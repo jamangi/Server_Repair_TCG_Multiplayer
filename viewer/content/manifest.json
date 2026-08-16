@@ -1,7 +1,14 @@
 {
   "format_version": 1,
-  "generated_at": "2026-08-16T18:55:34.520Z",
+  "generated_at": "2026-08-16T19:50:42.931Z",
   "files": [
+    "./core-v0.1-components.json",
+    "./core-v0.1-diagnostics.json",
+    "./core-v0.1-fault-graph.json",
+    "./core-v0.1-faults.json",
+    "./core-v0.1-protocols.json",
+    "./core-v0.1-repairs-validations.json",
+    "./core-v0.1-symptoms.json",
     "./diagnostics-and-repairs.sample.json",
     "./faults-and-symptoms.sample.json",
     "./hardware.sample.json"
