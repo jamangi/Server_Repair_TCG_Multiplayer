@@ -6,6 +6,8 @@ export const ENTITY_TYPE_LABELS = Object.freeze({
   tool: 'Tools',
   command: 'Commands',
   repair_procedure: 'Repairs',
+  validation_procedure: 'Validations',
+  protocol: 'Protocols',
 });
 
 export const ENTITY_TYPE_ORDER = Object.freeze([
@@ -16,9 +18,9 @@ export const ENTITY_TYPE_ORDER = Object.freeze([
 export function categoryFor(record) {
   return record.category
     || record.subsystem
+    || record.protocol_type
     || record.test_type
     || record.tool_type
     || record.platform
     || '';
 }
-
