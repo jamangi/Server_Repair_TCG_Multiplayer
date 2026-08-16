@@ -18,12 +18,16 @@ The first playable target is a competitive prototype in which technicians race t
 
 ## Repository map
 
+- `AGENTS.md` — concise operating rules for Codex builders.
 - `docs/design/` — game rules, content catalogs, and implementation guidance.
 - `docs/schema-notes/` — domain/runtime schema notes and server-authority rules.
+- `docs/VIEWER_ARCHITECTURE.md` — static viewer boundaries and data flow.
+- `docs/tasks/` — scoped implementation contracts and their status.
 - `schemas/domain/` — schemas for reusable server-repair knowledge.
 - `schemas/runtime/` — schemas for multiplayer match state and commands.
 - `examples/` — domain and runtime example records.
 - `viewer/` — static prototype for browsing and searching domain content.
+- `tests/` — dependency-free baseline and task acceptance tests.
 - `tools/validation/` — content-validation helpers.
 
 ## Current status
