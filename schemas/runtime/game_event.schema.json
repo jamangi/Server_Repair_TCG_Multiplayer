@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/runtime/game_event.schema.json",
+  "title": "Game Event",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "stableId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+    },
+    "uuidLike": {
+      "type": "string",
+      "minLength": 8
+    },
+    "entityRef": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+    },
+    "cardInstanceId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "playerId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ticketInstanceId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "match_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sequence": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "event_type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "actor_player_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "visibility": {
+      "type": "string",
+      "enum": [
+        "public",
+        "player_private",
+        "server_only"
+      ]
+    },
+    "visible_to_player_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/playerId"
+      },
+      "uniqueItems": true
+    },
+    "payload": {
+      "type": "object"
+    },
+    "created_at": {
+      "$ref": "#/$defs/timestamp"
+    }
+  },
+  "required": [
+    "event_id",
+    "match_id",
+    "sequence",
+    "revision",
+    "event_type",
+    "actor_player_id",
+    "visibility",
+    "visible_to_player_ids",
+    "payload",
+    "created_at"
+  ]
+}

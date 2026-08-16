@@ -1,0 +1,154 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/runtime/public_match_view.schema.json",
+  "title": "Public Match View",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "stableId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+    },
+    "uuidLike": {
+      "type": "string",
+      "minLength": 8
+    },
+    "entityRef": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+    },
+    "cardInstanceId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "playerId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ticketInstanceId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "properties": {
+    "match_id": {
+      "type": "string"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "status": {
+      "type": "string"
+    },
+    "players": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "player_id": {
+            "$ref": "#/$defs/playerId"
+          },
+          "display_name": {
+            "type": "string"
+          },
+          "service_points": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "hand_count": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "deck_count": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "discard_card_definition_ids": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/entityRef"
+            }
+          },
+          "in_play_card_definition_ids": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/entityRef"
+            }
+          }
+        },
+        "required": [
+          "player_id",
+          "display_name",
+          "service_points",
+          "hand_count",
+          "deck_count",
+          "discard_card_definition_ids",
+          "in_play_card_definition_ids"
+        ]
+      }
+    },
+    "repair_queue": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "ticket_instance_id": {
+            "$ref": "#/$defs/ticketInstanceId"
+          },
+          "ticket_definition_id": {
+            "$ref": "#/$defs/entityRef"
+          },
+          "status": {
+            "type": "string"
+          },
+          "visible_symptom_ids": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/entityRef"
+            }
+          },
+          "publicly_revealed_fault_ids": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/entityRef"
+            }
+          },
+          "documentation_complete": {
+            "type": "boolean"
+          },
+          "service_points_awarded": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "ticket_instance_id",
+          "ticket_definition_id",
+          "status",
+          "visible_symptom_ids",
+          "publicly_revealed_fault_ids",
+          "documentation_complete",
+          "service_points_awarded"
+        ]
+      }
+    },
+    "turn_state": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "match_id",
+    "revision",
+    "status",
+    "players",
+    "repair_queue",
+    "turn_state"
+  ]
+}

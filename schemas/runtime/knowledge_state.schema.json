@@ -1,0 +1,181 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/runtime/knowledge_state.schema.json",
+  "title": "Knowledge State",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "stableId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+    },
+    "uuidLike": {
+      "type": "string",
+      "minLength": 8
+    },
+    "entityRef": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+    },
+    "cardInstanceId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "playerId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ticketInstanceId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "properties": {
+    "player_id": {
+      "$ref": "#/$defs/playerId"
+    },
+    "ticket_instance_id": {
+      "$ref": "#/$defs/ticketInstanceId"
+    },
+    "known_symptom_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/entityRef"
+      },
+      "uniqueItems": true
+    },
+    "known_fault_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/entityRef"
+      },
+      "uniqueItems": true
+    },
+    "ruled_out_fault_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/entityRef"
+      },
+      "uniqueItems": true
+    },
+    "suspected_fault_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/entityRef"
+      },
+      "uniqueItems": true
+    },
+    "known_fault_categories": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "source_type": {
+            "type": "string",
+            "enum": [
+              "test",
+              "command",
+              "inspection",
+              "effect",
+              "system"
+            ]
+          },
+          "source_id": {
+            "type": "string"
+          },
+          "fault_id": {
+            "$ref": "#/$defs/entityRef"
+          },
+          "outcome": {
+            "type": "string",
+            "enum": [
+              "supports",
+              "contradicts",
+              "confirms",
+              "rules_out",
+              "inconclusive"
+            ]
+          },
+          "strength": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "revealed_at_revision": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "source_type",
+          "source_id",
+          "fault_id",
+          "outcome",
+          "strength",
+          "revealed_at_revision"
+        ]
+      }
+    },
+    "diagnosis_progress": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "hypothesis_history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "fault_ids": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/entityRef"
+            },
+            "uniqueItems": true
+          },
+          "submitted_at_revision": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "active",
+              "revised",
+              "accepted",
+              "rejected"
+            ]
+          }
+        },
+        "required": [
+          "fault_ids",
+          "submitted_at_revision",
+          "status"
+        ]
+      }
+    }
+  },
+  "required": [
+    "player_id",
+    "ticket_instance_id",
+    "known_symptom_ids",
+    "known_fault_ids",
+    "ruled_out_fault_ids",
+    "suspected_fault_ids",
+    "known_fault_categories",
+    "evidence",
+    "diagnosis_progress",
+    "hypothesis_history"
+  ]
+}

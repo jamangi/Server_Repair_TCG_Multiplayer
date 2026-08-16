@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/runtime/action_result.schema.json",
+  "title": "Server Action Result",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "stableId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+    },
+    "uuidLike": {
+      "type": "string",
+      "minLength": 8
+    },
+    "entityRef": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+    },
+    "cardInstanceId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "playerId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ticketInstanceId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "properties": {
+    "request_id": {
+      "type": "string"
+    },
+    "accepted": {
+      "type": "boolean"
+    },
+    "match_revision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "public_events": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "private_events": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "error_code": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "error_message": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "request_id",
+    "accepted",
+    "match_revision",
+    "public_events",
+    "private_events",
+    "error_code",
+    "error_message"
+  ]
+}

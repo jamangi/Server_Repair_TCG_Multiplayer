@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/runtime/private_player_view.schema.json",
+  "title": "Private Player Match View",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "stableId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+    },
+    "uuidLike": {
+      "type": "string",
+      "minLength": 8
+    },
+    "entityRef": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+    },
+    "cardInstanceId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "playerId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ticketInstanceId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "properties": {
+    "player_id": {
+      "$ref": "#/$defs/playerId"
+    },
+    "match_id": {
+      "type": "string"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "hand": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "deck_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "knowledge_states": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "private_reveals": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "legal_actions": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  },
+  "required": [
+    "player_id",
+    "match_id",
+    "revision",
+    "hand",
+    "deck_count",
+    "knowledge_states",
+    "private_reveals",
+    "legal_actions"
+  ]
+}

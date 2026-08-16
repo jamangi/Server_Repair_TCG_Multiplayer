@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/runtime/match_state.schema.json",
+  "title": "Authoritative Match State",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "stableId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+    },
+    "uuidLike": {
+      "type": "string",
+      "minLength": 8
+    },
+    "entityRef": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+    },
+    "cardInstanceId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "playerId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ticketInstanceId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "properties": {
+    "match_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "ruleset_version": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "setup",
+        "active",
+        "completed",
+        "aborted"
+      ]
+    },
+    "created_at": {
+      "$ref": "#/$defs/timestamp"
+    },
+    "updated_at": {
+      "$ref": "#/$defs/timestamp"
+    },
+    "winning_service_points": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "players": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object"
+      }
+    },
+    "turn_state": {
+      "type": "object"
+    },
+    "repair_queue": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "card_instances": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "ticket_deck_definition_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/entityRef"
+      }
+    },
+    "ticket_discard_definition_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/entityRef"
+      }
+    },
+    "winner_player_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "win_reason": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "event_sequence": {
+      "type": "integer",
+      "minimum": 0
+    }
+  },
+  "required": [
+    "match_id",
+    "revision",
+    "ruleset_version",
+    "status",
+    "created_at",
+    "updated_at",
+    "winning_service_points",
+    "players",
+    "turn_state",
+    "repair_queue",
+    "card_instances",
+    "ticket_deck_definition_ids",
+    "ticket_discard_definition_ids",
+    "winner_player_id",
+    "win_reason",
+    "event_sequence"
+  ]
+}

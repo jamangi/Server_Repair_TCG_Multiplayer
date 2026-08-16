@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/runtime/action_request.schema.json",
+  "title": "Client Action Request",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "stableId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+    },
+    "uuidLike": {
+      "type": "string",
+      "minLength": 8
+    },
+    "entityRef": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+    },
+    "cardInstanceId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "playerId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ticketInstanceId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "properties": {
+    "request_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "match_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "player_id": {
+      "$ref": "#/$defs/playerId"
+    },
+    "expected_revision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "action_type": {
+      "type": "string",
+      "enum": [
+        "play_card",
+        "run_test",
+        "submit_hypothesis",
+        "perform_repair",
+        "perform_verification",
+        "complete_documentation",
+        "pass_turn",
+        "select_ticket",
+        "activate_effect"
+      ]
+    },
+    "payload": {
+      "type": "object"
+    },
+    "client_nonce": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "request_id",
+    "match_id",
+    "player_id",
+    "expected_revision",
+    "action_type",
+    "payload",
+    "client_nonce"
+  ]
+}

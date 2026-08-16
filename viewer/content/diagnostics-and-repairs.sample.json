@@ -1,0 +1,42 @@
+{
+  "pack_id":"core-v0.1-diagnostics-sample",
+  "name":"Core v0.1 Diagnostics & Repair Sample",
+  "version":"0.1.0",
+  "entities":[
+    {
+      "id":"test.memory.diagnostic","entity_type":"test",
+      "presentation":{"display_name":"Memory Diagnostic","short_description":"Run a memory-focused diagnostic to gather evidence about RAM faults.","illustration":{"asset_id":"art.test.memory_diagnostic","alt_text":"A diagnostic interface testing server memory."}},
+      "source":{"expansion_id":"expansion.core_v0_1","status":"draft","search_tags":["memory","test","diagnostic"]},
+      "test_type":"diagnostic","tool_requirement_ids":[],"command_requirement_ids":[],"target_component_ids":["component.memory.ecc_dimm"],"evidence_rules":[{"fault_id":"fault.memory.dimm.failed","possible_outcomes":["supports","contradicts","confirms","inconclusive"]}],"diagnostic_strength":2,"action_cost":1,
+      "education_text":"Diagnostic results change what the technician knows; they do not themselves repair memory."
+    },
+    {
+      "id":"test.power.psu_status","entity_type":"test",
+      "presentation":{"display_name":"PSU Status Inspection","short_description":"Inspect PSU indicators and telemetry for evidence of a power-supply fault.","illustration":{"asset_id":"art.test.psu_status","alt_text":"Technician examining PSU status indicators."}},
+      "source":{"expansion_id":"expansion.core_v0_1","status":"draft","search_tags":["psu","power","indicator"]},
+      "test_type":"inspection","tool_requirement_ids":[],"command_requirement_ids":[],"target_component_ids":["component.power.hot_swap_psu"],"evidence_rules":[{"fault_id":"fault.power.psu.failed","possible_outcomes":["supports","contradicts","inconclusive"]}],"diagnostic_strength":1,"action_cost":1,
+      "education_text":"Status indicators can quickly narrow a suspected redundant-power problem."
+    },
+    {
+      "id":"command.linux.lsblk","entity_type":"command",
+      "presentation":{"display_name":"lsblk","short_description":"Lists block devices visible to Linux.","illustration":{"asset_id":"art.command.lsblk","alt_text":"Linux terminal showing lsblk output."}},
+      "source":{"expansion_id":"expansion.core_v0_1","status":"draft","search_tags":["linux","storage","block device"]},
+      "platform":"linux","syntax":"lsblk","purpose":"Inspect block devices and their hierarchy.","capabilities":["list_block_devices","inspect_storage_topology"],"related_test_ids":["test.storage.device_inventory"],
+      "education_text":"Useful when determining whether Linux recognizes expected storage devices."
+    },
+    {
+      "id":"repair.memory.replace_dimm","entity_type":"repair_procedure",
+      "presentation":{"display_name":"Replace Failed DIMM","short_description":"Remove a confirmed failed memory module and install a compatible replacement.","illustration":{"asset_id":"art.repair.replace_dimm","alt_text":"Technician replacing a server DIMM."}},
+      "source":{"expansion_id":"expansion.core_v0_1","status":"draft","search_tags":["memory","replace","dimm"]},
+      "target_fault_ids":["fault.memory.dimm.failed"],"required_component_ids":["component.memory.ecc_dimm"],"required_tool_ids":[],"required_protocol_ids":["protocol.safety.esd"],"steps_summary":["Power or isolate equipment as procedure requires.","Remove failed DIMM.","Install compatible replacement in the correct slot.","Reassemble as required."],"action_cost":1,
+      "education_text":"A repair changes machine state and should be followed by verification."
+    },
+    {
+      "id":"repair.power.replace_psu","entity_type":"repair_procedure",
+      "presentation":{"display_name":"Replace Failed PSU","short_description":"Replace a failed server power-supply module according to platform procedure.","illustration":{"asset_id":"art.repair.replace_psu","alt_text":"Technician replacing a hot-swap server PSU."}},
+      "source":{"expansion_id":"expansion.core_v0_1","status":"draft","search_tags":["power","replace","psu","hot swap"]},
+      "target_fault_ids":["fault.power.psu.failed"],"required_component_ids":["component.power.hot_swap_psu"],"required_tool_ids":[],"required_protocol_ids":[],"steps_summary":["Confirm failed supply.","Follow redundancy or hot-swap procedure.","Replace PSU.","Confirm healthy state."],"action_cost":1,
+      "education_text":"Redundant platforms may permit PSU replacement while the system remains operational."
+    }
+  ]
+}

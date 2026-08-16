@@ -1,0 +1,9 @@
+{
+  "format_version": 1,
+  "generated_at": "2026-08-16T18:54:49.463Z",
+  "files": [
+    "./diagnostics-and-repairs.sample.json",
+    "./faults-and-symptoms.sample.json",
+    "./hardware.sample.json"
+  ]
+}

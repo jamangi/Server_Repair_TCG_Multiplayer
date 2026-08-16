@@ -1,0 +1,46 @@
+{
+  "player_id": "player_a",
+  "match_id": "match_demo_001",
+  "revision": 18,
+  "hand": [
+    {
+      "card_instance_id": "cardinst_104",
+      "card_definition_id": "card.core.replace_dimm"
+    }
+  ],
+  "deck_count": 31,
+  "knowledge_states": [
+    {
+      "ticket_instance_id": "ticketinst_2",
+      "known_symptom_ids": [
+        "symptom.boot.no_post"
+      ],
+      "known_fault_ids": [],
+      "ruled_out_fault_ids": [],
+      "suspected_fault_ids": [
+        "fault.memory.dimm.failed"
+      ],
+      "evidence": [
+        {
+          "source_type": "test",
+          "source_id": "test.memory.diagnostic",
+          "fault_id": "fault.memory.dimm.failed",
+          "outcome": "supports",
+          "strength": 2,
+          "revealed_at_revision": 18
+        }
+      ]
+    }
+  ],
+  "private_reveals": [],
+  "legal_actions": [
+    {
+      "action_type": "submit_hypothesis",
+      "ticket_instance_id": "ticketinst_2"
+    },
+    {
+      "action_type": "play_card",
+      "card_instance_id": "cardinst_104"
+    }
+  ]
+}

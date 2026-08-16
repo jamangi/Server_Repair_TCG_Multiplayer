@@ -1,0 +1,260 @@
+# Server Repair Card Game — Fault Browser and Search Design
+
+The Fault Browser should be useful both as:
+
+1. an educational encyclopedia outside matches, and
+2. an optional searchable reference during matches.
+
+Whether unrestricted in-match search is competitively desirable can be decided by game mode.
+
+---
+
+# Fault Result Card
+
+A search result can display:
+
+- Fault name
+- Fault category
+- affected component/subsystem
+- common symptoms
+- short description
+- difficulty
+- root/intermediate/terminal tags
+- expansion/set
+
+Selecting it opens the full Fault record.
+
+---
+
+# Full Fault Page
+
+Recommended sections:
+
+## Identity
+
+- Name
+- ID
+- Category
+- Subsystem
+- Affected Components
+
+## What You May Observe
+
+- Symptoms
+- diagnostic indicators
+- logs/messages
+- common state changes
+
+## What May Cause It
+
+- upstream Faults
+- environmental/configuration causes
+
+## What It May Cause
+
+- downstream Faults
+- downstream Symptoms
+
+## How to Inspect/Test It
+
+- relevant inspections
+- Tests
+- Tools
+- Commands
+
+## How to Repair It
+
+- Repair Procedures
+- required Components
+- safety/protocol requirements
+
+## How to Verify the Repair
+
+- Verification Procedures
+
+## Related Cards
+
+- player cards referencing this Fault
+- tickets that may contain it
+
+## Educational Notes
+
+- concise explanation
+- interview-relevant vocabulary
+- common mistakes
+
+---
+
+# Search Modes
+
+## Free Text
+
+Search across:
+
+- name
+- summary
+- symptoms
+- component names
+- tool names
+- command names
+- repair names
+- tags
+- educational notes
+
+Examples:
+
+```text
+"no post"
+"memory error"
+"fans loud"
+"lsblk"
+"SAS"
+"shutdown under load"
+```
+
+---
+
+# Filters
+
+Recommended v0.1 filters:
+
+### Category
+- Memory
+- Power
+- Storage
+- RAID
+- Boot
+- Firmware
+- Thermal
+- Networking
+- CPU
+- Motherboard
+- PCIe
+
+### Component
+
+Select one or more components.
+
+### Symptom
+
+Examples:
+
+- No POST
+- No Power
+- No Boot Device
+- RAID Degraded
+- Unexpected Shutdown
+- Device Missing
+- No Network Link
+
+### Effective Tool
+
+Examples:
+
+- Multimeter
+- Management Console
+- Known-good DIMM
+
+### Effective Test
+
+Examples:
+
+- Visual Inspection
+- Memory Diagnostic
+- POST Code Analysis
+
+### Effective Command
+
+Examples:
+
+- lsblk
+- lspci
+- dmesg
+
+### Repair Type
+
+Examples:
+
+- Reseat
+- Replace
+- Reconfigure
+- Rebuild
+- Clean
+- Restore
+
+### Fault Depth / Role
+
+- Root-capable
+- Intermediate
+- Terminal/actionable
+
+### Difficulty
+
+### Expansion / Set
+
+---
+
+# Sorting
+
+Useful sorts:
+
+- Alphabetical
+- Category
+- Difficulty
+- Component
+- Number of associated Symptoms
+- Number of causal relationships
+- Recently viewed
+- Most frequently encountered in tickets
+
+---
+
+# Causal Graph View
+
+A very useful optional visualization:
+
+```text
+[Failed Fan]
+      ↓
+[CPU Overheating]
+      ↓
+[Thermal Shutdown]
+      ↓
+[Unexpected Shutdown Under Load]
+```
+
+The user should be able to:
+
+- expand upstream causes,
+- expand downstream effects,
+- click any Fault,
+- click any Symptom,
+- see which Tests discriminate between nearby candidate Faults.
+
+This turns the game's database into a practical study tool.
+
+---
+
+# In-Match Reference Modes
+
+Possible modes:
+
+## Study Mode
+
+Full Fault Browser access.
+
+Good for learning.
+
+## Competitive Mode
+
+Only previously discovered/unlocked information or limited reference access.
+
+Good if unrestricted lookup reduces deduction too much.
+
+## Interview Drill Mode
+
+Browser hidden until after the player commits to a hypothesis.
+
+Then the system grades the reasoning.
+
+The same data model can support all three.

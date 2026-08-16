@@ -1,0 +1,48 @@
+{
+  "id": "fault.memory.dimm.failed",
+  "entity_type": "fault",
+  "presentation": {
+    "display_name": "Failed ECC DIMM",
+    "short_description": "An ECC memory module is no longer operating reliably.",
+    "illustration": {
+      "asset_id": "art.component.ecc_dimm.failed",
+      "alt_text": "Server ECC DIMM shown with a diagnostic warning indicator."
+    }
+  },
+  "source": {
+    "expansion_id": "expansion.core_v0_1",
+    "version": "0.1.0",
+    "status": "draft",
+    "search_tags": [
+      "memory",
+      "ecc",
+      "dimm",
+      "no post",
+      "errors"
+    ]
+  },
+  "category": "memory",
+  "severity": "high",
+  "affected_component_ids": [
+    "component.memory.ecc_dimm"
+  ],
+  "affected_subsystem_ids": [
+    "subsystem.memory"
+  ],
+  "symptom_ids": [
+    "symptom.memory.ecc_errors",
+    "symptom.boot.no_post"
+  ],
+  "effective_test_ids": [
+    "test.memory.diagnostic",
+    "test.memory.single_dimm_isolation"
+  ],
+  "repair_procedure_ids": [
+    "repair.memory.replace_dimm"
+  ],
+  "validation_procedure_ids": [
+    "verify.memory.full_test",
+    "verify.boot.post"
+  ],
+  "education_text": "A failed DIMM may cause ECC errors, reduced capacity, instability, or POST failure."
+}

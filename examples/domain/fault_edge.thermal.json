@@ -1,0 +1,20 @@
+{
+  "id": "edge.thermal.overheating_to_shutdown",
+  "cause_fault_id": "fault.thermal.cpu.overheating",
+  "effect_fault_id": "fault.thermal.shutdown",
+  "relationship_type": "causes",
+  "conditions": [
+    "Sustained temperature exceeds platform protection threshold."
+  ],
+  "notes": "A scenario may omit this downstream transition if shutdown never occurs.",
+  "source": {
+    "expansion_id": "expansion.core_v0_1",
+    "version": "0.1.0",
+    "status": "draft",
+    "search_tags": [
+      "thermal",
+      "shutdown",
+      "overheating"
+    ]
+  }
+}

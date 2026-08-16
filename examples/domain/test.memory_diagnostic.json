@@ -1,0 +1,44 @@
+{
+  "id": "test.memory.diagnostic",
+  "entity_type": "test",
+  "presentation": {
+    "display_name": "Memory Diagnostic",
+    "short_description": "Run a memory-focused diagnostic to gather evidence about RAM faults.",
+    "illustration": {
+      "asset_id": "art.test.memory_diagnostic",
+      "alt_text": "Diagnostic screen testing server memory modules."
+    }
+  },
+  "source": {
+    "expansion_id": "expansion.core_v0_1",
+    "version": "0.1.0",
+    "status": "draft",
+    "search_tags": [
+      "memory",
+      "diagnostic",
+      "ecc",
+      "dimm"
+    ]
+  },
+  "test_type": "diagnostic",
+  "tool_requirement_ids": [],
+  "command_requirement_ids": [],
+  "target_component_ids": [
+    "component.memory.ecc_dimm"
+  ],
+  "evidence_rules": [
+    {
+      "fault_id": "fault.memory.dimm.failed",
+      "possible_outcomes": [
+        "supports",
+        "contradicts",
+        "confirms",
+        "inconclusive"
+      ],
+      "notes": "Exact certainty depends on diagnostic result and scenario."
+    }
+  ],
+  "diagnostic_strength": 2,
+  "action_cost": 1,
+  "education_text": "Tests should change player knowledge, not directly repair the machine."
+}

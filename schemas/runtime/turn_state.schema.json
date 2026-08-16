@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/runtime/turn_state.schema.json",
+  "title": "Turn State",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "stableId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+    },
+    "uuidLike": {
+      "type": "string",
+      "minLength": 8
+    },
+    "entityRef": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+    },
+    "cardInstanceId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "playerId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ticketInstanceId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "properties": {
+    "turn_number": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "active_player_id": {
+      "$ref": "#/$defs/playerId"
+    },
+    "phase": {
+      "type": "string",
+      "enum": [
+        "start",
+        "draw",
+        "work",
+        "resolution",
+        "end"
+      ]
+    },
+    "mandatory_draw_completed": {
+      "type": "boolean"
+    },
+    "actions_started": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "actions_spent": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "passed": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "turn_number",
+    "active_player_id",
+    "phase",
+    "mandatory_draw_completed",
+    "actions_started",
+    "actions_spent",
+    "passed"
+  ]
+}

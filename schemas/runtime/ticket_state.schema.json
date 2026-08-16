@@ -1,0 +1,182 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/runtime/ticket_state.schema.json",
+  "title": "Ticket State",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "stableId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+    },
+    "uuidLike": {
+      "type": "string",
+      "minLength": 8
+    },
+    "entityRef": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+    },
+    "cardInstanceId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "playerId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ticketInstanceId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "properties": {
+    "ticket_instance_id": {
+      "$ref": "#/$defs/ticketInstanceId"
+    },
+    "ticket_definition_id": {
+      "$ref": "#/$defs/entityRef"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "queued",
+        "active",
+        "repairing",
+        "awaiting_verification",
+        "closed",
+        "failed"
+      ]
+    },
+    "assigned_player_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "visible_symptom_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/entityRef"
+      },
+      "uniqueItems": true
+    },
+    "fault_states": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "repair_history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "action_id": {
+            "type": "string"
+          },
+          "player_id": {
+            "$ref": "#/$defs/playerId"
+          },
+          "repair_procedure_id": {
+            "$ref": "#/$defs/entityRef"
+          },
+          "target_fault_instance_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "result": {
+            "type": "string",
+            "enum": [
+              "successful",
+              "unsuccessful",
+              "partial",
+              "invalid"
+            ]
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "action_id",
+          "player_id",
+          "repair_procedure_id",
+          "target_fault_instance_ids",
+          "result",
+          "revision"
+        ]
+      }
+    },
+    "verification_history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "action_id": {
+            "type": "string"
+          },
+          "player_id": {
+            "$ref": "#/$defs/playerId"
+          },
+          "validation_procedure_id": {
+            "$ref": "#/$defs/entityRef"
+          },
+          "result": {
+            "type": "string",
+            "enum": [
+              "pass",
+              "fail",
+              "inconclusive",
+              "invalid"
+            ]
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "action_id",
+          "player_id",
+          "validation_procedure_id",
+          "result",
+          "revision"
+        ]
+      }
+    },
+    "documentation_complete": {
+      "type": "boolean"
+    },
+    "unnecessary_repairs_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "service_points_awarded": {
+      "type": "integer",
+      "minimum": 0
+    }
+  },
+  "required": [
+    "ticket_instance_id",
+    "ticket_definition_id",
+    "status",
+    "assigned_player_id",
+    "visible_symptom_ids",
+    "fault_states",
+    "repair_history",
+    "verification_history",
+    "documentation_complete",
+    "unnecessary_repairs_count",
+    "service_points_awarded"
+  ]
+}

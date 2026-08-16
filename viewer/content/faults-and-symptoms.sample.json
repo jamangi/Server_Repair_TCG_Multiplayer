@@ -1,0 +1,33 @@
+{
+  "pack_id":"core-v0.1-fault-sample",
+  "name":"Core v0.1 Fault & Symptom Sample",
+  "version":"0.1.0",
+  "entities":[
+    {
+      "id":"fault.memory.dimm.failed","entity_type":"fault",
+      "presentation":{"display_name":"Failed ECC DIMM","short_description":"An ECC memory module is no longer operating reliably.","illustration":{"asset_id":"art.fault.failed_dimm","alt_text":"A server DIMM marked with a diagnostic warning."}},
+      "source":{"expansion_id":"expansion.core_v0_1","status":"draft","search_tags":["memory","ecc","dimm","no post"]},
+      "category":"memory","severity":"high","affected_component_ids":["component.memory.ecc_dimm"],"affected_subsystem_ids":["subsystem.memory"],"symptom_ids":["symptom.boot.no_post","symptom.memory.ecc_errors"],"effective_test_ids":["test.memory.diagnostic"],"repair_procedure_ids":["repair.memory.replace_dimm"],"validation_procedure_ids":["verify.memory.full_test","verify.boot.post"],
+      "education_text":"A failed DIMM can cause ECC errors, instability, reduced memory, or POST failure."
+    },
+    {
+      "id":"fault.power.psu.failed","entity_type":"fault",
+      "presentation":{"display_name":"Failed PSU","short_description":"A server power supply can no longer deliver required power.","illustration":{"asset_id":"art.fault.failed_psu","alt_text":"A hot-swap PSU showing a fault indicator."}},
+      "source":{"expansion_id":"expansion.core_v0_1","status":"draft","search_tags":["power","psu","no power"]},
+      "category":"power","severity":"critical","affected_component_ids":["component.power.hot_swap_psu"],"affected_subsystem_ids":["subsystem.power"],"symptom_ids":["symptom.power.no_power"],"effective_test_ids":["test.power.psu_status"],"repair_procedure_ids":["repair.power.replace_psu"],"validation_procedure_ids":["verify.power.stable"],
+      "education_text":"A failed PSU may cause no power, redundancy warnings, or unexpected shutdowns."
+    },
+    {
+      "id":"symptom.boot.no_post","entity_type":"symptom",
+      "presentation":{"display_name":"No POST","short_description":"The server does not successfully complete its Power-On Self-Test.","illustration":{"asset_id":"art.symptom.no_post","alt_text":"Server powered on without completing POST."}},
+      "source":{"expansion_id":"expansion.core_v0_1","status":"draft","search_tags":["boot","post","startup"]},
+      "category":"boot","description":"Power may be present, but firmware initialization does not complete normally.","observable_via_ids":["test.boot.post_observation"],"associated_fault_ids":["fault.memory.dimm.failed"]
+    },
+    {
+      "id":"symptom.power.no_power","entity_type":"symptom",
+      "presentation":{"display_name":"No Power","short_description":"The server shows no normal response to an attempted power-on.","illustration":{"asset_id":"art.symptom.no_power","alt_text":"A server chassis with no power indicators."}},
+      "source":{"expansion_id":"expansion.core_v0_1","status":"draft","search_tags":["power","dead","startup"]},
+      "category":"power","description":"No expected fans, LEDs, POST activity, or normal power-on behavior.","observable_via_ids":["test.general.visual_inspection"],"associated_fault_ids":["fault.power.psu.failed"]
+    }
+  ]
+}

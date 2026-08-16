@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/symptom.schema.json",
+  "title": "Symptom",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "stableId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+    },
+    "entityRef": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+    },
+    "presentation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "display_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "short_description": {
+          "type": "string"
+        },
+        "illustration": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "asset_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "alt_text": {
+              "type": "string"
+            },
+            "caption": {
+              "type": "string"
+            },
+            "crop_hint": {
+              "type": "string"
+            },
+            "license_note": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "asset_id",
+            "alt_text"
+          ]
+        }
+      },
+      "required": [
+        "display_name"
+      ]
+    },
+    "sourceMeta": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "expansion_id": {
+          "$ref": "#/$defs/entityRef"
+        },
+        "version": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "reviewed",
+            "published",
+            "deprecated"
+          ]
+        },
+        "search_tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "expansion_id",
+        "status"
+      ]
+    }
+  },
+  "properties": {
+    "id": {
+      "$ref": "#/$defs/stableId"
+    },
+    "entity_type": {
+      "const": "symptom"
+    },
+    "presentation": {
+      "$ref": "#/$defs/presentation"
+    },
+    "source": {
+      "$ref": "#/$defs/sourceMeta"
+    },
+    "category": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string"
+    },
+    "observable_via_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/entityRef"
+      },
+      "uniqueItems": true
+    },
+    "associated_fault_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/entityRef"
+      },
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "id",
+    "entity_type",
+    "presentation",
+    "source",
+    "category",
+    "description"
+  ]
+}

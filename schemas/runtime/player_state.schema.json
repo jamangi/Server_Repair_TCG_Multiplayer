@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/runtime/player_state.schema.json",
+  "title": "Player State",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "stableId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+    },
+    "uuidLike": {
+      "type": "string",
+      "minLength": 8
+    },
+    "entityRef": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+    },
+    "cardInstanceId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "playerId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ticketInstanceId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "properties": {
+    "player_id": {
+      "$ref": "#/$defs/playerId"
+    },
+    "display_name": {
+      "type": "string"
+    },
+    "service_points": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "actions_remaining": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "deck_card_instance_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/cardInstanceId"
+      }
+    },
+    "hand_card_instance_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/cardInstanceId"
+      }
+    },
+    "discard_card_instance_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/cardInstanceId"
+      }
+    },
+    "in_play_card_instance_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/cardInstanceId"
+      }
+    },
+    "knowledge_states": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "has_lost": {
+      "type": "boolean"
+    },
+    "loss_reason": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "player_id",
+    "display_name",
+    "service_points",
+    "actions_remaining",
+    "deck_card_instance_ids",
+    "hand_card_instance_ids",
+    "discard_card_instance_ids",
+    "in_play_card_instance_ids",
+    "knowledge_states",
+    "has_lost",
+    "loss_reason"
+  ]
+}

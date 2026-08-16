@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/runtime/card_instance.schema.json",
+  "title": "Card Instance",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "stableId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+    },
+    "uuidLike": {
+      "type": "string",
+      "minLength": 8
+    },
+    "entityRef": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+    },
+    "cardInstanceId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "playerId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ticketInstanceId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "properties": {
+    "card_instance_id": {
+      "$ref": "#/$defs/cardInstanceId"
+    },
+    "card_definition_id": {
+      "$ref": "#/$defs/entityRef"
+    },
+    "owner_player_id": {
+      "$ref": "#/$defs/playerId"
+    },
+    "controller_player_id": {
+      "$ref": "#/$defs/playerId"
+    },
+    "zone": {
+      "type": "string",
+      "enum": [
+        "deck",
+        "hand",
+        "discard",
+        "in_play",
+        "exile",
+        "revealed",
+        "ticket_area"
+      ]
+    },
+    "face_state": {
+      "type": "string",
+      "enum": [
+        "face_up",
+        "face_down"
+      ]
+    },
+    "counters": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer"
+      }
+    },
+    "runtime_tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "card_instance_id",
+    "card_definition_id",
+    "owner_player_id",
+    "controller_player_id",
+    "zone",
+    "face_state",
+    "counters",
+    "runtime_tags"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "id": "card.core.memory_diagnostic",
+  "entity_type": "card",
+  "presentation": {
+    "display_name": "Memory Diagnostic",
+    "short_description": "Use a memory diagnostic against an active Repair Ticket.",
+    "illustration": {
+      "asset_id": "art.test.memory_diagnostic",
+      "alt_text": "Diagnostic screen testing server memory modules."
+    }
+  },
+  "source": {
+    "expansion_id": "expansion.core_v0_1",
+    "version": "0.1.0",
+    "status": "draft",
+    "search_tags": [
+      "memory",
+      "test",
+      "diagnosis"
+    ]
+  },
+  "card_type": "test",
+  "archetypes": [
+    "hardware_troubleshooting",
+    "server_hardware"
+  ],
+  "cost": 1,
+  "tags": [
+    "memory",
+    "diagnostic"
+  ],
+  "rules_text": "Run Memory Diagnostic on a Repair Ticket. Resolve the referenced Test and add its evidence to your Knowledge State.",
+  "reference_entity_ids": [
+    "test.memory.diagnostic"
+  ],
+  "effects": [
+    {
+      "effect_type": "add_evidence",
+      "target": "active_ticket",
+      "parameters": {
+        "source_test_id": "test.memory.diagnostic"
+      }
+    }
+  ],
+  "educational_text": "This card reuses the domain illustration and educational definition for the Memory Diagnostic test.",
+  "rarity": "common"
+}

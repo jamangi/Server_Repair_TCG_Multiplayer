@@ -1,0 +1,13 @@
+{
+  "request_id": "req_00042",
+  "match_id": "match_demo_001",
+  "player_id": "player_a",
+  "expected_revision": 17,
+  "action_type": "run_test",
+  "payload": {
+    "card_instance_id": "cardinst_103",
+    "test_id": "test.memory.diagnostic",
+    "ticket_instance_id": "ticketinst_2"
+  },
+  "client_nonce": "nonce_abc123"
+}
