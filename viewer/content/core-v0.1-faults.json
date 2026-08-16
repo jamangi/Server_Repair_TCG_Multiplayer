@@ -1,0 +1,1537 @@
+{
+  "pack_id": "core_v0_1_faults",
+  "name": "Core V0.1 Faults",
+  "version": "0.1.0",
+  "entities": [
+    {
+      "id": "fault.memory.dimm.not_seated",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "DIMM Not Fully Seated",
+        "short_description": "A DIMM is not fully seated in its slot.",
+        "illustration": {
+          "asset_id": "art.fault.memory.dimm.not_seated",
+          "alt_text": "Technical reference illustration for DIMM Not Fully Seated."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "memory",
+          "dimm",
+          "not",
+          "fully",
+          "seated"
+        ]
+      },
+      "category": "memory",
+      "severity": "moderate",
+      "affected_component_ids": [
+        "component.memory.ecc_dimm"
+      ],
+      "affected_subsystem_ids": [
+        "subsystem.memory"
+      ],
+      "symptom_ids": [
+        "symptom.boot.no_post",
+        "symptom.memory.reduced_capacity",
+        "symptom.boot.memory_warning"
+      ],
+      "effective_test_ids": [
+        "test.general.visual_inspection",
+        "test.memory.single_dimm_isolation"
+      ],
+      "repair_procedure_ids": [
+        "repair.memory.reseat_dimm"
+      ],
+      "validation_procedure_ids": [
+        "verify.boot.post",
+        "verify.memory.inventory"
+      ],
+      "education_text": "A DIMM is not fully seated in its slot."
+    },
+    {
+      "id": "fault.memory.dimm.failed",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "Failed ECC DIMM",
+        "short_description": "A memory module no longer operates reliably.",
+        "illustration": {
+          "asset_id": "art.fault.memory.dimm.failed",
+          "alt_text": "Technical reference illustration for Failed ECC DIMM."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "memory",
+          "failed",
+          "ecc",
+          "dimm"
+        ]
+      },
+      "category": "memory",
+      "severity": "high",
+      "affected_component_ids": [
+        "component.memory.ecc_dimm"
+      ],
+      "affected_subsystem_ids": [
+        "subsystem.memory"
+      ],
+      "symptom_ids": [
+        "symptom.memory.ecc_errors",
+        "symptom.boot.no_post",
+        "symptom.system.intermittent_crash"
+      ],
+      "effective_test_ids": [
+        "test.memory.diagnostic",
+        "test.memory.single_dimm_isolation",
+        "test.memory.known_good_substitution",
+        "test.system.bmc_logs"
+      ],
+      "repair_procedure_ids": [
+        "repair.memory.replace_dimm"
+      ],
+      "validation_procedure_ids": [
+        "verify.memory.full_test",
+        "verify.boot.post"
+      ],
+      "education_text": "A memory module no longer operates reliably."
+    },
+    {
+      "id": "fault.memory.population.invalid",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "Invalid DIMM Population",
+        "short_description": "DIMMs do not follow the server slot-population rules.",
+        "illustration": {
+          "asset_id": "art.fault.memory.population.invalid",
+          "alt_text": "Technical reference illustration for Invalid DIMM Population."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "memory",
+          "invalid",
+          "dimm",
+          "population"
+        ]
+      },
+      "category": "memory",
+      "severity": "moderate",
+      "affected_component_ids": [
+        "component.memory.ecc_dimm",
+        "component.memory.channel"
+      ],
+      "affected_subsystem_ids": [
+        "subsystem.memory"
+      ],
+      "symptom_ids": [
+        "symptom.boot.no_post",
+        "symptom.memory.reduced_capacity",
+        "symptom.boot.memory_warning"
+      ],
+      "effective_test_ids": [
+        "test.general.visual_inspection",
+        "test.memory.single_dimm_isolation"
+      ],
+      "repair_procedure_ids": [
+        "repair.memory.correct_population"
+      ],
+      "validation_procedure_ids": [
+        "verify.memory.inventory",
+        "verify.boot.post"
+      ],
+      "education_text": "DIMMs do not follow the server slot-population rules."
+    },
+    {
+      "id": "fault.memory.channel.unavailable",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "Memory Channel Unavailable",
+        "short_description": "A memory channel is unavailable because of a deeper DIMM, CPU/socket, or board issue.",
+        "illustration": {
+          "asset_id": "art.fault.memory.channel.unavailable",
+          "alt_text": "Technical reference illustration for Memory Channel Unavailable."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "memory",
+          "memory",
+          "channel",
+          "unavailable"
+        ]
+      },
+      "category": "memory",
+      "severity": "high",
+      "affected_component_ids": [
+        "component.memory.channel",
+        "component.compute.cpu",
+        "component.board.system"
+      ],
+      "affected_subsystem_ids": [
+        "subsystem.memory"
+      ],
+      "symptom_ids": [
+        "symptom.memory.reduced_capacity",
+        "symptom.boot.memory_warning"
+      ],
+      "effective_test_ids": [
+        "test.memory.single_dimm_isolation",
+        "test.system.bmc_logs"
+      ],
+      "repair_procedure_ids": [],
+      "validation_procedure_ids": [
+        "verify.memory.full_test"
+      ],
+      "education_text": "A memory channel is unavailable because of a deeper DIMM, CPU/socket, or board issue."
+    },
+    {
+      "id": "fault.system.intermittent_memory_instability",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "Intermittent Memory Instability",
+        "short_description": "Memory-related instability appears intermittently.",
+        "illustration": {
+          "asset_id": "art.fault.system.intermittent_memory_instability",
+          "alt_text": "Technical reference illustration for Intermittent Memory Instability."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "memory",
+          "intermittent",
+          "memory",
+          "instability"
+        ]
+      },
+      "category": "memory",
+      "severity": "high",
+      "affected_component_ids": [
+        "component.memory.ecc_dimm"
+      ],
+      "affected_subsystem_ids": [
+        "subsystem.memory"
+      ],
+      "symptom_ids": [
+        "symptom.system.intermittent_crash",
+        "symptom.system.random_reboot",
+        "symptom.memory.ecc_errors"
+      ],
+      "effective_test_ids": [
+        "test.memory.diagnostic",
+        "test.system.controlled_stress",
+        "test.system.bmc_logs"
+      ],
+      "repair_procedure_ids": [],
+      "validation_procedure_ids": [
+        "verify.system.burn_in"
+      ],
+      "education_text": "Memory-related instability appears intermittently."
+    },
+    {
+      "id": "fault.power.psu.failed",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "Failed PSU",
+        "short_description": "A PSU cannot provide required power reliably.",
+        "illustration": {
+          "asset_id": "art.fault.power.psu.failed",
+          "alt_text": "Technical reference illustration for Failed PSU."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "power",
+          "failed",
+          "psu"
+        ]
+      },
+      "category": "power",
+      "severity": "critical",
+      "affected_component_ids": [
+        "component.power.hot_swap_psu"
+      ],
+      "affected_subsystem_ids": [
+        "subsystem.power"
+      ],
+      "symptom_ids": [
+        "symptom.power.no_power",
+        "symptom.power.redundancy_warning",
+        "symptom.system.random_reboot"
+      ],
+      "effective_test_ids": [
+        "test.power.psu_status",
+        "test.power.known_good_psu",
+        "test.system.bmc_logs"
+      ],
+      "repair_procedure_ids": [
+        "repair.power.replace_psu"
+      ],
+      "validation_procedure_ids": [
+        "verify.power.stable"
+      ],
+      "education_text": "A PSU cannot provide required power reliably."
+    },
+    {
+      "id": "fault.power.psu.not_seated",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "PSU Not Fully Seated",
+        "short_description": "A removable PSU is not fully engaged.",
+        "illustration": {
+          "asset_id": "art.fault.power.psu.not_seated",
+          "alt_text": "Technical reference illustration for PSU Not Fully Seated."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "power",
+          "psu",
+          "not",
+          "fully",
+          "seated"
+        ]
+      },
+      "category": "power",
+      "severity": "moderate",
+      "affected_component_ids": [
+        "component.power.hot_swap_psu"
+      ],
+      "affected_subsystem_ids": [
+        "subsystem.power"
+      ],
+      "symptom_ids": [
+        "symptom.power.redundancy_warning",
+        "symptom.power.no_power"
+      ],
+      "effective_test_ids": [
+        "test.general.visual_inspection",
+        "test.power.psu_status"
+      ],
+      "repair_procedure_ids": [
+        "repair.power.reseat_psu"
+      ],
+      "validation_procedure_ids": [
+        "verify.power.stable"
+      ],
+      "education_text": "A removable PSU is not fully engaged."
+    },
+    {
+      "id": "fault.power.input.cable_loose",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "Loose / Disconnected Power Cable",
+        "short_description": "Input power is unavailable because a cable is loose or disconnected.",
+        "illustration": {
+          "asset_id": "art.fault.power.input.cable_loose",
+          "alt_text": "Technical reference illustration for Loose / Disconnected Power Cable."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "power",
+          "loose",
+          "/",
+          "disconnected",
+          "power",
+          "cable"
+        ]
+      },
+      "category": "power",
+      "severity": "moderate",
+      "affected_component_ids": [
+        "component.power.input_cable"
+      ],
+      "affected_subsystem_ids": [
+        "subsystem.power"
+      ],
+      "symptom_ids": [
+        "symptom.power.no_power",
+        "symptom.power.redundancy_warning"
+      ],
+      "effective_test_ids": [
+        "test.general.visual_inspection"
+      ],
+      "repair_procedure_ids": [
+        "repair.power.reconnect_input"
+      ],
+      "validation_procedure_ids": [
+        "verify.power.stable"
+      ],
+      "education_text": "Input power is unavailable because a cable is loose or disconnected."
+    },
+    {
+      "id": "fault.storage.sas.drive_failed",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "Failed SAS Drive",
+        "short_description": "A SAS drive has failed or become unreliable.",
+        "illustration": {
+          "asset_id": "art.fault.storage.sas.drive_failed",
+          "alt_text": "Technical reference illustration for Failed SAS Drive."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "storage",
+          "failed",
+          "sas",
+          "drive"
+        ]
+      },
+      "category": "storage",
+      "severity": "high",
+      "affected_component_ids": [
+        "component.storage.sas_hdd"
+      ],
+      "affected_subsystem_ids": [
+        "subsystem.storage"
+      ],
+      "symptom_ids": [
+        "symptom.storage.raid_degraded",
+        "symptom.storage.drive_fault_led",
+        "symptom.storage.io_errors"
+      ],
+      "effective_test_ids": [
+        "test.storage.raid_status",
+        "test.storage.drive_health",
+        "test.system.bmc_logs"
+      ],
+      "repair_procedure_ids": [
+        "repair.storage.replace_raid_member"
+      ],
+      "validation_procedure_ids": [
+        "verify.storage.raid_healthy"
+      ],
+      "education_text": "A SAS drive has failed or become unreliable."
+    },
+    {
+      "id": "fault.storage.sata.drive_failed",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "Failed SATA Drive",
+        "short_description": "A SATA drive has failed or become unreliable.",
+        "illustration": {
+          "asset_id": "art.fault.storage.sata.drive_failed",
+          "alt_text": "Technical reference illustration for Failed SATA Drive."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "storage",
+          "failed",
+          "sata",
+          "drive"
+        ]
+      },
+      "category": "storage",
+      "severity": "high",
+      "affected_component_ids": [
+        "component.storage.sata_ssd"
+      ],
+      "affected_subsystem_ids": [
+        "subsystem.storage"
+      ],
+      "symptom_ids": [
+        "symptom.storage.drive_missing",
+        "symptom.storage.io_errors",
+        "symptom.storage.raid_degraded"
+      ],
+      "effective_test_ids": [
+        "test.storage.drive_health",
+        "test.storage.device_inventory",
+        "test.storage.raid_status"
+      ],
+      "repair_procedure_ids": [
+        "repair.storage.replace_raid_member"
+      ],
+      "validation_procedure_ids": [
+        "verify.storage.raid_healthy"
+      ],
+      "education_text": "A SATA drive has failed or become unreliable."
+    },
+    {
+      "id": "fault.storage.nvme.device_failed",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "Failed NVMe Device",
+        "short_description": "An NVMe device is unavailable or unreliable.",
+        "illustration": {
+          "asset_id": "art.fault.storage.nvme.device_failed",
+          "alt_text": "Technical reference illustration for Failed NVMe Device."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "storage",
+          "failed",
+          "nvme",
+          "device"
+        ]
+      },
+      "category": "storage",
+      "severity": "high",
+      "affected_component_ids": [
+        "component.storage.nvme_ssd"
+      ],
+      "affected_subsystem_ids": [
+        "subsystem.storage"
+      ],
+      "symptom_ids": [
+        "symptom.storage.drive_missing",
+        "symptom.storage.io_errors",
+        "symptom.boot.no_boot_device"
+      ],
+      "effective_test_ids": [
+        "test.storage.device_inventory",
+        "test.system.bmc_logs"
+      ],
+      "repair_procedure_ids": [
+        "repair.storage.replace_nvme"
+      ],
+      "validation_procedure_ids": [
+        "verify.storage.device_detected",
+        "verify.boot.normal_boot"
+      ],
+      "education_text": "An NVMe device is unavailable or unreliable."
+    },
+    {
+      "id": "fault.storage.cable.loose",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "Loose Storage Cable",
+        "short_description": "A storage data cable is not securely connected.",
+        "illustration": {
+          "asset_id": "art.fault.storage.cable.loose",
+          "alt_text": "Technical reference illustration for Loose Storage Cable."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "storage",
+          "loose",
+          "storage",
+          "cable"
+        ]
+      },
+      "category": "storage",
+      "severity": "moderate",
+      "affected_component_ids": [
+        "component.storage.data_cable"
+      ],
+      "affected_subsystem_ids": [
+        "subsystem.storage"
+      ],
+      "symptom_ids": [
+        "symptom.storage.drive_missing",
+        "symptom.storage.io_errors",
+        "symptom.boot.no_boot_device"
+      ],
+      "effective_test_ids": [
+        "test.general.visual_inspection",
+        "test.storage.device_inventory"
+      ],
+      "repair_procedure_ids": [
+        "repair.storage.reseat_cable"
+      ],
+      "validation_procedure_ids": [
+        "verify.storage.device_detected"
+      ],
+      "education_text": "A storage data cable is not securely connected."
+    },
+    {
+      "id": "fault.storage.cable.failed",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "Failed Storage Cable",
+        "short_description": "A storage data cable has failed.",
+        "illustration": {
+          "asset_id": "art.fault.storage.cable.failed",
+          "alt_text": "Technical reference illustration for Failed Storage Cable."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "storage",
+          "failed",
+          "storage",
+          "cable"
+        ]
+      },
+      "category": "storage",
+      "severity": "moderate",
+      "affected_component_ids": [
+        "component.storage.data_cable"
+      ],
+      "affected_subsystem_ids": [
+        "subsystem.storage"
+      ],
+      "symptom_ids": [
+        "symptom.storage.drive_missing",
+        "symptom.storage.io_errors"
+      ],
+      "effective_test_ids": [
+        "test.general.visual_inspection",
+        "test.storage.device_inventory"
+      ],
+      "repair_procedure_ids": [
+        "repair.storage.replace_cable"
+      ],
+      "validation_procedure_ids": [
+        "verify.storage.device_detected"
+      ],
+      "education_text": "A storage data cable has failed."
+    },
+    {
+      "id": "fault.storage.raid.degraded",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "RAID Array Degraded",
+        "short_description": "A RAID array has lost expected redundancy.",
+        "illustration": {
+          "asset_id": "art.fault.storage.raid.degraded",
+          "alt_text": "Technical reference illustration for RAID Array Degraded."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "storage",
+          "raid",
+          "array",
+          "degraded"
+        ]
+      },
+      "category": "storage",
+      "severity": "high",
+      "affected_component_ids": [
+        "component.storage.raid_controller"
+      ],
+      "affected_subsystem_ids": [
+        "subsystem.storage"
+      ],
+      "symptom_ids": [
+        "symptom.storage.raid_degraded"
+      ],
+      "effective_test_ids": [
+        "test.storage.raid_status"
+      ],
+      "repair_procedure_ids": [
+        "repair.storage.rebuild_array"
+      ],
+      "validation_procedure_ids": [
+        "verify.storage.raid_healthy"
+      ],
+      "education_text": "A RAID array has lost expected redundancy."
+    },
+    {
+      "id": "fault.storage.raid.controller_failed",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "RAID Controller Failure",
+        "short_description": "The RAID controller is unavailable or malfunctioning.",
+        "illustration": {
+          "asset_id": "art.fault.storage.raid.controller_failed",
+          "alt_text": "Technical reference illustration for RAID Controller Failure."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "storage",
+          "raid",
+          "controller",
+          "failure"
+        ]
+      },
+      "category": "storage",
+      "severity": "critical",
+      "affected_component_ids": [
+        "component.storage.raid_controller"
+      ],
+      "affected_subsystem_ids": [
+        "subsystem.storage"
+      ],
+      "symptom_ids": [
+        "symptom.storage.drive_missing",
+        "symptom.boot.no_boot_device",
+        "symptom.system.device_errors"
+      ],
+      "effective_test_ids": [
+        "test.pcie.inventory",
+        "test.system.bmc_logs",
+        "test.general.minimum_configuration"
+      ],
+      "repair_procedure_ids": [
+        "repair.storage.replace_raid_controller"
+      ],
+      "validation_procedure_ids": [
+        "verify.storage.raid_healthy",
+        "verify.boot.normal_boot"
+      ],
+      "education_text": "The RAID controller is unavailable or malfunctioning."
+    },
+    {
+      "id": "fault.boot.order.incorrect",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "Incorrect Boot Order",
+        "short_description": "Firmware is configured to boot from the wrong source.",
+        "illustration": {
+          "asset_id": "art.fault.boot.order.incorrect",
+          "alt_text": "Technical reference illustration for Incorrect Boot Order."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "boot",
+          "incorrect",
+          "boot",
+          "order"
+        ]
+      },
+      "category": "boot",
+      "severity": "low",
+      "affected_component_ids": [],
+      "affected_subsystem_ids": [
+        "subsystem.boot"
+      ],
+      "symptom_ids": [
+        "symptom.boot.no_boot_device",
+        "symptom.boot.wrong_device"
+      ],
+      "effective_test_ids": [
+        "test.firmware.settings_review",
+        "test.boot.device_inventory"
+      ],
+      "repair_procedure_ids": [
+        "repair.boot.correct_order"
+      ],
+      "validation_procedure_ids": [
+        "verify.boot.normal_boot"
+      ],
+      "education_text": "Firmware is configured to boot from the wrong source."
+    },
+    {
+      "id": "fault.boot.device.not_detected",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "Boot Device Not Detected",
+        "short_description": "The intended boot device is absent from inventory.",
+        "illustration": {
+          "asset_id": "art.fault.boot.device.not_detected",
+          "alt_text": "Technical reference illustration for Boot Device Not Detected."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "boot",
+          "boot",
+          "device",
+          "not",
+          "detected"
+        ]
+      },
+      "category": "boot",
+      "severity": "high",
+      "affected_component_ids": [],
+      "affected_subsystem_ids": [
+        "subsystem.boot"
+      ],
+      "symptom_ids": [
+        "symptom.boot.no_boot_device",
+        "symptom.storage.drive_missing"
+      ],
+      "effective_test_ids": [
+        "test.boot.device_inventory",
+        "test.storage.device_inventory",
+        "test.storage.raid_status"
+      ],
+      "repair_procedure_ids": [],
+      "validation_procedure_ids": [
+        "verify.boot.normal_boot"
+      ],
+      "education_text": "The intended boot device is absent from inventory."
+    },
+    {
+      "id": "fault.boot.bootloader.corrupt",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "Corrupt Bootloader",
+        "short_description": "The boot device is visible but its bootloader cannot start the operating system.",
+        "illustration": {
+          "asset_id": "art.fault.boot.bootloader.corrupt",
+          "alt_text": "Technical reference illustration for Corrupt Bootloader."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "boot",
+          "corrupt",
+          "bootloader"
+        ]
+      },
+      "category": "boot",
+      "severity": "high",
+      "affected_component_ids": [],
+      "affected_subsystem_ids": [
+        "subsystem.boot"
+      ],
+      "symptom_ids": [
+        "symptom.boot.bootloader_error"
+      ],
+      "effective_test_ids": [
+        "test.boot.device_inventory"
+      ],
+      "repair_procedure_ids": [
+        "repair.boot.repair_bootloader"
+      ],
+      "validation_procedure_ids": [
+        "verify.boot.normal_boot"
+      ],
+      "education_text": "The boot device is visible but its bootloader cannot start the operating system."
+    },
+    {
+      "id": "fault.firmware.config.reset",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "Firmware Configuration Reset",
+        "short_description": "BIOS/UEFI settings have unexpectedly reverted.",
+        "illustration": {
+          "asset_id": "art.fault.firmware.config.reset",
+          "alt_text": "Technical reference illustration for Firmware Configuration Reset."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "firmware",
+          "firmware",
+          "configuration",
+          "reset"
+        ]
+      },
+      "category": "firmware",
+      "severity": "moderate",
+      "affected_component_ids": [
+        "component.board.rtc_battery"
+      ],
+      "affected_subsystem_ids": [
+        "subsystem.firmware"
+      ],
+      "symptom_ids": [
+        "symptom.firmware.settings_reset",
+        "symptom.boot.wrong_device"
+      ],
+      "effective_test_ids": [
+        "test.firmware.settings_review"
+      ],
+      "repair_procedure_ids": [
+        "repair.firmware.restore_settings"
+      ],
+      "validation_procedure_ids": [
+        "verify.firmware.settings_persist"
+      ],
+      "education_text": "BIOS/UEFI settings have unexpectedly reverted."
+    },
+    {
+      "id": "fault.board.rtc_battery.failed",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "Failed RTC / CMOS Battery",
+        "short_description": "A replaceable RTC/CMOS battery no longer maintains expected persistent state.",
+        "illustration": {
+          "asset_id": "art.fault.board.rtc_battery.failed",
+          "alt_text": "Technical reference illustration for Failed RTC / CMOS Battery."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "firmware",
+          "failed",
+          "rtc",
+          "/",
+          "cmos",
+          "battery"
+        ]
+      },
+      "category": "firmware",
+      "severity": "moderate",
+      "affected_component_ids": [
+        "component.board.rtc_battery"
+      ],
+      "affected_subsystem_ids": [
+        "subsystem.firmware"
+      ],
+      "symptom_ids": [
+        "symptom.firmware.settings_reset"
+      ],
+      "effective_test_ids": [
+        "test.firmware.settings_review"
+      ],
+      "repair_procedure_ids": [
+        "repair.board.replace_rtc_battery"
+      ],
+      "validation_procedure_ids": [
+        "verify.firmware.settings_persist"
+      ],
+      "education_text": "A replaceable RTC/CMOS battery no longer maintains expected persistent state."
+    },
+    {
+      "id": "fault.thermal.fan.failed",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "Failed Chassis Fan",
+        "short_description": "A chassis fan is stalled, missing, or underperforming.",
+        "illustration": {
+          "asset_id": "art.fault.thermal.fan.failed",
+          "alt_text": "Technical reference illustration for Failed Chassis Fan."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "thermal",
+          "failed",
+          "chassis",
+          "fan"
+        ]
+      },
+      "category": "thermal",
+      "severity": "high",
+      "affected_component_ids": [
+        "component.cooling.fan"
+      ],
+      "affected_subsystem_ids": [
+        "subsystem.thermal"
+      ],
+      "symptom_ids": [
+        "symptom.thermal.fan_warning",
+        "symptom.thermal.fans_loud",
+        "symptom.thermal.high_cpu_temp"
+      ],
+      "effective_test_ids": [
+        "test.thermal.fan_telemetry",
+        "test.general.visual_inspection"
+      ],
+      "repair_procedure_ids": [
+        "repair.thermal.replace_fan"
+      ],
+      "validation_procedure_ids": [
+        "verify.thermal.load_test"
+      ],
+      "education_text": "A chassis fan is stalled, missing, or underperforming."
+    },
+    {
+      "id": "fault.thermal.heatsink.clogged",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "Dust-Clogged Heatsink",
+        "short_description": "Dust restricts airflow through the heatsink.",
+        "illustration": {
+          "asset_id": "art.fault.thermal.heatsink.clogged",
+          "alt_text": "Technical reference illustration for Dust-Clogged Heatsink."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "thermal",
+          "dust-clogged",
+          "heatsink"
+        ]
+      },
+      "category": "thermal",
+      "severity": "moderate",
+      "affected_component_ids": [
+        "component.cooling.cpu_heatsink"
+      ],
+      "affected_subsystem_ids": [
+        "subsystem.thermal"
+      ],
+      "symptom_ids": [
+        "symptom.thermal.high_cpu_temp",
+        "symptom.thermal.fans_loud"
+      ],
+      "effective_test_ids": [
+        "test.general.visual_inspection",
+        "test.thermal.temperature_monitoring"
+      ],
+      "repair_procedure_ids": [
+        "repair.thermal.clean_cooling_path"
+      ],
+      "validation_procedure_ids": [
+        "verify.thermal.load_test"
+      ],
+      "education_text": "Dust restricts airflow through the heatsink."
+    },
+    {
+      "id": "fault.thermal.heatsink.contact_poor",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "Poor Heatsink Contact",
+        "short_description": "The heatsink does not make proper thermal contact.",
+        "illustration": {
+          "asset_id": "art.fault.thermal.heatsink.contact_poor",
+          "alt_text": "Technical reference illustration for Poor Heatsink Contact."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "thermal",
+          "poor",
+          "heatsink",
+          "contact"
+        ]
+      },
+      "category": "thermal",
+      "severity": "high",
+      "affected_component_ids": [
+        "component.cooling.cpu_heatsink",
+        "component.cooling.tim"
+      ],
+      "affected_subsystem_ids": [
+        "subsystem.thermal"
+      ],
+      "symptom_ids": [
+        "symptom.thermal.high_cpu_temp",
+        "symptom.thermal.shutdown_under_load"
+      ],
+      "effective_test_ids": [
+        "test.thermal.temperature_monitoring",
+        "test.general.visual_inspection"
+      ],
+      "repair_procedure_ids": [
+        "repair.thermal.restore_heatsink_contact"
+      ],
+      "validation_procedure_ids": [
+        "verify.thermal.load_test"
+      ],
+      "education_text": "The heatsink does not make proper thermal contact."
+    },
+    {
+      "id": "fault.thermal.cpu.overheating",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "CPU Overheating",
+        "short_description": "Processor temperature exceeds expected range because of a cooling problem.",
+        "illustration": {
+          "asset_id": "art.fault.thermal.cpu.overheating",
+          "alt_text": "Technical reference illustration for CPU Overheating."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "thermal",
+          "cpu",
+          "overheating"
+        ]
+      },
+      "category": "thermal",
+      "severity": "high",
+      "affected_component_ids": [
+        "component.compute.cpu",
+        "component.cooling.cpu_heatsink"
+      ],
+      "affected_subsystem_ids": [
+        "subsystem.thermal"
+      ],
+      "symptom_ids": [
+        "symptom.thermal.high_cpu_temp",
+        "symptom.thermal.fans_loud",
+        "symptom.thermal.shutdown_under_load"
+      ],
+      "effective_test_ids": [
+        "test.thermal.temperature_monitoring",
+        "test.thermal.fan_telemetry",
+        "test.system.bmc_logs"
+      ],
+      "repair_procedure_ids": [],
+      "validation_procedure_ids": [
+        "verify.thermal.load_test"
+      ],
+      "education_text": "Processor temperature exceeds expected range because of a cooling problem."
+    },
+    {
+      "id": "fault.thermal.shutdown",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "Thermal Shutdown",
+        "short_description": "Platform thermal protection shuts the server down.",
+        "illustration": {
+          "asset_id": "art.fault.thermal.shutdown",
+          "alt_text": "Technical reference illustration for Thermal Shutdown."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "thermal",
+          "thermal",
+          "shutdown"
+        ]
+      },
+      "category": "thermal",
+      "severity": "critical",
+      "affected_component_ids": [],
+      "affected_subsystem_ids": [
+        "subsystem.thermal"
+      ],
+      "symptom_ids": [
+        "symptom.thermal.shutdown_under_load",
+        "symptom.system.random_reboot"
+      ],
+      "effective_test_ids": [
+        "test.system.bmc_logs",
+        "test.thermal.temperature_monitoring",
+        "test.system.controlled_stress"
+      ],
+      "repair_procedure_ids": [],
+      "validation_procedure_ids": [
+        "verify.thermal.load_test"
+      ],
+      "education_text": "Platform thermal protection shuts the server down."
+    },
+    {
+      "id": "fault.network.cable.disconnected",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "Ethernet Cable Disconnected",
+        "short_description": "The NIC has no path because its cable is disconnected.",
+        "illustration": {
+          "asset_id": "art.fault.network.cable.disconnected",
+          "alt_text": "Technical reference illustration for Ethernet Cable Disconnected."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "network",
+          "ethernet",
+          "cable",
+          "disconnected"
+        ]
+      },
+      "category": "network",
+      "severity": "low",
+      "affected_component_ids": [
+        "component.network.ethernet_cable"
+      ],
+      "affected_subsystem_ids": [
+        "subsystem.network"
+      ],
+      "symptom_ids": [
+        "symptom.network.no_link",
+        "symptom.network.no_connectivity"
+      ],
+      "effective_test_ids": [
+        "test.general.visual_inspection",
+        "test.network.link"
+      ],
+      "repair_procedure_ids": [
+        "repair.network.reconnect_cable"
+      ],
+      "validation_procedure_ids": [
+        "verify.network.link",
+        "verify.network.connectivity"
+      ],
+      "education_text": "The NIC has no path because its cable is disconnected."
+    },
+    {
+      "id": "fault.network.cable.failed",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "Failed Ethernet Cable",
+        "short_description": "The Ethernet cable is damaged or electrically unreliable.",
+        "illustration": {
+          "asset_id": "art.fault.network.cable.failed",
+          "alt_text": "Technical reference illustration for Failed Ethernet Cable."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "network",
+          "failed",
+          "ethernet",
+          "cable"
+        ]
+      },
+      "category": "network",
+      "severity": "moderate",
+      "affected_component_ids": [
+        "component.network.ethernet_cable"
+      ],
+      "affected_subsystem_ids": [
+        "subsystem.network"
+      ],
+      "symptom_ids": [
+        "symptom.network.no_link",
+        "symptom.network.no_connectivity"
+      ],
+      "effective_test_ids": [
+        "test.network.link",
+        "test.network.cable_substitution"
+      ],
+      "repair_procedure_ids": [
+        "repair.network.replace_cable"
+      ],
+      "validation_procedure_ids": [
+        "verify.network.link",
+        "verify.network.connectivity"
+      ],
+      "education_text": "The Ethernet cable is damaged or electrically unreliable."
+    },
+    {
+      "id": "fault.network.nic.failed",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "NIC Failure",
+        "short_description": "A network adapter fails to enumerate or establish expected connectivity.",
+        "illustration": {
+          "asset_id": "art.fault.network.nic.failed",
+          "alt_text": "Technical reference illustration for NIC Failure."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "network",
+          "nic",
+          "failure"
+        ]
+      },
+      "category": "network",
+      "severity": "high",
+      "affected_component_ids": [
+        "component.network.nic"
+      ],
+      "affected_subsystem_ids": [
+        "subsystem.network"
+      ],
+      "symptom_ids": [
+        "symptom.network.no_link",
+        "symptom.network.no_connectivity",
+        "symptom.pcie.device_missing"
+      ],
+      "effective_test_ids": [
+        "test.pcie.inventory",
+        "test.network.link",
+        "test.network.cable_substitution"
+      ],
+      "repair_procedure_ids": [
+        "repair.network.replace_nic"
+      ],
+      "validation_procedure_ids": [
+        "verify.network.link",
+        "verify.network.connectivity"
+      ],
+      "education_text": "A network adapter fails to enumerate or establish expected connectivity."
+    },
+    {
+      "id": "fault.network.ip.static_incorrect",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "Incorrect Static IP Configuration",
+        "short_description": "Static address, prefix, or gateway does not match the intended network.",
+        "illustration": {
+          "asset_id": "art.fault.network.ip.static_incorrect",
+          "alt_text": "Technical reference illustration for Incorrect Static IP Configuration."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "network",
+          "incorrect",
+          "static",
+          "ip",
+          "configuration"
+        ]
+      },
+      "category": "network",
+      "severity": "moderate",
+      "affected_component_ids": [],
+      "affected_subsystem_ids": [
+        "subsystem.network"
+      ],
+      "symptom_ids": [
+        "symptom.network.no_connectivity",
+        "symptom.network.wrong_ip"
+      ],
+      "effective_test_ids": [
+        "test.network.interface_config",
+        "test.network.ping"
+      ],
+      "repair_procedure_ids": [
+        "repair.network.correct_static_ip"
+      ],
+      "validation_procedure_ids": [
+        "verify.network.connectivity"
+      ],
+      "education_text": "Static address, prefix, or gateway does not match the intended network."
+    },
+    {
+      "id": "fault.network.dhcp.no_lease",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "DHCP Lease Failure",
+        "short_description": "A DHCP-configured interface does not obtain the expected lease.",
+        "illustration": {
+          "asset_id": "art.fault.network.dhcp.no_lease",
+          "alt_text": "Technical reference illustration for DHCP Lease Failure."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "network",
+          "dhcp",
+          "lease",
+          "failure"
+        ]
+      },
+      "category": "network",
+      "severity": "moderate",
+      "affected_component_ids": [],
+      "affected_subsystem_ids": [
+        "subsystem.network"
+      ],
+      "symptom_ids": [
+        "symptom.network.no_dhcp_lease",
+        "symptom.network.no_connectivity"
+      ],
+      "effective_test_ids": [
+        "test.network.interface_config",
+        "test.network.link",
+        "test.network.ping"
+      ],
+      "repair_procedure_ids": [],
+      "validation_procedure_ids": [
+        "verify.network.connectivity"
+      ],
+      "education_text": "A DHCP-configured interface does not obtain the expected lease."
+    },
+    {
+      "id": "fault.pcie.card.not_seated",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "PCIe Card Not Fully Seated",
+        "short_description": "A PCIe card is not making reliable contact.",
+        "illustration": {
+          "asset_id": "art.fault.pcie.card.not_seated",
+          "alt_text": "Technical reference illustration for PCIe Card Not Fully Seated."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "pcie",
+          "pcie",
+          "card",
+          "not",
+          "fully",
+          "seated"
+        ]
+      },
+      "category": "pcie",
+      "severity": "moderate",
+      "affected_component_ids": [
+        "component.pcie.card"
+      ],
+      "affected_subsystem_ids": [
+        "subsystem.pcie"
+      ],
+      "symptom_ids": [
+        "symptom.pcie.device_missing",
+        "symptom.system.device_errors"
+      ],
+      "effective_test_ids": [
+        "test.pcie.inventory",
+        "test.general.visual_inspection"
+      ],
+      "repair_procedure_ids": [
+        "repair.pcie.reseat_card"
+      ],
+      "validation_procedure_ids": [
+        "verify.pcie.device_present"
+      ],
+      "education_text": "A PCIe card is not making reliable contact."
+    },
+    {
+      "id": "fault.cpu.not_seated",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "CPU Not Properly Seated",
+        "short_description": "The CPU/socket relationship is incorrect or unreliable.",
+        "illustration": {
+          "asset_id": "art.fault.cpu.not_seated",
+          "alt_text": "Technical reference illustration for CPU Not Properly Seated."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "compute",
+          "cpu",
+          "not",
+          "properly",
+          "seated"
+        ]
+      },
+      "category": "compute",
+      "severity": "critical",
+      "affected_component_ids": [
+        "component.compute.cpu"
+      ],
+      "affected_subsystem_ids": [
+        "subsystem.compute"
+      ],
+      "symptom_ids": [
+        "symptom.boot.no_post",
+        "symptom.memory.reduced_capacity"
+      ],
+      "effective_test_ids": [
+        "test.boot.post_code_analysis",
+        "test.general.minimum_configuration"
+      ],
+      "repair_procedure_ids": [],
+      "validation_procedure_ids": [
+        "verify.boot.post",
+        "verify.memory.inventory"
+      ],
+      "education_text": "The CPU/socket relationship is incorrect or unreliable."
+    },
+    {
+      "id": "fault.board.system.failed",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "System Board Failure",
+        "short_description": "The system board has failed after simpler replaceable causes are isolated.",
+        "illustration": {
+          "asset_id": "art.fault.board.system.failed",
+          "alt_text": "Technical reference illustration for System Board Failure."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "board",
+          "system",
+          "board",
+          "failure"
+        ]
+      },
+      "category": "board",
+      "severity": "critical",
+      "affected_component_ids": [
+        "component.board.system"
+      ],
+      "affected_subsystem_ids": [
+        "subsystem.board"
+      ],
+      "symptom_ids": [
+        "symptom.boot.no_post",
+        "symptom.system.device_errors",
+        "symptom.power.no_power"
+      ],
+      "effective_test_ids": [
+        "test.general.minimum_configuration",
+        "test.system.bmc_logs"
+      ],
+      "repair_procedure_ids": [
+        "repair.board.replace_system_board"
+      ],
+      "validation_procedure_ids": [
+        "verify.boot.post",
+        "verify.system.burn_in"
+      ],
+      "education_text": "The system board has failed after simpler replaceable causes are isolated."
+    }
+  ]
+}

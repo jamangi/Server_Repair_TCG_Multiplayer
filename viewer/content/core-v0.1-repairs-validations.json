@@ -1,0 +1,1284 @@
+{
+  "pack_id": "core_v0_1_repairs_validations",
+  "name": "Core V0.1 Repairs Validations",
+  "version": "0.1.0",
+  "entities": [
+    {
+      "id": "repair.memory.reseat_dimm",
+      "entity_type": "repair_procedure",
+      "presentation": {
+        "display_name": "Reseat DIMM",
+        "short_description": "Reseat DIMM corrective procedure.",
+        "illustration": {
+          "asset_id": "art.repair.memory.reseat_dimm",
+          "alt_text": "Technical reference illustration for Reseat DIMM."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "reseat",
+          "dimm"
+        ]
+      },
+      "target_fault_ids": [
+        "fault.memory.dimm.not_seated"
+      ],
+      "required_component_ids": [],
+      "required_tool_ids": [],
+      "required_protocol_ids": [
+        "protocol.safety.esd"
+      ],
+      "steps_summary": [
+        "Perform reseat dimm according to approved platform procedure."
+      ],
+      "action_cost": 1,
+      "education_text": "Repairs change machine state and should be followed by verification."
+    },
+    {
+      "id": "repair.memory.replace_dimm",
+      "entity_type": "repair_procedure",
+      "presentation": {
+        "display_name": "Replace Failed DIMM",
+        "short_description": "Replace Failed DIMM corrective procedure.",
+        "illustration": {
+          "asset_id": "art.repair.memory.replace_dimm",
+          "alt_text": "Technical reference illustration for Replace Failed DIMM."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "replace",
+          "failed",
+          "dimm"
+        ]
+      },
+      "target_fault_ids": [
+        "fault.memory.dimm.failed"
+      ],
+      "required_component_ids": [],
+      "required_tool_ids": [],
+      "required_protocol_ids": [
+        "protocol.safety.esd"
+      ],
+      "steps_summary": [
+        "Perform replace failed dimm according to approved platform procedure."
+      ],
+      "action_cost": 1,
+      "education_text": "Repairs change machine state and should be followed by verification."
+    },
+    {
+      "id": "repair.memory.correct_population",
+      "entity_type": "repair_procedure",
+      "presentation": {
+        "display_name": "Correct DIMM Population",
+        "short_description": "Correct DIMM Population corrective procedure.",
+        "illustration": {
+          "asset_id": "art.repair.memory.correct_population",
+          "alt_text": "Technical reference illustration for Correct DIMM Population."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "correct",
+          "dimm",
+          "population"
+        ]
+      },
+      "target_fault_ids": [
+        "fault.memory.population.invalid"
+      ],
+      "required_component_ids": [],
+      "required_tool_ids": [],
+      "required_protocol_ids": [
+        "protocol.safety.esd"
+      ],
+      "steps_summary": [
+        "Perform correct dimm population according to approved platform procedure."
+      ],
+      "action_cost": 1,
+      "education_text": "Repairs change machine state and should be followed by verification."
+    },
+    {
+      "id": "repair.power.reseat_psu",
+      "entity_type": "repair_procedure",
+      "presentation": {
+        "display_name": "Reseat PSU",
+        "short_description": "Reseat PSU corrective procedure.",
+        "illustration": {
+          "asset_id": "art.repair.power.reseat_psu",
+          "alt_text": "Technical reference illustration for Reseat PSU."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "reseat",
+          "psu"
+        ]
+      },
+      "target_fault_ids": [
+        "fault.power.psu.not_seated"
+      ],
+      "required_component_ids": [],
+      "required_tool_ids": [],
+      "required_protocol_ids": [],
+      "steps_summary": [
+        "Perform reseat psu according to approved platform procedure."
+      ],
+      "action_cost": 1,
+      "education_text": "Repairs change machine state and should be followed by verification."
+    },
+    {
+      "id": "repair.power.replace_psu",
+      "entity_type": "repair_procedure",
+      "presentation": {
+        "display_name": "Replace Failed PSU",
+        "short_description": "Replace Failed PSU corrective procedure.",
+        "illustration": {
+          "asset_id": "art.repair.power.replace_psu",
+          "alt_text": "Technical reference illustration for Replace Failed PSU."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "replace",
+          "failed",
+          "psu"
+        ]
+      },
+      "target_fault_ids": [
+        "fault.power.psu.failed"
+      ],
+      "required_component_ids": [],
+      "required_tool_ids": [],
+      "required_protocol_ids": [],
+      "steps_summary": [
+        "Perform replace failed psu according to approved platform procedure."
+      ],
+      "action_cost": 1,
+      "education_text": "Repairs change machine state and should be followed by verification."
+    },
+    {
+      "id": "repair.power.reconnect_input",
+      "entity_type": "repair_procedure",
+      "presentation": {
+        "display_name": "Reconnect Power Cable",
+        "short_description": "Reconnect Power Cable corrective procedure.",
+        "illustration": {
+          "asset_id": "art.repair.power.reconnect_input",
+          "alt_text": "Technical reference illustration for Reconnect Power Cable."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "reconnect",
+          "power",
+          "cable"
+        ]
+      },
+      "target_fault_ids": [
+        "fault.power.input.cable_loose"
+      ],
+      "required_component_ids": [],
+      "required_tool_ids": [],
+      "required_protocol_ids": [],
+      "steps_summary": [
+        "Perform reconnect power cable according to approved platform procedure."
+      ],
+      "action_cost": 1,
+      "education_text": "Repairs change machine state and should be followed by verification."
+    },
+    {
+      "id": "repair.storage.replace_raid_member",
+      "entity_type": "repair_procedure",
+      "presentation": {
+        "display_name": "Replace Failed RAID Member",
+        "short_description": "Replace Failed RAID Member corrective procedure.",
+        "illustration": {
+          "asset_id": "art.repair.storage.replace_raid_member",
+          "alt_text": "Technical reference illustration for Replace Failed RAID Member."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "replace",
+          "failed",
+          "raid",
+          "member"
+        ]
+      },
+      "target_fault_ids": [
+        "fault.storage.sas.drive_failed",
+        "fault.storage.sata.drive_failed"
+      ],
+      "required_component_ids": [],
+      "required_tool_ids": [],
+      "required_protocol_ids": [],
+      "steps_summary": [
+        "Perform replace failed raid member according to approved platform procedure."
+      ],
+      "action_cost": 1,
+      "education_text": "Repairs change machine state and should be followed by verification."
+    },
+    {
+      "id": "repair.storage.rebuild_array",
+      "entity_type": "repair_procedure",
+      "presentation": {
+        "display_name": "Rebuild RAID Array",
+        "short_description": "Rebuild RAID Array corrective procedure.",
+        "illustration": {
+          "asset_id": "art.repair.storage.rebuild_array",
+          "alt_text": "Technical reference illustration for Rebuild RAID Array."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "rebuild",
+          "raid",
+          "array"
+        ]
+      },
+      "target_fault_ids": [
+        "fault.storage.raid.degraded"
+      ],
+      "required_component_ids": [],
+      "required_tool_ids": [],
+      "required_protocol_ids": [],
+      "steps_summary": [
+        "Perform rebuild raid array according to approved platform procedure."
+      ],
+      "action_cost": 1,
+      "education_text": "Repairs change machine state and should be followed by verification."
+    },
+    {
+      "id": "repair.storage.reseat_cable",
+      "entity_type": "repair_procedure",
+      "presentation": {
+        "display_name": "Reseat Storage Cable",
+        "short_description": "Reseat Storage Cable corrective procedure.",
+        "illustration": {
+          "asset_id": "art.repair.storage.reseat_cable",
+          "alt_text": "Technical reference illustration for Reseat Storage Cable."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "reseat",
+          "storage",
+          "cable"
+        ]
+      },
+      "target_fault_ids": [
+        "fault.storage.cable.loose"
+      ],
+      "required_component_ids": [],
+      "required_tool_ids": [],
+      "required_protocol_ids": [],
+      "steps_summary": [
+        "Perform reseat storage cable according to approved platform procedure."
+      ],
+      "action_cost": 1,
+      "education_text": "Repairs change machine state and should be followed by verification."
+    },
+    {
+      "id": "repair.storage.replace_cable",
+      "entity_type": "repair_procedure",
+      "presentation": {
+        "display_name": "Replace Storage Cable",
+        "short_description": "Replace Storage Cable corrective procedure.",
+        "illustration": {
+          "asset_id": "art.repair.storage.replace_cable",
+          "alt_text": "Technical reference illustration for Replace Storage Cable."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "replace",
+          "storage",
+          "cable"
+        ]
+      },
+      "target_fault_ids": [
+        "fault.storage.cable.failed"
+      ],
+      "required_component_ids": [],
+      "required_tool_ids": [],
+      "required_protocol_ids": [],
+      "steps_summary": [
+        "Perform replace storage cable according to approved platform procedure."
+      ],
+      "action_cost": 1,
+      "education_text": "Repairs change machine state and should be followed by verification."
+    },
+    {
+      "id": "repair.storage.replace_nvme",
+      "entity_type": "repair_procedure",
+      "presentation": {
+        "display_name": "Replace Failed NVMe Device",
+        "short_description": "Replace Failed NVMe Device corrective procedure.",
+        "illustration": {
+          "asset_id": "art.repair.storage.replace_nvme",
+          "alt_text": "Technical reference illustration for Replace Failed NVMe Device."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "replace",
+          "failed",
+          "nvme",
+          "device"
+        ]
+      },
+      "target_fault_ids": [
+        "fault.storage.nvme.device_failed"
+      ],
+      "required_component_ids": [],
+      "required_tool_ids": [],
+      "required_protocol_ids": [],
+      "steps_summary": [
+        "Perform replace failed nvme device according to approved platform procedure."
+      ],
+      "action_cost": 1,
+      "education_text": "Repairs change machine state and should be followed by verification."
+    },
+    {
+      "id": "repair.storage.replace_raid_controller",
+      "entity_type": "repair_procedure",
+      "presentation": {
+        "display_name": "Replace RAID Controller",
+        "short_description": "Replace RAID Controller corrective procedure.",
+        "illustration": {
+          "asset_id": "art.repair.storage.replace_raid_controller",
+          "alt_text": "Technical reference illustration for Replace RAID Controller."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "replace",
+          "raid",
+          "controller"
+        ]
+      },
+      "target_fault_ids": [
+        "fault.storage.raid.controller_failed"
+      ],
+      "required_component_ids": [],
+      "required_tool_ids": [],
+      "required_protocol_ids": [],
+      "steps_summary": [
+        "Perform replace raid controller according to approved platform procedure."
+      ],
+      "action_cost": 1,
+      "education_text": "Repairs change machine state and should be followed by verification."
+    },
+    {
+      "id": "repair.boot.correct_order",
+      "entity_type": "repair_procedure",
+      "presentation": {
+        "display_name": "Correct Boot Order",
+        "short_description": "Correct Boot Order corrective procedure.",
+        "illustration": {
+          "asset_id": "art.repair.boot.correct_order",
+          "alt_text": "Technical reference illustration for Correct Boot Order."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "correct",
+          "boot",
+          "order"
+        ]
+      },
+      "target_fault_ids": [
+        "fault.boot.order.incorrect"
+      ],
+      "required_component_ids": [],
+      "required_tool_ids": [],
+      "required_protocol_ids": [],
+      "steps_summary": [
+        "Perform correct boot order according to approved platform procedure."
+      ],
+      "action_cost": 1,
+      "education_text": "Repairs change machine state and should be followed by verification."
+    },
+    {
+      "id": "repair.boot.repair_bootloader",
+      "entity_type": "repair_procedure",
+      "presentation": {
+        "display_name": "Repair Bootloader",
+        "short_description": "Repair Bootloader corrective procedure.",
+        "illustration": {
+          "asset_id": "art.repair.boot.repair_bootloader",
+          "alt_text": "Technical reference illustration for Repair Bootloader."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "repair",
+          "bootloader"
+        ]
+      },
+      "target_fault_ids": [
+        "fault.boot.bootloader.corrupt"
+      ],
+      "required_component_ids": [],
+      "required_tool_ids": [],
+      "required_protocol_ids": [],
+      "steps_summary": [
+        "Perform repair bootloader according to approved platform procedure."
+      ],
+      "action_cost": 1,
+      "education_text": "Repairs change machine state and should be followed by verification."
+    },
+    {
+      "id": "repair.firmware.restore_settings",
+      "entity_type": "repair_procedure",
+      "presentation": {
+        "display_name": "Restore Firmware Settings",
+        "short_description": "Restore Firmware Settings corrective procedure.",
+        "illustration": {
+          "asset_id": "art.repair.firmware.restore_settings",
+          "alt_text": "Technical reference illustration for Restore Firmware Settings."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "restore",
+          "firmware",
+          "settings"
+        ]
+      },
+      "target_fault_ids": [
+        "fault.firmware.config.reset"
+      ],
+      "required_component_ids": [],
+      "required_tool_ids": [],
+      "required_protocol_ids": [],
+      "steps_summary": [
+        "Perform restore firmware settings according to approved platform procedure."
+      ],
+      "action_cost": 1,
+      "education_text": "Repairs change machine state and should be followed by verification."
+    },
+    {
+      "id": "repair.board.replace_rtc_battery",
+      "entity_type": "repair_procedure",
+      "presentation": {
+        "display_name": "Replace RTC Battery",
+        "short_description": "Replace RTC Battery corrective procedure.",
+        "illustration": {
+          "asset_id": "art.repair.board.replace_rtc_battery",
+          "alt_text": "Technical reference illustration for Replace RTC Battery."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "replace",
+          "rtc",
+          "battery"
+        ]
+      },
+      "target_fault_ids": [
+        "fault.board.rtc_battery.failed"
+      ],
+      "required_component_ids": [],
+      "required_tool_ids": [],
+      "required_protocol_ids": [
+        "protocol.safety.esd"
+      ],
+      "steps_summary": [
+        "Perform replace rtc battery according to approved platform procedure."
+      ],
+      "action_cost": 1,
+      "education_text": "Repairs change machine state and should be followed by verification."
+    },
+    {
+      "id": "repair.thermal.replace_fan",
+      "entity_type": "repair_procedure",
+      "presentation": {
+        "display_name": "Replace Chassis Fan",
+        "short_description": "Replace Chassis Fan corrective procedure.",
+        "illustration": {
+          "asset_id": "art.repair.thermal.replace_fan",
+          "alt_text": "Technical reference illustration for Replace Chassis Fan."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "replace",
+          "chassis",
+          "fan"
+        ]
+      },
+      "target_fault_ids": [
+        "fault.thermal.fan.failed"
+      ],
+      "required_component_ids": [],
+      "required_tool_ids": [],
+      "required_protocol_ids": [],
+      "steps_summary": [
+        "Perform replace chassis fan according to approved platform procedure."
+      ],
+      "action_cost": 1,
+      "education_text": "Repairs change machine state and should be followed by verification."
+    },
+    {
+      "id": "repair.thermal.clean_cooling_path",
+      "entity_type": "repair_procedure",
+      "presentation": {
+        "display_name": "Clean Cooling Path",
+        "short_description": "Clean Cooling Path corrective procedure.",
+        "illustration": {
+          "asset_id": "art.repair.thermal.clean_cooling_path",
+          "alt_text": "Technical reference illustration for Clean Cooling Path."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "clean",
+          "cooling",
+          "path"
+        ]
+      },
+      "target_fault_ids": [
+        "fault.thermal.heatsink.clogged"
+      ],
+      "required_component_ids": [],
+      "required_tool_ids": [],
+      "required_protocol_ids": [],
+      "steps_summary": [
+        "Perform clean cooling path according to approved platform procedure."
+      ],
+      "action_cost": 1,
+      "education_text": "Repairs change machine state and should be followed by verification."
+    },
+    {
+      "id": "repair.thermal.restore_heatsink_contact",
+      "entity_type": "repair_procedure",
+      "presentation": {
+        "display_name": "Restore Heatsink Contact",
+        "short_description": "Restore Heatsink Contact corrective procedure.",
+        "illustration": {
+          "asset_id": "art.repair.thermal.restore_heatsink_contact",
+          "alt_text": "Technical reference illustration for Restore Heatsink Contact."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "restore",
+          "heatsink",
+          "contact"
+        ]
+      },
+      "target_fault_ids": [
+        "fault.thermal.heatsink.contact_poor"
+      ],
+      "required_component_ids": [],
+      "required_tool_ids": [],
+      "required_protocol_ids": [],
+      "steps_summary": [
+        "Perform restore heatsink contact according to approved platform procedure."
+      ],
+      "action_cost": 1,
+      "education_text": "Repairs change machine state and should be followed by verification."
+    },
+    {
+      "id": "repair.network.reconnect_cable",
+      "entity_type": "repair_procedure",
+      "presentation": {
+        "display_name": "Reconnect Ethernet Cable",
+        "short_description": "Reconnect Ethernet Cable corrective procedure.",
+        "illustration": {
+          "asset_id": "art.repair.network.reconnect_cable",
+          "alt_text": "Technical reference illustration for Reconnect Ethernet Cable."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "reconnect",
+          "ethernet",
+          "cable"
+        ]
+      },
+      "target_fault_ids": [
+        "fault.network.cable.disconnected"
+      ],
+      "required_component_ids": [],
+      "required_tool_ids": [],
+      "required_protocol_ids": [],
+      "steps_summary": [
+        "Perform reconnect ethernet cable according to approved platform procedure."
+      ],
+      "action_cost": 1,
+      "education_text": "Repairs change machine state and should be followed by verification."
+    },
+    {
+      "id": "repair.network.replace_cable",
+      "entity_type": "repair_procedure",
+      "presentation": {
+        "display_name": "Replace Ethernet Cable",
+        "short_description": "Replace Ethernet Cable corrective procedure.",
+        "illustration": {
+          "asset_id": "art.repair.network.replace_cable",
+          "alt_text": "Technical reference illustration for Replace Ethernet Cable."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "replace",
+          "ethernet",
+          "cable"
+        ]
+      },
+      "target_fault_ids": [
+        "fault.network.cable.failed"
+      ],
+      "required_component_ids": [],
+      "required_tool_ids": [],
+      "required_protocol_ids": [],
+      "steps_summary": [
+        "Perform replace ethernet cable according to approved platform procedure."
+      ],
+      "action_cost": 1,
+      "education_text": "Repairs change machine state and should be followed by verification."
+    },
+    {
+      "id": "repair.network.correct_static_ip",
+      "entity_type": "repair_procedure",
+      "presentation": {
+        "display_name": "Correct Static IP Configuration",
+        "short_description": "Correct Static IP Configuration corrective procedure.",
+        "illustration": {
+          "asset_id": "art.repair.network.correct_static_ip",
+          "alt_text": "Technical reference illustration for Correct Static IP Configuration."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "correct",
+          "static",
+          "ip",
+          "configuration"
+        ]
+      },
+      "target_fault_ids": [
+        "fault.network.ip.static_incorrect"
+      ],
+      "required_component_ids": [],
+      "required_tool_ids": [],
+      "required_protocol_ids": [],
+      "steps_summary": [
+        "Perform correct static ip configuration according to approved platform procedure."
+      ],
+      "action_cost": 1,
+      "education_text": "Repairs change machine state and should be followed by verification."
+    },
+    {
+      "id": "repair.pcie.reseat_card",
+      "entity_type": "repair_procedure",
+      "presentation": {
+        "display_name": "Reseat PCIe Card",
+        "short_description": "Reseat PCIe Card corrective procedure.",
+        "illustration": {
+          "asset_id": "art.repair.pcie.reseat_card",
+          "alt_text": "Technical reference illustration for Reseat PCIe Card."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "reseat",
+          "pcie",
+          "card"
+        ]
+      },
+      "target_fault_ids": [
+        "fault.pcie.card.not_seated"
+      ],
+      "required_component_ids": [],
+      "required_tool_ids": [],
+      "required_protocol_ids": [
+        "protocol.safety.esd"
+      ],
+      "steps_summary": [
+        "Perform reseat pcie card according to approved platform procedure."
+      ],
+      "action_cost": 1,
+      "education_text": "Repairs change machine state and should be followed by verification."
+    },
+    {
+      "id": "repair.network.replace_nic",
+      "entity_type": "repair_procedure",
+      "presentation": {
+        "display_name": "Replace Failed NIC",
+        "short_description": "Replace Failed NIC corrective procedure.",
+        "illustration": {
+          "asset_id": "art.repair.network.replace_nic",
+          "alt_text": "Technical reference illustration for Replace Failed NIC."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "replace",
+          "failed",
+          "nic"
+        ]
+      },
+      "target_fault_ids": [
+        "fault.network.nic.failed"
+      ],
+      "required_component_ids": [],
+      "required_tool_ids": [],
+      "required_protocol_ids": [],
+      "steps_summary": [
+        "Perform replace failed nic according to approved platform procedure."
+      ],
+      "action_cost": 1,
+      "education_text": "Repairs change machine state and should be followed by verification."
+    },
+    {
+      "id": "repair.board.replace_system_board",
+      "entity_type": "repair_procedure",
+      "presentation": {
+        "display_name": "Replace System Board",
+        "short_description": "Replace System Board corrective procedure.",
+        "illustration": {
+          "asset_id": "art.repair.board.replace_system_board",
+          "alt_text": "Technical reference illustration for Replace System Board."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "replace",
+          "system",
+          "board"
+        ]
+      },
+      "target_fault_ids": [
+        "fault.board.system.failed"
+      ],
+      "required_component_ids": [],
+      "required_tool_ids": [],
+      "required_protocol_ids": [
+        "protocol.safety.esd"
+      ],
+      "steps_summary": [
+        "Perform replace system board according to approved platform procedure."
+      ],
+      "action_cost": 3,
+      "education_text": "Repairs change machine state and should be followed by verification."
+    },
+    {
+      "id": "verify.boot.post",
+      "entity_type": "validation_procedure",
+      "presentation": {
+        "display_name": "POST Verification",
+        "short_description": "POST Verification confirms the repaired state.",
+        "illustration": {
+          "asset_id": "art.verify.boot.post",
+          "alt_text": "Technical reference illustration for POST Verification."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "post",
+          "verification"
+        ]
+      },
+      "validates_fault_ids": [
+        "fault.memory.dimm.not_seated",
+        "fault.memory.dimm.failed",
+        "fault.memory.population.invalid",
+        "fault.pcie.card.not_seated",
+        "fault.board.system.failed"
+      ],
+      "target_component_ids": [],
+      "required_tool_ids": [],
+      "success_conditions": [
+        "Original fault condition no longer appears and required operation succeeds."
+      ],
+      "action_cost": 1,
+      "education_text": "Verification evaluates whether the repair produced the required operational state."
+    },
+    {
+      "id": "verify.memory.full_test",
+      "entity_type": "validation_procedure",
+      "presentation": {
+        "display_name": "Memory Verification",
+        "short_description": "Memory Verification confirms the repaired state.",
+        "illustration": {
+          "asset_id": "art.verify.memory.full_test",
+          "alt_text": "Technical reference illustration for Memory Verification."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "memory",
+          "verification"
+        ]
+      },
+      "validates_fault_ids": [
+        "fault.memory.dimm.failed",
+        "fault.memory.channel.unavailable",
+        "fault.system.intermittent_memory_instability"
+      ],
+      "target_component_ids": [],
+      "required_tool_ids": [],
+      "success_conditions": [
+        "Original fault condition no longer appears and required operation succeeds."
+      ],
+      "action_cost": 1,
+      "education_text": "Verification evaluates whether the repair produced the required operational state."
+    },
+    {
+      "id": "verify.memory.inventory",
+      "entity_type": "validation_procedure",
+      "presentation": {
+        "display_name": "Memory Inventory Verification",
+        "short_description": "Memory Inventory Verification confirms the repaired state.",
+        "illustration": {
+          "asset_id": "art.verify.memory.inventory",
+          "alt_text": "Technical reference illustration for Memory Inventory Verification."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "memory",
+          "inventory",
+          "verification"
+        ]
+      },
+      "validates_fault_ids": [
+        "fault.memory.population.invalid",
+        "fault.memory.dimm.not_seated"
+      ],
+      "target_component_ids": [],
+      "required_tool_ids": [],
+      "success_conditions": [
+        "Original fault condition no longer appears and required operation succeeds."
+      ],
+      "action_cost": 1,
+      "education_text": "Verification evaluates whether the repair produced the required operational state."
+    },
+    {
+      "id": "verify.power.stable",
+      "entity_type": "validation_procedure",
+      "presentation": {
+        "display_name": "Stable Power Verification",
+        "short_description": "Stable Power Verification confirms the repaired state.",
+        "illustration": {
+          "asset_id": "art.verify.power.stable",
+          "alt_text": "Technical reference illustration for Stable Power Verification."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "stable",
+          "power",
+          "verification"
+        ]
+      },
+      "validates_fault_ids": [
+        "fault.power.psu.failed",
+        "fault.power.psu.not_seated",
+        "fault.power.input.cable_loose"
+      ],
+      "target_component_ids": [],
+      "required_tool_ids": [],
+      "success_conditions": [
+        "Original fault condition no longer appears and required operation succeeds."
+      ],
+      "action_cost": 1,
+      "education_text": "Verification evaluates whether the repair produced the required operational state."
+    },
+    {
+      "id": "verify.storage.device_detected",
+      "entity_type": "validation_procedure",
+      "presentation": {
+        "display_name": "Storage Detection Verification",
+        "short_description": "Storage Detection Verification confirms the repaired state.",
+        "illustration": {
+          "asset_id": "art.verify.storage.device_detected",
+          "alt_text": "Technical reference illustration for Storage Detection Verification."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "storage",
+          "detection",
+          "verification"
+        ]
+      },
+      "validates_fault_ids": [
+        "fault.storage.cable.loose",
+        "fault.storage.cable.failed",
+        "fault.storage.nvme.device_failed"
+      ],
+      "target_component_ids": [],
+      "required_tool_ids": [],
+      "success_conditions": [
+        "Original fault condition no longer appears and required operation succeeds."
+      ],
+      "action_cost": 1,
+      "education_text": "Verification evaluates whether the repair produced the required operational state."
+    },
+    {
+      "id": "verify.storage.raid_healthy",
+      "entity_type": "validation_procedure",
+      "presentation": {
+        "display_name": "RAID Healthy Verification",
+        "short_description": "RAID Healthy Verification confirms the repaired state.",
+        "illustration": {
+          "asset_id": "art.verify.storage.raid_healthy",
+          "alt_text": "Technical reference illustration for RAID Healthy Verification."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "raid",
+          "healthy",
+          "verification"
+        ]
+      },
+      "validates_fault_ids": [
+        "fault.storage.raid.degraded",
+        "fault.storage.sas.drive_failed",
+        "fault.storage.sata.drive_failed",
+        "fault.storage.raid.controller_failed"
+      ],
+      "target_component_ids": [],
+      "required_tool_ids": [],
+      "success_conditions": [
+        "Original fault condition no longer appears and required operation succeeds."
+      ],
+      "action_cost": 1,
+      "education_text": "Verification evaluates whether the repair produced the required operational state."
+    },
+    {
+      "id": "verify.boot.normal_boot",
+      "entity_type": "validation_procedure",
+      "presentation": {
+        "display_name": "Normal Boot Verification",
+        "short_description": "Normal Boot Verification confirms the repaired state.",
+        "illustration": {
+          "asset_id": "art.verify.boot.normal_boot",
+          "alt_text": "Technical reference illustration for Normal Boot Verification."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "normal",
+          "boot",
+          "verification"
+        ]
+      },
+      "validates_fault_ids": [
+        "fault.boot.order.incorrect",
+        "fault.boot.bootloader.corrupt",
+        "fault.boot.device.not_detected"
+      ],
+      "target_component_ids": [],
+      "required_tool_ids": [],
+      "success_conditions": [
+        "Original fault condition no longer appears and required operation succeeds."
+      ],
+      "action_cost": 1,
+      "education_text": "Verification evaluates whether the repair produced the required operational state."
+    },
+    {
+      "id": "verify.firmware.settings_persist",
+      "entity_type": "validation_procedure",
+      "presentation": {
+        "display_name": "Firmware Persistence Verification",
+        "short_description": "Firmware Persistence Verification confirms the repaired state.",
+        "illustration": {
+          "asset_id": "art.verify.firmware.settings_persist",
+          "alt_text": "Technical reference illustration for Firmware Persistence Verification."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "firmware",
+          "persistence",
+          "verification"
+        ]
+      },
+      "validates_fault_ids": [
+        "fault.firmware.config.reset",
+        "fault.board.rtc_battery.failed"
+      ],
+      "target_component_ids": [],
+      "required_tool_ids": [],
+      "success_conditions": [
+        "Original fault condition no longer appears and required operation succeeds."
+      ],
+      "action_cost": 1,
+      "education_text": "Verification evaluates whether the repair produced the required operational state."
+    },
+    {
+      "id": "verify.thermal.load_test",
+      "entity_type": "validation_procedure",
+      "presentation": {
+        "display_name": "Thermal Load Verification",
+        "short_description": "Thermal Load Verification confirms the repaired state.",
+        "illustration": {
+          "asset_id": "art.verify.thermal.load_test",
+          "alt_text": "Technical reference illustration for Thermal Load Verification."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "thermal",
+          "load",
+          "verification"
+        ]
+      },
+      "validates_fault_ids": [
+        "fault.thermal.fan.failed",
+        "fault.thermal.heatsink.clogged",
+        "fault.thermal.heatsink.contact_poor",
+        "fault.thermal.cpu.overheating",
+        "fault.thermal.shutdown"
+      ],
+      "target_component_ids": [],
+      "required_tool_ids": [],
+      "success_conditions": [
+        "Original fault condition no longer appears and required operation succeeds."
+      ],
+      "action_cost": 1,
+      "education_text": "Verification evaluates whether the repair produced the required operational state."
+    },
+    {
+      "id": "verify.network.link",
+      "entity_type": "validation_procedure",
+      "presentation": {
+        "display_name": "Network Link Verification",
+        "short_description": "Network Link Verification confirms the repaired state.",
+        "illustration": {
+          "asset_id": "art.verify.network.link",
+          "alt_text": "Technical reference illustration for Network Link Verification."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "network",
+          "link",
+          "verification"
+        ]
+      },
+      "validates_fault_ids": [
+        "fault.network.cable.disconnected",
+        "fault.network.cable.failed",
+        "fault.network.nic.failed"
+      ],
+      "target_component_ids": [],
+      "required_tool_ids": [],
+      "success_conditions": [
+        "Original fault condition no longer appears and required operation succeeds."
+      ],
+      "action_cost": 1,
+      "education_text": "Verification evaluates whether the repair produced the required operational state."
+    },
+    {
+      "id": "verify.network.connectivity",
+      "entity_type": "validation_procedure",
+      "presentation": {
+        "display_name": "Network Connectivity Verification",
+        "short_description": "Network Connectivity Verification confirms the repaired state.",
+        "illustration": {
+          "asset_id": "art.verify.network.connectivity",
+          "alt_text": "Technical reference illustration for Network Connectivity Verification."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "network",
+          "connectivity",
+          "verification"
+        ]
+      },
+      "validates_fault_ids": [
+        "fault.network.ip.static_incorrect",
+        "fault.network.dhcp.no_lease",
+        "fault.network.nic.failed"
+      ],
+      "target_component_ids": [],
+      "required_tool_ids": [],
+      "success_conditions": [
+        "Original fault condition no longer appears and required operation succeeds."
+      ],
+      "action_cost": 1,
+      "education_text": "Verification evaluates whether the repair produced the required operational state."
+    },
+    {
+      "id": "verify.pcie.device_present",
+      "entity_type": "validation_procedure",
+      "presentation": {
+        "display_name": "PCIe Device Verification",
+        "short_description": "PCIe Device Verification confirms the repaired state.",
+        "illustration": {
+          "asset_id": "art.verify.pcie.device_present",
+          "alt_text": "Technical reference illustration for PCIe Device Verification."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "pcie",
+          "device",
+          "verification"
+        ]
+      },
+      "validates_fault_ids": [
+        "fault.pcie.card.not_seated"
+      ],
+      "target_component_ids": [],
+      "required_tool_ids": [],
+      "success_conditions": [
+        "Original fault condition no longer appears and required operation succeeds."
+      ],
+      "action_cost": 1,
+      "education_text": "Verification evaluates whether the repair produced the required operational state."
+    },
+    {
+      "id": "verify.system.burn_in",
+      "entity_type": "validation_procedure",
+      "presentation": {
+        "display_name": "Burn-In Verification",
+        "short_description": "Burn-In Verification confirms the repaired state.",
+        "illustration": {
+          "asset_id": "art.verify.system.burn_in",
+          "alt_text": "Technical reference illustration for Burn-In Verification."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "burn-in",
+          "verification"
+        ]
+      },
+      "validates_fault_ids": [
+        "fault.board.system.failed",
+        "fault.system.intermittent_memory_instability"
+      ],
+      "target_component_ids": [],
+      "required_tool_ids": [],
+      "success_conditions": [
+        "Original fault condition no longer appears and required operation succeeds."
+      ],
+      "action_cost": 1,
+      "education_text": "Verification evaluates whether the repair produced the required operational state."
+    }
+  ]
+}

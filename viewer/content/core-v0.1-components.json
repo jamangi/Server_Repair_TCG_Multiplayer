@@ -1,0 +1,654 @@
+{
+  "pack_id": "core_v0_1_components",
+  "name": "Core V0.1 Components",
+  "version": "0.1.0",
+  "entities": [
+    {
+      "id": "component.compute.cpu",
+      "entity_type": "component",
+      "presentation": {
+        "display_name": "CPU",
+        "short_description": "CPU used in server hardware and troubleshooting.",
+        "illustration": {
+          "asset_id": "art.component.compute.cpu",
+          "alt_text": "Technical reference illustration for CPU."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "cpu",
+          "processor"
+        ]
+      },
+      "component_type": "processor",
+      "subsystem": "compute",
+      "interfaces": [],
+      "compatibility_tags": [],
+      "hot_swappable": false,
+      "replaceable": true,
+      "inspectable": true,
+      "education_text": "CPU is part of the compute subsystem."
+    },
+    {
+      "id": "component.board.system",
+      "entity_type": "component",
+      "presentation": {
+        "display_name": "System Board",
+        "short_description": "System Board used in server hardware and troubleshooting.",
+        "illustration": {
+          "asset_id": "art.component.board.system",
+          "alt_text": "Technical reference illustration for System Board."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "motherboard",
+          "system board"
+        ]
+      },
+      "component_type": "motherboard",
+      "subsystem": "board",
+      "interfaces": [],
+      "compatibility_tags": [],
+      "hot_swappable": false,
+      "replaceable": true,
+      "inspectable": true,
+      "education_text": "System Board is part of the board subsystem."
+    },
+    {
+      "id": "component.board.rtc_battery",
+      "entity_type": "component",
+      "presentation": {
+        "display_name": "RTC / CMOS Battery",
+        "short_description": "RTC / CMOS Battery used in server hardware and troubleshooting.",
+        "illustration": {
+          "asset_id": "art.component.board.rtc_battery",
+          "alt_text": "Technical reference illustration for RTC / CMOS Battery."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "cmos",
+          "rtc",
+          "battery"
+        ]
+      },
+      "component_type": "battery",
+      "subsystem": "board",
+      "interfaces": [],
+      "compatibility_tags": [],
+      "hot_swappable": false,
+      "replaceable": true,
+      "inspectable": true,
+      "education_text": "RTC / CMOS Battery is part of the board subsystem."
+    },
+    {
+      "id": "component.memory.ecc_dimm",
+      "entity_type": "component",
+      "presentation": {
+        "display_name": "ECC DIMM",
+        "short_description": "ECC DIMM used in server hardware and troubleshooting.",
+        "illustration": {
+          "asset_id": "art.component.memory.ecc_dimm",
+          "alt_text": "Technical reference illustration for ECC DIMM."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "memory",
+          "ecc",
+          "dimm"
+        ]
+      },
+      "component_type": "memory_module",
+      "subsystem": "memory",
+      "interfaces": [],
+      "compatibility_tags": [],
+      "hot_swappable": false,
+      "replaceable": true,
+      "inspectable": true,
+      "education_text": "ECC DIMM is part of the memory subsystem."
+    },
+    {
+      "id": "component.memory.channel",
+      "entity_type": "component",
+      "presentation": {
+        "display_name": "Memory Channel",
+        "short_description": "Memory Channel used in server hardware and troubleshooting.",
+        "illustration": {
+          "asset_id": "art.component.memory.channel",
+          "alt_text": "Technical reference illustration for Memory Channel."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "memory",
+          "channel"
+        ]
+      },
+      "component_type": "memory_path",
+      "subsystem": "memory",
+      "interfaces": [],
+      "compatibility_tags": [],
+      "hot_swappable": false,
+      "replaceable": false,
+      "inspectable": true,
+      "education_text": "Memory Channel is part of the memory subsystem."
+    },
+    {
+      "id": "component.storage.sas_hdd",
+      "entity_type": "component",
+      "presentation": {
+        "display_name": "SAS HDD",
+        "short_description": "SAS HDD used in server hardware and troubleshooting.",
+        "illustration": {
+          "asset_id": "art.component.storage.sas_hdd",
+          "alt_text": "Technical reference illustration for SAS HDD."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "sas",
+          "hdd",
+          "storage"
+        ]
+      },
+      "component_type": "disk_drive",
+      "subsystem": "storage",
+      "interfaces": [],
+      "compatibility_tags": [],
+      "hot_swappable": true,
+      "replaceable": true,
+      "inspectable": true,
+      "education_text": "SAS HDD is part of the storage subsystem."
+    },
+    {
+      "id": "component.storage.sata_ssd",
+      "entity_type": "component",
+      "presentation": {
+        "display_name": "SATA SSD",
+        "short_description": "SATA SSD used in server hardware and troubleshooting.",
+        "illustration": {
+          "asset_id": "art.component.storage.sata_ssd",
+          "alt_text": "Technical reference illustration for SATA SSD."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "sata",
+          "ssd",
+          "storage"
+        ]
+      },
+      "component_type": "solid_state_drive",
+      "subsystem": "storage",
+      "interfaces": [],
+      "compatibility_tags": [],
+      "hot_swappable": true,
+      "replaceable": true,
+      "inspectable": true,
+      "education_text": "SATA SSD is part of the storage subsystem."
+    },
+    {
+      "id": "component.storage.nvme_ssd",
+      "entity_type": "component",
+      "presentation": {
+        "display_name": "NVMe SSD",
+        "short_description": "NVMe SSD used in server hardware and troubleshooting.",
+        "illustration": {
+          "asset_id": "art.component.storage.nvme_ssd",
+          "alt_text": "Technical reference illustration for NVMe SSD."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "nvme",
+          "ssd",
+          "storage"
+        ]
+      },
+      "component_type": "solid_state_drive",
+      "subsystem": "storage",
+      "interfaces": [],
+      "compatibility_tags": [],
+      "hot_swappable": true,
+      "replaceable": true,
+      "inspectable": true,
+      "education_text": "NVMe SSD is part of the storage subsystem."
+    },
+    {
+      "id": "component.storage.raid_controller",
+      "entity_type": "component",
+      "presentation": {
+        "display_name": "RAID Controller",
+        "short_description": "RAID Controller used in server hardware and troubleshooting.",
+        "illustration": {
+          "asset_id": "art.component.storage.raid_controller",
+          "alt_text": "Technical reference illustration for RAID Controller."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "raid",
+          "controller"
+        ]
+      },
+      "component_type": "storage_controller",
+      "subsystem": "storage",
+      "interfaces": [],
+      "compatibility_tags": [],
+      "hot_swappable": false,
+      "replaceable": true,
+      "inspectable": true,
+      "education_text": "RAID Controller is part of the storage subsystem."
+    },
+    {
+      "id": "component.storage.hba",
+      "entity_type": "component",
+      "presentation": {
+        "display_name": "HBA",
+        "short_description": "HBA used in server hardware and troubleshooting.",
+        "illustration": {
+          "asset_id": "art.component.storage.hba",
+          "alt_text": "Technical reference illustration for HBA."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "hba",
+          "sas"
+        ]
+      },
+      "component_type": "storage_controller",
+      "subsystem": "storage",
+      "interfaces": [],
+      "compatibility_tags": [],
+      "hot_swappable": false,
+      "replaceable": true,
+      "inspectable": true,
+      "education_text": "HBA is part of the storage subsystem."
+    },
+    {
+      "id": "component.storage.backplane",
+      "entity_type": "component",
+      "presentation": {
+        "display_name": "Drive Backplane",
+        "short_description": "Drive Backplane used in server hardware and troubleshooting.",
+        "illustration": {
+          "asset_id": "art.component.storage.backplane",
+          "alt_text": "Technical reference illustration for Drive Backplane."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "backplane",
+          "drive bay"
+        ]
+      },
+      "component_type": "backplane",
+      "subsystem": "storage",
+      "interfaces": [],
+      "compatibility_tags": [],
+      "hot_swappable": false,
+      "replaceable": true,
+      "inspectable": true,
+      "education_text": "Drive Backplane is part of the storage subsystem."
+    },
+    {
+      "id": "component.storage.data_cable",
+      "entity_type": "component",
+      "presentation": {
+        "display_name": "SAS/SATA Data Cable",
+        "short_description": "SAS/SATA Data Cable used in server hardware and troubleshooting.",
+        "illustration": {
+          "asset_id": "art.component.storage.data_cable",
+          "alt_text": "Technical reference illustration for SAS/SATA Data Cable."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "sas",
+          "sata",
+          "cable"
+        ]
+      },
+      "component_type": "data_cable",
+      "subsystem": "storage",
+      "interfaces": [],
+      "compatibility_tags": [],
+      "hot_swappable": false,
+      "replaceable": true,
+      "inspectable": true,
+      "education_text": "SAS/SATA Data Cable is part of the storage subsystem."
+    },
+    {
+      "id": "component.power.hot_swap_psu",
+      "entity_type": "component",
+      "presentation": {
+        "display_name": "Hot-Swap PSU",
+        "short_description": "Hot-Swap PSU used in server hardware and troubleshooting.",
+        "illustration": {
+          "asset_id": "art.component.power.hot_swap_psu",
+          "alt_text": "Technical reference illustration for Hot-Swap PSU."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "psu",
+          "power",
+          "hot swap"
+        ]
+      },
+      "component_type": "power_supply",
+      "subsystem": "power",
+      "interfaces": [],
+      "compatibility_tags": [],
+      "hot_swappable": true,
+      "replaceable": true,
+      "inspectable": true,
+      "education_text": "Hot-Swap PSU is part of the power subsystem."
+    },
+    {
+      "id": "component.power.input_cable",
+      "entity_type": "component",
+      "presentation": {
+        "display_name": "AC Power Cable",
+        "short_description": "AC Power Cable used in server hardware and troubleshooting.",
+        "illustration": {
+          "asset_id": "art.component.power.input_cable",
+          "alt_text": "Technical reference illustration for AC Power Cable."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "power",
+          "cable"
+        ]
+      },
+      "component_type": "power_cable",
+      "subsystem": "power",
+      "interfaces": [],
+      "compatibility_tags": [],
+      "hot_swappable": false,
+      "replaceable": true,
+      "inspectable": true,
+      "education_text": "AC Power Cable is part of the power subsystem."
+    },
+    {
+      "id": "component.cooling.fan",
+      "entity_type": "component",
+      "presentation": {
+        "display_name": "Chassis Fan",
+        "short_description": "Chassis Fan used in server hardware and troubleshooting.",
+        "illustration": {
+          "asset_id": "art.component.cooling.fan",
+          "alt_text": "Technical reference illustration for Chassis Fan."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "fan",
+          "cooling"
+        ]
+      },
+      "component_type": "fan",
+      "subsystem": "thermal",
+      "interfaces": [],
+      "compatibility_tags": [],
+      "hot_swappable": true,
+      "replaceable": true,
+      "inspectable": true,
+      "education_text": "Chassis Fan is part of the thermal subsystem."
+    },
+    {
+      "id": "component.cooling.cpu_heatsink",
+      "entity_type": "component",
+      "presentation": {
+        "display_name": "CPU Heatsink",
+        "short_description": "CPU Heatsink used in server hardware and troubleshooting.",
+        "illustration": {
+          "asset_id": "art.component.cooling.cpu_heatsink",
+          "alt_text": "Technical reference illustration for CPU Heatsink."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "heatsink",
+          "cpu"
+        ]
+      },
+      "component_type": "heatsink",
+      "subsystem": "thermal",
+      "interfaces": [],
+      "compatibility_tags": [],
+      "hot_swappable": false,
+      "replaceable": true,
+      "inspectable": true,
+      "education_text": "CPU Heatsink is part of the thermal subsystem."
+    },
+    {
+      "id": "component.cooling.tim",
+      "entity_type": "component",
+      "presentation": {
+        "display_name": "Thermal Interface Material",
+        "short_description": "Thermal Interface Material used in server hardware and troubleshooting.",
+        "illustration": {
+          "asset_id": "art.component.cooling.tim",
+          "alt_text": "Technical reference illustration for Thermal Interface Material."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "thermal paste",
+          "tim"
+        ]
+      },
+      "component_type": "thermal_interface",
+      "subsystem": "thermal",
+      "interfaces": [],
+      "compatibility_tags": [],
+      "hot_swappable": false,
+      "replaceable": true,
+      "inspectable": true,
+      "education_text": "Thermal Interface Material is part of the thermal subsystem."
+    },
+    {
+      "id": "component.network.nic",
+      "entity_type": "component",
+      "presentation": {
+        "display_name": "Ethernet NIC",
+        "short_description": "Ethernet NIC used in server hardware and troubleshooting.",
+        "illustration": {
+          "asset_id": "art.component.network.nic",
+          "alt_text": "Technical reference illustration for Ethernet NIC."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "nic",
+          "ethernet"
+        ]
+      },
+      "component_type": "network_adapter",
+      "subsystem": "network",
+      "interfaces": [],
+      "compatibility_tags": [],
+      "hot_swappable": false,
+      "replaceable": true,
+      "inspectable": true,
+      "education_text": "Ethernet NIC is part of the network subsystem."
+    },
+    {
+      "id": "component.network.ethernet_cable",
+      "entity_type": "component",
+      "presentation": {
+        "display_name": "Ethernet Cable",
+        "short_description": "Ethernet Cable used in server hardware and troubleshooting.",
+        "illustration": {
+          "asset_id": "art.component.network.ethernet_cable",
+          "alt_text": "Technical reference illustration for Ethernet Cable."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "ethernet",
+          "cable"
+        ]
+      },
+      "component_type": "network_cable",
+      "subsystem": "network",
+      "interfaces": [],
+      "compatibility_tags": [],
+      "hot_swappable": false,
+      "replaceable": true,
+      "inspectable": true,
+      "education_text": "Ethernet Cable is part of the network subsystem."
+    },
+    {
+      "id": "component.pcie.card",
+      "entity_type": "component",
+      "presentation": {
+        "display_name": "PCIe Expansion Card",
+        "short_description": "PCIe Expansion Card used in server hardware and troubleshooting.",
+        "illustration": {
+          "asset_id": "art.component.pcie.card",
+          "alt_text": "Technical reference illustration for PCIe Expansion Card."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "pcie",
+          "card"
+        ]
+      },
+      "component_type": "expansion_card",
+      "subsystem": "pcie",
+      "interfaces": [],
+      "compatibility_tags": [],
+      "hot_swappable": false,
+      "replaceable": true,
+      "inspectable": true,
+      "education_text": "PCIe Expansion Card is part of the pcie subsystem."
+    },
+    {
+      "id": "component.management.bmc",
+      "entity_type": "component",
+      "presentation": {
+        "display_name": "Baseboard Management Controller",
+        "short_description": "Baseboard Management Controller used in server hardware and troubleshooting.",
+        "illustration": {
+          "asset_id": "art.component.management.bmc",
+          "alt_text": "Technical reference illustration for Baseboard Management Controller."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "bmc",
+          "ipmi",
+          "idrac",
+          "ilo"
+        ]
+      },
+      "component_type": "management_controller",
+      "subsystem": "management",
+      "interfaces": [],
+      "compatibility_tags": [],
+      "hot_swappable": false,
+      "replaceable": false,
+      "inspectable": true,
+      "education_text": "Baseboard Management Controller is part of the management subsystem."
+    },
+    {
+      "id": "component.chassis.diagnostics",
+      "entity_type": "component",
+      "presentation": {
+        "display_name": "Diagnostic Indicators",
+        "short_description": "Diagnostic Indicators used in server hardware and troubleshooting.",
+        "illustration": {
+          "asset_id": "art.component.chassis.diagnostics",
+          "alt_text": "Technical reference illustration for Diagnostic Indicators."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "led",
+          "diagnostic"
+        ]
+      },
+      "component_type": "diagnostic_indicator",
+      "subsystem": "chassis",
+      "interfaces": [],
+      "compatibility_tags": [],
+      "hot_swappable": false,
+      "replaceable": false,
+      "inspectable": true,
+      "education_text": "Diagnostic Indicators is part of the chassis subsystem."
+    }
+  ]
+}

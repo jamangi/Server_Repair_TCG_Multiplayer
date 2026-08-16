@@ -1,0 +1,878 @@
+{
+  "pack_id": "core_v0_1_symptoms",
+  "name": "Core V0.1 Symptoms",
+  "version": "0.1.0",
+  "entities": [
+    {
+      "id": "symptom.power.no_power",
+      "entity_type": "symptom",
+      "presentation": {
+        "display_name": "No Power",
+        "short_description": "No normal response to power-on.",
+        "illustration": {
+          "asset_id": "art.symptom.power.no_power",
+          "alt_text": "Technical reference illustration for No Power."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "power",
+          "no",
+          "power"
+        ]
+      },
+      "category": "power",
+      "description": "No normal response to power-on.",
+      "observable_via_ids": [
+        "test.general.visual_inspection",
+        "test.power.psu_status"
+      ],
+      "associated_fault_ids": [
+        "fault.board.system.failed",
+        "fault.power.input.cable_loose",
+        "fault.power.psu.failed",
+        "fault.power.psu.not_seated"
+      ]
+    },
+    {
+      "id": "symptom.power.redundancy_warning",
+      "entity_type": "symptom",
+      "presentation": {
+        "display_name": "Power Redundancy Warning",
+        "short_description": "One redundant power path is unavailable.",
+        "illustration": {
+          "asset_id": "art.symptom.power.redundancy_warning",
+          "alt_text": "Technical reference illustration for Power Redundancy Warning."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "power",
+          "power",
+          "redundancy",
+          "warning"
+        ]
+      },
+      "category": "power",
+      "description": "One redundant power path is unavailable.",
+      "observable_via_ids": [
+        "test.general.visual_inspection",
+        "test.power.psu_status"
+      ],
+      "associated_fault_ids": [
+        "fault.power.input.cable_loose",
+        "fault.power.psu.failed",
+        "fault.power.psu.not_seated"
+      ]
+    },
+    {
+      "id": "symptom.boot.no_post",
+      "entity_type": "symptom",
+      "presentation": {
+        "display_name": "No POST",
+        "short_description": "Power-On Self-Test does not complete.",
+        "illustration": {
+          "asset_id": "art.symptom.boot.no_post",
+          "alt_text": "Technical reference illustration for No POST."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "boot",
+          "no",
+          "post"
+        ]
+      },
+      "category": "boot",
+      "description": "Power-On Self-Test does not complete.",
+      "observable_via_ids": [
+        "test.boot.post_observation",
+        "test.boot.device_inventory"
+      ],
+      "associated_fault_ids": [
+        "fault.board.system.failed",
+        "fault.cpu.not_seated",
+        "fault.memory.dimm.failed",
+        "fault.memory.dimm.not_seated",
+        "fault.memory.population.invalid"
+      ]
+    },
+    {
+      "id": "symptom.boot.memory_warning",
+      "entity_type": "symptom",
+      "presentation": {
+        "display_name": "Memory Warning",
+        "short_description": "Firmware or management telemetry reports memory trouble.",
+        "illustration": {
+          "asset_id": "art.symptom.boot.memory_warning",
+          "alt_text": "Technical reference illustration for Memory Warning."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "memory",
+          "memory",
+          "warning"
+        ]
+      },
+      "category": "memory",
+      "description": "Firmware or management telemetry reports memory trouble.",
+      "observable_via_ids": [
+        "test.memory.diagnostic",
+        "test.system.bmc_logs"
+      ],
+      "associated_fault_ids": [
+        "fault.memory.channel.unavailable",
+        "fault.memory.dimm.not_seated",
+        "fault.memory.population.invalid"
+      ]
+    },
+    {
+      "id": "symptom.memory.ecc_errors",
+      "entity_type": "symptom",
+      "presentation": {
+        "display_name": "ECC Errors",
+        "short_description": "Corrected or uncorrected memory errors are reported.",
+        "illustration": {
+          "asset_id": "art.symptom.memory.ecc_errors",
+          "alt_text": "Technical reference illustration for ECC Errors."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "memory",
+          "ecc",
+          "errors"
+        ]
+      },
+      "category": "memory",
+      "description": "Corrected or uncorrected memory errors are reported.",
+      "observable_via_ids": [
+        "test.memory.diagnostic",
+        "test.system.bmc_logs"
+      ],
+      "associated_fault_ids": [
+        "fault.memory.dimm.failed",
+        "fault.system.intermittent_memory_instability"
+      ]
+    },
+    {
+      "id": "symptom.memory.reduced_capacity",
+      "entity_type": "symptom",
+      "presentation": {
+        "display_name": "Reduced Detected Memory",
+        "short_description": "Less memory is detected than expected.",
+        "illustration": {
+          "asset_id": "art.symptom.memory.reduced_capacity",
+          "alt_text": "Technical reference illustration for Reduced Detected Memory."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "memory",
+          "reduced",
+          "detected",
+          "memory"
+        ]
+      },
+      "category": "memory",
+      "description": "Less memory is detected than expected.",
+      "observable_via_ids": [
+        "test.memory.diagnostic",
+        "test.system.bmc_logs"
+      ],
+      "associated_fault_ids": [
+        "fault.cpu.not_seated",
+        "fault.memory.channel.unavailable",
+        "fault.memory.dimm.not_seated",
+        "fault.memory.population.invalid"
+      ]
+    },
+    {
+      "id": "symptom.boot.no_boot_device",
+      "entity_type": "symptom",
+      "presentation": {
+        "display_name": "No Boot Device",
+        "short_description": "POST completes but no usable boot device is found.",
+        "illustration": {
+          "asset_id": "art.symptom.boot.no_boot_device",
+          "alt_text": "Technical reference illustration for No Boot Device."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "boot",
+          "no",
+          "boot",
+          "device"
+        ]
+      },
+      "category": "boot",
+      "description": "POST completes but no usable boot device is found.",
+      "observable_via_ids": [
+        "test.boot.post_observation",
+        "test.boot.device_inventory"
+      ],
+      "associated_fault_ids": [
+        "fault.boot.device.not_detected",
+        "fault.boot.order.incorrect",
+        "fault.storage.cable.loose",
+        "fault.storage.nvme.device_failed",
+        "fault.storage.raid.controller_failed"
+      ]
+    },
+    {
+      "id": "symptom.boot.wrong_device",
+      "entity_type": "symptom",
+      "presentation": {
+        "display_name": "Wrong Boot Device",
+        "short_description": "The server attempts to boot from an unintended source.",
+        "illustration": {
+          "asset_id": "art.symptom.boot.wrong_device",
+          "alt_text": "Technical reference illustration for Wrong Boot Device."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "boot",
+          "wrong",
+          "boot",
+          "device"
+        ]
+      },
+      "category": "boot",
+      "description": "The server attempts to boot from an unintended source.",
+      "observable_via_ids": [
+        "test.boot.post_observation",
+        "test.boot.device_inventory"
+      ],
+      "associated_fault_ids": [
+        "fault.boot.order.incorrect",
+        "fault.firmware.config.reset"
+      ]
+    },
+    {
+      "id": "symptom.boot.bootloader_error",
+      "entity_type": "symptom",
+      "presentation": {
+        "display_name": "Bootloader Error",
+        "short_description": "Storage is detected but OS boot does not proceed normally.",
+        "illustration": {
+          "asset_id": "art.symptom.boot.bootloader_error",
+          "alt_text": "Technical reference illustration for Bootloader Error."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "boot",
+          "bootloader",
+          "error"
+        ]
+      },
+      "category": "boot",
+      "description": "Storage is detected but OS boot does not proceed normally.",
+      "observable_via_ids": [
+        "test.boot.post_observation",
+        "test.boot.device_inventory"
+      ],
+      "associated_fault_ids": [
+        "fault.boot.bootloader.corrupt"
+      ]
+    },
+    {
+      "id": "symptom.storage.raid_degraded",
+      "entity_type": "symptom",
+      "presentation": {
+        "display_name": "RAID Degraded",
+        "short_description": "Array redundancy is reduced.",
+        "illustration": {
+          "asset_id": "art.symptom.storage.raid_degraded",
+          "alt_text": "Technical reference illustration for RAID Degraded."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "storage",
+          "raid",
+          "degraded"
+        ]
+      },
+      "category": "storage",
+      "description": "Array redundancy is reduced.",
+      "observable_via_ids": [
+        "test.storage.raid_status",
+        "test.storage.device_inventory"
+      ],
+      "associated_fault_ids": [
+        "fault.storage.raid.degraded",
+        "fault.storage.sas.drive_failed",
+        "fault.storage.sata.drive_failed"
+      ]
+    },
+    {
+      "id": "symptom.storage.drive_missing",
+      "entity_type": "symptom",
+      "presentation": {
+        "display_name": "Drive Missing",
+        "short_description": "An expected drive is not detected.",
+        "illustration": {
+          "asset_id": "art.symptom.storage.drive_missing",
+          "alt_text": "Technical reference illustration for Drive Missing."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "storage",
+          "drive",
+          "missing"
+        ]
+      },
+      "category": "storage",
+      "description": "An expected drive is not detected.",
+      "observable_via_ids": [
+        "test.storage.raid_status",
+        "test.storage.device_inventory"
+      ],
+      "associated_fault_ids": [
+        "fault.boot.device.not_detected",
+        "fault.storage.cable.failed",
+        "fault.storage.cable.loose",
+        "fault.storage.nvme.device_failed",
+        "fault.storage.raid.controller_failed",
+        "fault.storage.sata.drive_failed"
+      ]
+    },
+    {
+      "id": "symptom.storage.io_errors",
+      "entity_type": "symptom",
+      "presentation": {
+        "display_name": "Storage I/O Errors",
+        "short_description": "Storage operations generate errors or timeouts.",
+        "illustration": {
+          "asset_id": "art.symptom.storage.io_errors",
+          "alt_text": "Technical reference illustration for Storage I/O Errors."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "storage",
+          "storage",
+          "i/o",
+          "errors"
+        ]
+      },
+      "category": "storage",
+      "description": "Storage operations generate errors or timeouts.",
+      "observable_via_ids": [
+        "test.storage.raid_status",
+        "test.storage.device_inventory"
+      ],
+      "associated_fault_ids": [
+        "fault.storage.cable.failed",
+        "fault.storage.cable.loose",
+        "fault.storage.nvme.device_failed",
+        "fault.storage.sas.drive_failed",
+        "fault.storage.sata.drive_failed"
+      ]
+    },
+    {
+      "id": "symptom.storage.drive_fault_led",
+      "entity_type": "symptom",
+      "presentation": {
+        "display_name": "Drive Fault Indicator",
+        "short_description": "A drive bay or management interface reports a fault.",
+        "illustration": {
+          "asset_id": "art.symptom.storage.drive_fault_led",
+          "alt_text": "Technical reference illustration for Drive Fault Indicator."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "storage",
+          "drive",
+          "fault",
+          "indicator"
+        ]
+      },
+      "category": "storage",
+      "description": "A drive bay or management interface reports a fault.",
+      "observable_via_ids": [
+        "test.storage.raid_status",
+        "test.storage.device_inventory"
+      ],
+      "associated_fault_ids": [
+        "fault.storage.sas.drive_failed"
+      ]
+    },
+    {
+      "id": "symptom.thermal.high_cpu_temp",
+      "entity_type": "symptom",
+      "presentation": {
+        "display_name": "High CPU Temperature",
+        "short_description": "Processor temperature is above expected range.",
+        "illustration": {
+          "asset_id": "art.symptom.thermal.high_cpu_temp",
+          "alt_text": "Technical reference illustration for High CPU Temperature."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "thermal",
+          "high",
+          "cpu",
+          "temperature"
+        ]
+      },
+      "category": "thermal",
+      "description": "Processor temperature is above expected range.",
+      "observable_via_ids": [
+        "test.thermal.temperature_monitoring",
+        "test.system.bmc_logs"
+      ],
+      "associated_fault_ids": [
+        "fault.thermal.cpu.overheating",
+        "fault.thermal.fan.failed",
+        "fault.thermal.heatsink.clogged",
+        "fault.thermal.heatsink.contact_poor"
+      ]
+    },
+    {
+      "id": "symptom.thermal.fans_loud",
+      "entity_type": "symptom",
+      "presentation": {
+        "display_name": "Fans Running Loud",
+        "short_description": "Fans run unusually fast or loudly.",
+        "illustration": {
+          "asset_id": "art.symptom.thermal.fans_loud",
+          "alt_text": "Technical reference illustration for Fans Running Loud."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "thermal",
+          "fans",
+          "running",
+          "loud"
+        ]
+      },
+      "category": "thermal",
+      "description": "Fans run unusually fast or loudly.",
+      "observable_via_ids": [
+        "test.thermal.temperature_monitoring",
+        "test.system.bmc_logs"
+      ],
+      "associated_fault_ids": [
+        "fault.thermal.cpu.overheating",
+        "fault.thermal.fan.failed",
+        "fault.thermal.heatsink.clogged"
+      ]
+    },
+    {
+      "id": "symptom.thermal.shutdown_under_load",
+      "entity_type": "symptom",
+      "presentation": {
+        "display_name": "Shutdown Under Load",
+        "short_description": "Server powers off or resets during sustained load.",
+        "illustration": {
+          "asset_id": "art.symptom.thermal.shutdown_under_load",
+          "alt_text": "Technical reference illustration for Shutdown Under Load."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "thermal",
+          "shutdown",
+          "under",
+          "load"
+        ]
+      },
+      "category": "thermal",
+      "description": "Server powers off or resets during sustained load.",
+      "observable_via_ids": [
+        "test.thermal.temperature_monitoring",
+        "test.system.bmc_logs"
+      ],
+      "associated_fault_ids": [
+        "fault.thermal.cpu.overheating",
+        "fault.thermal.heatsink.contact_poor",
+        "fault.thermal.shutdown"
+      ]
+    },
+    {
+      "id": "symptom.thermal.fan_warning",
+      "entity_type": "symptom",
+      "presentation": {
+        "display_name": "Fan Warning",
+        "short_description": "A fan is missing, stalled, or below expected speed.",
+        "illustration": {
+          "asset_id": "art.symptom.thermal.fan_warning",
+          "alt_text": "Technical reference illustration for Fan Warning."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "thermal",
+          "fan",
+          "warning"
+        ]
+      },
+      "category": "thermal",
+      "description": "A fan is missing, stalled, or below expected speed.",
+      "observable_via_ids": [
+        "test.thermal.temperature_monitoring",
+        "test.system.bmc_logs"
+      ],
+      "associated_fault_ids": [
+        "fault.thermal.fan.failed"
+      ]
+    },
+    {
+      "id": "symptom.network.no_link",
+      "entity_type": "symptom",
+      "presentation": {
+        "display_name": "No Ethernet Link",
+        "short_description": "Network interface reports no physical carrier.",
+        "illustration": {
+          "asset_id": "art.symptom.network.no_link",
+          "alt_text": "Technical reference illustration for No Ethernet Link."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "network",
+          "no",
+          "ethernet",
+          "link"
+        ]
+      },
+      "category": "network",
+      "description": "Network interface reports no physical carrier.",
+      "observable_via_ids": [
+        "test.network.link",
+        "test.network.interface_config"
+      ],
+      "associated_fault_ids": [
+        "fault.network.cable.disconnected",
+        "fault.network.cable.failed",
+        "fault.network.nic.failed"
+      ]
+    },
+    {
+      "id": "symptom.network.no_connectivity",
+      "entity_type": "symptom",
+      "presentation": {
+        "display_name": "No Network Connectivity",
+        "short_description": "Expected network destinations cannot be reached.",
+        "illustration": {
+          "asset_id": "art.symptom.network.no_connectivity",
+          "alt_text": "Technical reference illustration for No Network Connectivity."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "network",
+          "no",
+          "network",
+          "connectivity"
+        ]
+      },
+      "category": "network",
+      "description": "Expected network destinations cannot be reached.",
+      "observable_via_ids": [
+        "test.network.link",
+        "test.network.interface_config"
+      ],
+      "associated_fault_ids": [
+        "fault.network.cable.disconnected",
+        "fault.network.cable.failed",
+        "fault.network.dhcp.no_lease",
+        "fault.network.ip.static_incorrect",
+        "fault.network.nic.failed"
+      ]
+    },
+    {
+      "id": "symptom.network.wrong_ip",
+      "entity_type": "symptom",
+      "presentation": {
+        "display_name": "Unexpected IP Configuration",
+        "short_description": "Address, prefix, or gateway is incorrect.",
+        "illustration": {
+          "asset_id": "art.symptom.network.wrong_ip",
+          "alt_text": "Technical reference illustration for Unexpected IP Configuration."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "network",
+          "unexpected",
+          "ip",
+          "configuration"
+        ]
+      },
+      "category": "network",
+      "description": "Address, prefix, or gateway is incorrect.",
+      "observable_via_ids": [
+        "test.network.link",
+        "test.network.interface_config"
+      ],
+      "associated_fault_ids": [
+        "fault.network.ip.static_incorrect"
+      ]
+    },
+    {
+      "id": "symptom.network.no_dhcp_lease",
+      "entity_type": "symptom",
+      "presentation": {
+        "display_name": "No DHCP Lease",
+        "short_description": "A DHCP client does not obtain the expected lease.",
+        "illustration": {
+          "asset_id": "art.symptom.network.no_dhcp_lease",
+          "alt_text": "Technical reference illustration for No DHCP Lease."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "network",
+          "no",
+          "dhcp",
+          "lease"
+        ]
+      },
+      "category": "network",
+      "description": "A DHCP client does not obtain the expected lease.",
+      "observable_via_ids": [
+        "test.network.link",
+        "test.network.interface_config"
+      ],
+      "associated_fault_ids": [
+        "fault.network.dhcp.no_lease"
+      ]
+    },
+    {
+      "id": "symptom.pcie.device_missing",
+      "entity_type": "symptom",
+      "presentation": {
+        "display_name": "PCIe Device Missing",
+        "short_description": "An expected PCIe device does not enumerate.",
+        "illustration": {
+          "asset_id": "art.symptom.pcie.device_missing",
+          "alt_text": "Technical reference illustration for PCIe Device Missing."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "pcie",
+          "pcie",
+          "device",
+          "missing"
+        ]
+      },
+      "category": "pcie",
+      "description": "An expected PCIe device does not enumerate.",
+      "observable_via_ids": [
+        "test.pcie.inventory"
+      ],
+      "associated_fault_ids": [
+        "fault.network.nic.failed",
+        "fault.pcie.card.not_seated"
+      ]
+    },
+    {
+      "id": "symptom.firmware.settings_reset",
+      "entity_type": "symptom",
+      "presentation": {
+        "display_name": "Firmware Settings Reset",
+        "short_description": "Firmware settings or clock values unexpectedly revert.",
+        "illustration": {
+          "asset_id": "art.symptom.firmware.settings_reset",
+          "alt_text": "Technical reference illustration for Firmware Settings Reset."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "firmware",
+          "firmware",
+          "settings",
+          "reset"
+        ]
+      },
+      "category": "firmware",
+      "description": "Firmware settings or clock values unexpectedly revert.",
+      "observable_via_ids": [
+        "test.firmware.settings_review"
+      ],
+      "associated_fault_ids": [
+        "fault.board.rtc_battery.failed",
+        "fault.firmware.config.reset"
+      ]
+    },
+    {
+      "id": "symptom.system.random_reboot",
+      "entity_type": "symptom",
+      "presentation": {
+        "display_name": "Unexpected Reboot",
+        "short_description": "Server restarts without intended operator action.",
+        "illustration": {
+          "asset_id": "art.symptom.system.random_reboot",
+          "alt_text": "Technical reference illustration for Unexpected Reboot."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "system",
+          "unexpected",
+          "reboot"
+        ]
+      },
+      "category": "system",
+      "description": "Server restarts without intended operator action.",
+      "observable_via_ids": [
+        "test.system.bmc_logs",
+        "test.system.controlled_stress"
+      ],
+      "associated_fault_ids": [
+        "fault.power.psu.failed",
+        "fault.system.intermittent_memory_instability",
+        "fault.thermal.shutdown"
+      ]
+    },
+    {
+      "id": "symptom.system.intermittent_crash",
+      "entity_type": "symptom",
+      "presentation": {
+        "display_name": "Intermittent Crash",
+        "short_description": "Workload or OS crashes sporadically.",
+        "illustration": {
+          "asset_id": "art.symptom.system.intermittent_crash",
+          "alt_text": "Technical reference illustration for Intermittent Crash."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "system",
+          "intermittent",
+          "crash"
+        ]
+      },
+      "category": "system",
+      "description": "Workload or OS crashes sporadically.",
+      "observable_via_ids": [
+        "test.system.bmc_logs",
+        "test.system.controlled_stress"
+      ],
+      "associated_fault_ids": [
+        "fault.memory.dimm.failed",
+        "fault.system.intermittent_memory_instability"
+      ]
+    },
+    {
+      "id": "symptom.system.device_errors",
+      "entity_type": "symptom",
+      "presentation": {
+        "display_name": "Multiple Device Errors",
+        "short_description": "Several unrelated devices report errors.",
+        "illustration": {
+          "asset_id": "art.symptom.system.device_errors",
+          "alt_text": "Technical reference illustration for Multiple Device Errors."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "system",
+          "multiple",
+          "device",
+          "errors"
+        ]
+      },
+      "category": "system",
+      "description": "Several unrelated devices report errors.",
+      "observable_via_ids": [
+        "test.system.bmc_logs",
+        "test.system.controlled_stress"
+      ],
+      "associated_fault_ids": [
+        "fault.board.system.failed",
+        "fault.pcie.card.not_seated",
+        "fault.storage.raid.controller_failed"
+      ]
+    }
+  ]
+}

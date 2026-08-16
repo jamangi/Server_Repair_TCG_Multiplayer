@@ -1,0 +1,423 @@
+{
+  "pack_id": "core_v0_1_fault_graph",
+  "name": "Core V0.1 Fault Graph",
+  "version": "0.1.0",
+  "entities": [
+    {
+      "id": "edge.memory.dimm_to_channel",
+      "entity_type": "fault_causal_edge",
+      "presentation": {
+        "display_name": "Fault Causal Relationship",
+        "short_description": "fault.memory.dimm.not_seated can contribute to fault.memory.channel.unavailable.",
+        "illustration": {
+          "asset_id": "art.edge.memory.dimm_to_channel",
+          "alt_text": "Technical reference illustration for Fault Causal Relationship."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "fault chain",
+          "causal"
+        ]
+      },
+      "cause_fault_id": "fault.memory.dimm.not_seated",
+      "effect_fault_id": "fault.memory.channel.unavailable",
+      "relationship_type": "causes",
+      "conditions": [],
+      "notes": "Scenario-specific causality edge."
+    },
+    {
+      "id": "edge.memory.failed_to_instability",
+      "entity_type": "fault_causal_edge",
+      "presentation": {
+        "display_name": "Fault Causal Relationship",
+        "short_description": "fault.memory.dimm.failed can contribute to fault.system.intermittent_memory_instability.",
+        "illustration": {
+          "asset_id": "art.edge.memory.failed_to_instability",
+          "alt_text": "Technical reference illustration for Fault Causal Relationship."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "fault chain",
+          "causal"
+        ]
+      },
+      "cause_fault_id": "fault.memory.dimm.failed",
+      "effect_fault_id": "fault.system.intermittent_memory_instability",
+      "relationship_type": "causes",
+      "conditions": [],
+      "notes": "Scenario-specific causality edge."
+    },
+    {
+      "id": "edge.storage.sas_to_degraded",
+      "entity_type": "fault_causal_edge",
+      "presentation": {
+        "display_name": "Fault Causal Relationship",
+        "short_description": "fault.storage.sas.drive_failed can contribute to fault.storage.raid.degraded.",
+        "illustration": {
+          "asset_id": "art.edge.storage.sas_to_degraded",
+          "alt_text": "Technical reference illustration for Fault Causal Relationship."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "fault chain",
+          "causal"
+        ]
+      },
+      "cause_fault_id": "fault.storage.sas.drive_failed",
+      "effect_fault_id": "fault.storage.raid.degraded",
+      "relationship_type": "causes",
+      "conditions": [],
+      "notes": "Scenario-specific causality edge."
+    },
+    {
+      "id": "edge.storage.sata_to_degraded",
+      "entity_type": "fault_causal_edge",
+      "presentation": {
+        "display_name": "Fault Causal Relationship",
+        "short_description": "fault.storage.sata.drive_failed can contribute to fault.storage.raid.degraded.",
+        "illustration": {
+          "asset_id": "art.edge.storage.sata_to_degraded",
+          "alt_text": "Technical reference illustration for Fault Causal Relationship."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "fault chain",
+          "causal"
+        ]
+      },
+      "cause_fault_id": "fault.storage.sata.drive_failed",
+      "effect_fault_id": "fault.storage.raid.degraded",
+      "relationship_type": "causes",
+      "conditions": [],
+      "notes": "Scenario-specific causality edge."
+    },
+    {
+      "id": "edge.storage.loose_to_boot_missing",
+      "entity_type": "fault_causal_edge",
+      "presentation": {
+        "display_name": "Fault Causal Relationship",
+        "short_description": "fault.storage.cable.loose can contribute to fault.boot.device.not_detected.",
+        "illustration": {
+          "asset_id": "art.edge.storage.loose_to_boot_missing",
+          "alt_text": "Technical reference illustration for Fault Causal Relationship."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "fault chain",
+          "causal"
+        ]
+      },
+      "cause_fault_id": "fault.storage.cable.loose",
+      "effect_fault_id": "fault.boot.device.not_detected",
+      "relationship_type": "causes",
+      "conditions": [],
+      "notes": "Scenario-specific causality edge."
+    },
+    {
+      "id": "edge.storage.failed_to_boot_missing",
+      "entity_type": "fault_causal_edge",
+      "presentation": {
+        "display_name": "Fault Causal Relationship",
+        "short_description": "fault.storage.cable.failed can contribute to fault.boot.device.not_detected.",
+        "illustration": {
+          "asset_id": "art.edge.storage.failed_to_boot_missing",
+          "alt_text": "Technical reference illustration for Fault Causal Relationship."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "fault chain",
+          "causal"
+        ]
+      },
+      "cause_fault_id": "fault.storage.cable.failed",
+      "effect_fault_id": "fault.boot.device.not_detected",
+      "relationship_type": "causes",
+      "conditions": [],
+      "notes": "Scenario-specific causality edge."
+    },
+    {
+      "id": "edge.storage.nvme_to_boot_missing",
+      "entity_type": "fault_causal_edge",
+      "presentation": {
+        "display_name": "Fault Causal Relationship",
+        "short_description": "fault.storage.nvme.device_failed can contribute to fault.boot.device.not_detected.",
+        "illustration": {
+          "asset_id": "art.edge.storage.nvme_to_boot_missing",
+          "alt_text": "Technical reference illustration for Fault Causal Relationship."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "fault chain",
+          "causal"
+        ]
+      },
+      "cause_fault_id": "fault.storage.nvme.device_failed",
+      "effect_fault_id": "fault.boot.device.not_detected",
+      "relationship_type": "causes",
+      "conditions": [],
+      "notes": "Scenario-specific causality edge."
+    },
+    {
+      "id": "edge.firmware.rtc_to_reset",
+      "entity_type": "fault_causal_edge",
+      "presentation": {
+        "display_name": "Fault Causal Relationship",
+        "short_description": "fault.board.rtc_battery.failed can contribute to fault.firmware.config.reset.",
+        "illustration": {
+          "asset_id": "art.edge.firmware.rtc_to_reset",
+          "alt_text": "Technical reference illustration for Fault Causal Relationship."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "fault chain",
+          "causal"
+        ]
+      },
+      "cause_fault_id": "fault.board.rtc_battery.failed",
+      "effect_fault_id": "fault.firmware.config.reset",
+      "relationship_type": "causes",
+      "conditions": [],
+      "notes": "Scenario-specific causality edge."
+    },
+    {
+      "id": "edge.firmware.reset_to_order",
+      "entity_type": "fault_causal_edge",
+      "presentation": {
+        "display_name": "Fault Causal Relationship",
+        "short_description": "fault.firmware.config.reset can contribute to fault.boot.order.incorrect.",
+        "illustration": {
+          "asset_id": "art.edge.firmware.reset_to_order",
+          "alt_text": "Technical reference illustration for Fault Causal Relationship."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "fault chain",
+          "causal"
+        ]
+      },
+      "cause_fault_id": "fault.firmware.config.reset",
+      "effect_fault_id": "fault.boot.order.incorrect",
+      "relationship_type": "causes",
+      "conditions": [],
+      "notes": "Scenario-specific causality edge."
+    },
+    {
+      "id": "edge.thermal.fan_to_overheat",
+      "entity_type": "fault_causal_edge",
+      "presentation": {
+        "display_name": "Fault Causal Relationship",
+        "short_description": "fault.thermal.fan.failed can contribute to fault.thermal.cpu.overheating.",
+        "illustration": {
+          "asset_id": "art.edge.thermal.fan_to_overheat",
+          "alt_text": "Technical reference illustration for Fault Causal Relationship."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "fault chain",
+          "causal"
+        ]
+      },
+      "cause_fault_id": "fault.thermal.fan.failed",
+      "effect_fault_id": "fault.thermal.cpu.overheating",
+      "relationship_type": "causes",
+      "conditions": [],
+      "notes": "Scenario-specific causality edge."
+    },
+    {
+      "id": "edge.thermal.clog_to_overheat",
+      "entity_type": "fault_causal_edge",
+      "presentation": {
+        "display_name": "Fault Causal Relationship",
+        "short_description": "fault.thermal.heatsink.clogged can contribute to fault.thermal.cpu.overheating.",
+        "illustration": {
+          "asset_id": "art.edge.thermal.clog_to_overheat",
+          "alt_text": "Technical reference illustration for Fault Causal Relationship."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "fault chain",
+          "causal"
+        ]
+      },
+      "cause_fault_id": "fault.thermal.heatsink.clogged",
+      "effect_fault_id": "fault.thermal.cpu.overheating",
+      "relationship_type": "causes",
+      "conditions": [],
+      "notes": "Scenario-specific causality edge."
+    },
+    {
+      "id": "edge.thermal.contact_to_overheat",
+      "entity_type": "fault_causal_edge",
+      "presentation": {
+        "display_name": "Fault Causal Relationship",
+        "short_description": "fault.thermal.heatsink.contact_poor can contribute to fault.thermal.cpu.overheating.",
+        "illustration": {
+          "asset_id": "art.edge.thermal.contact_to_overheat",
+          "alt_text": "Technical reference illustration for Fault Causal Relationship."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "fault chain",
+          "causal"
+        ]
+      },
+      "cause_fault_id": "fault.thermal.heatsink.contact_poor",
+      "effect_fault_id": "fault.thermal.cpu.overheating",
+      "relationship_type": "causes",
+      "conditions": [],
+      "notes": "Scenario-specific causality edge."
+    },
+    {
+      "id": "edge.thermal.overheat_to_shutdown",
+      "entity_type": "fault_causal_edge",
+      "presentation": {
+        "display_name": "Fault Causal Relationship",
+        "short_description": "fault.thermal.cpu.overheating can contribute to fault.thermal.shutdown.",
+        "illustration": {
+          "asset_id": "art.edge.thermal.overheat_to_shutdown",
+          "alt_text": "Technical reference illustration for Fault Causal Relationship."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "fault chain",
+          "causal"
+        ]
+      },
+      "cause_fault_id": "fault.thermal.cpu.overheating",
+      "effect_fault_id": "fault.thermal.shutdown",
+      "relationship_type": "causes",
+      "conditions": [],
+      "notes": "Scenario-specific causality edge."
+    },
+    {
+      "id": "edge.network.cable_to_dhcp",
+      "entity_type": "fault_causal_edge",
+      "presentation": {
+        "display_name": "Fault Causal Relationship",
+        "short_description": "fault.network.cable.disconnected can contribute to fault.network.dhcp.no_lease.",
+        "illustration": {
+          "asset_id": "art.edge.network.cable_to_dhcp",
+          "alt_text": "Technical reference illustration for Fault Causal Relationship."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "fault chain",
+          "causal"
+        ]
+      },
+      "cause_fault_id": "fault.network.cable.disconnected",
+      "effect_fault_id": "fault.network.dhcp.no_lease",
+      "relationship_type": "causes",
+      "conditions": [],
+      "notes": "Scenario-specific causality edge."
+    },
+    {
+      "id": "edge.network.bad_cable_to_dhcp",
+      "entity_type": "fault_causal_edge",
+      "presentation": {
+        "display_name": "Fault Causal Relationship",
+        "short_description": "fault.network.cable.failed can contribute to fault.network.dhcp.no_lease.",
+        "illustration": {
+          "asset_id": "art.edge.network.bad_cable_to_dhcp",
+          "alt_text": "Technical reference illustration for Fault Causal Relationship."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "fault chain",
+          "causal"
+        ]
+      },
+      "cause_fault_id": "fault.network.cable.failed",
+      "effect_fault_id": "fault.network.dhcp.no_lease",
+      "relationship_type": "causes",
+      "conditions": [],
+      "notes": "Scenario-specific causality edge."
+    },
+    {
+      "id": "edge.network.nic_to_dhcp",
+      "entity_type": "fault_causal_edge",
+      "presentation": {
+        "display_name": "Fault Causal Relationship",
+        "short_description": "fault.network.nic.failed can contribute to fault.network.dhcp.no_lease.",
+        "illustration": {
+          "asset_id": "art.edge.network.nic_to_dhcp",
+          "alt_text": "Technical reference illustration for Fault Causal Relationship."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "fault chain",
+          "causal"
+        ]
+      },
+      "cause_fault_id": "fault.network.nic.failed",
+      "effect_fault_id": "fault.network.dhcp.no_lease",
+      "relationship_type": "causes",
+      "conditions": [],
+      "notes": "Scenario-specific causality edge."
+    }
+  ]
+}

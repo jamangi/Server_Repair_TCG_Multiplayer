@@ -1,0 +1,331 @@
+{
+  "pack_id": "core_v0_1_protocols",
+  "name": "Core V0.1 Protocols",
+  "version": "0.1.0",
+  "entities": [
+    {
+      "id": "protocol.interface.sata",
+      "entity_type": "protocol",
+      "presentation": {
+        "display_name": "SATA",
+        "short_description": "Serial ATA storage interface.",
+        "illustration": {
+          "asset_id": "art.protocol.interface.sata",
+          "alt_text": "Technical reference illustration for SATA."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "storage_interface",
+          "sata"
+        ]
+      },
+      "protocol_type": "storage_interface",
+      "purpose": "Serial ATA storage interface.",
+      "related_component_ids": [],
+      "related_fault_ids": [],
+      "related_procedure_ids": [],
+      "education_text": "Serial ATA storage interface."
+    },
+    {
+      "id": "protocol.interface.sas",
+      "entity_type": "protocol",
+      "presentation": {
+        "display_name": "SAS",
+        "short_description": "Serial Attached SCSI storage interface.",
+        "illustration": {
+          "asset_id": "art.protocol.interface.sas",
+          "alt_text": "Technical reference illustration for SAS."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "storage_interface",
+          "sas"
+        ]
+      },
+      "protocol_type": "storage_interface",
+      "purpose": "Serial Attached SCSI storage interface.",
+      "related_component_ids": [],
+      "related_fault_ids": [],
+      "related_procedure_ids": [],
+      "education_text": "Serial Attached SCSI storage interface."
+    },
+    {
+      "id": "protocol.interface.nvme",
+      "entity_type": "protocol",
+      "presentation": {
+        "display_name": "NVMe",
+        "short_description": "Nonvolatile Memory Express storage protocol over PCIe.",
+        "illustration": {
+          "asset_id": "art.protocol.interface.nvme",
+          "alt_text": "Technical reference illustration for NVMe."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "storage_protocol",
+          "nvme"
+        ]
+      },
+      "protocol_type": "storage_protocol",
+      "purpose": "Nonvolatile Memory Express storage protocol over PCIe.",
+      "related_component_ids": [],
+      "related_fault_ids": [],
+      "related_procedure_ids": [],
+      "education_text": "Nonvolatile Memory Express storage protocol over PCIe."
+    },
+    {
+      "id": "protocol.interface.pcie",
+      "entity_type": "protocol",
+      "presentation": {
+        "display_name": "PCIe",
+        "short_description": "High-speed expansion interconnect.",
+        "illustration": {
+          "asset_id": "art.protocol.interface.pcie",
+          "alt_text": "Technical reference illustration for PCIe."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "bus_interface",
+          "pcie"
+        ]
+      },
+      "protocol_type": "bus_interface",
+      "purpose": "High-speed expansion interconnect.",
+      "related_component_ids": [],
+      "related_fault_ids": [],
+      "related_procedure_ids": [],
+      "education_text": "High-speed expansion interconnect."
+    },
+    {
+      "id": "protocol.network.dhcp",
+      "entity_type": "protocol",
+      "presentation": {
+        "display_name": "DHCP",
+        "short_description": "Automatically assigns IP configuration.",
+        "illustration": {
+          "asset_id": "art.protocol.network.dhcp",
+          "alt_text": "Technical reference illustration for DHCP."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "network_protocol",
+          "dhcp"
+        ]
+      },
+      "protocol_type": "network_protocol",
+      "purpose": "Automatically assigns IP configuration.",
+      "related_component_ids": [],
+      "related_fault_ids": [],
+      "related_procedure_ids": [],
+      "education_text": "Automatically assigns IP configuration."
+    },
+    {
+      "id": "protocol.network.dns",
+      "entity_type": "protocol",
+      "presentation": {
+        "display_name": "DNS",
+        "short_description": "Resolves names to network addresses.",
+        "illustration": {
+          "asset_id": "art.protocol.network.dns",
+          "alt_text": "Technical reference illustration for DNS."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "network_protocol",
+          "dns"
+        ]
+      },
+      "protocol_type": "network_protocol",
+      "purpose": "Resolves names to network addresses.",
+      "related_component_ids": [],
+      "related_fault_ids": [],
+      "related_procedure_ids": [],
+      "education_text": "Resolves names to network addresses."
+    },
+    {
+      "id": "protocol.safety.esd",
+      "entity_type": "protocol",
+      "presentation": {
+        "display_name": "ESD Handling Procedure",
+        "short_description": "Reduces electrostatic discharge risk.",
+        "illustration": {
+          "asset_id": "art.protocol.safety.esd",
+          "alt_text": "Technical reference illustration for ESD Handling Procedure."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "safety_protocol",
+          "esd handling procedure"
+        ]
+      },
+      "protocol_type": "safety_protocol",
+      "purpose": "Reduces electrostatic discharge risk.",
+      "related_component_ids": [],
+      "related_fault_ids": [],
+      "related_procedure_ids": [],
+      "education_text": "Reduces electrostatic discharge risk."
+    },
+    {
+      "id": "protocol.raid.raid0",
+      "entity_type": "protocol",
+      "presentation": {
+        "display_name": "RAID 0",
+        "short_description": "Striping without redundancy.",
+        "illustration": {
+          "asset_id": "art.protocol.raid.raid0",
+          "alt_text": "Technical reference illustration for RAID 0."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "raid_level",
+          "raid 0"
+        ]
+      },
+      "protocol_type": "raid_level",
+      "purpose": "Striping without redundancy.",
+      "related_component_ids": [],
+      "related_fault_ids": [],
+      "related_procedure_ids": [],
+      "education_text": "Striping without redundancy."
+    },
+    {
+      "id": "protocol.raid.raid1",
+      "entity_type": "protocol",
+      "presentation": {
+        "display_name": "RAID 1",
+        "short_description": "Mirroring for redundancy.",
+        "illustration": {
+          "asset_id": "art.protocol.raid.raid1",
+          "alt_text": "Technical reference illustration for RAID 1."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "raid_level",
+          "raid 1"
+        ]
+      },
+      "protocol_type": "raid_level",
+      "purpose": "Mirroring for redundancy.",
+      "related_component_ids": [],
+      "related_fault_ids": [],
+      "related_procedure_ids": [],
+      "education_text": "Mirroring for redundancy."
+    },
+    {
+      "id": "protocol.raid.raid5",
+      "entity_type": "protocol",
+      "presentation": {
+        "display_name": "RAID 5",
+        "short_description": "Striping with single distributed parity.",
+        "illustration": {
+          "asset_id": "art.protocol.raid.raid5",
+          "alt_text": "Technical reference illustration for RAID 5."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "raid_level",
+          "raid 5"
+        ]
+      },
+      "protocol_type": "raid_level",
+      "purpose": "Striping with single distributed parity.",
+      "related_component_ids": [],
+      "related_fault_ids": [],
+      "related_procedure_ids": [],
+      "education_text": "Striping with single distributed parity."
+    },
+    {
+      "id": "protocol.raid.raid6",
+      "entity_type": "protocol",
+      "presentation": {
+        "display_name": "RAID 6",
+        "short_description": "Striping with dual distributed parity.",
+        "illustration": {
+          "asset_id": "art.protocol.raid.raid6",
+          "alt_text": "Technical reference illustration for RAID 6."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "raid_level",
+          "raid 6"
+        ]
+      },
+      "protocol_type": "raid_level",
+      "purpose": "Striping with dual distributed parity.",
+      "related_component_ids": [],
+      "related_fault_ids": [],
+      "related_procedure_ids": [],
+      "education_text": "Striping with dual distributed parity."
+    },
+    {
+      "id": "protocol.raid.raid10",
+      "entity_type": "protocol",
+      "presentation": {
+        "display_name": "RAID 10",
+        "short_description": "Striping across mirrored sets.",
+        "illustration": {
+          "asset_id": "art.protocol.raid.raid10",
+          "alt_text": "Technical reference illustration for RAID 10."
+        }
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "raid_level",
+          "raid 10"
+        ]
+      },
+      "protocol_type": "raid_level",
+      "purpose": "Striping across mirrored sets.",
+      "related_component_ids": [],
+      "related_fault_ids": [],
+      "related_procedure_ids": [],
+      "education_text": "Striping across mirrored sets."
+    }
+  ]
+}
