@@ -41,10 +41,16 @@ MatchConfiguration
   min_faults_per_ticket: integer                 // MnD
   max_faults_per_ticket: integer                 // MxD
   progressive_difficulty: boolean                // PD
+  starting_hand_size: integer
+  cards_per_draw_step: integer
+  draw_step_cadence: start_of_turn | end_of_turn | start_of_round
+  actions_per_turn: integer
+  max_hand_size: integer | null
   starting_search_tokens: integer                // SSC
   ticket_search_tokens: integer                  // TSC
-  refresh_tokens_per_ticket_closed: integer
-  max_refresh_tokens: integer
+  starting_refresh_tokens: integer               // SRT
+  max_refresh_tokens: integer                    // MRF; 0 disables refresh
+  root_cause_bonus_service_points: integer
   player_overrides: PlayerSetup[]
   preset_id: string | null
   rules_version: string
@@ -61,6 +67,8 @@ PlayerSetup
 ```
 
 The server validates `player_count <= seat_limit <= max_players_per_match` before starting.
+
+Deck size and per-card copy limit are deliberately absent. They belong to versioned deck-legality rules, not Room configuration. Disconnect grace is also absent because it belongs to `ServerMatchCapabilities`.
 
 ## Match state
 

@@ -29,6 +29,43 @@ The current configuration vocabulary is:
 - Whether custom public rooms may use the broad schema limits or only approved presets.
 - Default values and permitted ranges for `T`, `PT`, spectator capacity, and search/refresh resources.
 
+### Recommended room-creation presentation
+
+Room creation should use two layers:
+
+1. **Basic settings** expose the decisions most players understand before their first match: preset, collaboration mode, Player seats, Spectator seats, score objective, and ticket-queue shape.
+2. **Advanced settings** expose optional pacing and economy controls without crowding the initial form.
+
+Recommended Advanced settings are:
+
+- starting hand size,
+- cards drawn per draw step,
+- draw-step cadence,
+- Actions per turn,
+- maximum hand size, if the rules later adopt one,
+- Starting Search Tokens (`SSC`),
+- Search Tokens per ticket closure (`TSC`),
+- Starting Refresh Tokens (`SRT`),
+- Maximum Refresh Tokens (`MRF`),
+- Root Cause Bonus magnitude,
+- turn timer (`T`),
+- player match clock (`PT`),
+- minimum and maximum faults per generated ticket (`MnD` and `MxD`),
+- Progressive Difficulty (`PD`).
+
+The form should begin with a named preset. Opening Advanced settings shows the preset's concrete values. Editing an Advanced value marks the configuration as **Custom** without losing the preset it originated from.
+
+The following are server/game-system policy rather than Room settings:
+
+- legal deck size,
+- per-card copy limit,
+- disconnect grace (`W`),
+- maximum Players per match (`M`),
+- absolute Spectator capacity,
+- production admission and resource limits.
+
+This distinction lets players customize a match without letting one Room redefine deck legality or server safety.
+
 ## 3. New ticket-generation settings
 
 Candidate room settings:
@@ -56,7 +93,16 @@ Candidate settings:
 
 - `starting_search_tokens` (`SSC`): utility searches granted at setup; proposed schema range 0 through 5.
 - `ticket_search_tokens` (`TSC`): utility searches granted when a ticket closes; proposed schema range 0 through 5.
-- `grant_refresh_token_on_ticket_created`: whether each newly created ticket grants a Deck Refresh Token.
+- `starting_refresh_tokens` (`SRT`): Deck Refresh Tokens granted to each Player at setup.
+- `max_refresh_tokens` (`MRF`): maximum Deck Refresh Tokens a Player may hold.
+
+Proposed validation:
+
+- `0 <= MRF <= 2`
+- `0 <= SRT <= MRF`
+- the standard preset uses `MRF = 1` and `SRT = 1`
+- after every ticket closure, each active Player gains one Deck Refresh Token, up to `MRF`
+- `MRF = 0` disables starting and earned refresh tokens and intentionally creates a harder room configuration
 
 These should be utility resources rather than ordinary cards in hand. They do not count toward starting hand size or deck size.
 
@@ -68,10 +114,8 @@ Unfrozen questions:
 - Whether Search Tokens have a storage cap.
 - Whether the recommended preset is `SSC = 2` or `SSC = 3`; the current design proposal favors 3.
 - Whether the recommended `TSC` should be 1 rather than 3 to preserve draw uncertainty and reduce repetitive search.
-- Whether a Deck Refresh Token belongs to each player or to the team.
-- Whether ticket creation grants tokens for the initial `S` tickets or only later replenishment tickets.
+- Whether a Deck Refresh Token belongs to each player or to the team. The current recommendation is per Player.
 - Whether using a Deck Refresh Token consumes an Action.
-- Whether refresh tokens are capped.
 - Whether refresh shuffles only discard into deck or combines discard with the remaining deck and shuffles everything.
 
 ## 5. Recommended starting balance for playtesting
@@ -92,7 +136,7 @@ These are recommendations, not frozen rules. They provide one coherent baseline 
 | Search Tokens on closure (`TSC`) | 1 per active player; storage cap 5 | Prevents the game from stalling while avoiding three guaranteed searches after every closure. |
 | Search Token use | Spend 1 token and 1 Action; select one eligible card from the deck, add it to hand, then shuffle | Strong and legible, but not a free action. Eligibility may later be narrowed by effects. |
 | Deck Refresh Token use | Spend 1 token and 1 Action; combine discard with remaining draw deck and shuffle | Prevents endless-run exhaustion while preserving an action tradeoff. |
-| Refresh award | 1 per active player after a ticket closes and replenishment succeeds; storage cap 3 | Safer than awarding once for every initial or bulk-created ticket, which would make large `S` or `Q` a token exploit. |
+| Refresh resources | `SRT = 1`, `MRF = 1`; each active Player returns to the cap after every ticket closure | Makes deck cycling fundamental in standard play while allowing `MRF = 0` challenge rooms and avoiding accumulation. |
 | Ticket Service Points | Use each ticket's authored Service Point value; initial baseline 1 per ordinary ticket | Preserves ticket-level balancing and keeps a 10-point preset understandable. |
 | Root Cause Bonus | +1 Service Point once per ticket | Meaningful relative to a 1-point ordinary ticket without overwhelming ticket completion. |
 | Ordinary mistakes | Do not subtract Service Points by default | A bad action already spends a card and Action and may reveal information or forfeit efficiency bonuses. Explicit high-risk cards may define additional penalties. |

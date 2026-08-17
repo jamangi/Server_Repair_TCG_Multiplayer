@@ -31,8 +31,8 @@
       "progressive_difficulty": false,
       "starting_search_tokens": 3,
       "ticket_search_tokens": 1,
-      "refresh_tokens_per_ticket_closed": 1,
-      "max_refresh_tokens": 3,
+      "starting_refresh_tokens": 1,
+      "max_refresh_tokens": 1,
       "default_starting_service_points": 0,
       "description": "Two technicians race to 10 Service Points while three active tickets are maintained."
     },
@@ -51,8 +51,8 @@
       "progressive_difficulty": false,
       "starting_search_tokens": 3,
       "ticket_search_tokens": 1,
-      "refresh_tokens_per_ticket_closed": 1,
-      "max_refresh_tokens": 3,
+      "starting_refresh_tokens": 1,
+      "max_refresh_tokens": 1,
       "default_starting_service_points": 0,
       "description": "Up to four technicians share progress toward 10 Service Points while three active tickets are maintained."
     },
@@ -71,8 +71,8 @@
       "progressive_difficulty": false,
       "starting_search_tokens": 3,
       "ticket_search_tokens": 1,
-      "refresh_tokens_per_ticket_closed": 1,
-      "max_refresh_tokens": 3,
+      "starting_refresh_tokens": 1,
+      "max_refresh_tokens": 1,
       "default_starting_service_points": 0,
       "description": "The queue does not replenish. When all eight tickets close, the highest score wins."
     },
@@ -91,8 +91,8 @@
       "progressive_difficulty": false,
       "starting_search_tokens": 3,
       "ticket_search_tokens": 1,
-      "refresh_tokens_per_ticket_closed": 1,
-      "max_refresh_tokens": 3,
+      "starting_refresh_tokens": 1,
+      "max_refresh_tokens": 1,
       "default_starting_service_points": 0,
       "description": "The team wins by closing the eight starting tickets without replenishment."
     },
@@ -111,8 +111,8 @@
       "progressive_difficulty": false,
       "starting_search_tokens": 3,
       "ticket_search_tokens": 1,
-      "refresh_tokens_per_ticket_closed": 1,
-      "max_refresh_tokens": 3,
+      "starting_refresh_tokens": 1,
+      "max_refresh_tokens": 1,
       "default_starting_service_points": 0,
       "description": "A four-seat race with 90-second turns and 15 minutes of player time."
     },
@@ -131,8 +131,8 @@
       "progressive_difficulty": true,
       "starting_search_tokens": 3,
       "ticket_search_tokens": 1,
-      "refresh_tokens_per_ticket_closed": 1,
-      "max_refresh_tokens": 3,
+      "starting_refresh_tokens": 1,
+      "max_refresh_tokens": 1,
       "default_starting_service_points": 0,
       "description": "An intentionally endless-by-configuration cooperative session that continues until a tertiary ending rule applies."
     }
