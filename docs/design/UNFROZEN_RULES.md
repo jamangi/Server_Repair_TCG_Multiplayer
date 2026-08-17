@@ -2,9 +2,9 @@
 
 This document is the canonical inventory of game rules that remain open to design or playtesting. It prevents unresolved decisions from being silently embedded in schemas, cards, user-interface code, or server behavior.
 
-## 1. Frozen direction: one configurable match system
+## 1. Canonical boundary
 
-There is no separate Ace Mode or Cleaner Mode in the rules engine. A match is configured through one `MatchConfiguration`. "Ace" may remain an informal development nickname for this configurable system.
+Approved behavior now lives in `FROZEN_RULES.md`. This file contains only decisions that still require design, balance testing, or production-policy selection.
 
 The current configuration vocabulary is:
 
@@ -22,47 +22,95 @@ The current configuration vocabulary is:
 | `W` | `disconnect_grace_seconds` | Server-administered disconnection grace period before automatic concession. |
 | `M` | `max_players_per_match` | Server-administered upper bound on `seat_limit`. Initially expected to be 8, but never hardcoded into game logic. |
 
-## 2. Proposed configuration invariants
+## 2. Remaining configuration questions
 
-These constraints are recommended but remain unfrozen until accepted in the normative match contract:
+- Whether all numeric settings must be integers in every rules version.
+- Production admission limits for large `S`, `Q`, player, and spectator values.
+- Whether custom public rooms may use the broad schema limits or only approved presets.
+- Default values and permitted ranges for `T`, `PT`, spectator capacity, and search/refresh resources.
 
-- All numeric settings are integers unless a later rule explicitly permits fractions.
-- `termination_score` SHALL be `-1` or an integer from `1` through `99`. Zero is excluded because a player starting at the default zero score would already satisfy it.
-- `starting_ticket_count` SHALL be an integer from `1` through `99`.
-- `queue_minimum` SHALL be an integer from `0` through `99`.
-- `starting_ticket_count >= queue_minimum`. This avoids beginning a match by unexpectedly creating additional tickets.
-- Each starting Service Point value SHALL be an integer from `-99` through `99`.
-- When `termination_score >= 1`, every eligible player's or team's effective starting score SHALL be less than `termination_score`. Merely requiring `H(p) != X` is insufficient because `H(p) > X` would also begin beyond the target.
-- `player_count >= 1`.
-- `player_count <= seat_limit <= max_players_per_match`.
-- Time limits SHALL be positive whole seconds or `null` when disabled.
-- `disconnect_grace_seconds` SHALL be a positive whole number chosen by server administrators.
+## 3. New ticket-generation settings
 
-## 3. Proposed queue semantics
+Candidate room settings:
 
-The following interpretation removes the need for a separate finite-ticket mode:
+- `min_faults_per_ticket` (`MnD`): minimum randomized fault count, greater than zero.
+- `max_faults_per_ticket` (`MxD`): maximum randomized fault count, greater than or equal to `MnD`.
+- `progressive_difficulty` (`PD`): whether generated-ticket difficulty grows during the match.
+- Future `min_fault_depth` and `max_fault_depth` settings once the content catalog contains enough deep causal graphs.
 
-1. Create exactly `starting_ticket_count` active tickets during setup.
-2. Resolve ticket closures and all events they cause.
-3. If `queue_minimum > 0` and the active count is below it, create random tickets until the active count equals `queue_minimum`.
-4. If `queue_minimum == 0`, do not replenish automatically.
-5. If the active queue becomes empty while `queue_minimum == 0`, evaluate the queue-empty termination rule.
+Unfrozen questions:
 
-Thus:
+- Exact supported ranges and production caps.
+- Whether difficulty counts distinct faults, total fault instances, or actionable root faults.
+- How minimum and maximum fault depth are calculated for branching graphs.
+- The progression cadence, formula, and ceiling for `PD`.
+- Whether progression is based on tickets created, tickets closed, rounds, score, or elapsed time.
+- How generation behaves when the catalog cannot satisfy the requested range.
+- Whether a room falls back to the closest valid ticket or rejects the configuration.
 
-- A finite queue match is expressed with `X = -1`, `S = desired finite ticket count`, and `Q = 0`.
-- An endless-by-configuration match is expressed with `X = -1` and `Q > 0`.
-- The earlier prototype is not fully described until its replenishment intent is chosen. "Always keep three tickets" is `X = 10, S = 3, Q = 3`; "only three tickets" is `X = 10, S = 3, Q = 0`.
+One server-side `max_faults_per_ticket` capability is sufficient to bound both `MnD` and `MxD`; a separate "highest minimum" capability is redundant as long as validation enforces `MnD <= MxD <= server_max_faults_per_ticket`.
 
-## 4. Frozen cooperative continuity direction
+## 4. Search and deck-refresh resources
 
-Cooperative matches do not end merely because all but one human player has conceded, disconnected beyond `W`, or otherwise left the active roster. Every remaining active human may choose to continue the match or concede.
+Candidate settings:
 
-This direction anticipates cooperative matchmaking with unfamiliar players, where a departing teammate must not force a loss upon players who wish to finish. Departed players stop receiving turns and cannot rejoin after their departure becomes a concession. The exact treatment of their private cards, controlled resources, ticket contributions, clocks, and statistics remains unfrozen.
+- `starting_search_tokens` (`SSC`): utility searches granted at setup; proposed schema range 0 through 5.
+- `ticket_search_tokens` (`TSC`): utility searches granted when a ticket closes; proposed schema range 0 through 5.
+- `grant_refresh_token_on_ticket_created`: whether each newly created ticket grants a Deck Refresh Token.
 
-## 5. Currently unfrozen rules
+These should be utility resources rather than ordinary cards in hand. They do not count toward starting hand size or deck size.
 
-### 4.1 Match configuration and setup
+Unfrozen questions:
+
+- Exact search behavior: entire deck, top cards, eligible family, or filtered selection.
+- Whether using a Search Token consumes an Action.
+- Whether `TSC` is awarded to every player, contributors only, the closing player, or a cooperative team pool.
+- Whether Search Tokens have a storage cap.
+- Whether the recommended preset is `SSC = 2` or `SSC = 3`; the current design proposal favors 3.
+- Whether the recommended `TSC` should be 1 rather than 3 to preserve draw uncertainty and reduce repetitive search.
+- Whether a Deck Refresh Token belongs to each player or to the team.
+- Whether ticket creation grants tokens for the initial `S` tickets or only later replenishment tickets.
+- Whether using a Deck Refresh Token consumes an Action.
+- Whether refresh tokens are capped.
+- Whether refresh shuffles only discard into deck or combines discard with the remaining deck and shuffles everything.
+
+## 5. Recommended starting balance for playtesting
+
+These are recommendations, not frozen rules. They provide one coherent baseline for the first playable prototype.
+
+| Area | Recommended baseline | Reason |
+|---|---|---|
+| Deck size | 30 cards | Large enough for specialization without making relevant cards too rare. |
+| Copy limit | 3 copies per card ID | Supports consistency without allowing a deck to collapse into one repeated action. |
+| Starting hand | 5 deck cards | Keeps the opening readable. Search Tokens are displayed separately and do not turn this into an eight-card hand. |
+| Draw cadence | Draw 1 deck card at the start of each turn | Predictable pacing and simple reconnect reconstruction. |
+| Actions per turn | 2 Actions | Permits a test-and-follow-up rhythm while requiring prioritization. |
+| Generic card cost | Actions only; no second universal card currency | Avoids preventing knowledgeable play merely because a separate resource was not drawn. |
+| Typical action cost | 1 Action | The content currently contains `action_cost`; treat it as Action consumption, not money or energy. Audit 0-, 2-, and 3-Action outliers before freezing. |
+| Hand limit | No rules-level maximum in the first prototype | Avoids forced discards before deck/search pacing is observed. The UI must remain usable with large hands. |
+| Starting Search Tokens (`SSC`) | 3 per player | Makes a 30-card deck dependable without replacing all draw uncertainty. |
+| Search Tokens on closure (`TSC`) | 1 per active player; storage cap 5 | Prevents the game from stalling while avoiding three guaranteed searches after every closure. |
+| Search Token use | Spend 1 token and 1 Action; select one eligible card from the deck, add it to hand, then shuffle | Strong and legible, but not a free action. Eligibility may later be narrowed by effects. |
+| Deck Refresh Token use | Spend 1 token and 1 Action; combine discard with remaining draw deck and shuffle | Prevents endless-run exhaustion while preserving an action tradeoff. |
+| Refresh award | 1 per active player after a ticket closes and replenishment succeeds; storage cap 3 | Safer than awarding once for every initial or bulk-created ticket, which would make large `S` or `Q` a token exploit. |
+| Ticket Service Points | Use each ticket's authored Service Point value; initial baseline 1 per ordinary ticket | Preserves ticket-level balancing and keeps a 10-point preset understandable. |
+| Root Cause Bonus | +1 Service Point once per ticket | Meaningful relative to a 1-point ordinary ticket without overwhelming ticket completion. |
+| Ordinary mistakes | Do not subtract Service Points by default | A bad action already spends a card and Action and may reveal information or forfeit efficiency bonuses. Explicit high-risk cards may define additional penalties. |
+| Turn timer (`T`) | 120 seconds when enabled | Gives unfamiliar players time to read technical material. Expiration auto-passes. |
+| Player clock (`PT`) | 1,200 seconds per player when enabled | A 20-minute decision budget discourages indefinite matches without rushing each turn. |
+| Disconnect grace (`W`) | 60 seconds | Long enough for a routine reconnect and short enough to release abandoned live matches. |
+
+Recommended player-count presets should be explicit data rather than hidden formulas. As a starting point:
+
+- 1-player training: `SL = 1`, `S = 3`, `Q = 3`, `X = 10`, timers disabled.
+- 2-player competitive: `SL = 2`, `S = 3`, `Q = 3`, `X = 10`.
+- 2–4-player cooperative: `SL = 4`, `S = 3`, `Q = 3`, shared `X = 10`.
+- 3–4-player competitive: `SL = 4`, `S = 4`, `Q = 4`, `X = 15`.
+- 5–8-player large-room trial: `SL = 8`, `S = 6`, `Q = 6`, `X = 20`; keep administrator-gated until load and pacing are measured.
+
+## 6. Currently unfrozen rules
+
+### 6.1 Match configuration and setup
 
 - Which configuration values players may customize and which are supplied only through presets.
 - Whether public matchmaking permits arbitrary settings or only administrator-approved presets.
@@ -74,7 +122,7 @@ This direction anticipates cooperative matchmaking with unfamiliar players, wher
 - Whether competitive play is free-for-all only or should support teams.
 - How cooperative team membership is represented in anticipation of possible multi-team play.
 
-### 4.2 Score and handicaps
+### 6.2 Score and handicaps
 
 - Whether Service Points are awarded per qualifying action, per ticket stage, or only at ticket closure.
 - How multiple contributors divide or independently earn Service Points.
@@ -86,7 +134,7 @@ This direction anticipates cooperative matchmaking with unfamiliar players, wher
 - Exact Root Cause Bonus value and attribution.
 - Tie handling when the queue becomes empty in competitive play.
 
-### 4.3 Ticket queue and contention
+### 6.3 Ticket queue and contention
 
 - Whether replenishment occurs immediately after each closure or once all current effects finish resolving. The recommendation is after the complete resolution transaction.
 - Whether random replenishment samples with replacement, without replacement from a finite catalog, or from a weighted generator.
@@ -98,7 +146,7 @@ This direction anticipates cooperative matchmaking with unfamiliar players, wher
 - How contribution history is recorded for scoring and final statistics.
 - Whether impossible or corrupted tickets can be replaced, and what penalty applies.
 
-### 4.4 Turn structure and card economy
+### 6.4 Turn structure and card economy
 
 - Deck size and copy limits.
 - Starting hand size.
@@ -113,7 +161,7 @@ This direction anticipates cooperative matchmaking with unfamiliar players, wher
 - Whether rounds mean one turn for every currently active player.
 - Whether player-count scaling affects actions, draws, tickets, difficulty, rewards, or events.
 
-### 4.5 Diagnosis, repair, and failure
+### 6.5 Diagnosis, repair, and failure
 
 - Diagnosis commitment thresholds and evidence requirements.
 - Exact Root Cause Bonus requirements.
@@ -124,12 +172,12 @@ This direction anticipates cooperative matchmaking with unfamiliar players, wher
 - Whether mandatory-draw failure causes exhaustion, concession, elimination, or match loss.
 - How a cooperative team is affected when one member becomes exhausted.
 
-### 4.6 Timers, disconnection, and concession
+### 6.6 Timers, disconnection, and concession
 
 - Default and permitted ranges for `T`, `PT`, and administrator-controlled `W`.
 - Whether turn time and player time may both be enabled and which expiration wins if they coincide.
 - Whether clocks pause during server resolution, animations, reconnect synchronization, or modal decisions.
-- Whether turn expiration causes immediate match concession, ends only the current turn, or consumes a limited timeout resource.
+- Number of consecutive or total automatic turn passes, if any, that eventually cause concession.
 - Whether player-time expiration causes concession or inactivity.
 - How repeated disconnects interact with `W`.
 - Whether voluntary concession requires confirmation.
@@ -137,7 +185,7 @@ This direction anticipates cooperative matchmaking with unfamiliar players, wher
 - How a cooperative leaver's hand, controlled resources, unresolved effects, and ticket claims are released or transferred while remaining players continue.
 - How computer players affect "all human players conceded" termination; computer players never concede.
 
-### 4.7 Terminal conditions and results
+### 6.7 Terminal conditions and results
 
 - Whether reaching `termination_score` is checked after each atomic scoring event or after the entire action resolves.
 - How simultaneous threshold crossings are resolved.
@@ -150,7 +198,7 @@ This direction anticipates cooperative matchmaking with unfamiliar players, wher
 - Whether administrators may terminate or invalidate a match and how that affects results.
 - Whether an infinite configured match exposes an administrator or unanimous-vote ending mechanism.
 
-### 4.8 Multiplayer targeting and information
+### 6.8 Multiplayer targeting and information
 
 - Machine-readable effect targets: self, ally, opponent, team, any player, active ticket, claimed ticket, or any ticket.
 - Which discoveries are private, team-shared, or public.
@@ -159,7 +207,7 @@ This direction anticipates cooperative matchmaking with unfamiliar players, wher
 - What information spectators receive.
 - How private state is redacted from reconnect snapshots and event history.
 
-### 4.9 Computer players
+### 6.9 Computer players
 
 - Supported computer-player counts and collaboration modes.
 - Whether computer players can fill empty seats or join only at setup.
@@ -168,7 +216,7 @@ This direction anticipates cooperative matchmaking with unfamiliar players, wher
 - How computer-player rewards and statistics are reported.
 - What terminates an otherwise endless match containing only computer players.
 
-### 4.10 End-of-match statistics
+### 6.10 End-of-match statistics
 
 - Which statistics appear in the result screen.
 - Attribution rules for tickets, assists, diagnoses, tests, repairs, verification, and documentation.
@@ -177,7 +225,24 @@ This direction anticipates cooperative matchmaking with unfamiliar players, wher
 - Whether statistics are persisted to an account record.
 - Whether all statistics are derived from the authoritative event log.
 
-## 6. Rules removed from the unfrozen inventory
+### 6.11 Room lifecycle and roles
+
+- Room visibility: public, unlisted, private, or invite-only.
+- Room ownership, host transfer, and behavior when the creator leaves.
+- Ready-state requirements and who may start a match.
+- Whether settings remain editable after another member joins.
+- Whether Player seats may be reserved.
+- Whether late joining is ever permitted after match start.
+- Whether a Spectator may request a vacated Player seat between matches.
+- Whether spectator streams are live or delayed in competitive rooms.
+- Spectator chat and moderation policy.
+- Rejoin semantics before and after disconnection becomes concession.
+- Behavior when concession cannot convert a Player into a Spectator because spectator capacity is full.
+- Room retention after a match and support for rematches.
+- Host controls for adding, removing, and configuring computer players.
+- Whether offline all-computer simulations use Room objects or a smaller local simulation configuration.
+
+## 7. Rules removed from the unfrozen inventory
 
 The following questions no longer require separate decisions:
 
@@ -186,10 +251,13 @@ The following questions no longer require separate decisions:
 - How Cleaner and Ace cross-product combinations interact with competitive and cooperative play.
 - Whether `AceTicketPolicy` and `CleanerTicketPolicy` should be separate abstractions.
 - Whether a cooperative match automatically ends when all but one human player leaves.
+- Whether a live server match containing no humans may continue because spectators or computer players remain.
+- Whether turn-timer expiration immediately concedes the player.
+- Whether the public ticket progress record has a stable name; it is the Worklog.
 
 They are replaced by one configurable `TicketPolicy` governed by `starting_ticket_count`, `queue_minimum`, and `termination_score`.
 
-## 7. Change discipline
+## 8. Change discipline
 
 When an unfrozen rule is decided:
 

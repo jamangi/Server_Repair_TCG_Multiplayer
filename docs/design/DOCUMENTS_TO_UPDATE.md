@@ -16,6 +16,8 @@ Create `08_MATCH_CONFIGURATION_AND_RESULTS.md` after the currently unfrozen matc
 - winners and ties,
 - end-of-match statistics.
 
+Create `09_ROOM_LIFECYCLE_AND_COMMANDS.md` to own Room membership, Player and Spectator roles, capacity, readiness, socket subscription, concession-to-spectator transitions, leaving, bots, and live-versus-offline lifecycle rules.
+
 ## Existing design documents
 
 ### `00_GAME_ENGINE_OVERVIEW.md`
@@ -29,6 +31,8 @@ Add the structures proposed in `RECOMMENDED_DATA_MODEL.md`. Replace singular win
 ### `02_CARD_TYPES.md`
 
 Audit prose and structured effects for assumptions such as "the other player." Define explicit target relationships: self, ally, opponent, own team, opposing team, any player, and ticket targets. Technical card families otherwise remain valid.
+
+Clarify that Search Tokens and Deck Refresh Tokens are system utility resources rather than ordinary cards unless a later rule explicitly creates card versions of those effects.
 
 ### `03_FAULT_CATALOG_V0_1.md`
 

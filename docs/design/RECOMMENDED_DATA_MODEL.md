@@ -16,7 +16,9 @@ This is an architectural recommendation. It is not yet a frozen runtime schema.
 ```text
 ServerMatchCapabilities
   max_players_per_match: integer                 // M
+  max_spectators_per_room: integer
   disconnect_grace_seconds: integer              // W
+  max_faults_per_ticket: integer
   max_starting_tickets: integer
   max_queue_minimum: integer
   allowed_presets: MatchPresetId[]
@@ -36,6 +38,13 @@ MatchConfiguration
   seat_limit: integer                            // SL
   turn_time_limit_seconds: integer | null        // T
   player_time_limit_seconds: integer | null      // PT default
+  min_faults_per_ticket: integer                 // MnD
+  max_faults_per_ticket: integer                 // MxD
+  progressive_difficulty: boolean                // PD
+  starting_search_tokens: integer                // SSC
+  ticket_search_tokens: integer                  // TSC
+  refresh_tokens_per_ticket_closed: integer
+  max_refresh_tokens: integer
   player_overrides: PlayerSetup[]
   preset_id: string | null
   rules_version: string
@@ -73,6 +82,35 @@ MatchState
   revision: integer
 ```
 
+## Room state
+
+```text
+RoomState
+  room_id: RoomId
+  status: lobby | in_match | post_match | closed
+  visibility: public | unlisted | private
+  creator_member_id: MemberId
+  members_by_id: Map<MemberId, RoomMember>
+  player_seat_assignments: Map<SeatIndex, MemberId>
+  spectator_member_ids: MemberId[]
+  seat_limit: integer
+  spectator_limit: integer
+  pending_match_configuration: MatchConfiguration
+  active_match_id: MatchId | null
+  revision: integer
+```
+
+```text
+RoomMember
+  member_id: MemberId
+  account_id: AccountId
+  role: unassigned | player | spectator
+  connection_status: connected | reconnecting | disconnected
+  ready: boolean
+```
+
+Room commands should include `CREATE_ROOM`, `JOIN_ROOM`, `TAKE_SEAT`, `BECOME_SPECTATOR`, `CONCEDE_MATCH`, and `LEAVE_ROOM`. Match commands such as playing cards remain a separate command family.
+
 ## Players and teams
 
 ```text
@@ -89,6 +127,8 @@ PlayerState
   discard: CardInstance[]
   clock: PlayerClockState
   disconnect_deadline: timestamp | null
+  search_tokens: integer
+  deck_refresh_tokens: integer
 ```
 
 ```text
