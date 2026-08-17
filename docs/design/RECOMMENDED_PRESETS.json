@@ -1,0 +1,96 @@
+{
+  "document_status": "recommended_not_frozen",
+  "rules_version": "draft-configurable-match-v1",
+  "notes": [
+    "M and W are server-administered capabilities and are not repeated as player-selected preset fields.",
+    "A null time limit means that timer is disabled.",
+    "The exact cooperative score aggregation and concession behavior remain unfrozen."
+  ],
+  "server_capabilities_example": {
+    "max_players_per_match": 8,
+    "disconnect_grace_seconds": 60,
+    "max_starting_tickets": 99,
+    "max_queue_minimum": 99,
+    "allow_custom_matches": true
+  },
+  "presets": [
+    {
+      "id": "competitive-standard-race",
+      "display_name": "Competitive Standard Race",
+      "collaboration_mode": "competitive",
+      "termination_score": 10,
+      "starting_ticket_count": 3,
+      "queue_minimum": 3,
+      "seat_limit": 2,
+      "turn_time_limit_seconds": null,
+      "player_time_limit_seconds": null,
+      "default_starting_service_points": 0,
+      "description": "Two technicians race to 10 Service Points while three active tickets are maintained."
+    },
+    {
+      "id": "cooperative-standard-race",
+      "display_name": "Cooperative Standard Race",
+      "collaboration_mode": "cooperative",
+      "termination_score": 10,
+      "starting_ticket_count": 3,
+      "queue_minimum": 3,
+      "seat_limit": 4,
+      "turn_time_limit_seconds": null,
+      "player_time_limit_seconds": null,
+      "default_starting_service_points": 0,
+      "description": "Up to four technicians share progress toward 10 Service Points while three active tickets are maintained."
+    },
+    {
+      "id": "competitive-finite-cleanup",
+      "display_name": "Competitive Finite Cleanup",
+      "collaboration_mode": "competitive",
+      "termination_score": -1,
+      "starting_ticket_count": 8,
+      "queue_minimum": 0,
+      "seat_limit": 4,
+      "turn_time_limit_seconds": null,
+      "player_time_limit_seconds": null,
+      "default_starting_service_points": 0,
+      "description": "The queue does not replenish. When all eight tickets close, the highest score wins."
+    },
+    {
+      "id": "cooperative-finite-cleanup",
+      "display_name": "Cooperative Finite Cleanup",
+      "collaboration_mode": "cooperative",
+      "termination_score": -1,
+      "starting_ticket_count": 8,
+      "queue_minimum": 0,
+      "seat_limit": 4,
+      "turn_time_limit_seconds": null,
+      "player_time_limit_seconds": null,
+      "default_starting_service_points": 0,
+      "description": "The team wins by closing the eight starting tickets without replenishment."
+    },
+    {
+      "id": "competitive-timed-race",
+      "display_name": "Competitive Timed Race",
+      "collaboration_mode": "competitive",
+      "termination_score": 10,
+      "starting_ticket_count": 3,
+      "queue_minimum": 3,
+      "seat_limit": 4,
+      "turn_time_limit_seconds": 90,
+      "player_time_limit_seconds": 900,
+      "default_starting_service_points": 0,
+      "description": "A four-seat race with 90-second turns and 15 minutes of player time."
+    },
+    {
+      "id": "cooperative-endurance",
+      "display_name": "Cooperative Endurance",
+      "collaboration_mode": "cooperative",
+      "termination_score": -1,
+      "starting_ticket_count": 5,
+      "queue_minimum": 5,
+      "seat_limit": 4,
+      "turn_time_limit_seconds": null,
+      "player_time_limit_seconds": null,
+      "default_starting_service_points": 0,
+      "description": "An intentionally endless-by-configuration cooperative session that continues until a tertiary ending rule applies."
+    }
+  ]
+}
