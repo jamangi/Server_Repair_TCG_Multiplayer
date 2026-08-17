@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Loading and synchronization wireframe</title>
+  <desc id="desc">A match loading screen with an illustrated focal area, readiness checks, player states, and progress controls.</desc>
+  <defs><style>.bg{fill:#0f172a}.panel{fill:#172033;stroke:#64748b;stroke-width:2}.soft{fill:#243047}.ok{fill:#22c55e}.wait{fill:#f59e0b}.text{fill:#f8fafc;font:700 22px Arial}.small{fill:#cbd5e1;font:16px Arial}.label{fill:#7dd3fc;font:700 14px Arial;letter-spacing:1px}.line{stroke:#64748b;stroke-width:2}.button{fill:#164e63;stroke:#67e8f9;stroke-width:2}</style></defs>
+  <rect class="bg" width="1200" height="760"/>
+  <text class="label" x="48" y="50">SERVER REPAIR CARD GAME</text><text class="text" x="48" y="84" font-size="34">PREPARING THE INCIDENT ROOM</text>
+  <rect class="panel" x="48" y="112" width="690" height="500" rx="22"/>
+  <rect class="soft" x="74" y="138" width="638" height="350" rx="18"/>
+  <circle cx="392" cy="285" r="118" fill="#38bdf8" opacity=".15"/><rect x="275" y="215" width="235" height="155" rx="18" fill="#334155" stroke="#7dd3fc" stroke-width="3"/><path d="M310 335 L345 290 L380 312 L420 255 L474 335 Z" fill="#38bdf8" opacity=".55"/><text class="small" x="265" y="452">Illustration area: technicians entering a lit server room</text>
+  <text class="text" x="74" y="532">Tip: trace symptoms before replacing parts.</text><text class="small" x="74" y="568">The match begins only after required content and players are ready.</text>
+  <rect class="panel" x="764" y="112" width="388" height="500" rx="22"/>
+  <text class="text" x="794" y="154">READINESS CHECK</text>
+  <circle class="ok" cx="812" cy="199" r="10"/><text class="small" x="838" y="205">Room settings received</text>
+  <circle class="ok" cx="812" cy="244" r="10"/><text class="small" x="838" y="250">Card content verified</text>
+  <circle class="ok" cx="812" cy="289" r="10"/><text class="small" x="838" y="295">Decks validated</text>
+  <circle class="wait" cx="812" cy="334" r="10"/><text class="small" x="838" y="340">Waiting for one player</text>
+  <line class="line" x1="794" y1="374" x2="1122" y2="374"/>
+  <text class="label" x="794" y="408">PLAYERS</text><text class="small" x="794" y="444">Avery</text><text class="small" x="1048" y="444">READY</text><text class="small" x="794" y="480">Morgan</text><text class="small" x="1030" y="480">SYNCING</text><text class="small" x="794" y="516">CPU-1</text><text class="small" x="1048" y="516">READY</text>
+  <rect class="button" x="794" y="544" width="150" height="44" rx="12"/><text class="small" x="830" y="572">RECONNECT</text><rect class="soft" x="958" y="544" width="164" height="44" rx="12"/><text class="small" x="1002" y="572">LEAVE ROOM</text>
+  <rect class="soft" x="48" y="644" width="1104" height="28" rx="14"/><rect x="48" y="644" width="817" height="28" rx="14" fill="#38bdf8"/><text class="small" x="522" y="714">74% — synchronizing player-safe match view</text>
+</svg>

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Store wireframe</title>
+  <desc id="desc">A game store with currency balances, categories, products, a character preview, stat changes, and purchase controls.</desc>
+  <defs>
+    <style>
+      .bg{fill:#111827}.panel{fill:#1f2937;stroke:#64748b;stroke-width:2}.soft{fill:#273449}.accent{fill:#f59e0b}.blue{fill:#38bdf8}.text{fill:#f8fafc;font:700 20px Arial}.small{fill:#cbd5e1;font:15px Arial}.label{fill:#93c5fd;font:700 14px Arial;letter-spacing:1px}.line{stroke:#64748b;stroke-width:2}.button{fill:#0f766e;stroke:#5eead4;stroke-width:2}
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="760"/>
+  <text class="text" x="38" y="48" font-size="30">TECHNICIAN STORE</text>
+  <rect class="soft" x="820" y="18" width="160" height="46" rx="22"/><text class="small" x="842" y="47">Credits  2,450</text>
+  <rect class="soft" x="990" y="18" width="172" height="46" rx="22"/><text class="small" x="1010" y="47">Parts  180</text>
+  <rect class="panel" x="34" y="84" width="1128" height="60" rx="12"/>
+  <text class="label" x="64" y="120">FEATURED</text><text class="label" x="210" y="120">OUTFITS</text><text class="label" x="345" y="120">TOOLS</text><text class="label" x="455" y="120">EMOTES</text><text class="label" x="580" y="120">BUNDLES</text>
+  <rect class="panel" x="34" y="164" width="590" height="520" rx="16"/>
+  <text class="text" x="62" y="202">CATALOG</text>
+  <g>
+    <rect class="soft" x="62" y="228" width="160" height="190" rx="14"/><rect class="blue" x="78" y="244" width="128" height="105" rx="12" opacity=".35"/><text class="small" x="82" y="377">Field Jacket</text><text class="label" x="82" y="401">650 CREDITS</text>
+    <rect class="soft" x="248" y="228" width="160" height="190" rx="14"/><rect class="accent" x="264" y="244" width="128" height="105" rx="12" opacity=".35"/><text class="small" x="268" y="377">Diagnostic Kit</text><text class="label" x="268" y="401">420 CREDITS</text>
+    <rect class="soft" x="434" y="228" width="160" height="190" rx="14"/><rect class="blue" x="450" y="244" width="128" height="105" rx="12" opacity=".25"/><text class="small" x="454" y="377">Victory Pose</text><text class="label" x="454" y="401">300 CREDITS</text>
+    <rect class="soft" x="62" y="444" width="160" height="190" rx="14"/><rect class="accent" x="78" y="460" width="128" height="105" rx="12" opacity=".25"/><text class="small" x="82" y="593">Tool Belt</text><text class="label" x="82" y="617">220 CREDITS</text>
+    <rect class="soft" x="248" y="444" width="160" height="190" rx="14"/><rect class="blue" x="264" y="460" width="128" height="105" rx="12" opacity=".25"/><text class="small" x="268" y="593">Server Charm</text><text class="label" x="268" y="617">90 PARTS</text>
+  </g>
+  <rect class="panel" x="646" y="164" width="516" height="520" rx="16"/>
+  <text class="label" x="678" y="200">LIVE PREVIEW</text>
+  <rect class="soft" x="678" y="222" width="210" height="300" rx="90"/><circle class="blue" cx="783" cy="306" r="48" opacity=".35"/><rect class="blue" x="735" y="360" width="96" height="132" rx="35" opacity=".35"/>
+  <text class="text" x="920" y="248">Field Jacket</text><text class="small" x="920" y="280">Utility style</text><text class="small" x="920" y="310">+2 visual flair</text><line class="line" x1="920" y1="334" x2="1128" y2="334"/>
+  <text class="label" x="920" y="370">BEFORE / AFTER</text><text class="small" x="920" y="403">Outfit slot: Standard → Field</text><text class="small" x="920" y="432">Color: Slate → Signal blue</text>
+  <rect class="button" x="920" y="472" width="190" height="52" rx="14"/><text class="text" x="973" y="506">BUY</text>
+  <rect class="soft" x="920" y="540" width="190" height="52" rx="14"/><text class="text" x="966" y="574">PUT OFF</text>
+  <rect class="panel" x="34" y="704" width="1128" height="38" rx="12"/><text class="small" x="70" y="729">Rooms</text><text class="small" x="190" y="729">My Info</text><text class="small" x="320" y="729">Decks</text><text class="small" x="430" y="729">Store</text><text class="small" x="1050" y="729">Social</text>
+</svg>

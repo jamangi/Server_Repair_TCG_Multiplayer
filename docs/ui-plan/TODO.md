@@ -4,6 +4,8 @@ Status: **provisional and intentionally mutable**
 
 This document preserves the current UI planning discussion while additional visual references are gathered. It is not yet a frozen architecture, requirements contract, or implementation task. Revise it freely until the product structure and visual direction are approved.
 
+Original generalized references now live in [`wireframes/INDEX.md`](./wireframes/INDEX.md). They are working visual studies, not frozen specifications.
+
 ## Recommended UI-plan structure
 
 When the plan is mature enough to split into durable documents, the likely structure is:
@@ -159,6 +161,8 @@ Central principle: **turn multiplayer configuration into a social place, not a t
 
 ## Visual references in a public repository notes
 
+- Prefer the original generalized wireframes collected in [`wireframes/INDEX.md`](./wireframes/INDEX.md) when a public, redistributable reference is needed.
+
 - Do not copy third-party game screenshots into the public repository unless Jamangi has redistribution permission.
 - Preserve reference URLs and write original `REFERENCE_NOTES.md` files describing the reusable lessons:
   - strong mode typography;
@@ -201,4 +205,3 @@ Central principle: **turn multiplayer configuration into a social place, not a t
 - Which social capability is essential to the first public multiplayer milestone: presence, invitations, room chat, private messages, or none?
 - What original visual theme should replace the reference game's metallic arcade interface?
 - Which parts of the plan become reusable across future Jamangi card games, and which remain Server Repair TCG-specific?
-
