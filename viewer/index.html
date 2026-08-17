@@ -10,38 +10,14 @@
 <header><div><p class="eyebrow">Server Repair Card Game</p><h1>Domain Library</h1><p>Search faults, symptoms, components, tests, tools, commands, repairs, validations, and protocols.</p></div><div class="count"><b id="recordCount">0</b><span>records</span></div></header>
 <main>
 <section class="controls">
-<section id="listControls" class="control-grid">
 <label>Search<input id="search" type="search" placeholder='Try "no POST", "DIMM", "lsblk", or "thermal"'></label>
 <label>Sort<select id="sort"><option value="name">Name</option><option value="type">Type</option><option value="category">Category</option><option value="id">Stable ID</option></select></label>
 <label>Category<select id="category"><option value="">All categories</option></select></label>
-</section>
-<section id="graphControls" class="control-grid graph-control-grid" hidden>
-<label>Fault query<input id="graphSearch" type="search" placeholder='Try "overheat", "boot", or "memory"'></label>
-<label>Fault category<select id="graphCategory"><option value="all">All categories</option></select></label>
-<label>Depth<select id="graphDepth"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></label>
-<label>Direction<select id="graphDirection"><option value="both">Both</option><option value="causes">Causes</option><option value="effects">Effects</option></select></label>
-<label>Zoom
-  <div class="btn-row" style="margin-top:7px;display:flex;gap:8px;align-items:center">
-    <button id="graphZoomOut">−</button>
-    <span id="graphZoomLabel" aria-live="polite">100%</span>
-    <button id="graphZoomIn">+</button>
-    <button id="graphCenter">Center</button>
-    <button id="graphResetZoom">Reset</button>
-  </div>
-</label>
-</section>
 </section>
 <nav id="tabs"></nav>
 <div class="meta"><b id="resultCount"></b><span id="summary"></span></div>
 <section id="results" class="grid"></section>
 <section id="empty" class="empty" hidden><h2>No matches</h2><p>Try a broader query or remove a filter.</p></section>
-<section id="graphView" hidden>
-  <div id="graphWarningArea" class="graph-warning-area" aria-live="polite"></div>
-  <div id="graphCanvasWrap">
-    <div id="graphCanvas" class="graphCanvas" tabindex="0" aria-label="Fault causal graph canvas"></div>
-  </div>
-  <section id="graphRelationships" class="graph-relationships"></section>
-</section>
 </main>
 <dialog id="dialog"><button id="close">×</button><div id="detail"></div></dialog>
 <footer id="status">Loading…</footer>
