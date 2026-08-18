@@ -2,9 +2,11 @@
 
 This document is the canonical inventory of game rules that remain open to design or playtesting. It prevents unresolved decisions from being silently embedded in schemas, cards, user-interface code, or server behavior.
 
+Start with [`DECISION_INDEX.md`](DECISION_INDEX.md) for the decision hierarchy and recommended resolution order. Newly proposed questions remain in [`CANDIDATE_DECISIONS.md`](CANDIDATE_DECISIONS.md) until accepted into this inventory. Known overlaps with frozen rules are tracked in [`UNSYNCHRONIZED_DECISIONS.md`](UNSYNCHRONIZED_DECISIONS.md).
+
 ## 1. Canonical boundary
 
-Approved behavior now lives in `FROZEN_RULES.md`. This file contains only decisions that still require design, balance testing, or production-policy selection.
+Approved behavior lives in [`FROZEN_RULES.md`](FROZEN_RULES.md). This file contains only decisions that still require design, balance testing, or production-policy selection.
 
 The current configuration vocabulary is:
 

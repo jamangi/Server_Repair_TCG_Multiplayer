@@ -2,7 +2,9 @@
 
 This document records directions explicitly approved for the Server Repair TCG. "Frozen" means implementations and tests may rely on the rule. A frozen rule may still be changed deliberately through a documented rules-version migration.
 
-Unresolved decisions belong in `UNFROZEN_RULES.md`.
+Start with [`DECISION_INDEX.md`](DECISION_INDEX.md) for the decision hierarchy and current engine-decision order. Accepted unresolved decisions belong in [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md); new proposals belong in [`CANDIDATE_DECISIONS.md`](CANDIDATE_DECISIONS.md).
+
+A more fundamental unresolved decision may place a frozen rule in [`UNSYNCHRONIZED_DECISIONS.md`](UNSYNCHRONIZED_DECISIONS.md). The frozen rule remains authoritative until an explicit decision changes it.
 
 ## 1. Core educational loop
 

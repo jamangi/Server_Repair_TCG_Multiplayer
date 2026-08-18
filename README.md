@@ -60,17 +60,18 @@ It does not yet contain a playable game engine or multiplayer client. Some schem
 
 Read the design documents in this order:
 
-1. [`docs/design/FROZEN_RULES.md`](docs/design/FROZEN_RULES.md) — approved behavior that implementations and tests may rely on.
-2. [`docs/design/UNFROZEN_RULES.md`](docs/design/UNFROZEN_RULES.md) — the canonical inventory of decisions still requiring design or playtesting.
-3. [`docs/design/RECOMMENDED_DATA_MODEL.md`](docs/design/RECOMMENDED_DATA_MODEL.md) and [`RECOMMENDED_PRESETS.json`](docs/design/RECOMMENDED_PRESETS.json) — architectural and balance recommendations, not frozen contracts.
-4. [`docs/design/00_GAME_ENGINE_OVERVIEW.md`](docs/design/00_GAME_ENGINE_OVERVIEW.md) through [`07_FAULT_BROWSER_AND_SEARCH.md`](docs/design/07_FAULT_BROWSER_AND_SEARCH.md) — the foundational vision, architecture, and starter catalogs. Later frozen decisions take precedence where they differ.
-5. [`docs/design/DOCUMENTS_TO_UPDATE.md`](docs/design/DOCUMENTS_TO_UPDATE.md) — the migration map for bringing older documents and schemas into alignment.
+1. [`docs/design/decisions/DECISION_INDEX.md`](docs/design/decisions/DECISION_INDEX.md) — the authority map, current decision state, lifecycle, and recommended order for finishing the engine.
+2. [`docs/design/decisions/FROZEN_RULES.md`](docs/design/decisions/FROZEN_RULES.md) and [`UNFROZEN_RULES.md`](docs/design/decisions/UNFROZEN_RULES.md) — approved behavior and the canonical open-rule inventory.
+3. [`docs/design/decisions/CANDIDATE_DECISIONS.md`](docs/design/decisions/CANDIDATE_DECISIONS.md) and [`UNSYNCHRONIZED_DECISIONS.md`](docs/design/decisions/UNSYNCHRONIZED_DECISIONS.md) — proposed decisions, pruned ideas, and the active reconciliation queue.
+4. [`docs/design/RECOMMENDED_DATA_MODEL.md`](docs/design/RECOMMENDED_DATA_MODEL.md) and [`RECOMMENDED_PRESETS.json`](docs/design/RECOMMENDED_PRESETS.json) — architectural and balance recommendations, not frozen contracts.
+5. [`docs/design/00_GAME_ENGINE_OVERVIEW.md`](docs/design/00_GAME_ENGINE_OVERVIEW.md) through [`07_FAULT_BROWSER_AND_SEARCH.md`](docs/design/07_FAULT_BROWSER_AND_SEARCH.md) — the foundational vision, architecture, and starter catalogs. Later frozen decisions take precedence where they differ.
+6. [`docs/design/DOCUMENTS_TO_UPDATE.md`](docs/design/DOCUMENTS_TO_UPDATE.md) — the migration map for bringing older documents and schemas into alignment.
 
 Do not silently turn an unfrozen recommendation into a rule through code, schema, content, or UI behavior.
 
 ## Repository guide
 
-- [`docs/design/`](docs/design/) — game vision, rules, technical catalogs, and implementation recommendations.
+- [`docs/design/`](docs/design/) — game vision, decision sources of truth, technical catalogs, and implementation recommendations.
 - [`docs/ui-plan/`](docs/ui-plan/) — provisional application structure and original visual wireframes.
 - [`viewer/`](viewer/) — dependency-free static browser for reusable domain objects; it is not the multiplayer game client.
 - [`schemas/`](schemas/) and [`examples/`](examples/) — draft domain and runtime contracts that will evolve with approved rules.
