@@ -1,0 +1,715 @@
+{
+  "version": "0.1",
+  "baseline_commit": "7b8c88cd64930fc6d79e4b24307431a3759aadd9",
+  "association_count": 77,
+  "associations": [
+    {
+      "pair_id": "sfp-001",
+      "symptom_id": "symptom.boot.bootloader_error",
+      "symptom_name": "Bootloader Error",
+      "fault_id": "fault.boot.bootloader.corrupt",
+      "fault_name": "Corrupt Bootloader",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-002",
+      "symptom_id": "symptom.boot.memory_warning",
+      "symptom_name": "Memory Warning",
+      "fault_id": "fault.memory.channel.unavailable",
+      "fault_name": "Memory Channel Unavailable",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-003",
+      "symptom_id": "symptom.boot.memory_warning",
+      "symptom_name": "Memory Warning",
+      "fault_id": "fault.memory.dimm.not_seated",
+      "fault_name": "DIMM Not Fully Seated",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-004",
+      "symptom_id": "symptom.boot.memory_warning",
+      "symptom_name": "Memory Warning",
+      "fault_id": "fault.memory.population.invalid",
+      "fault_name": "Invalid DIMM Population",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-005",
+      "symptom_id": "symptom.boot.no_boot_device",
+      "symptom_name": "No Boot Device",
+      "fault_id": "fault.boot.device.not_detected",
+      "fault_name": "Boot Device Not Detected",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-006",
+      "symptom_id": "symptom.boot.no_boot_device",
+      "symptom_name": "No Boot Device",
+      "fault_id": "fault.boot.order.incorrect",
+      "fault_name": "Incorrect Boot Order",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-007",
+      "symptom_id": "symptom.boot.no_boot_device",
+      "symptom_name": "No Boot Device",
+      "fault_id": "fault.storage.cable.loose",
+      "fault_name": "Loose Storage Cable",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-008",
+      "symptom_id": "symptom.boot.no_boot_device",
+      "symptom_name": "No Boot Device",
+      "fault_id": "fault.storage.nvme.device_failed",
+      "fault_name": "Failed NVMe Device",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-009",
+      "symptom_id": "symptom.boot.no_boot_device",
+      "symptom_name": "No Boot Device",
+      "fault_id": "fault.storage.raid.controller_failed",
+      "fault_name": "RAID Controller Failure",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-010",
+      "symptom_id": "symptom.boot.no_post",
+      "symptom_name": "No POST",
+      "fault_id": "fault.board.system.failed",
+      "fault_name": "System Board Failure",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-011",
+      "symptom_id": "symptom.boot.no_post",
+      "symptom_name": "No POST",
+      "fault_id": "fault.cpu.not_seated",
+      "fault_name": "CPU Not Properly Seated",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-012",
+      "symptom_id": "symptom.boot.no_post",
+      "symptom_name": "No POST",
+      "fault_id": "fault.memory.dimm.failed",
+      "fault_name": "Failed ECC DIMM",
+      "status": "case_complete",
+      "pilot": true,
+      "case_path": "docs/case_studies/v0.1/cases/sfp-012--no-post--failed-ecc-dimm--quistian.md",
+      "found_cross_reference_path": "docs/case_studies/v0.1/database_cross_reference/found/sfp-012--no-post--failed-ecc-dimm--quistian.md",
+      "not_found_cross_reference_path": "docs/case_studies/v0.1/database_cross_reference/not_found/sfp-012--no-post--failed-ecc-dimm--quistian.md"
+    },
+    {
+      "pair_id": "sfp-013",
+      "symptom_id": "symptom.boot.no_post",
+      "symptom_name": "No POST",
+      "fault_id": "fault.memory.dimm.not_seated",
+      "fault_name": "DIMM Not Fully Seated",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-014",
+      "symptom_id": "symptom.boot.no_post",
+      "symptom_name": "No POST",
+      "fault_id": "fault.memory.population.invalid",
+      "fault_name": "Invalid DIMM Population",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-015",
+      "symptom_id": "symptom.boot.wrong_device",
+      "symptom_name": "Wrong Boot Device",
+      "fault_id": "fault.boot.order.incorrect",
+      "fault_name": "Incorrect Boot Order",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-016",
+      "symptom_id": "symptom.boot.wrong_device",
+      "symptom_name": "Wrong Boot Device",
+      "fault_id": "fault.firmware.config.reset",
+      "fault_name": "Firmware Configuration Reset",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-017",
+      "symptom_id": "symptom.firmware.settings_reset",
+      "symptom_name": "Firmware Settings Reset",
+      "fault_id": "fault.board.rtc_battery.failed",
+      "fault_name": "Failed RTC / CMOS Battery",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-018",
+      "symptom_id": "symptom.firmware.settings_reset",
+      "symptom_name": "Firmware Settings Reset",
+      "fault_id": "fault.firmware.config.reset",
+      "fault_name": "Firmware Configuration Reset",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-019",
+      "symptom_id": "symptom.memory.ecc_errors",
+      "symptom_name": "ECC Errors",
+      "fault_id": "fault.memory.dimm.failed",
+      "fault_name": "Failed ECC DIMM",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-020",
+      "symptom_id": "symptom.memory.ecc_errors",
+      "symptom_name": "ECC Errors",
+      "fault_id": "fault.system.intermittent_memory_instability",
+      "fault_name": "Intermittent Memory Instability",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-021",
+      "symptom_id": "symptom.memory.reduced_capacity",
+      "symptom_name": "Reduced Detected Memory",
+      "fault_id": "fault.cpu.not_seated",
+      "fault_name": "CPU Not Properly Seated",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-022",
+      "symptom_id": "symptom.memory.reduced_capacity",
+      "symptom_name": "Reduced Detected Memory",
+      "fault_id": "fault.memory.channel.unavailable",
+      "fault_name": "Memory Channel Unavailable",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-023",
+      "symptom_id": "symptom.memory.reduced_capacity",
+      "symptom_name": "Reduced Detected Memory",
+      "fault_id": "fault.memory.dimm.not_seated",
+      "fault_name": "DIMM Not Fully Seated",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-024",
+      "symptom_id": "symptom.memory.reduced_capacity",
+      "symptom_name": "Reduced Detected Memory",
+      "fault_id": "fault.memory.population.invalid",
+      "fault_name": "Invalid DIMM Population",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-025",
+      "symptom_id": "symptom.network.no_connectivity",
+      "symptom_name": "No Network Connectivity",
+      "fault_id": "fault.network.cable.disconnected",
+      "fault_name": "Ethernet Cable Disconnected",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-026",
+      "symptom_id": "symptom.network.no_connectivity",
+      "symptom_name": "No Network Connectivity",
+      "fault_id": "fault.network.cable.failed",
+      "fault_name": "Failed Ethernet Cable",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-027",
+      "symptom_id": "symptom.network.no_connectivity",
+      "symptom_name": "No Network Connectivity",
+      "fault_id": "fault.network.dhcp.no_lease",
+      "fault_name": "DHCP Lease Failure",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-028",
+      "symptom_id": "symptom.network.no_connectivity",
+      "symptom_name": "No Network Connectivity",
+      "fault_id": "fault.network.ip.static_incorrect",
+      "fault_name": "Incorrect Static IP Configuration",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-029",
+      "symptom_id": "symptom.network.no_connectivity",
+      "symptom_name": "No Network Connectivity",
+      "fault_id": "fault.network.nic.failed",
+      "fault_name": "NIC Failure",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-030",
+      "symptom_id": "symptom.network.no_dhcp_lease",
+      "symptom_name": "No DHCP Lease",
+      "fault_id": "fault.network.dhcp.no_lease",
+      "fault_name": "DHCP Lease Failure",
+      "status": "case_complete",
+      "pilot": true,
+      "case_path": "docs/case_studies/v0.1/cases/sfp-030--no-dhcp-lease--dhcp-lease-failure--serrano.md",
+      "found_cross_reference_path": "docs/case_studies/v0.1/database_cross_reference/found/sfp-030--no-dhcp-lease--dhcp-lease-failure--serrano.md",
+      "not_found_cross_reference_path": "docs/case_studies/v0.1/database_cross_reference/not_found/sfp-030--no-dhcp-lease--dhcp-lease-failure--serrano.md"
+    },
+    {
+      "pair_id": "sfp-031",
+      "symptom_id": "symptom.network.no_link",
+      "symptom_name": "No Ethernet Link",
+      "fault_id": "fault.network.cable.disconnected",
+      "fault_name": "Ethernet Cable Disconnected",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-032",
+      "symptom_id": "symptom.network.no_link",
+      "symptom_name": "No Ethernet Link",
+      "fault_id": "fault.network.cable.failed",
+      "fault_name": "Failed Ethernet Cable",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-033",
+      "symptom_id": "symptom.network.no_link",
+      "symptom_name": "No Ethernet Link",
+      "fault_id": "fault.network.nic.failed",
+      "fault_name": "NIC Failure",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-034",
+      "symptom_id": "symptom.network.wrong_ip",
+      "symptom_name": "Unexpected IP Configuration",
+      "fault_id": "fault.network.ip.static_incorrect",
+      "fault_name": "Incorrect Static IP Configuration",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-035",
+      "symptom_id": "symptom.pcie.device_missing",
+      "symptom_name": "PCIe Device Missing",
+      "fault_id": "fault.network.nic.failed",
+      "fault_name": "NIC Failure",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-036",
+      "symptom_id": "symptom.pcie.device_missing",
+      "symptom_name": "PCIe Device Missing",
+      "fault_id": "fault.pcie.card.not_seated",
+      "fault_name": "PCIe Card Not Fully Seated",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-037",
+      "symptom_id": "symptom.power.no_power",
+      "symptom_name": "No Power",
+      "fault_id": "fault.board.system.failed",
+      "fault_name": "System Board Failure",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-038",
+      "symptom_id": "symptom.power.no_power",
+      "symptom_name": "No Power",
+      "fault_id": "fault.power.input.cable_loose",
+      "fault_name": "Loose / Disconnected Power Cable",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-039",
+      "symptom_id": "symptom.power.no_power",
+      "symptom_name": "No Power",
+      "fault_id": "fault.power.psu.failed",
+      "fault_name": "Failed PSU",
+      "status": "case_complete",
+      "pilot": true,
+      "case_path": "docs/case_studies/v0.1/cases/sfp-039--no-power--failed-psu--supernc.md",
+      "found_cross_reference_path": "docs/case_studies/v0.1/database_cross_reference/found/sfp-039--no-power--failed-psu--supernc.md",
+      "not_found_cross_reference_path": "docs/case_studies/v0.1/database_cross_reference/not_found/sfp-039--no-power--failed-psu--supernc.md"
+    },
+    {
+      "pair_id": "sfp-040",
+      "symptom_id": "symptom.power.no_power",
+      "symptom_name": "No Power",
+      "fault_id": "fault.power.psu.not_seated",
+      "fault_name": "PSU Not Fully Seated",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-041",
+      "symptom_id": "symptom.power.redundancy_warning",
+      "symptom_name": "Power Redundancy Warning",
+      "fault_id": "fault.power.input.cable_loose",
+      "fault_name": "Loose / Disconnected Power Cable",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-042",
+      "symptom_id": "symptom.power.redundancy_warning",
+      "symptom_name": "Power Redundancy Warning",
+      "fault_id": "fault.power.psu.failed",
+      "fault_name": "Failed PSU",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-043",
+      "symptom_id": "symptom.power.redundancy_warning",
+      "symptom_name": "Power Redundancy Warning",
+      "fault_id": "fault.power.psu.not_seated",
+      "fault_name": "PSU Not Fully Seated",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-044",
+      "symptom_id": "symptom.storage.drive_fault_led",
+      "symptom_name": "Drive Fault Indicator",
+      "fault_id": "fault.storage.sas.drive_failed",
+      "fault_name": "Failed SAS Drive",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-045",
+      "symptom_id": "symptom.storage.drive_missing",
+      "symptom_name": "Drive Missing",
+      "fault_id": "fault.boot.device.not_detected",
+      "fault_name": "Boot Device Not Detected",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-046",
+      "symptom_id": "symptom.storage.drive_missing",
+      "symptom_name": "Drive Missing",
+      "fault_id": "fault.storage.cable.failed",
+      "fault_name": "Failed Storage Cable",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-047",
+      "symptom_id": "symptom.storage.drive_missing",
+      "symptom_name": "Drive Missing",
+      "fault_id": "fault.storage.cable.loose",
+      "fault_name": "Loose Storage Cable",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-048",
+      "symptom_id": "symptom.storage.drive_missing",
+      "symptom_name": "Drive Missing",
+      "fault_id": "fault.storage.nvme.device_failed",
+      "fault_name": "Failed NVMe Device",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-049",
+      "symptom_id": "symptom.storage.drive_missing",
+      "symptom_name": "Drive Missing",
+      "fault_id": "fault.storage.raid.controller_failed",
+      "fault_name": "RAID Controller Failure",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-050",
+      "symptom_id": "symptom.storage.drive_missing",
+      "symptom_name": "Drive Missing",
+      "fault_id": "fault.storage.sata.drive_failed",
+      "fault_name": "Failed SATA Drive",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-051",
+      "symptom_id": "symptom.storage.io_errors",
+      "symptom_name": "Storage I/O Errors",
+      "fault_id": "fault.storage.cable.failed",
+      "fault_name": "Failed Storage Cable",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-052",
+      "symptom_id": "symptom.storage.io_errors",
+      "symptom_name": "Storage I/O Errors",
+      "fault_id": "fault.storage.cable.loose",
+      "fault_name": "Loose Storage Cable",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-053",
+      "symptom_id": "symptom.storage.io_errors",
+      "symptom_name": "Storage I/O Errors",
+      "fault_id": "fault.storage.nvme.device_failed",
+      "fault_name": "Failed NVMe Device",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-054",
+      "symptom_id": "symptom.storage.io_errors",
+      "symptom_name": "Storage I/O Errors",
+      "fault_id": "fault.storage.sas.drive_failed",
+      "fault_name": "Failed SAS Drive",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-055",
+      "symptom_id": "symptom.storage.io_errors",
+      "symptom_name": "Storage I/O Errors",
+      "fault_id": "fault.storage.sata.drive_failed",
+      "fault_name": "Failed SATA Drive",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-056",
+      "symptom_id": "symptom.storage.raid_degraded",
+      "symptom_name": "RAID Degraded",
+      "fault_id": "fault.storage.raid.degraded",
+      "fault_name": "RAID Array Degraded",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-057",
+      "symptom_id": "symptom.storage.raid_degraded",
+      "symptom_name": "RAID Degraded",
+      "fault_id": "fault.storage.sas.drive_failed",
+      "fault_name": "Failed SAS Drive",
+      "status": "case_complete",
+      "pilot": true,
+      "case_path": "docs/case_studies/v0.1/cases/sfp-057--raid-degraded--failed-sas-drive--s-swaminathan.md",
+      "found_cross_reference_path": "docs/case_studies/v0.1/database_cross_reference/found/sfp-057--raid-degraded--failed-sas-drive--s-swaminathan.md",
+      "not_found_cross_reference_path": "docs/case_studies/v0.1/database_cross_reference/not_found/sfp-057--raid-degraded--failed-sas-drive--s-swaminathan.md"
+    },
+    {
+      "pair_id": "sfp-058",
+      "symptom_id": "symptom.storage.raid_degraded",
+      "symptom_name": "RAID Degraded",
+      "fault_id": "fault.storage.sata.drive_failed",
+      "fault_name": "Failed SATA Drive",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-059",
+      "symptom_id": "symptom.system.device_errors",
+      "symptom_name": "Multiple Device Errors",
+      "fault_id": "fault.board.system.failed",
+      "fault_name": "System Board Failure",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-060",
+      "symptom_id": "symptom.system.device_errors",
+      "symptom_name": "Multiple Device Errors",
+      "fault_id": "fault.pcie.card.not_seated",
+      "fault_name": "PCIe Card Not Fully Seated",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-061",
+      "symptom_id": "symptom.system.device_errors",
+      "symptom_name": "Multiple Device Errors",
+      "fault_id": "fault.storage.raid.controller_failed",
+      "fault_name": "RAID Controller Failure",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-062",
+      "symptom_id": "symptom.system.intermittent_crash",
+      "symptom_name": "Intermittent Crash",
+      "fault_id": "fault.memory.dimm.failed",
+      "fault_name": "Failed ECC DIMM",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-063",
+      "symptom_id": "symptom.system.intermittent_crash",
+      "symptom_name": "Intermittent Crash",
+      "fault_id": "fault.system.intermittent_memory_instability",
+      "fault_name": "Intermittent Memory Instability",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-064",
+      "symptom_id": "symptom.system.random_reboot",
+      "symptom_name": "Unexpected Reboot",
+      "fault_id": "fault.power.psu.failed",
+      "fault_name": "Failed PSU",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-065",
+      "symptom_id": "symptom.system.random_reboot",
+      "symptom_name": "Unexpected Reboot",
+      "fault_id": "fault.system.intermittent_memory_instability",
+      "fault_name": "Intermittent Memory Instability",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-066",
+      "symptom_id": "symptom.system.random_reboot",
+      "symptom_name": "Unexpected Reboot",
+      "fault_id": "fault.thermal.shutdown",
+      "fault_name": "Thermal Shutdown",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-067",
+      "symptom_id": "symptom.thermal.fan_warning",
+      "symptom_name": "Fan Warning",
+      "fault_id": "fault.thermal.fan.failed",
+      "fault_name": "Failed Chassis Fan",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-068",
+      "symptom_id": "symptom.thermal.fans_loud",
+      "symptom_name": "Fans Running Loud",
+      "fault_id": "fault.thermal.cpu.overheating",
+      "fault_name": "CPU Overheating",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-069",
+      "symptom_id": "symptom.thermal.fans_loud",
+      "symptom_name": "Fans Running Loud",
+      "fault_id": "fault.thermal.fan.failed",
+      "fault_name": "Failed Chassis Fan",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-070",
+      "symptom_id": "symptom.thermal.fans_loud",
+      "symptom_name": "Fans Running Loud",
+      "fault_id": "fault.thermal.heatsink.clogged",
+      "fault_name": "Dust-Clogged Heatsink",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-071",
+      "symptom_id": "symptom.thermal.high_cpu_temp",
+      "symptom_name": "High CPU Temperature",
+      "fault_id": "fault.thermal.cpu.overheating",
+      "fault_name": "CPU Overheating",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-072",
+      "symptom_id": "symptom.thermal.high_cpu_temp",
+      "symptom_name": "High CPU Temperature",
+      "fault_id": "fault.thermal.fan.failed",
+      "fault_name": "Failed Chassis Fan",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-073",
+      "symptom_id": "symptom.thermal.high_cpu_temp",
+      "symptom_name": "High CPU Temperature",
+      "fault_id": "fault.thermal.heatsink.clogged",
+      "fault_name": "Dust-Clogged Heatsink",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-074",
+      "symptom_id": "symptom.thermal.high_cpu_temp",
+      "symptom_name": "High CPU Temperature",
+      "fault_id": "fault.thermal.heatsink.contact_poor",
+      "fault_name": "Poor Heatsink Contact",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-075",
+      "symptom_id": "symptom.thermal.shutdown_under_load",
+      "symptom_name": "Shutdown Under Load",
+      "fault_id": "fault.thermal.cpu.overheating",
+      "fault_name": "CPU Overheating",
+      "status": "backlog",
+      "pilot": false
+    },
+    {
+      "pair_id": "sfp-076",
+      "symptom_id": "symptom.thermal.shutdown_under_load",
+      "symptom_name": "Shutdown Under Load",
+      "fault_id": "fault.thermal.heatsink.contact_poor",
+      "fault_name": "Poor Heatsink Contact",
+      "status": "case_complete",
+      "pilot": true,
+      "case_path": "docs/case_studies/v0.1/cases/sfp-076--shutdown-under-load--poor-heatsink-contact--nopcorn.md",
+      "found_cross_reference_path": "docs/case_studies/v0.1/database_cross_reference/found/sfp-076--shutdown-under-load--poor-heatsink-contact--nopcorn.md",
+      "not_found_cross_reference_path": "docs/case_studies/v0.1/database_cross_reference/not_found/sfp-076--shutdown-under-load--poor-heatsink-contact--nopcorn.md"
+    },
+    {
+      "pair_id": "sfp-077",
+      "symptom_id": "symptom.thermal.shutdown_under_load",
+      "symptom_name": "Shutdown Under Load",
+      "fault_id": "fault.thermal.shutdown",
+      "fault_name": "Thermal Shutdown",
+      "status": "backlog",
+      "pilot": false
+    }
+  ]
+}

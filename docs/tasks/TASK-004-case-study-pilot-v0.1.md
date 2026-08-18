@@ -2,7 +2,7 @@
 
 ## Status
 
-Active research and documentation task.
+Completed on 2026-08-18.
 
 ## Objective
 
@@ -275,3 +275,12 @@ Report completed, blocked, and backlog association totals separately. A blocked 
 ## Completion boundary
 
 Stop after the five-association pilot and candidate-material synthesis. Review the methodology and outputs with the user before creating a follow-on task for the remaining 72 associations.
+
+## Completion record
+
+- Association registry: 77 unique pairs across all 26 Symptoms.
+- Pilot results: 5 `case_complete`, 0 `blocked`.
+- Remaining inventory: 72 `backlog`.
+- Research artifacts: five case reductions, five found analyses, five not-found analyses, one source ledger, and three candidate-material syntheses.
+- Scope boundary preserved: no viewer, schema, test, domain-content, or living decision document changes.
+- Follow-on research for the remaining 72 associations requires user review and a new task.
