@@ -32,9 +32,9 @@ test('the generated manifest resolves to valid domain records', async () => {
   assert.ok(records.length > 0);
   assert.ok(records.every((record) => typeof record.id === 'string' && record.id.length > 0));
   assert.ok(records.every((record) => typeof record.entity_type === 'string' && record.entity_type.length > 0));
+  assert.equal(new Set(records.map((record) => record.id)).size, records.length, 'entity IDs are unique');
 
   for (const entityType of Object.keys(ENTITY_TYPE_LABELS)) {
     assert.ok(records.some((record) => record.entity_type === entityType), `${entityType} has content`);
   }
 });
-
