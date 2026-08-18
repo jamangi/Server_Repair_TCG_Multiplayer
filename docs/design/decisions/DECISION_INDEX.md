@@ -7,7 +7,7 @@ This directory is the authoritative entry point for Server Repair TCG rule decis
 - The repository has approved match, Room, authority, visibility, and lifecycle rules, but no playable game engine yet.
 - [`FROZEN_RULES.md`](FROZEN_RULES.md) remains authoritative while decisions are reviewed.
 - [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md) contains the existing canonical open-rule inventory. Its older entries have not yet been normalized into decision IDs.
-- [`CANDIDATE_DECISIONS.md`](CANDIDATE_DECISIONS.md) contains the current engine-decision batch, centered on information visibility, Isolation, Documentation, Ticket closure, and card replenishment.
+- [`CANDIDATE_DECISIONS.md`](CANDIDATE_DECISIONS.md) contains the current engine-decision batch, centered on information visibility, the Diagnosis sub-lifecycle, Isolation, Documentation, Ticket closure, and card replenishment.
 - [`UNSYNCHRONIZED_DECISIONS.md`](UNSYNCHRONIZED_DECISIONS.md) records confirmed overlaps and likely conflicts without silently changing either source.
 - The current design goal is to resolve the engine-blocking decisions before reconciling older design documents, schemas, examples, or presets.
 
@@ -65,15 +65,17 @@ Resolve foundations before rewards and balance values:
 1. [`OBS-001`](CANDIDATE_DECISIONS.md#obs-001) — visibility when an action or Evidence record is created.
 2. [`HYP-001`](CANDIDATE_DECISIONS.md#hyp-001) — the candidate-fault universe for a Ticket.
 3. [`ISO-001`](CANDIDATE_DECISIONS.md#iso-001) — the mechanical definition of Isolation.
-4. [`ISO-003`](CANDIDATE_DECISIONS.md#iso-003) — whether speculative Repair is legal.
-5. [`DOC-001`](CANDIDATE_DECISIONS.md#doc-001) — whether Documentation is required for closure.
-6. [`DOC-003`](CANDIDATE_DECISIONS.md#doc-003) — the visibility transition caused by Documentation.
-7. [`DOC-004`](CANDIDATE_DECISIONS.md#doc-004), [`DOC-005`](CANDIDATE_DECISIONS.md#doc-005), and [`DOC-006`](CANDIDATE_DECISIONS.md#doc-006) — invocation, selection, and timing.
-8. [`CROSS-001`](CANDIDATE_DECISIONS.md#cross-001) — the complete Ticket-closure transaction.
-9. [`CROSS-002`](CANDIDATE_DECISIONS.md#cross-002) — the unified card-replenishment economy.
-10. [`ISO-004`](CANDIDATE_DECISIONS.md#iso-004) and [`DOC-007`](CANDIDATE_DECISIONS.md#doc-007) — Root Cause and Documentation rewards.
-11. [`TST-002`](CANDIDATE_DECISIONS.md#tst-002) and [`DOC-008`](CANDIDATE_DECISIONS.md#doc-008) — repeated Tests, event identity, and chronology.
-12. [`CROSS-003`](CANDIDATE_DECISIONS.md#cross-003) — competitive and cooperative Documentation behavior.
+4. [`CROSS-004`](CANDIDATE_DECISIONS.md#cross-004) — Diagnosis as a sub-lifecycle and its possible Repair gateway.
+5. [`ISO-003`](CANDIDATE_DECISIONS.md#iso-003) — whether speculative Repair is legal as an exception to that gateway.
+6. [`DOC-001`](CANDIDATE_DECISIONS.md#doc-001) — whether Documentation is required for closure.
+7. [`DOC-002`](CANDIDATE_DECISIONS.md#doc-002) — whether actions are the primary Documentation targets and which attached records travel with them.
+8. [`DOC-003`](CANDIDATE_DECISIONS.md#doc-003) — the visibility transition caused by Documentation.
+9. [`DOC-004`](CANDIDATE_DECISIONS.md#doc-004), [`DOC-005`](CANDIDATE_DECISIONS.md#doc-005), and [`DOC-006`](CANDIDATE_DECISIONS.md#doc-006) — invocation, selection, and timing.
+10. [`CROSS-001`](CANDIDATE_DECISIONS.md#cross-001) — the complete Ticket-closure transaction.
+11. [`CROSS-002`](CANDIDATE_DECISIONS.md#cross-002) — the unified card-replenishment economy.
+12. [`ISO-004`](CANDIDATE_DECISIONS.md#iso-004) and [`DOC-007`](CANDIDATE_DECISIONS.md#doc-007) — Root Cause and Documentation rewards.
+13. [`TST-002`](CANDIDATE_DECISIONS.md#tst-002) and [`DOC-008`](CANDIDATE_DECISIONS.md#doc-008) — repeated Tests, event identity, and chronology.
+14. [`CROSS-003`](CANDIDATE_DECISIONS.md#cross-003) — competitive and cooperative Documentation behavior.
 
 After this batch, revisit the remaining engine questions already listed in `UNFROZEN_RULES.md`: turn phases, scoring, terminal precedence, targeting, ticket generation, computer players, and exhaustion.
 

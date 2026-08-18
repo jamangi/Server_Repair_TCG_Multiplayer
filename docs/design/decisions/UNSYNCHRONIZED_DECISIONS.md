@@ -32,11 +32,13 @@ These are potential conflicts. They become confirmed only if a candidate or unfr
 | --- | --- | --- |
 | `FUTURE-SYNC-001` | The frozen troubleshooting sequence ends with Document, while optional Documentation could allow closure without it. | [`DOC-001`](CANDIDATE_DECISIONS.md#doc-001) |
 | `FUTURE-SYNC-002` | The frozen sequence presents Document after Verify, while incremental Documentation could occur throughout Observe, Test, and Isolate. | [`DOC-004`](CANDIDATE_DECISIONS.md#doc-004), [`DOC-006`](CANDIDATE_DECISIONS.md#doc-006) |
-| `FUTURE-SYNC-003` | The frozen Worklog example can reveal that a Test occurred while keeping its result private; delayed Documentation could hide the action itself. | [`OBS-001`](CANDIDATE_DECISIONS.md#obs-001), [`DOC-003`](CANDIDATE_DECISIONS.md#doc-003) |
+| `FUTURE-SYNC-003` | The frozen Worklog example can reveal that a Test occurred while keeping its result private; an immediate generic placeholder followed by Documentation may instead withhold the action identity and target until publication. | [`OBS-001`](CANDIDATE_DECISIONS.md#obs-001), [`DOC-002`](CANDIDATE_DECISIONS.md#doc-002), [`DOC-003`](CANDIDATE_DECISIONS.md#doc-003) |
 | `FUTURE-SYNC-004` | Cooperative Evidence is team-visible by default; Documentation therefore cannot be the only transition from private to shared Evidence without changing that default. | [`DOC-003`](CANDIDATE_DECISIONS.md#doc-003), [`CROSS-003`](CANDIDATE_DECISIONS.md#cross-003) |
 | `FUTURE-SYNC-005` | Frozen visibility uses `SERVER_ONLY`, `PRIVATE_PLAYER`, `TEAM`, and `PUBLIC_MATCH`; a binary private/public Documentation model would bypass approved categories. | [`DOC-003`](CANDIDATE_DECISIONS.md#doc-003) |
 | `FUTURE-SYNC-006` | Ticket progress belongs to the Ticket, but a design that treats private Isolation, Repair, or Verification state as disposable Player state could erase authoritative progress. | [`ISO-002`](CANDIDATE_DECISIONS.md#iso-002), [`DOC-003`](CANDIDATE_DECISIONS.md#doc-003) |
 | `FUTURE-SYNC-007` | The server serializes authoritative actions; a Worklog ordered by publication time rather than event sequence could falsify chronology. | [`DOC-008`](CANDIDATE_DECISIONS.md#doc-008) |
+| `FUTURE-SYNC-008` | The unfrozen inventory asks for Diagnosis commitment thresholds; treating Diagnosis only as the Hypothesize–Test–Isolate umbrella could make a distinct commitment unnecessary or relocate it to Hypothesis or Isolation. | [`HYP-002`](CANDIDATE_DECISIONS.md#hyp-002), [`CROSS-004`](CANDIDATE_DECISIONS.md#cross-004) |
+| `FUTURE-SYNC-009` | Turning the frozen educational sequence into a strict Diagnosis-to-Repair state gate would make the displayed order mechanically mandatory rather than conceptual and would control whether speculative Repair is possible. | [`CROSS-004`](CANDIDATE_DECISIONS.md#cross-004), [`ISO-003`](CANDIDATE_DECISIONS.md#iso-003) |
 
 ## Indirectly pressured frozen rules
 
@@ -44,11 +46,15 @@ A frozen rule may be internally consistent yet depend on a foundation now under 
 
 ### Troubleshooting-loop order
 
-`DOC-001`, `DOC-004`, and `DOC-006` may determine whether Observe → Hypothesize → Test → Isolate → Repair → Verify → Document is strict stage order, a conceptual educational loop, or a completion checklist that permits incremental Documentation.
+`CROSS-004`, `ISO-003`, `DOC-001`, `DOC-004`, and `DOC-006` may determine whether Observe → Hypothesize → Test → Isolate → Repair → Verify → Document is strict stage order, a conceptual educational loop, or a completion checklist that permits iteration and incremental Documentation. `CROSS-004` also tests the higher-level grouping Observe → Diagnose → Repair → Verify → Document, with Hypothesize ↔ Test → Isolate inside Diagnosis.
 
 ### Worklog projection
 
-`OBS-001`, `DOC-002`, `DOC-003`, and `DOC-008` may refine which authoritative actions appear immediately, which results remain private, and how later publication preserves event chronology.
+`OBS-001`, `DOC-002`, `DOC-003`, and `DOC-008` may refine whether an immediate Worklog entry is a generic action placeholder or a fully identified action, which targets and attached Evidence remain concealed, and how Documentation enriches the record without falsifying its original event chronology.
+
+### Diagnosis representation
+
+`HYP-002`, `TST-001`, `ISO-001`, and `CROSS-004` may replace a distinct Diagnosis commitment with a sub-lifecycle spanning Hypothesize, Test, and Isolate. If so, the older unfrozen commitment wording must be narrowed or reassigned without inventing an eighth peer-level action.
 
 ### Cooperative Evidence defaults
 
