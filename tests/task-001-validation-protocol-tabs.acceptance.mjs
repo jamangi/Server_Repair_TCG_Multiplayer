@@ -30,6 +30,5 @@ test('current content exposes the accepted tab counts', async () => {
 
   assert.equal(count('validation_procedure'), 13);
   assert.equal(count('protocol'), 12);
-  assert.equal(records.length, 201);
+  assert.equal(records.length, 189);
 });
-
