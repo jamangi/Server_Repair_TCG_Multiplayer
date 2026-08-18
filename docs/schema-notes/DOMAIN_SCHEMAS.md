@@ -10,8 +10,8 @@ This package converts the v0.1 design documents into JSON Schema Draft 2020-12 d
 - Tests change **Knowledge State** by producing evidence.
 - Repair Procedures change **Machine/Fault State**.
 - Validation Procedures evaluate whether repaired state meets requirements.
-- Fault causal relationships are separate graph edges.
-- Causal-cycle prevention is a graph-level validator responsibility rather than something JSON Schema can fully enforce.
+- Fault causal relationships are separate directed edges.
+- Causal-cycle prevention is a relationship-set validator responsibility rather than something JSON Schema can fully enforce.
 
 ## Included schemas
 
@@ -47,8 +47,8 @@ JSON Schema validates shape and local field constraints, but a content build sho
 
 1. all referenced IDs exist,
 2. fault causal edges contain no self-loops,
-3. fault causal graph is acyclic,
-4. ticket fault blueprints form valid subgraphs,
+3. fault causal relationships are acyclic,
+4. ticket fault blueprints reference valid causal relationships,
 5. required repairs and validations exist,
 6. cards reference compatible domain entity types,
 7. asset IDs resolve in the asset manifest,

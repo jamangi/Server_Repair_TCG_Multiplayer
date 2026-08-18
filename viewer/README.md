@@ -12,7 +12,7 @@ index.html
   -> any number of JSON content packs
 ```
 
-The viewer includes tabs for Faults, Symptoms, Components, Tests, Tools, Commands, Repairs, and Everything; full-text search; category filtering; sorting; and record detail dialogs.
+The viewer includes tabs for Faults, Symptoms, Components, Tests, Tools, Commands, Repairs, Validations, Protocols, and Everything; full-text search; category filtering; sorting; and record detail dialogs.
 
 ## Adding a content pack
 
@@ -70,7 +70,6 @@ The test viewer displays the asset metadata but does not yet resolve an image fi
 
 - validate every pack against the JSON Schemas in CI
 - hyperlink referenced stable IDs to related records
-- add a Fault causal-graph view
 - add expansion/set filters
 - resolve illustration assets
 - persist filters/search in the URL

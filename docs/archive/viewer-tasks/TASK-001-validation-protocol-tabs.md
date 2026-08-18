@@ -1,5 +1,9 @@
 # TASK-001: Validation and Protocol tabs
 
+## Archive status
+
+Completed and archived. This contract is retained as implementation history and is not an active task.
+
 ## Objective
 
 Expose the already-loaded `validation_procedure` and `protocol` records as first-class viewer tabs without changing content, routing, deployment, or the behavior of existing entity types.
@@ -35,7 +39,7 @@ Do not change content JSON, schemas, manifest generation, deployment workflows, 
 
 ## Prohibited work
 
-- No fault graph.
+- No interactive causal-chain visualization.
 - No new dependencies or framework.
 - No backend or executable content format.
 - No content-field renaming.
@@ -71,4 +75,3 @@ Visit `http://127.0.0.1:8080/` and verify:
 ## Completion report
 
 Return changed files, commands executed, exit codes, passed/failed/skipped totals, and unresolved items. Do not claim completion if either test command fails.
-

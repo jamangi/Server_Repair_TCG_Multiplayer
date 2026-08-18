@@ -1,7 +1,7 @@
 from collections import defaultdict, deque
 
-def validate_no_fault_cycles(fault_ids, edges):
-    graph = defaultdict(list)
+def validate_fault_causal_relationships(fault_ids, edges):
+    outgoing_edges = defaultdict(list)
     indegree = {fid: 0 for fid in fault_ids}
 
     for edge in edges:
@@ -14,7 +14,7 @@ def validate_no_fault_cycles(fault_ids, edges):
         if a not in indegree or b not in indegree:
             raise ValueError(f"Unknown fault reference in edge: {a} -> {b}")
 
-        graph[a].append(b)
+        outgoing_edges[a].append(b)
         indegree[b] += 1
 
     queue = deque(fid for fid, degree in indegree.items() if degree == 0)
@@ -23,12 +23,12 @@ def validate_no_fault_cycles(fault_ids, edges):
     while queue:
         node = queue.popleft()
         visited += 1
-        for child in graph[node]:
+        for child in outgoing_edges[node]:
             indegree[child] -= 1
             if indegree[child] == 0:
                 queue.append(child)
 
     if visited != len(fault_ids):
-        raise ValueError("Fault causal graph contains a directed cycle.")
+        raise ValueError("Fault causal relationships contain a directed cycle.")
 
     return True

@@ -73,7 +73,7 @@ Candidate room settings:
 - `min_faults_per_ticket` (`MnD`): minimum randomized fault count, greater than zero.
 - `max_faults_per_ticket` (`MxD`): maximum randomized fault count, greater than or equal to `MnD`.
 - `progressive_difficulty` (`PD`): whether generated-ticket difficulty grows during the match.
-- Future `min_fault_depth` and `max_fault_depth` settings once the content catalog contains enough deep causal graphs.
+- Future `min_fault_depth` and `max_fault_depth` settings once the content catalog contains enough deep causal chains.
 
 Unfrozen questions:
 
