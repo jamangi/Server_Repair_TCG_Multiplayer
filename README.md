@@ -42,7 +42,7 @@ The design uses one configurable match system for competitive and cooperative pl
 
 A two-player race to 10 Service Points is one recommended preset, not the definition of the game. Many details of scoring, card economy, turn structure, targeting, and terminal conditions remain open for design and playtesting.
 
-Fault causal relationships and causal-chain validation remain part of the domain model. The separate fault-graph visualization project has been retired and is not planned work.
+Fault causal relationships and causal-chain validation remain part of the domain model. The separate interactive causal-chain visualization has been retired and is not planned work.
 
 ## Current state
 
