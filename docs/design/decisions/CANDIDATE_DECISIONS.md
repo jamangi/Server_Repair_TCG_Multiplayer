@@ -13,15 +13,17 @@ Candidate status is not permission to implement an option. See [`DECISION_INDEX.
 
 **Pressures:** Frozen Worklog examples and Evidence visibility defaults
 
-What becomes visible when an investigative action occurs? Decide separately whether participants can see:
+What becomes visible when an investigative action occurs? One candidate model creates an immediate public Worklog placeholder, then reveals the authoritative action details through Documentation. Decide separately whether participants can see:
 
 - that an action occurred;
+- who acted, which Ticket was affected, and the action's authoritative sequence or time;
+- a generic action category without its full identity;
 - which card, Test, Tool, or Command was used;
 - the target of the action;
 - the detailed result or Evidence;
-- the acting Player's conclusion.
+- any explicit Hypothesis, Diagnosis commitment, or Isolation result created by the action.
 
-This boundary is more fundamental than deciding what a later Document action publishes.
+This boundary is more fundamental than deciding what a later Document action publishes. A generic free-form "Player conclusion" need not be assumed to be a game object.
 
 ## Hypothesize
 
@@ -45,18 +47,21 @@ Possible models include:
 The answer determines whether complete elimination is computationally and practically achievable.
 
 <a id="hyp-002"></a>
-### HYP-002 — Hypothesis and Diagnosis state
+### HYP-002 — Hypothesis state and Diagnosis representation
 
 **Status:** Candidate
 
 **Depends on:** `HYP-001`
 
-Is a Hypothesis or Diagnosis an explicit game action or only private Player reasoning? If explicit, decide:
+Is a Hypothesis an authoritative game record or only private Player reasoning? If explicit, decide:
 
 - whether a Player selects one or several candidate Faults;
 - whether hypotheses are private, team-visible, or public;
 - whether hypotheses have mechanical effects;
-- whether committing to a Diagnosis differs from forming a Hypothesis.
+- how Test Evidence revises, replaces, or narrows a prior Hypothesis;
+- whether a Diagnosis commitment exists separately from a Hypothesis or Isolation result.
+
+Diagnosis may instead be an umbrella system concept spanning Hypothesize, Test, and Isolate. Its lifecycle and relationship to Repair are controlled by `CROSS-004`.
 
 ## Test
 
@@ -74,6 +79,8 @@ How do Tests modify the candidate-fault state? A Test might:
 - confirm a category or Component;
 - directly confirm a Fault;
 - contribute toward an Isolation threshold.
+
+Also decide whether the Hypothesize–Test cycle is represented by authoritative state transitions or simply emerges as Players form and revise hypotheses between Tests.
 
 <a id="tst-002"></a>
 ### TST-002 — Repeated Test executions
@@ -100,7 +107,7 @@ Resolve the technical event semantics before attaching draw or recovery effects.
 
 **Depends on:** `HYP-001`
 
-**Blocks:** `TST-001`, `ISO-002`, `ISO-003`, `ISO-004`
+**Blocks:** `TST-001`, `ISO-002`, `CROSS-004`, `ISO-004`
 
 What mechanically constitutes Isolation?
 
@@ -126,7 +133,7 @@ When a Player achieves Isolation, does the isolated Fault become private to that
 
 **Status:** Candidate
 
-**Depends on:** `ISO-001`
+**Depends on:** `ISO-001`, `CROSS-004`
 
 **Blocks:** `REP-001`, `ISO-004`
 
@@ -205,7 +212,9 @@ Possible models include:
 
 **Depends on:** `OBS-001`
 
-Which authoritative elements may be documented?
+What is the primary target of a Document action, and which related authoritative records are included with it?
+
+One candidate model makes each undocumented action record the selectable target. Documenting that action reveals its identity and target and automatically documents eligible Evidence or results attached to that execution. Other possible documentable elements include:
 
 - actions and their targets;
 - Tools, Tests, Repairs, Commands, and Verification procedures used;
@@ -215,7 +224,7 @@ Which authoritative elements may be documented?
 - replaced parts;
 - failed and unnecessary attempts.
 
-Documentation should project authoritative records rather than allow rule-significant free-text claims.
+Documentation should project authoritative records rather than allow rule-significant free-text claims. Decide whether Hypotheses, Isolation events, replaced parts, and other elements are independent targets or records attached to the action that created them.
 
 <a id="doc-003"></a>
 ### DOC-003 — Documentation visibility transition
@@ -235,6 +244,8 @@ Possible outcomes include:
 - preserve the private record while creating a public projection;
 - reveal an action but not its result;
 - reveal both the action and its result.
+
+If an immediate Worklog placeholder already exists, decide whether Documentation enriches that same entry with the action identity, target, and attached Evidence. Cooperative Evidence may already be `TEAM`-visible before Documentation, so publishing it need not be its first disclosure to teammates.
 
 <a id="doc-004"></a>
 ### DOC-004 — Documentation invocation
@@ -317,7 +328,8 @@ Choose the primary benefit or cost channel before selecting exact values:
 Decide whether:
 
 - the Worklog always uses authoritative event order;
-- later publication inserts an older event at its original sequence position;
+- later publication enriches an existing placeholder or inserts an older event at its original sequence position;
+- the action time and later Documentation time are both retained;
 - one event can be documented more than once;
 - repeated executions of the same Test are separate documentable events;
 - published records become immutable.
@@ -375,12 +387,43 @@ This is more fundamental than deciding whether an individual Test card draws a c
 
 Determine how Documentation's information cost and reward differ by collaboration mode. Competitive publication may help opponents; cooperative Evidence is already team-visible by default. Public Documentation may still matter for scoring, spectators, final review, and persistent history.
 
+<a id="cross-004"></a>
+### CROSS-004 — Diagnosis sub-lifecycle and Repair gateway
+
+**Status:** Candidate
+
+**Depends on:** `HYP-001`, `ISO-001`
+
+**Blocks:** `ISO-003`, `REP-001`
+
+What does Diagnosis mean mechanically within the troubleshooting lifecycle?
+
+The candidate conceptual hierarchy is:
+
+- high level: Observe → Diagnose → Repair → Verify → Document;
+- detailed: Observe → Hypothesize ↔ Test → Isolate → Repair → Verify → Document.
+
+Decide:
+
+- whether Diagnosis is only an umbrella term, a formal Ticket phase, or both;
+- whether Hypothesize and Test may repeat until the evidence supports Isolation;
+- whether successful Isolation transitions the Ticket out of Diagnosis;
+- whether leaving Diagnosis is required before Repair becomes legal;
+- whether a speculative Repair is an exception to that gateway or evidence that no strict gateway exists.
+
+Diagnosis need not be an eighth peer-level action. This decision controls whether the conceptual hierarchy also becomes an enforced engine state machine.
+
 ## Pruned candidate decisions
 
 These ideas remain recorded but are not independent questions yet.
 
 | Pruned idea | Parent decision | Reason |
 | --- | --- | --- |
+| Documentation flips an undocumented action face-up. | `DOC-002`, `DOC-003` | Useful interface metaphor; the engine rule is the target and visibility transition. |
+| A generic Player conclusion is a game object. | `HYP-002`, `ISO-001` | Model only explicit Hypothesis, Diagnosis commitment, or Isolation records required by resolved mechanics. |
+| Evidence automatically becomes documented with its producing action. | `DOC-002`, `DOC-003` | Attachment closure is one target-and-publication option. |
+| Diagnosis is an eighth peer-level action. | `CROSS-004` | Diagnosis scope and phase semantics must be decided first. |
+| Repair is always prohibited before Isolation. | `CROSS-004`, `ISO-003` | Repair legality follows the more fundamental Diagnosis gateway and exception decisions. |
 | Documentation automatically occurs at turn end. | `DOC-004` | One invocation option. |
 | Documentation is a manual button. | `DOC-004` | One invocation option. |
 | Documentation is a card resource. | `DOC-004` | Basic action and card enhancements must be separated first. |
