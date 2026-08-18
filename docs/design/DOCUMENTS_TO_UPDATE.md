@@ -1,6 +1,6 @@
 # Documents To Update For Configurable Matches
 
-This is a migration map, not a second source of game rules. Normative decisions should live in a dedicated match contract, while unresolved decisions remain in `UNFROZEN_RULES.md`.
+This is a migration map, not a second source of game rules. Normative decisions should live in a dedicated match contract, while unresolved decisions remain in [`decisions/UNFROZEN_RULES.md`](decisions/UNFROZEN_RULES.md).
 
 ## Recommended new normative document
 
@@ -117,7 +117,7 @@ Stable IDs must not be renamed without an explicit migration task.
 
 ## Recommended implementation order
 
-1. Resolve the terminal-condition and cooperative concession questions in `UNFROZEN_RULES.md`.
+1. Resolve the terminal-condition and cooperative concession questions in [`decisions/UNFROZEN_RULES.md`](decisions/UNFROZEN_RULES.md).
 2. Write `08_MATCH_CONFIGURATION_AND_RESULTS.md` as a SHALL-based contract.
 3. Add schema fixtures and failing validation tests.
 4. Migrate runtime schemas without changing the domain catalogs.
