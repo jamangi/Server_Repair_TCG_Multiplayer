@@ -170,7 +170,7 @@ Example:
 → causes **thermal throttling**
 → may cause **unexpected shutdown under load**
 
-The graph must be **directed and acyclic** for causal relationships.
+Fault-to-Fault causal relationships must form a **directed acyclic graph (DAG)**.
 
 A Fault may cause:
 

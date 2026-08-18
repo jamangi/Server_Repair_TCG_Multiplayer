@@ -209,29 +209,11 @@ Useful sorts:
 
 ---
 
-# Causal Graph View
+# Causal Relationships
 
-A very useful optional visualization:
+Fault pages should expose upstream causes and downstream effects as accessible linked records. Players should be able to follow those relationships through the standard browser and compare the Tests that discriminate between nearby candidate Faults.
 
-```text
-[Failed Fan]
-      ↓
-[CPU Overheating]
-      ↓
-[Thermal Shutdown]
-      ↓
-[Unexpected Shutdown Under Load]
-```
-
-The user should be able to:
-
-- expand upstream causes,
-- expand downstream effects,
-- click any Fault,
-- click any Symptom,
-- see which Tests discriminate between nearby candidate Faults.
-
-This turns the game's database into a practical study tool.
+A separate interactive causal-chain visualization is not planned. The reusable relationship data remains available to the browser, game, and other educational experiences.
 
 ---
 

@@ -44,7 +44,7 @@ However, forcing every case into a long chain would create busywork.
 
 ---
 
-# Graph Representation
+# Causal-Relationship Representation
 
 Recommended representation:
 
@@ -69,7 +69,7 @@ incoming[effect] -> causes[]
 
 # Cycle Detection
 
-A causal graph must be acyclic.
+The set of fault causal relationships must be acyclic.
 
 ## Build-Time Validation
 
@@ -196,7 +196,7 @@ For an early JavaScript implementation, content can simply be JSON or JS objects
 
 1. Define stable IDs and content schemas.
 2. Implement Fault, Symptom, Component, Test, Repair, Verification entities.
-3. Implement causal graph and cycle validator.
+3. Implement fault causal relationships and cycle validation.
 4. Implement Repair Ticket definitions.
 5. Implement match state and shared ticket queue.
 6. Implement Observe/Test/Diagnose/Repair/Verify/Document state transitions.

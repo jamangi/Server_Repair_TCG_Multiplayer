@@ -39,7 +39,7 @@ This layer powers:
 - search,
 - filtering,
 - ticket generation,
-- causal graphs,
+- fault causal relationships,
 - educational reference pages.
 
 ## B. Card Definition Layer
@@ -116,7 +116,7 @@ Suggested services:
 - CardResolver
 - TicketEngine
 - DiagnosisEngine
-- FaultGraphService
+- FaultCausalityService
 - RepairEngine
 - VerificationEngine
 - ScoringEngine
@@ -164,7 +164,7 @@ RepairProcedure --resolves--> Fault
 ValidationProcedure --verifies_resolution_of--> Fault
 ```
 
-Fault-to-Fault causal relationships should be stored separately as graph edges rather than nested recursive objects.
+Fault-to-Fault causal relationships should be stored separately as directed causal edges rather than nested recursive objects.
 
 ---
 
@@ -194,7 +194,7 @@ failed_dhcp_service -> no_dhcp_lease
 
 Adding an edge must not create a directed cycle.
 
-The Fault graph must remain a DAG for `causes` relationships.
+The set of `causes` relationships must remain a directed acyclic graph (DAG).
 
 Other non-causal relationships do not necessarily need this restriction.
 
@@ -440,7 +440,7 @@ required_to_identify
 required_to_repair
 ```
 
-A ticket can reference a subgraph of the global Fault DAG.
+A ticket can reference a subset of the global fault causal relationships.
 
 ---
 
@@ -541,7 +541,7 @@ Avoid creating a unique hard-coded function for every card unless necessary.
 | Observe | Symptom, RepairTicketDefinition, TicketState |
 | Hypothesize | KnowledgeState, suspected Faults, DiagnosisEngine |
 | Test | Test, Tool, Command, CardResolver |
-| Isolate | Fault, FaultCausalEdge, FaultGraphService |
+| Isolate | Fault, FaultCausalEdge, FaultCausalityService |
 | Repair | RepairProcedure, Component, RepairEngine |
 | Verify | ValidationProcedure, VerificationEngine |
 | Document | Documentation requirement, Workflow cards, TicketEngine |
@@ -551,9 +551,9 @@ Avoid creating a unique hard-coded function for every card unless necessary.
 
 ---
 
-# 6. Fault Graph Validation
+# 6. Fault Causal-Relationship Validation
 
-Every content build should validate the global causal graph.
+Every content build should validate the global set of fault causal relationships.
 
 Minimum checks:
 
@@ -561,7 +561,7 @@ Minimum checks:
 2. no self-loop exists,
 3. no duplicate causal edge exists,
 4. no directed cycle exists,
-5. every ticket's fault subgraph exists inside the global graph,
+5. every ticket's causal relationships exist in the global relationship set,
 6. root Faults in a ticket are actually ancestors of their stated downstream Faults,
 7. repair and verification references point to valid entities.
 

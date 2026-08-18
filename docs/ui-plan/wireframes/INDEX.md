@@ -84,7 +84,7 @@ The room-to-match transition is both an illustration opportunity and an honest r
 ## How to use these references
 
 - Treat each PNG preview and its SVG source as a structural study, not a pixel-perfect specification.
-- Preserve the information hierarchy when creating later requirements contracts and Spark Quests.
+- Preserve the information hierarchy when creating later requirements and implementation contracts.
 - Move or copy an approved wireframe into its eventual architecture folder only when that folder's boundary is frozen.
 - Add source notes beside any future third-party reference. Keep third-party screenshots outside the public repository unless redistribution rights are clear.
 - Prefer new original mockups for public architectural artifacts.
