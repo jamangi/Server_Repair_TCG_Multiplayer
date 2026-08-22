@@ -53,6 +53,7 @@ This repository currently contains:
 - draft domain and runtime schemas with examples;
 - a working static Domain Viewer;
 - a versioned case-study research system with a completed pilot spanning several troubleshooting subsystems;
+- a provisional story foundation with a fictional company, campaign frame, ensemble, voice guide, and story-derived gameplay candidates;
 - provisional UI planning and original wireframes for the future playable application.
 
 It does not yet contain a playable game engine or multiplayer client. Some schemas and older design documents predate the configurable-match rules and require deliberate migration before they can be treated as final implementation contracts.
@@ -74,12 +75,15 @@ Do not silently turn an unfrozen recommendation into a rule through code, schema
 
 - [`docs/design/`](docs/design/) — game vision, living decision sources of truth, technical catalogs, and implementation recommendations.
 - [`docs/case_studies/`](docs/case_studies/) — versioned research that converts real troubleshooting accounts into lifecycle reductions, domain cross-references, candidate materials, and decision observations. Begin with its [`README`](docs/case_studies/README.md).
+- [`docs/story/`](docs/story/) — the working fictional setting, company, campaign frame, characters, voice, real-world inspiration boundary, and story-derived candidate mechanics. Begin with its [`README`](docs/story/README.md).
 - [`docs/tasks/`](docs/tasks/) — scoped implementation and research contracts, with [`INDEX.md`](docs/tasks/INDEX.md) identifying the current task state.
 - [`docs/ui-plan/`](docs/ui-plan/) — provisional application structure and original visual wireframes.
 - [`viewer/`](viewer/) — dependency-free static browser for reusable domain objects; it is not the multiplayer game client.
 - [`schemas/`](schemas/) and [`examples/`](examples/) — draft domain and runtime contracts that will evolve with approved rules.
 
 Case studies are evidence-preserving research inputs rather than rule or domain-data authority. Their candidate domain objects, cardless actions, and decision observations must pass through the appropriate schema, validation, or decision lifecycle before becoming part of the game.
+
+Story documents provide narrative context for the gameplay but do not override frozen rules or settle unresolved mechanics. Ideas in `docs/story/gameplay_candidates/` remain candidates until they pass through the same design-decision, schema, validation, and implementation process as other gameplay proposals.
 
 The future playable application is intended to remain separate from the Domain Viewer. The current UI plan proposes a React client with a stable application shell, social room browser, room creation and lobby flows, technician identity, and match synchronization. Motion for React (formerly Framer Motion) is proposed for expressive, state-driven game and interface animation while authoritative rules remain outside the UI.
 
