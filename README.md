@@ -16,6 +16,8 @@ Every ticket follows the practical repair sequence:
 6. Verify recovery.
 7. Document the result.
 
+These are evidentiary functions, not seven isolated departments or a permanently one-way state machine. Hypothesize and Test form the iterative heart of Diagnosis; Isolate is the accountable transition to an actionable fault; Repair changes machine state without proving the diagnosis; failed Verify can reopen Diagnosis; and Document preserves the attributable explanation.
+
 The game should reward causal reasoning and effective verification rather than trivia recall or indiscriminate part replacement.
 
 ## Knowledge first, cards second
@@ -54,6 +56,7 @@ This repository currently contains:
 - a working static Domain Viewer;
 - a versioned case-study research system with a completed pilot spanning several troubleshooting subsystems;
 - a provisional story foundation with a fictional company, campaign frame, ensemble, voice guide, and story-derived gameplay candidates;
+- a non-authoritative, replayable candidate-flow package that combines temporary rules, exact card/deck/Ticket fixtures, complete matches, and landing-to-logout campaign and multiplayer journeys;
 - provisional UI planning and original wireframes for the future playable application.
 
 It does not yet contain a playable game engine or multiplayer client. Some schemas and older design documents predate the configurable-match rules and require deliberate migration before they can be treated as final implementation contracts.
@@ -74,6 +77,7 @@ Do not silently turn an unfrozen recommendation into a rule through code, schema
 ## Repository guide
 
 - [`docs/design/`](docs/design/) — game vision, living decision sources of truth, technical catalogs, and implementation recommendations.
+- [`docs/candidate_flows/`](docs/candidate_flows/) — deliberately non-authoritative example rules, board/card fixtures, audited game replays, focused application flows, and full campaign/multiplayer walkthroughs. Begin with its [`README`](docs/candidate_flows/README.md); use the package to critique structure, not as promoted rules or implementation contracts.
 - [`docs/case_studies/`](docs/case_studies/) — versioned research that converts real troubleshooting accounts into lifecycle reductions, domain cross-references, candidate materials, and decision observations. Begin with its [`README`](docs/case_studies/README.md).
 - [`docs/story/`](docs/story/) — the working fictional setting, company, campaign frame, characters, voice, real-world inspiration boundary, and story-derived candidate mechanics. Begin with its [`README`](docs/story/README.md).
 - [`docs/tasks/`](docs/tasks/) — scoped implementation and research contracts, with [`INDEX.md`](docs/tasks/INDEX.md) identifying the current task state.
@@ -84,6 +88,8 @@ Do not silently turn an unfrozen recommendation into a rule through code, schema
 Case studies are evidence-preserving research inputs rather than rule or domain-data authority. Their candidate domain objects, cardless actions, and decision observations must pass through the appropriate schema, validation, or decision lifecycle before becoming part of the game.
 
 Story documents provide narrative context for the gameplay but do not override frozen rules or settle unresolved mechanics. Ideas in `docs/story/gameplay_candidates/` remain candidates until they pass through the same design-decision, schema, validation, and implementation process as other gameplay proposals.
+
+Candidate gameplay flows choose one internally coherent set of temporary answers only to make examples replayable. Their `EX1-*` identifiers, card balance, Ticket outcomes, account state, screens, animation, and full journeys remain fixtures. Any idea worth adopting must return to the normal design-decision, content, schema, story, validation, and implementation lifecycle.
 
 The future playable application is intended to remain separate from the Domain Viewer. The current UI plan proposes a React client with a stable application shell, social room browser, room creation and lobby flows, technician identity, and match synchronization. Motion for React (formerly Framer Motion) is proposed for expressive, state-driven game and interface animation while authoritative rules remain outside the UI.
 
