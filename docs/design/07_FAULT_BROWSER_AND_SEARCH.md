@@ -7,6 +7,10 @@ The Fault Browser should be useful both as:
 
 Whether unrestricted in-match search is competitively desirable can be decided by game mode.
 
+This reference search is distinct from the frozen gameplay **Search** basic action, which spends one Search Token and one Action to select a card from the Player's remaining draw deck. Browser access never spends or grants Search Tokens unless an explicit future rule says so.
+
+The Browser reads reusable domain knowledge, not live authoritative Ticket truth. It must never reveal or rank a Ticket's `SERVER_ONLY` Fault instances, causal chain, authored outcome matrix, hidden scoring metadata, or another Player's private Evidence. Conversely, every active Ticket's public authored candidate set remains available through its authorized match projection regardless of whether a mode limits the broader encyclopedia.
+
 ---
 
 # Fault Result Card
@@ -215,6 +219,8 @@ Fault pages should expose upstream causes and downstream effects as accessible l
 
 A separate interactive causal-chain visualization is not planned. The reusable relationship data remains available to the browser, game, and other educational experiences.
 
+These global relationships are educational possibilities, not proof about the active Ticket. The authoritative server continues to project live information through `SERVER_ONLY`, `PRIVATE_PLAYER`, `TEAM`, and `PUBLIC_MATCH` visibility.
+
 ---
 
 # In-Match Reference Modes
@@ -233,10 +239,12 @@ Only previously discovered/unlocked information or limited reference access.
 
 Good if unrestricted lookup reduces deduction too much.
 
+This limitation cannot hide the active Ticket's public authored candidates or expose hidden truth by omission, ordering, emphasis, or result counts.
+
 ## Interview Drill Mode
 
-Browser hidden until after the player commits to a hypothesis.
+Browser hidden until after the Player revises a Hypothesis marker.
 
-Then the system grades the reasoning.
+Any grading occurs after the drill/session or through an explicitly authorized reveal. In a live match, changing a Hypothesis costs no Action, returns no truth response, and is not Commit Isolation.
 
 The same data model can support all three.

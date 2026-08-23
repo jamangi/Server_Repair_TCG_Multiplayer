@@ -2,6 +2,8 @@
 
 This is a deliberately finite starter catalog. It is not intended to model every real-world server failure.
 
+This file catalogs technical domain relationships; it does not make a Fault globally eligible for every Ticket. Each Ticket separately authors its public candidate set, server-only causal truth, Evidence outcomes, Isolation requirements, Repair path, and Verify conditions. Every ordinary Repair listed below still requires accepted Isolation. A known-good substitution listed as a Test is temporary and reverts after comparison. Existing dotted IDs are retained; an entry not yet materialized in domain JSON remains planned content rather than an implicit new public-data contract.
+
 The prototype should be robust enough to demonstrate:
 
 - hardware faults,
@@ -58,7 +60,6 @@ Not every field must appear on the face of a card. The full data should be avail
 **Effective inspection/tests:**
 - visual inspection
 - firmware memory inventory
-- reseat-and-retest
 - single-DIMM isolation
 
 **Repair:**
@@ -308,8 +309,7 @@ Similar to failed SAS drive, but associated with SATA storage.
 
 **Tests:**
 - physical inspection
-- cable reseat
-- known-good cable
+- temporary known-good cable comparison
 
 **Repair:**
 - reseat or replace cable
@@ -500,7 +500,7 @@ Similar to failed SAS drive, but associated with SATA storage.
 - acceptable temperature under load
 
 **Possible downstream faults:**
-- `fault.thermal.chassis.overheating`
+- `fault.thermal.chassis.overheating` *(planned catalog candidate; not yet a materialized domain record)*
 
 ---
 

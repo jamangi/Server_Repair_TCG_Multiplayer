@@ -2,6 +2,10 @@
 
 This starter set supports the initial Fault catalog and establishes reusable vocabulary.
 
+These are technical domain definitions. Technical Tools are not the removed account/loadout Equipment system. Each Test or Command execution is a distinct immutable action/result pair whose eligible outcome is authored by the active Ticket. Evidence changes Knowledge State; a temporary known-good substitution reverts after comparison. Every ordinary Repair listed here requires accepted evidence-supported Isolation and an eligible target. Every Verify result remains in history; a failure or inconclusive result returns the Ticket to Diagnosis without erasing prior Evidence or machine changes.
+
+Existing dotted IDs are retained. The legacy design identifier `test.system.stress` below is not silently renamed or treated as an alias for a different current domain record; reconciling that ID requires an explicit content migration.
+
 ---
 
 # Tools
@@ -444,6 +448,10 @@ Resolves:
 
 # Workflow / Documentation Procedures
 
+Workflow entities or cards may supplement the universal Documentation actions, but they never gate them. **Document Live** is a one-Action basic action available throughout an active Ticket. A valid structured closure bundle costs zero Actions, recovers no card, awards no Service Points for closure, and preserves Player/team closure attribution as statistics. Worklog actions and later publication links remain immutable and chronological.
+
+The `workflow.*` IDs below are planned content identifiers and are not yet materialized in the current viewer domain records. They are retained without renaming and require an explicit content/schema migration before becoming public data contracts.
+
 ## Record Repair Action
 
 **ID:** `workflow.document.repair_action`
@@ -472,4 +480,4 @@ Resolves:
 
 **ID:** `workflow.nff.standard`
 
-These procedures can initially be represented with lightweight cards/effects and later expanded into a richer production-workflow archetype.
+These procedures can be referenced by lightweight cards/effects and later expanded into a richer production-workflow archetype. They do not replace Document Live or the mandatory structured closure bundle.

@@ -1,0 +1,97 @@
+{
+  "id": "ticket.memory.no_post",
+  "entity_type": "repair_ticket",
+  "presentation": {
+    "display_name": "Memory Fault / No POST",
+    "short_description": "An authored fixture that exposes a candidate while retaining causal truth and unexecuted outcomes on the server."
+  },
+  "source": {
+    "expansion_id": "expansion.core_v0_1",
+    "version": "0.1.0",
+    "status": "draft",
+    "search_tags": [
+      "memory",
+      "no post",
+      "ticket"
+    ]
+  },
+  "difficulty": 1,
+  "server_profile_id": "server_profile.single_socket_demo",
+  "initial_symptom_ids": [
+    "symptom.boot.no_post"
+  ],
+  "public_candidate_fault_ids": [
+    "fault.memory.dimm.failed"
+  ],
+  "server_only_truth": {
+    "fault_instances": [
+      {
+        "fault_instance_key": "fault_instance.failed_dimm",
+        "fault_id": "fault.memory.dimm.failed",
+        "role": "ACTIONABLE",
+        "actionable": true,
+        "deepest": true,
+        "required_to_repair": true
+      }
+    ],
+    "causal_edge_ids": []
+  },
+  "authored_evidence_outcomes": [
+    {
+      "outcome_id": "outcome.memory_diagnostic.failed_dimm_support",
+      "source_definition_id": "test.memory.diagnostic",
+      "target_ref": "fault_instance.failed_dimm",
+      "eligible_machine_state_key": "machine_state.before_repair",
+      "candidate_effects": [
+        {
+          "candidate_fault_id": "fault.memory.dimm.failed",
+          "disposition": "SUPPORT"
+        }
+      ],
+      "observation_id": "symptom.memory.ecc_errors"
+    }
+  ],
+  "isolation_requirements": [
+    {
+      "requirement_id": "isolation.memory.failed_dimm",
+      "candidate_fault_id": "fault.memory.dimm.failed",
+      "classification": "ACTIONABLE_AND_DEEPEST",
+      "minimum_citations": 1,
+      "eligible_outcome_ids": [
+        "outcome.memory_diagnostic.failed_dimm_support"
+      ]
+    }
+  ],
+  "repair_requirements": [
+    {
+      "fault_id": "fault.memory.dimm.failed",
+      "eligible_repair_procedure_ids": [
+        "repair.memory.replace_dimm"
+      ]
+    }
+  ],
+  "verification_requirements": [
+    {
+      "requirement_id": "verification.memory.full_test",
+      "validation_procedure_id": "verify.memory.full_test",
+      "success_condition": "The authored full-memory validation condition passes after the latest relevant Repair.",
+      "must_pass_after_latest_repair": true
+    },
+    {
+      "requirement_id": "verification.boot.post",
+      "validation_procedure_id": "verify.boot.post",
+      "success_condition": "The authored POST validation condition passes after the latest relevant Repair.",
+      "must_pass_after_latest_repair": true
+    }
+  ],
+  "closure_requirements": {
+    "include_accepted_isolation": true,
+    "include_cited_decisive_evidence": true,
+    "include_every_repair_in_accepted_path": true,
+    "include_every_failed_verify_in_accepted_path": true,
+    "include_all_current_passing_verifies": true
+  },
+  "educational_objectives": [
+    "Separate Evidence, machine changes, Verify, and Documentation."
+  ]
+}

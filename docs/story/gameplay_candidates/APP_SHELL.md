@@ -25,7 +25,7 @@ Campaign becomes one destination inside that shell rather than a separate app wi
 | Shift | Continue campaign, see the current episode, rotation, lot brief, and unresolved story threads. | New campaign stage in the existing shell. |
 | Rooms | Browse, create, join, play, or spectate multiplayer rooms. | Preserve the planned social room browser and lobby. |
 | Decks | Prepare legal decks and inspect which procedures, tools, and cards are available. | Expands the likely deck destination without deciding legality. |
-| Qualifications | See rotation progress, learned practices, mentors, and campaign access. | Could share space with My Info if a separate destination is too heavy. |
+| Qualifications | See honor-only badges recognizing rotation milestones and documented practice. | Recognition only; no gameplay, access, deck, procedure, story, or matchmaking effect. Could share space with My Info. |
 | Records | Browse authorized Worklogs, closed campaign cases, technical references, and repeat-return links. | Combines story history with the existing educational reference boundary; must preserve visibility. |
 | My Info | Technician portrait, cosmetics, statistics, accessibility, and identity. | Preserve the planned identity strategy. |
 | Social | Friends, invitations, messages, room chat, and later community features. | Preserve the independent social-domain boundary. |
@@ -46,7 +46,7 @@ Candidate regions:
 
 - **Current shift:** episode title, time, location, and one-sentence premise.
 - **Active lot:** client-safe summary, visible unit count, authorized context, and urgency.
-- **Rotation badge:** home team, current shadow team, mentor, and next qualification opportunity.
+- **Rotation badge:** home team, current shadow team, mentor, and next honor-badge milestone.
 - **Story threads:** two or three short unresolved items such as a repeat serial, quarantined lot, or missing field report.
 - **Prepare:** deck selection, allowed changes, and a plain-language warning if requirements are unmet.
 - **Begin work:** the clear transition into the authoritative match.
@@ -61,7 +61,7 @@ Candidate sequence:
 Cold open
   -> Shift brief
   -> Authorized context review
-  -> Deck / qualification preparation
+  -> Deck preparation / honor-badge review
   -> Match synchronization
   -> Repair Ticket gameplay
   -> Gate review and results
@@ -84,7 +84,7 @@ Inflow -> First Look -> Rigline -> Trace -> Bench -> Gate -> Outflow
 
 This is a story and relationship map, not a forced one-way Ticket state machine. A failed Verify can visibly route a Ticket from Gate back toward Diagnosis. Supporting teams can open as panels or scene nodes without becoming separate game modes.
 
-The map should emphasize people and current work rather than simulate walking. Selecting Rigline might open Malik's scene, current qualification, and related Worklogs; it should not add traversal time between the player and the next meaningful decision.
+The map should emphasize people and current work rather than simulate walking. Selecting Rigline might open Malik's scene, honor-badge history, and related Worklogs; it should not add traversal time between the player and the next meaningful decision. Story access follows authored campaign state, never a Qualification badge.
 
 ## Match story surfaces
 
@@ -94,7 +94,7 @@ May show client-safe lot, unit identity, reported issue, visible symptoms, servi
 
 ### Private notebook
 
-Candidate home for private Evidence, explicit Hypotheses if adopted, unpublished results, and comparison notes. In cooperative play, team-visible Evidence needs a distinct presentation from both private notes and the public Worklog.
+Candidate home for private Evidence, the frozen private/team Hypothesis markers, unpublished results, and comparison notes. In cooperative play, team-visible Evidence needs a distinct presentation from both private notes and the public Worklog.
 
 ### Worklog
 
@@ -106,7 +106,7 @@ Named campaign characters or multiplayer technicians can appear as compact prese
 
 ### Gate state
 
-After Repair, the interface should make required Verify conditions and documentation gaps legible without implying that a green animation closes the Ticket by itself. Exact closure behavior remains controlled by `DOC-001`, `DOC-006`, and `CROSS-001`.
+After Repair, the interface should make required Verify conditions and Documentation gaps legible without implying that a green animation closes the Ticket by itself. Exact Verify, structured closure, and transaction behavior remains controlled by [`FROZEN_RULES.md` §§13–15](../../design/decisions/FROZEN_RULES.md#13-verify-and-return-to-diagnosis).
 
 ## Gate review and debrief
 
@@ -120,7 +120,7 @@ The post-match story bridge should separate:
 - what remains uncertain;
 - how contributors and the campaign reacted.
 
-This is more useful than a generic victory screen. It can still lead to Service Points, statistics, rewards, and story choices after those systems are decided.
+This is more useful than a generic victory screen. It may present causal Service Point events under the eventual `SCORE-001` policy, Player/team closure statistics, rewards, and story choices without treating closure itself as a scoring action.
 
 Candidate result labels should avoid false certainty:
 
@@ -130,13 +130,13 @@ Candidate result labels should avoid false certainty:
 - **Escalated:** the current service cell cannot safely or authoritatively continue.
 - **Dispositioned:** unit routed to another lifecycle outcome under an authored rule.
 
-These labels are story/UI candidates, not approved Ticket states.
+These labels are story/UI presentation candidates, not a replacement runtime-state enum. `Returned to Diagnosis` reflects approved behavior; the other labels may describe campaign disposition around the authoritative Ticket state.
 
 ## Character and rotation presentation
 
 - Reuse the player's portrait everywhere; current rotation changes a badge, background accent, or tool context rather than the player's identity.
 - Show mentors as people with availability and relationship context, not as anonymous perk dispensers.
-- Present a qualification as “access to a reviewed method” rather than a claim that the player became an expert after one scene.
+- Present a Qualification as honor-only recognition of a recorded milestone, never as access to a method or a claim that the player became an expert after one scene.
 - Keep cosmetic identity separate from mechanical effect.
 - Let characters appear in Worklog and result attribution when they actually performed or supported an authoritative action.
 
@@ -200,7 +200,7 @@ Avoid:
 ## Open interface questions
 
 1. Is Shift a primary dock destination or the default Home stage?
-2. Do Qualifications belong inside My Info, Decks, or a distinct campaign panel?
+2. Do honor-only Qualifications belong inside My Info or a campaign-history panel?
 3. How are campaign Worklogs separated from the domain encyclopedia and multiplayer history?
 4. Does co-op campaign support authored companions, human substitution, or both?
 5. Which story outcome ranges can the first engine actually report without bespoke scripting?

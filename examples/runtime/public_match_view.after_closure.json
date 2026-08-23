@@ -1,0 +1,54 @@
+{
+  "match_id": "match_demo_001",
+  "revision": 33,
+  "ruleset_version": "0.1-task-007",
+  "status": "COMPLETED",
+  "collaboration_mode": "competitive",
+  "players": [
+    {
+      "player_id": "player_a",
+      "display_name": "Player A",
+      "team_id": null,
+      "service_points": 1,
+      "hand_count": 3,
+      "deck_count": 0,
+      "discard_card_definition_ids": [],
+      "in_play_card_definition_ids": [],
+      "search_tokens": 3,
+      "max_search_tokens": 5,
+      "refresh_tokens": 1,
+      "max_refresh_tokens": 1,
+      "tickets_closed": 0,
+      "connection_status": "CONNECTED"
+    },
+    {
+      "player_id": "player_b",
+      "display_name": "Player B",
+      "team_id": null,
+      "service_points": 0,
+      "hand_count": 5,
+      "deck_count": 25,
+      "discard_card_definition_ids": [],
+      "in_play_card_definition_ids": [],
+      "search_tokens": 4,
+      "max_search_tokens": 5,
+      "refresh_tokens": 1,
+      "max_refresh_tokens": 1,
+      "tickets_closed": 1,
+      "connection_status": "CONNECTED"
+    }
+  ],
+  "repair_queue": [],
+  "turn": null,
+  "closure_statistics": [
+    {
+      "closure_event_id": "evt_close_001",
+      "ticket_instance_id": "ticketinst_2",
+      "closer_player_id": "player_b",
+      "attributed_team_id": null,
+      "closed_at": "2026-08-22T16:17:00Z"
+    }
+  ],
+  "public_events": [],
+  "last_event_sequence": 40
+}

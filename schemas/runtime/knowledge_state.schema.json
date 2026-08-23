@@ -1,80 +1,62 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.local/runtime/knowledge_state.schema.json",
-  "title": "Knowledge State",
+  "title": "Player or Team Knowledge State",
+  "description": "A private/team evidence model. It records beliefs and authored Evidence without duplicating authoritative machine or Fault state.",
   "type": "object",
   "additionalProperties": false,
   "$defs": {
-    "stableId": {
-      "type": "string",
-      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
-    },
-    "uuidLike": {
-      "type": "string",
-      "minLength": 8
-    },
     "entityRef": {
       "type": "string",
       "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
     },
-    "cardInstanceId": {
-      "type": "string",
-      "minLength": 1
-    },
-    "playerId": {
-      "type": "string",
-      "minLength": 1
-    },
-    "ticketInstanceId": {
-      "type": "string",
-      "minLength": 1
-    },
-    "timestamp": {
-      "type": "string",
-      "format": "date-time"
-    }
+    "instanceId": { "type": "string", "minLength": 1 },
+    "timestamp": { "type": "string", "format": "date-time" }
   },
   "properties": {
-    "player_id": {
-      "$ref": "#/$defs/playerId"
-    },
-    "ticket_instance_id": {
-      "$ref": "#/$defs/ticketInstanceId"
-    },
+    "knowledge_state_id": { "$ref": "#/$defs/instanceId" },
+    "ticket_instance_id": { "$ref": "#/$defs/instanceId" },
+    "audience": { "type": "string", "enum": ["PRIVATE_PLAYER", "TEAM"] },
+    "owner_player_id": { "type": ["string", "null"], "minLength": 1 },
+    "team_id": { "type": ["string", "null"], "minLength": 1 },
     "known_symptom_ids": {
       "type": "array",
-      "items": {
-        "$ref": "#/$defs/entityRef"
-      },
+      "items": { "$ref": "#/$defs/entityRef" },
       "uniqueItems": true
     },
-    "known_fault_ids": {
+    "candidate_assessments": {
       "type": "array",
       "items": {
-        "$ref": "#/$defs/entityRef"
-      },
-      "uniqueItems": true
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "candidate_fault_id": { "$ref": "#/$defs/entityRef" },
+          "assessment": {
+            "type": "string",
+            "enum": ["UNASSESSED", "SUSPECTED", "SUPPORTED", "CONTRADICTED", "RULED_OUT", "CONFIRMED"]
+          },
+          "supporting_evidence_event_ids": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/instanceId" },
+            "uniqueItems": true
+          }
+        },
+        "required": ["candidate_fault_id", "assessment", "supporting_evidence_event_ids"]
+      }
     },
-    "ruled_out_fault_ids": {
-      "type": "array",
-      "items": {
-        "$ref": "#/$defs/entityRef"
+    "current_hypothesis": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "candidate_fault_ids": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/entityRef" },
+          "uniqueItems": true,
+          "maxItems": 2
+        },
+        "revised_at_revision": { "type": "integer", "minimum": 0 }
       },
-      "uniqueItems": true
-    },
-    "suspected_fault_ids": {
-      "type": "array",
-      "items": {
-        "$ref": "#/$defs/entityRef"
-      },
-      "uniqueItems": true
-    },
-    "known_fault_categories": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "uniqueItems": true
+      "required": ["candidate_fault_ids", "revised_at_revision"]
     },
     "evidence": {
       "type": "array",
@@ -82,100 +64,88 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
+          "evidence_event_id": { "$ref": "#/$defs/instanceId" },
+          "action_event_id": { "$ref": "#/$defs/instanceId" },
           "source_type": {
             "type": "string",
-            "enum": [
-              "test",
-              "command",
-              "inspection",
-              "effect",
-              "system"
-            ]
+            "enum": ["TEST", "COMMAND", "INSPECTION", "VERIFY", "SYSTEM"]
           },
-          "source_id": {
-            "type": "string"
+          "source_definition_id": { "$ref": "#/$defs/entityRef" },
+          "authored_outcome_id": { "$ref": "#/$defs/entityRef" },
+          "candidate_fault_id": {
+            "type": ["string", "null"],
+            "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
           },
-          "fault_id": {
-            "$ref": "#/$defs/entityRef"
-          },
-          "outcome": {
+          "disposition": {
             "type": "string",
-            "enum": [
-              "supports",
-              "contradicts",
-              "confirms",
-              "rules_out",
-              "inconclusive"
-            ]
+            "enum": ["SUPPORT", "CONTRADICT", "RULE_OUT", "CONFIRM", "INCONCLUSIVE"]
           },
-          "strength": {
-            "type": "integer",
-            "minimum": 0
+          "observation_id": {
+            "type": ["string", "null"],
+            "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
           },
-          "revealed_at_revision": {
-            "type": "integer",
-            "minimum": 0
+          "visibility": { "type": "string", "enum": ["PRIVATE_PLAYER", "TEAM"] },
+          "machine_revision": { "type": "integer", "minimum": 0 },
+          "captured_at": { "$ref": "#/$defs/timestamp" },
+          "documented_by_publication_event_id": {
+            "type": ["string", "null"],
+            "minLength": 1
           }
         },
         "required": [
+          "evidence_event_id",
+          "action_event_id",
           "source_type",
-          "source_id",
-          "fault_id",
-          "outcome",
-          "strength",
-          "revealed_at_revision"
+          "source_definition_id",
+          "authored_outcome_id",
+          "candidate_fault_id",
+          "disposition",
+          "observation_id",
+          "visibility",
+          "machine_revision",
+          "captured_at",
+          "documented_by_publication_event_id"
         ]
       }
     },
-    "diagnosis_progress": {
-      "type": "integer",
-      "minimum": 0
-    },
-    "hypothesis_history": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "fault_ids": {
-            "type": "array",
-            "items": {
-              "$ref": "#/$defs/entityRef"
-            },
-            "uniqueItems": true
-          },
-          "submitted_at_revision": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "active",
-              "revised",
-              "accepted",
-              "rejected"
-            ]
-          }
-        },
-        "required": [
-          "fault_ids",
-          "submitted_at_revision",
-          "status"
-        ]
-      }
-    }
+    "last_updated_revision": { "type": "integer", "minimum": 0 }
   },
   "required": [
-    "player_id",
+    "knowledge_state_id",
     "ticket_instance_id",
+    "audience",
+    "owner_player_id",
+    "team_id",
     "known_symptom_ids",
-    "known_fault_ids",
-    "ruled_out_fault_ids",
-    "suspected_fault_ids",
-    "known_fault_categories",
+    "candidate_assessments",
+    "current_hypothesis",
     "evidence",
-    "diagnosis_progress",
-    "hypothesis_history"
+    "last_updated_revision"
+  ],
+  "allOf": [
+    {
+      "if": { "properties": { "audience": { "const": "PRIVATE_PLAYER" } } },
+      "then": {
+        "properties": {
+          "owner_player_id": { "type": "string", "minLength": 1 },
+          "team_id": { "const": null },
+          "evidence": {
+            "items": { "properties": { "visibility": { "const": "PRIVATE_PLAYER" } } }
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "audience": { "const": "TEAM" } } },
+      "then": {
+        "properties": {
+          "owner_player_id": { "const": null },
+          "team_id": { "type": "string", "minLength": 1 },
+          "evidence": {
+            "items": { "properties": { "visibility": { "const": "TEAM" } } }
+          }
+        }
+      }
+    }
   ]
 }

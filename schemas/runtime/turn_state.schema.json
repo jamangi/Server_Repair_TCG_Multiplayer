@@ -1,79 +1,147 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.local/runtime/turn_state.schema.json",
-  "title": "Turn State",
+  "title": "First-Version Turn State",
+  "description": "One fixed-seat turn: optional nonempty-deck draw, two Actions, and any explicit resolution window that delays automatic end-turn.",
   "type": "object",
   "additionalProperties": false,
   "$defs": {
-    "stableId": {
-      "type": "string",
-      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
-    },
-    "uuidLike": {
-      "type": "string",
-      "minLength": 8
-    },
-    "entityRef": {
-      "type": "string",
-      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
-    },
-    "cardInstanceId": {
-      "type": "string",
-      "minLength": 1
-    },
-    "playerId": {
-      "type": "string",
-      "minLength": 1
-    },
-    "ticketInstanceId": {
-      "type": "string",
-      "minLength": 1
-    },
-    "timestamp": {
-      "type": "string",
-      "format": "date-time"
-    }
+    "instanceId": { "type": "string", "minLength": 1 }
   },
   "properties": {
-    "turn_number": {
-      "type": "integer",
-      "minimum": 1
-    },
-    "active_player_id": {
-      "$ref": "#/$defs/playerId"
-    },
+    "round_number": { "type": "integer", "minimum": 1 },
+    "turn_number": { "type": "integer", "minimum": 1 },
+    "active_player_id": { "$ref": "#/$defs/instanceId" },
     "phase": {
       "type": "string",
-      "enum": [
-        "start",
-        "draw",
-        "work",
-        "resolution",
-        "end"
+      "enum": ["START_DRAW", "WORK", "RESOLUTION", "CLOSURE_RESOLUTION", "END"]
+    },
+    "draw_status": {
+      "type": "string",
+      "enum": ["PENDING", "DRAWN", "SKIPPED_EMPTY"]
+    },
+    "drawn_card_instance_id": {
+      "type": ["string", "null"],
+      "minLength": 1
+    },
+    "actions_started": { "const": 2 },
+    "actions_spent": { "type": "integer", "minimum": 0, "maximum": 2 },
+    "actions_remaining": { "type": "integer", "minimum": 0, "maximum": 2 },
+    "zero_action_card_names_played": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    },
+    "closure_window": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "is_open": { "type": "boolean" },
+        "eligible_ticket_instance_ids": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/instanceId" },
+          "uniqueItems": true
+        },
+        "opened_by_verify_event_id": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "precedes_automatic_end_turn": { "const": true }
+      },
+      "required": [
+        "is_open",
+        "eligible_ticket_instance_ids",
+        "opened_by_verify_event_id",
+        "precedes_automatic_end_turn"
       ]
     },
-    "mandatory_draw_completed": {
-      "type": "boolean"
-    },
-    "actions_started": {
-      "type": "integer",
-      "minimum": 0
-    },
-    "actions_spent": {
-      "type": "integer",
-      "minimum": 0
-    },
-    "passed": {
-      "type": "boolean"
+    "passed": { "type": "boolean" },
+    "turn_ended_reason": {
+      "type": ["string", "null"],
+      "enum": [null, "VOLUNTARY", "NO_ACTIONS", "CLOSURE_PUBLISHED", "TIME_EXPIRED"]
     }
   },
   "required": [
+    "round_number",
     "turn_number",
     "active_player_id",
     "phase",
-    "mandatory_draw_completed",
+    "draw_status",
+    "drawn_card_instance_id",
     "actions_started",
     "actions_spent",
-    "passed"
+    "actions_remaining",
+    "zero_action_card_names_played",
+    "closure_window",
+    "passed",
+    "turn_ended_reason"
+  ],
+  "allOf": [
+    {
+      "if": { "properties": { "draw_status": { "const": "DRAWN" } } },
+      "then": {
+        "properties": {
+          "drawn_card_instance_id": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "draw_status": { "enum": ["PENDING", "SKIPPED_EMPTY"] }
+        }
+      },
+      "then": { "properties": { "drawn_card_instance_id": { "const": null } } }
+    },
+    {
+      "if": {
+        "properties": {
+          "closure_window": { "properties": { "is_open": { "const": true } } }
+        }
+      },
+      "then": {
+        "properties": {
+          "phase": { "const": "CLOSURE_RESOLUTION" },
+          "closure_window": {
+            "properties": {
+              "eligible_ticket_instance_ids": { "minItems": 1 },
+              "opened_by_verify_event_id": { "type": "string", "minLength": 1 }
+            }
+          },
+          "turn_ended_reason": { "const": null }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "closure_window": { "properties": { "is_open": { "const": false } } }
+        }
+      },
+      "then": {
+        "properties": {
+          "closure_window": {
+            "properties": {
+              "eligible_ticket_instance_ids": { "maxItems": 0 },
+              "opened_by_verify_event_id": { "const": null }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "phase": { "const": "END" } } },
+      "then": {
+        "properties": {
+          "closure_window": {
+            "properties": {
+              "is_open": { "const": false },
+              "eligible_ticket_instance_ids": { "maxItems": 0 },
+              "opened_by_verify_event_id": { "const": null }
+            }
+          }
+        }
+      }
+    }
   ]
 }

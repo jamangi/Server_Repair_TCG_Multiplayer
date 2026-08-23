@@ -1,0 +1,237 @@
+{
+  "ticket_instance_id": "ticketinst_2",
+  "ticket_definition_id": "ticket.memory.no_post",
+  "status": "CLOSED",
+  "machine_revision": 2,
+  "visible_symptom_ids": [
+    "symptom.boot.no_post"
+  ],
+  "public_candidate_fault_ids": [
+    "fault.memory.dimm.failed"
+  ],
+  "fault_states": [
+    {
+      "fault_instance_id": "faultinst_dimm_001",
+      "fault_id": "fault.memory.dimm.failed",
+      "ticket_instance_id": "ticketinst_2",
+      "role": "ACTIONABLE",
+      "actual_present": true,
+      "machine_status": "RESOLVED",
+      "reveal_state": "REVEALED",
+      "resolved_by_action_id": "evt_repair_002",
+      "resolved_at_revision": 2,
+      "upstream_fault_instance_ids": [],
+      "downstream_fault_instance_ids": []
+    }
+  ],
+  "isolation_history": [
+    {
+      "isolation_event_id": "evt_isolation_001",
+      "player_id": "player_a",
+      "candidate_fault_id": "fault.memory.dimm.failed",
+      "cited_evidence_event_ids": [
+        "evt_evidence_001"
+      ],
+      "accepted": true,
+      "classification": "ACTIONABLE_AND_DEEPEST",
+      "public_fault_instance_id": "faultinst_dimm_001",
+      "response_code": "ISOLATION_ACCEPTED",
+      "root_cause_reward_eligible_after": true,
+      "committed_at_revision": 19,
+      "committed_at": "2026-08-22T16:02:00Z"
+    },
+    {
+      "isolation_event_id": "evt_isolation_rejected_001",
+      "player_id": "player_b",
+      "candidate_fault_id": "fault.memory.dimm.failed",
+      "cited_evidence_event_ids": [
+        "evt_inconclusive_001"
+      ],
+      "accepted": false,
+      "classification": null,
+      "public_fault_instance_id": null,
+      "response_code": "ISOLATION_NOT_SUPPORTED",
+      "root_cause_reward_eligible_after": false,
+      "committed_at_revision": 20,
+      "committed_at": "2026-08-22T16:03:00Z"
+    },
+    {
+      "isolation_event_id": "evt_isolation_002",
+      "player_id": "player_a",
+      "candidate_fault_id": "fault.memory.dimm.failed",
+      "cited_evidence_event_ids": [
+        "evt_evidence_001",
+        "evt_evidence_002"
+      ],
+      "accepted": true,
+      "classification": "ACTIONABLE_AND_DEEPEST",
+      "public_fault_instance_id": "faultinst_dimm_001",
+      "response_code": "ISOLATION_ACCEPTED",
+      "root_cause_reward_eligible_after": true,
+      "committed_at_revision": 27,
+      "committed_at": "2026-08-22T16:10:00Z"
+    }
+  ],
+  "current_accepted_isolation_event_id": "evt_isolation_002",
+  "root_cause_reward_ineligible_player_ids": [
+    "player_b"
+  ],
+  "repair_history": [
+    {
+      "repair_event_id": "evt_repair_001",
+      "player_id": "player_b",
+      "isolation_event_id": "evt_isolation_001",
+      "card_instance_id": "cardinst_repair_001",
+      "repair_procedure_id": "repair.memory.replace_dimm",
+      "target_fault_instance_id": "faultinst_dimm_001",
+      "machine_state_before": "failed_dimm_present",
+      "machine_state_after": "replacement_installed_first_path",
+      "machine_revision": 1,
+      "repaired_at": "2026-08-22T16:06:00Z"
+    },
+    {
+      "repair_event_id": "evt_repair_002",
+      "player_id": "player_a",
+      "isolation_event_id": "evt_isolation_002",
+      "card_instance_id": "cardinst_repair_002",
+      "repair_procedure_id": "repair.memory.replace_dimm",
+      "target_fault_instance_id": "faultinst_dimm_001",
+      "machine_state_before": "replacement_installed_first_path",
+      "machine_state_after": "authored_repair_condition_satisfied",
+      "machine_revision": 2,
+      "repaired_at": "2026-08-22T16:12:00Z"
+    }
+  ],
+  "verification_history": [
+    {
+      "verify_event_id": "evt_verify_pass_001",
+      "player_id": "player_a",
+      "validation_procedure_id": "verify.memory.full_test",
+      "requirement_id": "verification.memory.full_test",
+      "result": "PASS",
+      "machine_revision": 1,
+      "is_current": false,
+      "verified_at_revision": 23,
+      "verified_at": "2026-08-22T16:07:00Z"
+    },
+    {
+      "verify_event_id": "evt_verify_fail_001",
+      "player_id": "player_b",
+      "validation_procedure_id": "verify.boot.post",
+      "requirement_id": "verification.boot.post",
+      "result": "FAIL",
+      "machine_revision": 1,
+      "is_current": false,
+      "verified_at_revision": 24,
+      "verified_at": "2026-08-22T16:08:00Z"
+    },
+    {
+      "verify_event_id": "evt_verify_pass_002",
+      "player_id": "player_a",
+      "validation_procedure_id": "verify.memory.full_test",
+      "requirement_id": "verification.memory.full_test",
+      "result": "PASS",
+      "machine_revision": 2,
+      "is_current": true,
+      "verified_at_revision": 30,
+      "verified_at": "2026-08-22T16:14:00Z"
+    },
+    {
+      "verify_event_id": "evt_verify_pass_003",
+      "player_id": "player_b",
+      "validation_procedure_id": "verify.boot.post",
+      "requirement_id": "verification.boot.post",
+      "result": "PASS",
+      "machine_revision": 2,
+      "is_current": true,
+      "verified_at_revision": 32,
+      "verified_at": "2026-08-22T16:16:00Z"
+    }
+  ],
+  "current_verify_pass_event_ids": [
+    "evt_verify_pass_002",
+    "evt_verify_pass_003"
+  ],
+  "return_to_diagnosis_history": [
+    {
+      "return_event_id": "evt_return_diagnosis_001",
+      "failed_verify_event_id": "evt_verify_fail_001",
+      "invalidated_pass_event_ids": [
+        "evt_verify_pass_001"
+      ],
+      "returned_at_revision": 24,
+      "returned_at": "2026-08-22T16:08:00Z"
+    }
+  ],
+  "documentation_publications": [
+    {
+      "publication_event_id": "evt_publication_001",
+      "source_action_event_id": "evt_worklog_test_001",
+      "source_result_event_id": "evt_evidence_001",
+      "worklog_placeholder_event_id": "evt_worklog_test_001",
+      "publisher_player_id": "player_a",
+      "published_at": "2026-08-22T16:04:00Z"
+    }
+  ],
+  "worklog_event_ids": [
+    "evt_worklog_test_001",
+    "evt_publication_001",
+    "evt_worklog_isolation_001",
+    "evt_isolation_001",
+    "evt_repair_001",
+    "evt_verify_pass_001",
+    "evt_verify_fail_001",
+    "evt_return_diagnosis_001",
+    "evt_evidence_002",
+    "evt_isolation_002",
+    "evt_repair_002",
+    "evt_verify_pass_002",
+    "evt_verify_pass_003",
+    "evt_close_001"
+  ],
+  "pending_contributions": [
+    {
+      "contribution_id": "contrib_repair_002",
+      "source_event_id": "evt_repair_002",
+      "contributor_player_id": "player_a",
+      "policy_hook_id": "example_only.pending_policy.repair",
+      "settlement_status": "SETTLED",
+      "score_event_id": "evt_score_001"
+    }
+  ],
+  "closure": {
+    "closure_event_id": "evt_close_001",
+    "closer_player_id": "player_b",
+    "attributed_team_id": null,
+    "action_cost": 0,
+    "accepted_isolation_event_id": "evt_isolation_002",
+    "decisive_evidence_event_ids": [
+      "evt_evidence_001",
+      "evt_evidence_002"
+    ],
+    "repair_event_ids": [
+      "evt_repair_001",
+      "evt_repair_002"
+    ],
+    "failed_verify_event_ids": [
+      "evt_verify_fail_001"
+    ],
+    "current_passing_verify_event_ids": [
+      "evt_verify_pass_002",
+      "evt_verify_pass_003"
+    ],
+    "worklog_locked_event_id": "evt_worklog_locked_001",
+    "score_event_ids": [
+      "evt_score_001"
+    ],
+    "ticket_archived_event_id": "evt_archive_001",
+    "utility_grant_event_ids": [
+      "evt_grant_all_001"
+    ],
+    "queue_reconciled_event_id": "evt_queue_001",
+    "terminal_evaluated_event_id": "evt_terminal_001",
+    "turn_ended_event_id": "evt_turn_end_001",
+    "closed_at": "2026-08-22T16:17:00Z"
+  },
+  "archived": true
+}

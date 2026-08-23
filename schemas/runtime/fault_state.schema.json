@@ -48,10 +48,10 @@
     "role": {
       "type": "string",
       "enum": [
-        "root",
-        "intermediate",
-        "terminal",
-        "actionable"
+        "ROOT",
+        "INTERMEDIATE",
+        "TERMINAL",
+        "ACTIONABLE"
       ]
     },
     "actual_present": {
@@ -60,17 +60,17 @@
     "machine_status": {
       "type": "string",
       "enum": [
-        "active",
-        "mitigated",
-        "resolved"
+        "ACTIVE",
+        "MITIGATED",
+        "RESOLVED"
       ]
     },
-    "visibility": {
+    "reveal_state": {
       "type": "string",
       "enum": [
-        "hidden",
-        "category_only",
-        "revealed"
+        "HIDDEN",
+        "CATEGORY_ONLY",
+        "REVEALED"
       ]
     },
     "resolved_by_action_id": {
@@ -108,7 +108,7 @@
     "role",
     "actual_present",
     "machine_status",
-    "visibility",
+    "reveal_state",
     "resolved_by_action_id",
     "resolved_at_revision",
     "upstream_fault_instance_ids",

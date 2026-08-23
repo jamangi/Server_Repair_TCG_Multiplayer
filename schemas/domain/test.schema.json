@@ -140,11 +140,11 @@
             "items": {
               "type": "string",
               "enum": [
-                "supports",
-                "contradicts",
-                "confirms",
-                "rules_out",
-                "inconclusive"
+                "SUPPORT",
+                "CONTRADICT",
+                "CONFIRM",
+                "RULE_OUT",
+                "INCONCLUSIVE"
               ]
             },
             "uniqueItems": true,
@@ -166,7 +166,8 @@
     },
     "action_cost": {
       "type": "integer",
-      "minimum": 0
+      "minimum": 0,
+      "maximum": 2
     },
     "education_text": {
       "type": "string"

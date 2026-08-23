@@ -1,127 +1,122 @@
-# Documents To Update For Configurable Matches
+# Design Migration Map
 
-This is a migration map, not a second source of game rules. Normative decisions should live in a dedicated match contract, while unresolved decisions remain in [`decisions/UNFROZEN_RULES.md`](decisions/UNFROZEN_RULES.md).
+## Status and authority
 
-## Recommended new normative document
+This file is an administrative migration map, not a second source of game rules. Normative decisions live in [`decisions/FROZEN_RULES.md`](decisions/FROZEN_RULES.md); unresolved decisions live in [`decisions/UNFROZEN_RULES.md`](decisions/UNFROZEN_RULES.md). [`TASK-007`](../tasks/TASK-007-synchronize-approved-gameplay-rules.md) is the controlling synchronization contract.
 
-Create `08_MATCH_CONFIGURATION_AND_RESULTS.md` after the currently unfrozen match rules are sufficiently decided. It should own:
+The former “Documents To Update For Configurable Matches” list predated the 2026-08-22 rule resolutions. The dispositions below record which recommendations were completed in the top-level design pass, which were superseded by TASK-007's more precise contract, and which remain deferred. A disposition does not by itself prove repository-wide synchronization or close an entry in the decision queue.
 
-- match configuration and validation,
-- competitive and cooperative scoring,
-- ticket replenishment,
-- turn order for arbitrary player counts,
-- timers and disconnection,
-- concession and exhaustion,
-- terminal-condition precedence,
-- winners and ties,
-- end-of-match statistics.
+## Disposition vocabulary
 
-Create `09_ROOM_LIFECYCLE_AND_COMMANDS.md` to own Room membership, Player and Spectator roles, capacity, readiness, socket subscription, concession-to-spectator transitions, leaving, bots, and live-versus-offline lifecycle rules.
+- **Completed — top-level pass:** the named top-level design source was reviewed and synchronized during TASK-007.
+- **Superseded by TASK-007:** the old recommendation was too narrow or called the work “later”; TASK-007 now specifies the authoritative migration scope. Completion must be established by TASK-007 verification.
+- **Deferred:** the work depends on unresolved decisions or is product/engine implementation beyond TASK-007.
+- **Still relevant:** the recommendation remains useful but is not a rule or proof of completion.
 
-## Existing design documents
+## Deferred normative documents
 
-### `00_GAME_ENGINE_OVERVIEW.md`
+### `08_MATCH_CONFIGURATION_AND_RESULTS.md`
 
-Replace fixed two-player, 10-point, and mandatory-draw-loss language with a summary that references the new match contract. Preserve the troubleshooting loop. Add configuration-driven victory and queue behavior.
+**Disposition: Deferred.** Do not create this SHALL-based contract until the remaining scoring, terminal-precedence, timer/configuration, and results questions are resolved. Frozen configuration, queue, first-version card economy, closure, and finite queue-empty results already live in `FROZEN_RULES.md`; this map must not duplicate them normatively.
 
-### `01_DATA_ARCHITECTURE.md`
+### `09_ROOM_LIFECYCLE_AND_COMMANDS.md`
 
-Add the structures proposed in `RECOMMENDED_DATA_MODEL.md`. Replace singular winner and two-player assumptions with rosters, teams, score ledgers, ticket policy state, clocks, concessions, and result records.
+**Disposition: Deferred.** Frozen Room membership/role/capacity/concession foundations already live in `FROZEN_RULES.md`, while ownership, host transfer, Ready/start policy, late joining, moderation, retention, and rematch policy remain unresolved. TASK-007 is synchronization, not a new Room-design pass.
 
-### `02_CARD_TYPES.md`
+## Top-level design review
 
-Audit prose and structured effects for assumptions such as "the other player." Define explicit target relationships: self, ally, opponent, own team, opposing team, any player, and ticket targets. Technical card families otherwise remain valid.
+| File | Disposition | TASK-007 result |
+| --- | --- | --- |
+| `00_GAME_ENGINE_OVERVIEW.md` | Completed — top-level pass | Replaced fixed win/draw-loss and one-way lifecycle wording with configurable matches, iterative Diagnosis, evidence-supported Isolation, failed Verify return, immutable Worklog, zero-Action non-scoring closure, frozen card economy, and explicit `SCORE-001`/`GEN-001` boundaries. |
+| `01_DATA_ARCHITECTURE.md` | Completed — top-level pass | Added authored candidates/outcomes/Isolation, Ticket and Knowledge State separation, immutable action/event/Worklog identity, closure/statistical hooks, Repair/Verify rules, first-version invariants, and no Equipment/Qualification runtime state. |
+| `02_CARD_TYPES.md` | Completed — top-level pass | Clarified authored Ticket surfaces, diagnostic substitution, Repair gateway, failed Verify, universal Documentation, explicit targets, frozen deck/turn/Search/Refresh, technical Tools, and honor-only Qualifications. |
+| `03_FAULT_CATALOG_V0_1.md` | Completed — top-level pass | Technical catalog retained; mixed Test/Repair examples were separated, Ticket authorship/gateway rules were stated, and an unmaterialized planned Fault ID was labeled without renaming it. |
+| `04_COMPONENT_CATALOG_V0_1.md` | Completed — top-level pass | Technical catalog retained; Component state was separated from account Equipment, planned IDs were bounded, and automatic generation language was deferred to `GEN-001`. |
+| `05_TESTS_TOOLS_COMMANDS_V0_1.md` | Completed — top-level pass | Technical catalog retained; immutable authored outcomes, temporary substitution, Repair/Verify rules, Documentation basics, and one legacy-ID migration risk were made explicit. |
+| `06_IMPLEMENTATION_AND_CONTENT_VALIDATION.md` | Completed — top-level pass | Expanded solvability and behavior validation for the full iterative lifecycle, visibility, Worklog, closure transaction, first-version economy, and policy boundaries without implementing a solver. |
+| `07_FAULT_BROWSER_AND_SEARCH.md` | Completed — top-level pass | Separated encyclopedia search from token-based deck Search and protected public candidates and player-safe/live hidden state. |
+| `RECOMMENDED_DATA_MODEL.md` | Completed — top-level pass | Reworked as a visibly non-normative, versioned recommendation with Ticket/Knowledge/action/event/Worklog/contribution/closure/player-safe models and no embedded scoring or Ticket Builder policy. |
+| `RECOMMENDED_PRESETS.json` | Completed — top-level pass | Added `max_search_tokens`, removed embedded Ticket Builder constraints, and made closure plus unresolved scoring/generation boundaries explicit. |
+| `DOCUMENTS_TO_UPDATE.md` | Completed — top-level pass | Replaced the outdated future-work list with this disposition map and current affected-file inventory. |
 
-Clarify that Search Tokens and Deck Refresh Tokens are system utility resources rather than ordinary cards unless a later rule explicitly creates card versions of those effects.
+No stable domain ID was renamed in this pass.
 
-### `03_FAULT_CATALOG_V0_1.md`
+## Schema notes and JSON Schemas
 
-No fundamental technical change. Audit any scoring, ticket ownership, or single-investigator language introduced later.
+**Disposition: Superseded by TASK-007 §§2 and 6.** The old map described a later configurable-match migration and omitted newly frozen lifecycle, Evidence, Documentation, closure, Equipment, and Qualification requirements. TASK-007 is now the explicit migration scope.
 
-### `04_COMPONENT_CATALOG_V0_1.md`
+The affected inventory includes:
 
-No fundamental technical change. Ensure component state is ticket-scoped rather than player-count dependent.
+- `docs/schema-notes/DOMAIN_SCHEMAS.md`
+- `docs/schema-notes/RUNTIME_SCHEMAS.md`
+- `docs/schema-notes/SERVER_AUTHORITY.md`
+- `schemas/domain/repair_ticket.schema.json`
+- `schemas/runtime/action_request.schema.json`
+- `schemas/runtime/action_result.schema.json`
+- `schemas/runtime/card_instance.schema.json` where persistent playable zones need clarification
+- `schemas/runtime/fault_state.schema.json`
+- `schemas/runtime/game_event.schema.json`
+- `schemas/runtime/knowledge_state.schema.json`
+- `schemas/runtime/match_state.schema.json`
+- `schemas/runtime/player_state.schema.json`
+- `schemas/runtime/private_player_view.schema.json`
+- `schemas/runtime/public_match_view.schema.json`
+- `schemas/runtime/ticket_state.schema.json`
+- `schemas/runtime/turn_state.schema.json`
+- and any other schema transitively affected by those contracts.
 
-### `05_TESTS_TOOLS_COMMANDS_V0_1.md`
+The migration must cover authored candidate/outcome/Isolation/Repair/Verify/closure content; iterative Ticket state; Knowledge State; immutable actions/events and four-category visibility; Worklog placeholders/publication links; Search/Refresh; generic contribution/score hooks; zero-Action closure statistics and transaction ordering; and player-safe reconnect/results.
 
-Audit gameplay effects for shared tickets, team-visible evidence, contribution attribution, and target legality with more than two players.
+It must not define `SCORE-001` values/classes or a `GEN-001` builder, add Equipment fields, or give Qualifications runtime representation. Completion belongs in TASK-007's verification report and synchronization queue, not in this map.
 
-### `06_IMPLEMENTATION_AND_CONTENT_VALIDATION.md`
+## Examples and validation tests
 
-Add configuration validation and a behavior matrix covering:
+**Disposition: Superseded by TASK-007 §3.** The former generic fixture list was incomplete. TASK-007 now requires the smallest valid/invalid fixtures and tests for:
 
-- competitive and cooperative matches,
-- finite queues (`Q = 0`) and replenishing queues (`Q > 0`),
-- score targets enabled and disabled,
-- positive and negative handicaps,
-- timer combinations,
-- disconnection and concession,
-- player counts from one through the supported server maximum,
-- ties, simultaneous score events, exhaustion, and stalemates.
+- accepted and rejected evidence-supported Isolation;
+- Repair only after accepted Isolation;
+- failed Verify with preserved return to Diagnosis and later success;
+- Document Live placeholder enrichment and publication chronology;
+- competitive private and cooperative team Evidence;
+- stale-revision rejection before payment;
+- frozen deck/turn/Search/Refresh behavior and non-loss empty draw;
+- zero-Action, non-scoring, statistically attributable closure;
+- generic causal contribution and closure-statistic separation; and
+- removal of Equipment plus honor-only Qualifications.
 
-Tests should use small representative player counts plus boundary tests rather than exhaustively simulating every value through 99.
+Seeded generated-Ticket fixtures are **Deferred** under `GEN-001`. Deterministic fixed authored fixtures remain valid and do not imply a generator algorithm.
 
-### `07_FAULT_BROWSER_AND_SEARCH.md`
+## Candidate flows, story, and UI planning
 
-Define whether discoveries and browser access are private, team-shared, public, or mode-dependent. The underlying technical graph does not change.
+**Disposition: Superseded by TASK-007 §§4–5 for synchronization; production design remains Deferred.**
 
-## Schema notes
+TASK-007 owns correction of the existing non-authoritative candidate-flow replays, full journeys, story candidates, UI labels, and affected wireframes so they no longer demonstrate paid/scoring closure, Equipment loadouts, or mechanical Qualifications. That synchronization does not freeze example-local card balance, story truth, app routes, motion, commerce, Room policy, or a production client.
 
-### `docs/schema-notes/RUNTIME_SCHEMAS.md`
+Future production UI specifications remain deferred for:
 
-Document configuration, teams, score events, clocks, player status, ticket policy state, terminal evaluation, and results. Remove wording that implies exactly two players.
+- finalized match setup and admitted customization;
+- queue virtualization for large configured queues;
+- finalized roster/team/clock/connection displays;
+- result/statistic visibility and persistence after those rules are resolved; and
+- warnings for potentially long or resource-intensive configurations.
 
-### `docs/schema-notes/SERVER_AUTHORITY.md`
+## Engine and product implementation
 
-State that the server owns clocks, disconnect deadlines, random ticket generation, queue replenishment, scoring, concessions, and terminal-condition ordering. Clients submit intentions and display player-safe projections only.
+The former implementation sequence is **Superseded** where it called current schema and projection migration “later.” TASK-007 should proceed in this order:
 
-### `docs/schema-notes/DOMAIN_SCHEMAS.md`
+1. synchronize approved prose and recommended top-level models;
+2. synchronize schema notes, schemas, fixtures, and validation tests;
+3. correct candidate flows, story candidates, UI planning, and affected wireframes;
+4. verify lifecycle, visibility, closure, card/resource arithmetic, Equipment removal, Qualification boundaries, JSON/schema integrity, links, and allowed scope; and
+5. close or narrow synchronization entries only after every affected source agrees.
 
-No core change unless ticket generation gains new weighting or mode-eligibility metadata.
+The following remain **Deferred implementation** after TASK-007:
 
-## Runtime schemas
+- a playable game engine, multiplayer client, or backend;
+- runtime configuration, ticket, score, clock, or termination policy code;
+- the `GEN-001` Ticket Builder, constraints, solver, and versioned generator;
+- final `SCORE-001` policy and balance;
+- production Room/setup/results UI; and
+- any replacement for the removed Equipment system.
 
-The following schemas require a later, explicitly scoped migration:
-
-| Schema | Expected change |
-|---|---|
-| `match_state.schema.json` | Configuration, teams, roster order, ticket policy state, multiple winners/results, and clocks. |
-| `player_state.schema.json` | Team, seat, status, handicap/effective starting score, clocks, concession metadata, and performance counters if not derived separately. |
-| `turn_state.schema.json` | Arbitrary roster order, round semantics, deadline, and clock state. |
-| `public_match_view.schema.json` | Safe configuration, roster/team scores, player statuses, public deadlines, and terminal result. |
-| `private_player_view.schema.json` | Player-specific clock, legal actions, private evidence, and reconnect information. |
-| `game_event.schema.json` | Team/score/timer/disconnect/concession/termination events and visibility. |
-| `action_request.schema.json` | Concede and any timer- or ticket-claim-related intentions. |
-| `action_result.schema.json` | Configuration-aware rejection reasons and terminal results. |
-| `ticket_state.schema.json` | Contribution attribution, claim/control rules, and replenishment provenance if required. |
-
-Stable IDs must not be renamed without an explicit migration task.
-
-## Examples and tests
-
-- Add valid and invalid match-configuration fixtures.
-- Add solo, competitive, and cooperative runtime examples.
-- Add finite, replenishing, and endless-by-configuration match examples.
-- Add negative-handicap and near-target starting-score examples.
-- Add timer, disconnect, concession, and reconnect event sequences.
-- Add deterministic seeded ticket-generation fixtures.
-- Add result and statistics fixtures derived from event logs.
-
-## UI documents to add later
-
-- Match setup requirements, including presets and advanced settings.
-- Queue virtualization/pagination behavior for large `S` and `Q`.
-- Multiplayer roster, team, clocks, and connection-state display.
-- Result and statistics screen behavior.
-- Warnings for potentially long or resource-intensive configurations.
-
-## Recommended implementation order
-
-1. Resolve the terminal-condition and cooperative concession questions in [`decisions/UNFROZEN_RULES.md`](decisions/UNFROZEN_RULES.md).
-2. Write `08_MATCH_CONFIGURATION_AND_RESULTS.md` as a SHALL-based contract.
-3. Add schema fixtures and failing validation tests.
-4. Migrate runtime schemas without changing the domain catalogs.
-5. Implement a pure configuration validator.
-6. Implement composable `TicketPolicy`, `ScoringPolicy`, `ClockPolicy`, and `TerminationPolicy` functions.
-7. Update public/private projections.
-8. Add setup and result UI only after engine behavior is proven.
+After synchronization, resolve remaining fundamental rules through the decision lifecycle before building behavior that depends on them. Stable entity IDs remain public contracts and must not be renamed without an explicit migration task.

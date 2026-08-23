@@ -1,0 +1,76 @@
+{
+  "request_id": "req_isolation_accepted",
+  "accepted": true,
+  "match_revision_before": 18,
+  "match_revision_after": 19,
+  "payment_applied": true,
+  "actions_spent": 1,
+  "utility_resources_spent": {
+    "search_tokens": 0,
+    "refresh_tokens": 0
+  },
+  "public_events": [
+    {
+      "event_id": "evt_worklog_isolation_001",
+      "match_id": "match_demo_001",
+      "sequence": 3,
+      "revision": 19,
+      "event_type": "WORKLOG_PLACEHOLDER_CREATED",
+      "actor_player_id": "player_a",
+      "ticket_instance_id": "ticketinst_2",
+      "action_id": "action_isolation_001",
+      "visibility": "PUBLIC_MATCH",
+      "visible_to_player_ids": [],
+      "visible_to_team_ids": [],
+      "payload": {
+        "source_name": "Commit Isolation",
+        "public_target_surface": "ticketinst_2",
+        "action_cost": 1
+      },
+      "worklog_projection": {
+        "placeholder_event_id": "evt_worklog_isolation_001",
+        "source_action_event_id": "evt_worklog_isolation_001",
+        "source_result_event_id": null,
+        "public_summary": "player_a committed an Isolation on ticketinst_2.",
+        "action_time": "2026-08-22T16:02:00Z",
+        "publication_event_id": null,
+        "publication_time": null,
+        "publisher_player_id": null,
+        "locked": false
+      },
+      "action_time": "2026-08-22T16:02:00Z",
+      "publication_time": null,
+      "created_at": "2026-08-22T16:02:00Z"
+    },
+    {
+      "event_id": "evt_isolation_001",
+      "match_id": "match_demo_001",
+      "sequence": 4,
+      "revision": 19,
+      "event_type": "ISOLATION_ACCEPTED",
+      "actor_player_id": "player_a",
+      "ticket_instance_id": "ticketinst_2",
+      "action_id": "action_isolation_001",
+      "visibility": "PUBLIC_MATCH",
+      "visible_to_player_ids": [],
+      "visible_to_team_ids": [],
+      "payload": {
+        "fault_id": "fault.memory.dimm.failed",
+        "cited_evidence_event_ids": ["evt_evidence_001"],
+        "classification": "ACTIONABLE_AND_DEEPEST"
+      },
+      "worklog_projection": null,
+      "action_time": "2026-08-22T16:02:00Z",
+      "publication_time": null,
+      "created_at": "2026-08-22T16:02:00Z"
+    }
+  ],
+  "team_events": [],
+  "private_events": [],
+  "error_code": null,
+  "error_message": null,
+  "rejected_at": null,
+  "recovered_card_instance_id": null,
+  "opened_resolution_window": "NONE",
+  "resolution_code": "RESOLVED"
+}

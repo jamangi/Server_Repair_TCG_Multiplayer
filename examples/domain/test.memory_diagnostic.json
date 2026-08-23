@@ -30,10 +30,10 @@
     {
       "fault_id": "fault.memory.dimm.failed",
       "possible_outcomes": [
-        "supports",
-        "contradicts",
-        "confirms",
-        "inconclusive"
+        "SUPPORT",
+        "CONTRADICT",
+        "CONFIRM",
+        "INCONCLUSIVE"
       ],
       "notes": "Exact certainty depends on diagnostic result and scenario."
     }

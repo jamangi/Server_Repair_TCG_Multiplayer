@@ -12,7 +12,7 @@ The wireframes are intentionally low fidelity. They establish information hierar
 | 2 | Social room browser | `02-room-browser/` |
 | 3 | Friendly room creation | `03-room-creation/` |
 | 4 | Presence-rich room lobby | `04-room-lobby/` |
-| 5 | My Info, character, inventory, and abilities | `05-player-identity/` |
+| 5 | My Info, appearance, honor badges, collection, and history | `05-player-identity/` |
 | 6 | Persistent friends, whispers, guilds, and invitations | `06-social/` |
 | 7 | Store catalog with character preview | future commerce/store plan |
 | 8 | Match loading and synchronization | room-to-match transition plan |
@@ -55,7 +55,7 @@ A presence stage makes humans, computer players, open seats, teams, and readines
 
 [Editable SVG source](./05-my-info-and-character.svg)
 
-The technician is the visual anchor. Equipment, inventory, statistics, and provisional ability slots surround that identity. Candidate abilities such as Coder, Team Lead, and Admin Access remain design hypotheses until game rules freeze them.
+The technician is the visual anchor. Cosmetic appearance, honor-only Qualifications, collection summaries, and performance history surround that identity. There is no account Equipment/loadout or mechanical ability-slot system; technical Tools remain cards/domain concepts rather than profile items.
 
 ## 6. Social dock
 
@@ -71,7 +71,7 @@ Friends, whispers, guilds, private messages, room invitations, and presence shar
 
 [Editable SVG source](./07-store.svg)
 
-The catalog combines currency balances, category tabs, product cards, and a large live character preview. A purchase shows its visual or statistical effect before confirmation; `Put off` cleanly returns to browsing.
+The catalog combines currency balances, category tabs, owned-card or cosmetic products, and a large live character preview for appearance items. Cosmetic purchases state that they have no gameplay effect; card purchases enter the collection rather than a character slot. `Put off` cleanly returns to browsing.
 
 ## 8. Loading and synchronization
 

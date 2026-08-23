@@ -1,0 +1,21 @@
+{
+  "request_id": "req_stale_001",
+  "accepted": false,
+  "match_revision_before": 20,
+  "match_revision_after": 20,
+  "payment_applied": false,
+  "actions_spent": 0,
+  "utility_resources_spent": {
+    "search_tokens": 0,
+    "refresh_tokens": 0
+  },
+  "public_events": [],
+  "team_events": [],
+  "private_events": [],
+  "error_code": "STALE_REVISION",
+  "error_message": "Install the latest player-safe snapshot before retrying.",
+  "rejected_at": "BEFORE_PAYMENT",
+  "recovered_card_instance_id": null,
+  "opened_resolution_window": "NONE",
+  "resolution_code": null
+}

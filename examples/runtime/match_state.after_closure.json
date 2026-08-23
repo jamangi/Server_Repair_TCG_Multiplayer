@@ -1,0 +1,976 @@
+{
+  "match_id": "match_demo_001",
+  "revision": 33,
+  "ruleset_version": "0.1-task-007",
+  "status": "COMPLETED",
+  "created_at": "2026-08-22T15:55:00Z",
+  "updated_at": "2026-08-22T16:17:00Z",
+  "configuration": {
+    "collaboration_mode": "competitive",
+    "termination_score": -1,
+    "starting_ticket_count": 1,
+    "queue_minimum": 0,
+    "starting_service_points_by_player": {
+      "player_a": 0,
+      "player_b": 0
+    },
+    "deck_size": 30,
+    "max_copies_per_card_id": 3,
+    "opening_hand_size": 5,
+    "actions_per_turn": 2,
+    "starting_search_tokens": 3,
+    "ticket_search_tokens": 1,
+    "max_search_tokens": 5,
+    "starting_refresh_tokens": 1,
+    "max_refresh_tokens": 1
+  },
+  "players": [
+    {
+      "player_id": "player_a",
+      "display_name": "Player A",
+      "team_id": null,
+      "seat_number": 1,
+      "active": true,
+      "service_points": 1,
+      "deck_snapshot_card_definition_ids": [
+        "card.fixture.01", "card.fixture.01", "card.fixture.01",
+        "card.fixture.02", "card.fixture.02", "card.fixture.02",
+        "card.fixture.03", "card.fixture.03", "card.fixture.03",
+        "card.fixture.04", "card.fixture.04", "card.fixture.04",
+        "card.fixture.05", "card.fixture.05", "card.fixture.05",
+        "card.fixture.06", "card.fixture.06", "card.fixture.06",
+        "card.fixture.07", "card.fixture.07", "card.fixture.07",
+        "card.fixture.08", "card.fixture.08", "card.fixture.08",
+        "card.fixture.09", "card.fixture.09", "card.fixture.09",
+        "card.fixture.10", "card.fixture.10", "card.fixture.10"
+      ],
+      "deck_card_instance_ids": [],
+      "hand_card_instance_ids": ["cardinst_028", "cardinst_029", "cardinst_030"],
+      "discard_card_instance_ids": [
+        "cardinst_001", "cardinst_002", "cardinst_003", "cardinst_004", "cardinst_005",
+        "cardinst_006", "cardinst_007", "cardinst_008", "cardinst_009", "cardinst_010",
+        "cardinst_011", "cardinst_012", "cardinst_013", "cardinst_014", "cardinst_015",
+        "cardinst_016", "cardinst_017", "cardinst_018", "cardinst_019", "cardinst_020",
+        "cardinst_021", "cardinst_022", "cardinst_023", "cardinst_024", "cardinst_025",
+        "cardinst_026", "cardinst_027"
+      ],
+      "in_play_card_instance_ids": [],
+      "opening_hand_drawn": true,
+      "empty_draws_skipped": 1,
+      "utility_resources": {
+        "search_tokens": 3,
+        "max_search_tokens": 5,
+        "refresh_tokens": 1,
+        "max_refresh_tokens": 1
+      },
+      "knowledge_states": [],
+      "contribution_ids": ["contrib_repair_002"],
+      "score_event_ids": ["evt_score_001"],
+      "closure_statistics": {
+        "tickets_closed": 0,
+        "closure_event_ids": []
+      },
+      "connection": {
+        "status": "CONNECTED",
+        "snapshot_revision": 33,
+        "last_acknowledged_event_sequence": 40,
+        "unseen_semantic_event_ids": []
+      }
+    },
+    {
+      "player_id": "player_b",
+      "display_name": "Player B",
+      "team_id": null,
+      "seat_number": 2,
+      "active": true,
+      "service_points": 0,
+      "deck_snapshot_card_definition_ids": [
+        "card.fixture.01", "card.fixture.01", "card.fixture.01",
+        "card.fixture.02", "card.fixture.02", "card.fixture.02",
+        "card.fixture.03", "card.fixture.03", "card.fixture.03",
+        "card.fixture.04", "card.fixture.04", "card.fixture.04",
+        "card.fixture.05", "card.fixture.05", "card.fixture.05",
+        "card.fixture.06", "card.fixture.06", "card.fixture.06",
+        "card.fixture.07", "card.fixture.07", "card.fixture.07",
+        "card.fixture.08", "card.fixture.08", "card.fixture.08",
+        "card.fixture.09", "card.fixture.09", "card.fixture.09",
+        "card.fixture.10", "card.fixture.10", "card.fixture.10"
+      ],
+      "deck_card_instance_ids": [
+        "b_cardinst_006", "b_cardinst_007", "b_cardinst_008", "b_cardinst_009", "b_cardinst_010",
+        "b_cardinst_011", "b_cardinst_012", "b_cardinst_013", "b_cardinst_014", "b_cardinst_015",
+        "b_cardinst_016", "b_cardinst_017", "b_cardinst_018", "b_cardinst_019", "b_cardinst_020",
+        "b_cardinst_021", "b_cardinst_022", "b_cardinst_023", "b_cardinst_024", "b_cardinst_025",
+        "b_cardinst_026", "b_cardinst_027", "b_cardinst_028", "b_cardinst_029", "b_cardinst_030"
+      ],
+      "hand_card_instance_ids": [
+        "b_cardinst_001", "b_cardinst_002", "b_cardinst_003", "b_cardinst_004", "b_cardinst_005"
+      ],
+      "discard_card_instance_ids": [],
+      "in_play_card_instance_ids": [],
+      "opening_hand_drawn": true,
+      "empty_draws_skipped": 0,
+      "utility_resources": {
+        "search_tokens": 4,
+        "max_search_tokens": 5,
+        "refresh_tokens": 1,
+        "max_refresh_tokens": 1
+      },
+      "knowledge_states": [],
+      "contribution_ids": [],
+      "score_event_ids": [],
+      "closure_statistics": {
+        "tickets_closed": 1,
+        "closure_event_ids": ["evt_close_001"]
+      },
+      "connection": {
+        "status": "CONNECTED",
+        "snapshot_revision": 33,
+        "last_acknowledged_event_sequence": 40,
+        "unseen_semantic_event_ids": []
+      }
+    }
+  ],
+  "turn_state": null,
+  "active_tickets": [],
+  "archived_ticket_instance_ids": [
+    "ticketinst_2"
+  ],
+  "card_instances": [
+    {
+      "card_instance_id": "cardinst_001",
+      "card_definition_id": "card.fixture.01",
+      "owner_player_id": "player_a",
+      "controller_player_id": "player_a",
+      "zone": "discard",
+      "face_state": "face_up",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "cardinst_002",
+      "card_definition_id": "card.fixture.01",
+      "owner_player_id": "player_a",
+      "controller_player_id": "player_a",
+      "zone": "discard",
+      "face_state": "face_up",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "cardinst_003",
+      "card_definition_id": "card.fixture.01",
+      "owner_player_id": "player_a",
+      "controller_player_id": "player_a",
+      "zone": "discard",
+      "face_state": "face_up",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "cardinst_004",
+      "card_definition_id": "card.fixture.02",
+      "owner_player_id": "player_a",
+      "controller_player_id": "player_a",
+      "zone": "discard",
+      "face_state": "face_up",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "cardinst_005",
+      "card_definition_id": "card.fixture.02",
+      "owner_player_id": "player_a",
+      "controller_player_id": "player_a",
+      "zone": "discard",
+      "face_state": "face_up",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "cardinst_006",
+      "card_definition_id": "card.fixture.02",
+      "owner_player_id": "player_a",
+      "controller_player_id": "player_a",
+      "zone": "discard",
+      "face_state": "face_up",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "cardinst_007",
+      "card_definition_id": "card.fixture.03",
+      "owner_player_id": "player_a",
+      "controller_player_id": "player_a",
+      "zone": "discard",
+      "face_state": "face_up",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "cardinst_008",
+      "card_definition_id": "card.fixture.03",
+      "owner_player_id": "player_a",
+      "controller_player_id": "player_a",
+      "zone": "discard",
+      "face_state": "face_up",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "cardinst_009",
+      "card_definition_id": "card.fixture.03",
+      "owner_player_id": "player_a",
+      "controller_player_id": "player_a",
+      "zone": "discard",
+      "face_state": "face_up",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "cardinst_010",
+      "card_definition_id": "card.fixture.04",
+      "owner_player_id": "player_a",
+      "controller_player_id": "player_a",
+      "zone": "discard",
+      "face_state": "face_up",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "cardinst_011",
+      "card_definition_id": "card.fixture.04",
+      "owner_player_id": "player_a",
+      "controller_player_id": "player_a",
+      "zone": "discard",
+      "face_state": "face_up",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "cardinst_012",
+      "card_definition_id": "card.fixture.04",
+      "owner_player_id": "player_a",
+      "controller_player_id": "player_a",
+      "zone": "discard",
+      "face_state": "face_up",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "cardinst_013",
+      "card_definition_id": "card.fixture.05",
+      "owner_player_id": "player_a",
+      "controller_player_id": "player_a",
+      "zone": "discard",
+      "face_state": "face_up",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "cardinst_014",
+      "card_definition_id": "card.fixture.05",
+      "owner_player_id": "player_a",
+      "controller_player_id": "player_a",
+      "zone": "discard",
+      "face_state": "face_up",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "cardinst_015",
+      "card_definition_id": "card.fixture.05",
+      "owner_player_id": "player_a",
+      "controller_player_id": "player_a",
+      "zone": "discard",
+      "face_state": "face_up",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "cardinst_016",
+      "card_definition_id": "card.fixture.06",
+      "owner_player_id": "player_a",
+      "controller_player_id": "player_a",
+      "zone": "discard",
+      "face_state": "face_up",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "cardinst_017",
+      "card_definition_id": "card.fixture.06",
+      "owner_player_id": "player_a",
+      "controller_player_id": "player_a",
+      "zone": "discard",
+      "face_state": "face_up",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "cardinst_018",
+      "card_definition_id": "card.fixture.06",
+      "owner_player_id": "player_a",
+      "controller_player_id": "player_a",
+      "zone": "discard",
+      "face_state": "face_up",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "cardinst_019",
+      "card_definition_id": "card.fixture.07",
+      "owner_player_id": "player_a",
+      "controller_player_id": "player_a",
+      "zone": "discard",
+      "face_state": "face_up",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "cardinst_020",
+      "card_definition_id": "card.fixture.07",
+      "owner_player_id": "player_a",
+      "controller_player_id": "player_a",
+      "zone": "discard",
+      "face_state": "face_up",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "cardinst_021",
+      "card_definition_id": "card.fixture.07",
+      "owner_player_id": "player_a",
+      "controller_player_id": "player_a",
+      "zone": "discard",
+      "face_state": "face_up",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "cardinst_022",
+      "card_definition_id": "card.fixture.08",
+      "owner_player_id": "player_a",
+      "controller_player_id": "player_a",
+      "zone": "discard",
+      "face_state": "face_up",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "cardinst_023",
+      "card_definition_id": "card.fixture.08",
+      "owner_player_id": "player_a",
+      "controller_player_id": "player_a",
+      "zone": "discard",
+      "face_state": "face_up",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "cardinst_024",
+      "card_definition_id": "card.fixture.08",
+      "owner_player_id": "player_a",
+      "controller_player_id": "player_a",
+      "zone": "discard",
+      "face_state": "face_up",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "cardinst_025",
+      "card_definition_id": "card.fixture.09",
+      "owner_player_id": "player_a",
+      "controller_player_id": "player_a",
+      "zone": "discard",
+      "face_state": "face_up",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "cardinst_026",
+      "card_definition_id": "card.fixture.09",
+      "owner_player_id": "player_a",
+      "controller_player_id": "player_a",
+      "zone": "discard",
+      "face_state": "face_up",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "cardinst_027",
+      "card_definition_id": "card.fixture.09",
+      "owner_player_id": "player_a",
+      "controller_player_id": "player_a",
+      "zone": "discard",
+      "face_state": "face_up",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "cardinst_028",
+      "card_definition_id": "card.fixture.10",
+      "owner_player_id": "player_a",
+      "controller_player_id": "player_a",
+      "zone": "hand",
+      "face_state": "face_up",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "cardinst_029",
+      "card_definition_id": "card.fixture.10",
+      "owner_player_id": "player_a",
+      "controller_player_id": "player_a",
+      "zone": "hand",
+      "face_state": "face_up",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "cardinst_030",
+      "card_definition_id": "card.fixture.10",
+      "owner_player_id": "player_a",
+      "controller_player_id": "player_a",
+      "zone": "hand",
+      "face_state": "face_up",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "b_cardinst_001",
+      "card_definition_id": "card.fixture.01",
+      "owner_player_id": "player_b",
+      "controller_player_id": "player_b",
+      "zone": "hand",
+      "face_state": "face_up",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "b_cardinst_002",
+      "card_definition_id": "card.fixture.01",
+      "owner_player_id": "player_b",
+      "controller_player_id": "player_b",
+      "zone": "hand",
+      "face_state": "face_up",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "b_cardinst_003",
+      "card_definition_id": "card.fixture.01",
+      "owner_player_id": "player_b",
+      "controller_player_id": "player_b",
+      "zone": "hand",
+      "face_state": "face_up",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "b_cardinst_004",
+      "card_definition_id": "card.fixture.02",
+      "owner_player_id": "player_b",
+      "controller_player_id": "player_b",
+      "zone": "hand",
+      "face_state": "face_up",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "b_cardinst_005",
+      "card_definition_id": "card.fixture.02",
+      "owner_player_id": "player_b",
+      "controller_player_id": "player_b",
+      "zone": "hand",
+      "face_state": "face_up",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "b_cardinst_006",
+      "card_definition_id": "card.fixture.02",
+      "owner_player_id": "player_b",
+      "controller_player_id": "player_b",
+      "zone": "deck",
+      "face_state": "face_down",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "b_cardinst_007",
+      "card_definition_id": "card.fixture.03",
+      "owner_player_id": "player_b",
+      "controller_player_id": "player_b",
+      "zone": "deck",
+      "face_state": "face_down",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "b_cardinst_008",
+      "card_definition_id": "card.fixture.03",
+      "owner_player_id": "player_b",
+      "controller_player_id": "player_b",
+      "zone": "deck",
+      "face_state": "face_down",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "b_cardinst_009",
+      "card_definition_id": "card.fixture.03",
+      "owner_player_id": "player_b",
+      "controller_player_id": "player_b",
+      "zone": "deck",
+      "face_state": "face_down",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "b_cardinst_010",
+      "card_definition_id": "card.fixture.04",
+      "owner_player_id": "player_b",
+      "controller_player_id": "player_b",
+      "zone": "deck",
+      "face_state": "face_down",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "b_cardinst_011",
+      "card_definition_id": "card.fixture.04",
+      "owner_player_id": "player_b",
+      "controller_player_id": "player_b",
+      "zone": "deck",
+      "face_state": "face_down",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "b_cardinst_012",
+      "card_definition_id": "card.fixture.04",
+      "owner_player_id": "player_b",
+      "controller_player_id": "player_b",
+      "zone": "deck",
+      "face_state": "face_down",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "b_cardinst_013",
+      "card_definition_id": "card.fixture.05",
+      "owner_player_id": "player_b",
+      "controller_player_id": "player_b",
+      "zone": "deck",
+      "face_state": "face_down",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "b_cardinst_014",
+      "card_definition_id": "card.fixture.05",
+      "owner_player_id": "player_b",
+      "controller_player_id": "player_b",
+      "zone": "deck",
+      "face_state": "face_down",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "b_cardinst_015",
+      "card_definition_id": "card.fixture.05",
+      "owner_player_id": "player_b",
+      "controller_player_id": "player_b",
+      "zone": "deck",
+      "face_state": "face_down",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "b_cardinst_016",
+      "card_definition_id": "card.fixture.06",
+      "owner_player_id": "player_b",
+      "controller_player_id": "player_b",
+      "zone": "deck",
+      "face_state": "face_down",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "b_cardinst_017",
+      "card_definition_id": "card.fixture.06",
+      "owner_player_id": "player_b",
+      "controller_player_id": "player_b",
+      "zone": "deck",
+      "face_state": "face_down",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "b_cardinst_018",
+      "card_definition_id": "card.fixture.06",
+      "owner_player_id": "player_b",
+      "controller_player_id": "player_b",
+      "zone": "deck",
+      "face_state": "face_down",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "b_cardinst_019",
+      "card_definition_id": "card.fixture.07",
+      "owner_player_id": "player_b",
+      "controller_player_id": "player_b",
+      "zone": "deck",
+      "face_state": "face_down",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "b_cardinst_020",
+      "card_definition_id": "card.fixture.07",
+      "owner_player_id": "player_b",
+      "controller_player_id": "player_b",
+      "zone": "deck",
+      "face_state": "face_down",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "b_cardinst_021",
+      "card_definition_id": "card.fixture.07",
+      "owner_player_id": "player_b",
+      "controller_player_id": "player_b",
+      "zone": "deck",
+      "face_state": "face_down",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "b_cardinst_022",
+      "card_definition_id": "card.fixture.08",
+      "owner_player_id": "player_b",
+      "controller_player_id": "player_b",
+      "zone": "deck",
+      "face_state": "face_down",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "b_cardinst_023",
+      "card_definition_id": "card.fixture.08",
+      "owner_player_id": "player_b",
+      "controller_player_id": "player_b",
+      "zone": "deck",
+      "face_state": "face_down",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "b_cardinst_024",
+      "card_definition_id": "card.fixture.08",
+      "owner_player_id": "player_b",
+      "controller_player_id": "player_b",
+      "zone": "deck",
+      "face_state": "face_down",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "b_cardinst_025",
+      "card_definition_id": "card.fixture.09",
+      "owner_player_id": "player_b",
+      "controller_player_id": "player_b",
+      "zone": "deck",
+      "face_state": "face_down",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "b_cardinst_026",
+      "card_definition_id": "card.fixture.09",
+      "owner_player_id": "player_b",
+      "controller_player_id": "player_b",
+      "zone": "deck",
+      "face_state": "face_down",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "b_cardinst_027",
+      "card_definition_id": "card.fixture.09",
+      "owner_player_id": "player_b",
+      "controller_player_id": "player_b",
+      "zone": "deck",
+      "face_state": "face_down",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "b_cardinst_028",
+      "card_definition_id": "card.fixture.10",
+      "owner_player_id": "player_b",
+      "controller_player_id": "player_b",
+      "zone": "deck",
+      "face_state": "face_down",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "b_cardinst_029",
+      "card_definition_id": "card.fixture.10",
+      "owner_player_id": "player_b",
+      "controller_player_id": "player_b",
+      "zone": "deck",
+      "face_state": "face_down",
+      "counters": {},
+      "runtime_tags": []
+    },
+    {
+      "card_instance_id": "b_cardinst_030",
+      "card_definition_id": "card.fixture.10",
+      "owner_player_id": "player_b",
+      "controller_player_id": "player_b",
+      "zone": "deck",
+      "face_state": "face_down",
+      "counters": {},
+      "runtime_tags": []
+    }
+  ],
+  "queued_ticket_definition_ids": [],
+  "contribution_ledger": [
+    {
+      "contribution_id": "contrib_repair_002",
+      "ticket_instance_id": "ticketinst_2",
+      "source_event_id": "evt_repair_002",
+      "contributor_player_id": "player_a",
+      "policy_hook_id": "example_only.pending_policy.repair",
+      "settlement_status": "SETTLED"
+    }
+  ],
+  "service_point_events": [
+    {
+      "score_event_id": "evt_score_001",
+      "ticket_instance_id": "ticketinst_2",
+      "source_contribution_id": "contrib_repair_002",
+      "recipient_player_id": "player_a",
+      "recipient_team_id": null,
+      "delta": 1,
+      "policy_hook_id": "example_only.pending_policy.repair",
+      "settled_by_closure_event_id": "evt_close_001"
+    }
+  ],
+  "closure_statistics": [
+    {
+      "closure_event_id": "evt_close_001",
+      "ticket_instance_id": "ticketinst_2",
+      "closer_player_id": "player_b",
+      "attributed_team_id": null,
+      "closed_at": "2026-08-22T16:17:00Z"
+    }
+  ],
+  "events": [
+    {
+      "event_id": "evt_repair_002",
+      "match_id": "match_demo_001",
+      "sequence": 28,
+      "revision": 28,
+      "event_type": "MACHINE_STATE_CHANGED",
+      "actor_player_id": "player_a",
+      "ticket_instance_id": "ticketinst_2",
+      "action_id": "action_repair_002",
+      "visibility": "PUBLIC_MATCH",
+      "visible_to_player_ids": [],
+      "visible_to_team_ids": [],
+      "payload": {
+        "repair_procedure_id": "repair.memory.replace_dimm",
+        "machine_state_summary": "The authored Repair condition changed."
+      },
+      "worklog_projection": null,
+      "action_time": "2026-08-22T16:12:00Z",
+      "publication_time": null,
+      "created_at": "2026-08-22T16:12:00Z"
+    },
+    {
+      "event_id": "evt_close_001",
+      "match_id": "match_demo_001",
+      "sequence": 33,
+      "revision": 33,
+      "event_type": "CLOSURE_PUBLISHED",
+      "actor_player_id": "player_b",
+      "ticket_instance_id": "ticketinst_2",
+      "action_id": "action_close_001",
+      "visibility": "PUBLIC_MATCH",
+      "visible_to_player_ids": [],
+      "visible_to_team_ids": [],
+      "payload": {
+        "action_cost": 0,
+        "statistically_attributed_player_id": "player_b",
+        "card_recovered": false
+      },
+      "worklog_projection": null,
+      "action_time": "2026-08-22T16:17:00Z",
+      "publication_time": "2026-08-22T16:17:00Z",
+      "created_at": "2026-08-22T16:17:00Z"
+    },
+    {
+      "event_id": "evt_worklog_locked_001",
+      "match_id": "match_demo_001",
+      "sequence": 34,
+      "revision": 33,
+      "event_type": "WORKLOG_LOCKED",
+      "actor_player_id": "player_b",
+      "ticket_instance_id": "ticketinst_2",
+      "action_id": "action_close_001",
+      "visibility": "PUBLIC_MATCH",
+      "visible_to_player_ids": [],
+      "visible_to_team_ids": [],
+      "payload": {
+        "locked": true
+      },
+      "worklog_projection": null,
+      "action_time": "2026-08-22T16:17:00Z",
+      "publication_time": null,
+      "created_at": "2026-08-22T16:17:00Z"
+    },
+    {
+      "event_id": "evt_score_001",
+      "match_id": "match_demo_001",
+      "sequence": 35,
+      "revision": 33,
+      "event_type": "SCORE_EVENTS_CREATED",
+      "actor_player_id": null,
+      "ticket_instance_id": "ticketinst_2",
+      "action_id": "action_close_001",
+      "visibility": "PUBLIC_MATCH",
+      "visible_to_player_ids": [],
+      "visible_to_team_ids": [],
+      "payload": {
+        "source_contribution_ids": [
+          "contrib_repair_002"
+        ],
+        "policy_hook_id": "example_only.pending_policy.repair"
+      },
+      "worklog_projection": null,
+      "action_time": "2026-08-22T16:17:00Z",
+      "publication_time": null,
+      "created_at": "2026-08-22T16:17:00Z"
+    },
+    {
+      "event_id": "evt_archive_001",
+      "match_id": "match_demo_001",
+      "sequence": 36,
+      "revision": 33,
+      "event_type": "TICKET_ARCHIVED",
+      "actor_player_id": null,
+      "ticket_instance_id": "ticketinst_2",
+      "action_id": "action_close_001",
+      "visibility": "PUBLIC_MATCH",
+      "visible_to_player_ids": [],
+      "visible_to_team_ids": [],
+      "payload": {
+        "removed_from_active_queue": true
+      },
+      "worklog_projection": null,
+      "action_time": "2026-08-22T16:17:00Z",
+      "publication_time": null,
+      "created_at": "2026-08-22T16:17:00Z"
+    },
+    {
+      "event_id": "evt_grant_all_001",
+      "match_id": "match_demo_001",
+      "sequence": 37,
+      "revision": 33,
+      "event_type": "UTILITY_RESOURCES_GRANTED",
+      "actor_player_id": null,
+      "ticket_instance_id": "ticketinst_2",
+      "action_id": "action_close_001",
+      "visibility": "PUBLIC_MATCH",
+      "visible_to_player_ids": [],
+      "visible_to_team_ids": [],
+      "payload": {
+        "active_player_ids": [
+          "player_a",
+          "player_b"
+        ],
+        "configured_search_grant": 1,
+        "refresh_grant": 1,
+        "caps_applied": true
+      },
+      "worklog_projection": null,
+      "action_time": "2026-08-22T16:17:00Z",
+      "publication_time": null,
+      "created_at": "2026-08-22T16:17:00Z"
+    },
+    {
+      "event_id": "evt_queue_001",
+      "match_id": "match_demo_001",
+      "sequence": 38,
+      "revision": 33,
+      "event_type": "QUEUE_RECONCILED",
+      "actor_player_id": null,
+      "ticket_instance_id": "ticketinst_2",
+      "action_id": "action_close_001",
+      "visibility": "PUBLIC_MATCH",
+      "visible_to_player_ids": [],
+      "visible_to_team_ids": [],
+      "payload": {
+        "queue_minimum": 0,
+        "active_ticket_count": 0
+      },
+      "worklog_projection": null,
+      "action_time": "2026-08-22T16:17:00Z",
+      "publication_time": null,
+      "created_at": "2026-08-22T16:17:00Z"
+    },
+    {
+      "event_id": "evt_terminal_001",
+      "match_id": "match_demo_001",
+      "sequence": 39,
+      "revision": 33,
+      "event_type": "TERMINAL_EVALUATED",
+      "actor_player_id": null,
+      "ticket_instance_id": "ticketinst_2",
+      "action_id": "action_close_001",
+      "visibility": "PUBLIC_MATCH",
+      "visible_to_player_ids": [],
+      "visible_to_team_ids": [],
+      "payload": {
+        "evaluated_after_complete_transaction": true
+      },
+      "worklog_projection": null,
+      "action_time": "2026-08-22T16:17:00Z",
+      "publication_time": null,
+      "created_at": "2026-08-22T16:17:00Z"
+    },
+    {
+      "event_id": "evt_turn_end_001",
+      "match_id": "match_demo_001",
+      "sequence": 40,
+      "revision": 33,
+      "event_type": "TURN_ENDED",
+      "actor_player_id": "player_b",
+      "ticket_instance_id": "ticketinst_2",
+      "action_id": "action_close_001",
+      "visibility": "PUBLIC_MATCH",
+      "visible_to_player_ids": [],
+      "visible_to_team_ids": [],
+      "payload": {
+        "reason": "CLOSURE_PUBLISHED"
+      },
+      "worklog_projection": null,
+      "action_time": "2026-08-22T16:17:00Z",
+      "publication_time": null,
+      "created_at": "2026-08-22T16:17:00Z"
+    }
+  ],
+  "event_sequence": 40,
+  "last_queue_reconciliation_event_id": "evt_queue_001",
+  "result": {
+    "winner_player_ids": ["player_a"],
+    "winning_team_ids": [],
+    "reason": "QUEUE_EMPTY",
+    "evaluated_after_event_id": "evt_terminal_001"
+  }
+}

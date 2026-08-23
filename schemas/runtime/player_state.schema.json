@@ -1,105 +1,137 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.local/runtime/player_state.schema.json",
-  "title": "Player State",
+  "title": "Authoritative Player State",
   "type": "object",
   "additionalProperties": false,
   "$defs": {
-    "stableId": {
-      "type": "string",
-      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
-    },
-    "uuidLike": {
-      "type": "string",
-      "minLength": 8
-    },
+    "instanceId": { "type": "string", "minLength": 1 },
     "entityRef": {
       "type": "string",
       "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
-    },
-    "cardInstanceId": {
-      "type": "string",
-      "minLength": 1
-    },
-    "playerId": {
-      "type": "string",
-      "minLength": 1
-    },
-    "ticketInstanceId": {
-      "type": "string",
-      "minLength": 1
-    },
-    "timestamp": {
-      "type": "string",
-      "format": "date-time"
     }
   },
   "properties": {
-    "player_id": {
-      "$ref": "#/$defs/playerId"
-    },
-    "display_name": {
-      "type": "string"
-    },
-    "service_points": {
-      "type": "integer",
-      "minimum": 0
-    },
-    "actions_remaining": {
-      "type": "integer",
-      "minimum": 0
+    "player_id": { "$ref": "#/$defs/instanceId" },
+    "display_name": { "type": "string", "minLength": 1 },
+    "team_id": { "type": ["string", "null"], "minLength": 1 },
+    "seat_number": { "type": "integer", "minimum": 1 },
+    "active": { "type": "boolean" },
+    "service_points": { "type": "integer" },
+    "deck_snapshot_card_definition_ids": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/entityRef" },
+      "minItems": 30,
+      "maxItems": 30
     },
     "deck_card_instance_ids": {
       "type": "array",
-      "items": {
-        "$ref": "#/$defs/cardInstanceId"
-      }
+      "items": { "$ref": "#/$defs/instanceId" },
+      "uniqueItems": true
     },
     "hand_card_instance_ids": {
       "type": "array",
-      "items": {
-        "$ref": "#/$defs/cardInstanceId"
-      }
+      "items": { "$ref": "#/$defs/instanceId" },
+      "uniqueItems": true
     },
     "discard_card_instance_ids": {
       "type": "array",
-      "items": {
-        "$ref": "#/$defs/cardInstanceId"
-      }
+      "items": { "$ref": "#/$defs/instanceId" },
+      "uniqueItems": true
     },
     "in_play_card_instance_ids": {
       "type": "array",
-      "items": {
-        "$ref": "#/$defs/cardInstanceId"
-      }
+      "items": { "$ref": "#/$defs/instanceId" },
+      "uniqueItems": true
+    },
+    "opening_hand_drawn": { "type": "boolean" },
+    "empty_draws_skipped": { "type": "integer", "minimum": 0 },
+    "utility_resources": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "search_tokens": { "type": "integer", "minimum": 0 },
+        "max_search_tokens": { "type": "integer", "minimum": 0 },
+        "refresh_tokens": { "type": "integer", "minimum": 0 },
+        "max_refresh_tokens": { "type": "integer", "minimum": 0 }
+      },
+      "required": [
+        "search_tokens",
+        "max_search_tokens",
+        "refresh_tokens",
+        "max_refresh_tokens"
+      ]
     },
     "knowledge_states": {
       "type": "array",
-      "items": {
-        "type": "object"
-      }
+      "items": { "$ref": "knowledge_state.schema.json" }
     },
-    "has_lost": {
-      "type": "boolean"
+    "contribution_ids": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/instanceId" },
+      "uniqueItems": true
     },
-    "loss_reason": {
-      "type": [
-        "string",
-        "null"
+    "score_event_ids": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/instanceId" },
+      "uniqueItems": true
+    },
+    "closure_statistics": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tickets_closed": { "type": "integer", "minimum": 0 },
+        "closure_event_ids": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/instanceId" },
+          "uniqueItems": true
+        }
+      },
+      "required": ["tickets_closed", "closure_event_ids"]
+    },
+    "connection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["CONNECTED", "DISCONNECTED", "RECONNECTING", "CONCEDED"]
+        },
+        "snapshot_revision": { "type": "integer", "minimum": 0 },
+        "last_acknowledged_event_sequence": { "type": "integer", "minimum": 0 },
+        "unseen_semantic_event_ids": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/instanceId" },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "status",
+        "snapshot_revision",
+        "last_acknowledged_event_sequence",
+        "unseen_semantic_event_ids"
       ]
     }
   },
   "required": [
     "player_id",
     "display_name",
+    "team_id",
+    "seat_number",
+    "active",
     "service_points",
-    "actions_remaining",
+    "deck_snapshot_card_definition_ids",
     "deck_card_instance_ids",
     "hand_card_instance_ids",
     "discard_card_instance_ids",
     "in_play_card_instance_ids",
+    "opening_hand_drawn",
+    "empty_draws_skipped",
+    "utility_resources",
     "knowledge_states",
-    "has_lost",
-    "loss_reason"
+    "contribution_ids",
+    "score_event_ids",
+    "closure_statistics",
+    "connection"
   ]
 }

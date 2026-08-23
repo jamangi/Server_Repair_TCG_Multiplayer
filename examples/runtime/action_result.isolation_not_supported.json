@@ -1,0 +1,95 @@
+{
+  "request_id": "req_isolation_not_supported",
+  "accepted": true,
+  "match_revision_before": 19,
+  "match_revision_after": 20,
+  "payment_applied": true,
+  "actions_spent": 1,
+  "utility_resources_spent": {
+    "search_tokens": 0,
+    "refresh_tokens": 0
+  },
+  "public_events": [
+    {
+      "event_id": "evt_worklog_isolation_rejected_001",
+      "match_id": "match_demo_001",
+      "sequence": 5,
+      "revision": 20,
+      "event_type": "WORKLOG_PLACEHOLDER_CREATED",
+      "actor_player_id": "player_b",
+      "ticket_instance_id": "ticketinst_2",
+      "action_id": "action_isolation_rejected_001",
+      "visibility": "PUBLIC_MATCH",
+      "visible_to_player_ids": [],
+      "visible_to_team_ids": [],
+      "payload": {
+        "source_name": "Commit Isolation",
+        "public_target_surface": "ticketinst_2",
+        "action_cost": 1
+      },
+      "worklog_projection": {
+        "placeholder_event_id": "evt_worklog_isolation_rejected_001",
+        "source_action_event_id": "evt_worklog_isolation_rejected_001",
+        "source_result_event_id": null,
+        "public_summary": "player_b committed an Isolation on ticketinst_2.",
+        "action_time": "2026-08-22T16:03:00Z",
+        "publication_event_id": null,
+        "publication_time": null,
+        "publisher_player_id": null,
+        "locked": false
+      },
+      "action_time": "2026-08-22T16:03:00Z",
+      "publication_time": null,
+      "created_at": "2026-08-22T16:03:00Z"
+    },
+    {
+      "event_id": "evt_isolation_rejected_001",
+      "match_id": "match_demo_001",
+      "sequence": 6,
+      "revision": 20,
+      "event_type": "ISOLATION_REJECTED",
+      "actor_player_id": "player_b",
+      "ticket_instance_id": "ticketinst_2",
+      "action_id": "action_isolation_rejected_001",
+      "visibility": "PUBLIC_MATCH",
+      "visible_to_player_ids": [],
+      "visible_to_team_ids": [],
+      "payload": {
+        "response_code": "ISOLATION_NOT_SUPPORTED"
+      },
+      "worklog_projection": null,
+      "action_time": "2026-08-22T16:03:00Z",
+      "publication_time": null,
+      "created_at": "2026-08-22T16:03:00Z"
+    }
+  ],
+  "team_events": [],
+  "private_events": [
+    {
+      "event_id": "evt_root_eligibility_001",
+      "match_id": "match_demo_001",
+      "sequence": 7,
+      "revision": 20,
+      "event_type": "ROOT_CAUSE_ELIGIBILITY_CHANGED",
+      "actor_player_id": "player_b",
+      "ticket_instance_id": "ticketinst_2",
+      "action_id": "action_isolation_rejected_001",
+      "visibility": "PRIVATE_PLAYER",
+      "visible_to_player_ids": ["player_b"],
+      "visible_to_team_ids": [],
+      "payload": {
+        "eligible": false
+      },
+      "worklog_projection": null,
+      "action_time": "2026-08-22T16:03:00Z",
+      "publication_time": null,
+      "created_at": "2026-08-22T16:03:00Z"
+    }
+  ],
+  "error_code": null,
+  "error_message": null,
+  "rejected_at": null,
+  "recovered_card_instance_id": null,
+  "opened_resolution_window": "NONE",
+  "resolution_code": "ISOLATION_NOT_SUPPORTED"
+}

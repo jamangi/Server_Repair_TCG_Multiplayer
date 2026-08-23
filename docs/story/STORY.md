@@ -111,14 +111,14 @@ That position gives a new player a natural relationship to Observe. They encount
 
 ### Role: Crossline Technician
 
-Early in the campaign, the player is selected for Second Current's **Continuity Rotation**, a pilot intended to reduce repeat returns and information loss between teams. Participants retain a home team but rotate through Rigline, Trace, Bench, and Gate, shadow Inflow and Outflow, and earn scoped certifications on tools and procedures.
+Early in the campaign, the player is selected for Second Current's **Continuity Rotation**, a pilot intended to reduce repeat returns and information loss between teams. Participants retain a home team but rotate through Rigline, Trace, Bench, and Gate and shadow Inflow and Outflow. The campaign may recognize completed learning with honor-only Qualification badges, but those badges never grant cards, procedures, story access, deck legality, or match power.
 
 Second Current created the program for practical reasons: a good handoff is cheaper than a second repair. The player's supervisor has a less comfortable reason: too many units are passing local metrics while failing the complete lifecycle.
 
 The rotation solves several narrative and gameplay problems at once:
 
 - one protagonist can build meaningful relationships in every part of the facility;
-- new cards can represent learned procedures, tools, contacts, and certifications;
+- new cards can be separately authored campaign rewards for learned procedures, technical Tools, and contacts; certification or Qualification recognition never grants or legalizes them;
 - department identity can shape specialization without making ordinary reasoning impossible off-team;
 - campaign chapters can change scenery and social pressure while the same troubleshooting loop remains legible;
 - evidence gathered at one stage can matter several episodes later.
@@ -156,12 +156,12 @@ Campaign scenes should not reveal hidden faults the match expects the player to 
 | Private Evidence | A technician's notebook, unsent result, or locally visible bench record. | Exact visibility follows the frozen defaults and later decisions. |
 | Team Evidence | Results shared within a cooperative service cell. | Team visibility is not automatically public Documentation. |
 | Worklog | The official chronological service record, including public actions and conclusions. | Later Documentation should not falsify event order. |
-| Player deck | A prepared shift repertoire: certified procedures, available tools, parts access, commands, and trained workflows. | Cards are not literally a pack of cardboard carried on the floor. Exact economy remains unresolved. |
+| Player deck | A prepared shift repertoire: procedures, available technical Tools, parts access, Commands, and trained workflows. | Cards are not literally a pack of cardboard carried on the floor. The frozen first-version deck economy applies; honor badges and cosmetics are not deck entries. |
 | Drawing and searching | Which parts of that repertoire become available under limited time, attention, parts, and bench access. | This is a narrative metaphor, not a frozen explanation of draw rules. |
-| Service Points | A readable gameplay measure of useful service contribution and successful closures. | The fiction should not turn every human interaction into a KPI or settle scoring attribution. |
+| Service Points | A readable gameplay measure of causal service contribution under the eventual scoring policy. | Ticket closure itself is non-scoring. The fiction should not turn every human interaction into a KPI or settle `SCORE-001` attribution. |
 | Competitive play | Technicians working the same queue under an evaluation, certification trial, contract sprint, or friendly shift challenge. | Competition is about service quality and efficiency, not sabotage. |
 | Cooperative play | A service cell responding to a shared workload or incident. | Individual contributions can remain attributable without breaking the team fiction. |
-| Spectators | Trainees, remote specialists, auditors, or viewers of a sanctioned simulation. | Spectator information remains a rules and projection question. |
+| Spectators | Trainees, remote specialists, auditors, or viewers of a sanctioned simulation. | Spectators receive only `PUBLIC_MATCH` state; presentation remains a UI question. |
 
 ## The loop as drama
 
@@ -183,11 +183,11 @@ Each campaign episode can use the following rhythm without requiring every beat 
 
 1. **Cold open:** a person elsewhere in the workflow notices a problem, request, or contradiction.
 2. **Shift brief:** the player learns the lot, client, visible constraints, and social stakes.
-3. **Bench preparation:** the player selects a deck or qualification loadout if the eventual rules support it.
+3. **Bench preparation:** the player selects a legal deck and reviews player-safe context; cosmetics and honor-only Qualifications do not alter preparation.
 4. **Match:** one or more Tickets enter the authoritative troubleshooting game.
 5. **Gate review:** the fiction reacts to Verify results, Documentation quality, unnecessary work, unresolved uncertainty, and contribution history.
 6. **After-shift scene:** relationships change; another part of the facility reveals what the local repair meant.
-7. **Progression:** a mentor, rotation, certification, tool relationship, or new responsibility may make additional cards available.
+7. **Progression:** a separately authored campaign reward associated with mentorship, rotation, training, a technical Tool relationship, or new responsibility may make cards available; any certification or Qualification badge remains distinct honor-only recognition.
 8. **Thread forward:** a serial, part lot, symptom pattern, client statement, or missing record connects to a later episode.
 
 The result should be authored around ranges of legitimate outcomes, not only a single perfect score. A technically correct but poorly documented shift can advance the plot differently from a meticulous root-cause resolution. Exact branching and reward rules remain candidates.

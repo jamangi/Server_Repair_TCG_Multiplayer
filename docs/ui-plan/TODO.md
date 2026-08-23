@@ -97,6 +97,7 @@ Central principle: **turn multiplayer configuration into a social place, not a t
   - Spectator Seats (`SP`);
   - Starting Search Tokens (`SSC`);
   - Search Tokens per Closure (`TSC`);
+  - Maximum Search Tokens (`MSC`);
   - Refresh Token Limit (`MRF`);
   - Starting Refresh Tokens (`SRT`).
 - Prefer names, helper text, presets, sliders, steppers, toggles, and illustrations over exposing mathematical notation in the normal UI.
@@ -122,12 +123,15 @@ Central principle: **turn multiplayer configuration into a social place, not a t
 - Show the most important settings persistently; place the complete configuration behind a gear/details panel.
 - Candidate persistent summary: mode, seats, Service Point Goal, Starting Tickets, Queue Minimum, timer, and password/visibility status.
 - Avatars may idle, shift pose, emote, or display speech bubbles through lightweight Motion animations.
-- A player who concedes becomes a spectator unless they leave the room.
+- A Player who concedes becomes a Spectator only when spectator capacity and Room policy permit it; otherwise they remain a joined member with no gameplay role unless they leave.
 - The lobby must remain comprehensible without animation and under reduced-motion preferences.
 
 ## Character strategy notes
 
 - Begin cheaper than a 3D character system.
+- Do not create an account Equipment/loadout system, mechanical ability slots, or Equipment readiness snapshot. Mechanical preparation lives in legal decks and match-time card state.
+- Keep appearance choices cosmetic. Qualifications may appear as honor-only profile/history badges, with no gameplay, access, deck, procedure, story, or matchmaking effect.
+- Preserve technical Tools as domain records and playable card concepts; a Tool is not character Equipment merely because artwork shows the technician holding it.
 - First viable approach: selectable complete technician portraits or sprites plus an accent palette.
 - Expand later into a layered 2D paper-doll system:
   - base/body pose;
@@ -143,6 +147,17 @@ Central principle: **turn multiplayer configuration into a social place, not a t
 - Motion can provide breathing, bobbing, tool glints, readiness pulses, and small pose changes without requiring a game engine.
 - Character options should represent varied skin tones, hair, gender expression, and assistive devices without turning identity into gameplay power.
 - Keep character assets and selection data separate from game rules and authoritative match state.
+
+## Match interaction contract notes
+
+- Present Observe and Diagnosis as an evidence loop, not seven locked departments. Within Diagnosis, Hypothesize and Test remain revisitable until the player commits an evidence-supported Isolation.
+- Make `Commit Isolation` an explicit one-Action intent that cites Evidence and identifies an authored candidate Fault. Show accepted Isolation as public Ticket progress and the ordinary gateway to Repair; keep private or team Knowledge State visually distinct from machine state.
+- A failed Verify must visibly return the Ticket to Diagnosis without erasing earlier Evidence, Repairs, Verification attempts, or Worklog entries. A later Verify evaluates the current machine state and current passes after the latest relevant Repair.
+- Support incremental `Document Live` play during the match. The Worklog is an immutable chronology: player-safe placeholders may later gain publication details, but their event identity, action time, and order do not change.
+- Respect the four visibility categories—`SERVER_ONLY`, `PRIVATE_PLAYER`, `TEAM`, and `PUBLIC_MATCH`—in every match, reconnect, history, and spectator projection. Hidden content should never be inferred from animation timing, labels, or placeholder shape.
+- After successful Verify makes a Ticket ready to close, open an immediate structured closure window before automatic turn end, even when Verify spent the last Action. Closure costs zero Actions, awards no Service Points, records Player/team closure statistics, performs the full server transaction, and grants only the configured utility resources.
+- The first-version turn display should make the start-of-turn draw, two Actions, and remaining Search/Refresh resources legible. Empty draw is a non-loss event; Search and Refresh each cost one Action plus their own token, and legal zero-Action cards still obey their once-per-turn same-name limit.
+- Every motion treatment needs an equivalent stable-state cue. Under reduced motion, use focus movement, concise status text, and ordered Worklog updates instead of relying on card flight, pulses, or timing alone.
 
 ## Friends, messages, and guilds notes
 

@@ -1,0 +1,22 @@
+{
+  "event_id": "evt_team_evidence_001",
+  "match_id": "match_coop_001",
+  "sequence": 2,
+  "revision": 8,
+  "event_type": "EVIDENCE_CREATED",
+  "actor_player_id": "player_c",
+  "ticket_instance_id": "ticketinst_coop_1",
+  "action_id": "action_coop_test_001",
+  "visibility": "TEAM",
+  "visible_to_player_ids": [],
+  "visible_to_team_ids": ["team_alpha"],
+  "payload": {
+    "authored_outcome_id": "outcome.memory_diagnostic.failed_dimm_support",
+    "candidate_fault_id": "fault.memory.dimm.failed",
+    "disposition": "SUPPORT"
+  },
+  "worklog_projection": null,
+  "action_time": "2026-08-22T18:00:00Z",
+  "publication_time": null,
+  "created_at": "2026-08-22T18:00:00Z"
+}

@@ -2,86 +2,122 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.local/runtime/private_player_view.schema.json",
   "title": "Private Player Match View",
+  "description": "Authenticated Player projection installed as a revisioned snapshot before any explicitly supplied unseen semantic events.",
   "type": "object",
   "additionalProperties": false,
   "$defs": {
-    "stableId": {
-      "type": "string",
-      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
-    },
-    "uuidLike": {
-      "type": "string",
-      "minLength": 8
-    },
+    "instanceId": { "type": "string", "minLength": 1 },
     "entityRef": {
       "type": "string",
       "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
-    },
-    "cardInstanceId": {
-      "type": "string",
-      "minLength": 1
-    },
-    "playerId": {
-      "type": "string",
-      "minLength": 1
-    },
-    "ticketInstanceId": {
-      "type": "string",
-      "minLength": 1
-    },
-    "timestamp": {
-      "type": "string",
-      "format": "date-time"
     }
   },
   "properties": {
-    "player_id": {
-      "$ref": "#/$defs/playerId"
-    },
-    "match_id": {
-      "type": "string"
-    },
-    "revision": {
-      "type": "integer",
-      "minimum": 0
-    },
+    "player_id": { "$ref": "#/$defs/instanceId" },
+    "match_id": { "$ref": "#/$defs/instanceId" },
+    "team_id": { "type": ["string", "null"], "minLength": 1 },
+    "revision": { "type": "integer", "minimum": 0 },
+    "public_match": { "$ref": "public_match_view.schema.json" },
     "hand": {
       "type": "array",
       "items": {
-        "type": "object"
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "card_instance_id": { "$ref": "#/$defs/instanceId" },
+          "card_definition_id": { "$ref": "#/$defs/entityRef" }
+        },
+        "required": ["card_instance_id", "card_definition_id"]
       }
     },
-    "deck_count": {
-      "type": "integer",
-      "minimum": 0
+    "deck_count": { "type": "integer", "minimum": 0 },
+    "discard_card_instance_ids": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/instanceId" },
+      "uniqueItems": true
+    },
+    "utility_resources": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "search_tokens": { "type": "integer", "minimum": 0 },
+        "max_search_tokens": { "type": "integer", "minimum": 0 },
+        "refresh_tokens": { "type": "integer", "minimum": 0 },
+        "max_refresh_tokens": { "type": "integer", "minimum": 0 }
+      },
+      "required": [
+        "search_tokens",
+        "max_search_tokens",
+        "refresh_tokens",
+        "max_refresh_tokens"
+      ]
     },
     "knowledge_states": {
       "type": "array",
-      "items": {
-        "type": "object"
-      }
+      "items": { "$ref": "knowledge_state.schema.json" }
     },
-    "private_reveals": {
+    "authorized_events": {
       "type": "array",
       "items": {
-        "type": "object"
+        "allOf": [
+          { "$ref": "game_event.schema.json" },
+          {
+            "properties": {
+              "visibility": {
+                "enum": ["PRIVATE_PLAYER", "TEAM", "PUBLIC_MATCH"]
+              }
+            }
+          }
+        ]
       }
     },
     "legal_actions": {
       "type": "array",
       "items": {
-        "type": "object"
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "action_type": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]+$" },
+          "ticket_instance_id": { "type": ["string", "null"], "minLength": 1 },
+          "card_instance_id": { "type": ["string", "null"], "minLength": 1 }
+        },
+        "required": ["action_type", "ticket_instance_id", "card_instance_id"]
       }
+    },
+    "reconnect": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "snapshot_installed": { "const": true },
+        "snapshot_revision": { "type": "integer", "minimum": 0 },
+        "snapshot_event_sequence": { "type": "integer", "minimum": 0 },
+        "unseen_semantic_event_ids": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/instanceId" },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "snapshot_installed",
+        "snapshot_revision",
+        "snapshot_event_sequence",
+        "unseen_semantic_event_ids"
+      ]
     }
   },
   "required": [
     "player_id",
     "match_id",
+    "team_id",
     "revision",
+    "public_match",
     "hand",
     "deck_count",
+    "discard_card_instance_ids",
+    "utility_resources",
     "knowledge_states",
-    "private_reveals",
-    "legal_actions"
+    "authorized_events",
+    "legal_actions",
+    "reconnect"
   ]
 }

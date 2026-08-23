@@ -1,0 +1,102 @@
+{
+  "request_id": "req_search_001",
+  "accepted": true,
+  "match_revision_before": 24,
+  "match_revision_after": 25,
+  "payment_applied": true,
+  "actions_spent": 1,
+  "utility_resources_spent": {
+    "search_tokens": 1,
+    "refresh_tokens": 0
+  },
+  "public_events": [
+    {
+      "event_id": "evt_worklog_search_001",
+      "match_id": "match_utility_fixture_001",
+      "sequence": 1,
+      "revision": 25,
+      "event_type": "WORKLOG_PLACEHOLDER_CREATED",
+      "actor_player_id": "player_a",
+      "ticket_instance_id": null,
+      "action_id": "action_search_001",
+      "visibility": "PUBLIC_MATCH",
+      "visible_to_player_ids": [],
+      "visible_to_team_ids": [],
+      "payload": {
+        "source_name": "Search",
+        "public_target_surface": "player_a draw deck",
+        "action_cost": 1
+      },
+      "worklog_projection": {
+        "placeholder_event_id": "evt_worklog_search_001",
+        "source_action_event_id": "evt_worklog_search_001",
+        "source_result_event_id": null,
+        "public_summary": "player_a used Search on their remaining draw deck.",
+        "action_time": "2026-08-22T19:00:00Z",
+        "publication_event_id": null,
+        "publication_time": null,
+        "publisher_player_id": null,
+        "locked": false
+      },
+      "action_time": "2026-08-22T19:00:00Z",
+      "publication_time": null,
+      "created_at": "2026-08-22T19:00:00Z"
+    },
+    {
+      "event_id": "evt_search_public_001",
+      "match_id": "match_utility_fixture_001",
+      "sequence": 2,
+      "revision": 25,
+      "event_type": "SEARCH_COMPLETED",
+      "actor_player_id": "player_a",
+      "ticket_instance_id": null,
+      "action_id": "action_search_001",
+      "visibility": "PUBLIC_MATCH",
+      "visible_to_player_ids": [],
+      "visible_to_team_ids": [],
+      "payload": {
+        "hand_count_before": 5,
+        "hand_count_after": 6,
+        "deck_count_before": 20,
+        "deck_count_after": 19,
+        "search_tokens_before": 3,
+        "search_tokens_after": 2,
+        "remaining_deck_shuffled": true
+      },
+      "worklog_projection": null,
+      "action_time": "2026-08-22T19:00:00Z",
+      "publication_time": null,
+      "created_at": "2026-08-22T19:00:00Z"
+    }
+  ],
+  "team_events": [],
+  "private_events": [
+    {
+      "event_id": "evt_search_private_001",
+      "match_id": "match_utility_fixture_001",
+      "sequence": 3,
+      "revision": 25,
+      "event_type": "CARD_SEARCHED",
+      "actor_player_id": "player_a",
+      "ticket_instance_id": null,
+      "action_id": "action_search_001",
+      "visibility": "PRIVATE_PLAYER",
+      "visible_to_player_ids": ["player_a"],
+      "visible_to_team_ids": [],
+      "payload": {
+        "selected_card_definition_id": "card.core.memory_diagnostic",
+        "selected_card_instance_id": "utility_cardinst_020"
+      },
+      "worklog_projection": null,
+      "action_time": "2026-08-22T19:00:00Z",
+      "publication_time": null,
+      "created_at": "2026-08-22T19:00:00Z"
+    }
+  ],
+  "error_code": null,
+  "error_message": null,
+  "rejected_at": null,
+  "recovered_card_instance_id": null,
+  "opened_resolution_window": "NONE",
+  "resolution_code": "RESOLVED"
+}

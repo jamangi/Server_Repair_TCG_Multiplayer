@@ -1,0 +1,22 @@
+{
+  "round_number": 4,
+  "turn_number": 8,
+  "active_player_id": "player_b",
+  "phase": "CLOSURE_RESOLUTION",
+  "draw_status": "DRAWN",
+  "drawn_card_instance_id": "cardinst_turn_008",
+  "actions_started": 2,
+  "actions_spent": 2,
+  "actions_remaining": 0,
+  "zero_action_card_names_played": [],
+  "closure_window": {
+    "is_open": true,
+    "eligible_ticket_instance_ids": [
+      "ticketinst_2"
+    ],
+    "opened_by_verify_event_id": "evt_verify_pass_003",
+    "precedes_automatic_end_turn": true
+  },
+  "passed": false,
+  "turn_ended_reason": null
+}

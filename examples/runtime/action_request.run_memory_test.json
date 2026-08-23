@@ -3,11 +3,13 @@
   "match_id": "match_demo_001",
   "player_id": "player_a",
   "expected_revision": 17,
-  "action_type": "run_test",
+  "action_type": "RUN_TEST",
   "payload": {
+    "ticket_instance_id": "ticketinst_2",
     "card_instance_id": "cardinst_103",
-    "test_id": "test.memory.diagnostic",
-    "ticket_instance_id": "ticketinst_2"
+    "execution_definition_id": "test.memory.diagnostic",
+    "target_ref": "component_instance.dimm_a1",
+    "observed_machine_revision": 0
   },
   "client_nonce": "nonce_abc123"
 }

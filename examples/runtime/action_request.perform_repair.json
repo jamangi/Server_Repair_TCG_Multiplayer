@@ -1,0 +1,14 @@
+{
+  "request_id": "req_repair_001",
+  "match_id": "match_demo_001",
+  "player_id": "player_b",
+  "expected_revision": 20,
+  "action_type": "PERFORM_REPAIR",
+  "payload": {
+    "ticket_instance_id": "ticketinst_2",
+    "card_instance_id": "cardinst_repair_001",
+    "repair_procedure_id": "repair.memory.replace_dimm",
+    "isolated_fault_instance_id": "faultinst_dimm_001"
+  },
+  "client_nonce": "nonce_repair_001"
+}

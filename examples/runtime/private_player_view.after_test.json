@@ -1,46 +1,229 @@
 {
   "player_id": "player_a",
   "match_id": "match_demo_001",
+  "team_id": null,
   "revision": 18,
+  "public_match": {
+    "match_id": "match_demo_001",
+    "revision": 18,
+    "ruleset_version": "0.1-task-007",
+    "status": "ACTIVE",
+    "collaboration_mode": "competitive",
+    "players": [
+      {
+        "player_id": "player_a",
+        "display_name": "Player A",
+        "team_id": null,
+        "service_points": 0,
+        "hand_count": 5,
+        "deck_count": 24,
+        "discard_card_definition_ids": [
+          "card.core.memory_diagnostic"
+        ],
+        "in_play_card_definition_ids": [],
+        "search_tokens": 3,
+        "max_search_tokens": 5,
+        "refresh_tokens": 1,
+        "max_refresh_tokens": 1,
+        "tickets_closed": 0,
+        "connection_status": "CONNECTED"
+      }
+    ],
+    "repair_queue": [
+      {
+        "ticket_instance_id": "ticketinst_2",
+        "ticket_definition_id": "ticket.memory.no_post",
+        "status": "DIAGNOSIS",
+        "visible_symptom_ids": [
+          "symptom.boot.no_post"
+        ],
+        "public_candidate_fault_ids": [
+          "fault.memory.dimm.failed"
+        ],
+        "accepted_isolation": null,
+        "repair_summaries": [],
+        "verify_summaries": [],
+        "worklog": [
+          {
+            "placeholder_event_id": "evt_worklog_test_001",
+            "sequence": 1,
+            "actor_player_id": "player_a",
+            "source_name": "Memory Diagnostic",
+            "public_target_surface": "ticketinst_2",
+            "action_cost": 1,
+            "action_time": "2026-08-22T16:00:00Z",
+            "public_result_summary": null,
+            "publication_event_id": null,
+            "publication_time": null,
+            "publisher_player_id": null,
+            "locked": false
+          }
+        ],
+        "ready_to_close": false
+      }
+    ],
+    "turn": {
+      "round_number": 1,
+      "turn_number": 1,
+      "active_player_id": "player_a",
+      "phase": "WORK",
+      "actions_remaining": 1,
+      "closure_window_open": false,
+      "closure_eligible_ticket_instance_ids": []
+    },
+    "closure_statistics": [],
+    "public_events": [
+      {
+        "event_id": "evt_worklog_test_001",
+        "match_id": "match_demo_001",
+        "sequence": 1,
+        "revision": 18,
+        "event_type": "WORKLOG_PLACEHOLDER_CREATED",
+        "actor_player_id": "player_a",
+        "ticket_instance_id": "ticketinst_2",
+        "action_id": "action_test_001",
+        "visibility": "PUBLIC_MATCH",
+        "visible_to_player_ids": [],
+        "visible_to_team_ids": [],
+        "payload": {
+          "source_name": "Memory Diagnostic",
+          "public_target_surface": "ticketinst_2",
+          "action_cost": 1
+        },
+        "worklog_projection": {
+          "placeholder_event_id": "evt_worklog_test_001",
+          "source_action_event_id": "evt_worklog_test_001",
+          "source_result_event_id": null,
+          "public_summary": "player_a ran Memory Diagnostic on ticketinst_2.",
+          "action_time": "2026-08-22T16:00:00Z",
+          "publication_event_id": null,
+          "publication_time": null,
+          "publisher_player_id": null,
+          "locked": false
+        },
+        "action_time": "2026-08-22T16:00:00Z",
+        "publication_time": null,
+        "created_at": "2026-08-22T16:00:00Z"
+      }
+    ],
+    "last_event_sequence": 2
+  },
   "hand": [
     {
       "card_instance_id": "cardinst_104",
       "card_definition_id": "card.core.replace_dimm"
+    },
+    {
+      "card_instance_id": "cardinst_105",
+      "card_definition_id": "card.fixture.02"
+    },
+    {
+      "card_instance_id": "cardinst_106",
+      "card_definition_id": "card.fixture.03"
+    },
+    {
+      "card_instance_id": "cardinst_107",
+      "card_definition_id": "card.fixture.04"
+    },
+    {
+      "card_instance_id": "cardinst_108",
+      "card_definition_id": "card.fixture.05"
     }
   ],
-  "deck_count": 31,
+  "deck_count": 24,
+  "discard_card_instance_ids": [
+    "cardinst_103"
+  ],
+  "utility_resources": {
+    "search_tokens": 3,
+    "max_search_tokens": 5,
+    "refresh_tokens": 1,
+    "max_refresh_tokens": 1
+  },
   "knowledge_states": [
     {
+      "knowledge_state_id": "knowledge_player_a_ticket_2",
       "ticket_instance_id": "ticketinst_2",
+      "audience": "PRIVATE_PLAYER",
+      "owner_player_id": "player_a",
+      "team_id": null,
       "known_symptom_ids": [
         "symptom.boot.no_post"
       ],
-      "known_fault_ids": [],
-      "ruled_out_fault_ids": [],
-      "suspected_fault_ids": [
-        "fault.memory.dimm.failed"
+      "candidate_assessments": [
+        {
+          "candidate_fault_id": "fault.memory.dimm.failed",
+          "assessment": "SUPPORTED",
+          "supporting_evidence_event_ids": [
+            "evt_evidence_001"
+          ]
+        }
       ],
+      "current_hypothesis": {
+        "candidate_fault_ids": [
+          "fault.memory.dimm.failed"
+        ],
+        "revised_at_revision": 18
+      },
       "evidence": [
         {
-          "source_type": "test",
-          "source_id": "test.memory.diagnostic",
-          "fault_id": "fault.memory.dimm.failed",
-          "outcome": "supports",
-          "strength": 2,
-          "revealed_at_revision": 18
+          "evidence_event_id": "evt_evidence_001",
+          "action_event_id": "action_test_001",
+          "source_type": "TEST",
+          "source_definition_id": "test.memory.diagnostic",
+          "authored_outcome_id": "outcome.memory_diagnostic.failed_dimm_support",
+          "candidate_fault_id": "fault.memory.dimm.failed",
+          "disposition": "SUPPORT",
+          "observation_id": "symptom.memory.ecc_errors",
+          "visibility": "PRIVATE_PLAYER",
+          "machine_revision": 0,
+          "captured_at": "2026-08-22T16:00:00Z",
+          "documented_by_publication_event_id": null
         }
-      ]
+      ],
+      "last_updated_revision": 18
     }
   ],
-  "private_reveals": [],
+  "authorized_events": [
+    {
+      "event_id": "evt_evidence_001",
+      "match_id": "match_demo_001",
+      "sequence": 2,
+      "revision": 18,
+      "event_type": "EVIDENCE_CREATED",
+      "actor_player_id": "player_a",
+      "ticket_instance_id": "ticketinst_2",
+      "action_id": "action_test_001",
+      "visibility": "PRIVATE_PLAYER",
+      "visible_to_player_ids": ["player_a"],
+      "visible_to_team_ids": [],
+      "payload": {
+        "authored_outcome_id": "outcome.memory_diagnostic.failed_dimm_support",
+        "candidate_fault_id": "fault.memory.dimm.failed",
+        "disposition": "SUPPORT"
+      },
+      "worklog_projection": null,
+      "action_time": "2026-08-22T16:00:00Z",
+      "publication_time": null,
+      "created_at": "2026-08-22T16:00:00Z"
+    }
+  ],
   "legal_actions": [
     {
-      "action_type": "submit_hypothesis",
-      "ticket_instance_id": "ticketinst_2"
+      "action_type": "REVISE_HYPOTHESIS",
+      "ticket_instance_id": "ticketinst_2",
+      "card_instance_id": null
     },
     {
-      "action_type": "play_card",
-      "card_instance_id": "cardinst_104"
+      "action_type": "COMMIT_ISOLATION",
+      "ticket_instance_id": "ticketinst_2",
+      "card_instance_id": null
     }
-  ]
+  ],
+  "reconnect": {
+    "snapshot_installed": true,
+    "snapshot_revision": 18,
+    "snapshot_event_sequence": 2,
+    "unseen_semantic_event_ids": []
+  }
 }

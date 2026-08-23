@@ -1,0 +1,9 @@
+{
+  "request_id": "req_refresh_001",
+  "match_id": "match_utility_fixture_001",
+  "player_id": "player_a",
+  "expected_revision": 25,
+  "action_type": "REFRESH",
+  "payload": {},
+  "client_nonce": "nonce_refresh_001"
+}

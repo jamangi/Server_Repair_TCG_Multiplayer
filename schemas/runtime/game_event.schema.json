@@ -1,87 +1,122 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.local/runtime/game_event.schema.json",
-  "title": "Game Event",
+  "title": "Immutable Game Event",
+  "description": "Append-only authoritative semantic event with a player-safe visibility category and optional Worklog projection links.",
   "type": "object",
   "additionalProperties": false,
   "$defs": {
-    "stableId": {
-      "type": "string",
-      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+    "instanceId": { "type": "string", "minLength": 1 },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "playerSafePayload": {
+      "description": "Player-safe event payloads may not carry authoritative truth, hidden outcome matrices, random state, deck order, opponent hands, or internal scoring modifiers.",
+      "type": "object",
+      "not": {
+        "anyOf": [
+          { "required": ["server_only_truth"] },
+          { "required": ["causal_truth"] },
+          { "required": ["fault_states"] },
+          { "required": ["actual_present"] },
+          { "required": ["causal_edge_ids"] },
+          { "required": ["authored_evidence_outcomes"] },
+          { "required": ["unexecuted_outcomes"] },
+          { "required": ["random_seed"] },
+          { "required": ["deck_order"] },
+          { "required": ["opponent_hand_card_instance_ids"] },
+          { "required": ["internal_scoring_modifiers"] }
+        ]
+      }
     },
-    "uuidLike": {
-      "type": "string",
-      "minLength": 8
-    },
-    "entityRef": {
-      "type": "string",
-      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
-    },
-    "cardInstanceId": {
-      "type": "string",
-      "minLength": 1
-    },
-    "playerId": {
-      "type": "string",
-      "minLength": 1
-    },
-    "ticketInstanceId": {
-      "type": "string",
-      "minLength": 1
-    },
-    "timestamp": {
-      "type": "string",
-      "format": "date-time"
+    "worklogProjection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "placeholder_event_id": { "$ref": "#/$defs/instanceId" },
+        "source_action_event_id": { "$ref": "#/$defs/instanceId" },
+        "source_result_event_id": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "public_summary": { "type": "string", "minLength": 1 },
+        "action_time": { "$ref": "#/$defs/timestamp" },
+        "publication_event_id": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "publication_time": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        },
+        "publisher_player_id": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "locked": { "type": "boolean" }
+      },
+      "required": [
+        "placeholder_event_id",
+        "source_action_event_id",
+        "source_result_event_id",
+        "public_summary",
+        "action_time",
+        "publication_event_id",
+        "publication_time",
+        "publisher_player_id",
+        "locked"
+      ]
     }
   },
   "properties": {
-    "event_id": {
-      "type": "string",
-      "minLength": 1
-    },
-    "match_id": {
-      "type": "string",
-      "minLength": 1
-    },
-    "sequence": {
-      "type": "integer",
-      "minimum": 1
-    },
-    "revision": {
-      "type": "integer",
-      "minimum": 0
-    },
+    "event_id": { "$ref": "#/$defs/instanceId" },
+    "match_id": { "$ref": "#/$defs/instanceId" },
+    "sequence": { "type": "integer", "minimum": 1 },
+    "revision": { "type": "integer", "minimum": 0 },
     "event_type": {
       "type": "string",
-      "minLength": 1
+      "pattern": "^[A-Z][A-Z0-9_]+$"
     },
     "actor_player_id": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"],
+      "minLength": 1
+    },
+    "ticket_instance_id": {
+      "type": ["string", "null"],
+      "minLength": 1
+    },
+    "action_id": {
+      "type": ["string", "null"],
+      "minLength": 1
     },
     "visibility": {
       "type": "string",
-      "enum": [
-        "public",
-        "player_private",
-        "server_only"
-      ]
+      "enum": ["SERVER_ONLY", "PRIVATE_PLAYER", "TEAM", "PUBLIC_MATCH"]
     },
     "visible_to_player_ids": {
       "type": "array",
-      "items": {
-        "$ref": "#/$defs/playerId"
-      },
+      "items": { "$ref": "#/$defs/instanceId" },
       "uniqueItems": true
     },
-    "payload": {
-      "type": "object"
+    "visible_to_team_ids": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/instanceId" },
+      "uniqueItems": true
     },
-    "created_at": {
-      "$ref": "#/$defs/timestamp"
-    }
+    "payload": { "type": "object" },
+    "worklog_projection": {
+      "anyOf": [
+        { "type": "null" },
+        { "$ref": "#/$defs/worklogProjection" }
+      ]
+    },
+    "action_time": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    },
+    "publication_time": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    },
+    "created_at": { "$ref": "#/$defs/timestamp" }
   },
   "required": [
     "event_id",
@@ -90,9 +125,60 @@
     "revision",
     "event_type",
     "actor_player_id",
+    "ticket_instance_id",
+    "action_id",
     "visibility",
     "visible_to_player_ids",
+    "visible_to_team_ids",
     "payload",
+    "worklog_projection",
+    "action_time",
+    "publication_time",
     "created_at"
+  ],
+  "allOf": [
+    {
+      "if": { "properties": { "visibility": { "const": "PRIVATE_PLAYER" } } },
+      "then": {
+        "properties": {
+          "visible_to_player_ids": { "minItems": 1 },
+          "visible_to_team_ids": { "maxItems": 0 }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "visibility": { "const": "TEAM" } } },
+      "then": {
+        "properties": {
+          "visible_to_player_ids": { "maxItems": 0 },
+          "visible_to_team_ids": { "minItems": 1 }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "visibility": { "enum": ["SERVER_ONLY", "PUBLIC_MATCH"] }
+        }
+      },
+      "then": {
+        "properties": {
+          "visible_to_player_ids": { "maxItems": 0 },
+          "visible_to_team_ids": { "maxItems": 0 }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "visibility": { "enum": ["PRIVATE_PLAYER", "TEAM", "PUBLIC_MATCH"] }
+        }
+      },
+      "then": {
+        "properties": {
+          "payload": { "$ref": "#/$defs/playerSafePayload" }
+        }
+      }
+    }
   ]
 }

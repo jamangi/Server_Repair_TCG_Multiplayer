@@ -1,127 +1,58 @@
-# Runtime Schemas v0.1 — Server-Authoritative Game Model
+# Runtime schemas — synchronized server-authoritative model
 
-These schemas describe **mutable match state and client/server interaction**, not the static technical-knowledge database.
+The runtime schemas describe mutable match state, player-safe projections, authoritative intents, immutable semantic events, and reconnect state. They are implementation-neutral contracts, not a game engine.
 
-## Recommended content order
+## Lifecycle and state separation
 
-The intended development order is:
+[`ticket_state.schema.json`](../../schemas/runtime/ticket_state.schema.json) represents these Ticket-owned states:
 
-1. **Schemas for domain knowledge**
-2. **Domain content records**
-   - Faults
-   - Symptoms
-   - Components
-   - Tools
-   - Tests
-   - Commands
-   - Procedures
-   - Protocols
-3. **Repair Ticket definitions**
-4. **Runtime state schemas**
-5. **Playable card definitions that reference domain content**
-6. **Decks and balancing data**
-7. **More content / expansions**
+```text
+DIAGNOSIS --accepted Isolation--> REPAIR_READY -> AWAITING_VERIFY -> READY_TO_CLOSE -> CLOSED
+    ^                                                     |
+    `----------- RETURNED_TO_DIAGNOSIS <------------------' failed or inconclusive Verify
+```
 
-The earlier package contains only a few example records to prove the schema design. It is not yet a substantive card database.
+The diagram is a state summary, not seven one-way departments. Hypothesis revision and Tests iterate inside Diagnosis. `isolation_history`, `repair_history`, `verification_history`, `return_to_diagnosis_history`, `documentation_publications`, and Worklog IDs remain append-only across a return. A new accepted Isolation is required before another ordinary Repair.
 
-## Server-authoritative design
+[`knowledge_state.schema.json`](../../schemas/runtime/knowledge_state.schema.json) contains only Player-private or cooperative-team beliefs and Evidence. [`fault_state.schema.json`](../../schemas/runtime/fault_state.schema.json) contains authoritative machine reality. A player-safe view never infers one from the other.
 
-The client should be treated as an untrusted presentation layer.
+The initial public candidate set is not required to contain every hidden causal Fault. Authored play may reveal a previously hidden candidate dynamically; Repair legality still resolves against the authoritative causal truth and its requirements rather than treating the public candidate list as truth.
 
-The server should own:
+## Actions, payment, and utility resources
 
-- deck order,
-- hidden cards,
-- hidden Faults,
-- hidden ticket data,
-- all KnowledgeState truth,
-- legal action calculation,
-- random outcomes,
-- effect resolution,
-- scoring,
-- turn progression,
-- match revision.
+[`action_request.schema.json`](../../schemas/runtime/action_request.schema.json) gives every intent a request ID, actor, target revision, action discriminator, and type-specific payload. It covers card execution plus the cardless actions Revise Hypothesis, Commit Isolation, Document Live, Publish Closure, Search, Refresh, and Pass.
 
-A client submits an `ActionRequest`. The server checks:
+[`action_result.schema.json`](../../schemas/runtime/action_result.schema.json) distinguishes an accepted paid action from a request rejected before payment. An unsupported Isolation is an accepted one-Action resolution with the generic `ISOLATION_NOT_SUPPORTED` resolution code; it is not a free request rejection. A stale revision rejects with zero Actions, zero utility resources, no card movement, and no events.
 
-1. authentication / player identity,
-2. match membership,
-3. expected match revision,
-4. turn ownership,
-5. card ownership and zone,
-6. resource/action costs,
-7. target legality,
-8. hidden-information permissions,
-9. rule/effect legality.
+Search spends one Action and one Search Token to select a remaining-deck card before shuffling the remainder. Refresh spends one Action and one Refresh Token to combine discard with the remaining deck. [`player_state.schema.json`](../../schemas/runtime/player_state.schema.json) stores public utility-resource counts/caps, the 30-card Ready snapshot, card zones, skipped empty draws, and reconnect cursors. It contains no empty-deck loss flag.
 
-Only then does the server mutate authoritative state and return an `ActionResult`.
+[`turn_state.schema.json`](../../schemas/runtime/turn_state.schema.json) fixes two starting Actions, records `DRAWN` or `SKIPPED_EMPTY`, and holds an explicit `CLOSURE_RESOLUTION` window. That window precedes automatic zero-Action end-turn processing, so a successful Verify using the last Action can still be closed immediately for zero Actions.
 
-## Why `expected_revision` exists
+## Events, Worklog, and visibility
 
-Each client action carries the match revision it believes is current.
+[`game_event.schema.json`](../../schemas/runtime/game_event.schema.json) uses immutable event IDs, sequence numbers, revisions, action time, and publication time. Its only visibility categories are:
 
-If the server state has already advanced, the server rejects the stale request.
+- `SERVER_ONLY`
+- `PRIVATE_PLAYER`
+- `TEAM`
+- `PUBLIC_MATCH`
 
-This prevents:
+Every accepted paid action creates a public Worklog placeholder. A later Document Live publication creates a new event linked to that placeholder and its source result. The current Worklog projection can be enriched while the original action/result events and chronology remain immutable. Publication does not mutate the source Evidence visibility.
 
-- accidental double actions,
-- race conditions,
-- replay of stale UI actions,
-- some classes of client tampering.
+For an accepted paid result, the placeholder is the first public event from that action. Search and Refresh follow the same rule before publishing their completion event; rejected requests publish neither event.
 
-## Public vs private state
+Every non-`SERVER_ONLY` payload is also constrained against direct authoritative-secret fields. Dependency-free semantic validation applies the same prohibition recursively so a nested object cannot smuggle causal truth, unexecuted outcomes, random state, deck order, opponent hands, or internal scoring modifiers into a player-safe event. Private and team projections additionally verify that each event and Knowledge State is addressed to the authenticated Player or that Player's team.
 
-Do **not** send the authoritative MatchState directly to React.
+[`public_match_view.schema.json`](../../schemas/runtime/public_match_view.schema.json) contains only public candidates, accepted Isolation, machine-state summaries, Verify summaries, Worklog projections, public utility counts, public turn state, scores, and closure statistics. [`private_player_view.schema.json`](../../schemas/runtime/private_player_view.schema.json) adds the authenticated hand, authorized private/team Knowledge States and events, legal actions, and reconnect cursor. Neither view can carry `server_only_truth` or authoritative `fault_states`.
 
-Instead generate projections:
+## Closure and unresolved scoring
 
-### PublicMatchView
+A closed Ticket stores a zero-Action structured bundle and links every step in the atomic transaction: Worklog lock, policy-selected score events, archive/removal, utility grants, queue reconciliation, terminal evaluation, and turn end. Its closure record preserves the complete accepted-path Repair history, and its decisive Evidence links must be citations from the current accepted Isolation. The closer and optional team are recorded only as closure statistics. No closure card recovery or closure Service Point field exists.
 
-Safe information both players may see.
+`pending_contributions`, `contribution_ledger`, and `service_point_events` are deliberately policy-neutral. Their `policy_hook_id` is opaque, values are not enumerated, and no contribution class, weight, Root Cause rule, duplicate rule, visibility rule, or cooperative aggregation rule is selected. Example IDs beginning with `example_only.pending_policy` illustrate separation only and do not resolve `SCORE-001`.
 
-### PrivatePlayerView
+Runtime contracts contain no Equipment or Qualification fields. Technical Tool/card state remains ordinary match content.
 
-Information only the authenticated player may see:
+## Fixture and reference validation
 
-- their hand,
-- their private KnowledgeState,
-- private test results,
-- legal actions.
-
-Hidden server state should never appear in either response until game rules reveal it.
-
-## Critical hidden-information rule
-
-A Fault can be `actual_present: true` in authoritative `FaultState` while remaining absent from a player's `KnowledgeState`.
-
-This is intentional.
-
-The machine has one reality; each player has only the evidence they have earned.
-
-## Test / Repair / Verification separation
-
-- Tests write evidence into `KnowledgeState`.
-- Repairs modify `FaultState.machine_status`.
-- Verification appends results to `TicketState.verification_history`.
-- Ticket closure is a server rule that checks all required conditions.
-
-## Events
-
-`GameEvent` provides an append-only semantic history.
-
-This is useful for:
-
-- replay,
-- debugging,
-- audits,
-- spectator UI,
-- reconnecting clients,
-- dispute investigation.
-
-A later implementation can use full event sourcing or simply maintain events alongside current snapshots.
-
-## Language independence
-
-Nothing in these schemas requires JavaScript, TypeScript, Python, Go, Rust, Java, or another implementation language.
-
-The React client can consume JSON projections while any server technology validates and executes the rules.
+Example filenames declare their schema by the prefix before the first dot: `action_request.*.json` validates against `action_request.schema.json`, `ticket_state.*.json` against `ticket_state.schema.json`, and so on. The TASK-007 test loads every schema by `$id`, resolves internal and repository-local `$ref` values, validates every example, strictly checks RFC 3339 calendar date-times, and checks relationships that JSON Schema cannot express alone: Ticket-local authored references, lifecycle/history coherence, exact Action arithmetic, stale rejection, card-zone disjointness, deck copy counts, utility caps and zone effects, audience identity, card/event registry references, and atomic closure cleanup.

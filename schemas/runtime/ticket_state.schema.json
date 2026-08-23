@@ -1,182 +1,468 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.local/runtime/ticket_state.schema.json",
-  "title": "Ticket State",
+  "title": "Authoritative Ticket State",
+  "description": "Ticket-owned lifecycle, machine changes, evidence-supported Isolation, preserved Verify history, incremental publication, and immutable closure record.",
   "type": "object",
   "additionalProperties": false,
   "$defs": {
-    "stableId": {
-      "type": "string",
-      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
-    },
-    "uuidLike": {
-      "type": "string",
-      "minLength": 8
-    },
     "entityRef": {
       "type": "string",
       "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
     },
-    "cardInstanceId": {
-      "type": "string",
-      "minLength": 1
+    "instanceId": { "type": "string", "minLength": 1 },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "isolationRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "isolation_event_id": { "$ref": "#/$defs/instanceId" },
+        "player_id": { "$ref": "#/$defs/instanceId" },
+        "candidate_fault_id": { "$ref": "#/$defs/entityRef" },
+        "cited_evidence_event_ids": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/instanceId" },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "accepted": { "type": "boolean" },
+        "classification": {
+          "type": ["string", "null"],
+          "enum": [null, "ACTIONABLE", "DEEPEST", "ACTIONABLE_AND_DEEPEST"]
+        },
+        "public_fault_instance_id": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "response_code": {
+          "type": "string",
+          "enum": ["ISOLATION_ACCEPTED", "ISOLATION_NOT_SUPPORTED"]
+        },
+        "root_cause_reward_eligible_after": { "type": "boolean" },
+        "committed_at_revision": { "type": "integer", "minimum": 0 },
+        "committed_at": { "$ref": "#/$defs/timestamp" }
+      },
+      "required": [
+        "isolation_event_id",
+        "player_id",
+        "candidate_fault_id",
+        "cited_evidence_event_ids",
+        "accepted",
+        "classification",
+        "public_fault_instance_id",
+        "response_code",
+        "root_cause_reward_eligible_after",
+        "committed_at_revision",
+        "committed_at"
+      ],
+      "allOf": [
+        {
+          "if": { "properties": { "accepted": { "const": true } } },
+          "then": {
+            "properties": {
+              "classification": {
+                "type": "string",
+                "enum": ["ACTIONABLE", "DEEPEST", "ACTIONABLE_AND_DEEPEST"]
+              },
+              "public_fault_instance_id": { "type": "string", "minLength": 1 },
+              "response_code": { "const": "ISOLATION_ACCEPTED" }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "accepted": { "const": false } } },
+          "then": {
+            "properties": {
+              "classification": { "const": null },
+              "public_fault_instance_id": { "const": null },
+              "response_code": { "const": "ISOLATION_NOT_SUPPORTED" },
+              "root_cause_reward_eligible_after": { "const": false }
+            }
+          }
+        }
+      ]
     },
-    "playerId": {
-      "type": "string",
-      "minLength": 1
+    "repairRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "repair_event_id": { "$ref": "#/$defs/instanceId" },
+        "player_id": { "$ref": "#/$defs/instanceId" },
+        "isolation_event_id": { "$ref": "#/$defs/instanceId" },
+        "card_instance_id": { "$ref": "#/$defs/instanceId" },
+        "repair_procedure_id": { "$ref": "#/$defs/entityRef" },
+        "target_fault_instance_id": { "$ref": "#/$defs/instanceId" },
+        "machine_state_before": { "type": "string", "minLength": 1 },
+        "machine_state_after": { "type": "string", "minLength": 1 },
+        "machine_revision": { "type": "integer", "minimum": 1 },
+        "repaired_at": { "$ref": "#/$defs/timestamp" }
+      },
+      "required": [
+        "repair_event_id",
+        "player_id",
+        "isolation_event_id",
+        "card_instance_id",
+        "repair_procedure_id",
+        "target_fault_instance_id",
+        "machine_state_before",
+        "machine_state_after",
+        "machine_revision",
+        "repaired_at"
+      ]
     },
-    "ticketInstanceId": {
-      "type": "string",
-      "minLength": 1
+    "verifyRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "verify_event_id": { "$ref": "#/$defs/instanceId" },
+        "player_id": { "$ref": "#/$defs/instanceId" },
+        "validation_procedure_id": { "$ref": "#/$defs/entityRef" },
+        "requirement_id": { "$ref": "#/$defs/entityRef" },
+        "result": { "type": "string", "enum": ["PASS", "FAIL", "INCONCLUSIVE"] },
+        "machine_revision": { "type": "integer", "minimum": 0 },
+        "is_current": { "type": "boolean" },
+        "verified_at_revision": { "type": "integer", "minimum": 0 },
+        "verified_at": { "$ref": "#/$defs/timestamp" }
+      },
+      "required": [
+        "verify_event_id",
+        "player_id",
+        "validation_procedure_id",
+        "requirement_id",
+        "result",
+        "machine_revision",
+        "is_current",
+        "verified_at_revision",
+        "verified_at"
+      ]
     },
-    "timestamp": {
-      "type": "string",
-      "format": "date-time"
+    "closureRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "closure_event_id": { "$ref": "#/$defs/instanceId" },
+        "closer_player_id": { "$ref": "#/$defs/instanceId" },
+        "attributed_team_id": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "action_cost": { "const": 0 },
+        "accepted_isolation_event_id": { "$ref": "#/$defs/instanceId" },
+        "decisive_evidence_event_ids": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/instanceId" },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "repair_event_ids": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/instanceId" },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "failed_verify_event_ids": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/instanceId" },
+          "uniqueItems": true
+        },
+        "current_passing_verify_event_ids": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/instanceId" },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "worklog_locked_event_id": { "$ref": "#/$defs/instanceId" },
+        "score_event_ids": {
+          "description": "Opaque events emitted only by the separately selected causal scoring policy; this array may be empty.",
+          "type": "array",
+          "items": { "$ref": "#/$defs/instanceId" },
+          "uniqueItems": true
+        },
+        "ticket_archived_event_id": { "$ref": "#/$defs/instanceId" },
+        "utility_grant_event_ids": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/instanceId" },
+          "uniqueItems": true
+        },
+        "queue_reconciled_event_id": { "$ref": "#/$defs/instanceId" },
+        "terminal_evaluated_event_id": { "$ref": "#/$defs/instanceId" },
+        "turn_ended_event_id": { "$ref": "#/$defs/instanceId" },
+        "closed_at": { "$ref": "#/$defs/timestamp" }
+      },
+      "required": [
+        "closure_event_id",
+        "closer_player_id",
+        "attributed_team_id",
+        "action_cost",
+        "accepted_isolation_event_id",
+        "decisive_evidence_event_ids",
+        "repair_event_ids",
+        "failed_verify_event_ids",
+        "current_passing_verify_event_ids",
+        "worklog_locked_event_id",
+        "score_event_ids",
+        "ticket_archived_event_id",
+        "utility_grant_event_ids",
+        "queue_reconciled_event_id",
+        "terminal_evaluated_event_id",
+        "turn_ended_event_id",
+        "closed_at"
+      ]
     }
   },
   "properties": {
-    "ticket_instance_id": {
-      "$ref": "#/$defs/ticketInstanceId"
-    },
-    "ticket_definition_id": {
-      "$ref": "#/$defs/entityRef"
-    },
+    "ticket_instance_id": { "$ref": "#/$defs/instanceId" },
+    "ticket_definition_id": { "$ref": "#/$defs/entityRef" },
     "status": {
       "type": "string",
       "enum": [
-        "queued",
-        "active",
-        "repairing",
-        "awaiting_verification",
-        "closed",
-        "failed"
+        "DIAGNOSIS",
+        "REPAIR_READY",
+        "AWAITING_VERIFY",
+        "RETURNED_TO_DIAGNOSIS",
+        "READY_TO_CLOSE",
+        "CLOSED"
       ]
     },
-    "assigned_player_id": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
+    "machine_revision": { "type": "integer", "minimum": 0 },
     "visible_symptom_ids": {
       "type": "array",
-      "items": {
-        "$ref": "#/$defs/entityRef"
-      },
+      "items": { "$ref": "#/$defs/entityRef" },
       "uniqueItems": true
     },
-    "fault_states": {
+    "public_candidate_fault_ids": {
       "type": "array",
-      "items": {
-        "type": "object"
-      }
+      "items": { "$ref": "#/$defs/entityRef" },
+      "uniqueItems": true,
+      "minItems": 1
+    },
+    "fault_states": {
+      "description": "Authoritative server-only machine/Fault state; never copy this field into public/private player views.",
+      "type": "array",
+      "items": { "$ref": "fault_state.schema.json" }
+    },
+    "isolation_history": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/isolationRecord" }
+    },
+    "current_accepted_isolation_event_id": {
+      "type": ["string", "null"],
+      "minLength": 1
+    },
+    "root_cause_reward_ineligible_player_ids": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/instanceId" },
+      "uniqueItems": true
     },
     "repair_history": {
       "type": "array",
-      "items": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "action_id": {
-            "type": "string"
-          },
-          "player_id": {
-            "$ref": "#/$defs/playerId"
-          },
-          "repair_procedure_id": {
-            "$ref": "#/$defs/entityRef"
-          },
-          "target_fault_instance_ids": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "result": {
-            "type": "string",
-            "enum": [
-              "successful",
-              "unsuccessful",
-              "partial",
-              "invalid"
-            ]
-          },
-          "revision": {
-            "type": "integer",
-            "minimum": 0
-          }
-        },
-        "required": [
-          "action_id",
-          "player_id",
-          "repair_procedure_id",
-          "target_fault_instance_ids",
-          "result",
-          "revision"
-        ]
-      }
+      "items": { "$ref": "#/$defs/repairRecord" }
     },
     "verification_history": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/verifyRecord" }
+    },
+    "current_verify_pass_event_ids": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/instanceId" },
+      "uniqueItems": true
+    },
+    "return_to_diagnosis_history": {
       "type": "array",
       "items": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "action_id": {
-            "type": "string"
+          "return_event_id": { "$ref": "#/$defs/instanceId" },
+          "failed_verify_event_id": { "$ref": "#/$defs/instanceId" },
+          "invalidated_pass_event_ids": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/instanceId" },
+            "uniqueItems": true
           },
-          "player_id": {
-            "$ref": "#/$defs/playerId"
-          },
-          "validation_procedure_id": {
-            "$ref": "#/$defs/entityRef"
-          },
-          "result": {
-            "type": "string",
-            "enum": [
-              "pass",
-              "fail",
-              "inconclusive",
-              "invalid"
-            ]
-          },
-          "revision": {
-            "type": "integer",
-            "minimum": 0
-          }
+          "returned_at_revision": { "type": "integer", "minimum": 0 },
+          "returned_at": { "$ref": "#/$defs/timestamp" }
         },
         "required": [
-          "action_id",
-          "player_id",
-          "validation_procedure_id",
-          "result",
-          "revision"
+          "return_event_id",
+          "failed_verify_event_id",
+          "invalidated_pass_event_ids",
+          "returned_at_revision",
+          "returned_at"
         ]
       }
     },
-    "documentation_complete": {
-      "type": "boolean"
+    "documentation_publications": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "publication_event_id": { "$ref": "#/$defs/instanceId" },
+          "source_action_event_id": { "$ref": "#/$defs/instanceId" },
+          "source_result_event_id": { "$ref": "#/$defs/instanceId" },
+          "worklog_placeholder_event_id": { "$ref": "#/$defs/instanceId" },
+          "publisher_player_id": { "$ref": "#/$defs/instanceId" },
+          "published_at": { "$ref": "#/$defs/timestamp" }
+        },
+        "required": [
+          "publication_event_id",
+          "source_action_event_id",
+          "source_result_event_id",
+          "worklog_placeholder_event_id",
+          "publisher_player_id",
+          "published_at"
+        ]
+      }
     },
-    "unnecessary_repairs_count": {
-      "type": "integer",
-      "minimum": 0
+    "worklog_event_ids": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/instanceId" },
+      "uniqueItems": true
     },
-    "service_points_awarded": {
-      "type": "integer",
-      "minimum": 0
-    }
+    "pending_contributions": {
+      "description": "Policy-neutral hooks. Exact qualifying classes, weights, duplication, and visibility remain SCORE-001 decisions.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "contribution_id": { "$ref": "#/$defs/instanceId" },
+          "source_event_id": { "$ref": "#/$defs/instanceId" },
+          "contributor_player_id": { "$ref": "#/$defs/instanceId" },
+          "policy_hook_id": { "$ref": "#/$defs/entityRef" },
+          "settlement_status": {
+            "type": "string",
+            "enum": ["PENDING", "SETTLED", "SUPERSEDED", "INELIGIBLE"]
+          },
+          "score_event_id": {
+            "type": ["string", "null"],
+            "minLength": 1
+          }
+        },
+        "required": [
+          "contribution_id",
+          "source_event_id",
+          "contributor_player_id",
+          "policy_hook_id",
+          "settlement_status",
+          "score_event_id"
+        ]
+      }
+    },
+    "closure": {
+      "anyOf": [
+        { "type": "null" },
+        { "$ref": "#/$defs/closureRecord" }
+      ]
+    },
+    "archived": { "type": "boolean" }
   },
   "required": [
     "ticket_instance_id",
     "ticket_definition_id",
     "status",
-    "assigned_player_id",
+    "machine_revision",
     "visible_symptom_ids",
+    "public_candidate_fault_ids",
     "fault_states",
+    "isolation_history",
+    "current_accepted_isolation_event_id",
+    "root_cause_reward_ineligible_player_ids",
     "repair_history",
     "verification_history",
-    "documentation_complete",
-    "unnecessary_repairs_count",
-    "service_points_awarded"
+    "current_verify_pass_event_ids",
+    "return_to_diagnosis_history",
+    "documentation_publications",
+    "worklog_event_ids",
+    "pending_contributions",
+    "closure",
+    "archived"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": { "enum": ["DIAGNOSIS", "RETURNED_TO_DIAGNOSIS"] }
+        }
+      },
+      "then": {
+        "properties": {
+          "current_accepted_isolation_event_id": { "const": null }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": { "enum": ["REPAIR_READY", "AWAITING_VERIFY", "READY_TO_CLOSE", "CLOSED"] }
+        }
+      },
+      "then": {
+        "properties": {
+          "current_accepted_isolation_event_id": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "status": { "const": "AWAITING_VERIFY" } } },
+      "then": {
+        "properties": {
+          "repair_history": { "minItems": 1 },
+          "closure": { "const": null },
+          "archived": { "const": false }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": [
+              "DIAGNOSIS",
+              "REPAIR_READY",
+              "AWAITING_VERIFY",
+              "RETURNED_TO_DIAGNOSIS",
+              "READY_TO_CLOSE"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "closure": { "const": null },
+          "archived": { "const": false }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "status": { "const": "RETURNED_TO_DIAGNOSIS" } } },
+      "then": {
+        "properties": {
+          "current_accepted_isolation_event_id": { "const": null },
+          "return_to_diagnosis_history": { "minItems": 1 }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "status": { "const": "READY_TO_CLOSE" } } },
+      "then": {
+        "properties": {
+          "current_verify_pass_event_ids": { "minItems": 1 },
+          "closure": { "const": null },
+          "archived": { "const": false }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "status": { "const": "CLOSED" } } },
+      "then": {
+        "properties": {
+          "current_verify_pass_event_ids": { "minItems": 1 },
+          "closure": { "$ref": "#/$defs/closureRecord" },
+          "archived": { "const": true }
+        }
+      }
+    }
   ]
 }

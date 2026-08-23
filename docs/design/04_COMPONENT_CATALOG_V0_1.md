@@ -2,6 +2,8 @@
 
 The prototype Component catalog should cover enough internal server hardware to support diverse Repair Tickets without trying to be exhaustive.
 
+Components are technical machine/domain entities scoped through a Ticket or server profile, not account-owned Equipment. This catalog creates no Equipment inventory, slot, Store, loadout, or effect. Existing dotted IDs are retained; entries not yet materialized in current domain JSON remain planned content and require an explicit content/schema migration before becoming public data contracts.
+
 ---
 
 # Component Definition Template
@@ -303,5 +305,7 @@ These relationships can later power:
 - legality checking,
 - contextual search,
 - procedural hints,
-- automatically generated candidate Faults,
+- authored public candidate-Fault sets,
 - server-specific scenario generation.
+
+Future generated scenarios remain an opportunity under unresolved [`GEN-001`](decisions/UNFROZEN_RULES.md#gen-001). This catalog does not define a Ticket Builder configuration, constraint solver, or generator algorithm.

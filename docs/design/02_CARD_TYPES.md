@@ -2,6 +2,8 @@
 
 The game should distinguish **technical knowledge entities** from **playable cards**. A card can reference one or more entities and grant game actions involving them.
 
+[`decisions/FROZEN_RULES.md`](decisions/FROZEN_RULES.md) controls card-game behavior. The families below are content categories, not seven troubleshooting departments, and no card is required to use universal Hypothesis, Commit Isolation, Document Live, closure, Search, Refresh, or Pass actions.
+
 ---
 
 ## 1. Repair Ticket Cards
@@ -13,12 +15,17 @@ Contain or reference:
 - reported issue,
 - visible symptoms,
 - server profile,
-- hidden Fault blueprint,
+- public authored candidate-Fault set,
+- hidden server-only Fault blueprint or causal chain,
+- authored Test/Command outcome matrix,
+- authored Isolation requirements,
+- eligible Repair path,
 - difficulty,
-- Service Point value,
-- verification requirements.
+- Verification requirements,
+- structured closure requirements,
+- and optional opaque scoring-policy metadata after `SCORE-001` is resolved.
 
-These are primarily supplied by the shared Ticket Deck rather than player decks.
+These are supplied to the shared Repair Queue rather than Player decks. A Ticket has no fixed closer point: closure is zero-Action, non-scoring, and statistically attributable. Exact causal-contribution classes and values remain unresolved under [`SCORE-001`](decisions/UNFROZEN_RULES.md#score-001).
 
 ---
 
@@ -40,9 +47,11 @@ Examples:
 Uses:
 
 - replace failed hardware,
-- install known-good components for isolation,
+- provide a temporary known-good resource for a diagnostic-substitution Test,
 - satisfy repair requirements,
 - create compatibility or server-specific effects.
+
+A diagnostic substitution reverts after comparison and changes Knowledge State. A permanent Component change is a Repair and is legal only after accepted Isolation through an eligible Repair Procedure.
 
 This is the natural home of much of the Hardware / Server Hardware archetypes.
 
@@ -51,6 +60,8 @@ This is the natural home of much of the Hardware / Server Hardware archetypes.
 ## 3. Tool Cards
 
 Reusable or semi-reusable diagnostic resources.
+
+These are technical **Tools** in the domain/card model. They are not account-owned **Equipment**; the game has no Equipment inventory, slot, Store category, loadout, or starting Equipment effect.
 
 Examples:
 
@@ -87,13 +98,15 @@ Examples:
 
 Uses:
 
-- reveal Fault information,
-- eliminate candidates,
-- add Diagnosis,
+- produce authorized authored Evidence,
+- support, contradict, rule out, or confirm public candidates,
+- reveal an authored observation,
 - expose components,
 - follow causal chains.
 
 Tests are among the most important educational card types.
+
+Each Test execution is a distinct immutable action with one attached result. The result changes Knowledge State, not machine state, and may be `SUPPORT`, `CONTRADICT`, `RULE_OUT`, `CONFIRM`, an observation, or `INCONCLUSIVE`. A card named “Single-DIMM Isolation” remains a Test; it is not the universal accepted **Commit Isolation** action.
 
 ---
 
@@ -140,6 +153,8 @@ Uses:
 - consume Components or Tools,
 - prepare a ticket for Verification.
 
+Ordinary Repair is legal only after the Ticket has an accepted evidence-supported Isolation and the procedure targets that isolated actionable Fault. Unsupported or speculative Repair is rejected before payment; the core game has no parts-cannon exception. A Repair changes machine state and records history, but it never proves Verify or Documentation complete.
+
 ---
 
 ## 7. Verification Cards
@@ -156,7 +171,9 @@ Examples:
 - Burn-In Test
 - Connectivity Test
 
-A ticket cannot close until required Verification succeeds.
+A Ticket cannot become ready to close until all required Verification conditions have current passes after the latest relevant Repair. Every Verify execution creates a distinct immutable result.
+
+A failed or inconclusive Verify remains Evidence, invalidates affected stale passes, preserves earlier Evidence and machine changes, and returns the Ticket to Diagnosis. A later pass never erases the earlier failure.
 
 These cards reinforce the lesson that "part replaced" does not mean "repair finished."
 
@@ -184,7 +201,13 @@ Uses:
 - manipulate tickets,
 - reduce repeat-work penalties,
 - gain information from repair history,
-- satisfy documentation requirements.
+- supplement structured Documentation effects.
+
+Ordinary Documentation is never draw-dependent. **Document Live** is a universal one-Action basic action available throughout an active Ticket. It publishes one eligible authoritative action/result, enriches that action's original public Worklog placeholder in place, appends a linked publication event, and returns the exact source card from discard to its owner once.
+
+After all current Verify requirements pass, a mandatory structured closure bundle remains. Publishing it costs zero Actions, recovers no card, awards no Service Points for closure, and retains Player/team closure attribution as statistics. Successful Verify opens an immediate closure-resolution window before automatic end-turn, including when Verify used the last Action.
+
+Workflow cards may interact with these systems only through explicit card text. They do not replace Document Live, the immutable Worklog chronology, or structured closure.
 
 ---
 
@@ -244,9 +267,9 @@ Examples:
 - Bench Repair Veteran
 - Network Technician
 
-Could provide small passive bonuses or deck-building permissions.
+No frozen first-version rule currently grants passive bonuses or deck-building permissions through technician identity. Adopting that behavior would require its own explicit design decision.
 
-Not required for v0.1.
+Technician Cards are not Qualifications. Qualifications are non-mechanical honor badges and can never grant a passive bonus, deck permission, content access, procedure, matchmaking effect, or other gameplay benefit.
 
 ---
 
@@ -265,6 +288,22 @@ A Fault Card can expose one Fault as a collectible/reference object for:
 The engine should never require every Fault to be physically represented by a playable player-deck card.
 
 This prevents the knowledge graph from becoming coupled to card inventory.
+
+---
+
+# First-version card envelope and system actions
+
+- A legal deck contains exactly 30 cards and no more than three copies of one card ID.
+- Each Player opens with five cards, then draws one at the start of every turn when the draw deck is nonempty.
+- An empty draw deck skips the draw and is not itself loss, exhaustion, or concession.
+- Each turn supplies two Actions; printed card costs are 0, 1, or 2.
+- There is no rules-level maximum hand size.
+- A Player may play no more than one copy of the same 0-Action card name per turn unless explicit text overrides the limit.
+- One-shot cards enter discard after resolution. Installed or persistent playable cards remain in their defined match zone until removed by an effect; this is not account Equipment.
+
+Search Tokens and Deck Refresh Tokens are public utility resources rather than cards in hand. Search spends one token and one Action to select a card from the remaining draw deck, add it to hand, and shuffle the rest. Refresh spends one token and one Action to combine discard with the remaining draw deck and shuffle a new draw deck; hand and Installed playable cards do not move. Closure grants configured utility resources only after the complete closure transaction.
+
+Every card or basic action identifies an exact legal Ticket, Player zone, card/action record, or other explicit target. Target relationships remain effect-specific; the engine does not infer an unnamed “other Player.”
 
 ---
 

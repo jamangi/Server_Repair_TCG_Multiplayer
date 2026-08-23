@@ -1,0 +1,15 @@
+{
+  "request_id": "req_isolation_accepted",
+  "match_id": "match_demo_001",
+  "player_id": "player_a",
+  "expected_revision": 18,
+  "action_type": "COMMIT_ISOLATION",
+  "payload": {
+    "ticket_instance_id": "ticketinst_2",
+    "candidate_fault_id": "fault.memory.dimm.failed",
+    "cited_evidence_event_ids": [
+      "evt_evidence_001"
+    ]
+  },
+  "client_nonce": "nonce_isolation_accepted"
+}

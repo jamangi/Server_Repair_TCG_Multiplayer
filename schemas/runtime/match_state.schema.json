@@ -2,118 +2,217 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.local/runtime/match_state.schema.json",
   "title": "Authoritative Match State",
+  "description": "Versioned server state. Public/private views are projections and must never receive this object directly.",
   "type": "object",
   "additionalProperties": false,
   "$defs": {
-    "stableId": {
-      "type": "string",
-      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
-    },
-    "uuidLike": {
-      "type": "string",
-      "minLength": 8
-    },
+    "instanceId": { "type": "string", "minLength": 1 },
     "entityRef": {
       "type": "string",
       "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
     },
-    "cardInstanceId": {
-      "type": "string",
-      "minLength": 1
-    },
-    "playerId": {
-      "type": "string",
-      "minLength": 1
-    },
-    "ticketInstanceId": {
-      "type": "string",
-      "minLength": 1
-    },
-    "timestamp": {
-      "type": "string",
-      "format": "date-time"
-    }
+    "timestamp": { "type": "string", "format": "date-time" }
   },
   "properties": {
-    "match_id": {
-      "type": "string",
-      "minLength": 1
-    },
-    "revision": {
-      "type": "integer",
-      "minimum": 0
-    },
-    "ruleset_version": {
-      "type": "string"
-    },
-    "status": {
-      "type": "string",
-      "enum": [
-        "setup",
-        "active",
-        "completed",
-        "aborted"
+    "match_id": { "$ref": "#/$defs/instanceId" },
+    "revision": { "type": "integer", "minimum": 0 },
+    "ruleset_version": { "type": "string", "minLength": 1 },
+    "status": { "type": "string", "enum": ["SETUP", "ACTIVE", "COMPLETED", "ABORTED"] },
+    "created_at": { "$ref": "#/$defs/timestamp" },
+    "updated_at": { "$ref": "#/$defs/timestamp" },
+    "configuration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "collaboration_mode": { "type": "string", "enum": ["competitive", "cooperative"] },
+        "termination_score": {
+          "anyOf": [
+            { "const": -1 },
+            { "type": "integer", "minimum": 1, "maximum": 99 }
+          ]
+        },
+        "starting_ticket_count": { "type": "integer", "minimum": 1, "maximum": 99 },
+        "queue_minimum": { "type": "integer", "minimum": 0, "maximum": 99 },
+        "starting_service_points_by_player": {
+          "type": "object",
+          "additionalProperties": { "type": "integer", "minimum": -99, "maximum": 99 }
+        },
+        "deck_size": { "const": 30 },
+        "max_copies_per_card_id": { "const": 3 },
+        "opening_hand_size": { "const": 5 },
+        "actions_per_turn": { "const": 2 },
+        "starting_search_tokens": { "type": "integer", "minimum": 0 },
+        "ticket_search_tokens": { "type": "integer", "minimum": 0 },
+        "max_search_tokens": { "type": "integer", "minimum": 0 },
+        "starting_refresh_tokens": { "type": "integer", "minimum": 0 },
+        "max_refresh_tokens": { "type": "integer", "minimum": 0 }
+      },
+      "required": [
+        "collaboration_mode",
+        "termination_score",
+        "starting_ticket_count",
+        "queue_minimum",
+        "starting_service_points_by_player",
+        "deck_size",
+        "max_copies_per_card_id",
+        "opening_hand_size",
+        "actions_per_turn",
+        "starting_search_tokens",
+        "ticket_search_tokens",
+        "max_search_tokens",
+        "starting_refresh_tokens",
+        "max_refresh_tokens"
       ]
-    },
-    "created_at": {
-      "$ref": "#/$defs/timestamp"
-    },
-    "updated_at": {
-      "$ref": "#/$defs/timestamp"
-    },
-    "winning_service_points": {
-      "type": "integer",
-      "minimum": 1
     },
     "players": {
       "type": "array",
-      "minItems": 2,
-      "items": {
-        "type": "object"
-      }
+      "minItems": 1,
+      "items": { "$ref": "player_state.schema.json" }
     },
     "turn_state": {
-      "type": "object"
+      "anyOf": [
+        { "type": "null" },
+        { "$ref": "turn_state.schema.json" }
+      ]
     },
-    "repair_queue": {
+    "active_tickets": {
       "type": "array",
       "items": {
-        "type": "object"
+        "allOf": [
+          { "$ref": "ticket_state.schema.json" },
+          {
+            "properties": {
+              "status": {
+                "enum": [
+                  "DIAGNOSIS",
+                  "REPAIR_READY",
+                  "AWAITING_VERIFY",
+                  "RETURNED_TO_DIAGNOSIS",
+                  "READY_TO_CLOSE"
+                ]
+              }
+            }
+          }
+        ]
       }
+    },
+    "archived_ticket_instance_ids": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/instanceId" },
+      "uniqueItems": true
     },
     "card_instances": {
       "type": "array",
-      "items": {
-        "type": "object"
-      }
+      "items": { "$ref": "card_instance.schema.json" }
     },
-    "ticket_deck_definition_ids": {
+    "queued_ticket_definition_ids": {
+      "description": "Optional authored fixture queue. This is not a Ticket Builder configuration.",
+      "type": "array",
+      "items": { "$ref": "#/$defs/entityRef" }
+    },
+    "contribution_ledger": {
+      "description": "Policy-neutral attributable records; SCORE-001 determines future qualification and values.",
       "type": "array",
       "items": {
-        "$ref": "#/$defs/entityRef"
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "contribution_id": { "$ref": "#/$defs/instanceId" },
+          "ticket_instance_id": { "$ref": "#/$defs/instanceId" },
+          "source_event_id": { "$ref": "#/$defs/instanceId" },
+          "contributor_player_id": { "$ref": "#/$defs/instanceId" },
+          "policy_hook_id": { "$ref": "#/$defs/entityRef" },
+          "settlement_status": {
+            "type": "string",
+            "enum": ["PENDING", "SETTLED", "SUPERSEDED", "INELIGIBLE"]
+          }
+        },
+        "required": [
+          "contribution_id",
+          "ticket_instance_id",
+          "source_event_id",
+          "contributor_player_id",
+          "policy_hook_id",
+          "settlement_status"
+        ]
       }
     },
-    "ticket_discard_definition_ids": {
+    "service_point_events": {
+      "description": "Generic closure-settled causal score events. No contribution class, weight, or duplicate policy is selected here.",
       "type": "array",
       "items": {
-        "$ref": "#/$defs/entityRef"
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "score_event_id": { "$ref": "#/$defs/instanceId" },
+          "ticket_instance_id": { "$ref": "#/$defs/instanceId" },
+          "source_contribution_id": { "$ref": "#/$defs/instanceId" },
+          "recipient_player_id": { "$ref": "#/$defs/instanceId" },
+          "recipient_team_id": { "type": ["string", "null"], "minLength": 1 },
+          "delta": { "type": "integer" },
+          "policy_hook_id": { "$ref": "#/$defs/entityRef" },
+          "settled_by_closure_event_id": { "$ref": "#/$defs/instanceId" }
+        },
+        "required": [
+          "score_event_id",
+          "ticket_instance_id",
+          "source_contribution_id",
+          "recipient_player_id",
+          "recipient_team_id",
+          "delta",
+          "policy_hook_id",
+          "settled_by_closure_event_id"
+        ]
       }
     },
-    "winner_player_id": {
-      "type": [
-        "string",
-        "null"
-      ]
+    "closure_statistics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "closure_event_id": { "$ref": "#/$defs/instanceId" },
+          "ticket_instance_id": { "$ref": "#/$defs/instanceId" },
+          "closer_player_id": { "$ref": "#/$defs/instanceId" },
+          "attributed_team_id": { "type": ["string", "null"], "minLength": 1 },
+          "closed_at": { "$ref": "#/$defs/timestamp" }
+        },
+        "required": [
+          "closure_event_id",
+          "ticket_instance_id",
+          "closer_player_id",
+          "attributed_team_id",
+          "closed_at"
+        ]
+      }
     },
-    "win_reason": {
-      "type": [
-        "string",
-        "null"
-      ]
+    "events": {
+      "type": "array",
+      "items": { "$ref": "game_event.schema.json" }
     },
-    "event_sequence": {
-      "type": "integer",
-      "minimum": 0
+    "event_sequence": { "type": "integer", "minimum": 0 },
+    "last_queue_reconciliation_event_id": {
+      "type": ["string", "null"],
+      "minLength": 1
+    },
+    "result": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "winner_player_ids": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/instanceId" },
+          "uniqueItems": true
+        },
+        "winning_team_ids": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/instanceId" },
+          "uniqueItems": true
+        },
+        "reason": { "type": "string", "minLength": 1 },
+        "evaluated_after_event_id": { "$ref": "#/$defs/instanceId" }
+      },
+      "required": ["winner_player_ids", "winning_team_ids", "reason", "evaluated_after_event_id"]
     }
   },
   "required": [
@@ -123,15 +222,19 @@
     "status",
     "created_at",
     "updated_at",
-    "winning_service_points",
+    "configuration",
     "players",
     "turn_state",
-    "repair_queue",
+    "active_tickets",
+    "archived_ticket_instance_ids",
     "card_instances",
-    "ticket_deck_definition_ids",
-    "ticket_discard_definition_ids",
-    "winner_player_id",
-    "win_reason",
-    "event_sequence"
+    "queued_ticket_definition_ids",
+    "contribution_ledger",
+    "service_point_events",
+    "closure_statistics",
+    "events",
+    "event_sequence",
+    "last_queue_reconciliation_event_id",
+    "result"
   ]
 }

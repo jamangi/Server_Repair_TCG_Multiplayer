@@ -2,94 +2,100 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.local/runtime/public_match_view.schema.json",
   "title": "Public Match View",
+  "description": "PUBLIC_MATCH-only projection safe for Players and spectators.",
   "type": "object",
   "additionalProperties": false,
   "$defs": {
-    "stableId": {
-      "type": "string",
-      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
-    },
-    "uuidLike": {
-      "type": "string",
-      "minLength": 8
-    },
+    "instanceId": { "type": "string", "minLength": 1 },
     "entityRef": {
       "type": "string",
       "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
     },
-    "cardInstanceId": {
-      "type": "string",
-      "minLength": 1
-    },
-    "playerId": {
-      "type": "string",
-      "minLength": 1
-    },
-    "ticketInstanceId": {
-      "type": "string",
-      "minLength": 1
-    },
-    "timestamp": {
-      "type": "string",
-      "format": "date-time"
+    "timestamp": { "type": "string", "format": "date-time" },
+    "publicWorklogEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "placeholder_event_id": { "$ref": "#/$defs/instanceId" },
+        "sequence": { "type": "integer", "minimum": 1 },
+        "actor_player_id": { "$ref": "#/$defs/instanceId" },
+        "source_name": { "type": "string", "minLength": 1 },
+        "public_target_surface": { "type": "string", "minLength": 1 },
+        "action_cost": { "type": "integer", "minimum": 0, "maximum": 2 },
+        "action_time": { "$ref": "#/$defs/timestamp" },
+        "public_result_summary": { "type": ["string", "null"] },
+        "publication_event_id": { "type": ["string", "null"], "minLength": 1 },
+        "publication_time": { "type": ["string", "null"], "format": "date-time" },
+        "publisher_player_id": { "type": ["string", "null"], "minLength": 1 },
+        "locked": { "type": "boolean" }
+      },
+      "required": [
+        "placeholder_event_id",
+        "sequence",
+        "actor_player_id",
+        "source_name",
+        "public_target_surface",
+        "action_cost",
+        "action_time",
+        "public_result_summary",
+        "publication_event_id",
+        "publication_time",
+        "publisher_player_id",
+        "locked"
+      ]
     }
   },
   "properties": {
-    "match_id": {
-      "type": "string"
-    },
-    "revision": {
-      "type": "integer",
-      "minimum": 0
-    },
-    "status": {
-      "type": "string"
-    },
+    "match_id": { "$ref": "#/$defs/instanceId" },
+    "revision": { "type": "integer", "minimum": 0 },
+    "ruleset_version": { "type": "string", "minLength": 1 },
+    "status": { "type": "string", "enum": ["SETUP", "ACTIVE", "COMPLETED", "ABORTED"] },
+    "collaboration_mode": { "type": "string", "enum": ["competitive", "cooperative"] },
     "players": {
       "type": "array",
       "items": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "player_id": {
-            "$ref": "#/$defs/playerId"
-          },
-          "display_name": {
-            "type": "string"
-          },
-          "service_points": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "hand_count": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "deck_count": {
-            "type": "integer",
-            "minimum": 0
-          },
+          "player_id": { "$ref": "#/$defs/instanceId" },
+          "display_name": { "type": "string", "minLength": 1 },
+          "team_id": { "type": ["string", "null"], "minLength": 1 },
+          "service_points": { "type": "integer" },
+          "hand_count": { "type": "integer", "minimum": 0 },
+          "deck_count": { "type": "integer", "minimum": 0 },
           "discard_card_definition_ids": {
             "type": "array",
-            "items": {
-              "$ref": "#/$defs/entityRef"
-            }
+            "items": { "$ref": "#/$defs/entityRef" }
           },
           "in_play_card_definition_ids": {
             "type": "array",
-            "items": {
-              "$ref": "#/$defs/entityRef"
-            }
+            "items": { "$ref": "#/$defs/entityRef" }
+          },
+          "search_tokens": { "type": "integer", "minimum": 0 },
+          "max_search_tokens": { "type": "integer", "minimum": 0 },
+          "refresh_tokens": { "type": "integer", "minimum": 0 },
+          "max_refresh_tokens": { "type": "integer", "minimum": 0 },
+          "tickets_closed": { "type": "integer", "minimum": 0 },
+          "connection_status": {
+            "type": "string",
+            "enum": ["CONNECTED", "DISCONNECTED", "RECONNECTING", "CONCEDED"]
           }
         },
         "required": [
           "player_id",
           "display_name",
+          "team_id",
           "service_points",
           "hand_count",
           "deck_count",
           "discard_card_definition_ids",
-          "in_play_card_definition_ids"
+          "in_play_card_definition_ids",
+          "search_tokens",
+          "max_search_tokens",
+          "refresh_tokens",
+          "max_refresh_tokens",
+          "tickets_closed",
+          "connection_status"
         ]
       }
     },
@@ -99,56 +105,175 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "ticket_instance_id": {
-            "$ref": "#/$defs/ticketInstanceId"
-          },
-          "ticket_definition_id": {
-            "$ref": "#/$defs/entityRef"
-          },
+          "ticket_instance_id": { "$ref": "#/$defs/instanceId" },
+          "ticket_definition_id": { "$ref": "#/$defs/entityRef" },
           "status": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "DIAGNOSIS",
+              "REPAIR_READY",
+              "AWAITING_VERIFY",
+              "RETURNED_TO_DIAGNOSIS",
+              "READY_TO_CLOSE"
+            ]
           },
           "visible_symptom_ids": {
             "type": "array",
-            "items": {
-              "$ref": "#/$defs/entityRef"
-            }
+            "items": { "$ref": "#/$defs/entityRef" },
+            "uniqueItems": true
           },
-          "publicly_revealed_fault_ids": {
+          "public_candidate_fault_ids": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/entityRef" },
+            "uniqueItems": true,
+            "minItems": 1
+          },
+          "accepted_isolation": {
+            "type": ["object", "null"],
+            "additionalProperties": false,
+            "properties": {
+              "isolation_event_id": { "$ref": "#/$defs/instanceId" },
+              "fault_id": { "$ref": "#/$defs/entityRef" },
+              "contributor_player_id": { "$ref": "#/$defs/instanceId" },
+              "cited_public_evidence_event_ids": {
+                "type": "array",
+                "items": { "$ref": "#/$defs/instanceId" },
+                "uniqueItems": true,
+                "minItems": 1
+              },
+              "classification": {
+                "type": "string",
+                "enum": ["ACTIONABLE", "DEEPEST", "ACTIONABLE_AND_DEEPEST"]
+              }
+            },
+            "required": [
+              "isolation_event_id",
+              "fault_id",
+              "contributor_player_id",
+              "cited_public_evidence_event_ids",
+              "classification"
+            ]
+          },
+          "repair_summaries": {
             "type": "array",
             "items": {
-              "$ref": "#/$defs/entityRef"
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "repair_event_id": { "$ref": "#/$defs/instanceId" },
+                "player_id": { "$ref": "#/$defs/instanceId" },
+                "repair_procedure_id": { "$ref": "#/$defs/entityRef" },
+                "machine_state_summary": { "type": "string", "minLength": 1 }
+              },
+              "required": ["repair_event_id", "player_id", "repair_procedure_id", "machine_state_summary"]
             }
           },
-          "documentation_complete": {
-            "type": "boolean"
+          "verify_summaries": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "verify_event_id": { "$ref": "#/$defs/instanceId" },
+                "validation_procedure_id": { "$ref": "#/$defs/entityRef" },
+                "result": { "type": "string", "enum": ["PASS", "FAIL", "INCONCLUSIVE"] },
+                "is_current": { "type": "boolean" }
+              },
+              "required": ["verify_event_id", "validation_procedure_id", "result", "is_current"]
+            }
           },
-          "service_points_awarded": {
-            "type": "integer",
-            "minimum": 0
-          }
+          "worklog": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/publicWorklogEntry" }
+          },
+          "ready_to_close": { "type": "boolean" }
         },
         "required": [
           "ticket_instance_id",
           "ticket_definition_id",
           "status",
           "visible_symptom_ids",
-          "publicly_revealed_fault_ids",
-          "documentation_complete",
-          "service_points_awarded"
+          "public_candidate_fault_ids",
+          "accepted_isolation",
+          "repair_summaries",
+          "verify_summaries",
+          "worklog",
+          "ready_to_close"
         ]
       }
     },
-    "turn_state": {
-      "type": "object"
-    }
+    "turn": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "round_number": { "type": "integer", "minimum": 1 },
+        "turn_number": { "type": "integer", "minimum": 1 },
+        "active_player_id": { "$ref": "#/$defs/instanceId" },
+        "phase": {
+          "type": "string",
+          "enum": ["START_DRAW", "WORK", "RESOLUTION", "CLOSURE_RESOLUTION", "END"]
+        },
+        "actions_remaining": { "type": "integer", "minimum": 0, "maximum": 2 },
+        "closure_window_open": { "type": "boolean" },
+        "closure_eligible_ticket_instance_ids": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/instanceId" },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "round_number",
+        "turn_number",
+        "active_player_id",
+        "phase",
+        "actions_remaining",
+        "closure_window_open",
+        "closure_eligible_ticket_instance_ids"
+      ]
+    },
+    "closure_statistics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "closure_event_id": { "$ref": "#/$defs/instanceId" },
+          "ticket_instance_id": { "$ref": "#/$defs/instanceId" },
+          "closer_player_id": { "$ref": "#/$defs/instanceId" },
+          "attributed_team_id": { "type": ["string", "null"], "minLength": 1 },
+          "closed_at": { "$ref": "#/$defs/timestamp" }
+        },
+        "required": [
+          "closure_event_id",
+          "ticket_instance_id",
+          "closer_player_id",
+          "attributed_team_id",
+          "closed_at"
+        ]
+      }
+    },
+    "public_events": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          { "$ref": "game_event.schema.json" },
+          { "properties": { "visibility": { "const": "PUBLIC_MATCH" } } }
+        ]
+      }
+    },
+    "last_event_sequence": { "type": "integer", "minimum": 0 }
   },
   "required": [
     "match_id",
     "revision",
+    "ruleset_version",
     "status",
+    "collaboration_mode",
     "players",
     "repair_queue",
-    "turn_state"
+    "turn",
+    "closure_statistics",
+    "public_events",
+    "last_event_sequence"
   ]
 }

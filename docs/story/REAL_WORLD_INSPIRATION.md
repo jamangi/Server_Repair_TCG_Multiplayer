@@ -80,7 +80,7 @@ These are capability or repair-complexity bands. They should not be copied into 
 
 SMS's [careers page](https://www.smsinfocomm.com/Careers.html) explicitly emphasizes training, cross-training, mentorship, promotion from within, global collaboration, digital tools, and hiring across Logistics, Quality, Engineering, and Sustainability. The L3 job description also allows reassignment among inspection, soldering, testing, and data entry according to project need.
 
-This makes a fictional rotation program more grounded than an unrestricted “chosen technician” who somehow outranks every specialist. A participant can retain a home team, earn scoped qualifications, and move with the work while still depending on mentors and formal handoffs.
+This makes a fictional rotation program more grounded than an unrestricted “chosen technician” who somehow outranks every specialist. A participant can retain a home team, develop scoped skills, and move with the work while still depending on mentors and formal handoffs. In the game account, any Qualification badge recognizing that growth remains honor-only and has no access or gameplay effect.
 
 ## Fictional adaptation used by this story package
 
@@ -114,4 +114,4 @@ The four-sector model is a sound worldbuilding map:
 3. an independent quality and audit gate;
 4. Outflow and fulfillment.
 
-The evidence supports all of those **functions**. It does not establish that SMS universally organizes them as exactly those eight fixed teams. The most realistic fictional version keeps the spatial flow, gives people home functions, and lets assignments and qualifications overlap. That is the model adopted in [`STORY.md`](STORY.md).
+The evidence supports all of those **functions**. It does not establish that SMS universally organizes them as exactly those eight fixed teams. The most realistic fictional version keeps the spatial flow, gives people home functions, and lets assignments and real-world skills overlap. That is the model adopted in [`STORY.md`](STORY.md); it does not create mechanical Qualification gates.

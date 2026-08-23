@@ -1,0 +1,27 @@
+{
+  "request_id": "req_close_001",
+  "match_id": "match_demo_001",
+  "player_id": "player_b",
+  "expected_revision": 32,
+  "action_type": "PUBLISH_CLOSURE",
+  "payload": {
+    "ticket_instance_id": "ticketinst_2",
+    "accepted_isolation_event_id": "evt_isolation_002",
+    "decisive_evidence_event_ids": [
+      "evt_evidence_001",
+      "evt_evidence_002"
+    ],
+    "repair_event_ids": [
+      "evt_repair_001",
+      "evt_repair_002"
+    ],
+    "failed_verify_event_ids": [
+      "evt_verify_fail_001"
+    ],
+    "current_passing_verify_event_ids": [
+      "evt_verify_pass_002",
+      "evt_verify_pass_003"
+    ]
+  },
+  "client_nonce": "nonce_close_001"
+}

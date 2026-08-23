@@ -8,8 +8,8 @@ This directory is the authoritative entry point for Server Repair TCG rule decis
 - [`FROZEN_RULES.md`](FROZEN_RULES.md) remains authoritative while decisions are reviewed.
 - [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md) contains the remaining canonical open-rule inventory, including `SCORE-001` and `GEN-001`.
 - [`CANDIDATE_DECISIONS.md`](CANDIDATE_DECISIONS.md) has no active candidates. It preserves promotion, freeze, spiritual-conflict, and prune history plus legacy anchors.
-- [`UNSYNCHRONIZED_DECISIONS.md`](UNSYNCHRONIZED_DECISIONS.md) records the migrations created by the newly frozen rules, zero-Action closure, Equipment removal, non-mechanical Qualifications, and the accepted open decisions.
-- [`TASK-007`](../../tasks/TASK-007-synchronize-approved-gameplay-rules.md) is ready to synchronize design documents, schemas, examples, and candidate flows without resolving the remaining unfrozen scoring or Ticket Builder details.
+- [`UNSYNCHRONIZED_DECISIONS.md`](UNSYNCHRONIZED_DECISIONS.md) has no active reconciliation entries. It preserves the verified `SYNC-014`–`SYNC-020` resolution record and the boundary around accepted open decisions.
+- [`TASK-007`](../../tasks/TASK-007-synchronize-approved-gameplay-rules.md) completed repository-wide synchronization on 2026-08-23 without resolving the remaining unfrozen scoring or Ticket Builder details.
 
 ## Reading order
 
@@ -26,7 +26,7 @@ This directory is the authoritative entry point for Server Repair TCG rule decis
 | [`FROZEN_RULES.md`](FROZEN_RULES.md) | Normative | Approved behavior that implementations and tests may rely on. |
 | [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md) | Canonical open inventory | Fundamental questions accepted as real decisions but not yet resolved. |
 | [`CANDIDATE_DECISIONS.md`](CANDIDATE_DECISIONS.md) | Staging | Proposed questions, dependencies, cross-stage questions, and pruned derivative ideas. |
-| [`UNSYNCHRONIZED_DECISIONS.md`](UNSYNCHRONIZED_DECISIONS.md) | Reconciliation queue | Confirmed overlaps, likely future conflicts, and indirectly pressured frozen rules. |
+| [`UNSYNCHRONIZED_DECISIONS.md`](UNSYNCHRONIZED_DECISIONS.md) | Reconciliation queue | Active cross-source conflicts plus retained resolution history; currently empty. |
 
 ## Status definitions
 
@@ -60,15 +60,14 @@ An unsynchronized entry identifies work to reconcile. Until an explicit decision
 
 ## Recommended decision order for finishing the engine
 
-Synchronize approved foundations before narrowing the remaining rules:
+With the approved foundations synchronized, narrow the remaining rules in dependency order:
 
-1. Complete [`TASK-007`](../../tasks/TASK-007-synchronize-approved-gameplay-rules.md) and remove `SYNC-014`–`SYNC-020` only after every affected source agrees.
-2. Resolve [`SCORE-001`](UNFROZEN_RULES.md#score-001): qualifying causal contribution classes, weights, duplicate suppression, visibility, and cooperative aggregation.
-3. Resolve score-threshold and terminal precedence in [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md#7-terminal-conditions-and-results) against the closure-settled score events.
-4. Resolve [`GEN-001`](UNFROZEN_RULES.md#gen-001): Ticket Builder configuration, constraint solving, failure behavior, and versioned determinism.
-5. Resolve the remaining production policy in `UNFROZEN_RULES.md`: configuration admission, timer precedence, Room lifecycle, computer players, statistics, and content-level balance.
+1. Resolve [`SCORE-001`](UNFROZEN_RULES.md#score-001): qualifying causal contribution classes, weights, duplicate suppression, visibility, and cooperative aggregation.
+2. Resolve score-threshold and terminal precedence in [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md#7-terminal-conditions-and-results) against the closure-settled score events.
+3. Resolve [`GEN-001`](UNFROZEN_RULES.md#gen-001): Ticket Builder configuration, constraint solving, failure behavior, and versioned determinism.
+4. Resolve the remaining production policy in `UNFROZEN_RULES.md`: configuration admission, timer precedence, Room lifecycle, computer players, statistics, and content-level balance.
 
-After TASK-007, review whether the separate candidate and synchronization ledgers are still useful. Do not remove them merely because the candidate bucket is currently empty.
+Retain the separate candidate and synchronization ledgers for future proposals and cross-source conflicts even while both active queues are empty; their histories remain useful authority context.
 
 ## Maintenance rules
 

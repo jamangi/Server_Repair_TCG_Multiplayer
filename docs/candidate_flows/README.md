@@ -12,6 +12,8 @@ Observe -> Hypothesize <-> Test -> Isolate -> Repair -> Verify -> Document
 
 Hypothesize and Test are the repeatable heart of Diagnosis. Isolate is an evidence-citing commitment to an actionable fault. Repair changes machine state but does not prove the explanation. A failed Verify is a valid event that can preserve the repair and reopen Diagnosis. Document publishes an attributable account without rewriting the order in which events happened.
 
+The synchronized replays use frozen zero-Action, non-scoring closure. Their Service Points come from a visibly example-local pending causal-contribution rubric that settles only at closure; it is not a proposed resolution of unfrozen <code>SCORE-001</code>. The package contains no account/loadout Equipment mechanic. Qualifications appear only as recognition-only honor badges, while cosmetics remain non-mechanical.
+
 ## Recommended reading order
 
 1. [`v0.0_ex1_decisions.md`](v0.0_ex1_decisions.md) — the temporary decisions, inherited authority, alternatives, risks, and review boundary.
@@ -57,12 +59,12 @@ The five `SFP` Tickets preserve their case-study provenance. Outcomes strengthen
 - Use the decisions document to challenge the temporary rules, not to promote them silently.
 - Use the deterministic deck orders and final-state audits to reproduce arithmetic or locate contradictions.
 - Use focused UI flows to discuss one interaction without inheriting an entire product specification.
-- Use the full journeys to check continuity: ownership, deck choice, equipment access, story context, match synchronization, results, return paths, and logout.
+- Use the full journeys to check continuity: ownership, deck choice, recognition and appearance, story context, match synchronization, results, return paths, and logout.
 - Send any accepted change back through the normal decision, content, schema, story, or implementation lifecycle.
 
 ## Deliberate boundaries
 
-The package does not change the current runtime schemas or viewer data. Some illustrated concepts—including team-only visibility, reopened Diagnosis, basic Isolate/Search/Refresh/Document actions, configurable results, and multiple winners—are known migration subjects rather than present contracts.
+TASK-007 supplies generic runtime contracts for team-only visibility, returned Diagnosis, Commit Isolation, Document Live, Search, Refresh, zero-Action closure, and winner arrays. This package remains a non-authoritative set of fixture-specific replays and UI hypotheses: it does not define production content, client behavior, configurable-match policy, or viewer data.
 
 The future React client and Motion behavior are descriptive interaction hypotheses. Authoritative events come from game state; animation callbacks never decide rules, spend resources, or advance a turn. Every material motion has a reduced-motion equivalent, and state is also conveyed through text, shape, placement, and accessible announcements.
 
@@ -70,4 +72,4 @@ The campaign's *Quiet Cascade* remains technically unresolved. SIFT, story dialo
 
 ## Package contract
 
-This package was produced under [`TASK-006`](../tasks/TASK-006-candidate-gameplay-flows-v0.0.md). Its completion checks cover link resolution, domain-reference resolution, deck arithmetic, Ticket counts, round and turn order, visibility, reconnect and stale-action behavior, Worklog chronology, full-journey continuity, reserved story truth, and changed-file scope.
+This package was produced under [`TASK-006`](../tasks/TASK-006-candidate-gameplay-flows-v0.0.md) and synchronized to approved rules under [`TASK-007`](../tasks/TASK-007-synchronize-approved-gameplay-rules.md). Its completion checks cover link resolution, domain-reference resolution, deck and Action arithmetic, zero-Action closure, pending-contribution settlement, Ticket counts, round and turn order, visibility, reconnect and stale-action behavior, Worklog chronology, full-journey continuity, removal of account Equipment, non-mechanical Qualifications, reserved story truth, and changed-file scope.

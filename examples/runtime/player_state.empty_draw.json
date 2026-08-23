@@ -1,0 +1,58 @@
+{
+  "player_id": "player_b",
+  "display_name": "Player B",
+  "team_id": null,
+  "seat_number": 1,
+  "active": true,
+  "service_points": 0,
+  "deck_snapshot_card_definition_ids": [
+    "card.fixture.01", "card.fixture.01", "card.fixture.01",
+    "card.fixture.02", "card.fixture.02", "card.fixture.02",
+    "card.fixture.03", "card.fixture.03", "card.fixture.03",
+    "card.fixture.04", "card.fixture.04", "card.fixture.04",
+    "card.fixture.05", "card.fixture.05", "card.fixture.05",
+    "card.fixture.06", "card.fixture.06", "card.fixture.06",
+    "card.fixture.07", "card.fixture.07", "card.fixture.07",
+    "card.fixture.08", "card.fixture.08", "card.fixture.08",
+    "card.fixture.09", "card.fixture.09", "card.fixture.09",
+    "card.fixture.10", "card.fixture.10", "card.fixture.10"
+  ],
+  "deck_card_instance_ids": [],
+  "hand_card_instance_ids": [
+    "cardinst_028",
+    "cardinst_029",
+    "cardinst_030"
+  ],
+  "discard_card_instance_ids": [
+    "cardinst_001", "cardinst_002", "cardinst_003", "cardinst_004", "cardinst_005",
+    "cardinst_006", "cardinst_007", "cardinst_008", "cardinst_009", "cardinst_010",
+    "cardinst_011", "cardinst_012", "cardinst_013", "cardinst_014", "cardinst_015",
+    "cardinst_016", "cardinst_017", "cardinst_018", "cardinst_019", "cardinst_020",
+    "cardinst_021", "cardinst_022", "cardinst_023", "cardinst_024", "cardinst_025",
+    "cardinst_026", "cardinst_027"
+  ],
+  "in_play_card_instance_ids": [],
+  "opening_hand_drawn": true,
+  "empty_draws_skipped": 1,
+  "utility_resources": {
+    "search_tokens": 4,
+    "max_search_tokens": 5,
+    "refresh_tokens": 1,
+    "max_refresh_tokens": 1
+  },
+  "knowledge_states": [],
+  "contribution_ids": [],
+  "score_event_ids": [],
+  "closure_statistics": {
+    "tickets_closed": 1,
+    "closure_event_ids": [
+      "evt_close_001"
+    ]
+  },
+  "connection": {
+    "status": "CONNECTED",
+    "snapshot_revision": 33,
+    "last_acknowledged_event_sequence": 40,
+    "unseen_semantic_event_ids": []
+  }
+}

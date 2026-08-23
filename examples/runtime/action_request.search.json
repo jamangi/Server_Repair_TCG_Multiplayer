@@ -1,0 +1,11 @@
+{
+  "request_id": "req_search_001",
+  "match_id": "match_utility_fixture_001",
+  "player_id": "player_a",
+  "expected_revision": 24,
+  "action_type": "SEARCH",
+  "payload": {
+    "selected_card_definition_id": "card.core.memory_diagnostic"
+  },
+  "client_nonce": "nonce_search_001"
+}

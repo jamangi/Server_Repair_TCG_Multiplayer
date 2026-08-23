@@ -2,6 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.local/schemas/repair_ticket.schema.json",
   "title": "Repair Ticket Definition",
+  "description": "Authored Ticket content. Public candidate and requirement surfaces must be projected separately from server-only causal truth and unexecuted outcomes.",
   "type": "object",
   "additionalProperties": false,
   "$defs": {
@@ -10,179 +11,240 @@
       "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
     },
     "entityRef": {
-      "type": "string",
-      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+      "$ref": "#/$defs/stableId"
     },
     "presentation": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "display_name": {
-          "type": "string",
-          "minLength": 1
-        },
-        "short_description": {
-          "type": "string"
-        },
+        "display_name": { "type": "string", "minLength": 1 },
+        "short_description": { "type": "string" },
         "illustration": {
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "asset_id": {
-              "type": "string",
-              "minLength": 1
-            },
-            "alt_text": {
-              "type": "string"
-            },
-            "caption": {
-              "type": "string"
-            },
-            "crop_hint": {
-              "type": "string"
-            },
-            "license_note": {
-              "type": "string"
-            }
+            "asset_id": { "type": "string", "minLength": 1 },
+            "alt_text": { "type": "string" },
+            "caption": { "type": "string" },
+            "crop_hint": { "type": "string" },
+            "license_note": { "type": "string" }
           },
-          "required": [
-            "asset_id",
-            "alt_text"
-          ]
+          "required": ["asset_id", "alt_text"]
         }
       },
-      "required": [
-        "display_name"
-      ]
+      "required": ["display_name"]
     },
     "sourceMeta": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "expansion_id": {
-          "$ref": "#/$defs/entityRef"
-        },
-        "version": {
-          "type": "string"
-        },
+        "expansion_id": { "$ref": "#/$defs/entityRef" },
+        "version": { "type": "string" },
         "status": {
           "type": "string",
-          "enum": [
-            "draft",
-            "reviewed",
-            "published",
-            "deprecated"
-          ]
+          "enum": ["draft", "reviewed", "published", "deprecated"]
         },
         "search_tags": {
           "type": "array",
-          "items": {
-            "type": "string"
-          },
+          "items": { "type": "string" },
           "uniqueItems": true
         }
       },
-      "required": [
-        "expansion_id",
-        "status"
-      ]
+      "required": ["expansion_id", "status"]
     }
   },
   "properties": {
-    "id": {
-      "$ref": "#/$defs/stableId"
-    },
-    "entity_type": {
-      "const": "repair_ticket"
-    },
-    "presentation": {
-      "$ref": "#/$defs/presentation"
-    },
-    "source": {
-      "$ref": "#/$defs/sourceMeta"
-    },
-    "difficulty": {
-      "type": "integer",
-      "minimum": 1,
-      "maximum": 10
-    },
-    "service_points": {
-      "type": "integer",
-      "minimum": 1
-    },
-    "server_profile_id": {
-      "$ref": "#/$defs/entityRef"
-    },
+    "id": { "$ref": "#/$defs/stableId" },
+    "entity_type": { "const": "repair_ticket" },
+    "presentation": { "$ref": "#/$defs/presentation" },
+    "source": { "$ref": "#/$defs/sourceMeta" },
+    "difficulty": { "type": "integer", "minimum": 1, "maximum": 10 },
+    "server_profile_id": { "$ref": "#/$defs/entityRef" },
     "initial_symptom_ids": {
       "type": "array",
-      "items": {
-        "$ref": "#/$defs/entityRef"
-      },
-      "uniqueItems": true
+      "items": { "$ref": "#/$defs/entityRef" },
+      "uniqueItems": true,
+      "minItems": 1
     },
-    "fault_blueprint": {
+    "public_candidate_fault_ids": {
+      "description": "Authored candidate set visible to every Player; it does not reveal which candidate is true.",
+      "type": "array",
+      "items": { "$ref": "#/$defs/entityRef" },
+      "uniqueItems": true,
+      "minItems": 1
+    },
+    "server_only_truth": {
+      "description": "Authoritative causal truth. This object is never included in a player-safe projection.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "fault_instances": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "fault_instance_key": { "$ref": "#/$defs/stableId" },
+              "fault_id": { "$ref": "#/$defs/entityRef" },
+              "role": {
+                "type": "string",
+                "enum": ["ROOT", "INTERMEDIATE", "TERMINAL", "ACTIONABLE"]
+              },
+              "actionable": { "type": "boolean" },
+              "deepest": { "type": "boolean" },
+              "required_to_repair": { "type": "boolean" }
+            },
+            "required": [
+              "fault_instance_key",
+              "fault_id",
+              "role",
+              "actionable",
+              "deepest",
+              "required_to_repair"
+            ]
+          }
+        },
+        "causal_edge_ids": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/entityRef" },
+          "uniqueItems": true
+        }
+      },
+      "required": ["fault_instances", "causal_edge_ids"]
+    },
+    "authored_evidence_outcomes": {
+      "description": "Server-selected authored results for eligible Test, Command, inspection, or system executions.",
       "type": "array",
       "minItems": 1,
       "items": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "fault_id": {
-            "$ref": "#/$defs/entityRef"
+          "outcome_id": { "$ref": "#/$defs/stableId" },
+          "source_definition_id": { "$ref": "#/$defs/entityRef" },
+          "target_ref": { "$ref": "#/$defs/stableId" },
+          "eligible_machine_state_key": { "$ref": "#/$defs/stableId" },
+          "candidate_effects": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "candidate_fault_id": { "$ref": "#/$defs/entityRef" },
+                "disposition": {
+                  "type": "string",
+                  "enum": ["SUPPORT", "CONTRADICT", "RULE_OUT", "CONFIRM", "INCONCLUSIVE"]
+                }
+              },
+              "required": ["candidate_fault_id", "disposition"]
+            },
+            "minItems": 1
           },
-          "role": {
-            "type": "string",
-            "enum": [
-              "root",
-              "intermediate",
-              "terminal",
-              "actionable"
-            ]
-          },
-          "initial_visibility": {
-            "type": "string",
-            "enum": [
-              "hidden",
-              "category_only",
-              "visible"
-            ]
-          },
-          "required_to_identify": {
-            "type": "boolean"
-          },
-          "required_to_repair": {
-            "type": "boolean"
+          "observation_id": {
+            "type": ["string", "null"],
+            "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
           }
         },
         "required": [
-          "fault_id",
-          "role",
-          "initial_visibility",
-          "required_to_identify",
-          "required_to_repair"
+          "outcome_id",
+          "source_definition_id",
+          "target_ref",
+          "eligible_machine_state_key",
+          "candidate_effects",
+          "observation_id"
         ]
       }
     },
-    "verification_requirement_ids": {
+    "isolation_requirements": {
       "type": "array",
+      "minItems": 1,
       "items": {
-        "$ref": "#/$defs/entityRef"
-      },
-      "uniqueItems": true,
-      "minItems": 1
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "requirement_id": { "$ref": "#/$defs/stableId" },
+          "candidate_fault_id": { "$ref": "#/$defs/entityRef" },
+          "classification": {
+            "type": "string",
+            "enum": ["ACTIONABLE", "DEEPEST", "ACTIONABLE_AND_DEEPEST"]
+          },
+          "minimum_citations": { "type": "integer", "minimum": 1 },
+          "eligible_outcome_ids": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/stableId" },
+            "uniqueItems": true,
+            "minItems": 1
+          }
+        },
+        "required": [
+          "requirement_id",
+          "candidate_fault_id",
+          "classification",
+          "minimum_citations",
+          "eligible_outcome_ids"
+        ]
+      }
     },
-    "documentation_requirement_ids": {
+    "repair_requirements": {
       "type": "array",
+      "minItems": 1,
       "items": {
-        "$ref": "#/$defs/entityRef"
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "fault_id": { "$ref": "#/$defs/entityRef" },
+          "eligible_repair_procedure_ids": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/entityRef" },
+            "uniqueItems": true,
+            "minItems": 1
+          }
+        },
+        "required": ["fault_id", "eligible_repair_procedure_ids"]
+      }
+    },
+    "verification_requirements": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "requirement_id": { "$ref": "#/$defs/stableId" },
+          "validation_procedure_id": { "$ref": "#/$defs/entityRef" },
+          "success_condition": { "type": "string", "minLength": 1 },
+          "must_pass_after_latest_repair": { "const": true }
+        },
+        "required": [
+          "requirement_id",
+          "validation_procedure_id",
+          "success_condition",
+          "must_pass_after_latest_repair"
+        ]
+      }
+    },
+    "closure_requirements": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "include_accepted_isolation": { "const": true },
+        "include_cited_decisive_evidence": { "const": true },
+        "include_every_repair_in_accepted_path": { "const": true },
+        "include_every_failed_verify_in_accepted_path": { "const": true },
+        "include_all_current_passing_verifies": { "const": true }
       },
-      "uniqueItems": true
+      "required": [
+        "include_accepted_isolation",
+        "include_cited_decisive_evidence",
+        "include_every_repair_in_accepted_path",
+        "include_every_failed_verify_in_accepted_path",
+        "include_all_current_passing_verifies"
+      ]
     },
     "educational_objectives": {
       "type": "array",
-      "items": {
-        "type": "string"
-      }
+      "items": { "type": "string" }
     }
   },
   "required": [
@@ -191,9 +253,13 @@
     "presentation",
     "source",
     "difficulty",
-    "service_points",
     "initial_symptom_ids",
-    "fault_blueprint",
-    "verification_requirement_ids"
+    "public_candidate_fault_ids",
+    "server_only_truth",
+    "authored_evidence_outcomes",
+    "isolation_requirements",
+    "repair_requirements",
+    "verification_requirements",
+    "closure_requirements"
   ]
 }

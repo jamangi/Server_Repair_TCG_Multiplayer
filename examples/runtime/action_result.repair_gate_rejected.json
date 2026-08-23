@@ -1,0 +1,21 @@
+{
+  "request_id": "req_repair_ungated",
+  "accepted": false,
+  "match_revision_before": 18,
+  "match_revision_after": 18,
+  "payment_applied": false,
+  "actions_spent": 0,
+  "utility_resources_spent": {
+    "search_tokens": 0,
+    "refresh_tokens": 0
+  },
+  "public_events": [],
+  "team_events": [],
+  "private_events": [],
+  "error_code": "REPAIR_GATE_NOT_SATISFIED",
+  "error_message": "An accepted Isolation matching this Repair is required.",
+  "rejected_at": "BEFORE_PAYMENT",
+  "recovered_card_instance_id": null,
+  "opened_resolution_window": "NONE",
+  "resolution_code": null
+}

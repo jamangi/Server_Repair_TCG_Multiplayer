@@ -1,6 +1,6 @@
 # Story-derived cardless-action candidates
 
-Status: **candidate material only; not approved mechanics**
+Status: **candidate story presentation around approved system actions; not a new mechanics source**
 
 This file adapts the story premise without overriding the existing [case-study cardless-action research](../../case_studies/v0.1/candidate_materials/cardless-actions.md) or the [design-decision lifecycle](../../design/decisions/DECISION_INDEX.md).
 
@@ -8,10 +8,11 @@ This file adapts the story premise without overriding the existing [case-study c
 
 The player's home team and campaign rotation should enrich **how** they troubleshoot, not decide whether they are capable of ordinary reasoning.
 
-The strongest current candidate is:
+The synchronized boundary is:
 
-- keep Observe-recording, Hypothesis revision, evidence-supported Isolation, and Documentation available as universal or automatic system capabilities if the resolved engine needs them;
-- let cards, tools, tests, procedures, qualifications, and team relationships change scope, access, efficiency, or information quality;
+- preserve authorized review, Hypothesis revision, Commit Isolation, Document Live, and eligible zero-Action closure publication as universal or automatic system capabilities under the frozen rules;
+- let cards, technical Tools, Tests, procedures, and team relationships change scope, efficiency, or information quality;
+- keep Qualifications as honor-only account recognition with no gameplay, access, deck, procedure, story, or matchmaking effect;
 - keep Repair and Verify tied to appropriate domain objects and requirements rather than granting unsupported free universal actions.
 
 This preserves the educational loop and the case-study evidence while still giving campaign progression something meaningful to unlock.
@@ -35,11 +36,11 @@ This preserves the educational loop and the case-study evidence while still givi
 
 **Boundary:** a Tool, Command, or Test can create the Evidence. It does not own the engine's ability to retain that Evidence.
 
-**Decision pressure:** visibility and placeholder behavior remain controlled by `OBS-001`, `DOC-002`, `DOC-003`, and the frozen Evidence defaults.
+**Rules boundary:** visibility, immutable action results, and public placeholder behavior follow [`FROZEN_RULES.md` §§7–8](../../design/decisions/FROZEN_RULES.md#7-ticket-and-action-authority).
 
 ### Create or revise a Hypothesis set
 
-**Candidate form:** universal cardless reasoning action, if explicit Hypothesis state is adopted
+**Approved system form:** free on-turn revision of a private competitive or team cooperative marker naming up to two unresolved public candidates
 
 **Story reading:** the technician names the candidates worth distinguishing now, revises their ranking after Evidence, and may keep that reasoning private until they choose to publish or commit.
 
@@ -47,17 +48,17 @@ This preserves the educational loop and the case-study evidence while still givi
 
 **Possible team enrichment:**
 
-- mentor, history, and domain cards may add eligible candidates or show relationships;
-- Failure Analysis qualifications may improve comparison views or allow more structured commitments;
+- mentor, history, and domain cards may compare or show relationships among the Ticket's existing authored public candidates;
+- visible Evidence and eligible card effects may improve comparison views or allow more structured commitments;
 - SIFT may rank candidates only from legitimately visible records and must not inspect hidden authoritative state.
 
-**Boundary:** free-form prose should not become authoritative technical truth. If the engine does not need explicit Hypothesis records, player reasoning can remain in the player's head while Evidence and Isolation stay authoritative.
+**Boundary:** the marker is explicit but free-form prose does not become authoritative technical truth. It costs no Action, creates no score, and receives no truth response; Evidence and accepted Isolation remain authoritative.
 
-**Decision pressure:** `HYP-001`, `HYP-002`, `TST-001`, `ISO-001`, and `CROSS-004`.
+**Rules boundary:** candidate, Hypothesis, Test, and Isolation behavior follows [`FROZEN_RULES.md` §§11–12](../../design/decisions/FROZEN_RULES.md#11-candidate-faults-hypotheses-and-tests).
 
 ### Commit an evidence-supported Isolation
 
-**Candidate form:** universal cardless action or server-created transition
+**Approved system form:** universal one-Action `Commit Isolation` intent selecting one public candidate and citing Evidence
 
 **Story reading:** the technician becomes accountable for an actionable Fault, component, category, or causal depth after Evidence has meaningfully distinguished the candidates.
 
@@ -69,13 +70,13 @@ This preserves the educational loop and the case-study evidence while still givi
 - a mentor or workflow card may protect against premature commitment or help document bounded uncertainty;
 - authored Tickets may require different Isolation standards.
 
-**Boundary:** a successful Repair does not silently fabricate a prior Isolation. A substitution that both repairs and diagnoses still needs an unambiguous event or linked-event model.
+**Boundary:** a successful Repair does not silently fabricate a prior Isolation. Diagnostic substitution is a Test whose temporary resource reverts; a permanent machine change requires a separate legal Repair event.
 
-**Decision pressure:** `HYP-001`, `ISO-001`, `ISO-002`, `ISO-003`, `ISO-004`, `TST-001`, and `CROSS-004`.
+**Rules boundary:** false or insufficient commitment spends its Action, returns only `ISOLATION_NOT_SUPPORTED`, and follows the frozen eligibility consequence without exposing hidden truth.
 
 ### Document an authoritative action and attached result
 
-**Candidate form:** universal cardless action; cards may enhance it
+**Approved system form:** universal one-Action `Document Live`; explicit future card text may modify only what later rules permit
 
 **Story reading:** the player selects a real action record and publishes the allowed identity, target, interpretation, and attached Evidence into the Worklog while preserving original event chronology and later publication time.
 
@@ -89,9 +90,9 @@ This preserves the educational loop and the case-study evidence while still givi
 - Bench may attach part identity and repair detail.
 - Gate may audit completeness or require missing elements before release.
 
-**Boundary:** specialized cards can change cost, scope, audience, timing, or reward only after those rules are resolved. Documentation should project authoritative records, not let a player type a mechanically binding false claim.
+**Boundary:** Document Live selects one undocumented authoritative card action and attached eligible result, publishes the authorized projection, enriches the original placeholder, and recovers the exact source card once. Documentation projects authoritative records rather than accepting mechanically binding free-text claims.
 
-**Decision pressure:** `OBS-001`, `DOC-001` through `DOC-008`, `CROSS-001`, `CROSS-002`, and `CROSS-003`.
+**Rules boundary:** incremental Documentation and structured closure follow [`FROZEN_RULES.md` §§14–15](../../design/decisions/FROZEN_RULES.md#14-incremental-documentation-and-closure-record).
 
 ## Campaign-level cardless candidates
 
@@ -99,7 +100,7 @@ These belong between matches or in narrative preparation. They should not be mis
 
 ### Select a rotation assignment
 
-Choose which team the player shadows for the next campaign segment. A rotation may change the offered mentors, story scenes, deck-building pool, or qualification opportunities.
+Choose which team the player shadows for the next campaign segment. A rotation may change the offered mentors, story scenes, or authored deck-building rewards. It may also award an honor-only Qualification badge that records the milestone without causing any of those changes.
 
 It should not remove universal core-loop capabilities or silently change multiplayer deck-legality rules.
 
@@ -113,13 +114,13 @@ The consultation must use player-safe information and should not become a narrat
 
 Search closed and active records for serials, symptoms, tests, parts, and return history. This is primarily an application/reference capability, though a campaign may gate which client records the protagonist is authorized to inspect.
 
-Viewing an existing authorized record should not consume an in-match Action merely to make the application feel game-like. Any search-resource cost remains a separate unresolved rules question.
+Viewing an existing authorized record should not consume an in-match Action merely to make the application feel game-like. Reference/history lookup is distinct from the frozen deck **Search** action, which spends one Action and one Search Token to retrieve a card from the remaining draw deck.
 
 ## Team access model candidates
 
 ### Recommended: universal core, specialized leverage
 
-Every technician can participate in the reasoning loop. Team affiliation changes prepared resources, evidence scope, and campaign unlocks.
+Every technician can participate in the reasoning loop. Authored team preparation may change available resources, Tests, or campaign rewards, but affiliation alone never changes frozen Evidence visibility, projection rules, or hidden outcomes.
 
 Benefits:
 
@@ -128,11 +129,9 @@ Benefits:
 - specializations can be expressed through cards and authored Ticket opportunities;
 - cooperative teams still benefit from complementary decks.
 
-### Alternative: qualification gates for specialized procedures
+### Rejected: Qualification gates for specialized procedures
 
-Certain tools, tests, commands, rework procedures, or formal disposition actions require a campaign qualification or teammate.
-
-This is plausible for safety and expertise, but it should gate the specialized **method**, not basic Observe, Hypothesize, Isolate, or Document capability. It also requires a plan for campaign replay, cooperative composition, and legally solvable Tickets.
+Qualifications do not gate technical Tools, Tests, Commands, rework procedures, disposition actions, campaign scenes, deck construction, or matchmaking. Specialized methods may still carry authored domain prerequisites or card requirements, but those requirements must not be represented by an account badge.
 
 ### Not recommended: department-locked lifecycle verbs
 
@@ -146,14 +145,15 @@ Making only Inspect able to Observe, only Trace able to Isolate, or only Gate ab
 - **No mandatory card for ordinary thought:** cards may represent structured methods, references, tools, or advantages, not the human capacity to form a Hypothesis.
 - **No free-form authoritative conclusion:** rule-significant claims should point to eligible domain records and Evidence.
 - **No story-only exception to hidden state:** mentors, SIFT, computer technicians, and narrative scenes receive only legitimately visible information.
+- **No mechanical Qualification:** the account badge records recognition only and never changes a legal action or available experience.
 
 ## Promotion checklist
 
 Before any item becomes a rule or interface requirement:
 
-1. resolve its parent candidate decisions;
-2. define authoritative action and Evidence records;
-3. define collaboration-mode visibility;
-4. prove Ticket solvability with and without campaign progression;
-5. decide cost and economy only within `CROSS-002`;
+1. classify it as presentation around an existing frozen system action or as genuinely new behavior requiring the decision lifecycle;
+2. reuse the authoritative action, result, Evidence, and Worklog records rather than creating story-only truth;
+3. preserve the frozen collaboration-mode visibility categories;
+4. prove Ticket solvability independently of honor-only Qualifications;
+5. do not alter frozen Action/resource costs through candidate prose or implied card text;
 6. add schema, event, projection, and behavior tests in a separate task.

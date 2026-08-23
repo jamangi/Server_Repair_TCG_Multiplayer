@@ -4,7 +4,7 @@ Status: **working story proposal; not frozen canon or game rules**
 
 This directory gives Server Repair TCG a time, place, workplace, cast, campaign frame, and narrative voice. Its purpose is to make the troubleshooting loop feel like a lived activity performed by people whose work matters:
 
-**Observe -> Hypothesize -> Test -> Isolate -> Repair -> Verify -> Document**
+**Observe -> Diagnosis [Hypothesize <-> Test -> Isolate] -> Repair -> Verify -> Document**
 
 Story documents may explain why a player sees a Ticket queue, Worklog, private Evidence, team resources, or a deck-building reward. They do not determine how those systems behave. Normative and unresolved gameplay authority remains in [`docs/design/decisions/`](../design/decisions/DECISION_INDEX.md).
 
@@ -14,7 +14,7 @@ Story documents may explain why a player sees a Ticket queue, Worklog, private E
 2. [`CHARACTERS.md`](CHARACTERS.md) — the player-character model and initial ensemble, including future portrait hooks.
 3. [`VOICE.md`](VOICE.md) — tone, point of view, dialogue registers, terminology, and a sample campaign-to-match transition.
 4. [`REAL_WORLD_INSPIRATION.md`](REAL_WORLD_INSPIRATION.md) — sourced notes on SMS InfoComm and the line between operational research and fictional adaptation.
-5. [`gameplay_candidates/`](gameplay_candidates/) — story-derived card, cardless-action, and application-shell ideas that still require the normal design-decision lifecycle.
+5. [`gameplay_candidates/`](gameplay_candidates/) — story-facing presentation and content ideas constrained by frozen system actions; genuinely new behavior still requires the normal design-decision lifecycle.
 
 ## Authority labels
 
@@ -27,7 +27,7 @@ Story documents may explain why a player sees a Ticket queue, Worklog, private E
 
 The rules currently call the sixth lifecycle stage **Verify**. Second Current employees often call the surrounding organizational practice **Validation**, and its quality area is the **Validation Gate**. In story text, validation therefore means the in-world practice; **Verify** remains the exact gameplay-stage term.
 
-The loop is iterative rather than a one-way conveyor. Failed Verify can reopen Diagnosis, Tests can revise Hypotheses, and one physical intervention can produce both diagnostic Evidence and a Repair state change. Department handoffs organize the work but do not redefine the lifecycle.
+The loop is iterative rather than a one-way conveyor. Hypothesize and Test can repeat inside Diagnosis, accepted Isolation is the accountable transition to ordinary Repair, and failed Verify can reopen Diagnosis while preserving earlier Evidence, machine changes, and Worklog history. A real-world intervention may motivate linked observations, but the core game records a reverting diagnostic substitution as a Test and a permanent machine change as a separate legal Repair. Department handoffs organize the work but do not redefine the lifecycle.
 
 ## Candidate directory
 

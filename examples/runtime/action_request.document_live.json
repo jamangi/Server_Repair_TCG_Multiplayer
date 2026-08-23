@@ -1,0 +1,14 @@
+{
+  "request_id": "req_document_001",
+  "match_id": "match_demo_001",
+  "player_id": "player_a",
+  "expected_revision": 20,
+  "action_type": "DOCUMENT_LIVE",
+  "payload": {
+    "ticket_instance_id": "ticketinst_2",
+    "source_action_event_id": "evt_worklog_test_001",
+    "source_result_event_id": "evt_evidence_001",
+    "worklog_placeholder_event_id": "evt_worklog_test_001"
+  },
+  "client_nonce": "nonce_document_001"
+}

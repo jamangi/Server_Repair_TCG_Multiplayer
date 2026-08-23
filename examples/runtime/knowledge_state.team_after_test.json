@@ -1,0 +1,42 @@
+{
+  "knowledge_state_id": "knowledge_team_alpha_ticket_1",
+  "ticket_instance_id": "ticketinst_coop_1",
+  "audience": "TEAM",
+  "owner_player_id": null,
+  "team_id": "team_alpha",
+  "known_symptom_ids": [
+    "symptom.boot.no_post"
+  ],
+  "candidate_assessments": [
+    {
+      "candidate_fault_id": "fault.memory.dimm.failed",
+      "assessment": "SUPPORTED",
+      "supporting_evidence_event_ids": [
+        "evt_team_evidence_001"
+      ]
+    }
+  ],
+  "current_hypothesis": {
+    "candidate_fault_ids": [
+      "fault.memory.dimm.failed"
+    ],
+    "revised_at_revision": 8
+  },
+  "evidence": [
+    {
+      "evidence_event_id": "evt_team_evidence_001",
+      "action_event_id": "action_coop_test_001",
+      "source_type": "TEST",
+      "source_definition_id": "test.memory.diagnostic",
+      "authored_outcome_id": "outcome.memory_diagnostic.failed_dimm_support",
+      "candidate_fault_id": "fault.memory.dimm.failed",
+      "disposition": "SUPPORT",
+      "observation_id": "symptom.memory.ecc_errors",
+      "visibility": "TEAM",
+      "machine_revision": 0,
+      "captured_at": "2026-08-22T18:00:00Z",
+      "documented_by_publication_event_id": null
+    }
+  ],
+  "last_updated_revision": 8
+}

@@ -8,13 +8,13 @@ These concepts connect the Second Current workplace to the existing card familie
 
 The player deck represents a prepared **shift repertoire**:
 
-- certified procedures and commands;
+- procedures and Commands represented by owned cards;
 - tools, fixtures, and known-good resources the technician can access;
 - compatible parts or component options;
 - trained workflows and reference practices;
 - limited help from colleagues or organizational systems.
 
-Cards need not be literal objects in the fiction. Drawing one means an option has become usable under the match's limits of time, attention, access, and inventory. Exact draw, search, discard, recovery, and refresh meanings remain unresolved.
+Cards need not be literal objects in the fiction. Drawing one means an option has become usable under the match's limits of time, attention, access, and inventory. The first-version draw, discard, Document Live recovery, Search, and Refresh meanings are frozen; card-specific effects and campaign reward balance remain candidates.
 
 ## Inflow and First Look concepts
 
@@ -31,18 +31,18 @@ Cards need not be literal objects in the fiction. Drawing one means an option ha
 | Working name | Likely card/domain home | Fictional function | Design caution |
 | --- | --- | --- | --- |
 | Baseline Harness | Tool plus Test access | Reproduce a standard boot, inventory, or functional profile. | A pass proves only its named conditions. |
-| Diagnostic Bundle Capture | Test or Workflow | Attach logs, sensors, and structured outputs from one execution. | Documentation target and attachment closure depend on `DOC-002`. |
+| Diagnostic Bundle Capture | Test or Workflow | Attach logs, sensors, and structured outputs from one execution. | Any publication must use Document Live's authoritative source/result link and preserve the original Worklog identity. |
 | Controlled Load Profile | Test | Reproduce intermittent power or thermal behavior under stated conditions. | Map to existing stress-test coverage when equivalent. |
-| Differential Retest | Test enhancement | Repeat a prior Test after one target or machine state changed and compare results. | Repeated executions require distinct event semantics under `TST-002`. |
+| Differential Retest | Test enhancement | Repeat a prior Test after one target or machine state changed and compare results. | Every execution remains a distinct immutable event; identical same-target, same-state repeats with no eligible new outcome are rejected before payment. |
 | Fixture Self-Check | Test | Determine whether a suspicious result belongs to the unit or test fixture. | Avoid turning every failure into a fixture problem; author eligible outcomes. |
 
 ## Trace and Failure Analysis concepts
 
 | Working name | Likely card/domain home | Fictional function | Design caution |
 | --- | --- | --- | --- |
-| Candidate Matrix | Workflow | Compare which visible Evidence supports or contradicts eligible Fault candidates. | Candidate universe and explicit Hypothesis state remain unresolved. |
+| Candidate Matrix | Workflow | Compare which visible Evidence supports or contradicts eligible Fault candidates. | Use the Ticket's authored public candidates and the player's authorized Hypothesis/Evidence only; never reveal causal truth. |
 | Schematic Trace | Test, Tool, or reference Workflow | Follow an electrical or logical path to choose a discriminating measurement. | Requires appropriate platform data and should not act as omniscience. |
-| Known-Good Substitution Plan | Test/Tool combination | Replace one controlled candidate and interpret the comparison. | Existing known-good tools and substitution Tests should be reused. One intervention may also become Repair. |
+| Known-Good Substitution Plan | Test/Tool combination | Replace one controlled candidate and interpret the comparison. | Reuse existing known-good Tools and substitution Tests. The temporary resource reverts; a permanent change is a separate legal Repair. |
 | Cross-Lot Pattern Review | Workflow | Compare authorized cases for recurring parts, sites, symptoms, or test conditions. | Requires privacy, visibility, and campaign-scope rules. |
 | Bounded Conclusion | Workflow enhancement | Document an actionable fault while preserving explicitly unresolved deeper causes. | Must attach to authoritative candidate and Evidence records rather than free text alone. |
 
@@ -50,7 +50,7 @@ Cards need not be literal objects in the fiction. Drawing one means an option ha
 
 | Working name | Likely card/domain home | Fictional function | Design caution |
 | --- | --- | --- | --- |
-| Prepared Parts Kit | Component access or search effect | Make compatible repair resources available for an authored server profile. | Compatibility and deck-search economy remain unresolved. |
+| Prepared Parts Kit | Component access or card effect | Make compatible repair resources available for an authored server profile. | Do not redefine the universal one-Action, one-token deck Search rule; any card-specific access effect still needs design review. |
 | Component-Level Rework | Repair Procedure | Perform scoped solder, desolder, connector, or board-component work. | Reuse existing repair content and require appropriate Tool/Protocol coverage. |
 | Workmanship Inspection | Test or Repair follow-up | Check polarity, bridges, cold joints, shifted pads, residue, and assembly issues. | This is not full post-repair functional Verify by itself. |
 | Paired Intervention Record | Workflow | Preserve which changes were made together when an efficient bundled Repair weakens root-cause attribution. | Do not award clean Isolation credit automatically. |
@@ -61,10 +61,10 @@ Cards need not be literal objects in the fiction. Drawing one means an option ha
 | Working name | Likely card/domain home | Fictional function | Design caution |
 | --- | --- | --- | --- |
 | Independent Validation | Validation Procedure | Repeat required operational checks without relying solely on the repairing technician's result. | Use **Verify** for the exact lifecycle stage; success conditions must be authored. |
-| Traveler Audit | Workflow | Compare unit identity, client complaint, repair action, replaced parts, Verify result, and accessories. | Documentation requirement for closure remains unresolved. |
+| Traveler Audit | Workflow | Compare unit identity, client complaint, repair action, replaced parts, Verify result, and accessories. | It may inspect or help publish authorized records, but it cannot replace the mandatory structured closure bundle. |
 | Out-of-Box Audit | Test plus Workflow | Sample a completed unit as a recipient would receive it. | Sampling policy is narrative texture until formalized. |
 | Release Hold | Workflow or state transition | Prevent release when evidence, workmanship, identity, or record completeness is insufficient. | Likely an engine/workflow rule rather than a normal player-deck card. |
-| Return to Diagnosis | Ticket transition | Preserve the failed Verify and reopen investigation. | Strong case-study support, but transition behavior needs an explicit decision before card design. |
+| Return to Diagnosis | Ticket transition | Preserve the failed Verify and reopen investigation. | This is frozen system behavior after failed or inconclusive Verify, not a card players must draw. |
 
 ## Outflow, materials, and lifecycle concepts
 
@@ -74,7 +74,7 @@ Cards need not be literal objects in the fiction. Drawing one means an option ha
 | Destination Packaging Profile | Protocol | Apply packaging required for chassis, carrier, climate, and client route. | Do not overload the first repair prototype with shipping simulation. |
 | Repeat Return Trace | Workflow | Link a newly received serial to a prior closed Worklog. | Record retention and client authorization need definition. |
 | Quarantined Part Lot | Event or condition | Restrict or flag a suspect batch while Materials investigates. | Use sparingly; it can undermine deck reliability if purely random. |
-| Requalified Component | Component state or card modifier | Return a tested reclaimed part to usable inventory with provenance. | Needs compatibility and qualification semantics before becoming content. |
+| Requalified Component | Component state or card modifier | Return a tested reclaimed part to usable inventory with provenance. | Needs compatibility and provenance semantics before becoming content; “requalified” here describes technical component state, not an account Qualification. |
 | Responsible Reclamation | Workflow | Route an irreparable unit to harvesting, secure data handling, and material recovery. | Valuable story worldbuilding; may belong outside the ordinary Ticket-closure rules. |
 
 ## Crossline and character-linked concepts
@@ -83,7 +83,7 @@ Cards need not be literal objects in the fiction. Drawing one means an option ha
 | --- | --- | --- | --- |
 | Shift Handoff | Workflow card | Publish selected action context so another technician can continue without erasing Ticket progress. | Ticket progress already belongs to the Ticket; do not imply ownership transfer is required. |
 | Mentor Consult | Campaign reward, support card, or pre-match choice | Let a named specialist improve access to an eligible method or interpretation view. | Must not expose hidden authoritative state. |
-| Rotation Qualification | Campaign unlock | Add a reviewed set of cards to the player's deck-building pool. | Unlock does not settle deck legality, copy limits, or match balance. |
+| Rotation Recognition | Honor-only Qualification badge | Record that the player completed a rotation milestone. | Recognition has no card-pool, deck, procedure, story, access, or matchmaking effect. |
 | SIFT Recommendation | Tool or Workflow | Rank eligible candidates from the player's visible Evidence and documented history. | Computer assistance must use player-safe information and communicate uncertainty. |
 | Global Desk Handoff | Workflow | Receive a remote specialist's authorized observation, test output, or procedure context. | Preserve source, time, audience, and chronology. |
 
@@ -93,7 +93,7 @@ Named cast members should not automatically become collectible power objects. A 
 
 ### Rotation completion
 
-Finishing a team chapter makes a small themed pool available for deck construction. The player keeps prior qualifications, supporting the crossline identity rather than swapping rigid classes.
+Finishing a team chapter may award new cards through an explicit campaign reward and may separately display an honor-only Qualification badge. The reward source and badge are distinct: the badge never grants the cards or changes their legality.
 
 ### Demonstrated practice
 

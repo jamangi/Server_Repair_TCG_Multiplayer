@@ -37,12 +37,20 @@ The design uses one configurable match system for competitive and cooperative pl
 
 - a shared queue of jointly actionable Repair Tickets;
 - hidden authoritative faults and causal chains;
-- public Worklogs plus private, team, and public evidence;
+- authored public candidate Faults and server-authored Evidence outcomes;
+- private, team, and public Evidence plus immutable public Worklog chronology;
+- accepted, evidence-supported Isolation as the ordinary gateway to Repair;
+- failed Verify returning a Ticket to Diagnosis without erasing its history;
+- a 30-card first-version deck, five-card opening hand, start-of-turn draw, and two-Action turn;
+- Search and Refresh as separately tokenized utility actions;
+- incremental Documentation followed by an immediate zero-Action, non-scoring closure transaction;
 - server-authoritative actions, clocks, scoring, ticket generation, and disconnection handling;
 - Rooms with explicit Player and Spectator roles;
 - human and computer-controlled technicians using player-safe information.
 
-A two-player race to 10 Service Points is one recommended preset, not the definition of the game. Many details of scoring, card economy, turn structure, targeting, and terminal conditions remain open for design and playtesting.
+A two-player race to 10 Service Points is one recommended preset, not the definition of the game. Exact causal-contribution scoring remains unfrozen, as do the Ticket Builder and several production configuration, timer, terminal, statistics, and balance policies. Ticket closure itself awards no Service Points; it records Player/team closure statistics and settles only whatever causal score events a future approved scoring policy requires.
+
+There is no account/loadout Equipment system. Technical Tools remain domain objects and playable card concepts. Qualifications may recognize milestones as honor badges, but they have no gameplay, access, deck, story, procedure, or matchmaking effect.
 
 Fault causal relationships and causal-chain validation remain part of the domain model. The separate interactive causal-chain visualization has been retired and is not planned work.
 
@@ -52,14 +60,14 @@ This repository currently contains:
 
 - approved and unresolved game rules;
 - starter technical catalogs and recommended match models;
-- draft domain and runtime schemas with examples;
+- synchronized draft domain and runtime schemas with valid and invalid examples;
 - a working static Domain Viewer;
 - a versioned case-study research system with a completed pilot spanning several troubleshooting subsystems;
 - a provisional story foundation with a fictional company, campaign frame, ensemble, voice guide, and story-derived gameplay candidates;
 - a non-authoritative, replayable candidate-flow package that combines temporary rules, exact card/deck/Ticket fixtures, complete matches, and landing-to-logout campaign and multiplayer journeys;
 - provisional UI planning and original wireframes for the future playable application.
 
-It does not yet contain a playable game engine or multiplayer client. Some schemas and older design documents predate the configurable-match rules and require deliberate migration before they can be treated as final implementation contracts.
+It does not yet contain a playable game engine or multiplayer client. The schemas remain draft contracts, and recommended models remain non-normative where scoring, Ticket generation, or production policy is still unfrozen.
 
 ## Design source of truth
 
@@ -67,10 +75,10 @@ Read the design documents in this order:
 
 1. [`docs/design/decisions/DECISION_INDEX.md`](docs/design/decisions/DECISION_INDEX.md) — the authority map, current decision state, lifecycle, and recommended order for finishing the engine.
 2. [`docs/design/decisions/FROZEN_RULES.md`](docs/design/decisions/FROZEN_RULES.md) and [`UNFROZEN_RULES.md`](docs/design/decisions/UNFROZEN_RULES.md) — approved behavior and the canonical open-rule inventory.
-3. [`docs/design/decisions/CANDIDATE_DECISIONS.md`](docs/design/decisions/CANDIDATE_DECISIONS.md) and [`UNSYNCHRONIZED_DECISIONS.md`](docs/design/decisions/UNSYNCHRONIZED_DECISIONS.md) — proposed decisions, pruned ideas, and the active reconciliation queue.
+3. [`docs/design/decisions/CANDIDATE_DECISIONS.md`](docs/design/decisions/CANDIDATE_DECISIONS.md) and [`UNSYNCHRONIZED_DECISIONS.md`](docs/design/decisions/UNSYNCHRONIZED_DECISIONS.md) — proposal/pruning history and the reconciliation ledger.
 4. [`docs/design/RECOMMENDED_DATA_MODEL.md`](docs/design/RECOMMENDED_DATA_MODEL.md) and [`RECOMMENDED_PRESETS.json`](docs/design/RECOMMENDED_PRESETS.json) — architectural and balance recommendations, not frozen contracts.
-5. [`docs/design/00_GAME_ENGINE_OVERVIEW.md`](docs/design/00_GAME_ENGINE_OVERVIEW.md) through [`07_FAULT_BROWSER_AND_SEARCH.md`](docs/design/07_FAULT_BROWSER_AND_SEARCH.md) — the foundational vision, architecture, and starter catalogs. Later frozen decisions take precedence where they differ.
-6. [`docs/design/DOCUMENTS_TO_UPDATE.md`](docs/design/DOCUMENTS_TO_UPDATE.md) — the migration map for bringing older documents and schemas into alignment.
+5. [`docs/design/00_GAME_ENGINE_OVERVIEW.md`](docs/design/00_GAME_ENGINE_OVERVIEW.md) through [`07_FAULT_BROWSER_AND_SEARCH.md`](docs/design/07_FAULT_BROWSER_AND_SEARCH.md) — the synchronized foundational vision, architecture, and starter catalogs. Frozen decisions still take precedence.
+6. [`docs/design/DOCUMENTS_TO_UPDATE.md`](docs/design/DOCUMENTS_TO_UPDATE.md) — the audited migration ledger, including completed, superseded, deferred, and still-relevant recommendations.
 
 Do not silently turn an unfrozen recommendation into a rule through code, schema, content, or UI behavior.
 
@@ -91,7 +99,7 @@ Story documents provide narrative context for the gameplay but do not override f
 
 Candidate gameplay flows choose one internally coherent set of temporary answers only to make examples replayable. Their `EX1-*` identifiers, card balance, Ticket outcomes, account state, screens, animation, and full journeys remain fixtures. Any idea worth adopting must return to the normal design-decision, content, schema, story, validation, and implementation lifecycle.
 
-The future playable application is intended to remain separate from the Domain Viewer. The current UI plan proposes a React client with a stable application shell, social room browser, room creation and lobby flows, technician identity, and match synchronization. Motion for React (formerly Framer Motion) is proposed for expressive, state-driven game and interface animation while authoritative rules remain outside the UI.
+The future playable application is intended to remain separate from the Domain Viewer. The current UI plan proposes a React client with a stable application shell, social room browser, room creation and lobby flows, cosmetic technician identity, honor-badge recognition, and match synchronization. Motion for React (formerly Framer Motion) is proposed for expressive, state-driven game and interface animation while authoritative rules remain outside the UI.
 
 ## Domain Viewer
 
