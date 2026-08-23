@@ -91,7 +91,8 @@ If implementation exposes a new rule question or pressure against frozen behavio
 - [`docs/tasks/`](docs/tasks/) — scoped implementation and research contracts, with [`INDEX.md`](docs/tasks/INDEX.md) identifying the current task state.
 - [`docs/ui-plan/`](docs/ui-plan/) — provisional application structure and original visual wireframes.
 - [`viewer/`](viewer/) — dependency-free static browser for reusable domain objects; it is not the multiplayer game client.
-- [`schemas/`](schemas/) and [`examples/`](examples/) — draft domain and runtime contracts that will evolve with approved rules.
+- [`schemas/`](schemas/) and [`examples/`](examples/) — draft domain and runtime contracts that will evolve with approved rules. Start with the [`schema package README`](schemas/README.md) for the domain/runtime boundary and file guide.
+- [`docs/improvement_analysis/`](docs/improvement_analysis/) — reviewable implementation and contract proposals that do not change frozen rules or live schemas until approved.
 
 Case studies are evidence-preserving research inputs rather than rule or domain-data authority. Their candidate domain objects, cardless actions, and decision observations must pass through the appropriate schema, validation, or decision lifecycle before becoming part of the game.
 
