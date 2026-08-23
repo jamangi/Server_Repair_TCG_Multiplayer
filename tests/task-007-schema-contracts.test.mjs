@@ -61,12 +61,14 @@ function assertInvalid(instance, schemaName, messagePattern) {
 }
 
 test('all domain/runtime schemas parse, retain unique IDs, and resolve every local $ref', () => {
-  assert.equal(registry.schemas.length, 24);
-  assert.equal(registry.byId.size, 24);
+  assert.equal(registry.schemas.length, 26);
+  assert.equal(registry.byId.size, 26);
   assertAllSchemaRefsResolve(registry);
 
   const expectedIds = {
     repair_ticket: 'https://example.local/schemas/repair_ticket.schema.json',
+    ticket_builder_configuration: 'https://example.local/schemas/ticket_builder_configuration.schema.json',
+    ticket_builder_result: 'https://example.local/schemas/ticket_builder_result.schema.json',
     action_request: 'https://example.local/runtime/action_request.schema.json',
     action_result: 'https://example.local/runtime/action_result.schema.json',
     game_event: 'https://example.local/runtime/game_event.schema.json',
@@ -83,7 +85,7 @@ test('all domain/runtime schemas parse, retain unique IDs, and resolve every loc
 
 test('every domain/runtime example validates against the schema declared by its filename', () => {
   const fixtures = examplePaths();
-  assert.equal(fixtures.length, 31);
+  assert.equal(fixtures.length, 38);
   for (const relativePath of fixtures) assertFixtureValid(relativePath);
 });
 

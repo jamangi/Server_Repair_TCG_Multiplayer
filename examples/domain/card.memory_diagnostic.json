@@ -3,15 +3,11 @@
   "entity_type": "card",
   "presentation": {
     "display_name": "Memory Diagnostic",
-    "short_description": "Use a memory diagnostic against an active Repair Ticket.",
-    "illustration": {
-      "asset_id": "art.test.memory_diagnostic",
-      "alt_text": "Diagnostic screen testing server memory modules."
-    }
+    "short_description": "Use a memory diagnostic against an active Repair Ticket."
   },
   "source": {
     "expansion_id": "expansion.core_v0_1",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "status": "draft",
     "search_tags": [
       "memory",
@@ -29,19 +25,32 @@
     "memory",
     "diagnostic"
   ],
-  "rules_text": "Run Memory Diagnostic on a Repair Ticket. Resolve the referenced Test and add its evidence to your Knowledge State.",
-  "reference_entity_ids": [
-    "test.memory.diagnostic"
-  ],
-  "effects": [
-    {
-      "effect_type": "add_evidence",
-      "target": "active_ticket",
-      "parameters": {
-        "source_test_id": "test.memory.diagnostic"
+  "rules_text": "Run Memory Diagnostic on one active Repair Ticket. Resolve that Ticket's authored outcome for test.memory.diagnostic.",
+  "primary_domain_reference": {
+    "entity_id": "test.memory.diagnostic",
+    "entity_type": "test",
+    "role": "execution",
+    "inherit_illustration": true
+  },
+  "additional_domain_references": [],
+  "play_contract": {
+    "contract_type": "DIAGNOSTIC",
+    "action_type": "RUN_TEST",
+    "source_definition_id": "test.memory.diagnostic",
+    "source_entity_type": "test",
+    "target_spec": {
+      "target_kind": "ACTIVE_TICKET",
+      "allowed_component_definition_ids": []
+    },
+    "prerequisites": [],
+    "resolution": [
+      {
+        "resolution_type": "AUTHORED_EVIDENCE",
+        "source_definition_id": "test.memory.diagnostic"
       }
-    }
-  ],
-  "educational_text": "This card reuses the domain illustration and educational definition for the Memory Diagnostic test.",
+    ],
+    "disposition": "discard"
+  },
+  "educational_text": "The Card Definition packages access to the Test while its primary domain reference supplies the technical illustration and educational definition.",
   "rarity": "common"
 }

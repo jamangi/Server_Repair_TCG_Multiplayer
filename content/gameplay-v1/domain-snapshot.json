@@ -1,0 +1,484 @@
+{
+  "domain_content_version": "core-domain-snapshot-v1",
+  "source_packs": [
+    {
+      "pack_id": "core_v0_1_components",
+      "version": "0.1.0"
+    },
+    {
+      "pack_id": "core_v0_1_diagnostics",
+      "version": "0.1.0"
+    },
+    {
+      "pack_id": "core_v0_1_fault_graph",
+      "version": "0.1.0"
+    },
+    {
+      "pack_id": "core_v0_1_faults",
+      "version": "0.1.0"
+    },
+    {
+      "pack_id": "core_v0_1_repairs_validations",
+      "version": "0.1.0"
+    },
+    {
+      "pack_id": "core_v0_1_symptoms",
+      "version": "0.1.0"
+    }
+  ],
+  "entities": [
+    {
+      "id": "command.linux.smartctl",
+      "entity_type": "command",
+      "presentation": {
+        "display_name": "smartctl",
+        "short_description": "Inspect supported drive health data.",
+        "illustration": {
+          "asset_id": "art.command.linux.smartctl",
+          "alt_text": "Technical reference illustration for smartctl."
+        }
+      },
+      "relationships": [
+        {
+          "role": "related_test",
+          "entity_id": "test.storage.drive_health"
+        }
+      ]
+    },
+    {
+      "id": "component.storage.raid_controller",
+      "entity_type": "component",
+      "presentation": {
+        "display_name": "RAID Controller",
+        "short_description": "RAID Controller used in server hardware and troubleshooting.",
+        "illustration": {
+          "asset_id": "art.component.storage.raid_controller",
+          "alt_text": "Technical reference illustration for RAID Controller."
+        }
+      },
+      "relationships": []
+    },
+    {
+      "id": "component.storage.sas_hdd",
+      "entity_type": "component",
+      "presentation": {
+        "display_name": "SAS HDD",
+        "short_description": "SAS HDD used in server hardware and troubleshooting.",
+        "illustration": {
+          "asset_id": "art.component.storage.sas_hdd",
+          "alt_text": "Technical reference illustration for SAS HDD."
+        }
+      },
+      "relationships": []
+    },
+    {
+      "id": "edge.storage.sas_to_degraded",
+      "entity_type": "fault_causal_edge",
+      "presentation": {
+        "display_name": "Fault Causal Relationship",
+        "short_description": "fault.storage.sas.drive_failed can contribute to fault.storage.raid.degraded.",
+        "illustration": {
+          "asset_id": "art.edge.storage.sas_to_degraded",
+          "alt_text": "Technical reference illustration for Fault Causal Relationship."
+        }
+      },
+      "relationships": [
+        {
+          "role": "cause_fault",
+          "entity_id": "fault.storage.sas.drive_failed"
+        },
+        {
+          "role": "effect_fault",
+          "entity_id": "fault.storage.raid.degraded"
+        }
+      ]
+    },
+    {
+      "id": "fault.storage.cable.loose",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "Loose Storage Cable",
+        "short_description": "A storage data cable is not securely connected.",
+        "illustration": {
+          "asset_id": "art.fault.storage.cable.loose",
+          "alt_text": "Technical reference illustration for Loose Storage Cable."
+        }
+      },
+      "relationships": [
+        {
+          "role": "symptom",
+          "entity_id": "symptom.storage.drive_missing"
+        },
+        {
+          "role": "effective_test",
+          "entity_id": "test.general.visual_inspection"
+        },
+        {
+          "role": "effective_test",
+          "entity_id": "test.storage.device_inventory"
+        },
+        {
+          "role": "repair_procedure",
+          "entity_id": "repair.storage.reseat_cable"
+        },
+        {
+          "role": "validation_procedure",
+          "entity_id": "verify.storage.device_detected"
+        }
+      ]
+    },
+    {
+      "id": "fault.storage.raid.controller_failed",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "RAID Controller Failure",
+        "short_description": "The RAID controller is unavailable or malfunctioning.",
+        "illustration": {
+          "asset_id": "art.fault.storage.raid.controller_failed",
+          "alt_text": "Technical reference illustration for RAID Controller Failure."
+        }
+      },
+      "relationships": [
+        {
+          "role": "affected_component",
+          "entity_id": "component.storage.raid_controller"
+        },
+        {
+          "role": "symptom",
+          "entity_id": "symptom.storage.drive_missing"
+        },
+        {
+          "role": "validation_procedure",
+          "entity_id": "verify.storage.raid_healthy"
+        }
+      ]
+    },
+    {
+      "id": "fault.storage.raid.degraded",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "RAID Array Degraded",
+        "short_description": "A RAID array has lost expected redundancy.",
+        "illustration": {
+          "asset_id": "art.fault.storage.raid.degraded",
+          "alt_text": "Technical reference illustration for RAID Array Degraded."
+        }
+      },
+      "relationships": [
+        {
+          "role": "affected_component",
+          "entity_id": "component.storage.raid_controller"
+        },
+        {
+          "role": "symptom",
+          "entity_id": "symptom.storage.raid_degraded"
+        },
+        {
+          "role": "effective_test",
+          "entity_id": "test.storage.raid_status"
+        },
+        {
+          "role": "repair_procedure",
+          "entity_id": "repair.storage.rebuild_array"
+        },
+        {
+          "role": "validation_procedure",
+          "entity_id": "verify.storage.raid_healthy"
+        }
+      ]
+    },
+    {
+      "id": "fault.storage.sas.drive_failed",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "Failed SAS Drive",
+        "short_description": "A SAS drive has failed or become unreliable.",
+        "illustration": {
+          "asset_id": "art.fault.storage.sas.drive_failed",
+          "alt_text": "Technical reference illustration for Failed SAS Drive."
+        }
+      },
+      "relationships": [
+        {
+          "role": "affected_component",
+          "entity_id": "component.storage.sas_hdd"
+        },
+        {
+          "role": "symptom",
+          "entity_id": "symptom.storage.raid_degraded"
+        },
+        {
+          "role": "effective_test",
+          "entity_id": "test.storage.raid_status"
+        },
+        {
+          "role": "effective_test",
+          "entity_id": "test.storage.drive_health"
+        },
+        {
+          "role": "repair_procedure",
+          "entity_id": "repair.storage.replace_raid_member"
+        },
+        {
+          "role": "validation_procedure",
+          "entity_id": "verify.storage.raid_healthy"
+        }
+      ]
+    },
+    {
+      "id": "repair.storage.rebuild_array",
+      "entity_type": "repair_procedure",
+      "presentation": {
+        "display_name": "Rebuild RAID Array",
+        "short_description": "Rebuild RAID Array corrective procedure.",
+        "illustration": {
+          "asset_id": "art.repair.storage.rebuild_array",
+          "alt_text": "Technical reference illustration for Rebuild RAID Array."
+        }
+      },
+      "relationships": [
+        {
+          "role": "target_fault",
+          "entity_id": "fault.storage.raid.degraded"
+        }
+      ]
+    },
+    {
+      "id": "repair.storage.replace_raid_member",
+      "entity_type": "repair_procedure",
+      "presentation": {
+        "display_name": "Replace Failed RAID Member",
+        "short_description": "Replace Failed RAID Member corrective procedure.",
+        "illustration": {
+          "asset_id": "art.repair.storage.replace_raid_member",
+          "alt_text": "Technical reference illustration for Replace Failed RAID Member."
+        }
+      },
+      "relationships": [
+        {
+          "role": "target_fault",
+          "entity_id": "fault.storage.sas.drive_failed"
+        }
+      ]
+    },
+    {
+      "id": "repair.storage.reseat_cable",
+      "entity_type": "repair_procedure",
+      "presentation": {
+        "display_name": "Reseat Storage Cable",
+        "short_description": "Reseat Storage Cable corrective procedure.",
+        "illustration": {
+          "asset_id": "art.repair.storage.reseat_cable",
+          "alt_text": "Technical reference illustration for Reseat Storage Cable."
+        }
+      },
+      "relationships": [
+        {
+          "role": "target_fault",
+          "entity_id": "fault.storage.cable.loose"
+        }
+      ]
+    },
+    {
+      "id": "symptom.storage.drive_missing",
+      "entity_type": "symptom",
+      "presentation": {
+        "display_name": "Drive Missing",
+        "short_description": "An expected drive is not detected.",
+        "illustration": {
+          "asset_id": "art.symptom.storage.drive_missing",
+          "alt_text": "Technical reference illustration for Drive Missing."
+        }
+      },
+      "relationships": [
+        {
+          "role": "observable_via",
+          "entity_id": "test.storage.raid_status"
+        },
+        {
+          "role": "observable_via",
+          "entity_id": "test.storage.device_inventory"
+        },
+        {
+          "role": "associated_fault",
+          "entity_id": "fault.storage.cable.loose"
+        },
+        {
+          "role": "associated_fault",
+          "entity_id": "fault.storage.raid.controller_failed"
+        }
+      ]
+    },
+    {
+      "id": "symptom.storage.raid_degraded",
+      "entity_type": "symptom",
+      "presentation": {
+        "display_name": "RAID Degraded",
+        "short_description": "Array redundancy is reduced.",
+        "illustration": {
+          "asset_id": "art.symptom.storage.raid_degraded",
+          "alt_text": "Technical reference illustration for RAID Degraded."
+        }
+      },
+      "relationships": [
+        {
+          "role": "observable_via",
+          "entity_id": "test.storage.raid_status"
+        },
+        {
+          "role": "observable_via",
+          "entity_id": "test.storage.device_inventory"
+        },
+        {
+          "role": "associated_fault",
+          "entity_id": "fault.storage.raid.degraded"
+        },
+        {
+          "role": "associated_fault",
+          "entity_id": "fault.storage.sas.drive_failed"
+        }
+      ]
+    },
+    {
+      "id": "test.general.visual_inspection",
+      "entity_type": "test",
+      "presentation": {
+        "display_name": "Visual Inspection",
+        "short_description": "Visual Inspection gathers troubleshooting evidence.",
+        "illustration": {
+          "asset_id": "art.test.general.visual_inspection",
+          "alt_text": "Technical reference illustration for Visual Inspection."
+        }
+      },
+      "relationships": [
+        {
+          "role": "evidence_target",
+          "entity_id": "fault.storage.cable.loose"
+        }
+      ]
+    },
+    {
+      "id": "test.storage.device_inventory",
+      "entity_type": "test",
+      "presentation": {
+        "display_name": "Storage Device Inventory",
+        "short_description": "Storage Device Inventory gathers troubleshooting evidence.",
+        "illustration": {
+          "asset_id": "art.test.storage.device_inventory",
+          "alt_text": "Technical reference illustration for Storage Device Inventory."
+        }
+      },
+      "relationships": [
+        {
+          "role": "evidence_target",
+          "entity_id": "fault.storage.cable.loose"
+        }
+      ]
+    },
+    {
+      "id": "test.storage.drive_health",
+      "entity_type": "test",
+      "presentation": {
+        "display_name": "Drive Health Test",
+        "short_description": "Drive Health Test gathers troubleshooting evidence.",
+        "illustration": {
+          "asset_id": "art.test.storage.drive_health",
+          "alt_text": "Technical reference illustration for Drive Health Test."
+        }
+      },
+      "relationships": [
+        {
+          "role": "command_requirement",
+          "entity_id": "command.linux.smartctl"
+        },
+        {
+          "role": "evidence_target",
+          "entity_id": "fault.storage.sas.drive_failed"
+        }
+      ]
+    },
+    {
+      "id": "test.storage.raid_status",
+      "entity_type": "test",
+      "presentation": {
+        "display_name": "RAID Status Inspection",
+        "short_description": "RAID Status Inspection gathers troubleshooting evidence.",
+        "illustration": {
+          "asset_id": "art.test.storage.raid_status",
+          "alt_text": "Technical reference illustration for RAID Status Inspection."
+        }
+      },
+      "relationships": [
+        {
+          "role": "tool_requirement",
+          "entity_id": "tool.storage.raid_console"
+        },
+        {
+          "role": "evidence_target",
+          "entity_id": "fault.storage.sas.drive_failed"
+        },
+        {
+          "role": "evidence_target",
+          "entity_id": "fault.storage.raid.degraded"
+        }
+      ]
+    },
+    {
+      "id": "tool.storage.raid_console",
+      "entity_type": "tool",
+      "presentation": {
+        "display_name": "RAID Management Utility",
+        "short_description": "RAID Management Utility used during troubleshooting.",
+        "illustration": {
+          "asset_id": "art.tool.storage.raid_console",
+          "alt_text": "Technical reference illustration for RAID Management Utility."
+        }
+      },
+      "relationships": []
+    },
+    {
+      "id": "verify.storage.device_detected",
+      "entity_type": "validation_procedure",
+      "presentation": {
+        "display_name": "Storage Detection Verification",
+        "short_description": "Storage Detection Verification confirms the repaired state.",
+        "illustration": {
+          "asset_id": "art.verify.storage.device_detected",
+          "alt_text": "Technical reference illustration for Storage Detection Verification."
+        }
+      },
+      "relationships": [
+        {
+          "role": "validates_fault",
+          "entity_id": "fault.storage.cable.loose"
+        }
+      ]
+    },
+    {
+      "id": "verify.storage.raid_healthy",
+      "entity_type": "validation_procedure",
+      "presentation": {
+        "display_name": "RAID Healthy Verification",
+        "short_description": "RAID Healthy Verification confirms the repaired state.",
+        "illustration": {
+          "asset_id": "art.verify.storage.raid_healthy",
+          "alt_text": "Technical reference illustration for RAID Healthy Verification."
+        }
+      },
+      "relationships": [
+        {
+          "role": "validates_fault",
+          "entity_id": "fault.storage.sas.drive_failed"
+        },
+        {
+          "role": "validates_fault",
+          "entity_id": "fault.storage.raid.degraded"
+        },
+        {
+          "role": "validates_fault",
+          "entity_id": "fault.storage.raid.controller_failed"
+        }
+      ]
+    }
+  ]
+}

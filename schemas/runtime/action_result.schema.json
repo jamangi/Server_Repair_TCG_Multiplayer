@@ -52,6 +52,10 @@
       "type": ["string", "null"],
       "enum": [
         null,
+        "ILLEGAL_REQUEST",
+        "MATCH_MISMATCH",
+        "ACTOR_MISMATCH",
+        "IDEMPOTENCY_CONFLICT",
         "STALE_REVISION",
         "REPAIR_GATE_NOT_SATISFIED",
         "IDENTICAL_TEST_NO_NEW_OUTCOME",
@@ -59,7 +63,17 @@
         "INSUFFICIENT_ACTIONS",
         "INSUFFICIENT_UTILITY_RESOURCE",
         "ILLEGAL_TARGET",
-        "NOT_ACTIVE_PLAYER"
+        "NOT_ACTIVE_PLAYER",
+        "ILLEGAL_CARD",
+        "CONTENT_INVALID",
+        "NO_AUTHORED_OUTCOME",
+        "STALE_MACHINE_REVISION",
+        "ZERO_ACTION_NAME_LIMIT",
+        "NO_CHANGE",
+        "ILLEGAL_TIMING",
+        "VERIFY_NOT_READY",
+        "ILLEGAL_DOCUMENT_SOURCE",
+        "UNSUPPORTED_ACTION_TYPE"
       ]
     },
     "error_message": { "type": ["string", "null"] },

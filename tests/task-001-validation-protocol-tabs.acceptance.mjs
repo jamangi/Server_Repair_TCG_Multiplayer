@@ -28,7 +28,7 @@ test('current content exposes the accepted tab counts', async () => {
   const { records } = await loadViewerContent();
   const count = (entityType) => records.filter((record) => record.entity_type === entityType).length;
 
-  assert.equal(count('validation_procedure'), 21);
-  assert.equal(count('protocol'), 18);
-  assert.equal(records.length, 244);
+  assert.equal(count('validation_procedure'), 22);
+  assert.equal(count('protocol'), 20);
+  assert.equal(records.length, 257);
 });

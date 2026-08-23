@@ -151,9 +151,8 @@
       "owner_player_id": "player_a",
       "controller_player_id": "player_a",
       "zone": "discard",
-      "face_state": "face_up",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "cardinst_002",
@@ -161,9 +160,8 @@
       "owner_player_id": "player_a",
       "controller_player_id": "player_a",
       "zone": "discard",
-      "face_state": "face_up",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "cardinst_003",
@@ -171,9 +169,8 @@
       "owner_player_id": "player_a",
       "controller_player_id": "player_a",
       "zone": "discard",
-      "face_state": "face_up",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "cardinst_004",
@@ -181,9 +178,8 @@
       "owner_player_id": "player_a",
       "controller_player_id": "player_a",
       "zone": "discard",
-      "face_state": "face_up",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "cardinst_005",
@@ -191,9 +187,8 @@
       "owner_player_id": "player_a",
       "controller_player_id": "player_a",
       "zone": "discard",
-      "face_state": "face_up",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "cardinst_006",
@@ -201,9 +196,8 @@
       "owner_player_id": "player_a",
       "controller_player_id": "player_a",
       "zone": "discard",
-      "face_state": "face_up",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "cardinst_007",
@@ -211,9 +205,8 @@
       "owner_player_id": "player_a",
       "controller_player_id": "player_a",
       "zone": "discard",
-      "face_state": "face_up",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "cardinst_008",
@@ -221,9 +214,8 @@
       "owner_player_id": "player_a",
       "controller_player_id": "player_a",
       "zone": "discard",
-      "face_state": "face_up",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "cardinst_009",
@@ -231,9 +223,8 @@
       "owner_player_id": "player_a",
       "controller_player_id": "player_a",
       "zone": "discard",
-      "face_state": "face_up",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "cardinst_010",
@@ -241,9 +232,8 @@
       "owner_player_id": "player_a",
       "controller_player_id": "player_a",
       "zone": "discard",
-      "face_state": "face_up",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "cardinst_011",
@@ -251,9 +241,8 @@
       "owner_player_id": "player_a",
       "controller_player_id": "player_a",
       "zone": "discard",
-      "face_state": "face_up",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "cardinst_012",
@@ -261,9 +250,8 @@
       "owner_player_id": "player_a",
       "controller_player_id": "player_a",
       "zone": "discard",
-      "face_state": "face_up",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "cardinst_013",
@@ -271,9 +259,8 @@
       "owner_player_id": "player_a",
       "controller_player_id": "player_a",
       "zone": "discard",
-      "face_state": "face_up",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "cardinst_014",
@@ -281,9 +268,8 @@
       "owner_player_id": "player_a",
       "controller_player_id": "player_a",
       "zone": "discard",
-      "face_state": "face_up",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "cardinst_015",
@@ -291,9 +277,8 @@
       "owner_player_id": "player_a",
       "controller_player_id": "player_a",
       "zone": "discard",
-      "face_state": "face_up",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "cardinst_016",
@@ -301,9 +286,8 @@
       "owner_player_id": "player_a",
       "controller_player_id": "player_a",
       "zone": "discard",
-      "face_state": "face_up",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "cardinst_017",
@@ -311,9 +295,8 @@
       "owner_player_id": "player_a",
       "controller_player_id": "player_a",
       "zone": "discard",
-      "face_state": "face_up",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "cardinst_018",
@@ -321,9 +304,8 @@
       "owner_player_id": "player_a",
       "controller_player_id": "player_a",
       "zone": "discard",
-      "face_state": "face_up",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "cardinst_019",
@@ -331,9 +313,8 @@
       "owner_player_id": "player_a",
       "controller_player_id": "player_a",
       "zone": "discard",
-      "face_state": "face_up",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "cardinst_020",
@@ -341,9 +322,8 @@
       "owner_player_id": "player_a",
       "controller_player_id": "player_a",
       "zone": "discard",
-      "face_state": "face_up",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "cardinst_021",
@@ -351,9 +331,8 @@
       "owner_player_id": "player_a",
       "controller_player_id": "player_a",
       "zone": "discard",
-      "face_state": "face_up",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "cardinst_022",
@@ -361,9 +340,8 @@
       "owner_player_id": "player_a",
       "controller_player_id": "player_a",
       "zone": "discard",
-      "face_state": "face_up",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "cardinst_023",
@@ -371,9 +349,8 @@
       "owner_player_id": "player_a",
       "controller_player_id": "player_a",
       "zone": "discard",
-      "face_state": "face_up",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "cardinst_024",
@@ -381,9 +358,8 @@
       "owner_player_id": "player_a",
       "controller_player_id": "player_a",
       "zone": "discard",
-      "face_state": "face_up",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "cardinst_025",
@@ -391,9 +367,8 @@
       "owner_player_id": "player_a",
       "controller_player_id": "player_a",
       "zone": "discard",
-      "face_state": "face_up",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "cardinst_026",
@@ -401,9 +376,8 @@
       "owner_player_id": "player_a",
       "controller_player_id": "player_a",
       "zone": "discard",
-      "face_state": "face_up",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "cardinst_027",
@@ -411,9 +385,8 @@
       "owner_player_id": "player_a",
       "controller_player_id": "player_a",
       "zone": "discard",
-      "face_state": "face_up",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "cardinst_028",
@@ -421,9 +394,8 @@
       "owner_player_id": "player_a",
       "controller_player_id": "player_a",
       "zone": "hand",
-      "face_state": "face_up",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "cardinst_029",
@@ -431,9 +403,8 @@
       "owner_player_id": "player_a",
       "controller_player_id": "player_a",
       "zone": "hand",
-      "face_state": "face_up",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "cardinst_030",
@@ -441,9 +412,8 @@
       "owner_player_id": "player_a",
       "controller_player_id": "player_a",
       "zone": "hand",
-      "face_state": "face_up",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "b_cardinst_001",
@@ -451,9 +421,8 @@
       "owner_player_id": "player_b",
       "controller_player_id": "player_b",
       "zone": "hand",
-      "face_state": "face_up",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "b_cardinst_002",
@@ -461,9 +430,8 @@
       "owner_player_id": "player_b",
       "controller_player_id": "player_b",
       "zone": "hand",
-      "face_state": "face_up",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "b_cardinst_003",
@@ -471,9 +439,8 @@
       "owner_player_id": "player_b",
       "controller_player_id": "player_b",
       "zone": "hand",
-      "face_state": "face_up",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "b_cardinst_004",
@@ -481,9 +448,8 @@
       "owner_player_id": "player_b",
       "controller_player_id": "player_b",
       "zone": "hand",
-      "face_state": "face_up",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "b_cardinst_005",
@@ -491,9 +457,8 @@
       "owner_player_id": "player_b",
       "controller_player_id": "player_b",
       "zone": "hand",
-      "face_state": "face_up",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "b_cardinst_006",
@@ -501,9 +466,8 @@
       "owner_player_id": "player_b",
       "controller_player_id": "player_b",
       "zone": "deck",
-      "face_state": "face_down",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "b_cardinst_007",
@@ -511,9 +475,8 @@
       "owner_player_id": "player_b",
       "controller_player_id": "player_b",
       "zone": "deck",
-      "face_state": "face_down",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "b_cardinst_008",
@@ -521,9 +484,8 @@
       "owner_player_id": "player_b",
       "controller_player_id": "player_b",
       "zone": "deck",
-      "face_state": "face_down",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "b_cardinst_009",
@@ -531,9 +493,8 @@
       "owner_player_id": "player_b",
       "controller_player_id": "player_b",
       "zone": "deck",
-      "face_state": "face_down",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "b_cardinst_010",
@@ -541,9 +502,8 @@
       "owner_player_id": "player_b",
       "controller_player_id": "player_b",
       "zone": "deck",
-      "face_state": "face_down",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "b_cardinst_011",
@@ -551,9 +511,8 @@
       "owner_player_id": "player_b",
       "controller_player_id": "player_b",
       "zone": "deck",
-      "face_state": "face_down",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "b_cardinst_012",
@@ -561,9 +520,8 @@
       "owner_player_id": "player_b",
       "controller_player_id": "player_b",
       "zone": "deck",
-      "face_state": "face_down",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "b_cardinst_013",
@@ -571,9 +529,8 @@
       "owner_player_id": "player_b",
       "controller_player_id": "player_b",
       "zone": "deck",
-      "face_state": "face_down",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "b_cardinst_014",
@@ -581,9 +538,8 @@
       "owner_player_id": "player_b",
       "controller_player_id": "player_b",
       "zone": "deck",
-      "face_state": "face_down",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "b_cardinst_015",
@@ -591,9 +547,8 @@
       "owner_player_id": "player_b",
       "controller_player_id": "player_b",
       "zone": "deck",
-      "face_state": "face_down",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "b_cardinst_016",
@@ -601,9 +556,8 @@
       "owner_player_id": "player_b",
       "controller_player_id": "player_b",
       "zone": "deck",
-      "face_state": "face_down",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "b_cardinst_017",
@@ -611,9 +565,8 @@
       "owner_player_id": "player_b",
       "controller_player_id": "player_b",
       "zone": "deck",
-      "face_state": "face_down",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "b_cardinst_018",
@@ -621,9 +574,8 @@
       "owner_player_id": "player_b",
       "controller_player_id": "player_b",
       "zone": "deck",
-      "face_state": "face_down",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "b_cardinst_019",
@@ -631,9 +583,8 @@
       "owner_player_id": "player_b",
       "controller_player_id": "player_b",
       "zone": "deck",
-      "face_state": "face_down",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "b_cardinst_020",
@@ -641,9 +592,8 @@
       "owner_player_id": "player_b",
       "controller_player_id": "player_b",
       "zone": "deck",
-      "face_state": "face_down",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "b_cardinst_021",
@@ -651,9 +601,8 @@
       "owner_player_id": "player_b",
       "controller_player_id": "player_b",
       "zone": "deck",
-      "face_state": "face_down",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "b_cardinst_022",
@@ -661,9 +610,8 @@
       "owner_player_id": "player_b",
       "controller_player_id": "player_b",
       "zone": "deck",
-      "face_state": "face_down",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "b_cardinst_023",
@@ -671,9 +619,8 @@
       "owner_player_id": "player_b",
       "controller_player_id": "player_b",
       "zone": "deck",
-      "face_state": "face_down",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "b_cardinst_024",
@@ -681,9 +628,8 @@
       "owner_player_id": "player_b",
       "controller_player_id": "player_b",
       "zone": "deck",
-      "face_state": "face_down",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "b_cardinst_025",
@@ -691,9 +637,8 @@
       "owner_player_id": "player_b",
       "controller_player_id": "player_b",
       "zone": "deck",
-      "face_state": "face_down",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "b_cardinst_026",
@@ -701,9 +646,8 @@
       "owner_player_id": "player_b",
       "controller_player_id": "player_b",
       "zone": "deck",
-      "face_state": "face_down",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "b_cardinst_027",
@@ -711,9 +655,8 @@
       "owner_player_id": "player_b",
       "controller_player_id": "player_b",
       "zone": "deck",
-      "face_state": "face_down",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "b_cardinst_028",
@@ -721,9 +664,8 @@
       "owner_player_id": "player_b",
       "controller_player_id": "player_b",
       "zone": "deck",
-      "face_state": "face_down",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "b_cardinst_029",
@@ -731,9 +673,8 @@
       "owner_player_id": "player_b",
       "controller_player_id": "player_b",
       "zone": "deck",
-      "face_state": "face_down",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     },
     {
       "card_instance_id": "b_cardinst_030",
@@ -741,9 +682,8 @@
       "owner_player_id": "player_b",
       "controller_player_id": "player_b",
       "zone": "deck",
-      "face_state": "face_down",
-      "counters": {},
-      "runtime_tags": []
+      "in_play_placement": null,
+      "effect_state": null
     }
   ],
   "queued_ticket_definition_ids": [],

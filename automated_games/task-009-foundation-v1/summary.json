@@ -1,0 +1,1098 @@
+{
+  "by_setting_group": [
+    {
+      "counts": {
+        "builder_unsatisfiable": 0,
+        "failed": 0,
+        "invalidated": 0,
+        "no_legal_progress_move": 2,
+        "policy_stall": 0,
+        "proven_stalemate": 0,
+        "requested": 2,
+        "simulation_cap": 0,
+        "started": 2,
+        "succeeded": 2
+      },
+      "results_by_seed": [
+        {
+          "classification": "SUCCEEDED",
+          "seeds": [
+            "1001",
+            "1002"
+          ],
+          "terminal_reason_codes": [
+            "QUEUE_EMPTY"
+          ]
+        }
+      ],
+      "seeds": [
+        "1001",
+        "1002"
+      ],
+      "setting_group_id": "coop-fixed-finite-solo-methodical",
+      "terminal_reasons": [
+        "QUEUE_EMPTY"
+      ],
+      "turn_distribution": {
+        "count": 2,
+        "maximum": 14,
+        "mean": 13,
+        "median": 13,
+        "minimum": 12,
+        "p95": 14
+      }
+    },
+    {
+      "counts": {
+        "builder_unsatisfiable": 0,
+        "failed": 0,
+        "invalidated": 0,
+        "no_legal_progress_move": 0,
+        "policy_stall": 0,
+        "proven_stalemate": 0,
+        "requested": 2,
+        "simulation_cap": 0,
+        "started": 2,
+        "succeeded": 2
+      },
+      "results_by_seed": [
+        {
+          "classification": "SUCCEEDED",
+          "seeds": [
+            "2001",
+            "2002"
+          ],
+          "terminal_reason_codes": [
+            "QUEUE_EMPTY"
+          ]
+        }
+      ],
+      "seeds": [
+        "2001",
+        "2002"
+      ],
+      "setting_group_id": "coop-generated-finite-pair-publication",
+      "terminal_reasons": [
+        "QUEUE_EMPTY"
+      ],
+      "turn_distribution": {
+        "count": 2,
+        "maximum": 8,
+        "mean": 7.5,
+        "median": 7.5,
+        "minimum": 7,
+        "p95": 8
+      }
+    },
+    {
+      "counts": {
+        "builder_unsatisfiable": 0,
+        "failed": 0,
+        "invalidated": 0,
+        "no_legal_progress_move": 1,
+        "policy_stall": 0,
+        "proven_stalemate": 0,
+        "requested": 2,
+        "simulation_cap": 0,
+        "started": 2,
+        "succeeded": 2
+      },
+      "results_by_seed": [
+        {
+          "classification": "SUCCEEDED",
+          "seeds": [
+            "3001",
+            "3002"
+          ],
+          "terminal_reason_codes": [
+            "SCORE_THRESHOLD"
+          ]
+        }
+      ],
+      "seeds": [
+        "3001",
+        "3002"
+      ],
+      "setting_group_id": "coop-fixed-replenishing-four-mixed",
+      "terminal_reasons": [
+        "SCORE_THRESHOLD"
+      ],
+      "turn_distribution": {
+        "count": 2,
+        "maximum": 14,
+        "mean": 9,
+        "median": 9,
+        "minimum": 4,
+        "p95": 14
+      }
+    },
+    {
+      "counts": {
+        "builder_unsatisfiable": 0,
+        "failed": 0,
+        "invalidated": 0,
+        "no_legal_progress_move": 0,
+        "policy_stall": 0,
+        "proven_stalemate": 0,
+        "requested": 2,
+        "simulation_cap": 0,
+        "started": 2,
+        "succeeded": 2
+      },
+      "results_by_seed": [
+        {
+          "classification": "SUCCEEDED",
+          "seeds": [
+            "4001",
+            "4002"
+          ],
+          "terminal_reason_codes": [
+            "QUEUE_EMPTY"
+          ]
+        }
+      ],
+      "seeds": [
+        "4001",
+        "4002"
+      ],
+      "setting_group_id": "competitive-fixed-finite-pair-scripted",
+      "terminal_reasons": [
+        "QUEUE_EMPTY"
+      ],
+      "turn_distribution": {
+        "count": 2,
+        "maximum": 11,
+        "mean": 10,
+        "median": 10,
+        "minimum": 9,
+        "p95": 11
+      }
+    },
+    {
+      "counts": {
+        "builder_unsatisfiable": 0,
+        "failed": 0,
+        "invalidated": 0,
+        "no_legal_progress_move": 0,
+        "policy_stall": 0,
+        "proven_stalemate": 0,
+        "requested": 2,
+        "simulation_cap": 0,
+        "started": 2,
+        "succeeded": 2
+      },
+      "results_by_seed": [
+        {
+          "classification": "SUCCEEDED",
+          "seeds": [
+            "4501",
+            "4502"
+          ],
+          "terminal_reason_codes": [
+            "QUEUE_EMPTY"
+          ]
+        }
+      ],
+      "seeds": [
+        "4501",
+        "4502"
+      ],
+      "setting_group_id": "coop-fixed-failed-verify-scripted",
+      "terminal_reasons": [
+        "QUEUE_EMPTY"
+      ],
+      "turn_distribution": {
+        "count": 2,
+        "maximum": 10,
+        "mean": 9.5,
+        "median": 9.5,
+        "minimum": 9,
+        "p95": 10
+      }
+    },
+    {
+      "counts": {
+        "builder_unsatisfiable": 0,
+        "failed": 0,
+        "invalidated": 0,
+        "no_legal_progress_move": 0,
+        "policy_stall": 0,
+        "proven_stalemate": 0,
+        "requested": 2,
+        "simulation_cap": 0,
+        "started": 2,
+        "succeeded": 2
+      },
+      "results_by_seed": [
+        {
+          "classification": "SUCCEEDED",
+          "seeds": [
+            "5001",
+            "5002"
+          ],
+          "terminal_reason_codes": [
+            "SCORE_THRESHOLD"
+          ]
+        }
+      ],
+      "seeds": [
+        "5001",
+        "5002"
+      ],
+      "setting_group_id": "competitive-generated-replenishing-three-mixed",
+      "terminal_reasons": [
+        "SCORE_THRESHOLD"
+      ],
+      "turn_distribution": {
+        "count": 2,
+        "maximum": 12,
+        "mean": 9.5,
+        "median": 9.5,
+        "minimum": 7,
+        "p95": 12
+      }
+    },
+    {
+      "counts": {
+        "builder_unsatisfiable": 2,
+        "failed": 2,
+        "invalidated": 0,
+        "no_legal_progress_move": 0,
+        "policy_stall": 0,
+        "proven_stalemate": 0,
+        "requested": 2,
+        "simulation_cap": 0,
+        "started": 0,
+        "succeeded": 0
+      },
+      "results_by_seed": [
+        {
+          "classification": "BUILDER_UNSATISFIABLE",
+          "seeds": [
+            "6001",
+            "6002"
+          ],
+          "terminal_reason_codes": [
+            "BUILDER_UNSATISFIABLE"
+          ]
+        }
+      ],
+      "seeds": [
+        "6001",
+        "6002"
+      ],
+      "setting_group_id": "fixture-builder-unsatisfiable",
+      "terminal_reasons": [
+        "BUILDER_UNSATISFIABLE"
+      ],
+      "turn_distribution": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "p95": null
+      }
+    },
+    {
+      "counts": {
+        "builder_unsatisfiable": 0,
+        "failed": 2,
+        "invalidated": 0,
+        "no_legal_progress_move": 2,
+        "policy_stall": 0,
+        "proven_stalemate": 2,
+        "requested": 2,
+        "simulation_cap": 0,
+        "started": 2,
+        "succeeded": 0
+      },
+      "results_by_seed": [
+        {
+          "classification": "PROVEN_STALEMATE",
+          "seeds": [
+            "7001",
+            "7002"
+          ],
+          "terminal_reason_codes": [
+            "STALEMATE"
+          ]
+        }
+      ],
+      "seeds": [
+        "7001",
+        "7002"
+      ],
+      "setting_group_id": "fixture-proven-stalemate",
+      "terminal_reasons": [
+        "STALEMATE"
+      ],
+      "turn_distribution": {
+        "count": 2,
+        "maximum": 25,
+        "mean": 25,
+        "median": 25,
+        "minimum": 25,
+        "p95": 25
+      }
+    },
+    {
+      "counts": {
+        "builder_unsatisfiable": 0,
+        "failed": 2,
+        "invalidated": 2,
+        "no_legal_progress_move": 1,
+        "policy_stall": 0,
+        "proven_stalemate": 0,
+        "requested": 2,
+        "simulation_cap": 0,
+        "started": 2,
+        "succeeded": 0
+      },
+      "results_by_seed": [
+        {
+          "classification": "INVALIDATED",
+          "seeds": [
+            "8001",
+            "8002"
+          ],
+          "terminal_reason_codes": [
+            "ADMIN_INVALIDATION"
+          ]
+        }
+      ],
+      "seeds": [
+        "8001",
+        "8002"
+      ],
+      "setting_group_id": "fixture-admin-invalidation",
+      "terminal_reasons": [
+        "ADMIN_INVALIDATION"
+      ],
+      "turn_distribution": {
+        "count": 2,
+        "maximum": 7,
+        "mean": 6,
+        "median": 6,
+        "minimum": 5,
+        "p95": 7
+      }
+    },
+    {
+      "counts": {
+        "builder_unsatisfiable": 0,
+        "failed": 2,
+        "invalidated": 0,
+        "no_legal_progress_move": 0,
+        "policy_stall": 0,
+        "proven_stalemate": 0,
+        "requested": 2,
+        "simulation_cap": 2,
+        "started": 2,
+        "succeeded": 0
+      },
+      "results_by_seed": [
+        {
+          "classification": "SIMULATION_CAP",
+          "seeds": [
+            "9001",
+            "9002"
+          ],
+          "terminal_reason_codes": [
+            "SIMULATION_CAP"
+          ]
+        }
+      ],
+      "seeds": [
+        "9001",
+        "9002"
+      ],
+      "setting_group_id": "fixture-simulation-cap",
+      "terminal_reasons": [
+        "SIMULATION_CAP"
+      ],
+      "turn_distribution": {
+        "count": 2,
+        "maximum": 3,
+        "mean": 3,
+        "median": 3,
+        "minimum": 3,
+        "p95": 3
+      }
+    },
+    {
+      "counts": {
+        "builder_unsatisfiable": 0,
+        "failed": 2,
+        "invalidated": 0,
+        "no_legal_progress_move": 0,
+        "policy_stall": 2,
+        "proven_stalemate": 0,
+        "requested": 2,
+        "simulation_cap": 0,
+        "started": 2,
+        "succeeded": 0
+      },
+      "results_by_seed": [
+        {
+          "classification": "POLICY_STALL",
+          "seeds": [
+            "10001",
+            "10002"
+          ],
+          "terminal_reason_codes": [
+            "POLICY_STALL",
+            "SIMULATION_CAP"
+          ]
+        }
+      ],
+      "seeds": [
+        "10001",
+        "10002"
+      ],
+      "setting_group_id": "fixture-policy-stall",
+      "terminal_reasons": [
+        "POLICY_STALL",
+        "SIMULATION_CAP"
+      ],
+      "turn_distribution": {
+        "count": 2,
+        "maximum": 3,
+        "mean": 3,
+        "median": 3,
+        "minimum": 3,
+        "p95": 3
+      }
+    }
+  ],
+  "campaign_id": "task-009-foundation-v1",
+  "determinism": {
+    "compared_fields": [
+      "ticket_snapshot_digest",
+      "replay_digest",
+      "outcome",
+      "scores",
+      "turns"
+    ],
+    "identical_input_reruns": 22,
+    "mismatch_rows": [],
+    "mismatches": 0
+  },
+  "generated_by": "automated-harness-v1",
+  "overall": {
+    "builder_unsatisfiable": 2,
+    "failed": 10,
+    "invalidated": 2,
+    "no_legal_progress_move": 6,
+    "policy_stall": 2,
+    "proven_stalemate": 2,
+    "requested": 22,
+    "simulation_cap": 2,
+    "started": 20,
+    "succeeded": 12
+  },
+  "overall_turn_distribution": {
+    "count": 20,
+    "maximum": 25,
+    "mean": 9.55,
+    "median": 8.5,
+    "minimum": 3,
+    "p95": 25
+  },
+  "progress_move_audit": {
+    "affected_match_ids": [
+      "task-009-foundation-v1.coop-fixed-finite-solo-methodical.seed-1001",
+      "task-009-foundation-v1.coop-fixed-finite-solo-methodical.seed-1002",
+      "task-009-foundation-v1.coop-fixed-replenishing-four-mixed.seed-3002",
+      "task-009-foundation-v1.fixture-proven-stalemate.seed-7001",
+      "task-009-foundation-v1.fixture-proven-stalemate.seed-7002",
+      "task-009-foundation-v1.fixture-admin-invalidation.seed-8002"
+    ],
+    "any_no_legal_progress_move": true,
+    "pass_is_always_legal_and_not_counted_as_progress": true
+  },
+  "service_points": {
+    "player_profiles": [
+      {
+        "final": 2,
+        "net": 2,
+        "player_id": "player_a",
+        "seeds": [
+          "4001"
+        ],
+        "setting_group_id": "competitive-fixed-finite-pair-scripted",
+        "starting": 0
+      },
+      {
+        "final": 3,
+        "net": 3,
+        "player_id": "player_a",
+        "seeds": [
+          "4002"
+        ],
+        "setting_group_id": "competitive-fixed-finite-pair-scripted",
+        "starting": 0
+      },
+      {
+        "final": 1,
+        "net": 1,
+        "player_id": "player_b",
+        "seeds": [
+          "4002"
+        ],
+        "setting_group_id": "competitive-fixed-finite-pair-scripted",
+        "starting": 0
+      },
+      {
+        "final": 2,
+        "net": 2,
+        "player_id": "player_b",
+        "seeds": [
+          "4001"
+        ],
+        "setting_group_id": "competitive-fixed-finite-pair-scripted",
+        "starting": 0
+      },
+      {
+        "final": 1,
+        "net": 1,
+        "player_id": "player_a",
+        "seeds": [
+          "5002"
+        ],
+        "setting_group_id": "competitive-generated-replenishing-three-mixed",
+        "starting": 0
+      },
+      {
+        "final": 3,
+        "net": 3,
+        "player_id": "player_a",
+        "seeds": [
+          "5001"
+        ],
+        "setting_group_id": "competitive-generated-replenishing-three-mixed",
+        "starting": 0
+      },
+      {
+        "final": 1,
+        "net": 1,
+        "player_id": "player_b",
+        "seeds": [
+          "5001",
+          "5002"
+        ],
+        "setting_group_id": "competitive-generated-replenishing-three-mixed",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_c",
+        "seeds": [
+          "5001",
+          "5002"
+        ],
+        "setting_group_id": "competitive-generated-replenishing-three-mixed",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "seeds": [
+          "4501",
+          "4502"
+        ],
+        "setting_group_id": "coop-fixed-failed-verify-scripted",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_b",
+        "seeds": [
+          "4501",
+          "4502"
+        ],
+        "setting_group_id": "coop-fixed-failed-verify-scripted",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "seeds": [
+          "1001",
+          "1002"
+        ],
+        "setting_group_id": "coop-fixed-finite-solo-methodical",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "seeds": [
+          "3001",
+          "3002"
+        ],
+        "setting_group_id": "coop-fixed-replenishing-four-mixed",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_b",
+        "seeds": [
+          "3001",
+          "3002"
+        ],
+        "setting_group_id": "coop-fixed-replenishing-four-mixed",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_c",
+        "seeds": [
+          "3001",
+          "3002"
+        ],
+        "setting_group_id": "coop-fixed-replenishing-four-mixed",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_d",
+        "seeds": [
+          "3001",
+          "3002"
+        ],
+        "setting_group_id": "coop-fixed-replenishing-four-mixed",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "seeds": [
+          "2001",
+          "2002"
+        ],
+        "setting_group_id": "coop-generated-finite-pair-publication",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_b",
+        "seeds": [
+          "2001",
+          "2002"
+        ],
+        "setting_group_id": "coop-generated-finite-pair-publication",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "seeds": [
+          "8001",
+          "8002"
+        ],
+        "setting_group_id": "fixture-admin-invalidation",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "seeds": [
+          "6001",
+          "6002"
+        ],
+        "setting_group_id": "fixture-builder-unsatisfiable",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "seeds": [
+          "10001",
+          "10002"
+        ],
+        "setting_group_id": "fixture-policy-stall",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_b",
+        "seeds": [
+          "10001",
+          "10002"
+        ],
+        "setting_group_id": "fixture-policy-stall",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "seeds": [
+          "7001",
+          "7002"
+        ],
+        "setting_group_id": "fixture-proven-stalemate",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "seeds": [
+          "9001",
+          "9002"
+        ],
+        "setting_group_id": "fixture-simulation-cap",
+        "starting": 0
+      }
+    ],
+    "players": [
+      {
+        "final": 5,
+        "matches": 2,
+        "net": 5,
+        "player_id": "player_a",
+        "setting_group_id": "competitive-fixed-finite-pair-scripted",
+        "starting": 0
+      },
+      {
+        "final": 3,
+        "matches": 2,
+        "net": 3,
+        "player_id": "player_b",
+        "setting_group_id": "competitive-fixed-finite-pair-scripted",
+        "starting": 0
+      },
+      {
+        "final": 4,
+        "matches": 2,
+        "net": 4,
+        "player_id": "player_a",
+        "setting_group_id": "competitive-generated-replenishing-three-mixed",
+        "starting": 0
+      },
+      {
+        "final": 2,
+        "matches": 2,
+        "net": 2,
+        "player_id": "player_b",
+        "setting_group_id": "competitive-generated-replenishing-three-mixed",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "matches": 2,
+        "net": 0,
+        "player_id": "player_c",
+        "setting_group_id": "competitive-generated-replenishing-three-mixed",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "matches": 2,
+        "net": 0,
+        "player_id": "player_a",
+        "setting_group_id": "coop-fixed-failed-verify-scripted",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "matches": 2,
+        "net": 0,
+        "player_id": "player_b",
+        "setting_group_id": "coop-fixed-failed-verify-scripted",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "matches": 2,
+        "net": 0,
+        "player_id": "player_a",
+        "setting_group_id": "coop-fixed-finite-solo-methodical",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "matches": 2,
+        "net": 0,
+        "player_id": "player_a",
+        "setting_group_id": "coop-fixed-replenishing-four-mixed",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "matches": 2,
+        "net": 0,
+        "player_id": "player_b",
+        "setting_group_id": "coop-fixed-replenishing-four-mixed",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "matches": 2,
+        "net": 0,
+        "player_id": "player_c",
+        "setting_group_id": "coop-fixed-replenishing-four-mixed",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "matches": 2,
+        "net": 0,
+        "player_id": "player_d",
+        "setting_group_id": "coop-fixed-replenishing-four-mixed",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "matches": 2,
+        "net": 0,
+        "player_id": "player_a",
+        "setting_group_id": "coop-generated-finite-pair-publication",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "matches": 2,
+        "net": 0,
+        "player_id": "player_b",
+        "setting_group_id": "coop-generated-finite-pair-publication",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "matches": 2,
+        "net": 0,
+        "player_id": "player_a",
+        "setting_group_id": "fixture-admin-invalidation",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "matches": 2,
+        "net": 0,
+        "player_id": "player_a",
+        "setting_group_id": "fixture-builder-unsatisfiable",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "matches": 2,
+        "net": 0,
+        "player_id": "player_a",
+        "setting_group_id": "fixture-policy-stall",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "matches": 2,
+        "net": 0,
+        "player_id": "player_b",
+        "setting_group_id": "fixture-policy-stall",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "matches": 2,
+        "net": 0,
+        "player_id": "player_a",
+        "setting_group_id": "fixture-proven-stalemate",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "matches": 2,
+        "net": 0,
+        "player_id": "player_a",
+        "setting_group_id": "fixture-simulation-cap",
+        "starting": 0
+      }
+    ],
+    "team_profiles": [
+      {
+        "final": 4,
+        "net": 4,
+        "seeds": [
+          "4501",
+          "4502"
+        ],
+        "setting_group_id": "coop-fixed-failed-verify-scripted",
+        "starting": 0,
+        "team_id": "team.cooperative"
+      },
+      {
+        "final": 2,
+        "net": 2,
+        "seeds": [
+          "1001",
+          "1002"
+        ],
+        "setting_group_id": "coop-fixed-finite-solo-methodical",
+        "starting": 0,
+        "team_id": "team.cooperative"
+      },
+      {
+        "final": 2,
+        "net": 2,
+        "seeds": [
+          "3001",
+          "3002"
+        ],
+        "setting_group_id": "coop-fixed-replenishing-four-mixed",
+        "starting": 0,
+        "team_id": "team.cooperative"
+      },
+      {
+        "final": 2,
+        "net": 2,
+        "seeds": [
+          "2001",
+          "2002"
+        ],
+        "setting_group_id": "coop-generated-finite-pair-publication",
+        "starting": 0,
+        "team_id": "team.cooperative"
+      },
+      {
+        "final": 2,
+        "net": 2,
+        "seeds": [
+          "8001",
+          "8002"
+        ],
+        "setting_group_id": "fixture-admin-invalidation",
+        "starting": 0,
+        "team_id": "team.cooperative"
+      },
+      {
+        "final": 0,
+        "net": 0,
+        "seeds": [
+          "6001",
+          "6002"
+        ],
+        "setting_group_id": "fixture-builder-unsatisfiable",
+        "starting": 0,
+        "team_id": "team.cooperative"
+      },
+      {
+        "final": 0,
+        "net": 0,
+        "seeds": [
+          "7001",
+          "7002"
+        ],
+        "setting_group_id": "fixture-proven-stalemate",
+        "starting": 0,
+        "team_id": "team.cooperative"
+      },
+      {
+        "final": 0,
+        "net": 0,
+        "seeds": [
+          "9001",
+          "9002"
+        ],
+        "setting_group_id": "fixture-simulation-cap",
+        "starting": 0,
+        "team_id": "team.cooperative"
+      }
+    ],
+    "teams": [
+      {
+        "final": 8,
+        "matches": 2,
+        "net": 8,
+        "setting_group_id": "coop-fixed-failed-verify-scripted",
+        "starting": 0,
+        "team_id": "team.cooperative"
+      },
+      {
+        "final": 4,
+        "matches": 2,
+        "net": 4,
+        "setting_group_id": "coop-fixed-finite-solo-methodical",
+        "starting": 0,
+        "team_id": "team.cooperative"
+      },
+      {
+        "final": 4,
+        "matches": 2,
+        "net": 4,
+        "setting_group_id": "coop-fixed-replenishing-four-mixed",
+        "starting": 0,
+        "team_id": "team.cooperative"
+      },
+      {
+        "final": 4,
+        "matches": 2,
+        "net": 4,
+        "setting_group_id": "coop-generated-finite-pair-publication",
+        "starting": 0,
+        "team_id": "team.cooperative"
+      },
+      {
+        "final": 4,
+        "matches": 2,
+        "net": 4,
+        "setting_group_id": "fixture-admin-invalidation",
+        "starting": 0,
+        "team_id": "team.cooperative"
+      },
+      {
+        "final": 0,
+        "matches": 2,
+        "net": 0,
+        "setting_group_id": "fixture-builder-unsatisfiable",
+        "starting": 0,
+        "team_id": "team.cooperative"
+      },
+      {
+        "final": 0,
+        "matches": 2,
+        "net": 0,
+        "setting_group_id": "fixture-proven-stalemate",
+        "starting": 0,
+        "team_id": "team.cooperative"
+      },
+      {
+        "final": 0,
+        "matches": 2,
+        "net": 0,
+        "setting_group_id": "fixture-simulation-cap",
+        "starting": 0,
+        "team_id": "team.cooperative"
+      }
+    ]
+  },
+  "version_pins": {
+    "card_catalog_version": "core-card-catalog-v1",
+    "domain_content_version": "core-domain-snapshot-v1",
+    "generator_version": "ticket-builder-v1",
+    "harness_version": "automated-harness-v1",
+    "policy_versions": [
+      "methodical-seat-safe-v1",
+      "publication-seat-safe-v1",
+      "scripted-cooperative-v1",
+      "scripted-competitive-v1",
+      "pass-only-fixture-v1"
+    ],
+    "ruleset_version": "first-version-v1",
+    "ticket_content_version": "core-ticket-templates-v1"
+  }
+}

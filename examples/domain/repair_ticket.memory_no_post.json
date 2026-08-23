@@ -24,6 +24,7 @@
     "fault.memory.dimm.failed"
   ],
   "server_only_truth": {
+    "initial_machine_state_key": "machine_state.memory.failed_dimm",
     "fault_instances": [
       {
         "fault_instance_key": "fault_instance.failed_dimm",
@@ -34,7 +35,8 @@
         "required_to_repair": true
       }
     ],
-    "causal_edge_ids": []
+    "causal_edge_ids": [],
+    "causal_edges": []
   },
   "authored_evidence_outcomes": [
     {
@@ -48,26 +50,48 @@
           "disposition": "SUPPORT"
         }
       ],
-      "observation_id": "symptom.memory.ecc_errors"
+      "observation_id": "symptom.memory.ecc_errors",
+      "public_summary": "The memory diagnostic reports evidence associated with the selected DIMM target."
     }
   ],
   "isolation_requirements": [
     {
       "requirement_id": "isolation.memory.failed_dimm",
+      "target_fault_instance_key": "fault_instance.failed_dimm",
       "candidate_fault_id": "fault.memory.dimm.failed",
       "classification": "ACTIONABLE_AND_DEEPEST",
       "minimum_citations": 1,
       "eligible_outcome_ids": [
         "outcome.memory_diagnostic.failed_dimm_support"
-      ]
+      ],
+      "eligible_verification_outcome_ids": []
     }
   ],
   "repair_requirements": [
     {
+      "requirement_id": "repair_requirement.memory.replace_dimm",
+      "target_fault_instance_key": "fault_instance.failed_dimm",
       "fault_id": "fault.memory.dimm.failed",
       "eligible_repair_procedure_ids": [
         "repair.memory.replace_dimm"
+      ],
+      "eligible_repair_outcome_ids": [
+        "repair_outcome.memory.replace_dimm"
       ]
+    }
+  ],
+  "authored_repair_outcomes": [
+    {
+      "outcome_id": "repair_outcome.memory.replace_dimm",
+      "repair_procedure_id": "repair.memory.replace_dimm",
+      "target_fault_instance_key": "fault_instance.failed_dimm",
+      "eligible_machine_state_key": "machine_state.memory.failed_dimm",
+      "resulting_machine_state_key": "machine_state.memory.dimm_replaced",
+      "resolved_fault_instance_keys": [
+        "fault_instance.failed_dimm"
+      ],
+      "necessary_for_closure": true,
+      "public_summary": "The isolated DIMM is replaced and the machine state advances to post-repair verification."
     }
   ],
   "verification_requirements": [
@@ -84,13 +108,51 @@
       "must_pass_after_latest_repair": true
     }
   ],
+  "authored_verification_outcomes": [
+    {
+      "outcome_id": "verification_outcome.memory.full_test_pass",
+      "validation_procedure_id": "verify.memory.full_test",
+      "requirement_id": "verification.memory.full_test",
+      "eligible_machine_state_key": "machine_state.memory.dimm_replaced",
+      "result": "PASS",
+      "resulting_machine_state_key": "machine_state.memory.dimm_replaced",
+      "revealed_candidate_fault_ids": [],
+      "candidate_effects": [],
+      "public_summary": "The full-memory validation condition passes after the replacement."
+    },
+    {
+      "outcome_id": "verification_outcome.boot.post_pass",
+      "validation_procedure_id": "verify.boot.post",
+      "requirement_id": "verification.boot.post",
+      "eligible_machine_state_key": "machine_state.memory.dimm_replaced",
+      "result": "PASS",
+      "resulting_machine_state_key": "machine_state.memory.dimm_replaced",
+      "revealed_candidate_fault_ids": [],
+      "candidate_effects": [],
+      "public_summary": "POST completes after the replacement."
+    }
+  ],
   "closure_requirements": {
     "include_accepted_isolation": true,
     "include_cited_decisive_evidence": true,
     "include_every_repair_in_accepted_path": true,
     "include_every_failed_verify_in_accepted_path": true,
-    "include_all_current_passing_verifies": true
+    "include_all_current_passing_verifies": true,
+    "required_fault_instance_keys": [
+      "fault_instance.failed_dimm"
+    ],
+    "required_isolation_requirement_ids": [
+      "isolation.memory.failed_dimm"
+    ],
+    "required_repair_outcome_ids": [
+      "repair_outcome.memory.replace_dimm"
+    ],
+    "required_verification_requirement_ids": [
+      "verification.memory.full_test",
+      "verification.boot.post"
+    ]
   },
+  "generation_provenance": null,
   "educational_objectives": [
     "Separate Evidence, machine changes, Verify, and Documentation."
   ]

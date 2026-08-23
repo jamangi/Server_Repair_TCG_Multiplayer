@@ -2,7 +2,7 @@
 
 ## Status
 
-**Ready — approved contract; implementation not started.** The user approved the Card Definition/Card Instance direction in [`card-contract-and-build-order.md`](../improvement_analysis/card-contract-and-build-order.md) on 2026-08-23, including the authoritative-server/client-read-only boundary. Mark this task Active when implementation begins.
+**Completed — 2026-08-23.** The approved Card Definition/Card Instance boundary, deterministic authoritative engine, Ticket Builder, seat-safe simulator, and reproducible automated-game campaign are implemented and validated under `first-version-v1`. No new rule question or hidden-information blocker remains.
 
 ## Objective
 
@@ -218,3 +218,69 @@ Do not modify `viewer/**`, story, case-study research, candidate-flow source fix
 ## Completion boundary
 
 TASK-009 is complete only when all five milestones pass, the approved contracts are synchronized, fixed and generated matches finish through the same engine, the automated report is committed and independently reproducible, all tests pass, and no unresolved rule or hidden-information leak remains.
+
+## Completion record — 2026-08-23
+
+### Outcome
+
+All five milestones and the approved contract synchronization are complete:
+
+- a versioned 11-card typed starter catalog and two legal 30-card deck snapshots exercise Diagnostic, Repair, Verify, Search, Refresh, Documentation, recovery, and a genuine no-repair stalemate;
+- three stable authored Ticket templates cover a direct cable fault, a single storage-member fault, and a failed-Verify return followed by isolation and repair of a distinct degraded-array fault;
+- the dependency-free engine applies authenticated identifier-based intents through deterministic server transitions, emits immutable public events, maintains private authoritative truth, and exposes seat-safe projections and legal intents;
+- fixed and generated Tickets use the same exact-target Repair gate, closure path, scoring path, and solvability oracle;
+- `ticket-builder-v1` canonically orders inputs, applies seeded weighted selection and every hard constraint, emits only complete snapshots, records separate fallback attempts, and returns structured no-partial-Ticket diagnostics when unsatisfiable; and
+- the automated harness calls the same public intent boundary as a future client, uses seeded policies and a virtual clock, retains compact reports, and byte-verifies campaign regeneration.
+
+The implementation deliberately does not add a playable client, multiplayer transport, account/progression system, campaign runtime, backend deployment, or any other prohibited later-task surface. `viewer/**` is unchanged, and no `EX1-*` candidate identifier was promoted into stable content. `UNFROZEN_RULES.md` remains empty.
+
+### Automated campaign
+
+Campaign `task-009-foundation-v1` requested 22 deterministic runs across 11 setting groups and two seeds per group:
+
+- 20 matches started and 12 completed successfully;
+- 2 Builder-unsatisfiable fixtures stopped before match creation;
+- 2 matches were administratively invalidated;
+- 2 reached a proven stalemate;
+- 2 stopped at the offline simulation cap;
+- 2 exhibited the deliberate pass-only policy stall;
+- 6 matches encountered at least one state with no legal progress move when the always-legal Pass action was excluded; and
+- 22 identical-input reruns produced 0 mismatches across Ticket snapshots, replay digests, outcomes, scores, and turn counts.
+
+The matrix covers cooperative and competitive play, fixed and generated Tickets, finite `Q = 0` and replenishing `Q > 0` queues, one through four seats where valid, every supported baseline policy, mixed policies, failed Verify reopening Diagnosis, and every required deliberate exception. Started matches took 3–25 turns (minimum 3, median 8.5, nearest-rank p95 25, maximum 25, mean 9.55). Per-seed Player/team starting, final, and net Service Points are recorded in `summary.json` and grouped for review in `summary.md`.
+
+### Final verification
+
+All commands were run from the repository root against the completed working tree:
+
+| Command | Exit | Result |
+| --- | ---: | --- |
+| PowerShell enumeration invoking `node --check` for every changed or new `.mjs`/`.js` file | 0 | 23/23 modules passed syntax checking |
+| `node --test tests/task-009-card-contracts.test.mjs` | 0 | 8 passed, 0 failed, 0 skipped |
+| `node --test tests/task-009-ticket-builder.test.mjs` | 0 | 11 passed, 0 failed, 0 skipped |
+| `node --test tests/task-009-engine.test.mjs` | 0 | 12 passed, 0 failed, 0 skipped |
+| `node --test tests/task-009-simulation-report.test.mjs` | 0 | 5 passed, 0 failed, 0 skipped |
+| `node --test tests/task-009-automated-campaign.test.mjs` | 0 | 5 passed, 0 failed, 0 skipped |
+| `node --test tests/*.mjs` | 0 | 74 passed, 0 failed, 0 skipped |
+| `node tools/run-automated-games.mjs --verify-report automated_games/task-009-foundation-v1` | 0 | 22 rows verified: 12 successes, 10 retained exceptions, 0 deterministic mismatches |
+| `git diff --check` | 0 | no whitespace errors |
+
+The four Domain Viewer baseline commands were not additionally required because no file under `viewer/**` changed. The existing TASK-001 acceptance count and TASK-007 schema registry assertions were synchronized to the already-present repository corpus/contracts; they do not change viewer behavior.
+
+### Changed-file inventory
+
+The completed task changes 66 files, all within its allowlist:
+
+- root and task documentation: `README.md`, `docs/tasks/INDEX.md`, `docs/tasks/TASK-009-gameplay-foundation.md`, and `docs/schema-notes/{DOMAIN_SCHEMAS,RUNTIME_SCHEMAS,SERVER_AUTHORITY}.md`;
+- stable gameplay pack: `content/gameplay-v1/{card-catalog,decks,domain-snapshot,ticket-templates}.json`;
+- schemas: `schemas/README.md`, `schemas/domain/{card,repair_ticket,ticket_builder_configuration,ticket_builder_result}.schema.json`, and `schemas/runtime/{action_request,action_result,card_instance}.schema.json`;
+- examples: `examples/domain/card.memory_diagnostic.json`, `examples/domain/repair_ticket.memory_no_post.json`, four `ticket_builder_configuration.*.json` fixtures, three `ticket_builder_result.*.json` fixtures, and `examples/runtime/match_state.after_closure.json`;
+- Builder: `src/builder/{canonical,ticket-builder,ticket-solvability}.mjs`;
+- engine: `src/engine/{catalogs,determinism,engine,events,index,invariants,projections}.mjs`;
+- simulation: `src/simulation/{artifacts,campaign,policies,report,simulator}.mjs` and `tools/run-automated-games.mjs`;
+- tests: `tests/task-001-validation-protocol-tabs.acceptance.mjs`, `tests/task-007-schema-contracts.test.mjs`, and the five `tests/task-009-*.test.mjs` suites;
+- report guide and compact campaign artifacts: `automated_games/README.md`, `automated_games/task-009-foundation-v1/{settings,matches,summary}.json`, `summary.md`, and 10 expanded exception files covering the two seeds for each Builder-unsatisfiable, proven-stalemate, administrative-invalidation, simulation-cap, and policy-stall fixture.
+
+### Unresolved items
+
+None. All required validation resolves successfully, the committed report is independently reproducible, the viewer deployment boundary is preserved, and the task introduces no unapproved gameplay rule.

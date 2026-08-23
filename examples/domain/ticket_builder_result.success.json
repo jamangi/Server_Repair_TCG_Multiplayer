@@ -1,0 +1,471 @@
+{
+  "id": "builder_result.aa35be680424cd1c735f9a3d",
+  "entity_type": "ticket_builder_result",
+  "status": "SUCCESS",
+  "primary_attempt_id": "builder_attempt.3c075f4ff3bccbca02381397",
+  "selected_attempt_id": "builder_attempt.3c075f4ff3bccbca02381397",
+  "attempts": [
+    {
+      "attempt_id": "builder_attempt.3c075f4ff3bccbca02381397",
+      "attempt_kind": "PRIMARY",
+      "parent_attempt_id": null,
+      "configuration": {
+        "id": "builder_config.storage_foundation_pair",
+        "entity_type": "ticket_builder_configuration",
+        "configuration_version": "ticket-builder-v1",
+        "scenario_or_mode_context": "SIMULATION",
+        "requested_ticket_count": 2,
+        "seed": "task-009-builder-success-seed",
+        "generator_version": "ticket-builder-v1",
+        "content_version": "core-ticket-templates-v1",
+        "domain_content_version": "core-domain-snapshot-v1",
+        "card_catalog_version": "core-card-catalog-v1",
+        "allowed_domain_ids": [],
+        "excluded_domain_ids": [],
+        "allowed_tags": [
+          "storage"
+        ],
+        "excluded_tags": [],
+        "guaranteed_categories": [
+          "storage.cabling",
+          "storage.raid"
+        ],
+        "required_teaching_beats": [
+          "evidence_before_repair",
+          "repair_then_verify"
+        ],
+        "authored_difficulty_bounds": {
+          "minimum": 1,
+          "maximum": 4
+        },
+        "fault_count_bounds": {
+          "minimum": 1,
+          "maximum": 2
+        },
+        "required_actionable_fault_count_bounds": {
+          "minimum": 1,
+          "maximum": 2
+        },
+        "causal_depth_bounds": {
+          "minimum": 0,
+          "maximum": 1
+        },
+        "inbound_branching_bounds": {
+          "minimum": 0,
+          "maximum": 1
+        },
+        "outbound_branching_bounds": {
+          "minimum": 0,
+          "maximum": 1
+        },
+        "progressive_difficulty_profile": {
+          "profile_id": "profile.storage_foundation_ramp",
+          "profile_version": "v1",
+          "explicit_ceiling": 4,
+          "bands": [
+            {
+              "start_generated_index": 0,
+              "end_generated_index": 0,
+              "target": 1,
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "start_generated_index": 1,
+              "end_generated_index": 1,
+              "target": 2,
+              "minimum": 2,
+              "maximum": 2
+            }
+          ]
+        },
+        "generation_index_start": 0,
+        "allow_duplicate_causal_fingerprints": false,
+        "active_causal_fingerprints": [],
+        "legal_card_definition_ids": [
+          "card.core.visual_inspection",
+          "card.core.raid_status_inspection",
+          "card.core.drive_health_test",
+          "card.core.storage_device_inventory",
+          "card.core.smartctl_drive_health",
+          "card.core.replace_raid_member",
+          "card.core.rebuild_raid_array",
+          "card.core.reseat_storage_cable",
+          "card.core.raid_health_verification",
+          "card.core.storage_detection_verification"
+        ],
+        "fallback_configuration_id": null
+      },
+      "status": "SUCCESS",
+      "diagnostics": [],
+      "selected_template_ids": [
+        "ticket_template.storage.loose_cable",
+        "ticket_template.storage.single_sas_member"
+      ],
+      "ticket_snapshot_digests": [
+        "bc660d97bfd165444e58463dbf7af99f5d63f9d61854e7908c54cf2d0d097b9f",
+        "3ff886e90449e0b5070ae7341ae1349e185c166c62ca39f16e0dfcc09c6dfd96"
+      ],
+      "ticket_snapshots": [
+        {
+          "id": "ticket.generated.69123f06b99dc972d6eb67c2",
+          "entity_type": "repair_ticket",
+          "presentation": {
+            "display_name": "The Missing Storage Path",
+            "short_description": "An expected storage device disappeared after a storage-path service window."
+          },
+          "source": {
+            "expansion_id": "expansion.gameplay_v1",
+            "version": "1.0.0",
+            "status": "published",
+            "search_tags": [
+              "storage",
+              "cable",
+              "missing device"
+            ]
+          },
+          "difficulty": 1,
+          "initial_symptom_ids": [
+            "symptom.storage.drive_missing"
+          ],
+          "public_candidate_fault_ids": [
+            "fault.storage.cable.loose",
+            "fault.storage.raid.controller_failed"
+          ],
+          "server_only_truth": {
+            "initial_machine_state_key": "machine_state.storage.cable_loose",
+            "fault_instances": [
+              {
+                "fault_instance_key": "fault_instance.storage.cable_loose",
+                "fault_id": "fault.storage.cable.loose",
+                "role": "ACTIONABLE",
+                "actionable": true,
+                "deepest": true,
+                "required_to_repair": true
+              }
+            ],
+            "causal_edge_ids": [],
+            "causal_edges": []
+          },
+          "authored_evidence_outcomes": [
+            {
+              "outcome_id": "evidence.storage.inventory_missing",
+              "source_definition_id": "test.storage.device_inventory",
+              "target_ref": "fault_instance.storage.cable_loose",
+              "eligible_machine_state_key": "machine_state.storage.cable_loose",
+              "candidate_effects": [
+                {
+                  "candidate_fault_id": "fault.storage.cable.loose",
+                  "disposition": "SUPPORT"
+                }
+              ],
+              "observation_id": "symptom.storage.drive_missing",
+              "public_summary": "The expected storage device is absent from the authorized inventory."
+            },
+            {
+              "outcome_id": "evidence.storage.connector_unlatched",
+              "source_definition_id": "test.general.visual_inspection",
+              "target_ref": "fault_instance.storage.cable_loose",
+              "eligible_machine_state_key": "machine_state.storage.cable_loose",
+              "candidate_effects": [
+                {
+                  "candidate_fault_id": "fault.storage.cable.loose",
+                  "disposition": "SUPPORT"
+                }
+              ],
+              "observation_id": "symptom.storage.drive_missing",
+              "public_summary": "The connector is not latched; no visible cable damage is recorded."
+            }
+          ],
+          "isolation_requirements": [
+            {
+              "requirement_id": "isolation.storage.cable_loose",
+              "target_fault_instance_key": "fault_instance.storage.cable_loose",
+              "candidate_fault_id": "fault.storage.cable.loose",
+              "classification": "ACTIONABLE_AND_DEEPEST",
+              "minimum_citations": 2,
+              "eligible_outcome_ids": [
+                "evidence.storage.inventory_missing",
+                "evidence.storage.connector_unlatched"
+              ],
+              "eligible_verification_outcome_ids": []
+            }
+          ],
+          "repair_requirements": [
+            {
+              "requirement_id": "repair_requirement.storage.reseat_cable",
+              "target_fault_instance_key": "fault_instance.storage.cable_loose",
+              "fault_id": "fault.storage.cable.loose",
+              "eligible_repair_procedure_ids": [
+                "repair.storage.reseat_cable"
+              ],
+              "eligible_repair_outcome_ids": [
+                "repair_outcome.storage.cable_reseated"
+              ]
+            }
+          ],
+          "authored_repair_outcomes": [
+            {
+              "outcome_id": "repair_outcome.storage.cable_reseated",
+              "repair_procedure_id": "repair.storage.reseat_cable",
+              "target_fault_instance_key": "fault_instance.storage.cable_loose",
+              "eligible_machine_state_key": "machine_state.storage.cable_loose",
+              "resulting_machine_state_key": "machine_state.storage.cable_reseated",
+              "resolved_fault_instance_keys": [
+                "fault_instance.storage.cable_loose"
+              ],
+              "necessary_for_closure": true,
+              "public_summary": "The isolated cable connection is reseated and latched."
+            }
+          ],
+          "verification_requirements": [
+            {
+              "requirement_id": "verification.storage.device_detected",
+              "validation_procedure_id": "verify.storage.device_detected",
+              "success_condition": "The expected storage device remains present across the authored detection check.",
+              "must_pass_after_latest_repair": true
+            }
+          ],
+          "authored_verification_outcomes": [
+            {
+              "outcome_id": "verification_outcome.storage.device_detected_pass",
+              "validation_procedure_id": "verify.storage.device_detected",
+              "requirement_id": "verification.storage.device_detected",
+              "eligible_machine_state_key": "machine_state.storage.cable_reseated",
+              "result": "PASS",
+              "resulting_machine_state_key": "machine_state.storage.cable_reseated",
+              "revealed_candidate_fault_ids": [],
+              "candidate_effects": [],
+              "public_summary": "The expected storage device is detected consistently after the reseat."
+            }
+          ],
+          "closure_requirements": {
+            "include_accepted_isolation": true,
+            "include_cited_decisive_evidence": true,
+            "include_every_repair_in_accepted_path": true,
+            "include_every_failed_verify_in_accepted_path": true,
+            "include_all_current_passing_verifies": true,
+            "required_fault_instance_keys": [
+              "fault_instance.storage.cable_loose"
+            ],
+            "required_isolation_requirement_ids": [
+              "isolation.storage.cable_loose"
+            ],
+            "required_repair_outcome_ids": [
+              "repair_outcome.storage.cable_reseated"
+            ],
+            "required_verification_requirement_ids": [
+              "verification.storage.device_detected"
+            ]
+          },
+          "generation_provenance": {
+            "generator_version": "ticket-builder-v1",
+            "content_version": "core-ticket-templates-v1",
+            "domain_content_version": "core-domain-snapshot-v1",
+            "card_catalog_version": "core-card-catalog-v1",
+            "configuration_version": "ticket-builder-v1",
+            "configuration_id": "builder_config.storage_foundation_pair",
+            "attempt_id": "builder_attempt.3c075f4ff3bccbca02381397",
+            "seed": "task-009-builder-success-seed",
+            "fallback_attempt_id": null,
+            "generation_index": 0,
+            "template_id": "ticket_template.storage.loose_cable"
+          },
+          "educational_objectives": [
+            "Use inventory and physical Evidence before changing machine state."
+          ]
+        },
+        {
+          "id": "ticket.generated.c2366afd7e037a0d3b5bebf9",
+          "entity_type": "repair_ticket",
+          "presentation": {
+            "display_name": "One Member Down",
+            "short_description": "A degraded array reports one unhealthy SAS member."
+          },
+          "source": {
+            "expansion_id": "expansion.gameplay_v1",
+            "version": "1.0.0",
+            "status": "published",
+            "search_tags": [
+              "storage",
+              "raid",
+              "sas"
+            ]
+          },
+          "difficulty": 2,
+          "initial_symptom_ids": [
+            "symptom.storage.raid_degraded"
+          ],
+          "public_candidate_fault_ids": [
+            "fault.storage.sas.drive_failed",
+            "fault.storage.raid.degraded",
+            "fault.storage.raid.controller_failed"
+          ],
+          "server_only_truth": {
+            "initial_machine_state_key": "machine_state.raid.single_member_failed",
+            "fault_instances": [
+              {
+                "fault_instance_key": "fault_instance.raid.member_a_failed",
+                "fault_id": "fault.storage.sas.drive_failed",
+                "role": "ACTIONABLE",
+                "actionable": true,
+                "deepest": true,
+                "required_to_repair": true
+              },
+              {
+                "fault_instance_key": "fault_instance.raid.array_degraded",
+                "fault_id": "fault.storage.raid.degraded",
+                "role": "TERMINAL",
+                "actionable": false,
+                "deepest": false,
+                "required_to_repair": false
+              }
+            ],
+            "causal_edge_ids": [
+              "edge.storage.sas_to_degraded"
+            ],
+            "causal_edges": [
+              {
+                "causal_edge_id": "edge.storage.sas_to_degraded",
+                "cause_fault_instance_key": "fault_instance.raid.member_a_failed",
+                "effect_fault_instance_key": "fault_instance.raid.array_degraded"
+              }
+            ]
+          },
+          "authored_evidence_outcomes": [
+            {
+              "outcome_id": "evidence.raid.single_member_status",
+              "source_definition_id": "test.storage.raid_status",
+              "target_ref": "fault_instance.raid.member_a_failed",
+              "eligible_machine_state_key": "machine_state.raid.single_member_failed",
+              "candidate_effects": [
+                {
+                  "candidate_fault_id": "fault.storage.sas.drive_failed",
+                  "disposition": "SUPPORT"
+                },
+                {
+                  "candidate_fault_id": "fault.storage.raid.degraded",
+                  "disposition": "CONFIRM"
+                }
+              ],
+              "observation_id": "symptom.storage.raid_degraded",
+              "public_summary": "The array is degraded and identifies one SAS member as unhealthy."
+            },
+            {
+              "outcome_id": "evidence.raid.single_member_health",
+              "source_definition_id": "test.storage.drive_health",
+              "target_ref": "fault_instance.raid.member_a_failed",
+              "eligible_machine_state_key": "machine_state.raid.single_member_failed",
+              "candidate_effects": [
+                {
+                  "candidate_fault_id": "fault.storage.sas.drive_failed",
+                  "disposition": "CONFIRM"
+                }
+              ],
+              "observation_id": "symptom.storage.raid_degraded",
+              "public_summary": "The named SAS member reports decisive failed-drive Evidence."
+            }
+          ],
+          "isolation_requirements": [
+            {
+              "requirement_id": "isolation.raid.member_a_failed",
+              "target_fault_instance_key": "fault_instance.raid.member_a_failed",
+              "candidate_fault_id": "fault.storage.sas.drive_failed",
+              "classification": "ACTIONABLE_AND_DEEPEST",
+              "minimum_citations": 2,
+              "eligible_outcome_ids": [
+                "evidence.raid.single_member_status",
+                "evidence.raid.single_member_health"
+              ],
+              "eligible_verification_outcome_ids": []
+            }
+          ],
+          "repair_requirements": [
+            {
+              "requirement_id": "repair_requirement.raid.replace_member_a",
+              "target_fault_instance_key": "fault_instance.raid.member_a_failed",
+              "fault_id": "fault.storage.sas.drive_failed",
+              "eligible_repair_procedure_ids": [
+                "repair.storage.replace_raid_member"
+              ],
+              "eligible_repair_outcome_ids": [
+                "repair_outcome.raid.member_a_replaced"
+              ]
+            }
+          ],
+          "authored_repair_outcomes": [
+            {
+              "outcome_id": "repair_outcome.raid.member_a_replaced",
+              "repair_procedure_id": "repair.storage.replace_raid_member",
+              "target_fault_instance_key": "fault_instance.raid.member_a_failed",
+              "eligible_machine_state_key": "machine_state.raid.single_member_failed",
+              "resulting_machine_state_key": "machine_state.raid.single_member_replaced",
+              "resolved_fault_instance_keys": [
+                "fault_instance.raid.member_a_failed",
+                "fault_instance.raid.array_degraded"
+              ],
+              "necessary_for_closure": true,
+              "public_summary": "The isolated failed member is replaced."
+            }
+          ],
+          "verification_requirements": [
+            {
+              "requirement_id": "verification.raid.health",
+              "validation_procedure_id": "verify.storage.raid_healthy",
+              "success_condition": "The replacement member is online and the array reports a healthy state after the latest Repair.",
+              "must_pass_after_latest_repair": true
+            }
+          ],
+          "authored_verification_outcomes": [
+            {
+              "outcome_id": "verification_outcome.raid.single_pass",
+              "validation_procedure_id": "verify.storage.raid_healthy",
+              "requirement_id": "verification.raid.health",
+              "eligible_machine_state_key": "machine_state.raid.single_member_replaced",
+              "result": "PASS",
+              "resulting_machine_state_key": "machine_state.raid.single_member_replaced",
+              "revealed_candidate_fault_ids": [],
+              "candidate_effects": [],
+              "public_summary": "The replacement member is online and the array reports healthy."
+            }
+          ],
+          "closure_requirements": {
+            "include_accepted_isolation": true,
+            "include_cited_decisive_evidence": true,
+            "include_every_repair_in_accepted_path": true,
+            "include_every_failed_verify_in_accepted_path": true,
+            "include_all_current_passing_verifies": true,
+            "required_fault_instance_keys": [
+              "fault_instance.raid.member_a_failed"
+            ],
+            "required_isolation_requirement_ids": [
+              "isolation.raid.member_a_failed"
+            ],
+            "required_repair_outcome_ids": [
+              "repair_outcome.raid.member_a_replaced"
+            ],
+            "required_verification_requirement_ids": [
+              "verification.raid.health"
+            ]
+          },
+          "generation_provenance": {
+            "generator_version": "ticket-builder-v1",
+            "content_version": "core-ticket-templates-v1",
+            "domain_content_version": "core-domain-snapshot-v1",
+            "card_catalog_version": "core-card-catalog-v1",
+            "configuration_version": "ticket-builder-v1",
+            "configuration_id": "builder_config.storage_foundation_pair",
+            "attempt_id": "builder_attempt.3c075f4ff3bccbca02381397",
+            "seed": "task-009-builder-success-seed",
+            "fallback_attempt_id": null,
+            "generation_index": 1,
+            "template_id": "ticket_template.storage.single_sas_member"
+          },
+          "educational_objectives": [
+            "Show that member replacement changes state while a later Verify proves recovery."
+          ]
+        }
+      ]
+    }
+  ]
+}

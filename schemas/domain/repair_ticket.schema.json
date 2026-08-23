@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.local/schemas/repair_ticket.schema.json",
   "title": "Repair Ticket Definition",
-  "description": "Authored Ticket content. Public candidate and requirement surfaces must be projected separately from server-only causal truth and unexecuted outcomes.",
+  "description": "Complete authored Ticket content shared by fixed fixtures and validated Ticket Builder snapshots. Server-only truth and unexecuted outcomes must never enter player-safe projections.",
   "type": "object",
   "additionalProperties": false,
   "$defs": {
@@ -39,7 +39,7 @@
       "additionalProperties": false,
       "properties": {
         "expansion_id": { "$ref": "#/$defs/entityRef" },
-        "version": { "type": "string" },
+        "version": { "type": "string", "minLength": 1 },
         "status": {
           "type": "string",
           "enum": ["draft", "reviewed", "published", "deprecated"]
@@ -50,7 +50,52 @@
           "uniqueItems": true
         }
       },
-      "required": ["expansion_id", "status"]
+      "required": ["expansion_id", "version", "status"]
+    },
+    "candidateEffect": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "candidate_fault_id": { "$ref": "#/$defs/entityRef" },
+        "disposition": {
+          "type": "string",
+          "enum": ["SUPPORT", "CONTRADICT", "RULE_OUT", "CONFIRM", "INCONCLUSIVE"]
+        }
+      },
+      "required": ["candidate_fault_id", "disposition"]
+    },
+    "generationProvenance": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "generator_version": { "$ref": "#/$defs/entityRef" },
+        "content_version": { "$ref": "#/$defs/entityRef" },
+        "domain_content_version": { "$ref": "#/$defs/entityRef" },
+        "card_catalog_version": { "$ref": "#/$defs/entityRef" },
+        "configuration_version": { "$ref": "#/$defs/entityRef" },
+        "configuration_id": { "$ref": "#/$defs/entityRef" },
+        "attempt_id": { "$ref": "#/$defs/entityRef" },
+        "seed": { "type": "string", "minLength": 1 },
+        "generation_index": { "type": "integer", "minimum": 0 },
+        "template_id": { "$ref": "#/$defs/entityRef" },
+        "fallback_attempt_id": {
+          "type": ["string", "null"],
+          "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+        }
+      },
+      "required": [
+        "generator_version",
+        "content_version",
+        "domain_content_version",
+        "card_catalog_version",
+        "configuration_version",
+        "configuration_id",
+        "attempt_id",
+        "seed",
+        "generation_index",
+        "template_id",
+        "fallback_attempt_id"
+      ]
     }
   },
   "properties": {
@@ -74,10 +119,11 @@
       "minItems": 1
     },
     "server_only_truth": {
-      "description": "Authoritative causal truth. This object is never included in a player-safe projection.",
+      "description": "Authoritative causal and machine-state blueprint. This object is never included in a player-safe projection.",
       "type": "object",
       "additionalProperties": false,
       "properties": {
+        "initial_machine_state_key": { "$ref": "#/$defs/stableId" },
         "fault_instances": {
           "type": "array",
           "minItems": 1,
@@ -106,15 +152,31 @@
           }
         },
         "causal_edge_ids": {
+          "description": "Stable authored edge references retained for cross-reference compatibility.",
           "type": "array",
           "items": { "$ref": "#/$defs/entityRef" },
           "uniqueItems": true
+        },
+        "causal_edges": {
+          "description": "Instance-bound uses of authored causal edges. Multiple Fault instances may use the same authored edge.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "causal_edge_id": { "$ref": "#/$defs/entityRef" },
+              "cause_fault_instance_key": { "$ref": "#/$defs/stableId" },
+              "effect_fault_instance_key": { "$ref": "#/$defs/stableId" }
+            },
+            "required": ["causal_edge_id", "cause_fault_instance_key", "effect_fault_instance_key"]
+          },
+          "uniqueItems": true
         }
       },
-      "required": ["fault_instances", "causal_edge_ids"]
+      "required": ["initial_machine_state_key", "fault_instances", "causal_edge_ids", "causal_edges"]
     },
     "authored_evidence_outcomes": {
-      "description": "Server-selected authored results for eligible Test, Command, inspection, or system executions.",
+      "description": "Server-selected authored Evidence for eligible Test, Command, inspection, or system executions.",
       "type": "array",
       "minItems": 1,
       "items": {
@@ -127,24 +189,14 @@
           "eligible_machine_state_key": { "$ref": "#/$defs/stableId" },
           "candidate_effects": {
             "type": "array",
-            "items": {
-              "type": "object",
-              "additionalProperties": false,
-              "properties": {
-                "candidate_fault_id": { "$ref": "#/$defs/entityRef" },
-                "disposition": {
-                  "type": "string",
-                  "enum": ["SUPPORT", "CONTRADICT", "RULE_OUT", "CONFIRM", "INCONCLUSIVE"]
-                }
-              },
-              "required": ["candidate_fault_id", "disposition"]
-            },
+            "items": { "$ref": "#/$defs/candidateEffect" },
             "minItems": 1
           },
           "observation_id": {
             "type": ["string", "null"],
             "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
-          }
+          },
+          "public_summary": { "type": "string", "minLength": 1 }
         },
         "required": [
           "outcome_id",
@@ -152,7 +204,8 @@
           "target_ref",
           "eligible_machine_state_key",
           "candidate_effects",
-          "observation_id"
+          "observation_id",
+          "public_summary"
         ]
       }
     },
@@ -164,6 +217,7 @@
         "additionalProperties": false,
         "properties": {
           "requirement_id": { "$ref": "#/$defs/stableId" },
+          "target_fault_instance_key": { "$ref": "#/$defs/stableId" },
           "candidate_fault_id": { "$ref": "#/$defs/entityRef" },
           "classification": {
             "type": "string",
@@ -173,16 +227,35 @@
           "eligible_outcome_ids": {
             "type": "array",
             "items": { "$ref": "#/$defs/stableId" },
-            "uniqueItems": true,
-            "minItems": 1
+            "uniqueItems": true
+          },
+          "eligible_verification_outcome_ids": {
+            "description": "Completed authored Verify outcomes that may be cited as decisive Evidence for this Isolation. This keeps failed Verify as a typed Diagnosis input rather than inventing a second Evidence record.",
+            "type": "array",
+            "items": { "$ref": "#/$defs/stableId" },
+            "uniqueItems": true
           }
         },
+        "anyOf": [
+          {
+            "properties": {
+              "eligible_outcome_ids": { "minItems": 1 }
+            }
+          },
+          {
+            "properties": {
+              "eligible_verification_outcome_ids": { "minItems": 1 }
+            }
+          }
+        ],
         "required": [
           "requirement_id",
+          "target_fault_instance_key",
           "candidate_fault_id",
           "classification",
           "minimum_citations",
-          "eligible_outcome_ids"
+          "eligible_outcome_ids",
+          "eligible_verification_outcome_ids"
         ]
       }
     },
@@ -193,15 +266,61 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
+          "requirement_id": { "$ref": "#/$defs/stableId" },
+          "target_fault_instance_key": { "$ref": "#/$defs/stableId" },
           "fault_id": { "$ref": "#/$defs/entityRef" },
           "eligible_repair_procedure_ids": {
             "type": "array",
             "items": { "$ref": "#/$defs/entityRef" },
             "uniqueItems": true,
             "minItems": 1
+          },
+          "eligible_repair_outcome_ids": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/stableId" },
+            "uniqueItems": true,
+            "minItems": 1
           }
         },
-        "required": ["fault_id", "eligible_repair_procedure_ids"]
+        "required": [
+          "requirement_id",
+          "target_fault_instance_key",
+          "fault_id",
+          "eligible_repair_procedure_ids",
+          "eligible_repair_outcome_ids"
+        ]
+      }
+    },
+    "authored_repair_outcomes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "outcome_id": { "$ref": "#/$defs/stableId" },
+          "repair_procedure_id": { "$ref": "#/$defs/entityRef" },
+          "target_fault_instance_key": { "$ref": "#/$defs/stableId" },
+          "eligible_machine_state_key": { "$ref": "#/$defs/stableId" },
+          "resulting_machine_state_key": { "$ref": "#/$defs/stableId" },
+          "resolved_fault_instance_keys": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/stableId" },
+            "uniqueItems": true
+          },
+          "necessary_for_closure": { "type": "boolean" },
+          "public_summary": { "type": "string", "minLength": 1 }
+        },
+        "required": [
+          "outcome_id",
+          "repair_procedure_id",
+          "target_fault_instance_key",
+          "eligible_machine_state_key",
+          "resulting_machine_state_key",
+          "resolved_fault_instance_keys",
+          "necessary_for_closure",
+          "public_summary"
+        ]
       }
     },
     "verification_requirements": {
@@ -224,6 +343,43 @@
         ]
       }
     },
+    "authored_verification_outcomes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "outcome_id": { "$ref": "#/$defs/stableId" },
+          "validation_procedure_id": { "$ref": "#/$defs/entityRef" },
+          "requirement_id": { "$ref": "#/$defs/stableId" },
+          "eligible_machine_state_key": { "$ref": "#/$defs/stableId" },
+          "result": { "type": "string", "enum": ["PASS", "FAIL", "INCONCLUSIVE"] },
+          "resulting_machine_state_key": { "$ref": "#/$defs/stableId" },
+          "revealed_candidate_fault_ids": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/entityRef" },
+            "uniqueItems": true
+          },
+          "candidate_effects": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/candidateEffect" }
+          },
+          "public_summary": { "type": "string", "minLength": 1 }
+        },
+        "required": [
+          "outcome_id",
+          "validation_procedure_id",
+          "requirement_id",
+          "eligible_machine_state_key",
+          "result",
+          "resulting_machine_state_key",
+          "revealed_candidate_fault_ids",
+          "candidate_effects",
+          "public_summary"
+        ]
+      }
+    },
     "closure_requirements": {
       "type": "object",
       "additionalProperties": false,
@@ -232,16 +388,45 @@
         "include_cited_decisive_evidence": { "const": true },
         "include_every_repair_in_accepted_path": { "const": true },
         "include_every_failed_verify_in_accepted_path": { "const": true },
-        "include_all_current_passing_verifies": { "const": true }
+        "include_all_current_passing_verifies": { "const": true },
+        "required_fault_instance_keys": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/stableId" },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "required_isolation_requirement_ids": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/stableId" },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "required_repair_outcome_ids": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/stableId" },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "required_verification_requirement_ids": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/stableId" },
+          "uniqueItems": true,
+          "minItems": 1
+        }
       },
       "required": [
         "include_accepted_isolation",
         "include_cited_decisive_evidence",
         "include_every_repair_in_accepted_path",
         "include_every_failed_verify_in_accepted_path",
-        "include_all_current_passing_verifies"
+        "include_all_current_passing_verifies",
+        "required_fault_instance_keys",
+        "required_isolation_requirement_ids",
+        "required_repair_outcome_ids",
+        "required_verification_requirement_ids"
       ]
     },
+    "generation_provenance": { "$ref": "#/$defs/generationProvenance" },
     "educational_objectives": {
       "type": "array",
       "items": { "type": "string" }
@@ -259,7 +444,10 @@
     "authored_evidence_outcomes",
     "isolation_requirements",
     "repair_requirements",
+    "authored_repair_outcomes",
     "verification_requirements",
-    "closure_requirements"
+    "authored_verification_outcomes",
+    "closure_requirements",
+    "generation_provenance"
   ]
 }

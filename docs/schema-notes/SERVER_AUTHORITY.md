@@ -18,6 +18,8 @@ For every `ActionRequest`, the server validates:
 
 A stale request is rejected before payment. It spends no Action or utility token, moves no card, and creates no Worklog/event record. An unsupported Commit Isolation is different: the intent is accepted, one Action is spent, a public placeholder is created, and the response is only `ISOLATION_NOT_SUPPORTED`.
 
+The engine's indexed Match aggregate, Builder attempts, idempotency registry, seeded random counters, complete Ticket snapshots, and causal contribution eligibility remain private server working state. Clients and computer Players cross only the authenticated intent/result boundary plus audience-safe public/private projections. A later persistence serializer must map that aggregate deliberately to a versioned save contract; returning the working object is never a shortcut.
+
 Public candidates are discoverable possibilities, not an exhaustive mirror of causal truth. A hidden causal Fault may be revealed into that set later, while Repair checks continue to use server-only truth.
 
 ## Authoritative secrets
@@ -41,11 +43,15 @@ Player-safe payload validation is recursive. Moving a forbidden field beneath a 
 
 Every accepted paid action also appends a public Worklog placeholder with the actor, Ticket, source name, public target surface, Action cost, and action time. The placeholder precedes other public events produced by that result, including Search and Refresh completion. Concealed targets/results remain in their authorized event. Document Live later publishes an eligible result by appending a publication event and enriching the public Worklog projection with its source links, publication time, and publisher. The source event is never overwritten or widened.
 
+When documented Evidence is cited in a later Isolation, the public publication is the authorization bridge: the server follows its immutable source-result link to test the authored outcome, but it does not reclassify the original private/team Evidence event as public. Legal-intent projections use the same rule, so a computer Player can act on published reasoning without receiving the concealed source payload.
+
 Successful and failed Verify summaries are public immediately because they change eligibility. A failed or inconclusive result and any stale pass remain in authoritative history when the Ticket returns to Diagnosis.
 
 ## Closure transaction
 
 After current Verify requirements pass, the server opens the closure-resolution window before automatic end-turn. A valid zero-Action bundle is serialized once and completes the full frozen transaction before any terminal result is evaluated. Closure preserves every Repair in the accepted path and accepts decisive Evidence only from the current accepted Isolation's citations. The closure event records statistical attribution but is not a Service Point source. Causal score records settle the eligible one-point Isolation and necessary-Repair slots and retain their contributors.
+
+Bundle identifier equality is not sufficient by itself. Before scoring, the server revalidates that the accepted Isolation targets, authored Repair outcome identities, and current passing Verify requirements exactly satisfy the Ticket's closure contract. A malformed or incomplete path rejects before any score, archive, resource grant, queue change, or terminal result.
 
 ## Reconnect
 

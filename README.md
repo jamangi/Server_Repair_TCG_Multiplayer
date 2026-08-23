@@ -61,13 +61,17 @@ This repository currently contains:
 - approved and unresolved game rules;
 - starter technical catalogs and recommended match models;
 - synchronized draft domain and runtime schemas with valid and invalid examples;
+- a version-pinned server gameplay pack with 11 typed Card Definitions, legal 30-card deck snapshots, and three complete storage/RAID Repair Tickets;
+- a dependency-free deterministic engine for authenticated intents, private/team/public Evidence, exact Isolation-to-Repair gates, failed Verify returns, Documentation, atomic closure, scoring, queue reconciliation, and offline terminal results;
+- a constraint-driven deterministic Ticket Builder with complete-or-none validation, structured diagnostics, and separately audited fallback attempts;
+- seat-safe cooperative and competitive computer policies plus a committed 22-run reproducible automated-game campaign;
 - a working static Domain Viewer;
 - a versioned case-study research system with a completed pilot spanning several troubleshooting subsystems;
 - a provisional story foundation with a fictional company, campaign frame, ensemble, voice guide, and story-derived gameplay candidates;
 - a non-authoritative, replayable candidate-flow package that combines temporary rules, exact card/deck/Ticket fixtures, complete matches, and landing-to-logout campaign and multiplayer journeys;
 - provisional UI planning and original wireframes for the future playable application.
 
-It does not yet contain a playable game engine or multiplayer client. The first-version rules foundation is frozen; schemas remain draft implementation contracts, and recommended models remain non-normative architecture guidance.
+The repository now contains a playable rules-engine foundation, not a player-facing application. It does not yet contain a multiplayer transport/server, Room or account runtime, campaign runtime, or playable client. The first-version rules foundation is frozen; schemas remain draft implementation contracts, and recommended models remain non-normative architecture guidance.
 
 ## Design source of truth
 
@@ -91,6 +95,9 @@ If implementation exposes a new rule question or pressure against frozen behavio
 - [`docs/tasks/`](docs/tasks/) — scoped implementation and research contracts, with [`INDEX.md`](docs/tasks/INDEX.md) identifying the current task state.
 - [`docs/ui-plan/`](docs/ui-plan/) — provisional application structure and original visual wireframes.
 - [`viewer/`](viewer/) — dependency-free static browser for reusable domain objects; it is not the multiplayer game client.
+- [`content/gameplay-v1/`](content/gameplay-v1/) — the first immutable server-side gameplay snapshot: selected domain inputs, typed Cards, deck snapshots, and authored Ticket templates. It is deliberately separate from the browser-delivered Viewer pack.
+- [`src/`](src/) — the deterministic authoritative engine, Ticket Builder/solvability oracle, and offline simulation/reporting modules.
+- [`automated_games/`](automated_games/) — compact committed campaign settings, match rows, recomputed summaries, and exception-only diagnostics.
 - [`schemas/`](schemas/) and [`examples/`](examples/) — draft domain and runtime contracts that will evolve with approved rules. Start with the [`schema package README`](schemas/README.md) for the domain/runtime boundary and file guide.
 - [`docs/improvement_analysis/`](docs/improvement_analysis/) — reviewable implementation and contract proposals that do not change frozen rules or live schemas until approved.
 
@@ -101,6 +108,24 @@ Story documents provide narrative context for the gameplay but do not override f
 Candidate gameplay flows choose one internally coherent set of temporary answers only to make examples replayable. Their `EX1-*` identifiers, card balance, Ticket outcomes, account state, screens, animation, and full journeys remain fixtures. Any idea worth adopting must return to the normal design-decision, content, schema, story, validation, and implementation lifecycle.
 
 The future playable application is intended to remain separate from the Domain Viewer. The current UI plan proposes a React client with a stable application shell, social room browser, room creation and lobby flows, cosmetic technician identity, honor-badge recognition, and match synchronization. Motion for React (formerly Framer Motion) is proposed for expressive, state-driven game and interface animation while authoritative rules remain outside the UI.
+
+## Gameplay foundation
+
+The TASK-009 vertical slice runs entirely in Node and sends every computer decision through the same private Player projection and authenticated legal-intent boundary intended for a future client. Fixed and generated Tickets use the same engine and solvability oracle. Repeating one campaign input compares its Ticket snapshot, replay digest, outcome, score, and turn count.
+
+Run the full behavior suite:
+
+```powershell
+node --test tests/*.mjs
+```
+
+Independently recompute and verify the committed campaign report:
+
+```powershell
+node tools/run-automated-games.mjs --verify-report automated_games/task-009-foundation-v1
+```
+
+The committed report covers one-, two-, three-, and four-seat cooperative/competitive settings; fixed and generated Ticket sources; finite and replenishing queues; mixed policies; and deliberate Builder-unsatisfiable, stalemate, invalidation, policy-stall, and simulation-cap fixtures.
 
 ## Domain Viewer
 

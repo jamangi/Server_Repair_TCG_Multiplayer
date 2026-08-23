@@ -1,0 +1,822 @@
+{
+  "campaign_id": "task-009-foundation-v1",
+  "harness_version": "automated-harness-v1",
+  "setting_groups": [
+    {
+      "caps": {
+        "closures": 12,
+        "policy_stall_consecutive_passes": 8,
+        "turns": 80
+      },
+      "collaboration_mode": "cooperative",
+      "description": "One cooperative computer clears one fixed finite Ticket.",
+      "fixture_kind": "ORDINARY",
+      "legal_card_pool_ids": [
+        "deck.core.storage_foundation"
+      ],
+      "match_configuration": {
+        "max_refresh_tokens": 1,
+        "max_search_tokens": 5,
+        "queue_minimum": 0,
+        "starting_refresh_tokens": 1,
+        "starting_search_tokens": 3,
+        "starting_ticket_count": 1,
+        "termination_score": -1,
+        "ticket_search_tokens": 1
+      },
+      "seats": [
+        {
+          "controller_type": "computer",
+          "deck_id": "deck.core.storage_foundation",
+          "player_id": "player_a",
+          "policy_id": "methodical-seat-safe-v1",
+          "starting_service_points": 0
+        }
+      ],
+      "seeds": [
+        "1001",
+        "1002"
+      ],
+      "setting_group_id": "coop-fixed-finite-solo-methodical",
+      "ticket_source": {
+        "content_version": "core-ticket-templates-v1",
+        "source_type": "fixed",
+        "ticket_definition_ids": [
+          "ticket.storage.loose_cable"
+        ]
+      },
+      "virtual_clock": {
+        "epoch": "2042-01-01T00:00:00.000Z",
+        "seconds_per_decision": 5
+      }
+    },
+    {
+      "caps": {
+        "closures": 12,
+        "policy_stall_consecutive_passes": 8,
+        "turns": 80
+      },
+      "collaboration_mode": "cooperative",
+      "description": "Two cooperative computers clear one deterministically generated finite Ticket.",
+      "fixture_kind": "ORDINARY",
+      "legal_card_pool_ids": [
+        "deck.core.storage_foundation"
+      ],
+      "match_configuration": {
+        "max_refresh_tokens": 1,
+        "max_search_tokens": 5,
+        "queue_minimum": 0,
+        "starting_refresh_tokens": 1,
+        "starting_search_tokens": 3,
+        "starting_ticket_count": 1,
+        "termination_score": -1,
+        "ticket_search_tokens": 1
+      },
+      "seats": [
+        {
+          "controller_type": "computer",
+          "deck_id": "deck.core.storage_foundation",
+          "player_id": "player_a",
+          "policy_id": "publication-seat-safe-v1",
+          "starting_service_points": 0
+        },
+        {
+          "controller_type": "computer",
+          "deck_id": "deck.core.storage_foundation",
+          "player_id": "player_b",
+          "policy_id": "methodical-seat-safe-v1",
+          "starting_service_points": 0
+        }
+      ],
+      "seeds": [
+        "2001",
+        "2002"
+      ],
+      "setting_group_id": "coop-generated-finite-pair-publication",
+      "ticket_source": {
+        "builder_configuration": {
+          "active_causal_fingerprints": [],
+          "allow_duplicate_causal_fingerprints": false,
+          "allowed_domain_ids": [],
+          "allowed_tags": [],
+          "authored_difficulty_bounds": {
+            "maximum": 4,
+            "minimum": 1
+          },
+          "card_catalog_version": "core-card-catalog-v1",
+          "causal_depth_bounds": {
+            "maximum": 1,
+            "minimum": 0
+          },
+          "configuration_version": "ticket-builder-v1",
+          "content_version": "core-ticket-templates-v1",
+          "domain_content_version": "core-domain-snapshot-v1",
+          "entity_type": "ticket_builder_configuration",
+          "excluded_domain_ids": [],
+          "excluded_tags": [],
+          "fallback_configuration_id": null,
+          "fault_count_bounds": {
+            "maximum": 3,
+            "minimum": 1
+          },
+          "generation_index_start": 0,
+          "generator_version": "ticket-builder-v1",
+          "guaranteed_categories": [],
+          "id": "builder.coop.generated.finite",
+          "inbound_branching_bounds": {
+            "maximum": 2,
+            "minimum": 0
+          },
+          "legal_card_definition_ids": [
+            "card.core.visual_inspection",
+            "card.core.raid_status_inspection",
+            "card.core.raid_console_snapshot",
+            "card.core.drive_health_test",
+            "card.core.storage_device_inventory",
+            "card.core.smartctl_drive_health",
+            "card.core.replace_raid_member",
+            "card.core.rebuild_raid_array",
+            "card.core.reseat_storage_cable",
+            "card.core.raid_health_verification",
+            "card.core.storage_detection_verification"
+          ],
+          "outbound_branching_bounds": {
+            "maximum": 2,
+            "minimum": 0
+          },
+          "progressive_difficulty_profile": {
+            "bands": [
+              {
+                "end_generated_index": 0,
+                "maximum": 4,
+                "minimum": 1,
+                "start_generated_index": 0,
+                "target": 2
+              }
+            ],
+            "explicit_ceiling": 4,
+            "profile_id": "progressive.simulation.foundation",
+            "profile_version": "progressive-simulation-v1"
+          },
+          "requested_ticket_count": 1,
+          "required_actionable_fault_count_bounds": {
+            "maximum": 2,
+            "minimum": 1
+          },
+          "required_teaching_beats": [],
+          "scenario_or_mode_context": "COOPERATIVE",
+          "seed": "match-seed"
+        },
+        "source_type": "generated"
+      },
+      "virtual_clock": {
+        "epoch": "2042-01-01T00:00:00.000Z",
+        "seconds_per_decision": 5
+      }
+    },
+    {
+      "caps": {
+        "closures": 12,
+        "policy_stall_consecutive_passes": 8,
+        "turns": 80
+      },
+      "collaboration_mode": "cooperative",
+      "description": "Four cooperative computers exercise fixed supply replenishment and mixed policies.",
+      "fixture_kind": "ORDINARY",
+      "legal_card_pool_ids": [
+        "deck.core.storage_foundation"
+      ],
+      "match_configuration": {
+        "max_refresh_tokens": 1,
+        "max_search_tokens": 5,
+        "queue_minimum": 1,
+        "starting_refresh_tokens": 1,
+        "starting_search_tokens": 3,
+        "starting_ticket_count": 1,
+        "termination_score": 2,
+        "ticket_search_tokens": 1
+      },
+      "seats": [
+        {
+          "controller_type": "computer",
+          "deck_id": "deck.core.storage_foundation",
+          "player_id": "player_a",
+          "policy_id": "methodical-seat-safe-v1",
+          "starting_service_points": 0
+        },
+        {
+          "controller_type": "computer",
+          "deck_id": "deck.core.storage_foundation",
+          "player_id": "player_b",
+          "policy_id": "publication-seat-safe-v1",
+          "starting_service_points": 0
+        },
+        {
+          "controller_type": "computer",
+          "deck_id": "deck.core.storage_foundation",
+          "player_id": "player_c",
+          "policy_id": "scripted-cooperative-v1",
+          "starting_service_points": 0
+        },
+        {
+          "controller_type": "computer",
+          "deck_id": "deck.core.storage_foundation",
+          "player_id": "player_d",
+          "policy_id": "methodical-seat-safe-v1",
+          "starting_service_points": 0
+        }
+      ],
+      "seeds": [
+        "3001",
+        "3002"
+      ],
+      "setting_group_id": "coop-fixed-replenishing-four-mixed",
+      "ticket_source": {
+        "content_version": "core-ticket-templates-v1",
+        "source_type": "fixed",
+        "ticket_definition_ids": [
+          "ticket.storage.loose_cable",
+          "ticket.storage.single_sas_member"
+        ]
+      },
+      "virtual_clock": {
+        "epoch": "2042-01-01T00:00:00.000Z",
+        "seconds_per_decision": 5
+      }
+    },
+    {
+      "caps": {
+        "closures": 12,
+        "policy_stall_consecutive_passes": 8,
+        "turns": 120
+      },
+      "collaboration_mode": "competitive",
+      "description": "Two competitive computers exercise private Evidence and the failed-Verify return path.",
+      "fixture_kind": "ORDINARY",
+      "legal_card_pool_ids": [
+        "deck.core.storage_foundation"
+      ],
+      "match_configuration": {
+        "max_refresh_tokens": 1,
+        "max_search_tokens": 5,
+        "queue_minimum": 0,
+        "starting_refresh_tokens": 1,
+        "starting_search_tokens": 3,
+        "starting_ticket_count": 1,
+        "termination_score": -1,
+        "ticket_search_tokens": 1
+      },
+      "seats": [
+        {
+          "controller_type": "computer",
+          "deck_id": "deck.core.storage_foundation",
+          "player_id": "player_a",
+          "policy_id": "scripted-competitive-v1",
+          "starting_service_points": 0
+        },
+        {
+          "controller_type": "computer",
+          "deck_id": "deck.core.storage_foundation",
+          "player_id": "player_b",
+          "policy_id": "methodical-seat-safe-v1",
+          "starting_service_points": 0
+        }
+      ],
+      "seeds": [
+        "4001",
+        "4002"
+      ],
+      "setting_group_id": "competitive-fixed-finite-pair-scripted",
+      "ticket_source": {
+        "content_version": "core-ticket-templates-v1",
+        "source_type": "fixed",
+        "ticket_definition_ids": [
+          "ticket.storage.member_then_array"
+        ]
+      },
+      "virtual_clock": {
+        "epoch": "2042-01-01T00:00:00.000Z",
+        "seconds_per_decision": 5
+      }
+    },
+    {
+      "caps": {
+        "closures": 12,
+        "policy_stall_consecutive_passes": 8,
+        "turns": 120
+      },
+      "collaboration_mode": "cooperative",
+      "description": "Two cooperative computers exercise the scripted failed-Verify return-to-Diagnosis path.",
+      "fixture_kind": "ORDINARY",
+      "legal_card_pool_ids": [
+        "deck.core.storage_foundation"
+      ],
+      "match_configuration": {
+        "max_refresh_tokens": 1,
+        "max_search_tokens": 5,
+        "queue_minimum": 0,
+        "starting_refresh_tokens": 1,
+        "starting_search_tokens": 3,
+        "starting_ticket_count": 1,
+        "termination_score": -1,
+        "ticket_search_tokens": 1
+      },
+      "seats": [
+        {
+          "controller_type": "computer",
+          "deck_id": "deck.core.storage_foundation",
+          "player_id": "player_a",
+          "policy_id": "scripted-cooperative-v1",
+          "starting_service_points": 0
+        },
+        {
+          "controller_type": "computer",
+          "deck_id": "deck.core.storage_foundation",
+          "player_id": "player_b",
+          "policy_id": "publication-seat-safe-v1",
+          "starting_service_points": 0
+        }
+      ],
+      "seeds": [
+        "4501",
+        "4502"
+      ],
+      "setting_group_id": "coop-fixed-failed-verify-scripted",
+      "ticket_source": {
+        "content_version": "core-ticket-templates-v1",
+        "source_type": "fixed",
+        "ticket_definition_ids": [
+          "ticket.storage.member_then_array"
+        ]
+      },
+      "virtual_clock": {
+        "epoch": "2042-01-01T00:00:00.000Z",
+        "seconds_per_decision": 5
+      }
+    },
+    {
+      "caps": {
+        "closures": 12,
+        "policy_stall_consecutive_passes": 8,
+        "turns": 80
+      },
+      "collaboration_mode": "competitive",
+      "description": "Three competitive computers use generated supply, replenishment, and mixed policies.",
+      "fixture_kind": "ORDINARY",
+      "legal_card_pool_ids": [
+        "deck.core.storage_foundation"
+      ],
+      "match_configuration": {
+        "max_refresh_tokens": 1,
+        "max_search_tokens": 5,
+        "queue_minimum": 1,
+        "starting_refresh_tokens": 1,
+        "starting_search_tokens": 3,
+        "starting_ticket_count": 1,
+        "termination_score": 1,
+        "ticket_search_tokens": 1
+      },
+      "seats": [
+        {
+          "controller_type": "computer",
+          "deck_id": "deck.core.storage_foundation",
+          "player_id": "player_a",
+          "policy_id": "methodical-seat-safe-v1",
+          "starting_service_points": 0
+        },
+        {
+          "controller_type": "computer",
+          "deck_id": "deck.core.storage_foundation",
+          "player_id": "player_b",
+          "policy_id": "publication-seat-safe-v1",
+          "starting_service_points": 0
+        },
+        {
+          "controller_type": "computer",
+          "deck_id": "deck.core.storage_foundation",
+          "player_id": "player_c",
+          "policy_id": "scripted-competitive-v1",
+          "starting_service_points": 0
+        }
+      ],
+      "seeds": [
+        "5001",
+        "5002"
+      ],
+      "setting_group_id": "competitive-generated-replenishing-three-mixed",
+      "ticket_source": {
+        "builder_configuration": {
+          "active_causal_fingerprints": [],
+          "allow_duplicate_causal_fingerprints": false,
+          "allowed_domain_ids": [],
+          "allowed_tags": [],
+          "authored_difficulty_bounds": {
+            "maximum": 4,
+            "minimum": 1
+          },
+          "card_catalog_version": "core-card-catalog-v1",
+          "causal_depth_bounds": {
+            "maximum": 1,
+            "minimum": 0
+          },
+          "configuration_version": "ticket-builder-v1",
+          "content_version": "core-ticket-templates-v1",
+          "domain_content_version": "core-domain-snapshot-v1",
+          "entity_type": "ticket_builder_configuration",
+          "excluded_domain_ids": [],
+          "excluded_tags": [],
+          "fallback_configuration_id": null,
+          "fault_count_bounds": {
+            "maximum": 3,
+            "minimum": 1
+          },
+          "generation_index_start": 0,
+          "generator_version": "ticket-builder-v1",
+          "guaranteed_categories": [],
+          "id": "builder.competitive.generated.replenishing",
+          "inbound_branching_bounds": {
+            "maximum": 2,
+            "minimum": 0
+          },
+          "legal_card_definition_ids": [
+            "card.core.visual_inspection",
+            "card.core.raid_status_inspection",
+            "card.core.raid_console_snapshot",
+            "card.core.drive_health_test",
+            "card.core.storage_device_inventory",
+            "card.core.smartctl_drive_health",
+            "card.core.replace_raid_member",
+            "card.core.rebuild_raid_array",
+            "card.core.reseat_storage_cable",
+            "card.core.raid_health_verification",
+            "card.core.storage_detection_verification"
+          ],
+          "outbound_branching_bounds": {
+            "maximum": 2,
+            "minimum": 0
+          },
+          "progressive_difficulty_profile": {
+            "bands": [
+              {
+                "end_generated_index": 1,
+                "maximum": 4,
+                "minimum": 1,
+                "start_generated_index": 0,
+                "target": 2
+              }
+            ],
+            "explicit_ceiling": 4,
+            "profile_id": "progressive.simulation.foundation",
+            "profile_version": "progressive-simulation-v1"
+          },
+          "requested_ticket_count": 2,
+          "required_actionable_fault_count_bounds": {
+            "maximum": 2,
+            "minimum": 1
+          },
+          "required_teaching_beats": [],
+          "scenario_or_mode_context": "COMPETITIVE",
+          "seed": "match-seed"
+        },
+        "source_type": "generated"
+      },
+      "virtual_clock": {
+        "epoch": "2042-01-01T00:00:00.000Z",
+        "seconds_per_decision": 5
+      }
+    },
+    {
+      "caps": {
+        "closures": 12,
+        "policy_stall_consecutive_passes": 8,
+        "turns": 80
+      },
+      "collaboration_mode": "cooperative",
+      "description": "An impossible required tag proves Builder failure returns no partial Ticket.",
+      "fixture_kind": "BUILDER_UNSATISFIABLE",
+      "legal_card_pool_ids": [
+        "deck.core.storage_foundation"
+      ],
+      "match_configuration": {
+        "max_refresh_tokens": 1,
+        "max_search_tokens": 5,
+        "queue_minimum": 0,
+        "starting_refresh_tokens": 1,
+        "starting_search_tokens": 3,
+        "starting_ticket_count": 1,
+        "termination_score": -1,
+        "ticket_search_tokens": 1
+      },
+      "seats": [
+        {
+          "controller_type": "computer",
+          "deck_id": "deck.core.storage_foundation",
+          "player_id": "player_a",
+          "policy_id": "methodical-seat-safe-v1",
+          "starting_service_points": 0
+        }
+      ],
+      "seeds": [
+        "6001",
+        "6002"
+      ],
+      "setting_group_id": "fixture-builder-unsatisfiable",
+      "ticket_source": {
+        "builder_configuration": {
+          "active_causal_fingerprints": [],
+          "allow_duplicate_causal_fingerprints": false,
+          "allowed_domain_ids": [],
+          "allowed_tags": [
+            "fixture.no_eligible_template"
+          ],
+          "authored_difficulty_bounds": {
+            "maximum": 4,
+            "minimum": 1
+          },
+          "card_catalog_version": "core-card-catalog-v1",
+          "causal_depth_bounds": {
+            "maximum": 1,
+            "minimum": 0
+          },
+          "configuration_version": "ticket-builder-v1",
+          "content_version": "core-ticket-templates-v1",
+          "domain_content_version": "core-domain-snapshot-v1",
+          "entity_type": "ticket_builder_configuration",
+          "excluded_domain_ids": [],
+          "excluded_tags": [],
+          "fallback_configuration_id": null,
+          "fault_count_bounds": {
+            "maximum": 3,
+            "minimum": 1
+          },
+          "generation_index_start": 0,
+          "generator_version": "ticket-builder-v1",
+          "guaranteed_categories": [],
+          "id": "builder.fixture.unsatisfiable",
+          "inbound_branching_bounds": {
+            "maximum": 2,
+            "minimum": 0
+          },
+          "legal_card_definition_ids": [
+            "card.core.visual_inspection",
+            "card.core.raid_status_inspection",
+            "card.core.raid_console_snapshot",
+            "card.core.drive_health_test",
+            "card.core.storage_device_inventory",
+            "card.core.smartctl_drive_health",
+            "card.core.replace_raid_member",
+            "card.core.rebuild_raid_array",
+            "card.core.reseat_storage_cable",
+            "card.core.raid_health_verification",
+            "card.core.storage_detection_verification"
+          ],
+          "outbound_branching_bounds": {
+            "maximum": 2,
+            "minimum": 0
+          },
+          "progressive_difficulty_profile": {
+            "bands": [
+              {
+                "end_generated_index": 0,
+                "maximum": 4,
+                "minimum": 1,
+                "start_generated_index": 0,
+                "target": 2
+              }
+            ],
+            "explicit_ceiling": 4,
+            "profile_id": "progressive.simulation.foundation",
+            "profile_version": "progressive-simulation-v1"
+          },
+          "requested_ticket_count": 1,
+          "required_actionable_fault_count_bounds": {
+            "maximum": 2,
+            "minimum": 1
+          },
+          "required_teaching_beats": [],
+          "scenario_or_mode_context": "SIMULATION",
+          "seed": "match-seed"
+        },
+        "source_type": "generated"
+      },
+      "virtual_clock": {
+        "epoch": "2042-01-01T00:00:00.000Z",
+        "seconds_per_decision": 5
+      }
+    },
+    {
+      "caps": {
+        "closures": 12,
+        "policy_stall_consecutive_passes": null,
+        "turns": 120
+      },
+      "collaboration_mode": "cooperative",
+      "description": "A legal alternate deck omits the only matching Repair, so the fixed Ticket cannot reach closure.",
+      "fixture_kind": "PROVEN_STALEMATE",
+      "legal_card_pool_ids": [
+        "deck.fixture.storage.no_cable_repair"
+      ],
+      "match_configuration": {
+        "max_refresh_tokens": 0,
+        "max_search_tokens": 0,
+        "queue_minimum": 0,
+        "starting_refresh_tokens": 0,
+        "starting_search_tokens": 0,
+        "starting_ticket_count": 1,
+        "termination_score": -1,
+        "ticket_search_tokens": 1
+      },
+      "seats": [
+        {
+          "controller_type": "computer",
+          "deck_id": "deck.fixture.storage.no_cable_repair",
+          "player_id": "player_a",
+          "policy_id": "methodical-seat-safe-v1",
+          "starting_service_points": 0
+        }
+      ],
+      "seeds": [
+        "7001",
+        "7002"
+      ],
+      "setting_group_id": "fixture-proven-stalemate",
+      "ticket_source": {
+        "content_version": "core-ticket-templates-v1",
+        "source_type": "fixed",
+        "ticket_definition_ids": [
+          "ticket.storage.loose_cable"
+        ]
+      },
+      "virtual_clock": {
+        "epoch": "2042-01-01T00:00:00.000Z",
+        "seconds_per_decision": 5
+      }
+    },
+    {
+      "caps": {
+        "closures": 12,
+        "policy_stall_consecutive_passes": 8,
+        "turns": 80
+      },
+      "collaboration_mode": "cooperative",
+      "description": "A replenishing queue exhausts its pinned fixed supply and invalidates after closure.",
+      "fixture_kind": "ADMIN_INVALIDATION",
+      "legal_card_pool_ids": [
+        "deck.core.storage_foundation"
+      ],
+      "match_configuration": {
+        "max_refresh_tokens": 1,
+        "max_search_tokens": 5,
+        "queue_minimum": 1,
+        "starting_refresh_tokens": 1,
+        "starting_search_tokens": 3,
+        "starting_ticket_count": 1,
+        "termination_score": -1,
+        "ticket_search_tokens": 1
+      },
+      "seats": [
+        {
+          "controller_type": "computer",
+          "deck_id": "deck.core.storage_foundation",
+          "player_id": "player_a",
+          "policy_id": "methodical-seat-safe-v1",
+          "starting_service_points": 0
+        }
+      ],
+      "seeds": [
+        "8001",
+        "8002"
+      ],
+      "setting_group_id": "fixture-admin-invalidation",
+      "ticket_source": {
+        "content_version": "core-ticket-templates-v1",
+        "source_type": "fixed",
+        "ticket_definition_ids": [
+          "ticket.storage.loose_cable"
+        ]
+      },
+      "virtual_clock": {
+        "epoch": "2042-01-01T00:00:00.000Z",
+        "seconds_per_decision": 5
+      }
+    },
+    {
+      "caps": {
+        "closures": 12,
+        "policy_stall_consecutive_passes": null,
+        "turns": 3
+      },
+      "collaboration_mode": "cooperative",
+      "description": "A pass-only policy reaches an offline safety cap without a gameplay winner.",
+      "fixture_kind": "SIMULATION_CAP",
+      "legal_card_pool_ids": [
+        "deck.core.storage_foundation"
+      ],
+      "match_configuration": {
+        "max_refresh_tokens": 1,
+        "max_search_tokens": 5,
+        "queue_minimum": 0,
+        "starting_refresh_tokens": 1,
+        "starting_search_tokens": 3,
+        "starting_ticket_count": 1,
+        "termination_score": -1,
+        "ticket_search_tokens": 1
+      },
+      "seats": [
+        {
+          "controller_type": "computer",
+          "deck_id": "deck.core.storage_foundation",
+          "player_id": "player_a",
+          "policy_id": "pass-only-fixture-v1",
+          "starting_service_points": 0
+        }
+      ],
+      "seeds": [
+        "9001",
+        "9002"
+      ],
+      "setting_group_id": "fixture-simulation-cap",
+      "ticket_source": {
+        "content_version": "core-ticket-templates-v1",
+        "source_type": "fixed",
+        "ticket_definition_ids": [
+          "ticket.storage.member_then_array"
+        ]
+      },
+      "virtual_clock": {
+        "epoch": "2042-01-01T00:00:00.000Z",
+        "seconds_per_decision": 5
+      }
+    },
+    {
+      "caps": {
+        "closures": 12,
+        "policy_stall_consecutive_passes": 2,
+        "turns": 20
+      },
+      "collaboration_mode": "competitive",
+      "description": "Pass-only competitive computers expose a policy stall while legal progress exists.",
+      "fixture_kind": "POLICY_STALL",
+      "legal_card_pool_ids": [
+        "deck.core.storage_foundation"
+      ],
+      "match_configuration": {
+        "max_refresh_tokens": 1,
+        "max_search_tokens": 5,
+        "queue_minimum": 0,
+        "starting_refresh_tokens": 1,
+        "starting_search_tokens": 3,
+        "starting_ticket_count": 1,
+        "termination_score": -1,
+        "ticket_search_tokens": 1
+      },
+      "seats": [
+        {
+          "controller_type": "computer",
+          "deck_id": "deck.core.storage_foundation",
+          "player_id": "player_a",
+          "policy_id": "pass-only-fixture-v1",
+          "starting_service_points": 0
+        },
+        {
+          "controller_type": "computer",
+          "deck_id": "deck.core.storage_foundation",
+          "player_id": "player_b",
+          "policy_id": "pass-only-fixture-v1",
+          "starting_service_points": 0
+        }
+      ],
+      "seeds": [
+        "10001",
+        "10002"
+      ],
+      "setting_group_id": "fixture-policy-stall",
+      "ticket_source": {
+        "content_version": "core-ticket-templates-v1",
+        "source_type": "fixed",
+        "ticket_definition_ids": [
+          "ticket.storage.loose_cable"
+        ]
+      },
+      "virtual_clock": {
+        "epoch": "2042-01-01T00:00:00.000Z",
+        "seconds_per_decision": 5
+      }
+    }
+  ],
+  "version_pins": {
+    "card_catalog_version": "core-card-catalog-v1",
+    "domain_content_version": "core-domain-snapshot-v1",
+    "generator_version": "ticket-builder-v1",
+    "harness_version": "automated-harness-v1",
+    "policy_versions": [
+      "methodical-seat-safe-v1",
+      "publication-seat-safe-v1",
+      "scripted-cooperative-v1",
+      "scripted-competitive-v1",
+      "pass-only-fixture-v1"
+    ],
+    "ruleset_version": "first-version-v1",
+    "ticket_content_version": "core-ticket-templates-v1"
+  }
+}

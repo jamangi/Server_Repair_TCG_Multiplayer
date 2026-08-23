@@ -13,7 +13,7 @@ JSON Schema validates object shape. Cross-file references, causal acyclicity, Ti
 
 | Schema | Authored responsibility |
 | --- | --- |
-| [`card.schema.json`](domain/card.schema.json) | A playable or reference card definition: gameplay identity, presentation, cost, technical references, and structured effects. It is not one physical copy in a match. |
+| [`card.schema.json`](domain/card.schema.json) | An immutable playable definition with presentation, explicit technical references, cost, and a discriminated executable play contract. It is not one physical copy in a match. |
 | [`command.schema.json`](domain/command.schema.json) | A command's platform, syntax, purpose, capabilities, and related Tests. |
 | [`component.schema.json`](domain/component.schema.json) | A hardware/component concept, including subsystem, interfaces, compatibility, and serviceability traits. |
 | [`fault.schema.json`](domain/fault.schema.json) | A reusable Fault concept and its relationships to Symptoms, Components, Tests, Repairs, and Verification. |
@@ -23,6 +23,8 @@ JSON Schema validates object shape. Cross-file references, causal acyclicity, Ti
 | [`repair_ticket.schema.json`](domain/repair_ticket.schema.json) | A complete authored troubleshooting scenario: public candidates, server-only causal truth, authored Evidence outcomes, Isolation/Repair/Verify requirements, and closure requirements. Fixed fixtures and Ticket Builder output share this contract. |
 | [`symptom.schema.json`](domain/symptom.schema.json) | An observable symptom and its authored associations. A public symptom is not proof of a hidden Fault. |
 | [`test.schema.json`](domain/test.schema.json) | An Evidence-producing diagnostic definition and its targets, requirements, strength, and Action cost. Tests change Knowledge State, not machine state. |
+| [`ticket_builder_configuration.schema.json`](domain/ticket_builder_configuration.schema.json) | One immutable, version-pinned set of hard generation constraints, duplicate policy, legal card pool, seed, and optional explicit fallback reference. |
+| [`ticket_builder_result.schema.json`](domain/ticket_builder_result.schema.json) | The complete server-only audit of a primary and optional fallback Builder attempt, including structured diagnostics or complete Ticket snapshots—never partial output. |
 | [`tool.schema.json`](domain/tool.schema.json) | A technical Tool and its capabilities. Tools are unrelated to the removed account Equipment system. |
 | [`validation_procedure.schema.json`](domain/validation_procedure.schema.json) | A post-Repair Verification procedure, its success conditions, targets, requirements, and Action cost. A pass does not close a Ticket by itself. |
 
@@ -34,7 +36,7 @@ See [`DOMAIN_SCHEMAS.md`](../docs/schema-notes/DOMAIN_SCHEMAS.md) for the author
 | --- | --- |
 | [`action_request.schema.json`](runtime/action_request.schema.json) | A revision-bound client intent with an exact actor, action/card, Ticket, and target. |
 | [`action_result.schema.json`](runtime/action_result.schema.json) | A player-safe accepted or rejected result, payment outcome, projected events, and resolution-window changes. |
-| [`card_instance.schema.json`](runtime/card_instance.schema.json) | One match-time copy of a Card Definition. It should contain identity and mutable placement/state only, never copied rules text or art. Its current limitations are analyzed in [`card-contract-and-build-order.md`](../docs/improvement_analysis/card-contract-and-build-order.md). |
+| [`card_instance.schema.json`](runtime/card_instance.schema.json) | One server-owned match copy of a pinned Card Definition. It contains identity and typed placement/state only, never copied rules text, art, generic counters, or client-authoritative mutations. |
 | [`fault_state.schema.json`](runtime/fault_state.schema.json) | Server-only truth and machine state for one Fault instance in one Ticket. |
 | [`game_event.schema.json`](runtime/game_event.schema.json) | One append-only semantic event with ordering, visibility, actor, source, and Worklog projection links. |
 | [`knowledge_state.schema.json`](runtime/knowledge_state.schema.json) | Private Player or cooperative-team beliefs and Evidence; it never substitutes for authoritative Fault state. |
@@ -52,6 +54,6 @@ See [`RUNTIME_SCHEMAS.md`](../docs/schema-notes/RUNTIME_SCHEMAS.md) for lifecycl
 - Stable domain IDs and existing schema `$id` values are public contracts. Do not rename them without an explicit migration task.
 - [`viewer/content/`](../viewer/content/) stores versioned packs of domain records for the static Domain Viewer. The individual records use the domain concepts above, while each viewer file also has a pack wrapper.
 - A Card Definition may own card-specific presentation, including an optional illustration. A Card Instance should reference that definition and must not duplicate presentation data.
+- [`content/gameplay-v1/`](../content/gameplay-v1/) is the first server-side version-pinned gameplay pack. It snapshots only the selected domain records needed by its Cards and Tickets; the engine does not import secret truth from the browser-delivered Viewer pack.
 - Repair Ticket definitions contain authoring truth. Runtime Ticket State records only one instantiated Ticket's evolving history and authorized projections.
 - Frozen behavior comes from [`FROZEN_RULES.md`](../docs/design/decisions/FROZEN_RULES.md), not from an example, schema description, or recommended model when they disagree.
-

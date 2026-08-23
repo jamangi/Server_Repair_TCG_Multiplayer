@@ -1,0 +1,54 @@
+{
+  "id": "builder_config.storage_fallback",
+  "entity_type": "ticket_builder_configuration",
+  "configuration_version": "ticket-builder-v1",
+  "scenario_or_mode_context": "SIMULATION",
+  "requested_ticket_count": 1,
+  "seed": "task-009-builder-fallback-seed",
+  "generator_version": "ticket-builder-v1",
+  "content_version": "core-ticket-templates-v1",
+  "domain_content_version": "core-domain-snapshot-v1",
+  "card_catalog_version": "core-card-catalog-v1",
+  "allowed_domain_ids": [],
+  "excluded_domain_ids": [],
+  "allowed_tags": ["cabling"],
+  "excluded_tags": [],
+  "guaranteed_categories": ["storage.cabling"],
+  "required_teaching_beats": ["single_actionable_fault"],
+  "authored_difficulty_bounds": { "minimum": 1, "maximum": 1 },
+  "fault_count_bounds": { "minimum": 1, "maximum": 1 },
+  "required_actionable_fault_count_bounds": { "minimum": 1, "maximum": 1 },
+  "causal_depth_bounds": { "minimum": 0, "maximum": 0 },
+  "inbound_branching_bounds": { "minimum": 0, "maximum": 0 },
+  "outbound_branching_bounds": { "minimum": 0, "maximum": 0 },
+  "progressive_difficulty_profile": {
+    "profile_id": "profile.storage_fallback",
+    "profile_version": "v1",
+    "explicit_ceiling": 1,
+    "bands": [
+      {
+        "start_generated_index": 0,
+        "end_generated_index": 0,
+        "target": 1,
+        "minimum": 1,
+        "maximum": 1
+      }
+    ]
+  },
+  "generation_index_start": 0,
+  "allow_duplicate_causal_fingerprints": false,
+  "active_causal_fingerprints": [],
+  "legal_card_definition_ids": [
+    "card.core.visual_inspection",
+    "card.core.raid_status_inspection",
+    "card.core.drive_health_test",
+    "card.core.storage_device_inventory",
+    "card.core.smartctl_drive_health",
+    "card.core.replace_raid_member",
+    "card.core.rebuild_raid_array",
+    "card.core.reseat_storage_cable",
+    "card.core.raid_health_verification",
+    "card.core.storage_detection_verification"
+  ],
+  "fallback_configuration_id": null
+}

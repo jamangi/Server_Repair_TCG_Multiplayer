@@ -1,0 +1,171 @@
+{
+  "classification": "SIMULATION_CAP",
+  "determinism": {
+    "identical": true,
+    "mismatch_fields": []
+  },
+  "first_run": {
+    "builder_diagnostic_codes": [],
+    "classification": "SIMULATION_CAP",
+    "concessions": 0,
+    "contribution_counts": [
+      {
+        "assists": 0,
+        "closures": 0,
+        "documentation": 0,
+        "failed_verifies": 0,
+        "isolations": 0,
+        "player_id": "player_a",
+        "redundant_or_superseded_actions": 0,
+        "rejected_isolations": 0,
+        "repairs": 0,
+        "team_id": "team.cooperative",
+        "tests": 0,
+        "verifies": 0
+      }
+    ],
+    "disconnects": 0,
+    "elapsed_virtual_time_seconds": 15,
+    "match_id": "task-009-foundation-v1.fixture-simulation-cap.seed-9001",
+    "no_legal_progress_move": false,
+    "outcome": {
+      "match_status": "ABORTED",
+      "reason_codes": [
+        "SIMULATION_CAP"
+      ],
+      "valid": true,
+      "winner_player_ids": [],
+      "winning_team_ids": []
+    },
+    "player_service_points": [
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "starting": 0
+      }
+    ],
+    "rejected_intent_codes": [],
+    "rejected_intents": 0,
+    "replay_digest": "ab45e3f3fca12023935927f216af9114eb8170475ba404c85ccfb04ecc2fb423",
+    "rounds": 3,
+    "scores": {
+      "players": {
+        "player_a": 0
+      },
+      "teams": {
+        "team.cooperative": 0
+      }
+    },
+    "seed": "9001",
+    "setting_group_id": "fixture-simulation-cap",
+    "stall_classification": "SIMULATION_CAP",
+    "started": true,
+    "team_service_points": [
+      {
+        "final": 0,
+        "net": 0,
+        "starting": 0,
+        "team_id": "team.cooperative"
+      }
+    ],
+    "terminal_reason_codes": [
+      "SIMULATION_CAP"
+    ],
+    "ticket_snapshot_digest": "4f110c89ba766bcd3948baebad86424635d06650d21a56fc887a5139bcba9504",
+    "tickets_closed": 0,
+    "tickets_quarantined": 0,
+    "turns": 3
+  },
+  "identical_input_rerun": {
+    "builder_diagnostic_codes": [],
+    "classification": "SIMULATION_CAP",
+    "concessions": 0,
+    "contribution_counts": [
+      {
+        "assists": 0,
+        "closures": 0,
+        "documentation": 0,
+        "failed_verifies": 0,
+        "isolations": 0,
+        "player_id": "player_a",
+        "redundant_or_superseded_actions": 0,
+        "rejected_isolations": 0,
+        "repairs": 0,
+        "team_id": "team.cooperative",
+        "tests": 0,
+        "verifies": 0
+      }
+    ],
+    "disconnects": 0,
+    "elapsed_virtual_time_seconds": 15,
+    "match_id": "task-009-foundation-v1.fixture-simulation-cap.seed-9001",
+    "no_legal_progress_move": false,
+    "outcome": {
+      "match_status": "ABORTED",
+      "reason_codes": [
+        "SIMULATION_CAP"
+      ],
+      "valid": true,
+      "winner_player_ids": [],
+      "winning_team_ids": []
+    },
+    "player_service_points": [
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "starting": 0
+      }
+    ],
+    "rejected_intent_codes": [],
+    "rejected_intents": 0,
+    "replay_digest": "ab45e3f3fca12023935927f216af9114eb8170475ba404c85ccfb04ecc2fb423",
+    "rounds": 3,
+    "scores": {
+      "players": {
+        "player_a": 0
+      },
+      "teams": {
+        "team.cooperative": 0
+      }
+    },
+    "seed": "9001",
+    "setting_group_id": "fixture-simulation-cap",
+    "stall_classification": "SIMULATION_CAP",
+    "started": true,
+    "team_service_points": [
+      {
+        "final": 0,
+        "net": 0,
+        "starting": 0,
+        "team_id": "team.cooperative"
+      }
+    ],
+    "terminal_reason_codes": [
+      "SIMULATION_CAP"
+    ],
+    "ticket_snapshot_digest": "4f110c89ba766bcd3948baebad86424635d06650d21a56fc887a5139bcba9504",
+    "tickets_closed": 0,
+    "tickets_quarantined": 0,
+    "turns": 3
+  },
+  "match_id": "task-009-foundation-v1.fixture-simulation-cap.seed-9001",
+  "seed": "9001",
+  "setting_group_id": "fixture-simulation-cap",
+  "version_pins": {
+    "card_catalog_version": "core-card-catalog-v1",
+    "domain_content_version": "core-domain-snapshot-v1",
+    "generator_version": "ticket-builder-v1",
+    "harness_version": "automated-harness-v1",
+    "policy_versions": [
+      "methodical-seat-safe-v1",
+      "publication-seat-safe-v1",
+      "scripted-cooperative-v1",
+      "scripted-competitive-v1",
+      "pass-only-fixture-v1"
+    ],
+    "ruleset_version": "first-version-v1",
+    "ticket_content_version": "core-ticket-templates-v1"
+  }
+}

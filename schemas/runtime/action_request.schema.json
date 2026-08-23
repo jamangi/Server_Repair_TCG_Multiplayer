@@ -101,6 +101,12 @@
       "properties": {
         "ticket_instance_id": { "$ref": "#/$defs/instanceId" },
         "accepted_isolation_event_id": { "$ref": "#/$defs/instanceId" },
+        "accepted_isolation_event_ids": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/instanceId" },
+          "uniqueItems": true,
+          "minItems": 1
+        },
         "decisive_evidence_event_ids": {
           "type": "array",
           "items": { "$ref": "#/$defs/instanceId" },
@@ -127,11 +133,20 @@
       },
       "required": [
         "ticket_instance_id",
-        "accepted_isolation_event_id",
         "decisive_evidence_event_ids",
         "repair_event_ids",
         "failed_verify_event_ids",
         "current_passing_verify_event_ids"
+      ],
+      "oneOf": [
+        {
+          "required": ["accepted_isolation_event_id"],
+          "not": { "required": ["accepted_isolation_event_ids"] }
+        },
+        {
+          "required": ["accepted_isolation_event_ids"],
+          "not": { "required": ["accepted_isolation_event_id"] }
+        }
       ]
     },
     "searchPayload": {

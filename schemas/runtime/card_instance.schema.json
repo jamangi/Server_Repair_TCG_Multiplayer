@@ -1,42 +1,123 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.local/runtime/card_instance.schema.json",
-  "title": "Card Instance",
+  "title": "Authoritative Card Instance",
+  "description": "One server-owned match copy of a pinned Card Definition. Clients may reference its ID in intents but may never submit replacement owner, controller, zone, placement, or effect state.",
   "type": "object",
   "additionalProperties": false,
   "$defs": {
-    "stableId": {
-      "type": "string",
-      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
-    },
-    "uuidLike": {
-      "type": "string",
-      "minLength": 8
-    },
     "entityRef": {
       "type": "string",
       "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
     },
-    "cardInstanceId": {
+    "instanceId": {
       "type": "string",
       "minLength": 1
     },
     "playerId": {
-      "type": "string",
+      "$ref": "#/$defs/instanceId"
+    },
+    "nullablePlayerId": {
+      "type": [
+        "string",
+        "null"
+      ],
       "minLength": 1
     },
-    "ticketInstanceId": {
-      "type": "string",
+    "nullableInstanceId": {
+      "type": [
+        "string",
+        "null"
+      ],
       "minLength": 1
     },
-    "timestamp": {
-      "type": "string",
-      "format": "date-time"
+    "inPlayPlacement": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "scope": {
+          "type": "string",
+          "enum": [
+            "PLAYER",
+            "TEAM",
+            "TICKET"
+          ]
+        },
+        "player_id": {
+          "$ref": "#/$defs/nullablePlayerId"
+        },
+        "team_id": {
+          "$ref": "#/$defs/nullableInstanceId"
+        },
+        "ticket_instance_id": {
+          "$ref": "#/$defs/nullableInstanceId"
+        },
+        "created_by_event_id": {
+          "$ref": "#/$defs/instanceId"
+        }
+      },
+      "required": [
+        "scope",
+        "player_id",
+        "team_id",
+        "ticket_instance_id",
+        "created_by_event_id"
+      ],
+      "oneOf": [
+        {
+          "properties": {
+            "scope": {
+              "const": "PLAYER"
+            },
+            "player_id": {
+              "$ref": "#/$defs/playerId"
+            },
+            "team_id": {
+              "const": null
+            },
+            "ticket_instance_id": {
+              "const": null
+            }
+          }
+        },
+        {
+          "properties": {
+            "scope": {
+              "const": "TEAM"
+            },
+            "player_id": {
+              "const": null
+            },
+            "team_id": {
+              "$ref": "#/$defs/instanceId"
+            },
+            "ticket_instance_id": {
+              "const": null
+            }
+          }
+        },
+        {
+          "properties": {
+            "scope": {
+              "const": "TICKET"
+            },
+            "player_id": {
+              "const": null
+            },
+            "team_id": {
+              "const": null
+            },
+            "ticket_instance_id": {
+              "$ref": "#/$defs/instanceId"
+            }
+          }
+        }
+      ]
     }
   },
   "properties": {
     "card_instance_id": {
-      "$ref": "#/$defs/cardInstanceId"
+      "$ref": "#/$defs/instanceId"
     },
     "card_definition_id": {
       "$ref": "#/$defs/entityRef"
@@ -45,7 +126,7 @@
       "$ref": "#/$defs/playerId"
     },
     "controller_player_id": {
-      "$ref": "#/$defs/playerId"
+      "$ref": "#/$defs/nullablePlayerId"
     },
     "zone": {
       "type": "string",
@@ -53,31 +134,22 @@
         "deck",
         "hand",
         "discard",
-        "in_play",
-        "exile",
-        "revealed",
-        "ticket_area"
+        "in_play"
       ]
     },
-    "face_state": {
-      "type": "string",
-      "enum": [
-        "face_up",
-        "face_down"
+    "in_play_placement": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/inPlayPlacement"
+        }
       ]
     },
-    "counters": {
-      "type": "object",
-      "additionalProperties": {
-        "type": "integer"
-      }
-    },
-    "runtime_tags": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "uniqueItems": true
+    "effect_state": {
+      "description": "The first stable catalog contains no persistent effect-state variant. Add only a typed approved variant when a persistent card requires it.",
+      "const": null
     }
   },
   "required": [
@@ -86,8 +158,61 @@
     "owner_player_id",
     "controller_player_id",
     "zone",
-    "face_state",
-    "counters",
-    "runtime_tags"
+    "in_play_placement",
+    "effect_state"
+  ],
+  "oneOf": [
+    {
+      "properties": {
+        "zone": {
+          "enum": [
+            "deck",
+            "hand",
+            "discard"
+          ]
+        },
+        "controller_player_id": {
+          "$ref": "#/$defs/playerId"
+        },
+        "in_play_placement": {
+          "const": null
+        }
+      }
+    },
+    {
+      "properties": {
+        "zone": {
+          "const": "in_play"
+        },
+        "in_play_placement": {
+          "$ref": "#/$defs/inPlayPlacement"
+        }
+      }
+    }
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "zone": {
+            "const": "in_play"
+          },
+          "in_play_placement": {
+            "properties": {
+              "scope": {
+                "const": "PLAYER"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "controller_player_id": {
+            "$ref": "#/$defs/playerId"
+          }
+        }
+      }
+    }
   ]
 }

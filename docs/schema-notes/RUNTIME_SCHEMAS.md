@@ -1,6 +1,6 @@
 # Runtime schemas — synchronized server-authoritative model
 
-The runtime schemas describe mutable match state, player-safe projections, authoritative intents, immutable semantic events, and reconnect state. They are implementation-neutral contracts, not a game engine.
+The runtime schemas describe durable match-state shapes, player-safe projections, authoritative intents, immutable semantic events, and reconnect state. They are implementation-neutral contracts, not a game engine. The dependency-free engine uses an indexed, server-private working aggregate for deterministic transitions; that internal map/ledger layout is neither a client payload nor an implicit replacement for the versioned persistence schemas. Any future save serializer is an explicit migration boundary rather than a second player-visible state shape.
 
 ## Lifecycle and state separation
 
@@ -24,6 +24,8 @@ The initial public candidate set is not required to contain every hidden causal 
 
 [`action_result.schema.json`](../../schemas/runtime/action_result.schema.json) distinguishes an accepted paid action from a request rejected before payment. An unsupported Isolation is an accepted one-Action resolution with the generic `ISOLATION_NOT_SUPPORTED` resolution code; it is not a free request rejection. A stale revision rejects with zero Actions, zero utility resources, no card movement, and no events.
 
+The engine derives the actor from the authenticated connection, compares the request's declared Player, rejects unexpected top-level or payload mutation fields, and applies changes only to a private clone after authentication, idempotency, revision, turn, target, and resource checks. Computer policies receive the same private Player projection and legal-intent list; they do not receive the working aggregate.
+
 Search spends one Action and one Search Token to select a remaining-deck card before shuffling the remainder. Refresh spends one Action and one Refresh Token to combine discard with the remaining deck. [`player_state.schema.json`](../../schemas/runtime/player_state.schema.json) stores public utility-resource counts/caps, the 30-card Ready snapshot, card zones, skipped empty draws, and reconnect cursors. It contains no empty-deck loss flag.
 
 [`turn_state.schema.json`](../../schemas/runtime/turn_state.schema.json) fixes two starting Actions, records `DRAWN` or `SKIPPED_EMPTY`, and holds an explicit `CLOSURE_RESOLUTION` window. That window precedes automatic zero-Action end-turn processing, so a successful Verify using the last Action can still be closed immediately for zero Actions.
@@ -39,6 +41,8 @@ Search spends one Action and one Search Token to select a remaining-deck card be
 
 Every accepted paid action creates a public Worklog placeholder. A later Document Live publication creates a new event linked to that placeholder and its source result. The current Worklog projection can be enriched while the original action/result events and chronology remain immutable. Publication does not mutate the source Evidence visibility.
 
+Published Evidence can later be cited for Isolation through that public publication link. The server resolves the link to the immutable authored source outcome for eligibility, while the original private/team event remains in its original audience. This lets teammates or competitors use deliberately documented reasoning without widening every source event.
+
 For an accepted paid result, the placeholder is the first public event from that action. Search and Refresh follow the same rule before publishing their completion event; rejected requests publish neither event.
 
 Every non-`SERVER_ONLY` payload is also constrained against direct authoritative-secret fields. Dependency-free semantic validation applies the same prohibition recursively so a nested object cannot smuggle causal truth, unexecuted outcomes, random state, deck order, opponent hands, or internal scoring modifiers into a player-safe event. Private and team projections additionally verify that each event and Knowledge State is addressed to the authenticated Player or that Player's team.
@@ -49,7 +53,7 @@ Every non-`SERVER_ONLY` payload is also constrained against direct authoritative
 
 A closed Ticket stores a zero-Action structured bundle and links every step in the atomic transaction: Worklog lock, policy-selected score events, archive/removal, utility grants, queue reconciliation, terminal evaluation, and turn end. Its closure record preserves the complete accepted-path Repair history, and its decisive Evidence links must be citations from the current accepted Isolation. The closer and optional team are recorded only as closure statistics. No closure card recovery or closure Service Point field exists.
 
-`pending_contributions`, `contribution_ledger`, and `service_point_events` implement the frozen causal policy. Every required actionable Fault has one one-point Isolation slot and one one-point necessary-Repair slot. The earliest qualifying final-path event owns each slot. Pending eligibility remains server-only until closure; settled score events are public. Root Cause has no bonus. Cooperative awards credit the shared team directly while retaining the contributing Player ID.
+Ticket-owned accepted-path Isolation and Repair lists plus the server-only contribution ledger implement the frozen causal policy. Every required actionable Fault has one one-point Isolation slot and one one-point necessary-Repair slot. The earliest qualifying final-path event owns each slot. Before settlement, closure independently rechecks the authored required Fault instances, exact Isolation requirements, necessary Repair outcome identities, and current Verify requirements. Pending eligibility remains server-only until closure; settled score events are public. Root Cause has no bonus. Cooperative awards credit the shared team directly while retaining the contributing Player ID.
 
 Runtime contracts contain no Equipment or Qualification fields. Technical Tool/card state remains ordinary match content.
 

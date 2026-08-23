@@ -1,0 +1,171 @@
+{
+  "classification": "INVALIDATED",
+  "determinism": {
+    "identical": true,
+    "mismatch_fields": []
+  },
+  "first_run": {
+    "builder_diagnostic_codes": [],
+    "classification": "INVALIDATED",
+    "concessions": 0,
+    "contribution_counts": [
+      {
+        "assists": 0,
+        "closures": 1,
+        "documentation": 2,
+        "failed_verifies": 0,
+        "isolations": 2,
+        "player_id": "player_a",
+        "redundant_or_superseded_actions": 0,
+        "rejected_isolations": 1,
+        "repairs": 1,
+        "team_id": "team.cooperative",
+        "tests": 2,
+        "verifies": 1
+      }
+    ],
+    "disconnects": 0,
+    "elapsed_virtual_time_seconds": 85,
+    "match_id": "task-009-foundation-v1.fixture-admin-invalidation.seed-8002",
+    "no_legal_progress_move": true,
+    "outcome": {
+      "match_status": "INVALIDATED",
+      "reason_codes": [
+        "ADMIN_INVALIDATION"
+      ],
+      "valid": false,
+      "winner_player_ids": [],
+      "winning_team_ids": []
+    },
+    "player_service_points": [
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "starting": 0
+      }
+    ],
+    "rejected_intent_codes": [],
+    "rejected_intents": 0,
+    "replay_digest": "4c94706c965ceececf064dd1e5e7ad4fd0d4f6eb44a208b4a765d8c65e85c8c9",
+    "rounds": 7,
+    "scores": {
+      "players": {
+        "player_a": 0
+      },
+      "teams": {
+        "team.cooperative": 2
+      }
+    },
+    "seed": "8002",
+    "setting_group_id": "fixture-admin-invalidation",
+    "stall_classification": "NONE",
+    "started": true,
+    "team_service_points": [
+      {
+        "final": 2,
+        "net": 2,
+        "starting": 0,
+        "team_id": "team.cooperative"
+      }
+    ],
+    "terminal_reason_codes": [
+      "ADMIN_INVALIDATION"
+    ],
+    "ticket_snapshot_digest": "07fc3b6a9d6a8ed9d4d1c483271725e23c38b22db97c8ac59d6f484ec101fc2d",
+    "tickets_closed": 1,
+    "tickets_quarantined": 0,
+    "turns": 7
+  },
+  "identical_input_rerun": {
+    "builder_diagnostic_codes": [],
+    "classification": "INVALIDATED",
+    "concessions": 0,
+    "contribution_counts": [
+      {
+        "assists": 0,
+        "closures": 1,
+        "documentation": 2,
+        "failed_verifies": 0,
+        "isolations": 2,
+        "player_id": "player_a",
+        "redundant_or_superseded_actions": 0,
+        "rejected_isolations": 1,
+        "repairs": 1,
+        "team_id": "team.cooperative",
+        "tests": 2,
+        "verifies": 1
+      }
+    ],
+    "disconnects": 0,
+    "elapsed_virtual_time_seconds": 85,
+    "match_id": "task-009-foundation-v1.fixture-admin-invalidation.seed-8002",
+    "no_legal_progress_move": true,
+    "outcome": {
+      "match_status": "INVALIDATED",
+      "reason_codes": [
+        "ADMIN_INVALIDATION"
+      ],
+      "valid": false,
+      "winner_player_ids": [],
+      "winning_team_ids": []
+    },
+    "player_service_points": [
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "starting": 0
+      }
+    ],
+    "rejected_intent_codes": [],
+    "rejected_intents": 0,
+    "replay_digest": "4c94706c965ceececf064dd1e5e7ad4fd0d4f6eb44a208b4a765d8c65e85c8c9",
+    "rounds": 7,
+    "scores": {
+      "players": {
+        "player_a": 0
+      },
+      "teams": {
+        "team.cooperative": 2
+      }
+    },
+    "seed": "8002",
+    "setting_group_id": "fixture-admin-invalidation",
+    "stall_classification": "NONE",
+    "started": true,
+    "team_service_points": [
+      {
+        "final": 2,
+        "net": 2,
+        "starting": 0,
+        "team_id": "team.cooperative"
+      }
+    ],
+    "terminal_reason_codes": [
+      "ADMIN_INVALIDATION"
+    ],
+    "ticket_snapshot_digest": "07fc3b6a9d6a8ed9d4d1c483271725e23c38b22db97c8ac59d6f484ec101fc2d",
+    "tickets_closed": 1,
+    "tickets_quarantined": 0,
+    "turns": 7
+  },
+  "match_id": "task-009-foundation-v1.fixture-admin-invalidation.seed-8002",
+  "seed": "8002",
+  "setting_group_id": "fixture-admin-invalidation",
+  "version_pins": {
+    "card_catalog_version": "core-card-catalog-v1",
+    "domain_content_version": "core-domain-snapshot-v1",
+    "generator_version": "ticket-builder-v1",
+    "harness_version": "automated-harness-v1",
+    "policy_versions": [
+      "methodical-seat-safe-v1",
+      "publication-seat-safe-v1",
+      "scripted-cooperative-v1",
+      "scripted-competitive-v1",
+      "pass-only-fixture-v1"
+    ],
+    "ruleset_version": "first-version-v1",
+    "ticket_content_version": "core-ticket-templates-v1"
+  }
+}

@@ -2,14 +2,17 @@
 
 Tasks are implementation contracts. A builder must read `AGENTS.md` and then the selected task completely.
 
-Active task: **None.**
+Active task:
+
+- **None.**
 
 Ready task awaiting implementation:
 
-- [`TASK-009: Build the playable gameplay foundation`](TASK-009-gameplay-foundation.md) — Card Definition/Card Instance direction approved 2026-08-23, including authoritative server ownership and client-read-only projections; staged schema/content synchronization, game engine, early automated-game harness, deterministic Ticket Builder, representative Card catalog, and reproducible automated-game statistics. Implementation has not started.
+- **None.**
 
 Completed documentation and research tasks:
 
+- [`TASK-009: Build the playable gameplay foundation`](TASK-009-gameplay-foundation.md) — completed 2026-08-23; synchronized executable Card/Ticket contracts, deterministic authoritative engine, constraint-driven Ticket Builder, seat-safe simulator, and a reproducible 22-run campaign with 0 deterministic mismatches.
 - [`TASK-008: Freeze the first-version foundation`](TASK-008-freeze-first-version-foundation.md) — completed 2026-08-23; all 89 reviewed open items and four pressures resolved, affected artifacts synchronized, and the Unfrozen ledger emptied.
 - [`TASK-007: Synchronize approved gameplay rules`](TASK-007-synchronize-approved-gameplay-rules.md) — completed 2026-08-23; `SYNC-014`–`SYNC-020` reconciled across design documents, schemas, examples, candidate flows, story/UI candidates, wireframes, and tests. `SCORE-001` and `GEN-001` remained unfrozen at that task's boundary and were later resolved by TASK-008.
 - [`TASK-006: Candidate gameplay flows v0.0`](TASK-006-candidate-gameplay-flows-v0.0.md) — completed 2026-08-22; non-authoritative example rules profile, board/card fixtures, four audited three-Ticket matches, focused application flows, and full campaign/multiplayer journeys created.

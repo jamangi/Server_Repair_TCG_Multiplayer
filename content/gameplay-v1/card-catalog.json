@@ -1,0 +1,734 @@
+{
+  "card_catalog_version": "core-card-catalog-v1",
+  "domain_content_version": "core-domain-snapshot-v1",
+  "ruleset_version": "first-version-v1",
+  "cards": [
+    {
+      "id": "card.core.visual_inspection",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Visual Inspection",
+        "short_description": "Inspect one active Ticket for authored visible evidence."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "inspection",
+          "storage",
+          "test"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "hardware_troubleshooting"
+      ],
+      "cost": 0,
+      "tags": [
+        "inspection",
+        "diagnostic"
+      ],
+      "rules_text": "Run Visual Inspection on one active Ticket and resolve its authored evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.general.visual_inspection",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "fault.storage.cable.loose",
+          "entity_type": "fault",
+          "role": "subject"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.general.visual_inspection",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET",
+          "allowed_component_definition_ids": []
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.general.visual_inspection"
+          }
+        ],
+        "disposition": "discard"
+      },
+      "educational_text": "Visible symptoms narrow possibilities but do not prove a hidden Fault.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.core.raid_status_inspection",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "RAID Status Inspection",
+        "short_description": "Inspect authored RAID array and member status."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "raid",
+          "status",
+          "test"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "server_hardware",
+        "storage"
+      ],
+      "cost": 1,
+      "tags": [
+        "raid",
+        "diagnostic"
+      ],
+      "rules_text": "Run RAID Status Inspection on one active Ticket and resolve its authored evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.storage.raid_status",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "tool.storage.raid_console",
+          "entity_type": "tool",
+          "role": "requirement"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.storage.raid_status",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET",
+          "allowed_component_definition_ids": []
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.storage.raid_status"
+          }
+        ],
+        "disposition": "discard"
+      },
+      "educational_text": "Array status can distinguish a member problem from broader controller or path concerns.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.core.raid_console_snapshot",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "RAID Console Snapshot",
+        "short_description": "Capture a prepared RAID-management status snapshot."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "console",
+          "raid",
+          "snapshot"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "server_hardware",
+        "storage"
+      ],
+      "cost": 0,
+      "tags": [
+        "console",
+        "diagnostic",
+        "raid"
+      ],
+      "rules_text": "Run RAID Console Snapshot on one active Ticket and resolve its authored RAID-status evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.storage.raid_status",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "tool.storage.raid_console",
+          "entity_type": "tool",
+          "role": "requirement"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.storage.raid_status",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET",
+          "allowed_component_definition_ids": []
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.storage.raid_status"
+          }
+        ],
+        "disposition": "discard"
+      },
+      "educational_text": "A prepared management-console affordance can expose the same authored RAID observation at a different Action tempo.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.core.drive_health_test",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Drive Health Test",
+        "short_description": "Inspect an authorized SAS drive target for authored health evidence."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "drive",
+          "health",
+          "storage"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "server_hardware",
+        "storage"
+      ],
+      "cost": 1,
+      "tags": [
+        "drive",
+        "diagnostic"
+      ],
+      "rules_text": "Run Drive Health Test on one authorized SAS drive in an active Ticket and resolve its authored evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.storage.drive_health",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "command.linux.smartctl",
+          "entity_type": "command",
+          "role": "requirement"
+        },
+        {
+          "entity_id": "component.storage.sas_hdd",
+          "entity_type": "component",
+          "role": "subject"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.storage.drive_health",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "TICKET_COMPONENT",
+          "allowed_component_definition_ids": [
+            "component.storage.sas_hdd"
+          ]
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.storage.drive_health"
+          }
+        ],
+        "disposition": "discard"
+      },
+      "educational_text": "Drive-health data is Evidence; the Ticket determines what that Evidence means in context.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.core.storage_device_inventory",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Storage Device Inventory",
+        "short_description": "Inspect which storage devices the active Ticket currently exposes."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "inventory",
+          "storage",
+          "test"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "storage"
+      ],
+      "cost": 1,
+      "tags": [
+        "inventory",
+        "diagnostic"
+      ],
+      "rules_text": "Run Storage Device Inventory on one active Ticket and resolve its authored evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.storage.device_inventory",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.storage.device_inventory",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET",
+          "allowed_component_definition_ids": []
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.storage.device_inventory"
+          }
+        ],
+        "disposition": "discard"
+      },
+      "educational_text": "Presence and absence observations help constrain a storage fault without changing machine state.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.core.smartctl_drive_health",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "smartctl Drive Health",
+        "short_description": "Use smartctl against an authorized SAS drive target."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "command",
+          "smartctl",
+          "storage"
+        ]
+      },
+      "card_type": "command",
+      "archetypes": [
+        "linux",
+        "storage"
+      ],
+      "cost": 1,
+      "tags": [
+        "command",
+        "drive"
+      ],
+      "rules_text": "Run command.linux.smartctl on one authorized SAS drive in an active Ticket and resolve its authored command outcome.",
+      "primary_domain_reference": {
+        "entity_id": "command.linux.smartctl",
+        "entity_type": "command",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "test.storage.drive_health",
+          "entity_type": "test",
+          "role": "reference"
+        },
+        {
+          "entity_id": "component.storage.sas_hdd",
+          "entity_type": "component",
+          "role": "subject"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "command.linux.smartctl",
+        "source_entity_type": "command",
+        "target_spec": {
+          "target_kind": "TICKET_COMPONENT",
+          "allowed_component_definition_ids": [
+            "component.storage.sas_hdd"
+          ]
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "command.linux.smartctl"
+          }
+        ],
+        "disposition": "discard"
+      },
+      "educational_text": "The command name is learned explicitly while its result remains Ticket-authored Evidence.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.core.replace_raid_member",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Replace Failed RAID Member",
+        "short_description": "Replace an accepted isolated failed SAS member."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "raid",
+          "repair",
+          "replace"
+        ]
+      },
+      "card_type": "repair_procedure",
+      "archetypes": [
+        "server_hardware",
+        "storage"
+      ],
+      "cost": 1,
+      "tags": [
+        "raid",
+        "repair"
+      ],
+      "rules_text": "After accepted Isolation of fault.storage.sas.drive_failed, apply repair.storage.replace_raid_member to that Fault instance.",
+      "primary_domain_reference": {
+        "entity_id": "repair.storage.replace_raid_member",
+        "entity_type": "repair_procedure",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "fault.storage.sas.drive_failed",
+          "entity_type": "fault",
+          "role": "subject"
+        },
+        {
+          "entity_id": "component.storage.sas_hdd",
+          "entity_type": "component",
+          "role": "subject"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "REPAIR",
+        "action_type": "PERFORM_REPAIR",
+        "repair_procedure_id": "repair.storage.replace_raid_member",
+        "target_spec": {
+          "target_kind": "ACCEPTED_ISOLATED_FAULT",
+          "allowed_fault_definition_ids": [
+            "fault.storage.sas.drive_failed"
+          ]
+        },
+        "prerequisites": [
+          {
+            "prerequisite_type": "ACCEPTED_ISOLATION"
+          }
+        ],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_REPAIR",
+            "repair_procedure_id": "repair.storage.replace_raid_member"
+          }
+        ],
+        "disposition": "discard"
+      },
+      "educational_text": "Replacement changes machine state but does not establish a successful Verify result.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.core.rebuild_raid_array",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Rebuild RAID Array",
+        "short_description": "Rebuild an accepted isolated degraded RAID array."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "raid",
+          "rebuild",
+          "repair"
+        ]
+      },
+      "card_type": "repair_procedure",
+      "archetypes": [
+        "server_hardware",
+        "storage"
+      ],
+      "cost": 1,
+      "tags": [
+        "raid",
+        "repair"
+      ],
+      "rules_text": "After accepted Isolation of fault.storage.raid.degraded, apply repair.storage.rebuild_array to that Fault instance.",
+      "primary_domain_reference": {
+        "entity_id": "repair.storage.rebuild_array",
+        "entity_type": "repair_procedure",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "fault.storage.raid.degraded",
+          "entity_type": "fault",
+          "role": "subject"
+        },
+        {
+          "entity_id": "component.storage.raid_controller",
+          "entity_type": "component",
+          "role": "subject"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "REPAIR",
+        "action_type": "PERFORM_REPAIR",
+        "repair_procedure_id": "repair.storage.rebuild_array",
+        "target_spec": {
+          "target_kind": "ACCEPTED_ISOLATED_FAULT",
+          "allowed_fault_definition_ids": [
+            "fault.storage.raid.degraded"
+          ]
+        },
+        "prerequisites": [
+          {
+            "prerequisite_type": "ACCEPTED_ISOLATION"
+          }
+        ],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_REPAIR",
+            "repair_procedure_id": "repair.storage.rebuild_array"
+          }
+        ],
+        "disposition": "discard"
+      },
+      "educational_text": "A replacement member and a healthy array are separate machine states.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.core.reseat_storage_cable",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Reseat Storage Cable",
+        "short_description": "Reseat an accepted isolated loose storage cable."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "cable",
+          "repair",
+          "storage"
+        ]
+      },
+      "card_type": "repair_procedure",
+      "archetypes": [
+        "hardware_troubleshooting",
+        "storage"
+      ],
+      "cost": 1,
+      "tags": [
+        "cable",
+        "repair"
+      ],
+      "rules_text": "After accepted Isolation of fault.storage.cable.loose, apply repair.storage.reseat_cable to that Fault instance.",
+      "primary_domain_reference": {
+        "entity_id": "repair.storage.reseat_cable",
+        "entity_type": "repair_procedure",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "fault.storage.cable.loose",
+          "entity_type": "fault",
+          "role": "subject"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "REPAIR",
+        "action_type": "PERFORM_REPAIR",
+        "repair_procedure_id": "repair.storage.reseat_cable",
+        "target_spec": {
+          "target_kind": "ACCEPTED_ISOLATED_FAULT",
+          "allowed_fault_definition_ids": [
+            "fault.storage.cable.loose"
+          ]
+        },
+        "prerequisites": [
+          {
+            "prerequisite_type": "ACCEPTED_ISOLATION"
+          }
+        ],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_REPAIR",
+            "repair_procedure_id": "repair.storage.reseat_cable"
+          }
+        ],
+        "disposition": "discard"
+      },
+      "educational_text": "The procedure is legal only when its exact target Fault has accepted Isolation.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.core.raid_health_verification",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "RAID Healthy Verification",
+        "short_description": "Evaluate an authored RAID-health requirement after Repair."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "raid",
+          "verification",
+          "verify"
+        ]
+      },
+      "card_type": "verification",
+      "archetypes": [
+        "server_hardware",
+        "storage"
+      ],
+      "cost": 1,
+      "tags": [
+        "raid",
+        "verify"
+      ],
+      "rules_text": "Evaluate verify.storage.raid_healthy for one named verification requirement on an active repaired Ticket.",
+      "primary_domain_reference": {
+        "entity_id": "verify.storage.raid_healthy",
+        "entity_type": "validation_procedure",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "fault.storage.sas.drive_failed",
+          "entity_type": "fault",
+          "role": "subject"
+        },
+        {
+          "entity_id": "fault.storage.raid.degraded",
+          "entity_type": "fault",
+          "role": "subject"
+        },
+        {
+          "entity_id": "fault.storage.raid.controller_failed",
+          "entity_type": "fault",
+          "role": "subject"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "VERIFY",
+        "action_type": "PERFORM_VERIFY",
+        "validation_procedure_id": "verify.storage.raid_healthy",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET_VERIFICATION_REQUIREMENT"
+        },
+        "prerequisites": [
+          {
+            "prerequisite_type": "REPAIR_HISTORY_PRESENT"
+          }
+        ],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_VERIFY",
+            "validation_procedure_id": "verify.storage.raid_healthy"
+          }
+        ],
+        "disposition": "discard"
+      },
+      "educational_text": "A failed result remains in history and can reopen Diagnosis; a passing result does not close the Ticket by itself.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.core.storage_detection_verification",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Storage Detection Verification",
+        "short_description": "Evaluate an authored storage-detection requirement after Repair."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "detection",
+          "storage",
+          "verify"
+        ]
+      },
+      "card_type": "verification",
+      "archetypes": [
+        "storage"
+      ],
+      "cost": 1,
+      "tags": [
+        "detection",
+        "verify"
+      ],
+      "rules_text": "Evaluate verify.storage.device_detected for one named verification requirement on an active repaired Ticket.",
+      "primary_domain_reference": {
+        "entity_id": "verify.storage.device_detected",
+        "entity_type": "validation_procedure",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "fault.storage.cable.loose",
+          "entity_type": "fault",
+          "role": "subject"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "VERIFY",
+        "action_type": "PERFORM_VERIFY",
+        "validation_procedure_id": "verify.storage.device_detected",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET_VERIFICATION_REQUIREMENT"
+        },
+        "prerequisites": [
+          {
+            "prerequisite_type": "REPAIR_HISTORY_PRESENT"
+          }
+        ],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_VERIFY",
+            "validation_procedure_id": "verify.storage.device_detected"
+          }
+        ],
+        "disposition": "discard"
+      },
+      "educational_text": "Verification evaluates current machine state after the latest relevant Repair.",
+      "rarity": "common"
+    }
+  ]
+}
