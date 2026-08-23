@@ -20,8 +20,7 @@
         "status": "draft",
         "search_tags": [
           "power",
-          "no",
-          "power"
+          "no"
         ]
       },
       "category": "power",
@@ -33,6 +32,7 @@
       "associated_fault_ids": [
         "fault.board.system.failed",
         "fault.power.input.cable_loose",
+        "fault.power.distribution_board.failed",
         "fault.power.psu.failed",
         "fault.power.psu.not_seated"
       ]
@@ -53,7 +53,6 @@
         "version": "0.1.0",
         "status": "draft",
         "search_tags": [
-          "power",
           "power",
           "redundancy",
           "warning"
@@ -100,6 +99,7 @@
       ],
       "associated_fault_ids": [
         "fault.board.system.failed",
+        "fault.compute.cpu_socket.contacts_damaged",
         "fault.cpu.not_seated",
         "fault.memory.dimm.failed",
         "fault.memory.dimm.not_seated",
@@ -122,7 +122,6 @@
         "version": "0.1.0",
         "status": "draft",
         "search_tags": [
-          "memory",
           "memory",
           "warning"
         ]
@@ -189,8 +188,7 @@
         "search_tags": [
           "memory",
           "reduced",
-          "detected",
-          "memory"
+          "detected"
         ]
       },
       "category": "memory",
@@ -200,6 +198,7 @@
         "test.system.bmc_logs"
       ],
       "associated_fault_ids": [
+        "fault.compute.cpu_socket.contacts_damaged",
         "fault.cpu.not_seated",
         "fault.memory.channel.unavailable",
         "fault.memory.dimm.not_seated",
@@ -224,7 +223,6 @@
         "search_tags": [
           "boot",
           "no",
-          "boot",
           "device"
         ]
       },
@@ -260,7 +258,6 @@
         "search_tags": [
           "boot",
           "wrong",
-          "boot",
           "device"
         ]
       },
@@ -371,6 +368,7 @@
         "fault.storage.cable.failed",
         "fault.storage.cable.loose",
         "fault.storage.nvme.device_failed",
+        "fault.storage.backplane.path_failed",
         "fault.storage.raid.controller_failed",
         "fault.storage.sata.drive_failed"
       ]
@@ -392,7 +390,6 @@
         "status": "draft",
         "search_tags": [
           "storage",
-          "storage",
           "i/o",
           "errors"
         ]
@@ -404,6 +401,7 @@
         "test.storage.device_inventory"
       ],
       "associated_fault_ids": [
+        "fault.storage.backplane.path_failed",
         "fault.storage.cable.failed",
         "fault.storage.cable.loose",
         "fault.storage.nvme.device_failed",
@@ -440,6 +438,7 @@
         "test.storage.device_inventory"
       ],
       "associated_fault_ids": [
+        "fault.storage.drive.predictive_failure",
         "fault.storage.sas.drive_failed"
       ]
     },
@@ -507,6 +506,8 @@
         "test.system.bmc_logs"
       ],
       "associated_fault_ids": [
+        "fault.cooling.fan_sense_path.intermittent",
+        "fault.management.bmc_firmware.corrupt",
         "fault.thermal.cpu.overheating",
         "fault.thermal.fan.failed",
         "fault.thermal.heatsink.clogged"
@@ -574,6 +575,7 @@
         "test.system.bmc_logs"
       ],
       "associated_fault_ids": [
+        "fault.cooling.fan_sense_path.intermittent",
         "fault.thermal.fan.failed"
       ]
     },
@@ -629,7 +631,6 @@
         "search_tags": [
           "network",
           "no",
-          "network",
           "connectivity"
         ]
       },
@@ -728,7 +729,6 @@
         "status": "draft",
         "search_tags": [
           "pcie",
-          "pcie",
           "device",
           "missing"
         ]
@@ -759,7 +759,6 @@
         "version": "0.1.0",
         "status": "draft",
         "search_tags": [
-          "firmware",
           "firmware",
           "settings",
           "reset"
@@ -870,6 +869,7 @@
       ],
       "associated_fault_ids": [
         "fault.board.system.failed",
+        "fault.firmware.version_set.incompatible",
         "fault.pcie.card.not_seated",
         "fault.storage.raid.controller_failed"
       ]

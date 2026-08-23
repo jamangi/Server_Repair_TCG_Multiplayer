@@ -1,4 +1,4 @@
-# Server Repair Domain Viewer — Prototype
+# Server Repair Domain Viewer
 
 A static HTML/CSS/JavaScript viewer for the Server Repair Card Game technical knowledge database.
 
@@ -29,13 +29,20 @@ Drop another `.json` file into `content/` with this general shape:
 }
 ```
 
-Then run:
+New records must use unique stable IDs, validate against the matching schema in
+`../schemas/domain/`, and reference IDs that exist in a manifest-loaded pack with the
+expected entity type. No edit to `index.html`, `app.js`, or `data-loader.js` is required.
+
+After adding or changing content, run the routine content checks from the repository root:
 
 ```bash
-node scripts/build-manifest.mjs
+node viewer/scripts/build-manifest.mjs
+node --test tests/viewer-content-schema.test.mjs tests/viewer-baseline.test.mjs
 ```
 
-No edit to `index.html`, `app.js`, or `data-loader.js` is required.
+CI runs the same schema, reference, causal-edge, and baseline checks for viewer-content
+changes. Schema validation is part of normal content maintenance, not a future viewer
+feature.
 
 The included GitHub Actions workflow can regenerate and commit the manifest automatically after content changes. If repository policy prevents Actions from pushing directly to the branch, run the manifest script locally or adapt the workflow to generate the manifest during Pages deployment instead.
 
@@ -43,19 +50,26 @@ The included GitHub Actions workflow can regenerate and commit the manifest auto
 
 Browsers can fetch or import known URLs, but a normal static GitHub Pages directory does not give client JavaScript a portable directory-globbing API. The manifest provides discovery without coupling the entrypoint to every pack filename.
 
+## Causal relationship data
+
+`content/core-v0.1-fault-graph.json` stores authored Fault-to-Fault causal edges used by
+domain-network and future Ticket Builder validation. It is not the retired interactive
+fault-graph visualization. The current viewer does not draw a graph or expose a causal-edge
+tab; edge records remain visible only through **Everything**.
+
 ## Local testing
 
 Do not double-click `index.html`, because the viewer fetches JSON. Serve the folder over HTTP, for example:
 
 ```bash
-python -m http.server 8000
+python -m http.server 8000 --directory viewer
 ```
 
 Then visit `http://localhost:8000/`.
 
 ## Illustrations
 
-Records already contain reusable illustration references, for example:
+Records may contain reusable illustration references, for example:
 
 ```json
 "illustration": {
@@ -64,13 +78,13 @@ Records already contain reusable illustration references, for example:
 }
 ```
 
-The test viewer displays the asset metadata but does not yet resolve an image file. A later `assets/manifest.json` can map these IDs to PNG/WebP/SVG resources.
+The viewer displays illustration metadata but does not resolve image files yet. Content may
+omit the optional `illustration` object until an asset pipeline is intentionally added.
 
-## Suggested next additions
+## Current scope
 
-- validate every pack against the JSON Schemas in CI
-- hyperlink referenced stable IDs to related records
-- add expansion/set filters
-- resolve illustration assets
-- persist filters/search in the URL
-- create the complete Core v0.1 Domain Content Pack
+The viewer intentionally provides search, category filtering, sorting, and generic record
+details for the Core v0.1 content packs. Referenced stable IDs are currently displayed as
+text. Making those references clickable would be a navigation enhancement, not a content,
+schema, or deployment requirement. Expansion filters and URL-persisted search state are not
+planned for this version.

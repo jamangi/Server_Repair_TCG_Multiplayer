@@ -1,0 +1,701 @@
+SERVER REPAIR TCG — POST-MARKET DOMAIN EXPANSION RESEARCH DRAFT
+Date: 2026-08-23
+Status: Reconciled research input. Implemented records remain draft Core v0.1 content.
+
+IMPLEMENTATION RECONCILIATION — 2026-08-23
+
+The frozen first-version rules and updated schemas changed the safe implementation cut:
+
+  - Diagnostic substitution is always a Test whose temporary known-good resource reverts.
+    Permanent replacement remains a separate Repair event.
+  - First-version Action costs are limited to 0, 1, or 2.
+  - Test outcomes use the uppercase authored vocabulary SUPPORT, CONTRADICT, CONFIRM,
+    RULE_OUT, and INCONCLUSIVE.
+  - Faults intended for future Ticket Builder use need coherent Symptoms, Tests, Repairs,
+    and Verifications rather than the earlier 32-object minimum's intentionally incomplete
+    set of reference objects.
+  - Fault causal relationships remain required domain data even though the retired graph
+    visualization is not returning. The existing fault-graph pack is relationship data,
+    not a viewer feature dependency.
+
+The implemented Core v0.1 post-market pack therefore supersedes the 32-object minimum in
+Section 8 with 55 linked records: 8 Faults, 7 Symptoms, 3 Components, 9 Tests, 4 Tools,
+2 Commands, 8 Repairs, 8 Validations, and 6 Protocols. Wave 2 remains research-only.
+
+PURPOSE
+
+Identify a restrained next set of Faults, Symptoms, Components, Tests, Tools,
+Commands, Repair Procedures, Validation Procedures, and Protocols that reflects
+what actually arrives at a post-market server repair bench and what a technician
+does to inspect, diagnose, repair, validate, and document it.
+
+This file deliberately does not assign stable IDs, final schema fields, card
+costs, or evidence outcomes. The repository is being updated. Every candidate
+must be reconciled against the post-update domain snapshot before IDs are
+allocated or viewer content is changed.
+
+
+1. REPOSITORY BASELINE REVIEWED
+
+The root README describes the intended loop as:
+
+  Observe -> Hypothesize <-> Test -> Isolate -> Repair -> Verify -> Document
+
+Domain knowledge is independent of cards. Case studies are evidence-preserving
+research inputs, not domain authority. Stable IDs are public contracts.
+
+Current viewer snapshot counts observed on 2026-08-23:
+
+  Faults                  33
+  Symptoms                26
+  Components              22
+  Tests                   24
+  Tools                    8
+  Commands                10
+  Repair Procedures       25
+  Validation Procedures   13
+  Protocols               12
+
+The existing catalog already covers the most obvious part-swap paths well:
+DIMM faults, PSUs, fans, CPU cooling, HDD/SSD/NVMe, RAID, storage cables, NICs,
+Ethernet cables, PCIe seating, boot order, bootloader repair, BMC logs, minimum
+configuration, known-good substitution, controlled stress, normal POST/boot,
+burn-in, and RAID-health verification.
+
+The best next expansion is therefore not another broad list of server nouns.
+It should fill bench-work gaps where the present database cannot represent the
+cause, discriminating test, repair, or proof of recovery.
+
+
+2. POST-MARKET SELECTION RUBRIC
+
+Score each candidate from 0 to 2 on each dimension (maximum 12):
+
+  A. Bench frequency
+     0 rare/specialized; 1 recurring; 2 routine intake or screening work.
+
+  B. Consequence
+     0 minor; 1 blocks a feature or degrades redundancy; 2 no-power/no-POST,
+     data-loss risk, safety risk, or likely repeat return.
+
+  C. Diagnostic distinctness
+     0 an alias of an existing object; 1 adds useful detail; 2 changes the
+     hypotheses, required evidence, or isolation path.
+
+  D. Physical/action relevance
+     0 primarily conceptual; 1 technician observes or configures it; 2 a
+     technician physically inspects, measures, substitutes, repairs, or replaces it.
+
+  E. Lifecycle completeness
+     0 orphan concept; 1 links to some existing objects; 2 can participate in a
+     Fault -> Test -> Repair -> Validation bundle.
+
+  F. Evidence quality
+     0 intuition only; 1 official procedure or incomplete case; 2 repeated or
+     complete real-world case support.
+
+Promotion guidance:
+
+  10-12  Wave 1 core candidate
+   7-9   Wave 2 or promote after one stronger case
+   4-6   specialist/educational candidate
+   0-3   reject, alias, or scenario fact
+
+Hard gates:
+
+  - Do not create an object that is only a product name, error-code spelling,
+    vendor synonym, or model-specific command unless it adds reusable behavior.
+  - Do not create a Fault unless it can be distinguished from an existing Fault.
+  - Do not create a Repair without a meaningful post-repair Validation.
+  - Keep unsafe board-level work behind an explicit safety/qualification protocol.
+  - Preserve missing stages in case evidence; do not invent successful verification.
+
+
+3. REAL-WORLD CASE SURVEY
+
+The existing v0.1 pilot already contributes five strong paths:
+
+  P1. No POST -> failed DIMM: single-DIMM isolation and known-good substitution
+      restore POST. Strong support for memory isolation, substitution, and POST.
+
+  P2. No DHCP lease -> exhausted IPv4 pool: client-side commands plus server-side
+      pool/reservation inspection isolate stale reservations; removing them restores
+      leasing. Strong support for DHCP transaction analysis and lease validation.
+
+  P3. No power -> failed PSU: competing board/PSU hypotheses and substitution.
+      The source uses an ATX PSU, so standalone jumpering must not be generalized to
+      server hot-swap PSUs.
+
+  P4. RAID degraded -> failed SAS member: controller report, member replacement,
+      rebuild failure, second media fault, and backup/restore recovery. Strong support
+      for predictive/media-error detail and recovery-path documentation.
+
+  P5. Shutdown under load -> poor heatsink contact: load reproduction and CPU
+      temperature rise followed by thermal-interface work. Attribution is partly
+      confounded by simultaneous cleaning and airflow improvement.
+
+Additional cases surveyed for post-market gaps:
+
+  N1. Dell PowerEdge R910 — second-CPU installation causes E1410/failsafe errors.
+      CPUs and RAM are swapped and shown functional; unsupported socket population
+      narrows the location; slightly bent socket pins are found, corrected, and the
+      server boots with all four CPUs. This is strong support for a bent CPU-socket
+      contact Fault, magnified socket inspection, socket-location isolation, careful
+      pin correction, and full CPU/memory inventory validation.
+      Source:
+      https://www.dell.com/community/en/conversations/rack-servers/r910-will-not-power-on-with-4-processors/647f7d25f4ccf8a8deb93b08
+
+  N2. Dell PowerEdge T420 — voltage-out-of-range and immediate shutdown on a
+      second-hand server. Both PSUs are tried individually and in both slots; the
+      machine is reduced to a minimum configuration; visual inspection and PDB/rail
+      checks are discussed; PDB replacement restores boot. This is strong support for
+      a Power Distribution Board component/fault/test/repair bundle.
+      Source:
+      https://www.dell.com/community/en/conversations/poweredge-hardware-general/t420-poweredge-vlt0204-main-board-voltage-outside-of-range/67fd91b469e6265ea77af6ab
+
+  N3. Dell PowerEdge R620 — fan reports 0 RPM although both blades spin. Fan swaps,
+      log clearing, power drain, and firmware alternatives do not move the location.
+      Pressing the fan connector makes the error disappear; releasing it brings the
+      error back, indicating a loose solder connection. This strongly supports
+      cross-slot substitution, a fan-sense/connector-path Fault, magnified connector
+      inspection, and sensor-stability validation. It supports board-level connector
+      repair as a candidate but does not document a durable completed repair.
+      Source:
+      https://www.dell.com/community/en/conversations/poweredge-hardware-general/poweredge-r620-system-board-fan5b-failure/647f8ccbf4ccf8a8de78dede
+
+  N4. Dell PowerEdge R320 — failed iDRAC firmware update leaves iDRAC uninitialized,
+      fans loud, Lifecycle Controller disabled, and firmware packages unusable.
+      Flea-power drain, NVRAM clear, bootable update media, and racadm recovery all
+      fail; the accepted support response identifies system-board replacement as the
+      remaining repair because iDRAC is embedded. Strong support for BMC firmware
+      corruption, recovery-mode testing, and an escalation path, but the thread does
+      not verify a completed board replacement.
+      Source:
+      https://www.dell.com/community/en/conversations/systems-management-general/how-to-repair-idrac7-after-bad-firmware-update/647f86faf4ccf8a8de61bf8e
+
+  N5. Dell PowerEdge 2800 — a controller diagnostic reports predictive drive failure.
+      The drive is identified by bay, taken offline, hot-replaced, rebuilt, and followed
+      by a consistency check. A repeat failure shows why replacement alone is not
+      sufficient proof and why controller/media/path evidence must be retained.
+      Source:
+      https://www.dell.com/community/en/conversations/poweredge-hddscsiraid/poweredge-2800-raid-disk-problem/647f3a8bf4ccf8a8de193bf0
+
+  N6. Dell PowerEdge 1950/2950 — a “backplane degraded” state remains after a failed
+      drive is replaced and the array is healthy. A fresh DSET probe/log operation
+      clears the stale state; the backplane was not faulty. This is a valuable L0/NTF
+      case: save evidence, clear stale state, retest, and avoid an unnecessary FRU swap.
+      Source:
+      https://www.dell.com/community/en/conversations/poweredge-hddscsiraid/pe2900-backplane-degraded/647e8b20f4ccf8a8dede59e9
+
+  N7. Dell PowerEdge systems — NIC link-down/up alerts begin after a management
+      firmware change and disappear after rollback to iDRAC 4.40.40. This supports
+      firmware regression/mismatch as a distinct Fault, version correlation as a
+      Test, rollback as a Repair, and link-soak/error-counter verification. It also
+      warns against replacing NIC hardware based only on management-plane alerts.
+      Source:
+      https://www.dell.com/community/en/conversations/poweredge-hardware-general/idrac-keeps-messaging-the-nic-in-slot-4-port-1-network-link-is-started/647f94b2f4ccf8a8de70eaff
+
+  N8. Dell PowerEdge R720xd — persistent iDRAC initialization failure survives reset
+      and reflashing attempts; the owner replaces the system board. This supports the
+      BMC recovery/escalation bundle and distinguishes a completed replacement outcome
+      from N4's recommendation-only ending.
+      Source:
+      https://www.dell.com/community/en/conversations/rack-servers/720xd-motherboard-initialization-error-fix-or-replace/64d7d8a1e76b0831726869a4
+
+Cross-case conclusions:
+
+  - Post-market work repeatedly encounters physical damage and latent connection
+    problems that generic “system board failed” cannot teach well.
+  - Location-following versus part-following substitution is one of the highest-value
+    reasoning patterns and should be expressible for fans, DIMMs, drives, PSUs, ports,
+    CPUs, and risers.
+  - Firmware can be the root cause, the repair, or the source of misleading telemetry.
+  - L0/NTF requires saving evidence, clearing stale state, reproducing the complaint,
+    and proving a clean exit; “no fault found” must not mean “no test performed.”
+  - A successful boot is not enough after storage, firmware, thermal, or intermittent
+    repairs. Cold cycles, stress/soak, inventory, logs, and error counters matter.
+
+
+4. RECOMMENDED EXPANSION STRATEGY
+
+Build complete repair-pattern bundles. Wave 1 should target six bundles:
+
+  A. Incoming inspection and NTF screening
+  B. Board/socket/connector damage
+  C. Power distribution and rail isolation
+  D. Firmware and management-controller recovery
+  E. Predictive storage, path isolation, and rebuild proof
+  F. Network port/transceiver/firmware isolation
+
+Do not require every object below to become a card. Some are better reference-only
+entities that make tickets and evidence coherent.
+
+
+5. WAVE 1 — CORE CANDIDATES
+
+5.1 Faults
+
+F1. Bent or damaged CPU-socket contacts
+    Why distinct: a CPU can pass in another socket while one socket loses CPU,
+    memory-channel, or inter-processor links. Repair differs from replacing a CPU.
+    Evidence: N1 and multiple Dell service/community sequences.
+
+F2. Fan connector or tachometer-sense path intermittent
+    Why distinct: the fan physically spins but telemetry reports 0 RPM; swapping a fan
+    leaves the fault at the connector location. Avoids incorrect fan replacement.
+    Evidence: N3.
+
+F3. Power distribution board failed
+    Why distinct: known-good/redundant PSUs can all fail in either bay while downstream
+    voltage or power-good errors persist. The replaceable PDB is not the PSU or board.
+    Evidence: N2.
+
+F4. BMC/iDRAC firmware corrupted or unbootable
+    Why distinct: produces management loss, disabled lifecycle functions, boot delay,
+    and failsafe fan behavior; may require recovery media or system-board replacement.
+    Evidence: N4 and N8.
+
+F5. Firmware regression or incompatible firmware set
+    Why distinct: hardware may function while alerts, drivers, or ports fail after a
+    version change; rollback/update is the repair, not FRU replacement.
+    Evidence: N7 and N4.
+
+F6. Drive predictive failure / endurance exhausted
+    Why distinct: the drive is still online but carries imminent data-loss risk. It is
+    not equivalent to an already-failed drive and changes backup/replacement ordering.
+    Evidence: N5 and Dell PDR16 guidance.
+
+F7. Storage backplane slot/path failed
+    Why distinct: a known-good drive fails only in one bay; the existing generic cable,
+    drive, HBA, and controller faults cannot isolate a bay/backplane path.
+    Evidence: recurring official troubleshooting path; promote after a complete case.
+
+F8. Stale management-controller hardware alert
+    Why distinct: the reported FRU is healthy after the original fault is gone. The
+    repair is state refresh/log handling and retest, not replacing the named FRU.
+    Evidence: N6.
+
+F9. Replacement-part identity or compatibility mismatch
+    Why distinct: used boards/risers/controllers may physically fit but carry wrong
+    identity, firmware family, feature license, or configuration. Promote only if the
+    implementation can avoid vendor-model trivia.
+
+F10. RAID cache-protection module failed or depleted
+     Why distinct: can disable write-back cache or expose unwritten data without a
+     controller failure. Common enough to research as a Wave 1/2 boundary candidate.
+
+Recommended first cut: F1-F8. Hold F9-F10 for another complete case each.
+
+5.2 Symptoms
+
+S1. CPU or processor socket not detected
+S2. BMC not responding / initialization failed
+S3. Lifecycle or platform-management functions unavailable
+S4. Firmware update or recovery rejected/failed
+S5. Voltage or power-good reading outside range
+S6. Fan reports zero RPM while visibly spinning
+S7. Predictive drive-failure or endurance warning
+S8. Slot-specific drive missing with known-good media
+S9. Link repeatedly flaps up/down
+S10. Hardware alert persists after the implicated FRU is healthy
+
+Reuse instead of duplicating:
+
+  - Map failsafe fan noise to existing Fans Loud where sufficient.
+  - Map reduced memory behind a damaged CPU socket to existing Reduced Capacity.
+  - Map generic missing PCIe/NIC devices to existing Device Missing objects when the
+    evidence does not need a new observable distinction.
+
+5.3 Components
+
+C1. CPU socket
+C2. Power distribution board / PSU backplane
+C3. PCIe riser
+C4. Network daughter card (only if the existing NIC cannot express replaceable NDC work)
+C5. Pluggable network transceiver (SFP/SFP+/QSFP family, vendor-neutral)
+C6. Fan connector/header and sense path
+C7. RAID cache-protection module (battery or supercapacitor abstraction)
+C8. Internal boot media (M.2/SD/USB abstraction)
+C9. Service-identity storage/configuration (reference-only unless schema semantics fit)
+
+Do not add another generic system board, NIC, backplane, or drive component; those
+already exist. Add only the replaceable or diagnostically separable boundary.
+
+5.4 Tests
+
+T1. Intake configuration and identity capture
+    Record model, service/asset identifier, serials, received configuration, firmware
+    versions, missing parts, visible damage, and customer symptom before disturbance.
+
+T2. Magnified socket and connector inspection
+    Requires magnification and controlled lighting; checks pin-row uniformity,
+    contamination, lifted connectors, cracked joints, and damaged pads.
+
+T3. Location-following cross-substitution
+    Formalize the reasoning rule: if a known-good part fails in one location while the
+    suspect part passes elsewhere, evidence shifts toward socket/slot/path.
+
+T4. Power-distribution path isolation
+    Test each known-good PSU in each bay, reduce to minimum configuration, inspect the
+    PDB, and interpret rail/power-good results without unsafe live probing by default.
+
+T5. DC rail and power-good measurement
+    Advanced bench test requiring model-specific pinout, safe breakout/load method,
+    multimeter, and explicit electrical-safety protocol.
+
+T6. Firmware inventory and compatibility comparison
+    Compare BIOS, BMC, CPLD, RAID, NIC, drive, and backplane versions against an approved
+    baseline and identify incompatible sequences or regressions.
+
+T7. BMC reset/recovery-path test
+    Distinguish reachable-but-stuck, soft-resettable, hard-resettable, recovery-mode,
+    and unrecoverable embedded-controller states.
+
+T8. Predictive drive health and endurance analysis
+    Interpret SMART/controller predictive state, media errors, remaining endurance,
+    wear, and controller logs; preserve data before destructive testing.
+
+T9. Drive-bay/path isolation
+    Use a known-good compatible drive and/or move a test drive under a protected plan
+    to separate media, carrier, bay, cable, expander/backplane, and controller faults.
+
+T10. Event-log freshness test
+     Export/save logs, correlate timestamps and serials, clear only after preservation,
+     reproduce or soak, then determine whether the alert returns.
+
+T11. Network transceiver/port path isolation
+     Substitute known-good optic/DAC/cable and switch port, inspect DOM data where
+     supported, and determine whether the fault follows module, port, or far end.
+
+T12. Network link-flap and error-counter soak
+     Observe link transitions, CRC/symbol errors, drops, resets, and firmware/driver
+     correlation over a defined interval.
+
+5.5 Tools
+
+TL1. Illuminated magnifier or inspection microscope
+TL2. Calibrated torque driver
+TL3. Known-good compatible CPU (use only if a CPU substitution object is needed)
+TL4. Known-good pluggable transceiver/DAC
+TL5. Network loopback plug/module
+TL6. Bootable vendor diagnostics and firmware media
+TL7. Soldering/rework station (qualification-gated)
+TL8. Fiber inspection/cleaning kit
+
+Possible later tools: thermal camera, oscilloscope, dedicated PSU tester, BGA rework
+station, programmable load, and board preheater. These are valuable L3/L4 tools but
+should wait for cases that produce distinct gameplay evidence rather than tool trivia.
+
+5.6 Commands
+
+CMD1. ipmitool SEL listing
+      Representative syntax: ipmitool sel elist
+      Purpose: retrieve timestamped system-event history with sensor context.
+
+CMD2. ipmitool sensor/SDR inspection
+      Representative syntax: ipmitool sdr elist
+      Purpose: compare reported state, reading, threshold, and physical observation.
+
+CMD3. NVMe health log
+      Representative syntax: nvme smart-log <device>
+      Purpose: read critical warnings, media errors, temperature, and endurance.
+
+CMD4. Detailed RAID-controller physical-drive status
+      Representative family: storcli /c<controller> /eall /sall show all
+      Purpose: locate drive, predictive state, media errors, and rebuild condition.
+      Note: model as a command family or pick one supported platform deliberately;
+      do not imply syntax portability across PERC, MegaRAID, Smart Array, and others.
+
+CMD5. NIC statistics and counters
+      Representative syntax: ethtool -S <interface>
+      This may be an expansion of the existing ethtool Command rather than a new ID.
+
+CMD6. Firmware/FRU inventory command
+      Prefer a vendor-neutral capability first. If an OEM command is needed, use a
+      narrowly scoped racadm/Redfish query and label the platform accurately.
+
+Avoid creating separate Commands for every harmless flag variation. Add a Command
+only when it unlocks a distinct Test or Evidence result.
+
+5.7 Repair Procedures
+
+R1. Correct damaged CPU-socket contact
+    L3/L4, magnification- and qualification-gated; otherwise replace system board.
+
+R2. Repair fan/connector solder joint
+    L3, ESD and solder-process controlled; otherwise replace the affected board.
+
+R3. Replace power distribution board
+
+R4. Recover BMC firmware
+    Ordered attempts: preserve configuration/logs if possible, approved reset, approved
+    recovery image/method, version stepping if required, then hardware escalation.
+
+R5. Recover system BIOS/UEFI firmware
+
+R6. Update or roll back firmware as a coordinated set
+    Must include dependency/order, power-loss protection, configuration backup, and a
+    known recovery path; never represent “update everything” as automatically safe.
+
+R7. Replace storage backplane
+    Preserve array metadata and drive-slot mapping; handle foreign configuration safely.
+
+R8. Replace predictively failing drive
+    Backup first, identify/blink and verify the exact bay/serial, follow controller-safe
+    offline/hot-swap procedure, then monitor rebuild.
+
+R9. Replace pluggable network transceiver
+
+R10. Restore board identity and management configuration after system-board replacement
+     Restore service identity, licenses where permitted, BIOS/BMC settings, time, network
+     configuration, certificates/credentials, and firmware baseline without inventing
+     vendor-independent guarantees.
+
+R11. Clear stale hardware state after evidence preservation
+     Treat as a state-correction/NTF procedure, not proof that the original complaint is
+     repaired. Always pair it with reproduction/soak validation.
+
+5.8 Validation Procedures
+
+V1. Repeated cold-start validation
+    Remove AC as required, allow controller discharge/initialization, and complete a
+    defined number of cold POST/boot cycles without the original symptom.
+
+V2. Full expected hardware-inventory validation
+    Verify CPUs, memory capacity/channels, PCIe devices, storage, NIC ports, fans, PSUs,
+    serials, and management inventory against the intake/target configuration.
+
+V3. Clean event-log validation
+    Save and clear baseline, run the relevant cold/stress/soak sequence, and require no
+    recurrence of the target event. Do not require a globally empty log.
+
+V4. BMC functional validation
+    Require reachable UI/API/CLI, accurate sensors, inventory, SEL access, remote power
+    control where authorized, and no initialization/failsafe-fan fault.
+
+V5. Firmware persistence and compatibility validation
+    Verify versions after cold reboot, no pending jobs, expected settings preserved,
+    devices/drivers initialize, and no new firmware-related events.
+
+V6. Power redundancy and failover validation
+    Under a safe load, verify each PSU/bay and redundancy transition without shutdown,
+    voltage error, or loss of telemetry.
+
+V7. Fan telemetry and thermal-control validation
+    Require plausible RPM from every fan, no connector-location fault, expected control
+    response, and safe temperatures under load.
+
+V8. Predictive-drive replacement validation
+    Require correct serial/bay, rebuild completion, optimal array state, clean predictive
+    status, and appropriate consistency/background initialization result.
+
+V9. Storage error-free soak
+    Defined non-destructive workload plus stable media/path/controller counters and no
+    new I/O or predictive errors.
+
+V10. Network link and counter soak
+     Stable negotiated link at expected speed/lanes, traffic passes, counters stay within
+     acceptance limits, and link transitions do not recur.
+
+V11. NTF screening exit
+     Complaint attempted under documented conditions; diagnostics, cold cycles, stress,
+     log review, and observation window completed; no fault reproduced; limitations and
+     received/returned configuration documented.
+
+5.9 Protocols
+
+P01. Intake condition, configuration, and chain-of-custody protocol
+P02. Customer-data protection and storage-media handling protocol
+P03. De-energization, residual-power discharge, and safe re-energization protocol
+P04. CPU/socket handling and calibrated torque protocol
+P05. Firmware change control, dependency ordering, and recovery protocol
+P06. RAID member replacement and data-preservation protocol
+P07. NTF screening and evidence-based exit protocol
+P08. Board-level solder/rework safety and qualification protocol
+P09. Fiber-optic inspection, cleaning, and eye-safety protocol
+P10. Post-repair evidence and worklog protocol
+
+The existing ESD protocol should be reused, not duplicated. Its related procedures may
+need expansion to cover mat/grounding, packaging, and exposed-socket handling.
+
+
+6. WAVE 2 — RESEARCH BEFORE PROMOTION
+
+The following are plausible and post-market relevant, but should not be promoted until
+they have a complete case, a clear schema role, and a distinct repair/validation path:
+
+  - Liquid residue, corrosion, or conductive contamination on a board
+  - Burned connector, damaged trace, lifted pad, cracked solder joint as separate Faults
+  - PCIe riser failure or incompatible riser population
+  - RAID cache battery/supercapacitor depletion
+  - BMC/BIOS service-identity mismatch after used-board replacement
+  - Internal SD/USB/M.2 boot-media wear or mirror degradation
+  - SFP/QSFP transceiver failure and dirty fiber end face
+  - Thermal sensor failure versus actual overheating
+  - NVRAM/CMOS configuration corruption distinct from existing configuration reset
+  - Unsupported/mismatched CPU stepping or memory type
+  - Security lock, password, or ownership-transfer state on used equipment
+  - Data sanitization and media disposition
+  - Cosmetic refurbishment grades and accessory completeness
+  - BGA or fine-pitch device rework
+
+Why these wait: several are common in depot work, but the current research either lacks a
+complete server-specific lifecycle case or risks collapsing product-specific policy into a
+generic domain object.
+
+
+7. OBJECTS TO REUSE OR EXTEND INSTEAD OF DUPLICATING
+
+Reuse current entities whenever their evidence semantics are sufficient:
+
+  - General Visual Inspection: extend evidence coverage; add Magnified Socket/Connector
+    Inspection only because it has different tools and specific physical evidence.
+  - Minimum Configuration: reuse across board, PDB, BMC, and socket cases.
+  - Known-Good Substitution: consider generalizing its target capability before adding
+    one Test per component class.
+  - BMC Logs: reuse; add Event-Log Freshness only for preserve/clear/reproduce reasoning.
+  - Controlled Stress and Burn-In: reuse; add only acceptance profiles/linked validations.
+  - Multimeter, BMC Console, RAID Console, basic hand tools, ESD strap: reuse.
+  - System Board Failed: retain as the final FRU-level cause when no more specific,
+    repair-relevant physical cause is established.
+  - NIC Failed and PCIe Card Not Seated: reuse unless NDC/riser/transceiver evidence is
+    intentionally modeled at a separable boundary.
+  - Drive Health and RAID Status: extend or link to the narrower predictive/endurance and
+    post-rebuild consistency Tests rather than duplicating generic health checks.
+  - Fans Loud, Reduced Capacity, Device Missing, No POST: reuse as Symptoms.
+
+
+8. SUPERSEDED MINIMUM FIRST IMPLEMENTATION
+
+The 32-object cut below is retained as proposal history. It was not implemented because it
+left several Faults without paired Repairs and Verifications. The reconciled 55-record pack
+described in the implementation note at the top of this file is the authoritative result of
+this draft's conversion to viewer content.
+
+If the updated repo can absorb only one compact expansion, implement these 32 objects
+after deduplication and schema validation:
+
+  Faults (8)
+    Bent/damaged CPU-socket contacts
+    Fan connector/tach-sense path intermittent
+    Power distribution board failed
+    BMC firmware corrupted/unbootable
+    Firmware regression/incompatible firmware set
+    Drive predictive failure/endurance exhausted
+    Storage backplane slot/path failed
+    Stale management-controller hardware alert
+
+  Components (5)
+    CPU socket
+    Power distribution board
+    PCIe riser
+    Pluggable network transceiver
+    RAID cache-protection module
+
+  Tests (7)
+    Intake configuration/identity capture
+    Magnified socket/connector inspection
+    Location-following cross-substitution
+    Power-distribution path isolation
+    Firmware inventory/compatibility comparison
+    Predictive drive health/endurance analysis
+    Event-log freshness test
+
+  Tools (3)
+    Illuminated magnifier/inspection microscope
+    Calibrated torque driver
+    Bootable diagnostics/firmware media
+
+  Commands (3)
+    ipmitool SEL listing
+    ipmitool SDR/sensor inspection
+    NVMe health log
+
+  Repairs (3)
+    Replace power distribution board
+    Recover BMC firmware
+    Replace predictively failing drive
+
+  Validations (3)
+    Repeated cold-start validation
+    Full expected hardware-inventory validation
+    Clean event-log validation
+
+This 32-object cut is intentionally incomplete as a final catalog, but it adds the most
+diagnostically distinctive post-market bench patterns without flooding the database. The
+next increment should add the paired repairs and validations from Section 5, not another
+batch of unrelated concepts.
+
+
+9. IMPLEMENTATION NOTES FOR THE FUTURE UPDATED REPOSITORY
+
+Before authoring JSON:
+
+  1. Re-read the post-update root README, AGENTS.md, active task contract, schemas, and
+     content IDs. Do not assume the 2026-08-23 counts or schema fields remain current.
+  2. Reconcile every candidate against existing objects and aliases.
+  3. Select an expansion_id and source.status consistent with the updated schema.
+  4. Allocate stable IDs only after names and boundaries are approved.
+  5. Build causal links in both directions where required by the content model.
+  6. Give every new Fault at least one observable Symptom, discriminating Test, Repair,
+     and Validation, or explicitly document why a link is absent.
+  7. Separate explicit source evidence from inferred educational content.
+  8. Rebuild viewer/content/manifest.json only through build-manifest.mjs.
+  9. Run every verification command in the future named task plus the baseline checks.
+
+Suggested authoring order:
+
+  Protocols/Components -> Tools/Commands -> Symptoms/Faults -> Tests -> Repairs ->
+  Validations -> relationship audit -> case fixtures -> viewer validation.
+
+
+10. SOURCE AND AUTHORITY NOTES
+
+Operational framing:
+
+  SMS InfoComm publicly describes L0 DOA/NTF/accessory replacement; L1 screen/clean and
+  software/firmware upgrade; L2 component/part replacement and basic PCB repair; L3
+  multi-solder-point and motherboard replacement; and L4 debugging/BGA/failure analysis.
+  https://www.smsinfocomm.com/Solutions_1.html
+
+Official service-flow support:
+
+  Oracle's server service documentation sequences fault/event review, preparation for
+  physical service, ESD-safe workspace, component service, and fault clearing.
+  https://docs.oracle.com/en/industries/communications/e6-2l/1.0/service-manual/troubleshoot-diagnose-issues.html
+
+  Dell PowerEdge troubleshooting guidance supports POST/error-code review, bent-pin and
+  socket inspection, minimum configuration, cable reseating, inventory confirmation,
+  firmware handling, and component replacement boundaries.
+  https://dl.dell.com/manuals/common/servertroubleshootingguide_en.pdf
+
+  Dell predictive-drive guidance emphasizes backup, controller/support log collection,
+  replacement, optimal virtual-disk state, and coordinated drive/iDRAC/RAID firmware.
+  https://www.dell.com/support/kbdoc/en-us/000126418/poweredge-hdd-what-is-predicted-drive-failure-and-how-to-solve-it
+
+Source caution:
+
+  Community threads are primary accounts of troubleshooting sequences and outcomes, not
+  universal service instructions. Model-specific voltage probing, pin repair, firmware
+  recovery, hot-swap, fiber handling, and solder/BGA work require the correct service
+  manual, safety procedure, compatible tools, and technician qualification.
+
+
+11. OPEN DECISIONS
+
+  - Should “no trouble found” be represented as a Fault-like hidden state, a ticket
+    outcome, or only a screening Protocol/Validation? The research favors the latter;
+    NTF is a conclusion after evidence, not a physical cause.
+  - Should vendor CLI families be individual Commands or capabilities/aliases under a
+    generic management Tool? Decide before adding racadm, storcli, ssacli, and Redfish.
+  - Should location-following substitution be one general Test with parameterized targets
+    or several component-specific Tests? Prefer one general reasoning pattern if schema
+    evidence rules can express it cleanly.
+  - Is board-level rework in the first playable scope, or reference-only domain content?
+    The post-market context argues for inclusion, but safety and balance may favor later
+    reference-only objects.
+  - Does the current Protocol schema adequately represent operational/safety processes
+    such as chain of custody, NTF exit criteria, and firmware change control, or is it
+    intended mainly for technical interface protocols? Review before implementation.
+
+END OF DRAFT

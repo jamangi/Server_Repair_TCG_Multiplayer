@@ -32,6 +32,8 @@ jobs:
           node-version: "22"
       - name: Build content manifest for this deployment
         run: node viewer/scripts/build-manifest.mjs
+      - name: Validate viewer content
+        run: node --test tests/viewer-content-schema.test.mjs tests/viewer-baseline.test.mjs
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload viewer

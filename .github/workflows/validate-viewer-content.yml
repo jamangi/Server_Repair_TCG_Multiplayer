@@ -1,0 +1,35 @@
+name: Validate viewer content
+
+on:
+  pull_request:
+    paths:
+      - "viewer/content/**"
+      - "schemas/domain/**"
+      - "tests/helpers/**"
+      - "tests/viewer-*.mjs"
+      - ".github/workflows/validate-viewer-content.yml"
+  push:
+    branches: ["main"]
+    paths:
+      - "viewer/content/**"
+      - "schemas/domain/**"
+      - "tests/helpers/**"
+      - "tests/viewer-*.mjs"
+      - ".github/workflows/validate-viewer-content.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Rebuild content manifest
+        run: node viewer/scripts/build-manifest.mjs
+      - name: Validate schemas, references, causal edges, and viewer baseline
+        run: node --test tests/viewer-content-schema.test.mjs tests/viewer-baseline.test.mjs

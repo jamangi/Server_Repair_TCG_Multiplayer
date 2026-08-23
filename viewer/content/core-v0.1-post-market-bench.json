@@ -1,0 +1,2049 @@
+{
+  "pack_id": "core_v0_1_post_market_bench",
+  "name": "Core v0.1 Post-Market Bench",
+  "version": "0.1.0",
+  "entities": [
+    {
+      "id": "component.compute.cpu_socket",
+      "entity_type": "component",
+      "presentation": {
+        "display_name": "CPU Socket",
+        "short_description": "The board-mounted socket whose contacts connect a processor to power, memory, and system buses."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "cpu",
+          "socket",
+          "contacts",
+          "lga"
+        ]
+      },
+      "component_type": "socket",
+      "subsystem": "compute",
+      "interfaces": [],
+      "compatibility_tags": [
+        "model-specific",
+        "socket-specific"
+      ],
+      "hot_swappable": false,
+      "replaceable": false,
+      "inspectable": true,
+      "education_text": "A socket fault can affect processor detection, attached memory channels, or inter-processor links even when the processor itself works elsewhere."
+    },
+    {
+      "id": "component.cooling.fan_connector",
+      "entity_type": "component",
+      "presentation": {
+        "display_name": "Fan Connector and Sense Path",
+        "short_description": "The connector and board path that power a fan and return tachometer or presence data."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "fan",
+          "connector",
+          "tachometer",
+          "sensor"
+        ]
+      },
+      "component_type": "board connector",
+      "subsystem": "cooling",
+      "interfaces": [],
+      "compatibility_tags": [
+        "model-specific"
+      ],
+      "hot_swappable": false,
+      "replaceable": false,
+      "inspectable": true,
+      "education_text": "A spinning fan can still report zero RPM when its sense contact, header, trace, or solder joint is intermittent."
+    },
+    {
+      "id": "component.power.distribution_board",
+      "entity_type": "component",
+      "presentation": {
+        "display_name": "Power Distribution Board",
+        "short_description": "The replaceable board that routes PSU output and power-good signals to server subsystems."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "power",
+          "distribution",
+          "pdb",
+          "psu backplane"
+        ]
+      },
+      "component_type": "power distribution",
+      "subsystem": "power",
+      "interfaces": [],
+      "compatibility_tags": [
+        "model-specific",
+        "fru"
+      ],
+      "hot_swappable": false,
+      "replaceable": true,
+      "inspectable": true,
+      "education_text": "When known-good PSUs fail in every bay, the shared distribution path is a stronger suspect than each supply independently."
+    },
+    {
+      "id": "symptom.management.bmc_not_responding",
+      "entity_type": "symptom",
+      "presentation": {
+        "display_name": "BMC Not Responding",
+        "short_description": "The server reports that its management controller is unavailable or never becomes ready."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "bmc",
+          "idrac",
+          "ipmi",
+          "management"
+        ]
+      },
+      "category": "management",
+      "description": "Local boot messages or remote access show that the baseboard management controller is not responding or is stuck initializing.",
+      "observable_via_ids": [
+        "tool.management.bmc_console"
+      ],
+      "associated_fault_ids": [
+        "fault.management.bmc_firmware.corrupt"
+      ]
+    },
+    {
+      "id": "symptom.management.lifecycle_unavailable",
+      "entity_type": "symptom",
+      "presentation": {
+        "display_name": "Lifecycle Management Unavailable",
+        "short_description": "Firmware inventory, update, or preboot lifecycle functions are disabled or inaccessible."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "lifecycle",
+          "firmware",
+          "management",
+          "unavailable"
+        ]
+      },
+      "category": "management",
+      "description": "The platform cannot enter or use its normal lifecycle, provisioning, or management update functions.",
+      "observable_via_ids": [
+        "tool.management.bmc_console"
+      ],
+      "associated_fault_ids": [
+        "fault.management.bmc_firmware.corrupt"
+      ]
+    },
+    {
+      "id": "symptom.firmware.update_failed",
+      "entity_type": "symptom",
+      "presentation": {
+        "display_name": "Firmware Update Failed",
+        "short_description": "An approved firmware job is rejected, interrupted, or cannot initialize its target."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "firmware",
+          "update",
+          "recovery",
+          "failure"
+        ]
+      },
+      "category": "firmware",
+      "description": "A firmware update or recovery cannot complete, reports incompatibility, or leaves a device unable to initialize.",
+      "observable_via_ids": [
+        "tool.management.bmc_console",
+        "tool.diagnostics.bootable_media"
+      ],
+      "associated_fault_ids": [
+        "fault.management.bmc_firmware.corrupt",
+        "fault.firmware.version_set.incompatible"
+      ]
+    },
+    {
+      "id": "symptom.power.voltage_out_of_range",
+      "entity_type": "symptom",
+      "presentation": {
+        "display_name": "Voltage Outside Expected Range",
+        "short_description": "Management telemetry or POST reports an invalid voltage or power-good condition."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "voltage",
+          "power good",
+          "rail",
+          "shutdown"
+        ]
+      },
+      "category": "power",
+      "description": "A monitored rail or power-good signal falls outside its accepted range, often followed by an aborted start or shutdown.",
+      "observable_via_ids": [
+        "tool.management.bmc_console"
+      ],
+      "associated_fault_ids": [
+        "fault.power.distribution_board.failed"
+      ]
+    },
+    {
+      "id": "symptom.storage.predictive_failure_warning",
+      "entity_type": "symptom",
+      "presentation": {
+        "display_name": "Predictive Drive Failure Warning",
+        "short_description": "A drive remains online but reports failure prediction, excessive media errors, or exhausted endurance."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "smart",
+          "predictive",
+          "endurance",
+          "media errors"
+        ]
+      },
+      "category": "storage",
+      "description": "SMART or the storage controller warns that an online drive is likely to fail and should be protected and replaced.",
+      "observable_via_ids": [
+        "tool.storage.raid_console",
+        "command.linux.smartctl",
+        "command.linux.nvme_smart_log"
+      ],
+      "associated_fault_ids": [
+        "fault.storage.drive.predictive_failure"
+      ]
+    },
+    {
+      "id": "symptom.network.link_flapping",
+      "entity_type": "symptom",
+      "presentation": {
+        "display_name": "Network Link Flapping",
+        "short_description": "A network port repeatedly transitions between link up and link down."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "network",
+          "link",
+          "flapping",
+          "firmware"
+        ]
+      },
+      "category": "network",
+      "description": "Link transitions recur without an intentional cable or switch change and may correlate with a firmware version change.",
+      "observable_via_ids": [
+        "command.linux.ethtool",
+        "tool.management.bmc_console"
+      ],
+      "associated_fault_ids": [
+        "fault.firmware.version_set.incompatible"
+      ]
+    },
+    {
+      "id": "symptom.management.alert_persists",
+      "entity_type": "symptom",
+      "presentation": {
+        "display_name": "Hardware Alert Persists After Recovery",
+        "short_description": "Management continues to report a component fault after current checks show the component healthy."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "stale",
+          "alert",
+          "sel",
+          "no trouble found"
+        ]
+      },
+      "category": "management",
+      "description": "A historical or cached alert remains visible even though the original fault is gone and fresh hardware state is normal.",
+      "observable_via_ids": [
+        "tool.management.bmc_console",
+        "command.ipmi.sel_elist"
+      ],
+      "associated_fault_ids": [
+        "fault.management.alert.stale"
+      ]
+    },
+    {
+      "id": "tool.inspection.magnifier",
+      "entity_type": "tool",
+      "presentation": {
+        "display_name": "Illuminated Inspection Magnifier",
+        "short_description": "Magnification and controlled light for inspecting sockets, contacts, connectors, and solder joints."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "magnifier",
+          "microscope",
+          "inspection",
+          "lighting"
+        ]
+      },
+      "tool_type": "inspection",
+      "capabilities": [
+        "Magnify fine contacts",
+        "Reveal contamination or displaced pins",
+        "Inspect connector solder joints"
+      ],
+      "applicable_component_type_ids": [
+        "component.compute.cpu_socket",
+        "component.cooling.fan_connector"
+      ],
+      "applicable_fault_ids": [
+        "fault.compute.cpu_socket.contacts_damaged",
+        "fault.cooling.fan_sense_path.intermittent"
+      ],
+      "safety_notes": [
+        "Use ESD controls before exposing sockets or board assemblies."
+      ]
+    },
+    {
+      "id": "tool.hand.calibrated_torque_driver",
+      "entity_type": "tool",
+      "presentation": {
+        "display_name": "Calibrated Torque Driver",
+        "short_description": "A controlled driver used to tighten processor and heatsink hardware to the service specification."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "torque",
+          "driver",
+          "cpu",
+          "heatsink"
+        ]
+      },
+      "tool_type": "hand tool",
+      "capabilities": [
+        "Apply model-specified torque",
+        "Reduce uneven socket loading"
+      ],
+      "applicable_component_type_ids": [
+        "component.compute.cpu_socket",
+        "component.cooling.cpu_heatsink"
+      ],
+      "applicable_fault_ids": [
+        "fault.compute.cpu_socket.contacts_damaged",
+        "fault.thermal.heatsink.contact_poor"
+      ],
+      "safety_notes": [
+        "Use only the sequence and torque value specified for the exact platform."
+      ]
+    },
+    {
+      "id": "tool.diagnostics.bootable_media",
+      "entity_type": "tool",
+      "presentation": {
+        "display_name": "Bootable Diagnostics and Firmware Media",
+        "short_description": "Approved removable media that runs platform diagnostics or recovery outside the installed operating system."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "bootable",
+          "diagnostics",
+          "firmware",
+          "recovery"
+        ]
+      },
+      "tool_type": "diagnostic media",
+      "capabilities": [
+        "Run offline diagnostics",
+        "Inventory firmware",
+        "Attempt approved recovery"
+      ],
+      "applicable_component_type_ids": [
+        "component.management.bmc",
+        "component.board.system"
+      ],
+      "applicable_fault_ids": [
+        "fault.management.bmc_firmware.corrupt",
+        "fault.firmware.version_set.incompatible"
+      ],
+      "safety_notes": [
+        "Verify image authenticity, platform compatibility, and uninterrupted power before use."
+      ]
+    },
+    {
+      "id": "tool.electronics.soldering_rework_station",
+      "entity_type": "tool",
+      "presentation": {
+        "display_name": "Soldering Rework Station",
+        "short_description": "A temperature-controlled station for qualified connector and board-level solder repair."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "soldering",
+          "rework",
+          "connector",
+          "board repair"
+        ]
+      },
+      "tool_type": "electronics rework",
+      "capabilities": [
+        "Rework connector solder joints",
+        "Control tip temperature",
+        "Support inspected board repair"
+      ],
+      "applicable_component_type_ids": [
+        "component.cooling.fan_connector"
+      ],
+      "applicable_fault_ids": [
+        "fault.cooling.fan_sense_path.intermittent"
+      ],
+      "safety_notes": [
+        "Use only at a qualified ESD-safe rework station with the correct process limits."
+      ]
+    },
+    {
+      "id": "command.ipmi.sel_elist",
+      "entity_type": "command",
+      "presentation": {
+        "display_name": "List Detailed IPMI System Events",
+        "short_description": "Reads detailed System Event Log entries through a compatible IPMI interface."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "ipmitool",
+          "sel",
+          "events",
+          "bmc"
+        ]
+      },
+      "platform": "IPMI",
+      "syntax": "ipmitool sel elist",
+      "purpose": "Retrieve timestamped system events with extended sensor context before deciding whether an alert is current or stale.",
+      "capabilities": [
+        "Read event history",
+        "Correlate sensor identifiers",
+        "Preserve diagnostic evidence"
+      ],
+      "related_test_ids": [
+        "test.management.event_log_freshness"
+      ],
+      "education_text": "Reading a log is non-destructive. Preserve relevant entries before clearing any management state."
+    },
+    {
+      "id": "command.linux.nvme_smart_log",
+      "entity_type": "command",
+      "presentation": {
+        "display_name": "Read NVMe Health Log",
+        "short_description": "Reads critical warnings, media errors, temperature, and endurance from an NVMe device."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "nvme",
+          "smart",
+          "health",
+          "endurance"
+        ]
+      },
+      "platform": "Linux",
+      "syntax": "nvme smart-log <device>",
+      "purpose": "Inspect an NVMe device health log without starting a destructive media test.",
+      "capabilities": [
+        "Read critical warnings",
+        "Read media error count",
+        "Read percentage used"
+      ],
+      "related_test_ids": [
+        "test.storage.predictive_health"
+      ],
+      "education_text": "Interpret the log with the device and platform documentation; capture it before replacing the drive."
+    },
+    {
+      "id": "fault.compute.cpu_socket.contacts_damaged",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "CPU Socket Contacts Damaged",
+        "short_description": "Bent, displaced, contaminated, or damaged socket contacts interrupt required processor connections."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "cpu socket",
+          "bent pins",
+          "contacts",
+          "no post"
+        ]
+      },
+      "category": "compute",
+      "severity": "high",
+      "affected_component_ids": [
+        "component.compute.cpu_socket"
+      ],
+      "symptom_ids": [
+        "symptom.boot.no_post",
+        "symptom.memory.reduced_capacity"
+      ],
+      "effective_test_ids": [
+        "test.compute.socket_magnified_inspection"
+      ],
+      "repair_procedure_ids": [
+        "repair.compute.restore_socket_contacts"
+      ],
+      "validation_procedure_ids": [
+        "verify.compute.socket_path"
+      ],
+      "education_text": "If a known-good processor fails only in one socket, inspect the location before condemning the processor. Fine-pitch contact correction is advanced work; board replacement is the safer service path when correction is not controlled."
+    },
+    {
+      "id": "fault.cooling.fan_sense_path.intermittent",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "Fan Sense Path Intermittent",
+        "short_description": "A connector, tachometer contact, trace, or solder joint intermittently loses fan telemetry."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "fan",
+          "zero rpm",
+          "connector",
+          "solder joint"
+        ]
+      },
+      "category": "cooling",
+      "severity": "high",
+      "affected_component_ids": [
+        "component.cooling.fan_connector",
+        "component.board.system"
+      ],
+      "symptom_ids": [
+        "symptom.thermal.fan_warning",
+        "symptom.thermal.fans_loud"
+      ],
+      "effective_test_ids": [
+        "test.cooling.location_cross_substitution",
+        "test.thermal.fan_telemetry"
+      ],
+      "repair_procedure_ids": [
+        "repair.cooling.repair_fan_connector"
+      ],
+      "validation_procedure_ids": [
+        "verify.cooling.fan_sense_path"
+      ],
+      "education_text": "When a fault stays with one fan position after fans are swapped, evidence shifts from the fan module to its connector and board path."
+    },
+    {
+      "id": "fault.power.distribution_board.failed",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "Power Distribution Board Failed",
+        "short_description": "The shared distribution board cannot route stable power or valid power-good signals."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "pdb",
+          "power distribution",
+          "voltage",
+          "no power"
+        ]
+      },
+      "category": "power",
+      "severity": "critical",
+      "affected_component_ids": [
+        "component.power.distribution_board"
+      ],
+      "symptom_ids": [
+        "symptom.power.no_power",
+        "symptom.power.voltage_out_of_range"
+      ],
+      "effective_test_ids": [
+        "test.power.distribution_path_isolation",
+        "test.power.known_good_psu"
+      ],
+      "repair_procedure_ids": [
+        "repair.power.replace_distribution_board"
+      ],
+      "validation_procedure_ids": [
+        "verify.power.distribution_path"
+      ],
+      "education_text": "A shared PDB can explain why multiple known-good PSUs behave the same in every bay."
+    },
+    {
+      "id": "fault.management.bmc_firmware.corrupt",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "Management Controller Firmware Corrupted",
+        "short_description": "The embedded management controller cannot initialize normally after firmware corruption or an interrupted update."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "bmc",
+          "idrac",
+          "firmware",
+          "recovery"
+        ]
+      },
+      "category": "management",
+      "severity": "high",
+      "affected_component_ids": [
+        "component.management.bmc",
+        "component.board.system"
+      ],
+      "symptom_ids": [
+        "symptom.management.bmc_not_responding",
+        "symptom.management.lifecycle_unavailable",
+        "symptom.firmware.update_failed",
+        "symptom.thermal.fans_loud"
+      ],
+      "effective_test_ids": [
+        "test.management.bmc_recovery_state"
+      ],
+      "repair_procedure_ids": [
+        "repair.management.recover_bmc_firmware"
+      ],
+      "validation_procedure_ids": [
+        "verify.management.bmc_functional"
+      ],
+      "education_text": "Management-controller failure can affect inventory, remote access, lifecycle tools, boot timing, and failsafe fan control even when the operating system still boots."
+    },
+    {
+      "id": "fault.firmware.version_set.incompatible",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "Firmware Version Set Incompatible",
+        "short_description": "Interdependent platform firmware versions are mismatched or a new version regresses device behavior."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "firmware",
+          "compatibility",
+          "regression",
+          "rollback"
+        ]
+      },
+      "category": "firmware",
+      "severity": "high",
+      "affected_component_ids": [
+        "component.board.system",
+        "component.management.bmc",
+        "component.network.nic"
+      ],
+      "symptom_ids": [
+        "symptom.firmware.update_failed",
+        "symptom.network.link_flapping",
+        "symptom.system.device_errors"
+      ],
+      "effective_test_ids": [
+        "test.firmware.version_compatibility",
+        "test.network.link_counter_soak"
+      ],
+      "repair_procedure_ids": [
+        "repair.firmware.restore_compatible_versions"
+      ],
+      "validation_procedure_ids": [
+        "verify.firmware.compatible_persistent"
+      ],
+      "education_text": "Firmware may be the cause rather than the cure. Correlate the first failure with version changes and treat rollback as a controlled repair."
+    },
+    {
+      "id": "fault.storage.drive.predictive_failure",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "Drive Predictive Failure",
+        "short_description": "An online drive has crossed a health, media-error, or endurance threshold indicating likely failure."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "drive",
+          "predictive failure",
+          "smart",
+          "endurance"
+        ]
+      },
+      "category": "storage",
+      "severity": "critical",
+      "affected_component_ids": [
+        "component.storage.sas_hdd",
+        "component.storage.sata_ssd",
+        "component.storage.nvme_ssd"
+      ],
+      "symptom_ids": [
+        "symptom.storage.predictive_failure_warning",
+        "symptom.storage.drive_fault_led"
+      ],
+      "effective_test_ids": [
+        "test.storage.predictive_health",
+        "test.storage.drive_health"
+      ],
+      "repair_procedure_ids": [
+        "repair.storage.replace_predictive_drive"
+      ],
+      "validation_procedure_ids": [
+        "verify.storage.predictive_replacement"
+      ],
+      "education_text": "Predictive failure is actionable before total device loss. Preserve data and controller evidence before replacement."
+    },
+    {
+      "id": "fault.storage.backplane.path_failed",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "Storage Backplane Path Failed",
+        "short_description": "One backplane bay or path cannot power, detect, or communicate with a known-good compatible drive."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "backplane",
+          "drive bay",
+          "missing drive",
+          "path"
+        ]
+      },
+      "category": "storage",
+      "severity": "high",
+      "affected_component_ids": [
+        "component.storage.backplane"
+      ],
+      "symptom_ids": [
+        "symptom.storage.drive_missing",
+        "symptom.storage.io_errors"
+      ],
+      "effective_test_ids": [
+        "test.storage.bay_path_isolation",
+        "test.storage.device_inventory"
+      ],
+      "repair_procedure_ids": [
+        "repair.storage.replace_backplane"
+      ],
+      "validation_procedure_ids": [
+        "verify.storage.backplane_path"
+      ],
+      "education_text": "A bay-specific failure should be separated from a failed drive by testing whether the problem follows the media or remains at the location."
+    },
+    {
+      "id": "fault.management.alert.stale",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "Stale Hardware Alert State",
+        "short_description": "Management retains an obsolete fault indication after fresh checks show the hardware is healthy."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "stale alert",
+          "cached status",
+          "ntf",
+          "event log"
+        ]
+      },
+      "category": "management",
+      "severity": "moderate",
+      "affected_component_ids": [
+        "component.chassis.diagnostics",
+        "component.management.bmc"
+      ],
+      "symptom_ids": [
+        "symptom.management.alert_persists"
+      ],
+      "effective_test_ids": [
+        "test.management.event_log_freshness"
+      ],
+      "repair_procedure_ids": [
+        "repair.management.clear_stale_alert_state"
+      ],
+      "validation_procedure_ids": [
+        "verify.management.alert_does_not_recur"
+      ],
+      "education_text": "A displayed alert is evidence, not automatic proof that its named FRU is currently faulty. Preserve, refresh, and reproduce before replacing hardware."
+    },
+    {
+      "id": "test.compute.socket_magnified_inspection",
+      "entity_type": "test",
+      "presentation": {
+        "display_name": "Magnified CPU Socket Inspection",
+        "short_description": "Inspects socket contact alignment, contamination, damage, and mounting evidence under controlled magnification."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "socket",
+          "inspection",
+          "bent pins",
+          "magnification"
+        ]
+      },
+      "test_type": "inspection",
+      "tool_requirement_ids": [
+        "tool.inspection.magnifier",
+        "tool.safety.esd_strap"
+      ],
+      "command_requirement_ids": [],
+      "target_component_ids": [
+        "component.compute.cpu_socket"
+      ],
+      "evidence_rules": [
+        {
+          "fault_id": "fault.compute.cpu_socket.contacts_damaged",
+          "possible_outcomes": [
+            "SUPPORT",
+            "CONFIRM",
+            "RULE_OUT",
+            "INCONCLUSIVE"
+          ],
+          "notes": "Visible displaced, contaminated, or damaged contacts can confirm a physical socket fault; a normal visual result may remain inconclusive for microscopic contact problems."
+        }
+      ],
+      "diagnostic_strength": 4,
+      "action_cost": 1,
+      "education_text": "Compare the uniform contact pattern from multiple angles and do not touch contacts during an inspection-only Test."
+    },
+    {
+      "id": "test.cooling.location_cross_substitution",
+      "entity_type": "test",
+      "presentation": {
+        "display_name": "Fan-to-Location Cross-Substitution",
+        "short_description": "Temporarily swaps compatible fans to determine whether a telemetry fault follows the fan or stays at its connector."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "fan",
+          "substitution",
+          "location",
+          "tachometer"
+        ]
+      },
+      "test_type": "substitution",
+      "tool_requirement_ids": [
+        "tool.hand.basic_set",
+        "tool.safety.esd_strap"
+      ],
+      "command_requirement_ids": [],
+      "target_component_ids": [
+        "component.cooling.fan",
+        "component.cooling.fan_connector"
+      ],
+      "evidence_rules": [
+        {
+          "fault_id": "fault.cooling.fan_sense_path.intermittent",
+          "possible_outcomes": [
+            "SUPPORT",
+            "CONFIRM",
+            "RULE_OUT",
+            "INCONCLUSIVE"
+          ],
+          "notes": "The fault staying at one location supports the connector path; following one fan supports the fan module instead. Temporary substitutions revert after comparison."
+        },
+        {
+          "fault_id": "fault.thermal.fan.failed",
+          "possible_outcomes": [
+            "SUPPORT",
+            "CONFIRM",
+            "RULE_OUT",
+            "INCONCLUSIVE"
+          ],
+          "notes": "The fault following one fan supports a failed fan module."
+        }
+      ],
+      "diagnostic_strength": 4,
+      "action_cost": 2,
+      "education_text": "This is a diagnostic substitution, not a permanent replacement. Restore the authored machine state after the comparison."
+    },
+    {
+      "id": "test.power.distribution_path_isolation",
+      "entity_type": "test",
+      "presentation": {
+        "display_name": "Power Distribution Path Isolation",
+        "short_description": "Compares known-good PSUs across bays and minimum configuration to isolate a shared power-distribution fault."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "power",
+          "pdb",
+          "isolation",
+          "known-good psu"
+        ]
+      },
+      "test_type": "isolation",
+      "tool_requirement_ids": [
+        "tool.known_good.psu",
+        "tool.management.bmc_console"
+      ],
+      "command_requirement_ids": [],
+      "target_component_ids": [
+        "component.power.hot_swap_psu",
+        "component.power.distribution_board"
+      ],
+      "evidence_rules": [
+        {
+          "fault_id": "fault.power.distribution_board.failed",
+          "possible_outcomes": [
+            "SUPPORT",
+            "CONFIRM",
+            "RULE_OUT",
+            "INCONCLUSIVE"
+          ],
+          "notes": "The same power-good or shutdown failure with a known-good supply in every supported bay supports the shared distribution path."
+        },
+        {
+          "fault_id": "fault.power.psu.failed",
+          "possible_outcomes": [
+            "SUPPORT",
+            "RULE_OUT",
+            "INCONCLUSIVE"
+          ],
+          "notes": "A successful known-good substitution can rule out the original PSU without permanently installing it."
+        }
+      ],
+      "diagnostic_strength": 4,
+      "action_cost": 2,
+      "education_text": "Do not live-probe undocumented connectors. Follow the platform service procedure and de-energization requirements."
+    },
+    {
+      "id": "test.management.bmc_recovery_state",
+      "entity_type": "test",
+      "presentation": {
+        "display_name": "BMC Recovery-State Test",
+        "short_description": "Determines whether the management controller is reachable, resettable, in recovery mode, or unrecoverable."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "bmc",
+          "recovery",
+          "reset",
+          "firmware"
+        ]
+      },
+      "test_type": "firmware diagnostic",
+      "tool_requirement_ids": [
+        "tool.management.bmc_console",
+        "tool.diagnostics.bootable_media"
+      ],
+      "command_requirement_ids": [],
+      "target_component_ids": [
+        "component.management.bmc"
+      ],
+      "evidence_rules": [
+        {
+          "fault_id": "fault.management.bmc_firmware.corrupt",
+          "possible_outcomes": [
+            "SUPPORT",
+            "CONFIRM",
+            "RULE_OUT",
+            "INCONCLUSIVE"
+          ],
+          "notes": "Failure across approved reset and recovery entry paths supports an unrecoverable embedded-controller state; successful reset rules out persistent corruption."
+        }
+      ],
+      "diagnostic_strength": 4,
+      "action_cost": 2,
+      "education_text": "Test reachability and approved recovery paths before treating the entire system board as failed."
+    },
+    {
+      "id": "test.firmware.version_compatibility",
+      "entity_type": "test",
+      "presentation": {
+        "display_name": "Firmware Version Compatibility Review",
+        "short_description": "Compares BIOS, BMC, storage, network, and device firmware against an approved compatible baseline."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "firmware",
+          "inventory",
+          "compatibility",
+          "regression"
+        ]
+      },
+      "test_type": "configuration review",
+      "tool_requirement_ids": [
+        "tool.management.bmc_console",
+        "tool.diagnostics.bootable_media"
+      ],
+      "command_requirement_ids": [
+        "command.linux.ethtool",
+        "command.linux.lspci"
+      ],
+      "target_component_ids": [
+        "component.board.system",
+        "component.management.bmc",
+        "component.network.nic"
+      ],
+      "evidence_rules": [
+        {
+          "fault_id": "fault.firmware.version_set.incompatible",
+          "possible_outcomes": [
+            "SUPPORT",
+            "CONFIRM",
+            "RULE_OUT",
+            "INCONCLUSIVE"
+          ],
+          "notes": "A documented incompatible combination or repeatable regression correlated with a version change can confirm the fault."
+        }
+      ],
+      "diagnostic_strength": 3,
+      "action_cost": 1,
+      "education_text": "Newest is not automatically safest; use the platform dependency order, release notes, and recovery plan."
+    },
+    {
+      "id": "test.storage.predictive_health",
+      "entity_type": "test",
+      "presentation": {
+        "display_name": "Predictive Drive Health Analysis",
+        "short_description": "Reviews SMART, controller, media-error, and endurance evidence before an online drive fails completely."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "storage",
+          "smart",
+          "predictive",
+          "endurance"
+        ]
+      },
+      "test_type": "health diagnostic",
+      "tool_requirement_ids": [
+        "tool.storage.raid_console"
+      ],
+      "command_requirement_ids": [
+        "command.linux.smartctl",
+        "command.linux.nvme_smart_log"
+      ],
+      "target_component_ids": [
+        "component.storage.sas_hdd",
+        "component.storage.sata_ssd",
+        "component.storage.nvme_ssd"
+      ],
+      "evidence_rules": [
+        {
+          "fault_id": "fault.storage.drive.predictive_failure",
+          "possible_outcomes": [
+            "SUPPORT",
+            "CONFIRM",
+            "RULE_OUT",
+            "INCONCLUSIVE"
+          ],
+          "notes": "A controller predictive flag, critical SMART warning, persistent media-error trend, or exhausted endurance can confirm the fault."
+        }
+      ],
+      "diagnostic_strength": 4,
+      "action_cost": 1,
+      "education_text": "Capture the device serial, bay, controller log, and health data before replacement. Avoid destructive tests before data protection."
+    },
+    {
+      "id": "test.storage.bay_path_isolation",
+      "entity_type": "test",
+      "presentation": {
+        "display_name": "Drive Bay Path Isolation",
+        "short_description": "Uses protected inventory and compatible known-good media to determine whether a failure follows a drive or remains at one bay."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "storage",
+          "backplane",
+          "drive bay",
+          "isolation"
+        ]
+      },
+      "test_type": "substitution",
+      "tool_requirement_ids": [
+        "tool.storage.raid_console"
+      ],
+      "command_requirement_ids": [
+        "command.linux.lsblk"
+      ],
+      "target_component_ids": [
+        "component.storage.backplane",
+        "component.storage.sas_hdd",
+        "component.storage.sata_ssd"
+      ],
+      "evidence_rules": [
+        {
+          "fault_id": "fault.storage.backplane.path_failed",
+          "possible_outcomes": [
+            "SUPPORT",
+            "CONFIRM",
+            "RULE_OUT",
+            "INCONCLUSIVE"
+          ],
+          "notes": "A compatible known-good test drive missing only from one bay supports the bay/backplane path. Temporary test media is removed after comparison."
+        },
+        {
+          "fault_id": "fault.storage.sas.drive_failed",
+          "possible_outcomes": [
+            "SUPPORT",
+            "RULE_OUT",
+            "INCONCLUSIVE"
+          ],
+          "notes": "A failure that follows the original drive supports media failure instead of the bay path."
+        }
+      ],
+      "diagnostic_strength": 4,
+      "action_cost": 2,
+      "education_text": "Protect array metadata and slot mapping. Never move production members casually to perform this test."
+    },
+    {
+      "id": "test.management.event_log_freshness",
+      "entity_type": "test",
+      "presentation": {
+        "display_name": "Event Log Freshness Test",
+        "short_description": "Preserves current logs, refreshes management state, and checks whether the target alert returns under the complaint conditions."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "event log",
+          "stale alert",
+          "reproduce",
+          "ntf"
+        ]
+      },
+      "test_type": "reproduction",
+      "tool_requirement_ids": [
+        "tool.management.bmc_console"
+      ],
+      "command_requirement_ids": [
+        "command.ipmi.sel_elist"
+      ],
+      "target_component_ids": [
+        "component.management.bmc",
+        "component.chassis.diagnostics"
+      ],
+      "evidence_rules": [
+        {
+          "fault_id": "fault.management.alert.stale",
+          "possible_outcomes": [
+            "SUPPORT",
+            "CONFIRM",
+            "RULE_OUT",
+            "INCONCLUSIVE"
+          ],
+          "notes": "A historical alert that does not recur after evidence preservation, refresh, and a relevant retest supports stale state rather than a current FRU fault."
+        }
+      ],
+      "diagnostic_strength": 3,
+      "action_cost": 1,
+      "education_text": "Preserve evidence before clearing. A cleared display alone is not proof; the relevant machine state must be exercised again."
+    },
+    {
+      "id": "test.network.link_counter_soak",
+      "entity_type": "test",
+      "presentation": {
+        "display_name": "Network Link and Counter Soak",
+        "short_description": "Observes link transitions and interface error counters over a defined interval after a firmware-related change."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "network",
+          "soak",
+          "link flap",
+          "counters"
+        ]
+      },
+      "test_type": "soak",
+      "tool_requirement_ids": [
+        "tool.management.bmc_console"
+      ],
+      "command_requirement_ids": [
+        "command.linux.ethtool",
+        "command.linux.journalctl"
+      ],
+      "target_component_ids": [
+        "component.network.nic"
+      ],
+      "evidence_rules": [
+        {
+          "fault_id": "fault.firmware.version_set.incompatible",
+          "possible_outcomes": [
+            "SUPPORT",
+            "CONTRADICT",
+            "RULE_OUT",
+            "INCONCLUSIVE"
+          ],
+          "notes": "Flapping that appears with one firmware set and disappears with an approved rollback supports a regression; persistent physical errors shift attention to the link path."
+        }
+      ],
+      "diagnostic_strength": 3,
+      "action_cost": 1,
+      "education_text": "Define the observation interval and acceptance counters before starting so absence of a brief alert is not mistaken for proof."
+    },
+    {
+      "id": "protocol.safety.deenergize_discharge",
+      "entity_type": "protocol",
+      "presentation": {
+        "display_name": "De-Energization and Residual-Power Protocol",
+        "short_description": "Safely removes external power, discharges residual state, and controls re-energization before internal service."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "power",
+          "discharge",
+          "deenergize",
+          "safety"
+        ]
+      },
+      "protocol_type": "safety",
+      "purpose": "Prevent unintended energization and give embedded controllers and stored energy the documented discharge interval before service.",
+      "related_component_ids": [
+        "component.power.distribution_board",
+        "component.board.system"
+      ],
+      "related_fault_ids": [
+        "fault.power.distribution_board.failed"
+      ],
+      "related_procedure_ids": [
+        "repair.power.replace_distribution_board"
+      ],
+      "education_text": "Use the exact platform service instructions; removing one PSU may not de-energize a redundant server."
+    },
+    {
+      "id": "protocol.service.cpu_socket_handling",
+      "entity_type": "protocol",
+      "presentation": {
+        "display_name": "CPU Socket Handling and Torque Protocol",
+        "short_description": "Controls socket exposure, contact inspection, processor alignment, and model-specified tightening sequence."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "cpu",
+          "socket",
+          "torque",
+          "handling"
+        ]
+      },
+      "protocol_type": "service safety",
+      "purpose": "Prevent new contact damage and uneven loading while inspecting or servicing a processor socket.",
+      "related_component_ids": [
+        "component.compute.cpu_socket",
+        "component.compute.cpu",
+        "component.cooling.cpu_heatsink"
+      ],
+      "related_fault_ids": [
+        "fault.compute.cpu_socket.contacts_damaged"
+      ],
+      "related_procedure_ids": [
+        "repair.compute.restore_socket_contacts"
+      ],
+      "education_text": "Fine-pitch socket work is platform-specific and qualification-gated. Install the protective cover whenever the socket is stored empty."
+    },
+    {
+      "id": "protocol.service.firmware_change_control",
+      "entity_type": "protocol",
+      "presentation": {
+        "display_name": "Firmware Change and Recovery Protocol",
+        "short_description": "Controls compatibility review, dependency order, backup, power protection, rollback, and recovery for firmware work."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "firmware",
+          "change control",
+          "rollback",
+          "recovery"
+        ]
+      },
+      "protocol_type": "change control",
+      "purpose": "Reduce firmware-induced outages and ensure every change has an approved image, compatible sequence, evidence capture, and recovery path.",
+      "related_component_ids": [
+        "component.management.bmc",
+        "component.board.system",
+        "component.network.nic"
+      ],
+      "related_fault_ids": [
+        "fault.management.bmc_firmware.corrupt",
+        "fault.firmware.version_set.incompatible"
+      ],
+      "related_procedure_ids": [
+        "repair.management.recover_bmc_firmware",
+        "repair.firmware.restore_compatible_versions"
+      ],
+      "education_text": "Do not interrupt power or assume the newest image is compatible with every adjacent controller."
+    },
+    {
+      "id": "protocol.service.storage_data_preservation",
+      "entity_type": "protocol",
+      "presentation": {
+        "display_name": "Storage Data Preservation and Member Replacement Protocol",
+        "short_description": "Protects data, array metadata, serial-to-bay mapping, and rebuild state during drive or backplane service."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "storage",
+          "backup",
+          "raid",
+          "replacement"
+        ]
+      },
+      "protocol_type": "data protection",
+      "purpose": "Prevent avoidable data loss while identifying, replacing, and validating storage FRUs.",
+      "related_component_ids": [
+        "component.storage.backplane",
+        "component.storage.sas_hdd",
+        "component.storage.sata_ssd",
+        "component.storage.nvme_ssd"
+      ],
+      "related_fault_ids": [
+        "fault.storage.drive.predictive_failure",
+        "fault.storage.backplane.path_failed"
+      ],
+      "related_procedure_ids": [
+        "repair.storage.replace_predictive_drive",
+        "repair.storage.replace_backplane"
+      ],
+      "education_text": "Record the exact serial and bay, secure a current backup when possible, and never assume a rebuild has started or finished."
+    },
+    {
+      "id": "protocol.service.board_rework",
+      "entity_type": "protocol",
+      "presentation": {
+        "display_name": "Qualified Board Rework Protocol",
+        "short_description": "Controls ESD, heat, materials, inspection, and acceptance for connector-level solder repair."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "board repair",
+          "soldering",
+          "rework",
+          "qualification"
+        ]
+      },
+      "protocol_type": "repair safety",
+      "purpose": "Limit board-level repair to qualified work with controlled materials, temperatures, inspection, cleaning, and verification.",
+      "related_component_ids": [
+        "component.cooling.fan_connector",
+        "component.board.system"
+      ],
+      "related_fault_ids": [
+        "fault.cooling.fan_sense_path.intermittent"
+      ],
+      "related_procedure_ids": [
+        "repair.cooling.repair_fan_connector"
+      ],
+      "education_text": "If the repair process or acceptance criteria are unavailable, replace the supported FRU instead of improvising a board repair."
+    },
+    {
+      "id": "protocol.service.ntf_screening",
+      "entity_type": "protocol",
+      "presentation": {
+        "display_name": "No-Trouble-Found Screening Protocol",
+        "short_description": "Defines evidence capture, complaint reproduction, state refresh, stress or soak, and documented exit criteria."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "ntf",
+          "screening",
+          "reproduction",
+          "documentation"
+        ]
+      },
+      "protocol_type": "screening",
+      "purpose": "Ensure that no-trouble-found means the reported condition was systematically exercised and documented, not merely absent during a brief power-on.",
+      "related_component_ids": [
+        "component.management.bmc",
+        "component.chassis.diagnostics"
+      ],
+      "related_fault_ids": [
+        "fault.management.alert.stale"
+      ],
+      "related_procedure_ids": [
+        "repair.management.clear_stale_alert_state"
+      ],
+      "education_text": "Record received and returned configuration, conditions attempted, elapsed soak, evidence retained, and limitations."
+    },
+    {
+      "id": "repair.compute.restore_socket_contacts",
+      "entity_type": "repair_procedure",
+      "presentation": {
+        "display_name": "Restore CPU Socket Contact Integrity",
+        "short_description": "A qualified repair restores correct socket contact condition or replaces the supported board FRU."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "cpu socket",
+          "contact repair",
+          "board replacement",
+          "torque"
+        ]
+      },
+      "target_fault_ids": [
+        "fault.compute.cpu_socket.contacts_damaged"
+      ],
+      "required_component_ids": [
+        "component.compute.cpu_socket"
+      ],
+      "required_tool_ids": [
+        "tool.inspection.magnifier",
+        "tool.hand.calibrated_torque_driver",
+        "tool.safety.esd_strap"
+      ],
+      "required_protocol_ids": [
+        "protocol.safety.esd",
+        "protocol.service.cpu_socket_handling"
+      ],
+      "steps_summary": [
+        "De-energize and expose the socket under ESD control.",
+        "Use the approved qualified contact-correction process, or replace the supported system-board FRU.",
+        "Install the processor and heatsink with the specified sequence and torque."
+      ],
+      "action_cost": 2,
+      "education_text": "Do not attempt fine-pitch contact correction without the correct service process, magnification, and qualification."
+    },
+    {
+      "id": "repair.cooling.repair_fan_connector",
+      "entity_type": "repair_procedure",
+      "presentation": {
+        "display_name": "Repair Fan Connector Sense Path",
+        "short_description": "A qualified board repair restores the connector or sense joint, or the supported board FRU is replaced."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "fan connector",
+          "solder",
+          "tachometer",
+          "board repair"
+        ]
+      },
+      "target_fault_ids": [
+        "fault.cooling.fan_sense_path.intermittent"
+      ],
+      "required_component_ids": [
+        "component.cooling.fan_connector"
+      ],
+      "required_tool_ids": [
+        "tool.inspection.magnifier",
+        "tool.electronics.soldering_rework_station",
+        "tool.safety.esd_strap"
+      ],
+      "required_protocol_ids": [
+        "protocol.safety.esd",
+        "protocol.service.board_rework"
+      ],
+      "steps_summary": [
+        "De-energize and inspect the connector path.",
+        "Rework the confirmed joint under the qualified process, or replace the supported board FRU.",
+        "Clean and inspect the repaired area before reassembly."
+      ],
+      "action_cost": 2,
+      "education_text": "Pressure that temporarily changes the symptom is diagnostic evidence, not a durable repair."
+    },
+    {
+      "id": "repair.power.replace_distribution_board",
+      "entity_type": "repair_procedure",
+      "presentation": {
+        "display_name": "Replace Power Distribution Board",
+        "short_description": "Replaces the isolated PDB or PSU-backplane FRU and restores its supported connections."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "pdb",
+          "power distribution",
+          "replacement",
+          "fru"
+        ]
+      },
+      "target_fault_ids": [
+        "fault.power.distribution_board.failed"
+      ],
+      "required_component_ids": [
+        "component.power.distribution_board"
+      ],
+      "required_tool_ids": [
+        "tool.hand.basic_set",
+        "tool.safety.esd_strap"
+      ],
+      "required_protocol_ids": [
+        "protocol.safety.esd",
+        "protocol.safety.deenergize_discharge"
+      ],
+      "steps_summary": [
+        "Remove all input power and observe the discharge interval.",
+        "Record and disconnect the PDB power and signal paths.",
+        "Install the compatible replacement and restore every connection before re-energizing."
+      ],
+      "action_cost": 2,
+      "education_text": "A PDB replacement changes machine state but does not prove stable power until cold-start and redundancy checks pass."
+    },
+    {
+      "id": "repair.management.recover_bmc_firmware",
+      "entity_type": "repair_procedure",
+      "presentation": {
+        "display_name": "Recover Management Controller Firmware",
+        "short_description": "Uses the approved reset or recovery image path and escalates to board replacement when the embedded controller is unrecoverable."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "bmc",
+          "firmware recovery",
+          "idrac",
+          "reset"
+        ]
+      },
+      "target_fault_ids": [
+        "fault.management.bmc_firmware.corrupt"
+      ],
+      "required_component_ids": [
+        "component.management.bmc"
+      ],
+      "required_tool_ids": [
+        "tool.management.bmc_console",
+        "tool.diagnostics.bootable_media"
+      ],
+      "required_protocol_ids": [
+        "protocol.service.firmware_change_control"
+      ],
+      "steps_summary": [
+        "Preserve available logs, identity, license, and configuration data.",
+        "Apply the platform-approved reset or recovery method with the correct image and protected power.",
+        "If recovery cannot initialize, replace the supported board FRU and restore identity and configuration."
+      ],
+      "action_cost": 2,
+      "education_text": "Recovery steps are ordered and platform-specific; repeated incompatible flashing can make evidence and recovery worse."
+    },
+    {
+      "id": "repair.firmware.restore_compatible_versions",
+      "entity_type": "repair_procedure",
+      "presentation": {
+        "display_name": "Restore Compatible Firmware Set",
+        "short_description": "Updates or rolls back interdependent firmware to an approved, compatible version set."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "firmware",
+          "rollback",
+          "compatibility",
+          "version set"
+        ]
+      },
+      "target_fault_ids": [
+        "fault.firmware.version_set.incompatible"
+      ],
+      "required_component_ids": [],
+      "required_tool_ids": [
+        "tool.management.bmc_console",
+        "tool.diagnostics.bootable_media"
+      ],
+      "required_protocol_ids": [
+        "protocol.service.firmware_change_control"
+      ],
+      "steps_summary": [
+        "Capture the current version set and failure correlation.",
+        "Select the approved compatible target and dependency order.",
+        "Apply the controlled update or rollback and complete all pending jobs and required restarts."
+      ],
+      "action_cost": 2,
+      "education_text": "Firmware repair must preserve a rollback or recovery route and must not be represented as indiscriminate updating."
+    },
+    {
+      "id": "repair.storage.replace_predictive_drive",
+      "entity_type": "repair_procedure",
+      "presentation": {
+        "display_name": "Replace Predictively Failing Drive",
+        "short_description": "Protects data, identifies the exact drive, replaces it safely, and starts the required rebuild or initialization."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "predictive failure",
+          "drive replacement",
+          "raid",
+          "backup"
+        ]
+      },
+      "target_fault_ids": [
+        "fault.storage.drive.predictive_failure"
+      ],
+      "required_component_ids": [],
+      "required_tool_ids": [
+        "tool.storage.raid_console"
+      ],
+      "required_protocol_ids": [
+        "protocol.service.storage_data_preservation"
+      ],
+      "steps_summary": [
+        "Protect current data and capture the drive serial, bay, and controller evidence.",
+        "Follow the controller-safe offline or hot-swap procedure for the exact member.",
+        "Install a compatible replacement and confirm that rebuild or initialization starts."
+      ],
+      "action_cost": 2,
+      "education_text": "Replacement is incomplete until the new member and array return to their required healthy states."
+    },
+    {
+      "id": "repair.storage.replace_backplane",
+      "entity_type": "repair_procedure",
+      "presentation": {
+        "display_name": "Replace Storage Backplane",
+        "short_description": "Replaces an isolated backplane while preserving drive order, controller metadata, and cabling."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "backplane",
+          "replacement",
+          "drive mapping",
+          "storage"
+        ]
+      },
+      "target_fault_ids": [
+        "fault.storage.backplane.path_failed"
+      ],
+      "required_component_ids": [
+        "component.storage.backplane"
+      ],
+      "required_tool_ids": [
+        "tool.hand.basic_set",
+        "tool.safety.esd_strap",
+        "tool.storage.raid_console"
+      ],
+      "required_protocol_ids": [
+        "protocol.safety.esd",
+        "protocol.service.storage_data_preservation"
+      ],
+      "steps_summary": [
+        "Capture drive serial-to-bay mapping and array state.",
+        "De-energize as required and replace the compatible backplane without changing drive order.",
+        "Restore cables and handle any foreign configuration only through the approved controller procedure."
+      ],
+      "action_cost": 2,
+      "education_text": "A backplane replacement should not silently reorder members or overwrite controller metadata."
+    },
+    {
+      "id": "repair.management.clear_stale_alert_state",
+      "entity_type": "repair_procedure",
+      "presentation": {
+        "display_name": "Refresh Stale Hardware Alert State",
+        "short_description": "After preserving evidence, refreshes or clears obsolete management state so current hardware can be evaluated."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "stale alert",
+          "clear sel",
+          "refresh",
+          "ntf"
+        ]
+      },
+      "target_fault_ids": [
+        "fault.management.alert.stale"
+      ],
+      "required_component_ids": [
+        "component.management.bmc"
+      ],
+      "required_tool_ids": [
+        "tool.management.bmc_console"
+      ],
+      "required_protocol_ids": [
+        "protocol.service.ntf_screening"
+      ],
+      "steps_summary": [
+        "Export the relevant event and hardware state evidence.",
+        "Use the approved management refresh, log-clear, or controller-reset operation.",
+        "Re-exercise the complaint conditions without replacing the healthy FRU."
+      ],
+      "action_cost": 1,
+      "education_text": "Clearing an alert changes reported state; only a clean retest verifies that the alert was stale."
+    },
+    {
+      "id": "verify.compute.socket_path",
+      "entity_type": "validation_procedure",
+      "presentation": {
+        "display_name": "CPU Socket Path Verification",
+        "short_description": "Cold-starts the server and verifies the expected processors, memory channels, and dependent devices."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "cpu socket",
+          "post",
+          "inventory",
+          "cold start"
+        ]
+      },
+      "validates_fault_ids": [
+        "fault.compute.cpu_socket.contacts_damaged"
+      ],
+      "target_component_ids": [
+        "component.compute.cpu_socket",
+        "component.compute.cpu",
+        "component.memory.channel"
+      ],
+      "required_tool_ids": [
+        "tool.management.bmc_console"
+      ],
+      "success_conditions": [
+        "The server completes repeated cold POST cycles without the original processor or memory symptom.",
+        "Every expected processor and attached memory channel appears in platform inventory.",
+        "No new socket, CPU, or memory-channel event is recorded."
+      ],
+      "action_cost": 2,
+      "education_text": "One successful warm boot is weak proof for a contact fault; include cold cycles and full inventory."
+    },
+    {
+      "id": "verify.cooling.fan_sense_path",
+      "entity_type": "validation_procedure",
+      "presentation": {
+        "display_name": "Fan Sense Path Verification",
+        "short_description": "Confirms stable fan presence and RPM telemetry through cold cycles and controlled load."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "fan",
+          "rpm",
+          "telemetry",
+          "load"
+        ]
+      },
+      "validates_fault_ids": [
+        "fault.cooling.fan_sense_path.intermittent"
+      ],
+      "target_component_ids": [
+        "component.cooling.fan_connector",
+        "component.cooling.fan"
+      ],
+      "required_tool_ids": [
+        "tool.management.bmc_console"
+      ],
+      "success_conditions": [
+        "The repaired location reports plausible stable RPM after repeated cold starts.",
+        "The fan-control response remains normal during controlled load.",
+        "No fan-presence, tachometer, or redundancy event recurs."
+      ],
+      "action_cost": 2,
+      "education_text": "Validate both physical rotation and telemetry; either one alone can miss the original failure mode."
+    },
+    {
+      "id": "verify.power.distribution_path",
+      "entity_type": "validation_procedure",
+      "presentation": {
+        "display_name": "Power Distribution Path Verification",
+        "short_description": "Verifies cold starts, stable rails, PSU-bay operation, and redundancy after PDB replacement."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "power",
+          "pdb",
+          "redundancy",
+          "cold start"
+        ]
+      },
+      "validates_fault_ids": [
+        "fault.power.distribution_board.failed"
+      ],
+      "target_component_ids": [
+        "component.power.distribution_board",
+        "component.power.hot_swap_psu"
+      ],
+      "required_tool_ids": [
+        "tool.management.bmc_console"
+      ],
+      "success_conditions": [
+        "The server completes repeated cold starts without voltage or power-good faults.",
+        "Each supported PSU bay reports correct presence and input/output telemetry.",
+        "A safe redundancy transition does not interrupt operation or create a new power event."
+      ],
+      "action_cost": 2,
+      "education_text": "A restored power-on proves less than stable distribution and redundancy under the supported configuration."
+    },
+    {
+      "id": "verify.management.bmc_functional",
+      "entity_type": "validation_procedure",
+      "presentation": {
+        "display_name": "Management Controller Functional Verification",
+        "short_description": "Checks BMC access, sensors, inventory, lifecycle functions, and cold initialization after recovery."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "bmc",
+          "management",
+          "sensors",
+          "inventory"
+        ]
+      },
+      "validates_fault_ids": [
+        "fault.management.bmc_firmware.corrupt"
+      ],
+      "target_component_ids": [
+        "component.management.bmc"
+      ],
+      "required_tool_ids": [
+        "tool.management.bmc_console"
+      ],
+      "success_conditions": [
+        "The BMC becomes ready after repeated cold initialization.",
+        "Authorized UI, API, or CLI access succeeds and inventory and sensor readings are plausible.",
+        "Lifecycle functions are available and no initialization or failsafe-fan event recurs."
+      ],
+      "action_cost": 2,
+      "education_text": "An operating-system boot does not by itself verify the embedded management controller."
+    },
+    {
+      "id": "verify.firmware.compatible_persistent",
+      "entity_type": "validation_procedure",
+      "presentation": {
+        "display_name": "Firmware Compatibility and Persistence Verification",
+        "short_description": "Confirms the intended version set persists and affected devices initialize without the regression."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "firmware",
+          "persistence",
+          "compatibility",
+          "soak"
+        ]
+      },
+      "validates_fault_ids": [
+        "fault.firmware.version_set.incompatible"
+      ],
+      "target_component_ids": [
+        "component.board.system",
+        "component.management.bmc",
+        "component.network.nic"
+      ],
+      "required_tool_ids": [
+        "tool.management.bmc_console"
+      ],
+      "success_conditions": [
+        "The approved version set is present after a cold restart with no pending or failed jobs.",
+        "Affected devices and drivers initialize with expected inventory and settings.",
+        "The defined link/counter soak completes without the original regression or new firmware event."
+      ],
+      "action_cost": 2,
+      "education_text": "Verify both version persistence and the behavior that motivated the change."
+    },
+    {
+      "id": "verify.storage.predictive_replacement",
+      "entity_type": "validation_procedure",
+      "presentation": {
+        "display_name": "Predictive Drive Replacement Verification",
+        "short_description": "Confirms the correct replacement member, healthy array state, and clean predictive status."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "drive",
+          "rebuild",
+          "predictive",
+          "consistency"
+        ]
+      },
+      "validates_fault_ids": [
+        "fault.storage.drive.predictive_failure"
+      ],
+      "target_component_ids": [
+        "component.storage.sas_hdd",
+        "component.storage.sata_ssd",
+        "component.storage.nvme_ssd",
+        "component.storage.raid_controller"
+      ],
+      "required_tool_ids": [
+        "tool.storage.raid_console"
+      ],
+      "success_conditions": [
+        "The expected replacement serial appears in the documented bay.",
+        "Required rebuild, initialization, or consistency work completes and the virtual disk is healthy.",
+        "No predictive warning or new media/path error appears during the defined observation period."
+      ],
+      "action_cost": 2,
+      "education_text": "A green bay light or started rebuild is not the same as completed storage recovery."
+    },
+    {
+      "id": "verify.storage.backplane_path",
+      "entity_type": "validation_procedure",
+      "presentation": {
+        "display_name": "Storage Backplane Path Verification",
+        "short_description": "Confirms every expected bay, drive, and array member remains stable after backplane replacement."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "backplane",
+          "drive bay",
+          "inventory",
+          "soak"
+        ]
+      },
+      "validates_fault_ids": [
+        "fault.storage.backplane.path_failed"
+      ],
+      "target_component_ids": [
+        "component.storage.backplane",
+        "component.storage.raid_controller"
+      ],
+      "required_tool_ids": [
+        "tool.storage.raid_console"
+      ],
+      "success_conditions": [
+        "All expected bays and drive serials are detected in their documented locations.",
+        "The array imports or remains online without unexpected foreign or missing members.",
+        "A non-destructive storage soak produces no new bay, link, or I/O errors."
+      ],
+      "action_cost": 2,
+      "education_text": "Verify location mapping as well as aggregate array health after changing the shared drive path."
+    },
+    {
+      "id": "verify.management.alert_does_not_recur",
+      "entity_type": "validation_procedure",
+      "presentation": {
+        "display_name": "Stale Alert Non-Recurrence Verification",
+        "short_description": "Re-exercises the complaint conditions after state refresh and requires no new target alert."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "stale alert",
+          "non-recurrence",
+          "ntf",
+          "event log"
+        ]
+      },
+      "validates_fault_ids": [
+        "fault.management.alert.stale"
+      ],
+      "target_component_ids": [
+        "component.management.bmc",
+        "component.chassis.diagnostics"
+      ],
+      "required_tool_ids": [
+        "tool.management.bmc_console"
+      ],
+      "success_conditions": [
+        "The relevant complaint conditions and hardware checks are completed after the preserved baseline is cleared or refreshed.",
+        "The implicated hardware remains healthy in current inventory and telemetry.",
+        "No new target event appears during the documented observation window."
+      ],
+      "action_cost": 1,
+      "education_text": "Document the duration and conditions. No recurrence during an undefined brief check is weak evidence."
+    }
+  ]
+}

@@ -534,8 +534,7 @@
         "status": "draft",
         "search_tags": [
           "inspection",
-          "visual",
-          "inspection"
+          "visual"
         ]
       },
       "test_type": "inspection",
@@ -546,99 +545,99 @@
         {
           "fault_id": "fault.memory.dimm.not_seated",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.memory.population.invalid",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.power.psu.not_seated",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.power.input.cable_loose",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.storage.cable.loose",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.storage.cable.failed",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.thermal.fan.failed",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.thermal.heatsink.clogged",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.thermal.heatsink.contact_poor",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.network.cable.disconnected",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.pcie.card.not_seated",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         }
@@ -677,27 +676,27 @@
         {
           "fault_id": "fault.storage.raid.controller_failed",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.cpu.not_seated",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.board.system.failed",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         }
@@ -723,8 +722,7 @@
         "status": "draft",
         "search_tags": [
           "diagnostic",
-          "memory",
-          "diagnostic"
+          "memory"
         ]
       },
       "test_type": "diagnostic",
@@ -735,20 +733,20 @@
         {
           "fault_id": "fault.memory.dimm.failed",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive",
-            "confirms"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE",
+            "CONFIRM"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.system.intermittent_memory_instability",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive",
-            "confirms"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE",
+            "CONFIRM"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         }
@@ -774,8 +772,7 @@
         "status": "draft",
         "search_tags": [
           "isolation",
-          "single-dimm",
-          "isolation"
+          "single-dimm"
         ]
       },
       "test_type": "isolation",
@@ -786,40 +783,40 @@
         {
           "fault_id": "fault.memory.dimm.not_seated",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive",
-            "confirms"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE",
+            "CONFIRM"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.memory.dimm.failed",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive",
-            "confirms"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE",
+            "CONFIRM"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.memory.population.invalid",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive",
-            "confirms"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE",
+            "CONFIRM"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.memory.channel.unavailable",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive",
-            "confirms"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE",
+            "CONFIRM"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         }
@@ -846,8 +843,7 @@
         "search_tags": [
           "substitution",
           "known-good",
-          "dimm",
-          "substitution"
+          "dimm"
         ]
       },
       "test_type": "substitution",
@@ -860,11 +856,11 @@
         {
           "fault_id": "fault.memory.dimm.failed",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive",
-            "confirms",
-            "rules_out"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE",
+            "CONFIRM",
+            "RULE_OUT"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         }
@@ -891,8 +887,7 @@
         "search_tags": [
           "inspection",
           "psu",
-          "status",
-          "inspection"
+          "status"
         ]
       },
       "test_type": "inspection",
@@ -903,18 +898,18 @@
         {
           "fault_id": "fault.power.psu.failed",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.power.psu.not_seated",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         }
@@ -955,13 +950,22 @@
         {
           "fault_id": "fault.power.psu.failed",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive",
-            "confirms",
-            "rules_out"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE",
+            "CONFIRM",
+            "RULE_OUT"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
+        },
+        {
+          "fault_id": "fault.power.distribution_board.failed",
+          "possible_outcomes": [
+            "SUPPORT",
+            "RULE_OUT",
+            "INCONCLUSIVE"
+          ],
+          "notes": "A known-good PSU that fails in every supported bay shifts evidence toward the shared distribution path."
         }
       ],
       "diagnostic_strength": 4,
@@ -1032,40 +1036,40 @@
         {
           "fault_id": "fault.storage.sas.drive_failed",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive",
-            "confirms"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE",
+            "CONFIRM"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.storage.sata.drive_failed",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive",
-            "confirms"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE",
+            "CONFIRM"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.storage.raid.degraded",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive",
-            "confirms"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE",
+            "CONFIRM"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.boot.device.not_detected",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive",
-            "confirms"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE",
+            "CONFIRM"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         }
@@ -1106,22 +1110,32 @@
         {
           "fault_id": "fault.storage.sas.drive_failed",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive",
-            "confirms"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE",
+            "CONFIRM"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.storage.sata.drive_failed",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive",
-            "confirms"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE",
+            "CONFIRM"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
+        },
+        {
+          "fault_id": "fault.storage.drive.predictive_failure",
+          "possible_outcomes": [
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE",
+            "CONFIRM"
+          ],
+          "notes": "Predictive flags, media-error trends, or exhausted endurance can identify a drive that is still online but unsafe."
         }
       ],
       "diagnostic_strength": 3,
@@ -1160,47 +1174,56 @@
         {
           "fault_id": "fault.storage.sata.drive_failed",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.storage.nvme.device_failed",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.storage.cable.loose",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.storage.cable.failed",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.boot.device.not_detected",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
+        },
+        {
+          "fault_id": "fault.storage.backplane.path_failed",
+          "possible_outcomes": [
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE"
+          ],
+          "notes": "A drive missing only at one documented bay can support a bay or backplane path fault."
         }
       ],
       "diagnostic_strength": 2,
@@ -1267,10 +1290,10 @@
         {
           "fault_id": "fault.cpu.not_seated",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive",
-            "confirms"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE",
+            "CONFIRM"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         }
@@ -1310,27 +1333,27 @@
         {
           "fault_id": "fault.boot.order.incorrect",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.boot.device.not_detected",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.boot.bootloader.corrupt",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         }
@@ -1369,36 +1392,36 @@
         {
           "fault_id": "fault.network.cable.disconnected",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.network.cable.failed",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.network.nic.failed",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.network.dhcp.no_lease",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         }
@@ -1439,18 +1462,18 @@
         {
           "fault_id": "fault.network.ip.static_incorrect",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.network.dhcp.no_lease",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         }
@@ -1492,20 +1515,20 @@
         {
           "fault_id": "fault.network.ip.static_incorrect",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive",
-            "confirms"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE",
+            "CONFIRM"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.network.dhcp.no_lease",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive",
-            "confirms"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE",
+            "CONFIRM"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         }
@@ -1547,22 +1570,22 @@
         {
           "fault_id": "fault.network.cable.failed",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive",
-            "confirms",
-            "rules_out"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE",
+            "CONFIRM",
+            "RULE_OUT"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.network.nic.failed",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive",
-            "confirms",
-            "rules_out"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE",
+            "CONFIRM",
+            "RULE_OUT"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         }
@@ -1603,27 +1626,27 @@
         {
           "fault_id": "fault.storage.raid.controller_failed",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.network.nic.failed",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.pcie.card.not_seated",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         }
@@ -1663,40 +1686,40 @@
         {
           "fault_id": "fault.thermal.heatsink.clogged",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive",
-            "confirms"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE",
+            "CONFIRM"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.thermal.heatsink.contact_poor",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive",
-            "confirms"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE",
+            "CONFIRM"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.thermal.cpu.overheating",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive",
-            "confirms"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE",
+            "CONFIRM"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.thermal.shutdown",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive",
-            "confirms"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE",
+            "CONFIRM"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         }
@@ -1737,22 +1760,32 @@
         {
           "fault_id": "fault.thermal.fan.failed",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive",
-            "confirms"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE",
+            "CONFIRM"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.thermal.cpu.overheating",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive",
-            "confirms"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE",
+            "CONFIRM"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
+        },
+        {
+          "fault_id": "fault.cooling.fan_sense_path.intermittent",
+          "possible_outcomes": [
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE",
+            "CONFIRM"
+          ],
+          "notes": "A zero or unstable reported RPM while the fan physically spins supports a sense-path fault."
         }
       ],
       "diagnostic_strength": 3,
@@ -1777,7 +1810,6 @@
         "search_tags": [
           "stress",
           "controlled",
-          "stress",
           "test"
         ]
       },
@@ -1789,20 +1821,20 @@
         {
           "fault_id": "fault.system.intermittent_memory_instability",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive",
-            "confirms"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE",
+            "CONFIRM"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.thermal.shutdown",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive",
-            "confirms"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE",
+            "CONFIRM"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         }
@@ -1844,100 +1876,100 @@
         {
           "fault_id": "fault.memory.dimm.failed",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive",
-            "confirms"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE",
+            "CONFIRM"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.memory.channel.unavailable",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive",
-            "confirms"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE",
+            "CONFIRM"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.system.intermittent_memory_instability",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive",
-            "confirms"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE",
+            "CONFIRM"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.power.psu.failed",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive",
-            "confirms"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE",
+            "CONFIRM"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.storage.sas.drive_failed",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive",
-            "confirms"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE",
+            "CONFIRM"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.storage.nvme.device_failed",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive",
-            "confirms"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE",
+            "CONFIRM"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.storage.raid.controller_failed",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive",
-            "confirms"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE",
+            "CONFIRM"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.thermal.cpu.overheating",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive",
-            "confirms"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE",
+            "CONFIRM"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.thermal.shutdown",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive",
-            "confirms"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE",
+            "CONFIRM"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.board.system.failed",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive",
-            "confirms"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE",
+            "CONFIRM"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         }
@@ -1976,27 +2008,27 @@
         {
           "fault_id": "fault.boot.order.incorrect",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.firmware.config.reset",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         },
         {
           "fault_id": "fault.board.rtc_battery.failed",
           "possible_outcomes": [
-            "supports",
-            "contradicts",
-            "inconclusive"
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE"
           ],
           "notes": "Scenario result determines the actual evidence outcome."
         }

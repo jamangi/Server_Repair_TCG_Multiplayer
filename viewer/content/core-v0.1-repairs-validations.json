@@ -838,7 +838,7 @@
       "steps_summary": [
         "Perform replace system board according to approved platform procedure."
       ],
-      "action_cost": 3,
+      "action_cost": 2,
       "education_text": "Repairs change machine state and should be followed by verification."
     },
     {

@@ -1,11 +1,12 @@
 {
   "format_version": 1,
-  "generated_at": "2026-08-18T21:33:10.428Z",
+  "generated_at": "2026-08-23T16:53:13.878Z",
   "files": [
     "./core-v0.1-components.json",
     "./core-v0.1-diagnostics.json",
     "./core-v0.1-fault-graph.json",
     "./core-v0.1-faults.json",
+    "./core-v0.1-post-market-bench.json",
     "./core-v0.1-protocols.json",
     "./core-v0.1-repairs-validations.json",
     "./core-v0.1-symptoms.json"

@@ -17,6 +17,8 @@ jobs:
           node-version: "22"
       - name: Build manifest
         run: node viewer/scripts/build-manifest.mjs
+      - name: Validate viewer content
+        run: node --test tests/viewer-content-schema.test.mjs tests/viewer-baseline.test.mjs
       - name: Commit manifest if changed
         run: |
           if git diff --quiet -- viewer/content/manifest.json; then exit 0; fi

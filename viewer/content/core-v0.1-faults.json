@@ -168,7 +168,6 @@
         "status": "draft",
         "search_tags": [
           "memory",
-          "memory",
           "channel",
           "unavailable"
         ]
@@ -215,7 +214,6 @@
         "search_tags": [
           "memory",
           "intermittent",
-          "memory",
           "instability"
         ]
       },
@@ -357,7 +355,6 @@
           "loose",
           "/",
           "disconnected",
-          "power",
           "cable"
         ]
       },
@@ -546,7 +543,6 @@
         "search_tags": [
           "storage",
           "loose",
-          "storage",
           "cable"
         ]
       },
@@ -593,7 +589,6 @@
         "search_tags": [
           "storage",
           "failed",
-          "storage",
           "cable"
         ]
       },
@@ -732,7 +727,6 @@
         "search_tags": [
           "boot",
           "incorrect",
-          "boot",
           "order"
         ]
       },
@@ -774,7 +768,6 @@
         "version": "0.1.0",
         "status": "draft",
         "search_tags": [
-          "boot",
           "boot",
           "device",
           "not",
@@ -859,7 +852,6 @@
         "version": "0.1.0",
         "status": "draft",
         "search_tags": [
-          "firmware",
           "firmware",
           "configuration",
           "reset"
@@ -1136,7 +1128,6 @@
         "status": "draft",
         "search_tags": [
           "thermal",
-          "thermal",
           "shutdown"
         ]
       },
@@ -1408,7 +1399,6 @@
         "status": "draft",
         "search_tags": [
           "pcie",
-          "pcie",
           "card",
           "not",
           "fully",
@@ -1503,7 +1493,6 @@
         "search_tags": [
           "board",
           "system",
-          "board",
           "failure"
         ]
       },

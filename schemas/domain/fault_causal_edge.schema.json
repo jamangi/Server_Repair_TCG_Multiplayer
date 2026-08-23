@@ -92,6 +92,12 @@
     "id": {
       "$ref": "#/$defs/stableId"
     },
+    "entity_type": {
+      "const": "fault_causal_edge"
+    },
+    "presentation": {
+      "$ref": "#/$defs/presentation"
+    },
     "cause_fault_id": {
       "$ref": "#/$defs/entityRef"
     },
