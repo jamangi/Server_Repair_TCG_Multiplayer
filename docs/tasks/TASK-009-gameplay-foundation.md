@@ -2,7 +2,7 @@
 
 ## Status
 
-**Proposed — awaiting review and approval.** Do not begin implementation or replace the current card schemas until the proposal in [`card-contract-and-build-order.md`](../improvement_analysis/card-contract-and-build-order.md) is approved or amended.
+**Ready — approved contract; implementation not started.** The user approved the Card Definition/Card Instance direction in [`card-contract-and-build-order.md`](../improvement_analysis/card-contract-and-build-order.md) on 2026-08-23, including the authoritative-server/client-read-only boundary. Mark this task Active when implementation begins.
 
 ## Objective
 
@@ -32,7 +32,7 @@ Every builder must read `AGENTS.md`, the root `README.md`, this task, [`schemas/
 
 ### Card contracts and starter Cards
 
-- [`card-contract-and-build-order.md`](../improvement_analysis/card-contract-and-build-order.md) — review gate, definition/instance boundary, illustration resolution, version pinning, and proposed executable contract.
+- [`card-contract-and-build-order.md`](../improvement_analysis/card-contract-and-build-order.md) — approved definition/instance boundary, authoritative-server rule, illustration resolution, version pinning, and executable contract.
 - [`02_CARD_TYPES.md`](../design/02_CARD_TYPES.md) — intended card families and the difference between technical concepts and playable affordances; Frozen Rules still controls any mismatch.
 - Card Architecture and Major Layers in [`01_DATA_ARCHITECTURE.md`](../design/01_DATA_ARCHITECTURE.md) — separation of domain, card, scenario, runtime, and rules-service layers.
 - [`card.schema.json`](../../schemas/domain/card.schema.json), [`card_instance.schema.json`](../../schemas/runtime/card_instance.schema.json), and [`card.memory_diagnostic.json`](../../examples/domain/card.memory_diagnostic.json) — current machine-readable contracts and the inheritance ambiguity that must be replaced deliberately.
@@ -66,13 +66,16 @@ Every builder must read `AGENTS.md`, the root `README.md`, this task, [`schemas/
 
 ## Required implementation order
 
-### Milestone 0 — approve and synchronize contracts
+### Milestone 0 — synchronize approved contracts
 
-1. Obtain review of the card-contract proposal.
-2. Update Card Definition, Card Instance, related runtime schemas, examples, and semantic tests together.
-3. Add a versioned Ticket Builder configuration/result contract and pin immutable domain input, generator, seed, produced Ticket snapshots, and structured failure diagnostics.
-4. Pin the immutable card catalog at the Match or Ready/deck-snapshot boundary.
-5. Preserve existing schema `$id` values unless the approved plan explicitly defines a migration.
+Approval prerequisite: **Completed 2026-08-23.** Do not reopen the approved direction through implementation convenience; use the decision lifecycle if genuine pressure appears.
+
+1. Update Card Definition, Card Instance, related runtime schemas, examples, and semantic tests together.
+2. Enforce that Card Instances are authoritative server state: clients submit identifier-based intents, never trusted owner/controller/zone mutations or replacement instances.
+3. Derive the actor from the authenticated connection, validate any request `player_id`, reject unexpected mutation fields, and permit state changes only through validated server transitions and immutable events.
+4. Add a versioned Ticket Builder configuration/result contract and pin immutable domain input, generator, seed, produced Ticket snapshots, and structured failure diagnostics.
+5. Pin the immutable card catalog at the Match or Ready/deck-snapshot boundary.
+6. Preserve existing schema `$id` values unless the approved plan explicitly defines a migration.
 
 Do not continue when the approved contract would require behavior absent from or conflicting with Frozen Rules. Record that question in the Unfrozen ledger.
 
@@ -215,4 +218,3 @@ Do not modify `viewer/**`, story, case-study research, candidate-flow source fix
 ## Completion boundary
 
 TASK-009 is complete only when all five milestones pass, the approved contracts are synchronized, fixed and generated matches finish through the same engine, the automated report is committed and independently reproducible, all tests pass, and no unresolved rule or hidden-information leak remains.
-

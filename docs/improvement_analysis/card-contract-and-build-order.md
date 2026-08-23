@@ -1,12 +1,16 @@
 # Card contract and gameplay-foundation build order
 
-Status: **Proposal for review.** This analysis does not replace a schema, promote candidate-flow fixtures into stable content, or change a frozen rule.
+Status: **Approved direction — 2026-08-23.** This analysis does not itself replace a schema, promote candidate-flow fixtures into stable content, or change a frozen rule. TASK-009 is authorized to synchronize the approved direction into versioned schemas, examples, semantic tests, and implementation.
+
+## Approval record
+
+The user approved the Card Definition/Card Instance contract on 2026-08-23, including the clarification that Card Instances are authoritative server state. Clients may receive audience-safe projections and submit identifier-based intents, but they cannot write owner, controller, zone, placement, or effect state.
 
 ## Recommendation
 
 Do not build the four requested systems as four isolated, strictly sequential projects. Use a thin vertical slice, then widen it:
 
-1. Approve the Card Definition/Card Instance contracts and author the smallest complete, stable card-and-Ticket fixture set.
+1. Synchronize the approved Card Definition/Card Instance contracts and author the smallest complete, stable card-and-Ticket fixture set.
 2. Build the deterministic server-authoritative game engine against those fixed fixtures.
 3. Add the automated-game harness as soon as that vertical slice can finish a match.
 4. Build the Ticket Builder on the already-tested authored Ticket contract and engine solvability checks.
@@ -36,7 +40,7 @@ The current [`card.schema.json`](../../schemas/domain/card.schema.json) already 
 
 What is missing is a machine-readable inheritance rule. `reference_entity_ids` may contain several IDs and does not identify the primary visual source. In addition, 68 records across the current `viewer/content` packs have no illustration, so inheritance cannot be assumed to succeed for every future card.
 
-Recommended rule for publishable Card Definitions:
+Approved rule for publishable Card Definitions:
 
 1. use a card-specific `presentation.illustration` when supplied;
 2. otherwise inherit from an explicitly designated primary domain reference;
@@ -69,9 +73,9 @@ The current required list is simultaneously too broad and not strong enough:
 
 The fields are enough to count and move simple one-shot fixture cards, but they are not sufficient to support authoritative persistence, replay, and ownership semantics.
 
-## Proposed replacement contract
+## Approved replacement contract
 
-Review and approve the following direction before editing the live schemas.
+The following direction is approved for synchronization during TASK-009.
 
 ### Card Definition
 
@@ -143,6 +147,19 @@ Conditional validation should require `in_play_placement` only in `in_play`, req
 
 At the Match or immutable Ready/deck-snapshot boundary, add a pinned `card_catalog_version` (and retain `ruleset_version`). Do not repeat the catalog version on all 60 instances. The catalog version must identify immutable Card Definitions so saved games and replays cannot change when a stable card ID receives a later version.
 
+### Server-authoritative instance boundary
+
+`CardInstance` is authoritative server state and is never client-writable.
+
+- A client submits an identifier-based, revision-bound intent. It does not submit a replacement Card Instance or trusted owner/controller/zone fields.
+- The server derives the actor from the authenticated connection and verifies any request `player_id`; possession of an ID does not grant authority.
+- The server loads the current Card Instance, validates actor, zone, controller, target, prerequisites, costs, and match revision, and then applies an approved transition.
+- Owner, controller, zone, placement, and effect state may change only through server rules/effect resolution recorded in authoritative state and immutable events.
+- Player and spectator clients receive only audience-safe projections. Local client tampering can at most falsify that client's temporary display; it cannot change the match and is overwritten by the next authoritative result or snapshot.
+- Action-request schemas should reject unexpected Card Instance mutation fields. Server handlers must also use an explicit allowlist rather than merging client payloads into authoritative objects.
+
+A legal control-changing card effect may request a change, but only the server decides whether that effect is approved and legal. Editing `controller_player_id` on a client never transfers control.
+
 ### Related contracts that must change together
 
 A Card Instance replacement cannot be safe as an isolated edit. The implementation task must synchronize:
@@ -172,7 +189,6 @@ Pass/end turn is always legal, so “no valid moves” is not literally a frozen
 
 This distinction answers whether play got stuck without incorrectly treating the always-legal Pass action as progress.
 
-## Known review gate, not a rule blocker
+## Approval status and remaining blockers
 
-The frozen and unfrozen ledgers contain no unresolved first-version rule that blocks implementation. The only immediate gate is approval of the proposed Card Definition/Card Instance contract and related version-pinning direction before the current schemas are replaced. Content balance, AI policy quality, deployment caps, and UI layout remain their own workstreams.
-
+The Card Definition/Card Instance and related version-pinning direction is approved. The frozen and unfrozen ledgers contain no unresolved first-version rule that blocks implementation. Content balance, AI policy quality, deployment caps, and UI layout remain their own workstreams.

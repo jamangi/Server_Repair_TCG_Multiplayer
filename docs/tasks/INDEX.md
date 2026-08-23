@@ -4,9 +4,9 @@ Tasks are implementation contracts. A builder must read `AGENTS.md` and then the
 
 Active task: **None.**
 
-Proposed task awaiting review:
+Ready task awaiting implementation:
 
-- [`TASK-009: Build the playable gameplay foundation`](TASK-009-gameplay-foundation.md) — proposed 2026-08-23; staged Card contracts/content, game engine, early automated-game harness, deterministic Ticket Builder, representative Card catalog, and reproducible automated-game statistics. Implementation is gated on approval of the Card Definition/Card Instance proposal.
+- [`TASK-009: Build the playable gameplay foundation`](TASK-009-gameplay-foundation.md) — Card Definition/Card Instance direction approved 2026-08-23, including authoritative server ownership and client-read-only projections; staged schema/content synchronization, game engine, early automated-game harness, deterministic Ticket Builder, representative Card catalog, and reproducible automated-game statistics. Implementation has not started.
 
 Completed documentation and research tasks:
 
