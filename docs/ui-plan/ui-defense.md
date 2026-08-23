@@ -1,8 +1,8 @@
 # Gameplay UI defense — Night-Shift Operations Desk
 
-Status: **proposed visual direction, rules-aligned and non-authoritative**
+Status: **approved visual direction for TASK-010, rules-aligned and non-authoritative**
 
-This document explains how the proposed board, Repair Tickets, cards, and motion language can look emotionally rewarding while faithfully expressing `first-version-v1`. It is a design defense, not a replacement for schemas, player-safe projections, content, or the engine.
+This document explains how the approved reference board, Repair Tickets, cards, and motion language can look emotionally rewarding while faithfully expressing `first-version-v1`. It is a design defense, not a replacement for schemas, player-safe projections, content, or the engine.
 
 ## 1. Design thesis
 

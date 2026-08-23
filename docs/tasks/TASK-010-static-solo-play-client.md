@@ -2,7 +2,7 @@
 
 ## Status
 
-**Proposed — awaiting the approvals below.** This task is a scoped static-client enhancement built on completed TASK-009. Do not begin implementation until the Approval section is accepted or amended.
+**Ready — A1 through A7 approved 2026-08-23.** This task is a scoped static-client enhancement built on completed TASK-009. Implementation may begin within the boundaries below.
 
 ## Objective
 
@@ -29,13 +29,13 @@ The profile must identify:
 
 The profile cannot silently override a frozen gameplay rule. If implementation needs a real gameplay difference, record pressure in `UNFROZEN_RULES.md` and stop only the affected work. Reduced security is an environment limitation, not permission to change deck, turn, Evidence, Isolation, Repair, Verify, Documentation, closure, scoring, or Ticket Builder behavior.
 
-## Approvals required
+## Approved decisions
 
-The following recommendations are internally coherent and may be approved together.
+The user approved A1 through A7 together on 2026-08-23. They are implementation requirements, not open questions.
 
 ### A1 — Solo match profile
 
-Approve `solo-pages-v1` as:
+Approved `solo-pages-v1` as:
 
 - one human Player in cooperative training mode, with no computer opponent;
 - a finite queue with `queue_minimum = 0` and score termination disabled;
@@ -46,13 +46,13 @@ Approve `solo-pages-v1` as:
 
 ### A2 — Local authority and active-match persistence
 
-Approve a dedicated module Web Worker as the in-browser local authority. The DOM sends identifier-based intents and receives player-safe projections/events; it never mutates Match State directly. This is architectural isolation and responsiveness, not a security boundary.
+Approved a dedicated module Web Worker as the in-browser local authority. The DOM sends identifier-based intents and receives player-safe projections/events; it never mutates Match State directly. This is architectural isolation and responsiveness, not a security boundary.
 
 Recommended scope: TASK-010 does **not** resume an in-progress match after reload or browser close. Navigating away from an active game requires confirmation, and export excludes active Match State. A future task may define the deliberate versioned save serializer required for safe resume.
 
 ### A3 — Local data and import behavior
 
-Approve versioned `localStorage` for profile, decks, active deck ID, settings, processed Match-start/result IDs, and aggregate statistics.
+Approved versioned `localStorage` for profile, decks, active deck ID, settings, processed Match-start/result IDs, and aggregate statistics.
 
 - Export produces one human-downloadable JSON backup containing only those local application records and version metadata.
 - Import validates and previews the file, then replaces local data only after explicit confirmation. It does not silently merge.
@@ -62,7 +62,7 @@ Approve versioned `localStorage` for profile, decks, active deck ID, settings, p
 
 ### A4 — Profile Level and statistics
 
-Approve `level = max(0, floor(lifetime_service_points_gained / 10))`, with no stored Level field and no initial maximum. Thus 5 Service Points gives Level 0 and 100 gives Level 10; a negative lifetime total never produces a negative Level.
+Approved `level = max(0, floor(lifetime_service_points_gained / 10))`, with no stored Level field and no initial maximum. Thus 5 Service Points gives Level 0 and 100 gives Level 10; a negative lifetime total never produces a negative Level.
 
 Lifetime statistics are updated exactly once per completed Match ID from the authoritative local result/event ledger. The stored/displayable set includes:
 
@@ -77,7 +77,7 @@ Disconnect and concession statistics are omitted from the solo display because t
 
 ### A5 — Anime.js dependency and interaction rule
 
-Approve one exact pinned Anime.js v4 release as a vendored ESM dependency, with its license, source/version record, and integrity checksum committed. Do not load executable code from a runtime CDN.
+Approved one exact pinned Anime.js v4 release as a vendored ESM dependency, with its license, source/version record, and integrity checksum committed. Do not load executable code from a runtime CDN.
 
 Use native CSS/WAAPI or Anime.js `waapi.animate()` for simple transform/opacity motion; import the JavaScript timeline, spring, staggering, or draggable modules only where they materially improve the interaction. Official documentation describes direct ESM download, granular modules, vanilla-JavaScript use, a lighter WAAPI API, and a separate draggable module:
 
@@ -90,19 +90,19 @@ Dragging is an optional input method. Every drag interaction requires a complete
 
 ### A6 — Illustration architecture and TASK-011 split
 
-Approve TASK-010 to build the resolver, responsive card-art slots, accessible alt-text behavior, loading/error fallbacks, and intentional category-specific placeholder visuals. Do not create the full card illustration set in this task.
+Approved TASK-010 to build the resolver, responsive card-art slots, accessible alt-text behavior, loading/error fallbacks, and intentional category-specific placeholder visuals. Do not create the full card illustration set in this task.
 
 Reserve TASK-011 for canonical card illustrations and their validation. Canonical assets should live outside UI component code under stable `asset_id` control and be staged into the Viewer deployment so a later full client can reuse them. Published art must never be addressed by card title or array position.
 
 ### A7 — Browser acceptance dependency
 
-Approve a dev-only Playwright dependency and pinned browser acceptance workflow. It has no production runtime cost. Node tests remain responsible for pure state, storage, routing, schema, and deterministic behavior; Playwright verifies actual navigation, dialogs, local storage, import/export, keyboard operation, responsive layout, reduced motion, drag fallback, gameplay, and GitHub Pages asset loading.
+Approved a dev-only Playwright dependency and pinned browser acceptance workflow. It has no production runtime cost. Node tests remain responsible for pure state, storage, routing, schema, and deterministic behavior; Playwright verifies actual navigation, dialogs, local storage, import/export, keyboard operation, responsive layout, reduced motion, drag fallback, gameplay, and GitHub Pages asset loading.
 
-## Visual-reference boundary
+## Visual-reference boundary and quality target
 
-The seven user-supplied screenshots are layout and interaction references only. Do not copy Honeyfoot branding, prose, art, currency, Shop, Tutorial, matchmaking, ownership economy, XP system, exact colors, or proprietary visual identity.
+The earlier user-supplied Honeyfoot screenshots are layout and interaction references only. Do not copy Honeyfoot branding, prose, art, currency, Shop, Tutorial, matchmaking, ownership economy, XP system, exact colors, or proprietary visual identity.
 
-Borrow only the useful structural qualities:
+Borrow only these useful shell qualities:
 
 - a polished framed shell with persistent navigation;
 - a strong two-column Home composition with an illustration/visual anchor and clear play controls;
@@ -111,7 +111,20 @@ Borrow only the useful structural qualities:
 - a large accessible card-inspection dialog; and
 - a profile split between identity/summary and editable cosmetic choices.
 
-Create an original Server Repair visual system that remains coherent with the existing dark technical Library. Appearance has priority, but the result must remain responsive, accessible, and lean.
+The committed Night-Shift references are the direct gameplay-surface quality set:
+
+- `docs/ui-plan/ui-reference_images/ui-minimum.png` — the implementation floor, captured from the supplied standalone vanilla HTML/CSS/JavaScript proof of concept;
+- `docs/ui-plan/ui-reference_images/ui-minimum-demo.html` — the exact standalone source behind that floor, useful for studying lightweight layering, responsive structure, hover tilt, and native Web Animations usage;
+- `docs/ui-plan/ui-reference_images/01-night-shift-board-desktop.png` — the desktop composition and material target;
+- `docs/ui-plan/ui-reference_images/02-card-ticket-specimens.png` — the Card/Ticket scale, family grammar, texture, and detail target;
+- `docs/ui-plan/ui-reference_images/03-night-shift-board-mobile.png` — the mobile recomposition and touch hierarchy target; and
+- `docs/ui-plan/ui-defense.md` — the rules, information-design, responsive, interaction, and accessibility defense behind the images.
+
+All six are references, not executable requirements, authoritative fixtures, or sources of rules/content. The demo's hard-coded text, costs, IDs, candidate states, counters, action behavior, and toast are illustrative and must never be copied into application data or rules. The engine's player-safe projections and pinned content remain authoritative.
+
+`ui-minimum.png` establishes the lowest acceptable material and atmosphere bar: layered panels, tactile Ticket/Card separation, restrained pseudo-texture, directional lighting, shadow, glow, slight perspective, clear family color, and polished transitions. A flat recoloring of generic rectangles does not meet this task. The three advanced images are the intended target: implementation must make a serious, recognizable attempt at their composition, density, material depth, card presence, and desktop/mobile hierarchy even while TASK-011 art is represented by intentional placeholders.
+
+Create an original Server Repair visual system coherent with the existing dark technical Library. Home, Decks, Profile, Settings, and results may be calmer than the game board, but must share its typography, graphite/navy surfaces, vellum accents, family colors, lighting logic, depth scale, controls, and motion language. Appearance has priority, while accessibility, responsiveness, and bounded resource use remain non-negotiable.
 
 ## Current implementation facts and blockers
 
@@ -135,7 +148,8 @@ Read before changing code:
 - every file under `src/engine/` and `src/builder/`, but only the public boundaries of `src/simulation/` needed to avoid shipping Node-only code;
 - `content/gameplay-v1/{card-catalog,decks,domain-snapshot,ticket-templates}.json`;
 - `viewer/{README.md,index.html,styles.css}`, every current `viewer/js/*.js` module, both Viewer workflows, and Viewer tests;
-- the application-shell, profile, and match-interaction sections of `docs/ui-plan/TODO.md` and `docs/ui-plan/wireframes/INDEX.md`; and
+- `docs/ui-plan/README.md`, complete `docs/ui-plan/ui-defense.md`, complete `docs/ui-plan/ui-reference_images/README.md`, complete `docs/ui-plan/ui-reference_images/ui-minimum-demo.html`, and visually inspect all four committed PNG references at full resolution;
+- the application-shell and profile sections of `docs/ui-plan/TODO.md` and `docs/ui-plan/wireframes/INDEX.md`, using the newer Night-Shift references for the match surface; and
 - only the board surface, Player zones, card grammar, and deterministic gameplay-example sections of the candidate-flow package. Candidate fixtures remain non-authoritative.
 
 Do not load unrelated story, case-study, social, Room, Store, campaign, or full-journey documents.
@@ -251,7 +265,23 @@ Use the Play shell's persistent Home/Decks/Profile navigation and an original tw
 
 Do not add Shop, currency, account XP, sign-in, matchmaking, or a computer-opponent selector. Play is disabled with a clear repair path when there is no legal active deck or required content failed to load.
 
-### 8. Solo game and results
+### 8. Visual system and gameplay-board fidelity
+
+Build the Night-Shift Operations Desk as a reusable presentation system, not one oversized screenshot or a set of isolated page mockups.
+
+- Define documented CSS tokens for graphite/navy structure, vellum/ink surfaces, cyan Test, violet Command, amber Repair, emerald Verify, semantic states, typography, spacing, radii, depth, glow, and motion.
+- Prefer semantic HTML, layered CSS, pseudo-elements, gradients, restrained repeat textures, small reusable SVG details, and transform-based depth. Do not bake interface text or state into raster images.
+- Preserve categorical silhouette as well as color: landscape clipped work-order Tickets, portrait playable Cards, note-like Evidence, chronological Worklog records, and tool-like basic actions.
+- Build art slots at the proportions shown in the specimen/board references. Until TASK-011, intentional category-aware placeholders must contribute composition, lighting, and focal hierarchy rather than appearing as broken, blank, or generic gray boxes.
+- On wide desktop, prioritize the selected Ticket, visible queue, Worklog, hand, resources, deck/discard, and basic-action rail with the density and hierarchy of `01-night-shift-board-desktop.png`.
+- On narrow mobile, genuinely recompose into the Ticket strip, selected Ticket, Evidence/Worklog switch, touch-sized citable rows, hand/selection focus, sticky primary controls, and labeled resource counters demonstrated by `03-night-shift-board-mobile.png`. Do not merely shrink or horizontally clip the desktop grid.
+- Use layering, lighting, shadow, glow, and modest perspective to at least match `ui-minimum.png`; aim for the tactile depth and controlled glamor of the advanced references without sacrificing legibility.
+- Card hover/selection tilt, parallax, and lighting response must be subtle, bounded, input-aware, cancellable, and absent for reduced motion or where coarse-pointer ergonomics make them harmful.
+- Prevent decorative layers from intercepting input or entering the accessibility tree. Texture, family color, glow, depth, and illustration can reinforce information but cannot be its sole carrier.
+
+Capability order is: HTML/CSS/SVG first, the approved Anime.js modules second. Do not add GSAP, PixiJS, Three.js, a canvas/WebGL renderer, or another visual runtime merely to imitate static lighting or texture. If the builder can demonstrate a required target that the approved stack cannot reasonably achieve, stop that optional enhancement and propose a narrowly scoped, pinned dependency amendment with bundle/performance/accessibility evidence; the rest of TASK-010 should continue.
+
+### 9. Solo game and results
 
 The game screen must use the same engine/Builder contracts as TASK-009:
 
@@ -266,7 +296,7 @@ The game screen must use the same engine/Builder contracts as TASK-009:
 
 The browser ships hidden truth because this is local-only. Keep it out of ordinary DOM/projections to preserve honest play, while documenting that developer tools can inspect it.
 
-### 9. Motion and interaction feel
+### 10. Motion and interaction feel
 
 Create one semantic animation coordinator. Engine state/events decide what happened; animation only explains it.
 
@@ -288,7 +318,7 @@ Do not block authoritative state on an animation callback. Lock only duplicate U
 
 Draggable Cards may be enabled only after click/keyboard targeting is complete. Drag uses pointer capture, legal drop-zone highlighting, escape/cancel, touch support, snapback, and engine validation after drop.
 
-### 10. Accessibility, responsiveness, and performance
+### 11. Accessibility, responsiveness, and performance
 
 At minimum:
 
@@ -301,25 +331,26 @@ At minimum:
 - responsive shell/deck/game layouts for narrow touch screens through large desktops;
 - adequate contrast, readable type, 44px-class touch targets, and overflow behavior without horizontal page clipping;
 - lazy image decoding/loading, responsive source sizes, and intentional placeholders without layout shift;
-- transform/opacity motion where practical, bounded animation targets, and no permanent per-frame loop; and
+- transform/opacity motion where practical, bounded animation targets, no permanent per-frame loop, and no full-viewport animated filter/canvas layer;
+- progressive enhancement when hover, fine pointer, backdrop filtering, masking, or advanced blend effects are unsupported; and
 - graceful operation when Anime.js, one image, local storage, or optional dragging is unavailable.
 
 Beauty remains a requirement. Performance work should protect interaction and loading quality rather than strip the visual hierarchy.
 
 ## Required implementation order
 
-1. Record approvals and create `solo-pages-v1` plus local-data schemas.
+1. Implement the approved A1–A7 decisions in `solo-pages-v1` plus local-data schemas.
 2. Make engine/Builder deterministic helpers browser-compatible while preserving every TASK-009 deterministic artifact.
 3. Build and test Viewer staging/deployment before UI code depends on it.
 4. Refactor Library and add hash routing plus the Library/Play switch.
 5. Implement storage, migration, import/export/reset, and Settings.
-6. Build the Play shell, Home, Decks, Profile, and placeholder art resolver.
-7. Integrate the Worker authority, Builder, game table, results, and exactly-once statistics.
+6. Build the shared Night-Shift visual system, Play shell, Home, Decks, Profile, and compositionally useful placeholder art resolver.
+7. Integrate the Worker authority, Builder, visually faithful desktop/mobile game table, results, and exactly-once statistics.
 8. Add semantic animation, then optional dragging, reduced motion, and cancellation.
-9. Complete responsive/accessibility/performance passes and automated browser acceptance.
+9. Complete responsive/accessibility/performance and reference-comparison passes plus automated browser acceptance.
 10. Run the full repository, deterministic campaign, Viewer, staging, and browser verification matrix before completion.
 
-## Allowed paths after approval
+## Allowed implementation paths
 
 - `viewer/**`
 - `src/engine/**`
@@ -375,6 +406,7 @@ At minimum verify:
 - keyboard-only and click-only complete game paths, with drag disabled;
 - drag/touch path when enabled, invalid snapback, and duplicate-intent prevention;
 - reduced motion, focus restoration, live announcements, contrast, responsive breakpoints, import dialog, card dialog, and active-match leave confirmation;
+- the minimum material/lighting/depth floor and desktop/mobile composition targets from the four committed visual references;
 - missing/corrupt content, missing art, storage unavailable/full, Worker failure, and animation-disabled fallbacks; and
 - no horizontal page overflow or uncaught console/page errors in supported browser sizes.
 
@@ -392,7 +424,16 @@ node tools/run-automated-games.mjs --verify-report automated_games/task-009-foun
 git diff --check
 ```
 
-Visually inspect Home, Your Decks, Edit Deck, card detail, Profile, Settings/import, solo game, failed Verify, closure, and results at desktop, tablet, and narrow mobile sizes in normal and reduced-motion modes. Preserve screenshots or a concise visual-QA record in the completion record.
+Visually inspect Home, Your Decks, Edit Deck, card detail, Profile, Settings/import, solo game, failed Verify, closure, and results at desktop, tablet, and narrow mobile sizes in normal and reduced-motion modes.
+
+The visual-QA record must include:
+
+- full-page captures at 1600×1000-class desktop, an intermediate tablet size, and 390×844-class mobile;
+- side-by-side review against `ui-minimum.png`, the advanced desktop board, Card/Ticket specimen sheet, and advanced mobile board;
+- a checklist covering hierarchy, material separation, texture, lighting, shadow/glow, card scale, Ticket dominance, Worklog/Evidence clarity, hand interaction, responsive recomposition, placeholder-art quality, and shell consistency; and
+- documented reasons for material deviations caused by current content, missing TASK-011 illustrations, accessibility, browser support, or measured performance—not convenience alone.
+
+Exact pixel matching is neither possible nor desired, and generated incidental text is not a target. However, if the implemented board is materially flatter, less layered, or less polished than `ui-minimum.png`, TASK-010 is incomplete. Preserve the captures and concise comparison in the completion record.
 
 ## Completion boundary
 
@@ -401,6 +442,7 @@ TASK-010 is complete only when:
 - Library remains unchanged in capability and the active Library/Play selection is idempotent;
 - the static Pages artifact can complete a deterministic local solo game with 1–10 requested Tickets using one active legal deck;
 - Home, Decks, Profile, Settings, export/import, results, statistics, Level, placeholders, and accessibility requirements work across the supported browser matrix;
+- the shared visual system clears the minimum reference floor and makes a documented, rules-faithful attempt at the advanced desktop/specimen/mobile targets;
 - the client uses the canonical engine/Builder through the Worker intent boundary rather than duplicated UI rules;
 - TASK-009 deterministic outputs remain unchanged;
 - all required tests and visual checks pass;

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Server Repair — Night Shift Prototype</title>
+<style>
+:root{--bg:#061016;--panel:#0b171f;--line:#1d3541;--cyan:#39d7ff;--amber:#f3aa25;--violet:#a88cff;--green:#79d36a;--paper:#e8dcc5;--ink:#25211d}
+*{box-sizing:border-box} body{margin:0;min-height:100vh;color:#eef6f8;font-family:Inter,Segoe UI,system-ui,sans-serif;background:
+radial-gradient(circle at 50% -20%,#10313f 0,transparent 36rem),linear-gradient(#08131a,#03080c 75%)}
+body:after{content:"";position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.012) 0 1px,transparent 1px 4px),radial-gradient(circle,transparent 45%,rgba(0,0,0,.5));}
+header{height:66px;display:flex;align-items:center;padding:0 22px;gap:20px;background:#071018eF;border-bottom:1px solid #18303b;box-shadow:0 12px 30px #0008}
+.brand{font-weight:900;letter-spacing:.24em}.brand:before{content:"▦";color:var(--cyan);font-size:26px;margin-right:12px;text-shadow:0 0 14px var(--cyan)}
+.actions{padding:9px 17px;border:1px solid #15506a;border-radius:9px;color:var(--cyan);font-weight:900;letter-spacing:.08em}.push{flex:1}.shift{font-size:12px;color:#91aab5}
+.layout{max-width:1500px;margin:auto;padding:15px;display:grid;grid-template-columns:215px minmax(560px,1fr) 270px;gap:14px}
+.panel{background:linear-gradient(#0b171f,#071017);border:1px solid #203741;border-radius:8px;box-shadow:0 18px 45px #0007;overflow:hidden}.panel h3{font-size:11px;letter-spacing:.16em;margin:0;padding:11px 13px;border-bottom:1px solid #1b3039}
+.tickets{padding:9px}.ticket{position:relative;color:#201d19;background:repeating-linear-gradient(0deg,#e8ddc9 0 3px,#e6dbc6 3px 4px);border:1px solid #aa9a7f;border-radius:9px;padding:14px 12px;margin-bottom:10px;box-shadow:0 5px 12px #0007}.ticket:before{content:"";position:absolute;top:-5px;left:42%;width:50px;height:11px;border:2px solid #554e43;border-bottom:0;border-radius:6px 6px 0 0;background:#bcae95}.ticket b{display:block;margin-top:8px;font-size:14px;line-height:1.1}.ticket small{font-weight:800}.ticket.active{outline:2px solid var(--amber);box-shadow:0 0 20px #f3aa2544}
+.case{color:var(--ink);position:relative;padding:26px 28px;border:9px solid #302e29;border-radius:18px;background:repeating-linear-gradient(0deg,#e8dcc5 0 4px,#e7dbc3 4px 5px);box-shadow:0 22px 60px #0009,inset 0 0 35px #69451d18}.case:before{content:"";position:absolute;top:-22px;left:50%;transform:translateX(-50%);width:260px;height:34px;border-radius:7px;border:2px solid #161616;background:linear-gradient(#6a6862,#242522 27%,#77746d 34%,#262725 58%,#5a5650)}
+.casehead{display:flex;justify-content:space-between;gap:15px;align-items:start}.case h1{font-family:Impact,"Arial Narrow Bold",sans-serif;letter-spacing:.03em;font-size:34px;margin:4px 0 10px}.chip{padding:6px 10px;border:1px solid #b5774b;border-radius:7px;color:#8d4129;font-size:10px;font-weight:900}
+.serverart{height:175px;border:2px solid #1a1d1c;border-radius:7px;box-shadow:inset 0 0 40px #000;background:
+radial-gradient(circle at 80% 49%,#95ff72 0 2px,transparent 3px),radial-gradient(circle at 84% 52%,#95ff72 0 2px,transparent 3px),
+linear-gradient(90deg,transparent 0 12%,#dc7718 12% 14%,transparent 14% 20%,#2487be 20% 23%,transparent 23% 100%),
+repeating-linear-gradient(90deg,#0b151b 0 21px,#183440 21px 24px,#071015 24px 31px)}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:25px;margin-top:17px}.label{font-size:11px;font-weight:900;letter-spacing:.08em}.cols ul{font-size:13px;line-height:1.55;padding-left:18px}.faults{display:flex;gap:8px;margin-top:9px}.fault{flex:1;padding:14px 7px;text-align:center;border:1px solid #91aeb3;background:#d7e3e1aa;border-radius:5px;font-weight:800;font-size:12px}.fault:nth-child(2){border-color:#aa9ac1;background:#ded6e8aa}
+.machine{border-top:1px solid #9b876d66;margin-top:18px;padding-top:14px}.stategrid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:8px}.state{padding:11px;text-align:center;border:1px solid #b9a88e;border-radius:5px;background:#ffffff18;font-size:12px}.state b{display:block;margin-top:5px}.ok{color:#2d8755}.warn{color:#a36d16}.bad{color:#b54134}
+.hand{display:flex;justify-content:center;gap:9px;margin-top:16px;perspective:1000px;padding-bottom:10px}.card{width:185px;height:265px;border-radius:12px;padding:10px;position:relative;cursor:pointer;transform-style:preserve-3d;transition:transform .17s,filter .17s;box-shadow:0 13px 28px #0009,inset 0 0 0 1px #ffffff15}.test{background:linear-gradient(150deg,#11556c,#082732);border:2px solid #31c9ed}.command{background:linear-gradient(150deg,#473665,#20192e);border:2px solid #9c7ee0}.repair{background:linear-gradient(150deg,#76500d,#291c07);border:2px solid #efaa28}.verify{background:linear-gradient(150deg,#356734,#172917);border:2px solid #79c96b}.type{font-size:10px;font-weight:900;letter-spacing:.13em}.test .type{color:var(--cyan)}.command .type{color:#c5adff}.repair .type{color:#ffc64a}.verify .type{color:#9ae08d}.cost{position:absolute;top:7px;right:8px;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:#dfbf87;border:2px solid #59421f;color:#21180d;font-weight:900}.art{height:105px;margin-top:10px;border:1px solid #ffffff22;border-radius:6px;background:radial-gradient(circle at 72% 52%,#9dff75 0 2px,transparent 3px),repeating-linear-gradient(90deg,#0a151a 0 15px,#18333e 15px 18px,#071116 18px 23px)}.name{font-family:Georgia,serif;font-size:19px;margin:11px 0 5px}.card p{margin:0;font-size:11.5px;line-height:1.4;color:#d2e0e5}.id{position:absolute;bottom:7px;font-size:9px;color:#7f9ca7}
+.log{display:grid;grid-template-columns:28px 1fr auto;gap:8px;padding:11px 9px;border-bottom:1px solid #1a2e38}.log span{color:#80949d;font-size:11px}.log b{font-size:10px;letter-spacing:.1em}.log p{margin:3px 0 0;color:#9bb0ba;font-size:11px}.c{color:var(--cyan)}.p{color:#bc9cff}.a{color:var(--amber)}.g{color:#8ce27f}
+.bottom{max-width:1500px;margin:0 auto 15px;padding:0 15px;display:grid;grid-template-columns:repeat(6,1fr);gap:9px}.bottom button{min-height:67px;background:linear-gradient(#0e1a22,#081118);color:#dce9ed;border:1px solid #253d49;border-radius:8px;font-weight:800;font-size:15px;cursor:pointer}.bottom button:hover{border-color:#30c9ea;background:#0d222c}
+.toast{position:fixed;left:50%;bottom:25px;transform:translate(-50%,15px);opacity:0;background:#0a2630;border:1px solid var(--cyan);color:#baf1ff;padding:11px 18px;border-radius:7px;transition:.2s;z-index:30}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:1000px){.layout{grid-template-columns:1fr}.right{display:none}.tickets{display:flex;overflow:auto;gap:9px}.ticket{min-width:210px}.hand{overflow:auto;justify-content:flex-start}.bottom{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+<header><div class="brand">SERVER REPAIR</div><div class="actions">▦ &nbsp;2 ACTIONS</div><div class="push"></div><div class="shift">☾ SHIFT 23A &nbsp; ◷ 00:47 &nbsp; SYS-CORE-7 ●</div></header>
+<div class="layout">
+<aside class="panel"><h3>WORK ORDERS</h3><div class="tickets">
+<div class="ticket active"><small>#2317</small><b>THE MISSING<br>STORAGE PATH</b></div>
+<div class="ticket"><small>#2318</small><b>SLOW DATABASE<br>QUERIES</b></div>
+<div class="ticket"><small>#2319</small><b>AUTH SERVICE<br>TIMEOUTS</b></div>
+</div></aside>
+
+<main>
+<section class="case">
+<div class="casehead"><h1>THE MISSING STORAGE PATH</h1><div class="chip">STORAGE · HIGH</div></div>
+<div class="serverart"></div>
+<div class="cols">
+<div><div class="label">SYMPTOMS</div><ul><li>Some volumes not mounting on boot</li><li>Intermittent I/O errors in logs</li><li>Latency increased to dependent services</li></ul></div>
+<div><div class="label">CANDIDATE FAULTS (PUBLIC)</div><div class="faults"><div class="fault">Cable<br>Dislodged</div><div class="fault">RAID Member<br>Degraded</div></div></div>
+</div>
+<div class="machine"><div class="label">MACHINE STATE</div><div class="stategrid">
+<div class="state">◉<b>Network</b><strong class="ok">OK</strong></div>
+<div class="state">⚠<b>Storage Path</b><strong class="warn">DEGRADED</strong></div>
+<div class="state">⊖<b>Volumes</b><strong class="warn">PARTIAL</strong></div>
+<div class="state">☒<b>Services</b><strong class="bad">IMPACTED</strong></div>
+</div></div>
+</section>
+
+<section class="hand">
+<div class="card test" data-name="Visual Inspection"><div class="type">⌕ TEST</div><div class="cost">1</div><div class="art"></div><div class="name">Visual Inspection</div><p>Inspect the top Evidence notes. You may attach 1.</p><div class="id">#T-001</div></div>
+<div class="card command" data-name="RAID Status"><div class="type">⌘ COMMAND</div><div class="cost">2</div><div class="art"></div><div class="name">RAID Status</div><p>Check the health of the active RAID array.</p><div class="id">#C-014</div></div>
+<div class="card repair" data-name="Replace Member"><div class="type">⌁ REPAIR</div><div class="cost">1</div><div class="art"></div><div class="name">Replace Member</div><p>Replace a failed member in a RAID array. Then draw 1.</p><div class="id">#R-007</div></div>
+<div class="card verify" data-name="Verify Health"><div class="type">⌁ VERIFY</div><div class="cost">1</div><div class="art"></div><div class="name">Verify Health</div><p>Evaluate the authored post-repair health condition.</p><div class="id">#V-003</div></div>
+</section>
+</main>
+
+<aside class="panel right"><h3>WORKLOG</h3>
+<div class="log"><span>08</span><div><b class="c">TEST</b><p>Visual Inspection<br>Checked cable connections.</p></div><span>00:41</span></div>
+<div class="log"><span>07</span><div><b class="p">COMMAND</b><p>Show Multipath<br>Viewed active pathing.</p></div><span>00:39</span></div>
+<div class="log"><span>06</span><div><b class="c">TEST</b><p>RAID Status<br>Checked array health.</p></div><span>00:37</span></div>
+<div class="log"><span>05</span><div><b class="a">REPAIR</b><p>Reseat Cable<br>Reseated suspect cable.</p></div><span>00:35</span></div>
+<div class="log"><span>04</span><div><b class="g">VERIFY</b><p>Verify Health<br>Baseline system check.</p></div><span>00:32</span></div>
+</aside>
+</div>
+
+<div class="bottom">
+<button>♧ Hypothesis</button><button>◎ Isolate</button><button>▢ Document</button><button>⌕ Search</button><button>↻ Refresh</button><button>→ Pass</button>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const toast=document.querySelector('#toast');
+document.querySelectorAll('.card').forEach(card=>{
+  card.addEventListener('pointermove',e=>{
+    const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+    card.style.transform=`translateY(-10px) rotateX(${-y*9}deg) rotateY(${x*12}deg) scale(1.035)`;
+  });
+  card.addEventListener('pointerleave',()=>card.style.transform='');
+  card.addEventListener('click',()=>{
+    card.animate([
+      {transform:'translateY(-10px) scale(1.03)',filter:'brightness(1)'},
+      {transform:'translateY(-70px) scale(1.13) rotateZ(-2deg)',filter:'brightness(1.45)'},
+      {transform:'translateY(-12px) scale(1.03)',filter:'brightness(1)'}
+    ],{duration:650,easing:'cubic-bezier(.18,.75,.25,1)'});
+    toast.textContent=card.dataset.name+' played';
+    toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'),1000);
+  });
+});
+</script>
+</body>
+</html>

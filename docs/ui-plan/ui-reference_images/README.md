@@ -1,16 +1,33 @@
 # Gameplay reference images
 
-These are original AI-generated visual references for the proposed **Night-Shift Operations Desk** direction. They are intended to communicate composition, material, illustration density, card family grammar, and responsive hierarchy.
+This folder contains the approved **Night-Shift Operations Desk** visual references for TASK-010: one project-owner-supplied vanilla proof of concept and its screenshot establish the minimum implementation floor, while three original AI-generated references establish the intended desktop, component, and mobile targets. Together they communicate composition, material, illustration density, card family grammar, responsive hierarchy, and achievable browser-native depth.
 
 They are not:
 
 - canonical card or Ticket illustrations;
 - exact UI copy or authoritative match fixtures;
-- implementation screenshots;
+- production implementation screenshots;
 - proof that every pictured interaction is legal; or
 - a substitute for `FROZEN_RULES.md`, schemas, engine projections, or TASK-010 acceptance tests.
 
-The generated images received a rules-oriented visual QA pass. Visible Repair costs were corrected to the frozen 0/1/2 envelope, and Verify text that implied a Service Point award was removed. Small incidental generated text may still be illustrative; implementation must render current pinned content.
+The three generated target images received a rules-oriented visual QA pass. Visible Repair costs were corrected to the frozen 0/1/2 envelope, and Verify text that implied a Service Point award was removed. The minimum demo and all images still contain illustrative sample state and incidental text; implementation must render current pinned content and player-safe engine projections.
+
+## 00 — Minimum implementation floor
+
+![Minimum night-shift gameplay board](./ui-minimum.png)
+
+Source: [`ui-minimum-demo.html`](./ui-minimum-demo.html)
+
+This standalone proof of concept uses HTML, CSS, and vanilla JavaScript with no external runtime library. Use it to establish the minimum acceptable execution quality for:
+
+- layered graphite/navy panels and a tactile vellum Ticket;
+- restrained pseudo-texture, directional lighting, shadow, glow, and depth;
+- distinct Test, Command, Repair, and Verify Card families;
+- slight perspective and hover tilt;
+- native Web Animations feedback; and
+- a responsive structural fallback.
+
+The demo is visual implementation evidence, not production source or an authoritative fixture. Do not copy its hard-coded Ticket/Card text, costs, IDs, candidates, resources, Worklog, click-to-play behavior, or toast into the client. TASK-010 must use the canonical engine, Builder, content, Worker authority boundary, accessibility alternatives, and approved Anime.js policy. A completed board that is materially flatter or less polished than this floor does not meet TASK-010.
 
 ## 01 — Desktop board
 
@@ -78,8 +95,9 @@ Correction pass: change the pictured Repair cost from 3 to 1 and remove Verify S
 
 ## Generation provenance
 
+- Minimum reference provenance: project-owner-supplied standalone Server Repair HTML/CSS/JavaScript proof of concept and exact screenshot, added 2026-08-23. The source is committed only as a readable visual reference and is not part of the Viewer runtime.
 - Mode: built-in image generation, with targeted built-in edit passes.
 - Date: 2026-08-23.
 - Source references: four user-supplied screenshots used only for general layout/aesthetic lessons; not committed.
 - Style anchor: the generated desktop board was used to maintain consistency in the specimen and mobile references.
-- Redistribution boundary: these three outputs are original project references; no third-party screenshot or brand asset is included.
+- Redistribution boundary: the minimum proof of concept and three generated outputs are project references; no third-party screenshot or brand asset is included.

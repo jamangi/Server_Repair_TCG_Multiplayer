@@ -8,11 +8,11 @@ Active task:
 
 Proposed task awaiting approvals:
 
-- [`TASK-010: Add Library and local Solo Play to the static Viewer`](TASK-010-static-solo-play-client.md) — proposed 2026-08-23; preserves the Domain Library while adding a browser-local Play shell, deck builder, profile/statistics, export/import, deterministic solo game, semantic animation, and GitHub Pages packaging. Seven scoped approvals cover the derived solo profile, local authority/persistence, Level/statistics, Anime.js, illustration staging, and browser acceptance.
+- **None.**
 
 Ready task awaiting implementation:
 
-- **None.**
+- [`TASK-010: Add Library and local Solo Play to the static Viewer`](TASK-010-static-solo-play-client.md) — A1–A7 approved 2026-08-23; preserves the Domain Library while adding a browser-local Play shell, deck builder, profile/statistics, export/import, deterministic solo game, semantic animation, Night-Shift visual system, and GitHub Pages packaging. TASK-011 remains reserved for the full illustration set.
 
 Completed documentation and research tasks:
 
