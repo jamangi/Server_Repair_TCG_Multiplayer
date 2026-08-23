@@ -1,0 +1,531 @@
+{
+  "pack_id": "core_v0_1_case_study_gaps",
+  "name": "Core v0.1 Case-Study Gaps",
+  "version": "0.1.0",
+  "entities": [
+    {
+      "id": "protocol.network.ipv4",
+      "entity_type": "protocol",
+      "presentation": {
+        "display_name": "IPv4",
+        "short_description": "The Internet Protocol version 4 addressing and packet-delivery protocol used by the diagnosed network path."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "network",
+          "ipv4",
+          "addressing"
+        ]
+      },
+      "protocol_type": "network protocol",
+      "purpose": "Represent IPv4 addressing and packet delivery independently from address-assignment protocols such as DHCP.",
+      "related_component_ids": [
+        "component.network.nic"
+      ],
+      "related_fault_ids": [
+        "fault.network.dhcp.pool_exhausted",
+        "fault.network.dhcp.no_lease",
+        "fault.network.ip.static_incorrect"
+      ],
+      "related_procedure_ids": [
+        "repair.network.clear_stale_dhcp_reservations",
+        "verify.network.dhcp_lease"
+      ],
+      "education_text": "A host can have working IPv6 while its IPv4 configuration or DHCPv4 lease path is unavailable."
+    },
+    {
+      "id": "protocol.network.ipv6",
+      "entity_type": "protocol",
+      "presentation": {
+        "display_name": "IPv6",
+        "short_description": "The Internet Protocol version 6 addressing and packet-delivery protocol."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "network",
+          "ipv6",
+          "addressing"
+        ]
+      },
+      "protocol_type": "network protocol",
+      "purpose": "Represent IPv6 state separately when comparing protocol-specific reachability and address assignment.",
+      "related_component_ids": [
+        "component.network.nic"
+      ],
+      "related_fault_ids": [],
+      "related_procedure_ids": [],
+      "education_text": "Healthy IPv6 connectivity does not prove that IPv4 addressing or DHCPv4 is healthy."
+    },
+    {
+      "id": "fault.network.dhcp.pool_exhausted",
+      "entity_type": "fault",
+      "presentation": {
+        "display_name": "DHCP Address Pool Exhausted",
+        "short_description": "The DHCP server has no reusable address available for a requesting client."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "network",
+          "dhcp",
+          "address pool",
+          "stale reservations"
+        ]
+      },
+      "category": "network",
+      "severity": "moderate",
+      "affected_component_ids": [],
+      "affected_subsystem_ids": [
+        "subsystem.network"
+      ],
+      "symptom_ids": [
+        "symptom.network.no_dhcp_lease",
+        "symptom.network.no_connectivity"
+      ],
+      "effective_test_ids": [
+        "test.network.interface_config",
+        "test.network.dhcp_transaction_trace",
+        "test.network.dhcp_pool_audit"
+      ],
+      "repair_procedure_ids": [
+        "repair.network.clear_stale_dhcp_reservations"
+      ],
+      "validation_procedure_ids": [
+        "verify.network.dhcp_lease",
+        "verify.network.connectivity"
+      ],
+      "education_text": "Pool exhaustion is a server-side actionable cause of a client-visible lease failure; stale reservations are one possible source of occupied capacity."
+    },
+    {
+      "id": "command.linux.dhclient",
+      "entity_type": "command",
+      "presentation": {
+        "display_name": "dhclient Lease Request",
+        "short_description": "Releases or requests a DHCP lease and can display the client transaction in verbose mode."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "linux",
+          "dhclient",
+          "dhcp",
+          "lease"
+        ]
+      },
+      "platform": "Linux with ISC DHCP client",
+      "syntax": "dhclient -4 -r -v <interface>; dhclient -4 -v [-s <server>] <interface>",
+      "purpose": "Release and request an IPv4 DHCP lease while recording Discover, Offer, Request, and acknowledgement behavior.",
+      "capabilities": [
+        "Release an existing IPv4 lease",
+        "Request a new IPv4 lease",
+        "Display verbose DHCP transaction output"
+      ],
+      "related_test_ids": [
+        "test.network.dhcp_transaction_trace"
+      ],
+      "education_text": "Command syntax and direct-server options vary by client version; preserve the exact command and output in the work record."
+    },
+    {
+      "id": "test.power.residual_power_drain",
+      "entity_type": "test",
+      "presentation": {
+        "display_name": "Residual-Power Drain Test",
+        "short_description": "Safely removes all power, discharges residual state, then compares symptoms after controlled re-energization."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "power",
+          "residual power",
+          "discharge",
+          "flea power"
+        ]
+      },
+      "test_type": "state reset and symptom comparison",
+      "tool_requirement_ids": [],
+      "command_requirement_ids": [],
+      "target_component_ids": [
+        "component.board.system",
+        "component.power.hot_swap_psu",
+        "component.power.distribution_board"
+      ],
+      "evidence_rules": [
+        {
+          "fault_id": "fault.power.psu.failed",
+          "possible_outcomes": [
+            "SUPPORT",
+            "CONTRADICT",
+            "RULE_OUT",
+            "INCONCLUSIVE"
+          ],
+          "notes": "Symptom changes after a complete discharge can narrow power-state hypotheses but do not by themselves prove a PSU repair."
+        },
+        {
+          "fault_id": "fault.power.distribution_board.failed",
+          "possible_outcomes": [
+            "SUPPORT",
+            "CONTRADICT",
+            "RULE_OUT",
+            "INCONCLUSIVE"
+          ],
+          "notes": "Persistent or changed power behavior becomes Evidence after the controlled reset."
+        },
+        {
+          "fault_id": "fault.board.system.failed",
+          "possible_outcomes": [
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE"
+          ],
+          "notes": "A partial recovery can leave a board or another subsystem hypothesis unresolved."
+        }
+      ],
+      "diagnostic_strength": 1,
+      "action_cost": 1,
+      "education_text": "Follow protocol.safety.deenergize_discharge and the platform service instructions; redundant power feeds must all be removed before discharge."
+    },
+    {
+      "id": "test.power.output_voltage_measurement",
+      "entity_type": "test",
+      "presentation": {
+        "display_name": "Power Output Voltage Measurement",
+        "short_description": "Measures documented power rails and power-good signals with an appropriate meter and platform pinout."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "power",
+          "voltage",
+          "multimeter",
+          "power rail"
+        ]
+      },
+      "test_type": "electrical measurement",
+      "tool_requirement_ids": [
+        "tool.electrical.multimeter"
+      ],
+      "command_requirement_ids": [],
+      "target_component_ids": [
+        "component.power.hot_swap_psu",
+        "component.power.distribution_board"
+      ],
+      "evidence_rules": [
+        {
+          "fault_id": "fault.power.psu.failed",
+          "possible_outcomes": [
+            "SUPPORT",
+            "CONTRADICT",
+            "CONFIRM",
+            "RULE_OUT",
+            "INCONCLUSIVE"
+          ],
+          "notes": "Interpret measurements only against the approved connector, load, tolerance, and power-state specification."
+        },
+        {
+          "fault_id": "fault.power.distribution_board.failed",
+          "possible_outcomes": [
+            "SUPPORT",
+            "CONTRADICT",
+            "CONFIRM",
+            "RULE_OUT",
+            "INCONCLUSIVE"
+          ],
+          "notes": "Comparing source and distributed rails can isolate a supply from the downstream distribution path."
+        }
+      ],
+      "diagnostic_strength": 3,
+      "action_cost": 2,
+      "education_text": "Do not generalize an ATX pinout to a proprietary or hot-swap server interface; use model-specific service documentation and electrical safety controls."
+    },
+    {
+      "id": "test.network.dhcp_transaction_trace",
+      "entity_type": "test",
+      "presentation": {
+        "display_name": "DHCP Transaction Trace",
+        "short_description": "Interprets the DHCP client transaction to distinguish an absent offer from client-side address configuration problems."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "network",
+          "dhcp",
+          "discover",
+          "offer"
+        ]
+      },
+      "test_type": "protocol transaction analysis",
+      "tool_requirement_ids": [],
+      "command_requirement_ids": [
+        "command.linux.dhclient"
+      ],
+      "target_component_ids": [
+        "component.network.nic"
+      ],
+      "evidence_rules": [
+        {
+          "fault_id": "fault.network.dhcp.no_lease",
+          "possible_outcomes": [
+            "SUPPORT",
+            "CONTRADICT",
+            "CONFIRM",
+            "RULE_OUT",
+            "INCONCLUSIVE"
+          ],
+          "notes": "Discover without Offer supports a DHCP service or capacity path; a completed lease can rule out the current lease-failure state."
+        },
+        {
+          "fault_id": "fault.network.dhcp.pool_exhausted",
+          "possible_outcomes": [
+            "SUPPORT",
+            "CONTRADICT",
+            "RULE_OUT",
+            "INCONCLUSIVE"
+          ],
+          "notes": "An absent Offer is compatible with pool exhaustion but does not confirm the server-side cause without a pool audit."
+        }
+      ],
+      "diagnostic_strength": 2,
+      "action_cost": 1,
+      "education_text": "Preserve the exact Discover, Offer, Request, acknowledgement, timeout, and server-identity observations."
+    },
+    {
+      "id": "test.network.dhcp_pool_audit",
+      "entity_type": "test",
+      "presentation": {
+        "display_name": "DHCP Address Pool Audit",
+        "short_description": "Inspects free-address capacity, active leases, exclusions, and stale reservations on the DHCP service."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "network",
+          "dhcp",
+          "pool capacity",
+          "reservations"
+        ]
+      },
+      "test_type": "server-side configuration and capacity audit",
+      "tool_requirement_ids": [],
+      "command_requirement_ids": [],
+      "target_component_ids": [],
+      "evidence_rules": [
+        {
+          "fault_id": "fault.network.dhcp.pool_exhausted",
+          "possible_outcomes": [
+            "SUPPORT",
+            "CONTRADICT",
+            "CONFIRM",
+            "RULE_OUT",
+            "INCONCLUSIVE"
+          ],
+          "notes": "Zero available addresses with occupied or stale allocations can confirm the actionable capacity fault."
+        },
+        {
+          "fault_id": "fault.network.dhcp.no_lease",
+          "possible_outcomes": [
+            "SUPPORT",
+            "CONTRADICT",
+            "INCONCLUSIVE"
+          ],
+          "notes": "The audit explains one server-side path to the client-visible lease failure."
+        }
+      ],
+      "diagnostic_strength": 4,
+      "action_cost": 1,
+      "education_text": "Record scope utilization and the specific allocation state; do not delete active reservations merely because the pool is full."
+    },
+    {
+      "id": "tool.monitoring.os_temperature",
+      "entity_type": "tool",
+      "presentation": {
+        "display_name": "Operating-System Temperature Monitor",
+        "short_description": "Reads processor and platform temperature telemetry through an operating-system sensor utility."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "thermal",
+          "temperature",
+          "operating system",
+          "sensor utility"
+        ]
+      },
+      "tool_type": "software monitoring utility",
+      "capabilities": [
+        "Read CPU temperature telemetry",
+        "Record temperature change during a controlled workload",
+        "Provide telemetry when a BMC console is unavailable"
+      ],
+      "applicable_component_type_ids": [
+        "component.compute.cpu",
+        "component.cooling.cpu_heatsink"
+      ],
+      "applicable_fault_ids": [
+        "fault.thermal.heatsink.clogged",
+        "fault.thermal.heatsink.contact_poor",
+        "fault.thermal.cpu.overheating",
+        "fault.thermal.shutdown"
+      ],
+      "safety_notes": [
+        "Confirm that the utility reports the intended sensor and units before interpreting thresholds.",
+        "Stop the workload if the platform reaches its approved thermal limit or becomes unstable."
+      ]
+    },
+    {
+      "id": "repair.network.clear_stale_dhcp_reservations",
+      "entity_type": "repair_procedure",
+      "presentation": {
+        "display_name": "Clear Stale DHCP Reservations",
+        "short_description": "Removes verified stale reservations or allocations to restore reusable DHCP address capacity."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "network",
+          "dhcp",
+          "reservations",
+          "address pool"
+        ]
+      },
+      "target_fault_ids": [
+        "fault.network.dhcp.pool_exhausted"
+      ],
+      "required_component_ids": [],
+      "required_tool_ids": [],
+      "required_protocol_ids": [
+        "protocol.network.dhcp",
+        "protocol.network.ipv4"
+      ],
+      "steps_summary": [
+        "Confirm address-pool exhaustion and identify allocations that are genuinely stale.",
+        "Preserve required reservations and remove only the stale entries authorized for cleanup.",
+        "Confirm that reusable capacity is available before requesting a new client lease."
+      ],
+      "action_cost": 1,
+      "education_text": "The repair changes DHCP server state; it is distinct from correcting one client's static address."
+    },
+    {
+      "id": "repair.storage.backup_rebuild_restore",
+      "entity_type": "repair_procedure",
+      "presentation": {
+        "display_name": "Backup, Rebuild, and Restore System",
+        "short_description": "Preserves recoverable data, rebuilds the affected system or storage configuration, and restores the verified backup when in-place reconstruction cannot complete."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "storage",
+          "backup",
+          "rebuild",
+          "restore"
+        ]
+      },
+      "target_fault_ids": [
+        "fault.storage.sas.drive_failed",
+        "fault.storage.raid.degraded"
+      ],
+      "required_component_ids": [
+        "component.storage.sas_hdd",
+        "component.storage.raid_controller"
+      ],
+      "required_tool_ids": [
+        "tool.storage.raid_console"
+      ],
+      "required_protocol_ids": [
+        "protocol.service.storage_data_preservation"
+      ],
+      "steps_summary": [
+        "Capture a full recoverable backup and verify that it can be read before destructive reconstruction.",
+        "Record array members, bay mapping, configuration, and the isolated failure path.",
+        "Rebuild the approved system and storage configuration without inventing an unverified component replacement.",
+        "Restore the backup and perform the required boot, storage, and service validations."
+      ],
+      "action_cost": 2,
+      "education_text": "This is a recovery path when in-place array reconstruction cannot safely complete; it is not the same procedure as a normal RAID parity rebuild."
+    },
+    {
+      "id": "verify.network.dhcp_lease",
+      "entity_type": "validation_procedure",
+      "presentation": {
+        "display_name": "DHCP Lease Verification",
+        "short_description": "Confirms that the repaired client receives the expected lease and usable network configuration from the intended DHCP service."
+      },
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "network",
+          "dhcp",
+          "lease",
+          "verification"
+        ]
+      },
+      "validates_fault_ids": [
+        "fault.network.dhcp.pool_exhausted",
+        "fault.network.dhcp.no_lease"
+      ],
+      "target_component_ids": [
+        "component.network.nic"
+      ],
+      "required_tool_ids": [],
+      "success_conditions": [
+        "The client obtains a new IPv4 lease from the expected DHCP service.",
+        "The assigned address, prefix, gateway, lease lifetime, and required options match the authored network expectations.",
+        "The repaired path passes the Ticket's required connectivity check."
+      ],
+      "action_cost": 1,
+      "education_text": "A successful ping alone does not prove that the expected DHCP server supplied the correct lease and options."
+    },
+    {
+      "id": "edge.network.dhcp_pool_to_no_lease",
+      "entity_type": "fault_causal_edge",
+      "presentation": {
+        "display_name": "Exhausted DHCP Pool Causes Lease Failure",
+        "short_description": "An address pool with no reusable capacity prevents a requesting client from obtaining a lease."
+      },
+      "cause_fault_id": "fault.network.dhcp.pool_exhausted",
+      "effect_fault_id": "fault.network.dhcp.no_lease",
+      "relationship_type": "causes",
+      "conditions": [
+        "The client requests an address from the exhausted pool.",
+        "No reusable allocation is available under the active DHCP policy."
+      ],
+      "notes": "Pool exhaustion is one actionable cause of lease failure, not a claim that every absent lease has this cause.",
+      "source": {
+        "expansion_id": "expansion.core_v0_1",
+        "version": "0.1.0",
+        "status": "draft",
+        "search_tags": [
+          "network",
+          "dhcp",
+          "causal relationship"
+        ]
+      }
+    }
+  ]
+}

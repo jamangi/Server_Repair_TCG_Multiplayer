@@ -1,7 +1,8 @@
 {
   "format_version": 1,
-  "generated_at": "2026-08-23T16:55:50.556Z",
+  "generated_at": "2026-08-23T17:32:23.157Z",
   "files": [
+    "./core-v0.1-case-study-gaps.json",
     "./core-v0.1-components.json",
     "./core-v0.1-diagnostics.json",
     "./core-v0.1-fault-graph.json",

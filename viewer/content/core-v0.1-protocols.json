@@ -133,9 +133,17 @@
       },
       "protocol_type": "network_protocol",
       "purpose": "Automatically assigns IP configuration.",
-      "related_component_ids": [],
-      "related_fault_ids": [],
-      "related_procedure_ids": [],
+      "related_component_ids": [
+        "component.network.nic"
+      ],
+      "related_fault_ids": [
+        "fault.network.dhcp.pool_exhausted",
+        "fault.network.dhcp.no_lease"
+      ],
+      "related_procedure_ids": [
+        "repair.network.clear_stale_dhcp_reservations",
+        "verify.network.dhcp_lease"
+      ],
       "education_text": "Automatically assigns IP configuration."
     },
     {

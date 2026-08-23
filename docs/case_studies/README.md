@@ -30,6 +30,7 @@ Research that exposes a rule question still belongs in the rule-evolution proces
 Current research drafts:
 
 - [`SERVER-REPAIR-DOMAIN-EXPANSION-DRAFT-2026-08-23.txt`](research_drafts/SERVER-REPAIR-DOMAIN-EXPANSION-DRAFT-2026-08-23.txt) surveys post-market repair-bench cases and records the reconciliation behind the Core v0.1 expansion.
+- [`CASE-STUDY-CANDIDATE-DOMAIN-RECONCILIATION-2026-08-23.md`](research_drafts/CASE-STUDY-CANDIDATE-DOMAIN-RECONCILIATION-2026-08-23.md) compares the v0.1 case-study candidates and example card catalog with the live domain database, documenting the gaps promoted into Core v0.1.
 
 ## Method
 

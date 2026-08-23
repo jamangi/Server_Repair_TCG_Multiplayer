@@ -597,7 +597,9 @@
       ],
       "effective_test_ids": [
         "test.power.distribution_path_isolation",
-        "test.power.known_good_psu"
+        "test.power.known_good_psu",
+        "test.power.residual_power_drain",
+        "test.power.output_voltage_measurement"
       ],
       "repair_procedure_ids": [
         "repair.power.replace_distribution_board"
@@ -1031,7 +1033,8 @@
       "target_component_ids": [
         "component.board.system",
         "component.management.bmc",
-        "component.network.nic"
+        "component.network.nic",
+        "component.storage.raid_controller"
       ],
       "evidence_rules": [
         {
@@ -1369,11 +1372,14 @@
       ],
       "related_fault_ids": [
         "fault.storage.drive.predictive_failure",
-        "fault.storage.backplane.path_failed"
+        "fault.storage.backplane.path_failed",
+        "fault.storage.sas.drive_failed",
+        "fault.storage.raid.degraded"
       ],
       "related_procedure_ids": [
         "repair.storage.replace_predictive_drive",
-        "repair.storage.replace_backplane"
+        "repair.storage.replace_backplane",
+        "repair.storage.backup_rebuild_restore"
       ],
       "education_text": "Record the exact serial and bay, secure a current backup when possible, and never assume a rebuild has started or finished."
     },

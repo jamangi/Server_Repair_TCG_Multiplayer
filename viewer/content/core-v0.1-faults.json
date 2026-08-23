@@ -278,6 +278,8 @@
       "effective_test_ids": [
         "test.power.psu_status",
         "test.power.known_good_psu",
+        "test.power.residual_power_drain",
+        "test.power.output_voltage_measurement",
         "test.system.bmc_logs"
       ],
       "repair_procedure_ids": [
@@ -422,7 +424,8 @@
         "test.system.bmc_logs"
       ],
       "repair_procedure_ids": [
-        "repair.storage.replace_raid_member"
+        "repair.storage.replace_raid_member",
+        "repair.storage.backup_rebuild_restore"
       ],
       "validation_procedure_ids": [
         "verify.storage.raid_healthy"
@@ -653,7 +656,8 @@
         "test.storage.raid_status"
       ],
       "repair_procedure_ids": [
-        "repair.storage.rebuild_array"
+        "repair.storage.rebuild_array",
+        "repair.storage.backup_rebuild_restore"
       ],
       "validation_procedure_ids": [
         "verify.storage.raid_healthy"
@@ -1374,11 +1378,14 @@
       "effective_test_ids": [
         "test.network.interface_config",
         "test.network.link",
-        "test.network.ping"
+        "test.network.ping",
+        "test.network.dhcp_transaction_trace",
+        "test.network.dhcp_pool_audit"
       ],
       "repair_procedure_ids": [],
       "validation_procedure_ids": [
-        "verify.network.connectivity"
+        "verify.network.connectivity",
+        "verify.network.dhcp_lease"
       ],
       "education_text": "A DHCP-configured interface does not obtain the expected lease."
     },
