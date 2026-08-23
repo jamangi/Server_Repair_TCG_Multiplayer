@@ -1,0 +1,85 @@
+# Gameplay reference images
+
+These are original AI-generated visual references for the proposed **Night-Shift Operations Desk** direction. They are intended to communicate composition, material, illustration density, card family grammar, and responsive hierarchy.
+
+They are not:
+
+- canonical card or Ticket illustrations;
+- exact UI copy or authoritative match fixtures;
+- implementation screenshots;
+- proof that every pictured interaction is legal; or
+- a substitute for `FROZEN_RULES.md`, schemas, engine projections, or TASK-010 acceptance tests.
+
+The generated images received a rules-oriented visual QA pass. Visible Repair costs were corrected to the frozen 0/1/2 envelope, and Verify text that implied a Service Point award was removed. Small incidental generated text may still be illustrative; implementation must render current pinned content.
+
+## 01 — Desktop board
+
+![Night-shift desktop gameplay board](./01-night-shift-board-desktop.png)
+
+Use it for:
+
+- full-width composition;
+- Ticket-as-hero hierarchy;
+- persistent desktop Worklog;
+- tactile queue, Evidence, machine-state, card, deck, and discard differentiation;
+- illustrated hand density; and
+- basic actions presented as tools rather than cards.
+
+Do not copy incidental card effects, candidate names, or ticket numbers from the pixels.
+
+### Generation prompt
+
+> Original high-fidelity 16:10 Server Repair gameplay board using supplied screenshots only as references for colorful composition, tactile texture, illustration-rich cards, selected-card inspection, and widescreen density. Create a night-shift operations desk with graphite/navy structure, vellum Ticket, warm lamp, cool rack light, left Ticket queue, central “THE MISSING STORAGE PATH,” right immutable Worklog, bottom illustrated hand, deck/discard, labeled basic-action rail, two Actions, Search, Refresh, and Service counters. Distinguish TEST cyan, COMMAND violet, REPAIR amber, and VERIFY emerald with word/icon/shape redundancy. No copied branding, fantasy combat, health bar, opponent lane, seven department lanes, hidden answer, wasted margins, trademark, or watermark.
+
+Correction pass: change the pictured Repair cost from 3 to 1 and replace Verify reward language with “Evaluate the authored post-Repair health condition,” preserving the rest of the composition.
+
+## 02 — Card and Ticket specimens
+
+![Card and Ticket component specimens](./02-card-ticket-specimens.png)
+
+Use it for:
+
+- full/hand/detail card scales;
+- approximately 45% illustration area;
+- family color, icon, word, and border redundancy;
+- action-cost medallion placement;
+- material and texture exploration; and
+- making a landscape Repair Ticket categorically different from portrait playable cards.
+
+### Generation prompt
+
+> Original high-fidelity landscape component sheet photographed like a premium tabletop prototype on a dark drafting desk. Four full cards: TEST “Visual Inspection” cost 0, COMMAND “smartctl Drive Health” cost 1, REPAIR “Reseat Storage Cable” cost 1, VERIFY “Storage Detection” cost 1. Include fanned-hand and inspection scales. Add one large vellum Ticket “THE MISSING STORAGE PATH” with DIAGNOSIS tab, server-cable illustration, symptoms, public candidates, Evidence citations, and separate machine-state strip. Preserve the night-shift graphite/navy/parchment/cyan/violet/amber/emerald material language. No copied branding, combat, hidden truth, lifecycle lanes, illegal costs, trademarks, or watermark.
+
+Correction pass: replace invented draw/reward microcopy with rules-faithful summaries:
+
+- Visual Inspection: “Run an authored visual Evidence check on one active Ticket.”
+- smartctl Drive Health: “Run smartctl on an authorized SAS drive target.”
+- Reseat Storage Cable: “Reseat an accepted isolated loose storage cable.”
+- Storage Detection: “Evaluate the authored storage-detection requirement after Repair.”
+
+## 03 — Mobile board
+
+![Night-shift mobile gameplay board](./03-night-shift-board-mobile.png)
+
+Use it for:
+
+- genuine mobile recomposition rather than desktop scaling;
+- horizontal Ticket strip;
+- selected Ticket followed by an Evidence/Worklog sheet;
+- citable Evidence rows with large touch targets;
+- selected-card lift and sticky Play/Inspect/Pass tray; and
+- explicit labeled Search, Refresh, deck, and discard counters.
+
+### Generation prompt
+
+> Original high-fidelity 390x844-class portrait solo gameplay UI using the desktop concept only as a style anchor. Compact “SERVER REPAIR” top rail and “2 ACTIONS”; horizontal strip of three illustrated Tickets; selected “THE MISSING STORAGE PATH” Ticket with DIAGNOSIS, server-cable art, symptom, public candidates, and machine state; segmented “EVIDENCE 3” / “WORKLOG 8” sheet with citable rows; bottom fanned illustrated hand; sticky PLAY, INSPECT, PASS actions; labeled Search 3, Refresh 1, deck, and discard counters. Tactile work-order paper on graphite glass, 44px-class controls, tap targeting primary. No squeezed desktop columns, tiny paragraphs, clipping, drag-only interaction, hidden answer, copied branding, trademark, or watermark.
+
+Correction pass: change the pictured Repair cost from 3 to 1 and remove Verify Service reward language, preserving the rest of the portrait composition.
+
+## Generation provenance
+
+- Mode: built-in image generation, with targeted built-in edit passes.
+- Date: 2026-08-23.
+- Source references: four user-supplied screenshots used only for general layout/aesthetic lessons; not committed.
+- Style anchor: the generated desktop board was used to maintain consistency in the specimen and mobile references.
+- Redistribution boundary: these three outputs are original project references; no third-party screenshot or brand asset is included.
