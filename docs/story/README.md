@@ -35,4 +35,4 @@ The loop is iterative rather than a one-way conveyor. Hypothesize and Test can r
 - [`CARDS.md`](gameplay_candidates/CARDS.md) — department-flavored card and campaign-unlock concepts.
 - [`APP_SHELL.md`](gameplay_candidates/APP_SHELL.md) — a campaign and workplace layer that can coexist with the provisional multiplayer application shell.
 
-Before promoting any candidate, reconcile it with the frozen, unfrozen, candidate, and unsynchronized decisions in [`docs/design/decisions/`](../design/decisions/DECISION_INDEX.md).
+Before promoting any story candidate, reconcile it with the frozen rules and the open questions or pressure recorded in [`docs/design/decisions/`](../design/decisions/DECISION_INDEX.md).

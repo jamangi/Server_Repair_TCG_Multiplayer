@@ -74,8 +74,8 @@ It does not yet contain a playable game engine or multiplayer client. The schema
 Read the design documents in this order:
 
 1. [`docs/design/decisions/DECISION_INDEX.md`](docs/design/decisions/DECISION_INDEX.md) — the authority map, current decision state, lifecycle, and recommended order for finishing the engine.
-2. [`docs/design/decisions/FROZEN_RULES.md`](docs/design/decisions/FROZEN_RULES.md) and [`UNFROZEN_RULES.md`](docs/design/decisions/UNFROZEN_RULES.md) — approved behavior and the canonical open-rule inventory.
-3. [`docs/design/decisions/CANDIDATE_DECISIONS.md`](docs/design/decisions/CANDIDATE_DECISIONS.md) and [`UNSYNCHRONIZED_DECISIONS.md`](docs/design/decisions/UNSYNCHRONIZED_DECISIONS.md) — proposal/pruning history and the reconciliation ledger.
+2. [`docs/design/decisions/FROZEN_RULES.md`](docs/design/decisions/FROZEN_RULES.md) — approved behavior implementations may rely on.
+3. [`docs/design/decisions/UNFROZEN_RULES.md`](docs/design/decisions/UNFROZEN_RULES.md) — the remaining open rules, freeze recommendations, and any pressure against frozen rules.
 4. [`docs/design/RECOMMENDED_DATA_MODEL.md`](docs/design/RECOMMENDED_DATA_MODEL.md) and [`RECOMMENDED_PRESETS.json`](docs/design/RECOMMENDED_PRESETS.json) — architectural and balance recommendations, not frozen contracts.
 5. [`docs/design/00_GAME_ENGINE_OVERVIEW.md`](docs/design/00_GAME_ENGINE_OVERVIEW.md) through [`07_FAULT_BROWSER_AND_SEARCH.md`](docs/design/07_FAULT_BROWSER_AND_SEARCH.md) — the synchronized foundational vision, architecture, and starter catalogs. Frozen decisions still take precedence.
 6. [`docs/design/DOCUMENTS_TO_UPDATE.md`](docs/design/DOCUMENTS_TO_UPDATE.md) — the audited migration ledger, including completed, superseded, deferred, and still-relevant recommendations.

@@ -1,12 +1,40 @@
 # Unfrozen Rules
 
-This document is the canonical inventory of game rules that remain open to design, balance testing, or production-policy selection. It prevents unresolved decisions from being silently embedded in schemas, cards, user-interface code, or server behavior.
+This document is the canonical inventory of Server Repair TCG rules that remain open. It also records concrete freeze recommendations and pressure against approved rules so implementation does not silently choose behavior.
 
-Start with [`DECISION_INDEX.md`](DECISION_INDEX.md) for the decision hierarchy. Approved behavior lives in [`FROZEN_RULES.md`](FROZEN_RULES.md). Newly proposed options remain in [`CANDIDATE_DECISIONS.md`](CANDIDATE_DECISIONS.md) until accepted into this inventory. Known migration work and conflicts are tracked in [`UNSYNCHRONIZED_DECISIONS.md`](UNSYNCHRONIZED_DECISIONS.md).
+Start with [`DECISION_INDEX.md`](DECISION_INDEX.md) for authority and [`FROZEN_RULES.md`](FROZEN_RULES.md) for approved behavior. This is the only active place for open rule decisions. Git history and completed task records preserve the retired candidate and synchronization ledgers.
 
-The 2026-08-22 Candidate-Frozen Example Profile review resolved the Diagnosis, Test, Isolation, Repair, Verify, Documentation, Worklog, first-version turn, and utility-resource foundations. Those questions have been removed from this inventory rather than left as duplicate open wording.
+Recommendations in this file are non-authoritative until the user approves them. The following labels are used:
 
-<a id="4-search-and-deck-refresh-resources"></a>
+- **Freeze now:** the existing direction is sufficiently specified and low-risk.
+- **Adjust, then freeze:** adopt the stated narrower rule before moving it to the frozen ledger.
+- **Keep unfrozen:** the choice needs explicit user judgment, prototyping, or evidence.
+- **Defer outside first version:** explicitly exclude the capability from the first engine while preserving a future extension point.
+- **Remove from rule ledger:** treat the item as content, interface, moderation, or production policy after its rules boundary is fixed.
+
+<a id="0-freeze-review-summary-and-frozen-rule-pressure"></a>
+## 0. Freeze-review summary and frozen-rule pressure
+
+There are no active unsynchronized decisions to transition. `TASK-007` synchronized every former entry, so its resolved history does not become unfrozen rules. There are also no active candidates. Retiring those empty ledgers leaves `FROZEN_RULES.md` and this file as the only rule sources.
+
+No repository-migration blocker prevents the freeze review. The remaining blockers are explicit design approvals:
+
+1. `SCORE-001` controls Service Point event shape and is required before the scoring engine and final terminal resolver can be stable.
+2. `GEN-001` controls Ticket Builder input, determinism, and failure behavior and is required before generated Tickets or versioned campaign saves can be stable.
+3. Terminal precedence, departure cleanup, and the minimum Room lifecycle need small first-version decisions before authoritative multiplayer implementation.
+4. The first starting-seat selection rule was left open inside the frozen ledger but omitted from the prior unfrozen inventory.
+
+### Pressured frozen rules
+
+| Pressure | Frozen location | Problem | Recommendation |
+| --- | --- | --- | --- |
+| `PRESSURE-001` | Frozen §12 | A rejected Isolation currently removes eligibility for a “Root Cause reward,” but `SCORE-001` still asks whether Root Cause is a reward at all. | Make Root Cause a statistic only. Change the frozen rejection consequence to the spent Action, a failed-attempt statistic, no truth leak, and no award for that rejected event; do not ban the Player from later valid contribution credit. |
+| `PRESSURE-002` | Frozen §9 | The paragraph is labeled frozen while saying the first starting seat remains open, and the old unfrozen inventory did not track it. | Freeze seeded server selection from eligible starting seats, record it for replay, then use the already-frozen fixed seat order. |
+| `PRESSURE-003` | Frozen §2 | Queue refill says it creates “random Tickets,” while `GEN-001` is converging on constraint-driven, seeded Ticket Builder output. | After `GEN-001` is approved, say refill requests Builder output from the match's pinned generation configuration; randomness is seeded selection within those constraints. |
+| `PRESSURE-004` | Frozen §10 | Base Search selects any card, while the old balance inventory allowed mode-level Search restrictions that could silently weaken that rule. | Protect base Search as unrestricted within the remaining draw deck. A card may define a separate narrower search effect; modes may disable/configure tokens but must not redefine base Search. |
+
+The other open items below extend frozen rules without contradicting them.
+
 ## 1. Canonical configuration vocabulary
 
 | Symbol | Recommended field name | Meaning |
@@ -28,218 +56,189 @@ The 2026-08-22 Candidate-Frozen Example Profile review resolved the Diagnosis, T
 | `SRT` | `starting_refresh_tokens` | Refresh Tokens granted to each Player at setup. |
 | `MRF` | `max_refresh_tokens` | Maximum Refresh Tokens a Player may hold. |
 
-Deck size, copy limit, opening hand, draw cadence, Actions, Search behavior, Refresh behavior, and the standard first-version token values are frozen. They are not reopened merely because a future rules version might intentionally migrate them.
+**Recommendation — Freeze now:** move this canonical vocabulary into Frozen §2/§10. The meanings and first-version deck, turn, Search, Refresh, and standard-preset values are already approved; keeping their names in the open ledger creates false uncertainty.
 
-## 2. Remaining match-configuration questions
+## 2. Match configuration and first turn
 
-- Which settings Room creators may customize and which are supplied only through approved presets.
-- Whether public matchmaking permits Custom configurations.
-- Production limits for large `S`, `Q`, Player, Spectator, and expected-duration values.
-- Default and permitted ranges for `T`, `PT`, and administrator-controlled `W`.
-- Whether turn time and player time may both be enabled and which expiration wins if they coincide.
-- Whether clocks pause during modal decisions. Server-resolution and reconnect pauses are already frozen.
-- Whether a match may start below `SL`, and its minimum occupancy.
-- Whether all new numeric settings use integer values and what their schema ranges are.
-- Whether configurable Search and Refresh values use the broad schema limits or preset-specific limits.
-- Whether the standard preset's first-version values are also mandatory in ranked or campaign play.
-
-Room creation should distinguish player-facing match settings from server safety capabilities. Exact interface grouping remains a product decision, not an engine rule.
+| Open item | Recommendation | Proposed first-version boundary |
+| --- | --- | --- |
+| Creator-customizable settings versus presets | **Adjust, then freeze** | Public matchmaking uses server-owned, versioned presets. Private Rooms may use validated custom settings. `W`, `M`, and production safety caps remain administrator-owned. |
+| Custom configurations in public matchmaking | **Freeze now** | Do not permit them in first-version public matchmaking. |
+| Production limits for large queues, capacities, and duration | **Remove from rule ledger** | Freeze only that the server enforces caps before Room creation or match start. Keep exact deploy-specific ceilings in administrator configuration. |
+| Permitted `T`, `PT`, and `W` values | **Adjust, then freeze** | Enabled values are positive integral seconds; `T` and `PT` may be `null`; `W` is always administrator-supplied. Deployment caps are production policy. |
+| Enabling both `T` and `PT` and simultaneous expiration | **Freeze now** | Both may run. If both expire on the same authoritative instant, player-clock concession takes precedence over turn auto-pass. |
+| Clock behavior during modal decisions | **Freeze now** | No client modal pauses a clock. Time pauses only for frozen server-resolution and reconnect synchronization boundaries; an actionable authoritative decision window consumes its owner's time. |
+| Starting below `SL` and minimum occupancy | **Adjust, then freeze** | `SL` is capacity, not required occupancy. Cooperative/training matches require at least one Player; competitive matches require at least two. Mode-owned presets may require more. |
+| Numeric representation and schema ranges | **Freeze now** | Counts, points, token quantities, and seconds are integers. Ratios and authored weights need not be. Every field has its own validated range. |
+| Search/Refresh custom ranges | **Adjust, then freeze** | Token starts, closure grants, and caps are nonnegative integers; starts and grants may exceed remaining capacity but storage always clamps to the cap. The standard preset remains unchanged. |
+| Standard preset in ranked and campaign modes | **Adjust, then freeze** | Ranked and campaign modes use their own versioned approved presets. The standard preset is the default, not an implicit mandate for every mode. |
+| Room-creation interface grouping | **Remove from rule ledger** | The interface must distinguish player settings from administrator limits, but layout is an application-shell decision. |
+| First starting seat | **Adjust, then freeze** | The authoritative server selects uniformly from eligible starting seats using the match seed, records the result, and then follows fixed seat order for every round. |
 
 ## 3. Ticket generation and campaign selection
 
 <a id="gen-001"></a>
 ### GEN-001 — Constraint-driven Ticket Builder
 
-**Status:** Unfrozen
+**Status:** Unfrozen; foundation blocker for generated Tickets and versioned campaign saves.
 
-One reusable Ticket Builder should generate Ticket instances for campaign, mission, challenge, training, cooperative, and competitive modes. Its semantic input should be a generation-constraint configuration rather than a preselected eligible Ticket pool.
+One reusable Ticket Builder should generate Ticket instances for campaign, mission, challenge, training, cooperative, and competitive modes. It consumes a generation-constraint configuration rather than a preselected eligible whole-Ticket pool. Fixed authored fixtures remain valid for tutorials, audits, and examples.
 
-The accepted direction requires the configuration to express, when relevant:
+Generated Tickets must provide the frozen authored surfaces: public candidates, server-only causal truth, authored Evidence outcomes, Isolation requirements, Repair paths, Verify conditions, and closure requirements. Generated content is assembled from validated authored domain relationships and rule templates; it is not unconstrained procedural prose.
 
-- causal-chain shapes and fault-count/depth constraints;
-- difficulty range;
-- required teaching beats;
-- guaranteed Ticket categories;
-- configurable exclusions, especially for story state and campaign replayability;
-- Progressive Difficulty (`PD`) behavior;
-- mode or scenario context; and
-- a seed and generator version for reproducible saves, replays, and tests.
+| Open item | Recommendation | Proposed resolution |
+| --- | --- | --- |
+| Exact configuration contract | **Adjust, then freeze** | Version the config and include scenario/mode context, requested count, seed, generator version, allowed and excluded domain IDs/tags, category guarantees, difficulty bounds, causal shape bounds, teaching beats, Progressive Difficulty profile, and duplicate policy. |
+| Difficulty definition | **Adjust, then freeze** | Use an authored composite difficulty rating for content selection. Keep fault count, actionable-cause count, and causal depth as separate structural constraints rather than pretending one automatically measures difficulty. |
+| Branching shape and depth | **Adjust, then freeze** | Evaluate a validated actionable causal DAG: node count is distinct actionable Fault instances, depth is the longest required causal path, and branch limits apply to required inbound/outbound causal edges. |
+| Progressive Difficulty (`PD`) | **Adjust, then freeze** | A scenario supplies a versioned difficulty target or band by generated Ticket index, with an explicit ceiling. Do not embed one universal progression formula in the Builder. |
+| Solver and weighted randomization | **Adjust, then freeze** | Canonically order eligible authored parts, filter by hard constraints, assemble/validate complete candidates, then choose by seeded weighted randomization. Identical config, content version, generator version, and seed must produce identical Ticket snapshots. |
+| Unsatisfiable configurations | **Freeze now** | Fail with structured diagnostics and create no partial Ticket. Never silently relax a guarantee. A scenario may name an explicit fallback configuration, which is a separate auditable generation attempt. |
+| Duplicate active structures | **Adjust, then freeze** | Default to no duplicate causal fingerprint in one active queue. Training/simulation configs may explicitly allow duplicates. |
+| Exclusions and story-state safety | **Adjust, then freeze** | Inputs use stable server-owned domain IDs/tags. Player-visible saves retain scenario-safe constraints, never hidden causal selections or author-only exclusion rationale. |
+| Generator migrations and deterministic saves | **Freeze now** | Persist generator version, content version, seed, config, and the produced Ticket snapshot. Existing saves/replays use the stored snapshot; new generation uses the pinned version until an explicit migration. |
 
-An authored campaign scenario supplies bounded constraints, allowing its Tickets to vary on replay without violating its teaching or story purpose. Mission and challenge modes may use different bounded configurations. Training and competitive modes may use broad configurations for genuinely random Ticket pools. Fixed authored Ticket fixtures remain valid for tutorials, audits, and worked examples.
-
-The Ticket Builder must produce the already frozen authored gameplay surfaces: a public candidate set, server-only causal truth, authored Evidence outcomes, Isolation requirements, Repair path, Verify conditions, and closure requirements. “Authored” means that generated content must be assembled from validated authored domain relationships and rule templates; it does not require selecting one prewritten whole Ticket from a list.
-
-Still decide:
-
-- the exact configuration schema, ranges, and server production caps;
-- whether difficulty counts Faults, Fault instances, actionable causes, causal depth, or an authored composite rating;
-- how branching-graph shape and depth constraints are evaluated;
-- the progression cadence, formula, and ceiling for `PD`;
-- the constraint-solving and weighted-randomization algorithm;
-- how unsatisfiable configurations fail, relax, or fall back without silently violating scenario guarantees;
-- whether duplicate generated Ticket structures may be active simultaneously;
-- which exclusions and story-state inputs are safe to persist or reveal; and
-- how generator-version migrations preserve saved campaigns and replay determinism.
-
-<a id="62-score-and-handicaps"></a>
 ## 4. Scoring and closure contention
 
 <a id="score-001"></a>
 ### SCORE-001 — Closure-settled causal contribution scoring
 
-**Status:** Unfrozen
+**Status:** Unfrozen; foundation blocker for scoring events and terminal resolution.
 
-The scoring policy must reward causal troubleshooting without teaching that technical work is complete before the Ticket is closed. Closure itself is already frozen as a zero-Action, non-scoring event with Player/team statistical attribution.
+The accepted model is a pending causal-contribution ledger. Qualifying causal events create attributable pending records. Successful Verify does not pay by itself. Publishing a valid closure bundle atomically settles still-relevant records in the final causal path. An unclosed Ticket pays nothing, closure itself awards no Service Point, and rejected, redundant, or superseded work remains statistical history.
 
-The leading unresolved model is a **pending causal-contribution ledger**:
+| Open item | Recommendation | Proposed first-version resolution |
+| --- | --- | --- |
+| Eligible contribution classes | **Adjust, then freeze** | Award one Service Point for each accepted Isolation of a required actionable Fault and one for each necessary Repair of that Fault in the final valid causal path. Tests, Verify, Documentation, and assists remain attributed statistics in the first version. |
+| Rubric and budget visibility | **Adjust, then freeze** | Publish the global scoring rule. Keep a Ticket's exact eligible slots and total budget server-only until closure so scoring does not reveal hidden fault count or causal shape; publish settled awards at closure. |
+| Multi-fault granularity and weights | **Freeze now** | Use one unique Isolation slot and one unique Repair slot per required actionable Fault instance, each worth one point. Do not use authored variable weights in the first version. |
+| Revised causal paths | **Freeze now** | A record remains eligible only if its event belongs to the final closure-valid causal path. Failed Verify preserves pending records; a later superseding path may make them statistical-only. |
+| Repeats, assists, and duplicates | **Adjust, then freeze** | Uniqueness key is `(Ticket, Fault instance, contribution class)`. The earliest qualifying event on the final path owns the slot. Later equivalent events and assists remain statistics and cannot duplicate the award. |
+| Root Cause treatment | **Adjust, then freeze** | Root Cause/deepest-cause identification is a statistic only, not a separate point or bonus. Required deep Faults already score through the normal Isolation slot. |
+| Rejected Isolation | **Adjust Frozen §12, then freeze** | Spend the Action, record the rejected attempt, reveal only `ISOLATION_NOT_SUPPORTED`, and award nothing for that event. Do not permanently bar the Player from later valid slots on the Ticket. |
+| Pending-record visibility | **Adjust, then freeze** | Preserve the source event's normal visibility, but keep pending eligibility and slot identity server-only until closure. Settled score events are public. |
+| Cooperative aggregation | **Freeze now** | Write settled points directly to the shared team score while retaining the contributing Player ID on each score event. |
+| Individual cooperative points | **Freeze now** | Statistics only; they are not a second gameplay score. |
+| Negative scoring | **Freeze now** | First-version Service Points never decrease and cannot fall below their configured starting value. Penalties use Actions, cards, resources, or statistics instead. |
+| Handicap ownership | **Adjust, then freeze** | `H(p)` belongs to a Player seat. In cooperative play, snapshot the team's starting score as the sum of active Players' `H(p)` values at match start; departures do not recalculate it. |
 
-1. Qualifying causal actions create attributable pending contribution records rather than immediate Service Points.
-2. The Ticket's server-only causal chain and scoring rubric determine which records belong to a valid resolution path.
-3. Successful Verify does not pay points by itself. Failed or inconclusive Verify pays nothing and returns the Ticket to Diagnosis while preserving prior pending records.
-4. Publishing a valid closure bundle settles every still-relevant pending contribution in the completed causal path atomically.
-5. An unclosed Ticket pays no Service Points, even if some technical requirements have passed.
-6. Ineligible, redundant, or superseded actions remain statistics but do not score.
-7. Competitive awards go to recorded contributors. Cooperative awards enter the shared pool while retaining individual attribution.
-
-This settlement boundary gives every Player a reason for the company-visible result—the closed Ticket—without making closure itself worth stealing. It also lets an underdog rationally move to another workload when their expected remaining causal contribution is low.
-
-Still decide:
-
-- whether only accepted Isolation and necessary Repair score, or whether decisive Tests and Verify may also carry authored values;
-- whether the possible point budget and rubric are public, partially visible, or server-only;
-- whether multi-fault Tickets pay once per stage, once per distinct causal element, or according to authored weights;
-- when an earlier contribution remains eligible after later work revises the causal path;
-- how repeated equivalent actions and assists avoid duplicate awards;
-- whether Root Cause is a separate bonus, an authored Isolation value, or only a statistic;
-- how rejected Isolation affects score eligibility beyond the frozen Root Cause consequence;
-- whether cooperative points are written directly to the team ledger or aggregated from Player awards;
-- whether individual cooperative points are gameplay values, statistics only, or both;
-- whether penalties may reduce scores below their starting values or below zero;
-- whether a handicap belongs to a Player, seat, team, or some combination; and
-- how cooperative starting team score is derived from `H(p)`.
+This recommendation intentionally starts with the narrow Isolation/Repair rubric already exercised by the audited examples. Decisive Tests or Verify can gain values only through a later rules-version and balance migration.
 
 ## 5. Ticket queue and contention
 
-- Whether an explicit effect may claim a shared Ticket and how long that claim lasts.
-- Whether allies and opponents may contribute to a claimed Ticket.
-- How large queues are paginated or spatially represented without hiding public state.
-- Whether impossible or corrupted Tickets can be replaced, and what penalty or audit record applies.
-- Whether a contribution-scoring policy needs temporary locks while a closure transaction resolves. Server serialization and stale-revision rejection are already frozen.
+| Open item | Recommendation | Proposed first-version boundary |
+| --- | --- | --- |
+| Explicit Ticket claims | **Defer outside first version** | Do not author claim or ownership effects. Tickets remain shared. |
+| Contributions to claimed Tickets | **Defer outside first version** | Remove with claims; revisit both together if claims are introduced later. |
+| Large-queue pagination | **Remove from rule ledger** | All public Ticket state must remain accessible; spatial layout and pagination are interface concerns. |
+| Impossible or corrupted Tickets | **Adjust, then freeze** | Quarantine the Ticket, award no penalty or score, preserve an audit record, and attempt deterministic replacement from the pinned Builder config. If replacement fails, pause/invalidate the match rather than silently weaken constraints. |
+| Closure scoring locks | **Freeze now** | Add no special claim or lock. Existing authoritative serialization, expected revisions, and one atomic closure transaction are sufficient. |
 
-<a id="64-turn-structure-and-card-economy"></a>
 ## 6. Card content and balance
 
-The first-version deck and turn envelope is frozen. Content-level balance still requires playtesting:
-
-- Which individual cards cost 0, 1, or 2 Actions.
-- Whether any effect justifies a higher cost in a later rules version.
-- Whether each 0-Action card remains safe under the same-name once-per-turn limit.
-- Effect-specific targets, prerequisites, and use limits.
-- Search eligibility restrictions created by particular cards or modes.
-- Whether any explicit high-risk card imposes an additional penalty.
-- How Player-count scaling affects Ticket difficulty, rewards, or event frequency without changing the two-Action turn.
-- Exact definition and handling of a Player who has cards but no useful legal action. An empty draw deck alone is not loss or exhaustion.
+| Open item | Recommendation | Proposed first-version boundary |
+| --- | --- | --- |
+| Individual 0/1/2 Action costs | **Remove from rule ledger** | Keep costs in validated card content and balance tests. |
+| Costs above two in later versions | **Defer outside first version** | The first-version engine accepts only the frozen 0/1/2 envelope. |
+| Safety of individual 0-Action cards | **Remove from rule ledger** | Enforce the frozen same-name limit; evaluate each card in content review and simulations. |
+| Effect targets, prerequisites, and limits | **Remove from rule ledger** | Card definitions must use explicit engine-supported target/effect contracts; individual choices are content. |
+| Search restrictions | **Adjust Frozen §10, then freeze** | Base Search always selects any card in the remaining draw deck. Cards may define separately named narrower search effects; modes may configure token availability but not alter base Search. |
+| High-risk card penalties | **Defer outside first version** | Do not introduce score penalties. Any first-version risk must be explicit card/resource/Action behavior. |
+| Player-count scaling | **Adjust, then freeze** | Scale Ticket Builder constraints and mode presets, not the two-Action turn or core card text. Exact curves are content/balance data. |
+| No useful legal action | **Freeze now** | Pass/end turn is always legal. Having no useful paid action is not exhaustion, loss, or stalemate by itself. |
 
 ## 7. Terminal conditions and results
 
-- Precedence among score threshold, queue empty, concession, exhaustion, stalemate, and administrator termination after a complete resolution transaction.
-- How simultaneous threshold crossings within one closure transaction are resolved.
-- Whether competitive team scores may satisfy `X` if team-versus-team play is introduced.
-- Whether unresolved non-closure effects delay terminal evaluation.
-- Stalemate detection when `X = -1` and `Q > 0`.
-- Termination policy for offline all-computer simulations.
-- Whether administrators may invalidate a match and how that affects results.
-- Whether an intentionally endless configuration exposes an administrator or unanimous-vote ending mechanism.
-
-Queue-empty competitive winners, co-winners, and cooperative victory for `Q = 0` are frozen.
+| Open item | Recommendation | Proposed first-version resolution |
+| --- | --- | --- |
+| Terminal precedence | **Adjust, then freeze** | Resolve the current atomic transaction/window first. Then apply: administrator invalidation; live no-human abandonment; last-eligible competitive forfeit; queue/score objectives; proven stalemate. Record every simultaneously satisfied gameplay trigger. |
+| Simultaneous score crossings | **Freeze now** | Apply all score events in the transaction, then compare final totals. Highest total wins; equal highest totals are co-winners. Crossing order inside the transaction has no effect. |
+| Queue-empty and score trigger together | **Freeze now** | Record both reasons. Competitive result still uses highest final Service Points; cooperative result is a team win. |
+| Competitive teams satisfying `X` | **Defer outside first version** | First-version competitive play is free-for-all. |
+| Unresolved non-closure effects | **Freeze now** | Delay normal terminal evaluation until the authoritative resolution stack/window is empty. Administrator invalidation and no-human resource cleanup may interrupt. |
+| Stalemate | **Adjust, then freeze** | Stalemate exists only when the server can prove that every active Player can only Pass, no queued resolution or future deterministic draw/resource change can create progress, and no active Ticket can reach closure. Competitive result uses highest current score; cooperative result is a loss. |
+| Offline all-computer termination | **Adjust, then freeze** | Require a finite queue, score target, or configured simulation turn/closure cap. Reaching only the simulation cap stops without declaring a gameplay winner. |
+| Administrator invalidation | **Freeze now** | End with an invalid/no-contest result, no account rewards or rating changes, and a retained audit record. |
+| Intentionally endless live configurations | **Defer outside first version** | Do not admit them to public play. Private/admin test matches may be stopped as no-contest; no unanimous-vote protocol is needed initially. |
 
 ## 8. Timers, inactivity, and departure cleanup
 
-- Number of consecutive or total automatic turn passes, if any, that cause inactivity or concession.
-- How repeated disconnects interact with `W`.
-- Whether a competitive match ends when only one eligible Player remains or waits for another terminal condition.
-- How a cooperative leaver's hand, Installed objects, controlled resources, unresolved effects, and explicit Ticket claims are released or transferred.
-- Whether a disconnected Player may resume before `W` without any additional seat confirmation.
-
-Clock authority, automatic turn pass, player-clock concession, reconnect synchronization, no-human live termination, and no seat reclamation after departure becomes concession are already frozen.
+| Open item | Recommendation | Proposed first-version resolution |
+| --- | --- | --- |
+| Repeated automatic turn passes | **Adjust, then freeze** | Three consecutive turn-time expirations concede the Player. A voluntary Pass or a completed intervening turn resets the count. Mode presets without `T` rely on `PT`/`W` and have no timeout-pass counter. |
+| Repeated disconnects | **Freeze now** | Each reconnect before `W` restores the seat and resets that disconnect's grace deadline. Repetition does not accumulate a hidden gameplay penalty; abuse controls are production policy. |
+| Last eligible competitive Player | **Freeze now** | End immediately after current resolution cleanup and award that Player a forfeit win. |
+| Cooperative leaver cleanup | **Adjust, then freeze** | Remove the leaver's hand, deck, discard, personal resources, and future turns; cancel unresolved intents; release claims; preserve already-resolved Ticket/team effects and historical attribution. Player-controlled Installed objects with no valid controller are discarded unless their explicit effect says they became Ticket/team-owned on resolution. |
+| Resume before `W` | **Freeze now** | Reinstall the player-safe snapshot and resume without another seat confirmation. The seat remains reserved during grace. |
 
 ## 9. Multiplayer teams, targeting, and information exceptions
 
-- Whether competitive play is free-for-all only or may support teams.
-- How cooperative team membership is represented if multi-team play is introduced.
-- Effect-specific target relationships beyond the frozen requirement for explicit targets.
-- Whether an explicit card may inspect another Player's hand, Hypothesis, or unpublished Evidence and what counterplay is required.
-- Whether teammate hands are visible. Cooperative Evidence and Hypotheses are already team-visible by default.
-- Whether competitive spectator streams are live, delayed, or Room-configurable.
-- Which result-screen statistics are private, team-visible, public, or account-persisted.
-
-Spectators receive only `PUBLIC_MATCH` state, and reconnect views must remain player-safe.
+| Open item | Recommendation | Proposed first-version boundary |
+| --- | --- | --- |
+| Competitive teams | **Defer outside first version** | Competitive is free-for-all; cooperative uses one shared team. |
+| Multiple cooperative teams | **Defer outside first version** | One cooperative team only. |
+| Effect target relationships | **Adjust, then freeze** | The engine supports explicit `SELF`, `ALLY`, `OPPONENT`, `ANY_PLAYER`, `ACTIVE_TICKET`, and defined zone/Worklog targets; each effect chooses from this contract. |
+| Inspecting another Player's private state | **Defer outside first version** | No card may inspect another hand, private Hypothesis, or unpublished Evidence. |
+| Teammate hand visibility | **Freeze now** | Hands remain private to their owners. Cooperative Evidence and Hypotheses retain the frozen team visibility. |
+| Competitive spectator delay | **Freeze now** | First-version spectator projection is live because it contains only `PUBLIC_MATCH` information. Delay may be added later as a broadcast policy without changing visibility. |
+| Result-screen visibility | **Adjust, then freeze** | Public match facts, settled score events, closure attribution, and public contribution statistics are public. Private/team Evidence does not become public merely because the match ended. A Player may persist their own private detail and account aggregates. |
 
 ## 10. Computer players
 
-- Supported computer-player counts and collaboration modes.
-- Whether computer players can fill empty seats or join only at setup.
-- Difficulty definitions and decision-time behavior.
-- How computer-player rewards and statistics are reported.
-- What terminates an otherwise endless offline match containing only computer players.
-
-Computer players are never allowed to inspect hidden authoritative answers beyond their seat's player-safe view.
+| Open item | Recommendation | Proposed first-version boundary |
+| --- | --- | --- |
+| Counts and modes | **Adjust, then freeze** | Allow computer Players in offline simulations/training and unranked private Rooms, in either collaboration mode, up to ordinary seat capacity. Exclude them from public/ranked matchmaking. |
+| Filling seats | **Freeze now** | Add/configure them only before match start; never insert a replacement computer Player mid-match. |
+| Difficulty and decision time | **Remove from rule ledger** | All levels use only seat-safe information and legal intents. Heuristics and presentation delay are AI/product tuning; authoritative timers still apply. |
+| Rewards and statistics | **Adjust, then freeze** | Computer contributions score normally inside the match and are marked as computer-authored. Computer accounts receive no progression, currency, rating, or achievement rewards. |
+| Endless offline match | **Freeze with Terminal §7** | Require a finite gameplay objective or simulation cap. |
 
 ## 11. End-of-match statistics
 
-- Which statistics appear in results.
-- Attribution rules for Tickets, assists, Tests, Isolation, Repairs, Verify, Documentation, failed paths, and redundant actions.
-- Whether useful and redundant actions are distinguished by authored scoring metadata or retrospective analysis.
-- Which statistics persist to an account record.
-- Whether all statistics are derived from the authoritative event log and score ledger.
+| Open item | Recommendation | Proposed first-version boundary |
+| --- | --- | --- |
+| Minimum result metrics | **Adjust, then freeze** | Record outcome/reasons, final scores, closure attribution, settled causal awards, counts by contribution class, rejected Isolation, failed Verify, redundant actions, turns, elapsed authoritative time, disconnects, and concessions. |
+| Attribution | **Freeze now** | Attribute every statistic to its authoritative event actor, Ticket, and team where applicable; never infer ownership from who closed the Ticket. |
+| Useful versus redundant work | **Freeze now** | Derive it from final-path scoring eligibility and authored metadata, not retrospective free-form analysis. |
+| Account persistence | **Adjust, then freeze** | Persist the immutable match result plus per-account authorized aggregates. Do not copy hidden opponent Evidence into an account record. Retention duration is account/product policy. |
+| Derivation source | **Freeze now** | Derive result statistics from the authoritative event log, Ticket records, and score ledger; client counters are projections only. |
 
-<a id="611-room-lifecycle-and-roles"></a>
 ## 12. Room lifecycle and roles
 
-- Room visibility: public, unlisted, private, or invite-only.
-- Room ownership, host transfer, and behavior when the creator leaves.
-- Ready-state requirements and who may start a match.
-- Whether settings remain editable after another member joins.
-- Whether Player seats may be reserved.
-- Whether late joining is ever permitted after match start.
-- Whether a Spectator may request a vacated Player seat between matches.
-- Spectator chat and moderation policy.
-- Behavior before disconnection becomes concession.
-- Room retention after a match and support for rematches.
-- Host controls for adding, removing, and configuring computer players.
-- Whether offline all-computer simulations use Room objects or a smaller local configuration.
+| Open item | Recommendation | Proposed first-version boundary |
+| --- | --- | --- |
+| Room visibility | **Adjust, then freeze** | Support public listed Rooms and private invite/code Rooms. Do not create a separate unlisted category initially. |
+| Ownership and host transfer | **Adjust, then freeze** | Creator begins as host. If the host leaves, transfer to the longest-present eligible human member; close an empty Room. Host departure never transfers match authority away from the server. |
+| Ready and start | **Adjust, then freeze** | Every seated human must be Ready; computer Players are setup-ready. Host starts a private Room after mode minimum occupancy; matchmaking presets may start automatically. |
+| Editing settings after join | **Freeze now** | Host may edit only while no match is active. A legality-relevant change clears every Player's Ready state with a reason. |
+| Reserved Player seats | **Defer outside first version** | No reservations beyond a disconnected active Player's frozen grace-period seat. |
+| Late join | **Freeze now** | Members may join an active Room as Spectators if capacity permits, but no Player joins an active Match. |
+| Spectator taking a vacated seat | **Freeze now** | Permit an explicit seat request only between Matches, followed by normal deck validation and Ready. |
+| Spectator chat and moderation | **Remove from rule ledger** | Chat is not required for first gameplay. If added, moderation is a separate safety/product contract. |
+| During disconnect grace | **Adjust, then freeze** | Reserve the seat, allow authoritative timers and automatic passes to continue, accept no intents from the disconnected socket, and restore by player-safe snapshot on reconnect. |
+| Room retention and rematches | **Adjust, then freeze** | Keep the Room after results while members remain; a rematch creates a new Match and clears Ready. Empty/idle retention duration is administrator policy. |
+| Host computer-player controls | **Freeze now** | Add, remove, and configure computer Players only before a private unranked Match and only within ordinary seat limits. |
+| Offline simulations and Room objects | **Freeze now** | Offline simulations use a smaller local match configuration and do not require a network Room object. |
 
-Explicit Play/Spectate choice, separate capacities, concession fallback when Spectator capacity is full, and inability to reclaim a departed seat are already frozen.
+## 13. Explicitly deferred and non-rule work
 
-## 13. Rules removed from the unfrozen inventory
+The following should not block freezing the first-version engine foundation once their boundaries above are approved:
 
-The following no longer require separate decisions:
-
-- separate Ace and Cleaner engines or policy classes;
-- a separate Cleaner `Y` setting;
-- whether cooperative play ends when all but one human leaves;
-- whether a live match without humans may continue;
-- whether turn-timer expiration immediately concedes;
-- whether the public Ticket record has a stable name;
-- whether candidate Faults are global, generated dynamically, or authored;
-- whether Hypothesis, Test, and Isolation form a Diagnosis sub-lifecycle;
-- whether speculative ordinary Repair is legal;
-- whether failed Verify can reopen Diagnosis while preserving work;
-- whether Documentation is mandatory or end-only;
-- Documentation targets, visibility, chronology, selection, and live recovery;
-- basic deck size, copy limit, hand, draw, Actions, Search, Refresh, and empty-deck behavior;
-- whether successful Verify is immediately public; and
-- queue-empty winners and ties for finite matches;
-- whether closure costs an Action, awards Service Points, or creates a protected claim;
-- whether the game contains an account/loadout Equipment system; and
-- whether Qualifications affect gameplay, access, loadouts, or matchmaking.
+- individual card balance, effect catalogs, and exact content rewards;
+- queue layout, Room-setting layout, result-screen presentation, and pagination;
+- deployment capacity ceilings, abuse controls, retention durations, and broadcast delay;
+- chat and moderation;
+- competitive teams, multiple cooperative teams, mid-match computer replacement, Ticket claims, private-state attack cards, and Action costs above two; and
+- future skill rating or matchmaking ranking, which remains separate from Qualifications.
 
 ## 14. Change discipline
 
-When an unfrozen rule is decided:
+When the user approves a recommendation:
 
-1. Remove it from the unfrozen list.
-2. Add the normative decision to the appropriate frozen design contract.
-3. Update schemas and examples if the decision changes persisted or transmitted data.
-4. Add behavior-focused tests before relying on it in implementation.
-5. Record any migration required for saved presets or matches.
+1. Add the normative behavior to the appropriate frozen section and remove it here.
+2. Remove any resolved pressure statement from this file.
+3. Update schemas and examples when persisted or transmitted behavior changes.
+4. Add behavior-focused tests before implementation relies on the rule.
+5. Record migrations for saved presets, Tickets, matches, or accounts.
+
+Newly discovered rule questions or pressure enter this file directly. Rejected or superseded options remain in discussion, completed tasks, and Git history rather than creating another permanent ledger.

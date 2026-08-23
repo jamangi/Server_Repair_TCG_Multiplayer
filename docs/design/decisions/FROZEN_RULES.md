@@ -2,7 +2,7 @@
 
 This document records directions explicitly approved for the Server Repair TCG. "Frozen" means implementations and tests may rely on the rule. A frozen rule may still be changed deliberately through a documented rules-version migration.
 
-Start with [`DECISION_INDEX.md`](DECISION_INDEX.md) for the decision hierarchy. Accepted unresolved decisions belong in [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md); new proposals belong in [`CANDIDATE_DECISIONS.md`](CANDIDATE_DECISIONS.md). Known migration work and conflicts belong in [`UNSYNCHRONIZED_DECISIONS.md`](UNSYNCHRONIZED_DECISIONS.md).
+Start with [`DECISION_INDEX.md`](DECISION_INDEX.md) for the decision hierarchy. Accepted unresolved decisions, new proposals that require rules review, and pressure against this ledger belong in [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md). Git history and completed task records preserve the retired candidate and synchronization ledgers.
 
 The rules in §§9–15 were approved from the Candidate-Frozen Example Profile v0.0 review on 2026-08-22. The example package's named Tickets, deterministic deck orders, account fixtures, balance audits, screens, and animations remain non-authoritative fixtures.
 

@@ -21,7 +21,8 @@ const taskDocuments = [
     .filter((name) => name.endsWith('.md'))
     .map((name) => path.join('docs/design', name)),
   'docs/design/decisions/DECISION_INDEX.md',
-  'docs/design/decisions/UNSYNCHRONIZED_DECISIONS.md',
+  'docs/design/decisions/FROZEN_RULES.md',
+  'docs/design/decisions/UNFROZEN_RULES.md',
   ...filesBelow('docs/schema-notes', '.md'),
   ...filesBelow('docs/candidate_flows', '.md'),
   ...filesBelow('docs/story', '.md'),

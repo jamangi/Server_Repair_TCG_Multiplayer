@@ -18,13 +18,13 @@ Synchronize the repository with the frozen gameplay rules approved through 2026-
 - removal of the account/loadout Equipment system; and
 - Qualifications as non-mechanical honor badges.
 
-This task resolved [`SYNC-014` through `SYNC-020`](../design/decisions/UNSYNCHRONIZED_DECISIONS.md#resolved-synchronization-record) across design documents, schema notes, JSON Schemas, examples, candidate flows, story/UI candidates, and validation tests. It was a synchronization and migration task, not a new rules-design pass or game implementation.
+This task resolved `SYNC-014` through `SYNC-020` across design documents, schema notes, JSON Schemas, examples, candidate flows, story/UI candidates, and validation tests. It was a synchronization and migration task, not a new rules-design pass or game implementation. The resolved synchronization ledger was retired after this task completed; this completion record and Git history preserve it.
 
 ## Authority and open-rule boundary
 
 - [`FROZEN_RULES.md`](../design/decisions/FROZEN_RULES.md) is authoritative.
 - [`UNFROZEN_RULES.md`](../design/decisions/UNFROZEN_RULES.md) identifies decisions this task must not silently resolve.
-- [`CANDIDATE_DECISIONS.md`](../design/decisions/CANDIDATE_DECISIONS.md) has no active candidates and preserves lifecycle history only.
+- The candidate ledger had no active candidates and preserved lifecycle history only. It was retired after this task completed; Git history preserves that record.
 - If synchronization reveals a genuine contradiction in frozen rules, stop and report it. Do not repair the contradiction by editing frozen authority.
 - Do not select final `SCORE-001` contribution classes, values, visibility, duplicate policy, Root Cause policy, handicap policy, or cooperative aggregation.
 - Do not implement or freeze the `GEN-001` Ticket Builder, its configuration schema, constraint solver, or generator algorithm. Recommendations may identify future contract opportunities only.
