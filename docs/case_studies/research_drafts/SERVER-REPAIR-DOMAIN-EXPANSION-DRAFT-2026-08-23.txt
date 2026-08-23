@@ -1,6 +1,6 @@
 SERVER REPAIR TCG — POST-MARKET DOMAIN EXPANSION RESEARCH DRAFT
 Date: 2026-08-23
-Status: Reconciled research input. Implemented records remain draft Core v0.1 content.
+Status: Archived research provenance for implemented Core v0.1 content.
 
 IMPLEMENTATION RECONCILIATION — 2026-08-23
 
