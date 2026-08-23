@@ -4,12 +4,12 @@ This directory is the authoritative entry point for Server Repair TCG rule decis
 
 ## Current decision state
 
-- The repository has approved match, Room, authority, visibility, and lifecycle rules, but no playable game engine yet.
+- The repository has approved match, Room, authority, visibility, first-version deck/turn/economy, Diagnosis, Isolation, Repair, Verify, Documentation, and closure-transaction rules, but no playable game engine yet.
 - [`FROZEN_RULES.md`](FROZEN_RULES.md) remains authoritative while decisions are reviewed.
-- [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md) contains the existing canonical open-rule inventory. Its older entries have not yet been normalized into decision IDs.
-- [`CANDIDATE_DECISIONS.md`](CANDIDATE_DECISIONS.md) contains the current engine-decision batch, centered on information visibility, the Diagnosis sub-lifecycle, Isolation, Documentation, Ticket closure, and card replenishment.
-- [`UNSYNCHRONIZED_DECISIONS.md`](UNSYNCHRONIZED_DECISIONS.md) records confirmed overlaps and likely conflicts without silently changing either source.
-- The current design goal is to resolve the engine-blocking decisions before reconciling older design documents, schemas, examples, or presets.
+- [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md) contains the remaining canonical open-rule inventory after the 2026-08-22 Candidate-Frozen Example Profile review.
+- [`CANDIDATE_DECISIONS.md`](CANDIDATE_DECISIONS.md) now centers on verification-conditioned contribution scoring, the closure reward and Action cost, Equipment, Qualifications, and campaign Ticket selection.
+- [`UNSYNCHRONIZED_DECISIONS.md`](UNSYNCHRONIZED_DECISIONS.md) records the migrations created by the newly frozen rules and the two candidate-flow assumptions explicitly rejected by the review.
+- The immediate design goal is to resolve scoring and closure contention before implementing score or closure behavior. Equipment and Qualifications are the next independent preparation decisions.
 
 ## Reading order
 
@@ -60,24 +60,19 @@ An unsynchronized entry identifies work to reconcile. Until an explicit decision
 
 ## Recommended decision order for finishing the engine
 
-Resolve foundations before rewards and balance values:
+Resolve reward ownership before balance values and preparation content:
 
-1. [`OBS-001`](CANDIDATE_DECISIONS.md#obs-001) — visibility when an action or Evidence record is created.
-2. [`HYP-001`](CANDIDATE_DECISIONS.md#hyp-001) — the candidate-fault universe for a Ticket.
-3. [`ISO-001`](CANDIDATE_DECISIONS.md#iso-001) — the mechanical definition of Isolation.
-4. [`CROSS-004`](CANDIDATE_DECISIONS.md#cross-004) — Diagnosis as a sub-lifecycle and its possible Repair gateway.
-5. [`ISO-003`](CANDIDATE_DECISIONS.md#iso-003) — whether speculative Repair is legal as an exception to that gateway.
-6. [`DOC-001`](CANDIDATE_DECISIONS.md#doc-001) — whether Documentation is required for closure.
-7. [`DOC-002`](CANDIDATE_DECISIONS.md#doc-002) — whether actions are the primary Documentation targets and which attached records travel with them.
-8. [`DOC-003`](CANDIDATE_DECISIONS.md#doc-003) — the visibility transition caused by Documentation.
-9. [`DOC-004`](CANDIDATE_DECISIONS.md#doc-004), [`DOC-005`](CANDIDATE_DECISIONS.md#doc-005), and [`DOC-006`](CANDIDATE_DECISIONS.md#doc-006) — invocation, selection, and timing.
-10. [`CROSS-001`](CANDIDATE_DECISIONS.md#cross-001) — the complete Ticket-closure transaction.
-11. [`CROSS-002`](CANDIDATE_DECISIONS.md#cross-002) — the unified card-replenishment economy.
-12. [`ISO-004`](CANDIDATE_DECISIONS.md#iso-004) and [`DOC-007`](CANDIDATE_DECISIONS.md#doc-007) — Root Cause and Documentation rewards.
-13. [`TST-002`](CANDIDATE_DECISIONS.md#tst-002) and [`DOC-008`](CANDIDATE_DECISIONS.md#doc-008) — repeated Tests, event identity, and chronology.
-14. [`CROSS-003`](CANDIDATE_DECISIONS.md#cross-003) — competitive and cooperative Documentation behavior.
+1. [`SCORE-001`](CANDIDATE_DECISIONS.md#score-001) — whether verified causal contributions settle from a pending ledger.
+2. [`SCORE-002`](CANDIDATE_DECISIONS.md#score-002) — the size and recipient of any closure reward.
+3. [`DOC-009`](CANDIDATE_DECISIONS.md#doc-009) — whether the mandatory closure bundle costs zero Actions and needs any first-refusal rule.
+4. Resolve score-threshold and terminal precedence in [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md#7-terminal-conditions-and-results) against the resulting atomic score events.
+5. [`EQP-001`](CANDIDATE_DECISIONS.md#eqp-001) — the separate pre-match Equipment slot and starting installation.
+6. [`EQP-002`](CANDIDATE_DECISIONS.md#eqp-002) — permitted Equipment effects and their Action-cost budget.
+7. [`EQP-003`](CANDIDATE_DECISIONS.md#eqp-003) — ownership, Room policy, and competitive equality.
+8. [`QUAL-001`](CANDIDATE_DECISIONS.md#qual-001) — Qualifications as campaign progress rather than board power.
+9. [`GEN-001`](CANDIDATE_DECISIONS.md#gen-001) — bounded campaign Ticket randomization.
 
-After this batch, revisit the remaining engine questions already listed in `UNFROZEN_RULES.md`: turn phases, scoring, terminal precedence, targeting, ticket generation, computer players, and exhaustion.
+After this batch, resolve the remaining production policy in `UNFROZEN_RULES.md`: configuration admission, timer precedence, Room lifecycle, computer players, statistics, and content-level balance.
 
 ## Maintenance rules
 
