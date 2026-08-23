@@ -120,7 +120,7 @@ The post-match story bridge should separate:
 - what remains uncertain;
 - how contributors and the campaign reacted.
 
-This is more useful than a generic victory screen. It may present causal Service Point events under the eventual `SCORE-001` policy, Player/team closure statistics, rewards, and story choices without treating closure itself as a scoring action.
+This is more useful than a generic victory screen. It may present the frozen Isolation/necessary-Repair Service Point events, Player/team closure statistics, rewards, and story choices without treating closure itself as a scoring action.
 
 Candidate result labels should avoid false certainty:
 

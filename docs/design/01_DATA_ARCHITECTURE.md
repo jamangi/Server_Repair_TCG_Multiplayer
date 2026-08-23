@@ -1,6 +1,6 @@
 # Server Repair Card Game — Data Architecture
 
-This document is a foundational architecture guide. [`decisions/FROZEN_RULES.md`](decisions/FROZEN_RULES.md) controls approved behavior; illustrative field lists here are not substitutes for versioned schemas. [`decisions/UNFROZEN_RULES.md`](decisions/UNFROZEN_RULES.md) controls open policy, especially `SCORE-001` and `GEN-001`.
+This document is a foundational architecture guide. [`decisions/FROZEN_RULES.md`](decisions/FROZEN_RULES.md) controls approved behavior; illustrative field lists here are not substitutes for versioned schemas. [`decisions/UNFROZEN_RULES.md`](decisions/UNFROZEN_RULES.md) is currently empty.
 
 ## Architectural Principle
 
@@ -96,7 +96,7 @@ A ticket is not merely a Fault. It is a scenario that combines:
 - repair requirements,
 - verification requirements,
 - structured closure requirements,
-- and optional scoring-policy hooks whose values remain unresolved under `SCORE-001`.
+- and server-only Isolation/Repair scoring-slot metadata derived from required actionable Fault instances.
 
 ## D. Runtime Match Layer
 
@@ -449,7 +449,7 @@ verification_requirements[]
 closure_requirement
 time_or_action_modifiers
 educational_objectives[]
-scoring_policy_metadata_optional     # hook only; SCORE-001 defines no classes or values yet
+scoring_slot_metadata               # one Isolation and one necessary-Repair slot per required actionable Fault
 expansion_id
 ```
 
@@ -530,7 +530,7 @@ verification_history[]               # current/stale passes plus preserved failu
 current_verify_pass_ids[]
 worklog_entry_ids[]
 published_record_ids[]
-contribution_record_ids[]             # generic SCORE-001 hook; not a value policy
+contribution_record_ids[]             # frozen Isolation/Repair slot records
 closure_record_id_optional
 ```
 
@@ -615,7 +615,7 @@ Document Live enriches the existing `WorklogEntry` in place. Its later publicati
 
 ## Contribution and closure records
 
-Contribution storage remains extensible without selecting `SCORE-001`:
+Contribution storage represents the frozen closure-settled scoring rule:
 
 ```text
 ContributionRecord
@@ -624,7 +624,10 @@ ContributionRecord
   ticket_instance_id
   contributor_player_id
   contributor_team_id_optional
-  policy_classification_opaque
+  fault_instance_id
+  contribution_class             # isolation | repair
+  slot_key                        # unique Ticket + Fault instance + class
+  point_value                     # 1 in the first version
   settlement_status             # pending | awarded | ineligible | superseded
   score_event_ids[]
 
@@ -641,7 +644,7 @@ ClosureRecord
   closed_at
 ```
 
-Closure costs zero Actions, recovers no card, awards no Service Points for closing, and retains Player/team closure attribution as statistics. Policy classifications, values, visibility, duplicate suppression, Root Cause treatment, and cooperative aggregation remain unresolved.
+Closure costs zero Actions, recovers no card, awards no Service Points for closing, and retains Player/team closure attribution as statistics. The earliest qualifying final-path event owns each slot. Root Cause, Tests, Verify, Documentation, assists, and repeated equivalents remain statistics. Cooperative settlements credit the shared team score and retain the contributing Player ID.
 
 ---
 
@@ -683,7 +686,6 @@ GAIN_ACTION
 RECOVER_CARD
 INSPECT_COMPONENT
 MOVE_TICKET
-CLAIM_TICKET
 MODIFY_TEST
 PREVENT_EFFECT
 ```
@@ -706,7 +708,7 @@ Avoid creating a unique hard-coded function for every card unless necessary. Do 
 | Verify | ValidationProcedure, current/stale pass tracking, VerificationEngine |
 | Failed Verify return | preserved Evidence/Repair/Verify history, `returned_to_diagnosis` Ticket state |
 | Document | WorklogEntry, Document Live publication, ClosureRecord, DocumentationEngine |
-| Score | generic ContributionRecord and ScoreEvent hooks governed later by `SCORE-001` |
+| Score | unique one-point Isolation/Repair ContributionRecords settled into public ScoreEvents at closure |
 | Compete/cooperate | RepairQueueState, MatchState, team/player-safe projections |
 | Expand | CardDefinition + stable Domain Knowledge IDs + expansion metadata |
 

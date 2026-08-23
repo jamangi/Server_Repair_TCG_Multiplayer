@@ -43,13 +43,13 @@ For an accepted paid result, the placeholder is the first public event from that
 
 Every non-`SERVER_ONLY` payload is also constrained against direct authoritative-secret fields. Dependency-free semantic validation applies the same prohibition recursively so a nested object cannot smuggle causal truth, unexecuted outcomes, random state, deck order, opponent hands, or internal scoring modifiers into a player-safe event. Private and team projections additionally verify that each event and Knowledge State is addressed to the authenticated Player or that Player's team.
 
-[`public_match_view.schema.json`](../../schemas/runtime/public_match_view.schema.json) contains only public candidates, accepted Isolation, machine-state summaries, Verify summaries, Worklog projections, public utility counts, public turn state, scores, and closure statistics. [`private_player_view.schema.json`](../../schemas/runtime/private_player_view.schema.json) adds the authenticated hand, authorized private/team Knowledge States and events, legal actions, and reconnect cursor. Neither view can carry `server_only_truth` or authoritative `fault_states`.
+[`public_match_view.schema.json`](../../schemas/runtime/public_match_view.schema.json) contains only public candidates, accepted Isolation, machine-state summaries, Verify summaries, Worklog projections, public utility counts, public turn state, scores, closure statistics, and the public result/statistics projection. [`private_player_view.schema.json`](../../schemas/runtime/private_player_view.schema.json) adds the authenticated hand, authorized private/team Knowledge States and events, legal actions, and reconnect cursor. Neither view can carry `server_only_truth` or authoritative `fault_states`.
 
-## Closure and unresolved scoring
+## Closure and causal scoring
 
 A closed Ticket stores a zero-Action structured bundle and links every step in the atomic transaction: Worklog lock, policy-selected score events, archive/removal, utility grants, queue reconciliation, terminal evaluation, and turn end. Its closure record preserves the complete accepted-path Repair history, and its decisive Evidence links must be citations from the current accepted Isolation. The closer and optional team are recorded only as closure statistics. No closure card recovery or closure Service Point field exists.
 
-`pending_contributions`, `contribution_ledger`, and `service_point_events` are deliberately policy-neutral. Their `policy_hook_id` is opaque, values are not enumerated, and no contribution class, weight, Root Cause rule, duplicate rule, visibility rule, or cooperative aggregation rule is selected. Example IDs beginning with `example_only.pending_policy` illustrate separation only and do not resolve `SCORE-001`.
+`pending_contributions`, `contribution_ledger`, and `service_point_events` implement the frozen causal policy. Every required actionable Fault has one one-point Isolation slot and one one-point necessary-Repair slot. The earliest qualifying final-path event owns each slot. Pending eligibility remains server-only until closure; settled score events are public. Root Cause has no bonus. Cooperative awards credit the shared team directly while retaining the contributing Player ID.
 
 Runtime contracts contain no Equipment or Qualification fields. Technical Tool/card state remains ordinary match content.
 

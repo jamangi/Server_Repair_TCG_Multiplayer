@@ -1,6 +1,6 @@
 # Server Repair Card Game — Implementation and Content Validation
 
-[`decisions/FROZEN_RULES.md`](decisions/FROZEN_RULES.md) controls required behavior. This file recommends validation strategy; it does not define unresolved scoring or Ticket-generation policy.
+[`decisions/FROZEN_RULES.md`](decisions/FROZEN_RULES.md) controls required behavior. This file recommends validation strategy for the frozen scoring and deterministic Ticket-generation policies.
 
 ## Recommendation for v0.1
 
@@ -16,7 +16,7 @@ Recommended content distribution:
 
 These ratios are only starting points for playtesting.
 
-They may guide manually authored content sets. They are not Ticket Builder constraints or a generator algorithm. Constraint configuration, solving, fallback, and versioned generation remain unresolved under [`GEN-001`](decisions/UNFROZEN_RULES.md#gen-001).
+They may guide manually authored content sets. They are not automatically Ticket Builder constraints. A scenario must encode any desired distribution in its versioned difficulty profile and structural bounds.
 
 ---
 
@@ -135,7 +135,7 @@ Automated content tests should attempt to verify:
 - Worklog placeholders, attached results, publication links, action times, and publication times remain internally consistent; and
 - `SERVER_ONLY`, `PRIVATE_PLAYER`, `TEAM`, and `PUBLIC_MATCH` projections reveal no unauthorized information.
 
-A future scenario solver is part of unresolved `GEN-001`. TASK-007 should validate fixed authored fixtures and contracts without defining that solver.
+The Ticket Builder must run the same solvability checks after deterministic assembly. Identical configuration, content version, generator version, and seed must reproduce the same validated Ticket snapshots; a content version therefore identifies an immutable authored input set for generation. Unsatisfiable configurations fail with structured diagnostics and never silently relax guarantees.
 
 ---
 
@@ -148,8 +148,8 @@ Behavior-focused validation should cover at least:
 - failed Verify returning to Diagnosis with preserved history, then later successful Verify;
 - incremental Document Live, card recovery exactly once, and immutable Worklog enrichment;
 - zero-Action closure during the immediate post-Verify window, including when Verify spends the last Action;
-- no closure Service Point, with separate Player/team closure statistics and generic unresolved contribution hooks;
-- the atomic closure order: validate, lock records, emit policy-defined score events, archive, grant resources, reconcile queue, evaluate termination, end turn;
+- no closure Service Point, with separate Player/team closure statistics and unique one-point Isolation/necessary-Repair slots;
+- the atomic closure order: validate, lock records, settle eligible Isolation/Repair score events, archive, grant resources, reconcile queue, evaluate termination, end turn;
 - competitive private Evidence, cooperative team Evidence, and public Documentation;
 - stale-revision rejection before payment;
 - legal 30-card decks, maximum three copies, opening five, start-turn draw, two Actions, costs 0–2, no hand limit, and same-name 0-Action limit;
@@ -157,7 +157,7 @@ Behavior-focused validation should cover at least:
 - Search and Refresh costs, shuffles, caps, and post-closure grants; and
 - absence of account/loadout Equipment plus absence of any Qualification gameplay or access effect.
 
-`SCORE-001` tests may verify generic ledger integrity and closure settlement timing, but must not choose contribution classes, values, visibility, duplicate suppression, Root Cause treatment, handicap policy, or cooperative aggregation.
+Scoring tests must verify one Isolation and one necessary-Repair slot per required actionable Fault, earliest-event ownership, final-path eligibility, closure-only settlement, public settled events, no Root Cause bonus, and direct cooperative team credit with individual attribution.
 
 ---
 
@@ -234,9 +234,10 @@ For an early JavaScript implementation, content can simply be JSON or JS objects
 4. Implement authored Repair Ticket definitions: public candidates, server-only causal truth/outcomes, Isolation, Repair, Verify, and closure requirements.
 5. Implement match state, Knowledge State, immutable action/event identity, player-safe projections, and the shared Ticket queue.
 6. Implement iterative Diagnosis (`Hypothesize <-> Test -> Isolate`), the ordinary Repair gateway, failed-Verify return, incremental Documentation, and zero-Action closure.
-7. Implement the frozen deck/turn/Search/Refresh envelope and complete closure transaction without resolving `SCORE-001` or `GEN-001`.
-8. Implement generic card effects with explicit targets and Worklog projection.
-9. Implement Fault/Card browser search and filtering without access to live hidden truth.
-10. Add starter authored content and automated content/behavior validation to CI.
+7. Implement the frozen deck/turn/Search/Refresh envelope, causal scoring slots, and complete closure transaction.
+8. Implement the deterministic constraint-driven Ticket Builder and snapshot/version persistence.
+9. Implement generic card effects with explicit targets and Worklog projection.
+10. Implement Fault/Card browser search and filtering without access to live hidden truth.
+11. Add starter authored content and automated content/behavior validation to CI.
 
 The important principle is that **content expansion should mostly mean adding data, not rewriting engine code**.

@@ -12,7 +12,7 @@ Observe -> Hypothesize <-> Test -> Isolate -> Repair -> Verify -> Document
 
 Hypothesize and Test are the repeatable heart of Diagnosis. Isolate is an evidence-citing commitment to an actionable fault. Repair changes machine state but does not prove the explanation. A failed Verify is a valid event that can preserve the repair and reopen Diagnosis. Document publishes an attributable account without rewriting the order in which events happened.
 
-The synchronized replays use frozen zero-Action, non-scoring closure. Their Service Points come from a visibly example-local pending causal-contribution rubric that settles only at closure; it is not a proposed resolution of unfrozen <code>SCORE-001</code>. The package contains no account/loadout Equipment mechanic. Qualifications appear only as recognition-only honor badges, while cosmetics remain non-mechanical.
+The synchronized replays use frozen zero-Action, non-scoring closure and instantiate the frozen causal rubric: one point for the required actionable Isolation and one for its necessary Repair, settled only at closure. The package contains no account/loadout Equipment mechanic. Qualifications appear only as recognition-only honor badges, while cosmetics remain non-mechanical.
 
 ## Recommended reading order
 

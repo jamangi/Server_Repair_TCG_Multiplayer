@@ -308,4 +308,4 @@ These relationships can later power:
 - authored public candidate-Fault sets,
 - server-specific scenario generation.
 
-Future generated scenarios remain an opportunity under unresolved [`GEN-001`](decisions/UNFROZEN_RULES.md#gen-001). This catalog does not define a Ticket Builder configuration, constraint solver, or generator algorithm.
+Generated scenarios use the deterministic constraint-driven Ticket Builder in Frozen Rules §18. This catalog supplies validated authored parts and metadata; it does not itself define a scenario configuration or invoke the Builder.

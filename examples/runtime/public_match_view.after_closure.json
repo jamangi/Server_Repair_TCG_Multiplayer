@@ -1,7 +1,7 @@
 {
   "match_id": "match_demo_001",
   "revision": 33,
-  "ruleset_version": "0.1-task-007",
+  "ruleset_version": "first-version-v1",
   "status": "COMPLETED",
   "collaboration_mode": "competitive",
   "players": [
@@ -9,7 +9,7 @@
       "player_id": "player_a",
       "display_name": "Player A",
       "team_id": null,
-      "service_points": 1,
+      "service_points": 2,
       "hand_count": 3,
       "deck_count": 0,
       "discard_card_definition_ids": [],
@@ -49,6 +49,34 @@
       "closed_at": "2026-08-22T16:17:00Z"
     }
   ],
+  "result": {
+    "winner_player_ids": ["player_a"],
+    "winning_team_ids": [],
+    "valid": true,
+    "reason_codes": ["QUEUE_EMPTY"],
+    "final_player_scores": {
+      "player_a": 2,
+      "player_b": 0
+    },
+    "final_team_scores": {},
+    "public_statistics": [
+      {
+        "metric": "TICKET_CLOSURE",
+        "value": 1,
+        "player_id": "player_b",
+        "team_id": null,
+        "ticket_instance_id": "ticketinst_2"
+      },
+      {
+        "metric": "SETTLED_CAUSAL_AWARD",
+        "value": 2,
+        "player_id": "player_a",
+        "team_id": null,
+        "ticket_instance_id": "ticketinst_2"
+      }
+    ],
+    "completed_at": "2026-08-22T16:17:00Z"
+  },
   "public_events": [],
   "last_event_sequence": 40
 }

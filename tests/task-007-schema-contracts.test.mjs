@@ -443,20 +443,26 @@ test('Action arithmetic, stale revision, zero-Action closure, and closed windows
   assertInvalid(closedWindow, 'turn_state', /eligible_ticket_instance_ids.*more than 0 items/);
 });
 
-test('closure attribution is statistical and causal Service Point events remain separate hooks', () => {
+test('closure attribution is statistical and frozen Isolation/Repair slots settle separately', () => {
   const match = readJson('examples/runtime/match_state.after_closure.json');
   assert.equal(match.closure_statistics.length, 1);
-  assert.equal(match.service_point_events.length, 1);
+  assert.equal(match.service_point_events.length, 2);
   const closure = match.closure_statistics[0];
-  const score = match.service_point_events[0];
-  assert.equal(score.settled_by_closure_event_id, closure.closure_event_id);
-  assert.notEqual(score.source_contribution_id, closure.closure_event_id);
-  assert.ok(match.contribution_ledger.some((record) => record.contribution_id === score.source_contribution_id));
-  assert.ok(match.players.some((player) => player.player_id === score.recipient_player_id));
+  assert.deepEqual(new Set(match.service_point_events.map((score) => score.contribution_class)), new Set(['ISOLATION', 'REPAIR']));
+  assert.equal(new Set(match.contribution_ledger.map((record) => record.slot_key)).size, 2);
+  for (const score of match.service_point_events) {
+    assert.equal(score.settled_by_closure_event_id, closure.closure_event_id);
+    assert.notEqual(score.source_contribution_id, closure.closure_event_id);
+    assert.equal(score.delta, 1);
+    const contribution = match.contribution_ledger.find((record) => record.contribution_id === score.source_contribution_id);
+    assert.ok(contribution);
+    assert.equal(score.contribution_class, contribution.contribution_class);
+    assert.equal(score.contributor_player_id, contribution.contributor_player_id);
+    assert.ok(match.players.some((player) => player.player_id === score.recipient_player_id));
+  }
   const closer = match.players.find((player) => player.player_id === closure.closer_player_id);
   assert.ok(closer, 'statistically attributed closer remains a Match Player');
   assert.ok(closer.closure_statistics.closure_event_ids.includes(closure.closure_event_id));
-  assert.match(score.policy_hook_id, /^example_only\.pending_policy\./);
   assert.equal(Object.hasOwn(closure, 'service_points'), false);
 });
 
@@ -543,7 +549,7 @@ test('deck copies, card-zone disjointness, utility caps, Search, and Refresh rej
   assert.match(validateActionExchange(refreshRequest, refreshWithoutPlaceholder).join('\n'), /does not begin with exactly one public Worklog placeholder/);
 });
 
-test('JSON contracts contain no Equipment/Qualification fields or Ticket Builder configuration', () => {
+test('JSON contracts contain no Equipment or Qualification gameplay fields', () => {
   const propertyNames = [];
   function visit(value) {
     if (Array.isArray(value)) return value.forEach(visit);
@@ -558,13 +564,12 @@ test('JSON contracts contain no Equipment/Qualification fields or Ticket Builder
 
   assert.ok(propertyNames.every((name) => !/equipment/i.test(name)));
   assert.ok(propertyNames.every((name) => !/qualification/i.test(name)));
-  assert.ok(propertyNames.every((name) => !/ticket_builder|generator_config/i.test(name)));
 });
 
 test('authoritative Match fixture reconciles 60 card instances, event references, closure cleanup, and closer identity', () => {
   const match = readJson('examples/runtime/match_state.after_closure.json');
   assert.equal(match.card_instances.length, 60);
-  assert.equal(match.events.length, 9);
+  assert.equal(match.events.length, 10);
   assert.deepEqual(validateMatchState(match), []);
 
   const missingCard = structuredClone(match);

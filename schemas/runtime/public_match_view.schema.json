@@ -49,7 +49,7 @@
     "match_id": { "$ref": "#/$defs/instanceId" },
     "revision": { "type": "integer", "minimum": 0 },
     "ruleset_version": { "type": "string", "minLength": 1 },
-    "status": { "type": "string", "enum": ["SETUP", "ACTIVE", "COMPLETED", "ABORTED"] },
+    "status": { "type": "string", "enum": ["SETUP", "ACTIVE", "COMPLETED", "ABORTED", "INVALIDATED"] },
     "collaboration_mode": { "type": "string", "enum": ["competitive", "cooperative"] },
     "players": {
       "type": "array",
@@ -252,6 +252,63 @@
         ]
       }
     },
+    "result": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "winner_player_ids": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/instanceId" },
+          "uniqueItems": true
+        },
+        "winning_team_ids": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/instanceId" },
+          "uniqueItems": true
+        },
+        "valid": { "type": "boolean" },
+        "reason_codes": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "final_player_scores": {
+          "type": "object",
+          "additionalProperties": { "type": "integer" }
+        },
+        "final_team_scores": {
+          "type": "object",
+          "additionalProperties": { "type": "integer" }
+        },
+        "public_statistics": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "metric": { "type": "string", "minLength": 1 },
+              "value": { "type": "integer", "minimum": 0 },
+              "player_id": { "type": ["string", "null"], "minLength": 1 },
+              "team_id": { "type": ["string", "null"], "minLength": 1 },
+              "ticket_instance_id": { "type": ["string", "null"], "minLength": 1 }
+            },
+            "required": ["metric", "value", "player_id", "team_id", "ticket_instance_id"]
+          }
+        },
+        "completed_at": { "$ref": "#/$defs/timestamp" }
+      },
+      "required": [
+        "winner_player_ids",
+        "winning_team_ids",
+        "valid",
+        "reason_codes",
+        "final_player_scores",
+        "final_team_scores",
+        "public_statistics",
+        "completed_at"
+      ]
+    },
     "public_events": {
       "type": "array",
       "items": {
@@ -273,6 +330,7 @@
     "repair_queue",
     "turn",
     "closure_statistics",
+    "result",
     "public_events",
     "last_event_sequence"
   ]

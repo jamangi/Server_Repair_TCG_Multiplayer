@@ -28,7 +28,7 @@ Never send these fields to a Player or spectator until a rule explicitly publish
 - unused authored Evidence outcomes and server-selected random state;
 - opponent hand identities and exact deck order;
 - another competitive Player's Evidence or Hypothesis;
-- internal scoring modifiers or policy metadata whose visibility remains unresolved; and
+- server-only pending scoring-slot eligibility and hidden Ticket point budget; and
 - private scenario branches.
 
 CSS hiding, disabled controls, obfuscated identifiers, and encrypted-looking strings do not protect data already delivered to a browser.
@@ -45,7 +45,7 @@ Successful and failed Verify summaries are public immediately because they chang
 
 ## Closure transaction
 
-After current Verify requirements pass, the server opens the closure-resolution window before automatic end-turn. A valid zero-Action bundle is serialized once and completes the full frozen transaction before any terminal result is evaluated. Closure preserves every Repair in the accepted path and accepts decisive Evidence only from the current accepted Isolation's citations. The closure event records statistical attribution but is not a Service Point source. Any causal score events reference separately attributable contribution records under the unresolved scoring policy.
+After current Verify requirements pass, the server opens the closure-resolution window before automatic end-turn. A valid zero-Action bundle is serialized once and completes the full frozen transaction before any terminal result is evaluated. Closure preserves every Repair in the accepted path and accepts decisive Evidence only from the current accepted Isolation's citations. The closure event records statistical attribution but is not a Service Point source. Causal score records settle the eligible one-point Isolation and necessary-Repair slots and retain their contributors.
 
 ## Reconnect
 

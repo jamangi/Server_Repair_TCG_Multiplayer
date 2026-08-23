@@ -6,7 +6,7 @@
   "public_match": {
     "match_id": "match_demo_001",
     "revision": 18,
-    "ruleset_version": "0.1-task-007",
+    "ruleset_version": "first-version-v1",
     "status": "ACTIVE",
     "collaboration_mode": "competitive",
     "players": [
@@ -72,6 +72,7 @@
       "closure_eligible_ticket_instance_ids": []
     },
     "closure_statistics": [],
+    "result": null,
     "public_events": [
       {
         "event_id": "evt_worklog_test_001",

@@ -38,7 +38,6 @@
           "type": "string",
           "enum": ["ISOLATION_ACCEPTED", "ISOLATION_NOT_SUPPORTED"]
         },
-        "root_cause_reward_eligible_after": { "type": "boolean" },
         "committed_at_revision": { "type": "integer", "minimum": 0 },
         "committed_at": { "$ref": "#/$defs/timestamp" }
       },
@@ -51,7 +50,6 @@
         "classification",
         "public_fault_instance_id",
         "response_code",
-        "root_cause_reward_eligible_after",
         "committed_at_revision",
         "committed_at"
       ],
@@ -75,8 +73,7 @@
             "properties": {
               "classification": { "const": null },
               "public_fault_instance_id": { "const": null },
-              "response_code": { "const": "ISOLATION_NOT_SUPPORTED" },
-              "root_cause_reward_eligible_after": { "const": false }
+              "response_code": { "const": "ISOLATION_NOT_SUPPORTED" }
             }
           }
         }
@@ -173,7 +170,7 @@
         },
         "worklog_locked_event_id": { "$ref": "#/$defs/instanceId" },
         "score_event_ids": {
-          "description": "Opaque events emitted only by the separately selected causal scoring policy; this array may be empty.",
+          "description": "Public score events emitted for eligible frozen Isolation/Repair slots; this may be empty when no slot remains eligible.",
           "type": "array",
           "items": { "$ref": "#/$defs/instanceId" },
           "uniqueItems": true
@@ -249,11 +246,6 @@
       "type": ["string", "null"],
       "minLength": 1
     },
-    "root_cause_reward_ineligible_player_ids": {
-      "type": "array",
-      "items": { "$ref": "#/$defs/instanceId" },
-      "uniqueItems": true
-    },
     "repair_history": {
       "type": "array",
       "items": { "$ref": "#/$defs/repairRecord" }
@@ -321,7 +313,7 @@
       "uniqueItems": true
     },
     "pending_contributions": {
-      "description": "Policy-neutral hooks. Exact qualifying classes, weights, duplication, and visibility remain SCORE-001 decisions.",
+      "description": "Frozen one-point Isolation/Repair slots. Eligibility remains server-only until closure; settled awards are public.",
       "type": "array",
       "items": {
         "type": "object",
@@ -330,7 +322,10 @@
           "contribution_id": { "$ref": "#/$defs/instanceId" },
           "source_event_id": { "$ref": "#/$defs/instanceId" },
           "contributor_player_id": { "$ref": "#/$defs/instanceId" },
-          "policy_hook_id": { "$ref": "#/$defs/entityRef" },
+          "fault_instance_id": { "$ref": "#/$defs/instanceId" },
+          "contribution_class": { "type": "string", "enum": ["ISOLATION", "REPAIR"] },
+          "slot_key": { "$ref": "#/$defs/instanceId" },
+          "point_value": { "const": 1 },
           "settlement_status": {
             "type": "string",
             "enum": ["PENDING", "SETTLED", "SUPERSEDED", "INELIGIBLE"]
@@ -344,7 +339,10 @@
           "contribution_id",
           "source_event_id",
           "contributor_player_id",
-          "policy_hook_id",
+          "fault_instance_id",
+          "contribution_class",
+          "slot_key",
+          "point_value",
           "settlement_status",
           "score_event_id"
         ]
@@ -368,7 +366,6 @@
     "fault_states",
     "isolation_history",
     "current_accepted_isolation_event_id",
-    "root_cause_reward_ineligible_player_ids",
     "repair_history",
     "verification_history",
     "current_verify_pass_event_ids",

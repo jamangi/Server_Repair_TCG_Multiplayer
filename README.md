@@ -48,7 +48,7 @@ The design uses one configurable match system for competitive and cooperative pl
 - Rooms with explicit Player and Spectator roles;
 - human and computer-controlled technicians using player-safe information.
 
-A two-player race to 10 Service Points is one recommended preset, not the definition of the game. Exact causal-contribution scoring remains unfrozen, as do the Ticket Builder and several production configuration, timer, terminal, statistics, and balance policies. Ticket closure itself awards no Service Points; it records Player/team closure statistics and settles only whatever causal score events a future approved scoring policy requires.
+A two-player race to 10 Service Points is one recommended preset, not the definition of the game. The first-version foundation now freezes causal-contribution scoring, deterministic Ticket generation, configuration boundaries, timers, terminal resolution, statistics, multiplayer scope, and Room lifecycle. Ticket closure itself awards no Service Points; it records Player/team closure statistics and settles the eligible one-point Isolation and necessary-Repair slots.
 
 There is no account/loadout Equipment system. Technical Tools remain domain objects and playable card concepts. Qualifications may recognize milestones as honor badges, but they have no gameplay, access, deck, story, procedure, or matchmaking effect.
 
@@ -67,7 +67,7 @@ This repository currently contains:
 - a non-authoritative, replayable candidate-flow package that combines temporary rules, exact card/deck/Ticket fixtures, complete matches, and landing-to-logout campaign and multiplayer journeys;
 - provisional UI planning and original wireframes for the future playable application.
 
-It does not yet contain a playable game engine or multiplayer client. The schemas remain draft contracts, and recommended models remain non-normative where scoring, Ticket generation, or production policy is still unfrozen.
+It does not yet contain a playable game engine or multiplayer client. The first-version rules foundation is frozen; schemas remain draft implementation contracts, and recommended models remain non-normative architecture guidance.
 
 ## Design source of truth
 
@@ -80,7 +80,7 @@ Read the design documents in this order:
 5. [`docs/design/00_GAME_ENGINE_OVERVIEW.md`](docs/design/00_GAME_ENGINE_OVERVIEW.md) through [`07_FAULT_BROWSER_AND_SEARCH.md`](docs/design/07_FAULT_BROWSER_AND_SEARCH.md) — the synchronized foundational vision, architecture, and starter catalogs. Frozen decisions still take precedence.
 6. [`docs/design/DOCUMENTS_TO_UPDATE.md`](docs/design/DOCUMENTS_TO_UPDATE.md) — the audited migration ledger, including completed, superseded, deferred, and still-relevant recommendations.
 
-Do not silently turn an unfrozen recommendation into a rule through code, schema, content, or UI behavior.
+If implementation exposes a new rule question or pressure against frozen behavior, record it in the empty Unfrozen ledger before choosing an answer through code, schema, content, or UI behavior.
 
 ## Repository guide
 

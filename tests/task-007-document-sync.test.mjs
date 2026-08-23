@@ -133,7 +133,7 @@ test('candidate replays retain six zero-Action, non-scoring closures and reconci
     '12 + 4 = 16; 13 + 1 = 14',
     '6 + 8 = 14; 11 + 3 = 14',
     '3 + 1 + 1 + 1, capped = 5',
-    'Each game settles six causal-contribution points across exactly three closes',
+    'Game 1 settles eight causal-contribution points and Game 2 settles six',
     'A 3 / B 3',
   ]) {
     assert.ok(replay.includes(requiredAudit), requiredAudit);
@@ -145,7 +145,8 @@ test('candidate replays retain six zero-Action, non-scoring closures and reconci
   );
   assert.doesNotMatch(decisions, /CANDIDATE_DECISIONS\.md#(?:hyp|tst|iso|rep|doc|obs|cross)-/i);
   assert.doesNotMatch(decisions, /FUTURE-SYNC-/);
-  assert.match(decisions, /not\s+(?:<code>)?SCORE-001/i);
+  assert.doesNotMatch(decisions, /SCORE-001/i);
+  assert.match(decisions, /Frozen rule, fixture-local instantiation/i);
   assert.match(decisions, /zero-Action, non-scoring/i);
 
   const candidatePackage = filesBelow('docs/candidate_flows', '.md')

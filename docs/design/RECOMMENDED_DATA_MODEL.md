@@ -2,13 +2,9 @@
 
 ## Status and authority
 
-This is an architectural recommendation, not a frozen runtime schema. [`decisions/FROZEN_RULES.md`](decisions/FROZEN_RULES.md) controls approved behavior. [`decisions/UNFROZEN_RULES.md`](decisions/UNFROZEN_RULES.md) controls open policy. Field names and shapes below identify implementation opportunities; versioned JSON Schemas remain the machine-readable contracts.
+This is an architectural recommendation, not a frozen runtime schema. [`decisions/FROZEN_RULES.md`](decisions/FROZEN_RULES.md) controls approved behavior. [`decisions/UNFROZEN_RULES.md`](decisions/UNFROZEN_RULES.md) is currently empty. Field names and shapes below identify implementation opportunities; versioned JSON Schemas remain the machine-readable contracts.
 
-In particular:
-
-- `SCORE-001` does not yet define eligible contribution classes, values, visibility, duplicate handling, Root Cause treatment, handicap policy, or cooperative aggregation.
-- `GEN-001` does not yet define a Ticket Builder configuration, constraint solver, generation algorithm, failure behavior, or migration policy.
-- no recommendation below creates an account/loadout Equipment system or a runtime Qualification effect.
+In particular, the model follows the frozen one-point Isolation/necessary-Repair slots and deterministic constraint-driven Ticket Builder. No recommendation below creates an account/loadout Equipment system or a runtime Qualification effect.
 
 ## Design principles
 
@@ -19,7 +15,7 @@ In particular:
 - Derive public/team/private projections from one authoritative state and the four frozen visibility categories.
 - Compose queue, scoring, clocks, and termination as policies rather than one monolithic mode switch.
 - Treat frozen first-version deck/turn behavior as part of `rules_version`, not Room customization.
-- Use fixed authored Ticket fixtures until a later `GEN-001` decision defines generation. Seeded/versioned generation remains a future contract opportunity only.
+- Support both fixed authored Ticket fixtures and deterministic seeded Builder output under the same authored Ticket contract.
 
 ## Versioned first-version rules profile
 
@@ -38,7 +34,7 @@ FirstVersionRulesProfile
   max_same_name_zero_action_plays_per_turn: 1
 ```
 
-An empty draw deck skips the draw. It never creates loss, exhaustion, or concession by itself. The first starting-seat selection policy remains unresolved even though seat order after selection is fixed.
+An empty draw deck skips the draw. It never creates loss, exhaustion, or concession by itself. The server selects the first starting seat uniformly from eligible seats using the match seed and records it for replay; later order remains fixed.
 
 ## Server capabilities
 
@@ -53,7 +49,7 @@ ServerMatchCapabilities
   allow_custom_matches: boolean
 ```
 
-`M` and `W` are server-administered. Resource limits may be stricter than broad ranges accepted by offline tools. Ticket Builder capabilities are deliberately absent while `GEN-001` remains unfrozen.
+`M` and `W` are server-administered. Resource limits may be stricter than broad ranges accepted by offline tools. Public matchmaking uses approved presets; private Rooms may use validated Custom configurations.
 
 ## Match configuration
 
@@ -65,7 +61,7 @@ MatchConfiguration
   queue_minimum: integer                         // Q
   seat_limit: integer                            // SL
   turn_time_limit_seconds: integer | null        // T
-  player_time_limit_seconds: integer | null      // PT default
+  match_time_limit_seconds_by_player: map<PlayerId, integer | null> // PT(p)
   starting_search_tokens: integer                // SSC
   ticket_search_tokens: integer                  // TSC closure grant
   max_search_tokens: integer                     // MSC
@@ -78,7 +74,35 @@ MatchConfiguration
 
 The server validates `player_count <= seat_limit <= max_players_per_match` before starting. Deck size, copy limit, opening hand, draw cadence, Actions, hand limit, and empty-draw behavior come from the versioned rules profile. Disconnect grace belongs to capabilities.
 
-No `min_faults_per_ticket`, `max_faults_per_ticket`, `progressive_difficulty`, Root Cause bonus, or other Ticket Builder/scoring-policy field belongs in this current configuration recommendation. Those fields require `GEN-001` or `SCORE-001` decisions first.
+Ticket generation uses a separate pinned source/configuration object rather than mixing authoring constraints into ordinary turn/economy settings. Root Cause has no bonus.
+
+```text
+TicketSource
+  source_type: fixed_fixture | generated
+  fixed_ticket_definition_ids: TicketDefinitionId[] | null
+  generation_configuration: TicketGenerationConfiguration | null
+
+TicketGenerationConfiguration
+  scenario_or_mode_context: string
+  requested_ticket_count: integer
+  seed: string
+  generator_version: string
+  content_version: string
+  allowed_domain_ids_or_tags: string[]
+  excluded_domain_ids_or_tags: string[]
+  guaranteed_categories: string[]
+  required_teaching_beats: string[]
+  authored_difficulty_min: number
+  authored_difficulty_max: number
+  actionable_fault_count_bounds: integer range
+  causal_depth_bounds: integer range
+  branch_bounds: integer range
+  progressive_difficulty_profile: versioned targets/bands with ceiling
+  allow_duplicate_causal_fingerprints: boolean
+  fallback_configuration_optional: TicketGenerationConfiguration
+```
+
+The Builder persists this configuration and the produced snapshots. Identical configuration, content version, generator version, and seed reproduce identical snapshots; the content version pins the immutable authored inputs. Unsatisfiable input returns structured failure rather than relaxed content.
 
 ```text
 PlayerSetup
@@ -86,7 +110,7 @@ PlayerSetup
   seat_index: integer
   team_id: TeamId
   starting_service_points: integer               // H(p)
-  player_time_limit_seconds: integer | null       // optional PT(p)
+  match_time_limit_seconds: integer | null        // this Player's PT(p)
   controller_type: human | computer
 ```
 
@@ -184,7 +208,7 @@ TeamState
   team_knowledge_state_ids: KnowledgeStateId[]
 ```
 
-Competitive matches may create one team per Player while cooperative matches create one shared team. Exact cooperative score aggregation remains unresolved.
+Competitive free-for-all may represent each Player as their own scoring entity while cooperative play creates one shared team. Cooperative score events credit that team directly while retaining the contributing Player ID.
 
 Search and Refresh are named basic actions:
 
@@ -388,9 +412,9 @@ reconcileQueue(state, configuration, approvedTicketSource)
     create tickets until active_ticket_count >= queue_minimum
 ```
 
-Setup separately creates `starting_ticket_count` Tickets. An `approvedTicketSource` may be a fixed authored fixture today. A future generated source may add seed/generator-version provenance only after `GEN-001` defines the contract. This model deliberately provides no constraint configuration or solver.
+Setup separately creates `starting_ticket_count` Tickets. An `approvedTicketSource` is either a fixed authored fixture or deterministic Builder output with pinned configuration, content version, generator version, seed, and stored Ticket snapshots.
 
-## Contribution and scoring hooks
+## Contribution and scoring records
 
 ```text
 ContributionRecord
@@ -399,7 +423,10 @@ ContributionRecord
   source_action_id: ActionId
   contributor_player_id: PlayerId
   contributor_team_id: TeamId | null
-  policy_classification: opaque string
+  fault_instance_id: FaultInstanceId
+  contribution_class: isolation | repair
+  slot_key: Ticket + Fault instance + contribution class
+  point_value: 1
   settlement_state: pending | awarded | ineligible | superseded
   score_event_ids: EventId[]
 ```
@@ -408,15 +435,16 @@ ContributionRecord
 ScoreEvent
   score_event_id: EventId
   sequence: integer
-  reason_code: opaque string
-  points: integer
+  contribution_class: isolation | repair
+  points: 1
+  contributor_player_id: PlayerId
   player_id: PlayerId | null
   team_id: TeamId | null
   ticket_instance_id: TicketInstanceId | null
   source_contribution_id: ContributionId
 ```
 
-These are extensibility hooks, not a scoring decision. `SCORE-001` must still decide which actions qualify, point values, rubric visibility, repeated/assist suppression, multi-Fault behavior, Root Cause treatment, rejected-Isolation consequences beyond the frozen rule, handicaps, and cooperative aggregation. An unclosed Ticket pays nothing; any eligible awards settle atomically at closure. Closure attribution is a separate statistic and never a score reason.
+Each required actionable Fault provides one Isolation and one necessary-Repair slot. The earliest qualifying event that remains on the final closure-valid path owns its slot. Eligibility remains server-only until closure; settled score records are public. Root Cause, Tests, Verify, Documentation, assists, repeats, superseded work, and closure remain statistics rather than extra points. Cooperative awards write directly to the shared team score with Player attribution.
 
 ## Clocks and reconnect
 
@@ -440,7 +468,7 @@ evaluateTermination(matchState) ->
   | InvalidMatch(reasonCode)
 ```
 
-For `Q = 0`, queue-empty cooperative victory and competitive highest-score/co-winner behavior are frozen. Precedence among score, empty queue, concession, exhaustion, stalemate, and administration remains unfrozen, so `reasonCode` should remain versioned rather than implying a final enum here. Empty draw alone is never an exhaustion reason.
+Terminal precedence is administrator invalidation, live no-human abandonment, last-eligible competitive forfeit, completed queue/score objectives, then proven stalemate, always after the current atomic transaction/window. Simultaneous gameplay triggers are all recorded and all score records in the transaction settle before comparison. Empty draw alone is never an exhaustion or stalemate reason.
 
 ```text
 MatchResult
@@ -453,7 +481,7 @@ MatchResult
   statistics: MatchStatistics
 ```
 
-Statistics should derive from the authoritative event, contribution, score, and closure ledgers. The exact metric catalog and persistence policy remain unfrozen.
+Statistics derive from the authoritative event, Ticket, contribution, score, and closure ledgers. Frozen Rules §20 defines the minimum result catalog and authorized account persistence boundary.
 
 ## Player-safe projections
 

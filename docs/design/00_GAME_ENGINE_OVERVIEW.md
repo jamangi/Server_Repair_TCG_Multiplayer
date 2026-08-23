@@ -2,7 +2,7 @@
 
 ## Authority and purpose
 
-This document summarizes the engine direction. [`decisions/FROZEN_RULES.md`](decisions/FROZEN_RULES.md) is authoritative where this overview is less detailed. [`decisions/UNFROZEN_RULES.md`](decisions/UNFROZEN_RULES.md) identifies rules that must not be selected implicitly through content, schemas, or implementation.
+This document summarizes the engine direction. [`decisions/FROZEN_RULES.md`](decisions/FROZEN_RULES.md) is authoritative where this overview is less detailed. [`decisions/UNFROZEN_RULES.md`](decisions/UNFROZEN_RULES.md) is currently empty and is reserved for future pressure or rule questions.
 
 The game teaches a practical troubleshooting loop:
 
@@ -32,9 +32,9 @@ Important configuration includes:
 - optional turn and Player clocks; and
 - starting and capped Search/Refresh resources.
 
-A two-Player race to 10 Service Points remains a recommended preset, not a core rule. Exact causal-contribution classes, values, visibility, duplicate handling, Root Cause policy, and cooperative aggregation remain unresolved under [`SCORE-001`](decisions/UNFROZEN_RULES.md#score-001).
+A two-Player race to 10 Service Points remains a recommended preset, not a core rule. Each required actionable Fault has one one-point Isolation slot and one one-point necessary-Repair slot. Eligible records settle at closure; Root Cause is a statistic only.
 
-For finite matches with `Q = 0`, an empty active queue ends the match after the complete closure transaction. A cooperative team wins by closing the queue. In competitive play, the highest final Service Point total wins and equal highest totals are co-winners. Precedence involving other terminal conditions remains unfrozen.
+For finite matches with `Q = 0`, an empty active queue ends the match after the complete closure transaction. A cooperative team wins by closing the queue. In competitive play, the highest final Service Point total wins and equal highest totals are co-winners. Frozen Rules §15 defines terminal precedence and simultaneous triggers.
 
 ---
 
@@ -48,7 +48,7 @@ The match contains a shared queue of jointly actionable Repair Tickets unless an
 - Ticket progress belongs to the Ticket, not to the most recent Player.
 - An action must identify its exact legal Ticket, card instance or named basic action, and target. The engine never infers an unspecified “other Player.”
 
-Initial Tickets may be fixed authored fixtures or may eventually come from an approved generation policy. The constraint-driven Ticket Builder, configuration schema, solver, and generator algorithm remain unresolved under [`GEN-001`](decisions/UNFROZEN_RULES.md#gen-001).
+Initial Tickets may be fixed authored fixtures or deterministic constraint-driven Ticket Builder output. Identical generation configuration, content version, generator version, seed, and authored inputs produce identical Ticket snapshots; Frozen Rules §18 defines the full generation boundary.
 
 ---
 
@@ -70,9 +70,9 @@ The authoritative server separately retains:
 - the true Fault instances or causal chain;
 - the candidate/outcome matrix for Tests and Commands;
 - machine state and every machine-state revision; and
-- hidden scoring metadata only after the unresolved scoring policy defines it.
+- server-only scoring-slot eligibility until closure.
 
-Generated content, if later approved, must still be assembled from validated authored domain relationships and rule templates. This overview does not define a Ticket Builder.
+Generated content is assembled from validated authored domain relationships and rule templates. It must satisfy the same Ticket contract as fixed authored content.
 
 ---
 
@@ -110,7 +110,7 @@ A repeated Test may be useful after its target or relevant machine state changes
 - Acceptance requires a true actionable Fault and sufficient cited Evidence.
 - Accepted Isolation becomes public, Ticket-owned progress and records contributor, citations, actionable/deepest classification, and time.
 - A false or insufficient commitment spends the Action, changes no machine state, and returns only `ISOLATION_NOT_SUPPORTED`.
-- Rejection removes that Player's Root Cause reward eligibility for the Ticket, although whether Root Cause ever scores remains unresolved.
+- Rejection fills no scoring slot and records a failed-attempt statistic, but does not bar the Player from later valid credit. Root Cause has no bonus.
 
 ### Repair
 
@@ -184,7 +184,7 @@ The first-version card-game envelope is frozen:
 - at most one copy of the same 0-Action card name played per turn unless explicit text overrides it; and
 - no loss, concession, or exhaustion merely because the draw deck is empty.
 
-The first starting seat remains unresolved. One-shot cards enter discard after resolution. Installed or persistent playable cards remain in their defined match zone until removed by an effect. “Installed” here is a card zone, not account Equipment.
+The server chooses the first starting seat uniformly from eligible seats using the match seed and records it for replay. One-shot cards enter discard after resolution. Installed or persistent playable cards remain in their defined match zone until removed by an effect. “Installed” here is a card zone, not account Equipment.
 
 Reviewing authorized information, revising a Hypothesis, Commit Isolation, Document Live, publishing an eligible closure bundle, passing, Search, and Deck Refresh are basic system actions; they do not require a card to be drawn.
 
@@ -201,6 +201,8 @@ Search Tokens and Deck Refresh Tokens are public utility resources, not hand car
 
 The standard first-version preset starts each Player at three Search Tokens and one Refresh Token, caps them at five and one, and grants one Search Token per Ticket closure.
 
+Base Search remains unrestricted within the remaining draw deck. Cards may define separate narrower search effects; modes may configure token availability but may not redefine base Search.
+
 ---
 
 ## Closure transaction and scoring boundary
@@ -209,14 +211,14 @@ A valid closure resolves atomically in this order:
 
 1. validate the complete authored Isolation, Repair, and Verify path;
 2. enrich and lock Worklog records;
-3. create score events required by the eventual scoring policy;
+3. create one-point score records for eligible Isolation and necessary-Repair slots;
 4. archive and remove the Ticket;
 5. grant configured Search and Refresh resources;
 6. reconcile the queue after every closure effect;
 7. evaluate terminal conditions against the complete transaction; and
 8. end the closer's turn.
 
-Closure grants no separate draw and no Service Point reward. Service Points may come only from the unresolved causal-contribution policy and settle, if eligible, as part of closure. Content and implementation must not assume exact contribution classes, weights, duplicate suppression, visibility, Root Cause value, handicap policy, or cooperative aggregation before `SCORE-001` is resolved.
+Closure grants no separate draw and no Service Point reward. The earliest qualifying Isolation or necessary Repair in each unique final-path slot earns its one point only when the Ticket closes. Tests, Verify, Documentation, assists, repeats, and Root Cause classification remain attributable statistics rather than separate first-version score sources.
 
 ---
 
@@ -235,7 +237,7 @@ Dust-clogged heatsink
 
 Fault-to-Fault `causes` relationships form a directed acyclic graph. A Fault may cause another Fault, one or more Symptoms, or changes to machine state. A downstream state may therefore be both an effect of a deeper Fault and a cause of another state or Symptom.
 
-Content balance may begin with mostly single-Fault Tickets and a smaller number of short chains. Exact generation and campaign replay policy remains under `GEN-001`.
+Content balance may begin with mostly single-Fault Tickets and a smaller number of short chains. Scenarios supply versioned generation constraints and Progressive Difficulty profiles to the deterministic Builder.
 
 ---
 

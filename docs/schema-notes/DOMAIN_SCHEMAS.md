@@ -1,6 +1,6 @@
 # Domain schema package
 
-The domain package describes reusable authored technical knowledge and authored Repair Ticket content. It does not describe mutable match state. The synchronized contracts implement the approved gameplay surfaces in [`FROZEN_RULES.md`](../design/decisions/FROZEN_RULES.md) while leaving the open scoring and Ticket Builder policies in [`UNFROZEN_RULES.md`](../design/decisions/UNFROZEN_RULES.md).
+The domain package describes reusable authored technical knowledge and authored Repair Ticket content. It does not describe mutable match state. The synchronized contracts implement the approved gameplay surfaces in [`FROZEN_RULES.md`](../design/decisions/FROZEN_RULES.md); the Unfrozen ledger is currently empty.
 
 ## Architectural boundary
 
@@ -23,9 +23,9 @@ The domain package describes reusable authored technical knowledge and authored 
 - `verification_requirements` require current passes after the latest relevant Repair.
 - `closure_requirements` require the accepted Isolation, decisive Evidence, accepted-path Repairs, preserved failed Verifies, and all current passing Verifies.
 
-The Ticket definition intentionally has no flat closure Service Point value. Closure itself is non-scoring. Generic runtime score hooks can later refer to a separately selected causal policy without deciding `SCORE-001` here.
+The Ticket definition intentionally has no flat closure Service Point value. Closure itself is non-scoring. Runtime scoring derives one Isolation and one necessary-Repair slot for every required actionable Fault instance in the final valid path.
 
-This is an authored Ticket contract, not the unfrozen `GEN-001` Ticket Builder configuration. Fixed fixtures and future generated instances may both satisfy it; no solver, seed policy, relaxation rule, or generator configuration is implied.
+This is the authored output contract shared by fixed fixtures and deterministic Ticket Builder output. The Builder's pinned configuration, solver, seed/version provenance, failure behavior, and stored snapshots sit outside an individual Ticket definition.
 
 ## Included schemas
 

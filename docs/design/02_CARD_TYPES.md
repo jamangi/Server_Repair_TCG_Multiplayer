@@ -23,9 +23,9 @@ Contain or reference:
 - difficulty,
 - Verification requirements,
 - structured closure requirements,
-- and optional opaque scoring-policy metadata after `SCORE-001` is resolved.
+- and server-only scoring-slot metadata for required actionable Fault Isolation and necessary Repair.
 
-These are supplied to the shared Repair Queue rather than Player decks. A Ticket has no fixed closer point: closure is zero-Action, non-scoring, and statistically attributable. Exact causal-contribution classes and values remain unresolved under [`SCORE-001`](decisions/UNFROZEN_RULES.md#score-001).
+These are supplied to the shared Repair Queue rather than Player decks. A Ticket has no fixed closer point: closure is zero-Action, non-scoring, and statistically attributable. Each required actionable Fault instead supplies one one-point Isolation slot and one one-point necessary-Repair slot, settled at closure.
 
 ---
 

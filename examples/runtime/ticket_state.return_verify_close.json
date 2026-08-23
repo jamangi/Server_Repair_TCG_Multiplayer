@@ -36,7 +36,6 @@
       "classification": "ACTIONABLE_AND_DEEPEST",
       "public_fault_instance_id": "faultinst_dimm_001",
       "response_code": "ISOLATION_ACCEPTED",
-      "root_cause_reward_eligible_after": true,
       "committed_at_revision": 19,
       "committed_at": "2026-08-22T16:02:00Z"
     },
@@ -51,7 +50,6 @@
       "classification": null,
       "public_fault_instance_id": null,
       "response_code": "ISOLATION_NOT_SUPPORTED",
-      "root_cause_reward_eligible_after": false,
       "committed_at_revision": 20,
       "committed_at": "2026-08-22T16:03:00Z"
     },
@@ -67,15 +65,11 @@
       "classification": "ACTIONABLE_AND_DEEPEST",
       "public_fault_instance_id": "faultinst_dimm_001",
       "response_code": "ISOLATION_ACCEPTED",
-      "root_cause_reward_eligible_after": true,
       "committed_at_revision": 27,
       "committed_at": "2026-08-22T16:10:00Z"
     }
   ],
   "current_accepted_isolation_event_id": "evt_isolation_002",
-  "root_cause_reward_ineligible_player_ids": [
-    "player_b"
-  ],
   "repair_history": [
     {
       "repair_event_id": "evt_repair_001",
@@ -191,10 +185,24 @@
   ],
   "pending_contributions": [
     {
+      "contribution_id": "contrib_isolation_002",
+      "source_event_id": "evt_isolation_002",
+      "contributor_player_id": "player_a",
+      "fault_instance_id": "faultinst_dimm_001",
+      "contribution_class": "ISOLATION",
+      "slot_key": "ticketinst_2.faultinst_dimm_001.isolation",
+      "point_value": 1,
+      "settlement_status": "SETTLED",
+      "score_event_id": "evt_score_001"
+    },
+    {
       "contribution_id": "contrib_repair_002",
       "source_event_id": "evt_repair_002",
       "contributor_player_id": "player_a",
-      "policy_hook_id": "example_only.pending_policy.repair",
+      "fault_instance_id": "faultinst_dimm_001",
+      "contribution_class": "REPAIR",
+      "slot_key": "ticketinst_2.faultinst_dimm_001.repair",
+      "point_value": 1,
       "settlement_status": "SETTLED",
       "score_event_id": "evt_score_001"
     }

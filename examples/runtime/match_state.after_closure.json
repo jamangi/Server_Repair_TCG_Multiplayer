@@ -1,7 +1,7 @@
 {
   "match_id": "match_demo_001",
   "revision": 33,
-  "ruleset_version": "0.1-task-007",
+  "ruleset_version": "first-version-v1",
   "status": "COMPLETED",
   "created_at": "2026-08-22T15:55:00Z",
   "updated_at": "2026-08-22T16:17:00Z",
@@ -10,6 +10,12 @@
     "termination_score": -1,
     "starting_ticket_count": 1,
     "queue_minimum": 0,
+    "seat_limit": 2,
+    "turn_time_limit_seconds": null,
+    "match_time_limit_seconds_by_player": {
+      "player_a": null,
+      "player_b": null
+    },
     "starting_service_points_by_player": {
       "player_a": 0,
       "player_b": 0
@@ -24,6 +30,8 @@
     "starting_refresh_tokens": 1,
     "max_refresh_tokens": 1
   },
+  "match_seed": "fixture-seed-match-demo-001",
+  "starting_seat_number": 1,
   "players": [
     {
       "player_id": "player_a",
@@ -31,7 +39,7 @@
       "team_id": null,
       "seat_number": 1,
       "active": true,
-      "service_points": 1,
+      "service_points": 2,
       "deck_snapshot_card_definition_ids": [
         "card.fixture.01", "card.fixture.01", "card.fixture.01",
         "card.fixture.02", "card.fixture.02", "card.fixture.02",
@@ -64,7 +72,7 @@
         "max_refresh_tokens": 1
       },
       "knowledge_states": [],
-      "contribution_ids": ["contrib_repair_002"],
+      "contribution_ids": ["contrib_isolation_002", "contrib_repair_002"],
       "score_event_ids": ["evt_score_001"],
       "closure_statistics": {
         "tickets_closed": 0,
@@ -741,11 +749,25 @@
   "queued_ticket_definition_ids": [],
   "contribution_ledger": [
     {
+      "contribution_id": "contrib_isolation_002",
+      "ticket_instance_id": "ticketinst_2",
+      "source_event_id": "evt_isolation_002",
+      "contributor_player_id": "player_a",
+      "fault_instance_id": "faultinst_dimm_001",
+      "contribution_class": "ISOLATION",
+      "slot_key": "ticketinst_2.faultinst_dimm_001.isolation",
+      "point_value": 1,
+      "settlement_status": "SETTLED"
+    },
+    {
       "contribution_id": "contrib_repair_002",
       "ticket_instance_id": "ticketinst_2",
       "source_event_id": "evt_repair_002",
       "contributor_player_id": "player_a",
-      "policy_hook_id": "example_only.pending_policy.repair",
+      "fault_instance_id": "faultinst_dimm_001",
+      "contribution_class": "REPAIR",
+      "slot_key": "ticketinst_2.faultinst_dimm_001.repair",
+      "point_value": 1,
       "settlement_status": "SETTLED"
     }
   ],
@@ -753,11 +775,23 @@
     {
       "score_event_id": "evt_score_001",
       "ticket_instance_id": "ticketinst_2",
-      "source_contribution_id": "contrib_repair_002",
+      "source_contribution_id": "contrib_isolation_002",
+      "contributor_player_id": "player_a",
+      "contribution_class": "ISOLATION",
       "recipient_player_id": "player_a",
       "recipient_team_id": null,
       "delta": 1,
-      "policy_hook_id": "example_only.pending_policy.repair",
+      "settled_by_closure_event_id": "evt_close_001"
+    },
+    {
+      "score_event_id": "evt_score_001",
+      "ticket_instance_id": "ticketinst_2",
+      "source_contribution_id": "contrib_repair_002",
+      "contributor_player_id": "player_a",
+      "contribution_class": "REPAIR",
+      "recipient_player_id": "player_a",
+      "recipient_team_id": null,
+      "delta": 1,
       "settled_by_closure_event_id": "evt_close_001"
     }
   ],
@@ -771,6 +805,27 @@
     }
   ],
   "events": [
+    {
+      "event_id": "evt_isolation_002",
+      "match_id": "match_demo_001",
+      "sequence": 27,
+      "revision": 27,
+      "event_type": "ISOLATION_ACCEPTED",
+      "actor_player_id": "player_a",
+      "ticket_instance_id": "ticketinst_2",
+      "action_id": "action_isolation_002",
+      "visibility": "PUBLIC_MATCH",
+      "visible_to_player_ids": [],
+      "visible_to_team_ids": [],
+      "payload": {
+        "fault_instance_id": "faultinst_dimm_001",
+        "classification": "ACTIONABLE_AND_DEEPEST"
+      },
+      "worklog_projection": null,
+      "action_time": "2026-08-22T16:10:00Z",
+      "publication_time": null,
+      "created_at": "2026-08-22T16:10:00Z"
+    },
     {
       "event_id": "evt_repair_002",
       "match_id": "match_demo_001",
@@ -848,9 +903,10 @@
       "visible_to_team_ids": [],
       "payload": {
         "source_contribution_ids": [
+          "contrib_isolation_002",
           "contrib_repair_002"
         ],
-        "policy_hook_id": "example_only.pending_policy.repair"
+        "contribution_classes": ["ISOLATION", "REPAIR"]
       },
       "worklog_projection": null,
       "action_time": "2026-08-22T16:17:00Z",
@@ -970,7 +1026,30 @@
   "result": {
     "winner_player_ids": ["player_a"],
     "winning_team_ids": [],
-    "reason": "QUEUE_EMPTY",
-    "evaluated_after_event_id": "evt_terminal_001"
+    "valid": true,
+    "reason_codes": ["QUEUE_EMPTY"],
+    "final_player_scores": {
+      "player_a": 2,
+      "player_b": 0
+    },
+    "final_team_scores": {},
+    "statistics": [
+      {
+        "metric": "TICKET_CLOSURE",
+        "value": 1,
+        "player_id": "player_b",
+        "team_id": null,
+        "ticket_instance_id": "ticketinst_2"
+      },
+      {
+        "metric": "SETTLED_CAUSAL_AWARD",
+        "value": 2,
+        "player_id": "player_a",
+        "team_id": null,
+        "ticket_instance_id": "ticketinst_2"
+      }
+    ],
+    "evaluated_after_event_id": "evt_terminal_001",
+    "completed_at": "2026-08-22T16:17:00Z"
   }
 }

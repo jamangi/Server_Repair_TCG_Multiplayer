@@ -5,23 +5,24 @@ This directory is the authoritative entry point for Server Repair TCG rule decis
 ## Current decision state
 
 - [`FROZEN_RULES.md`](FROZEN_RULES.md) is the normative source implementations and tests may rely on.
-- [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md) is the canonical open inventory. It also records freeze recommendations and any pressure against frozen rules.
+- [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md) is the canonical open inventory and is empty after the 2026-08-23 foundation-freeze approval.
 - There are no active candidate decisions and no active unsynchronized decisions as of 2026-08-23.
 - The former candidate ledger was fully resolved on 2026-08-22. The former synchronization ledger was fully resolved by [`TASK-007`](../../tasks/TASK-007-synchronize-approved-gameplay-rules.md) on 2026-08-23. Both retired ledgers remain available in Git history.
-- The repository has synchronized gameplay contracts but no playable game engine yet.
+- `SCORE-001`, `GEN-001`, terminal policy, departure cleanup, Room lifecycle, and the four previously pressured frozen rules are approved. [`TASK-008`](../../tasks/TASK-008-freeze-first-version-foundation.md) records their synchronization.
+- The repository has a frozen first-version gameplay foundation but no playable game engine yet.
 
 ## Reading order
 
 1. Read this index for authority and lifecycle.
 2. Read [`FROZEN_RULES.md`](FROZEN_RULES.md) for behavior implementation may rely on.
-3. Read [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md) only when work touches an open decision or a listed pressure.
+3. Check [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md) for any question added after the current empty state.
 
 ## Active decision documents
 
 | Document | Authority | Purpose |
 | --- | --- | --- |
 | [`FROZEN_RULES.md`](FROZEN_RULES.md) | Normative | Approved behavior that implementations and tests may rely on. |
-| [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md) | Non-normative open inventory | Accepted unresolved rules, concrete freeze recommendations, deferred boundaries, and pressure against frozen rules. |
+| [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md) | Non-normative open inventory | Future accepted unresolved rules and pressure; currently empty. |
 
 Completed task records, case studies, candidate flows, examples, and Git history explain provenance but are not additional rule ledgers.
 
@@ -47,14 +48,9 @@ flowchart LR
 
 Rejected, derivative, or superseded ideas need not remain in the active foundation. Git history and the discussion or task that resolved them preserve their rationale.
 
-## Recommended decision order for freezing the foundation
+## Foundation status
 
-1. Resolve the pressures listed at the start of [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md#0-freeze-review-summary-and-frozen-rule-pressure).
-2. Resolve [`SCORE-001`](UNFROZEN_RULES.md#score-001), including contribution classes, unique award slots, visibility, cooperative aggregation, and the Root Cause boundary.
-3. Resolve terminal precedence against closure-settled score events.
-4. Resolve [`GEN-001`](UNFROZEN_RULES.md#gen-001), including its configuration contract, deterministic constraint solving, failure behavior, and versioned save policy.
-5. Freeze the small first-version boundaries recommended for configuration, departure, multiplayer, computer players, statistics, and Room lifecycle.
-6. Remove content balance, interface presentation, moderation, capacity tuning, and future-version ideas from the engine-rule ledger once their rule boundaries are explicit.
+There is no remaining rule-decision order. New implementation may proceed in scoped tasks against the frozen contracts. If implementation exposes a genuine rules question or pressure, record it in `UNFROZEN_RULES.md` before embedding an answer in code, schema, content, or UI behavior.
 
 ## Maintenance rules
 

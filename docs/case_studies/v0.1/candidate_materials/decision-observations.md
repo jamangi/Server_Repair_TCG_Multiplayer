@@ -21,7 +21,7 @@ These are research observations for user review. They neither add candidate deci
 - **Evidence:** `sfp-076` applies thermal paste, removes dust, and changes cable routing together. The system improves, but the source cannot cleanly assign causality to one intervention.
 - **Question:** Can a multi-target or bundled Repair earn Isolation/Root Cause credit, and how does the engine represent confounded success?
 - **Dependencies:** `ISO-001`, `ISO-004`, `REP-001`, and `TST-002` if the repair is followed by repeated tests.
-- **Pressure:** Exact Root Cause Bonus requirements and consequences for unnecessary repair remain unfrozen.
+- **Resolution note (2026-08-23):** Root Cause is now a statistic only. A rejected Isolation spends its Action and fills no scoring slot but does not bar later valid contribution credit. Unnecessary work remains statistical rather than receiving a Root Cause penalty/bonus.
 
 ## `CASE-OBS-004` — A repair action may simultaneously be a diagnostic substitution
 

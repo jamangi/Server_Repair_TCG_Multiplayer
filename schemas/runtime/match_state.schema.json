@@ -17,7 +17,7 @@
     "match_id": { "$ref": "#/$defs/instanceId" },
     "revision": { "type": "integer", "minimum": 0 },
     "ruleset_version": { "type": "string", "minLength": 1 },
-    "status": { "type": "string", "enum": ["SETUP", "ACTIVE", "COMPLETED", "ABORTED"] },
+    "status": { "type": "string", "enum": ["SETUP", "ACTIVE", "COMPLETED", "ABORTED", "INVALIDATED"] },
     "created_at": { "$ref": "#/$defs/timestamp" },
     "updated_at": { "$ref": "#/$defs/timestamp" },
     "configuration": {
@@ -33,6 +33,18 @@
         },
         "starting_ticket_count": { "type": "integer", "minimum": 1, "maximum": 99 },
         "queue_minimum": { "type": "integer", "minimum": 0, "maximum": 99 },
+        "seat_limit": { "type": "integer", "minimum": 1, "maximum": 99 },
+        "turn_time_limit_seconds": {
+          "type": ["integer", "null"],
+          "minimum": 1
+        },
+        "match_time_limit_seconds_by_player": {
+          "type": "object",
+          "additionalProperties": {
+            "type": ["integer", "null"],
+            "minimum": 1
+          }
+        },
         "starting_service_points_by_player": {
           "type": "object",
           "additionalProperties": { "type": "integer", "minimum": -99, "maximum": 99 }
@@ -52,6 +64,9 @@
         "termination_score",
         "starting_ticket_count",
         "queue_minimum",
+        "seat_limit",
+        "turn_time_limit_seconds",
+        "match_time_limit_seconds_by_player",
         "starting_service_points_by_player",
         "deck_size",
         "max_copies_per_card_id",
@@ -69,6 +84,8 @@
       "minItems": 1,
       "items": { "$ref": "player_state.schema.json" }
     },
+    "match_seed": { "type": "string", "minLength": 1 },
+    "starting_seat_number": { "type": "integer", "minimum": 1 },
     "turn_state": {
       "anyOf": [
         { "type": "null" },
@@ -106,12 +123,12 @@
       "items": { "$ref": "card_instance.schema.json" }
     },
     "queued_ticket_definition_ids": {
-      "description": "Optional authored fixture queue. This is not a Ticket Builder configuration.",
+      "description": "Pinned fixed-fixture or generated Ticket snapshot queue. Generated provenance/configuration is persisted by the future Ticket Builder domain contract.",
       "type": "array",
       "items": { "$ref": "#/$defs/entityRef" }
     },
     "contribution_ledger": {
-      "description": "Policy-neutral attributable records; SCORE-001 determines future qualification and values.",
+      "description": "Frozen one-point Isolation/Repair slots attributable to their source actors and required actionable Fault instances.",
       "type": "array",
       "items": {
         "type": "object",
@@ -121,7 +138,10 @@
           "ticket_instance_id": { "$ref": "#/$defs/instanceId" },
           "source_event_id": { "$ref": "#/$defs/instanceId" },
           "contributor_player_id": { "$ref": "#/$defs/instanceId" },
-          "policy_hook_id": { "$ref": "#/$defs/entityRef" },
+          "fault_instance_id": { "$ref": "#/$defs/instanceId" },
+          "contribution_class": { "type": "string", "enum": ["ISOLATION", "REPAIR"] },
+          "slot_key": { "$ref": "#/$defs/instanceId" },
+          "point_value": { "const": 1 },
           "settlement_status": {
             "type": "string",
             "enum": ["PENDING", "SETTLED", "SUPERSEDED", "INELIGIBLE"]
@@ -132,13 +152,16 @@
           "ticket_instance_id",
           "source_event_id",
           "contributor_player_id",
-          "policy_hook_id",
+          "fault_instance_id",
+          "contribution_class",
+          "slot_key",
+          "point_value",
           "settlement_status"
         ]
       }
     },
     "service_point_events": {
-      "description": "Generic closure-settled causal score events. No contribution class, weight, or duplicate policy is selected here.",
+      "description": "Public one-point score records emitted at closure for eligible Isolation/Repair slots.",
       "type": "array",
       "items": {
         "type": "object",
@@ -147,21 +170,37 @@
           "score_event_id": { "$ref": "#/$defs/instanceId" },
           "ticket_instance_id": { "$ref": "#/$defs/instanceId" },
           "source_contribution_id": { "$ref": "#/$defs/instanceId" },
-          "recipient_player_id": { "$ref": "#/$defs/instanceId" },
+          "contributor_player_id": { "$ref": "#/$defs/instanceId" },
+          "contribution_class": { "type": "string", "enum": ["ISOLATION", "REPAIR"] },
+          "recipient_player_id": { "type": ["string", "null"], "minLength": 1 },
           "recipient_team_id": { "type": ["string", "null"], "minLength": 1 },
-          "delta": { "type": "integer" },
-          "policy_hook_id": { "$ref": "#/$defs/entityRef" },
+          "delta": { "const": 1 },
           "settled_by_closure_event_id": { "$ref": "#/$defs/instanceId" }
         },
         "required": [
           "score_event_id",
           "ticket_instance_id",
           "source_contribution_id",
+          "contributor_player_id",
+          "contribution_class",
           "recipient_player_id",
           "recipient_team_id",
           "delta",
-          "policy_hook_id",
           "settled_by_closure_event_id"
+        ],
+        "oneOf": [
+          {
+            "properties": {
+              "recipient_player_id": { "type": "string", "minLength": 1 },
+              "recipient_team_id": { "const": null }
+            }
+          },
+          {
+            "properties": {
+              "recipient_player_id": { "const": null },
+              "recipient_team_id": { "type": "string", "minLength": 1 }
+            }
+          }
         ]
       }
     },
@@ -209,10 +248,80 @@
           "items": { "$ref": "#/$defs/instanceId" },
           "uniqueItems": true
         },
-        "reason": { "type": "string", "minLength": 1 },
-        "evaluated_after_event_id": { "$ref": "#/$defs/instanceId" }
+        "valid": { "type": "boolean" },
+        "reason_codes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "ADMIN_INVALIDATION",
+              "NO_HUMANS",
+              "FORFEIT",
+              "QUEUE_EMPTY",
+              "SCORE_THRESHOLD",
+              "STALEMATE",
+              "SIMULATION_CAP"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "final_player_scores": {
+          "type": "object",
+          "additionalProperties": { "type": "integer", "minimum": -99, "maximum": 9999 }
+        },
+        "final_team_scores": {
+          "type": "object",
+          "additionalProperties": { "type": "integer", "minimum": -99, "maximum": 9999 }
+        },
+        "statistics": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "metric": {
+                "type": "string",
+                "enum": [
+                  "TICKET_CLOSURE",
+                  "SETTLED_CAUSAL_AWARD",
+                  "TEST",
+                  "ISOLATION",
+                  "REPAIR",
+                  "VERIFY",
+                  "DOCUMENTATION",
+                  "ASSIST",
+                  "REJECTED_ISOLATION",
+                  "FAILED_VERIFY",
+                  "REDUNDANT_ACTION",
+                  "TURN",
+                  "AUTHORITATIVE_SECONDS",
+                  "DISCONNECT",
+                  "CONCESSION"
+                ]
+              },
+              "value": { "type": "integer", "minimum": 0 },
+              "player_id": { "type": ["string", "null"], "minLength": 1 },
+              "team_id": { "type": ["string", "null"], "minLength": 1 },
+              "ticket_instance_id": { "type": ["string", "null"], "minLength": 1 }
+            },
+            "required": ["metric", "value", "player_id", "team_id", "ticket_instance_id"]
+          }
+        },
+        "evaluated_after_event_id": { "$ref": "#/$defs/instanceId" },
+        "completed_at": { "$ref": "#/$defs/timestamp" }
       },
-      "required": ["winner_player_ids", "winning_team_ids", "reason", "evaluated_after_event_id"]
+      "required": [
+        "winner_player_ids",
+        "winning_team_ids",
+        "valid",
+        "reason_codes",
+        "final_player_scores",
+        "final_team_scores",
+        "statistics",
+        "evaluated_after_event_id",
+        "completed_at"
+      ]
     }
   },
   "required": [
@@ -224,6 +333,8 @@
     "updated_at",
     "configuration",
     "players",
+    "match_seed",
+    "starting_seat_number",
     "turn_state",
     "active_tickets",
     "archived_ticket_instance_ids",

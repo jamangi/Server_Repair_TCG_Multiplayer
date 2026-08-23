@@ -2,7 +2,7 @@
 
 ## Status and authority
 
-This file is an administrative migration map, not a second source of game rules. Normative decisions live in [`decisions/FROZEN_RULES.md`](decisions/FROZEN_RULES.md); unresolved decisions live in [`decisions/UNFROZEN_RULES.md`](decisions/UNFROZEN_RULES.md). [`TASK-007`](../tasks/TASK-007-synchronize-approved-gameplay-rules.md) is the controlling synchronization contract.
+This file is an administrative migration map, not a second source of game rules. Normative decisions live in [`decisions/FROZEN_RULES.md`](decisions/FROZEN_RULES.md); the Unfrozen ledger is empty. [`TASK-008`](../tasks/TASK-008-freeze-first-version-foundation.md) controls the final foundation-freeze synchronization; TASK-007 remains historical context.
 
 The former “Documents To Update For Configurable Matches” list predated the 2026-08-22 rule resolutions. The dispositions below record which recommendations were completed in the top-level design pass, which were superseded by TASK-007's more precise contract, and which remain deferred. A disposition does not by itself prove repository-wide synchronization or close an entry in the decision queue.
 
@@ -10,28 +10,28 @@ The former “Documents To Update For Configurable Matches” list predated the 
 
 - **Completed — top-level pass:** the named top-level design source was reviewed and synchronized during TASK-007.
 - **Superseded by TASK-007:** the old recommendation was too narrow or called the work “later”; TASK-007 now specifies the authoritative migration scope. Completion must be established by TASK-007 verification.
-- **Deferred:** the work depends on unresolved decisions or is product/engine implementation beyond TASK-007.
+- **Deferred:** the work is product/engine implementation or future-version scope rather than a foundation rule.
 - **Still relevant:** the recommendation remains useful but is not a rule or proof of completion.
 
 ## Deferred normative documents
 
 ### `08_MATCH_CONFIGURATION_AND_RESULTS.md`
 
-**Disposition: Deferred.** Do not create this SHALL-based contract until the remaining scoring, terminal-precedence, timer/configuration, and results questions are resolved. Frozen configuration, queue, first-version card economy, closure, and finite queue-empty results already live in `FROZEN_RULES.md`; this map must not duplicate them normatively.
+**Disposition: Superseded by Frozen Rules.** Scoring, terminal precedence, timers/configuration, and results are resolved in `FROZEN_RULES.md`. Do not create another SHALL-based design contract that duplicates the ledger; create implementation contracts only when building the engine.
 
 ### `09_ROOM_LIFECYCLE_AND_COMMANDS.md`
 
-**Disposition: Deferred.** Frozen Room membership/role/capacity/concession foundations already live in `FROZEN_RULES.md`, while ownership, host transfer, Ready/start policy, late joining, moderation, retention, and rematch policy remain unresolved. TASK-007 is synchronization, not a new Room-design pass.
+**Disposition: Superseded by Frozen Rules.** Room membership, roles, capacity, host transfer, Ready/start, late joining, retention, rematches, and first-version exclusions are resolved in `FROZEN_RULES.md`. Chat/moderation and exact retention time remain product policy.
 
 ## Top-level design review
 
 | File | Disposition | TASK-007 result |
 | --- | --- | --- |
-| `00_GAME_ENGINE_OVERVIEW.md` | Completed — top-level pass | Replaced fixed win/draw-loss and one-way lifecycle wording with configurable matches, iterative Diagnosis, evidence-supported Isolation, failed Verify return, immutable Worklog, zero-Action non-scoring closure, frozen card economy, and explicit `SCORE-001`/`GEN-001` boundaries. |
+| `00_GAME_ENGINE_OVERVIEW.md` | Completed — top-level pass | At TASK-007's boundary, replaced fixed win/draw-loss and one-way lifecycle wording with configurable matches, iterative Diagnosis, evidence-supported Isolation, failed Verify return, immutable Worklog, zero-Action non-scoring closure, frozen card economy, and explicit scoring/generation boundaries. TASK-008 later froze both. |
 | `01_DATA_ARCHITECTURE.md` | Completed — top-level pass | Added authored candidates/outcomes/Isolation, Ticket and Knowledge State separation, immutable action/event/Worklog identity, closure/statistical hooks, Repair/Verify rules, first-version invariants, and no Equipment/Qualification runtime state. |
 | `02_CARD_TYPES.md` | Completed — top-level pass | Clarified authored Ticket surfaces, diagnostic substitution, Repair gateway, failed Verify, universal Documentation, explicit targets, frozen deck/turn/Search/Refresh, technical Tools, and honor-only Qualifications. |
 | `03_FAULT_CATALOG_V0_1.md` | Completed — top-level pass | Technical catalog retained; mixed Test/Repair examples were separated, Ticket authorship/gateway rules were stated, and an unmaterialized planned Fault ID was labeled without renaming it. |
-| `04_COMPONENT_CATALOG_V0_1.md` | Completed — top-level pass | Technical catalog retained; Component state was separated from account Equipment, planned IDs were bounded, and automatic generation language was deferred to `GEN-001`. |
+| `04_COMPONENT_CATALOG_V0_1.md` | Completed — top-level pass | Technical catalog retained; Component state was separated from account Equipment, planned IDs were bounded, and automatic generation was deferred at TASK-007's boundary. TASK-008 later froze the Ticket Builder contract. |
 | `05_TESTS_TOOLS_COMMANDS_V0_1.md` | Completed — top-level pass | Technical catalog retained; immutable authored outcomes, temporary substitution, Repair/Verify rules, Documentation basics, and one legacy-ID migration risk were made explicit. |
 | `06_IMPLEMENTATION_AND_CONTENT_VALIDATION.md` | Completed — top-level pass | Expanded solvability and behavior validation for the full iterative lifecycle, visibility, Worklog, closure transaction, first-version economy, and policy boundaries without implementing a solver. |
 | `07_FAULT_BROWSER_AND_SEARCH.md` | Completed — top-level pass | Separated encyclopedia search from token-based deck Search and protected public candidates and player-safe/live hidden state. |
@@ -65,9 +65,9 @@ The affected inventory includes:
 - `schemas/runtime/turn_state.schema.json`
 - and any other schema transitively affected by those contracts.
 
-The migration must cover authored candidate/outcome/Isolation/Repair/Verify/closure content; iterative Ticket state; Knowledge State; immutable actions/events and four-category visibility; Worklog placeholders/publication links; Search/Refresh; generic contribution/score hooks; zero-Action closure statistics and transaction ordering; and player-safe reconnect/results.
+The migration covered authored candidate/outcome/Isolation/Repair/Verify/closure content; iterative Ticket state; Knowledge State; immutable actions/events and four-category visibility; Worklog placeholders/publication links; Search/Refresh; contribution/score hooks; zero-Action closure statistics and transaction ordering; and player-safe reconnect/results. TASK-008 then specialized scoring hooks to frozen Isolation/Repair slots.
 
-It must not define `SCORE-001` values/classes or a `GEN-001` builder, add Equipment fields, or give Qualifications runtime representation. Completion belongs in TASK-007's verification report and synchronization queue, not in this map.
+TASK-007 correctly did not define then-unresolved scoring or generation. TASK-008 now synchronizes their approved boundaries without adding Equipment fields or Qualification runtime effects.
 
 ## Examples and validation tests
 
@@ -84,7 +84,7 @@ It must not define `SCORE-001` values/classes or a `GEN-001` builder, add Equipm
 - generic causal contribution and closure-statistic separation; and
 - removal of Equipment plus honor-only Qualifications.
 
-Seeded generated-Ticket fixtures are **Deferred** under `GEN-001`. Deterministic fixed authored fixtures remain valid and do not imply a generator algorithm.
+Generated-Ticket implementation fixtures remain future Ticket Builder work. The frozen contract now requires deterministic seeded snapshots; fixed authored fixtures remain valid.
 
 ## Candidate flows, story, and UI planning
 
@@ -97,7 +97,7 @@ Future production UI specifications remain deferred for:
 - finalized match setup and admitted customization;
 - queue virtualization for large configured queues;
 - finalized roster/team/clock/connection displays;
-- result/statistic visibility and persistence after those rules are resolved; and
+- result/statistic presentation and account integration under the frozen visibility/persistence boundary; and
 - warnings for potentially long or resource-intensive configurations.
 
 ## Engine and product implementation
@@ -114,9 +114,9 @@ The following remain **Deferred implementation** after TASK-007:
 
 - a playable game engine, multiplayer client, or backend;
 - runtime configuration, ticket, score, clock, or termination policy code;
-- the `GEN-001` Ticket Builder, constraints, solver, and versioned generator;
-- final `SCORE-001` policy and balance;
+- the deterministic Ticket Builder implementation and versioned generation schemas;
+- scoring-engine implementation and content balance within the frozen slot policy;
 - production Room/setup/results UI; and
 - any replacement for the removed Equipment system.
 
-After synchronization, resolve remaining fundamental rules through the decision lifecycle before building behavior that depends on them. Stable entity IDs remain public contracts and must not be renamed without an explicit migration task.
+The first-version foundation is now frozen. Stable entity IDs remain public contracts and must not be renamed without an explicit migration task. If implementation exposes a new genuine rules question, record it in the empty Unfrozen ledger before choosing behavior.

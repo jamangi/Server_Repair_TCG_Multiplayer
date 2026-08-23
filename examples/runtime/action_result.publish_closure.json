@@ -63,8 +63,8 @@
       "visible_to_player_ids": [],
       "visible_to_team_ids": [],
       "payload": {
-        "source_contribution_ids": ["contrib_repair_002"],
-        "policy_hook_id": "example_only.pending_policy.repair"
+        "source_contribution_ids": ["contrib_isolation_002", "contrib_repair_002"],
+        "contribution_classes": ["ISOLATION", "REPAIR"]
       },
       "worklog_projection": null,
       "action_time": "2026-08-22T16:17:00Z",

@@ -2,6 +2,8 @@
 
 This document records directions explicitly approved for the Server Repair TCG. "Frozen" means implementations and tests may rely on the rule. A frozen rule may still be changed deliberately through a documented rules-version migration.
 
+The consolidated rules version approved on 2026-08-23 is `first-version-v1`.
+
 Start with [`DECISION_INDEX.md`](DECISION_INDEX.md) for the decision hierarchy. Accepted unresolved decisions, new proposals that require rules review, and pressure against this ledger belong in [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md). Git history and completed task records preserve the retired candidate and synchronization ledgers.
 
 The rules in §§9–15 were approved from the Candidate-Frozen Example Profile v0.0 review on 2026-08-22. The example package's named Tickets, deterministic deck orders, account fixtures, balance audits, screens, and animations remain non-authoritative fixtures.
@@ -26,21 +28,29 @@ Observe -> Diagnosis [Hypothesize <-> Test -> Isolate] -> Repair -> Verify -> Do
 
 There are no separate Ace and Cleaner rules engines. A match is described by one configuration.
 
+Canonical configuration fields are `termination_score` (`X`), `starting_ticket_count` (`S`), `queue_minimum` (`Q`), `starting_service_points_by_player[p]` (`H(p)`), `turn_time_limit_seconds` (`T`), `match_time_limit_seconds_by_player[p]` (`PT(p)`), `seat_limit` (`SL`), `player_count` (`Players`), `collaboration_mode` (`Mode`), `disconnect_grace_seconds` (`W`), `max_players_per_match` (`M`), `starting_search_tokens` (`SSC`), `ticket_search_tokens` (`TSC`), `max_search_tokens` (`MSC`), `starting_refresh_tokens` (`SRT`), and `max_refresh_tokens` (`MRF`).
+
 - `termination_score` (`X`) is `-1` to disable score termination or an integer from 1 through 99.
 - `starting_ticket_count` (`S`) is an integer from 1 through 99.
 - `queue_minimum` (`Q`) is an integer from 0 through 99 and cannot exceed `S`.
 - `Q = 0` disables automatic replenishment.
-- When `Q > 0`, a completed resolution that leaves fewer than `Q` active Tickets creates random Tickets until the queue again contains `Q`.
+- When `Q > 0`, a completed resolution that leaves fewer than `Q` active Tickets requests deterministic seeded Ticket Builder output from the match's pinned generation configuration until the queue again contains `Q`.
 - Queue-empty termination is possible only when the active Ticket queue reaches zero while `Q = 0`.
 - `starting_service_points_by_player[p]` (`H(p)`) may be an integer from -99 through 99.
 - When score termination is enabled, every eligible scoring entity must start below `X`.
 - `seat_limit` (`SL`) cannot exceed the server-administered `max_players_per_match` (`M`).
 - `disconnect_grace_seconds` (`W`) and `M` are controlled by server administrators rather than Room creators.
-- `turn_time_limit_seconds` (`T`) and player match clocks (`PT`) may be disabled during setup.
+- `W` is a positive integral number of seconds supplied by the server.
+- `turn_time_limit_seconds` (`T`) and player match clocks (`PT`) may be disabled during setup. Enabled time values are positive integral seconds.
+- `T` and `PT` may both run. If both expire on the same authoritative instant, player-clock concession takes precedence over turn auto-pass.
+- No client modal pauses a clock. An actionable authoritative decision window consumes its owner's time; only server resolution and reconnect synchronization use the frozen pauses.
+- `SL` is capacity rather than required occupancy. Cooperative and training matches require at least one Player; competitive matches require at least two. A mode-owned preset may require more.
 - A finite cooperative match wins when the team closes the queue with `Q = 0`.
 - A finite competitive match with `Q = 0` ends when the queue is empty; the highest final Service Point total wins and equal highest totals are co-winners.
 
-Initial Tickets may be authored fixtures or generated according to the match or campaign configuration. Exact campaign selection and replay-randomization policy remains open.
+Initial Tickets may be fixed authored fixtures or deterministic Ticket Builder output under §18. Public matchmaking uses server-owned versioned presets and does not admit Custom configurations in the first version. Private Rooms may use validated Custom configurations. Ranked and campaign modes use their own approved versioned presets; the standard preset is a default, not an implicit mandate for every mode.
+
+Counts, points, token quantities, and seconds are integers. Ratios and authored weights need not be. Every configuration field has its own validated range. The server rejects configurations outside administrator-owned capacity and safety caps before Room creation or match start; exact deployment ceilings are not game rules.
 
 <a id="3-collaboration"></a>
 ## 3. Collaboration and contribution
@@ -51,7 +61,15 @@ Initial Tickets may be authored fixtures or generated according to the match or 
 - A cooperative match does not end merely because all but one human teammate leaves or concedes.
 - Every remaining cooperative human may choose to continue or concede.
 - A departed player stops receiving turns and cannot reclaim the seat after departure becomes a concession.
-- Tests, Isolation, Repairs, Verify, Documentation, and assists are recorded as distinct contributions. Which contributions award Service Points and when those points settle remains unfrozen.
+- Tests, Isolation, Repairs, Verify, Documentation, and assists are recorded as distinct contributions.
+- Each required actionable Fault instance has one Isolation scoring slot and one necessary-Repair scoring slot, each worth one Service Point.
+- The earliest qualifying event in each `(Ticket, Fault instance, contribution class)` slot owns that slot if it remains on the final closure-valid causal path. Later equivalent events and assists remain statistics.
+- Qualifying records remain pending until valid Ticket closure. Failed Verify preserves still-relevant pending records; superseded work remains statistical history but does not score.
+- Closure atomically settles every eligible slot. Closure itself, Tests, Verify, Documentation, assists, and Root Cause/deepest-cause classification award no separate Service Points in the first version.
+- The global scoring rule is public. A Ticket's exact slot identities and point budget remain server-only until closure so scoring does not reveal hidden causal shape. Settled score events are public.
+- Competitive points go to the contributing Player. Cooperative points are written directly to the shared team score while every event retains its contributing Player ID; individual cooperative totals are statistics only.
+- First-version Service Points never decrease. Penalties use Actions, cards, resources, or statistics instead.
+- `H(p)` belongs to a Player seat. Cooperative starting team score is the sum of active Players' snapshotted `H(p)` values at match start and is not recalculated after departure.
 
 ## 4. Live and offline execution
 
@@ -60,6 +78,10 @@ Initial Tickets may be authored fixtures or generated according to the match or 
 - An offline training or simulation match may contain only computer players and may continue without a human player.
 - Computer players never voluntarily concede.
 - Computer players receive only the player-safe information available to their seat; they do not inspect hidden authoritative faults, causal chains, or random state directly.
+- Computer Players are permitted in offline training/simulations and unranked private Rooms, in either collaboration mode, up to ordinary seat capacity. They are excluded from public/ranked matchmaking.
+- Computer Players may be added or configured only before match start and never replace a departed Player mid-match.
+- Their match contributions score normally and are marked as computer-authored. They receive no account progression, currency, rating, achievement, or other account reward.
+- AI difficulty and presentation delay are product tuning, but every level remains subject to legal intents, seat-safe information, and authoritative timers.
 
 ## 5. Room and match boundary
 
@@ -77,6 +99,16 @@ A Room is the membership, role, configuration, and socket container. A Match is 
 - Player seat capacity and spectator capacity are separate.
 - `spectator_limit` is configured per Room within the server-administered `max_spectators_per_room`.
 - A Ready Player's deck is snapshotted for match setup. A Player must explicitly leave Ready before changing it and must pass legality checks before becoming Ready again. The game has no separate Equipment loadout.
+- First-version Rooms are either public/listed or private/invite-or-code. There is no separate unlisted category.
+- The creator begins as host. If the host leaves, hosting transfers to the longest-present eligible human member; an empty Room closes. Match authority always remains with the server.
+- Every seated human must be Ready before a private match starts; computer Players are setup-ready. The host starts after minimum occupancy. Matchmaking presets may start automatically.
+- The host may edit settings only while no match is active. A legality-relevant edit clears every Player's Ready state with a reason.
+- Player seats are not reservable except for an active disconnected Player during `W`.
+- A member may join an active Room as Spectator when capacity permits, but no Player may join an active Match. Between matches, a Spectator may explicitly request a vacant seat and then complete ordinary deck validation and Ready.
+- A Room remains after results while members remain. A rematch creates a new Match and clears Ready. Empty/idle retention duration is administrator policy.
+- Host computer-player controls are available only before a private unranked Match and within ordinary seat limits.
+- Offline simulation uses a smaller local match configuration and does not require a network Room.
+- Chat is not required by the first-version game rules. Any future chat and moderation contract is separate product/safety work.
 
 Internal commands use unambiguous names even when the UI uses friendlier labels:
 
@@ -101,6 +133,11 @@ Playing a gameplay card is a different command and must not be named `PLAY` in t
 - Narrative reading and decorative animation do not consume authoritative turn time.
 - A Player disconnected longer than `W` concedes.
 - Reconnect first installs the latest player-safe snapshot, then applies only explicitly supplied unseen semantic events. Duplicate event IDs are ignored.
+- During `W`, the seat remains reserved, authoritative timers and automatic passes continue, and the disconnected socket may submit no intents. Reconnect before `W` resumes after snapshot installation without another seat confirmation and resets that disconnect's grace deadline.
+- Three consecutive turn-time expirations concede the Player. A voluntary Pass or a completed intervening turn resets the count. A preset without `T` has no timeout-pass counter and relies on `PT` and `W`.
+- Repeated disconnects do not accumulate a hidden gameplay penalty. Abuse controls are production policy.
+- When one eligible competitive Player remains, the match ends after current resolution cleanup and that Player wins by forfeit.
+- When a cooperative Player leaves or concedes, remove their hand, deck, discard, personal resources, and future turns; cancel unresolved intents; and release claims. Preserve resolved Ticket/team effects and historical attribution. A Player-controlled Installed object with no valid controller is discarded unless its resolved effect explicitly made it Ticket- or team-owned.
 
 ## 7. Ticket and action authority
 
@@ -112,6 +149,10 @@ Playing a gameplay card is a different command and must not be named `PLAY` in t
 - Replenishment and random Ticket generation occur on the authoritative server in live play.
 - Technical faults and causal chains remain hidden authoritative state until rules legitimately reveal them.
 - A card or basic action identifies its legal active Ticket, Player zone, or Worklog target. No implied "other player" target is allowed in the engine contract.
+- The first-version target relationship vocabulary supports explicit `SELF`, `ALLY`, `OPPONENT`, `ANY_PLAYER`, `ACTIVE_TICKET`, and defined zone/Worklog targets.
+- First-version content contains no Ticket-claim/ownership effect and no effect that inspects another Player's hand, private Hypothesis, or unpublished Evidence.
+- A corrupted or impossible active Ticket is quarantined without Player penalty or score. The server retains an audit record and attempts deterministic replacement from the pinned Builder configuration. If replacement fails, it pauses and invalidates the match rather than weakening constraints.
+- Closure needs no special scoring lock beyond server serialization, expected revisions, and the atomic transaction.
 
 <a id="8-evidence-and-worklog"></a>
 ## 8. Evidence visibility and Worklog
@@ -144,7 +185,7 @@ Spectators receive only `PUBLIC_MATCH` state. Reconnect snapshots, computer-play
 
 - A legal first-version deck contains exactly 30 cards and no more than three copies of one card ID.
 - Each Player draws five deck cards for the opening hand.
-- A round contains one turn for each currently active Player in fixed seat order. How the first starting seat is selected remains open.
+- At match setup, the authoritative server selects the first starting seat uniformly from eligible seats using the match seed and records the result for replay. A round then contains one turn for each currently active Player in fixed seat order.
 - At the start of each turn, the Player draws one card if the draw deck is nonempty, then receives two Actions.
 - An empty draw deck skips that draw. It does not itself cause exhaustion, concession, or loss.
 - The Player may take legal paid actions in any order. The turn ends voluntarily or automatically when no Actions remain, except while an explicit resolution window is open.
@@ -152,6 +193,7 @@ Spectators receive only `PUBLIC_MATCH` state. Reconnect snapshots, computer-play
 - There is no rules-level maximum hand size in the first version.
 - One-shot cards enter discard after resolution. Installed or persistent cards remain in their defined match zone until an effect removes them.
 - Cards represent prepared technical affordances. Reviewing authorized information, revising a Hypothesis, committing an evidence-supported Isolation, documenting, passing, and using configured utility resources remain basic system actions rather than draw-dependent permissions.
+- Pass/end turn is always legal. Having cards but no useful paid action is not exhaustion, loss, or stalemate by itself.
 
 ## 10. Search and Deck Refresh
 
@@ -163,6 +205,8 @@ Search Tokens and Deck Refresh Tokens are public utility resources, not cards in
 - A zero Refresh Token cap disables starting and earned Refresh Tokens.
 
 The standard first-version preset starts each Player with three Search Tokens and one Refresh Token, caps Search Tokens at five and Refresh Tokens at one, and grants one Search Token per Ticket closure.
+
+Base Search is unrestricted within the remaining draw deck. A card may define a separately named narrower search effect. A mode may configure or disable Search Tokens but may not redefine base Search. Token starts, closure grants, and caps are nonnegative integers; grants clamp to the configured storage cap.
 
 ## 11. Candidate faults, Hypotheses, and Tests
 
@@ -181,7 +225,7 @@ The standard first-version preset starts each Player with three Search Tokens an
 
 - Isolation succeeds only when the selected candidate is a true actionable Fault and the cited authored requirements are satisfied.
 - Accepted Isolation becomes Ticket-owned `PUBLIC_MATCH` progress and records the Fault, contributor, cited Evidence, actionable/deepest classification, and acceptance time.
-- A false or insufficient commitment spends the Action, returns only `ISOLATION_NOT_SUPPORTED`, changes no machine state, and removes that Player's eligibility for any Root Cause reward on that Ticket. The response does not distinguish a wrong candidate from insufficient Evidence.
+- A false or insufficient commitment spends the Action, returns only `ISOLATION_NOT_SUPPORTED`, changes no machine state, and records a rejected-attempt statistic. The rejected event fills no scoring slot, but it does not bar the Player from a later valid contribution on that Ticket. The response does not distinguish a wrong candidate from insufficient Evidence.
 - Accepted Isolation moves the Ticket out of Diagnosis for the matching Repair gateway. Other Players may still run legal Tests.
 - An ordinary Repair is legal only after accepted Isolation and when an eligible Repair Procedure targets that isolated Fault.
 - Unsupported and speculative Repairs are rejected before payment. The core game contains no parts-cannon exception.
@@ -222,14 +266,28 @@ A valid closure bundle resolves atomically in this order:
 
 1. validate that the current Isolation, Repairs, and Verify passes form a complete authored causal path;
 2. enrich and lock the Worklog records;
-3. create the score events required by the resolved scoring policy;
+3. create the closure-settled Isolation and necessary-Repair score events required by §3;
 4. archive and remove the Ticket from the active queue;
 5. grant configured Search and Refresh resources to active Players;
 6. reconcile the active queue after every closure effect finishes;
 7. evaluate terminal conditions against the complete transaction; and
 8. end the closer's turn.
 
-Closure grants no separate card draw or Service Point reward. Score termination is not evaluated between causal-contribution awards belonging to the same closure transaction. Exact qualifying contributions and values remain unresolved.
+Closure grants no separate card draw or Service Point reward. Score termination is not evaluated between causal-contribution awards belonging to the same closure transaction.
+
+After the current atomic transaction or authoritative resolution window completes, terminal evaluation uses this precedence:
+
+1. administrator invalidation;
+2. live no-human abandonment;
+3. last-eligible competitive forfeit;
+4. satisfied queue-empty and/or score objectives; and
+5. proven stalemate.
+
+Every simultaneously satisfied gameplay trigger is recorded. All score events from one transaction apply before totals are compared; the highest competitive final total wins and equal highest totals are co-winners. If queue-empty and score objectives trigger together, both reasons are recorded; competitive results still use highest final Service Points and cooperative play records a team win.
+
+Normal terminal evaluation waits until the resolution stack/window is empty. Administrator invalidation and no-human resource cleanup may interrupt. Invalidation produces an invalid/no-contest result, no account rewards or rating changes, and a retained audit record.
+
+Stalemate exists only when the server can prove every active Player can only Pass, no queued resolution or future deterministic draw/resource change can create progress, and no active Ticket can reach closure. Competitive stalemate uses highest current score; cooperative stalemate is a loss. An offline all-computer simulation requires a finite queue, score target, or configured turn/closure cap; reaching only the simulation cap stops without declaring a gameplay winner. Public play admits no intentionally endless configuration. Private/admin test matches may be stopped as no-contest.
 
 ## 16. Equipment removal and Qualifications
 
@@ -250,3 +308,61 @@ Changes to frozen behavior require:
 3. behavior-focused tests;
 4. schema or saved-preset migration where applicable; and
 5. release notes when player-visible behavior changes.
+
+## 18. Constraint-driven Ticket Builder
+
+One reusable Ticket Builder serves campaign, mission, challenge, training, cooperative, and competitive modes. It assembles valid Ticket definitions from authored domain relationships and rule templates under a versioned generation-constraint configuration; it does not generate unconstrained procedural prose.
+
+The configuration contains, when relevant:
+
+- scenario/mode context and requested Ticket count;
+- seed, generator version, and content version;
+- allowed and excluded stable domain IDs/tags;
+- guaranteed Ticket categories and required teaching beats;
+- authored composite difficulty bounds;
+- causal shape bounds for distinct required actionable Fault-instance count, longest required causal-path depth, and required inbound/outbound branching;
+- a versioned Progressive Difficulty target/band by generated Ticket index with an explicit ceiling; and
+- duplicate-structure policy.
+
+Fault count, actionable-cause count, causal depth, and authored composite difficulty remain separate constraints. Branch constraints are evaluated on the validated actionable causal DAG. A scenario owns its Progressive Difficulty profile; the Builder contains no universal progression formula.
+
+Generation canonically orders eligible authored parts, applies hard constraints, assembles and validates complete candidates, and then performs seeded weighted selection. “Random” means deterministic pseudorandom selection: identical configuration, content version, generator version, and seed produce identical Ticket snapshots. A content version therefore identifies an immutable authored input set for generation.
+
+An unsatisfiable configuration creates no partial Ticket and fails with structured diagnostics. Guarantees are never silently relaxed. A scenario may declare an explicit fallback configuration, which is a separate auditable generation attempt.
+
+Duplicate causal fingerprints are forbidden in one active queue by default; training/simulation may explicitly allow them. Inputs use stable server-owned IDs/tags. Player-visible saves never expose hidden causal selections or author-only exclusion rationale.
+
+Persist generator version, content version, seed, configuration, and produced Ticket snapshots. Existing saves and replays use their stored snapshots; new generation remains pinned to its recorded versions until an explicit migration.
+
+Every generated Ticket must satisfy the same frozen authored contract as a fixed fixture: public candidates, server-only causal truth, authored Evidence outcomes, Isolation requirements, Repair paths, Verify conditions, and closure requirements.
+
+## 19. First-version multiplayer and information scope
+
+- Competitive play is free-for-all. Cooperative play has one shared team. Competitive teams and multiple cooperative teams are deferred beyond the first version.
+- Player hands remain private to their owners. Cooperative Evidence and Hypotheses retain team visibility.
+- Spectator projection is live and contains only `PUBLIC_MATCH` information. A later broadcast delay is product policy and does not change visibility.
+- Public result information includes public match facts, settled score events, closure attribution, and public contribution statistics. Private/team Evidence does not become public at match end. A Player may persist their own authorized private detail and account aggregates.
+- Costs above two Actions, Ticket claims, private-state attack cards, mid-match computer replacement, and reserved Player seats are absent from the first version.
+
+## 20. Result statistics
+
+The authoritative result records:
+
+- outcome and all terminal reasons;
+- final Player/team scores;
+- Ticket closure attribution and settled causal awards;
+- contribution counts by Tests, Isolation, Repairs, Verify, Documentation, and assists;
+- rejected Isolation, failed Verify, redundant/superseded actions, turns, authoritative elapsed time, disconnects, and concessions.
+
+Every statistic is attributed to its authoritative event actor, Ticket, and team where applicable; closure never implies ownership of earlier work. Useful versus redundant work derives from final-path scoring eligibility and authored metadata, not retrospective free-form analysis.
+
+The immutable match result and each account's authorized aggregates may persist. Hidden opponent Evidence is never copied into an account record. Retention duration is product policy. Server results derive only from the authoritative event log, Ticket records, and score ledger; client counters are projections.
+
+## 21. Content, interface, and production boundaries
+
+- Individual card costs within the frozen 0/1/2 envelope, targets, prerequisites, use limits, 0-Action safety, rewards, and event-frequency curves are validated content and balance work rather than open engine rules.
+- First-version high-risk cards impose no score penalty. Any risk uses explicit Action, card, or resource behavior.
+- Player-count scaling selects Ticket Builder constraints and mode presets; it does not change the two-Action turn or core card text.
+- Queue layout, pagination, Room-setting layout, and result presentation are interface work, provided every authorized public state remains accessible.
+- Exact deployment caps, abuse controls, idle retention, AI heuristics/presentation delay, and broadcast delay are production policy.
+- Chat/moderation, competitive teams, multiple cooperative teams, Ticket claims, private-state attack cards, mid-match computer replacement, and costs above two require a later rules version if introduced.

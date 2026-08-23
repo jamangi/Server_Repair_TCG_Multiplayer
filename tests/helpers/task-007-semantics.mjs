@@ -387,6 +387,13 @@ export function validateMatchState(match) {
   const errors = [];
   for (const player of match.players) errors.push(...validatePlayerState(player));
   const players = new Map(match.players.map((player) => [player.player_id, player]));
+  if (match.players.length > match.configuration.seat_limit) errors.push('Player count exceeds seat limit');
+  if (match.configuration.collaboration_mode === 'competitive' && match.players.length < 2) {
+    errors.push('competitive match requires at least two Players');
+  }
+  if (!match.players.some((player) => player.seat_number === match.starting_seat_number)) {
+    errors.push('starting seat is not an eligible occupied seat');
+  }
   const instances = new Map();
   for (const instance of match.card_instances) {
     if (instances.has(instance.card_instance_id)) errors.push(`duplicate card instance ${instance.card_instance_id}`);
@@ -436,10 +443,26 @@ export function validateMatchState(match) {
   const requireEvent = (eventId, context) => {
     if (eventId !== null && !eventIds.has(eventId)) errors.push(`${context}: missing event ${eventId}`);
   };
-  for (const contribution of match.contribution_ledger) requireEvent(contribution.source_event_id, contribution.contribution_id);
+  const contributionSlots = new Set();
+  for (const contribution of match.contribution_ledger) {
+    requireEvent(contribution.source_event_id, contribution.contribution_id);
+    if (contributionSlots.has(contribution.slot_key)) errors.push(`duplicate contribution slot ${contribution.slot_key}`);
+    contributionSlots.add(contribution.slot_key);
+    if (!['ISOLATION', 'REPAIR'].includes(contribution.contribution_class)) {
+      errors.push(`${contribution.contribution_id}: invalid contribution class`);
+    }
+    if (contribution.point_value !== 1) errors.push(`${contribution.contribution_id}: first-version slot is not one point`);
+  }
   for (const score of match.service_point_events) {
     requireEvent(score.score_event_id, 'score ledger');
     requireEvent(score.settled_by_closure_event_id, score.score_event_id);
+    const contribution = match.contribution_ledger.find((entry) => entry.contribution_id === score.source_contribution_id);
+    if (!contribution) errors.push(`${score.score_event_id}: missing source contribution ${score.source_contribution_id}`);
+    else {
+      if (score.contribution_class !== contribution.contribution_class) errors.push(`${score.score_event_id}: contribution class mismatch`);
+      if (score.contributor_player_id !== contribution.contributor_player_id) errors.push(`${score.score_event_id}: contributor mismatch`);
+    }
+    if (score.delta !== 1) errors.push(`${score.score_event_id}: first-version award is not one point`);
   }
   for (const closure of match.closure_statistics) {
     requireEvent(closure.closure_event_id, 'closure statistics');
@@ -461,7 +484,14 @@ export function validateMatchState(match) {
     }
   }
   requireEvent(match.last_queue_reconciliation_event_id, 'queue reconciliation');
-  if (match.result) requireEvent(match.result.evaluated_after_event_id, 'Match result');
+  if (match.result) {
+    requireEvent(match.result.evaluated_after_event_id, 'Match result');
+    for (const player of match.players) {
+      if (match.result.final_player_scores[player.player_id] !== player.service_points) {
+        errors.push(`${player.player_id}: final result score differs from authoritative Player score`);
+      }
+    }
+  }
 
   const active = new Set(match.active_tickets.map((ticket) => ticket.ticket_instance_id));
   for (const ticket of match.active_tickets) {
