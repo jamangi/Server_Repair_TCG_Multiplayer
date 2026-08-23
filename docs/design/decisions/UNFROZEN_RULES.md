@@ -47,49 +47,76 @@ Room creation should distinguish player-facing match settings from server safety
 
 ## 3. Ticket generation and campaign selection
 
-Candidate configuration fields remain:
+<a id="gen-001"></a>
+### GEN-001 — Constraint-driven Ticket Builder
 
-- `min_faults_per_ticket` (`MnD`);
-- `max_faults_per_ticket` (`MxD`);
-- `progressive_difficulty` (`PD`); and
-- future minimum and maximum fault-depth settings when the content catalog supports them.
+**Status:** Unfrozen
 
-Unfrozen questions:
+One reusable Ticket Builder should generate Ticket instances for campaign, mission, challenge, training, cooperative, and competitive modes. Its semantic input should be a generation-constraint configuration rather than a preselected eligible Ticket pool.
 
-- Exact supported ranges and production caps.
-- Whether difficulty counts distinct Faults, Fault instances, actionable causes, or authored causal complexity.
-- How minimum and maximum depth work for branching causal graphs.
-- The progression cadence, formula, and ceiling for `PD`.
-- Whether progression is based on Tickets created, Tickets closed, rounds, score, or elapsed time.
-- How generation behaves when the catalog cannot satisfy the requested range.
-- Whether random selection samples with replacement, without replacement, or through weighted generation.
-- Whether duplicate Ticket definitions may be active simultaneously.
-- How story scenarios constrain random selection without leaking reserved truth.
+The accepted direction requires the configuration to express, when relevant:
 
-[`GEN-001`](CANDIDATE_DECISIONS.md#gen-001) stages bounded campaign randomization as one proposed answer. Fixed authored Tickets remain valid for tutorials and audited examples.
+- causal-chain shapes and fault-count/depth constraints;
+- difficulty range;
+- required teaching beats;
+- guaranteed Ticket categories;
+- configurable exclusions, especially for story state and campaign replayability;
+- Progressive Difficulty (`PD`) behavior;
+- mode or scenario context; and
+- a seed and generator version for reproducible saves, replays, and tests.
+
+An authored campaign scenario supplies bounded constraints, allowing its Tickets to vary on replay without violating its teaching or story purpose. Mission and challenge modes may use different bounded configurations. Training and competitive modes may use broad configurations for genuinely random Ticket pools. Fixed authored Ticket fixtures remain valid for tutorials, audits, and worked examples.
+
+The Ticket Builder must produce the already frozen authored gameplay surfaces: a public candidate set, server-only causal truth, authored Evidence outcomes, Isolation requirements, Repair path, Verify conditions, and closure requirements. “Authored” means that generated content must be assembled from validated authored domain relationships and rule templates; it does not require selecting one prewritten whole Ticket from a list.
+
+Still decide:
+
+- the exact configuration schema, ranges, and server production caps;
+- whether difficulty counts Faults, Fault instances, actionable causes, causal depth, or an authored composite rating;
+- how branching-graph shape and depth constraints are evaluated;
+- the progression cadence, formula, and ceiling for `PD`;
+- the constraint-solving and weighted-randomization algorithm;
+- how unsatisfiable configurations fail, relax, or fall back without silently violating scenario guarantees;
+- whether duplicate generated Ticket structures may be active simultaneously;
+- which exclusions and story-state inputs are safe to persist or reveal; and
+- how generator-version migrations preserve saved campaigns and replay determinism.
 
 <a id="62-score-and-handicaps"></a>
 ## 4. Scoring and closure contention
 
-The fundamental scoring model remains unfrozen. The approved structure guarantees individual attribution, a cooperative team pool, immutable contribution records, and atomic closure settlement, but not which records award points.
+<a id="score-001"></a>
+### SCORE-001 — Closure-settled causal contribution scoring
 
-Decide:
+**Status:** Unfrozen
 
-- whether Service Points are awarded per verified causal contribution, per Ticket stage, or through another authored rubric;
-- which Tests, Isolation events, Repairs, Verify events, Documentation events, or assists qualify;
-- how failed Verify defers, invalidates, or preserves pending credit;
-- how multiple contributors divide or independently earn Service Points;
-- whether cooperative points are written directly to the team ledger or aggregated from player awards;
-- whether individual cooperative points are gameplay values, statistics only, or both;
+The scoring policy must reward causal troubleshooting without teaching that technical work is complete before the Ticket is closed. Closure itself is already frozen as a zero-Action, non-scoring event with Player/team statistical attribution.
+
+The leading unresolved model is a **pending causal-contribution ledger**:
+
+1. Qualifying causal actions create attributable pending contribution records rather than immediate Service Points.
+2. The Ticket's server-only causal chain and scoring rubric determine which records belong to a valid resolution path.
+3. Successful Verify does not pay points by itself. Failed or inconclusive Verify pays nothing and returns the Ticket to Diagnosis while preserving prior pending records.
+4. Publishing a valid closure bundle settles every still-relevant pending contribution in the completed causal path atomically.
+5. An unclosed Ticket pays no Service Points, even if some technical requirements have passed.
+6. Ineligible, redundant, or superseded actions remain statistics but do not score.
+7. Competitive awards go to recorded contributors. Cooperative awards enter the shared pool while retaining individual attribution.
+
+This settlement boundary gives every Player a reason for the company-visible result—the closed Ticket—without making closure itself worth stealing. It also lets an underdog rationally move to another workload when their expected remaining causal contribution is low.
+
+Still decide:
+
+- whether only accepted Isolation and necessary Repair score, or whether decisive Tests and Verify may also carry authored values;
+- whether the possible point budget and rubric are public, partially visible, or server-only;
+- whether multi-fault Tickets pay once per stage, once per distinct causal element, or according to authored weights;
+- when an earlier contribution remains eligible after later work revises the causal path;
+- how repeated equivalent actions and assists avoid duplicate awards;
 - whether Root Cause is a separate bonus, an authored Isolation value, or only a statistic;
-- whether rejected Isolation permanently removes only Root Cause eligibility or other score eligibility;
-- whether closure awards a Service Point, who receives it, and how small it must remain relative to causal work;
-- whether the zero-Action closure-bundle proposal is adopted and whether anyone receives first refusal;
+- how rejected Isolation affects score eligibility beyond the frozen Root Cause consequence;
+- whether cooperative points are written directly to the team ledger or aggregated from Player awards;
+- whether individual cooperative points are gameplay values, statistics only, or both;
 - whether penalties may reduce scores below their starting values or below zero;
 - whether a handicap belongs to a Player, seat, team, or some combination; and
 - how cooperative starting team score is derived from `H(p)`.
-
-The leading proposals are [`SCORE-001`](CANDIDATE_DECISIONS.md#score-001), [`SCORE-002`](CANDIDATE_DECISIONS.md#score-002), and [`DOC-009`](CANDIDATE_DECISIONS.md#doc-009). Until they are approved, implementations must not preserve the example profile's “base point to closer plus Root Cause point” model as a rule.
 
 ## 5. Ticket queue and contention
 
@@ -184,20 +211,7 @@ Computer players are never allowed to inspect hidden authoritative answers beyon
 
 Explicit Play/Spectate choice, separate capacities, concession fallback when Spectator capacity is full, and inability to reclaim a departed seat are already frozen.
 
-## 13. Equipment, Qualifications, and ranking
-
-No Equipment effect model or Qualification-to-gameplay relationship is frozen. The review specifically rejected treating the candidate-flow equipment fixture as approved behavior.
-
-Staged proposals:
-
-- [`EQP-001`](CANDIDATE_DECISIONS.md#eqp-001) — one separate Equipment slot installed at match start;
-- [`EQP-002`](CANDIDATE_DECISIONS.md#eqp-002) — bounded passive or Action-costed effects;
-- [`EQP-003`](CANDIDATE_DECISIONS.md#eqp-003) — ownership and multiplayer equality;
-- [`QUAL-001`](CANDIDATE_DECISIONS.md#qual-001) — campaign progress with no board or Equipment effect.
-
-An experience-based matchmaking rating is deferred and is not part of the first rules version.
-
-## 14. Rules removed from the unfrozen inventory
+## 13. Rules removed from the unfrozen inventory
 
 The following no longer require separate decisions:
 
@@ -215,9 +229,12 @@ The following no longer require separate decisions:
 - Documentation targets, visibility, chronology, selection, and live recovery;
 - basic deck size, copy limit, hand, draw, Actions, Search, Refresh, and empty-deck behavior;
 - whether successful Verify is immediately public; and
-- queue-empty winners and ties for finite matches.
+- queue-empty winners and ties for finite matches;
+- whether closure costs an Action, awards Service Points, or creates a protected claim;
+- whether the game contains an account/loadout Equipment system; and
+- whether Qualifications affect gameplay, access, loadouts, or matchmaking.
 
-## 15. Change discipline
+## 14. Change discipline
 
 When an unfrozen rule is decided:
 

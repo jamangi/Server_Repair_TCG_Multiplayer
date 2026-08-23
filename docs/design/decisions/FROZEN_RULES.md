@@ -76,7 +76,7 @@ A Room is the membership, role, configuration, and socket container. A Match is 
 - Leaving removes Room membership and also concedes if the member was an active Player.
 - Player seat capacity and spectator capacity are separate.
 - `spectator_limit` is configured per Room within the server-administered `max_spectators_per_room`.
-- A Ready Player's deck and other mechanical loadout state are snapshotted for match setup. A Player must explicitly leave Ready before changing that state and must pass legality checks before becoming Ready again.
+- A Ready Player's deck is snapshotted for match setup. A Player must explicitly leave Ready before changing it and must pass legality checks before becoming Ready again. The game has no separate Equipment loadout.
 
 Internal commands use unambiguous names even when the UI uses friendlier labels:
 
@@ -208,7 +208,12 @@ Documentation projects authoritative structured records; it does not create rule
 - Published records are immutable and cannot be documented twice for another reward.
 - Document Live returns the published action's exact source card from discard to its owner's hand once. The recovered card retains no prior private result; replaying it creates a new action and Evidence event.
 - After all current Verify requirements pass, closure requires one structured bundle containing the accepted Isolation, cited decisive Evidence, every Repair in the accepted path, every failed Verify in that path, and all current passing Verify results.
-- The closure bundle does not recover cards. Its exact Action cost and whether a Player receives a protected same-turn closure opportunity remain candidate decisions.
+- The closure bundle costs zero Actions and does not recover cards.
+- Successful Verify opens an immediate closure-resolution window before the normal zero-Actions automatic end-turn check. The active Player may publish the eligible bundle in that window.
+- If the immediate window closes without closure, the eligible Ticket remains jointly actionable and any later active Player may publish its bundle. No Player receives ownership, first refusal, or a protected closure claim.
+- Publishing a valid closure bundle is limited to once for that Ticket, resolves the complete closure transaction, and ends the active Player's turn.
+- An invalid closure attempt is rejected before changing state and returns no hidden truth beyond the closure requirements already visible to that Player.
+- Closure receives attributable team and Player statistics but awards no Service Points. Service Points may come only from the separately resolved causal-contribution scoring policy.
 - A closed Ticket's structured record is immutable.
 
 ## 15. Complete closure transaction
@@ -224,9 +229,19 @@ A valid closure bundle resolves atomically in this order:
 7. evaluate terminal conditions against the complete transaction; and
 8. end the closer's turn.
 
-Closure grants no separate card draw. Score termination is not evaluated between contingent contribution awards belonging to the same closure transaction. Exact contribution awards, the closure reward, and the closure-bundle Action cost remain unresolved.
+Closure grants no separate card draw or Service Point reward. Score termination is not evaluated between causal-contribution awards belonging to the same closure transaction. Exact qualifying contributions and values remain unresolved.
 
-## 16. Rule evolution
+## 16. Equipment removal and Qualifications
+
+- **Equipment**, as an account-owned or pre-match mechanical loadout category, is removed from the game. There are no Equipment slots, Equipment inventory, Equipment Store items, starting Installed Equipment objects, or Equipment effects.
+- This removal does not remove technical **Tools** from the domain model or from cards. A diagnostic Tool is technical subject matter, not an account Equipment system.
+- Qualifications are non-mechanical honor badges that record campaign accomplishments or standing.
+- Qualifications are not bought, equipped, drawn, consumed, installed, or included in a match loadout.
+- Qualifications do not change Actions, cards, decks, Tests, Isolation, Repair, Verify, Documentation, Ticket access, story access, matchmaking, or any other gameplay rule.
+- Qualifications may be displayed in account, campaign-history, profile, or progression views as recognition only.
+- Any future skill-rating or matchmaking-rank system must use a separate decision and data model rather than Qualification state.
+
+## 17. Rule evolution
 
 Changes to frozen behavior require:
 

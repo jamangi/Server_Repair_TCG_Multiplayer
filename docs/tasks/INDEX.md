@@ -2,7 +2,11 @@
 
 Tasks are implementation contracts. A builder must read `AGENTS.md` and then the selected task completely.
 
-There is no active task. The candidate gameplay flows are ready for user review; their example profile remains non-authoritative and does not promote rules, schemas, content, story canon, balance, or implementation behavior.
+There is no active task.
+
+Next task ready for implementation:
+
+- [`TASK-007: Synchronize approved gameplay rules`](TASK-007-synchronize-approved-gameplay-rules.md) — synchronize `SYNC-014`–`SYNC-020` across design documents, schemas, examples, candidate flows, story/UI candidates, and tests without resolving unfrozen scoring or Ticket Builder details.
 
 Completed documentation and research tasks:
 
@@ -12,4 +16,4 @@ Completed documentation and research tasks:
 
 Completed and cancelled viewer-task contracts are retained in [`docs/archive/viewer-tasks/`](../archive/viewer-tasks/) for historical context. Archived contracts are not planned work.
 
-Only one future task may be active at a time.
+Only one future task may be active at a time. Change TASK-007 from Ready to Active only when its implementation begins.

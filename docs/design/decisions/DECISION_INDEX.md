@@ -6,10 +6,10 @@ This directory is the authoritative entry point for Server Repair TCG rule decis
 
 - The repository has approved match, Room, authority, visibility, first-version deck/turn/economy, Diagnosis, Isolation, Repair, Verify, Documentation, and closure-transaction rules, but no playable game engine yet.
 - [`FROZEN_RULES.md`](FROZEN_RULES.md) remains authoritative while decisions are reviewed.
-- [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md) contains the remaining canonical open-rule inventory after the 2026-08-22 Candidate-Frozen Example Profile review.
-- [`CANDIDATE_DECISIONS.md`](CANDIDATE_DECISIONS.md) now centers on verification-conditioned contribution scoring, the closure reward and Action cost, Equipment, Qualifications, and campaign Ticket selection.
-- [`UNSYNCHRONIZED_DECISIONS.md`](UNSYNCHRONIZED_DECISIONS.md) records the migrations created by the newly frozen rules and the two candidate-flow assumptions explicitly rejected by the review.
-- The immediate design goal is to resolve scoring and closure contention before implementing score or closure behavior. Equipment and Qualifications are the next independent preparation decisions.
+- [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md) contains the remaining canonical open-rule inventory, including `SCORE-001` and `GEN-001`.
+- [`CANDIDATE_DECISIONS.md`](CANDIDATE_DECISIONS.md) has no active candidates. It preserves promotion, freeze, spiritual-conflict, and prune history plus legacy anchors.
+- [`UNSYNCHRONIZED_DECISIONS.md`](UNSYNCHRONIZED_DECISIONS.md) records the migrations created by the newly frozen rules, zero-Action closure, Equipment removal, non-mechanical Qualifications, and the accepted open decisions.
+- [`TASK-007`](../../tasks/TASK-007-synchronize-approved-gameplay-rules.md) is ready to synchronize design documents, schemas, examples, and candidate flows without resolving the remaining unfrozen scoring or Ticket Builder details.
 
 ## Reading order
 
@@ -60,19 +60,15 @@ An unsynchronized entry identifies work to reconcile. Until an explicit decision
 
 ## Recommended decision order for finishing the engine
 
-Resolve reward ownership before balance values and preparation content:
+Synchronize approved foundations before narrowing the remaining rules:
 
-1. [`SCORE-001`](CANDIDATE_DECISIONS.md#score-001) — whether verified causal contributions settle from a pending ledger.
-2. [`SCORE-002`](CANDIDATE_DECISIONS.md#score-002) — the size and recipient of any closure reward.
-3. [`DOC-009`](CANDIDATE_DECISIONS.md#doc-009) — whether the mandatory closure bundle costs zero Actions and needs any first-refusal rule.
-4. Resolve score-threshold and terminal precedence in [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md#7-terminal-conditions-and-results) against the resulting atomic score events.
-5. [`EQP-001`](CANDIDATE_DECISIONS.md#eqp-001) — the separate pre-match Equipment slot and starting installation.
-6. [`EQP-002`](CANDIDATE_DECISIONS.md#eqp-002) — permitted Equipment effects and their Action-cost budget.
-7. [`EQP-003`](CANDIDATE_DECISIONS.md#eqp-003) — ownership, Room policy, and competitive equality.
-8. [`QUAL-001`](CANDIDATE_DECISIONS.md#qual-001) — Qualifications as campaign progress rather than board power.
-9. [`GEN-001`](CANDIDATE_DECISIONS.md#gen-001) — bounded campaign Ticket randomization.
+1. Complete [`TASK-007`](../../tasks/TASK-007-synchronize-approved-gameplay-rules.md) and remove `SYNC-014`–`SYNC-020` only after every affected source agrees.
+2. Resolve [`SCORE-001`](UNFROZEN_RULES.md#score-001): qualifying causal contribution classes, weights, duplicate suppression, visibility, and cooperative aggregation.
+3. Resolve score-threshold and terminal precedence in [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md#7-terminal-conditions-and-results) against the closure-settled score events.
+4. Resolve [`GEN-001`](UNFROZEN_RULES.md#gen-001): Ticket Builder configuration, constraint solving, failure behavior, and versioned determinism.
+5. Resolve the remaining production policy in `UNFROZEN_RULES.md`: configuration admission, timer precedence, Room lifecycle, computer players, statistics, and content-level balance.
 
-After this batch, resolve the remaining production policy in `UNFROZEN_RULES.md`: configuration admission, timer precedence, Room lifecycle, computer players, statistics, and content-level balance.
+After TASK-007, review whether the separate candidate and synchronization ledgers are still useful. Do not remove them merely because the candidate bucket is currently empty.
 
 ## Maintenance rules
 

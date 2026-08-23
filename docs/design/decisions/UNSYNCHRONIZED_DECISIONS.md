@@ -4,7 +4,7 @@ This file is the active reconciliation queue for decisions that overlap, contrad
 
 An entry here does not silently change authority. [`FROZEN_RULES.md`](FROZEN_RULES.md) remains authoritative for approved behavior; [`CANDIDATE_DECISIONS.md`](CANDIDATE_DECISIONS.md) remains non-authoritative for proposed behavior. See [`DECISION_INDEX.md`](DECISION_INDEX.md) for the decision lifecycle.
 
-The 2026-08-22 review synchronized the four decision ledgers internally. The remaining entries are migrations into older design documents, schemas, examples, presets, tests, and the now-superseded assumptions in the candidate-flow fixtures.
+The 2026-08-22 review synchronized the four decision ledgers internally. The remaining entries are migrations into older design documents, schemas, examples, presets, tests, and superseded candidate-flow fixtures. [`TASK-007`](../../tasks/TASK-007-synchronize-approved-gameplay-rules.md) is the approved synchronization contract for `SYNC-014` through `SYNC-020`.
 
 ## Confirmed unsynchronized decisions
 
@@ -23,6 +23,8 @@ Affected artifacts:
 - `docs/design/00_GAME_ENGINE_OVERVIEW.md` through `07_FAULT_BROWSER_AND_SEARCH.md` where stage wording implies a one-way sequence;
 - `schemas/runtime/ticket_state.schema.json` status and current Verification state;
 - runtime examples, player-safe views, tests, and UI stage presentation.
+
+`TASK-007` must review all top-level `docs/design/` sources, not only files already known to contain one-way wording. It must review `RECOMMENDED_DATA_MODEL.md` for update opportunities and analyze `DOCUMENTS_TO_UPDATE.md` as an outdated migration map without automatically implementing every recommendation it contains.
 
 ### SYNC-015 — Authored candidates, Evidence outcomes, and Isolation requirements
 
@@ -94,38 +96,37 @@ Affected artifacts:
 
 ### SYNC-019 — Candidate-flow closure scoring is no longer an approved direction
 
-**Sources:** `docs/candidate_flows/v0.0_ex1_decisions.md` `EX1-RULE-012`; scoring review; `SCORE-001`, `SCORE-002`, `DOC-009`
+**Sources:** `docs/candidate_flows/v0.0_ex1_decisions.md` `EX1-RULE-012`; Frozen Rules §§14–15; unfrozen `SCORE-001`; pruned `SCORE-002`
 
-**Authority during review:** Scoring remains unfrozen; the candidate-flow replay remains a non-authoritative historical fixture
+**Authority during review:** Closure is zero-Action, non-scoring, and statistically attributable; causal-contribution details remain unfrozen
 
-**Fundamental dependency:** [`SCORE-001`](CANDIDATE_DECISIONS.md#score-001)
+**Fundamental dependency:** [`SCORE-001`](UNFROZEN_RULES.md#score-001)
 
-The example awards the base Ticket point to the Player who publishes the closure bundle and gives one Root Cause point to the first eligible deepest-cause isolator. The review identified that model as too easy to exploit through closure sniping. It must not be copied into implementation, schemas, presets, or new examples as an approved rule.
+The example spends one Action on closure, awards the base Ticket point to the Player who publishes the bundle, and gives one Root Cause point to the first eligible deepest-cause isolator. The approved rule instead makes closure cost zero Actions, awards no Service Points for it, and preserves Player/team closure attribution as statistics. The example model must not be copied into implementation, schemas, presets, or new examples.
 
-If `DOC-009` makes closure free or the scoring candidates are approved, the audited replays and their score totals will need a separately scoped rewrite. Until then they remain internally replayable demonstrations of the rejected pressure case.
+`TASK-007` must rewrite the Candidate-Frozen Example Profile, audited Action ledgers, score totals, full journeys, and related audits so they no longer remain replayable demonstrations of the rejected pressure case. Because `SCORE-001` remains unfrozen, the revised examples may use a clearly labeled example-local causal rubric but must not promote exact contribution classes or values into schemas or normative rules.
 
-### SYNC-020 — Equipment and Qualification example assumptions conflict with the new candidates
+### SYNC-020 — Remove Equipment and reduce Qualifications to honor badges
 
-**Sources:** Candidate-flow `EX1-UI-07`, board/equipment fixtures, and equipping walkthrough; `EQP-001`–`EQP-003`, `QUAL-001`
+**Sources:** Frozen Rules §16; candidate-flow `EX1-UI-07`, board/equipment fixtures, equipping walkthrough, full journeys, story candidates, and UI planning
 
-**Authority during review:** No Equipment or Qualification gameplay model is frozen
+**Authority during review:** The account/loadout Equipment system does not exist; Qualifications are recognition-only honor badges
 
-**Fundamental dependency:** [`EQP-001`](CANDIDATE_DECISIONS.md#eqp-001) and [`QUAL-001`](CANDIDATE_DECISIONS.md#qual-001)
+**Fundamental dependency:** Frozen Equipment-removal and Qualification rules
 
-The example flow uses Qualifications to permit Equipment and deliberately gives Equipment no audited-match Installed object. The new candidate direction instead separates Qualifications from board gameplay and gives each Player a dedicated pre-match Equipment slot whose item is installed at match start.
+The example flow uses Qualifications to permit Equipment and models Equipment ownership, Store inventory, Ready snapshots, and possible Installed objects. Story and UI candidates also refer to Equipment or Qualification loadouts. These assumptions now contradict the frozen removal and honor-badge boundary.
 
-Do not implement either model until the candidates are approved. If approved, update the candidate-flow board boundary, account fixtures, equipping walkthrough, Ready snapshot, full journeys, and any future account/match schemas together.
+`TASK-007` must remove the account/loadout Equipment concept from affected design, story, UI, schema, example, and candidate-flow sources while preserving ordinary technical Tools and real-world uses of the lowercase word “equipment.” It must rewrite Qualification examples as non-mechanical recognition and update the legacy equipping walkthrough into a synchronized account/appearance/recognition flow or another clearly explained retained artifact.
 
-## Candidate pressures that are not frozen conflicts
+## Accepted decision pressures
 
-| Candidate | Pressure if approved | Why it is not yet a frozen conflict |
+| Decision | Synchronization pressure | TASK-007 boundary |
 | --- | --- | --- |
-| `SCORE-001` | Adds server-only scoring rubric, pending contribution records, and settlement events. | Contribution scoring remains explicitly unfrozen. |
-| `SCORE-002` | Replaces the example's closer-owned base reward and old Root Cause balance. | No exact frozen scoring award exists. |
-| `DOC-009` | Changes closure bundle from one Action to zero and invalidates replay Action totals. | Frozen §14 deliberately leaves closure cost open. |
-| `EQP-001`–`EQP-003` | Adds account loadout state and a starting Installed Equipment zone. | Frozen rules only snapshot generic mechanical loadout state. |
-| `QUAL-001` | Removes Equipment/deck gates from Qualifications. | No Qualification rule is frozen. |
-| `GEN-001` | Adds bounded random selection and saved random provenance to campaign state. | Frozen rules permit authored or generated initial Tickets. |
+| `SCORE-001` | A future score schema may need pending causal contributions and closure settlement. | Keep the rule unfrozen; provide extensible ledgers and example-local values only where required. |
+| Frozen zero-Action closure | Invalidates closure Action costs, closer points, replay turns, score totals, and transaction examples. | Synchronize all affected examples and contracts now. |
+| Frozen Equipment removal | Invalidates loadout, Store, account, Installed Equipment, qualification-gate, and UI assumptions. | Remove the mechanic; preserve technical Tools. |
+| Frozen Qualification boundary | Invalidates permission, unlock, loadout, procedure, and matchmaking effects. | Retain honor-badge recognition only. |
+| `GEN-001` | A future Ticket Builder needs constraint configuration, seeded determinism, and generator versioning. | Keep it unfrozen; review recommendations but do not implement or freeze a builder contract in TASK-007. |
 
 <a id="likely-future-unsynchronized-decisions"></a>
 ## Review disposition of the former queue
