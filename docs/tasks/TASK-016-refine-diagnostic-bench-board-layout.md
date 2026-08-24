@@ -2,11 +2,11 @@
 
 ## Status
 
-**Proposed — blocked on TASK-012, TASK-013, and TASK-014.** Fix continuity first, stabilize the approved Bench Profile semantics second, and populate representative Ticket/diagnostic data third. This task is the dedicated whole-board density, responsive-composition, and visual-polish pass before tutorial overlays depend on final control locations.
+**Proposed — blocked on TASK-012, TASK-013, and TASK-014.** Fix continuity first, stabilize authoritative Global availability and switchable Bench View semantics second, and populate representative Ticket/diagnostic data third. This task is the dedicated whole-board density, responsive-composition, and visual-polish pass before tutorial overlays depend on final control locations.
 
 ## Objective
 
-Refine the solo Night-Shift board so its primary troubleshooting surfaces are simultaneously legible at ordinary desktop sizes, each approved Diagnostic Bench Profile receives a layout suited to its information volume, and unavoidable scrolling is confined to intentionally bounded collections rather than the selected Ticket or Legal Action.
+Refine the solo Night-Shift board so its primary troubleshooting surfaces are simultaneously legible at ordinary desktop sizes, each approved Diagnostic Bench View receives a layout suited to its information volume, and unavoidable scrolling is confined to intentionally bounded collections rather than the selected Ticket or Legal Action.
 
 This task changes presentation, not game authority. It consumes player-safe projections and legal intents established by TASK-013/TASK-014 and must not infer relevance, legality, target compatibility, costs, or results in the DOM.
 
@@ -40,7 +40,8 @@ At the task's agreed reference desktop viewports, the primary board must fit wit
 - Collapse excess masthead/navigation padding during an active Match and allocate the recovered height to gameplay.
 - Use a viewport-aware grid with `minmax(0, 1fr)`-style containment so panels consume available height rather than leaving a large unused lower region.
 - Keep resources, selected Ticket identity/state, public Candidates, Bench, selected diagnostic/Legal Action, and private response hand immediately visible.
-- Keep Evidence/Worklog present and independently scrollable. Preserve TASK-012 semantic scroll/focus continuity across rerenders and profile-specific layouts.
+- Make Evidence disposition strength legible without opening hidden details: `CONFIRM` must not look interchangeable with `SUPPORT`, and confirmed non-actionable conditions must remain visually distinct from Repair-gating accepted Isolation.
+- Keep Evidence/Worklog present and independently scrollable. Preserve TASK-012 semantic scroll/focus continuity across rerenders and view-specific layouts.
 - Avoid nested scroll surfaces where pagination, collapsible history, or responsive reflow provides a clearer solution.
 
 ## Selected Ticket
@@ -53,17 +54,17 @@ At the task's agreed reference desktop viewports, the primary board must fit wit
 
 ## Diagnostic Bench layouts
 
-### Relevant profile
+### Relevant view
 
 - Favor a compact single shelf/tray with a visible relevant count and All/Test/Command filtering.
 - Maintain useful card illustration/family recognition without making a small result set look like a database table.
-- Explain that membership comes from the selected Ticket's public context and does not certify which diagnostic will be decisive.
+- Explain that membership comes from the selected Ticket's public context and does not certify which diagnostic will be decisive. Provide `Why relevant?` paths and an incomplete-graph disclaimer.
 
-### Global profile
+### Global view
 
 - Favor a dense grid/list browser with search; All/Test/Command tabs; subsystem/category filtering; deterministic sort by Name, Type, Cost, or Subsystem; result range; and bounded pagination.
 - Preserve query, filters, sort, page, selected diagnostic, and focus across rerenders and Ticket changes where still valid.
-- Provide `Runnable for selected target` as a compatibility filter only if the authoritative projection supplies it. Never add a `Relevant` sort/filter or styling cue that defeats Global mode.
+- Provide the same optional Relevant filter and `Why relevant?` explanations inside Global. Also provide `Runnable for selected target` as a compatibility filter only if the authoritative projection supplies it. Neither filter may alter legality or consult hidden truth.
 - Use pagination or deliberate virtualization rather than a second long free-scrolling Card wall. Page size must respond to layout while remaining deterministic and announced.
 
 ## Legal Action and response hand
@@ -92,17 +93,18 @@ At the task's agreed reference desktop viewports, the primary board must fit wit
 
 Add browser and visual regression coverage for:
 
-- Relevant and Global profiles at representative 16:9, 16:10, short-laptop, tablet, and phone viewports;
+- Relevant and Global views at representative 16:9, 16:10, short-laptop, tablet, and phone viewports;
 - 1-, 3-, and 10-Ticket queues plus empty/non-empty Archived collections;
 - minimum/maximum representative Evidence, Worklog, Bench, and response-hand sizes;
 - no document-level board scroll and no clipped primary controls at agreed desktop references;
 - bounded, discoverable internal scrolling/pagination where permitted;
 - complete Legal Action visibility, cross-Ticket result navigation, full-Ticket expansion, and selected Ticket visibility;
-- Global search/filter/sort/page state and Relevant public-context explanation;
+- disposition labels/help, direct-confirmation Isolation affordance, multi-Evidence route citation, elimination-route presentation, and generic unsupported-Isolation feedback under the approved semantics;
+- Global search/filter/sort/page state, optional Relevant filtering, player-safe relationship explanations, and view switching with no lost selection or Match mutation;
 - sequential input, IME, focus, selection, scroll restoration, keyboard-only, touch, reduced-motion, zoom/reflow, and screen-reader announcements; and
 - visual comparison against both Bench references without copying their incidental data.
 
-Run and report the full repository suite, staged Viewer verification, complete task-specific browser matrix, visual captures with dimensions/profile/data case, performance/accessibility checks, and `git diff --check`.
+Run and report the full repository suite, staged Viewer verification, complete task-specific browser matrix, visual captures with dimensions/view/data case, performance/accessibility checks, and `git diff --check`.
 
 ## Allowed paths after prerequisites
 
@@ -118,4 +120,4 @@ Do not change diagnostic availability, rules, costs, outcomes, Builder content, 
 
 ## Completion boundary
 
-Complete only when both approved Bench Profile layouts are polished against representative final data; primary desktop troubleshooting controls fit the agreed viewports without document scrolling; unavoidable collection overflow is bounded and understandable; Ticket/Legal Action/queue improvements remain responsive and accessible; TASK-012 continuity is preserved; and no client-side rule inference or authoritative-state mutation was introduced.
+Complete only when both approved Bench View layouts are polished against representative final data; switching/filtering is comfortable, explainable, and state-safe; primary desktop troubleshooting controls fit the agreed viewports without document scrolling; unavoidable collection overflow is bounded and understandable; Ticket/Legal Action/queue improvements remain responsive and accessible; TASK-012 continuity is preserved; and no client-side rule inference or authoritative-state mutation was introduced.

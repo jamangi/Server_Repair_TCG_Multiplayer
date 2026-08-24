@@ -38,8 +38,9 @@ Implement only the approved choices, but the synchronized result must explicitly
 ### Diagnostic availability
 
 - which Test/Command definitions are offered, how relevance is derived, their runtime placement/zone, whether they occupy the 30-card response deck, and how existing decks migrate;
-- if PT-001 D is approved, the `RELEVANT`/`GLOBAL` Bench Profile setting, default, pre-Match selection, immutable Match pinning, preset/export behavior, provenance, result/statistics grouping, and prevention of mid-Match switching;
-- one versioned playable diagnostic catalog shared by both profiles: Relevant filters it using public context only, while Global exposes it without hidden relevance labels;
+- if PT-001 D is approved, one authoritative globally available playable diagnostic catalog plus switchable `RELEVANT`/`GLOBAL` local Bench Views over identical legal intents;
+- default/preferred view persistence and export, mid-Match switching, filter/sort/page continuity, and proof that view changes do not mutate Match state, replay provenance, legality, scoring, or statistics;
+- public-context-only relevance membership and player-safe `Why relevant?` relationship paths, plus an explicit incomplete-graph disclaimer and the same optional Relevant filter inside Global view;
 - Action costs, repetition rules, disposition, Documentation behavior, statistics, visibility, and Search/Refresh interaction;
 - how every offered diagnostic obtains exactly one deterministic typed Evidence outcome for the current Ticket target and machine revision; and
 - how irrelevant, clean, inconclusive, support, contradiction, rule-out, and confirmation results differ without exposing hidden truth prematurely.
@@ -55,9 +56,9 @@ Implement only the approved choices, but the synchronized result must explicitly
 
 If PT-001 D is approved, TASK-013 must ship a usable first implementation rather than contracts with no play surface:
 
-- Home exposes Bench Profile beside the other Match settings, explains curated versus unfiltered play, and pins the choice when Match creation begins.
+- Settings may remember the preferred Bench View, and the active board exposes an immediate Relevant/Global switch. It explains focused versus complete catalog organization without presenting either as a difficulty mode.
 - Relevant mode presents the public-context-filtered diagnostics as a compact shelf/tray with Test/Command filtering and a visible relevant-count explanation.
-- Global mode presents the full playable catalog with search, All/Test/Command filters, subsystem/category filtering, deterministic sort, bounded pagination, result count, and preserved selection/filter state.
+- Global mode presents the full playable catalog with search, All/Test/Command filters, subsystem/category and optional Relevant filtering, deterministic sort, bounded pagination, result count, `Why relevant?` explanations, and preserved selection/filter state.
 - Both modes feed one selected-diagnostic/legal-action surface that shows the target Ticket, type, Action cost, Inspect affordance, and Run confirmation without internal scrolling at ordinary desktop reference sizes.
 - Diagnostics are visually and semantically separate from the private Repair/Verify response hand. Keyboard, touch, screen-reader, narrow-screen, reduced-motion, and no-JavaScript-failure behavior remain explicit.
 
@@ -67,8 +68,20 @@ Use the two diagnostic-bench mockups as hierarchy references. Do not copy incide
 
 - deterministic candidate derivation, hidden-Fault inclusion, distractor validity, min/max count, causal/subsystem filtering, and Builder failure diagnostics;
 - the difference among a public Candidate, a private/team Hypothesis marker, an Evidence disposition, an elimination record, and authoritative hidden truth;
+- exact normative meanings for `SUPPORT`, `CONTRADICT`, `RULE_OUT`, `CONFIRM`, and `INCONCLUSIVE`, including the rule that candidate-specific `CONFIRM` independently satisfies a positive route for that candidate under its authored target/state conditions;
 - elimination action cost, visibility, citation requirements, reversibility, chronology, statistics, and stale-evidence behavior after Repair/failed Verify; and
-- the exact accepted-Isolation predicate for positive support, elimination, or both, including generic rejected responses that do not disclose which prerequisite failed.
+- the exact accepted-Isolation predicate for every approved alternative route, including generic rejected responses that do not disclose which prerequisite failed.
+
+### Alternative Isolation routes and attribution
+
+- Replace or explicitly migrate the flat `eligible_outcome_ids` plus `minimum_citations` model with typed versioned alternative routes capable of direct observation, definitive diagnostic, corroborated support, elimination, and recovery-derived paths.
+- Define AND/OR/threshold semantics without a loose expression language or UI-evaluated rule bag. Route IDs, eligible dispositions/outcomes, target/state scope, and required visibility/revision must be schema-valid and deterministic.
+- A direct visual observation may be decisive. Do not require unrelated diagnostics after the player has authored Evidence that literally observes the active actionable fault.
+- If an outcome is labeled candidate-specific `CONFIRM`, a valid Commit citing it must not fail merely because an unrelated citation count was not met. If corroboration is required, migrate the outcome to `SUPPORT` and author the corroborated route honestly.
+- Permit several validated routes to the same Fault so different Players can contribute different Evidence sequences. Define how team/public Evidence combines, which Player owns the accepted Isolation event, and how all contributing Evidence remains attributable.
+- Allow only one accepted Isolation contribution slot for the same active Fault/stage. Subsequent attempts after it is isolated follow ordinary timing/idempotency behavior; later newly actionable causal stages may create new Isolation work.
+- Distinguish a confirmed non-actionable effect/condition from an active actionable Fault so `CONFIRM` does not automatically create an invalid Repair gateway.
+- Preserve the privacy purpose of `ISOLATION_NOT_SUPPORTED`, while making Evidence-strength terminology and pre-commit education clear enough that a decisive `CONFIRM` cannot appear to be arbitrarily rejected.
 
 ### Repair gateway
 
@@ -88,8 +101,9 @@ Use the two diagnostic-bench mockups as hierarchy references. Do not copy incide
 - Prefer new discriminated event/action variants and typed state over extension bags or UI-only flags.
 - Keep clients intent-only. The engine/Worker decides relevance, elimination validity, Isolation, Repair, abandonment, reveal, payment, and statistics.
 - Update Card placement/state schemas if an approved diagnostic bench creates a new zone; keep Card Instances server/Worker-owned.
-- Treat Bench Profile as Match configuration, not account Equipment, collectible ownership, technician power, or a readiness/loadout snapshot.
+- Treat Bench View as local presentation state, not Match configuration, account Equipment, collectible ownership, technician power, a readiness/loadout snapshot, or an input to authoritative policies.
 - Update Ticket, Knowledge State, Player, Match result, public/private projection, action request/result, and event schemas only where the approved semantics require it.
+- Version/migrate every persisted Ticket whose disposition labels and Isolation routes disagree; do not reinterpret old `first-version-v1` replays under new `CONFIRM` semantics.
 - Extend Builder solvability so its proof matches every newly legal success path and rejects content that merely looks playable.
 - Update seat-safe automated policies without granting hidden truth.
 - Preserve deterministic hashing, canonical order, replay identity, rejection immutability, and complete-or-none Builder behavior.
@@ -99,11 +113,14 @@ Use the two diagnostic-bench mockups as hierarchy references. Do not copy incide
 Add focused tests for every approved route and rejected boundary, including:
 
 - deterministic diagnostic availability and outcomes across machine revisions;
-- if selectable profiles are approved, immutable configuration, public-context-only Relevant membership, complete Global membership, separated statistics, and deterministic policy behavior under both profiles;
+- if selectable views are approved, identical legal intents and deterministic outcomes before/after switching; complete Global membership; public-context-only Relevant membership/explanations; no hidden-truth inference; and no Match/replay/statistic mutation from view/filter state;
 - every accepted paid action producing exactly one persistently projectable result, including diagnostics with no candidate effect and cross-Ticket targets;
 - no Action/Card/token payment on rejected intents and no paid `RESOLVED` result without visible feedback;
 - no hidden truth in ordinary projections or timing;
 - candidate derivation always including truth and only valid distractors;
+- disposition semantics and every typed route kind, including alternate routes to the same Fault and multi-Player Evidence contribution;
+- `One Member Down`: Drive Health's decisive Failed SAS Drive `CONFIRM` succeeds as a one-citation positive route, or a deliberately revised `SUPPORT` fixture proves the newly authored corroborated route instead—never the current contradictory labeling/count combination;
+- direct visual `CONFIRM`, corroborated `SUPPORT`, complete `RULE_OUT` elimination, insufficient `CONTRADICT`, recovery-derived Evidence, confirmed non-actionable condition, and stale/wrong-target negative cases;
 - valid/invalid/stale elimination citations and visibility;
 - every accepted-Isolation route and generic rejection;
 - speculative-Repair thresholds/failure privacy if approved;

@@ -8,7 +8,7 @@ Active task:
 
 Proposed task awaiting approvals:
 
-- [`TASK-013: Synchronize approved post-playtest diagnosis rules`](TASK-013-synchronize-post-playtest-diagnosis-rules.md) — blocked on PT-001 through PT-005; creates the versioned rules/contracts/engine migration before content or tutorials depend on it.
+- [`TASK-013: Synchronize approved post-playtest diagnosis rules`](TASK-013-synchronize-post-playtest-diagnosis-rules.md) — blocked on PT-001 through PT-005; creates the versioned Global/Relevant Bench, Evidence-disposition, multi-route Isolation, elimination, Repair-gateway, and reveal migration before content or tutorials depend on it.
 - [`TASK-014: Expand playable content and Ticket generation`](TASK-014-expand-playable-content-and-ticket-generation.md) — blocked on TASK-013 and PT-006; expands coverage-driven Cards/scenarios, optionally promotes all 50 Bench diagnostics under PT-006 D, and evolves generation beyond whole-template cloning with unique-before-repeat queues and exact resource solvability.
 - [`TASK-016: Refine Diagnostic Bench and game-board composition`](TASK-016-refine-diagnostic-bench-board-layout.md) — blocked on TASK-012 through TASK-014; applies the Relevant/Global Bench-specific layouts, compact Ticket, fully visible Legal Action, viewport-aware queue, and responsive density pass against representative content.
 - [`TASK-015: Add guided tutorials and the solo solution-reveal experience`](TASK-015-add-guided-tutorial-and-solution-reveal.md) — blocked on TASK-013, TASK-014, TASK-016, and PT-007; teaches the final rules through real seeded engine paths and presents the authoritative Give Up reveal after final control locations stabilize.

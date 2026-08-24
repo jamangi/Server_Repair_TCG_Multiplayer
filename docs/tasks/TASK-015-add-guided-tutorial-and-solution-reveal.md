@@ -37,9 +37,9 @@ In the approved order and terminology:
 1. **Observe:** Symptoms, public Candidates, machine-state summary, Ticket selection, queue, Evidence, and immutable Worklog are different information surfaces.
 2. **Turn resources:** opening availability, two Actions, Card/bench costs, hand/response deck, Search/Refresh if retained, discard, and Pass.
 3. **Hypothesis:** a private/team working belief is not a guess submission and receives no truth feedback.
-4. **Diagnostics:** how to select the highlighted Test/Command, verify its target Ticket, spend Actions, follow a cross-Ticket result, and read support/contradiction/rule-out/confirmation/inconclusive Evidence. Explain that clean, negative, unrelated, and inconclusive findings are still recorded Evidence; a result with no candidate effect is not missing feedback.
+4. **Diagnostics:** how to select the highlighted Test/Command, verify its target Ticket, spend Actions, follow a cross-Ticket result, and read `SUPPORT`, `CONTRADICT`, `RULE_OUT`, `CONFIRM`, and `INCONCLUSIVE` under their approved normative meanings. Explain that clean, negative, unrelated, and inconclusive findings are still recorded Evidence; a result with no candidate effect is not missing feedback.
 5. **Candidate management:** how the approved elimination/notebook model works, whether it costs an Action, what Evidence is cited, and why a remaining candidate is not automatically revealed as true.
-6. **Isolation:** the exact approved success routes, how citations are chosen, why an unsupported attempt remains generic, and why the current UI may withhold or disable a legal-looking action.
+6. **Isolation:** direct observation, definitive diagnostic, corroborated support, elimination, and recovery-derived routes where approved; how citations are chosen; why candidate-specific `CONFIRM` is decisive for an active actionable Fault; why a confirmed non-actionable condition does not open Repair; how multiple Players may contribute Evidence but only one accepted event owns a Fault/stage; why an unsupported attempt remains generic; and why the current UI may withhold or disable a legal-looking action.
 7. **Repair:** machine-state change, Card disposition, accepted-Isolation or approved speculative threshold, and why Repair does not prove success.
 8. **Verify:** named requirements, current passes, failure/inconclusive return to Diagnosis, and preserved history.
 9. **Documentation and closure:** Document Live versus final closure bundle, recovery behavior, Worklog enrichment, score settlement, and Ticket archive.
@@ -67,6 +67,7 @@ Before revealing truth, provide player-safe guidance derived only from the authe
 
 - whether the Ticket is in a phase where Isolation is accepted;
 - whether the approved route needs selected/cited Evidence, valid eliminations, or another public prerequisite;
+- the public meaning of each cited disposition and whether the selected Evidence is direct `CONFIRM`, accumulated `SUPPORT`, counterevidence, or inconclusive—without evaluating hidden truth;
 - which currently authorized Evidence the Player has selected;
 - that rejection intentionally does not distinguish a wrong candidate from insufficient Evidence; and
 - how to inspect Evidence, run another relevant diagnostic, revise the notebook, or use Give Up.

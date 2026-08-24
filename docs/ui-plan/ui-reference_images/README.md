@@ -120,7 +120,7 @@ Use it for:
 - a compact private response hand; and
 - a deliberately denser expert-facing composition.
 
-Symptoms remain primary observed information even when the reference compresses them. Production should retain a concise symptom or a one-step accessible full-Ticket view. The pictured `50` count is illustrative until all displayed knowledge records have complete playable contracts and outcomes. Global mode must not expose hidden relevance through sorting, styling, or availability.
+Symptoms remain primary observed information even when the reference compresses them. Production should retain a concise symptom or a one-step accessible full-Ticket view. The pictured `50` count is illustrative until all displayed knowledge records have complete playable contracts and outcomes. Global may include the same public-graph Relevant filter and `Why relevant?` paths as the focused view, while making clear that the curated graph is incomplete; it must never infer relevance from hidden truth.
 
 ## Generation provenance
 

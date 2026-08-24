@@ -33,7 +33,7 @@ TASK-012 addresses the current cross-Ticket result-discoverability weakness with
 
 ## PT-001 — Diagnostic availability
 
-Which diagnostic access profile should a Match use? Review the original project mockups [`relevant_diagnostic_bench.png`](../../ui-plan/ui-reference_images/relevant_diagnostic_bench.png) and [`global_diagnostic_bench.png`](../../ui-plan/ui-reference_images/global_diagnostic_bench.png) as compositional references, not authoritative state.
+Which diagnostic catalog and view model should play use? Review the original project mockups [`relevant_diagnostic_bench.png`](../../ui-plan/ui-reference_images/relevant_diagnostic_bench.png) and [`global_diagnostic_bench.png`](../../ui-plan/ui-reference_images/global_diagnostic_bench.png) as compositional references, not authoritative state.
 
 ### A — Relevant Diagnostic Bench only
 
@@ -49,7 +49,7 @@ This meets the educational intent without presenting all 50 current diagnostics 
 
 Make every published **playable** Test and Command visible on every Ticket from the beginning. Search, Test/Command tabs, subsystem/category filters, deterministic sorting, and bounded pagination keep the catalog navigable. “Published playable” is important: a knowledge-library Test/Command does not enter this Bench until it has a complete typed execution contract and outcome coverage.
 
-Global mode must not label or rank diagnostics by hidden relevance. Unrelated choices resolve to an authored/assembled clean, inconclusive, not-applicable, or no-relevant-finding Evidence result rather than silence. The selected diagnostic surface must show target, cost, and expected target compatibility before confirmation without revealing hidden truth.
+Global mode may label/filter by relevance derived from public graph relationships and explain those paths, but it must not consult or imply hidden-truth relevance. Unrelated choices resolve to an authored/assembled clean, inconclusive, not-applicable, or no-relevant-finding Evidence result rather than silence. The selected diagnostic surface must show target, cost, and expected target compatibility before confirmation without revealing hidden truth.
 
 This most literally satisfies “all Tests and Commands,” but the current domain already contains 50 such objects. It creates substantial choice overload and a much larger outcome-authoring/validation surface.
 
@@ -59,15 +59,17 @@ Keep Tests and Commands in the 30-card draw deck, but guarantee that every diagn
 
 This is the smallest migration, but diagnostics are still not literally all available and deck construction continues to govern knowledge access.
 
-### D — Player-selectable Bench Profile (recommended experiment)
+### D — Global availability with selectable Bench View (recommended)
 
-Provide both `RELEVANT` and `GLOBAL` as pre-Match Bench Profiles over the same versioned playable diagnostic catalog. `RELEVANT` is the default teaching profile and uses Option A's public-context derivation and compact shelf. `GLOBAL` uses Option B's complete catalog and search/filter/pagination layout. In both profiles, diagnostics remain outside the 30-card response deck; Repair and Verify remain response-deck Cards.
+Make the complete versioned playable diagnostic catalog authoritative and available regardless of presentation. Provide `RELEVANT` and `GLOBAL` as switchable Bench Views over that same catalog and identical legal intents. `RELEVANT` defaults to Option A's public-context filter and compact shelf. `GLOBAL` exposes Option B's complete search/filter/pagination layout and may include the same optional Relevant filter. Switching views changes no Match state, legality, cost, result, difficulty designation, scoring, or statistics.
 
-The selected profile is pinned in Match configuration/provenance and cannot change during an active Match. Home explains the learning tradeoff before play, saved presets may remember the preference, and local export/import preserves it. Results and automated-game statistics are grouped by Bench Profile so curated and uncurated outcomes are not compared as if they represented the same difficulty. Relevant mode must never use hidden truth to choose its shelf; Global mode must never expose a relevance hint that defeats its purpose.
+Relevance is advisory rather than authoritative expertise. It must be derived only from public graph paths such as observed Symptom -> public Candidate Fault -> diagnostic Evidence target, exposed component/subsystem relationships, or published diagnostic prerequisites. Each relevance marker should offer a player-safe `Why relevant?` explanation showing the relationship path. The UI must also explain that the graph is curated and incomplete: an unmarked diagnostic is not declared useless, and expert judgment may reasonably inspect connections the current content graph does not represent. Running an unmarked diagnostic still produces its authored clean, negative, unrelated, inconclusive, or candidate-changing Evidence result.
 
-Use **Bench Profile** (or the user-facing label **Bench Type**) rather than restoring account Equipment. Equipment previously implied owned mechanical loadouts, progression, or readiness snapshots; this setting provisions a diagnostic workspace for one Match and grants no collectible, ownership, or character power.
+The Player may switch Bench Views or apply/clear the Relevant filter during a Match because this is a comfort and information-organization preference, not a rules preset. Local settings may remember the preferred default and export/import it. Global search, category, sort, page, and Relevant-filter state should persist across rerenders without altering replay provenance. Automated policies operate on legal intents, not the human view preference, so results do not need to be grouped by Bench View.
 
-TASK-013 should establish both authoritative access algorithms, the pinned Match setting, deck migration, projections, and a functional responsive UI using the currently playable catalog. TASK-014 expands and validates the playable diagnostic/content coverage; pairing PT-001 D with PT-006 D is the recommendation if “Global” is intended to include all 50 current Test/Command knowledge records. Until promotion is complete, the UI must report the exact playable count and must not claim the raw library is fully runnable. TASK-016 then performs the dedicated board-density and visual-composition pass against the final representative data sizes.
+Use **Bench View** (or the user-facing label **Bench Type**) rather than restoring account Equipment. Equipment previously implied owned mechanical loadouts, progression, or character power; this is a local view of one shared diagnostic workspace.
+
+TASK-013 should establish Global diagnostic availability, public-only relevance derivation/explanation, deck migration, projections, and a functional switchable UI using the currently playable catalog. TASK-014 expands and validates playable diagnostic/content coverage; pairing PT-001 D with PT-006 D is the recommendation if Global is intended to include all 50 current Test/Command knowledge records. Until promotion is complete, the UI must report the exact playable count and must not claim the raw library is fully runnable. TASK-016 then performs the dedicated board-density and visual-composition pass against final representative data sizes.
 
 ## PT-002 — Public candidate generation
 
@@ -89,7 +91,23 @@ Retain the current rule that each complete Ticket/template directly authors its 
 
 How should candidate elimination relate to Isolation?
 
-### A — Evidence-backed elimination with two valid Isolation routes (recommended)
+### Verified current behavior and the `CONFIRM` mismatch
+
+Current Commit Isolation accepts a public candidate plus one or more authorized same-Ticket Evidence citations, spends one Action, and then looks for one authored Isolation requirement whose candidate is the selected true active actionable Fault and whose flat `minimum_citations` count is met by eligible outcome IDs. The engine does not interpret `CONFIRM` as intrinsically sufficient; disposition and Isolation eligibility are separate fields.
+
+That explains the reported result but exposes a design/content mismatch. On `One Member Down`, Drive Health produces `CONFIRM: Failed SAS Drive` and says the Evidence is decisive, while the authored Isolation requirement separately requires two citations: RAID member status plus Drive Health. Citing only the confirmed Drive Health result therefore returns `ISOLATION_NOT_SUPPORTED`. The engine followed its current contract, but the word `CONFIRM`, the public summary, candidate-flow precedent, and player expectation all imply that this Evidence should be independently sufficient. Keeping both meanings would make the game appear buggy.
+
+The current Evidence dispositions are:
+
+- `SUPPORT`: increases confidence in a candidate but is not independently decisive unless an explicit multi-Evidence route says otherwise;
+- `CONTRADICT`: evidence against a candidate, but not necessarily enough to eliminate it;
+- `RULE_OUT`: decisive incompatibility with that candidate under the authored conditions;
+- `CONFIRM`: currently only a strong candidate effect, but proposed below to mean independently decisive establishment of that candidate under the authored conditions; and
+- `INCONCLUSIVE`: the observation does not change a candidate assessment.
+
+These are Evidence meanings, not Isolation response codes. A syntactically/legal Commit produces either an `ISOLATION_ACCEPTED` event (the general action result is `RESOLVED`) or spends one Action and produces `ISOLATION_NOT_SUPPORTED`. The latter intentionally does not distinguish a wrong candidate from insufficient Evidence. A Commit can instead reject before payment with `ILLEGAL_TIMING` (Ticket is not in Diagnosis), `ILLEGAL_TARGET` (candidate/citations are malformed, unauthorized, or belong to another Ticket), or `INSUFFICIENT_ACTIONS`; ordinary request-envelope guards can also return `ILLEGAL_REQUEST`, `MATCH_MISMATCH`, `ACTOR_MISMATCH`, `IDEMPOTENCY_CONFLICT`, `STALE_REVISION`, or `NOT_ACTIVE_PLAYER`. Those errors do not mean the candidate was evaluated and found unsupported.
+
+### A — Evidence-backed elimination with two valid Isolation routes
 
 The Player may mark a candidate eliminated only by citing authorized Evidence whose authored disposition for that candidate is `RULE_OUT` or `CONTRADICT`. The mark is `PRIVATE_PLAYER` in competitive play and `TEAM` in cooperative play, costs zero Actions, is reversible, and never reveals whether the remaining candidate is true.
 
@@ -108,13 +126,29 @@ Allow free, possibly incorrect private/team crossed-out markers with no server v
 
 Every other candidate must be validly eliminated and the selected candidate must independently meet its positive Evidence requirement. This is clearest but likely slow and repetitive.
 
+### D — Typed alternative Isolation routes with decisive `CONFIRM` (recommended)
+
+Retain free Evidence-backed elimination, but replace the flat eligible-ID/minimum-count model with one or more explicit alternative Isolation routes per actionable Fault. Supported route types include:
+
+1. **Direct observation:** an authored visual/physical observation directly sees the broken, disconnected, burned, leaking, unseated, or otherwise decisive condition and yields candidate-specific `CONFIRM`;
+2. **Definitive diagnostic:** one Test/Command result yields candidate-specific `CONFIRM` under its stated target and machine-state conditions;
+3. **Corroborated support:** an authored AND/threshold combination of independent `SUPPORT`/other eligible Evidence satisfies a route without mislabeling any one result as confirming;
+4. **Elimination:** authorized `RULE_OUT` Evidence eliminates every other public candidate while the selected candidate remains; carefully authored combinations may use `CONTRADICT`, but `CONTRADICT` alone does not automatically mean ruled out; and
+5. **Recovery-derived route:** a failed/inconclusive Verify or later machine-state observation may open a new route for a newly actionable Fault.
+
+`CONFIRM` becomes a promise: for the referenced candidate under the current target/state conditions, that Evidence independently satisfies a positive Isolation route. If content still requires corroboration, use `SUPPORT`, not `CONFIRM`. Commit Isolation additionally requires the candidate to map to a true active actionable Fault; a confirmed non-actionable effect/condition must be labeled as such and cannot open a Repair gateway.
+
+Multiple valid routes may coexist, so different Players or teams can reach the same conclusion through different technical reasoning. Evidence contributions from multiple Players may combine when visibility permits, and any eligible Player may commit. The first accepted commitment for a particular active Fault/stage owns the Isolation event and contribution slot; the same already-isolated Fault is not repeatedly committed or scored, while later causal stages may require new Isolation.
+
+Every route is typed, versioned, Builder-proved, and player-safe. The UI explains disposition meanings and can show public route concepts, but it does not preview hidden truth or guarantee acceptance for a false candidate. The `One Member Down` regression must prove that its decisive Drive Health `CONFIRM` succeeds alone—or the content must be relabeled/re-authored as non-confirming.
+
 ## PT-004 — Speculative Repair
 
 Should a Player be able to Repair before accepted Isolation?
 
 ### A — Keep the accepted-Isolation gate (recommended for the first experiment)
 
-Do not add speculative Repair yet. PT-003 A already permits Isolation by elimination, so a Player can unlock Repair without a confirming Test when every alternative has been validly ruled out. This preserves the game's causal-accountability lesson and avoids using machine response as a hidden-answer oracle.
+Do not add speculative Repair yet. PT-003 D already permits Isolation through direct confirmation, corroborated support, or elimination, so a Player has flexible evidence paths without using Repair as the diagnostic oracle. This preserves the game's causal-accountability lesson.
 
 ### B — Permit a guess with two candidates remaining
 
@@ -189,7 +223,7 @@ Approve or amend each item by ID, for example:
 ```text
 PT-001 D
 PT-002 A
-PT-003 A
+PT-003 D
 PT-004 A
 PT-005 A
 PT-006 D

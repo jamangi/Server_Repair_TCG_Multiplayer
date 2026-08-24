@@ -13,7 +13,7 @@ Two project-owner layout studies now live in `ui-reference_images/`:
 - `relevant_diagnostic_bench.png` explores a compact public-context-filtered shelf, split illustration/Ticket details, expanded queue, separate response hand, and fully visible Legal Action.
 - `global_diagnostic_bench.png` explores a searchable/filterable/paginated complete playable catalog, compressed Ticket summary, selected-diagnostic inspector, and compact response hand.
 
-Current recommendation: approve PT-001 D as a pre-Match **Bench Profile** choice between `RELEVANT` and `GLOBAL`, default Relevant, and pin it for the Match. Do not model this as owned Equipment; it is a workspace/access profile with no inventory, progression, or technician power. Group results by profile because the modes represent different amounts of guidance.
+Current recommendation: approve PT-001 D as one globally available diagnostic catalog with switchable **Bench Views**: `RELEVANT` for a compact public-graph-filtered shelf and `GLOBAL` for the complete catalog. This is a comfort/organization preference, not a difficulty or Match setting; switching views or applying the Relevant filter inside Global changes no legality, score, statistics, or replay. Do not model it as owned Equipment.
 
 Functional rules/contracts and a usable first Bench belong to TASK-013. Catalog/outcome breadth belongs to TASK-014. Whole-board responsive density/polish belongs to TASK-016 after representative data stabilizes. Key TASK-016 backlog:
 
@@ -22,11 +22,11 @@ Functional rules/contracts and a usable first Bench belong to TASK-013. Catalog/
 - keep selected Ticket status/candidates visible, using a split Relevant hero and compressed Global summary plus an accessible full-Ticket view;
 - keep the selected Legal Action completely visible at normal desktop heights;
 - keep Bench diagnostics distinct from the private Repair/Verify response hand;
-- preserve Evidence/Worklog, queue, Bench, and input continuity from TASK-012;
+- preserve Evidence/Worklog, queue, Bench view/filter, and input continuity from TASK-012;
 - use bounded pagination/filtering for Global rather than one enormous Card scroller; and
 - recompose for mobile instead of shrinking the desktop grid.
 
-Do not add a `Relevant` hint/filter to Global mode, derive client-side relevance, hide basic symptom access, or display raw knowledge-library counts as playable catalog counts.
+Do not derive relevance in the DOM, imply that the curated graph exhausts expert judgment, hide basic symptom access, or display raw knowledge-library counts as playable catalog counts. Global should include the same authoritative public-graph Relevant filter and explainable relationship paths as an optional organization aid.
 
 ## Recommended UI-plan structure
 
