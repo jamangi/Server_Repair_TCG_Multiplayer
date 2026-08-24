@@ -1,10 +1,18 @@
-name: Deploy domain viewer to GitHub Pages
+name: Deploy Server Repair Viewer to GitHub Pages
 
 on:
   push:
     branches: ["main"]
     paths:
       - "viewer/**"
+      - "src/engine/**"
+      - "src/builder/**"
+      - "src/shared/**"
+      - "content/gameplay-v1/**"
+      - "assets/**"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - "tests/task-010-browser-portability.test.mjs"
       - ".github/workflows/deploy-pages.yml"
   workflow_dispatch:
 
@@ -32,8 +40,16 @@ jobs:
           node-version: "22"
       - name: Build content manifest for this deployment
         run: node viewer/scripts/build-manifest.mjs
+      - name: Reject stale or unexpected committed Play assets
+        run: node viewer/scripts/verify-play-assets.mjs
+      - name: Build browser-safe Play runtime
+        run: node viewer/scripts/build-play-assets.mjs
+      - name: Verify Play runtime allowlist, integrity, and committed freshness
+        run: |
+          node viewer/scripts/verify-play-assets.mjs
+          git diff --exit-code -- viewer/generated/play
       - name: Validate viewer content
-        run: node --test tests/viewer-content-schema.test.mjs tests/viewer-baseline.test.mjs
+        run: node --test tests/viewer-content-schema.test.mjs tests/viewer-baseline.test.mjs tests/task-010-browser-portability.test.mjs
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload viewer

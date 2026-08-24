@@ -1,0 +1,18 @@
+{
+  "name": "server-repair-tcg-multiplayer",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "packageManager": "pnpm@11.19.0",
+  "scripts": {
+    "build:content-manifest": "node viewer/scripts/build-manifest.mjs",
+    "build:play-assets": "node viewer/scripts/build-play-assets.mjs",
+    "verify:play-assets": "node viewer/scripts/verify-play-assets.mjs",
+    "test:node": "node --test tests/*.test.mjs",
+    "test:browser": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.62.1",
+    "animejs": "4.5.0"
+  }
+}

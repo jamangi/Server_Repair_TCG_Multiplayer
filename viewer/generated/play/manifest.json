@@ -1,0 +1,199 @@
+{
+  "format_version": 1,
+  "profile_id": "solo-pages-v1",
+  "hash_algorithm": "sha256",
+  "files": [
+    {
+      "path": "assets/play/assets.json",
+      "source": "viewer/assets/play/assets.json",
+      "bytes": 7549,
+      "sha256": "5180bd11f8b4814e752bee6891d2df3881cc95f50d26ea250c0e93b45be72d6a"
+    },
+    {
+      "path": "assets/play/decorative/night-shift-desk.svg",
+      "source": "viewer/assets/play/decorative/night-shift-desk.svg",
+      "bytes": 3718,
+      "sha256": "6c48701c1235fdeb5bf0f227ab8cf382b0748b372e1fa2c75c8a2bbfd427738f"
+    },
+    {
+      "path": "assets/play/placeholders/command-console.svg",
+      "source": "viewer/assets/play/placeholders/command-console.svg",
+      "bytes": 1801,
+      "sha256": "c6f22d32053fd728b258be862d95e1704c09c642a4d6e46bfcaba42780820266"
+    },
+    {
+      "path": "assets/play/placeholders/generic-server.svg",
+      "source": "viewer/assets/play/placeholders/generic-server.svg",
+      "bytes": 1631,
+      "sha256": "05a68b0c2d08a7100bdc94df51838a6d25a67cdc9379b2c52055a165f8d0f2cf"
+    },
+    {
+      "path": "assets/play/placeholders/repair-bench.svg",
+      "source": "viewer/assets/play/placeholders/repair-bench.svg",
+      "bytes": 1977,
+      "sha256": "2e3fe10801044f75bcd6242628b18c86f3d0390d1db94ddd56e32dcce5ab11c3"
+    },
+    {
+      "path": "assets/play/placeholders/test-diagnostics.svg",
+      "source": "viewer/assets/play/placeholders/test-diagnostics.svg",
+      "bytes": 1733,
+      "sha256": "596299364363ce9a40565341afdddf789a2eb0df37cc9827f985886798a486f3"
+    },
+    {
+      "path": "assets/play/placeholders/ticket-storage.svg",
+      "source": "viewer/assets/play/placeholders/ticket-storage.svg",
+      "bytes": 1989,
+      "sha256": "d0d75428b8a103a59f4db5c7297d955824b4dc49bd5f11626875faa4d04d0d4e"
+    },
+    {
+      "path": "assets/play/placeholders/verify-readout.svg",
+      "source": "viewer/assets/play/placeholders/verify-readout.svg",
+      "bytes": 1535,
+      "sha256": "bd15b440af779398380b3db25eb17b4e768e3b97c053a07e709b887f36d634d3"
+    },
+    {
+      "path": "assets/play/profile-icons/console-specialist.svg",
+      "source": "viewer/assets/play/profile-icons/console-specialist.svg",
+      "bytes": 830,
+      "sha256": "b3ab88fc8a33352e3030ba15487badcb14bca3df9f41715122c676ddad00b020"
+    },
+    {
+      "path": "assets/play/profile-icons/field-technician.svg",
+      "source": "viewer/assets/play/profile-icons/field-technician.svg",
+      "bytes": 808,
+      "sha256": "b60e7581080cf1ff6737aeb5c874912a7254c689d2359ed09a543b74890a69e5"
+    },
+    {
+      "path": "assets/play/profile-icons/storage-specialist.svg",
+      "source": "viewer/assets/play/profile-icons/storage-specialist.svg",
+      "bytes": 842,
+      "sha256": "e90f5112d754de4d963c58f3c4caaad539df6e82bc3f5cbef7f948de6b592f5c"
+    },
+    {
+      "path": "assets/play/profile-icons/systems-operator.svg",
+      "source": "viewer/assets/play/profile-icons/systems-operator.svg",
+      "bytes": 860,
+      "sha256": "1b6af7ec71481eb890a775f100c8168b71b4818428d041c400367a2b71879938"
+    },
+    {
+      "path": "assets/play/textures/blueprint-grid.svg",
+      "source": "viewer/assets/play/textures/blueprint-grid.svg",
+      "bytes": 404,
+      "sha256": "df5a9a55146d1c4939a0e2f90ee20caf9e2e6eeb48438b0d97b4e0ccd4e4858d"
+    },
+    {
+      "path": "assets/play/textures/paper-fibers.svg",
+      "source": "viewer/assets/play/textures/paper-fibers.svg",
+      "bytes": 422,
+      "sha256": "6a946ba8f5f515b665daef8fa7e021b2a87cd6c813ddf844bcb5181b179de2d8"
+    },
+    {
+      "path": "content/gameplay-v1/card-catalog.json",
+      "source": "content/gameplay-v1/card-catalog.json",
+      "bytes": 22309,
+      "sha256": "560d6bc57bb8c4544175caed9b3405da5f3dd7204d4e37f3f207a271d80f4d5e"
+    },
+    {
+      "path": "content/gameplay-v1/decks.json",
+      "source": "content/gameplay-v1/decks.json",
+      "bytes": 2999,
+      "sha256": "6ac09dee5bc86708a4d85da4749b860bd4c62d7463eb797cfa22125ec2773732"
+    },
+    {
+      "path": "content/gameplay-v1/domain-snapshot.json",
+      "source": "content/gameplay-v1/domain-snapshot.json",
+      "bytes": 14703,
+      "sha256": "255cbae625610fbd7fce9d07fb6fe0ced4397211dab13f72bd181adf6764a0ae"
+    },
+    {
+      "path": "content/gameplay-v1/ticket-templates.json",
+      "source": "content/gameplay-v1/ticket-templates.json",
+      "bytes": 25093,
+      "sha256": "e967c524ba36905ae18edafbf066c229838010cded57855f884fcfecf4ce74db"
+    },
+    {
+      "path": "src/builder/canonical.mjs",
+      "source": "src/builder/canonical.mjs",
+      "bytes": 1837,
+      "sha256": "9d8f6db18311916334e4288b7a7c5b26f21e742582229991028de015b48fd760"
+    },
+    {
+      "path": "src/builder/ticket-builder.mjs",
+      "source": "src/builder/ticket-builder.mjs",
+      "bytes": 30608,
+      "sha256": "361fc5c663310142a4ac04a06feb3cdbd3886811c7d51c882edbd31f3a25b4d5"
+    },
+    {
+      "path": "src/builder/ticket-solvability.mjs",
+      "source": "src/builder/ticket-solvability.mjs",
+      "bytes": 30944,
+      "sha256": "ea153a0340a0fe1ad31c4597f7b60c06b15db3b029b57c4bf5a1f0f74f0cabf3"
+    },
+    {
+      "path": "src/engine/catalogs.mjs",
+      "source": "src/engine/catalogs.mjs",
+      "bytes": 1203,
+      "sha256": "dcb5f93ee2dec5bfd1b08da2f1780f7ab491b97058d0fc122fabf6ca24f6a818"
+    },
+    {
+      "path": "src/engine/determinism.mjs",
+      "source": "src/engine/determinism.mjs",
+      "bytes": 2206,
+      "sha256": "76a6e36d7dc876c2ed816a3ff42d244766d19aaea141e0c31379b130360c4b0e"
+    },
+    {
+      "path": "src/engine/engine.mjs",
+      "source": "src/engine/engine.mjs",
+      "bytes": 71142,
+      "sha256": "4689a848e05cc72ca79a8a0c5279ed94e0e4fa1e496c5a3ae4ca1ca00432c27d"
+    },
+    {
+      "path": "src/engine/events.mjs",
+      "source": "src/engine/events.mjs",
+      "bytes": 3550,
+      "sha256": "7037e6091632be3ed2240531fa8f35c1c11160ff535811ca3eee4aa88f532696"
+    },
+    {
+      "path": "src/engine/index.mjs",
+      "source": "src/engine/index.mjs",
+      "bytes": 378,
+      "sha256": "70988e36f16eead4c1c90179d7c8121c7f128093242308e1fa93ffc4a0372958"
+    },
+    {
+      "path": "src/engine/invariants.mjs",
+      "source": "src/engine/invariants.mjs",
+      "bytes": 5757,
+      "sha256": "c8c75ed669c157c936da21a08ac55e76c604789731f1c46b3fab45752216070b"
+    },
+    {
+      "path": "src/engine/projections.mjs",
+      "source": "src/engine/projections.mjs",
+      "bytes": 19531,
+      "sha256": "8824cf02b799c12d46581b748e1eea422f4d32bceb8d3f869a4436f87f8a3940"
+    },
+    {
+      "path": "src/shared/sha256.mjs",
+      "source": "src/shared/sha256.mjs",
+      "bytes": 4478,
+      "sha256": "24ac0e5eaa6f70ec118b779813ef924ece6084ad0daa1f407767391cd53baa94"
+    },
+    {
+      "path": "vendor/animejs/4.5.0/LICENSE.md",
+      "source": "viewer/vendor/animejs/4.5.0/LICENSE.md",
+      "bytes": 1075,
+      "sha256": "3f3e835a9952cfc2a6ca836fb95b3257c981f24fa3ef51249055acb09931897b"
+    },
+    {
+      "path": "vendor/animejs/4.5.0/anime.esm.min.js",
+      "source": "viewer/vendor/animejs/4.5.0/anime.esm.min.js",
+      "bytes": 118678,
+      "sha256": "a19015a1a92d52025a2fb6703b6d67eadd1cc2aeaf880770e96e04cf6aa07be1"
+    },
+    {
+      "path": "vendor/animejs/4.5.0/metadata.json",
+      "source": "viewer/vendor/animejs/4.5.0/metadata.json",
+      "bytes": 377,
+      "sha256": "159a8d530bea93dd029e397ec1d633720bdd866973b4c3635ad66f6b24cb88c8"
+    }
+  ]
+}

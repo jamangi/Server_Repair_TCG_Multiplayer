@@ -1,0 +1,6 @@
+{
+  "schema_version": "solo-settings-v1",
+  "starting_ticket_count": 3,
+  "motion_preference": "SYSTEM",
+  "drag_enabled": false
+}

@@ -1,11 +1,133 @@
-import{loadAllContent}from'./data-loader.js';
-import{ENTITY_TYPE_LABELS as labels,ENTITY_TYPE_ORDER as order,categoryFor as cat}from'./entity-types.js';
-const S={records:[],tab:'fault',q:'',sort:'name',cat:''}; const $=s=>document.querySelector(s); const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const name=r=>r.presentation?.display_name||r.name||r.id, desc=r=>r.presentation?.short_description||r.description||r.education_text||'No description yet.';
-function tabs(){ $('#tabs').innerHTML=''; for(const t of order){const n=t==='everything'?S.records.length:S.records.filter(r=>r.entity_type===t).length;const b=document.createElement('button');b.className='tab '+(S.tab===t?'active':'');b.textContent=`${t==='everything'?'Everything':labels[t]} (${n})`;b.onclick=()=>{S.tab=t;tabs();cats();render()};$('#tabs').append(b)}}
-function cats(){const vals=[...new Set(S.records.filter(r=>S.tab==='everything'||r.entity_type===S.tab).map(cat).filter(Boolean))].sort();$('#category').innerHTML='<option value="">All categories</option>'+vals.map(v=>`<option>${esc(v)}</option>`).join('');if(!vals.includes(S.cat))S.cat='';$('#category').value=S.cat}
-function rows(){let x=S.records.filter(r=>S.tab==='everything'||r.entity_type===S.tab);if(S.cat)x=x.filter(r=>cat(r)===S.cat);if(S.q)x=x.filter(r=>JSON.stringify(r).toLowerCase().includes(S.q));const f={name:(a,b)=>name(a).localeCompare(name(b)),type:(a,b)=>a.entity_type.localeCompare(b.entity_type)||name(a).localeCompare(name(b)),category:(a,b)=>cat(a).localeCompare(cat(b))||name(a).localeCompare(name(b)),id:(a,b)=>a.id.localeCompare(b.id)}[S.sort];return x.sort(f)}
-function detail(r){const skip=new Set(['presentation','source','entity_type','_pack_id','_pack_name']);const fv=v=>Array.isArray(v)?`<ul>${v.map(x=>`<li>${fv(x)}</li>`).join('')}</ul>`:v&&typeof v==='object'?`<pre>${esc(JSON.stringify(v,null,2))}</pre>`:esc(v??'');return `<span class="pill">${esc(labels[r.entity_type]||r.entity_type)}</span><h2>${esc(name(r))}</h2><p>${esc(desc(r))}</p>${r.presentation?.illustration?`<h3>Illustration</h3><p><code>${esc(r.presentation.illustration.asset_id)}</code><br>${esc(r.presentation.illustration.alt_text||'')}</p>`:''}<h3>Domain data</h3><table>${Object.entries(r).filter(([k])=>!skip.has(k)).map(([k,v])=>`<tr><td>${esc(k.replaceAll('_',' '))}</td><td>${fv(v)}</td></tr>`).join('')}</table><p>Pack: ${esc(r._pack_name||'')}</p>`}
-function render(){const x=rows();$('#results').innerHTML='';$('#resultCount').textContent=`${x.length} result${x.length===1?'':'s'}`;$('#summary').textContent=S.tab==='everything'?'Everything':labels[S.tab];$('#empty').hidden=!!x.length;for(const r of x){const b=document.createElement('button');b.className='card';b.innerHTML=`<span class="pill">${esc(labels[r.entity_type]||r.entity_type)}</span>${cat(r)?`<span class="pill">${esc(cat(r))}</span>`:''}<h2>${esc(name(r))}</h2><p>${esc(desc(r))}</p><code>${esc(r.id)}</code>`;b.onclick=()=>{$('#detail').innerHTML=detail(r);$('#dialog').showModal()};$('#results').append(b)}}
-$('#search').oninput=e=>{S.q=e.target.value.trim().toLowerCase();render()};$('#sort').onchange=e=>{S.sort=e.target.value;render()};$('#category').onchange=e=>{S.cat=e.target.value;render()};$('#close').onclick=()=>$('#dialog').close();$('#dialog').onclick=e=>{if(e.target===$('#dialog'))$('#dialog').close()};
-try{const {manifest,packs,records}=await loadAllContent();S.records=records;$('#recordCount').textContent=records.length;$('#status').textContent=`Loaded ${packs.length} pack(s). Manifest: ${manifest.generated_at||'prototype'}.`;tabs();cats();render()}catch(e){console.error(e);$('#status').textContent='Load failed: '+e.message;$('#empty').hidden=false;$('#empty').innerHTML='<h2>Could not load content</h2><p>Serve this folder over HTTP; do not open with file://.</p>'}
+import { mountLibrary, unmountLibrary } from './library-view.js';
+
+const appRoot = document.querySelector('#app');
+const announcer = document.querySelector('#announcer');
+const libraryTab = document.querySelector('#library-tab');
+const playTab = document.querySelector('#play-tab');
+const settingsTrigger = document.querySelector('#settings-trigger');
+
+let activeRoute = null;
+let activeArea = null;
+let playModule = null;
+let navigationToken = 0;
+let restoringHash = false;
+
+function announce(message) {
+  announcer.textContent = '';
+  requestAnimationFrame(() => { announcer.textContent = message; });
+}
+
+function normalizeRoute(hash = location.hash) {
+  const raw = hash.startsWith('#') ? hash.slice(1) : hash;
+  const path = raw.startsWith('/') ? raw : `/${raw}`;
+  if (!raw || path === '/') return { hash: '#/library', area: 'library', name: 'library', params: {} };
+  if (path === '/library') return { hash: '#/library', area: 'library', name: 'library', params: {} };
+  if (path === '/play/home') return { hash: '#/play/home', area: 'play', name: 'home', params: {} };
+  if (path === '/play/decks') return { hash: '#/play/decks', area: 'play', name: 'decks', params: {} };
+  const deckEditor = path.match(/^\/play\/decks\/([a-z0-9._-]+)\/edit$/);
+  if (deckEditor) return {
+    hash: `#/play/decks/${deckEditor[1]}/edit`,
+    area: 'play',
+    name: 'deck-edit',
+    params: { deckId: deckEditor[1] },
+  };
+  if (path === '/play/profile') return { hash: '#/play/profile', area: 'play', name: 'profile', params: {} };
+  if (path === '/play/game') return { hash: '#/play/game', area: 'play', name: 'game', params: {} };
+  return { hash: '#/library', area: 'library', name: 'library', params: {}, replacedInvalid: true };
+}
+
+async function ensurePlayModule() {
+  playModule ||= await import('./play/play-app.mjs');
+  return playModule;
+}
+
+function updateChrome(route) {
+  if (route.area === 'library') libraryTab.setAttribute('aria-current', 'page');
+  else libraryTab.removeAttribute('aria-current');
+  if (route.area === 'play') playTab.setAttribute('aria-current', 'page');
+  else playTab.removeAttribute('aria-current');
+  settingsTrigger.hidden = route.area !== 'play';
+  document.body.dataset.area = route.area;
+  const titles = {
+    library: 'Domain Library',
+    home: 'Shift Home',
+    decks: 'Decks',
+    'deck-edit': 'Deck Editor',
+    profile: 'Profile',
+    game: 'Solo Repair',
+  };
+  document.title = `${titles[route.name] || 'Server Repair'} · Server Repair`;
+}
+
+async function routeApplication() {
+  if (restoringHash) {
+    restoringHash = false;
+    return;
+  }
+  const next = normalizeRoute();
+  if (next.replacedInvalid || location.hash !== next.hash) {
+    history.replaceState(null, '', next.hash);
+  }
+
+  if (activeRoute && activeRoute.hash !== next.hash && activeArea === 'play' && playModule?.confirmNavigation) {
+    const allowed = await playModule.confirmNavigation(next);
+    if (!allowed) {
+      restoringHash = true;
+      location.hash = activeRoute.hash;
+      return;
+    }
+  }
+
+  const token = ++navigationToken;
+  updateChrome(next);
+  appRoot.setAttribute('aria-busy', 'true');
+
+  try {
+    if (next.area === 'library') {
+      if (activeArea === 'play') playModule?.unmountPlay?.();
+      await mountLibrary(appRoot, { announce });
+    } else {
+      if (activeArea === 'library') unmountLibrary();
+      const module = await ensurePlayModule();
+      if (token !== navigationToken) return;
+      await module.mountPlay(appRoot, {
+        route: next,
+        announce,
+        navigate: (hash) => { location.hash = hash; },
+      });
+    }
+    if (token !== navigationToken) return;
+    activeRoute = next;
+    activeArea = next.area;
+    appRoot.removeAttribute('aria-busy');
+    appRoot.focus({ preventScroll: true });
+  } catch (error) {
+    console.error(error);
+    appRoot.removeAttribute('aria-busy');
+    appRoot.innerHTML = `<section class="route-error" role="alert"><p class="eyebrow">Client error</p><h1>This area could not be opened</h1><p>${String(error.message || error)}</p><p>Library access remains available from the top navigation.</p></section>`;
+    announce('The requested area could not be opened.');
+  }
+}
+
+settingsTrigger.addEventListener('click', async () => {
+  if (activeArea !== 'play') return;
+  const module = await ensurePlayModule();
+  module.openSettings?.();
+});
+
+libraryTab.addEventListener('click', (event) => {
+  if (activeArea === 'library') event.preventDefault();
+});
+
+playTab.addEventListener('click', (event) => {
+  if (activeArea === 'play') event.preventDefault();
+});
+
+window.addEventListener('hashchange', routeApplication);
+window.addEventListener('beforeunload', (event) => {
+  if (!playModule?.hasUnsafeExit?.()) return;
+  event.preventDefault();
+  event.returnValue = '';
+});
+
+await routeApplication();

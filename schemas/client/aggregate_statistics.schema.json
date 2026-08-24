@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/client/aggregate_statistics.schema.json",
+  "title": "Solo Pages Aggregate Statistics v1",
+  "description": "User-controlled local-only lifetime statistics with exactly-once Match and result ledgers.",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "stableId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+    },
+    "counter": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "points": {
+      "type": "integer",
+      "minimum": -9007199254740991,
+      "maximum": 9007199254740991
+    }
+  },
+  "properties": {
+    "schema_version": {
+      "const": "solo-statistics-v1"
+    },
+    "processed_match_start_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/stableId"
+      },
+      "uniqueItems": true
+    },
+    "processed_match_results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "match_id": { "$ref": "#/$defs/stableId" },
+          "result_id": { "$ref": "#/$defs/stableId" }
+        },
+        "required": ["match_id", "result_id"]
+      },
+      "uniqueItems": true
+    },
+    "totals": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "matches_started": { "$ref": "#/$defs/counter" },
+        "matches_completed": { "$ref": "#/$defs/counter" },
+        "solo_wins": { "$ref": "#/$defs/counter" },
+        "solo_losses": { "$ref": "#/$defs/counter" },
+        "solo_stalemates": { "$ref": "#/$defs/counter" },
+        "invalid_or_capped_results": { "$ref": "#/$defs/counter" },
+        "tickets_closed": { "$ref": "#/$defs/counter" },
+        "starting_service_points_total": { "$ref": "#/$defs/points" },
+        "final_service_points_total": { "$ref": "#/$defs/points" },
+        "lifetime_service_points_gained": { "$ref": "#/$defs/points" },
+        "tests": { "$ref": "#/$defs/counter" },
+        "accepted_isolations": { "$ref": "#/$defs/counter" },
+        "rejected_isolations": { "$ref": "#/$defs/counter" },
+        "repairs": { "$ref": "#/$defs/counter" },
+        "verify_attempts": { "$ref": "#/$defs/counter" },
+        "verify_passes": { "$ref": "#/$defs/counter" },
+        "verify_failures": { "$ref": "#/$defs/counter" },
+        "verify_inconclusive_results": { "$ref": "#/$defs/counter" },
+        "documentation": { "$ref": "#/$defs/counter" },
+        "assists": { "$ref": "#/$defs/counter" },
+        "failed_verify": { "$ref": "#/$defs/counter" },
+        "redundant_or_superseded_actions": { "$ref": "#/$defs/counter" },
+        "turns": { "$ref": "#/$defs/counter" },
+        "authoritative_elapsed_seconds": { "$ref": "#/$defs/counter" },
+        "search_uses": { "$ref": "#/$defs/counter" },
+        "refresh_uses": { "$ref": "#/$defs/counter" }
+      },
+      "required": [
+        "matches_started",
+        "matches_completed",
+        "solo_wins",
+        "solo_losses",
+        "solo_stalemates",
+        "invalid_or_capped_results",
+        "tickets_closed",
+        "starting_service_points_total",
+        "final_service_points_total",
+        "lifetime_service_points_gained",
+        "tests",
+        "accepted_isolations",
+        "rejected_isolations",
+        "repairs",
+        "verify_attempts",
+        "verify_passes",
+        "verify_failures",
+        "verify_inconclusive_results",
+        "documentation",
+        "assists",
+        "failed_verify",
+        "redundant_or_superseded_actions",
+        "turns",
+        "authoritative_elapsed_seconds",
+        "search_uses",
+        "refresh_uses"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "processed_match_start_ids",
+    "processed_match_results",
+    "totals"
+  ]
+}

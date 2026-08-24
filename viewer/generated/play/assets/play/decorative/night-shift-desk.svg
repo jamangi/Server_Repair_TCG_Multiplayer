@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900">
+  <defs>
+    <linearGradient id="room" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#06131c"/><stop offset=".52" stop-color="#102c3a"/><stop offset="1" stop-color="#03070a"/></linearGradient>
+    <linearGradient id="desk" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#263239"/><stop offset=".42" stop-color="#11191e"/><stop offset="1" stop-color="#05080a"/></linearGradient>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#f1e8d6"/><stop offset="1" stop-color="#cdbc9d"/></linearGradient>
+    <radialGradient id="lamp" cx="76%" cy="20%" r="65%"><stop stop-color="#ffc867" stop-opacity=".68"/><stop offset=".28" stop-color="#f19b22" stop-opacity=".19"/><stop offset="1" stop-color="#f19b22" stop-opacity="0"/></radialGradient>
+    <radialGradient id="racklight" cx="18%" cy="34%" r="55%"><stop stop-color="#37d6ff" stop-opacity=".42"/><stop offset="1" stop-color="#37d6ff" stop-opacity="0"/></radialGradient>
+    <pattern id="rack" width="120" height="72" patternUnits="userSpaceOnUse"><rect x="4" y="4" width="111" height="63" rx="4" fill="#071219" stroke="#1c4556"/><path d="M15 21h65M15 34h78M15 47h49" stroke="#2a6477" stroke-width="4" opacity=".55"/><circle cx="98" cy="21" r="4" fill="#77ed70"/><circle cx="98" cy="40" r="4" fill="#33d1f4"/></pattern>
+    <filter id="shadow"><feDropShadow dx="0" dy="20" stdDeviation="18" flood-opacity=".75"/></filter>
+  </defs>
+  <rect width="1200" height="900" fill="url(#room)"/><rect x="0" y="0" width="585" height="610" fill="url(#rack)"/><rect width="1200" height="900" fill="url(#racklight)"/>
+  <path d="M0 570L1200 426v474H0z" fill="url(#desk)"/><path d="M0 617l1200-145" stroke="#40515a" stroke-width="5" opacity=".55"/>
+  <g transform="translate(357 350) rotate(-4)" filter="url(#shadow)">
+    <rect x="-18" y="-18" width="636" height="414" rx="26" fill="#15191a" stroke="#61615b" stroke-width="8"/>
+    <path d="M0 0h600v360H0z" fill="url(#paper)" stroke="#9c8e76" stroke-width="5"/>
+    <rect x="52" y="57" width="496" height="142" rx="10" fill="#07151c"/>
+    <path d="M67 153c92-99 150 62 243-32s151-27 221 9" fill="none" stroke="#318fb9" stroke-width="15"/>
+    <path d="M67 170c91-51 159 42 261-17s128-36 202-4" fill="none" stroke="#df8318" stroke-width="12"/>
+    <g fill="#69767b"><rect x="53" y="238" width="145" height="30" rx="6"/><rect x="217" y="238" width="145" height="30" rx="6"/><rect x="381" y="238" width="167" height="30" rx="6"/></g>
+    <g fill="#a7977e"><rect x="52" y="294" width="235" height="14" rx="7"/><rect x="52" y="319" width="353" height="14" rx="7"/></g>
+  </g>
+  <g transform="translate(128 608) rotate(-10)" filter="url(#shadow)"><rect width="218" height="287" rx="18" fill="#082b38" stroke="#35d9ff" stroke-width="6"/><rect x="18" y="32" width="182" height="119" rx="8" fill="url(#rack)"/><path d="M25 183h162M25 212h124M25 241h147" stroke="#9ad2df" stroke-width="9" opacity=".72"/></g>
+  <g transform="translate(871 588) rotate(9)" filter="url(#shadow)"><rect width="218" height="287" rx="18" fill="#3a2708" stroke="#f2ab27" stroke-width="6"/><rect x="18" y="32" width="182" height="119" rx="8" fill="#101719"/><circle cx="108" cy="91" r="42" fill="#303b41" stroke="#d49b32" stroke-width="6"/><path d="M25 183h162M25 212h124M25 241h147" stroke="#ead2a1" stroke-width="9" opacity=".72"/></g>
+  <rect width="1200" height="900" fill="url(#lamp)"/>
+  <g transform="translate(941 34)" fill="#11171a" stroke="#6a7274" stroke-width="9"><path d="M81 0h95l70 251-42 12-54-181-63 217-43-12 75-245z"/><ellipse cx="214" cy="278" rx="116" ry="45" fill="#232a2b"/><ellipse cx="214" cy="285" rx="86" ry="26" fill="#f4b249" opacity=".7"/></g>
+</svg>

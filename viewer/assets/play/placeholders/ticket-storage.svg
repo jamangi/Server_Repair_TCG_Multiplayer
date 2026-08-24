@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 480">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#061019"/><stop offset=".45" stop-color="#102d3d"/><stop offset="1" stop-color="#02070b"/></linearGradient>
+    <radialGradient id="warm" cx="19%" cy="62%" r="44%"><stop stop-color="#ec8f1b" stop-opacity=".5"/><stop offset="1" stop-color="#ec8f1b" stop-opacity="0"/></radialGradient>
+    <radialGradient id="cool" cx="75%" cy="36%" r="52%"><stop stop-color="#35bfe8" stop-opacity=".4"/><stop offset="1" stop-color="#35bfe8" stop-opacity="0"/></radialGradient>
+    <pattern id="rack" width="130" height="88" patternUnits="userSpaceOnUse"><rect x="4" y="4" width="120" height="78" rx="5" fill="#07131a" stroke="#194556"/><path d="M17 22h78M17 37h62M17 52h85" stroke="#2d6b7e" stroke-width="4" opacity=".52"/><circle cx="108" cy="23" r="4" fill="#80ef70"/><circle cx="108" cy="45" r="4" fill="#e4a72d"/></pattern>
+    <filter id="glow"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="1200" height="480" fill="url(#bg)"/><rect x="22" y="28" width="1156" height="424" rx="20" fill="url(#rack)"/>
+  <rect width="1200" height="480" fill="url(#warm)"/><rect width="1200" height="480" fill="url(#cool)"/>
+  <g fill="none" stroke-linecap="round" filter="url(#glow)">
+    <path d="M-30 344C184 110 321 430 545 219S850 133 1233 287" stroke="#eb8a17" stroke-width="25" opacity=".92"/>
+    <path d="M-22 387C182 224 337 401 573 256S891 183 1232 342" stroke="#2b9cd0" stroke-width="22" opacity=".92"/>
+    <path d="M-22 300C151 178 309 331 526 170S890 95 1228 235" stroke="#194d65" stroke-width="14"/>
+  </g>
+  <g fill="#8cf47d" filter="url(#glow)"><circle cx="973" cy="154" r="8"/><circle cx="1010" cy="172" r="8"/><circle cx="1047" cy="155" r="8"/></g>
+  <path d="M0 424c251-70 393 26 595-17s354-54 605-3v76H0z" fill="#02060a" opacity=".64"/>
+</svg>

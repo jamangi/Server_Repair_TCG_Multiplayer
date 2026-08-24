@@ -1,0 +1,81 @@
+name: Browser acceptance
+
+on:
+  pull_request:
+    paths:
+      - "viewer/**"
+      - "src/engine/**"
+      - "src/builder/**"
+      - "src/shared/**"
+      - "content/gameplay-v1/**"
+      - "assets/**"
+      - "schemas/client/**"
+      - "examples/client/**"
+      - "tests/browser/**"
+      - "playwright.config.mjs"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - ".github/workflows/browser-acceptance.yml"
+  push:
+    branches: ["main"]
+    paths:
+      - "viewer/**"
+      - "src/engine/**"
+      - "src/builder/**"
+      - "src/shared/**"
+      - "content/gameplay-v1/**"
+      - "assets/**"
+      - "schemas/client/**"
+      - "examples/client/**"
+      - "tests/browser/**"
+      - "playwright.config.mjs"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - ".github/workflows/browser-acceptance.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: browser-acceptance-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  chromium:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.19.0
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: pnpm
+      - name: Install exact development dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Prepare and verify the static Pages artifact
+        run: |
+          node viewer/scripts/build-manifest.mjs
+          node viewer/scripts/build-play-assets.mjs
+          node viewer/scripts/verify-play-assets.mjs
+          git diff --exit-code -- viewer/generated/play
+      - name: Install pinned Chromium runtime
+        run: pnpm exec playwright install --with-deps chromium
+      - name: Run browser acceptance matrix
+        run: pnpm exec playwright test
+      - name: Preserve browser report and failure evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: task-010-browser-acceptance
+          path: |
+            playwright-report/task-010
+            test-results/task-010
+          if-no-files-found: ignore
+          retention-days: 14

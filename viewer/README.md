@@ -1,15 +1,15 @@
-# Server Repair Domain Viewer
+# Server Repair static Library and local Solo Play
 
-A static HTML/CSS/JavaScript viewer for the Server Repair Card Game technical knowledge database.
+A static HTML/CSS/JavaScript GitHub Pages application with two top-level areas: the established technical Domain Library and the browser-local `solo-pages-v1` training client.
 
 ## Flow
 
 ```text
 index.html
   -> js/app.js
-  -> js/data-loader.js
-  -> content/manifest.json
-  -> any number of JSON content packs
+     -> Library: js/data-loader.js -> content/manifest.json -> JSON content packs
+     -> Play: js/play/play-app.mjs -> dedicated module Worker
+              -> generated/play/ canonical engine, Builder, gameplay, and vendored motion runtime
 ```
 
 The viewer includes tabs for Faults, Symptoms, Components, Tests, Tools, Commands, Repairs, Validations, Protocols, and Everything; full-text search; category filtering; sorting; and record detail dialogs.
@@ -59,13 +59,21 @@ tab; edge records remain visible only through **Everything**.
 
 ## Local testing
 
-Do not double-click `index.html`, because the viewer fetches JSON. Serve the folder over HTTP, for example:
+Prepare the complete allowlisted Pages artifact from the repository root with one command:
+
+```bash
+node viewer/scripts/build-play-assets.mjs
+```
+
+Then serve `viewer/` over HTTP. Do not double-click `index.html`, because both areas fetch modules and JSON:
 
 ```bash
 python -m http.server 8000 --directory viewer
 ```
 
 Then visit `http://localhost:8000/`.
+
+Run `node viewer/scripts/verify-play-assets.mjs` to confirm that the staged Play subtree is complete, hash-matched, and free of denylisted server/simulation material.
 
 ## Illustrations
 
@@ -78,13 +86,14 @@ Records may contain reusable illustration references, for example:
 }
 ```
 
-The viewer displays illustration metadata but does not resolve image files yet. Content may
-omit the optional `illustration` object until an asset pipeline is intentionally added.
+The Library displays illustration metadata. Play resolves stable `asset_id` values through
+an external asset manifest and falls back through domain/category-specific placeholders.
+The canonical full illustration set remains reserved for TASK-011.
 
 ## Current scope
 
-The viewer intentionally provides search, category filtering, sorting, and generic record
-details for the Core v0.1 content packs. Referenced stable IDs are currently displayed as
-text. Making those references clickable would be a navigation enhancement, not a content,
-schema, or deployment requirement. Expansion filters and URL-persisted search state are not
-planned for this version.
+Library intentionally preserves search, category filtering, sorting, and generic record
+details for the Core v0.1 packs. Play is a local solo training profile, not an account,
+multiplayer, campaign, Room, cloud-save, or anti-cheat client. Its active Match is intentionally
+non-resumable; validated backup export contains only profile, decks, settings, processed IDs,
+and aggregates.

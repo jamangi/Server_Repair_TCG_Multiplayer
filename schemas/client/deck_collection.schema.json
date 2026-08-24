@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/client/deck_collection.schema.json",
+  "title": "Solo Pages Deck Collection v1",
+  "description": "Saved local deck definitions. Draft editing state is deliberately not persisted here.",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "stableId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+    },
+    "savedDeck": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "deck_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "display_name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 48,
+          "pattern": "^[^\\u0000-\\u001f\\u007f]+$"
+        },
+        "source_deck_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+        },
+        "card_definition_ids": {
+          "type": "array",
+          "minItems": 30,
+          "maxItems": 30,
+          "items": {
+            "$ref": "#/$defs/stableId"
+          }
+        }
+      },
+      "required": [
+        "deck_id",
+        "display_name",
+        "source_deck_id",
+        "card_definition_ids"
+      ]
+    }
+  },
+  "properties": {
+    "schema_version": {
+      "const": "solo-decks-v1"
+    },
+    "ruleset_version": {
+      "const": "first-version-v1"
+    },
+    "card_catalog_version": {
+      "const": "core-card-catalog-v1"
+    },
+    "active_deck_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+    },
+    "decks": {
+      "type": "array",
+      "maxItems": 64,
+      "items": {
+        "$ref": "#/$defs/savedDeck"
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "ruleset_version",
+    "card_catalog_version",
+    "active_deck_id",
+    "decks"
+  ]
+}

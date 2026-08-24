@@ -12,10 +12,11 @@ Proposed task awaiting approvals:
 
 Ready task awaiting implementation:
 
-- [`TASK-010: Add Library and local Solo Play to the static Viewer`](TASK-010-static-solo-play-client.md) — A1–A7 approved 2026-08-23; preserves the Domain Library while adding a browser-local Play shell, deck builder, profile/statistics, export/import, deterministic solo game, semantic animation, Night-Shift visual system, and GitHub Pages packaging. TASK-011 remains reserved for the full illustration set.
+- **None.**
 
 Completed documentation and research tasks:
 
+- [`TASK-010: Add Library and local Solo Play to the static Viewer`](TASK-010-static-solo-play-client.md) — completed 2026-08-23; preserved the Domain Library and added the `solo-pages-v1` local Play shell, legal deck editor, profile/statistics and backup portability, Worker-authoritative 1–10 Ticket games, semantic motion, responsive Night-Shift visual system, deterministic Pages staging, and browser/visual acceptance. TASK-011 remains reserved for the full illustration set.
 - [`TASK-009: Build the playable gameplay foundation`](TASK-009-gameplay-foundation.md) — completed 2026-08-23; synchronized executable Card/Ticket contracts, deterministic authoritative engine, constraint-driven Ticket Builder, seat-safe simulator, and a reproducible 22-run campaign with 0 deterministic mismatches.
 - [`TASK-008: Freeze the first-version foundation`](TASK-008-freeze-first-version-foundation.md) — completed 2026-08-23; all 89 reviewed open items and four pressures resolved, affected artifacts synchronized, and the Unfrozen ledger emptied.
 - [`TASK-007: Synchronize approved gameplay rules`](TASK-007-synchronize-approved-gameplay-rules.md) — completed 2026-08-23; `SYNC-014`–`SYNC-020` reconciled across design documents, schemas, examples, candidate flows, story/UI candidates, wireframes, and tests. `SCORE-001` and `GEN-001` remained unfrozen at that task's boundary and were later resolved by TASK-008.

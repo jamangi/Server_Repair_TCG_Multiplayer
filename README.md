@@ -65,13 +65,13 @@ This repository currently contains:
 - a dependency-free deterministic engine for authenticated intents, private/team/public Evidence, exact Isolation-to-Repair gates, failed Verify returns, Documentation, atomic closure, scoring, queue reconciliation, and offline terminal results;
 - a constraint-driven deterministic Ticket Builder with complete-or-none validation, structured diagnostics, and separately audited fallback attempts;
 - seat-safe cooperative and competitive computer policies plus a committed 22-run reproducible automated-game campaign;
-- a working static Domain Viewer;
+- a working static GitHub Pages application with the established Domain Library plus a browser-local solo Play slice, deck editor, profile/statistics, validated backup portability, and Worker-authoritative 1–10 Ticket matches;
 - a versioned case-study research system with a completed pilot spanning several troubleshooting subsystems;
 - a provisional story foundation with a fictional company, campaign frame, ensemble, voice guide, and story-derived gameplay candidates;
 - a non-authoritative, replayable candidate-flow package that combines temporary rules, exact card/deck/Ticket fixtures, complete matches, and landing-to-logout campaign and multiplayer journeys;
 - provisional UI planning and original wireframes for the future playable application.
 
-The repository now contains a playable rules-engine foundation, not a player-facing application. It does not yet contain a multiplayer transport/server, Room or account runtime, campaign runtime, or playable client. The first-version rules foundation is frozen; schemas remain draft implementation contracts, and recommended models remain non-normative architecture guidance.
+The repository now contains both the playable rules-engine foundation and a deliberately scoped player-facing local solo client. It does not yet contain a multiplayer transport/server, Room or account runtime, campaign runtime, cloud persistence, or the production multiplayer client. The first-version rules foundation is frozen; schemas remain draft implementation contracts, and recommended models remain non-normative architecture guidance.
 
 ## Design source of truth
 
@@ -80,9 +80,10 @@ Read the design documents in this order:
 1. [`docs/design/decisions/DECISION_INDEX.md`](docs/design/decisions/DECISION_INDEX.md) — the authority map, current decision state, lifecycle, and recommended order for finishing the engine.
 2. [`docs/design/decisions/FROZEN_RULES.md`](docs/design/decisions/FROZEN_RULES.md) — approved behavior implementations may rely on.
 3. [`docs/design/decisions/UNFROZEN_RULES.md`](docs/design/decisions/UNFROZEN_RULES.md) — the remaining open rules, freeze recommendations, and any pressure against frozen rules.
-4. [`docs/design/RECOMMENDED_DATA_MODEL.md`](docs/design/RECOMMENDED_DATA_MODEL.md) and [`RECOMMENDED_PRESETS.json`](docs/design/RECOMMENDED_PRESETS.json) — architectural and balance recommendations, not frozen contracts.
-5. [`docs/design/00_GAME_ENGINE_OVERVIEW.md`](docs/design/00_GAME_ENGINE_OVERVIEW.md) through [`07_FAULT_BROWSER_AND_SEARCH.md`](docs/design/07_FAULT_BROWSER_AND_SEARCH.md) — the synchronized foundational vision, architecture, and starter catalogs. Frozen decisions still take precedence.
-6. [`docs/design/DOCUMENTS_TO_UPDATE.md`](docs/design/DOCUMENTS_TO_UPDATE.md) — the audited migration ledger, including completed, superseded, deferred, and still-relevant recommendations.
+4. [`docs/design/SOLO_PAGES_PROFILE.md`](docs/design/SOLO_PAGES_PROFILE.md) — the derived `solo-pages-v1` implementation profile; it configures the local training client without copying or overriding Frozen Rules.
+5. [`docs/design/RECOMMENDED_DATA_MODEL.md`](docs/design/RECOMMENDED_DATA_MODEL.md) and [`RECOMMENDED_PRESETS.json`](docs/design/RECOMMENDED_PRESETS.json) — architectural and balance recommendations, not frozen contracts.
+6. [`docs/design/00_GAME_ENGINE_OVERVIEW.md`](docs/design/00_GAME_ENGINE_OVERVIEW.md) through [`07_FAULT_BROWSER_AND_SEARCH.md`](docs/design/07_FAULT_BROWSER_AND_SEARCH.md) — the synchronized foundational vision, architecture, and starter catalogs. Frozen decisions still take precedence.
+7. [`docs/design/DOCUMENTS_TO_UPDATE.md`](docs/design/DOCUMENTS_TO_UPDATE.md) — the audited migration ledger, including completed, superseded, deferred, and still-relevant recommendations.
 
 If implementation exposes a new rule question or pressure against frozen behavior, record it in the empty Unfrozen ledger before choosing an answer through code, schema, content, or UI behavior.
 
@@ -94,11 +95,11 @@ If implementation exposes a new rule question or pressure against frozen behavio
 - [`docs/story/`](docs/story/) — the working fictional setting, company, campaign frame, characters, voice, real-world inspiration boundary, and story-derived candidate mechanics. Begin with its [`README`](docs/story/README.md).
 - [`docs/tasks/`](docs/tasks/) — scoped implementation and research contracts, with [`INDEX.md`](docs/tasks/INDEX.md) identifying the current task state.
 - [`docs/ui-plan/`](docs/ui-plan/) — provisional application structure and original visual wireframes.
-- [`viewer/`](viewer/) — dependency-free static browser for reusable domain objects; it is not the multiplayer game client.
+- [`viewer/`](viewer/) — the static Pages root: the established reusable Domain Library plus the `solo-pages-v1` local Play experience. It is not the production multiplayer client.
 - [`content/gameplay-v1/`](content/gameplay-v1/) — the first immutable server-side gameplay snapshot: selected domain inputs, typed Cards, deck snapshots, and authored Ticket templates. It is deliberately separate from the browser-delivered Viewer pack.
 - [`src/`](src/) — the deterministic authoritative engine, Ticket Builder/solvability oracle, and offline simulation/reporting modules.
 - [`automated_games/`](automated_games/) — compact committed campaign settings, match rows, recomputed summaries, and exception-only diagnostics.
-- [`schemas/`](schemas/) and [`examples/`](examples/) — draft domain and runtime contracts that will evolve with approved rules. Start with the [`schema package README`](schemas/README.md) for the domain/runtime boundary and file guide.
+- [`schemas/`](schemas/) and [`examples/`](examples/) — draft domain, runtime, and local-client contracts that will evolve with approved rules. Start with the [`schema package README`](schemas/README.md) for the domain/runtime boundary and file guide.
 - [`docs/improvement_analysis/`](docs/improvement_analysis/) — reviewable implementation and contract proposals that do not change frozen rules or live schemas until approved.
 
 Case studies are evidence-preserving research inputs rather than rule or domain-data authority. Their candidate domain objects, cardless actions, and decision observations must pass through the appropriate schema, validation, or decision lifecycle before becoming part of the game.
@@ -107,7 +108,7 @@ Story documents provide narrative context for the gameplay but do not override f
 
 Candidate gameplay flows choose one internally coherent set of temporary answers only to make examples replayable. Their `EX1-*` identifiers, card balance, Ticket outcomes, account state, screens, animation, and full journeys remain fixtures. Any idea worth adopting must return to the normal design-decision, content, schema, story, validation, and implementation lifecycle.
 
-The future playable application is intended to remain separate from the Domain Viewer. The current UI plan proposes a React client with a stable application shell, social room browser, room creation and lobby flows, cosmetic technician identity, honor-badge recognition, and match synchronization. Motion for React (formerly Framer Motion) is proposed for expressive, state-driven game and interface animation while authoritative rules remain outside the UI.
+TASK-010 intentionally places Library and local Solo Play behind one static application shell while preserving their distinct purposes. The broader UI plan still describes a future production multiplayer client with social rooms, lobbies, synchronized matches, and server authority; those capabilities are not implied by the browser-local training slice.
 
 ## Gameplay foundation
 
@@ -127,17 +128,18 @@ node tools/run-automated-games.mjs --verify-report automated_games/task-009-foun
 
 The committed report covers one-, two-, three-, and four-seat cooperative/competitive settings; fixed and generated Ticket sources; finite and replenishing queues; mixed policies; and deliberate Builder-unsatisfiable, stalemate, invalidation, policy-stall, and simulation-cap fixtures.
 
-## Domain Viewer
+## Static Library and local Solo Play
 
 From the repository root:
 
 ```powershell
+node viewer/scripts/build-play-assets.mjs
 python -m http.server 8080 --directory viewer
 ```
 
 Then open <http://127.0.0.1:8080/>. Do not open `viewer/index.html` through the `file://` protocol because browsers cannot reliably fetch its JSON content that way.
 
-The viewer currently exposes faults, symptoms, components, tests, tools, commands, repairs, validations, and protocols through search, filtering, sorting, and record details.
+The Library exposes faults, symptoms, components, tests, tools, commands, repairs, validations, and protocols through search, filtering, sorting, and record details. Play provides a versioned local profile, legal 30-card decks, Settings and backup portability, and deterministic finite solo matches. A dedicated module Worker owns each active Match; active Match state is intentionally not resumable or included in exports.
 
 After changing `viewer/content/*.json`, rebuild its generated manifest:
 
@@ -146,3 +148,10 @@ node viewer/scripts/build-manifest.mjs
 ```
 
 Do not hand-edit `viewer/content/manifest.json`.
+
+After changing canonical engine, Builder, gameplay, Play modules, assets, or the vendored runtime, rebuild and verify the staged browser artifact:
+
+```powershell
+node viewer/scripts/build-play-assets.mjs
+node viewer/scripts/verify-play-assets.mjs
+```

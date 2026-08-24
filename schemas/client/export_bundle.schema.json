@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/client/export_bundle.schema.json",
+  "title": "Solo Pages Export Bundle v1",
+  "description": "A local-only backup. It excludes active Match State, credentials, Ticket truth, Card definitions, and rules text.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "solo-export-v1"
+    },
+    "implementation_profile_id": {
+      "const": "solo-pages-v1"
+    },
+    "exported_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "records": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile": {
+          "$ref": "local_profile.schema.json"
+        },
+        "decks": {
+          "$ref": "deck_collection.schema.json"
+        },
+        "settings": {
+          "$ref": "local_settings.schema.json"
+        },
+        "statistics": {
+          "$ref": "aggregate_statistics.schema.json"
+        }
+      },
+      "required": [
+        "profile",
+        "decks",
+        "settings",
+        "statistics"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "implementation_profile_id",
+    "exported_at",
+    "records"
+  ]
+}

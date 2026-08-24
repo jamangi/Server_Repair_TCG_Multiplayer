@@ -1,0 +1,33 @@
+{
+  "schema_version": "solo-statistics-v1",
+  "processed_match_start_ids": [],
+  "processed_match_results": [],
+  "totals": {
+    "matches_started": 0,
+    "matches_completed": 0,
+    "solo_wins": 0,
+    "solo_losses": 0,
+    "solo_stalemates": 0,
+    "invalid_or_capped_results": 0,
+    "tickets_closed": 0,
+    "starting_service_points_total": 0,
+    "final_service_points_total": 0,
+    "lifetime_service_points_gained": 0,
+    "tests": 0,
+    "accepted_isolations": 0,
+    "rejected_isolations": 0,
+    "repairs": 0,
+    "verify_attempts": 0,
+    "verify_passes": 0,
+    "verify_failures": 0,
+    "verify_inconclusive_results": 0,
+    "documentation": 0,
+    "assists": 0,
+    "failed_verify": 0,
+    "redundant_or_superseded_actions": 0,
+    "turns": 0,
+    "authoritative_elapsed_seconds": 0,
+    "search_uses": 0,
+    "refresh_uses": 0
+  }
+}

@@ -2,7 +2,7 @@
 
 ## Status
 
-**Ready — A1 through A7 approved 2026-08-23.** This task is a scoped static-client enhancement built on completed TASK-009. Implementation may begin within the boundaries below.
+**Complete — 2026-08-23.** A1 through A7 were implemented within the approved static-client scope on top of completed TASK-009.
 
 ## Objective
 
@@ -448,3 +448,77 @@ TASK-010 is complete only when:
 - all required tests and visual checks pass;
 - Pages deploys only the intended staged runtime; and
 - every approved dependency, local schema, profile rule, limitation, and unresolved item is documented.
+
+## Completion record — 2026-08-23
+
+### Outcome
+
+The static GitHub Pages application now has two stable, idempotent top-level areas without changing the Domain Library's capabilities:
+
+- **Library** retains its existing content loading, search, filtering, sorting, detail dialog, route state, and validation behavior;
+- **Play** adds Home, Your Decks, a legal 30-card deck editor, Profile and Level/statistics surfaces, Settings, strict backup export/import, confirmed reset, and finite 1–10 Ticket solo queues;
+- a dedicated module Worker is the only Viewer importer of the staged canonical engine and Ticket Builder, reconstructs authoritative requests from opaque projected `intent_id` values, and returns only player-safe projections and audience-filtered events;
+- the complete Observe, Hypothesize ↔ Test, Isolate, Repair, Verify, Document, and closure loop is playable by click or keyboard, including Search, Refresh, unsupported Isolation, failed Verify reopening Diagnosis, retained history, exactly-once result aggregation, and a 10-Ticket repeated-structure disclosure;
+- optional mouse drag and touch/pen pointer drag use engine-projected targets, preserve a non-drag path, cancel and snap back safely, prevent duplicate submission, and never decide legality from position;
+- local data is schema-versioned and validated on every read and replacement, recovers explicitly from corruption/quota failure, excludes active Match State and hidden truth from backups, and persists only decks, profile/settings, processed result IDs, and aggregate ledgers;
+- the Night-Shift visual system provides distinct Card/Ticket materials, responsive desktop/tablet/mobile composition, visible focus, live announcements, reduced motion, named/restoring dialogs, category-aware placeholder art, and deliberate failure fallbacks; and
+- GitHub Pages rebuilds a strict 32-file allowlist plus generated manifest from canonical gameplay, engine, Builder, shared hashing, assets, and the vendored motion runtime, then verifies every staged digest and denylist boundary before deployment.
+
+The implementation profile is recorded in `docs/design/SOLO_PAGES_PROFILE.md`. It inherits `first-version-v1`; no new Frozen or Unfrozen gameplay rule was needed, and `UNFROZEN_RULES.md` remains unchanged.
+
+### Browser and visual acceptance
+
+The final serial Chromium matrix expanded 8 scenarios across four projects. Long interaction scenarios run once on desktop, the touch-pointer branch runs once in the touch-enabled tablet project, and route/layout/capture scenarios run across every project:
+
+- 14 passed, 0 failed, and 18 intentional project skips in 2.2 minutes;
+- complete click-only and keyboard-only games both reached closure through UI controls;
+- the advanced deterministic game performed a failed Verify, preserved the earlier path, reopened Diagnosis, completed the second Isolation/Repair/Verify path, and published closure;
+- the touch project verified pointer capture/release order, Escape cancellation with zero submission, and one legal touch-drop producing exactly one opaque Worker intent;
+- normal desktop, tablet, and mobile plus reduced-motion mobile had no document-level horizontal overflow or uncaught page/console errors; and
+- the reduced project explicitly verified the media preference and at-most-1 ms Play/Library animation durations.
+
+Nine full-page captures are preserved under `tests/visual/task-010/`: desktop Home/game/result, tablet Home/game, mobile Home/game, and reduced-motion mobile Home/game. The accompanying `README.md` records measured dimensions, side-by-side review against all four committed references, the full hierarchy/material/texture/lighting/depth/accessibility checklist, and reasoned TASK-011/art and mobile-density deviations. The 1600×1000-class game capture is 1600×1004 and keeps queue, Ticket, Evidence/Worklog, hand, resources, and actions on the same desk.
+
+### Dependencies and generated artifacts
+
+| Dependency/tool | Version | Use | License/disposition |
+| --- | --- | --- | --- |
+| Anime.js | 4.5.0 exact | semantic route, Card, Ticket, result, rejection, and failed-Verify motion | MIT; exact ESM module, license, integrity, and SHA-256 metadata are vendored in both source and staged runtime; load failure degrades to immediate state |
+| `@playwright/test` | 1.62.1 exact | browser acceptance and capture generation only | Apache-2.0; development-only and omitted from the Pages artifact |
+| pnpm | 11.19.0 exact | reproducible lock/install manager | pinned through `packageManager`; no runtime package manager is shipped |
+
+`viewer/scripts/build-play-assets.mjs` stages 32 deterministic allowlisted files and writes one generated manifest: 14 asset-pack files, four gameplay snapshots, 11 canonical Builder/engine/shared modules, and three Anime.js runtime/license/metadata files. `viewer/content/manifest.json` remains generated by its existing dedicated script.
+
+### Final verification
+
+All commands were run from the repository root against the completed implementation; the browser command used an explicitly managed local static server at `http://127.0.0.1:4173`.
+
+| Command | Exit | Result |
+| --- | ---: | --- |
+| `node viewer/scripts/build-manifest.mjs` | 0 | generated 9 Library packs |
+| `node viewer/scripts/build-play-assets.mjs` | 0 | staged 32 deterministic Play assets |
+| `node viewer/scripts/verify-play-assets.mjs` | 0 | verified all 32 staged assets, hashes, allowlist, and denylist |
+| PowerShell enumeration invoking `node --check` for every changed/new `.js` and `.mjs` file | 0 | 40/40 modules passed syntax checking |
+| `node --check viewer/js/app.js` | 0 | syntax passed |
+| `node --check viewer/js/data-loader.js` | 0 | syntax passed |
+| `node --check viewer/js/entity-types.js` | 0 | syntax passed |
+| `node --test tests/*.mjs` | 0 | 103 passed, 0 failed, 0 skipped |
+| `node tools/run-automated-games.mjs --verify-report automated_games/task-009-foundation-v1` | 0 | 22 rows verified: 12 successes, 10 retained exceptions, 0 deterministic mismatches |
+| `$env:PLAYWRIGHT_BASE_URL = 'http://127.0.0.1:4173'; $env:UPDATE_TASK_010_VISUALS = '1'; node node_modules/@playwright/test/cli.js test tests/browser/task-010-solo.spec.mjs --workers=1 --reporter=line` | 0 | 14 passed, 0 failed, 18 intentional project skips; 9 captures refreshed |
+| `git diff --check` | 0 | no whitespace errors |
+
+### Changed-file inventory
+
+The completed task changes 110 files, all within its allowlist:
+
+- workflow and deployment: two files under `.github/workflows/`;
+- root/profile/task documentation: `README.md`, `docs/design/SOLO_PAGES_PROFILE.md`, `docs/tasks/INDEX.md`, and this task contract;
+- exact dependency/test configuration: `package.json`, `pnpm-lock.yaml`, and `playwright.config.mjs`;
+- strict local-client contracts and fixtures: five files each under `schemas/client/` and `examples/client/`;
+- browser-safe canonical hashing integration: `src/shared/sha256.mjs`, `src/builder/canonical.mjs`, and `src/engine/determinism.mjs`;
+- acceptance evidence: three TASK-010 Node suites, one browser suite, the visual-QA record, and nine PNG captures (14 files under `tests/`); and
+- 74 Viewer files covering the shared shell/Library extraction, Play modules and CSS, source asset pack, two staging scripts, vendored Anime.js files, and 33 generated Play artifacts including the generated manifest.
+
+### Unresolved items
+
+None. The approved profile boundaries remain explicit rather than unresolved defects: browser-local authority and statistics are user-inspectable, active Matches are intentionally non-resumable, no cloud/account/multiplayer claim is made, and canonical Card illustrations remain reserved for TASK-011. Missing content/art, unavailable storage, Worker startup failure, and unavailable animation runtime all fail closed or degrade intentionally and are covered by tests.

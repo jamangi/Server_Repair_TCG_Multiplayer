@@ -1,0 +1,416 @@
+import { bindResolvedImage } from '../art-resolver.mjs';
+import { createCardDetailView, createCardView, setCardViewState } from '../card-view.mjs';
+import { cardName, domainName } from '../catalog-service.mjs';
+import { dialogWithRestore, escapeHtml, formatDuration, formatInteger } from '../dom-utils.mjs';
+import { closeDialogWithMotion } from '../motion-coordinator.mjs';
+
+const STATUS_LABELS = Object.freeze({
+  DIAGNOSIS: 'Diagnosis open',
+  RETURNED_TO_DIAGNOSIS: 'Returned to Diagnosis',
+  REPAIR_READY: 'Repair ready',
+  AWAITING_VERIFY: 'Awaiting Verify',
+  READY_TO_CLOSE: 'Ready to close',
+  CLOSED: 'Closed',
+});
+
+const ACTION_LABELS = Object.freeze({
+  RUN_TEST: 'Run Test',
+  PLAY_CARD: 'Run Command',
+  PERFORM_REPAIR: 'Perform Repair',
+  PERFORM_VERIFY: 'Perform Verify',
+  REVISE_HYPOTHESIS: 'Revise Hypothesis',
+  COMMIT_ISOLATION: 'Commit Isolation',
+  DOCUMENT_LIVE: 'Document Live',
+  PUBLISH_CLOSURE: 'Document & Close',
+  SEARCH: 'Search',
+  REFRESH: 'Refresh',
+  PASS_TURN: 'Pass turn',
+});
+
+function ticketName(projection, ticketId) {
+  return projection.ticket_presentations[ticketId]?.display_name || ticketId;
+}
+
+function actionLabel(intent, projection, catalog) {
+  const base = ACTION_LABELS[intent.action_type] || intent.action_type.replaceAll('_', ' ');
+  const ticket = intent.ticket_instance_id ? ticketName(projection, intent.ticket_instance_id) : '';
+  const card = intent.card_definition_id ? cardName(catalog.cardById.get(intent.card_definition_id)) : '';
+  if (intent.action_type === 'SEARCH') return `Search for ${card}`;
+  if (intent.action_type === 'DOCUMENT_LIVE') return `${base} · ${ticket}`;
+  if (card && ticket) return `${base}: ${card} → ${ticket}`;
+  return ticket ? `${base}: ${ticket}` : base;
+}
+
+function eventSummary(event, catalog) {
+  const type = event.event_type.replaceAll('_', ' ').toLowerCase().replace(/^./, (letter) => letter.toUpperCase());
+  const source = event.payload?.source_definition_id ? domainName(catalog, event.payload.source_definition_id) : null;
+  const summary = event.payload?.public_summary || event.payload?.response_code || event.payload?.result || '';
+  const effects = (event.payload?.candidate_effects || []).map((effect) => `${effect.disposition}: ${domainName(catalog, effect.candidate_fault_id)}`).join(' · ');
+  return { type, source, summary, effects };
+}
+
+function renderEvidence(events, ticketId, catalog, lastEvents = []) {
+  const evidence = events.filter((event) => event.ticket_instance_id === ticketId
+    && ['EVIDENCE_CREATED', 'VERIFY_RESOLVED', 'VERIFY_EVIDENCE_CREATED', 'ISOLATION_ACCEPTED', 'ISOLATION_NOT_SUPPORTED'].includes(event.event_type));
+  if (!evidence.length) return '<div class="empty-intelligence"><p>No authorized Evidence yet.</p><small>Run a legal Test before committing Isolation.</small></div>';
+  const newIds = new Set(lastEvents.map((event) => event.event_id));
+  return [...evidence].sort((left, right) => left.sequence - right.sequence).map((event) => {
+    const summary = eventSummary(event, catalog);
+    return `<article class="evidence-entry${newIds.has(event.event_id) ? ' is-new' : ''}" data-event-id="${escapeHtml(event.event_id)}"><header><span>#${event.sequence}</span><strong>${escapeHtml(summary.type)}</strong></header>${summary.source ? `<p class="evidence-source">${escapeHtml(summary.source)}</p>` : ''}${summary.summary ? `<p>${escapeHtml(summary.summary)}</p>` : ''}${summary.effects ? `<p class="evidence-effects">${escapeHtml(summary.effects)}</p>` : ''}</article>`;
+  }).join('');
+}
+
+function renderWorklog(ticket, lastEvents) {
+  if (!ticket.worklog.length) return '<div class="empty-intelligence"><p>The Worklog is empty.</p><small>Accepted actions appear here in immutable sequence.</small></div>';
+  const newIds = new Set(lastEvents.map((event) => event.event_id));
+  return ticket.worklog.map((entry, index) => `<article class="worklog-entry${index === ticket.worklog.length - 1 && lastEvents.length ? ' is-new' : ''}" data-placeholder-id="${escapeHtml(entry.placeholder_event_id)}"><header><span>#${entry.sequence}</span><strong>${escapeHtml(entry.source_name)}</strong><span>${entry.action_cost} Action${entry.action_cost === 1 ? '' : 's'}</span></header><p>${escapeHtml(entry.public_result_summary || 'Result retained at its authorized visibility.')}</p><footer>${entry.publication_event_id ? `Published later · ${escapeHtml(entry.publisher_player_id)}` : 'Live placeholder'}${entry.locked ? ' · Locked' : ''}</footer></article>`).join('');
+}
+
+function candidateMarkup(ticket, session, context) {
+  return ticket.public_candidate_fault_ids.map((candidateId) => {
+    const hypothesis = session.projection.legal_intents.find((intent) => intent.action_type === 'REVISE_HYPOTHESIS'
+      && intent.ticket_instance_id === ticket.ticket_instance_id && intent.candidate_fault_id === candidateId);
+    const isolation = session.projection.legal_intents.find((intent) => intent.action_type === 'COMMIT_ISOLATION'
+      && intent.ticket_instance_id === ticket.ticket_instance_id && intent.candidate_fault_id === candidateId);
+    const current = session.projection.view.hypotheses[ticket.ticket_instance_id]?.includes(candidateId);
+    return `<li class="candidate-row${current ? ' is-hypothesis' : ''}"><div><span>${escapeHtml(domainName(context.catalog, candidateId))}</span><code>${escapeHtml(candidateId)}</code></div><div class="candidate-actions">${hypothesis ? `<button type="button" class="basic-action basic-action--hypothesis" data-intent-id="${hypothesis.intent_id}"${session.resolving ? ' disabled' : ''}>Hypothesize</button>` : current ? '<span class="candidate-marker">Current hypothesis</span>' : ''}${isolation ? `<button type="button" class="basic-action basic-action--isolate" data-intent-id="${isolation.intent_id}"${session.resolving ? ' disabled' : ''}>Isolate</button>` : ''}</div></li>`;
+  }).join('');
+}
+
+function resultMarkup(session) {
+  const result = session.terminalResult;
+  const won = result.solo_wins === 1;
+  const status = won ? 'Queue cleared' : result.solo_stalemates ? 'Proven stalemate' : result.invalid_or_capped_results ? 'Invalid or capped' : 'Shift ended';
+  return `
+    <section class="play-route result-route" aria-labelledby="result-heading">
+      <div class="result-panel">
+        <p class="play-eyebrow" data-result-reveal>Local solo result</p>
+        <h1 id="result-heading" tabindex="-1" data-result-reveal>${status}</h1>
+        <p data-result-reveal>${won ? 'Every Ticket was closed through an Evidence-backed causal record.' : 'Review the terminal reasons and preserve the useful history.'}</p>
+        <div class="result-score" data-result-reveal><span>Service Points</span><strong>${formatInteger(result.final_service_points)}</strong><small>+${formatInteger(result.service_points_gained)} this Match</small></div>
+        <dl class="result-stat-grid" data-result-reveal>
+          <div><dt>Tickets closed</dt><dd>${result.tickets_closed}</dd></div>
+          <div><dt>Turns</dt><dd>${result.turns_elapsed}</dd></div>
+          <div><dt>Elapsed</dt><dd>${formatDuration(result.elapsed_seconds)}</dd></div>
+          <div><dt>Tests</dt><dd>${result.tests_run}</dd></div>
+          <div><dt>Isolation</dt><dd>${result.isolations_accepted} accepted · ${result.isolations_rejected} rejected</dd></div>
+          <div><dt>Repair / Verify</dt><dd>${result.repairs_performed} / ${result.verify_attempts}</dd></div>
+          <div><dt>Failed Verify</dt><dd>${result.failed_verifies}</dd></div>
+          <div><dt>Documentation</dt><dd>${result.documentation_actions}</dd></div>
+          <div><dt>Search / Refresh</dt><dd>${result.search_uses} / ${result.refresh_uses}</dd></div>
+          <div><dt>Redundant / superseded</dt><dd>${result.redundant_or_superseded_actions}</dd></div>
+        </dl>
+        <details class="result-reasons" data-result-reveal><summary>Terminal reasons</summary><ul>${result.reason_codes.map((reason) => `<li><code>${escapeHtml(reason)}</code></li>`).join('')}</ul></details>
+        <p class="result-record-status" data-result-reveal>${session.resultApplied === false ? 'This result was already present; lifetime totals were not incremented twice.' : 'Result recorded exactly once in this local Profile.'}</p>
+        <div class="button-row" data-result-reveal><button type="button" class="play-button play-button--primary" data-finish-game="#/play/home">Return Home</button><button type="button" class="play-button" data-finish-game="#/play/profile">View Profile</button></div>
+        <p class="authority-note" data-result-reveal>Local statistics are user-controlled and are not competitive records.</p>
+      </div>
+    </section>`;
+}
+
+function gameLoadingMarkup(error = null) {
+  return `<section class="play-route"><div class="game-loading"${error ? ' role="alert"' : ' aria-busy="true"'}><p class="play-eyebrow">Local authority</p><h1>${error ? 'Solo Match could not start' : 'Building repair queue…'}</h1><p>${escapeHtml(error || 'The Ticket Builder and engine are preparing a complete deterministic Match in a dedicated Worker.')}</p>${error ? '<a class="play-button" href="#/play/home">Return Home</a>' : ''}</div></section>`;
+}
+
+export function renderGame(root, context) {
+  const session = context.game;
+  if (session.error) {
+    root.innerHTML = gameLoadingMarkup(session.error);
+    return () => {};
+  }
+  if (!session.projection) {
+    root.innerHTML = gameLoadingMarkup();
+    return () => {};
+  }
+  if (session.terminalResult) {
+    root.innerHTML = resultMarkup(session);
+    const onClick = (event) => {
+      const finish = event.target.closest('[data-finish-game]');
+      if (finish) context.finishGame(finish.dataset.finishGame);
+    };
+    root.addEventListener('click', onClick);
+    requestAnimationFrame(() => {
+      root.querySelector('#result-heading')?.focus();
+      context.motion('result', root);
+    });
+    return () => root.removeEventListener('click', onClick);
+  }
+
+  const projection = session.projection;
+  const view = projection.view;
+  const publicMatch = view.public_match;
+  const player = publicMatch.players.find((item) => item.player_id === view.player_id);
+  const tickets = publicMatch.repair_queue;
+  const selectedTicket = tickets.find((ticket) => ticket.ticket_instance_id === session.selectedTicketId) || tickets[0];
+  session.selectedTicketId = selectedTicket?.ticket_instance_id ?? null;
+  const presentation = selectedTicket ? projection.ticket_presentations[selectedTicket.ticket_instance_id] : null;
+  const selectedCard = view.hand.find((card) => card.card_instance_id === session.selectedCardInstanceId) ?? null;
+  const cardIntents = selectedCard ? projection.legal_intents.filter((intent) => intent.card_instance_id === selectedCard.card_instance_id) : [];
+  const prioritizedCardIntents = cardIntents.some((intent) => intent.ticket_instance_id === session.selectedTicketId)
+    ? cardIntents.filter((intent) => intent.ticket_instance_id === session.selectedTicketId)
+    : cardIntents;
+  const documentIntents = projection.legal_intents.filter((intent) => intent.action_type === 'DOCUMENT_LIVE' && intent.ticket_instance_id === session.selectedTicketId);
+  const closureIntent = projection.legal_intents.find((intent) => intent.action_type === 'PUBLISH_CLOSURE' && intent.ticket_instance_id === session.selectedTicketId);
+  const searchIntents = projection.legal_intents.filter((intent) => intent.action_type === 'SEARCH');
+  const refreshIntent = projection.legal_intents.find((intent) => intent.action_type === 'REFRESH');
+  const passIntent = projection.legal_intents.find((intent) => intent.action_type === 'PASS_TURN');
+  const lastClosureTicket = session.lastEvents.find((event) => event.event_type === 'CLOSURE_PUBLISHED')?.ticket_instance_id;
+
+  root.innerHTML = `
+    <section class="play-route game-route" aria-labelledby="game-heading">
+      <header class="game-header" data-route-reveal>
+        <div><p class="play-eyebrow">Solo cooperative training</p><h1 id="game-heading">Night-shift board</h1><p>Round ${publicMatch.turn?.round_number ?? '—'} · Turn ${publicMatch.turn?.turn_number ?? '—'} · ${escapeHtml(publicMatch.turn?.phase?.replaceAll('_', ' ') || publicMatch.status)}</p></div>
+        <dl class="game-resources"><div><dt>Service Points</dt><dd>${player.team_service_points ?? player.service_points}</dd></div><div><dt>Actions</dt><dd>${publicMatch.turn?.actions_remaining ?? 0} / 2</dd></div><div><dt>Search</dt><dd>${view.utility_resources.search_tokens}</dd></div><div><dt>Refresh</dt><dd>${view.utility_resources.refresh_tokens}</dd></div><div><dt>Deck / Discard</dt><dd>${view.deck_count} / ${view.discard_card_instance_ids.length}</dd></div></dl>
+      </header>
+      ${projection.duplicate_ticket_disclosure ? `<p class="duplicate-disclosure game-disclosure"><strong>${projection.ticket_count}-Ticket training queue:</strong> repeated scenario templates are intentionally permitted; each remains an independent machine state and evidence record.</p>` : ''}
+      <div class="game-board">
+        <aside class="ticket-queue" aria-labelledby="queue-heading" data-route-reveal>
+          <div class="section-heading"><div><p class="play-eyebrow">Shared queue</p><h2 id="queue-heading">Active Tickets</h2></div><span>${tickets.length}</span></div>
+          <div class="ticket-queue__list">${tickets.map((ticket, index) => `<button type="button" class="ticket-card${ticket.ticket_instance_id === lastClosureTicket ? ' is-closing' : ''}" data-ticket-id="${escapeHtml(ticket.ticket_instance_id)}" aria-current="${ticket.ticket_instance_id === session.selectedTicketId}" data-drop-target="true"><span class="ticket-card__index">SR-${String(index + 1).padStart(3, '0')}</span><strong>${escapeHtml(ticketName(projection, ticket.ticket_instance_id))}</strong><span>${escapeHtml(STATUS_LABELS[ticket.status] || ticket.status)}</span><small>Machine revision ${ticket.machine_revision}</small></button>`).join('')}</div>
+          <div class="closed-ticket-list"><h3>Archived</h3>${publicMatch.closed_tickets.map((ticket) => `<div class="closure-chip${ticket.ticket_instance_id === lastClosureTicket ? ' is-new' : ''}"><span>Closed</span><strong>${escapeHtml(ticketName(projection, ticket.ticket_instance_id))}</strong></div>`).join('') || '<p>None yet.</p>'}</div>
+        </aside>
+
+        <section class="ticket-sheet${selectedTicket?.status === 'RETURNED_TO_DIAGNOSIS' ? ' is-returned' : ''}" aria-labelledby="selected-ticket-heading" aria-current="true" data-route-reveal>
+          ${selectedTicket ? `<div class="ticket-sheet__art play-art-slot"><img id="ticket-placeholder-art" width="900" height="420" alt=""></div>
+          <header><p class="ticket-code">${escapeHtml(selectedTicket.ticket_instance_id)}</p><h2 id="selected-ticket-heading">${escapeHtml(presentation?.display_name || selectedTicket.ticket_definition_id)}</h2><p>${escapeHtml(presentation?.short_description || 'Generated repair scenario')}</p><span class="ticket-status" data-status="${selectedTicket.status}">${escapeHtml(STATUS_LABELS[selectedTicket.status] || selectedTicket.status)}</span></header>
+          <section class="ticket-symptoms"><h3>Observe · visible symptoms</h3><ul>${selectedTicket.visible_symptom_ids.map((id) => `<li>${escapeHtml(domainName(context.catalog, id))}<code>${escapeHtml(id)}</code></li>`).join('')}</ul></section>
+          <section class="machine-state-strip"><span>Machine state</span><strong>${escapeHtml(presentation?.machine_state_summary || 'No authorized machine-state change recorded.')}</strong><small>Revision ${selectedTicket.machine_revision} · Repair changes state; Verify proves recovery.</small></section>
+          <section class="candidate-tray"${selectedTicket.status === 'RETURNED_TO_DIAGNOSIS' ? ' data-diagnosis-reopened="true"' : ''}><div class="section-heading"><div><p class="play-eyebrow">Hypothesize ↔ Test</p><h3>Candidate faults</h3></div><span>${selectedTicket.public_candidate_fault_ids.length}</span></div><ul>${candidateMarkup(selectedTicket, session, context)}</ul></section>
+          <section class="accepted-isolation"><h3>Accepted Isolation</h3>${selectedTicket.accepted_isolations.length ? selectedTicket.accepted_isolations.map((record) => `<article><strong>${escapeHtml(domainName(context.catalog, record.candidate_fault_id))}</strong><span>${escapeHtml(record.classification.replaceAll('_', ' '))}</span><small>${record.cited_public_evidence_event_ids.length} public citation${record.cited_public_evidence_event_ids.length === 1 ? '' : 's'}</small></article>`).join('') : '<p>No actionable fault accepted yet.</p>'}</section>` : '<p>No active Ticket.</p>'}
+        </section>
+
+        <aside class="intelligence-panel" data-route-reveal>
+          <div class="intelligence-tabs" role="tablist" aria-label="Ticket intelligence"><button type="button" role="tab" data-panel-tab="evidence" aria-selected="${session.panelTab === 'evidence'}">Evidence</button><button type="button" role="tab" data-panel-tab="worklog" aria-selected="${session.panelTab === 'worklog'}">Worklog</button></div>
+          <section class="evidence-panel" role="tabpanel" data-panel="evidence"${session.panelTab === 'evidence' ? '' : ' hidden'}><div class="section-heading"><div><p class="play-eyebrow">Knowledge state</p><h2>Evidence</h2></div><span>Team</span></div>${selectedTicket ? renderEvidence(view.authorized_events, selectedTicket.ticket_instance_id, context.catalog, session.lastEvents) : ''}</section>
+          <section class="worklog-panel" role="tabpanel" data-panel="worklog"${session.panelTab === 'worklog' ? '' : ' hidden'}><div class="section-heading"><div><p class="play-eyebrow">Immutable sequence</p><h2>Worklog</h2></div><span>${selectedTicket?.worklog.length || 0}</span></div>${selectedTicket ? renderWorklog(selectedTicket, session.lastEvents) : ''}</section>
+        </aside>
+      </div>
+
+      <section class="hand-rail" aria-labelledby="hand-heading" data-route-reveal><div class="hand-rail__heading"><div><p class="play-eyebrow">Private hand</p><h2 id="hand-heading">Cards</h2></div><span>${view.hand.length} in hand</span></div><div class="hand-rail__cards"></div></section>
+      <section class="action-dock" aria-labelledby="actions-heading" data-route-reveal><div><p class="play-eyebrow">Engine-projected options</p><h2 id="actions-heading">Legal actions</h2></div>
+        <div class="selected-card-actions">${selectedCard ? `<strong>${escapeHtml(cardName(context.catalog.cardById.get(selectedCard.card_definition_id)))}</strong><button type="button" class="play-button play-button--quiet" data-inspect-selected>Inspect</button>${prioritizedCardIntents.map((intent) => `<button type="button" class="play-button play-button--primary" data-intent-id="${intent.intent_id}"${session.resolving ? ' disabled' : ''}>${escapeHtml(actionLabel(intent, projection, context.catalog))}</button>`).join('') || '<span>No legal play for this Card in the selected Ticket.</span>'}` : '<span>Select a Card to inspect its legal targets.</span>'}</div>
+        <div class="basic-action-row">
+          ${closureIntent ? `<button type="button" class="basic-action basic-action--close" data-intent-id="${closureIntent.intent_id}"${session.resolving ? ' disabled' : ''}>Document &amp; Close</button>` : ''}
+          ${documentIntents.map((intent) => `<button type="button" class="basic-action basic-action--document" data-intent-id="${intent.intent_id}"${session.resolving ? ' disabled' : ''}>Document Live</button>`).join('')}
+          ${searchIntents.length ? `<label class="search-action">Search deck<select id="search-intent">${searchIntents.map((intent) => `<option value="${intent.intent_id}">${escapeHtml(cardName(context.catalog.cardById.get(intent.selected_card_definition_id)))}</option>`).join('')}</select><button type="button" class="basic-action" data-submit-search${session.resolving ? ' disabled' : ''}>Search</button></label>` : ''}
+          ${refreshIntent ? `<button type="button" class="basic-action" data-intent-id="${refreshIntent.intent_id}"${session.resolving ? ' disabled' : ''}>Refresh</button>` : ''}
+          ${passIntent ? `<button type="button" class="basic-action basic-action--pass" data-intent-id="${passIntent.intent_id}"${session.resolving ? ' disabled' : ''}>Pass</button>` : ''}
+        </div>
+        ${session.resolving ? '<span class="intent-resolving" role="status">Resolving authoritative intent…</span>' : ''}
+      </section>
+      <dialog id="game-card-dialog" class="play-dialog card-detail-dialog" aria-label="Card details"><button type="button" class="dialog-close" data-close-dialog aria-label="Close Card details">×</button><div data-dialog-content></div></dialog>
+    </section>`;
+
+  if (selectedTicket) bindResolvedImage(root.querySelector('#ticket-placeholder-art'), context.artResolver.resolveAssetById('placeholder.ticket.storage'));
+  const hand = root.querySelector('.hand-rail__cards');
+  const newDrawIds = new Set(session.lastEvents.filter((event) => event.event_type === 'CARD_DRAWN').map((event) => event.payload?.card_instance_id));
+  const clearDragTargets = () => {
+    root.querySelectorAll('[data-drag-target], [data-drag-invalid]').forEach((target) => {
+      target.removeAttribute('data-drag-target');
+      target.removeAttribute('data-drag-invalid');
+    });
+  };
+  const settleDraggedCard = (cardView) => {
+    if (!cardView) return;
+    cardView.dataset.dragSnapback = 'true';
+    cardView.style.translate = '0px 0px';
+    cardView.removeAttribute('data-pointer-dragging');
+    window.setTimeout(() => {
+      cardView.removeAttribute('data-drag-snapback');
+      cardView.style.removeProperty('translate');
+      cardView.style.removeProperty('z-index');
+    }, 180);
+  };
+  for (const held of view.hand) {
+    const card = context.catalog.cardById.get(held.card_definition_id);
+    const hasLegal = projection.legal_intents.some((intent) => intent.card_instance_id === held.card_instance_id);
+    let suppressActivation = false;
+    const cardView = createCardView(card, {
+      variant: 'hand',
+      interactive: true,
+      selected: held.card_instance_id === session.selectedCardInstanceId,
+      cardInstanceId: held.card_instance_id,
+      artResolver: context.artResolver,
+      onActivate: ({ cardInstanceId }) => {
+        if (suppressActivation) {
+          suppressActivation = false;
+          return;
+        }
+        session.selectedCardInstanceId = cardInstanceId;
+        session.lastMotion = null;
+        context.rerender();
+      },
+    });
+    setCardViewState(cardView, { legalTarget: hasLegal, resolving: session.resolving && held.card_instance_id === session.selectedCardInstanceId });
+    if (newDrawIds.has(held.card_instance_id)) cardView.dataset.newDraw = 'true';
+    if (context.snapshot.state.records.settings.drag_enabled && hasLegal) {
+      cardView.draggable = true;
+      cardView.addEventListener('dragstart', (event) => {
+        session.dragCardInstanceId = held.card_instance_id;
+        cardView.dataset.pointerDragging = 'true';
+        event.dataTransfer.effectAllowed = 'move';
+        event.dataTransfer.setData('text/plain', held.card_instance_id);
+      });
+      cardView.addEventListener('dragend', () => {
+        clearDragTargets();
+        session.dragCardInstanceId = null;
+        settleDraggedCard(cardView);
+      });
+
+      let pointerDrag = null;
+      const cancelPointerDrag = () => {
+        if (!pointerDrag) return false;
+        const pointerId = pointerDrag.pointerId;
+        pointerDrag = null;
+        if (typeof cardView.hasPointerCapture === 'function'
+          && cardView.hasPointerCapture(pointerId)) cardView.releasePointerCapture(pointerId);
+        clearDragTargets();
+        session.dragCardInstanceId = null;
+        if (session.cancelPointerDrag === cancelPointerDrag) session.cancelPointerDrag = null;
+        suppressActivation = true;
+        window.setTimeout(() => { suppressActivation = false; }, 0);
+        settleDraggedCard(cardView);
+        return true;
+      };
+      cardView.addEventListener('pointerdown', (event) => {
+        if (!['touch', 'pen'].includes(event.pointerType) || session.resolving) return;
+        session.cancelPointerDrag?.();
+        pointerDrag = {
+          pointerId: event.pointerId,
+          startX: event.clientX,
+          startY: event.clientY,
+          startScrollY: window.scrollY,
+          active: false,
+        };
+        session.cancelPointerDrag = cancelPointerDrag;
+        if (typeof cardView.setPointerCapture === 'function') cardView.setPointerCapture(event.pointerId);
+      });
+      cardView.addEventListener('pointermove', (event) => {
+        if (!pointerDrag || event.pointerId !== pointerDrag.pointerId) return;
+        const deltaX = event.clientX - pointerDrag.startX;
+        const deltaY = event.clientY - pointerDrag.startY;
+        if (!pointerDrag.active && Math.hypot(deltaX, deltaY) < 9) return;
+        pointerDrag.active = true;
+        suppressActivation = true;
+        session.dragCardInstanceId = held.card_instance_id;
+        cardView.dataset.pointerDragging = 'true';
+        cardView.style.zIndex = '80';
+        const edgeDistance = 72;
+        if (event.clientY < edgeDistance) window.scrollBy({ top: -Math.min(24, edgeDistance - event.clientY), behavior: 'auto' });
+        if (event.clientY > window.innerHeight - edgeDistance) window.scrollBy({ top: Math.min(24, event.clientY - (window.innerHeight - edgeDistance)), behavior: 'auto' });
+        cardView.style.translate = `${deltaX}px ${deltaY + window.scrollY - pointerDrag.startScrollY}px`;
+        clearDragTargets();
+        const ticketButton = document.elementFromPoint(event.clientX, event.clientY)?.closest('[data-drop-target]');
+        if (ticketButton) {
+          const legal = projection.legal_intents.some((intent) => intent.card_instance_id === held.card_instance_id
+            && intent.ticket_instance_id === ticketButton.dataset.ticketId);
+          ticketButton.dataset[legal ? 'dragTarget' : 'dragInvalid'] = 'true';
+        }
+        event.preventDefault();
+      });
+      const finishPointerDrag = (event, cancelled = false) => {
+        if (!pointerDrag || event.pointerId !== pointerDrag.pointerId) return;
+        const wasActive = pointerDrag.active;
+        pointerDrag = null;
+        if (typeof cardView.hasPointerCapture === 'function'
+          && cardView.hasPointerCapture(event.pointerId)) cardView.releasePointerCapture(event.pointerId);
+        if (session.cancelPointerDrag === cancelPointerDrag) session.cancelPointerDrag = null;
+        const ticketButton = cancelled ? null : document.elementFromPoint(event.clientX, event.clientY)?.closest('[data-drop-target]');
+        const legal = wasActive && ticketButton
+          ? projection.legal_intents.find((intent) => intent.card_instance_id === held.card_instance_id
+            && intent.ticket_instance_id === ticketButton.dataset.ticketId)
+          : null;
+        clearDragTargets();
+        session.dragCardInstanceId = null;
+        if (wasActive) {
+          event.preventDefault();
+          if (legal) submit(legal.intent_id);
+          else settleDraggedCard(cardView);
+        }
+      };
+      cardView.addEventListener('pointerup', (event) => finishPointerDrag(event));
+      cardView.addEventListener('pointercancel', (event) => finishPointerDrag(event, true));
+    }
+    hand.append(cardView);
+  }
+
+  const submit = (intentId) => session.submit(intentId);
+  const onClick = (event) => {
+    const ticketButton = event.target.closest('[data-ticket-id]');
+    if (ticketButton) {
+      session.selectedTicketId = ticketButton.dataset.ticketId;
+      session.lastMotion = 'ticketSelected';
+      context.rerender();
+      return;
+    }
+    const tab = event.target.closest('[data-panel-tab]');
+    if (tab) {
+      session.panelTab = tab.dataset.panelTab;
+      session.lastMotion = null;
+      context.rerender();
+      return;
+    }
+    const intent = event.target.closest('[data-intent-id]');
+    if (intent) submit(intent.dataset.intentId);
+    if (event.target.closest('[data-submit-search]')) submit(root.querySelector('#search-intent').value);
+    if (event.target.closest('[data-inspect-selected]') && selectedCard) {
+      const dialog = root.querySelector('#game-card-dialog');
+      dialog.querySelector('[data-dialog-content]').replaceChildren(createCardDetailView(context.catalog.cardById.get(selectedCard.card_definition_id), { artResolver: context.artResolver }));
+      dialogWithRestore(dialog, event.target.closest('[data-inspect-selected]'));
+      context.motion('dialog', dialog);
+    }
+    if (event.target.closest('[data-close-dialog]')) closeDialogWithMotion(root.querySelector('#game-card-dialog'));
+  };
+  const onDragOver = (event) => {
+    const ticketButton = event.target.closest('[data-drop-target]');
+    if (!ticketButton || !session.dragCardInstanceId) return;
+    const legal = projection.legal_intents.some((intent) => intent.card_instance_id === session.dragCardInstanceId && intent.ticket_instance_id === ticketButton.dataset.ticketId);
+    if (legal) {
+      event.preventDefault();
+      event.dataTransfer.dropEffect = 'move';
+      ticketButton.dataset.dragTarget = 'true';
+    }
+  };
+  const onDragLeave = (event) => event.target.closest('[data-drop-target]')?.removeAttribute('data-drag-target');
+  const onDrop = (event) => {
+    const ticketButton = event.target.closest('[data-drop-target]');
+    if (!ticketButton || !session.dragCardInstanceId) return;
+    const legal = projection.legal_intents.find((intent) => intent.card_instance_id === session.dragCardInstanceId && intent.ticket_instance_id === ticketButton.dataset.ticketId);
+    ticketButton.removeAttribute('data-drag-target');
+    session.dragCardInstanceId = null;
+    if (legal) {
+      event.preventDefault();
+      submit(legal.intent_id);
+    }
+  };
+  const onDragCancel = (event) => {
+    if (event.key !== 'Escape') return;
+    if (session.cancelPointerDrag?.()) {
+      event.preventDefault();
+      return;
+    }
+    if (!session.dragCardInstanceId) return;
+    session.dragCardInstanceId = null;
+    clearDragTargets();
+    settleDraggedCard(root.querySelector('[data-pointer-dragging="true"]'));
+    event.preventDefault();
+  };
+  root.addEventListener('click', onClick);
+  document.addEventListener('keydown', onDragCancel);
+  root.addEventListener('dragover', onDragOver);
+  root.addEventListener('dragleave', onDragLeave);
+  root.addEventListener('drop', onDrop);
+
+  const pendingMotion = session.lastMotion;
+  session.lastMotion = null;
+  if (pendingMotion) requestAnimationFrame(() => context.motion(pendingMotion, root));
+  return () => {
+    session.cancelPointerDrag?.();
+    session.cancelPointerDrag = null;
+    root.removeEventListener('click', onClick);
+    document.removeEventListener('keydown', onDragCancel);
+    root.removeEventListener('dragover', onDragOver);
+    root.removeEventListener('dragleave', onDragLeave);
+    root.removeEventListener('drop', onDrop);
+  };
+}

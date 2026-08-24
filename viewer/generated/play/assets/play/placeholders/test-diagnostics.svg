@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#06141d"/><stop offset=".55" stop-color="#0a2632"/><stop offset="1" stop-color="#02080d"/>
+    </linearGradient>
+    <radialGradient id="lamp" cx="70%" cy="35%" r="58%">
+      <stop offset="0" stop-color="#48e4ff" stop-opacity=".44"/><stop offset=".45" stop-color="#178bad" stop-opacity=".13"/><stop offset="1" stop-color="#06141d" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="rack" width="98" height="58" patternUnits="userSpaceOnUse">
+      <rect x="4" y="4" width="88" height="48" rx="5" fill="#0b1c25" stroke="#1b5366"/>
+      <path d="M14 17h48M14 25h55M14 33h40" stroke="#2c7284" stroke-width="3" opacity=".45"/>
+      <circle cx="78" cy="18" r="3" fill="#7cf175"/><circle cx="78" cy="31" r="3" fill="#34d8ff"/>
+    </pattern>
+    <filter id="glow"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <rect x="35" y="42" width="730" height="366" rx="18" fill="url(#rack)" opacity=".9"/>
+  <rect width="800" height="450" fill="url(#lamp)"/>
+  <g fill="none" stroke="#55e8ff" filter="url(#glow)">
+    <circle cx="505" cy="222" r="92" stroke-width="10" opacity=".8"/>
+    <circle cx="505" cy="222" r="58" stroke-width="2" stroke-dasharray="8 12" opacity=".72"/>
+    <path d="M570 287l88 88" stroke-width="20" stroke-linecap="round"/>
+    <path d="M460 222h90M505 177v90" stroke-width="3" opacity=".72"/>
+  </g>
+  <path d="M0 407C168 342 275 416 440 363S688 303 800 327v123H0z" fill="#031018" opacity=".8"/>
+</svg>
