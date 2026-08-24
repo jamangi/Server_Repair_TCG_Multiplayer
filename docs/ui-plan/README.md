@@ -12,7 +12,7 @@ This directory now contains two different generations of UI thinking:
 These artifacts are design references, not production UI, canonical content, or rules. The standalone minimum HTML is executable only as a visual proof of concept and is not part of the Viewer runtime.
 
 - Frozen gameplay authority remains [`FROZEN_RULES.md`](../design/decisions/FROZEN_RULES.md).
-- The local solo client is ready for implementation in [`TASK-010`](../tasks/TASK-010-static-solo-play-client.md); A1 through A7 were approved on 2026-08-23.
+- The local solo client was implemented by [`TASK-010`](../tasks/TASK-010-static-solo-play-client.md) after A1 through A7 were approved on 2026-08-23. Post-playtest Bench/Profile changes remain proposals in [`APPROVALS.md`](../design/decisions/APPROVALS.md).
 - Text and state shown inside generated images are compositional examples. Implementations must render authoritative player-safe projections and current content rather than copying pixels or treating image microcopy as data.
 - Earlier third-party screenshots were used only to identify general shell qualities—illustration value, tactile variety, card inspection, and screen-density opportunities. They are not committed here and are not redistribution assets. `ui-minimum.png` is instead a project-owner-supplied capture of the standalone Server Repair proof of concept and is committed as the minimum implementation reference.
 
@@ -37,6 +37,8 @@ That distinction is the central aesthetic and information-design decision. See [
 | [`01-night-shift-board-desktop.png`](./ui-reference_images/01-night-shift-board-desktop.png) | Wide desktop composition: Ticket queue, selected Ticket, Worklog, hand, resources, and basic-action rail. |
 | [`02-card-ticket-specimens.png`](./ui-reference_images/02-card-ticket-specimens.png) | Card families, hand/detail scales, material palette, and the categorical difference between a card and a Ticket. |
 | [`03-night-shift-board-mobile.png`](./ui-reference_images/03-night-shift-board-mobile.png) | Mobile recomposition with Ticket strip, Evidence/Worklog switch, touch targeting, fanned hand, and labeled counters. |
+| [`relevant_diagnostic_bench.png`](./ui-reference_images/relevant_diagnostic_bench.png) | Compact Relevant Bench study: split Ticket summary, filtered diagnostic shelf, separate response hand, and fully visible Legal Action. |
+| [`global_diagnostic_bench.png`](./ui-reference_images/global_diagnostic_bench.png) | Dense Global Bench study: compressed Ticket, searchable/filterable/paginated diagnostic catalog, selected-item action panel, and compact response hand. |
 | [`ui-reference_images/README.md`](./ui-reference_images/README.md) | Reference-specific notes, limitations, generation provenance, and prompt specifications. |
 
 ## TASK-010 approval boundary

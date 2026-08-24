@@ -1,6 +1,6 @@
 # Gameplay reference images
 
-This folder contains the approved **Night-Shift Operations Desk** visual references for TASK-010: one project-owner-supplied vanilla proof of concept and its screenshot establish the minimum implementation floor, while three original AI-generated references establish the intended desktop, component, and mobile targets. Together they communicate composition, material, illustration density, card family grammar, responsive hierarchy, and achievable browser-native depth.
+This folder contains the approved **Night-Shift Operations Desk** visual references: one project-owner-supplied vanilla proof of concept and its screenshot establish the TASK-010 minimum implementation floor; three original AI-generated references establish the desktop, component, and mobile targets; and two later project-owner-supplied studies explore Relevant and Global Diagnostic Bench compositions. Together they communicate composition, material, illustration density, card family grammar, responsive hierarchy, catalog-density alternatives, and achievable browser-native depth.
 
 They are not:
 
@@ -93,9 +93,39 @@ Use it for:
 
 Correction pass: change the pictured Repair cost from 3 to 1 and remove Verify Service reward language, preserving the rest of the portrait composition.
 
+## 04 — Relevant Diagnostic Bench study
+
+![Relevant Diagnostic Bench layout study](./relevant_diagnostic_bench.png)
+
+Use it for:
+
+- a compact Ticket hero split between illustration and always-visible public details;
+- a small public-context-filtered diagnostic shelf with All/Test/Command controls;
+- strong separation between Bench diagnostics and the private Repair/Verify response hand;
+- a complete selected-item Legal Action surface without internal scrolling;
+- expanded Ticket-queue use of the available viewport; and
+- a calm, low-friction teaching composition.
+
+Do not treat the pictured six-item membership as authoritative or imply that a Relevant diagnostic is necessarily decisive. The engine/Builder projection owns membership, legality, cost, target, and result.
+
+## 05 — Global Diagnostic Bench study
+
+![Global Diagnostic Bench layout study](./global_diagnostic_bench.png)
+
+Use it for:
+
+- a compressed selected-Ticket header that preserves candidates while prioritizing a large catalog;
+- search, All/Test/Command counts, subsystem/category filters, bounded pagination, and result-range feedback;
+- a persistent selected-diagnostic inspector with target, cost, and Run confirmation;
+- a compact private response hand; and
+- a deliberately denser expert-facing composition.
+
+Symptoms remain primary observed information even when the reference compresses them. Production should retain a concise symptom or a one-step accessible full-Ticket view. The pictured `50` count is illustrative until all displayed knowledge records have complete playable contracts and outcomes. Global mode must not expose hidden relevance through sorting, styling, or availability.
+
 ## Generation provenance
 
 - Minimum reference provenance: project-owner-supplied standalone Server Repair HTML/CSS/JavaScript proof of concept and exact screenshot, added 2026-08-23. The source is committed only as a readable visual reference and is not part of the Viewer runtime.
+- Diagnostic Bench reference provenance: two project-owner-supplied original layout studies, each 1774×887, added 2026-08-24. They are compositional references for PT-001 and TASK-016, not runtime assets or authoritative fixtures.
 - Mode: built-in image generation, with targeted built-in edit passes.
 - Date: 2026-08-23.
 - Source references: four user-supplied screenshots used only for general layout/aesthetic lessons; not committed.

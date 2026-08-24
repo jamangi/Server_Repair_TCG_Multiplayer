@@ -4,7 +4,7 @@ Status: **Awaiting user choices — 2026-08-24.**
 
 This is a non-authoritative review packet for the first hands-on solo-play findings. Approved choices must be synchronized through TASK-013 before code relies on them. Existing `first-version-v1` behavior remains authoritative until then.
 
-The canonical open-rule entries live in [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md). This file supplies the requested A/B/C choices without creating a second rules ledger. After resolution, the selected behavior belongs in `FROZEN_RULES.md`; this packet remains only as decision provenance or may be retired through the approving task.
+The canonical open-rule entries live in [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md). This file supplies reviewable lettered choices without creating a second rules ledger. After resolution, the selected behavior belongs in `FROZEN_RULES.md`; this packet remains only as decision provenance or may be retired through the approving task.
 
 ## Verified current facts
 
@@ -33,9 +33,9 @@ TASK-012 addresses the current cross-Ticket result-discoverability weakness with
 
 ## PT-001 — Diagnostic availability
 
-Which diagnostics should be available at the start of work on a Ticket?
+Which diagnostic access profile should a Match use? Review the original project mockups [`relevant_diagnostic_bench.png`](../../ui-plan/ui-reference_images/relevant_diagnostic_bench.png) and [`global_diagnostic_bench.png`](../../ui-plan/ui-reference_images/global_diagnostic_bench.png) as compositional references, not authoritative state.
 
-### A — Relevant Diagnostic Bench (recommended)
+### A — Relevant Diagnostic Bench only
 
 Every published Test or Command connected to the active Ticket's **public context** is available from a persistent Diagnostic Bench from the beginning. Public context means its observed Symptoms, public Candidate Faults, exposed components/subsystem, or an authored prerequisite/control needed to distinguish those candidates. Relevance must be derivable without consulting hidden truth, so the offered set cannot itself leak the answer. A diagnostic that has no valid relationship to those surfaces is not contextually relevant.
 
@@ -47,7 +47,9 @@ This meets the educational intent without presenting all 50 current diagnostics 
 
 ### B — Global Diagnostic Bench
 
-Make every published Test and Command available on every Ticket from the beginning. Unrelated choices resolve to an authored/assembled inconclusive or no-relevant-finding result.
+Make every published **playable** Test and Command visible on every Ticket from the beginning. Search, Test/Command tabs, subsystem/category filters, deterministic sorting, and bounded pagination keep the catalog navigable. “Published playable” is important: a knowledge-library Test/Command does not enter this Bench until it has a complete typed execution contract and outcome coverage.
+
+Global mode must not label or rank diagnostics by hidden relevance. Unrelated choices resolve to an authored/assembled clean, inconclusive, not-applicable, or no-relevant-finding Evidence result rather than silence. The selected diagnostic surface must show target, cost, and expected target compatibility before confirmation without revealing hidden truth.
 
 This most literally satisfies “all Tests and Commands,” but the current domain already contains 50 such objects. It creates substantial choice overload and a much larger outcome-authoring/validation surface.
 
@@ -56,6 +58,16 @@ This most literally satisfies “all Tests and Commands,” but the current doma
 Keep Tests and Commands in the 30-card draw deck, but guarantee that every diagnostic required by the active Ticket is immediately discoverable through a free or separately provisioned diagnostic Search affordance. Ordinary play, discard, Refresh, and copy limits otherwise remain intact.
 
 This is the smallest migration, but diagnostics are still not literally all available and deck construction continues to govern knowledge access.
+
+### D — Player-selectable Bench Profile (recommended experiment)
+
+Provide both `RELEVANT` and `GLOBAL` as pre-Match Bench Profiles over the same versioned playable diagnostic catalog. `RELEVANT` is the default teaching profile and uses Option A's public-context derivation and compact shelf. `GLOBAL` uses Option B's complete catalog and search/filter/pagination layout. In both profiles, diagnostics remain outside the 30-card response deck; Repair and Verify remain response-deck Cards.
+
+The selected profile is pinned in Match configuration/provenance and cannot change during an active Match. Home explains the learning tradeoff before play, saved presets may remember the preference, and local export/import preserves it. Results and automated-game statistics are grouped by Bench Profile so curated and uncurated outcomes are not compared as if they represented the same difficulty. Relevant mode must never use hidden truth to choose its shelf; Global mode must never expose a relevance hint that defeats its purpose.
+
+Use **Bench Profile** (or the user-facing label **Bench Type**) rather than restoring account Equipment. Equipment previously implied owned mechanical loadouts, progression, or readiness snapshots; this setting provisions a diagnostic workspace for one Match and grants no collectible, ownership, or character power.
+
+TASK-013 should establish both authoritative access algorithms, the pinned Match setting, deck migration, projections, and a functional responsive UI using the currently playable catalog. TASK-014 expands and validates the playable diagnostic/content coverage; pairing PT-001 D with PT-006 D is the recommendation if “Global” is intended to include all 50 current Test/Command knowledge records. Until promotion is complete, the UI must report the exact playable count and must not claim the raw library is fully runnable. TASK-016 then performs the dedicated board-density and visual-composition pass against the final representative data sizes.
 
 ## PT-002 — Public candidate generation
 
@@ -132,7 +144,7 @@ Keep the Ticket active and reveal increasingly specific hints, never the full hi
 
 How large should the first expansion be?
 
-### A — Twelve fingerprints across six subsystems (recommended)
+### A — Twelve fingerprints across six subsystems
 
 Support at least two distinct causal fingerprints each for storage, memory, power, boot, thermal, and network. Add however many Card Definitions and authored/assemblable parts are required for complete diagnostic, Isolation, Repair, and Verify coverage; do not chase an arbitrary Card count. Queues must exhaust eligible unique fingerprints before balanced repetition.
 
@@ -143,6 +155,12 @@ Ship a smaller slice with two fingerprints each in storage, memory, and power. T
 ### C — Convert all action-bearing library records
 
 Attempt playable contracts for all current 37 Tests, 13 Commands, 35 Repairs, and 22 Validations, then build Ticket coverage around them. This is comprehensive but much too large for one safe content task without staged releases.
+
+### D — Twelve fingerprints plus all 50 Bench diagnostics (recommended with PT-001 D)
+
+Support Option A's twelve causal fingerprints across storage, memory, power, boot, thermal, and network, while also promoting all current 37 Tests and 13 Commands into the versioned Global Bench catalog. Add only the Repairs and Validations needed by the twelve supported scenario paths; do not expand all 107 action-bearing records in one task.
+
+Each promoted diagnostic needs a complete typed execution contract, target-compatibility rules, and deterministic Evidence behavior. Reuse validated outcome families for clean, not-applicable, no-relevant-finding, and inconclusive results where technically accurate instead of hand-authoring 50 × every Ticket combinations or inventing claims. Scenario-specific support/contradiction/rule-out/confirmation remains explicitly authored or assembled from validated domain relationships. This is materially larger than A, but it fulfills the pictured Global Bench without coupling it to full Repair/Validation conversion.
 
 ## PT-007 — Tutorial scope
 
@@ -169,11 +187,11 @@ Do not implement or approve an SLA yet. A future decision should compare an auth
 Approve or amend each item by ID, for example:
 
 ```text
-PT-001 A
+PT-001 D
 PT-002 A
 PT-003 A
 PT-004 A
 PT-005 A
-PT-006 A
+PT-006 D
 PT-007 A
 ```

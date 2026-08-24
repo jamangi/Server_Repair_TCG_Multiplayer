@@ -49,6 +49,8 @@ No coverage percentage may imply that Faults, Symptoms, Components, Tools, or Pr
 Implement the approved PT-006 scope across its named subsystems.
 
 - Add typed Card Definitions only when they expose a complete executable contract needed by supported Tickets or the approved diagnostic model.
+- If PT-001 D is approved, define the exact versioned Global Bench catalog promised by the approved PT-006 scope. If PT-006 D is also approved, promote all current 37 Tests and 13 Commands while limiting broad Repair/Validation work to the twelve supported fingerprints. Do not display the raw knowledge-library count as playable: promote a Test/Command only after it has a complete execution contract, targets, costs, and deterministic result coverage. Relevant mode must be a public-context-only filtered view of this same catalog rather than a separate hand-authored list.
+- Prefer validated reusable outcome families for technically accurate clean, not-applicable, no-relevant-finding, and inconclusive results; keep candidate-changing outcomes relationship-bound and explicit. Do not manufacture a 50 × Ticket prose matrix or silently treat every unrelated diagnostic as the same observation.
 - Prefer one reusable definition referencing one domain action over Ticket-specific duplicate Cards.
 - Add complete authored machine states, causal truth, outcomes, elimination/Isolation paths, Repairs, Verify requirements, and closure paths.
 - Use current technical domain relationships; do not invent a playable procedure merely to hit a count.
@@ -87,6 +89,7 @@ Assembly must reject incompatible combinations, missing outcomes, ambiguous sour
 ### 5. Solo behavior
 
 - Queues of 1–10 Tickets use distinct fingerprints until the selected content pool is exhausted.
+- Relevant and Global Bench Profiles render the same underlying diagnostic definitions/outcomes and differ only in access/filtering policy; Match setup and results clearly disclose the pinned profile.
 - Home discloses the eligible unique count and when repetition will begin for the active deck/settings.
 - Builder failure identifies missing Card/diagnostic/Repair/Verify coverage in player-safe terms and offers a path back to Decks; it never leaks hidden selected truth.
 - Search, Refresh, draw/discard, or any successor response-deck behavior must be proven sufficient across repeated Tickets, not just for one closure.
@@ -99,16 +102,17 @@ Add tests that prove:
 - every supported Symptom/candidate relationship follows selected domain data;
 - every candidate is differentiable and every offered diagnostic has exactly one legal current-state outcome;
 - clean, negative, unrelated, and inconclusive diagnostic outcomes create typed Evidence with a useful public observation even when they change no candidate assessment;
+- the Global catalog count equals the promoted playable definitions rather than the raw knowledge-library count, Relevant membership is derived only from public context, and neither profile leaks hidden truth through availability, ordering, or timing;
 - every generated Ticket passes the same complete Ticket schema and solvability oracle as fixtures;
 - fixed seeds reproduce exact assembled snapshots/provenance;
 - different seeds produce the expected diversity without weakening hard constraints;
 - unique-before-repeat and balanced-repeat behavior for 1–10 queues;
 - exact active-deck/resource reachability, including deliberate missing-diagnostic, missing-Repair, missing-Verify, exhausted-resource, and incomplete-declaration failures;
-- every fingerprint and representative deck completes through seat-safe automated play;
+- every fingerprint and representative deck completes through seat-safe automated play under each approved Bench Profile, with results grouped by profile;
 - no policy receives hidden truth; and
 - staged browser content, Deck coverage messaging, and Home preflight match canonical Builder behavior.
 
-Run the full repository suite, a new per-fingerprint/seed/deck automated campaign with committed compact statistics, TASK-009 report verification, Viewer staging verification, representative browser starts/failures, and `git diff --check`.
+Run the full repository suite, a new per-profile/fingerprint/seed/deck automated campaign with committed compact statistics, TASK-009 report verification, Viewer staging verification, representative browser starts/failures, and `git diff --check`.
 
 ## Allowed paths after prerequisites
 

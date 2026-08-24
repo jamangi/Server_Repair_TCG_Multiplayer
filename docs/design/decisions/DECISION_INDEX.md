@@ -6,7 +6,7 @@ This directory is the authoritative entry point for Server Repair TCG rule decis
 
 - [`FROZEN_RULES.md`](FROZEN_RULES.md) is the normative source implementations and tests may rely on.
 - [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md) is the canonical open inventory and contains four post-playtest pressures accepted for review on 2026-08-24.
-- [`APPROVALS.md`](APPROVALS.md) is the current non-authoritative A/B/C review packet for those pressures plus content/tutorial scope. No option is approved merely because it appears there.
+- [`APPROVALS.md`](APPROVALS.md) is the current non-authoritative option review packet for those pressures plus content/tutorial scope. No option is approved merely because it appears there.
 - The former candidate ledger was fully resolved on 2026-08-22. The former synchronization ledger was fully resolved by [`TASK-007`](../../tasks/TASK-007-synchronize-approved-gameplay-rules.md) on 2026-08-23. Both retired ledgers remain available in Git history.
 - `SCORE-001`, `GEN-001`, terminal policy, departure cleanup, Room lifecycle, and the four previously pressured frozen rules are approved. [`TASK-008`](../../tasks/TASK-008-freeze-first-version-foundation.md) records their synchronization.
 - The repository has a frozen first-version gameplay foundation, deterministic engine/Builder, automated-game campaign, and deployed browser-local solo client. `first-version-v1` remains authoritative while the post-playtest changes are reviewed.
@@ -52,7 +52,7 @@ Rejected, derivative, or superseded ideas need not remain in the active foundati
 
 ## Foundation status
 
-The immediate rule-decision order is `PT-001` through `PT-005` in `APPROVALS.md`, followed by synchronization through TASK-013. Independent interface defects may proceed under TASK-012. Content expansion and tutorials remain downstream so they are not authored against behavior that is about to change.
+The immediate rule-decision order is `PT-001` through `PT-005` in `APPROVALS.md`, followed by synchronization through TASK-013. Independent interface defects may proceed under TASK-012. Content expansion (TASK-014), final Bench/board composition (TASK-016), and tutorials (TASK-015) remain ordered downstream so they are not authored against behavior or representative data that is about to change.
 
 ## Maintenance rules
 

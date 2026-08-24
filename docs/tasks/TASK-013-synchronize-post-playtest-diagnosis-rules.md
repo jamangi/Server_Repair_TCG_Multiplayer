@@ -17,6 +17,7 @@ Read completely before editing:
 - `AGENTS.md`, root `README.md`, this task, `docs/tasks/INDEX.md`, and TASK-009/TASK-010 completion records;
 - `docs/design/decisions/{DECISION_INDEX,FROZEN_RULES,UNFROZEN_RULES,APPROVALS}.md`;
 - `docs/design/SOLO_PAGES_PROFILE.md`;
+- `docs/ui-plan/ui-reference_images/{README.md,relevant_diagnostic_bench.png,global_diagnostic_bench.png}` for information hierarchy and responsive composition only;
 - Card/Ticket/Builder domain schemas, all runtime schemas, and their schema notes;
 - every file under `src/engine/` and `src/builder/`;
 - the playable catalogs, templates, decks, examples, engine/Builder tests, automated policies, and solo Worker/projection adapter; and
@@ -37,6 +38,8 @@ Implement only the approved choices, but the synchronized result must explicitly
 ### Diagnostic availability
 
 - which Test/Command definitions are offered, how relevance is derived, their runtime placement/zone, whether they occupy the 30-card response deck, and how existing decks migrate;
+- if PT-001 D is approved, the `RELEVANT`/`GLOBAL` Bench Profile setting, default, pre-Match selection, immutable Match pinning, preset/export behavior, provenance, result/statistics grouping, and prevention of mid-Match switching;
+- one versioned playable diagnostic catalog shared by both profiles: Relevant filters it using public context only, while Global exposes it without hidden relevance labels;
 - Action costs, repetition rules, disposition, Documentation behavior, statistics, visibility, and Search/Refresh interaction;
 - how every offered diagnostic obtains exactly one deterministic typed Evidence outcome for the current Ticket target and machine revision; and
 - how irrelevant, clean, inconclusive, support, contradiction, rule-out, and confirmation results differ without exposing hidden truth prematurely.
@@ -47,6 +50,18 @@ Implement only the approved choices, but the synchronized result must explicitly
 - Every other accepted resource-spending action must emit a typed result event. The authoritative result/projection must identify the target, payment/disposition, and outcome; clients may not infer these from local animation.
 - A `RESOLVED` response with payment but no player-visible result is invalid. Rejections remain pre-payment and must explicitly project zero cost.
 - Cross-Ticket results must remain persistently discoverable after rerender. Synchronize event/projection fields needed by the Viewer without exposing hidden truth.
+
+### Functional Bench UI boundary
+
+If PT-001 D is approved, TASK-013 must ship a usable first implementation rather than contracts with no play surface:
+
+- Home exposes Bench Profile beside the other Match settings, explains curated versus unfiltered play, and pins the choice when Match creation begins.
+- Relevant mode presents the public-context-filtered diagnostics as a compact shelf/tray with Test/Command filtering and a visible relevant-count explanation.
+- Global mode presents the full playable catalog with search, All/Test/Command filters, subsystem/category filtering, deterministic sort, bounded pagination, result count, and preserved selection/filter state.
+- Both modes feed one selected-diagnostic/legal-action surface that shows the target Ticket, type, Action cost, Inspect affordance, and Run confirmation without internal scrolling at ordinary desktop reference sizes.
+- Diagnostics are visually and semantically separate from the private Repair/Verify response hand. Keyboard, touch, screen-reader, narrow-screen, reduced-motion, and no-JavaScript-failure behavior remain explicit.
+
+Use the two diagnostic-bench mockups as hierarchy references. Do not copy incidental counts, Ticket text, diagnostic legality, or hidden-information assumptions from their pixels. TASK-016 owns the later whole-board density/polish pass after representative content exists.
 
 ### Candidates, Hypotheses, and elimination
 
@@ -73,6 +88,7 @@ Implement only the approved choices, but the synchronized result must explicitly
 - Prefer new discriminated event/action variants and typed state over extension bags or UI-only flags.
 - Keep clients intent-only. The engine/Worker decides relevance, elimination validity, Isolation, Repair, abandonment, reveal, payment, and statistics.
 - Update Card placement/state schemas if an approved diagnostic bench creates a new zone; keep Card Instances server/Worker-owned.
+- Treat Bench Profile as Match configuration, not account Equipment, collectible ownership, technician power, or a readiness/loadout snapshot.
 - Update Ticket, Knowledge State, Player, Match result, public/private projection, action request/result, and event schemas only where the approved semantics require it.
 - Extend Builder solvability so its proof matches every newly legal success path and rejects content that merely looks playable.
 - Update seat-safe automated policies without granting hidden truth.
@@ -83,6 +99,7 @@ Implement only the approved choices, but the synchronized result must explicitly
 Add focused tests for every approved route and rejected boundary, including:
 
 - deterministic diagnostic availability and outcomes across machine revisions;
+- if selectable profiles are approved, immutable configuration, public-context-only Relevant membership, complete Global membership, separated statistics, and deterministic policy behavior under both profiles;
 - every accepted paid action producing exactly one persistently projectable result, including diagnostics with no candidate effect and cross-Ticket targets;
 - no Action/Card/token payment on rejected intents and no paid `RESOLVED` result without visible feedback;
 - no hidden truth in ordinary projections or timing;
@@ -108,6 +125,7 @@ Run and report all repository tests, schema/example validation, automated-game v
 - `src/simulation/**`
 - `content/gameplay-v1/**` only for minimal migration fixtures; broad content belongs to TASK-014
 - `viewer/js/play/**` and required staged contracts/adapters
+- the two approved diagnostic-bench references may be read but not altered; broader visual-density planning belongs to TASK-016
 - `automated_games/**`
 - `tests/**`
 - staging scripts/manifests generated from changed canonical sources

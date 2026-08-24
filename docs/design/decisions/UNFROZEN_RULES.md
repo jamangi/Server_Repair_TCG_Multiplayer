@@ -8,9 +8,9 @@ Four accepted post-playtest pressures are open as of 2026-08-24. The existing `f
 
 ### PRESSURE-005 — Diagnostic access versus deck economy
 
-The first solo playtest requested every Test and Command from the beginning so troubleshooting cannot appear blocked by draw order or an absent diagnostic. It also established that an accepted resource-spending action may never appear silent: every Test/Command must return visible Evidence, including clean, negative, unrelated, and inconclusive findings, and every other paid action must visibly report its typed result. This pressures Frozen §§9–11: Tests/Commands are presently draw-dependent Card affordances, Search is the universal deck-access tool, and diagnostics resolve only through authored Ticket outcomes.
+The first solo playtest requested every Test and Command from the beginning so troubleshooting cannot appear blocked by draw order or an absent diagnostic. Follow-up mockups proposed a pre-Match choice between a public-context-filtered Relevant Bench and an unfiltered Global Bench. It also established that an accepted resource-spending action may never appear silent: every Test/Command must return visible Evidence, including clean, negative, unrelated, and inconclusive findings, and every other paid action must visibly report its typed result. This pressures Frozen §§9–11: Tests/Commands are presently draw-dependent Card affordances, Search is the universal deck-access tool, and diagnostics resolve only through authored Ticket outcomes.
 
-Affected surfaces: Card placement/zones, deck legality and migration, Search/Refresh, action requests/results, events, projections, Ticket outcome authoring/assembly, Builder solvability, automated policies, solo UI target/result continuity, tutorials, and saved presets. Review the required no-silent-action invariant and `PT-001` in `APPROVALS.md`.
+Affected surfaces: Match settings/provenance, statistics comparability, Card placement/zones, deck legality and migration, Search/Refresh, action requests/results, events, projections, Ticket outcome authoring/assembly, Builder solvability, automated policies, solo UI target/result continuity, tutorials, and saved presets. Review the required no-silent-action invariant and `PT-001` in `APPROVALS.md`.
 
 ### PRESSURE-006 — Candidate derivation and elimination-based Isolation
 

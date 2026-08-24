@@ -2,7 +2,7 @@
 
 ## Status
 
-**Proposed — blocked on TASK-013, TASK-014, and PT-007.** The tutorial must teach the approved rules against representative final content. The reveal UI must consume the authoritative Give-Up contract selected in PT-005 rather than inventing truth in the DOM.
+**Proposed — blocked on TASK-013, TASK-014, TASK-016, and PT-007.** The tutorial must teach the approved rules against representative final content and stable control locations. The reveal UI must consume the authoritative Give-Up contract selected in PT-005 rather than inventing truth in the DOM.
 
 ## Objective
 
@@ -14,7 +14,7 @@ Tutorials are not substitutes for tests. They demonstrate the real engine path; 
 
 Read completely before editing:
 
-- `AGENTS.md`, root `README.md`, this task, `docs/tasks/INDEX.md`, and completed TASK-012 through TASK-014;
+- `AGENTS.md`, root `README.md`, this task, `docs/tasks/INDEX.md`, and completed TASK-012 through TASK-014 plus TASK-016;
 - the approved rules/profile, Ticket/Card/Knowledge/Event/projection schemas, and solution-reveal contract;
 - the final playable catalog, coverage matrix, seeded Ticket provenance, and automated-game paths;
 - all solo Play pages/session/Worker/motion/accessibility modules and TASK-010 visual references;
