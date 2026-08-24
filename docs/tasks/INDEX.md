@@ -14,7 +14,7 @@ Proposed task awaiting approvals:
 
 Ready task awaiting implementation:
 
-- [`TASK-012: Fix solo-client scroll and text-entry defects`](TASK-012-fix-solo-client-interaction-defects.md) — ready 2026-08-24; preserves internal Ticket/board scroll and real sequential-input caret/selection without changing gameplay.
+- [`TASK-012: Fix solo-client interaction defects`](TASK-012-fix-solo-client-interaction-defects.md) — ready 2026-08-24; preserves internal Ticket/board scroll and real sequential-input caret/selection, and keeps accepted cross-Ticket action results persistently visible without changing gameplay.
 
 Reserved task number:
 

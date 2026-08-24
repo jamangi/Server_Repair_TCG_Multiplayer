@@ -14,10 +14,22 @@ The canonical open-rule entries live in [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md)
 - The current content pack has only three complete storage/RAID templates. `solo-pages-v1` permits duplicate fingerprints from the first selection, so a seeded queue may repeat one template even before all three have appeared.
 - The current Builder selects and snapshots complete authored templates. It does not yet assemble materially novel scenarios from smaller compatible authored parts.
 - A diagnostic is currently legal only when its Card is in hand and the active Ticket has exactly one authored outcome for that diagnostic and machine state.
+- Every currently accepted diagnostic already appends a Worklog entry and an `EVIDENCE_CREATED` event before payment resolution completes. In the reported screenshot, however, the selected Ticket is `One Member Down` while the legal-action button targets `The Missing Storage Path`; the Evidence panel remains filtered to the selected Ticket. Follow-up inspection confirmed that the action correctly created Evidence #21 on `The Missing Storage Path`. This is a cross-Ticket result-discoverability issue, not a silent engine resolution.
 - A Hypothesis is a free private/team marker for up to two candidates. It is not an elimination ledger and receives no truth feedback.
 - Commit Isolation costs one Action and succeeds through positive authored citation requirements. The current rules do not require eliminating other candidates and forbid speculative Repair before accepted Isolation.
 
 These facts make the observed concern credible even though exact-deck solvability is already intended: undeclared or incomplete outcome coverage, poor explanation of Search/citations, and extreme content repetition can still make a valid path feel absent.
+
+## Required invariant — no silent paid actions
+
+This is a cross-cutting acceptance requirement, not an A/B/C choice:
+
+- Every accepted Test or Command creates exactly one typed diagnostic result for the chosen Ticket and machine revision. A clean result, unrelated finding, negative result, or inconclusive result is still Evidence and must say what was observed and whether it changes any public candidate assessment.
+- Every other accepted action that spends an Action, Card, Search/Refresh token, or other limited resource emits a typed result event and an immediately visible explanation of the outcome. Rejected actions remain rejection-before-payment and explicitly say that nothing was spent.
+- The UI must identify the action's target before confirmation and make its result visible afterward. If the target is not the currently displayed Ticket, the client must either switch to that Ticket/result or present a persistent “View result” affordance. A transient announcement alone is insufficient.
+- “No candidate effect” is a legitimate result; “no feedback” is not. The engine, projection, UI, automated policies, and tests must preserve that distinction.
+
+TASK-012 addresses the current cross-Ticket result-discoverability weakness without changing rules. TASK-013 makes this invariant explicit in the successor contracts and rules. TASK-014 requires complete authored/assembled diagnostic-result coverage.
 
 ## PT-001 — Diagnostic availability
 
@@ -25,7 +37,11 @@ Which diagnostics should be available at the start of work on a Ticket?
 
 ### A — Relevant Diagnostic Bench (recommended)
 
-Every published Test or Command connected to an observed Symptom or public candidate on the active Ticket is available from a persistent Diagnostic Bench from the beginning. These remain typed Card Definitions and spend their printed Actions, but they do not depend on draw order or consume slots in the 30-card response deck for this rules/profile revision. Every offered diagnostic must have one deterministic authored or Builder-assembled outcome in the current machine state; an outcome may support, contradict, rule out, confirm, or be inconclusive. Repair and Verify remain response-deck Cards and retain their gates.
+Every published Test or Command connected to the active Ticket's **public context** is available from a persistent Diagnostic Bench from the beginning. Public context means its observed Symptoms, public Candidate Faults, exposed components/subsystem, or an authored prerequisite/control needed to distinguish those candidates. Relevance must be derivable without consulting hidden truth, so the offered set cannot itself leak the answer. A diagnostic that has no valid relationship to those surfaces is not contextually relevant.
+
+The Diagnostic Bench is a proposed persistent, non-random palette of these Test/Command affordances outside the 30-card response deck. It is not the current `Legal actions` panel. In the present UI, the hand supplies Cards and the action panel shows engine-projected targets for the selected Card. Under this option, the Bench would supply always-available diagnostics—probably as a searchable/filterable panel, drawer, or tray—while the Legal actions panel could remain the final target/inspect/run surface for the selected Bench item.
+
+Bench items remain typed Card Definitions and spend their printed Actions, but they do not depend on draw order or consume response-deck slots for this rules/profile revision. Every offered diagnostic must have exactly one deterministic authored or Builder-assembled Evidence outcome for every machine state in which it can be run. The outcome may support, contradict, rule out, confirm, or explicitly report a clean/inconclusive/no-relevant-finding result. Repair and Verify remain response-deck Cards and retain their gates.
 
 This meets the educational intent without presenting all 50 current diagnostics on every Ticket. It requires deck migration, a new Card placement/availability contract, Builder outcome coverage, projections, UI, and automated-game changes.
 

@@ -37,7 +37,7 @@ In the approved order and terminology:
 1. **Observe:** Symptoms, public Candidates, machine-state summary, Ticket selection, queue, Evidence, and immutable Worklog are different information surfaces.
 2. **Turn resources:** opening availability, two Actions, Card/bench costs, hand/response deck, Search/Refresh if retained, discard, and Pass.
 3. **Hypothesis:** a private/team working belief is not a guess submission and receives no truth feedback.
-4. **Diagnostics:** how to select the highlighted Test/Command, select its target, spend Actions, and read support/contradiction/rule-out/confirmation/inconclusive Evidence.
+4. **Diagnostics:** how to select the highlighted Test/Command, verify its target Ticket, spend Actions, follow a cross-Ticket result, and read support/contradiction/rule-out/confirmation/inconclusive Evidence. Explain that clean, negative, unrelated, and inconclusive findings are still recorded Evidence; a result with no candidate effect is not missing feedback.
 5. **Candidate management:** how the approved elimination/notebook model works, whether it costs an Action, what Evidence is cited, and why a remaining candidate is not automatically revealed as true.
 6. **Isolation:** the exact approved success routes, how citations are chosen, why an unsupported attempt remains generic, and why the current UI may withhold or disable a legal-looking action.
 7. **Repair:** machine-state change, Card disposition, accepted-Isolation or approved speculative threshold, and why Repair does not prove success.
@@ -94,6 +94,7 @@ Add Node and browser tests proving:
 - wrong actions remain unavailable or receive instructional recovery without state fabrication;
 - refresh/reload/version mismatch, exit/restart, focus restoration, scroll continuity, and modal behavior are safe;
 - click, keyboard, touch, reduced-motion, and live-announcement paths reach completion;
+- every paid tutorial action exposes its target, payment, and persistent result, including a diagnostic with no candidate effect and an intentionally demonstrated cross-Ticket result where the approved tutorial scope permits one;
 - pre-reveal help contains no hidden truth;
 - Give Up confirmation, one-intent submission, lifecycle/stat effects, post-transition reveal, and no-resume boundary match the approved engine contract;
 - every revealed required path independently passes the Builder solvability oracle; and

@@ -40,6 +40,8 @@ For every supported scenario identify stable domain IDs, Card/bench definitions 
 - records selected for this playable release; and
 - records deferred because their relationships or authored outcomes are incomplete.
 
+For every Test/Command the approved availability model can offer, enumerate an outcome for every eligible generated machine state. Clean, negative, unrelated, and inconclusive observations are first-class Evidence outcomes, not missing mappings. Flag any diagnostic that can be offered yet lacks exactly one deterministic outcome as a hard coverage failure.
+
 No coverage percentage may imply that Faults, Symptoms, Components, Tools, or Protocols should become Cards merely because they exist.
 
 ### 2. Playable content expansion
@@ -78,6 +80,7 @@ Assembly must reject incompatible combinations, missing outcomes, ambiguous sour
 - Preserve seed replayability and record every part/template ID plus content/generator version in provenance.
 - Derive required playable definitions/resources from the assembled semantic path and cross-check any declared requirement list so incomplete declarations cannot bypass solvability.
 - Prove each selected Ticket against the exact active deck and/or diagnostic availability model approved in TASK-013—not merely the global catalog.
+- Reject any Ticket where a projected legal diagnostic can spend resources without exactly one authored/assembled Evidence result for its target and machine revision.
 - Complete-or-none remains mandatory: one unreachable Ticket rejects the entire requested batch before Match creation.
 - A legal 30-card deck and a scenario-compatible deck are distinct concepts. The Deck/Home UI must show the eligible subsystem/fingerprint coverage of a saved deck and explain when a Match request has insufficient variety or no complete path.
 
@@ -95,6 +98,7 @@ Add tests that prove:
 - coverage matrix references and all new Card/Ticket/part schemas are valid;
 - every supported Symptom/candidate relationship follows selected domain data;
 - every candidate is differentiable and every offered diagnostic has exactly one legal current-state outcome;
+- clean, negative, unrelated, and inconclusive diagnostic outcomes create typed Evidence with a useful public observation even when they change no candidate assessment;
 - every generated Ticket passes the same complete Ticket schema and solvability oracle as fixtures;
 - fixed seeds reproduce exact assembled snapshots/provenance;
 - different seeds produce the expected diversity without weakening hard constraints;

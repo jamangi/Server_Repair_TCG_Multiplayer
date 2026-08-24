@@ -38,8 +38,15 @@ Implement only the approved choices, but the synchronized result must explicitly
 
 - which Test/Command definitions are offered, how relevance is derived, their runtime placement/zone, whether they occupy the 30-card response deck, and how existing decks migrate;
 - Action costs, repetition rules, disposition, Documentation behavior, statistics, visibility, and Search/Refresh interaction;
-- how every offered diagnostic obtains exactly one deterministic outcome for the current Ticket target and machine revision; and
+- how every offered diagnostic obtains exactly one deterministic typed Evidence outcome for the current Ticket target and machine revision; and
 - how irrelevant, clean, inconclusive, support, contradiction, rule-out, and confirmation results differ without exposing hidden truth prematurely.
+
+### No-silent-action invariant
+
+- Every accepted Test/Command must produce Evidence even when it reports clean, negative, unrelated, or inconclusive findings. Define whether an outcome has no candidate effects or changes one or more assessments, and always include a player-comprehensible observation.
+- Every other accepted resource-spending action must emit a typed result event. The authoritative result/projection must identify the target, payment/disposition, and outcome; clients may not infer these from local animation.
+- A `RESOLVED` response with payment but no player-visible result is invalid. Rejections remain pre-payment and must explicitly project zero cost.
+- Cross-Ticket results must remain persistently discoverable after rerender. Synchronize event/projection fields needed by the Viewer without exposing hidden truth.
 
 ### Candidates, Hypotheses, and elimination
 
@@ -76,6 +83,8 @@ Implement only the approved choices, but the synchronized result must explicitly
 Add focused tests for every approved route and rejected boundary, including:
 
 - deterministic diagnostic availability and outcomes across machine revisions;
+- every accepted paid action producing exactly one persistently projectable result, including diagnostics with no candidate effect and cross-Ticket targets;
+- no Action/Card/token payment on rejected intents and no paid `RESOLVED` result without visible feedback;
 - no hidden truth in ordinary projections or timing;
 - candidate derivation always including truth and only valid distractors;
 - valid/invalid/stale elimination citations and visibility;

@@ -1,4 +1,4 @@
-# TASK-012: Fix solo-client scroll and text-entry defects
+# TASK-012: Fix solo-client interaction defects
 
 ## Status
 
@@ -6,10 +6,11 @@
 
 ## Objective
 
-Fix two TASK-010 regressions without changing gameplay:
+Fix two TASK-010 regressions and one result-discoverability weakness without changing gameplay:
 
 1. the selected Ticket's internally scrollable sheet returns to its top after ordinary clicks, Worker projections, tab changes, and other same-route rerenders; and
-2. text controls that rerender their surrounding view after each input event move the caret to the start, causing sequential typing to appear in reverse or at the wrong insertion point.
+2. text controls that rerender their surrounding view after each input event move the caret to the start, causing sequential typing to appear in reverse or at the wrong insertion point; and
+3. an accepted Card action can target a Ticket other than the Ticket currently displayed, while Evidence/Worklog remains filtered to the displayed Ticket, making the correctly created result easy to overlook.
 
 ## Verified causes and boundary
 
@@ -17,6 +18,7 @@ Fix two TASK-010 regressions without changing gameplay:
 - `game-page.mjs` does not preserve the selected Ticket sheet's internal scroll position across reconstruction.
 - Library search and deck search rebuild their markup during an input event and then refocus a newly created control without restoring its selection range.
 - Existing acceptance tests use `fill()`, which replaces a value atomically and does not reproduce real character-by-character caret behavior.
+- `game-page.mjs` falls back to every legal target for the selected Card when that Card has no legal intent for the selected Ticket. The action label correctly names the other Ticket, but submitting it does not change `selectedTicketId`; the resulting Evidence exists and is announced transiently while the persistent Evidence panel continues showing the previous Ticket.
 
 These are UI state-continuity defects. Do not change the engine, Ticket Builder, rules, content, Card legality, hidden information, or persistence formats.
 
@@ -58,6 +60,15 @@ Read completely before editing:
 - Preserve existing unsaved deck/profile drafts, dialogs, reduced-motion behavior, live announcements, and idempotent navigation.
 - Do not suppress legitimate route focus management or accessibility announcements to hide the defect.
 
+### Action-target and result continuity
+
+- Keep the current engine rule that an accepted diagnostic creates an `EVIDENCE_CREATED` event. The reported `Storage Device Inventory` action correctly created Evidence for `The Missing Storage Path`; this task improves presentation and selection continuity and must not invent client-side Evidence.
+- Make a selected Card's target scope unmistakable before submission. Do not visually imply that an action applies to the displayed Ticket when its intent targets another Ticket.
+- After any accepted action, preserve a persistent route to its result. When the result belongs to another active Ticket, either select that Ticket and reveal/highlight its new Evidence/Worklog entry or retain the current Ticket and display a persistent result notice with a keyboard-accessible `View result` control.
+- The result presentation must name the action, target Ticket, resource/Card disposition, and plain-language result. A result with no candidate effect must say so; it must not look like missing output.
+- Live-region announcements remain required but are supplementary. Do not make a transient screen-reader/toast message the only way to recover a paid result.
+- Rejected actions must continue to identify the rejection and show that no Action/Card/token was spent.
+
 ## Required tests
 
 Add browser regression tests that use sequential key presses rather than only `fill()`:
@@ -67,6 +78,8 @@ Add browser regression tests that use sequential key presses rather than only `f
 - verify composition-safe behavior through dispatchable composition/input events where the browser harness supports it;
 - scroll the selected Ticket sheet to a nonzero position, perform representative no-op UI clicks and accepted/rejected engine intents, and assert that the same semantic surface retains its scroll position within a small tolerance;
 - verify selecting another Ticket uses its own position and returning restores the prior Ticket position;
+- select a Card that is invalid for the displayed Ticket but valid for another Ticket, assert the alternate target is explicit, submit it, and prove the resulting authoritative Evidence is persistently visible or reachable from the result notice;
+- assert the accepted action's Action/Card payment is displayed alongside its result, while a rejected action reports zero payment;
 - cover desktop and narrow mobile internal-scroll layouts; and
 - ensure focus remains on the intended control without document-level scroll jumps.
 
@@ -96,4 +109,4 @@ Generated Play assets may be rebuilt if a canonical staged module changes. Do no
 
 ## Completion boundary
 
-Complete only when real sequential typing and same-route Ticket interaction no longer move the caret or reset reading position; desktop/mobile browser regressions prove both fixes; all TASK-010 behavior and visual baselines remain intact; and no gameplay/rule/content change is included.
+Complete only when real sequential typing and same-route Ticket interaction no longer move the caret or reset reading position; every accepted cross-Ticket action leaves its target and result persistently visible or reachable; desktop/mobile browser regressions prove the two fixes and discoverability improvement; all TASK-010 behavior and visual baselines remain intact; and no gameplay/rule/content change is included.
