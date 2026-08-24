@@ -6,23 +6,26 @@ Active task:
 
 - **None.**
 
-Proposed task awaiting approvals:
+Ready migration task:
 
-- [`TASK-017: Create the Server Repair V2 Migration Seed`](TASK-017-create-server-repair-v2-migration-seed.md) — blocked on MS-001 through MS-007; audits V0 in bounded checkpoints, preserves reusable knowledge, unfreezes incompatible authored-disposition rules, proves dependency-derived inference through strict schemas and executable reference semantics, and creates the approved public V2 foundation without modifying V0 behavior.
+- [`TASK-017: Create the Server Repair V2 Migration Seed`](TASK-017-create-server-repair-v2-migration-seed.md) — ready 2026-08-24 under approved MS-001 A through MS-007 A; audits V0 in bounded checkpoints, preserves reusable knowledge, unfreezes incompatible authored-disposition rules, proves dependency-derived inference through strict schemas and executable reference semantics, and creates the approved public `jamangi/Server_Repair_V2` foundation without modifying V0 behavior.
+
+Parked V0 tasks retained as provenance under approved MS-006 A:
+
 - [`TASK-013: Synchronize approved post-playtest diagnosis rules`](TASK-013-synchronize-post-playtest-diagnosis-rules.md) — blocked on PT-001 through PT-005; creates the versioned Global/Relevant Bench, Evidence-disposition, multi-route Isolation, elimination, Repair-gateway, and reveal migration before content or tutorials depend on it.
 - [`TASK-014: Expand playable content and Ticket generation`](TASK-014-expand-playable-content-and-ticket-generation.md) — blocked on TASK-013 and PT-006; expands coverage-driven Cards/scenarios, optionally promotes all 50 Bench diagnostics under PT-006 D, and evolves generation beyond whole-template cloning with unique-before-repeat queues and exact resource solvability.
 - [`TASK-016: Refine Diagnostic Bench and game-board composition`](TASK-016-refine-diagnostic-bench-board-layout.md) — blocked on TASK-012 through TASK-014; applies the Relevant/Global Bench-specific layouts, compact Ticket, fully visible Legal Action, viewport-aware queue, and responsive density pass against representative content.
 - [`TASK-015: Add guided tutorials and the solo solution-reveal experience`](TASK-015-add-guided-tutorial-and-solution-reveal.md) — blocked on TASK-013, TASK-014, TASK-016, and PT-007; teaches the final rules through real seeded engine paths and presents the authoritative Give Up reveal after final control locations stabilize.
 
-Ready task awaiting implementation:
+Optional V0 maintenance task:
 
 - [`TASK-012: Fix solo-client interaction defects`](TASK-012-fix-solo-client-interaction-defects.md) — ready 2026-08-24; preserves internal Ticket/board scroll and real sequential-input caret/selection, and keeps accepted cross-Ticket action results persistently visible without changing gameplay.
 
-Reserved task number:
+Parked reserved task number:
 
-- **TASK-011 — canonical Card illustrations.** The full illustration contract remains reserved from TASK-010 and should be scoped after TASK-014 stabilizes the expanded playable catalog, avoiding throwaway artwork or asset migrations.
+- **TASK-011 — canonical Card illustrations.** Retained as a V0 planning artifact but parked under MS-006 A; V2 illustration work must be re-scoped against the future V2 catalog.
 
-Recommended migration order: optionally complete TASK-012 as contained V0 maintenance → approve MS-001 through MS-007 → TASK-017 → continue from the new V2 roadmap. If MS-006 A is approved, retain TASK-013 through TASK-016 and reserved TASK-011 without implementing them in V0. The alternative V0 continuation order remains TASK-012 → approve PT-001 through PT-005 → TASK-013 → approve PT-006 → TASK-014 → TASK-016 → approve PT-007 → TASK-015, but running both semantic tracks in parallel is not recommended.
+Approved migration order: optionally complete TASK-012 as contained V0 maintenance → TASK-017 → continue from the new V2 roadmap. Do not implement TASK-013 through TASK-016 or reserved TASK-011 in V0 unless the project owner later reverses MS-006 A through a new decision.
 
 Completed documentation and research tasks:
 

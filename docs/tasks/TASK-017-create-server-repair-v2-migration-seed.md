@@ -2,7 +2,19 @@
 
 ## Status
 
-**Proposed — blocked on MS-001 through MS-007 in `docs/design/decisions/APPROVALS.md`.** This task creates a new repository and therefore must not begin until repository identity, migration depth, and V0 preservation are approved. Do not implement PT-001 through PT-007 as part of this task.
+**Ready — MS-001 A through MS-007 A approved by the project owner on 2026-08-24.** This task may create the approved public repository after the Migration Seed passes its required gates. Do not implement PT-001 through PT-007 as part of this task.
+
+## Approved authority
+
+- **MS-001 A:** create `jamangi/Server_Repair_V2` as a public repository after verifying that the name is available; do not reuse an unexpected existing repository.
+- **MS-002 A:** preserve V0 intact. Do not rewrite, archive, delete, retag, or bulk-modify this repository. After V2 is online, V0 may receive one concise README/decision pointer.
+- **MS-003 A:** dependency-derived Evidence dispositions are authoritative. Permit only constrained, versioned, justified, scoped, tested, and validation-visible explicit inference exceptions.
+- **MS-004 A:** produce strict draft schemas, valid/invalid examples, and executable reference semantics; do not build the production engine or Viewer in this task.
+- **MS-005 A:** migrate a provenance-rich domain catalog seed rather than structurally porting complete V0 domain objects or treating V0 Evidence/Isolation tables as V2 truth.
+- **MS-006 A:** park V0 semantic/content expansion under TASK-013 through TASK-016 and reserved TASK-011. TASK-012 remains optional contained V0 defect maintenance.
+- **MS-007 A:** define one typed inference model supporting Core, Advanced, and Expert profiles, while limiting the first V2 playable content to Core cases.
+
+These approvals authorize the external repository creation and V0 documentation pointer only within this task's gates and allowed paths. They do not authorize weakening a stop condition, importing V0 debt, implementing deferred V2 systems, or changing V0 behavior.
 
 ## Objective
 

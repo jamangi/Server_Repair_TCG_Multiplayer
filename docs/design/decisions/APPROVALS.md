@@ -1,6 +1,6 @@
 # Post-TASK-010 playtest approvals
 
-Status: **Awaiting user choices — 2026-08-24.**
+Status: **Migration Seed choices MS-001 A through MS-007 A approved — 2026-08-24. V0 PT-001 through PT-007 remain unapproved and parked under MS-006 A.**
 
 This is a non-authoritative review packet for the first hands-on solo-play findings. Approved choices must be synchronized through TASK-013 before code relies on them. Existing `first-version-v1` behavior remains authoritative until then.
 
@@ -215,6 +215,8 @@ Add a rules reference and dismissible callouts without a locked guided sequence.
 ## Migration Seed and Server Repair V2
 
 The Version 2 proposal is a separate migration track, not another PT-003 option. If approved, V2 does not inherit “authored disposition” as its normal Evidence architecture. Review [`TASK-017`](../../tasks/TASK-017-create-server-repair-v2-migration-seed.md) for the complete bounded audit, ontology, proof, and repository contract.
+
+**Approved 2026-08-24:** `MS-001 A`, `MS-002 A`, `MS-003 A`, `MS-004 A`, `MS-005 A`, `MS-006 A`, and `MS-007 A`. TASK-017 is ready. The alternatives below remain as decision provenance; they are not open implementation choices.
 
 ### MS-001 — New repository identity
 
