@@ -212,6 +212,48 @@ Cover Observe, diagnostics, Evidence, candidate management, Isolation, Repair, V
 
 Add a rules reference and dismissible callouts without a locked guided sequence. This is lighter but does not prove a complete path through the actual engine.
 
+## Migration Seed and Server Repair V2
+
+The Version 2 proposal is a separate migration track, not another PT-003 option. If approved, V2 does not inherit “authored disposition” as its normal Evidence architecture. Review [`TASK-017`](../../tasks/TASK-017-create-server-repair-v2-migration-seed.md) for the complete bounded audit, ontology, proof, and repository contract.
+
+### MS-001 — New repository identity
+
+- **A — Create `jamangi/Server_Repair_V2` as a public repository (recommended).** Verify that the name is available before creation and stop rather than reuse an unexpected existing repository.
+- **B — Approve the public migration but provide a different owner or repository name.**
+
+### MS-002 — V0 preservation boundary
+
+- **A — Preserve V0 intact (recommended).** Do not rewrite, archive, delete, retag, or bulk-modify this repository. After V2 is online, V0 may receive one concise README/decision pointer to the new project.
+- **B — Preserve code/history but permit a broader V0 migration-status documentation pass.** No V0 behavior or schema changes are implied.
+
+### MS-003 — V2 inference authority
+
+- **A — Dependency-derived dispositions with constrained explicit exceptions (recommended).** Capabilities, topology, dependency expressions, Fault effects, selected Test conditions, and observation coverage produce Evidence dispositions. A versioned exception is allowed only for a named technical phenomenon the typed model cannot yet express and must be justified, scoped, tested, and visible to validation.
+- **B — Dependency-derived dispositions with no exception mechanism.** This is purer but may force premature ontology complexity or block legitimate technical cases.
+- **C — Hybrid per-Test/per-Ticket disposition tables.** This preserves more V0 content but is not recommended because it recreates the debt the migration is meant to remove.
+
+### MS-004 — Seed proof depth
+
+- **A — Strict draft schemas plus executable reference semantics (recommended).** The Seed includes valid/invalid examples and a small replaceable inference evaluator proving dependency propagation, observation, candidate compatibility, disposition, derivation trace, and Isolation proof. It does not build the production engine or Viewer.
+- **B — Schemas and prose blueprint only.** Faster, but logical contradictions may survive until expensive engine work.
+- **C — Build the production engine inside the Seed task.** Too much scope before the ontology receives independent review.
+
+### MS-005 — Initial domain migration depth
+
+- **A — Provenance-rich catalog seed only (recommended).** Inventory V0 domain IDs, names, types, sources, and relationship hints; exclude V0 Evidence/Isolation tables from V2 authority. Rebuild complete domain objects later in bounded technical batches.
+- **B — Structurally port every domain object immediately.** Faster apparent progress but risks translating V0 assumptions before the ontology stabilizes.
+- **C — Carry no domain catalog into V2.** Cleanest surface but unnecessarily loses useful naming, research, and provenance.
+
+### MS-006 — Existing V0 task track
+
+- **A — Park V0 semantic expansion (recommended).** Retain TASK-013 through TASK-016 and reserved TASK-011 as historical/proposed contracts but do not implement them in V0. TASK-012 may still be executed as a contained defect-maintenance task for the preserved playable prototype.
+- **B — Continue the V0 and V2 tracks in parallel.** This produces two evolving rule/content systems and significantly increases synchronization and debt risk.
+
+### MS-007 — Complexity profiles
+
+- **A — One typed engine model with Core, Advanced, and Expert content profiles (recommended).** The Seed must prove the nuanced semantics, while the first V2 playable content exposes only Core cases. Later profiles may introduce redundancy, conditions, intermittent behavior, telemetry failures, concurrent Faults, and deeper ambiguity without replacing the inference engine.
+- **B — Model Core only and defer advanced schema support.** Smaller foundation, but may require another contract migration when richer campaign/expert content arrives.
+
 ## Deferred: SLA / round limit
 
 Do not implement or approve an SLA yet. A future decision should compare an authoritative round limit with the existing turn/player clocks and stalemate/cap semantics after the untimed diagnosis loop is understandable and balanced. No current task should smuggle in a deadline through UI timers or tutorial scripting.
@@ -228,4 +270,11 @@ PT-004 A
 PT-005 A
 PT-006 D
 PT-007 A
+MS-001 A
+MS-002 A
+MS-003 A
+MS-004 A
+MS-005 A
+MS-006 A
+MS-007 A
 ```

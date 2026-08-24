@@ -4,7 +4,7 @@ This is the canonical ledger for accepted Server Repair TCG rule questions that 
 
 ## Current state
 
-Four accepted post-playtest pressures are open as of 2026-08-24. The existing `first-version-v1` wording remains authoritative until the user selects options in [`APPROVALS.md`](APPROVALS.md) and TASK-013 synchronizes an updated rules version.
+Five accepted post-playtest/migration pressures are open as of 2026-08-24. The existing `first-version-v1` wording remains authoritative in this repository until the user selects options in [`APPROVALS.md`](APPROVALS.md). TASK-013 remains the V0 synchronization proposal; TASK-017 proposes a separately versioned V2 foundation rather than silently changing V0.
 
 ### PRESSURE-005 — Diagnostic access versus deck economy
 
@@ -30,7 +30,15 @@ The playtest requested a Show Answer action that reveals the hidden Fault and re
 
 Affected surfaces: Ticket lifecycle and archival, hidden-information release, pending contribution settlement, queue/terminal evaluation, results/statistics, projections, solo profile, UI confirmation/reveal, tutorial use, and automated games. Review `PT-005`.
 
-Content breadth (`PT-006`), tutorial scope (`PT-007`), the scrolling/caret defects, and a future SLA are not frozen-rule decisions by themselves. Their tasks remain ordered around the pressures above.
+### PRESSURE-009 — Dependency-derived diagnostic inference
+
+Hands-on review established that V0's Test `evidence_rules`, reciprocal Fault `effective_test_ids`, Ticket-authored candidate effects, and separately authored Isolation requirements do not form a dependency-based elimination engine. A passing Test should rule out a candidate only when the modeled topology, capability dependencies, Fault effects, selected conditions, and observation coverage make that outcome impossible under the candidate—not because a Ticket remembered to label an outcome `RULE_OUT`. Likewise, failure of a shared or redundant capability must not overstate which dependency is faulty.
+
+This pressures Frozen §§11–12 and §20's authored Ticket/Builder boundary, plus the current domain/runtime schemas and content architecture. V0 remains reproducible under `first-version-v1`; the proposed resolution is an audited Migration Seed and separate V2 repository rather than an in-place contract replacement. Review MS-001 through MS-007 and TASK-017.
+
+Affected surfaces: ontology, server/component topology, capabilities, typed dependency expressions, Fault modes/effects, Test conditions, observations and measurement coverage, Evidence dispositions and derivation traces, candidates/possible worlds, elimination, Isolation proofs, Builder solvability, hidden-information projections, deterministic replay, domain migration, difficulty content, automated proof cases, story opportunities, and future UI explanations.
+
+Content breadth (`PT-006`), tutorial scope (`PT-007`), the scrolling/caret defects, and a future SLA are not frozen-rule decisions by themselves. If MS-006 A is approved, the V0 semantic/content tasks are parked and V2 work begins with TASK-017; TASK-012 remains optional contained maintenance.
 
 ## Boundary
 

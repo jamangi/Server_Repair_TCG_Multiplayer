@@ -5,7 +5,7 @@ This directory is the authoritative entry point for Server Repair TCG rule decis
 ## Current decision state
 
 - [`FROZEN_RULES.md`](FROZEN_RULES.md) is the normative source implementations and tests may rely on.
-- [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md) is the canonical open inventory and contains four post-playtest pressures accepted for review on 2026-08-24.
+- [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md) is the canonical open inventory and contains five post-playtest/migration pressures accepted for review on 2026-08-24.
 - [`APPROVALS.md`](APPROVALS.md) is the current non-authoritative option review packet for those pressures plus content/tutorial scope. No option is approved merely because it appears there.
 - The former candidate ledger was fully resolved on 2026-08-22. The former synchronization ledger was fully resolved by [`TASK-007`](../../tasks/TASK-007-synchronize-approved-gameplay-rules.md) on 2026-08-23. Both retired ledgers remain available in Git history.
 - `SCORE-001`, `GEN-001`, terminal policy, departure cleanup, Room lifecycle, and the four previously pressured frozen rules are approved. [`TASK-008`](../../tasks/TASK-008-freeze-first-version-foundation.md) records their synchronization.
@@ -23,7 +23,7 @@ This directory is the authoritative entry point for Server Repair TCG rule decis
 | Document | Authority | Purpose |
 | --- | --- | --- |
 | [`FROZEN_RULES.md`](FROZEN_RULES.md) | Normative | Approved behavior that implementations and tests may rely on. |
-| [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md) | Non-normative open inventory | Accepted unresolved rules and pressure; currently contains `PRESSURE-005` through `PRESSURE-008`. |
+| [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md) | Non-normative open inventory | Accepted unresolved rules and pressure; currently contains `PRESSURE-005` through `PRESSURE-009`. |
 | [`APPROVALS.md`](APPROVALS.md) | Non-normative review packet | Clarified post-playtest options awaiting user selection. |
 
 Completed task records, case studies, candidate flows, examples, and Git history explain provenance but are not additional rule ledgers.
@@ -52,7 +52,7 @@ Rejected, derivative, or superseded ideas need not remain in the active foundati
 
 ## Foundation status
 
-The immediate rule-decision order is `PT-001` through `PT-005` in `APPROVALS.md`, followed by synchronization through TASK-013. Independent interface defects may proceed under TASK-012. Content expansion (TASK-014), final Bench/board composition (TASK-016), and tutorials (TASK-015) remain ordered downstream so they are not authored against behavior or representative data that is about to change.
+Two mutually exclusive near-term tracks are under review. The V0 continuation track resolves `PT-001` through `PT-005`, synchronizes through TASK-013, and then proceeds to TASK-014/TASK-016/TASK-015. The recommended migration track resolves MS-001 through MS-007 and executes TASK-017, preserving V0 while establishing dependency-derived inference in a separate V2 repository. TASK-012 may proceed independently as contained V0 defect maintenance.
 
 ## Maintenance rules
 
