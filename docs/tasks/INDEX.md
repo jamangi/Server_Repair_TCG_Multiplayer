@@ -2,34 +2,33 @@
 
 Tasks are implementation contracts. A builder must read `AGENTS.md` and then the selected task completely.
 
+Beginning with TASK-011, the displayed task ID includes the recommended reasoning-effort suffix used when starting that task. `HIGH` denotes substantial but bounded implementation/research; `XHIGH` denotes a cross-cutting semantic, architectural, or broad content migration. The stable task number and existing filename do not change, preserving links and history.
+
 Active task:
 
 - **None.**
 
-Ready migration task:
+Active V0 training-ready sequence:
 
-- [`TASK-017: Create the Server Repair V2 Migration Seed`](TASK-017-create-server-repair-v2-migration-seed.md) — ready 2026-08-24 under approved MS-001 A through MS-007 A; audits V0 in bounded checkpoints, preserves reusable knowledge, unfreezes incompatible authored-disposition rules, proves dependency-derived inference through strict schemas and executable reference semantics, and creates the approved public `jamangi/Server_Repair_V2` foundation without modifying V0 behavior.
+- [`TASK-012-HIGH: Fix solo-client interaction defects`](TASK-012-fix-solo-client-interaction-defects.md) — ready; preserves internal Ticket/board scroll and real sequential-input caret/selection, and keeps accepted cross-Ticket action results persistently visible without changing gameplay.
+- [`TASK-013-XHIGH: Synchronize approved post-playtest diagnosis rules`](TASK-013-synchronize-post-playtest-diagnosis-rules.md) — approved PT-001 D through PT-005 A; queued after TASK-012 to create the versioned Global/Relevant Bench, Evidence semantics, multi-route Isolation/elimination, Repair gateway, and solo reveal authority.
+- [`TASK-014-XHIGH: Expand playable content and Ticket generation`](TASK-014-expand-playable-content-and-ticket-generation.md) — approved PT-006 D; blocked on TASK-013 and expands twelve causal fingerprints plus all 50 current Bench diagnostics with coverage-driven Cards/scenarios, material generation, unique-before-repeat queues, and exact resource solvability.
+- [`TASK-016-HIGH: Refine Diagnostic Bench and game-board composition`](TASK-016-refine-diagnostic-bench-board-layout.md) — approved and blocked on TASK-012 through TASK-014; applies the Relevant/Global layouts, compact Ticket, fully visible Legal Action, viewport-aware queue, and responsive visual polish against representative content.
+- [`TASK-015-HIGH: Add guided tutorials and the solo solution-reveal experience`](TASK-015-add-guided-tutorial-and-solution-reveal.md) — approved PT-007 A and blocked on TASK-013, TASK-014, and TASK-016; teaches the final rules through two real seeded engine paths and presents the authoritative PT-005 A Give Up reveal.
 
-Parked V0 tasks retained as provenance under approved MS-006 A:
+Reserved V0 illustration task:
 
-- [`TASK-013: Synchronize approved post-playtest diagnosis rules`](TASK-013-synchronize-post-playtest-diagnosis-rules.md) — blocked on PT-001 through PT-005; creates the versioned Global/Relevant Bench, Evidence-disposition, multi-route Isolation, elimination, Repair-gateway, and reveal migration before content or tutorials depend on it.
-- [`TASK-014: Expand playable content and Ticket generation`](TASK-014-expand-playable-content-and-ticket-generation.md) — blocked on TASK-013 and PT-006; expands coverage-driven Cards/scenarios, optionally promotes all 50 Bench diagnostics under PT-006 D, and evolves generation beyond whole-template cloning with unique-before-repeat queues and exact resource solvability.
-- [`TASK-016: Refine Diagnostic Bench and game-board composition`](TASK-016-refine-diagnostic-bench-board-layout.md) — blocked on TASK-012 through TASK-014; applies the Relevant/Global Bench-specific layouts, compact Ticket, fully visible Legal Action, viewport-aware queue, and responsive density pass against representative content.
-- [`TASK-015: Add guided tutorials and the solo solution-reveal experience`](TASK-015-add-guided-tutorial-and-solution-reveal.md) — blocked on TASK-013, TASK-014, TASK-016, and PT-007; teaches the final rules through real seeded engine paths and presents the authoritative Give Up reveal after final control locations stabilize.
+- **TASK-011-HIGH — canonical Card illustrations.** Scope after TASK-014 stabilizes the expanded playable catalog, avoiding throwaway art and asset migration. It may then proceed independently of TASK-016/TASK-015 where asset integration permits.
 
-Optional V0 maintenance task:
+Approved but deferred V2 task:
 
-- [`TASK-012: Fix solo-client interaction defects`](TASK-012-fix-solo-client-interaction-defects.md) — ready 2026-08-24; preserves internal Ticket/board scroll and real sequential-input caret/selection, and keeps accepted cross-Ticket action results persistently visible without changing gameplay.
+- [`TASK-017-XHIGH: Create the Server Repair V2 Migration Seed`](TASK-017-create-server-repair-v2-migration-seed.md) — approved Migration Seed direction but deferred until the V0 product is training-ready; when reactivated, it audits V0 in bounded checkpoints and establishes the public dependency-inference V2 foundation without modifying V0 behavior.
 
-Parked reserved task number:
-
-- **TASK-011 — canonical Card illustrations.** Retained as a V0 planning artifact but parked under MS-006 A; V2 illustration work must be re-scoped against the future V2 catalog.
-
-Approved migration order: optionally complete TASK-012 as contained V0 maintenance → TASK-017 → continue from the new V2 roadmap. Do not implement TASK-013 through TASK-016 or reserved TASK-011 in V0 unless the project owner later reverses MS-006 A through a new decision.
+Approved execution order: TASK-012-HIGH → TASK-013-XHIGH → TASK-014-XHIGH → TASK-016-HIGH → TASK-015-HIGH. Scope TASK-011-HIGH after TASK-014. Return to TASK-017-XHIGH only when the project owner reactivates V2 migration.
 
 Completed documentation and research tasks:
 
-- [`TASK-010: Add Library and local Solo Play to the static Viewer`](TASK-010-static-solo-play-client.md) — completed 2026-08-23; preserved the Domain Library and added the `solo-pages-v1` local Play shell, legal deck editor, profile/statistics and backup portability, Worker-authoritative 1–10 Ticket games, semantic motion, responsive Night-Shift visual system, deterministic Pages staging, and browser/visual acceptance. TASK-011 remains reserved for the full illustration set.
+- [`TASK-010: Add Library and local Solo Play to the static Viewer`](TASK-010-static-solo-play-client.md) — completed 2026-08-23; preserved the Domain Library and added the `solo-pages-v1` local Play shell, legal deck editor, profile/statistics and backup portability, Worker-authoritative 1–10 Ticket games, semantic motion, responsive Night-Shift visual system, deterministic Pages staging, and browser/visual acceptance. TASK-011-HIGH remains reserved for the full illustration set.
 - [`TASK-009: Build the playable gameplay foundation`](TASK-009-gameplay-foundation.md) — completed 2026-08-23; synchronized executable Card/Ticket contracts, deterministic authoritative engine, constraint-driven Ticket Builder, seat-safe simulator, and a reproducible 22-run campaign with 0 deterministic mismatches.
 - [`TASK-008: Freeze the first-version foundation`](TASK-008-freeze-first-version-foundation.md) — completed 2026-08-23; all 89 reviewed open items and four pressures resolved, affected artifacts synchronized, and the Unfrozen ledger emptied.
 - [`TASK-007: Synchronize approved gameplay rules`](TASK-007-synchronize-approved-gameplay-rules.md) — completed 2026-08-23; `SYNC-014`–`SYNC-020` reconciled across design documents, schemas, examples, candidate flows, story/UI candidates, wireframes, and tests. `SCORE-001` and `GEN-001` remained unfrozen at that task's boundary and were later resolved by TASK-008.

@@ -1,4 +1,4 @@
-# TASK-012: Fix solo-client interaction defects
+# TASK-012-HIGH: Fix solo-client interaction defects
 
 ## Status
 

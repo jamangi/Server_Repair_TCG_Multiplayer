@@ -4,7 +4,7 @@ This is the canonical ledger for accepted Server Repair TCG rule questions that 
 
 ## Current state
 
-Five post-playtest/migration pressures remain recorded as of 2026-08-24. MS-001 A through MS-007 A are approved: TASK-017 will resolve `PRESSURE-009` in a separately versioned V2 foundation while preserving this repository's `first-version-v1` authority. The unapproved PT choices and TASK-013 through TASK-016 are parked rather than implemented in V0; TASK-012 remains optional contained maintenance.
+Five approved but unsynchronized post-playtest/migration pressures remain recorded as of 2026-08-24. PT-001 D through PT-007 A activate the V0 training-ready sequence: TASK-012 first, then TASK-013, TASK-014, TASK-016, and TASK-015. TASK-017 and `PRESSURE-009` remain approved V2 direction but are deferred until the project owner returns to migration. Existing `first-version-v1` wording remains authoritative until each synchronization task completes its versioned boundary.
 
 ### PRESSURE-005 — Diagnostic access versus deck economy
 
@@ -34,11 +34,11 @@ Affected surfaces: Ticket lifecycle and archival, hidden-information release, pe
 
 Hands-on review established that V0's Test `evidence_rules`, reciprocal Fault `effective_test_ids`, Ticket-authored candidate effects, and separately authored Isolation requirements do not form a dependency-based elimination engine. A passing Test should rule out a candidate only when the modeled topology, capability dependencies, Fault effects, selected conditions, and observation coverage make that outcome impossible under the candidate—not because a Ticket remembered to label an outcome `RULE_OUT`. Likewise, failure of a shared or redundant capability must not overstate which dependency is faulty.
 
-This pressures Frozen §§11–12 and §20's authored Ticket/Builder boundary, plus the current domain/runtime schemas and content architecture. V0 remains reproducible under `first-version-v1`; the approved resolution is an audited Migration Seed and separate V2 repository rather than an in-place contract replacement. MS-001 A through MS-007 A are recorded in `APPROVALS.md`, and TASK-017 is ready.
+This pressures Frozen §§11–12 and §20's authored Ticket/Builder boundary, plus the current domain/runtime schemas and content architecture. V0 remains reproducible under `first-version-v1`; the approved resolution is an audited Migration Seed and separate V2 repository rather than an in-place contract replacement. The retained Migration Seed choices and superseded sequencing decision are recorded in `APPROVALS.md`; TASK-017 is approved but deferred.
 
 Affected surfaces: ontology, server/component topology, capabilities, typed dependency expressions, Fault modes/effects, Test conditions, observations and measurement coverage, Evidence dispositions and derivation traces, candidates/possible worlds, elimination, Isolation proofs, Builder solvability, hidden-information projections, deterministic replay, domain migration, difficulty content, automated proof cases, story opportunities, and future UI explanations.
 
-Content breadth (`PT-006`), tutorial scope (`PT-007`), the scrolling/caret defects, and a future SLA are not frozen-rule decisions by themselves. If MS-006 A is approved, the V0 semantic/content tasks are parked and V2 work begins with TASK-017; TASK-012 remains optional contained maintenance.
+Content breadth (`PT-006 D`), tutorial scope (`PT-007 A`), and the scrolling/caret defects are approved work ordered around the pressures above but are not frozen-rule decisions by themselves. A future SLA remains deferred. MS-006 A's earlier V0-parking sequence is superseded; TASK-017 is deferred rather than active.
 
 ## Boundary
 

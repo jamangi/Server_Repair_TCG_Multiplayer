@@ -1,8 +1,12 @@
-# TASK-015: Add guided tutorials and the solo solution-reveal experience
+# TASK-015-HIGH: Add guided tutorials and the solo solution-reveal experience
 
 ## Status
 
-**Proposed — blocked on TASK-013, TASK-014, TASK-016, and PT-007.** The tutorial must teach the approved rules against representative final content and stable control locations. The reveal UI must consume the authoritative Give-Up contract selected in PT-005 rather than inventing truth in the DOM.
+**Approved scope — blocked on TASK-013, TASK-014, and TASK-016.** PT-007 A and the prerequisite PT-005 A reveal behavior were approved by the project owner on 2026-08-24. The tutorials must teach synchronized rules against representative final content and stable control locations.
+
+## Approved authority
+
+PT-007 A requires two engine-driven tutorials: a fundamentals path and a failed-Verify/recovery path. Both use pinned versions/seeds and real engine/Builder legal intents; pause at semantic checkpoints; highlight and announce exact controls; support replay, keyboard, touch, screen readers, and reduced motion; and never fabricate tutorial-only authority. PT-005 A supplies the solo one-Ticket Give Up/reveal behavior rendered by this task.
 
 ## Objective
 

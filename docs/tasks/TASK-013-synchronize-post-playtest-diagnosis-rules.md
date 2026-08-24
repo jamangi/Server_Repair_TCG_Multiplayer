@@ -1,8 +1,18 @@
-# TASK-013: Synchronize approved post-playtest diagnosis rules
+# TASK-013-XHIGH: Synchronize approved post-playtest diagnosis rules
 
 ## Status
 
-**Proposed — blocked on PT-001 through PT-005 in `docs/design/decisions/APPROVALS.md`.** Do not implement an option before the user approves it. TASK-012 may proceed independently.
+**Approved — queued after TASK-012.** PT-001 D, PT-002 A, PT-003 D, PT-004 A, and PT-005 A were approved by the project owner on 2026-08-24. TASK-012 must stabilize the browser interaction surface before this cross-cutting migration begins.
+
+## Approved authority
+
+- **PT-001 D:** one globally available playable diagnostic catalog with switchable Relevant/Global Bench Views; relevance is an advisory, public-graph-derived filter available in either view and never a difficulty or Match setting.
+- **PT-002 A:** deterministically derive 2–5 public candidates from Symptoms plus component/subsystem/causal context; always include hidden actionable Faults and require every distractor to be plausible and differentiable.
+- **PT-003 D:** replace flat citation counting with typed alternative Isolation routes and decisive candidate-specific `CONFIRM`; support direct observation, definitive diagnostics, corroborated support, Evidence-backed elimination, and recovery-derived routes with deterministic validation and contribution attribution.
+- **PT-004 A:** retain accepted Isolation as the Repair gateway; do not implement speculative Repair in this revision.
+- **PT-005 A:** in solo/training, confirmed Give Up atomically abandons and reveals one Ticket, voids its pending contributions, records the give-up, prevents play on revealed truth, and permits the remaining queue to continue without recording the Match as a solo win.
+
+These choices are V0 successor-rule authority for this task. They do not import the deferred V2 dependency-inference architecture, expand content under PT-006, or pre-implement the tutorial under PT-007.
 
 ## Objective
 
@@ -38,7 +48,7 @@ Implement only the approved choices, but the synchronized result must explicitly
 ### Diagnostic availability
 
 - which Test/Command definitions are offered, how relevance is derived, their runtime placement/zone, whether they occupy the 30-card response deck, and how existing decks migrate;
-- if PT-001 D is approved, one authoritative globally available playable diagnostic catalog plus switchable `RELEVANT`/`GLOBAL` local Bench Views over identical legal intents;
+- under approved PT-001 D, one authoritative globally available playable diagnostic catalog plus switchable `RELEVANT`/`GLOBAL` local Bench Views over identical legal intents;
 - default/preferred view persistence and export, mid-Match switching, filter/sort/page continuity, and proof that view changes do not mutate Match state, replay provenance, legality, scoring, or statistics;
 - public-context-only relevance membership and player-safe `Why relevant?` relationship paths, plus an explicit incomplete-graph disclaimer and the same optional Relevant filter inside Global view;
 - Action costs, repetition rules, disposition, Documentation behavior, statistics, visibility, and Search/Refresh interaction;
@@ -54,7 +64,7 @@ Implement only the approved choices, but the synchronized result must explicitly
 
 ### Functional Bench UI boundary
 
-If PT-001 D is approved, TASK-013 must ship a usable first implementation rather than contracts with no play surface:
+Under approved PT-001 D, TASK-013 must ship a usable first implementation rather than contracts with no play surface:
 
 - Settings may remember the preferred Bench View, and the active board exposes an immediate Relevant/Global switch. It explains focused versus complete catalog organization without presenting either as a difficulty mode.
 - Relevant mode presents the public-context-filtered diagnostics as a compact shelf/tray with Test/Command filtering and a visible relevant-count explanation.
@@ -113,7 +123,7 @@ Use the two diagnostic-bench mockups as hierarchy references. Do not copy incide
 Add focused tests for every approved route and rejected boundary, including:
 
 - deterministic diagnostic availability and outcomes across machine revisions;
-- if selectable views are approved, identical legal intents and deterministic outcomes before/after switching; complete Global membership; public-context-only Relevant membership/explanations; no hidden-truth inference; and no Match/replay/statistic mutation from view/filter state;
+- identical legal intents and deterministic outcomes before/after switching; complete Global membership; public-context-only Relevant membership/explanations; no hidden-truth inference; and no Match/replay/statistic mutation from view/filter state;
 - every accepted paid action producing exactly one persistently projectable result, including diagnostics with no candidate effect and cross-Ticket targets;
 - no Action/Card/token payment on rejected intents and no paid `RESOLVED` result without visible feedback;
 - no hidden truth in ordinary projections or timing;

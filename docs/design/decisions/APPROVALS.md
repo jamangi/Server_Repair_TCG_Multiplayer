@@ -1,10 +1,14 @@
 # Post-TASK-010 playtest approvals
 
-Status: **Migration Seed choices MS-001 A through MS-007 A approved — 2026-08-24. V0 PT-001 through PT-007 remain unapproved and parked under MS-006 A.**
+Status: **PT-001 D, PT-002 A, PT-003 D, PT-004 A, PT-005 A, PT-006 D, and PT-007 A approved — 2026-08-24. The V0 training-ready track is active. Migration choices MS-001 A through MS-005 A and MS-007 A remain approved, but TASK-017 is deferred; MS-006 A's earlier parking sequence is superseded.**
 
 This is a non-authoritative review packet for the first hands-on solo-play findings. Approved choices must be synchronized through TASK-013 before code relies on them. Existing `first-version-v1` behavior remains authoritative until then.
 
 The canonical open-rule entries live in [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md). This file supplies reviewable lettered choices without creating a second rules ledger. After resolution, the selected behavior belongs in `FROZEN_RULES.md`; this packet remains only as decision provenance or may be retired through the approving task.
+
+## Approved V0 record
+
+The project owner approved `PT-001 D`, `PT-002 A`, `PT-003 D`, `PT-004 A`, `PT-005 A`, `PT-006 D`, and `PT-007 A` on 2026-08-24. TASK-012 proceeds first; TASK-013 synchronizes PT-001 through PT-005 into a successor V0 rules version; TASK-014 implements PT-006 D; TASK-016 stabilizes final board composition; and TASK-015 implements PT-007 A plus the PT-005 A reveal experience. The alternatives below remain decision provenance, not open implementation choices.
 
 ## Verified current facts
 
@@ -216,7 +220,7 @@ Add a rules reference and dismissible callouts without a locked guided sequence.
 
 The Version 2 proposal is a separate migration track, not another PT-003 option. If approved, V2 does not inherit “authored disposition” as its normal Evidence architecture. Review [`TASK-017`](../../tasks/TASK-017-create-server-repair-v2-migration-seed.md) for the complete bounded audit, ontology, proof, and repository contract.
 
-**Approved 2026-08-24:** `MS-001 A`, `MS-002 A`, `MS-003 A`, `MS-004 A`, `MS-005 A`, `MS-006 A`, and `MS-007 A`. TASK-017 is ready. The alternatives below remain as decision provenance; they are not open implementation choices.
+**Approved 2026-08-24, then deferred:** `MS-001 A`, `MS-002 A`, `MS-003 A`, `MS-004 A`, `MS-005 A`, and `MS-007 A` remain the Migration Seed direction. MS-006 A's instruction to park V0 was superseded later that day when the project owner reactivated the V0 training-ready track and deferred TASK-017. The alternatives below remain decision provenance; they are not open implementation choices.
 
 ### MS-001 — New repository identity
 
@@ -262,7 +266,7 @@ Do not implement or approve an SLA yet. A future decision should compare an auth
 
 ## Reply format
 
-Approve or amend each item by ID, for example:
+Historical reply format used during review:
 
 ```text
 PT-001 D

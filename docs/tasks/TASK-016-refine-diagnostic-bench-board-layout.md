@@ -1,8 +1,8 @@
-# TASK-016: Refine Diagnostic Bench and game-board composition
+# TASK-016-HIGH: Refine Diagnostic Bench and game-board composition
 
 ## Status
 
-**Proposed — blocked on TASK-012, TASK-013, and TASK-014.** Fix continuity first, stabilize authoritative Global availability and switchable Bench View semantics second, and populate representative Ticket/diagnostic data third. This task is the dedicated whole-board density, responsive-composition, and visual-polish pass before tutorial overlays depend on final control locations.
+**Approved and queued — blocked on TASK-012, TASK-013, and TASK-014.** Fix continuity first, stabilize authoritative Global availability and switchable Bench View semantics second, and populate representative Ticket/diagnostic data third. This task is the dedicated whole-board density, responsive-composition, and visual-polish pass before tutorial overlays depend on final control locations.
 
 ## Objective
 

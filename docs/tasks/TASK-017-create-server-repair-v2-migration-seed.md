@@ -1,8 +1,8 @@
-# TASK-017: Create the Server Repair V2 Migration Seed
+# TASK-017-XHIGH: Create the Server Repair V2 Migration Seed
 
 ## Status
 
-**Ready — MS-001 A through MS-007 A approved by the project owner on 2026-08-24.** This task may create the approved public repository after the Migration Seed passes its required gates. Do not implement PT-001 through PT-007 as part of this task.
+**Approved but deferred — return after the V0 training-ready track.** MS-001 A through MS-005 A and MS-007 A remain approved. The project owner superseded MS-006 A's parking sequence on 2026-08-24 by reactivating V0 work and deferring the Migration Seed. Do not begin TASK-017 until the project owner returns to it; do not implement PT-001 through PT-007 as part of this task.
 
 ## Approved authority
 
@@ -11,7 +11,7 @@
 - **MS-003 A:** dependency-derived Evidence dispositions are authoritative. Permit only constrained, versioned, justified, scoped, tested, and validation-visible explicit inference exceptions.
 - **MS-004 A:** produce strict draft schemas, valid/invalid examples, and executable reference semantics; do not build the production engine or Viewer in this task.
 - **MS-005 A:** migrate a provenance-rich domain catalog seed rather than structurally porting complete V0 domain objects or treating V0 Evidence/Isolation tables as V2 truth.
-- **MS-006 A:** park V0 semantic/content expansion under TASK-013 through TASK-016 and reserved TASK-011. TASK-012 remains optional contained V0 defect maintenance.
+- **MS-006 A (superseded sequencing):** originally parked V0 semantic/content expansion. The later project-owner direction reactivated TASK-012 through TASK-016 and deferred this task. Preserve the choice as provenance, but do not use it to block the active V0 track.
 - **MS-007 A:** define one typed inference model supporting Core, Advanced, and Expert profiles, while limiting the first V2 playable content to Core cases.
 
 These approvals authorize the external repository creation and V0 documentation pointer only within this task's gates and allowed paths. They do not authorize weakening a stop condition, importing V0 debt, implementing deferred V2 systems, or changing V0 behavior.
@@ -58,7 +58,7 @@ Start with these navigation sources:
 - `docs/design/decisions/{DECISION_INDEX,FROZEN_RULES,UNFROZEN_RULES,APPROVALS}.md`;
 - `schemas/README.md` and the schema-note indexes;
 - the README or index at the root of each major documentation/content area;
-- TASK-005 through TASK-010 completion records, plus TASK-012 through TASK-016 only as future intent and discovered defects;
+- TASK-005 through TASK-010 completion records, plus TASK-012 through TASK-016 as V0 migration inputs, completed work where applicable, and discovered defects at Seed time;
 - `docs/design/01_DATA_ARCHITECTURE.md`, the Card/Ticket analysis, and current engine/Builder overviews;
 - the UI-reference README and selected images named by it; and
 - manifests and file inventories before opening large data, replay, report, or generated files.

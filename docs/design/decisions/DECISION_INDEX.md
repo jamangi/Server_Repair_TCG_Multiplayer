@@ -6,7 +6,7 @@ This directory is the authoritative entry point for Server Repair TCG rule decis
 
 - [`FROZEN_RULES.md`](FROZEN_RULES.md) is the normative source implementations and tests may rely on.
 - [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md) is the canonical open inventory and contains five post-playtest/migration pressures accepted for review on 2026-08-24.
-- [`APPROVALS.md`](APPROVALS.md) records approved MS-001 A through MS-007 A and retains the unapproved/parked PT alternatives as decision provenance. No unselected option is authoritative merely because it appears there.
+- [`APPROVALS.md`](APPROVALS.md) records approved PT-001 through PT-007 choices, the still-approved-but-deferred Migration Seed direction, and rejected alternatives as decision provenance. No unselected option is authoritative merely because it appears there.
 - The former candidate ledger was fully resolved on 2026-08-22. The former synchronization ledger was fully resolved by [`TASK-007`](../../tasks/TASK-007-synchronize-approved-gameplay-rules.md) on 2026-08-23. Both retired ledgers remain available in Git history.
 - `SCORE-001`, `GEN-001`, terminal policy, departure cleanup, Room lifecycle, and the four previously pressured frozen rules are approved. [`TASK-008`](../../tasks/TASK-008-freeze-first-version-foundation.md) records their synchronization.
 - The repository has a frozen first-version gameplay foundation, deterministic engine/Builder, automated-game campaign, and deployed browser-local solo client. `first-version-v1` remains authoritative while the post-playtest changes are reviewed.
@@ -24,7 +24,7 @@ This directory is the authoritative entry point for Server Repair TCG rule decis
 | --- | --- | --- |
 | [`FROZEN_RULES.md`](FROZEN_RULES.md) | Normative | Approved behavior that implementations and tests may rely on. |
 | [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md) | Non-normative open inventory | Accepted unresolved rules and pressure; currently contains `PRESSURE-005` through `PRESSURE-009`. |
-| [`APPROVALS.md`](APPROVALS.md) | Decision record and non-normative option provenance | Records the approved V2 Migration Seed choices and the parked, unapproved V0 post-playtest alternatives. |
+| [`APPROVALS.md`](APPROVALS.md) | Decision record and non-normative option provenance | Records the active approved V0 choices, deferred approved V2 direction, and unselected alternatives. |
 
 Completed task records, case studies, candidate flows, examples, and Git history explain provenance but are not additional rule ledgers.
 
@@ -52,7 +52,7 @@ Rejected, derivative, or superseded ideas need not remain in the active foundati
 
 ## Foundation status
 
-The migration track is approved through MS-001 A to MS-007 A. TASK-017 is ready to preserve V0 and establish dependency-derived inference in the separate public `jamangi/Server_Repair_V2` repository. The unapproved PT/V0 semantic-content track is parked; TASK-013 through TASK-016 and reserved TASK-011 remain as provenance and must not be implemented in V0. TASK-012 may proceed independently as contained defect maintenance.
+The V0 training-ready track is active under approved PT-001 D, PT-002 A, PT-003 D, PT-004 A, PT-005 A, PT-006 D, and PT-007 A. Execute TASK-012, TASK-013, TASK-014, TASK-016, and TASK-015 in that order; TASK-011 follows the stable playable catalog. The V2 Migration Seed direction remains approved except that MS-006 A's prior parking sequence is superseded; TASK-017 is deferred until the project owner returns to it.
 
 ## Maintenance rules
 

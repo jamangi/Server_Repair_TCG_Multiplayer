@@ -1,8 +1,12 @@
-# TASK-014: Expand playable content and Ticket generation
+# TASK-014-XHIGH: Expand playable content and Ticket generation
 
 ## Status
 
-**Proposed — blocked on TASK-013 and PT-006 in `docs/design/decisions/APPROVALS.md`.** The approved diagnostic/candidate model must be stable before authoring its content at scale.
+**Approved scope — blocked on completion of TASK-013.** PT-006 D was approved by the project owner on 2026-08-24. The synchronized diagnostic/candidate model must be stable before authoring its content at scale.
+
+## Approved authority
+
+PT-006 D requires at least twelve causal fingerprints—two each across storage, memory, power, boot, thermal, and network—plus promotion of all current 37 Tests and 13 Commands into the versioned Global Bench catalog once each has a complete executable contract, target compatibility, Action cost, and deterministic result coverage. Add only the Repairs and Validations needed by the twelve supported scenario paths. Recompute source counts from the pinned manifest if the library changes before implementation.
 
 ## Objective
 
@@ -49,7 +53,7 @@ No coverage percentage may imply that Faults, Symptoms, Components, Tools, or Pr
 Implement the approved PT-006 scope across its named subsystems.
 
 - Add typed Card Definitions only when they expose a complete executable contract needed by supported Tickets or the approved diagnostic model.
-- If PT-001 D is approved, define the exact versioned Global Bench catalog promised by the approved PT-006 scope. If PT-006 D is also approved, promote all current 37 Tests and 13 Commands while limiting broad Repair/Validation work to the twelve supported fingerprints. Do not display the raw knowledge-library count as playable: promote a Test/Command only after it has a complete execution contract, targets, costs, and deterministic result coverage. Relevant mode must be a public-context-only filtered view of this same catalog rather than a separate hand-authored list.
+- Under approved PT-001 D and PT-006 D, define the exact versioned Global Bench catalog and promote all current 37 Tests and 13 Commands while limiting broad Repair/Validation work to the twelve supported fingerprints. Do not display the raw knowledge-library count as playable: promote a Test/Command only after it has a complete execution contract, targets, costs, and deterministic result coverage. Relevant mode must be a public-context-only filtered view of this same catalog rather than a separate hand-authored list.
 - Prefer validated reusable outcome families for technically accurate clean, not-applicable, no-relevant-finding, and inconclusive results; keep candidate-changing outcomes relationship-bound and explicit. Do not manufacture a 50 × Ticket prose matrix or silently treat every unrelated diagnostic as the same observation.
 - Prefer one reusable definition referencing one domain action over Ticket-specific duplicate Cards.
 - Add complete authored machine states, causal truth, outcomes, typed alternative elimination/Isolation routes, Repairs, Verify requirements, and closure paths.
