@@ -5,24 +5,26 @@ This directory is the authoritative entry point for Server Repair TCG rule decis
 ## Current decision state
 
 - [`FROZEN_RULES.md`](FROZEN_RULES.md) is the normative source implementations and tests may rely on.
-- [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md) is the canonical open inventory and is empty after the 2026-08-23 foundation-freeze approval.
-- There are no active candidate decisions and no active unsynchronized decisions as of 2026-08-23.
+- [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md) is the canonical open inventory and contains four post-playtest pressures accepted for review on 2026-08-24.
+- [`APPROVALS.md`](APPROVALS.md) is the current non-authoritative A/B/C review packet for those pressures plus content/tutorial scope. No option is approved merely because it appears there.
 - The former candidate ledger was fully resolved on 2026-08-22. The former synchronization ledger was fully resolved by [`TASK-007`](../../tasks/TASK-007-synchronize-approved-gameplay-rules.md) on 2026-08-23. Both retired ledgers remain available in Git history.
 - `SCORE-001`, `GEN-001`, terminal policy, departure cleanup, Room lifecycle, and the four previously pressured frozen rules are approved. [`TASK-008`](../../tasks/TASK-008-freeze-first-version-foundation.md) records their synchronization.
-- The repository has a frozen first-version gameplay foundation but no playable game engine yet.
+- The repository has a frozen first-version gameplay foundation, deterministic engine/Builder, automated-game campaign, and deployed browser-local solo client. `first-version-v1` remains authoritative while the post-playtest changes are reviewed.
 
 ## Reading order
 
 1. Read this index for authority and lifecycle.
 2. Read [`FROZEN_RULES.md`](FROZEN_RULES.md) for behavior implementation may rely on.
-3. Check [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md) for any question added after the current empty state.
+3. Check [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md) for accepted open questions or pressure against Frozen behavior.
+4. When choices are pending, review [`APPROVALS.md`](APPROVALS.md) and keep every option non-authoritative until the user responds.
 
 ## Active decision documents
 
 | Document | Authority | Purpose |
 | --- | --- | --- |
 | [`FROZEN_RULES.md`](FROZEN_RULES.md) | Normative | Approved behavior that implementations and tests may rely on. |
-| [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md) | Non-normative open inventory | Future accepted unresolved rules and pressure; currently empty. |
+| [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md) | Non-normative open inventory | Accepted unresolved rules and pressure; currently contains `PRESSURE-005` through `PRESSURE-008`. |
+| [`APPROVALS.md`](APPROVALS.md) | Non-normative review packet | Clarified post-playtest options awaiting user selection. |
 
 Completed task records, case studies, candidate flows, examples, and Git history explain provenance but are not additional rule ledgers.
 
@@ -50,7 +52,7 @@ Rejected, derivative, or superseded ideas need not remain in the active foundati
 
 ## Foundation status
 
-There is no remaining rule-decision order. New implementation may proceed in scoped tasks against the frozen contracts. If implementation exposes a genuine rules question or pressure, record it in `UNFROZEN_RULES.md` before embedding an answer in code, schema, content, or UI behavior.
+The immediate rule-decision order is `PT-001` through `PT-005` in `APPROVALS.md`, followed by synchronization through TASK-013. Independent interface defects may proceed under TASK-012. Content expansion and tutorials remain downstream so they are not authored against behavior that is about to change.
 
 ## Maintenance rules
 

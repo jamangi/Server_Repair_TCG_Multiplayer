@@ -4,6 +4,12 @@ An educational, server-authoritative card game about diagnosing and repairing co
 
 Players are technicians, not opposing armies. They compete or cooperate by troubleshooting Repair Tickets accurately and efficiently while learning concepts that transfer to real server work.
 
+## Play now
+
+Open the [Server Repair GitHub Pages application](https://jamangi.github.io/Server_Repair_TCG_Multiplayer/) and select **Play**. No installation, local server, account, or sign-in is required.
+
+The current game is a browser-local solo training client. Decks, profile choices, settings, and statistics stay in that browser unless exported from Settings. An active Match is intentionally not resumable after leaving or reloading it.
+
 ## Troubleshooting loop
 
 Every ticket follows the practical repair sequence:
@@ -79,11 +85,12 @@ Read the design documents in this order:
 
 1. [`docs/design/decisions/DECISION_INDEX.md`](docs/design/decisions/DECISION_INDEX.md) — the authority map, current decision state, lifecycle, and recommended order for finishing the engine.
 2. [`docs/design/decisions/FROZEN_RULES.md`](docs/design/decisions/FROZEN_RULES.md) — approved behavior implementations may rely on.
-3. [`docs/design/decisions/UNFROZEN_RULES.md`](docs/design/decisions/UNFROZEN_RULES.md) — the remaining open rules, freeze recommendations, and any pressure against frozen rules.
-4. [`docs/design/SOLO_PAGES_PROFILE.md`](docs/design/SOLO_PAGES_PROFILE.md) — the derived `solo-pages-v1` implementation profile; it configures the local training client without copying or overriding Frozen Rules.
-5. [`docs/design/RECOMMENDED_DATA_MODEL.md`](docs/design/RECOMMENDED_DATA_MODEL.md) and [`RECOMMENDED_PRESETS.json`](docs/design/RECOMMENDED_PRESETS.json) — architectural and balance recommendations, not frozen contracts.
-6. [`docs/design/00_GAME_ENGINE_OVERVIEW.md`](docs/design/00_GAME_ENGINE_OVERVIEW.md) through [`07_FAULT_BROWSER_AND_SEARCH.md`](docs/design/07_FAULT_BROWSER_AND_SEARCH.md) — the synchronized foundational vision, architecture, and starter catalogs. Frozen decisions still take precedence.
-7. [`docs/design/DOCUMENTS_TO_UPDATE.md`](docs/design/DOCUMENTS_TO_UPDATE.md) — the audited migration ledger, including completed, superseded, deferred, and still-relevant recommendations.
+3. [`docs/design/decisions/UNFROZEN_RULES.md`](docs/design/decisions/UNFROZEN_RULES.md) — accepted open rules and pressure against frozen behavior.
+4. [`docs/design/decisions/APPROVALS.md`](docs/design/decisions/APPROVALS.md) — the current post-playtest option packet awaiting user choices; it is non-authoritative until approved.
+5. [`docs/design/SOLO_PAGES_PROFILE.md`](docs/design/SOLO_PAGES_PROFILE.md) — the derived `solo-pages-v1` implementation profile; it configures the local training client without copying or overriding Frozen Rules.
+6. [`docs/design/RECOMMENDED_DATA_MODEL.md`](docs/design/RECOMMENDED_DATA_MODEL.md) and [`RECOMMENDED_PRESETS.json`](docs/design/RECOMMENDED_PRESETS.json) — architectural and balance recommendations, not frozen contracts.
+7. [`docs/design/00_GAME_ENGINE_OVERVIEW.md`](docs/design/00_GAME_ENGINE_OVERVIEW.md) through [`07_FAULT_BROWSER_AND_SEARCH.md`](docs/design/07_FAULT_BROWSER_AND_SEARCH.md) — the synchronized foundational vision, architecture, and starter catalogs. Frozen decisions still take precedence.
+8. [`docs/design/DOCUMENTS_TO_UPDATE.md`](docs/design/DOCUMENTS_TO_UPDATE.md) — the audited migration ledger, including completed, superseded, deferred, and still-relevant recommendations.
 
 If implementation exposes a new rule question or pressure against frozen behavior, record it in the empty Unfrozen ledger before choosing an answer through code, schema, content, or UI behavior.
 
@@ -130,7 +137,9 @@ The committed report covers one-, two-, three-, and four-seat cooperative/compet
 
 ## Static Library and local Solo Play
 
-From the repository root:
+Most players should use the [hosted GitHub Pages application](https://jamangi.github.io/Server_Repair_TCG_Multiplayer/) and select **Play**.
+
+For local development or repository verification, run from the repository root:
 
 ```powershell
 node viewer/scripts/build-play-assets.mjs

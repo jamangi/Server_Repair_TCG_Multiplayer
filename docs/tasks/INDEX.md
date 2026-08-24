@@ -8,11 +8,19 @@ Active task:
 
 Proposed task awaiting approvals:
 
-- **None.**
+- [`TASK-013: Synchronize approved post-playtest diagnosis rules`](TASK-013-synchronize-post-playtest-diagnosis-rules.md) — blocked on PT-001 through PT-005; creates the versioned rules/contracts/engine migration before content or tutorials depend on it.
+- [`TASK-014: Expand playable content and Ticket generation`](TASK-014-expand-playable-content-and-ticket-generation.md) — blocked on TASK-013 and PT-006; expands coverage-driven Cards/scenarios and evolves generation beyond whole-template cloning with unique-before-repeat queues and exact resource solvability.
+- [`TASK-015: Add guided tutorials and the solo solution-reveal experience`](TASK-015-add-guided-tutorial-and-solution-reveal.md) — blocked on TASK-013, TASK-014, and PT-007; teaches the final rules through real seeded engine paths and presents the authoritative Give Up reveal.
 
 Ready task awaiting implementation:
 
-- **None.**
+- [`TASK-012: Fix solo-client scroll and text-entry defects`](TASK-012-fix-solo-client-interaction-defects.md) — ready 2026-08-24; preserves internal Ticket/board scroll and real sequential-input caret/selection without changing gameplay.
+
+Reserved task number:
+
+- **TASK-011 — canonical Card illustrations.** The full illustration contract remains reserved from TASK-010 and should be scoped after TASK-014 stabilizes the expanded playable catalog, avoiding throwaway artwork or asset migrations.
+
+Recommended execution order: TASK-012 → approve PT-001 through PT-005 → TASK-013 → approve PT-006 → TASK-014 → approve PT-007 → TASK-015. TASK-011 illustration work follows the stable TASK-014 catalog and may be scheduled independently of tutorial implementation.
 
 Completed documentation and research tasks:
 

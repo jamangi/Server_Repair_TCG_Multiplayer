@@ -1,0 +1,163 @@
+# Post-TASK-010 playtest approvals
+
+Status: **Awaiting user choices — 2026-08-24.**
+
+This is a non-authoritative review packet for the first hands-on solo-play findings. Approved choices must be synchronized through TASK-013 before code relies on them. Existing `first-version-v1` behavior remains authoritative until then.
+
+The canonical open-rule entries live in [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md). This file supplies the requested A/B/C choices without creating a second rules ledger. After resolution, the selected behavior belongs in `FROZEN_RULES.md`; this packet remains only as decision provenance or may be retired through the approving task.
+
+## Verified current facts
+
+- A legal deck contains 30 **instances/copies**, but the pinned playable catalog contains only 11 distinct Card Definitions.
+- The Viewer knowledge library contains 257 records, including 37 Tests, 13 Commands, 35 Repair Procedures, and 22 Validation Procedures. Faults, Symptoms, Components, Tools, and Protocols are knowledge objects and should not automatically become Cards.
+- The solo Worker passes the exact active 30-card deck IDs to the Ticket Builder, and the Builder rejects a batch whose declared required Card path is unreachable. A Match therefore should not start with a Ticket whose correctly declared required Cards are absent from that deck.
+- The current content pack has only three complete storage/RAID templates. `solo-pages-v1` permits duplicate fingerprints from the first selection, so a seeded queue may repeat one template even before all three have appeared.
+- The current Builder selects and snapshots complete authored templates. It does not yet assemble materially novel scenarios from smaller compatible authored parts.
+- A diagnostic is currently legal only when its Card is in hand and the active Ticket has exactly one authored outcome for that diagnostic and machine state.
+- A Hypothesis is a free private/team marker for up to two candidates. It is not an elimination ledger and receives no truth feedback.
+- Commit Isolation costs one Action and succeeds through positive authored citation requirements. The current rules do not require eliminating other candidates and forbid speculative Repair before accepted Isolation.
+
+These facts make the observed concern credible even though exact-deck solvability is already intended: undeclared or incomplete outcome coverage, poor explanation of Search/citations, and extreme content repetition can still make a valid path feel absent.
+
+## PT-001 — Diagnostic availability
+
+Which diagnostics should be available at the start of work on a Ticket?
+
+### A — Relevant Diagnostic Bench (recommended)
+
+Every published Test or Command connected to an observed Symptom or public candidate on the active Ticket is available from a persistent Diagnostic Bench from the beginning. These remain typed Card Definitions and spend their printed Actions, but they do not depend on draw order or consume slots in the 30-card response deck for this rules/profile revision. Every offered diagnostic must have one deterministic authored or Builder-assembled outcome in the current machine state; an outcome may support, contradict, rule out, confirm, or be inconclusive. Repair and Verify remain response-deck Cards and retain their gates.
+
+This meets the educational intent without presenting all 50 current diagnostics on every Ticket. It requires deck migration, a new Card placement/availability contract, Builder outcome coverage, projections, UI, and automated-game changes.
+
+### B — Global Diagnostic Bench
+
+Make every published Test and Command available on every Ticket from the beginning. Unrelated choices resolve to an authored/assembled inconclusive or no-relevant-finding result.
+
+This most literally satisfies “all Tests and Commands,” but the current domain already contains 50 such objects. It creates substantial choice overload and a much larger outcome-authoring/validation surface.
+
+### C — Guaranteed deck access
+
+Keep Tests and Commands in the 30-card draw deck, but guarantee that every diagnostic required by the active Ticket is immediately discoverable through a free or separately provisioned diagnostic Search affordance. Ordinary play, discard, Refresh, and copy limits otherwise remain intact.
+
+This is the smallest migration, but diagnostics are still not literally all available and deck construction continues to govern knowledge access.
+
+## PT-002 — Public candidate generation
+
+How should a generated Ticket choose Candidate Faults?
+
+### A — Relevant deterministic subset of 2–5 (recommended)
+
+Start from Faults associated with the observed Symptoms, filter by the Ticket's component/subsystem/causal context, always include every hidden actionable Fault represented by the Ticket, and deterministically select plausible distractors up to a five-candidate maximum. Every distractor must have at least one authored differentiating Evidence path; arbitrary or impossible candidates are forbidden.
+
+### B — Every relevant associated Fault
+
+Show the complete validated set produced by the same relationship rules, with no five-candidate cap. This is exhaustive but can overwhelm broad Symptoms such as no power or no POST.
+
+### C — Fully authored lists
+
+Retain the current rule that each complete Ticket/template directly authors its public candidate list. The Builder may validate relationships but does not select candidates from them. This maximizes author control and minimizes novelty.
+
+## PT-003 — Manual elimination and successful Isolation
+
+How should candidate elimination relate to Isolation?
+
+### A — Evidence-backed elimination with two valid Isolation routes (recommended)
+
+The Player may mark a candidate eliminated only by citing authorized Evidence whose authored disposition for that candidate is `RULE_OUT` or `CONTRADICT`. The mark is `PRIVATE_PLAYER` in competitive play and `TEAM` in cooperative play, costs zero Actions, is reversible, and never reveals whether the remaining candidate is true.
+
+Commit Isolation still costs one Action and succeeds through either:
+
+1. the current positive Evidence requirement for the selected actionable Fault; or
+2. eligible Evidence-backed elimination of every other public candidate while the selected candidate remains.
+
+This supports both confirmation and Phasmophobia-like elimination without making notebook maintenance consume scarce technical work.
+
+### B — Elimination is a notebook aid only
+
+Allow free, possibly incorrect private/team crossed-out markers with no server validation or gameplay effect. Successful Isolation keeps the current positive Evidence requirement. This improves organization but does not create an elimination route.
+
+### C — Require both positive support and complete elimination
+
+Every other candidate must be validly eliminated and the selected candidate must independently meet its positive Evidence requirement. This is clearest but likely slow and repetitive.
+
+## PT-004 — Speculative Repair
+
+Should a Player be able to Repair before accepted Isolation?
+
+### A — Keep the accepted-Isolation gate (recommended for the first experiment)
+
+Do not add speculative Repair yet. PT-003 A already permits Isolation by elimination, so a Player can unlock Repair without a confirming Test when every alternative has been validly ruled out. This preserves the game's causal-accountability lesson and avoids using machine response as a hidden-answer oracle.
+
+### B — Permit a guess with two candidates remaining
+
+When no more than two non-eliminated candidates remain, allow an eligible Repair guess. It spends the printed Card and Actions. A wrong guess changes no machine state, returns one generic unsupported-repair result, receives no score, and records a speculative-repair statistic without revealing whether the candidate or procedure was wrong.
+
+### C — Permit Repair at any time
+
+Allow any eligible-looking Repair before Isolation, with an explicit additional Action/resource penalty and the same generic failure response. This is the strongest parts-cannon model and the largest departure from the educational loop.
+
+## PT-005 — Give Up and Show Answer
+
+What should the solo-only reveal do?
+
+### A — Abandon one Ticket, reveal, and continue (recommended)
+
+After confirmation, atomically mark the selected Ticket `ABANDONED_REVEALED`, void its pending contributions, archive it without closure or points, and reveal its hidden Fault/causal path, required Isolation Evidence, eligible Repair, and Verify/closure path. The remaining queue continues. A Match containing any abandoned Ticket is not recorded as a solo win, and Profile tracks Ticket give-ups separately. No play can continue on the revealed Ticket.
+
+### B — End and reveal the whole Match
+
+Give Up ends the entire Match as a solo loss/no-contest and reveals every active Ticket solution. This is simpler and safest for hidden information, but punishes a Player who only needs help with one Ticket in a longer queue.
+
+### C — Progressive hints only
+
+Keep the Ticket active and reveal increasingly specific hints, never the full hidden truth. This preserves the Match but does not fully answer whether a valid authored solution existed.
+
+## PT-006 — Initial playable-content breadth
+
+How large should the first expansion be?
+
+### A — Twelve fingerprints across six subsystems (recommended)
+
+Support at least two distinct causal fingerprints each for storage, memory, power, boot, thermal, and network. Add however many Card Definitions and authored/assemblable parts are required for complete diagnostic, Isolation, Repair, and Verify coverage; do not chase an arbitrary Card count. Queues must exhaust eligible unique fingerprints before balanced repetition.
+
+### B — Six fingerprints across three subsystems
+
+Ship a smaller slice with two fingerprints each in storage, memory, and power. This is faster but may still feel repetitive and postpones boot, thermal, and network coverage.
+
+### C — Convert all action-bearing library records
+
+Attempt playable contracts for all current 37 Tests, 13 Commands, 35 Repairs, and 22 Validations, then build Ticket coverage around them. This is comprehensive but much too large for one safe content task without staged releases.
+
+## PT-007 — Tutorial scope
+
+What tutorial package should follow the rule/content work?
+
+### A — Two engine-driven tutorials (recommended)
+
+Create a short fundamentals tutorial and a second failed-Verify/recovery tutorial. Both use pinned seeds and real engine/Builder intents, pause between checkpoints, highlight the exact current control, provide replayable explanations, support keyboard/touch/reduced motion, and can be restarted independently.
+
+### B — One fundamentals tutorial
+
+Cover Observe, diagnostics, Evidence, candidate management, Isolation, Repair, Verify, Documentation, and closure in one fixed Ticket. Defer failed Verify and recovery.
+
+### C — Contextual help only
+
+Add a rules reference and dismissible callouts without a locked guided sequence. This is lighter but does not prove a complete path through the actual engine.
+
+## Deferred: SLA / round limit
+
+Do not implement or approve an SLA yet. A future decision should compare an authoritative round limit with the existing turn/player clocks and stalemate/cap semantics after the untimed diagnosis loop is understandable and balanced. No current task should smuggle in a deadline through UI timers or tutorial scripting.
+
+## Reply format
+
+Approve or amend each item by ID, for example:
+
+```text
+PT-001 A
+PT-002 A
+PT-003 A
+PT-004 A
+PT-005 A
+PT-006 A
+PT-007 A
+```
