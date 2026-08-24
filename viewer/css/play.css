@@ -3022,6 +3022,39 @@ dialog.settings-dialog::backdrop {
 .play-app :is(.evidence-entry, .worklog-entry) { padding: 0.7rem; border: 1px solid rgba(107, 187, 210, 0.3); border-radius: var(--play-radius-sm); background: rgba(6, 20, 28, 0.84); }
 .play-app :is(.evidence-entry, .worklog-entry) + :is(.evidence-entry, .worklog-entry) { margin-top: var(--play-space-2); }
 .play-app :is(.evidence-entry, .worklog-entry) header { display: flex; flex-wrap: wrap; gap: 0.4rem 0.65rem; justify-content: space-between; }
+.play-app :is(.evidence-entry, .worklog-entry).is-result-target { border-color: var(--play-success); box-shadow: 0 0 0 2px rgba(80, 222, 165, 0.22), 0 0 22px rgba(80, 222, 165, 0.12); }
+
+.play-app .action-result-notice {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(12rem, 0.55fr) minmax(0, 1.45fr) auto;
+  gap: var(--play-space-4);
+  align-items: center;
+  padding: var(--play-space-4);
+  border: 1px solid rgba(80, 222, 165, 0.48);
+  border-radius: var(--play-radius-md);
+  background: linear-gradient(115deg, rgba(22, 96, 73, 0.34), rgba(5, 18, 24, 0.92));
+  box-shadow: var(--play-inset), 0 10px 26px rgba(0, 0, 0, 0.28);
+}
+.play-app .action-result-notice[data-action-result="rejected"] { border-color: rgba(255, 113, 113, 0.58); background: linear-gradient(115deg, rgba(117, 39, 39, 0.34), rgba(5, 18, 24, 0.92)); }
+.play-app .action-result-notice h2 { margin: 0; font-size: 1rem; }
+.play-app .action-result-notice dl { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--play-space-3); margin: 0; }
+.play-app .action-result-notice dl > div { min-width: 0; }
+.play-app .action-result-notice dt { color: #8faab3; font-size: 0.65rem; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase; }
+.play-app .action-result-notice dd { margin: 0.22rem 0 0; color: #e0eff2; font-size: 0.78rem; line-height: 1.4; }
+.play-app .action-result-notice dd span { display: block; color: #a9c9d0; }
+
+.play-app .target-scope {
+  flex-basis: 100%;
+  padding: 0.65rem 0.75rem;
+  margin: 0;
+  border: 1px solid rgba(255, 190, 92, 0.5);
+  border-radius: var(--play-radius-sm);
+  color: #f5dfb6;
+  background: rgba(111, 68, 13, 0.3);
+  font-size: 0.76rem;
+  line-height: 1.4;
+}
 
 .play-app .ticket-sheet__art { aspect-ratio: 2.15 / 1; overflow: hidden; border: 2px solid #252724; border-radius: var(--play-radius-sm); background: #07141b; }
 .play-app .ticket-sheet__art img { width: 100%; height: 100%; object-fit: cover; }
@@ -3177,6 +3210,8 @@ dialog.settings-dialog::backdrop {
   .play-app .deck-summary { position: static; order: -1; }
   .play-app .profile-grid { grid-template-columns: 1fr; }
   .play-app .action-dock { grid-template-columns: 1fr; }
+  .play-app .action-result-notice { grid-template-columns: 1fr; align-items: start; }
+  .play-app .action-result-notice dl { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .play-app .basic-action-row { justify-content: flex-start; }
 }
 
@@ -3205,5 +3240,7 @@ dialog.settings-dialog::backdrop {
   .play-app .hand-rail .play-card { width: clamp(9.5rem, 48vw, 12rem); min-width: clamp(9.5rem, 48vw, 12rem); }
   .play-app .hand-rail .play-card + .play-card { margin-left: -1.5rem; }
   .play-app .action-dock { position: sticky; z-index: 35; bottom: 0; padding: 0.5rem; margin-inline: -0.55rem; border-top: 1px solid rgba(95, 184, 214, 0.32); background: rgba(3, 10, 15, 0.96); box-shadow: 0 -16px 28px rgba(0, 0, 0, 0.52); }
+  .play-app .action-result-notice { margin-inline: 0.55rem; }
+  .play-app .action-result-notice dl { grid-template-columns: 1fr; }
   .play-app .result-panel { grid-template-columns: 1fr; }
 }

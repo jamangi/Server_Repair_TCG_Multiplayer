@@ -9,6 +9,7 @@ import { renderHome } from './pages/home-page.mjs';
 import { renderProfile } from './pages/profile-page.mjs';
 import { closeSettingsDialog, openSettingsDialog } from './settings-dialog.mjs';
 import { createStorageService } from './storage-service.mjs';
+import { createUiContinuity } from './ui-continuity.mjs';
 
 let root = null;
 let route = null;
@@ -23,6 +24,7 @@ let announce = () => {};
 let game = null;
 let pendingStart = null;
 let gameStartInitiated = false;
+const continuity = createUiContinuity();
 
 const ui = {
   selectedDeckId: null,
@@ -126,11 +128,13 @@ function renderCurrent({ focus = null } = {}) {
     }
   }
   if (route.name !== 'game') requestAnimationFrame(() => runMotion('route', pageRoot));
-  if (focus) requestAnimationFrame(() => pageRoot.querySelector(focus)?.focus());
+  if (focus) requestAnimationFrame(() => pageRoot.querySelector(focus)?.focus({ preventScroll: true }));
 }
 
 function rerender(options = {}) {
+  continuity.capture(root, { scope: route?.hash ?? 'play' });
   renderCurrent(options);
+  continuity.restore(root, { scope: route?.hash ?? 'play' });
 }
 
 function createLocalId(prefix) {

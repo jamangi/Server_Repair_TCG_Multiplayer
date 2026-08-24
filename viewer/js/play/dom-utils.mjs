@@ -34,7 +34,12 @@ export function dialogWithRestore(dialog, opener = document.activeElement) {
   const restore = opener instanceof HTMLElement ? opener : null;
   const onClose = () => {
     dialog.removeEventListener('close', onClose);
-    restore?.focus?.();
+    if (!restore?.focus) return;
+    try {
+      restore.focus({ preventScroll: true });
+    } catch {
+      restore.focus();
+    }
   };
   dialog.addEventListener('close', onClose);
   dialog.showModal();

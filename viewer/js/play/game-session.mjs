@@ -11,6 +11,8 @@ export class SoloGameSession {
     this.panelTab = 'evidence';
     this.lastEvents = [];
     this.lastResult = null;
+    this.lastAction = null;
+    this.pendingIntent = null;
     this.lastMotion = null;
     this.resultApplied = null;
     this.cancelPointerDrag = null;
@@ -70,11 +72,35 @@ export class SoloGameSession {
     }
     if (message.type === 'INTENT_RESOLVED') {
       const previousActions = this.projection?.view.public_match.turn?.actions_remaining;
+      const submittedIntent = this.pendingIntent;
+      this.pendingIntent = null;
       this.resolving = false;
       this.projection = message.projection;
       this.lastEvents = message.events || [];
       this.lastResult = message.result;
+      const targetTicketId = submittedIntent?.ticket_instance_id ?? null;
+      const resultEvent = this.lastEvents.find((event) => event.ticket_instance_id === targetTicketId
+        && ['EVIDENCE_CREATED', 'VERIFY_RESOLVED', 'VERIFY_EVIDENCE_CREATED', 'ISOLATION_ACCEPTED', 'ISOLATION_NOT_SUPPORTED'].includes(event.event_type))
+        ?? this.lastEvents.find((event) => event.ticket_instance_id === targetTicketId)
+        ?? null;
+      this.lastAction = submittedIntent ? {
+        accepted: message.result?.accepted === true,
+        intent: submittedIntent,
+        result: message.result,
+        target_ticket_id: targetTicketId,
+        result_event_id: resultEvent?.event_id ?? null,
+        result_event_type: resultEvent?.event_type ?? null,
+      } : null;
       this.terminalResult = message.terminal_result;
+      const activeTicketIds = message.projection.view.public_match.repair_queue
+        .map((ticket) => ticket.ticket_instance_id);
+      if (this.lastAction?.accepted && targetTicketId && targetTicketId !== this.selectedTicketId
+        && activeTicketIds.includes(targetTicketId)) {
+        this.selectedTicketId = targetTicketId;
+        if (['EVIDENCE_CREATED', 'VERIFY_RESOLVED', 'VERIFY_EVIDENCE_CREATED', 'ISOLATION_ACCEPTED', 'ISOLATION_NOT_SUPPORTED']
+          .includes(this.lastAction.result_event_type)) this.panelTab = 'evidence';
+        else this.panelTab = 'worklog';
+      }
       this.selectAvailableTicket();
       this.lastMotion = this.motionFromEvents(this.lastEvents, this.terminalResult, message.result);
       this.announceEvents(this.lastEvents, message.result, this.terminalResult, previousActions);
@@ -88,6 +114,7 @@ export class SoloGameSession {
     if (message.type === 'WORKER_ERROR') {
       this.error = message.message;
       this.resolving = false;
+      this.pendingIntent = null;
       this.rejectStart?.(new Error(message.message));
       this.resolveStart = null;
       this.rejectStart = null;
@@ -140,6 +167,7 @@ export class SoloGameSession {
     if (!this.projection?.legal_intents.some((intent) => intent.intent_id === intentId)) return false;
     const selected = this.projection.legal_intents.find((intent) => intent.intent_id === intentId);
     this.selectedCardInstanceId = selected.card_instance_id ?? this.selectedCardInstanceId;
+    this.pendingIntent = structuredClone(selected);
     this.resolving = true;
     this.lastMotion = null;
     this.worker.postMessage({ type: 'SUBMIT_INTENT', intent_id: intentId });
@@ -154,6 +182,7 @@ export class SoloGameSession {
     this.worker = null;
     this.active = false;
     this.resolving = false;
+    this.pendingIntent = null;
   }
 
   endSession() {

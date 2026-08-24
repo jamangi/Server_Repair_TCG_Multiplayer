@@ -154,8 +154,6 @@ export function renderDeckEditor(root, context, deckId) {
   }
   context.ui.deckFilters ||= { query: '', family: '', archetype: '', cost: '' };
   const filters = context.ui.deckFilters;
-  const counts = new Map(compactDeckCards(draft.card_definition_ids).map((entry) => [entry.card_definition_id, entry.quantity]));
-  const cards = context.catalog.cards.cards.filter((card) => matchesFilters(card, filters));
   const archetypes = [...new Set(context.catalog.cards.cards.flatMap((card) => card.archetypes || []))].sort();
   const reasons = deckReasons(draft);
   root.innerHTML = `
@@ -165,15 +163,15 @@ export function renderDeckEditor(root, context, deckId) {
         <div class="deck-editor-status"><strong>${draft.card_definition_ids.length} / 30</strong><span>${reasons.length ? 'Draft incomplete' : 'Legal deck'}</span></div>
       </header>
       <section class="deck-editor-tools" data-route-reveal>
-        <label class="deck-name-field">Deck name<input id="deck-name" value="${escapeHtml(draft.display_name)}" maxlength="48"></label>
-        <label>Search<input id="deck-search" type="search" value="${escapeHtml(filters.query)}" placeholder="Search Cards and rules"></label>
+        <label class="deck-name-field">Deck name<input id="deck-name" data-continuity-key="deck-name:${escapeHtml(deckId)}" value="${escapeHtml(draft.display_name)}" maxlength="48"></label>
+        <label>Search<input id="deck-search" data-continuity-key="deck-search:${escapeHtml(deckId)}" type="search" value="${escapeHtml(filters.query)}" placeholder="Search Cards and rules"></label>
         <label>Family<select id="deck-family"><option value="">All families</option>${[['test', 'Test'], ['command', 'Command'], ['repair', 'Repair'], ['verify', 'Verify']].map(([value, label]) => `<option value="${value}"${filters.family === value ? ' selected' : ''}>${label}</option>`).join('')}</select></label>
         <label>Archetype<select id="deck-archetype"><option value="">All archetypes</option>${archetypes.map((value) => `<option${filters.archetype === value ? ' selected' : ''}>${escapeHtml(value.replaceAll('_', ' '))}</option>`).join('')}</select></label>
         <label>Action cost<select id="deck-cost"><option value="">Any cost</option>${[0, 1, 2].map((value) => `<option value="${value}"${filters.cost === String(value) ? ' selected' : ''}>${value}</option>`).join('')}</select></label>
       </section>
       <div class="deck-editor-layout">
-        <section class="card-catalog-grid" aria-label="Available Cards" data-route-reveal></section>
-        <aside class="deck-summary" data-route-reveal>
+        <section class="card-catalog-grid" data-continuity-scroll="deck:${escapeHtml(deckId)}:card-grid" aria-label="Available Cards" data-route-reveal></section>
+        <aside class="deck-summary" data-continuity-scroll="deck:${escapeHtml(deckId)}:summary" data-route-reveal>
           <p class="play-eyebrow">Draft summary</p>
           <h2>${draft.card_definition_ids.length} of 30 Cards</h2>
           <div class="composition-row">${compositionMarkup(context.catalog, draft)}</div>
@@ -188,34 +186,42 @@ export function renderDeckEditor(root, context, deckId) {
     </section>`;
 
   const grid = root.querySelector('.card-catalog-grid');
-  for (const card of cards) {
-    const quantity = counts.get(card.id) ?? 0;
-    grid.append(createDeckCardTile(card, {
-      quantity,
-      canIncrement: quantity < 3 && draft.card_definition_ids.length < 30,
-      canDecrement: quantity > 0,
-      artResolver: context.artResolver,
-      onAdjust: ({ cardId, delta }) => {
-        if (delta > 0 && (quantity >= 3 || draft.card_definition_ids.length >= 30)) return;
-        if (delta < 0) {
-          const index = draft.card_definition_ids.lastIndexOf(cardId);
-          if (index >= 0) draft.card_definition_ids.splice(index, 1);
-        } else {
-          draft.card_definition_ids.push(cardId);
-        }
-        context.ui.editorDirty = true;
-        context.rerender();
-        context.announce(`${cardName(card)} quantity ${quantity + delta}. ${draft.card_definition_ids.length} of 30 Cards.`);
-      },
-      onInspect: ({ cardId }) => {
-        const dialog = root.querySelector('#editor-card-dialog');
-        dialog.querySelector('[data-dialog-content]').replaceChildren(createCardDetailView(context.catalog.cardById.get(cardId), { artResolver: context.artResolver }));
-        dialogWithRestore(dialog);
-        context.motion('dialog', dialog);
-      },
-    }));
-  }
-  if (!cards.length) grid.innerHTML = '<div class="empty-panel"><h2>No Cards match</h2><p>Broaden the Card filters.</p></div>';
+  const renderCardResults = () => {
+    const counts = new Map(compactDeckCards(draft.card_definition_ids).map((entry) => [entry.card_definition_id, entry.quantity]));
+    const cards = context.catalog.cards.cards.filter((card) => matchesFilters(card, filters));
+    grid.replaceChildren();
+    for (const card of cards) {
+      const quantity = counts.get(card.id) ?? 0;
+      grid.append(createDeckCardTile(card, {
+        quantity,
+        canIncrement: quantity < 3 && draft.card_definition_ids.length < 30,
+        canDecrement: quantity > 0,
+        artResolver: context.artResolver,
+        onAdjust: ({ cardId, delta }) => {
+          if (delta > 0 && (quantity >= 3 || draft.card_definition_ids.length >= 30)) return;
+          if (delta < 0) {
+            const index = draft.card_definition_ids.lastIndexOf(cardId);
+            if (index >= 0) draft.card_definition_ids.splice(index, 1);
+          } else {
+            draft.card_definition_ids.push(cardId);
+          }
+          context.ui.editorDirty = true;
+          context.rerender();
+          context.announce(`${cardName(card)} quantity ${quantity + delta}. ${draft.card_definition_ids.length} of 30 Cards.`);
+        },
+        onInspect: ({ cardId }) => {
+          const dialog = root.querySelector('#editor-card-dialog');
+          dialog.querySelector('[data-dialog-content]').replaceChildren(createCardDetailView(context.catalog.cardById.get(cardId), { artResolver: context.artResolver }));
+          dialogWithRestore(dialog);
+          context.motion('dialog', dialog);
+        },
+      }));
+    }
+    if (!cards.length) grid.innerHTML = '<div class="empty-panel"><h2>No Cards match</h2><p>Broaden the Card filters.</p></div>';
+  };
+  renderCardResults();
+
+  let searchCompositionActive = false;
 
   const onInput = (event) => {
     if (event.target.id === 'deck-name') {
@@ -226,9 +232,19 @@ export function renderDeckEditor(root, context, deckId) {
       return;
     }
     if (event.target.id === 'deck-search') {
+      if (searchCompositionActive || event.isComposing) return;
       filters.query = event.target.value;
-      context.rerender({ focus: '#deck-search' });
+      renderCardResults();
     }
+  };
+  const onCompositionStart = (event) => {
+    if (event.target.id === 'deck-search') searchCompositionActive = true;
+  };
+  const onCompositionEnd = (event) => {
+    if (event.target.id !== 'deck-search') return;
+    searchCompositionActive = false;
+    filters.query = event.target.value;
+    renderCardResults();
   };
   const onChange = (event) => {
     const filterKeys = { 'deck-family': 'family', 'deck-archetype': 'archetype', 'deck-cost': 'cost' };
@@ -257,10 +273,14 @@ export function renderDeckEditor(root, context, deckId) {
     }
   };
   root.addEventListener('input', onInput);
+  root.addEventListener('compositionstart', onCompositionStart);
+  root.addEventListener('compositionend', onCompositionEnd);
   root.addEventListener('change', onChange);
   root.addEventListener('click', onClick);
   return () => {
     root.removeEventListener('input', onInput);
+    root.removeEventListener('compositionstart', onCompositionStart);
+    root.removeEventListener('compositionend', onCompositionEnd);
     root.removeEventListener('change', onChange);
     root.removeEventListener('click', onClick);
   };

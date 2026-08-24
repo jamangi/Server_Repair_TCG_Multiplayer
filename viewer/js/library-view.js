@@ -4,6 +4,7 @@ import {
   ENTITY_TYPE_ORDER as order,
   categoryFor,
 } from './entity-types.js';
+import { createUiContinuity } from './play/ui-continuity.mjs';
 
 const state = {
   records: [],
@@ -21,6 +22,8 @@ const state = {
 
 let loadPromise = null;
 let mountedRoot = null;
+let searchCompositionActive = false;
+const continuity = createUiContinuity();
 
 const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (character) => ({
   '&': '&amp;',
@@ -63,7 +66,8 @@ function categoryOptions() {
 function visibleRecords() {
   let rows = state.records.filter((record) => state.tab === 'everything' || record.entity_type === state.tab);
   if (state.category) rows = rows.filter((record) => categoryFor(record) === state.category);
-  if (state.query) rows = rows.filter((record) => JSON.stringify(record).toLowerCase().includes(state.query));
+  const query = state.query.trim().toLowerCase();
+  if (query) rows = rows.filter((record) => JSON.stringify(record).toLowerCase().includes(query));
   const comparators = {
     name: (left, right) => displayName(left).localeCompare(displayName(right)),
     type: (left, right) => left.entity_type.localeCompare(right.entity_type)
@@ -97,8 +101,28 @@ function detailMarkup(record) {
     <p>Pack: ${escapeHtml(record._pack_name || '')}</p>`;
 }
 
-function render() {
+function resultCardsMarkup(rows) {
+  return rows.map((record) => `
+        <button type="button" class="library-card" data-record-id="${escapeHtml(record.id)}">
+          <span class="library-pill">${escapeHtml(labels[record.entity_type] || record.entity_type)}</span>
+          ${categoryFor(record) ? `<span class="library-pill">${escapeHtml(categoryFor(record))}</span>` : ''}
+          <h2>${escapeHtml(displayName(record))}</h2><p>${escapeHtml(description(record))}</p><code>${escapeHtml(record.id)}</code>
+        </button>`).join('');
+}
+
+function updateResults() {
   if (!mountedRoot) return;
+  const rows = visibleRecords();
+  const tabLabel = state.tab === 'everything' ? 'Everything' : labels[state.tab];
+  mountedRoot.querySelector('#resultCount').textContent = `${rows.length} result${rows.length === 1 ? '' : 's'}`;
+  mountedRoot.querySelector('#summary').textContent = tabLabel;
+  mountedRoot.querySelector('#results').innerHTML = resultCardsMarkup(rows);
+  mountedRoot.querySelector('#empty').hidden = rows.length > 0;
+}
+
+function render({ preserveContinuity = true } = {}) {
+  if (!mountedRoot) return;
+  if (preserveContinuity) continuity.capture(mountedRoot, { scope: 'library' });
   if (state.error) {
     mountedRoot.innerHTML = `
       <section class="library-error" role="alert">
@@ -126,7 +150,7 @@ function render() {
         <div class="library-count" aria-label="${state.records.length} domain records"><b id="recordCount">${state.records.length}</b><span>records</span></div>
       </header>
       <section class="library-controls" aria-label="Library filters">
-        <label>Search<input id="search" type="search" value="${escapeHtml(state.query)}" placeholder='Try "no POST", "DIMM", "lsblk", or "thermal"'></label>
+        <label>Search<input id="search" data-continuity-key="library-search" type="search" value="${escapeHtml(state.query)}" placeholder='Try "no POST", "DIMM", "lsblk", or "thermal"'></label>
         <label>Sort<select id="sort">
           ${[['name', 'Name'], ['type', 'Type'], ['category', 'Category'], ['id', 'Stable ID']]
     .map(([value, label]) => `<option value="${value}"${state.sort === value ? ' selected' : ''}>${label}</option>`).join('')}
@@ -134,17 +158,12 @@ function render() {
         <label>Category<select id="category"><option value="">All categories</option>${categories
     .map((value) => `<option${state.category === value ? ' selected' : ''}>${escapeHtml(value)}</option>`).join('')}</select></label>
       </section>
-      <nav id="tabs" class="library-tabs" aria-label="Domain entity types">${order.map((type) => {
+      <nav id="tabs" class="library-tabs" data-continuity-scroll="library:tabs" aria-label="Domain entity types">${order.map((type) => {
     const count = type === 'everything' ? state.records.length : state.records.filter((record) => record.entity_type === type).length;
     return `<button type="button" class="library-tab${state.tab === type ? ' active' : ''}" data-tab="${type}" aria-pressed="${state.tab === type}">${type === 'everything' ? 'Everything' : labels[type]} (${count})</button>`;
   }).join('')}</nav>
       <div class="library-meta"><b id="resultCount">${rows.length} result${rows.length === 1 ? '' : 's'}</b><span id="summary">${escapeHtml(tabLabel)}</span></div>
-      <section id="results" class="library-grid" aria-label="Library results">${rows.map((record) => `
-        <button type="button" class="library-card" data-record-id="${escapeHtml(record.id)}">
-          <span class="library-pill">${escapeHtml(labels[record.entity_type] || record.entity_type)}</span>
-          ${categoryFor(record) ? `<span class="library-pill">${escapeHtml(categoryFor(record))}</span>` : ''}
-          <h2>${escapeHtml(displayName(record))}</h2><p>${escapeHtml(description(record))}</p><code>${escapeHtml(record.id)}</code>
-        </button>`).join('')}</section>
+      <section id="results" class="library-grid" aria-label="Library results">${resultCardsMarkup(rows)}</section>
       <section id="empty" class="library-empty"${rows.length ? ' hidden' : ''}><h2>No matches</h2><p>Try a broader query or remove a filter.</p></section>
       <footer id="status" class="library-status">Loaded ${state.packs.length} pack(s). Manifest: ${escapeHtml(state.manifest?.generated_at || 'prototype')}.</footer>
       <dialog id="dialog" class="library-dialog" aria-labelledby="library-detail-title">
@@ -163,13 +182,25 @@ function render() {
       state.openRecordId = null;
     }
   }
+  if (preserveContinuity) continuity.restore(mountedRoot, { scope: 'library' });
 }
 
 function onInput(event) {
   if (event.target.id !== 'search') return;
-  state.query = event.target.value.trim().toLowerCase();
-  render();
-  mountedRoot?.querySelector('#search')?.focus();
+  if (searchCompositionActive || event.isComposing) return;
+  state.query = event.target.value;
+  updateResults();
+}
+
+function onCompositionStart(event) {
+  if (event.target.id === 'search') searchCompositionActive = true;
+}
+
+function onCompositionEnd(event) {
+  if (event.target.id !== 'search') return;
+  searchCompositionActive = false;
+  state.query = event.target.value;
+  updateResults();
 }
 
 function onChange(event) {
@@ -214,8 +245,10 @@ export async function mountLibrary(root, { announce = () => {} } = {}) {
   root.innerHTML = '<section class="route-loading" aria-busy="true"><p>Loading Domain Library…</p></section>';
   await ensureContent();
   if (mountedRoot !== root) return;
-  render();
+  render({ preserveContinuity: false });
   root.addEventListener('input', onInput);
+  root.addEventListener('compositionstart', onCompositionStart);
+  root.addEventListener('compositionend', onCompositionEnd);
   root.addEventListener('change', onChange);
   root.addEventListener('click', onClick);
   root.addEventListener('click', onDialogClick);
@@ -228,6 +261,8 @@ export function unmountLibrary() {
   if (!mountedRoot) return;
   state.scrollY = window.scrollY;
   mountedRoot.removeEventListener('input', onInput);
+  mountedRoot.removeEventListener('compositionstart', onCompositionStart);
+  mountedRoot.removeEventListener('compositionend', onCompositionEnd);
   mountedRoot.removeEventListener('change', onChange);
   mountedRoot.removeEventListener('click', onClick);
   mountedRoot.removeEventListener('click', onDialogClick);

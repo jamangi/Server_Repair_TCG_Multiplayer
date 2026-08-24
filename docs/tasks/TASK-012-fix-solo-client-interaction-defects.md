@@ -2,7 +2,7 @@
 
 ## Status
 
-**Ready — independent of the post-playtest rule decisions.** Implement this task before deeper gameplay/content work so later browser tests and playtesting use a stable interface.
+**Complete — 2026-08-24.** Same-route scroll/focus state, real sequential text entry, and cross-Ticket result discoverability are covered without changing engine, content, rules, or persistence.
 
 ## Objective
 
@@ -110,3 +110,35 @@ Generated Play assets may be rebuilt if a canonical staged module changes. Do no
 ## Completion boundary
 
 Complete only when real sequential typing and same-route Ticket interaction no longer move the caret or reset reading position; every accepted cross-Ticket action leaves its target and result persistently visible or reachable; desktop/mobile browser regressions prove the two fixes and discoverability improvement; all TASK-010 behavior and visual baselines remain intact; and no gameplay/rule/content change is included.
+
+## Completion record — 2026-08-24
+
+### Outcome
+
+- Added one semantic UI-continuity service used by Library and Play. Same-route reconstruction captures document position, named internal surfaces, focus, and text selection by stable route/Ticket/deck/control identity rather than DOM order. Hidden tab panels retain their last visible position until shown again.
+- Named coverage includes Library tabs; selected Ticket sheets; per-Ticket Evidence and Worklog panels; Ticket, hand, and resource rails; and deck Card-grid/summary surfaces. Selecting another Ticket opens that Ticket's independently stored position; returning restores the prior Ticket. Intentional route navigation starts a separate scope, and **View result** intentionally focuses and scrolls the authoritative result entry.
+- Library and deck searches update only their adjacent result regions. Sequential keys, middle insertion, selection replacement, Backspace/Delete, arrows, Home/End, paste-style input, and exact selection direction remain native. Filtering pauses for IME composition and resumes on `compositionend`. The remaining text inputs—deck name and Profile display name—already update draft state without reconstruction; Home, Settings, game controls, dialogs, and import preview contain no editable text/search field.
+- A selected Card that cannot target the displayed Ticket now shows an explicit alternate-target warning before submission. Accepted cross-Ticket actions select the authoritative target Ticket, reveal/highlight the result, and retain a persistent result panel naming action, Ticket, Card/disposition, authoritative payment, plain-language result, and candidate impact (including explicit no-effect wording).
+- Rejected-result presentation is pinned to zero Action, utility-token, and Card payment. Live announcements remain supplementary to the persistent result route.
+
+### Verification
+
+| Command | Exit | Result |
+| --- | ---: | --- |
+| `node --check viewer/js/app.js` | 0 | syntax passed |
+| `node --check viewer/js/data-loader.js` | 0 | syntax passed |
+| `node --check viewer/js/entity-types.js` | 0 | syntax passed |
+| `node --test tests/*.mjs` | 0 | 105 passed, 0 failed, 0 skipped |
+| `node viewer/scripts/verify-play-assets.mjs` | 0 | 32 deterministic staged assets verified |
+| `node tools/run-automated-games.mjs --verify-report automated_games/task-009-foundation-v1` | 0 | 22 rows verified; 12 successes, 10 retained exceptions, 0 deterministic mismatches |
+| `node node_modules/@playwright/test/cli.js test tests/browser/task-012-continuity.spec.mjs --project=chromium-desktop --project=chromium-mobile --workers=1 --reporter=line` | 0 | 4 passed, 0 failed, 2 intentional project skips |
+| `node node_modules/@playwright/test/cli.js test tests/browser/task-010-solo.spec.mjs --workers=1 --reporter=line` | 0 | 14 passed, 0 failed, 18 intentional project skips |
+| `git diff --check` | 0 | no whitespace errors |
+
+### Changed-file inventory
+
+Thirteen files changed within the task allowlist: this task and `docs/tasks/INDEX.md`; `viewer/css/play.css`; eight Viewer behavior modules including the new `viewer/js/play/ui-continuity.mjs`; and two TASK-012 regression suites under `tests/`.
+
+### Unresolved items
+
+None. TASK-012 deliberately leaves gameplay/rules/content, Worker authority, persistence formats, and TASK-010 visual baselines unchanged.
