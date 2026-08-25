@@ -229,6 +229,7 @@ export function createDeckCardTile(card, {
 export function createCardDetailView(card, {
   artResolver = null,
   diagnosticContext = null,
+  handContext = null,
   documentRef = globalThis.document,
 } = {}) {
   const documentObject = requireDocument(documentRef);
@@ -269,6 +270,13 @@ export function createCardDetailView(card, {
         )),
       );
     }
+  }
+  if (handContext) {
+    const quantity = Math.max(1, Number(handContext.quantity) || 1);
+    copy.append(
+      element(documentObject, "h4", "play-eyebrow", "Current hand stack"),
+      element(documentObject, "p", "card-detail__hand-quantity", `${quantity} ${quantity === 1 ? "copy" : "copies"} currently in hand. Play resolves to the first eligible real Card in preserved hand order.`),
+    );
   }
   const educational = text(card?.educational_text);
   if (educational) {

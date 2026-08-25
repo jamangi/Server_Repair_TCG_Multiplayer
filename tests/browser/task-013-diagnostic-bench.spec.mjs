@@ -41,7 +41,8 @@ test('Relevant and Global organize one Bench without authority changes and Give 
   await global.click();
   await expect(global).toHaveAttribute('aria-pressed', 'true');
   await expect(page.locator('[data-bench-search]')).toBeVisible();
-  await expect(page.locator('.diagnostic-tile')).toHaveCount(8);
+  const benchPageSize = Number(await page.locator('.diagnostic-bench').getAttribute('data-bench-page-size'));
+  await expect(page.locator('.diagnostic-tile')).toHaveCount(benchPageSize);
   expect(await page.evaluate(() => window.__task013WorkerMessages.length)).toBe(1);
 
   const latest = await page.evaluate(() => window.__task013WorkerMessages.at(-1));

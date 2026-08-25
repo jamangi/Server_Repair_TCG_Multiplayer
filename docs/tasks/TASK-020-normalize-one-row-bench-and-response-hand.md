@@ -2,7 +2,7 @@
 
 ## Status
 
-**Approved scope — active.** The project owner supplied the current TASK-019 Relevant/Global captures and approved the one-row Bench, stacked-duplicate hand, and reclaimed-height direction on 2026-08-25. Complete this presentation refinement before TASK-015 binds tutorial highlights to the active-Match geometry.
+**Complete — 2026-08-25.** Relevant and Global now share one compact desktop diagnostic row, the resting response hand uses the recovered height, and duplicate definitions render as deterministic accessible stacks without changing authority. TASK-015 may bind tutorial highlights to the completed active-Match geometry.
 
 ## Objective
 
@@ -120,3 +120,44 @@ Do not change schemas, domain content, Card ownership/zones, authoritative hand/
 ## Completion boundary
 
 Complete only when Relevant and Global use the same compact one-row desktop diagnostic shelf; additional Global density becomes pagination rather than a second row; the recovered height produces a readable resting hand; duplicates read as one accessible tactile stack while every authoritative instance remains deterministic and intact; all board surfaces remain usable across the viewport matrix; visual QA confirms comfortable proportions; and gameplay/replay authority remains equivalent for identical intents.
+
+## Completion record — 2026-08-25
+
+### Outcome
+
+- Normalized Relevant and Global to one shared desktop Bench row with equal-height tiles, width-derived four/six-tile page capacity, independent pagination, and the existing complete family/cost/art/title/Inspect anatomy.
+- Reallocated the recovered center-board height to illustrated resting hand Cards. Desktop shows up to five readable groups, or four at 1366px to preserve the tested 150px minimum Card width.
+- Replaced copy-selection tabs with one layered, accessible `×N` stack. Grouping includes visible state and normalized projected legality; the documented helper resolves the first eligible real instance in original hand order and removes only that chosen instance.
+- Preserved Bench/hand paging, mode switching, selection, focus, Inspect, expand/collapse, drag, click, keyboard, legal targets, Worker intents, Match/replay order, and responsive document flow.
+- Kept the dependency-free static Viewer boundary and introduced explicit Bench-row, tile-width, hand-height, Card-width, and stack-offset tokens.
+
+### Verification
+
+| Command | Exit | Result |
+| --- | ---: | --- |
+| `node viewer/scripts/build-manifest.mjs` | 0 | 9 Viewer content packs staged; only the generated timestamp differed and was not committed |
+| `node viewer/scripts/build-play-assets.mjs`; `node viewer/scripts/verify-play-assets.mjs` | 0 | 40 deterministic Play assets staged and verified byte-equivalent |
+| `node --check viewer/js/app.js`; `node --check viewer/js/data-loader.js`; `node --check viewer/js/entity-types.js` | 0 | baseline Viewer syntax passed |
+| `node --check` on Card, hand, Bench, and game-page modules | 0 | all affected Play modules passed syntax validation |
+| `node --test tests/viewer-baseline.test.mjs` | 0 | 3 passed, 0 failed, 0 skipped |
+| `node --test tests/*.test.mjs` | 0 | 126 passed, 0 failed, 0 skipped |
+| `node tools/run-automated-games.mjs --verify-report automated_games/task-009-foundation-v1` | 0 | 22 frozen rows verified with 0 deterministic mismatches |
+| `node tools/run-task-014-campaign.mjs --verify-report automated_games/task-014-playable-coverage-v3` | 0 | 13 expanded-content rows verified with 0 deterministic mismatches |
+| Focused TASK-020 Playwright matrix with accepted capture regeneration | 0 | 6 passed, 0 failed, 6 intentional project skips |
+| Complete Playwright browser matrix (`--workers=6`) | 0 | 47 passed, 0 failed, 61 intentional project skips |
+| TASK-020 written human QA and accepted visual set | 0 | 14 Relevant/Global desktop, tablet, phone, and reduced-motion captures passed |
+| `git diff --check` | 0 | no whitespace errors |
+
+### Visual evidence
+
+- `docs/ui-plan/task-020-visual-qa.md` records measured desktop Bench/tile/hand geometry and the completed human checklist.
+- `tests/visual/task-020/` contains the deterministic Relevant/Global captures for four desktop sizes plus tablet, phone, and reduced motion.
+- The accepted 1366×768 captures prove the previously divergent short-height modes now reserve equal control height and produce the same 121px one-row tile scale.
+
+### Changed-file inventory
+
+Changes remain inside the task allowlist: shared Card/hand/Bench helpers and game-page presentation, consolidated active-Match CSS, affected TASK-012/TASK-013/TASK-016 compatibility tests, focused Node/browser tests and accepted captures, visual-QA documentation, this task/index, and TASK-015 dependency status. Generated Viewer/Play content remains unchanged.
+
+### Unresolved items
+
+None for TASK-020. TASK-015 is unblocked and is now the active training-ready feature task.

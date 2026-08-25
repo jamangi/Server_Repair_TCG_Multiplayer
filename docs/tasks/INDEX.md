@@ -6,11 +6,7 @@ Beginning with TASK-011, the displayed task ID includes the recommended reasonin
 
 Active task:
 
-- [`TASK-020-HIGH: Normalize the one-row Bench and spatial response hand`](TASK-020-normalize-one-row-bench-and-response-hand.md) — approved presentation refinement; give Relevant and Global the same compact one-row diagnostic shelf, convert duplicate-copy tabs into an instance-safe visual stack, and spend the recovered height on a readable resting hand before tutorial overlays bind to the board.
-
-Queued V0 training-ready sequence:
-
-- [`TASK-015-HIGH: Add guided tutorials and the solo solution-reveal experience`](TASK-015-add-guided-tutorial-and-solution-reveal.md) — approved PT-007 A; queued after TASK-020 so semantic highlights bind once to the final Bench/hand geometry.
+- [`TASK-015-HIGH: Add guided tutorials and the solo solution-reveal experience`](TASK-015-add-guided-tutorial-and-solution-reveal.md) — approved PT-007 A; add engine-driven fundamentals and recovery tutorials now that the final Bench/hand geometry is complete.
 
 Reserved V0 illustration task:
 
@@ -20,10 +16,11 @@ Approved but deferred V2 task:
 
 - [`TASK-017-XHIGH: Create the Server Repair V2 Migration Seed`](TASK-017-create-server-repair-v2-migration-seed.md) — approved Migration Seed direction but deferred until the V0 product is training-ready; when reactivated, it audits V0 in bounded checkpoints and establishes the public dependency-inference V2 foundation without modifying V0 behavior.
 
-TASK-012-HIGH through TASK-014-XHIGH, TASK-016-HIGH, TASK-018-HIGH, and TASK-019-HIGH are complete. TASK-020-HIGH is the active proportional UI refinement; TASK-015-HIGH follows as the remaining training-ready feature task. TASK-011-HIGH may proceed where asset integration permits. Return to TASK-017-XHIGH only when the project owner reactivates V2 migration.
+TASK-012-HIGH through TASK-014-XHIGH, TASK-016-HIGH, and TASK-018-HIGH through TASK-020-HIGH are complete. TASK-015-HIGH is the active remaining training-ready feature task. TASK-011-HIGH may proceed where asset integration permits. Return to TASK-017-XHIGH only when the project owner reactivates V2 migration.
 
 Completed documentation and research tasks:
 
+- [`TASK-020-HIGH: Normalize the one-row Bench and spatial response hand`](TASK-020-normalize-one-row-bench-and-response-hand.md) — completed 2026-08-25; normalized Relevant/Global to one equal-scale diagnostic row with width-derived paging, invested the recovered height in a readable illustrated hand, and replaced per-copy tabs with deterministic accessible stacks without authority changes.
 - [`TASK-019-HIGH: Refine Bench tiles and the adaptive response hand`](TASK-019-refine-bench-tiles-and-adaptive-response-hand.md) — completed 2026-08-25; introduced shared legible diagnostic tiles and contextual Inspect detail, an instance-safe grouped/paged/expandable response hand, deliberate Relevant/Global height use, responsive child-level QA, and one consolidated active-Match CSS composition without authority changes.
 - [`TASK-018-HIGH: Fix Play dialog lifecycle and Ticket-visibility regressions`](TASK-018-fix-play-dialog-and-ticket-visibility-regressions.md) — completed 2026-08-25; centralized reusable Play-dialog open/close/motion/focus/teardown, removed retained invisible close effects, restored child-level Ticket visibility across Relevant/Global and responsive/reflow compositions, and verified 14.62:1 symptom contrast without gameplay changes.
 - [`TASK-016-HIGH: Refine Diagnostic Bench and game-board composition`](TASK-016-refine-diagnostic-bench-board-layout.md) — completed 2026-08-25; composed a no-document-scroll desktop board with a full-height queue, compact/full Ticket workflow, mode-specific Relevant/Global Bench, private hand, continuous intelligence/Legal Action/basic-action rail, and responsive touch hierarchy without changing authority. Post-completion hands-on review found the successor regressions assigned to TASK-018/TASK-019.

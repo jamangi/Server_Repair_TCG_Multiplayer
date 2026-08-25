@@ -2,7 +2,7 @@
 
 ## Status
 
-**Approved scope — queued after TASK-020.** PT-007 A and the prerequisite PT-005 A reveal behavior were approved by the project owner on 2026-08-24. TASK-013, TASK-014, TASK-016, corrective TASK-018, and TASK-019 are complete. TASK-020 must first normalize the one-row Bench and spatial response hand so tutorial overlays bind to the final controls and responsive geometry only once.
+**Approved scope — active.** PT-007 A and the prerequisite PT-005 A reveal behavior were approved by the project owner on 2026-08-24. TASK-013, TASK-014, TASK-016, corrective TASK-018, TASK-019, and TASK-020 are complete, so tutorial overlays may now bind to the final controls and responsive geometry.
 
 ## Approved authority
 

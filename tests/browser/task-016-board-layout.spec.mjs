@@ -31,9 +31,10 @@ test('board preserves the approved desktop viewport composition and bounded over
   test.skip(testInfo.project.name !== 'chromium-desktop', 'Desktop breakpoint and short-laptop regression.');
   await openSolo(page, 3, 1601);
 
-  for (const viewport of [{ width: 1920, height: 1080 }, { width: 1600, height: 1000 }, { width: 1366, height: 768 }]) {
+  for (const viewport of [{ width: 1920, height: 1080, benchPageSize: 6 }, { width: 1600, height: 1000, benchPageSize: 5 }, { width: 1366, height: 768, benchPageSize: 4 }]) {
     await page.setViewportSize(viewport);
     await expect(page.locator('.game-board')).toBeVisible();
+    await expect(page.locator('.diagnostic-bench')).toHaveAttribute('data-bench-page-size', String(viewport.benchPageSize));
     const dimensions = await page.evaluate(() => ({
       documentHeight: document.documentElement.scrollHeight,
       documentWidth: document.documentElement.scrollWidth,
@@ -59,7 +60,7 @@ test('board preserves the approved desktop viewport composition and bounded over
     expect(await page.locator('.legal-action-panel').evaluate((element) => element.scrollHeight - element.clientHeight)).toBeLessThanOrEqual(2);
   }
 
-  await expect(page.locator('.diagnostic-tile')).toHaveCount(6);
+  await expect(page.locator('.diagnostic-tile')).toHaveCount(4);
   await expect(page.locator('.closed-ticket-list')).not.toHaveAttribute('open', '');
   await capture(page, testInfo, 'relevant-short-laptop');
 
@@ -75,7 +76,8 @@ test('Global filters, pagination, and projection-derived Runnable state survive 
   test.skip(testInfo.project.name !== 'chromium-desktop', 'Catalog-state continuity is covered once on desktop.');
   await openSolo(page, 3, 1602);
   await page.getByRole('button', { name: 'Global', exact: true }).click();
-  await expect(page.locator('.diagnostic-tile')).toHaveCount(8);
+  const benchPageSize = Number(await page.locator('.diagnostic-bench').getAttribute('data-bench-page-size'));
+  await expect(page.locator('.diagnostic-tile')).toHaveCount(benchPageSize);
   await page.locator('[data-bench-search]').fill('test');
   await page.locator('[data-bench-sort]').selectOption('COST');
   await page.locator('[data-bench-category]').selectOption({ index: 1 });
@@ -96,7 +98,7 @@ test('Global filters, pagination, and projection-derived Runnable state survive 
   await page.locator('[data-bench-relevant]').uncheck();
   await page.locator('[data-bench-runnable]').uncheck();
   await page.locator('[data-bench-page="2"]').click();
-  await expect(page.locator('.diagnostic-bench__count')).toContainText('Showing 9–16');
+  await expect(page.locator('.diagnostic-bench__count')).toContainText(`Showing ${benchPageSize + 1}–${benchPageSize * 2}`);
   await capture(page, testInfo, 'global-catalog');
 });
 

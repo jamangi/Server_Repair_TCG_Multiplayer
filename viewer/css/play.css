@@ -3456,8 +3456,7 @@ dialog.settings-dialog::backdrop {
 .play-app .diagnostic-tile__inspect,
 .play-app .hand-group__inspect,
 .play-app .hand-expand-toggle,
-.play-app .hand-pagination button,
-.play-app .hand-group__copies button {
+.play-app .hand-pagination button {
   min-height: 44px;
   border: 1px solid rgba(95, 184, 214, 0.34);
   color: #d9edf2;
@@ -3472,15 +3471,13 @@ dialog.settings-dialog::backdrop {
 .play-app .hand-rail__range { min-height: 1.1rem; color: var(--play-muted); font-size: 0.62rem; }
 .play-app .hand-pagination { position: absolute; z-index: 4; top: 0; right: 0; display: flex; gap: 0.3rem; }
 .play-app .hand-pagination button { min-width: 4.5rem; padding-inline: 0.45rem; }
-.play-app .hand-group { position: relative; display: grid; grid-template-rows: minmax(0, 1fr) auto auto; min-width: 0; min-height: 0; }
+.play-app .hand-group { position: relative; display: grid; grid-template-rows: minmax(0, 1fr) auto; min-width: 0; min-height: 0; }
 .play-app .hand-group--stacked::before,
-.play-app .hand-group--stacked::after { content: ""; position: absolute; z-index: 0; inset: 0.25rem -0.2rem 2.65rem 0.2rem; border: 1px solid rgba(95, 184, 214, 0.25); border-radius: 0.55rem; background: #07131b; }
-.play-app .hand-group--stacked::after { inset: 0.5rem -0.4rem 2.4rem 0.4rem; z-index: -1; opacity: 0.65; }
+.play-app .hand-group--stacked::after { content: ""; position: absolute; z-index: 0; inset: var(--hand-stack-offset, 0.28rem) calc(-1 * var(--hand-stack-offset, 0.28rem)) calc(44px + var(--hand-stack-offset, 0.28rem)) var(--hand-stack-offset, 0.28rem); border: 1px solid rgba(95, 184, 214, 0.25); border-radius: 0.55rem; background: #07131b; }
+.play-app .hand-group--stacked::after { inset: calc(2 * var(--hand-stack-offset, 0.28rem)) calc(-2 * var(--hand-stack-offset, 0.28rem)) 44px calc(2 * var(--hand-stack-offset, 0.28rem)); z-index: -1; opacity: 0.65; }
 .play-app .hand-group > * { position: relative; z-index: 1; }
 .play-app .hand-group__meta { display: grid; grid-template-columns: auto 1fr; align-items: center; }
 .play-app .hand-group__quantity { display: grid; min-width: 2.25rem; min-height: 44px; place-items: center; color: #fff3c7; background: rgba(112, 76, 15, 0.8); font-weight: 900; }
-.play-app .hand-group__copies { display: flex; gap: 0.25rem; align-items: center; min-width: 0; overflow-x: auto; color: var(--play-muted); font-size: 0.58rem; white-space: nowrap; }
-.play-app .hand-group__copies button { min-width: max-content; padding-inline: 0.5rem; }
 .play-app .hand-group .play-card[data-selected="true"] { transform: none; }
 
 @media (min-width: 1181px) {
@@ -3498,8 +3495,12 @@ dialog.settings-dialog::backdrop {
   body.active-match-layout .play-app .game-route {
     --active-gap: 0.48rem;
     --ticket-row: 9rem;
-    --hand-row: 11rem;
-    --tile-art-min: 1.5rem;
+    --bench-tile-min-width: 9rem;
+    --bench-tile-row-height: clamp(8.6rem, 18dvh, 13.5rem);
+    --hand-row: clamp(14rem, 32dvh, 23rem);
+    --hand-card-min-width: 9.375rem;
+    --hand-stack-offset: 0.28rem;
+    --tile-art-min: 2.75rem;
     display: grid;
     grid-template: auto auto minmax(0, 1fr) / minmax(0, 1fr);
     gap: 0.42rem;
@@ -3511,8 +3512,8 @@ dialog.settings-dialog::backdrop {
     padding: 0.45rem 0.55rem 0.15rem;
     overflow: hidden;
   }
-  body.active-match-layout .play-app .game-route--global { --ticket-row: 8.5rem; --hand-row: 11rem; --tile-art-min: 1.3rem; }
-  body.active-match-layout .play-app .game-route--text-reflow { --ticket-row: 12rem; --hand-row: 8rem; }
+  body.active-match-layout .play-app .game-route--global { --ticket-row: 8.5rem; }
+  body.active-match-layout .play-app .game-route--text-reflow { --ticket-row: 12rem; --hand-row: clamp(14rem, 32dvh, 23rem); }
   body.active-match-layout .play-app .game-route > :is(.game-header, .game-disclosure, .game-board) { grid-column: 1; }
   body.active-match-layout .play-app .game-header { grid-row: 1; }
   body.active-match-layout .play-app .game-disclosure { grid-row: 2; }
@@ -3552,20 +3553,19 @@ dialog.settings-dialog::backdrop {
   body.active-match-layout .play-app .view-full-ticket { grid-column: 2; grid-row: 2; min-height: 44px; align-self: center; padding-inline: 0.65rem; white-space: nowrap; }
 
   body.active-match-layout .play-app .diagnostic-bench { position: relative; display: grid; grid-template-rows: auto auto minmax(0, 1fr) auto; gap: 0.18rem; min-width: 0; min-height: 0; padding: 0.5rem; margin: 0; overflow: hidden; }
-  body.active-match-layout .play-app .diagnostic-bench__heading { gap: 0.6rem; }
+  body.active-match-layout .play-app .diagnostic-bench__heading { gap: 0.6rem; height: 3.25rem; min-height: 3.25rem; overflow: hidden; }
   body.active-match-layout .play-app .diagnostic-bench__heading h2 { font-size: 1rem; }
   body.active-match-layout .play-app .diagnostic-bench__heading p { margin: 0.1rem 0 0; font-size: 0.64rem; }
   body.active-match-layout .play-app .bench-view-switch button { min-height: 44px; padding: 0 0.7rem; }
   body.active-match-layout .play-app .diagnostic-disclaimer { display: none; }
-  body.active-match-layout .play-app .diagnostic-bench__controls { display: flex; gap: 0.35rem; align-items: end; min-width: 0; margin: 0; }
+  body.active-match-layout .play-app .diagnostic-bench__controls { display: flex; gap: 0.35rem; align-items: end; min-width: 0; min-height: 3rem; margin: 0; }
   body.active-match-layout .play-app .diagnostic-bench__controls label:not(.switch-row) { min-width: 0; font-size: 0; }
   body.active-match-layout .play-app .diagnostic-bench__controls label:first-child { flex: 1 1 11rem; }
   body.active-match-layout .play-app .diagnostic-bench__controls input[type="search"],
   body.active-match-layout .play-app .diagnostic-bench__controls select { min-height: 44px; padding: 0 0.48rem; margin-top: 0; font-size: 0.62rem; }
   body.active-match-layout .play-app .diagnostic-bench__controls .switch-row { flex: 0 0 auto; min-height: 44px; padding: 0 0.35rem; font-size: 0.56rem; }
   body.active-match-layout .play-app .diagnostic-bench__count { position: absolute; z-index: 2; bottom: 0.9rem; left: 0.7rem; min-height: 1rem; margin: 0; font-size: 0.62rem; }
-  body.active-match-layout .play-app .diagnostic-shelf { display: grid; grid-template: repeat(2, minmax(0, 1fr)) / repeat(4, minmax(0, 1fr)); gap: 0.42rem; min-height: 0; padding: 0.1rem 0; overflow: hidden; }
-  body.active-match-layout .play-app .game-board--relevant .diagnostic-shelf { grid-template: minmax(0, 1fr) / repeat(6, minmax(0, 1fr)); }
+  body.active-match-layout .play-app .diagnostic-shelf { display: grid; grid-template: minmax(0, var(--bench-tile-row-height)) / repeat(var(--bench-columns), minmax(var(--bench-tile-min-width), 1fr)); gap: 0.42rem; align-content: start; min-height: 0; padding: 0.1rem 0; overflow: hidden; }
   body.active-match-layout .play-app .diagnostic-tile { display: grid; grid-template-rows: minmax(0, 1fr) auto; min-width: 0; min-height: 0; overflow: hidden; }
   body.active-match-layout .play-app .diagnostic-tile .play-card { display: grid; grid-template: auto minmax(var(--tile-art-min), 1fr) auto / minmax(0, 1fr); width: 100%; min-width: 0; min-height: 0; height: 100%; padding: 0.3rem; }
   body.active-match-layout .play-app .diagnostic-tile .play-card__header { min-width: 0; min-height: 1.3rem; padding: 0.08rem 0.2rem; }
@@ -3577,22 +3577,21 @@ dialog.settings-dialog::backdrop {
   body.active-match-layout .play-app .diagnostic-tile__inspect { display: grid; width: 100%; min-height: 44px; place-items: center; padding: 0.2rem; border: 1px solid rgba(95, 184, 214, 0.34); color: #d9edf2; text-align: center; background: rgba(8, 30, 40, 0.9); }
   body.active-match-layout .play-app .bench-pagination { min-height: 44px; margin: 0; }
 
-  body.active-match-layout .play-app .hand-rail { position: relative; display: grid; grid-template-columns: 10.5rem minmax(0, 1fr); gap: 0.55rem; align-items: stretch; min-width: 0; min-height: 0; height: var(--hand-row); box-sizing: border-box; padding: 0.45rem 0.55rem; margin: 0; overflow: hidden; }
+  body.active-match-layout .play-app .hand-rail { position: relative; display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: 0.7rem; align-items: stretch; min-width: 0; min-height: 0; height: var(--hand-row); box-sizing: border-box; padding: 0.45rem 0.7rem 0.55rem 0.55rem; margin: 0; overflow: hidden; }
   body.active-match-layout .play-app .hand-rail__heading { display: grid; grid-template-rows: auto auto 1fr; gap: 0.25rem; min-width: 0; align-content: start; }
   body.active-match-layout .play-app .hand-rail__heading h2 { margin: 0; font-size: 0.9rem; }
   body.active-match-layout .play-app .hand-expand-toggle { align-self: end; }
   body.active-match-layout .play-app .hand-rail__range { display: flex; min-height: 44px; align-items: center; padding-right: 10rem; }
-  body.active-match-layout .play-app .hand-rail__cards { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.42rem; align-items: stretch; justify-content: stretch; min-width: 0; min-height: 0; padding: 0; overflow: hidden; }
-  body.active-match-layout .play-app .hand-group { height: 100%; overflow: hidden; }
-  body.active-match-layout .play-app .hand-group .play-card { display: grid; grid-template: auto minmax(0, 1fr) / 3rem minmax(0, 1fr); width: 100%; min-width: 0; min-height: 0; height: 100%; padding: 0.25rem; }
-  body.active-match-layout .play-app .hand-group .play-card__header { grid-column: 1 / -1; min-width: 0; padding: 0.12rem 0.25rem; }
+  body.active-match-layout .play-app .hand-rail__cards { display: grid; grid-template-columns: repeat(var(--hand-columns), minmax(var(--hand-card-min-width), 1fr)); gap: 0.7rem; align-items: stretch; justify-content: stretch; min-width: 0; min-height: 0; padding: 0 0.4rem 0 0; overflow: hidden; }
+  body.active-match-layout .play-app .hand-group { height: 100%; overflow: visible; }
+  body.active-match-layout .play-app .hand-group .play-card { display: grid; grid-template: auto minmax(var(--hand-art-min, 2.75rem), 1fr) auto / minmax(0, 1fr); width: 100%; min-width: 0; min-height: 0; height: 100%; padding: 0.25rem; }
+  body.active-match-layout .play-app .hand-group .play-card__header { grid-column: 1; grid-row: 1; min-width: 0; padding: 0.12rem 0.25rem; }
   body.active-match-layout .play-app .hand-group .play-card__family { overflow: visible; font-size: 0.58rem; text-overflow: clip; white-space: nowrap; }
-  body.active-match-layout .play-app .hand-group .play-card__art { grid-column: 1; grid-row: 2; min-height: 0; aspect-ratio: auto; }
+  body.active-match-layout .play-app .hand-group .play-card__art { grid-column: 1; grid-row: 2; min-height: 2.75rem; aspect-ratio: auto; }
   body.active-match-layout .play-app .hand-group .play-card__art-image { width: 100%; height: 100%; object-fit: cover; }
-  body.active-match-layout .play-app .hand-group .play-card__body { grid-column: 2; grid-row: 2; min-width: 0; padding: 0.2rem 0.25rem; }
-  body.active-match-layout .play-app .hand-group .play-card__title { display: block; overflow: visible; font-size: 0.6rem; line-height: 1.1; white-space: normal; }
+  body.active-match-layout .play-app .hand-group .play-card__body { grid-column: 1; grid-row: 3; min-width: 0; padding: 0.3rem 0.25rem; }
+  body.active-match-layout .play-app .hand-group .play-card__title { display: block; overflow: visible; font-size: 0.68rem; line-height: 1.15; white-space: normal; }
   body.active-match-layout .play-app .hand-group__inspect { width: 100%; }
-  body.active-match-layout .play-app .hand-group__copies { position: absolute; right: 0; bottom: 44px; left: 0; background: rgba(3, 11, 17, 0.96); }
 
   body.active-match-layout .play-app .hand-rail[data-expanded="true"] { position: absolute; z-index: 30; grid-column: 1; grid-row: 1 / -1; top: calc(var(--ticket-row) + var(--active-gap)); right: 0; bottom: 0; left: 0; height: auto; border-color: rgba(95, 184, 214, 0.7); background: radial-gradient(ellipse at 50% 120%, rgba(48, 159, 190, 0.2), transparent 62%), linear-gradient(180deg, #030a0f, #010508); box-shadow: 0 -0.4rem 1.4rem rgba(0, 0, 0, 0.7); }
   body.active-match-layout .play-app .hand-rail[data-expanded="true"] .hand-rail__cards { align-items: stretch; }
@@ -3620,6 +3619,19 @@ dialog.settings-dialog::backdrop {
   body.active-match-layout .play-app .basic-actions-panel .basic-action-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.35rem; }
   body.active-match-layout .play-app .basic-actions-panel .search-action { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr auto; gap: 0.3rem; align-items: center; font-size: 0.58rem; }
   body.active-match-layout .play-app .basic-actions-panel :is(button, select) { min-height: 44px; }
+}
+
+@media (min-width: 1181px) and (max-height: 800px) {
+  body.active-match-layout .play-app .game-route {
+    --ticket-row: 7.5rem;
+    --bench-tile-row-height: 8rem;
+    --hand-row: 13rem;
+    --hand-art-min: 2rem;
+    --tile-art-min: 1.5rem;
+  }
+  body.active-match-layout .play-app .game-route--global { --ticket-row: 7.5rem; }
+  body.active-match-layout .play-app .hand-group .play-card__header { min-height: 2rem; }
+  body.active-match-layout .play-app .hand-group .play-card__body { padding: 0.12rem 0.25rem; }
 }
 
 @media (min-width: 1181px) and (max-width: 1500px) {

@@ -146,6 +146,22 @@ async function submitAndWait(page, intentId) {
   await expect.poll(() => page.evaluate(() => window.__task012WorkerMessages.length)).toBeGreaterThan(before);
 }
 
+async function selectHeldInstanceAcrossPages(page, instanceId) {
+  const previous = page.locator('.hand-pagination [data-hand-page]').filter({ hasText: 'Previous' });
+  while (await previous.count() && await previous.isEnabled()) await previous.click();
+  for (let pageNumber = 0; pageNumber < 12; pageNumber += 1) {
+    const group = page.locator(`.hand-group[data-card-instance-ids~="${instanceId}"]`);
+    if (await group.count()) {
+      await group.locator('.play-card').click();
+      return;
+    }
+    const next = page.locator('.hand-pagination [data-hand-page]').filter({ hasText: 'Next' });
+    if (!await next.count() || !await next.isEnabled()) break;
+    await next.click();
+  }
+  throw new Error(`Held Card ${instanceId} was not present on any response-hand page.`);
+}
+
 function scanCandidateEffects(value, target = []) {
   if (Array.isArray(value)) {
     for (const entry of value) scanCandidateEffects(entry, target);
@@ -325,7 +341,7 @@ test('desktop compact Ticket and full-detail workflow retain accepted cross-Tick
   }
   expect(alternate, 'Expected one held Card with an explicit alternate Ticket target.').toBeTruthy();
   await page.locator(`[data-ticket-id="${alternate.displayedTicketId}"]`).click();
-  await page.locator(`[data-card-instance-id="${alternate.held.card_instance_id}"]`).click();
+  await selectHeldInstanceAcrossPages(page, alternate.held.card_instance_id);
   const scope = page.locator('[data-alternate-target]');
   await expect(scope).toBeVisible();
   await expect(scope).toContainText('Alternate target only');
