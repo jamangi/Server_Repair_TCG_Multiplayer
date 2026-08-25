@@ -2,7 +2,7 @@
 
 ## Status
 
-**Approved scope — blocked on TASK-013, TASK-014, and TASK-016.** PT-007 A and the prerequisite PT-005 A reveal behavior were approved by the project owner on 2026-08-24. The tutorials must teach synchronized rules against representative final content and stable control locations.
+**Approved scope — blocked on TASK-018 and TASK-019.** PT-007 A and the prerequisite PT-005 A reveal behavior were approved by the project owner on 2026-08-24. TASK-013, TASK-014, and TASK-016 are complete, but post-TASK-016 playtesting found dialog and card-surface regressions that must be corrected before tutorial overlays bind to those controls. The tutorials must teach synchronized rules against representative final content and stable, repeatedly usable control locations.
 
 ## Approved authority
 
@@ -18,7 +18,7 @@ Tutorials are not substitutes for tests. They demonstrate the real engine path; 
 
 Read completely before editing:
 
-- `AGENTS.md`, root `README.md`, this task, `docs/tasks/INDEX.md`, and completed TASK-012 through TASK-014 plus TASK-016;
+- `AGENTS.md`, root `README.md`, this task, `docs/tasks/INDEX.md`, and completed TASK-012 through TASK-014 plus TASK-016, TASK-018, and TASK-019;
 - the approved rules/profile, Ticket/Card/Knowledge/Event/projection schemas, and solution-reveal contract;
 - the final playable catalog, coverage matrix, seeded Ticket provenance, and automated-game paths;
 - all solo Play pages/session/Worker/motion/accessibility modules and TASK-010 visual references;

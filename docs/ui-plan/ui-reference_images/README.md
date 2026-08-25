@@ -150,11 +150,34 @@ Use it for the Relevant mode's split Ticket summary, inline public Candidates, s
 
 Across both directions, the profitable lesson is composition rather than gameplay: use horizontal adjacency for short related information, preserve one-step access to detail, and assign bounded overflow only to genuine collections. Do not copy names, counts, costs, outcomes, legality, or hidden-information assumptions from the pixels.
 
+## 07 — TASK-016 post-pass review
+
+### Relevant post-pass
+
+![TASK-016 Relevant implementation after the first pass](./task-016-postpass-relevant.png)
+
+The pass successfully separates Basic Actions from Legal Action and establishes the queue/center/right-rail frame. It also demonstrates the follow-up defects TASK-018/TASK-019 must not normalize: over-compressed diagnostic art/text, unreadable hand-family/title anatomy, hidden relevance disclosure, pale symptom ink, and a large unused lower band.
+
+### Global post-pass
+
+![TASK-016 Global implementation after the first pass](./task-016-postpass-global.png)
+
+The pass gives the Ticket queue and right rail useful height, but the Global center rows clip nearly all selected-Ticket content and the hand's top edge. Diagnostic tiles devote substantial area to empty card bodies while squeezing art and text into a narrow strip. Container fit and absence of document scrolling did not guarantee usable descendants.
+
+### Collapsed response-hand reference
+
+![Collapsed response hand layout reference](./response-hand-collapsed-reference.png)
+
+This is a compact anatomy reference for the UI-002 decision: a collapsed hand can preserve family, complete title, count, expansion control, and Deck/Discard state without pretending to be a full illustrated Card. It is not authoritative grouping, instance-selection, paging, or Card-disposition behavior.
+
+The earlier `relevant_diagnostic_bench.png`, `task-016-relevant-bench-layout.png`, and `global_diagnostic_bench.png` remain the richer comparison targets. The fifth post-pass attachment was byte-identical to the existing `global_diagnostic_bench.png`, so it is not duplicated.
+
 ## Generation provenance
 
 - Minimum reference provenance: project-owner-supplied standalone Server Repair HTML/CSS/JavaScript proof of concept and exact screenshot, added 2026-08-23. The source is committed only as a readable visual reference and is not part of the Viewer runtime.
 - Diagnostic Bench reference provenance: two project-owner-supplied original layout studies, each 1774×887, added 2026-08-24. They are compositional references for PT-001 and TASK-016, not runtime assets or authoritative fixtures.
 - TASK-016 comparison provenance: one project-owner-supplied post-TASK-014 Viewer capture (2535×1291) and two project-owner-supplied layout studies (1672×941), added 2026-08-25. They document a before/Global/Relevant composition comparison, not runtime assets or authoritative fixtures.
+- TASK-016 post-pass provenance: two project-owner-supplied implementation captures (2543×1291 Relevant and 2551×1293 Global) plus one 1263×95 response-hand composition crop, added 2026-08-25. They are defect/interaction references for TASK-018/TASK-019, not runtime assets or gameplay fixtures. The accompanying modal recording is translated into deterministic reproduction steps in TASK-018 rather than committed as a large binary.
 - Mode: built-in image generation, with targeted built-in edit passes.
 - Date: 2026-08-23.
 - Source references: four user-supplied screenshots used only for general layout/aesthetic lessons; not committed.

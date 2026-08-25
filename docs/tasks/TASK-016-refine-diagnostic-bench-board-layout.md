@@ -181,4 +181,10 @@ Changes stay within the task allowlist: the game-page/session/shell presentation
 
 ### Unresolved items
 
-None. TASK-015 is now unblocked; guided tutorial scripting was not started in this task.
+None recorded at completion. TASK-015 was considered unblocked at that boundary; guided tutorial scripting was not started in this task. The later hands-on finding below supersedes that sequencing statement.
+
+## Post-completion playtest finding — 2026-08-25
+
+Hands-on review found that the structural pass was only partially successful. Basic Actions are correctly separated from Legal Action, the desktop queue uses its vertical allocation, and the action rail no longer needs ordinary scrolling. However, repeated animated dialog opening can leave an invisible modal/backdrop state; the Global Ticket summary clips required content; Ticket symptom contrast is inadequate; diagnostic art and hand Cards are over-compressed; relevance/catalog disclosures are not reliably visible; and Relevant mode leaves avoidable lower space unused.
+
+The completion tests proved outer container fit and no document scroll but did not prove required child visibility, readable Card anatomy, repeated full-motion dialog lifecycle, or human visual acceptance. The accepted captures themselves contain several of these defects. TASK-018 owns the deterministic dialog/Ticket/contrast regressions. TASK-019 owns the approval-dependent diagnostic tile, adaptive hand, height-use, and CSS-consolidation refinement. TASK-015 is blocked on both so tutorial highlights do not fossilize unstable controls.
