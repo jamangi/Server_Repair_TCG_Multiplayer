@@ -30,21 +30,6 @@ export function downloadText(filename, text, type = 'application/json') {
   setTimeout(() => URL.revokeObjectURL(url), 0);
 }
 
-export function dialogWithRestore(dialog, opener = document.activeElement) {
-  const restore = opener instanceof HTMLElement ? opener : null;
-  const onClose = () => {
-    dialog.removeEventListener('close', onClose);
-    if (!restore?.focus) return;
-    try {
-      restore.focus({ preventScroll: true });
-    } catch {
-      restore.focus();
-    }
-  };
-  dialog.addEventListener('close', onClose);
-  dialog.showModal();
-}
-
 export function setInlineNotice(root, message, tone = 'info') {
   const notice = root.querySelector('[data-inline-notice]');
   if (!notice) return;

@@ -14,6 +14,7 @@ let getPreference = () => 'SYSTEM';
 const systemReduced = typeof matchMedia === 'function'
   ? matchMedia('(prefers-reduced-motion: reduce)')
   : { matches: false };
+const dialogStates = new WeakMap();
 
 export function configureMotion(preferenceReader) {
   getPreference = typeof preferenceReader === 'function' ? preferenceReader : getPreference;
@@ -107,17 +108,6 @@ const patterns = {
       ease: 'outExpo',
     });
   },
-  dialog(root) {
-    const panel = root.matches?.('dialog') ? root : root.querySelector('dialog[open]');
-    if (!panel) return null;
-    return animate(panel, {
-      opacity: { from: 0 },
-      scale: { from: .97, to: 1 },
-      y: { from: 8, to: 0 },
-      duration: 260,
-      ease: 'outQuart',
-    });
-  },
 };
 
 export function runMotion(pattern, root = document) {
@@ -135,33 +125,189 @@ export function runMotion(pattern, root = document) {
   }
 }
 
-export function closeDialogWithMotion(dialog) {
-  if (!dialog?.open || dialog.dataset.motionClosing === 'true') return null;
+function focusSurvivingOpener(opener) {
+  if (!(opener instanceof HTMLElement) || !opener.isConnected || typeof opener.focus !== 'function') return;
+  try {
+    opener.focus({ preventScroll: true });
+  } catch {
+    opener.focus();
+  }
+}
+
+function dialogState(dialog) {
+  let state = dialogStates.get(dialog);
+  if (state) return state;
+  state = {
+    generation: 0,
+    phase: 'closed',
+    opener: null,
+    restoreFocus: true,
+    openingAnimation: null,
+    closingAnimation: null,
+    onCancel: null,
+    onClick: null,
+    onClose: null,
+  };
+  state.onCancel = (event) => {
+    event.preventDefault();
+    closePlayDialog(dialog);
+  };
+  state.onClick = (event) => {
+    if (event.target === dialog) closePlayDialog(dialog);
+  };
+  state.onClose = () => {
+    neutralizeDialogMotion(dialog, state);
+    state.phase = 'closed';
+    const opener = state.opener;
+    const shouldRestore = state.restoreFocus;
+    state.opener = null;
+    state.restoreFocus = true;
+    if (shouldRestore) focusSurvivingOpener(opener);
+  };
+  dialog.addEventListener('cancel', state.onCancel);
+  dialog.addEventListener('click', state.onClick);
+  dialog.addEventListener('close', state.onClose);
+  dialogStates.set(dialog, state);
+  return state;
+}
+
+function neutralizeDialogMotion(dialog, state = dialogStates.get(dialog)) {
+  if (!state) return;
+  state.generation += 1;
+  const animations = new Set([
+    state.openingAnimation,
+    state.closingAnimation,
+    ...(typeof dialog.getAnimations === 'function' ? dialog.getAnimations() : []),
+  ]);
+  for (const animation of animations) {
+    try {
+      animation?.cancel?.();
+    } catch {
+      // A stale browser animation may already have detached its effect.
+    }
+  }
+  state.openingAnimation = null;
+  state.closingAnimation = null;
+  delete dialog.dataset.motionClosing;
+}
+
+function completeOpening(dialog, state, animation, generation) {
+  if (state.generation !== generation || state.openingAnimation !== animation) return;
+  try {
+    animation.cancel();
+  } catch {
+    // The finished animation may already have been removed by the browser.
+  }
+  state.openingAnimation = null;
+  state.phase = 'open';
+}
+
+/**
+ * Own the complete lifecycle for a reusable Play dialog. Every opening starts
+ * from neutral visual state, even when it interrupts a closing animation.
+ */
+export function openPlayDialog(dialog, opener = document.activeElement) {
+  if (!(dialog instanceof HTMLDialogElement)) return null;
+  const state = dialogState(dialog);
+  neutralizeDialogMotion(dialog, state);
+  state.opener = opener instanceof HTMLElement && opener.isConnected ? opener : null;
+  state.restoreFocus = true;
+  state.phase = 'opening';
+  if (!dialog.open) dialog.showModal();
   if (prefersReducedMotion() || typeof dialog.animate !== 'function') {
+    state.phase = 'open';
+    return null;
+  }
+  try {
+    const generation = state.generation;
+    const animation = dialog.animate([
+      { opacity: 0, transform: 'translateY(8px) scale(.97)' },
+      { opacity: 1, transform: 'translateY(0) scale(1)' },
+    ], {
+      duration: 260,
+      easing: 'cubic-bezier(.22, .76, .25, 1)',
+      fill: 'none',
+    });
+    state.openingAnimation = animation;
+    animation.addEventListener('finish', () => completeOpening(dialog, state, animation, generation), { once: true });
+    return animation;
+  } catch (error) {
+    neutralizeDialogMotion(dialog, state);
+    state.phase = 'open';
+    console.warn('Play dialog opening motion could not run.', error);
+    return null;
+  }
+}
+
+export function closePlayDialog(dialog, { restoreFocus = true, immediate = false } = {}) {
+  if (!(dialog instanceof HTMLDialogElement)) return null;
+  const state = dialogState(dialog);
+  neutralizeDialogMotion(dialog, state);
+  state.restoreFocus = restoreFocus;
+  if (!dialog.open) {
+    state.phase = 'closed';
+    return null;
+  }
+  state.phase = 'closing';
+  if (immediate || prefersReducedMotion() || typeof dialog.animate !== 'function') {
     dialog.close();
     return null;
   }
   try {
     dialog.dataset.motionClosing = 'true';
+    const generation = state.generation;
     const animation = dialog.animate([
       { opacity: 1, transform: 'translateY(0) scale(1)' },
       { opacity: 0, transform: 'translateY(6px) scale(.975)' },
     ], {
       duration: 160,
       easing: 'cubic-bezier(.4, 0, 1, 1)',
-      fill: 'forwards',
+      fill: 'none',
     });
-    const finish = () => {
+    state.closingAnimation = animation;
+    animation.addEventListener('finish', () => {
+      if (state.generation !== generation || state.closingAnimation !== animation) return;
+      try {
+        animation.cancel();
+      } catch {
+        // The browser may already have discarded the completed effect.
+      }
+      state.closingAnimation = null;
       delete dialog.dataset.motionClosing;
       if (dialog.open) dialog.close();
-    };
-    animation.addEventListener('finish', finish, { once: true });
-    animation.addEventListener('cancel', finish, { once: true });
+    }, { once: true });
     return animation;
   } catch (error) {
-    delete dialog.dataset.motionClosing;
+    neutralizeDialogMotion(dialog, state);
     dialog.close();
-    console.warn('Card inspection close motion could not run.', error);
+    console.warn('Play dialog closing motion could not run.', error);
     return null;
+  }
+}
+
+function dialogsWithin(root) {
+  if (!root) return [];
+  return [
+    ...(root instanceof HTMLDialogElement ? [root] : []),
+    ...(typeof root.querySelectorAll === 'function' ? root.querySelectorAll('dialog') : []),
+  ];
+}
+
+/** Close and detach lifecycle listeners without focusing controls that the
+ * route is about to remove. */
+export function teardownPlayDialogs(root) {
+  for (const dialog of dialogsWithin(root)) {
+    const state = dialogStates.get(dialog);
+    if (state) {
+      state.restoreFocus = false;
+      state.opener = null;
+      neutralizeDialogMotion(dialog, state);
+      dialog.removeEventListener('cancel', state.onCancel);
+      dialog.removeEventListener('click', state.onClick);
+      dialog.removeEventListener('close', state.onClose);
+      dialogStates.delete(dialog);
+    }
+    if (dialog.open) dialog.close();
+    delete dialog.dataset.motionClosing;
   }
 }

@@ -2,7 +2,7 @@
 
 ## Status
 
-**Active — no product approval required.** This is a corrective regression task discovered immediately after TASK-016. Complete it before TASK-019 or TASK-015 relies on the affected dialogs and Ticket geometry.
+**Complete — 2026-08-25.** Reusable Play dialogs now clear every transient animation state across repeated and interrupted use, and the selected Ticket keeps its required public information visibly usable with verified dark-ink contrast.
 
 ## Objective
 
@@ -91,3 +91,43 @@ Do not change engine rules, legal intents, Card/Ticket schemas or content, Bench
 ## Completion boundary
 
 Complete only when every affected dialog survives repeat open/close/reopen under real motion without invisible top-layer state; required selected-Ticket information and the full-ticket route are visibly usable in both Bench Views; symptom contrast is verified; tests assert child-level usability rather than container geometry alone; and no rerender workaround or gameplay mutation was introduced.
+
+## Completion record — 2026-08-25
+
+### Outcome
+
+- Reproduced the owner report in real Chromium before editing. After the animated `×` close, the reused dialog retained one finished 160 ms Web Animation with `fill: "forwards"`; reopening left `dialog.open === true` while computed opacity remained `0` and the closing transform remained applied.
+- Replaced the split open/motion/focus behavior with one Play-dialog lifecycle owner. It neutralizes stale opening and closing animations before every open, uses non-retaining motion, supports interrupted close/reopen, owns `×`, `Escape`, backdrop, form-completion, reduced-motion, and teardown paths, bounds listeners, and restores focus once only when the opener still survives.
+- Applied that lifecycle to game Inspect, full Ticket, Deck inspect, editor inspect, and Settings. Same-route reconstruction and route teardown close top-layer dialogs immediately without focusing controls that are about to detach; no caller invokes `showModal()`, `close()`, or independent dialog motion directly.
+- Made selected-Ticket row sizing content-aware, restored the compact physical Ticket padding in the final desktop cascade, allowed Candidates to wrap into visible space, and added the projected machine revision to the persistent summary. Phone composition prioritizes the public Ticket text over decorative art so title, status, symptom, Candidates, revision, and the complete full-Ticket route remain present.
+- Changed the persistent symptom to semantic `--play-ink-900` on Ticket vellum. The verified `#191a18` on `#f3ead8` pair has a 14.62:1 contrast ratio, exceeding WCAG AA ordinary-text requirements.
+
+### Verification
+
+| Command | Exit | Result |
+| --- | ---: | --- |
+| `node viewer/scripts/build-play-assets.mjs`; `node viewer/scripts/verify-play-assets.mjs` | 0 | 40 deterministic Play assets staged and verified |
+| `node --check viewer/js/app.js`; `node --check viewer/js/data-loader.js`; `node --check viewer/js/entity-types.js` | 0 | baseline Viewer syntax passed |
+| `node --test tests/viewer-baseline.test.mjs` | 0 | 3 passed, 0 failed, 0 skipped |
+| `node --test tests/*.test.mjs` | 0 | 119 passed, 0 failed, 0 skipped |
+| `node tools/run-automated-games.mjs --verify-report automated_games/task-009-foundation-v1` | 0 | 22 frozen rows verified with 0 deterministic mismatches |
+| `node tools/run-task-014-campaign.mjs --verify-report automated_games/task-014-playable-coverage-v3` | 0 | 13 expanded-content rows verified with 0 deterministic mismatches |
+| Playwright TASK-018 dialog/Ticket matrix | 0 | 7 passed, 0 failed, 5 intentional project skips |
+| Playwright TASK-016 compatibility matrix | 0 | 7 passed, 0 failed, 13 intentional project skips |
+| Complete Playwright browser matrix | 0 | 36 passed, 0 failed, 52 intentional project skips |
+| TASK-018 focused visual regeneration | 0 | 3 passed, 0 failed |
+| `git diff --check` | 0 | no whitespace errors |
+
+### Visual evidence
+
+- Reopened Inspect: 1366×768 full-motion desktop after an immediate close/reopen interruption; the panel, Card detail, close control, and backdrop are visibly usable.
+- Relevant selected Ticket: 1920×960 with identity, status, symptom, all public Candidates, machine revision, and full 44px-class detail route visible.
+- Global selected Ticket: 1920×960 with the same child-level contract preserved in the compressed catalog composition.
+
+### Changed-file inventory
+
+Fifteen files changed within the task allowlist: this task, `docs/tasks/INDEX.md`, and the TASK-015 dependency status; Play CSS; six Play dialog/game/deck/settings/shell modules; the new TASK-018 browser matrix; and a focused visual README plus three accepted captures. Rebuilt generated Play assets remained byte-identical.
+
+### Unresolved items
+
+None for TASK-018. Gameplay, legal intents, projections, content, persistence, Bench membership, and response-hand behavior are unchanged. TASK-019 is now the active UI refinement; TASK-015 remains blocked only on TASK-019.

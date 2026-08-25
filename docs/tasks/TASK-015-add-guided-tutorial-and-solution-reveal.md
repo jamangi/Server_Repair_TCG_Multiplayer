@@ -2,7 +2,7 @@
 
 ## Status
 
-**Approved scope — blocked on TASK-018 and TASK-019.** PT-007 A and the prerequisite PT-005 A reveal behavior were approved by the project owner on 2026-08-24. TASK-013, TASK-014, and TASK-016 are complete, but post-TASK-016 playtesting found dialog and card-surface regressions that must be corrected before tutorial overlays bind to those controls. The tutorials must teach synchronized rules against representative final content and stable, repeatedly usable control locations.
+**Approved scope — blocked on TASK-019.** PT-007 A and the prerequisite PT-005 A reveal behavior were approved by the project owner on 2026-08-24. TASK-013, TASK-014, TASK-016, and corrective TASK-018 are complete; TASK-018 stabilized reusable dialogs and selected-Ticket visibility. TASK-019 must still finalize the diagnostic tiles, adaptive response hand, and responsive geometry before tutorial overlays bind to those controls.
 
 ## Approved authority
 

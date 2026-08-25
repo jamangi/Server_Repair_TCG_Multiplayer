@@ -2460,11 +2460,12 @@
 /* TASK-016: diagnostic bench board composition */
 .play-app .candidate-chip-row {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.35rem;
   align-items: center;
   padding: 0;
   margin: 0;
-  overflow: hidden;
+  overflow: visible;
   list-style: none;
 }
 
@@ -2574,13 +2575,14 @@
   .play-app .ticket-sheet::before { display: none; }
   .play-app .ticket-sheet__art { min-height: 0; height: 100%; margin: 0; border-radius: 0.5rem; }
   .play-app .ticket-sheet__summary { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto auto auto; gap: 0.3rem 0.55rem; min-width: 0; padding: 0.2rem 0.35rem 0.2rem 0.65rem; }
-  .play-app .ticket-sheet__summary header { display: flex; gap: 0.45rem; align-items: center; min-width: 0; grid-column: 1 / -1; }
-  .play-app .ticket-sheet__summary h2 { margin: 0; overflow: hidden; font-size: 1rem; text-overflow: ellipsis; white-space: nowrap; }
+  .play-app .ticket-sheet__summary header { display: flex; flex-wrap: wrap; gap: 0.25rem 0.45rem; align-items: center; min-width: 0; grid-column: 1 / -1; }
+  .play-app .ticket-sheet__summary h2 { margin: 0; overflow: visible; font-size: 1rem; line-height: 1.1; white-space: normal; }
   .play-app .ticket-sheet__summary .ticket-code { margin: 0; font-size: 0.58rem; }
   .play-app .ticket-sheet__summary .ticket-status { margin-left: auto; font-size: 0.56rem; white-space: nowrap; }
-  .play-app .ticket-sheet__symptom { grid-column: 1; margin: 0; overflow: hidden; color: #c9d6dc; font-size: 0.72rem; text-overflow: ellipsis; white-space: nowrap; }
-  .play-app .ticket-sheet .candidate-chip-row { grid-column: 1; }
-  .play-app .view-full-ticket { grid-column: 2; grid-row: 2 / span 2; min-height: 44px; align-self: center; padding-inline: 0.65rem; white-space: nowrap; }
+  .play-app .ticket-sheet__revision { color: var(--play-ink-700); font-size: 0.58rem; font-weight: 800; white-space: nowrap; }
+  .play-app .ticket-sheet__symptom { grid-column: 1; margin: 0; overflow: visible; color: var(--play-ink-900); font-size: 0.72rem; line-height: 1.25; white-space: normal; }
+  .play-app .ticket-sheet .candidate-chip-row { grid-column: 1 / -1; }
+  .play-app .view-full-ticket { grid-column: 2; grid-row: 2; min-height: 44px; align-self: center; padding-inline: 0.65rem; white-space: nowrap; }
 
   .play-app .diagnostic-bench { display: grid; grid-template-rows: auto auto auto auto minmax(0, 1fr) auto; min-width: 0; min-height: 0; padding: 0.55rem; margin: 0; overflow: hidden; }
   .play-app .diagnostic-bench__heading { gap: 0.6rem; }
@@ -2649,13 +2651,13 @@
   .play-app .ticket-queue__list { display: flex; gap: 0.45rem; padding: 0.5rem; overflow-x: auto; }
   .play-app .ticket-queue__list .ticket-card { width: 13rem; min-width: 13rem; }
   .play-app .closed-ticket-list { display: none; }
-  .play-app .ticket-sheet { order: 2; }
+  .play-app .ticket-sheet { order: 2; overflow: visible; }
   .play-app .intelligence-panel { order: 3; min-height: 18rem; }
   .play-app .diagnostic-bench { order: 4; min-height: 34rem; margin: 0; }
   .play-app .hand-rail { order: 5; margin: 0; }
   .play-app .legal-action-panel { order: 6; margin: 0; overflow: visible; }
   .play-app .basic-actions-panel { order: 7; padding: 0.7rem; border: 1px solid rgba(95, 184, 214, 0.28); border-radius: 0.75rem; background: rgba(4, 13, 19, 0.98); }
-  .play-app .ticket-sheet { display: grid; grid-template-columns: minmax(11rem, 30%) 1fr; gap: 0.55rem; min-height: 11rem; overflow: hidden; }
+  .play-app .ticket-sheet { display: grid; grid-template-columns: minmax(11rem, 30%) 1fr; gap: 0.55rem; min-height: 0; overflow: visible; }
   .play-app .ticket-sheet__summary { min-width: 0; }
   .play-app .diagnostic-shelf { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .play-app .diagnostic-tile .play-card { width: 100%; }
@@ -2668,14 +2670,14 @@
   .play-app .game-header { gap: 0.45rem; padding: 0.65rem; }
   .play-app .game-header h1 { font-size: 1.15rem; }
   .play-app .game-header > div > p { margin: 0.15rem 0; font-size: 0.68rem; }
-  .play-app .ticket-sheet { display: grid; grid-template-columns: 6.8rem minmax(0, 1fr); min-height: 9.8rem; padding: 0.65rem; margin: 0; }
-  .play-app .ticket-sheet__art { height: 100%; margin: 0; }
+  .play-app .ticket-sheet { display: grid; grid-template-columns: minmax(0, 1fr); min-height: 0; padding: 0.65rem; margin: 0; }
+  .play-app .ticket-sheet__art { display: none; }
   .play-app .ticket-sheet__summary { display: grid; align-content: start; gap: 0.35rem; min-width: 0; }
   .play-app .ticket-sheet__summary header { display: block; }
-  .play-app .ticket-sheet__summary h2 { margin: 0.2rem 0; overflow: hidden; font-size: 0.9rem; text-overflow: ellipsis; white-space: nowrap; }
+  .play-app .ticket-sheet__summary h2 { margin: 0.2rem 0; overflow: visible; font-size: 0.9rem; white-space: normal; }
   .play-app .ticket-sheet__summary .ticket-status { display: inline-block; font-size: 0.55rem; }
   .play-app .ticket-sheet__symptom { margin: 0; font-size: 0.68rem; }
-  .play-app .ticket-sheet .candidate-chip-row { display: none; }
+  .play-app .ticket-sheet .candidate-chip-row { display: flex; flex-wrap: wrap; }
   .play-app .view-full-ticket { min-height: 44px; font-size: 0.66rem; }
   .play-app .diagnostic-bench { min-height: 44rem; padding: 0.65rem; }
   .play-app .diagnostic-bench__heading { display: grid; grid-template-columns: 1fr; }
@@ -3642,8 +3644,7 @@ dialog.settings-dialog::backdrop {
   body.active-match-layout .play-app .game-board > .ticket-queue { grid-area: queue; height: 100%; overflow: hidden; }
   body.active-match-layout .play-app .board-center { grid-area: center; }
   body.active-match-layout .play-app .investigation-rail { grid-area: rail; }
-  body.active-match-layout .play-app .board-center { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: 11.5rem minmax(0, 1fr) 8.1rem; height: 100%; max-height: 100%; align-self: stretch; }
-  body.active-match-layout .play-app .game-board--global .board-center { grid-template-rows: 6.9rem minmax(0, 1fr) 7.4rem; }
+  body.active-match-layout .play-app .board-center { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: max-content minmax(0, 1fr) max-content; height: 100%; max-height: 100%; align-self: stretch; }
   body.active-match-layout .play-app .board-center > .ticket-sheet { grid-area: auto; grid-column: 1; grid-row: 1; }
   body.active-match-layout .play-app .board-center > .diagnostic-bench { grid-area: auto; grid-column: 1; grid-row: 2; }
   body.active-match-layout .play-app .board-center > .hand-rail { grid-area: auto; grid-column: 1; grid-row: 3; }
@@ -3652,7 +3653,7 @@ dialog.settings-dialog::backdrop {
   body.active-match-layout .play-app .investigation-rail > .legal-action-panel { grid-area: auto; grid-column: 1; grid-row: 2; }
   body.active-match-layout .play-app .investigation-rail > .basic-actions-panel { grid-area: auto; grid-column: 1; grid-row: 3; }
   body.active-match-layout .play-app .ticket-queue__list { max-height: none; }
-  body.active-match-layout .play-app .ticket-sheet { height: auto; overflow: hidden; }
+  body.active-match-layout .play-app .ticket-sheet { height: auto; padding: 0.55rem; overflow: visible; border-width: 0.28rem; border-radius: 0.85rem; }
   body.active-match-layout .play-app .ticket-sheet__art { aspect-ratio: auto; }
   body.active-match-layout .play-app .intelligence-panel { height: auto; }
   body.active-match-layout .play-app .intelligence-panel > :is(.evidence-panel, .worklog-panel) { max-height: none; }

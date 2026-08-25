@@ -1,5 +1,6 @@
-import { dialogWithRestore, downloadText, escapeHtml, setInlineNotice } from './dom-utils.mjs';
+import { downloadText, escapeHtml, setInlineNotice } from './dom-utils.mjs';
 import { deckCoverage } from './catalog-service.mjs';
+import { closePlayDialog, openPlayDialog, teardownPlayDialogs } from './motion-coordinator.mjs';
 
 let activeDialog = null;
 
@@ -23,7 +24,10 @@ function previewMarkup(preview) {
 }
 
 export function openSettingsDialog(context) {
-  activeDialog?.remove();
+  if (activeDialog) {
+    teardownPlayDialogs(activeDialog);
+    activeDialog.remove();
+  }
   const snapshot = context.refreshSnapshot();
   const settings = snapshot.state.records.settings;
   const activeDeck = snapshot.state.records.decks.decks.find(
@@ -99,7 +103,7 @@ export function openSettingsDialog(context) {
     try {
       context.storage.replaceFromImport(preparedImport, { confirmed: true });
       context.onDataReplaced();
-      dialog.close();
+      closePlayDialog(dialog);
       context.announce('Local data replaced from the validated backup.');
     } catch (error) {
       setInlineNotice(dialog, error.message, 'error');
@@ -111,7 +115,7 @@ export function openSettingsDialog(context) {
     try {
       context.storage.reset({ confirmed: true });
       context.onDataReplaced();
-      dialog.close();
+      closePlayDialog(dialog);
       context.announce('Local data reset to defaults.');
     } catch (error) {
       setInlineNotice(dialog, error.message, 'error');
@@ -119,7 +123,7 @@ export function openSettingsDialog(context) {
   };
 
   const onClick = (event) => {
-    if (event.target.closest('[data-close-settings]')) dialog.close();
+    if (event.target.closest('[data-close-settings]')) closePlayDialog(dialog);
     if (event.target.closest('[data-export-backup]') || event.target.closest('[data-download-current]')) exportCurrent();
     if (event.target.closest('[data-confirm-import]')) replaceImport();
     if (event.target.closest('[data-reset-local]')) resetData();
@@ -139,10 +143,9 @@ export function openSettingsDialog(context) {
   dialog.addEventListener('change', onChange);
   dialog.querySelector('#settings-form').addEventListener('submit', saveSettings);
   dialog.addEventListener('close', cleanup, { once: true });
-  dialogWithRestore(dialog);
-  context.motion('dialog', dialog);
+  openPlayDialog(dialog);
 }
 
-export function closeSettingsDialog() {
-  activeDialog?.close();
+export function closeSettingsDialog(options) {
+  if (activeDialog) closePlayDialog(activeDialog, options);
 }

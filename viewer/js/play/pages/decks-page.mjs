@@ -1,7 +1,7 @@
 import { createCardDetailView, createDeckCardTile } from '../card-view.mjs';
 import { cardFamily, cardName, compactDeckCards, deckComposition, deckCoverage } from '../catalog-service.mjs';
-import { cloneJson, dialogWithRestore, escapeHtml, setInlineNotice } from '../dom-utils.mjs';
-import { closeDialogWithMotion } from '../motion-coordinator.mjs';
+import { cloneJson, escapeHtml, setInlineNotice } from '../dom-utils.mjs';
+import { closePlayDialog, openPlayDialog } from '../motion-coordinator.mjs';
 import { MAX_COPIES_PER_CARD_ID } from '../data/client-data.mjs';
 
 function deckReasons(deck) {
@@ -77,8 +77,7 @@ export function renderDecks(root, context) {
     const dialog = root.querySelector('#deck-card-dialog');
     const content = dialog.querySelector('[data-dialog-content]');
     content.replaceChildren(createCardDetailView(card, { artResolver: context.artResolver }));
-    dialogWithRestore(dialog, opener);
-    context.motion('dialog', dialog);
+    openPlayDialog(dialog, opener);
   };
 
   const onClick = (event) => {
@@ -124,7 +123,7 @@ export function renderDecks(root, context) {
     }
     const inspectButton = event.target.closest('[data-inspect-card]');
     if (inspectButton) inspect(inspectButton.dataset.inspectCard, inspectButton);
-    if (event.target.closest('[data-close-dialog]')) closeDialogWithMotion(root.querySelector('#deck-card-dialog'));
+    if (event.target.closest('[data-close-dialog]')) closePlayDialog(root.querySelector('#deck-card-dialog'));
   };
   root.addEventListener('click', onClick);
   return () => root.removeEventListener('click', onClick);
@@ -218,8 +217,7 @@ export function renderDeckEditor(root, context, deckId) {
         onInspect: ({ cardId }) => {
           const dialog = root.querySelector('#editor-card-dialog');
           dialog.querySelector('[data-dialog-content]').replaceChildren(createCardDetailView(context.catalog.cardById.get(cardId), { artResolver: context.artResolver }));
-          dialogWithRestore(dialog);
-          context.motion('dialog', dialog);
+          openPlayDialog(dialog);
         },
       }));
     }
@@ -259,7 +257,7 @@ export function renderDeckEditor(root, context, deckId) {
     context.rerender();
   };
   const onClick = (event) => {
-    if (event.target.closest('[data-close-dialog]')) closeDialogWithMotion(root.querySelector('#editor-card-dialog'));
+    if (event.target.closest('[data-close-dialog]')) closePlayDialog(root.querySelector('#editor-card-dialog'));
     if (!event.target.closest('#save-deck')) return;
     draft.display_name = root.querySelector('#deck-name').value.trim();
     const errors = deckReasons(draft);

@@ -2,7 +2,7 @@ import { createArtResolver, loadArtManifest } from './art-resolver.mjs';
 import { loadPlayCatalog } from './catalog-service.mjs';
 import { createClientDataContext } from './data/client-data.mjs';
 import { SoloGameSession } from './game-session.mjs';
-import { configureMotion, runMotion } from './motion-coordinator.mjs';
+import { configureMotion, runMotion, teardownPlayDialogs } from './motion-coordinator.mjs';
 import { renderDeckEditor, renderDecks } from './pages/decks-page.mjs';
 import { renderGame } from './pages/game-page.mjs';
 import { renderHome } from './pages/home-page.mjs';
@@ -95,6 +95,7 @@ function playNavigationMarkup() {
 }
 
 function renderShell() {
+  teardownPlayDialogs(root);
   pageCleanup?.();
   pageCleanup = null;
   document.body.classList.toggle('active-match-layout', route?.name === 'game' && Boolean(game?.hasActiveMatch()));
@@ -283,9 +284,10 @@ export function openSettings() {
 }
 
 export function unmountPlay() {
+  teardownPlayDialogs(root);
   pageCleanup?.();
   pageCleanup = null;
-  closeSettingsDialog();
+  closeSettingsDialog({ restoreFocus: false, immediate: true });
   if (game?.hasActiveMatch()) game.endSession();
   game = null;
   pendingStart = null;
