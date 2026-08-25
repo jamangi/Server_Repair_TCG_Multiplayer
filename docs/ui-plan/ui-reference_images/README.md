@@ -1,6 +1,6 @@
 # Gameplay reference images
 
-This folder contains the approved **Night-Shift Operations Desk** visual references: one project-owner-supplied vanilla proof of concept and its screenshot establish the TASK-010 minimum implementation floor; three original AI-generated references establish the desktop, component, and mobile targets; and two later project-owner-supplied studies explore Relevant and Global Diagnostic Bench compositions. Together they communicate composition, material, illustration density, card family grammar, responsive hierarchy, catalog-density alternatives, and achievable browser-native depth.
+This folder contains the approved **Night-Shift Operations Desk** visual references: one project-owner-supplied vanilla proof of concept and its screenshot establish the TASK-010 minimum implementation floor; three original AI-generated references establish the desktop, component, and mobile targets; two later project-owner-supplied studies explore Relevant and Global Diagnostic Bench compositions; and a three-image TASK-016 comparison set records the post-TASK-014 baseline beside refined Global and Relevant layout directions. Together they communicate composition, material, illustration density, card family grammar, responsive hierarchy, catalog-density alternatives, and achievable browser-native depth.
 
 They are not:
 
@@ -122,10 +122,39 @@ Use it for:
 
 Symptoms remain primary observed information even when the reference compresses them. Production should retain a concise symptom or a one-step accessible full-Ticket view. The pictured `50` count is illustrative until all displayed knowledge records have complete playable contracts and outcomes. Global may include the same public-graph Relevant filter and `Why relevant?` paths as the focused view, while making clear that the curated graph is incomplete; it must never infer relevance from hidden truth.
 
+## 06 — TASK-016 board-composition comparison
+
+### Current post-TASK-014 baseline
+
+![Current TASK-016 board baseline](./task-016-current-layout.png)
+
+This capture documents the real starting point for TASK-016. It is not a visual target. Use it to verify that the refinement addresses:
+
+- an oversized active-Match masthead and unused upper-board space;
+- wide Candidate rows and other short controls consuming entire horizontal bands;
+- a Bench and response hand stacked as broad blocks rather than composed with the queue and action rail;
+- a shallow Ticket queue despite unused viewport height; and
+- a Legal Action panel whose controls require scrolling.
+
+### Refined Global direction
+
+![TASK-016 Global Bench layout direction](./task-016-global-bench-layout.png)
+
+Use it for the Global mode's dense, searchable catalog; compact selected-Ticket header; taller queue; center-column response hand; and continuous right rail. The rail separates Evidence/Worklog, the context-sensitive Legal Action, and compact Basic Actions. Treat pictured content as incidental.
+
+### Refined Relevant direction
+
+![TASK-016 Relevant Bench layout direction](./task-016-relevant-bench-layout.png)
+
+Use it for the Relevant mode's split Ticket summary, inline public Candidates, single diagnostic shelf, prominent full-Ticket route, taller queue, compact response hand, and distinct Legal Action and Basic Actions panels. Treat pictured content as incidental.
+
+Across both directions, the profitable lesson is composition rather than gameplay: use horizontal adjacency for short related information, preserve one-step access to detail, and assign bounded overflow only to genuine collections. Do not copy names, counts, costs, outcomes, legality, or hidden-information assumptions from the pixels.
+
 ## Generation provenance
 
 - Minimum reference provenance: project-owner-supplied standalone Server Repair HTML/CSS/JavaScript proof of concept and exact screenshot, added 2026-08-23. The source is committed only as a readable visual reference and is not part of the Viewer runtime.
 - Diagnostic Bench reference provenance: two project-owner-supplied original layout studies, each 1774×887, added 2026-08-24. They are compositional references for PT-001 and TASK-016, not runtime assets or authoritative fixtures.
+- TASK-016 comparison provenance: one project-owner-supplied post-TASK-014 Viewer capture (2535×1291) and two project-owner-supplied layout studies (1672×941), added 2026-08-25. They document a before/Global/Relevant composition comparison, not runtime assets or authoritative fixtures.
 - Mode: built-in image generation, with targeted built-in edit passes.
 - Date: 2026-08-23.
 - Source references: four user-supplied screenshots used only for general layout/aesthetic lessons; not committed.

@@ -6,11 +6,10 @@ Beginning with TASK-011, the displayed task ID includes the recommended reasonin
 
 Active task:
 
-- **None.**
+- [`TASK-016-HIGH: Refine Diagnostic Bench and game-board composition`](TASK-016-refine-diagnostic-bench-board-layout.md) — active; composes the post-TASK-014 board into a full-height queue, view-specific center work surface, continuous Evidence/Legal Action/basic-action rail, compact Ticket summary, and responsive Relevant/Global layouts without changing gameplay.
 
 Active V0 training-ready sequence:
 
-- [`TASK-016-HIGH: Refine Diagnostic Bench and game-board composition`](TASK-016-refine-diagnostic-bench-board-layout.md) — approved and next in sequence; applies the Relevant/Global layouts, compact Ticket, fully visible Legal Action, viewport-aware queue, and responsive visual polish against representative content.
 - [`TASK-015-HIGH: Add guided tutorials and the solo solution-reveal experience`](TASK-015-add-guided-tutorial-and-solution-reveal.md) — approved PT-007 A and blocked on TASK-014 and TASK-016; teaches the final rules through two real seeded engine paths and presents the authoritative PT-005 A Give Up reveal.
 
 Reserved V0 illustration task:
