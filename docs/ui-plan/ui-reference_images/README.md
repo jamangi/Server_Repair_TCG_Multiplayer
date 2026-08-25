@@ -1,6 +1,6 @@
 # Gameplay reference images
 
-This folder contains the approved **Night-Shift Operations Desk** visual references: one project-owner-supplied vanilla proof of concept and its screenshot establish the TASK-010 minimum implementation floor; three original AI-generated references establish the desktop, component, and mobile targets; two later project-owner-supplied studies explore Relevant and Global Diagnostic Bench compositions; and a three-image TASK-016 comparison set records the post-TASK-014 baseline beside refined Global and Relevant layout directions. Together they communicate composition, material, illustration density, card family grammar, responsive hierarchy, catalog-density alternatives, and achievable browser-native depth.
+This folder contains the approved **Night-Shift Operations Desk** visual references: one project-owner-supplied vanilla proof of concept and its screenshot establish the TASK-010 minimum implementation floor; three original AI-generated references establish the desktop, component, and mobile targets; later project-owner-supplied studies explore Relevant and Global Diagnostic Bench compositions; a three-image TASK-016 comparison set records the post-TASK-014 baseline beside refined Global and Relevant layout directions; and two TASK-020 targets refine the shared one-row Bench and spatial response hand. Together they communicate composition, material, illustration density, card family grammar, responsive hierarchy, catalog-density alternatives, and achievable browser-native depth.
 
 They are not:
 
@@ -172,12 +172,29 @@ This is a compact anatomy reference for the UI-002 decision: a collapsed hand ca
 
 The earlier `relevant_diagnostic_bench.png`, `task-016-relevant-bench-layout.png`, and `global_diagnostic_bench.png` remain the richer comparison targets. The fifth post-pass attachment was byte-identical to the existing `global_diagnostic_bench.png`, so it is not duplicated.
 
+## 08 — TASK-020 one-row Bench and spatial-hand targets
+
+### Global one-row direction
+
+![TASK-020 Global one-row Bench and spatial-hand target](./task-020-global-one-row-target.png)
+
+Use it for the approved proportional change: keep Global diagnostics to one readable row, accept additional pages, and give the private response hand enough height for illustrated family/title recognition. Its filter arrangement, six-column shelf, and five hand groups are useful examples, not fixed counts at every viewport.
+
+### Relevant one-row direction
+
+![TASK-020 Relevant one-row Bench and spatial-hand target](./task-020-relevant-one-row-target.png)
+
+Use it for cross-mode parity: Relevant uses the same compact tile scale and one-row shelf as Global rather than doubling tile height. The duplicate Verify Cards illustrate a tactile layered stack with one quantity badge instead of persistent per-instance copy tabs. Underlying Card Instances remain authoritative and deterministic.
+
+Both images are composition targets rather than gameplay fixtures. Do not copy their incidental Card/diagnostic membership, art, costs, quantities, Ticket facts, or filter results. The accepted deterministic TASK-019 captures are the before-state evidence; TASK-020 must compare measured row count, tile geometry, and hand allocation as well as visual comfort.
+
 ## Generation provenance
 
 - Minimum reference provenance: project-owner-supplied standalone Server Repair HTML/CSS/JavaScript proof of concept and exact screenshot, added 2026-08-23. The source is committed only as a readable visual reference and is not part of the Viewer runtime.
 - Diagnostic Bench reference provenance: two project-owner-supplied original layout studies, each 1774×887, added 2026-08-24. They are compositional references for PT-001 and TASK-016, not runtime assets or authoritative fixtures.
 - TASK-016 comparison provenance: one project-owner-supplied post-TASK-014 Viewer capture (2535×1291) and two project-owner-supplied layout studies (1672×941), added 2026-08-25. They document a before/Global/Relevant composition comparison, not runtime assets or authoritative fixtures.
 - TASK-016 post-pass provenance: two project-owner-supplied implementation captures (2543×1291 Relevant and 2551×1293 Global) plus one 1263×95 response-hand composition crop, added 2026-08-25. They are defect/interaction references for TASK-018/TASK-019, not runtime assets or gameplay fixtures. The accompanying modal recording is translated into deterministic reproduction steps in TASK-018 rather than committed as a large binary.
+- TASK-020 target provenance: two project-owner-supplied 1764×892 one-row layout studies, added 2026-08-25. They define proportional and duplicate-stack direction for TASK-020, not exact content, breakpoint counts, or gameplay authority.
 - Mode: built-in image generation, with targeted built-in edit passes.
 - Date: 2026-08-23.
 - Source references: four user-supplied screenshots used only for general layout/aesthetic lessons; not committed.

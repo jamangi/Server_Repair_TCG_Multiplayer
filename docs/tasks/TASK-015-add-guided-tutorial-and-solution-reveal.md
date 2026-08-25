@@ -2,7 +2,7 @@
 
 ## Status
 
-**Approved scope — ready after TASK-019.** PT-007 A and the prerequisite PT-005 A reveal behavior were approved by the project owner on 2026-08-24. TASK-013, TASK-014, TASK-016, corrective TASK-018, and TASK-019 are complete. Tutorial overlays may now bind to the finalized diagnostic tiles, adaptive response hand, Inspect routes, and responsive geometry.
+**Approved scope — queued after TASK-020.** PT-007 A and the prerequisite PT-005 A reveal behavior were approved by the project owner on 2026-08-24. TASK-013, TASK-014, TASK-016, corrective TASK-018, and TASK-019 are complete. TASK-020 must first normalize the one-row Bench and spatial response hand so tutorial overlays bind to the final controls and responsive geometry only once.
 
 ## Approved authority
 
@@ -18,7 +18,7 @@ Tutorials are not substitutes for tests. They demonstrate the real engine path; 
 
 Read completely before editing:
 
-- `AGENTS.md`, root `README.md`, this task, `docs/tasks/INDEX.md`, and completed TASK-012 through TASK-014 plus TASK-016, TASK-018, and TASK-019;
+- `AGENTS.md`, root `README.md`, this task, `docs/tasks/INDEX.md`, and completed TASK-012 through TASK-014 plus TASK-016, TASK-018, TASK-019, and TASK-020;
 - the approved rules/profile, Ticket/Card/Knowledge/Event/projection schemas, and solution-reveal contract;
 - the final playable catalog, coverage matrix, seeded Ticket provenance, and automated-game paths;
 - all solo Play pages/session/Worker/motion/accessibility modules and TASK-010 visual references;

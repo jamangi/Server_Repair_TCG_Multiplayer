@@ -6,11 +6,11 @@ Beginning with TASK-011, the displayed task ID includes the recommended reasonin
 
 Active task:
 
-- [`TASK-015-HIGH: Add guided tutorials and the solo solution-reveal experience`](TASK-015-add-guided-tutorial-and-solution-reveal.md) — approved PT-007 A and unblocked by TASK-019; tutorials can bind to the finalized Bench tiles, response-hand controls, Inspect routes, and responsive geometry.
+- [`TASK-020-HIGH: Normalize the one-row Bench and spatial response hand`](TASK-020-normalize-one-row-bench-and-response-hand.md) — approved presentation refinement; give Relevant and Global the same compact one-row diagnostic shelf, convert duplicate-copy tabs into an instance-safe visual stack, and spend the recovered height on a readable resting hand before tutorial overlays bind to the board.
 
 Queued V0 training-ready sequence:
 
-- No additional task is queued behind TASK-015 in the current V0 training-ready sequence.
+- [`TASK-015-HIGH: Add guided tutorials and the solo solution-reveal experience`](TASK-015-add-guided-tutorial-and-solution-reveal.md) — approved PT-007 A; queued after TASK-020 so semantic highlights bind once to the final Bench/hand geometry.
 
 Reserved V0 illustration task:
 
@@ -20,7 +20,7 @@ Approved but deferred V2 task:
 
 - [`TASK-017-XHIGH: Create the Server Repair V2 Migration Seed`](TASK-017-create-server-repair-v2-migration-seed.md) — approved Migration Seed direction but deferred until the V0 product is training-ready; when reactivated, it audits V0 in bounded checkpoints and establishes the public dependency-inference V2 foundation without modifying V0 behavior.
 
-TASK-012-HIGH through TASK-014-XHIGH, TASK-016-HIGH, TASK-018-HIGH, and TASK-019-HIGH are complete. TASK-015-HIGH is the remaining training-ready task. TASK-011-HIGH may proceed where asset integration permits. Return to TASK-017-XHIGH only when the project owner reactivates V2 migration.
+TASK-012-HIGH through TASK-014-XHIGH, TASK-016-HIGH, TASK-018-HIGH, and TASK-019-HIGH are complete. TASK-020-HIGH is the active proportional UI refinement; TASK-015-HIGH follows as the remaining training-ready feature task. TASK-011-HIGH may proceed where asset integration permits. Return to TASK-017-XHIGH only when the project owner reactivates V2 migration.
 
 Completed documentation and research tasks:
 
