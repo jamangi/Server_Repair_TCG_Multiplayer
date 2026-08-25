@@ -138,7 +138,11 @@ async function startSolo(page, count = 3) {
 
 async function submitAndWait(page, intentId) {
   const before = await page.evaluate(() => window.__task012WorkerMessages.length);
-  await page.locator(`[data-intent-id="${intentId}"]`).click();
+  const projectedAction = page.locator(`[data-intent-id="${intentId}"]`);
+  if (!await projectedAction.isVisible() && await page.getByRole('button', { name: 'View full Ticket' }).isVisible()) {
+    await page.getByRole('button', { name: 'View full Ticket' }).click();
+  }
+  await projectedAction.click();
   await expect.poll(() => page.evaluate(() => window.__task012WorkerMessages.length)).toBeGreaterThan(before);
 }
 
@@ -278,8 +282,8 @@ test('real sequential editing and IME composition preserve Library and deck-sear
   await expect(page.getByRole('button', { name: /^Remove one / }).first()).toBeFocused();
 });
 
-test('desktop same-route updates retain semantic Ticket scroll and accepted cross-Ticket results', async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name !== DESKTOP, 'The selected Ticket is an internal vertical scroll surface at the desktop layout.');
+test('desktop compact Ticket and full-detail workflow retain accepted cross-Ticket results', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== DESKTOP, 'The selected Ticket is compact at the desktop layout.');
   await installWorkerProbe(page);
   await openRoute(page, '#/play/home');
   await startSolo(page, 3);
@@ -287,32 +291,23 @@ test('desktop same-route updates retain semantic Ticket scroll and accepted cros
 
   const firstTicketId = await page.locator('.ticket-card[aria-current="true"]').getAttribute('data-ticket-id');
   const sheet = page.locator('.ticket-sheet');
-  const firstSheetScroll = await setScroll(sheet, { top: 120 });
-  expect(firstSheetScroll.maximumTop).toBeGreaterThan(120);
-  let rememberedFirst = firstSheetScroll.top;
-
-  await page.getByRole('tab', { name: 'Evidence' }).click();
-  expectNear((await scrollPosition(sheet)).top, rememberedFirst);
-
-  const hypothesis = page.locator('.basic-action--hypothesis').first();
-  if (await hypothesis.count()) {
-    await hypothesis.scrollIntoViewIfNeeded();
-    rememberedFirst = (await scrollPosition(sheet)).top;
-    const before = await page.evaluate(() => window.__task012WorkerMessages.length);
-    await hypothesis.click();
-    await expect.poll(() => page.evaluate(() => window.__task012WorkerMessages.length)).toBeGreaterThan(before);
-    expectNear((await scrollPosition(page.locator('.ticket-sheet'))).top, rememberedFirst);
-  }
+  expect(await sheet.evaluate((element) => element.scrollHeight - element.clientHeight)).toBeLessThanOrEqual(2);
+  const fullTicketButton = page.getByRole('button', { name: 'View full Ticket' });
+  await fullTicketButton.click();
+  const fullTicket = page.locator('#full-ticket-dialog');
+  await expect(fullTicket).toBeVisible();
+  expect(await fullTicket.locator('.candidate-row').count()).toBeGreaterThan(0);
+  await fullTicket.getByRole('button', { name: 'Close full Ticket' }).click();
+  await expect(fullTicketButton).toBeFocused();
 
   const secondTicketId = await page.locator('.ticket-card').evaluateAll((tickets, selectedId) => tickets
     .map((ticket) => ticket.dataset.ticketId).find((ticketId) => ticketId !== selectedId), firstTicketId);
   await page.locator(`[data-ticket-id="${secondTicketId}"]`).click();
-  const secondSheetScroll = await setScroll(page.locator('.ticket-sheet'), { top: 64 });
-  expect(secondSheetScroll.maximumTop).toBeGreaterThan(64);
+  await page.getByRole('button', { name: 'View full Ticket' }).click();
+  await expect(page.locator('#full-ticket-dialog .ticket-code')).toContainText(secondTicketId);
+  await page.getByRole('button', { name: 'Close full Ticket' }).click();
   await page.locator(`[data-ticket-id="${firstTicketId}"]`).click();
-  expectNear((await scrollPosition(page.locator('.ticket-sheet'))).top, rememberedFirst);
   await page.locator(`[data-ticket-id="${secondTicketId}"]`).click();
-  expectNear((await scrollPosition(page.locator('.ticket-sheet'))).top, secondSheetScroll.top);
 
   const latest = await advanceUntilHeldResponseIsLegal(page);
   const projection = latest.projection;

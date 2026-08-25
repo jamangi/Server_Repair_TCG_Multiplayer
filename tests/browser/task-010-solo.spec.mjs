@@ -307,7 +307,11 @@ async function submitProjectedIntent(page, intent, mode) {
     else await select.selectOption(intent.intent_id);
     await activate(page, page.locator('[data-submit-search]'), mode);
   } else {
-    await activate(page, page.locator(`[data-intent-id="${intent.intent_id}"]`), mode);
+    const projectedAction = page.locator(`[data-intent-id="${intent.intent_id}"]`);
+    if (!await projectedAction.isVisible() && await page.getByRole('button', { name: 'View full Ticket' }).isVisible()) {
+      await activate(page, page.getByRole('button', { name: 'View full Ticket' }), mode);
+    }
+    await activate(page, projectedAction, mode);
   }
 }
 
@@ -730,7 +734,9 @@ test('touch-pointer drag captures, cancels safely, and submits one opaque projec
     });
   });
   await installWorkerProbe(page, 10);
-  await page.setViewportSize({ width: 1024, height: 3000 });
+  // Keep both the queue target and private hand in the synthetic pointer-test viewport.
+  // TASK-016 intentionally places Evidence and the Bench between those regions on tablet.
+  await page.setViewportSize({ width: 1024, height: 6000 });
   await openRoute(page, '#/play/home');
   await page.locator('#settings-trigger').click();
   await page.locator('#settings-drag').check();
@@ -849,12 +855,12 @@ test('ten-Ticket queues maximize distinct fingerprints, prevent duplicate submis
   await directIntent.evaluate((button) => { button.click(); button.click(); });
   await expect.poll(() => page.evaluate(() => window.__soloMessagesToWorker.filter((message) => message.type === 'SUBMIT_INTENT').length)).toBe(outboundBefore + 1);
 
-  await activateWithDialog(page, page.getByRole('link', { name: 'Home', exact: true }), {
+  await activateWithDialog(page, page.getByRole('link', { name: 'Server Repair home' }), {
     accept: false,
     message: 'Leave this active Match',
   });
   await expect(page.getByRole('heading', { name: 'Night-shift board' })).toBeVisible();
-  await activateWithDialog(page, page.getByRole('link', { name: 'Home', exact: true }), { accept: true });
+  await activateWithDialog(page, page.getByRole('link', { name: 'Server Repair home' }), { accept: true });
   await expect(page.getByRole('heading', { name: 'Take the next repair queue' })).toBeVisible();
   expect(errors).toEqual([]);
 });

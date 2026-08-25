@@ -13,6 +13,7 @@ export class SoloGameSession {
     this.benchTypeFilter = 'ALL';
     this.benchCategory = 'ALL';
     this.benchRelevantOnly = false;
+    this.benchRunnableOnly = false;
     this.benchSort = 'NAME';
     this.benchPage = 1;
     this.panelTab = 'evidence';

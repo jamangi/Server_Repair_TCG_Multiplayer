@@ -2,7 +2,7 @@
 
 ## Status
 
-**Active — TASK-012, TASK-013, and TASK-014 prerequisites are complete.** This is the dedicated whole-board density, responsive-composition, and visual-polish pass before TASK-015 tutorial overlays depend on final control locations.
+**Complete — 2026-08-25.** The final whole-board density, responsive-composition, and visual-polish pass is implemented and verified; TASK-015 may depend on these stable control locations.
 
 ## Objective
 
@@ -142,3 +142,43 @@ Do not change diagnostic availability, rules, costs, outcomes, Builder content, 
 ## Completion boundary
 
 Complete only when both approved Bench View layouts are polished against representative final data; switching/filtering is comfortable, explainable, and state-safe; the board uses its horizontal and vertical space deliberately rather than stacking avoidably wide blocks; primary desktop troubleshooting controls fit the agreed viewports without document scrolling; Legal Action and Basic Actions are distinct and fully visible; unavoidable collection overflow is bounded and understandable; Ticket/Legal Action/queue improvements remain responsive and accessible; TASK-012 continuity is preserved; and no client-side rule inference or authoritative-state mutation was introduced.
+
+## Completion record — 2026-08-25
+
+### Outcome
+
+- Replaced the stacked active-Match page with an explicit full-height desktop queue, view-specific center work surface, and continuous intelligence/Legal Action/Basic Actions rail. The masthead compacts during play, and 16:9, 16:10, and 1366×768 references retain every primary panel without document-level scrolling.
+- Added a persistent Ticket summary with symptom, status, inline Candidate state, and one-step `View full Ticket` dialog. The dialog retains authorized IDs, symptoms, machine revisions, hypotheses, eliminations, Isolation, and documentation controls with focus restoration.
+- Rebuilt Relevant as a six-item relationship shelf and Global as an eight-item searchable, category-filtered, deterministically sorted, paginated catalog. Relevant and projection-derived Runnable filters, selection, query, sort, page, and Ticket continuity remain DOM-local presentation state and never alter legal intents.
+- Separated the private response hand, selected-item Legal Action, and always-visible Search/Refresh/Give Up/Pass controls. Target, cost, Inspect/Run, resolving, last-result routing, and cross-Ticket behavior remain sourced from authoritative projections.
+- Strengthened CONFIRM/SUPPORT Evidence hierarchy while keeping Accepted Isolation as the only visible Repair gate; unsupported Isolation remains generic. Archived Tickets are collapsed and counted, 1–10 active Tickets use bounded queue overflow, and drag remains optional with click/touch/keyboard equivalence.
+- Reordered tablet/phone surfaces into queue, Ticket, intelligence, Bench, hand, Legal Action, and sticky Basic Actions. Added 44 px touch, reduced-motion, landmark, live-region, dialog-focus, duplicate-ID, bounded-DOM, and no-horizontal-overflow coverage.
+
+### Verification
+
+| Command | Exit | Result |
+| --- | ---: | --- |
+| `node viewer/scripts/build-play-assets.mjs`; `node viewer/scripts/verify-play-assets.mjs` | 0 | 40 deterministic Play assets staged and verified |
+| `node --check viewer/js/app.js`; `node --check viewer/js/data-loader.js`; `node --check viewer/js/entity-types.js` | 0 | baseline Viewer syntax passed |
+| `node --test tests/viewer-baseline.test.mjs` | 0 | 3 passed, 0 failed |
+| `node --test tests/*.test.mjs` | 0 | 119 passed, 0 failed, 0 skipped |
+| `node tools/run-automated-games.mjs --verify-report automated_games/task-009-foundation-v1` | 0 | 22 frozen rows verified with 0 deterministic mismatches |
+| `node tools/run-task-014-campaign.mjs --verify-report automated_games/task-014-playable-coverage-v3` | 0 | 13 expanded-content rows verified with 0 deterministic mismatches |
+| Playwright TASK-016 browser/visual matrix | 0 | 7 passed, 0 failed, 13 intentional project skips |
+| Complete Playwright browser matrix | 0 | 29 passed, 0 failed, 47 intentional project skips |
+| `git diff --check` | 0 | no whitespace errors |
+
+### Visual captures
+
+- Relevant short-laptop: 1366×768, three active Tickets, six relationship-filtered diagnostics.
+- Global desktop: 1366×768, three Tickets, page 2 of the 50-item catalog with search/category/sort/Relevant/Runnable controls.
+- Tablet: 1024×768 viewport with full-page responsive hierarchy capture.
+- Phone and reduced motion: 390×844 viewport with full-page responsive hierarchy captures.
+
+### Changed-file inventory
+
+Changes stay within the task allowlist: the game-page/session/shell presentation modules; Play CSS; TASK-010/TASK-012/TASK-013 compatibility regressions; the new TASK-016 browser matrix and five accepted visual captures; task/index completion documentation. Generated Play assets were rebuilt and verified but remained byte-identical.
+
+### Unresolved items
+
+None. TASK-015 is now unblocked; guided tutorial scripting was not started in this task.

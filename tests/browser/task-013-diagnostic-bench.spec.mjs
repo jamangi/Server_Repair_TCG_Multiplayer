@@ -50,9 +50,9 @@ test('Relevant and Global organize one Bench without authority changes and Give 
 
   await page.locator('[data-bench-search]').fill('smartctl');
   await expect(page.locator('.diagnostic-tile')).toHaveCount(1);
-  await expect(page.locator('.diagnostic-bench__count')).toContainText('Showing 1 result');
+  await expect(page.locator('.diagnostic-bench__count')).toContainText('Showing 1–1 of 1');
   await page.locator('.diagnostic-tile button[data-select-diagnostic]').click();
-  await expect(page.locator('.selected-card-actions')).toContainText('Persistent Diagnostic Bench item');
+  await expect(page.locator('.selected-card-actions')).toContainText('COMMAND');
   await expect(page.locator('.selected-card-actions')).toContainText('1 Action');
   const run = page.locator('.selected-card-actions [data-intent-id]').first();
   const messagesBeforeRun = await page.evaluate(() => window.__task013WorkerMessages.length);
@@ -66,7 +66,7 @@ test('Relevant and Global organize one Bench without authority changes and Give 
   expect(resolved.events.some((event) => event.event_type === 'EVIDENCE_CREATED')).toBe(true);
   expect(resolved.projection.view.diagnostic_bench).toHaveLength(50);
 
-  const giveUp = page.getByRole('button', { name: 'Give Up Ticket' });
+  const giveUp = page.getByRole('button', { name: 'Give Up', exact: true });
   const dialogPromise = page.waitForEvent('dialog');
   const giveUpClick = giveUp.click();
   const dialog = await dialogPromise;

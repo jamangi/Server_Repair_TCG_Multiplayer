@@ -97,6 +97,7 @@ function playNavigationMarkup() {
 function renderShell() {
   pageCleanup?.();
   pageCleanup = null;
+  document.body.classList.toggle('active-match-layout', route?.name === 'game' && Boolean(game?.hasActiveMatch()));
   root.innerHTML = `<div class="play-shell">${playNavigationMarkup()}<div id="play-page"></div></div>`;
   pageRoot = root.querySelector('#play-page');
   const snapshot = freshSnapshot();
@@ -291,6 +292,7 @@ export function unmountPlay() {
   gameStartInitiated = false;
   root?.classList.remove('play-app');
   root?.removeAttribute('data-motion');
+  document.body.classList.remove('active-match-layout');
   root = null;
   route = null;
   pageRoot = null;
