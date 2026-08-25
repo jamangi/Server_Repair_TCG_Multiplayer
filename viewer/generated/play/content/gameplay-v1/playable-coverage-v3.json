@@ -1,0 +1,848 @@
+{
+  "coverage_version": "playable-coverage-v3",
+  "part_catalog_version": "ticket-parts-v1",
+  "ticket_content_version": "core-ticket-parts-v3",
+  "domain_content_version": "core-domain-snapshot-v2",
+  "card_catalog_version": "core-card-catalog-coverage-v3",
+  "source_manifest_files": [
+    "./core-v0.1-case-study-gaps.json",
+    "./core-v0.1-components.json",
+    "./core-v0.1-diagnostics.json",
+    "./core-v0.1-fault-graph.json",
+    "./core-v0.1-faults.json",
+    "./core-v0.1-post-market-bench.json",
+    "./core-v0.1-protocols.json",
+    "./core-v0.1-repairs-validations.json",
+    "./core-v0.1-symptoms.json"
+  ],
+  "inventory": {
+    "knowledge_records": 257,
+    "action_bearing_records": 107,
+    "tests": 37,
+    "commands": 13,
+    "repairs": 35,
+    "validations": 22,
+    "promoted_diagnostics": 50,
+    "selected_repairs": 12,
+    "selected_validations": 9,
+    "playable_card_definitions": 71,
+    "supported_fingerprints": 12,
+    "records_by_entity_type": {
+      "command": 13,
+      "component": 25,
+      "fault": 42,
+      "fault_causal_edge": 17,
+      "protocol": 20,
+      "repair_procedure": 35,
+      "symptom": 33,
+      "test": 37,
+      "tool": 13,
+      "validation_procedure": 22
+    }
+  },
+  "selected_action_definition_ids": [
+    "command.ipmi.sel_elist",
+    "command.linux.dhclient",
+    "command.linux.dmesg",
+    "command.linux.ethtool",
+    "command.linux.free_h",
+    "command.linux.ip_addr",
+    "command.linux.ip_route",
+    "command.linux.journalctl",
+    "command.linux.lsblk",
+    "command.linux.lspci",
+    "command.linux.nvme_smart_log",
+    "command.linux.smartctl",
+    "command.network.ping",
+    "repair.boot.correct_order",
+    "repair.memory.replace_dimm",
+    "repair.memory.reseat_dimm",
+    "repair.network.correct_static_ip",
+    "repair.network.replace_cable",
+    "repair.power.replace_psu",
+    "repair.power.reseat_psu",
+    "repair.storage.replace_nvme",
+    "repair.storage.replace_raid_member",
+    "repair.storage.reseat_cable",
+    "repair.thermal.clean_cooling_path",
+    "repair.thermal.replace_fan",
+    "test.boot.device_inventory",
+    "test.boot.post_code_analysis",
+    "test.boot.post_observation",
+    "test.compute.socket_magnified_inspection",
+    "test.cooling.location_cross_substitution",
+    "test.electrical.continuity",
+    "test.firmware.settings_review",
+    "test.firmware.version_compatibility",
+    "test.general.minimum_configuration",
+    "test.general.visual_inspection",
+    "test.management.bmc_recovery_state",
+    "test.management.event_log_freshness",
+    "test.memory.diagnostic",
+    "test.memory.known_good_substitution",
+    "test.memory.single_dimm_isolation",
+    "test.network.cable_substitution",
+    "test.network.dhcp_pool_audit",
+    "test.network.dhcp_transaction_trace",
+    "test.network.interface_config",
+    "test.network.link",
+    "test.network.link_counter_soak",
+    "test.network.ping",
+    "test.pcie.inventory",
+    "test.power.distribution_path_isolation",
+    "test.power.known_good_psu",
+    "test.power.output_voltage_measurement",
+    "test.power.psu_status",
+    "test.power.residual_power_drain",
+    "test.storage.bay_path_isolation",
+    "test.storage.device_inventory",
+    "test.storage.drive_health",
+    "test.storage.predictive_health",
+    "test.storage.raid_status",
+    "test.system.bmc_logs",
+    "test.system.controlled_stress",
+    "test.thermal.fan_telemetry",
+    "test.thermal.temperature_monitoring",
+    "verify.boot.normal_boot",
+    "verify.memory.full_test",
+    "verify.memory.inventory",
+    "verify.network.connectivity",
+    "verify.network.link",
+    "verify.power.stable",
+    "verify.storage.device_detected",
+    "verify.storage.raid_healthy",
+    "verify.thermal.load_test"
+  ],
+  "deferred_action_definition_ids": [
+    "repair.board.replace_rtc_battery",
+    "repair.board.replace_system_board",
+    "repair.boot.repair_bootloader",
+    "repair.compute.restore_socket_contacts",
+    "repair.cooling.repair_fan_connector",
+    "repair.firmware.restore_compatible_versions",
+    "repair.firmware.restore_settings",
+    "repair.management.clear_stale_alert_state",
+    "repair.management.recover_bmc_firmware",
+    "repair.memory.correct_population",
+    "repair.network.clear_stale_dhcp_reservations",
+    "repair.network.reconnect_cable",
+    "repair.network.replace_nic",
+    "repair.pcie.reseat_card",
+    "repair.power.reconnect_input",
+    "repair.power.replace_distribution_board",
+    "repair.storage.backup_rebuild_restore",
+    "repair.storage.rebuild_array",
+    "repair.storage.replace_backplane",
+    "repair.storage.replace_cable",
+    "repair.storage.replace_predictive_drive",
+    "repair.storage.replace_raid_controller",
+    "repair.thermal.restore_heatsink_contact",
+    "verify.boot.post",
+    "verify.compute.socket_path",
+    "verify.cooling.fan_sense_path",
+    "verify.firmware.compatible_persistent",
+    "verify.firmware.settings_persist",
+    "verify.management.alert_does_not_recur",
+    "verify.management.bmc_functional",
+    "verify.network.dhcp_lease",
+    "verify.pcie.device_present",
+    "verify.power.distribution_path",
+    "verify.storage.backplane_path",
+    "verify.storage.predictive_replacement",
+    "verify.system.burn_in"
+  ],
+  "diagnostic_definition_ids": [
+    "card.bench.command.ipmi.sel_elist",
+    "card.bench.command.linux.dhclient",
+    "card.bench.command.linux.dmesg",
+    "card.bench.command.linux.ethtool",
+    "card.bench.command.linux.free_h",
+    "card.bench.command.linux.ip_addr",
+    "card.bench.command.linux.ip_route",
+    "card.bench.command.linux.journalctl",
+    "card.bench.command.linux.lsblk",
+    "card.bench.command.linux.lspci",
+    "card.bench.command.linux.nvme_smart_log",
+    "card.bench.command.linux.smartctl",
+    "card.bench.command.network.ping",
+    "card.bench.test.boot.device_inventory",
+    "card.bench.test.boot.post_code_analysis",
+    "card.bench.test.boot.post_observation",
+    "card.bench.test.compute.socket_magnified_inspection",
+    "card.bench.test.cooling.location_cross_substitution",
+    "card.bench.test.electrical.continuity",
+    "card.bench.test.firmware.settings_review",
+    "card.bench.test.firmware.version_compatibility",
+    "card.bench.test.general.minimum_configuration",
+    "card.bench.test.general.visual_inspection",
+    "card.bench.test.management.bmc_recovery_state",
+    "card.bench.test.management.event_log_freshness",
+    "card.bench.test.memory.diagnostic",
+    "card.bench.test.memory.known_good_substitution",
+    "card.bench.test.memory.single_dimm_isolation",
+    "card.bench.test.network.cable_substitution",
+    "card.bench.test.network.dhcp_pool_audit",
+    "card.bench.test.network.dhcp_transaction_trace",
+    "card.bench.test.network.interface_config",
+    "card.bench.test.network.link",
+    "card.bench.test.network.link_counter_soak",
+    "card.bench.test.network.ping",
+    "card.bench.test.pcie.inventory",
+    "card.bench.test.power.distribution_path_isolation",
+    "card.bench.test.power.known_good_psu",
+    "card.bench.test.power.output_voltage_measurement",
+    "card.bench.test.power.psu_status",
+    "card.bench.test.power.residual_power_drain",
+    "card.bench.test.storage.bay_path_isolation",
+    "card.bench.test.storage.device_inventory",
+    "card.bench.test.storage.drive_health",
+    "card.bench.test.storage.predictive_health",
+    "card.bench.test.storage.raid_status",
+    "card.bench.test.system.bmc_logs",
+    "card.bench.test.system.controlled_stress",
+    "card.bench.test.thermal.fan_telemetry",
+    "card.bench.test.thermal.temperature_monitoring"
+  ],
+  "outcome_families": [
+    {
+      "part_id": "outcome_family.clean.v1",
+      "classification": "CLEAN",
+      "public_summary": "The diagnostic completed cleanly and produced no candidate-changing finding in this machine state."
+    },
+    {
+      "part_id": "outcome_family.unrelated.v1",
+      "classification": "IRRELEVANT",
+      "public_summary": "The diagnostic completed but produced no finding relevant to this Ticket."
+    },
+    {
+      "part_id": "outcome_family.inconclusive.v1",
+      "classification": "INCONCLUSIVE",
+      "public_summary": "The diagnostic completed, but the observation is inconclusive for the current candidates."
+    }
+  ],
+  "fingerprints": [
+    {
+      "fingerprint_id": "fingerprint.storage.loose_cable",
+      "subsystem": "storage",
+      "part_ids": [
+        "truth.storage.loose_cable.v1",
+        "context.storage.io_errors.v1",
+        "candidate_pool.public_relationships.v1",
+        "diagnostics.storage.loose_cable.v1",
+        "isolation.storage.loose_cable.v1",
+        "repair_plan.storage.loose_cable.v1",
+        "verify_plan.storage.detected.v1",
+        "teaching.storage.v1",
+        "closure.complete_path.v1"
+      ],
+      "symptom_ids": [
+        "symptom.storage.io_errors"
+      ],
+      "public_candidate_fault_ids": [
+        "fault.storage.backplane.path_failed",
+        "fault.storage.cable.failed",
+        "fault.storage.cable.loose",
+        "fault.storage.nvme.device_failed",
+        "fault.storage.sas.drive_failed"
+      ],
+      "actionable_fault_ids": [
+        "fault.storage.cable.loose"
+      ],
+      "causal_edge_ids": [],
+      "machine_state_keys": [
+        "machine.storage.loose_cable.active",
+        "machine.storage.loose_cable.active.repaired"
+      ],
+      "diagnostic_source_ids": [
+        "test.general.visual_inspection",
+        "test.storage.device_inventory"
+      ],
+      "isolation_route_kinds": [
+        "CORROBORATED_SUPPORT"
+      ],
+      "repair_procedure_ids": [
+        "repair.storage.reseat_cable"
+      ],
+      "validation_procedure_ids": [
+        "verify.storage.device_detected"
+      ],
+      "required_response_card_definition_ids": [
+        "card.response.repair.storage.reseat_cable",
+        "card.response.verify.storage.device_detected"
+      ],
+      "closure": "accepted Isolation + cited decisive Evidence + necessary Repair + all current passing Verifies"
+    },
+    {
+      "fingerprint_id": "fingerprint.storage.failed_sas_member",
+      "subsystem": "storage",
+      "part_ids": [
+        "truth.storage.failed_sas_member.v1",
+        "context.storage.raid_degraded.v1",
+        "candidate_pool.public_relationships.v1",
+        "diagnostics.storage.failed_sas_member.v1",
+        "isolation.storage.failed_sas_member.v1",
+        "repair_plan.storage.failed_sas_member.v1",
+        "verify_plan.storage.raid_healthy.v1",
+        "teaching.storage.v1",
+        "closure.complete_path.v1"
+      ],
+      "symptom_ids": [
+        "symptom.storage.raid_degraded"
+      ],
+      "public_candidate_fault_ids": [
+        "fault.storage.raid.degraded",
+        "fault.storage.sas.drive_failed",
+        "fault.storage.sata.drive_failed"
+      ],
+      "actionable_fault_ids": [
+        "fault.storage.sas.drive_failed"
+      ],
+      "causal_edge_ids": [
+        "edge.storage.sas_to_degraded"
+      ],
+      "machine_state_keys": [
+        "machine.storage.failed_sas_member.active",
+        "machine.storage.failed_sas_member.active.repaired"
+      ],
+      "diagnostic_source_ids": [
+        "command.linux.smartctl",
+        "test.storage.drive_health",
+        "test.storage.raid_status"
+      ],
+      "isolation_route_kinds": [
+        "CORROBORATED_SUPPORT",
+        "DEFINITIVE_DIAGNOSTIC"
+      ],
+      "repair_procedure_ids": [
+        "repair.storage.replace_raid_member"
+      ],
+      "validation_procedure_ids": [
+        "verify.storage.raid_healthy"
+      ],
+      "required_response_card_definition_ids": [
+        "card.response.repair.storage.replace_raid_member",
+        "card.response.verify.storage.raid_healthy"
+      ],
+      "closure": "accepted Isolation + cited decisive Evidence + necessary Repair + all current passing Verifies"
+    },
+    {
+      "fingerprint_id": "fingerprint.memory.unseated_dimm",
+      "subsystem": "memory",
+      "part_ids": [
+        "truth.memory.unseated_dimm.v1",
+        "context.memory.reduced_capacity.v1",
+        "candidate_pool.public_relationships.v1",
+        "diagnostics.memory.unseated_dimm.v1",
+        "isolation.memory.unseated_dimm.v1",
+        "repair_plan.memory.unseated_dimm.v1",
+        "verify_plan.memory.inventory_and_test.v1",
+        "teaching.memory.v1",
+        "closure.complete_path.v1"
+      ],
+      "symptom_ids": [
+        "symptom.boot.memory_warning"
+      ],
+      "public_candidate_fault_ids": [
+        "fault.memory.channel.unavailable",
+        "fault.memory.dimm.not_seated",
+        "fault.memory.population.invalid"
+      ],
+      "actionable_fault_ids": [
+        "fault.memory.dimm.not_seated"
+      ],
+      "causal_edge_ids": [
+        "edge.memory.dimm_to_channel"
+      ],
+      "machine_state_keys": [
+        "machine.memory.unseated_dimm.active",
+        "machine.memory.unseated_dimm.active.repaired"
+      ],
+      "diagnostic_source_ids": [
+        "test.general.visual_inspection",
+        "test.memory.single_dimm_isolation"
+      ],
+      "isolation_route_kinds": [
+        "DEFINITIVE_DIAGNOSTIC"
+      ],
+      "repair_procedure_ids": [
+        "repair.memory.reseat_dimm"
+      ],
+      "validation_procedure_ids": [
+        "verify.memory.inventory",
+        "verify.memory.full_test"
+      ],
+      "required_response_card_definition_ids": [
+        "card.response.repair.memory.reseat_dimm",
+        "card.response.verify.memory.inventory",
+        "card.response.verify.memory.full_test"
+      ],
+      "closure": "accepted Isolation + cited decisive Evidence + necessary Repair + all current passing Verifies"
+    },
+    {
+      "fingerprint_id": "fingerprint.memory.failed_dimm",
+      "subsystem": "memory",
+      "part_ids": [
+        "truth.memory.failed_dimm.v1",
+        "context.memory.intermittent_crash.v1",
+        "candidate_pool.public_relationships.v1",
+        "diagnostics.memory.failed_dimm.v1",
+        "isolation.memory.failed_dimm.v1",
+        "repair_plan.memory.failed_dimm.v1",
+        "verify_plan.memory.full_test.v1",
+        "teaching.memory.v1",
+        "closure.complete_path.v1"
+      ],
+      "symptom_ids": [
+        "symptom.system.intermittent_crash"
+      ],
+      "public_candidate_fault_ids": [
+        "fault.memory.dimm.failed",
+        "fault.system.intermittent_memory_instability"
+      ],
+      "actionable_fault_ids": [
+        "fault.memory.dimm.failed"
+      ],
+      "causal_edge_ids": [
+        "edge.memory.failed_to_instability"
+      ],
+      "machine_state_keys": [
+        "machine.memory.failed_dimm.active",
+        "machine.memory.failed_dimm.active.repaired"
+      ],
+      "diagnostic_source_ids": [
+        "test.memory.diagnostic",
+        "test.memory.single_dimm_isolation",
+        "test.system.bmc_logs"
+      ],
+      "isolation_route_kinds": [
+        "CORROBORATED_SUPPORT",
+        "DEFINITIVE_DIAGNOSTIC"
+      ],
+      "repair_procedure_ids": [
+        "repair.memory.replace_dimm"
+      ],
+      "validation_procedure_ids": [
+        "verify.memory.full_test"
+      ],
+      "required_response_card_definition_ids": [
+        "card.response.repair.memory.replace_dimm",
+        "card.response.verify.memory.full_test"
+      ],
+      "closure": "accepted Isolation + cited decisive Evidence + necessary Repair + all current passing Verifies"
+    },
+    {
+      "fingerprint_id": "fingerprint.power.unseated_psu",
+      "subsystem": "power",
+      "part_ids": [
+        "truth.power.unseated_psu.v1",
+        "context.power.redundancy_unseated.v1",
+        "candidate_pool.public_relationships.v1",
+        "diagnostics.power.unseated_psu.v1",
+        "isolation.power.unseated_psu.v1",
+        "repair_plan.power.unseated_psu.v1",
+        "verify_plan.power.stable_unseated.v1",
+        "teaching.power.v1",
+        "closure.complete_path.v1"
+      ],
+      "symptom_ids": [
+        "symptom.power.redundancy_warning"
+      ],
+      "public_candidate_fault_ids": [
+        "fault.power.input.cable_loose",
+        "fault.power.psu.failed",
+        "fault.power.psu.not_seated"
+      ],
+      "actionable_fault_ids": [
+        "fault.power.psu.not_seated"
+      ],
+      "causal_edge_ids": [],
+      "machine_state_keys": [
+        "machine.power.unseated_psu.active",
+        "machine.power.unseated_psu.active.repaired"
+      ],
+      "diagnostic_source_ids": [
+        "test.general.visual_inspection",
+        "test.power.psu_status"
+      ],
+      "isolation_route_kinds": [
+        "CORROBORATED_SUPPORT"
+      ],
+      "repair_procedure_ids": [
+        "repair.power.reseat_psu"
+      ],
+      "validation_procedure_ids": [
+        "verify.power.stable"
+      ],
+      "required_response_card_definition_ids": [
+        "card.response.repair.power.reseat_psu",
+        "card.response.verify.power.stable"
+      ],
+      "closure": "accepted Isolation + cited decisive Evidence + necessary Repair + all current passing Verifies"
+    },
+    {
+      "fingerprint_id": "fingerprint.power.failed_psu",
+      "subsystem": "power",
+      "part_ids": [
+        "truth.power.failed_psu.v1",
+        "context.power.redundancy_failed.v1",
+        "candidate_pool.public_relationships.v1",
+        "diagnostics.power.failed_psu.v1",
+        "isolation.power.failed_psu.v1",
+        "repair_plan.power.failed_psu.v1",
+        "verify_plan.power.stable_failed.v1",
+        "teaching.power.v1",
+        "closure.complete_path.v1"
+      ],
+      "symptom_ids": [
+        "symptom.power.redundancy_warning"
+      ],
+      "public_candidate_fault_ids": [
+        "fault.power.input.cable_loose",
+        "fault.power.psu.failed",
+        "fault.power.psu.not_seated"
+      ],
+      "actionable_fault_ids": [
+        "fault.power.psu.failed"
+      ],
+      "causal_edge_ids": [],
+      "machine_state_keys": [
+        "machine.power.failed_psu.active",
+        "machine.power.failed_psu.active.repaired"
+      ],
+      "diagnostic_source_ids": [
+        "test.power.known_good_psu",
+        "test.power.output_voltage_measurement",
+        "test.power.psu_status"
+      ],
+      "isolation_route_kinds": [
+        "CORROBORATED_SUPPORT",
+        "DEFINITIVE_DIAGNOSTIC"
+      ],
+      "repair_procedure_ids": [
+        "repair.power.replace_psu"
+      ],
+      "validation_procedure_ids": [
+        "verify.power.stable"
+      ],
+      "required_response_card_definition_ids": [
+        "card.response.repair.power.replace_psu",
+        "card.response.verify.power.stable"
+      ],
+      "closure": "accepted Isolation + cited decisive Evidence + necessary Repair + all current passing Verifies"
+    },
+    {
+      "fingerprint_id": "fingerprint.boot.incorrect_order",
+      "subsystem": "boot",
+      "part_ids": [
+        "truth.boot.incorrect_order.v1",
+        "context.boot.wrong_device.v1",
+        "candidate_pool.public_relationships.v1",
+        "diagnostics.boot.incorrect_order.v1",
+        "isolation.boot.incorrect_order.v1",
+        "repair_plan.boot.incorrect_order.v1",
+        "verify_plan.boot.normal_order.v1",
+        "teaching.boot.v1",
+        "closure.complete_path.v1"
+      ],
+      "symptom_ids": [
+        "symptom.boot.wrong_device"
+      ],
+      "public_candidate_fault_ids": [
+        "fault.boot.order.incorrect",
+        "fault.firmware.config.reset"
+      ],
+      "actionable_fault_ids": [
+        "fault.boot.order.incorrect"
+      ],
+      "causal_edge_ids": [],
+      "machine_state_keys": [
+        "machine.boot.incorrect_order.active",
+        "machine.boot.incorrect_order.active.repaired"
+      ],
+      "diagnostic_source_ids": [
+        "test.boot.device_inventory",
+        "test.firmware.settings_review"
+      ],
+      "isolation_route_kinds": [
+        "CORROBORATED_SUPPORT"
+      ],
+      "repair_procedure_ids": [
+        "repair.boot.correct_order"
+      ],
+      "validation_procedure_ids": [
+        "verify.boot.normal_boot"
+      ],
+      "required_response_card_definition_ids": [
+        "card.response.repair.boot.correct_order",
+        "card.response.verify.boot.normal_boot"
+      ],
+      "closure": "accepted Isolation + cited decisive Evidence + necessary Repair + all current passing Verifies"
+    },
+    {
+      "fingerprint_id": "fingerprint.boot.missing_nvme",
+      "subsystem": "boot",
+      "part_ids": [
+        "truth.boot.missing_nvme.v1",
+        "context.boot.no_device.v1",
+        "candidate_pool.public_relationships.v1",
+        "diagnostics.boot.missing_nvme.v1",
+        "isolation.boot.missing_nvme.v1",
+        "repair_plan.boot.missing_nvme.v1",
+        "verify_plan.boot.nvme_detected.v1",
+        "teaching.boot.v1",
+        "closure.complete_path.v1"
+      ],
+      "symptom_ids": [
+        "symptom.boot.no_boot_device"
+      ],
+      "public_candidate_fault_ids": [
+        "fault.boot.device.not_detected",
+        "fault.boot.order.incorrect",
+        "fault.storage.cable.loose",
+        "fault.storage.nvme.device_failed",
+        "fault.storage.raid.controller_failed"
+      ],
+      "actionable_fault_ids": [
+        "fault.storage.nvme.device_failed"
+      ],
+      "causal_edge_ids": [
+        "edge.storage.nvme_to_boot_missing"
+      ],
+      "machine_state_keys": [
+        "machine.boot.missing_nvme.active",
+        "machine.boot.missing_nvme.active.repaired"
+      ],
+      "diagnostic_source_ids": [
+        "test.boot.device_inventory",
+        "test.storage.device_inventory",
+        "test.system.bmc_logs"
+      ],
+      "isolation_route_kinds": [
+        "DEFINITIVE_DIAGNOSTIC"
+      ],
+      "repair_procedure_ids": [
+        "repair.storage.replace_nvme"
+      ],
+      "validation_procedure_ids": [
+        "verify.storage.device_detected",
+        "verify.boot.normal_boot"
+      ],
+      "required_response_card_definition_ids": [
+        "card.response.repair.storage.replace_nvme",
+        "card.response.verify.storage.device_detected",
+        "card.response.verify.boot.normal_boot"
+      ],
+      "closure": "accepted Isolation + cited decisive Evidence + necessary Repair + all current passing Verifies"
+    },
+    {
+      "fingerprint_id": "fingerprint.thermal.failed_fan",
+      "subsystem": "thermal",
+      "part_ids": [
+        "truth.thermal.failed_fan.v1",
+        "context.thermal.high_temp_fan.v1",
+        "candidate_pool.public_relationships.v1",
+        "diagnostics.thermal.failed_fan.v1",
+        "isolation.thermal.failed_fan.v1",
+        "repair_plan.thermal.failed_fan.v1",
+        "verify_plan.thermal.fan_load.v1",
+        "teaching.thermal.v1",
+        "closure.complete_path.v1"
+      ],
+      "symptom_ids": [
+        "symptom.thermal.high_cpu_temp"
+      ],
+      "public_candidate_fault_ids": [
+        "fault.thermal.cpu.overheating",
+        "fault.thermal.fan.failed",
+        "fault.thermal.heatsink.clogged",
+        "fault.thermal.heatsink.contact_poor"
+      ],
+      "actionable_fault_ids": [
+        "fault.thermal.fan.failed"
+      ],
+      "causal_edge_ids": [
+        "edge.thermal.fan_to_overheat"
+      ],
+      "machine_state_keys": [
+        "machine.thermal.failed_fan.active",
+        "machine.thermal.failed_fan.active.repaired"
+      ],
+      "diagnostic_source_ids": [
+        "test.cooling.location_cross_substitution",
+        "test.thermal.fan_telemetry"
+      ],
+      "isolation_route_kinds": [
+        "DEFINITIVE_DIAGNOSTIC"
+      ],
+      "repair_procedure_ids": [
+        "repair.thermal.replace_fan"
+      ],
+      "validation_procedure_ids": [
+        "verify.thermal.load_test"
+      ],
+      "required_response_card_definition_ids": [
+        "card.response.repair.thermal.replace_fan",
+        "card.response.verify.thermal.load_test"
+      ],
+      "closure": "accepted Isolation + cited decisive Evidence + necessary Repair + all current passing Verifies"
+    },
+    {
+      "fingerprint_id": "fingerprint.thermal.clogged_heatsink",
+      "subsystem": "thermal",
+      "part_ids": [
+        "truth.thermal.clogged_heatsink.v1",
+        "context.thermal.high_temp_clog.v1",
+        "candidate_pool.public_relationships.v1",
+        "diagnostics.thermal.clogged_heatsink.v1",
+        "isolation.thermal.clogged_heatsink.v1",
+        "repair_plan.thermal.clogged_heatsink.v1",
+        "verify_plan.thermal.clog_load.v1",
+        "teaching.thermal.v1",
+        "closure.complete_path.v1"
+      ],
+      "symptom_ids": [
+        "symptom.thermal.high_cpu_temp"
+      ],
+      "public_candidate_fault_ids": [
+        "fault.thermal.cpu.overheating",
+        "fault.thermal.fan.failed",
+        "fault.thermal.heatsink.clogged",
+        "fault.thermal.heatsink.contact_poor"
+      ],
+      "actionable_fault_ids": [
+        "fault.thermal.heatsink.clogged"
+      ],
+      "causal_edge_ids": [
+        "edge.thermal.clog_to_overheat"
+      ],
+      "machine_state_keys": [
+        "machine.thermal.clogged_heatsink.active",
+        "machine.thermal.clogged_heatsink.active.repaired"
+      ],
+      "diagnostic_source_ids": [
+        "test.general.visual_inspection",
+        "test.thermal.temperature_monitoring"
+      ],
+      "isolation_route_kinds": [
+        "DEFINITIVE_DIAGNOSTIC"
+      ],
+      "repair_procedure_ids": [
+        "repair.thermal.clean_cooling_path"
+      ],
+      "validation_procedure_ids": [
+        "verify.thermal.load_test"
+      ],
+      "required_response_card_definition_ids": [
+        "card.response.repair.thermal.clean_cooling_path",
+        "card.response.verify.thermal.load_test"
+      ],
+      "closure": "accepted Isolation + cited decisive Evidence + necessary Repair + all current passing Verifies"
+    },
+    {
+      "fingerprint_id": "fingerprint.network.failed_cable",
+      "subsystem": "network",
+      "part_ids": [
+        "truth.network.failed_cable.v1",
+        "context.network.no_connectivity_cable.v1",
+        "candidate_pool.public_relationships.v1",
+        "diagnostics.network.failed_cable.v1",
+        "isolation.network.failed_cable.v1",
+        "repair_plan.network.failed_cable.v1",
+        "verify_plan.network.link_connectivity.v1",
+        "teaching.network.v1",
+        "closure.complete_path.v1"
+      ],
+      "symptom_ids": [
+        "symptom.network.no_connectivity"
+      ],
+      "public_candidate_fault_ids": [
+        "fault.network.cable.disconnected",
+        "fault.network.cable.failed",
+        "fault.network.dhcp.no_lease",
+        "fault.network.ip.static_incorrect",
+        "fault.network.nic.failed"
+      ],
+      "actionable_fault_ids": [
+        "fault.network.cable.failed"
+      ],
+      "causal_edge_ids": [
+        "edge.network.bad_cable_to_dhcp"
+      ],
+      "machine_state_keys": [
+        "machine.network.failed_cable.active",
+        "machine.network.failed_cable.active.repaired"
+      ],
+      "diagnostic_source_ids": [
+        "test.network.cable_substitution",
+        "test.network.link"
+      ],
+      "isolation_route_kinds": [
+        "DEFINITIVE_DIAGNOSTIC"
+      ],
+      "repair_procedure_ids": [
+        "repair.network.replace_cable"
+      ],
+      "validation_procedure_ids": [
+        "verify.network.link",
+        "verify.network.connectivity"
+      ],
+      "required_response_card_definition_ids": [
+        "card.response.repair.network.replace_cable",
+        "card.response.verify.network.link",
+        "card.response.verify.network.connectivity"
+      ],
+      "closure": "accepted Isolation + cited decisive Evidence + necessary Repair + all current passing Verifies"
+    },
+    {
+      "fingerprint_id": "fingerprint.network.incorrect_static_ip",
+      "subsystem": "network",
+      "part_ids": [
+        "truth.network.incorrect_static_ip.v1",
+        "context.network.no_connectivity_static.v1",
+        "candidate_pool.public_relationships.v1",
+        "diagnostics.network.incorrect_static_ip.v1",
+        "isolation.network.incorrect_static_ip.v1",
+        "repair_plan.network.incorrect_static_ip.v1",
+        "verify_plan.network.connectivity.v1",
+        "teaching.network.v1",
+        "closure.complete_path.v1"
+      ],
+      "symptom_ids": [
+        "symptom.network.no_connectivity"
+      ],
+      "public_candidate_fault_ids": [
+        "fault.network.cable.disconnected",
+        "fault.network.cable.failed",
+        "fault.network.dhcp.no_lease",
+        "fault.network.ip.static_incorrect",
+        "fault.network.nic.failed"
+      ],
+      "actionable_fault_ids": [
+        "fault.network.ip.static_incorrect"
+      ],
+      "causal_edge_ids": [],
+      "machine_state_keys": [
+        "machine.network.incorrect_static_ip.active",
+        "machine.network.incorrect_static_ip.active.repaired"
+      ],
+      "diagnostic_source_ids": [
+        "test.network.interface_config",
+        "test.network.ping"
+      ],
+      "isolation_route_kinds": [
+        "DEFINITIVE_DIAGNOSTIC"
+      ],
+      "repair_procedure_ids": [
+        "repair.network.correct_static_ip"
+      ],
+      "validation_procedure_ids": [
+        "verify.network.connectivity"
+      ],
+      "required_response_card_definition_ids": [
+        "card.response.repair.network.correct_static_ip",
+        "card.response.verify.network.connectivity"
+      ],
+      "closure": "accepted Isolation + cited decisive Evidence + necessary Repair + all current passing Verifies"
+    }
+  ]
+}

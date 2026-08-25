@@ -1,0 +1,4655 @@
+{
+  "card_catalog_version": "core-card-catalog-coverage-v3",
+  "domain_content_version": "core-domain-snapshot-v2",
+  "ruleset_version": "first-version-v2",
+  "global_bench_version": "global-bench-v1",
+  "cards": [
+    {
+      "id": "card.bench.command.ipmi.sel_elist",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "List Detailed IPMI System Events",
+        "short_description": "Reads detailed System Event Log entries through a compatible IPMI interface."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "command",
+          "global_bench",
+          "ipmi"
+        ]
+      },
+      "card_type": "command",
+      "archetypes": [
+        "global_bench",
+        "ipmi"
+      ],
+      "cost": 1,
+      "tags": [
+        "command",
+        "diagnostic",
+        "ipmi"
+      ],
+      "rules_text": "Run command.ipmi.sel_elist on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "command.ipmi.sel_elist",
+        "entity_type": "command",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "component.chassis.diagnostics",
+          "entity_type": "component",
+          "role": "subject"
+        },
+        {
+          "entity_id": "component.management.bmc",
+          "entity_type": "component",
+          "role": "subject"
+        },
+        {
+          "entity_id": "test.management.event_log_freshness",
+          "entity_type": "test",
+          "role": "reference"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "command.ipmi.sel_elist",
+        "source_entity_type": "command",
+        "target_spec": {
+          "target_kind": "TICKET_COMPONENT",
+          "allowed_component_definition_ids": [
+            "component.chassis.diagnostics",
+            "component.management.bmc"
+          ]
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "command.ipmi.sel_elist"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Reading a log is non-destructive. Preserve relevant entries before clearing any management state.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.command.linux.dhclient",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "dhclient Lease Request",
+        "short_description": "Releases or requests a DHCP lease and can display the client transaction in verbose mode."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "command",
+          "global_bench",
+          "linux"
+        ]
+      },
+      "card_type": "command",
+      "archetypes": [
+        "global_bench",
+        "linux"
+      ],
+      "cost": 1,
+      "tags": [
+        "command",
+        "diagnostic",
+        "linux"
+      ],
+      "rules_text": "Run command.linux.dhclient on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "command.linux.dhclient",
+        "entity_type": "command",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "component.network.nic",
+          "entity_type": "component",
+          "role": "subject"
+        },
+        {
+          "entity_id": "test.network.dhcp_transaction_trace",
+          "entity_type": "test",
+          "role": "reference"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "command.linux.dhclient",
+        "source_entity_type": "command",
+        "target_spec": {
+          "target_kind": "TICKET_COMPONENT",
+          "allowed_component_definition_ids": [
+            "component.network.nic"
+          ]
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "command.linux.dhclient"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Command syntax and direct-server options vary by client version; preserve the exact command and output in the work record.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.command.linux.dmesg",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "dmesg",
+        "short_description": "Inspect kernel messages."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "command",
+          "global_bench",
+          "linux"
+        ]
+      },
+      "card_type": "command",
+      "archetypes": [
+        "global_bench",
+        "linux"
+      ],
+      "cost": 1,
+      "tags": [
+        "command",
+        "diagnostic",
+        "linux"
+      ],
+      "rules_text": "Run command.linux.dmesg on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "command.linux.dmesg",
+        "entity_type": "command",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "command.linux.dmesg",
+        "source_entity_type": "command",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET",
+          "allowed_component_definition_ids": []
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "command.linux.dmesg"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Inspect kernel messages.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.command.linux.ethtool",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "ethtool",
+        "short_description": "Inspect Ethernet link and adapter settings."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "command",
+          "global_bench",
+          "linux"
+        ]
+      },
+      "card_type": "command",
+      "archetypes": [
+        "global_bench",
+        "linux"
+      ],
+      "cost": 1,
+      "tags": [
+        "command",
+        "diagnostic",
+        "linux"
+      ],
+      "rules_text": "Run command.linux.ethtool on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "command.linux.ethtool",
+        "entity_type": "command",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "command.linux.ethtool",
+        "source_entity_type": "command",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET",
+          "allowed_component_definition_ids": []
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "command.linux.ethtool"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Inspect Ethernet link and adapter settings.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.command.linux.free_h",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "free -h",
+        "short_description": "Display memory usage."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "command",
+          "global_bench",
+          "linux"
+        ]
+      },
+      "card_type": "command",
+      "archetypes": [
+        "global_bench",
+        "linux"
+      ],
+      "cost": 1,
+      "tags": [
+        "command",
+        "diagnostic",
+        "linux"
+      ],
+      "rules_text": "Run command.linux.free_h on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "command.linux.free_h",
+        "entity_type": "command",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "command.linux.free_h",
+        "source_entity_type": "command",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET",
+          "allowed_component_definition_ids": []
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "command.linux.free_h"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Display memory usage.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.command.linux.ip_addr",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "ip addr",
+        "short_description": "Inspect interfaces and addresses."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "command",
+          "global_bench",
+          "linux"
+        ]
+      },
+      "card_type": "command",
+      "archetypes": [
+        "global_bench",
+        "linux"
+      ],
+      "cost": 1,
+      "tags": [
+        "command",
+        "diagnostic",
+        "linux"
+      ],
+      "rules_text": "Run command.linux.ip_addr on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "command.linux.ip_addr",
+        "entity_type": "command",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "test.network.interface_config",
+          "entity_type": "test",
+          "role": "reference"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "command.linux.ip_addr",
+        "source_entity_type": "command",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET",
+          "allowed_component_definition_ids": []
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "command.linux.ip_addr"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Inspect interfaces and addresses.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.command.linux.ip_route",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "ip route",
+        "short_description": "Inspect routing and default gateway."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "command",
+          "global_bench",
+          "linux"
+        ]
+      },
+      "card_type": "command",
+      "archetypes": [
+        "global_bench",
+        "linux"
+      ],
+      "cost": 1,
+      "tags": [
+        "command",
+        "diagnostic",
+        "linux"
+      ],
+      "rules_text": "Run command.linux.ip_route on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "command.linux.ip_route",
+        "entity_type": "command",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "test.network.interface_config",
+          "entity_type": "test",
+          "role": "reference"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "command.linux.ip_route",
+        "source_entity_type": "command",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET",
+          "allowed_component_definition_ids": []
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "command.linux.ip_route"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Inspect routing and default gateway.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.command.linux.journalctl",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "journalctl",
+        "short_description": "Inspect system journal logs."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "command",
+          "global_bench",
+          "linux"
+        ]
+      },
+      "card_type": "command",
+      "archetypes": [
+        "global_bench",
+        "linux"
+      ],
+      "cost": 1,
+      "tags": [
+        "command",
+        "diagnostic",
+        "linux"
+      ],
+      "rules_text": "Run command.linux.journalctl on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "command.linux.journalctl",
+        "entity_type": "command",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "command.linux.journalctl",
+        "source_entity_type": "command",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET",
+          "allowed_component_definition_ids": []
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "command.linux.journalctl"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Inspect system journal logs.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.command.linux.lsblk",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "lsblk",
+        "short_description": "List block devices."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "command",
+          "global_bench",
+          "linux"
+        ]
+      },
+      "card_type": "command",
+      "archetypes": [
+        "global_bench",
+        "linux"
+      ],
+      "cost": 1,
+      "tags": [
+        "command",
+        "diagnostic",
+        "linux"
+      ],
+      "rules_text": "Run command.linux.lsblk on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "command.linux.lsblk",
+        "entity_type": "command",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "test.storage.device_inventory",
+          "entity_type": "test",
+          "role": "reference"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "command.linux.lsblk",
+        "source_entity_type": "command",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET",
+          "allowed_component_definition_ids": []
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "command.linux.lsblk"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "List block devices.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.command.linux.lspci",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "lspci",
+        "short_description": "List PCI/PCIe devices."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "command",
+          "global_bench",
+          "linux"
+        ]
+      },
+      "card_type": "command",
+      "archetypes": [
+        "global_bench",
+        "linux"
+      ],
+      "cost": 1,
+      "tags": [
+        "command",
+        "diagnostic",
+        "linux"
+      ],
+      "rules_text": "Run command.linux.lspci on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "command.linux.lspci",
+        "entity_type": "command",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "test.pcie.inventory",
+          "entity_type": "test",
+          "role": "reference"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "command.linux.lspci",
+        "source_entity_type": "command",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET",
+          "allowed_component_definition_ids": []
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "command.linux.lspci"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "List PCI/PCIe devices.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.command.linux.nvme_smart_log",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Read NVMe Health Log",
+        "short_description": "Reads critical warnings, media errors, temperature, and endurance from an NVMe device."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "command",
+          "global_bench",
+          "linux"
+        ]
+      },
+      "card_type": "command",
+      "archetypes": [
+        "global_bench",
+        "linux"
+      ],
+      "cost": 1,
+      "tags": [
+        "command",
+        "diagnostic",
+        "linux"
+      ],
+      "rules_text": "Run command.linux.nvme_smart_log on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "command.linux.nvme_smart_log",
+        "entity_type": "command",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "component.storage.nvme_ssd",
+          "entity_type": "component",
+          "role": "subject"
+        },
+        {
+          "entity_id": "component.storage.sas_hdd",
+          "entity_type": "component",
+          "role": "subject"
+        },
+        {
+          "entity_id": "component.storage.sata_ssd",
+          "entity_type": "component",
+          "role": "subject"
+        },
+        {
+          "entity_id": "test.storage.predictive_health",
+          "entity_type": "test",
+          "role": "reference"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "command.linux.nvme_smart_log",
+        "source_entity_type": "command",
+        "target_spec": {
+          "target_kind": "TICKET_COMPONENT",
+          "allowed_component_definition_ids": [
+            "component.storage.nvme_ssd",
+            "component.storage.sas_hdd",
+            "component.storage.sata_ssd"
+          ]
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "command.linux.nvme_smart_log"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Interpret the log with the device and platform documentation; capture it before replacing the drive.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.command.linux.smartctl",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "smartctl",
+        "short_description": "Inspect supported drive health data."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "command",
+          "global_bench",
+          "linux"
+        ]
+      },
+      "card_type": "command",
+      "archetypes": [
+        "global_bench",
+        "linux"
+      ],
+      "cost": 1,
+      "tags": [
+        "command",
+        "diagnostic",
+        "linux"
+      ],
+      "rules_text": "Run command.linux.smartctl on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "command.linux.smartctl",
+        "entity_type": "command",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "test.storage.drive_health",
+          "entity_type": "test",
+          "role": "reference"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "command.linux.smartctl",
+        "source_entity_type": "command",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET",
+          "allowed_component_definition_ids": []
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "command.linux.smartctl"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Inspect supported drive health data.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.command.network.ping",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "ping",
+        "short_description": "Test IP reachability."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "command",
+          "global_bench",
+          "network"
+        ]
+      },
+      "card_type": "command",
+      "archetypes": [
+        "global_bench",
+        "network"
+      ],
+      "cost": 1,
+      "tags": [
+        "command",
+        "diagnostic",
+        "network"
+      ],
+      "rules_text": "Run command.network.ping on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "command.network.ping",
+        "entity_type": "command",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "test.network.ping",
+          "entity_type": "test",
+          "role": "reference"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "command.network.ping",
+        "source_entity_type": "command",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET",
+          "allowed_component_definition_ids": []
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "command.network.ping"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Test IP reachability.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.test.boot.device_inventory",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Firmware Boot Device Inventory",
+        "short_description": "Firmware Boot Device Inventory gathers troubleshooting evidence."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "boot",
+          "global_bench",
+          "test"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "boot",
+        "global_bench"
+      ],
+      "cost": 1,
+      "tags": [
+        "boot",
+        "diagnostic",
+        "test"
+      ],
+      "rules_text": "Run test.boot.device_inventory on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.boot.device_inventory",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.boot.device_inventory",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET",
+          "allowed_component_definition_ids": []
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.boot.device_inventory"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.test.boot.post_code_analysis",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "POST Code Analysis",
+        "short_description": "POST Code Analysis gathers troubleshooting evidence."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "boot",
+          "global_bench",
+          "test"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "boot",
+        "global_bench"
+      ],
+      "cost": 1,
+      "tags": [
+        "boot",
+        "diagnostic",
+        "test"
+      ],
+      "rules_text": "Run test.boot.post_code_analysis on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.boot.post_code_analysis",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.boot.post_code_analysis",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET",
+          "allowed_component_definition_ids": []
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.boot.post_code_analysis"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.test.boot.post_observation",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "POST Observation",
+        "short_description": "POST Observation gathers troubleshooting evidence."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "boot",
+          "global_bench",
+          "test"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "boot",
+        "global_bench"
+      ],
+      "cost": 0,
+      "tags": [
+        "boot",
+        "diagnostic",
+        "test"
+      ],
+      "rules_text": "Run test.boot.post_observation on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.boot.post_observation",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.boot.post_observation",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET",
+          "allowed_component_definition_ids": []
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.boot.post_observation"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.test.compute.socket_magnified_inspection",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Magnified CPU Socket Inspection",
+        "short_description": "Inspects socket contact alignment, contamination, damage, and mounting evidence under controlled magnification."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "compute",
+          "global_bench",
+          "test"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "compute",
+        "global_bench"
+      ],
+      "cost": 1,
+      "tags": [
+        "compute",
+        "diagnostic",
+        "test"
+      ],
+      "rules_text": "Run test.compute.socket_magnified_inspection on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.compute.socket_magnified_inspection",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "component.compute.cpu_socket",
+          "entity_type": "component",
+          "role": "subject"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.compute.socket_magnified_inspection",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "TICKET_COMPONENT",
+          "allowed_component_definition_ids": [
+            "component.compute.cpu_socket"
+          ]
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.compute.socket_magnified_inspection"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Compare the uniform contact pattern from multiple angles and do not touch contacts during an inspection-only Test.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.test.cooling.location_cross_substitution",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Fan-to-Location Cross-Substitution",
+        "short_description": "Temporarily swaps compatible fans to determine whether a telemetry fault follows the fan or stays at its connector."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "cooling",
+          "global_bench",
+          "test"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "cooling",
+        "global_bench"
+      ],
+      "cost": 2,
+      "tags": [
+        "cooling",
+        "diagnostic",
+        "test"
+      ],
+      "rules_text": "Run test.cooling.location_cross_substitution on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.cooling.location_cross_substitution",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "component.cooling.fan",
+          "entity_type": "component",
+          "role": "subject"
+        },
+        {
+          "entity_id": "component.cooling.fan_connector",
+          "entity_type": "component",
+          "role": "subject"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.cooling.location_cross_substitution",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "TICKET_COMPONENT",
+          "allowed_component_definition_ids": [
+            "component.cooling.fan",
+            "component.cooling.fan_connector"
+          ]
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.cooling.location_cross_substitution"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "This is a diagnostic substitution, not a permanent replacement. Restore the authored machine state after the comparison.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.test.electrical.continuity",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Continuity Test",
+        "short_description": "Continuity Test gathers troubleshooting evidence."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "electrical",
+          "global_bench",
+          "test"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "electrical",
+        "global_bench"
+      ],
+      "cost": 1,
+      "tags": [
+        "diagnostic",
+        "electrical",
+        "test"
+      ],
+      "rules_text": "Run test.electrical.continuity on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.electrical.continuity",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.electrical.continuity",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET",
+          "allowed_component_definition_ids": []
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.electrical.continuity"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.test.firmware.settings_review",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Firmware Settings Review",
+        "short_description": "Firmware Settings Review gathers troubleshooting evidence."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "firmware",
+          "global_bench",
+          "test"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "firmware",
+        "global_bench"
+      ],
+      "cost": 1,
+      "tags": [
+        "diagnostic",
+        "firmware",
+        "test"
+      ],
+      "rules_text": "Run test.firmware.settings_review on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.firmware.settings_review",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.firmware.settings_review",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET",
+          "allowed_component_definition_ids": []
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.firmware.settings_review"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.test.firmware.version_compatibility",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Firmware Version Compatibility Review",
+        "short_description": "Compares BIOS, BMC, storage, network, and device firmware against an approved compatible baseline."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "firmware",
+          "global_bench",
+          "test"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "firmware",
+        "global_bench"
+      ],
+      "cost": 1,
+      "tags": [
+        "diagnostic",
+        "firmware",
+        "test"
+      ],
+      "rules_text": "Run test.firmware.version_compatibility on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.firmware.version_compatibility",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "component.board.system",
+          "entity_type": "component",
+          "role": "subject"
+        },
+        {
+          "entity_id": "component.management.bmc",
+          "entity_type": "component",
+          "role": "subject"
+        },
+        {
+          "entity_id": "component.network.nic",
+          "entity_type": "component",
+          "role": "subject"
+        },
+        {
+          "entity_id": "component.storage.raid_controller",
+          "entity_type": "component",
+          "role": "subject"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.firmware.version_compatibility",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "TICKET_COMPONENT",
+          "allowed_component_definition_ids": [
+            "component.board.system",
+            "component.management.bmc",
+            "component.network.nic",
+            "component.storage.raid_controller"
+          ]
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.firmware.version_compatibility"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Newest is not automatically safest; use the platform dependency order, release notes, and recovery plan.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.test.general.minimum_configuration",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Minimum Configuration Test",
+        "short_description": "Minimum Configuration Test gathers troubleshooting evidence."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "general",
+          "global_bench",
+          "test"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "general",
+        "global_bench"
+      ],
+      "cost": 2,
+      "tags": [
+        "diagnostic",
+        "general",
+        "test"
+      ],
+      "rules_text": "Run test.general.minimum_configuration on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.general.minimum_configuration",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.general.minimum_configuration",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET",
+          "allowed_component_definition_ids": []
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.general.minimum_configuration"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.test.general.visual_inspection",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Visual Inspection",
+        "short_description": "Visual Inspection gathers troubleshooting evidence."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "general",
+          "global_bench",
+          "test"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "general",
+        "global_bench"
+      ],
+      "cost": 0,
+      "tags": [
+        "diagnostic",
+        "general",
+        "test"
+      ],
+      "rules_text": "Run test.general.visual_inspection on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.general.visual_inspection",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.general.visual_inspection",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET",
+          "allowed_component_definition_ids": []
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.general.visual_inspection"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.test.management.bmc_recovery_state",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "BMC Recovery-State Test",
+        "short_description": "Determines whether the management controller is reachable, resettable, in recovery mode, or unrecoverable."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "global_bench",
+          "management",
+          "test"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "global_bench",
+        "management"
+      ],
+      "cost": 2,
+      "tags": [
+        "diagnostic",
+        "management",
+        "test"
+      ],
+      "rules_text": "Run test.management.bmc_recovery_state on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.management.bmc_recovery_state",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "component.management.bmc",
+          "entity_type": "component",
+          "role": "subject"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.management.bmc_recovery_state",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "TICKET_COMPONENT",
+          "allowed_component_definition_ids": [
+            "component.management.bmc"
+          ]
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.management.bmc_recovery_state"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Test reachability and approved recovery paths before treating the entire system board as failed.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.test.management.event_log_freshness",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Event Log Freshness Test",
+        "short_description": "Preserves current logs, refreshes management state, and checks whether the target alert returns under the complaint conditions."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "global_bench",
+          "management",
+          "test"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "global_bench",
+        "management"
+      ],
+      "cost": 1,
+      "tags": [
+        "diagnostic",
+        "management",
+        "test"
+      ],
+      "rules_text": "Run test.management.event_log_freshness on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.management.event_log_freshness",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "component.chassis.diagnostics",
+          "entity_type": "component",
+          "role": "subject"
+        },
+        {
+          "entity_id": "component.management.bmc",
+          "entity_type": "component",
+          "role": "subject"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.management.event_log_freshness",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "TICKET_COMPONENT",
+          "allowed_component_definition_ids": [
+            "component.chassis.diagnostics",
+            "component.management.bmc"
+          ]
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.management.event_log_freshness"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Preserve evidence before clearing. A cleared display alone is not proof; the relevant machine state must be exercised again.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.test.memory.diagnostic",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Memory Diagnostic",
+        "short_description": "Memory Diagnostic gathers troubleshooting evidence."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "global_bench",
+          "memory",
+          "test"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "global_bench",
+        "memory"
+      ],
+      "cost": 1,
+      "tags": [
+        "diagnostic",
+        "memory",
+        "test"
+      ],
+      "rules_text": "Run test.memory.diagnostic on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.memory.diagnostic",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.memory.diagnostic",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET",
+          "allowed_component_definition_ids": []
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.memory.diagnostic"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.test.memory.known_good_substitution",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Known-Good DIMM Substitution",
+        "short_description": "Known-Good DIMM Substitution gathers troubleshooting evidence."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "global_bench",
+          "memory",
+          "test"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "global_bench",
+        "memory"
+      ],
+      "cost": 2,
+      "tags": [
+        "diagnostic",
+        "memory",
+        "test"
+      ],
+      "rules_text": "Run test.memory.known_good_substitution on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.memory.known_good_substitution",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.memory.known_good_substitution",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET",
+          "allowed_component_definition_ids": []
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.memory.known_good_substitution"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.test.memory.single_dimm_isolation",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Single-DIMM Isolation",
+        "short_description": "Single-DIMM Isolation gathers troubleshooting evidence."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "global_bench",
+          "memory",
+          "test"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "global_bench",
+        "memory"
+      ],
+      "cost": 2,
+      "tags": [
+        "diagnostic",
+        "memory",
+        "test"
+      ],
+      "rules_text": "Run test.memory.single_dimm_isolation on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.memory.single_dimm_isolation",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.memory.single_dimm_isolation",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET",
+          "allowed_component_definition_ids": []
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.memory.single_dimm_isolation"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.test.network.cable_substitution",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Known-Good Ethernet Cable Test",
+        "short_description": "Known-Good Ethernet Cable Test gathers troubleshooting evidence."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "global_bench",
+          "network",
+          "test"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "global_bench",
+        "network"
+      ],
+      "cost": 1,
+      "tags": [
+        "diagnostic",
+        "network",
+        "test"
+      ],
+      "rules_text": "Run test.network.cable_substitution on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.network.cable_substitution",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.network.cable_substitution",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET",
+          "allowed_component_definition_ids": []
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.network.cable_substitution"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.test.network.dhcp_pool_audit",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "DHCP Address Pool Audit",
+        "short_description": "Inspects free-address capacity, active leases, exclusions, and stale reservations on the DHCP service."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "global_bench",
+          "network",
+          "test"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "global_bench",
+        "network"
+      ],
+      "cost": 1,
+      "tags": [
+        "diagnostic",
+        "network",
+        "test"
+      ],
+      "rules_text": "Run test.network.dhcp_pool_audit on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.network.dhcp_pool_audit",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.network.dhcp_pool_audit",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET",
+          "allowed_component_definition_ids": []
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.network.dhcp_pool_audit"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Record scope utilization and the specific allocation state; do not delete active reservations merely because the pool is full.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.test.network.dhcp_transaction_trace",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "DHCP Transaction Trace",
+        "short_description": "Interprets the DHCP client transaction to distinguish an absent offer from client-side address configuration problems."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "global_bench",
+          "network",
+          "test"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "global_bench",
+        "network"
+      ],
+      "cost": 1,
+      "tags": [
+        "diagnostic",
+        "network",
+        "test"
+      ],
+      "rules_text": "Run test.network.dhcp_transaction_trace on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.network.dhcp_transaction_trace",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "component.network.nic",
+          "entity_type": "component",
+          "role": "subject"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.network.dhcp_transaction_trace",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "TICKET_COMPONENT",
+          "allowed_component_definition_ids": [
+            "component.network.nic"
+          ]
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.network.dhcp_transaction_trace"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Preserve the exact Discover, Offer, Request, acknowledgement, timeout, and server-identity observations.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.test.network.interface_config",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Interface Configuration Inspection",
+        "short_description": "Interface Configuration Inspection gathers troubleshooting evidence."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "global_bench",
+          "network",
+          "test"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "global_bench",
+        "network"
+      ],
+      "cost": 1,
+      "tags": [
+        "diagnostic",
+        "network",
+        "test"
+      ],
+      "rules_text": "Run test.network.interface_config on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.network.interface_config",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.network.interface_config",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET",
+          "allowed_component_definition_ids": []
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.network.interface_config"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.test.network.link",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Network Link Test",
+        "short_description": "Network Link Test gathers troubleshooting evidence."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "global_bench",
+          "network",
+          "test"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "global_bench",
+        "network"
+      ],
+      "cost": 1,
+      "tags": [
+        "diagnostic",
+        "network",
+        "test"
+      ],
+      "rules_text": "Run test.network.link on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.network.link",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.network.link",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET",
+          "allowed_component_definition_ids": []
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.network.link"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.test.network.link_counter_soak",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Network Link and Counter Soak",
+        "short_description": "Observes link transitions and interface error counters over a defined interval after a firmware-related change."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "global_bench",
+          "network",
+          "test"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "global_bench",
+        "network"
+      ],
+      "cost": 1,
+      "tags": [
+        "diagnostic",
+        "network",
+        "test"
+      ],
+      "rules_text": "Run test.network.link_counter_soak on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.network.link_counter_soak",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "component.network.nic",
+          "entity_type": "component",
+          "role": "subject"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.network.link_counter_soak",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "TICKET_COMPONENT",
+          "allowed_component_definition_ids": [
+            "component.network.nic"
+          ]
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.network.link_counter_soak"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Define the observation interval and acceptance counters before starting so absence of a brief alert is not mistaken for proof.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.test.network.ping",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Ping Connectivity Test",
+        "short_description": "Ping Connectivity Test gathers troubleshooting evidence."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "global_bench",
+          "network",
+          "test"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "global_bench",
+        "network"
+      ],
+      "cost": 1,
+      "tags": [
+        "diagnostic",
+        "network",
+        "test"
+      ],
+      "rules_text": "Run test.network.ping on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.network.ping",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.network.ping",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET",
+          "allowed_component_definition_ids": []
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.network.ping"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.test.pcie.inventory",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "PCIe Device Inventory",
+        "short_description": "PCIe Device Inventory gathers troubleshooting evidence."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "global_bench",
+          "pcie",
+          "test"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "global_bench",
+        "pcie"
+      ],
+      "cost": 1,
+      "tags": [
+        "diagnostic",
+        "pcie",
+        "test"
+      ],
+      "rules_text": "Run test.pcie.inventory on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.pcie.inventory",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.pcie.inventory",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET",
+          "allowed_component_definition_ids": []
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.pcie.inventory"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.test.power.distribution_path_isolation",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Power Distribution Path Isolation",
+        "short_description": "Compares known-good PSUs across bays and minimum configuration to isolate a shared power-distribution fault."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "global_bench",
+          "power",
+          "test"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "global_bench",
+        "power"
+      ],
+      "cost": 2,
+      "tags": [
+        "diagnostic",
+        "power",
+        "test"
+      ],
+      "rules_text": "Run test.power.distribution_path_isolation on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.power.distribution_path_isolation",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "component.power.distribution_board",
+          "entity_type": "component",
+          "role": "subject"
+        },
+        {
+          "entity_id": "component.power.hot_swap_psu",
+          "entity_type": "component",
+          "role": "subject"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.power.distribution_path_isolation",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "TICKET_COMPONENT",
+          "allowed_component_definition_ids": [
+            "component.power.distribution_board",
+            "component.power.hot_swap_psu"
+          ]
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.power.distribution_path_isolation"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Do not live-probe undocumented connectors. Follow the platform service procedure and de-energization requirements.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.test.power.known_good_psu",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Known-Good PSU Test",
+        "short_description": "Known-Good PSU Test gathers troubleshooting evidence."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "global_bench",
+          "power",
+          "test"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "global_bench",
+        "power"
+      ],
+      "cost": 2,
+      "tags": [
+        "diagnostic",
+        "power",
+        "test"
+      ],
+      "rules_text": "Run test.power.known_good_psu on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.power.known_good_psu",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.power.known_good_psu",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET",
+          "allowed_component_definition_ids": []
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.power.known_good_psu"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.test.power.output_voltage_measurement",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Power Output Voltage Measurement",
+        "short_description": "Measures documented power rails and power-good signals with an appropriate meter and platform pinout."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "global_bench",
+          "power",
+          "test"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "global_bench",
+        "power"
+      ],
+      "cost": 2,
+      "tags": [
+        "diagnostic",
+        "power",
+        "test"
+      ],
+      "rules_text": "Run test.power.output_voltage_measurement on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.power.output_voltage_measurement",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "component.power.distribution_board",
+          "entity_type": "component",
+          "role": "subject"
+        },
+        {
+          "entity_id": "component.power.hot_swap_psu",
+          "entity_type": "component",
+          "role": "subject"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.power.output_voltage_measurement",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "TICKET_COMPONENT",
+          "allowed_component_definition_ids": [
+            "component.power.distribution_board",
+            "component.power.hot_swap_psu"
+          ]
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.power.output_voltage_measurement"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Do not generalize an ATX pinout to a proprietary or hot-swap server interface; use model-specific service documentation and electrical safety controls.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.test.power.psu_status",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "PSU Status Inspection",
+        "short_description": "PSU Status Inspection gathers troubleshooting evidence."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "global_bench",
+          "power",
+          "test"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "global_bench",
+        "power"
+      ],
+      "cost": 1,
+      "tags": [
+        "diagnostic",
+        "power",
+        "test"
+      ],
+      "rules_text": "Run test.power.psu_status on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.power.psu_status",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.power.psu_status",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET",
+          "allowed_component_definition_ids": []
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.power.psu_status"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.test.power.residual_power_drain",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Residual-Power Drain Test",
+        "short_description": "Safely removes all power, discharges residual state, then compares symptoms after controlled re-energization."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "global_bench",
+          "power",
+          "test"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "global_bench",
+        "power"
+      ],
+      "cost": 1,
+      "tags": [
+        "diagnostic",
+        "power",
+        "test"
+      ],
+      "rules_text": "Run test.power.residual_power_drain on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.power.residual_power_drain",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "component.board.system",
+          "entity_type": "component",
+          "role": "subject"
+        },
+        {
+          "entity_id": "component.power.distribution_board",
+          "entity_type": "component",
+          "role": "subject"
+        },
+        {
+          "entity_id": "component.power.hot_swap_psu",
+          "entity_type": "component",
+          "role": "subject"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.power.residual_power_drain",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "TICKET_COMPONENT",
+          "allowed_component_definition_ids": [
+            "component.board.system",
+            "component.power.distribution_board",
+            "component.power.hot_swap_psu"
+          ]
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.power.residual_power_drain"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Follow protocol.safety.deenergize_discharge and the platform service instructions; redundant power feeds must all be removed before discharge.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.test.storage.bay_path_isolation",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Drive Bay Path Isolation",
+        "short_description": "Uses protected inventory and compatible known-good media to determine whether a failure follows a drive or remains at one bay."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "global_bench",
+          "storage",
+          "test"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "global_bench",
+        "storage"
+      ],
+      "cost": 2,
+      "tags": [
+        "diagnostic",
+        "storage",
+        "test"
+      ],
+      "rules_text": "Run test.storage.bay_path_isolation on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.storage.bay_path_isolation",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "component.storage.backplane",
+          "entity_type": "component",
+          "role": "subject"
+        },
+        {
+          "entity_id": "component.storage.sas_hdd",
+          "entity_type": "component",
+          "role": "subject"
+        },
+        {
+          "entity_id": "component.storage.sata_ssd",
+          "entity_type": "component",
+          "role": "subject"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.storage.bay_path_isolation",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "TICKET_COMPONENT",
+          "allowed_component_definition_ids": [
+            "component.storage.backplane",
+            "component.storage.sas_hdd",
+            "component.storage.sata_ssd"
+          ]
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.storage.bay_path_isolation"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Protect array metadata and slot mapping. Never move production members casually to perform this test.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.test.storage.device_inventory",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Storage Device Inventory",
+        "short_description": "Storage Device Inventory gathers troubleshooting evidence."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "global_bench",
+          "storage",
+          "test"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "global_bench",
+        "storage"
+      ],
+      "cost": 1,
+      "tags": [
+        "diagnostic",
+        "storage",
+        "test"
+      ],
+      "rules_text": "Run test.storage.device_inventory on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.storage.device_inventory",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.storage.device_inventory",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET",
+          "allowed_component_definition_ids": []
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.storage.device_inventory"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.test.storage.drive_health",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Drive Health Test",
+        "short_description": "Drive Health Test gathers troubleshooting evidence."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "global_bench",
+          "storage",
+          "test"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "global_bench",
+        "storage"
+      ],
+      "cost": 1,
+      "tags": [
+        "diagnostic",
+        "storage",
+        "test"
+      ],
+      "rules_text": "Run test.storage.drive_health on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.storage.drive_health",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.storage.drive_health",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET",
+          "allowed_component_definition_ids": []
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.storage.drive_health"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.test.storage.predictive_health",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Predictive Drive Health Analysis",
+        "short_description": "Reviews SMART, controller, media-error, and endurance evidence before an online drive fails completely."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "global_bench",
+          "storage",
+          "test"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "global_bench",
+        "storage"
+      ],
+      "cost": 1,
+      "tags": [
+        "diagnostic",
+        "storage",
+        "test"
+      ],
+      "rules_text": "Run test.storage.predictive_health on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.storage.predictive_health",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "component.storage.nvme_ssd",
+          "entity_type": "component",
+          "role": "subject"
+        },
+        {
+          "entity_id": "component.storage.sas_hdd",
+          "entity_type": "component",
+          "role": "subject"
+        },
+        {
+          "entity_id": "component.storage.sata_ssd",
+          "entity_type": "component",
+          "role": "subject"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.storage.predictive_health",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "TICKET_COMPONENT",
+          "allowed_component_definition_ids": [
+            "component.storage.nvme_ssd",
+            "component.storage.sas_hdd",
+            "component.storage.sata_ssd"
+          ]
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.storage.predictive_health"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Capture the device serial, bay, controller log, and health data before replacement. Avoid destructive tests before data protection.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.test.storage.raid_status",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "RAID Status Inspection",
+        "short_description": "RAID Status Inspection gathers troubleshooting evidence."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "global_bench",
+          "storage",
+          "test"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "global_bench",
+        "storage"
+      ],
+      "cost": 1,
+      "tags": [
+        "diagnostic",
+        "storage",
+        "test"
+      ],
+      "rules_text": "Run test.storage.raid_status on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.storage.raid_status",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.storage.raid_status",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET",
+          "allowed_component_definition_ids": []
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.storage.raid_status"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.test.system.bmc_logs",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Management Event Log Review",
+        "short_description": "Management Event Log Review gathers troubleshooting evidence."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "global_bench",
+          "system",
+          "test"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "global_bench",
+        "system"
+      ],
+      "cost": 1,
+      "tags": [
+        "diagnostic",
+        "system",
+        "test"
+      ],
+      "rules_text": "Run test.system.bmc_logs on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.system.bmc_logs",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.system.bmc_logs",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET",
+          "allowed_component_definition_ids": []
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.system.bmc_logs"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.test.system.controlled_stress",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Controlled Stress Test",
+        "short_description": "Controlled Stress Test gathers troubleshooting evidence."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "global_bench",
+          "system",
+          "test"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "global_bench",
+        "system"
+      ],
+      "cost": 2,
+      "tags": [
+        "diagnostic",
+        "system",
+        "test"
+      ],
+      "rules_text": "Run test.system.controlled_stress on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.system.controlled_stress",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.system.controlled_stress",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET",
+          "allowed_component_definition_ids": []
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.system.controlled_stress"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.test.thermal.fan_telemetry",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Fan Telemetry Inspection",
+        "short_description": "Fan Telemetry Inspection gathers troubleshooting evidence."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "global_bench",
+          "test",
+          "thermal"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "global_bench",
+        "thermal"
+      ],
+      "cost": 1,
+      "tags": [
+        "diagnostic",
+        "test",
+        "thermal"
+      ],
+      "rules_text": "Run test.thermal.fan_telemetry on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.thermal.fan_telemetry",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.thermal.fan_telemetry",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET",
+          "allowed_component_definition_ids": []
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.thermal.fan_telemetry"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.bench.test.thermal.temperature_monitoring",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Temperature Monitoring",
+        "short_description": "Temperature Monitoring gathers troubleshooting evidence."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "global_bench",
+          "test",
+          "thermal"
+        ]
+      },
+      "card_type": "test",
+      "archetypes": [
+        "global_bench",
+        "thermal"
+      ],
+      "cost": 1,
+      "tags": [
+        "diagnostic",
+        "test",
+        "thermal"
+      ],
+      "rules_text": "Run test.thermal.temperature_monitoring on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "primary_domain_reference": {
+        "entity_id": "test.thermal.temperature_monitoring",
+        "entity_type": "test",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [],
+      "play_contract": {
+        "contract_type": "DIAGNOSTIC",
+        "action_type": "RUN_TEST",
+        "source_definition_id": "test.thermal.temperature_monitoring",
+        "source_entity_type": "test",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET",
+          "allowed_component_definition_ids": []
+        },
+        "prerequisites": [],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_EVIDENCE",
+            "source_definition_id": "test.thermal.temperature_monitoring"
+          }
+        ],
+        "disposition": "remain_in_diagnostic_bench",
+        "placement": "diagnostic_bench"
+      },
+      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.response.repair.boot.correct_order",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Correct Boot Order",
+        "short_description": "Correct Boot Order corrective procedure."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "boot",
+          "repair",
+          "response"
+        ]
+      },
+      "card_type": "repair_procedure",
+      "archetypes": [
+        "boot",
+        "response"
+      ],
+      "cost": 1,
+      "tags": [
+        "boot",
+        "repair"
+      ],
+      "rules_text": "After accepted Isolation, apply repair.boot.correct_order to its compatible actionable Fault.",
+      "primary_domain_reference": {
+        "entity_id": "repair.boot.correct_order",
+        "entity_type": "repair_procedure",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "fault.boot.order.incorrect",
+          "entity_type": "fault",
+          "role": "subject"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "REPAIR",
+        "action_type": "PERFORM_REPAIR",
+        "repair_procedure_id": "repair.boot.correct_order",
+        "target_spec": {
+          "target_kind": "ACCEPTED_ISOLATED_FAULT",
+          "allowed_fault_definition_ids": [
+            "fault.boot.order.incorrect"
+          ]
+        },
+        "prerequisites": [
+          {
+            "prerequisite_type": "ACCEPTED_ISOLATION"
+          }
+        ],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_REPAIR",
+            "repair_procedure_id": "repair.boot.correct_order"
+          }
+        ],
+        "disposition": "discard"
+      },
+      "educational_text": "Repairs change machine state and should be followed by verification.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.response.repair.memory.replace_dimm",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Replace Failed DIMM",
+        "short_description": "Replace Failed DIMM corrective procedure."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "memory",
+          "repair",
+          "response"
+        ]
+      },
+      "card_type": "repair_procedure",
+      "archetypes": [
+        "memory",
+        "response"
+      ],
+      "cost": 1,
+      "tags": [
+        "memory",
+        "repair"
+      ],
+      "rules_text": "After accepted Isolation, apply repair.memory.replace_dimm to its compatible actionable Fault.",
+      "primary_domain_reference": {
+        "entity_id": "repair.memory.replace_dimm",
+        "entity_type": "repair_procedure",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "fault.memory.dimm.failed",
+          "entity_type": "fault",
+          "role": "subject"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "REPAIR",
+        "action_type": "PERFORM_REPAIR",
+        "repair_procedure_id": "repair.memory.replace_dimm",
+        "target_spec": {
+          "target_kind": "ACCEPTED_ISOLATED_FAULT",
+          "allowed_fault_definition_ids": [
+            "fault.memory.dimm.failed"
+          ]
+        },
+        "prerequisites": [
+          {
+            "prerequisite_type": "ACCEPTED_ISOLATION"
+          }
+        ],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_REPAIR",
+            "repair_procedure_id": "repair.memory.replace_dimm"
+          }
+        ],
+        "disposition": "discard"
+      },
+      "educational_text": "Repairs change machine state and should be followed by verification.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.response.repair.memory.reseat_dimm",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Reseat DIMM",
+        "short_description": "Reseat DIMM corrective procedure."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "memory",
+          "repair",
+          "response"
+        ]
+      },
+      "card_type": "repair_procedure",
+      "archetypes": [
+        "memory",
+        "response"
+      ],
+      "cost": 1,
+      "tags": [
+        "memory",
+        "repair"
+      ],
+      "rules_text": "After accepted Isolation, apply repair.memory.reseat_dimm to its compatible actionable Fault.",
+      "primary_domain_reference": {
+        "entity_id": "repair.memory.reseat_dimm",
+        "entity_type": "repair_procedure",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "fault.memory.dimm.not_seated",
+          "entity_type": "fault",
+          "role": "subject"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "REPAIR",
+        "action_type": "PERFORM_REPAIR",
+        "repair_procedure_id": "repair.memory.reseat_dimm",
+        "target_spec": {
+          "target_kind": "ACCEPTED_ISOLATED_FAULT",
+          "allowed_fault_definition_ids": [
+            "fault.memory.dimm.not_seated"
+          ]
+        },
+        "prerequisites": [
+          {
+            "prerequisite_type": "ACCEPTED_ISOLATION"
+          }
+        ],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_REPAIR",
+            "repair_procedure_id": "repair.memory.reseat_dimm"
+          }
+        ],
+        "disposition": "discard"
+      },
+      "educational_text": "Repairs change machine state and should be followed by verification.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.response.repair.network.correct_static_ip",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Correct Static IP Configuration",
+        "short_description": "Correct Static IP Configuration corrective procedure."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "network",
+          "repair",
+          "response"
+        ]
+      },
+      "card_type": "repair_procedure",
+      "archetypes": [
+        "network",
+        "response"
+      ],
+      "cost": 1,
+      "tags": [
+        "network",
+        "repair"
+      ],
+      "rules_text": "After accepted Isolation, apply repair.network.correct_static_ip to its compatible actionable Fault.",
+      "primary_domain_reference": {
+        "entity_id": "repair.network.correct_static_ip",
+        "entity_type": "repair_procedure",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "fault.network.ip.static_incorrect",
+          "entity_type": "fault",
+          "role": "subject"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "REPAIR",
+        "action_type": "PERFORM_REPAIR",
+        "repair_procedure_id": "repair.network.correct_static_ip",
+        "target_spec": {
+          "target_kind": "ACCEPTED_ISOLATED_FAULT",
+          "allowed_fault_definition_ids": [
+            "fault.network.ip.static_incorrect"
+          ]
+        },
+        "prerequisites": [
+          {
+            "prerequisite_type": "ACCEPTED_ISOLATION"
+          }
+        ],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_REPAIR",
+            "repair_procedure_id": "repair.network.correct_static_ip"
+          }
+        ],
+        "disposition": "discard"
+      },
+      "educational_text": "Repairs change machine state and should be followed by verification.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.response.repair.network.replace_cable",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Replace Ethernet Cable",
+        "short_description": "Replace Ethernet Cable corrective procedure."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "network",
+          "repair",
+          "response"
+        ]
+      },
+      "card_type": "repair_procedure",
+      "archetypes": [
+        "network",
+        "response"
+      ],
+      "cost": 1,
+      "tags": [
+        "network",
+        "repair"
+      ],
+      "rules_text": "After accepted Isolation, apply repair.network.replace_cable to its compatible actionable Fault.",
+      "primary_domain_reference": {
+        "entity_id": "repair.network.replace_cable",
+        "entity_type": "repair_procedure",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "fault.network.cable.failed",
+          "entity_type": "fault",
+          "role": "subject"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "REPAIR",
+        "action_type": "PERFORM_REPAIR",
+        "repair_procedure_id": "repair.network.replace_cable",
+        "target_spec": {
+          "target_kind": "ACCEPTED_ISOLATED_FAULT",
+          "allowed_fault_definition_ids": [
+            "fault.network.cable.failed"
+          ]
+        },
+        "prerequisites": [
+          {
+            "prerequisite_type": "ACCEPTED_ISOLATION"
+          }
+        ],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_REPAIR",
+            "repair_procedure_id": "repair.network.replace_cable"
+          }
+        ],
+        "disposition": "discard"
+      },
+      "educational_text": "Repairs change machine state and should be followed by verification.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.response.repair.power.replace_psu",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Replace Failed PSU",
+        "short_description": "Replace Failed PSU corrective procedure."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "power",
+          "repair",
+          "response"
+        ]
+      },
+      "card_type": "repair_procedure",
+      "archetypes": [
+        "power",
+        "response"
+      ],
+      "cost": 1,
+      "tags": [
+        "power",
+        "repair"
+      ],
+      "rules_text": "After accepted Isolation, apply repair.power.replace_psu to its compatible actionable Fault.",
+      "primary_domain_reference": {
+        "entity_id": "repair.power.replace_psu",
+        "entity_type": "repair_procedure",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "fault.power.psu.failed",
+          "entity_type": "fault",
+          "role": "subject"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "REPAIR",
+        "action_type": "PERFORM_REPAIR",
+        "repair_procedure_id": "repair.power.replace_psu",
+        "target_spec": {
+          "target_kind": "ACCEPTED_ISOLATED_FAULT",
+          "allowed_fault_definition_ids": [
+            "fault.power.psu.failed"
+          ]
+        },
+        "prerequisites": [
+          {
+            "prerequisite_type": "ACCEPTED_ISOLATION"
+          }
+        ],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_REPAIR",
+            "repair_procedure_id": "repair.power.replace_psu"
+          }
+        ],
+        "disposition": "discard"
+      },
+      "educational_text": "Repairs change machine state and should be followed by verification.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.response.repair.power.reseat_psu",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Reseat PSU",
+        "short_description": "Reseat PSU corrective procedure."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "power",
+          "repair",
+          "response"
+        ]
+      },
+      "card_type": "repair_procedure",
+      "archetypes": [
+        "power",
+        "response"
+      ],
+      "cost": 1,
+      "tags": [
+        "power",
+        "repair"
+      ],
+      "rules_text": "After accepted Isolation, apply repair.power.reseat_psu to its compatible actionable Fault.",
+      "primary_domain_reference": {
+        "entity_id": "repair.power.reseat_psu",
+        "entity_type": "repair_procedure",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "fault.power.psu.not_seated",
+          "entity_type": "fault",
+          "role": "subject"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "REPAIR",
+        "action_type": "PERFORM_REPAIR",
+        "repair_procedure_id": "repair.power.reseat_psu",
+        "target_spec": {
+          "target_kind": "ACCEPTED_ISOLATED_FAULT",
+          "allowed_fault_definition_ids": [
+            "fault.power.psu.not_seated"
+          ]
+        },
+        "prerequisites": [
+          {
+            "prerequisite_type": "ACCEPTED_ISOLATION"
+          }
+        ],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_REPAIR",
+            "repair_procedure_id": "repair.power.reseat_psu"
+          }
+        ],
+        "disposition": "discard"
+      },
+      "educational_text": "Repairs change machine state and should be followed by verification.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.response.repair.storage.replace_nvme",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Replace Failed NVMe Device",
+        "short_description": "Replace Failed NVMe Device corrective procedure."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "repair",
+          "response",
+          "storage"
+        ]
+      },
+      "card_type": "repair_procedure",
+      "archetypes": [
+        "response",
+        "storage"
+      ],
+      "cost": 1,
+      "tags": [
+        "repair",
+        "storage"
+      ],
+      "rules_text": "After accepted Isolation, apply repair.storage.replace_nvme to its compatible actionable Fault.",
+      "primary_domain_reference": {
+        "entity_id": "repair.storage.replace_nvme",
+        "entity_type": "repair_procedure",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "fault.storage.nvme.device_failed",
+          "entity_type": "fault",
+          "role": "subject"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "REPAIR",
+        "action_type": "PERFORM_REPAIR",
+        "repair_procedure_id": "repair.storage.replace_nvme",
+        "target_spec": {
+          "target_kind": "ACCEPTED_ISOLATED_FAULT",
+          "allowed_fault_definition_ids": [
+            "fault.storage.nvme.device_failed"
+          ]
+        },
+        "prerequisites": [
+          {
+            "prerequisite_type": "ACCEPTED_ISOLATION"
+          }
+        ],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_REPAIR",
+            "repair_procedure_id": "repair.storage.replace_nvme"
+          }
+        ],
+        "disposition": "discard"
+      },
+      "educational_text": "Repairs change machine state and should be followed by verification.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.response.repair.storage.replace_raid_member",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Replace Failed RAID Member",
+        "short_description": "Replace Failed RAID Member corrective procedure."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "repair",
+          "response",
+          "storage"
+        ]
+      },
+      "card_type": "repair_procedure",
+      "archetypes": [
+        "response",
+        "storage"
+      ],
+      "cost": 1,
+      "tags": [
+        "repair",
+        "storage"
+      ],
+      "rules_text": "After accepted Isolation, apply repair.storage.replace_raid_member to its compatible actionable Fault.",
+      "primary_domain_reference": {
+        "entity_id": "repair.storage.replace_raid_member",
+        "entity_type": "repair_procedure",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "fault.storage.sas.drive_failed",
+          "entity_type": "fault",
+          "role": "subject"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "REPAIR",
+        "action_type": "PERFORM_REPAIR",
+        "repair_procedure_id": "repair.storage.replace_raid_member",
+        "target_spec": {
+          "target_kind": "ACCEPTED_ISOLATED_FAULT",
+          "allowed_fault_definition_ids": [
+            "fault.storage.sas.drive_failed"
+          ]
+        },
+        "prerequisites": [
+          {
+            "prerequisite_type": "ACCEPTED_ISOLATION"
+          }
+        ],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_REPAIR",
+            "repair_procedure_id": "repair.storage.replace_raid_member"
+          }
+        ],
+        "disposition": "discard"
+      },
+      "educational_text": "Repairs change machine state and should be followed by verification.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.response.repair.storage.reseat_cable",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Reseat Storage Cable",
+        "short_description": "Reseat Storage Cable corrective procedure."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "repair",
+          "response",
+          "storage"
+        ]
+      },
+      "card_type": "repair_procedure",
+      "archetypes": [
+        "response",
+        "storage"
+      ],
+      "cost": 1,
+      "tags": [
+        "repair",
+        "storage"
+      ],
+      "rules_text": "After accepted Isolation, apply repair.storage.reseat_cable to its compatible actionable Fault.",
+      "primary_domain_reference": {
+        "entity_id": "repair.storage.reseat_cable",
+        "entity_type": "repair_procedure",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "fault.storage.cable.loose",
+          "entity_type": "fault",
+          "role": "subject"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "REPAIR",
+        "action_type": "PERFORM_REPAIR",
+        "repair_procedure_id": "repair.storage.reseat_cable",
+        "target_spec": {
+          "target_kind": "ACCEPTED_ISOLATED_FAULT",
+          "allowed_fault_definition_ids": [
+            "fault.storage.cable.loose"
+          ]
+        },
+        "prerequisites": [
+          {
+            "prerequisite_type": "ACCEPTED_ISOLATION"
+          }
+        ],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_REPAIR",
+            "repair_procedure_id": "repair.storage.reseat_cable"
+          }
+        ],
+        "disposition": "discard"
+      },
+      "educational_text": "Repairs change machine state and should be followed by verification.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.response.repair.thermal.clean_cooling_path",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Clean Cooling Path",
+        "short_description": "Clean Cooling Path corrective procedure."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "repair",
+          "response",
+          "thermal"
+        ]
+      },
+      "card_type": "repair_procedure",
+      "archetypes": [
+        "response",
+        "thermal"
+      ],
+      "cost": 1,
+      "tags": [
+        "repair",
+        "thermal"
+      ],
+      "rules_text": "After accepted Isolation, apply repair.thermal.clean_cooling_path to its compatible actionable Fault.",
+      "primary_domain_reference": {
+        "entity_id": "repair.thermal.clean_cooling_path",
+        "entity_type": "repair_procedure",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "fault.thermal.heatsink.clogged",
+          "entity_type": "fault",
+          "role": "subject"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "REPAIR",
+        "action_type": "PERFORM_REPAIR",
+        "repair_procedure_id": "repair.thermal.clean_cooling_path",
+        "target_spec": {
+          "target_kind": "ACCEPTED_ISOLATED_FAULT",
+          "allowed_fault_definition_ids": [
+            "fault.thermal.heatsink.clogged"
+          ]
+        },
+        "prerequisites": [
+          {
+            "prerequisite_type": "ACCEPTED_ISOLATION"
+          }
+        ],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_REPAIR",
+            "repair_procedure_id": "repair.thermal.clean_cooling_path"
+          }
+        ],
+        "disposition": "discard"
+      },
+      "educational_text": "Repairs change machine state and should be followed by verification.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.response.repair.thermal.replace_fan",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Replace Chassis Fan",
+        "short_description": "Replace Chassis Fan corrective procedure."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "repair",
+          "response",
+          "thermal"
+        ]
+      },
+      "card_type": "repair_procedure",
+      "archetypes": [
+        "response",
+        "thermal"
+      ],
+      "cost": 1,
+      "tags": [
+        "repair",
+        "thermal"
+      ],
+      "rules_text": "After accepted Isolation, apply repair.thermal.replace_fan to its compatible actionable Fault.",
+      "primary_domain_reference": {
+        "entity_id": "repair.thermal.replace_fan",
+        "entity_type": "repair_procedure",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "fault.thermal.fan.failed",
+          "entity_type": "fault",
+          "role": "subject"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "REPAIR",
+        "action_type": "PERFORM_REPAIR",
+        "repair_procedure_id": "repair.thermal.replace_fan",
+        "target_spec": {
+          "target_kind": "ACCEPTED_ISOLATED_FAULT",
+          "allowed_fault_definition_ids": [
+            "fault.thermal.fan.failed"
+          ]
+        },
+        "prerequisites": [
+          {
+            "prerequisite_type": "ACCEPTED_ISOLATION"
+          }
+        ],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_REPAIR",
+            "repair_procedure_id": "repair.thermal.replace_fan"
+          }
+        ],
+        "disposition": "discard"
+      },
+      "educational_text": "Repairs change machine state and should be followed by verification.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.response.verify.boot.normal_boot",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Normal Boot Verification",
+        "short_description": "Normal Boot Verification confirms the repaired state."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "boot",
+          "response",
+          "verify"
+        ]
+      },
+      "card_type": "verification",
+      "archetypes": [
+        "boot",
+        "response"
+      ],
+      "cost": 1,
+      "tags": [
+        "boot",
+        "verify"
+      ],
+      "rules_text": "Evaluate verify.boot.normal_boot for a named active Ticket requirement after its latest Repair.",
+      "primary_domain_reference": {
+        "entity_id": "verify.boot.normal_boot",
+        "entity_type": "validation_procedure",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "fault.boot.bootloader.corrupt",
+          "entity_type": "fault",
+          "role": "subject"
+        },
+        {
+          "entity_id": "fault.boot.device.not_detected",
+          "entity_type": "fault",
+          "role": "subject"
+        },
+        {
+          "entity_id": "fault.boot.order.incorrect",
+          "entity_type": "fault",
+          "role": "subject"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "VERIFY",
+        "action_type": "PERFORM_VERIFY",
+        "validation_procedure_id": "verify.boot.normal_boot",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET_VERIFICATION_REQUIREMENT"
+        },
+        "prerequisites": [
+          {
+            "prerequisite_type": "REPAIR_HISTORY_PRESENT"
+          }
+        ],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_VERIFY",
+            "validation_procedure_id": "verify.boot.normal_boot"
+          }
+        ],
+        "disposition": "discard"
+      },
+      "educational_text": "Verification evaluates whether the repair produced the required operational state.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.response.verify.memory.full_test",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Memory Verification",
+        "short_description": "Memory Verification confirms the repaired state."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "memory",
+          "response",
+          "verify"
+        ]
+      },
+      "card_type": "verification",
+      "archetypes": [
+        "memory",
+        "response"
+      ],
+      "cost": 1,
+      "tags": [
+        "memory",
+        "verify"
+      ],
+      "rules_text": "Evaluate verify.memory.full_test for a named active Ticket requirement after its latest Repair.",
+      "primary_domain_reference": {
+        "entity_id": "verify.memory.full_test",
+        "entity_type": "validation_procedure",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "fault.memory.channel.unavailable",
+          "entity_type": "fault",
+          "role": "subject"
+        },
+        {
+          "entity_id": "fault.memory.dimm.failed",
+          "entity_type": "fault",
+          "role": "subject"
+        },
+        {
+          "entity_id": "fault.system.intermittent_memory_instability",
+          "entity_type": "fault",
+          "role": "subject"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "VERIFY",
+        "action_type": "PERFORM_VERIFY",
+        "validation_procedure_id": "verify.memory.full_test",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET_VERIFICATION_REQUIREMENT"
+        },
+        "prerequisites": [
+          {
+            "prerequisite_type": "REPAIR_HISTORY_PRESENT"
+          }
+        ],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_VERIFY",
+            "validation_procedure_id": "verify.memory.full_test"
+          }
+        ],
+        "disposition": "discard"
+      },
+      "educational_text": "Verification evaluates whether the repair produced the required operational state.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.response.verify.memory.inventory",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Memory Inventory Verification",
+        "short_description": "Memory Inventory Verification confirms the repaired state."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "memory",
+          "response",
+          "verify"
+        ]
+      },
+      "card_type": "verification",
+      "archetypes": [
+        "memory",
+        "response"
+      ],
+      "cost": 1,
+      "tags": [
+        "memory",
+        "verify"
+      ],
+      "rules_text": "Evaluate verify.memory.inventory for a named active Ticket requirement after its latest Repair.",
+      "primary_domain_reference": {
+        "entity_id": "verify.memory.inventory",
+        "entity_type": "validation_procedure",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "fault.memory.dimm.not_seated",
+          "entity_type": "fault",
+          "role": "subject"
+        },
+        {
+          "entity_id": "fault.memory.population.invalid",
+          "entity_type": "fault",
+          "role": "subject"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "VERIFY",
+        "action_type": "PERFORM_VERIFY",
+        "validation_procedure_id": "verify.memory.inventory",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET_VERIFICATION_REQUIREMENT"
+        },
+        "prerequisites": [
+          {
+            "prerequisite_type": "REPAIR_HISTORY_PRESENT"
+          }
+        ],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_VERIFY",
+            "validation_procedure_id": "verify.memory.inventory"
+          }
+        ],
+        "disposition": "discard"
+      },
+      "educational_text": "Verification evaluates whether the repair produced the required operational state.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.response.verify.network.connectivity",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Network Connectivity Verification",
+        "short_description": "Network Connectivity Verification confirms the repaired state."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "network",
+          "response",
+          "verify"
+        ]
+      },
+      "card_type": "verification",
+      "archetypes": [
+        "network",
+        "response"
+      ],
+      "cost": 1,
+      "tags": [
+        "network",
+        "verify"
+      ],
+      "rules_text": "Evaluate verify.network.connectivity for a named active Ticket requirement after its latest Repair.",
+      "primary_domain_reference": {
+        "entity_id": "verify.network.connectivity",
+        "entity_type": "validation_procedure",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "fault.network.dhcp.no_lease",
+          "entity_type": "fault",
+          "role": "subject"
+        },
+        {
+          "entity_id": "fault.network.ip.static_incorrect",
+          "entity_type": "fault",
+          "role": "subject"
+        },
+        {
+          "entity_id": "fault.network.nic.failed",
+          "entity_type": "fault",
+          "role": "subject"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "VERIFY",
+        "action_type": "PERFORM_VERIFY",
+        "validation_procedure_id": "verify.network.connectivity",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET_VERIFICATION_REQUIREMENT"
+        },
+        "prerequisites": [
+          {
+            "prerequisite_type": "REPAIR_HISTORY_PRESENT"
+          }
+        ],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_VERIFY",
+            "validation_procedure_id": "verify.network.connectivity"
+          }
+        ],
+        "disposition": "discard"
+      },
+      "educational_text": "Verification evaluates whether the repair produced the required operational state.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.response.verify.network.link",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Network Link Verification",
+        "short_description": "Network Link Verification confirms the repaired state."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "network",
+          "response",
+          "verify"
+        ]
+      },
+      "card_type": "verification",
+      "archetypes": [
+        "network",
+        "response"
+      ],
+      "cost": 1,
+      "tags": [
+        "network",
+        "verify"
+      ],
+      "rules_text": "Evaluate verify.network.link for a named active Ticket requirement after its latest Repair.",
+      "primary_domain_reference": {
+        "entity_id": "verify.network.link",
+        "entity_type": "validation_procedure",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "fault.network.cable.disconnected",
+          "entity_type": "fault",
+          "role": "subject"
+        },
+        {
+          "entity_id": "fault.network.cable.failed",
+          "entity_type": "fault",
+          "role": "subject"
+        },
+        {
+          "entity_id": "fault.network.nic.failed",
+          "entity_type": "fault",
+          "role": "subject"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "VERIFY",
+        "action_type": "PERFORM_VERIFY",
+        "validation_procedure_id": "verify.network.link",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET_VERIFICATION_REQUIREMENT"
+        },
+        "prerequisites": [
+          {
+            "prerequisite_type": "REPAIR_HISTORY_PRESENT"
+          }
+        ],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_VERIFY",
+            "validation_procedure_id": "verify.network.link"
+          }
+        ],
+        "disposition": "discard"
+      },
+      "educational_text": "Verification evaluates whether the repair produced the required operational state.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.response.verify.power.stable",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Stable Power Verification",
+        "short_description": "Stable Power Verification confirms the repaired state."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "power",
+          "response",
+          "verify"
+        ]
+      },
+      "card_type": "verification",
+      "archetypes": [
+        "power",
+        "response"
+      ],
+      "cost": 1,
+      "tags": [
+        "power",
+        "verify"
+      ],
+      "rules_text": "Evaluate verify.power.stable for a named active Ticket requirement after its latest Repair.",
+      "primary_domain_reference": {
+        "entity_id": "verify.power.stable",
+        "entity_type": "validation_procedure",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "fault.power.input.cable_loose",
+          "entity_type": "fault",
+          "role": "subject"
+        },
+        {
+          "entity_id": "fault.power.psu.failed",
+          "entity_type": "fault",
+          "role": "subject"
+        },
+        {
+          "entity_id": "fault.power.psu.not_seated",
+          "entity_type": "fault",
+          "role": "subject"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "VERIFY",
+        "action_type": "PERFORM_VERIFY",
+        "validation_procedure_id": "verify.power.stable",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET_VERIFICATION_REQUIREMENT"
+        },
+        "prerequisites": [
+          {
+            "prerequisite_type": "REPAIR_HISTORY_PRESENT"
+          }
+        ],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_VERIFY",
+            "validation_procedure_id": "verify.power.stable"
+          }
+        ],
+        "disposition": "discard"
+      },
+      "educational_text": "Verification evaluates whether the repair produced the required operational state.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.response.verify.storage.device_detected",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Storage Detection Verification",
+        "short_description": "Storage Detection Verification confirms the repaired state."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "response",
+          "storage",
+          "verify"
+        ]
+      },
+      "card_type": "verification",
+      "archetypes": [
+        "response",
+        "storage"
+      ],
+      "cost": 1,
+      "tags": [
+        "storage",
+        "verify"
+      ],
+      "rules_text": "Evaluate verify.storage.device_detected for a named active Ticket requirement after its latest Repair.",
+      "primary_domain_reference": {
+        "entity_id": "verify.storage.device_detected",
+        "entity_type": "validation_procedure",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "fault.storage.cable.failed",
+          "entity_type": "fault",
+          "role": "subject"
+        },
+        {
+          "entity_id": "fault.storage.cable.loose",
+          "entity_type": "fault",
+          "role": "subject"
+        },
+        {
+          "entity_id": "fault.storage.nvme.device_failed",
+          "entity_type": "fault",
+          "role": "subject"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "VERIFY",
+        "action_type": "PERFORM_VERIFY",
+        "validation_procedure_id": "verify.storage.device_detected",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET_VERIFICATION_REQUIREMENT"
+        },
+        "prerequisites": [
+          {
+            "prerequisite_type": "REPAIR_HISTORY_PRESENT"
+          }
+        ],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_VERIFY",
+            "validation_procedure_id": "verify.storage.device_detected"
+          }
+        ],
+        "disposition": "discard"
+      },
+      "educational_text": "Verification evaluates whether the repair produced the required operational state.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.response.verify.storage.raid_healthy",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "RAID Healthy Verification",
+        "short_description": "RAID Healthy Verification confirms the repaired state."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "response",
+          "storage",
+          "verify"
+        ]
+      },
+      "card_type": "verification",
+      "archetypes": [
+        "response",
+        "storage"
+      ],
+      "cost": 1,
+      "tags": [
+        "storage",
+        "verify"
+      ],
+      "rules_text": "Evaluate verify.storage.raid_healthy for a named active Ticket requirement after its latest Repair.",
+      "primary_domain_reference": {
+        "entity_id": "verify.storage.raid_healthy",
+        "entity_type": "validation_procedure",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "fault.storage.raid.controller_failed",
+          "entity_type": "fault",
+          "role": "subject"
+        },
+        {
+          "entity_id": "fault.storage.raid.degraded",
+          "entity_type": "fault",
+          "role": "subject"
+        },
+        {
+          "entity_id": "fault.storage.sas.drive_failed",
+          "entity_type": "fault",
+          "role": "subject"
+        },
+        {
+          "entity_id": "fault.storage.sata.drive_failed",
+          "entity_type": "fault",
+          "role": "subject"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "VERIFY",
+        "action_type": "PERFORM_VERIFY",
+        "validation_procedure_id": "verify.storage.raid_healthy",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET_VERIFICATION_REQUIREMENT"
+        },
+        "prerequisites": [
+          {
+            "prerequisite_type": "REPAIR_HISTORY_PRESENT"
+          }
+        ],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_VERIFY",
+            "validation_procedure_id": "verify.storage.raid_healthy"
+          }
+        ],
+        "disposition": "discard"
+      },
+      "educational_text": "Verification evaluates whether the repair produced the required operational state.",
+      "rarity": "common"
+    },
+    {
+      "id": "card.response.verify.thermal.load_test",
+      "entity_type": "card",
+      "presentation": {
+        "display_name": "Thermal Load Verification",
+        "short_description": "Thermal Load Verification confirms the repaired state."
+      },
+      "source": {
+        "expansion_id": "expansion.task_014",
+        "version": "1.0.0",
+        "status": "published",
+        "search_tags": [
+          "response",
+          "thermal",
+          "verify"
+        ]
+      },
+      "card_type": "verification",
+      "archetypes": [
+        "response",
+        "thermal"
+      ],
+      "cost": 1,
+      "tags": [
+        "thermal",
+        "verify"
+      ],
+      "rules_text": "Evaluate verify.thermal.load_test for a named active Ticket requirement after its latest Repair.",
+      "primary_domain_reference": {
+        "entity_id": "verify.thermal.load_test",
+        "entity_type": "validation_procedure",
+        "role": "execution",
+        "inherit_illustration": true
+      },
+      "additional_domain_references": [
+        {
+          "entity_id": "fault.thermal.cpu.overheating",
+          "entity_type": "fault",
+          "role": "subject"
+        },
+        {
+          "entity_id": "fault.thermal.fan.failed",
+          "entity_type": "fault",
+          "role": "subject"
+        },
+        {
+          "entity_id": "fault.thermal.heatsink.clogged",
+          "entity_type": "fault",
+          "role": "subject"
+        },
+        {
+          "entity_id": "fault.thermal.heatsink.contact_poor",
+          "entity_type": "fault",
+          "role": "subject"
+        },
+        {
+          "entity_id": "fault.thermal.shutdown",
+          "entity_type": "fault",
+          "role": "subject"
+        }
+      ],
+      "play_contract": {
+        "contract_type": "VERIFY",
+        "action_type": "PERFORM_VERIFY",
+        "validation_procedure_id": "verify.thermal.load_test",
+        "target_spec": {
+          "target_kind": "ACTIVE_TICKET_VERIFICATION_REQUIREMENT"
+        },
+        "prerequisites": [
+          {
+            "prerequisite_type": "REPAIR_HISTORY_PRESENT"
+          }
+        ],
+        "resolution": [
+          {
+            "resolution_type": "AUTHORED_VERIFY",
+            "validation_procedure_id": "verify.thermal.load_test"
+          }
+        ],
+        "disposition": "discard"
+      },
+      "educational_text": "Verification evaluates whether the repair produced the required operational state.",
+      "rarity": "common"
+    }
+  ]
+}

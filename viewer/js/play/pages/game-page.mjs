@@ -171,7 +171,7 @@ function resultMarkup(session, context) {
 }
 
 function gameLoadingMarkup(error = null) {
-  return `<section class="play-route"><div class="game-loading"${error ? ' role="alert"' : ' aria-busy="true"'}><p class="play-eyebrow">Local authority</p><h1>${error ? 'Solo Match could not start' : 'Building repair queue…'}</h1><p>${escapeHtml(error || 'The Ticket Builder and engine are preparing a complete deterministic Match in a dedicated Worker.')}</p>${error ? '<a class="play-button" href="#/play/home">Return Home</a>' : ''}</div></section>`;
+  return `<section class="play-route"><div class="game-loading"${error ? ' role="alert"' : ' aria-busy="true"'}><p class="play-eyebrow">Local authority</p><h1>${error ? 'Solo Match could not start' : 'Building repair queue…'}</h1><p>${escapeHtml(error || 'The Ticket Builder and engine are preparing a complete deterministic Match in a dedicated Worker.')}</p>${error ? '<div class="button-row"><a class="play-button play-button--primary" href="#/play/decks">Review Deck coverage</a><a class="play-button" href="#/play/home">Return Home</a></div>' : ''}</div></section>`;
 }
 
 export function renderGame(root, context) {
@@ -239,7 +239,7 @@ export function renderGame(root, context) {
     if (session.benchView === 'GLOBAL' && session.benchRelevantOnly && !relevant) return false;
     if (session.benchTypeFilter !== 'ALL' && entry.diagnostic_type !== session.benchTypeFilter) return false;
     if (session.benchCategory !== 'ALL' && entry.category !== session.benchCategory) return false;
-    if (normalizedQuery && !`${cardName(card)} ${card?.rules_text ?? ''}`.toLocaleLowerCase().includes(normalizedQuery)) return false;
+    if (normalizedQuery && !`${entry.card_definition_id} ${cardName(card)} ${card?.rules_text ?? ''}`.toLocaleLowerCase().includes(normalizedQuery)) return false;
     return true;
   }).sort((left, right) => {
     const leftCard = context.catalog.cardById.get(left.card_definition_id);
@@ -259,7 +259,7 @@ export function renderGame(root, context) {
         <div><p class="play-eyebrow">Solo cooperative training</p><h1 id="game-heading">Night-shift board</h1><p>Round ${publicMatch.turn?.round_number ?? '—'} · Turn ${publicMatch.turn?.turn_number ?? '—'} · ${escapeHtml(publicMatch.turn?.phase?.replaceAll('_', ' ') || publicMatch.status)}</p></div>
         <dl class="game-resources" data-continuity-scroll="game:resources"><div><dt>Service Points</dt><dd>${player.team_service_points ?? player.service_points}</dd></div><div><dt>Actions</dt><dd>${publicMatch.turn?.actions_remaining ?? 0} / 2</dd></div><div><dt>Search</dt><dd>${view.utility_resources.search_tokens}</dd></div><div><dt>Refresh</dt><dd>${view.utility_resources.refresh_tokens}</dd></div><div><dt>Deck / Discard</dt><dd>${view.deck_count} / ${view.discard_card_instance_ids.length}</dd></div></dl>
       </header>
-      ${projection.duplicate_ticket_disclosure ? `<p class="duplicate-disclosure game-disclosure"><strong>${projection.ticket_count}-Ticket training queue:</strong> repeated scenario templates are intentionally permitted; each remains an independent machine state and evidence record.</p>` : ''}
+      ${projection.duplicate_ticket_disclosure ? `<p class="duplicate-disclosure game-disclosure"><strong>${projection.ticket_count}-Ticket training queue:</strong> repeated causal fingerprints are intentionally permitted; each remains an independent machine state and evidence record.</p>` : ''}
       ${actionResultMarkup(session, projection, context.catalog)}
       ${solutionRevealMarkup(view.solution_reveals ?? [], context.catalog, projection)}
       <div class="game-board">
@@ -289,7 +289,7 @@ export function renderGame(root, context) {
         <header class="diagnostic-bench__heading"><div><p class="play-eyebrow">Persistent shared affordances</p><h2 id="diagnostic-bench-heading">Diagnostic Bench</h2><p>${session.benchView === 'RELEVANT' ? `Focused shelf · ${relevantCount} of ${bench.length} diagnostics connected by public relationships.` : `Complete playable catalog · ${bench.length} diagnostics. Filters do not change legality.`}</p></div><div class="bench-view-switch" role="group" aria-label="Bench View"><button type="button" data-bench-view="RELEVANT" aria-pressed="${session.benchView === 'RELEVANT'}">Relevant</button><button type="button" data-bench-view="GLOBAL" aria-pressed="${session.benchView === 'GLOBAL'}">Global</button></div></header>
         <p class="diagnostic-disclaimer">${escapeHtml(view.diagnostic_relevance_notice || '')}</p>
         <div class="diagnostic-bench__controls">
-          ${session.benchView === 'GLOBAL' ? `<label>Search<input type="search" data-bench-search value="${escapeHtml(session.benchSearch)}" placeholder="Search diagnostics"></label>` : ''}
+          ${session.benchView === 'GLOBAL' ? `<label>Search<input type="search" data-bench-search data-continuity-key="game:bench-search" value="${escapeHtml(session.benchSearch)}" placeholder="Search diagnostics"></label>` : ''}
           <label>Type<select data-bench-type><option value="ALL">All</option><option value="TEST"${session.benchTypeFilter === 'TEST' ? ' selected' : ''}>Test</option><option value="COMMAND"${session.benchTypeFilter === 'COMMAND' ? ' selected' : ''}>Command</option></select></label>
           ${session.benchView === 'GLOBAL' ? `<label>Category<select data-bench-category><option value="ALL">All</option>${categories.map((category) => `<option value="${escapeHtml(category)}"${session.benchCategory === category ? ' selected' : ''}>${escapeHtml(category)}</option>`).join('')}</select></label><label>Sort<select data-bench-sort><option value="NAME">Name</option><option value="COST"${session.benchSort === 'COST' ? ' selected' : ''}>Cost</option><option value="TYPE"${session.benchSort === 'TYPE' ? ' selected' : ''}>Type</option></select></label><label class="switch-row"><input type="checkbox" data-bench-relevant${session.benchRelevantOnly ? ' checked' : ''}>Relevant only</label>` : ''}
         </div>

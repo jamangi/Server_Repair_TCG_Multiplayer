@@ -55,7 +55,10 @@
       "const": "first-version-v2"
     },
     "card_catalog_version": {
-      "const": "core-card-catalog-diagnosis-v2"
+      "enum": [
+        "core-card-catalog-diagnosis-v2",
+        "core-card-catalog-coverage-v3"
+      ]
     },
     "active_deck_id": {
       "type": [

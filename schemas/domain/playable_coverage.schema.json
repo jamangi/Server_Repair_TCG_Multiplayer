@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/playable_coverage.schema.json",
+  "title": "Playable coverage audit",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "stableId": { "type": "string", "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$" },
+    "idArray": { "type": "array", "items": { "$ref": "#/$defs/stableId" }, "uniqueItems": true },
+    "fingerprint": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "fingerprint_id": { "$ref": "#/$defs/stableId" },
+        "subsystem": { "$ref": "#/$defs/stableId" },
+        "part_ids": { "$ref": "#/$defs/idArray" },
+        "symptom_ids": { "$ref": "#/$defs/idArray" },
+        "public_candidate_fault_ids": { "$ref": "#/$defs/idArray" },
+        "actionable_fault_ids": { "$ref": "#/$defs/idArray" },
+        "causal_edge_ids": { "$ref": "#/$defs/idArray" },
+        "machine_state_keys": { "$ref": "#/$defs/idArray" },
+        "diagnostic_source_ids": { "$ref": "#/$defs/idArray" },
+        "isolation_route_kinds": { "type": "array", "items": { "enum": ["DIRECT_OBSERVATION", "DEFINITIVE_DIAGNOSTIC", "CORROBORATED_SUPPORT", "EVIDENCE_BACKED_ELIMINATION", "RECOVERY_DERIVED"] }, "uniqueItems": true },
+        "repair_procedure_ids": { "$ref": "#/$defs/idArray" },
+        "validation_procedure_ids": { "$ref": "#/$defs/idArray" },
+        "required_response_card_definition_ids": { "$ref": "#/$defs/idArray" },
+        "closure": { "type": "string", "minLength": 1 }
+      },
+      "required": ["fingerprint_id", "subsystem", "part_ids", "symptom_ids", "public_candidate_fault_ids", "actionable_fault_ids", "causal_edge_ids", "machine_state_keys", "diagnostic_source_ids", "isolation_route_kinds", "repair_procedure_ids", "validation_procedure_ids", "required_response_card_definition_ids", "closure"]
+    }
+  },
+  "properties": {
+    "coverage_version": { "$ref": "#/$defs/stableId" },
+    "part_catalog_version": { "$ref": "#/$defs/stableId" },
+    "ticket_content_version": { "$ref": "#/$defs/stableId" },
+    "domain_content_version": { "$ref": "#/$defs/stableId" },
+    "card_catalog_version": { "$ref": "#/$defs/stableId" },
+    "source_manifest_files": { "type": "array", "items": { "type": "string", "pattern": "^\\./[a-z0-9._-]+\\.json$" }, "uniqueItems": true },
+    "inventory": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "knowledge_records": { "type": "integer", "minimum": 1 },
+        "action_bearing_records": { "type": "integer", "minimum": 1 },
+        "tests": { "type": "integer", "minimum": 0 },
+        "commands": { "type": "integer", "minimum": 0 },
+        "repairs": { "type": "integer", "minimum": 0 },
+        "validations": { "type": "integer", "minimum": 0 },
+        "promoted_diagnostics": { "type": "integer", "minimum": 0 },
+        "selected_repairs": { "type": "integer", "minimum": 0 },
+        "selected_validations": { "type": "integer", "minimum": 0 },
+        "playable_card_definitions": { "type": "integer", "minimum": 0 },
+        "supported_fingerprints": { "type": "integer", "minimum": 0 },
+        "records_by_entity_type": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 0 } }
+      },
+      "required": ["knowledge_records", "action_bearing_records", "tests", "commands", "repairs", "validations", "promoted_diagnostics", "selected_repairs", "selected_validations", "playable_card_definitions", "supported_fingerprints", "records_by_entity_type"]
+    },
+    "selected_action_definition_ids": { "$ref": "#/$defs/idArray" },
+    "deferred_action_definition_ids": { "$ref": "#/$defs/idArray" },
+    "diagnostic_definition_ids": { "$ref": "#/$defs/idArray" },
+    "outcome_families": { "type": "array", "minItems": 3, "items": { "type": "object" } },
+    "fingerprints": { "type": "array", "items": { "$ref": "#/$defs/fingerprint" }, "minItems": 12 }
+  },
+  "required": ["coverage_version", "part_catalog_version", "ticket_content_version", "domain_content_version", "card_catalog_version", "source_manifest_files", "inventory", "selected_action_definition_ids", "deferred_action_definition_ids", "diagnostic_definition_ids", "outcome_families", "fingerprints"]
+}

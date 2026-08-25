@@ -61,8 +61,8 @@ function assertInvalid(instance, schemaName, messagePattern) {
 }
 
 test('all domain/runtime schemas parse, retain unique IDs, and resolve every local $ref', () => {
-  assert.equal(registry.schemas.length, 26);
-  assert.equal(registry.byId.size, 26);
+  assert.equal(registry.schemas.length, 28);
+  assert.equal(registry.byId.size, 28);
   assertAllSchemaRefsResolve(registry);
 
   const expectedIds = {

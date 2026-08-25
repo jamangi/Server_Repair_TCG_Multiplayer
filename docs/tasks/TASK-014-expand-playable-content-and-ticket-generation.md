@@ -2,7 +2,7 @@
 
 ## Status
 
-**Approved scope — blocked on completion of TASK-013.** PT-006 D was approved by the project owner on 2026-08-24. The synchronized diagnostic/candidate model must be stable before authoring its content at scale.
+**Completed 2026-08-24.** PT-006 D was implemented against the synchronized TASK-013 diagnostic/candidate model.
 
 ## Approved authority
 
@@ -137,3 +137,36 @@ Do not create full illustrations, tutorial overlays, SLA limits, multiplayer tra
 ## Completion boundary
 
 Complete only when the approved content breadth is playable and coverage-audited; generated Tickets are materially assembled rather than whole-template clones; 1–10 queues maximize real diversity before balanced repetition; every selected path is provably reachable with the exact Match resources; no declaration can hide a missing requirement; automated games exercise every supported fingerprint; and the UI explains compatibility without exposing truth.
+
+## Completion record — 2026-08-24
+
+### Outcome
+
+- Published a pinned 257-record domain snapshot and machine/human coverage audits that distinguish all 107 action-bearing definitions, the 50 promoted Test/Command diagnostics, twelve selected Repairs, nine selected Validations, twelve supported fingerprints, and 36 deferred actions.
+- Added two complete causal fingerprints each for storage, memory, power, boot, thermal, and network. Every path has relationship-bound candidates and outcomes, typed Isolation routes, exact Repair/Verify requirements, closure metadata, and deterministic clean, irrelevant, inconclusive, or candidate-changing Evidence for every target-compatible Bench diagnostic and machine state.
+- Replaced whole-template selection for this release with `ticket-builder-v3` assembly from independent versioned public-context, candidate, truth, causal, target, outcome, route, Repair, Verify, closure, and teaching parts. Snapshots record every part ID, fingerprint ID, content pin, generator pin, and causal digest.
+- Enforced exact active-deck counts, the complete 50-definition Bench, declaration cross-checking, complete-or-none solvability, unique-before-repeat selection, and balanced deterministic repetition. Deliberately missing diagnostic, Repair, Verify, response quantity, or declared legality fails before Match creation.
+- Updated local Solo Play to load the expanded catalog, instantiate all 50 diagnostics in one Relevant/Global Bench, show exact deck/fingerprint/subsystem coverage, disclose the repetition boundary, block legal-but-unsolvable decks, preserve returning profile/statistic records while replacing incompatible v2 deck definitions, and offer Deck coverage recovery on Builder failure.
+- Committed a 13-row campaign: one seat-safe deterministic run per fingerprint across two response-deck orderings plus a two-Ticket exact-resource run that exercised draw, Search, Refresh, two closures, and queue completion. All 13 succeeded with zero exceptions, rejected intents, legal-progress gaps, or deterministic mismatches.
+
+### Verification
+
+| Command | Exit | Result |
+| --- | ---: | --- |
+| `node viewer/scripts/build-task-014-content.mjs` | 0 | generated 71 Cards and twelve coverage paths from 257 pinned records |
+| `node --check viewer/js/app.js`; `node --check viewer/js/data-loader.js`; `node --check viewer/js/entity-types.js` | 0 | baseline Viewer syntax passed |
+| `node --test tests/viewer-baseline.test.mjs` | 0 | 3 passed, 0 failed |
+| `node --test tests/*.test.mjs` | 0 | 119 passed, 0 failed, 0 skipped |
+| `node viewer/scripts/build-play-assets.mjs`; `node viewer/scripts/verify-play-assets.mjs` | 0 | 40 deterministic Play assets staged and verified |
+| `node tools/run-automated-games.mjs --verify-report automated_games/task-009-foundation-v1` | 0 | 22 frozen foundation rows verified with 0 deterministic mismatches |
+| `node tools/run-task-014-campaign.mjs --verify-report automated_games/task-014-playable-coverage-v3` | 0 | 13 expanded-content rows verified with 0 exceptions or deterministic mismatches |
+| Playwright TASK-010/TASK-012/TASK-013/TASK-014 browser matrix | 0 | 22 passed, 0 failed, 34 intentional project skips |
+| `git diff --check` | 0 | no whitespace errors |
+
+### Changed-file inventory
+
+Changes stay within the task allowlist: versioned gameplay content and generated coverage report; two new domain schemas and focused Ticket/Builder/client schema extensions; the v3 Builder and solvability proof; seat-safe simulation policy, campaign runner, settings, matches, and summaries; canonical and staged Solo content/Builder assets; catalog, Worker, local-data, Home, Deck, Settings, and game-board integration; Node and browser regression tests; release/index documentation; and this completion record.
+
+### Unresolved items
+
+None. TASK-011 may now create illustrations against the stable expanded catalog. TASK-016 owns the approved Bench/board composition polish, and TASK-015 owns guided tutorial/reveal presentation; neither was started here.

@@ -4,13 +4,14 @@ import {
   submitIntent,
 } from '../../generated/play/src/engine/index.mjs';
 import {
-  buildTicketsV2,
-  createDiagnosisV2Catalogs,
-  DIAGNOSIS_V2_BUILDER_VERSION,
-  DIAGNOSIS_V2_CARD_CATALOG_VERSION,
-  DIAGNOSIS_V2_CONFIGURATION_VERSION,
-  DIAGNOSIS_V2_TICKET_CONTENT_VERSION,
-} from '../../generated/play/src/builder/diagnosis-v2.mjs';
+  buildTicketsV3,
+  createTask014Catalogs,
+  TASK_014_BUILDER_VERSION,
+  TASK_014_CARD_CATALOG_VERSION,
+  TASK_014_CONFIGURATION_VERSION,
+  TASK_014_DOMAIN_CONTENT_VERSION,
+  TASK_014_TICKET_CONTENT_VERSION,
+} from '../../generated/play/src/builder/task-014.mjs';
 
 const PLAYER_ID = 'player.solo';
 const TEAM_ID = 'team.cooperative';
@@ -34,15 +35,14 @@ async function loadJson(name) {
 
 async function loadCatalogs() {
   if (catalogs) return catalogs;
-  const [cards, decks, domain, ticketContent, migration] = await Promise.all([
-    loadJson('card-catalog.json'),
-    loadJson('decks.json'),
-    loadJson('domain-snapshot.json'),
-    loadJson('ticket-templates.json'),
-    loadJson('diagnosis-v2-migration.json'),
+  const [cards, decks, domain, parts, coverage] = await Promise.all([
+    loadJson('card-catalog-v3.json'),
+    loadJson('decks-v3.json'),
+    loadJson('domain-snapshot-v2.json'),
+    loadJson('task-014-parts.json'),
+    loadJson('playable-coverage-v3.json'),
   ]);
-  if (migration.successor_ruleset_version !== 'first-version-v2') throw new Error('Diagnosis migration version is incompatible.');
-  catalogs = createDiagnosisV2Catalogs({ cards, decks, domain, ticketContent });
+  catalogs = createTask014Catalogs({ cards, decks, domain, parts, coverage });
   return catalogs;
 }
 
@@ -50,18 +50,29 @@ function bounds(minimum, maximum) {
   return { minimum, maximum };
 }
 
-function builderConfiguration(ticketCount, seed, legalCardDefinitionIds) {
+function compactCounts(cardDefinitionIds) {
+  const counts = {};
+  for (const id of cardDefinitionIds) counts[id] = (counts[id] ?? 0) + 1;
+  return counts;
+}
+
+function builderConfiguration(ticketCount, seed, responseCardDefinitionIds, loadedCatalogs) {
+  const diagnosticIds = loadedCatalogs.cards.cards
+    .filter((card) => card.play_contract?.contract_type === 'DIAGNOSTIC')
+    .map((card) => card.id)
+    .sort();
+  const availableCounts = compactCounts(responseCardDefinitionIds);
   return {
     id: `builder_config.solo_pages.${ticketCount}`,
     entity_type: 'ticket_builder_configuration',
-    configuration_version: DIAGNOSIS_V2_CONFIGURATION_VERSION,
+    configuration_version: TASK_014_CONFIGURATION_VERSION,
     scenario_or_mode_context: 'TRAINING',
     requested_ticket_count: ticketCount,
     seed,
-    generator_version: DIAGNOSIS_V2_BUILDER_VERSION,
-    content_version: DIAGNOSIS_V2_TICKET_CONTENT_VERSION,
-    domain_content_version: 'core-domain-snapshot-v1',
-    card_catalog_version: DIAGNOSIS_V2_CARD_CATALOG_VERSION,
+    generator_version: TASK_014_BUILDER_VERSION,
+    content_version: TASK_014_TICKET_CONTENT_VERSION,
+    domain_content_version: TASK_014_DOMAIN_CONTENT_VERSION,
+    card_catalog_version: TASK_014_CARD_CATALOG_VERSION,
     allowed_domain_ids: [],
     excluded_domain_ids: [],
     allowed_tags: [],
@@ -89,7 +100,9 @@ function builderConfiguration(ticketCount, seed, legalCardDefinitionIds) {
     generation_index_start: 0,
     allow_duplicate_causal_fingerprints: true,
     active_causal_fingerprints: [],
-    legal_card_definition_ids: [...new Set(legalCardDefinitionIds)].sort(),
+    legal_card_definition_ids: [...new Set([...diagnosticIds, ...responseCardDefinitionIds])].sort(),
+    diagnostic_card_definition_ids: diagnosticIds,
+    available_card_definition_counts: availableCounts,
     fallback_configuration_id: null,
   };
 }
@@ -153,7 +166,7 @@ function project() {
     view,
     legal_intents: legalIntents,
     ticket_presentations: safeTicketPresentations(state),
-    duplicate_ticket_disclosure: matchMetadata.ticket_count > 1,
+    duplicate_ticket_disclosure: matchMetadata.has_repeated_fingerprint,
     ticket_count: matchMetadata.ticket_count,
   };
 }
@@ -242,8 +255,8 @@ async function startMatch(payload) {
   if (state) throw new Error('A local Match is already active.');
   assertStartPayload(payload);
   const loaded = await loadCatalogs();
-  const configuration = builderConfiguration(payload.ticket_count, payload.seed, payload.card_definition_ids);
-  const builderResult = buildTicketsV2({
+  const configuration = builderConfiguration(payload.ticket_count, payload.seed, payload.card_definition_ids, loaded);
+  const builderResult = buildTicketsV3({
     configuration,
     catalogs: loaded,
   });
@@ -254,7 +267,11 @@ async function startMatch(payload) {
   }
   const now = new Date().toISOString();
   startedAtMilliseconds = Date.parse(now);
-  matchMetadata = { ticket_count: payload.ticket_count, deck_id: payload.deck_id };
+  matchMetadata = {
+    ticket_count: payload.ticket_count,
+    deck_id: payload.deck_id,
+    has_repeated_fingerprint: new Set(attempt.selected_template_ids).size < attempt.selected_template_ids.length,
+  };
   state = createMatch({
     matchId: payload.match_id,
     players: [{

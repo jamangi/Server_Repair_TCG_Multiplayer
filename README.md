@@ -67,11 +67,11 @@ This repository currently contains:
 - approved and unresolved game rules;
 - starter technical catalogs and recommended match models;
 - synchronized draft domain and runtime schemas with valid and invalid examples;
-- a version-pinned server gameplay pack with 11 typed Card Definitions, legal 30-card deck snapshots, and three complete storage/RAID Repair Tickets;
+- a version-pinned playable pack with 71 typed Card Definitions: all 50 current Test/Command diagnostics in the Global Bench plus the 12 Repairs and nine Validations required by twelve supported causal fingerprints across storage, memory, power, boot, thermal, and network;
 - a dependency-free deterministic engine for authenticated intents, private/team/public Evidence, exact Isolation-to-Repair gates, failed Verify returns, Documentation, atomic closure, scoring, queue reconciliation, and offline terminal results;
-- a constraint-driven deterministic Ticket Builder with complete-or-none validation, structured diagnostics, and separately audited fallback attempts;
-- seat-safe cooperative and competitive computer policies plus a committed 22-run reproducible automated-game campaign;
-- a working static GitHub Pages application with the established Domain Library plus a browser-local solo Play slice, deck editor, profile/statistics, validated backup portability, and Worker-authoritative 1–10 Ticket matches;
+- a part-assembling deterministic Ticket Builder with exact diagnostic/outcome and active-deck resource proof, complete-or-none validation, unique-before-repeat queues, balanced repetition, structured diagnostics, and reproducible provenance;
+- seat-safe cooperative and competitive computer policies plus the frozen 22-run foundation campaign and a 13-run expanded-content campaign covering every supported fingerprint and a multi-Ticket resource path;
+- a working static GitHub Pages application with the established Domain Library plus a browser-local solo Play slice, 50-item Relevant/Global Diagnostic Bench, coverage-aware deck editor and Home preflight, profile/statistics, validated backup portability, and Worker-authoritative 1–10 Ticket matches;
 - a versioned case-study research system with a completed pilot spanning several troubleshooting subsystems;
 - a provisional story foundation with a fictional company, campaign frame, ensemble, voice guide, and story-derived gameplay candidates;
 - a non-authoritative, replayable candidate-flow package that combines temporary rules, exact card/deck/Ticket fixtures, complete matches, and landing-to-logout campaign and multiplayer journeys;
@@ -87,7 +87,7 @@ Read the design documents in this order:
 2. [`docs/design/decisions/FROZEN_RULES.md`](docs/design/decisions/FROZEN_RULES.md) — approved behavior implementations may rely on.
 3. [`docs/design/decisions/UNFROZEN_RULES.md`](docs/design/decisions/UNFROZEN_RULES.md) — accepted open rules and pressure against frozen behavior.
 4. [`docs/design/decisions/APPROVALS.md`](docs/design/decisions/APPROVALS.md) — the current post-playtest option packet awaiting user choices; it is non-authoritative until approved.
-5. [`docs/design/SOLO_PAGES_PROFILE.md`](docs/design/SOLO_PAGES_PROFILE.md) — the derived `solo-pages-v1` implementation profile; it configures the local training client without copying or overriding Frozen Rules.
+5. [`docs/design/SOLO_PAGES_PROFILE_V2.md`](docs/design/SOLO_PAGES_PROFILE_V2.md) — the current `solo-pages-v2` successor profile; the original [`solo-pages-v1` profile](docs/design/SOLO_PAGES_PROFILE.md) remains pinned for its historical artifacts.
 6. [`docs/design/RECOMMENDED_DATA_MODEL.md`](docs/design/RECOMMENDED_DATA_MODEL.md) and [`RECOMMENDED_PRESETS.json`](docs/design/RECOMMENDED_PRESETS.json) — architectural and balance recommendations, not frozen contracts.
 7. [`docs/design/00_GAME_ENGINE_OVERVIEW.md`](docs/design/00_GAME_ENGINE_OVERVIEW.md) through [`07_FAULT_BROWSER_AND_SEARCH.md`](docs/design/07_FAULT_BROWSER_AND_SEARCH.md) — the synchronized foundational vision, architecture, and starter catalogs. Frozen decisions still take precedence.
 8. [`docs/design/DOCUMENTS_TO_UPDATE.md`](docs/design/DOCUMENTS_TO_UPDATE.md) — the audited migration ledger, including completed, superseded, deferred, and still-relevant recommendations.
@@ -102,7 +102,7 @@ If implementation exposes a new rule question or pressure against frozen behavio
 - [`docs/story/`](docs/story/) — the working fictional setting, company, campaign frame, characters, voice, real-world inspiration boundary, and story-derived candidate mechanics. Begin with its [`README`](docs/story/README.md).
 - [`docs/tasks/`](docs/tasks/) — scoped implementation and research contracts, with [`INDEX.md`](docs/tasks/INDEX.md) identifying the current task state.
 - [`docs/ui-plan/`](docs/ui-plan/) — provisional application structure and original visual wireframes.
-- [`viewer/`](viewer/) — the static Pages root: the established reusable Domain Library plus the `solo-pages-v1` local Play experience. It is not the production multiplayer client.
+- [`viewer/`](viewer/) — the static Pages root: the established reusable Domain Library plus the `solo-pages-v2` local Play experience. It is not the production multiplayer client.
 - [`content/gameplay-v1/`](content/gameplay-v1/) — the first immutable server-side gameplay snapshot: selected domain inputs, typed Cards, deck snapshots, and authored Ticket templates. It is deliberately separate from the browser-delivered Viewer pack.
 - [`src/`](src/) — the deterministic authoritative engine, Ticket Builder/solvability oracle, and offline simulation/reporting modules.
 - [`automated_games/`](automated_games/) — compact committed campaign settings, match rows, recomputed summaries, and exception-only diagnostics.

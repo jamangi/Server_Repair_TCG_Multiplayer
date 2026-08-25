@@ -20,6 +20,7 @@ const DISPOSITION_WEIGHT = Object.freeze({
 export const SUPPORTED_POLICY_IDS = Object.freeze([
   'methodical-seat-safe-v1',
   'methodical-seat-safe-v2',
+  'coverage-seat-safe-v3',
   'publication-seat-safe-v1',
   'scripted-cooperative-v1',
   'scripted-competitive-v1',
@@ -91,6 +92,13 @@ function viewContains(view, token) {
   return canonical(view).includes(token);
 }
 
+function diagnosticIsPubliclyRelevant(view, option) {
+  const details = payload(option);
+  const benchEntry = view.diagnostic_bench?.find((entry) => entry.card_instance_id === details.card_instance_id);
+  return benchEntry?.ticket_relevance?.some((entry) =>
+    entry.ticket_instance_id === details.ticket_instance_id && entry.relevant) === true;
+}
+
 function priority(policyId, view, option) {
   const type = actionType(option);
   if (type === 'PASS_TURN') return 100;
@@ -105,7 +113,9 @@ function priority(policyId, view, option) {
   if (type === 'DOCUMENT_LIVE' && (publicationPolicy || failureVisible)) return 1;
   if (type === 'PERFORM_VERIFY') return 2;
   if (type === 'PERFORM_REPAIR') return 3;
-  if (type === 'SET_ELIMINATION') return 5;
+  if (type === 'SET_ELIMINATION') {
+    return policyId === 'coverage-seat-safe-v3' && payload(option).eliminated !== true ? 40 : 5;
+  }
   if (type === 'COMMIT_ISOLATION') {
     const score = candidateScore(view, option);
     const actorHasRejected = viewContains(view, 'ISOLATION_NOT_SUPPORTED');
@@ -118,7 +128,9 @@ function priority(policyId, view, option) {
       && view.authorized_events?.some((event) => event.event_type === 'EVIDENCE_CREATED'
         && event.payload?.source_definition_id === sourceId
         && event.payload?.machine_revision === payload(option).observed_machine_revision);
-    return repeatedAtCurrentRevision ? 30 : 6;
+    if (repeatedAtCurrentRevision) return 30;
+    if (policyId === 'coverage-seat-safe-v3') return diagnosticIsPubliclyRelevant(view, option) ? 6 : 25;
+    return 6;
   }
   if (type === 'DOCUMENT_LIVE') return 7;
   if (type === 'SEARCH') return 8;

@@ -1,0 +1,1029 @@
+[
+  {
+    "builder_diagnostic_codes": [],
+    "classification": "SUCCEEDED",
+    "concessions": 0,
+    "contribution_counts": [
+      {
+        "assists": 0,
+        "closures": 1,
+        "documentation": 0,
+        "failed_verifies": 0,
+        "isolations": 2,
+        "player_id": "player_a",
+        "redundant_or_superseded_actions": 0,
+        "rejected_isolations": 1,
+        "repairs": 1,
+        "team_id": "team.cooperative",
+        "tests": 2,
+        "verifies": 1
+      }
+    ],
+    "determinism": {
+      "identical": true,
+      "mismatch_fields": []
+    },
+    "disconnects": 0,
+    "elapsed_virtual_time_seconds": 35,
+    "match_id": "task-014-playable-coverage-v3.task-014-boot-incorrect_order.seed-14001",
+    "no_legal_progress_move": false,
+    "outcome": {
+      "match_status": "COMPLETED",
+      "reason_codes": [
+        "QUEUE_EMPTY"
+      ],
+      "valid": true,
+      "winner_player_ids": [],
+      "winning_team_ids": [
+        "team.cooperative"
+      ]
+    },
+    "player_service_points": [
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "starting": 0
+      }
+    ],
+    "rejected_intent_codes": [],
+    "rejected_intents": 0,
+    "replay_digest": "f09c95d660235a0715fa7121b18eb4ce4ad478d9eac81149bc164e912be9ffa5",
+    "rounds": 3,
+    "scores": {
+      "players": {
+        "player_a": 0
+      },
+      "teams": {
+        "team.cooperative": 2
+      }
+    },
+    "seed": "14001",
+    "setting_group_id": "task-014-boot-incorrect_order",
+    "stall_classification": "NONE",
+    "started": true,
+    "team_service_points": [
+      {
+        "final": 2,
+        "net": 2,
+        "starting": 0,
+        "team_id": "team.cooperative"
+      }
+    ],
+    "terminal_reason_codes": [
+      "QUEUE_EMPTY"
+    ],
+    "ticket_snapshot_digest": "069d5152aaf9a0b8a626c5feb4d47bf4c39db3866a03e65d2f328a931045375c",
+    "tickets_closed": 1,
+    "tickets_quarantined": 0,
+    "turns": 3
+  },
+  {
+    "builder_diagnostic_codes": [],
+    "classification": "SUCCEEDED",
+    "concessions": 0,
+    "contribution_counts": [
+      {
+        "assists": 0,
+        "closures": 1,
+        "documentation": 0,
+        "failed_verifies": 0,
+        "isolations": 25,
+        "player_id": "player_a",
+        "redundant_or_superseded_actions": 0,
+        "rejected_isolations": 24,
+        "repairs": 1,
+        "team_id": "team.cooperative",
+        "tests": 21,
+        "verifies": 3
+      }
+    ],
+    "determinism": {
+      "identical": true,
+      "mismatch_fields": []
+    },
+    "disconnects": 0,
+    "elapsed_virtual_time_seconds": 255,
+    "match_id": "task-014-playable-coverage-v3.task-014-boot-missing_nvme.seed-14002",
+    "no_legal_progress_move": false,
+    "outcome": {
+      "match_status": "COMPLETED",
+      "reason_codes": [
+        "QUEUE_EMPTY"
+      ],
+      "valid": true,
+      "winner_player_ids": [],
+      "winning_team_ids": [
+        "team.cooperative"
+      ]
+    },
+    "player_service_points": [
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "starting": 0
+      }
+    ],
+    "rejected_intent_codes": [],
+    "rejected_intents": 0,
+    "replay_digest": "1b206997052b453589e6f67f75d6d8378e7eda5f9eb64b95349babca0e3b3c69",
+    "rounds": 27,
+    "scores": {
+      "players": {
+        "player_a": 0
+      },
+      "teams": {
+        "team.cooperative": 2
+      }
+    },
+    "seed": "14002",
+    "setting_group_id": "task-014-boot-missing_nvme",
+    "stall_classification": "NONE",
+    "started": true,
+    "team_service_points": [
+      {
+        "final": 2,
+        "net": 2,
+        "starting": 0,
+        "team_id": "team.cooperative"
+      }
+    ],
+    "terminal_reason_codes": [
+      "QUEUE_EMPTY"
+    ],
+    "ticket_snapshot_digest": "867f780b10c79fd7cd4548f27fa22ff8a39fa83f1cb43d0437a904b3799e3e45",
+    "tickets_closed": 1,
+    "tickets_quarantined": 0,
+    "turns": 27
+  },
+  {
+    "builder_diagnostic_codes": [],
+    "classification": "SUCCEEDED",
+    "concessions": 0,
+    "contribution_counts": [
+      {
+        "assists": 0,
+        "closures": 1,
+        "documentation": 0,
+        "failed_verifies": 0,
+        "isolations": 1,
+        "player_id": "player_a",
+        "redundant_or_superseded_actions": 0,
+        "rejected_isolations": 0,
+        "repairs": 1,
+        "team_id": "team.cooperative",
+        "tests": 14,
+        "verifies": 1
+      }
+    ],
+    "determinism": {
+      "identical": true,
+      "mismatch_fields": []
+    },
+    "disconnects": 0,
+    "elapsed_virtual_time_seconds": 90,
+    "match_id": "task-014-playable-coverage-v3.task-014-memory-failed_dimm.seed-14003",
+    "no_legal_progress_move": false,
+    "outcome": {
+      "match_status": "COMPLETED",
+      "reason_codes": [
+        "QUEUE_EMPTY"
+      ],
+      "valid": true,
+      "winner_player_ids": [],
+      "winning_team_ids": [
+        "team.cooperative"
+      ]
+    },
+    "player_service_points": [
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "starting": 0
+      }
+    ],
+    "rejected_intent_codes": [],
+    "rejected_intents": 0,
+    "replay_digest": "88b85893cf134714f7078e89542e4b1d27622d79a9a6c930807e11c3ceb1def8",
+    "rounds": 11,
+    "scores": {
+      "players": {
+        "player_a": 0
+      },
+      "teams": {
+        "team.cooperative": 2
+      }
+    },
+    "seed": "14003",
+    "setting_group_id": "task-014-memory-failed_dimm",
+    "stall_classification": "NONE",
+    "started": true,
+    "team_service_points": [
+      {
+        "final": 2,
+        "net": 2,
+        "starting": 0,
+        "team_id": "team.cooperative"
+      }
+    ],
+    "terminal_reason_codes": [
+      "QUEUE_EMPTY"
+    ],
+    "ticket_snapshot_digest": "c2c0a520fb8e3cb46cfe90e1db33e06e1ab10acfc200825f4e0c34e279cfb790",
+    "tickets_closed": 1,
+    "tickets_quarantined": 0,
+    "turns": 11
+  },
+  {
+    "builder_diagnostic_codes": [],
+    "classification": "SUCCEEDED",
+    "concessions": 0,
+    "contribution_counts": [
+      {
+        "assists": 0,
+        "closures": 1,
+        "documentation": 2,
+        "failed_verifies": 0,
+        "isolations": 14,
+        "player_id": "player_a",
+        "redundant_or_superseded_actions": 0,
+        "rejected_isolations": 13,
+        "repairs": 1,
+        "team_id": "team.cooperative",
+        "tests": 17,
+        "verifies": 2
+      }
+    ],
+    "determinism": {
+      "identical": true,
+      "mismatch_fields": []
+    },
+    "disconnects": 0,
+    "elapsed_virtual_time_seconds": 185,
+    "match_id": "task-014-playable-coverage-v3.task-014-memory-unseated_dimm.seed-14004",
+    "no_legal_progress_move": false,
+    "outcome": {
+      "match_status": "COMPLETED",
+      "reason_codes": [
+        "QUEUE_EMPTY"
+      ],
+      "valid": true,
+      "winner_player_ids": [],
+      "winning_team_ids": [
+        "team.cooperative"
+      ]
+    },
+    "player_service_points": [
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "starting": 0
+      }
+    ],
+    "rejected_intent_codes": [],
+    "rejected_intents": 0,
+    "replay_digest": "96f796218085bbe6237775562a9f5a1c4fa0f353a13df68c0acdc145c4cca414",
+    "rounds": 19,
+    "scores": {
+      "players": {
+        "player_a": 0
+      },
+      "teams": {
+        "team.cooperative": 2
+      }
+    },
+    "seed": "14004",
+    "setting_group_id": "task-014-memory-unseated_dimm",
+    "stall_classification": "NONE",
+    "started": true,
+    "team_service_points": [
+      {
+        "final": 2,
+        "net": 2,
+        "starting": 0,
+        "team_id": "team.cooperative"
+      }
+    ],
+    "terminal_reason_codes": [
+      "QUEUE_EMPTY"
+    ],
+    "ticket_snapshot_digest": "638c76daa4b756cebf9654f0bcd0416e8a213fed55a380fe3dadd31f75200663",
+    "tickets_closed": 1,
+    "tickets_quarantined": 0,
+    "turns": 19
+  },
+  {
+    "builder_diagnostic_codes": [],
+    "classification": "SUCCEEDED",
+    "concessions": 0,
+    "contribution_counts": [
+      {
+        "assists": 0,
+        "closures": 1,
+        "documentation": 18,
+        "failed_verifies": 0,
+        "isolations": 1,
+        "player_id": "player_a",
+        "redundant_or_superseded_actions": 0,
+        "rejected_isolations": 0,
+        "repairs": 1,
+        "team_id": "team.cooperative",
+        "tests": 18,
+        "verifies": 3
+      }
+    ],
+    "determinism": {
+      "identical": true,
+      "mismatch_fields": []
+    },
+    "disconnects": 0,
+    "elapsed_virtual_time_seconds": 220,
+    "match_id": "task-014-playable-coverage-v3.task-014-network-failed_cable.seed-14005",
+    "no_legal_progress_move": false,
+    "outcome": {
+      "match_status": "COMPLETED",
+      "reason_codes": [
+        "QUEUE_EMPTY"
+      ],
+      "valid": true,
+      "winner_player_ids": [],
+      "winning_team_ids": [
+        "team.cooperative"
+      ]
+    },
+    "player_service_points": [
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "starting": 0
+      }
+    ],
+    "rejected_intent_codes": [],
+    "rejected_intents": 0,
+    "replay_digest": "b69c736291e548f94e6deae7d7c3b9d4de232fe029d16478af4a4c771c8a44c7",
+    "rounds": 22,
+    "scores": {
+      "players": {
+        "player_a": 0
+      },
+      "teams": {
+        "team.cooperative": 2
+      }
+    },
+    "seed": "14005",
+    "setting_group_id": "task-014-network-failed_cable",
+    "stall_classification": "NONE",
+    "started": true,
+    "team_service_points": [
+      {
+        "final": 2,
+        "net": 2,
+        "starting": 0,
+        "team_id": "team.cooperative"
+      }
+    ],
+    "terminal_reason_codes": [
+      "QUEUE_EMPTY"
+    ],
+    "ticket_snapshot_digest": "ce2d91a9048b6773e2adc3c48e7e8d20b2f81437bfebce326006105c7d5f3164",
+    "tickets_closed": 1,
+    "tickets_quarantined": 0,
+    "turns": 22
+  },
+  {
+    "builder_diagnostic_codes": [],
+    "classification": "SUCCEEDED",
+    "concessions": 0,
+    "contribution_counts": [
+      {
+        "assists": 0,
+        "closures": 1,
+        "documentation": 4,
+        "failed_verifies": 0,
+        "isolations": 1,
+        "player_id": "player_a",
+        "redundant_or_superseded_actions": 0,
+        "rejected_isolations": 0,
+        "repairs": 1,
+        "team_id": "team.cooperative",
+        "tests": 25,
+        "verifies": 1
+      }
+    ],
+    "determinism": {
+      "identical": true,
+      "mismatch_fields": []
+    },
+    "disconnects": 0,
+    "elapsed_virtual_time_seconds": 175,
+    "match_id": "task-014-playable-coverage-v3.task-014-network-incorrect_static_ip.seed-14006",
+    "no_legal_progress_move": false,
+    "outcome": {
+      "match_status": "COMPLETED",
+      "reason_codes": [
+        "QUEUE_EMPTY"
+      ],
+      "valid": true,
+      "winner_player_ids": [],
+      "winning_team_ids": [
+        "team.cooperative"
+      ]
+    },
+    "player_service_points": [
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "starting": 0
+      }
+    ],
+    "rejected_intent_codes": [],
+    "rejected_intents": 0,
+    "replay_digest": "86b2ad60759b412de1c485e803c868beaec7e42df5baed79f7cf9e7e791be23b",
+    "rounds": 17,
+    "scores": {
+      "players": {
+        "player_a": 0
+      },
+      "teams": {
+        "team.cooperative": 2
+      }
+    },
+    "seed": "14006",
+    "setting_group_id": "task-014-network-incorrect_static_ip",
+    "stall_classification": "NONE",
+    "started": true,
+    "team_service_points": [
+      {
+        "final": 2,
+        "net": 2,
+        "starting": 0,
+        "team_id": "team.cooperative"
+      }
+    ],
+    "terminal_reason_codes": [
+      "QUEUE_EMPTY"
+    ],
+    "ticket_snapshot_digest": "f71213a5ea1896ef8cb4a7fc4590ab4ff8fc25cccdc1948e9e2497e16d544628",
+    "tickets_closed": 1,
+    "tickets_quarantined": 0,
+    "turns": 17
+  },
+  {
+    "builder_diagnostic_codes": [],
+    "classification": "SUCCEEDED",
+    "concessions": 0,
+    "contribution_counts": [
+      {
+        "assists": 0,
+        "closures": 1,
+        "documentation": 9,
+        "failed_verifies": 0,
+        "isolations": 10,
+        "player_id": "player_a",
+        "redundant_or_superseded_actions": 0,
+        "rejected_isolations": 9,
+        "repairs": 1,
+        "team_id": "team.cooperative",
+        "tests": 19,
+        "verifies": 1
+      }
+    ],
+    "determinism": {
+      "identical": true,
+      "mismatch_fields": []
+    },
+    "disconnects": 0,
+    "elapsed_virtual_time_seconds": 205,
+    "match_id": "task-014-playable-coverage-v3.task-014-power-failed_psu.seed-14007",
+    "no_legal_progress_move": false,
+    "outcome": {
+      "match_status": "COMPLETED",
+      "reason_codes": [
+        "QUEUE_EMPTY"
+      ],
+      "valid": true,
+      "winner_player_ids": [],
+      "winning_team_ids": [
+        "team.cooperative"
+      ]
+    },
+    "player_service_points": [
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "starting": 0
+      }
+    ],
+    "rejected_intent_codes": [],
+    "rejected_intents": 0,
+    "replay_digest": "773e589b554881b8b4626a0605de40705610e8c08d2eff41830f851ec549b56d",
+    "rounds": 23,
+    "scores": {
+      "players": {
+        "player_a": 0
+      },
+      "teams": {
+        "team.cooperative": 2
+      }
+    },
+    "seed": "14007",
+    "setting_group_id": "task-014-power-failed_psu",
+    "stall_classification": "NONE",
+    "started": true,
+    "team_service_points": [
+      {
+        "final": 2,
+        "net": 2,
+        "starting": 0,
+        "team_id": "team.cooperative"
+      }
+    ],
+    "terminal_reason_codes": [
+      "QUEUE_EMPTY"
+    ],
+    "ticket_snapshot_digest": "44764cce62eab05ae74f9678be42f30cb27b907cd0080ba864133a4b29ddf2d6",
+    "tickets_closed": 1,
+    "tickets_quarantined": 0,
+    "turns": 23
+  },
+  {
+    "builder_diagnostic_codes": [],
+    "classification": "SUCCEEDED",
+    "concessions": 0,
+    "contribution_counts": [
+      {
+        "assists": 0,
+        "closures": 1,
+        "documentation": 0,
+        "failed_verifies": 0,
+        "isolations": 5,
+        "player_id": "player_a",
+        "redundant_or_superseded_actions": 0,
+        "rejected_isolations": 4,
+        "repairs": 1,
+        "team_id": "team.cooperative",
+        "tests": 6,
+        "verifies": 1
+      }
+    ],
+    "determinism": {
+      "identical": true,
+      "mismatch_fields": []
+    },
+    "disconnects": 0,
+    "elapsed_virtual_time_seconds": 70,
+    "match_id": "task-014-playable-coverage-v3.task-014-power-unseated_psu.seed-14008",
+    "no_legal_progress_move": false,
+    "outcome": {
+      "match_status": "COMPLETED",
+      "reason_codes": [
+        "QUEUE_EMPTY"
+      ],
+      "valid": true,
+      "winner_player_ids": [],
+      "winning_team_ids": [
+        "team.cooperative"
+      ]
+    },
+    "player_service_points": [
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "starting": 0
+      }
+    ],
+    "rejected_intent_codes": [],
+    "rejected_intents": 0,
+    "replay_digest": "c2586d464bf564d2ace6b555d4a449e5cd570f81e059a86952511264beac4b64",
+    "rounds": 7,
+    "scores": {
+      "players": {
+        "player_a": 0
+      },
+      "teams": {
+        "team.cooperative": 2
+      }
+    },
+    "seed": "14008",
+    "setting_group_id": "task-014-power-unseated_psu",
+    "stall_classification": "NONE",
+    "started": true,
+    "team_service_points": [
+      {
+        "final": 2,
+        "net": 2,
+        "starting": 0,
+        "team_id": "team.cooperative"
+      }
+    ],
+    "terminal_reason_codes": [
+      "QUEUE_EMPTY"
+    ],
+    "ticket_snapshot_digest": "b8dec93240d60534195bbd62718690c0b3f64e1fb54ce9c63a516a710410e758",
+    "tickets_closed": 1,
+    "tickets_quarantined": 0,
+    "turns": 7
+  },
+  {
+    "builder_diagnostic_codes": [],
+    "classification": "SUCCEEDED",
+    "concessions": 0,
+    "contribution_counts": [
+      {
+        "assists": 0,
+        "closures": 1,
+        "documentation": 0,
+        "failed_verifies": 0,
+        "isolations": 11,
+        "player_id": "player_a",
+        "redundant_or_superseded_actions": 0,
+        "rejected_isolations": 10,
+        "repairs": 1,
+        "team_id": "team.cooperative",
+        "tests": 22,
+        "verifies": 1
+      }
+    ],
+    "determinism": {
+      "identical": true,
+      "mismatch_fields": []
+    },
+    "disconnects": 0,
+    "elapsed_virtual_time_seconds": 180,
+    "match_id": "task-014-playable-coverage-v3.task-014-storage-failed_sas_member.seed-14009",
+    "no_legal_progress_move": false,
+    "outcome": {
+      "match_status": "COMPLETED",
+      "reason_codes": [
+        "QUEUE_EMPTY"
+      ],
+      "valid": true,
+      "winner_player_ids": [],
+      "winning_team_ids": [
+        "team.cooperative"
+      ]
+    },
+    "player_service_points": [
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "starting": 0
+      }
+    ],
+    "rejected_intent_codes": [],
+    "rejected_intents": 0,
+    "replay_digest": "7f37e04500f5a16383731fb8276c1841e87a84e650a108f3763e274c537ed268",
+    "rounds": 20,
+    "scores": {
+      "players": {
+        "player_a": 0
+      },
+      "teams": {
+        "team.cooperative": 2
+      }
+    },
+    "seed": "14009",
+    "setting_group_id": "task-014-storage-failed_sas_member",
+    "stall_classification": "NONE",
+    "started": true,
+    "team_service_points": [
+      {
+        "final": 2,
+        "net": 2,
+        "starting": 0,
+        "team_id": "team.cooperative"
+      }
+    ],
+    "terminal_reason_codes": [
+      "QUEUE_EMPTY"
+    ],
+    "ticket_snapshot_digest": "5abb1bbde552799b2b845c3efdd79a2bd94767c63d4d02e5e178161068f38332",
+    "tickets_closed": 1,
+    "tickets_quarantined": 0,
+    "turns": 20
+  },
+  {
+    "builder_diagnostic_codes": [],
+    "classification": "SUCCEEDED",
+    "concessions": 0,
+    "contribution_counts": [
+      {
+        "assists": 0,
+        "closures": 1,
+        "documentation": 14,
+        "failed_verifies": 0,
+        "isolations": 6,
+        "player_id": "player_a",
+        "redundant_or_superseded_actions": 0,
+        "rejected_isolations": 5,
+        "repairs": 1,
+        "team_id": "team.cooperative",
+        "tests": 20,
+        "verifies": 1
+      }
+    ],
+    "determinism": {
+      "identical": true,
+      "mismatch_fields": []
+    },
+    "disconnects": 0,
+    "elapsed_virtual_time_seconds": 215,
+    "match_id": "task-014-playable-coverage-v3.task-014-storage-loose_cable.seed-14010",
+    "no_legal_progress_move": false,
+    "outcome": {
+      "match_status": "COMPLETED",
+      "reason_codes": [
+        "QUEUE_EMPTY"
+      ],
+      "valid": true,
+      "winner_player_ids": [],
+      "winning_team_ids": [
+        "team.cooperative"
+      ]
+    },
+    "player_service_points": [
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "starting": 0
+      }
+    ],
+    "rejected_intent_codes": [],
+    "rejected_intents": 0,
+    "replay_digest": "1307ceac82d4d540006ab3320f9b0cbc1f9974de0b2f0629eaef6b94c96b7d0a",
+    "rounds": 23,
+    "scores": {
+      "players": {
+        "player_a": 0
+      },
+      "teams": {
+        "team.cooperative": 2
+      }
+    },
+    "seed": "14010",
+    "setting_group_id": "task-014-storage-loose_cable",
+    "stall_classification": "NONE",
+    "started": true,
+    "team_service_points": [
+      {
+        "final": 2,
+        "net": 2,
+        "starting": 0,
+        "team_id": "team.cooperative"
+      }
+    ],
+    "terminal_reason_codes": [
+      "QUEUE_EMPTY"
+    ],
+    "ticket_snapshot_digest": "f9897c757d8c6516a6209c51418ef59c57b8d74cd7f85f9513d66a428a77fb92",
+    "tickets_closed": 1,
+    "tickets_quarantined": 0,
+    "turns": 23
+  },
+  {
+    "builder_diagnostic_codes": [],
+    "classification": "SUCCEEDED",
+    "concessions": 0,
+    "contribution_counts": [
+      {
+        "assists": 0,
+        "closures": 1,
+        "documentation": 3,
+        "failed_verifies": 0,
+        "isolations": 12,
+        "player_id": "player_a",
+        "redundant_or_superseded_actions": 0,
+        "rejected_isolations": 11,
+        "repairs": 1,
+        "team_id": "team.cooperative",
+        "tests": 17,
+        "verifies": 1
+      }
+    ],
+    "determinism": {
+      "identical": true,
+      "mismatch_fields": []
+    },
+    "disconnects": 0,
+    "elapsed_virtual_time_seconds": 175,
+    "match_id": "task-014-playable-coverage-v3.task-014-thermal-clogged_heatsink.seed-14011",
+    "no_legal_progress_move": false,
+    "outcome": {
+      "match_status": "COMPLETED",
+      "reason_codes": [
+        "QUEUE_EMPTY"
+      ],
+      "valid": true,
+      "winner_player_ids": [],
+      "winning_team_ids": [
+        "team.cooperative"
+      ]
+    },
+    "player_service_points": [
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "starting": 0
+      }
+    ],
+    "rejected_intent_codes": [],
+    "rejected_intents": 0,
+    "replay_digest": "df2120be1ef997ec8a2c6b5c92951741bc62225bc3a6bcb74067fe8f10a01ebe",
+    "rounds": 19,
+    "scores": {
+      "players": {
+        "player_a": 0
+      },
+      "teams": {
+        "team.cooperative": 2
+      }
+    },
+    "seed": "14011",
+    "setting_group_id": "task-014-thermal-clogged_heatsink",
+    "stall_classification": "NONE",
+    "started": true,
+    "team_service_points": [
+      {
+        "final": 2,
+        "net": 2,
+        "starting": 0,
+        "team_id": "team.cooperative"
+      }
+    ],
+    "terminal_reason_codes": [
+      "QUEUE_EMPTY"
+    ],
+    "ticket_snapshot_digest": "199f765dd6590f6dc8bd58c345ad44c18e7a4c9bb9e087e443c69b482e2bc703",
+    "tickets_closed": 1,
+    "tickets_quarantined": 0,
+    "turns": 19
+  },
+  {
+    "builder_diagnostic_codes": [],
+    "classification": "SUCCEEDED",
+    "concessions": 0,
+    "contribution_counts": [
+      {
+        "assists": 0,
+        "closures": 1,
+        "documentation": 12,
+        "failed_verifies": 0,
+        "isolations": 1,
+        "player_id": "player_a",
+        "redundant_or_superseded_actions": 0,
+        "rejected_isolations": 0,
+        "repairs": 1,
+        "team_id": "team.cooperative",
+        "tests": 18,
+        "verifies": 1
+      }
+    ],
+    "determinism": {
+      "identical": true,
+      "mismatch_fields": []
+    },
+    "disconnects": 0,
+    "elapsed_virtual_time_seconds": 170,
+    "match_id": "task-014-playable-coverage-v3.task-014-thermal-failed_fan.seed-14012",
+    "no_legal_progress_move": false,
+    "outcome": {
+      "match_status": "COMPLETED",
+      "reason_codes": [
+        "QUEUE_EMPTY"
+      ],
+      "valid": true,
+      "winner_player_ids": [],
+      "winning_team_ids": [
+        "team.cooperative"
+      ]
+    },
+    "player_service_points": [
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "starting": 0
+      }
+    ],
+    "rejected_intent_codes": [],
+    "rejected_intents": 0,
+    "replay_digest": "acdc036a5240e5d51d3d73894da617299cb9f01bd2e6140cc549c807900a8164",
+    "rounds": 19,
+    "scores": {
+      "players": {
+        "player_a": 0
+      },
+      "teams": {
+        "team.cooperative": 2
+      }
+    },
+    "seed": "14012",
+    "setting_group_id": "task-014-thermal-failed_fan",
+    "stall_classification": "NONE",
+    "started": true,
+    "team_service_points": [
+      {
+        "final": 2,
+        "net": 2,
+        "starting": 0,
+        "team_id": "team.cooperative"
+      }
+    ],
+    "terminal_reason_codes": [
+      "QUEUE_EMPTY"
+    ],
+    "ticket_snapshot_digest": "789b14b6a6dc8b55133a10971b5d46fc5b70f32bbbd193ecbbc0f765fc9dde89",
+    "tickets_closed": 1,
+    "tickets_quarantined": 0,
+    "turns": 19
+  },
+  {
+    "builder_diagnostic_codes": [],
+    "classification": "SUCCEEDED",
+    "concessions": 0,
+    "contribution_counts": [
+      {
+        "assists": 0,
+        "closures": 2,
+        "documentation": 15,
+        "failed_verifies": 0,
+        "isolations": 3,
+        "player_id": "player_a",
+        "redundant_or_superseded_actions": 0,
+        "rejected_isolations": 1,
+        "repairs": 2,
+        "team_id": "team.cooperative",
+        "tests": 20,
+        "verifies": 2
+      }
+    ],
+    "determinism": {
+      "identical": true,
+      "mismatch_fields": []
+    },
+    "disconnects": 0,
+    "elapsed_virtual_time_seconds": 240,
+    "match_id": "task-014-playable-coverage-v3.task-014-multi-ticket-resource-path.seed-14998",
+    "no_legal_progress_move": false,
+    "outcome": {
+      "match_status": "COMPLETED",
+      "reason_codes": [
+        "QUEUE_EMPTY"
+      ],
+      "valid": true,
+      "winner_player_ids": [],
+      "winning_team_ids": [
+        "team.cooperative"
+      ]
+    },
+    "player_service_points": [
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "starting": 0
+      }
+    ],
+    "rejected_intent_codes": [],
+    "rejected_intents": 0,
+    "replay_digest": "31fe9f6096fa13172c0318c93f0aeda3869756071b277f3f3b04cdaa97950387",
+    "rounds": 23,
+    "scores": {
+      "players": {
+        "player_a": 0
+      },
+      "teams": {
+        "team.cooperative": 4
+      }
+    },
+    "seed": "14998",
+    "setting_group_id": "task-014-multi-ticket-resource-path",
+    "stall_classification": "NONE",
+    "started": true,
+    "team_service_points": [
+      {
+        "final": 4,
+        "net": 4,
+        "starting": 0,
+        "team_id": "team.cooperative"
+      }
+    ],
+    "terminal_reason_codes": [
+      "QUEUE_EMPTY"
+    ],
+    "ticket_snapshot_digest": "26c48c4b3c250ff87d9fde7d915befe462e2c21a5d8600a311583534bd80b9ad",
+    "tickets_closed": 2,
+    "tickets_quarantined": 0,
+    "turns": 23
+  }
+]

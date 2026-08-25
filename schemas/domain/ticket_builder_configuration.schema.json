@@ -108,11 +108,30 @@
       "items": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
       "uniqueItems": true
     },
+    "allowed_fingerprint_ids": {
+      "description": "Optional release-facing fingerprint filter for audited campaigns and constrained scenario pools.",
+      "type": "array",
+      "items": { "$ref": "#/$defs/stableId" },
+      "uniqueItems": true
+    },
     "legal_card_definition_ids": {
       "type": "array",
       "items": { "$ref": "#/$defs/stableId" },
       "uniqueItems": true,
       "minItems": 1
+    },
+    "diagnostic_card_definition_ids": {
+      "description": "Exact persistent diagnostic definitions available from the approved Global Bench.",
+      "type": "array",
+      "items": { "$ref": "#/$defs/stableId" },
+      "uniqueItems": true
+    },
+    "available_card_definition_counts": {
+      "description": "Exact response-deck snapshot as Card Definition quantities for batch reachability analysis.",
+      "type": "object",
+      "propertyNames": { "$ref": "#/$defs/stableId" },
+      "additionalProperties": { "type": "integer", "minimum": 1, "maximum": 6 },
+      "minProperties": 1
     },
     "fallback_configuration_id": {
       "description": "Optional separately registered immutable fallback configuration. It is resolved and attempted only after a retained primary failure.",

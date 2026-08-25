@@ -88,10 +88,22 @@
       "sha256": "6a946ba8f5f515b665daef8fa7e021b2a87cd6c813ddf844bcb5181b179de2d8"
     },
     {
+      "path": "content/gameplay-v1/card-catalog-v3.json",
+      "source": "content/gameplay-v1/card-catalog-v3.json",
+      "bytes": 144831,
+      "sha256": "f3dca617a5c8a5dbe084af3269e777ea1992cc29a1f91b9c900c88e3b002a0c9"
+    },
+    {
       "path": "content/gameplay-v1/card-catalog.json",
       "source": "content/gameplay-v1/card-catalog.json",
       "bytes": 22309,
       "sha256": "560d6bc57bb8c4544175caed9b3405da5f3dd7204d4e37f3f207a271d80f4d5e"
+    },
+    {
+      "path": "content/gameplay-v1/decks-v3.json",
+      "source": "content/gameplay-v1/decks-v3.json",
+      "bytes": 3661,
+      "sha256": "33ab22132062360390a20b35fa28aee5ee9698281f6424e1decf73bc7841a8e4"
     },
     {
       "path": "content/gameplay-v1/decks.json",
@@ -106,10 +118,28 @@
       "sha256": "6cd770f82179682c91e7ef97c131a0e11ce0c029fa97ceb44a02a0693678ec77"
     },
     {
+      "path": "content/gameplay-v1/domain-snapshot-v2.json",
+      "source": "content/gameplay-v1/domain-snapshot-v2.json",
+      "bytes": 404990,
+      "sha256": "cac32ced91ce46dfe991c857f4db444a6bad3d65f867c28b28b5e2558986b843"
+    },
+    {
       "path": "content/gameplay-v1/domain-snapshot.json",
       "source": "content/gameplay-v1/domain-snapshot.json",
       "bytes": 14703,
       "sha256": "255cbae625610fbd7fce9d07fb6fe0ced4397211dab13f72bd181adf6764a0ae"
+    },
+    {
+      "path": "content/gameplay-v1/playable-coverage-v3.json",
+      "source": "content/gameplay-v1/playable-coverage-v3.json",
+      "bytes": 29062,
+      "sha256": "ef2b90e924aa95afdef41593a017686cffecf0b971e09815ce82b24c00e8e86c"
+    },
+    {
+      "path": "content/gameplay-v1/task-014-parts.json",
+      "source": "content/gameplay-v1/task-014-parts.json",
+      "bytes": 35817,
+      "sha256": "f94ce4e7f91606e70213e764d17eedd2b5f40aa68939d8f8d953daf111469266"
     },
     {
       "path": "content/gameplay-v1/ticket-templates.json",
@@ -130,6 +160,12 @@
       "sha256": "e9598443c8f415bba77fd46c30e800d20d0328660366705c2dde22d32368d1e1"
     },
     {
+      "path": "src/builder/task-014.mjs",
+      "source": "src/builder/task-014.mjs",
+      "bytes": 35231,
+      "sha256": "559ba8dfbb1446b4c25f30535ef7a9b8bfeabd8f9b15d65e243eaa72c4676946"
+    },
+    {
       "path": "src/builder/ticket-builder.mjs",
       "source": "src/builder/ticket-builder.mjs",
       "bytes": 30608,
@@ -138,8 +174,8 @@
     {
       "path": "src/builder/ticket-solvability.mjs",
       "source": "src/builder/ticket-solvability.mjs",
-      "bytes": 30944,
-      "sha256": "ea153a0340a0fe1ad31c4597f7b60c06b15db3b029b57c4bf5a1f0f74f0cabf3"
+      "bytes": 35797,
+      "sha256": "da7b426ff89027d0bd982a75932006013fddc95046d8cfa967c8140b1aa5ed26"
     },
     {
       "path": "src/engine/catalogs.mjs",

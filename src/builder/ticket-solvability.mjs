@@ -303,26 +303,77 @@ function validateTicketReferences(ticket, domainById, graph) {
     if (!publicCandidates.has(requirement.candidate_fault_id)) {
       errors.push(error('INVALID_AUTHORED_INPUT', `${requirement.requirement_id} candidate is not public.`));
     }
-    const eligible = requirement.eligible_outcome_ids.map((id) => evidenceOutcomes.get(id)).filter(Boolean);
-    if (eligible.length !== requirement.eligible_outcome_ids.length) {
-      errors.push(error('REFERENCE_NOT_FOUND', `${requirement.requirement_id} references an unknown Evidence outcome.`));
-    }
-    const eligibleVerify = requirement.eligible_verification_outcome_ids
-      .map((id) => verificationOutcomes.get(id)).filter(Boolean);
-    if (eligibleVerify.length !== requirement.eligible_verification_outcome_ids.length) {
-      errors.push(error('REFERENCE_NOT_FOUND', `${requirement.requirement_id} references an unknown Verify outcome.`));
-    }
-    if (eligibleVerify.some((outcome) => !['FAIL', 'INCONCLUSIVE'].includes(outcome.result))) {
-      errors.push(error('INVALID_AUTHORED_INPUT', `${requirement.requirement_id} may cite only failed or inconclusive Verify outcomes.`));
-    }
-    const decisiveEvidence = eligible.filter((outcome) => outcome.candidate_effects.some((effect) =>
-      effect.candidate_fault_id === requirement.candidate_fault_id
-        && ['SUPPORT', 'CONFIRM'].includes(effect.disposition)));
-    const decisiveVerify = eligibleVerify.filter((outcome) => outcome.candidate_effects.some((effect) =>
-      effect.candidate_fault_id === requirement.candidate_fault_id
-        && ['SUPPORT', 'CONFIRM'].includes(effect.disposition)));
-    if (decisiveEvidence.length + decisiveVerify.length < requirement.minimum_citations) {
-      errors.push(error('INVALID_AUTHORED_INPUT', `${requirement.requirement_id} cannot meet its minimum decisive citations.`));
+    if (Array.isArray(requirement.routes)) {
+      const routeIds = new Set();
+      for (const route of requirement.routes) {
+        if (routeIds.has(route.route_id)) {
+          errors.push(error('INVALID_AUTHORED_INPUT', `Duplicate Isolation route ${route.route_id}.`));
+        }
+        routeIds.add(route.route_id);
+        if (route.target_fault_instance_key !== requirement.target_fault_instance_key
+            || route.candidate_fault_id !== requirement.candidate_fault_id
+            || route.classification !== requirement.classification) {
+          errors.push(error('INVALID_AUTHORED_INPUT', `${route.route_id} does not match its Isolation requirement.`));
+        }
+        const eligibleIds = route.eligible_outcome_ids ?? [];
+        const verifyIds = route.eligible_verification_outcome_ids ?? [];
+        const supportingIds = route.supporting_outcome_ids ?? [];
+        const eligible = eligibleIds.map((id) => evidenceOutcomes.get(id)).filter(Boolean);
+        const eligibleVerify = verifyIds.map((id) => verificationOutcomes.get(id)).filter(Boolean);
+        const supporting = supportingIds.map((id) => evidenceOutcomes.get(id)).filter(Boolean);
+        if (eligible.length !== eligibleIds.length || supporting.length !== supportingIds.length) {
+          errors.push(error('REFERENCE_NOT_FOUND', `${route.route_id} references an unknown Evidence outcome.`));
+        }
+        if (eligibleVerify.length !== verifyIds.length) {
+          errors.push(error('REFERENCE_NOT_FOUND', `${route.route_id} references an unknown Verify outcome.`));
+        }
+        if (eligibleVerify.some((outcome) => !['FAIL', 'INCONCLUSIVE'].includes(outcome.result))) {
+          errors.push(error('INVALID_AUTHORED_INPUT', `${route.route_id} may cite only failed or inconclusive Verify outcomes.`));
+        }
+        const hasDisposition = (outcome, allowed) => outcome?.candidate_effects.some((effect) =>
+          effect.candidate_fault_id === requirement.candidate_fault_id && allowed.includes(effect.disposition));
+        if (['DIRECT_OBSERVATION', 'DEFINITIVE_DIAGNOSTIC', 'RECOVERY_DERIVED'].includes(route.route_kind)) {
+          if (![...eligible, ...eligibleVerify].some((outcome) => hasDisposition(outcome, ['CONFIRM']))) {
+            errors.push(error('INVALID_AUTHORED_INPUT', `${route.route_id} lacks independently decisive CONFIRM Evidence.`));
+          }
+        } else if (route.route_kind === 'CORROBORATED_SUPPORT') {
+          const distinct = new Set(eligible.filter((outcome) => hasDisposition(outcome, ['SUPPORT'])).map((outcome) => outcome.outcome_id));
+          if (distinct.size < route.minimum_distinct_outcomes) {
+            errors.push(error('INVALID_AUTHORED_INPUT', `${route.route_id} cannot meet its corroborated-support minimum.`));
+          }
+        } else if (route.route_kind === 'EVIDENCE_BACKED_ELIMINATION') {
+          if (!supporting.some((outcome) => hasDisposition(outcome, ['SUPPORT', 'CONFIRM']))) {
+            errors.push(error('INVALID_AUTHORED_INPUT', `${route.route_id} lacks Evidence supporting its target.`));
+          }
+          for (const candidateId of route.required_eliminated_candidate_fault_ids ?? []) {
+            if (!publicCandidates.has(candidateId) || candidateId === requirement.candidate_fault_id) {
+              errors.push(error('INVALID_AUTHORED_INPUT', `${route.route_id} has an invalid elimination candidate ${candidateId}.`));
+            }
+          }
+        }
+      }
+    } else {
+      const eligible = requirement.eligible_outcome_ids.map((id) => evidenceOutcomes.get(id)).filter(Boolean);
+      if (eligible.length !== requirement.eligible_outcome_ids.length) {
+        errors.push(error('REFERENCE_NOT_FOUND', `${requirement.requirement_id} references an unknown Evidence outcome.`));
+      }
+      const eligibleVerify = requirement.eligible_verification_outcome_ids
+        .map((id) => verificationOutcomes.get(id)).filter(Boolean);
+      if (eligibleVerify.length !== requirement.eligible_verification_outcome_ids.length) {
+        errors.push(error('REFERENCE_NOT_FOUND', `${requirement.requirement_id} references an unknown Verify outcome.`));
+      }
+      if (eligibleVerify.some((outcome) => !['FAIL', 'INCONCLUSIVE'].includes(outcome.result))) {
+        errors.push(error('INVALID_AUTHORED_INPUT', `${requirement.requirement_id} may cite only failed or inconclusive Verify outcomes.`));
+      }
+      const decisiveEvidence = eligible.filter((outcome) => outcome.candidate_effects.some((effect) =>
+        effect.candidate_fault_id === requirement.candidate_fault_id
+          && ['SUPPORT', 'CONFIRM'].includes(effect.disposition)));
+      const decisiveVerify = eligibleVerify.filter((outcome) => outcome.candidate_effects.some((effect) =>
+        effect.candidate_fault_id === requirement.candidate_fault_id
+          && ['SUPPORT', 'CONFIRM'].includes(effect.disposition)));
+      if (decisiveEvidence.length + decisiveVerify.length < requirement.minimum_citations) {
+        errors.push(error('INVALID_AUTHORED_INPUT', `${requirement.requirement_id} cannot meet its minimum decisive citations.`));
+      }
     }
   }
 
@@ -478,7 +529,7 @@ function findWitness(ticket, cardById, legalCardIds, graph, domainById) {
 
     for (const [targetKey, requirement] of isolationByTarget) {
       if (current.currentIsolations.has(targetKey)) continue;
-      const usableEvidence = requirement.eligible_outcome_ids
+      const usableEvidence = (ids, dispositions) => ids
         .map((id) => evidenceById.get(id))
         .filter((outcome) => outcome?.eligible_machine_state_key === current.machine)
         .filter((outcome) => diagnosticCardSupports(
@@ -490,20 +541,40 @@ function findWitness(ticket, cardById, legalCardIds, graph, domainById) {
         ))
         .filter((outcome) => outcome.candidate_effects.some((effect) =>
           effect.candidate_fault_id === requirement.candidate_fault_id
-            && ['SUPPORT', 'CONFIRM'].includes(effect.disposition)));
-      const usableVerification = requirement.eligible_verification_outcome_ids
+            && dispositions.includes(effect.disposition)));
+      const usableVerification = (ids, dispositions) => ids
         .filter((outcomeId) => current.verificationHistory.has(outcomeId))
         .map((outcomeId) => verificationById.get(outcomeId))
         .filter((outcome) => outcome && ['FAIL', 'INCONCLUSIVE'].includes(outcome.result))
         .filter((outcome) => outcome.candidate_effects.some((effect) =>
           effect.candidate_fault_id === requirement.candidate_fault_id
-            && ['SUPPORT', 'CONFIRM'].includes(effect.disposition)));
-      const usable = [
-        ...usableEvidence.map((outcome) => ({ kind: 'DIAGNOSTIC', outcome })),
-        ...usableVerification.map((outcome) => ({ kind: 'VERIFY', outcome })),
-      ];
-      if (usable.length >= requirement.minimum_citations) {
-        const citations = usable.slice(0, requirement.minimum_citations);
+            && dispositions.includes(effect.disposition)));
+      let citations = null;
+      if (Array.isArray(requirement.routes)) {
+        for (const route of [...requirement.routes].sort((left, right) => left.route_id.localeCompare(right.route_id))) {
+          if (['DIRECT_OBSERVATION', 'DEFINITIVE_DIAGNOSTIC', 'RECOVERY_DERIVED'].includes(route.route_kind)) {
+            const decisive = [
+              ...usableEvidence(route.eligible_outcome_ids ?? [], ['CONFIRM']).map((outcome) => ({ kind: 'DIAGNOSTIC', outcome })),
+              ...usableVerification(route.eligible_verification_outcome_ids ?? [], ['CONFIRM']).map((outcome) => ({ kind: 'VERIFY', outcome })),
+            ];
+            if (decisive.length > 0) citations = decisive.slice(0, 1);
+          } else if (route.route_kind === 'CORROBORATED_SUPPORT') {
+            const corroborated = usableEvidence(route.eligible_outcome_ids ?? [], ['SUPPORT'])
+              .map((outcome) => ({ kind: 'DIAGNOSTIC', outcome }));
+            if (new Set(corroborated.map((entry) => entry.outcome.outcome_id)).size >= route.minimum_distinct_outcomes) {
+              citations = corroborated.slice(0, route.minimum_distinct_outcomes);
+            }
+          }
+          if (citations) break;
+        }
+      } else {
+        const usable = [
+          ...usableEvidence(requirement.eligible_outcome_ids, ['SUPPORT', 'CONFIRM']).map((outcome) => ({ kind: 'DIAGNOSTIC', outcome })),
+          ...usableVerification(requirement.eligible_verification_outcome_ids, ['SUPPORT', 'CONFIRM']).map((outcome) => ({ kind: 'VERIFY', outcome })),
+        ];
+        if (usable.length >= requirement.minimum_citations) citations = usable.slice(0, requirement.minimum_citations);
+      }
+      if (citations) {
         nextStates.push({
           ...current,
           currentIsolations: new Set([...current.currentIsolations, targetKey]),

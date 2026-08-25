@@ -1,0 +1,277 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/ticket_part_catalog.schema.json",
+  "title": "Versioned authored Ticket part catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "stableId": { "type": "string", "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$" },
+    "idArray": { "type": "array", "items": { "$ref": "#/$defs/stableId" }, "uniqueItems": true, "minItems": 1 },
+    "compatible": {
+      "type": "object",
+      "properties": {
+        "part_id": { "$ref": "#/$defs/stableId" },
+        "compatible_fault_blueprint_part_ids": { "$ref": "#/$defs/idArray" }
+      },
+      "required": ["part_id", "compatible_fault_blueprint_part_ids"]
+    },
+    "faultInstance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "fault_instance_key": { "$ref": "#/$defs/stableId" },
+        "fault_id": { "$ref": "#/$defs/stableId" },
+        "role": { "enum": ["ROOT", "INTERMEDIATE", "TERMINAL", "ACTIONABLE"] },
+        "actionable": { "type": "boolean" },
+        "deepest": { "type": "boolean" },
+        "required_to_repair": { "type": "boolean" }
+      },
+      "required": ["fault_instance_key", "fault_id", "role", "actionable", "deepest", "required_to_repair"]
+    },
+    "causalEdge": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "causal_edge_id": { "$ref": "#/$defs/stableId" },
+        "cause_fault_instance_key": { "$ref": "#/$defs/stableId" },
+        "effect_fault_instance_key": { "$ref": "#/$defs/stableId" }
+      },
+      "required": ["causal_edge_id", "cause_fault_instance_key", "effect_fault_instance_key"]
+    }
+  },
+  "properties": {
+    "part_catalog_version": { "$ref": "#/$defs/stableId" },
+    "ruleset_version": { "$ref": "#/$defs/stableId" },
+    "generator_version": { "$ref": "#/$defs/stableId" },
+    "configuration_version": { "$ref": "#/$defs/stableId" },
+    "ticket_content_version": { "$ref": "#/$defs/stableId" },
+    "domain_content_version": { "$ref": "#/$defs/stableId" },
+    "card_catalog_version": { "$ref": "#/$defs/stableId" },
+    "deck_catalog_version": { "$ref": "#/$defs/stableId" },
+    "outcome_family_version": { "$ref": "#/$defs/stableId" },
+    "command_action_costs": {
+      "type": "object",
+      "propertyNames": { "$ref": "#/$defs/stableId" },
+      "additionalProperties": { "type": "integer", "minimum": 0, "maximum": 3 },
+      "minProperties": 1
+    },
+    "diagnostic_outcome_families": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "part_id": { "$ref": "#/$defs/stableId" },
+          "classification": { "enum": ["CLEAN", "IRRELEVANT", "INCONCLUSIVE"] },
+          "public_summary": { "type": "string", "minLength": 1 }
+        },
+        "required": ["part_id", "classification", "public_summary"]
+      },
+      "minItems": 3
+    },
+    "candidate_pool_parts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "part_id": { "$ref": "#/$defs/stableId" },
+          "selection_rule": { "const": "PUBLIC_ASSOCIATED_FAULTS" },
+          "minimum_candidates": { "type": "integer", "minimum": 2, "maximum": 5 },
+          "maximum_candidates": { "type": "integer", "minimum": 2, "maximum": 5 },
+          "distractor_order": { "const": "STABLE_ID" }
+        },
+        "required": ["part_id", "selection_rule", "minimum_candidates", "maximum_candidates", "distractor_order"]
+      },
+      "minItems": 1
+    },
+    "closure_parts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "part_id": { "$ref": "#/$defs/stableId" },
+          "include_accepted_isolation": { "const": true },
+          "include_cited_decisive_evidence": { "const": true },
+          "include_every_repair_in_accepted_path": { "const": true },
+          "include_every_failed_verify_in_accepted_path": { "const": true },
+          "include_all_current_passing_verifies": { "const": true }
+        },
+        "required": ["part_id", "include_accepted_isolation", "include_cited_decisive_evidence", "include_every_repair_in_accepted_path", "include_every_failed_verify_in_accepted_path", "include_all_current_passing_verifies"]
+      },
+      "minItems": 1
+    },
+    "teaching_parts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "part_id": { "$ref": "#/$defs/stableId" },
+          "subsystem": { "$ref": "#/$defs/stableId" },
+          "difficulty": { "type": "integer", "minimum": 1, "maximum": 10 },
+          "objectives": { "type": "array", "items": { "type": "string", "minLength": 1 }, "minItems": 1 }
+        },
+        "required": ["part_id", "subsystem", "difficulty", "objectives"]
+      },
+      "minItems": 1
+    },
+    "fingerprint_roots": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "fingerprint_id": { "$ref": "#/$defs/stableId" },
+          "subsystem": { "$ref": "#/$defs/stableId" },
+          "fault_blueprint_part_id": { "$ref": "#/$defs/stableId" },
+          "selection_weight": { "type": "number", "exclusiveMinimum": 0 }
+        },
+        "required": ["fingerprint_id", "subsystem", "fault_blueprint_part_id", "selection_weight"]
+      },
+      "minItems": 12
+    },
+    "public_context_parts": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          { "$ref": "#/$defs/compatible" },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "part_id": { "$ref": "#/$defs/stableId" },
+              "compatible_fault_blueprint_part_ids": { "$ref": "#/$defs/idArray" },
+              "symptom_ids": { "$ref": "#/$defs/idArray" },
+              "display_name": { "type": "string", "minLength": 1 },
+              "short_description": { "type": "string", "minLength": 1 }
+            },
+            "required": ["part_id", "compatible_fault_blueprint_part_ids", "symptom_ids", "display_name", "short_description"]
+          }
+        ]
+      },
+      "minItems": 12
+    },
+    "fault_blueprint_parts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "part_id": { "$ref": "#/$defs/stableId" },
+          "initial_machine_state_key": { "$ref": "#/$defs/stableId" },
+          "fault_instances": { "type": "array", "items": { "$ref": "#/$defs/faultInstance" }, "minItems": 1 },
+          "causal_edges": { "type": "array", "items": { "$ref": "#/$defs/causalEdge" } }
+        },
+        "required": ["part_id", "initial_machine_state_key", "fault_instances", "causal_edges"]
+      },
+      "minItems": 12
+    },
+    "diagnostic_plan_parts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "part_id": { "$ref": "#/$defs/stableId" },
+          "compatible_fault_blueprint_part_ids": { "$ref": "#/$defs/idArray" },
+          "findings": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "source_definition_id": { "$ref": "#/$defs/stableId" },
+                "candidate_fault_id": { "$ref": "#/$defs/stableId" },
+                "disposition": { "enum": ["SUPPORT", "CONFIRM", "CONTRADICT", "RULE_OUT"] },
+                "public_summary": { "type": "string", "minLength": 1 }
+              },
+              "required": ["source_definition_id", "candidate_fault_id", "disposition", "public_summary"]
+            },
+            "minItems": 1
+          }
+        },
+        "required": ["part_id", "compatible_fault_blueprint_part_ids", "findings"]
+      },
+      "minItems": 12
+    },
+    "isolation_plan_parts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "part_id": { "$ref": "#/$defs/stableId" },
+          "compatible_fault_blueprint_part_ids": { "$ref": "#/$defs/idArray" },
+          "target_fault_id": { "$ref": "#/$defs/stableId" },
+          "routes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "route_kind": { "enum": ["DIRECT_OBSERVATION", "DEFINITIVE_DIAGNOSTIC", "CORROBORATED_SUPPORT", "EVIDENCE_BACKED_ELIMINATION", "RECOVERY_DERIVED"] },
+                "source_definition_ids": { "$ref": "#/$defs/idArray" },
+                "minimum_distinct_outcomes": { "type": "integer", "minimum": 2 }
+              },
+              "required": ["route_kind", "source_definition_ids"]
+            },
+            "minItems": 1
+          }
+        },
+        "required": ["part_id", "compatible_fault_blueprint_part_ids", "target_fault_id", "routes"]
+      },
+      "minItems": 12
+    },
+    "repair_plan_parts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "part_id": { "$ref": "#/$defs/stableId" },
+          "compatible_fault_blueprint_part_ids": { "$ref": "#/$defs/idArray" },
+          "target_fault_id": { "$ref": "#/$defs/stableId" },
+          "repair_procedure_id": { "$ref": "#/$defs/stableId" },
+          "public_summary": { "type": "string", "minLength": 1 }
+        },
+        "required": ["part_id", "compatible_fault_blueprint_part_ids", "target_fault_id", "repair_procedure_id", "public_summary"]
+      },
+      "minItems": 12
+    },
+    "verification_plan_parts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "part_id": { "$ref": "#/$defs/stableId" },
+          "compatible_fault_blueprint_part_ids": { "$ref": "#/$defs/idArray" },
+          "requirements": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "validation_procedure_id": { "$ref": "#/$defs/stableId" },
+                "success_condition": { "type": "string", "minLength": 1 }
+              },
+              "required": ["validation_procedure_id", "success_condition"]
+            },
+            "minItems": 1
+          }
+        },
+        "required": ["part_id", "compatible_fault_blueprint_part_ids", "requirements"]
+      },
+      "minItems": 12
+    }
+  },
+  "required": [
+    "part_catalog_version", "ruleset_version", "generator_version", "configuration_version",
+    "ticket_content_version", "domain_content_version", "card_catalog_version", "deck_catalog_version",
+    "outcome_family_version", "command_action_costs", "diagnostic_outcome_families", "candidate_pool_parts",
+    "closure_parts", "teaching_parts", "fingerprint_roots", "public_context_parts", "fault_blueprint_parts",
+    "diagnostic_plan_parts", "isolation_plan_parts", "repair_plan_parts", "verification_plan_parts"
+  ]
+}

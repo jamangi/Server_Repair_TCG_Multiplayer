@@ -161,6 +161,8 @@ function evidenceScore(view, candidateFaultId) {
 }
 
 async function advanceUntilHeldResponseIsLegal(page, maximumIntents = 30) {
+  const attemptedDiagnostics = new Set();
+  const rejectedIsolationScores = new Map();
   for (let step = 0; step < maximumIntents; step += 1) {
     const latest = await latestWorkerMessage(page);
     const projection = latest.projection;
@@ -170,11 +172,23 @@ async function advanceUntilHeldResponseIsLegal(page, maximumIntents = 30) {
     const positiveIsolation = projection.legal_intents
       .filter((intent) => intent.action_type === 'COMMIT_ISOLATION')
       .map((intent) => ({ intent, score: evidenceScore(projection.view, intent.candidate_fault_id) }))
-      .filter((entry) => entry.score > 0)
+      .filter((entry) => entry.score > 0
+        && entry.score > (rejectedIsolationScores.get(
+          `${entry.intent.ticket_instance_id}:${entry.intent.candidate_fault_id}`,
+        ) ?? Number.NEGATIVE_INFINITY))
       .sort((left, right) => right.score - left.score)[0]?.intent;
     const benchIds = new Set((projection.view.diagnostic_bench ?? []).map((entry) => entry.card_instance_id));
+    const benchEntryById = new Map((projection.view.diagnostic_bench ?? [])
+      .map((entry) => [entry.card_instance_id, entry]));
+    const unusedDiagnostic = (intent) => !attemptedDiagnostics.has(
+      `${intent.ticket_instance_id}:${intent.card_instance_id}`,
+    );
     const diagnostic = projection.legal_intents.find((intent) => intent.action_type === 'RUN_TEST'
-      && benchIds.has(intent.card_instance_id));
+      && benchEntryById.get(intent.card_instance_id)?.ticket_relevance.some((relevance) =>
+        relevance.ticket_instance_id === intent.ticket_instance_id && relevance.relevant)
+      && unusedDiagnostic(intent))
+      ?? projection.legal_intents.find((intent) => intent.action_type === 'RUN_TEST'
+        && benchIds.has(intent.card_instance_id) && unusedDiagnostic(intent));
     const intent = positiveIsolation ?? diagnostic;
     expect(intent, `No diagnosis-v2 setup intent at step ${step}`).toBeTruthy();
 
@@ -186,11 +200,25 @@ async function advanceUntilHeldResponseIsLegal(page, maximumIntents = 30) {
       let diagnosticButton = page.locator(`[data-select-diagnostic="${intent.card_instance_id}"]`);
       if (!await diagnosticButton.count()) {
         await page.getByRole('button', { name: 'Global', exact: true }).click();
+        const benchEntry = projection.view.diagnostic_bench.find(
+          (entry) => entry.card_instance_id === intent.card_instance_id,
+        );
+        await page.locator('[data-bench-search]').fill(benchEntry.card_definition_id);
         diagnosticButton = page.locator(`[data-select-diagnostic="${intent.card_instance_id}"]`);
       }
       await diagnosticButton.click();
+      attemptedDiagnostics.add(`${intent.ticket_instance_id}:${intent.card_instance_id}`);
     }
     await submitAndWait(page, intent.intent_id);
+    if (intent.action_type === 'COMMIT_ISOLATION') {
+      const resolved = await latestWorkerMessage(page);
+      if (resolved.result?.resolution_code === 'ISOLATION_NOT_SUPPORTED') {
+        rejectedIsolationScores.set(
+          `${intent.ticket_instance_id}:${intent.candidate_fault_id}`,
+          evidenceScore(projection.view, intent.candidate_fault_id),
+        );
+      }
+    }
   }
   throw new Error(`No held response Card became legal within ${maximumIntents} projected intents.`);
 }

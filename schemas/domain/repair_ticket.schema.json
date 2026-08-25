@@ -101,6 +101,22 @@
         "fallback_attempt_id": {
           "type": ["string", "null"],
           "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+        },
+        "part_ids": {
+          "description": "Every immutable authored part selected for an assembled Ticket.",
+          "type": "array",
+          "items": { "$ref": "#/$defs/entityRef" },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "fingerprint_id": {
+          "description": "Stable release-facing identifier for the supported authored path.",
+          "$ref": "#/$defs/entityRef"
+        },
+        "causal_fingerprint": {
+          "description": "Canonical SHA-256 digest of the assembled causal graph.",
+          "type": ["string", "null"],
+          "pattern": "^[a-f0-9]{64}$"
         }
       },
       "required": [

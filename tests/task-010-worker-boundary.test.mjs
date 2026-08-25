@@ -12,6 +12,15 @@ import {
   createDiagnosisV2Catalogs,
 } from '../viewer/generated/play/src/builder/diagnosis-v2.mjs';
 import {
+  TASK_014_BUILDER_VERSION,
+  TASK_014_CARD_CATALOG_VERSION,
+  TASK_014_CONFIGURATION_VERSION,
+  TASK_014_DOMAIN_CONTENT_VERSION,
+  TASK_014_TICKET_CONTENT_VERSION,
+  buildTicketsV3,
+  createTask014Catalogs,
+} from '../viewer/generated/play/src/builder/task-014.mjs';
+import {
   createClientDataContext,
   createDefaultState,
   createExportBundle,
@@ -187,14 +196,14 @@ test('the module Worker is the sole Viewer importer of the canonical staged engi
     },
     {
       relative: 'play/solo-worker.mjs',
-      specifier: '../../generated/play/src/builder/diagnosis-v2.mjs',
+      specifier: '../../generated/play/src/builder/task-014.mjs',
     },
   ]);
 
   const worker = await readText(WORKER_PATH);
   assert.match(worker, /projectPrivatePlayer\(state, PLAYER_ID, catalogs\.engineCatalogs\)/);
   assert.match(worker, /submitIntent\(\{[\s\S]*authenticatedPlayerId:\s*PLAYER_ID/);
-  assert.match(worker, /buildTicketsV2\(\{/);
+  assert.match(worker, /buildTicketsV3\(\{/);
 });
 
 test('DOM-side modules neither import rules authority nor access or mutate authoritative Match, Card, or Ticket fields', async () => {
@@ -460,61 +469,64 @@ test('Worker result summaries have the exact strict client contract and classify
   assert.equal(Object.hasOwn(summary, 'completed_at'), false);
 });
 
-test('the Worker-derived 1/10 Ticket configurations preserve the approved duplicate permission and build complete batches', async () => {
+test('the Worker-derived 1/10 Ticket configurations preserve exact resources and build unique-first batches', async () => {
   const worker = await readText(WORKER_PATH);
   const bounds = extractNamedFunction(worker, 'bounds');
+  const compactCounts = extractNamedFunction(worker, 'compactCounts');
   const builderConfiguration = extractNamedFunction(worker, 'builderConfiguration');
   const configure = Function(
     'ticketCount',
     'seed',
-    'legalCardDefinitionIds',
-    'DIAGNOSIS_V2_CONFIGURATION_VERSION',
-    'DIAGNOSIS_V2_BUILDER_VERSION',
-    'DIAGNOSIS_V2_TICKET_CONTENT_VERSION',
-    'DIAGNOSIS_V2_CARD_CATALOG_VERSION',
-    `'use strict'; ${bounds}; ${builderConfiguration}; return builderConfiguration(ticketCount, seed, legalCardDefinitionIds);`,
+    'responseCardDefinitionIds',
+    'loadedCatalogs',
+    'TASK_014_CONFIGURATION_VERSION',
+    'TASK_014_BUILDER_VERSION',
+    'TASK_014_TICKET_CONTENT_VERSION',
+    'TASK_014_DOMAIN_CONTENT_VERSION',
+    'TASK_014_CARD_CATALOG_VERSION',
+    `'use strict'; ${bounds}; ${compactCounts}; ${builderConfiguration}; return builderConfiguration(ticketCount, seed, responseCardDefinitionIds, loadedCatalogs);`,
   );
-  const [ticketContent, domainCatalog, cardCatalog, deckCatalog] = await Promise.all([
-    readJson('content/gameplay-v1/ticket-templates.json'),
-    readJson('content/gameplay-v1/domain-snapshot.json'),
-    readJson('content/gameplay-v1/card-catalog.json'),
-    readJson('content/gameplay-v1/decks.json'),
+  const [cardCatalog, deckCatalog, domainCatalog, parts, coverage] = await Promise.all([
+    readJson('content/gameplay-v1/card-catalog-v3.json'),
+    readJson('content/gameplay-v1/decks-v3.json'),
+    readJson('content/gameplay-v1/domain-snapshot-v2.json'),
+    readJson('content/gameplay-v1/task-014-parts.json'),
+    readJson('content/gameplay-v1/playable-coverage-v3.json'),
   ]);
-  const diagnosisCatalogs = createDiagnosisV2Catalogs({
-    cards: cardCatalog,
-    decks: deckCatalog,
-    domain: domainCatalog,
-    ticketContent,
-  });
-  const starterDeck = diagnosisCatalogs.decks.decks.find((deck) => deck.id === 'deck.core.storage_response_v2');
-  const legalCardDefinitionIds = [...new Set(starterDeck.card_definition_ids)].sort();
+  const expandedCatalogs = createTask014Catalogs({ cards: cardCatalog, decks: deckCatalog, domain: domainCatalog, parts, coverage });
+  const starterDeck = expandedCatalogs.decks.decks.find((deck) => deck.id === 'deck.core.multisystem_response_v3');
 
   for (const ticketCount of [1, 10]) {
     const configuration = configure(
       ticketCount,
       `task-010-worker-${ticketCount}`,
-      legalCardDefinitionIds,
-      DIAGNOSIS_V2_CONFIGURATION_VERSION,
-      DIAGNOSIS_V2_BUILDER_VERSION,
-      DIAGNOSIS_V2_TICKET_CONTENT_VERSION,
-      DIAGNOSIS_V2_CARD_CATALOG_VERSION,
+      starterDeck.card_definition_ids,
+      expandedCatalogs,
+      TASK_014_CONFIGURATION_VERSION,
+      TASK_014_BUILDER_VERSION,
+      TASK_014_TICKET_CONTENT_VERSION,
+      TASK_014_DOMAIN_CONTENT_VERSION,
+      TASK_014_CARD_CATALOG_VERSION,
     );
-    assert.equal(configuration.configuration_version, DIAGNOSIS_V2_CONFIGURATION_VERSION);
+    assert.equal(configuration.configuration_version, TASK_014_CONFIGURATION_VERSION);
     assert.equal(configuration.scenario_or_mode_context, 'TRAINING');
     assert.equal(configuration.requested_ticket_count, ticketCount);
     assert.equal(configuration.allow_duplicate_causal_fingerprints, true);
+    assert.equal(configuration.diagnostic_card_definition_ids.length, 50);
+    assert.equal(Object.values(configuration.available_card_definition_counts).reduce((sum, count) => sum + count, 0), 30);
     assert.equal(configuration.progressive_difficulty_profile.bands[0].end_generated_index, ticketCount - 1);
-    const result = buildTicketsV2({ configuration, catalogs: diagnosisCatalogs });
+    const result = buildTicketsV3({ configuration, catalogs: expandedCatalogs });
     assert.equal(result.status, 'SUCCESS');
     const selected = result.attempts.find((attempt) => attempt.attempt_id === result.selected_attempt_id);
     assert.equal(selected.ticket_snapshots.length, ticketCount);
+    assert.equal(new Set(selected.selected_template_ids).size, ticketCount);
   }
 
   assert.match(worker, /starting_ticket_count:\s*payload\.ticket_count/);
   assert.match(worker, /queue_minimum:\s*0/);
   assert.match(worker, /termination_score:\s*-1/);
   assert.match(worker, /collaboration_mode:\s*['"]cooperative['"]/);
-  assert.match(worker, /duplicate_ticket_disclosure:\s*matchMetadata\.ticket_count\s*>\s*1/);
+  assert.match(worker, /duplicate_ticket_disclosure:\s*matchMetadata\.has_repeated_fingerprint/);
 });
 
 test('the generated Pages stage is a strict allowlist with no Node-only or server/simulation surface', async () => {
@@ -524,6 +536,11 @@ test('the generated Pages stage is a strict allowlist with no Node-only or serve
     'decks.json',
     'domain-snapshot.json',
     'ticket-templates.json',
+    'task-014-parts.json',
+    'domain-snapshot-v2.json',
+    'card-catalog-v3.json',
+    'decks-v3.json',
+    'playable-coverage-v3.json',
   ]);
   const forbiddenSegments = new Set([
     'automated_games',

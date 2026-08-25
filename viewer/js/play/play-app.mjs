@@ -265,6 +265,7 @@ export function openSettings() {
   if (!storage) return;
   openSettingsDialog({
     storage,
+    catalog,
     refreshSnapshot: freshSnapshot,
     announce,
     motion: runMotion,

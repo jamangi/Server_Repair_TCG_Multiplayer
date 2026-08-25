@@ -18,6 +18,7 @@ JSON Schema validates object shape. Cross-file references, causal acyclicity, Ti
 | [`component.schema.json`](domain/component.schema.json) | A hardware/component concept, including subsystem, interfaces, compatibility, and serviceability traits. |
 | [`fault.schema.json`](domain/fault.schema.json) | A reusable Fault concept and its relationships to Symptoms, Components, Tests, Repairs, and Verification. |
 | [`fault_causal_edge.schema.json`](domain/fault_causal_edge.schema.json) | One authored directed causal relationship between two Fault definitions. The complete selected graph must be acyclic. |
+| [`playable_coverage.schema.json`](domain/playable_coverage.schema.json) | The machine-readable playable-release audit connecting the pinned knowledge inventory to supported causal fingerprints, exact response resources, and deferred action definitions. |
 | [`protocol.schema.json`](domain/protocol.schema.json) | A protocol or standard and its technical relationships. |
 | [`repair_procedure.schema.json`](domain/repair_procedure.schema.json) | An authored machine-changing procedure, its Fault targets, prerequisites, and Action cost. Runtime legality still requires accepted Isolation. |
 | [`repair_ticket.schema.json`](domain/repair_ticket.schema.json) | A complete authored troubleshooting scenario: v2 public context/candidates, server-only causal truth, complete typed Evidence outcomes, alternative Isolation routes, Repair/Verify requirements, and closure requirements. Fixed fixtures and Ticket Builder output share this contract. |
@@ -25,6 +26,7 @@ JSON Schema validates object shape. Cross-file references, causal acyclicity, Ti
 | [`test.schema.json`](domain/test.schema.json) | An Evidence-producing diagnostic definition and its targets, requirements, strength, and Action cost. Tests change Knowledge State, not machine state. |
 | [`ticket_builder_configuration.schema.json`](domain/ticket_builder_configuration.schema.json) | One immutable, version-pinned set of hard generation constraints, duplicate policy, legal card pool, seed, and optional explicit fallback reference. |
 | [`ticket_builder_result.schema.json`](domain/ticket_builder_result.schema.json) | The complete server-only audit of a primary and optional fallback Builder attempt, including structured diagnostics or complete Ticket snapshots—never partial output. |
+| [`ticket_part_catalog.schema.json`](domain/ticket_part_catalog.schema.json) | Versioned compatible authored Ticket parts used for deterministic assembly, including fingerprints, public context, truth, outcomes, routes, Repair, Verify, closure, and teaching metadata. |
 | [`tool.schema.json`](domain/tool.schema.json) | A technical Tool and its capabilities. Tools are unrelated to the removed account Equipment system. |
 | [`validation_procedure.schema.json`](domain/validation_procedure.schema.json) | A post-Repair Verification procedure, its success conditions, targets, requirements, and Action cost. A pass does not close a Ticket by itself. |
 

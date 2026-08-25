@@ -1,5 +1,5 @@
 import { createCardDetailView, createDeckCardTile } from '../card-view.mjs';
-import { cardFamily, cardName, compactDeckCards, deckComposition } from '../catalog-service.mjs';
+import { cardFamily, cardName, compactDeckCards, deckComposition, deckCoverage } from '../catalog-service.mjs';
 import { cloneJson, dialogWithRestore, escapeHtml, setInlineNotice } from '../dom-utils.mjs';
 import { closeDialogWithMotion } from '../motion-coordinator.mjs';
 import { MAX_COPIES_PER_CARD_ID } from '../data/client-data.mjs';
@@ -31,6 +31,7 @@ function ensureSelected(context, decks) {
 export function renderDecks(root, context) {
   const collection = context.snapshot.state.records.decks;
   const selected = ensureSelected(context, collection.decks);
+  const selectedCoverage = selected ? deckCoverage(context.catalog, selected.card_definition_ids) : null;
   root.innerHTML = `
     <section class="play-route decks-route" aria-labelledby="decks-heading">
       <header class="play-page-heading" data-route-reveal>
@@ -45,7 +46,7 @@ export function renderDecks(root, context) {
     return `<button type="button" class="deck-gallery-card${picked ? ' is-selected' : ''}" data-select-deck="${escapeHtml(deck.deck_id)}" aria-pressed="${picked}">
               <span class="deck-gallery-card__status">${active ? 'Active' : 'Saved'}</span>
               <strong>${escapeHtml(deck.display_name)}</strong>
-              <span>${deck.card_definition_ids.length} Cards · legal</span>
+              <span>${deck.card_definition_ids.length} Cards · legal · ${deckCoverage(context.catalog, deck.card_definition_ids).eligible_unique_count} fingerprints</span>
               <span class="composition-row">${compositionMarkup(context.catalog, deck)}</span>
             </button>`;
   }).join('') || '<div class="empty-panel"><h2>No saved decks</h2><p>Create an empty draft and add exactly 30 Cards.</p></div>'}
@@ -56,7 +57,8 @@ export function renderDecks(root, context) {
             <h2>${escapeHtml(selected.display_name)}</h2>
             <p><code>${escapeHtml(selected.deck_id)}</code></p>
             <div class="composition-row">${compositionMarkup(context.catalog, selected)}</div>
-            <dl class="inspector-facts"><div><dt>Cards</dt><dd>${selected.card_definition_ids.length} / 30</dd></div><div><dt>Validity</dt><dd>Legal</dd></div><div><dt>Status</dt><dd>${selected.deck_id === collection.active_deck_id ? 'Active' : 'Available'}</dd></div></dl>
+            <dl class="inspector-facts"><div><dt>Cards</dt><dd>${selected.card_definition_ids.length} / 30</dd></div><div><dt>Validity</dt><dd>Legal</dd></div><div><dt>Playable coverage</dt><dd>${selectedCoverage.eligible_unique_count} / ${selectedCoverage.supported_unique_count} fingerprints</dd></div><div><dt>Status</dt><dd>${selected.deck_id === collection.active_deck_id ? 'Active' : 'Available'}</dd></div></dl>
+            <p class="${selectedCoverage.eligible_unique_count ? 'authority-note' : 'status-warning'}">${selectedCoverage.eligible_unique_count ? `Eligible subsystem paths: ${Object.entries(selectedCoverage.subsystems).filter(([, count]) => count > 0).map(([name, count]) => `${name} ${count}`).join(' · ')}. Repetition can begin at Ticket ${selectedCoverage.eligible_unique_count + 1}.` : 'This legal deck has no complete supported Repair/Verify path. Edit it before starting a Match.'}</p>
             <div class="inspector-card-list">${compactDeckCards(selected.card_definition_ids).map((entry) => `<button type="button" data-inspect-card="${escapeHtml(entry.card_definition_id)}"><span>${entry.quantity}×</span>${escapeHtml(cardName(context.catalog.cardById.get(entry.card_definition_id)))}</button>`).join('')}</div>
             <div class="button-row">
               <button type="button" class="play-button play-button--primary" data-activate-deck="${escapeHtml(selected.deck_id)}"${selected.deck_id === collection.active_deck_id ? ' disabled' : ''}>${selected.deck_id === collection.active_deck_id ? 'Active deck' : 'Make active'}</button>
@@ -157,6 +159,7 @@ export function renderDeckEditor(root, context, deckId) {
   const filters = context.ui.deckFilters;
   const archetypes = [...new Set(context.catalog.cards.cards.flatMap((card) => card.archetypes || []))].sort();
   const reasons = deckReasons(draft);
+  const coverage = deckCoverage(context.catalog, draft.card_definition_ids);
   root.innerHTML = `
     <section class="play-route deck-editor-route" aria-labelledby="deck-editor-heading">
       <header class="play-page-heading" data-route-reveal>
@@ -177,6 +180,7 @@ export function renderDeckEditor(root, context, deckId) {
           <h2>${draft.card_definition_ids.length} of 30 Cards</h2>
           <div class="composition-row">${compositionMarkup(context.catalog, draft)}</div>
           <ul class="deck-reasons">${reasons.length ? reasons.map((reason) => `<li>${escapeHtml(reason)}</li>`).join('') : '<li class="is-valid">Exactly 30 Cards; copy limits satisfied.</li>'}</ul>
+          <p class="${coverage.eligible_unique_count ? 'authority-note' : 'status-warning'}"><strong>${coverage.eligible_unique_count} of ${coverage.supported_unique_count}</strong> supported fingerprints have a complete path. Legal deck construction and scenario compatibility are separate checks.</p>
           <div class="deck-summary-list">${compactDeckCards(draft.card_definition_ids).map((entry) => `<div><span>${entry.quantity}×</span><span>${escapeHtml(cardName(context.catalog.cardById.get(entry.card_definition_id)))}</span></div>`).join('') || '<p>No Cards added yet.</p>'}</div>
           <div class="button-column"><button id="save-deck" type="button" class="play-button play-button--primary"${reasons.length ? ' disabled' : ''}>Save deck</button><a class="play-button" href="#/play/decks">Cancel</a></div>
           <p class="authority-note">Saving updates this local deck only. An active Match always keeps its start-time snapshot.</p>

@@ -25,6 +25,11 @@ const GAMEPLAY_FILES = Object.freeze([
   'domain-snapshot.json',
   'ticket-templates.json',
   'diagnosis-v2-migration.json',
+  'task-014-parts.json',
+  'domain-snapshot-v2.json',
+  'card-catalog-v3.json',
+  'decks-v3.json',
+  'playable-coverage-v3.json',
 ]);
 
 const STATIC_ASSET_EXTENSIONS = new Set([

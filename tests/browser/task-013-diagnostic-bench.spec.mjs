@@ -29,7 +29,7 @@ test('Relevant and Global organize one Bench without authority changes and Give 
   await openSolo(page);
 
   const initial = await page.evaluate(() => window.__task013WorkerMessages.find((message) => message.type === 'MATCH_STARTED'));
-  expect(initial.projection.view.diagnostic_bench).toHaveLength(6);
+  expect(initial.projection.view.diagnostic_bench).toHaveLength(50);
   expect(initial.projection.view.hand).toHaveLength(6);
   expect(initial.projection.view.diagnostic_relevance_notice).toContain('graph may be incomplete');
   const revision = initial.projection.view.revision;
@@ -41,7 +41,7 @@ test('Relevant and Global organize one Bench without authority changes and Give 
   await global.click();
   await expect(global).toHaveAttribute('aria-pressed', 'true');
   await expect(page.locator('[data-bench-search]')).toBeVisible();
-  await expect(page.locator('.diagnostic-tile')).toHaveCount(6);
+  await expect(page.locator('.diagnostic-tile')).toHaveCount(8);
   expect(await page.evaluate(() => window.__task013WorkerMessages.length)).toBe(1);
 
   const latest = await page.evaluate(() => window.__task013WorkerMessages.at(-1));
@@ -64,7 +64,7 @@ test('Relevant and Global organize one Bench without authority changes and Give 
   expect(resolved.result.target_summary).toBeTruthy();
   expect(resolved.result.result_summary).toBeTruthy();
   expect(resolved.events.some((event) => event.event_type === 'EVIDENCE_CREATED')).toBe(true);
-  expect(resolved.projection.view.diagnostic_bench).toHaveLength(6);
+  expect(resolved.projection.view.diagnostic_bench).toHaveLength(50);
 
   const giveUp = page.getByRole('button', { name: 'Give Up Ticket' });
   const dialogPromise = page.waitForEvent('dialog');

@@ -8,12 +8,14 @@ export const EXPORT_VERSION = 'solo-export-v2';
 export const RESULT_SUMMARY_VERSION = 'solo-result-summary-v2';
 export const RULESET_VERSION = 'first-version-v2';
 export const CARD_CATALOG_VERSION = 'core-card-catalog-diagnosis-v2';
+export const EXPANDED_CARD_CATALOG_VERSION = 'core-card-catalog-coverage-v3';
 export const STORAGE_KEY = 'server-repair-tcg:solo-pages-v2:state';
 export const MAX_IMPORT_BYTES = 512 * 1024;
 export const PROFILE_NAME_MAX_LENGTH = 40;
 export const DECK_NAME_MAX_LENGTH = 48;
 export const MAX_SAVED_DECKS = 64;
 export const STARTER_SOURCE_DECK_ID = 'deck.core.storage_response_v2';
+export const EXPANDED_STARTER_SOURCE_DECK_ID = 'deck.core.multisystem_response_v3';
 export const STARTER_LOCAL_DECK_ID = 'deck.local.storage_response_v2';
 export const MAX_COPIES_PER_CARD_ID = 6;
 export const PROFILE_ICON_IDS = Object.freeze([
@@ -220,17 +222,20 @@ export function createClientDataContext({ cardCatalog, deckCatalog }) {
   if (!isPlainObject(deckCatalog) || !Array.isArray(deckCatalog.decks)) {
     throw new ClientDataError('MISSING_CONTENT_CONTEXT', 'A loaded deck catalog is required.');
   }
-  if (cardCatalog.card_catalog_version !== CARD_CATALOG_VERSION
+  const supportedCardCatalogVersions = new Set([CARD_CATALOG_VERSION, EXPANDED_CARD_CATALOG_VERSION]);
+  if (!supportedCardCatalogVersions.has(cardCatalog.card_catalog_version)
       || cardCatalog.ruleset_version !== RULESET_VERSION) {
     throw new ClientDataError('INCOMPATIBLE_CONTENT', 'The card catalog version is not compatible with solo-pages-v2.');
   }
-  if (deckCatalog.card_catalog_version !== CARD_CATALOG_VERSION
+  if (deckCatalog.card_catalog_version !== cardCatalog.card_catalog_version
       || deckCatalog.ruleset_version !== RULESET_VERSION) {
     throw new ClientDataError('INCOMPATIBLE_CONTENT', 'The deck catalog version is not compatible with solo-pages-v2.');
   }
-  const starterDeck = deckCatalog.decks.find((deck) => deck.id === STARTER_SOURCE_DECK_ID);
+  const starterSourceDeckId = cardCatalog.card_catalog_version === EXPANDED_CARD_CATALOG_VERSION
+    ? EXPANDED_STARTER_SOURCE_DECK_ID : STARTER_SOURCE_DECK_ID;
+  const starterDeck = deckCatalog.decks.find((deck) => deck.id === starterSourceDeckId);
   if (!starterDeck) {
-    throw new ClientDataError('MISSING_STARTER_DECK', `Missing ${STARTER_SOURCE_DECK_ID}.`);
+    throw new ClientDataError('MISSING_STARTER_DECK', `Missing ${starterSourceDeckId}.`);
   }
   return Object.freeze({
     knownCardIds: new Set(cardCatalog.cards
@@ -239,6 +244,9 @@ export function createClientDataContext({ cardCatalog, deckCatalog }) {
     knownSourceDeckIds: new Set(deckCatalog.decks.map((deck) => deck.id)),
     knownIconIds: new Set(PROFILE_ICON_IDS),
     starterDeck: structuredClone(starterDeck),
+    starterSourceDeckId,
+    cardCatalogVersion: cardCatalog.card_catalog_version,
+    rulesetVersion: cardCatalog.ruleset_version,
   });
 }
 
@@ -251,6 +259,9 @@ function normalizeContext(context) {
     knownSourceDeckIds: asSet(context.knownSourceDeckIds, 'knownSourceDeckIds'),
     knownIconIds: asSet(context.knownIconIds ?? PROFILE_ICON_IDS, 'knownIconIds'),
     starterDeck: context.starterDeck,
+    starterSourceDeckId: context.starterSourceDeckId ?? STARTER_SOURCE_DECK_ID,
+    cardCatalogVersion: context.cardCatalogVersion ?? CARD_CATALOG_VERSION,
+    rulesetVersion: context.rulesetVersion ?? RULESET_VERSION,
   };
 }
 
@@ -327,10 +338,10 @@ export function createEmptyStatistics() {
 export function createDefaultState(context) {
   const normalized = normalizeContext(context);
   const starter = normalized.starterDeck;
-  if (starter.id !== STARTER_SOURCE_DECK_ID
+  if (starter.id !== normalized.starterSourceDeckId
       || typeof starter.display_name !== 'string'
       || !Array.isArray(starter.card_definition_ids)) {
-    throw new ClientDataError('INVALID_STARTER_DECK', `The canonical ${STARTER_SOURCE_DECK_ID} fixture is malformed.`);
+    throw new ClientDataError('INVALID_STARTER_DECK', `The canonical ${normalized.starterSourceDeckId} fixture is malformed.`);
   }
   const state = {
     storage_version: LOCAL_STATE_VERSION,
@@ -343,8 +354,8 @@ export function createDefaultState(context) {
       },
       decks: {
         schema_version: DECKS_VERSION,
-        ruleset_version: RULESET_VERSION,
-        card_catalog_version: CARD_CATALOG_VERSION,
+        ruleset_version: normalized.rulesetVersion,
+        card_catalog_version: normalized.cardCatalogVersion,
         active_deck_id: STARTER_LOCAL_DECK_ID,
         decks: [{
           deck_id: STARTER_LOCAL_DECK_ID,
@@ -422,8 +433,8 @@ export function validateDeckCollection(collection, context) {
   const errors = [];
   if (!validateExactKeys(collection, DECK_COLLECTION_KEYS, '$.decks', errors)) return errors;
   validateVersion(collection.schema_version, DECKS_VERSION, '$.decks.schema_version', errors);
-  validateVersion(collection.ruleset_version, RULESET_VERSION, '$.decks.ruleset_version', errors);
-  validateVersion(collection.card_catalog_version, CARD_CATALOG_VERSION, '$.decks.card_catalog_version', errors);
+  validateVersion(collection.ruleset_version, normalized.rulesetVersion, '$.decks.ruleset_version', errors);
+  validateVersion(collection.card_catalog_version, normalized.cardCatalogVersion, '$.decks.card_catalog_version', errors);
   validateStableId(collection.active_deck_id, '$.decks.active_deck_id', errors, { nullable: true });
   if (!Array.isArray(collection.decks)) {
     errors.push(issue('$.decks.decks', 'EXPECTED_ARRAY', 'Decks must be an array.'));
@@ -584,7 +595,14 @@ export function migrateLocalState(candidate, context) {
       `Unsupported local data version ${String(candidate.storage_version)}.`,
     );
   }
-  return assertValidLocalState(candidate, context);
+  const normalized = normalizeContext(context);
+  if (normalized.cardCatalogVersion === EXPANDED_CARD_CATALOG_VERSION
+      && candidate.records?.decks?.card_catalog_version === CARD_CATALOG_VERSION) {
+    const migrated = cloneJson(candidate);
+    migrated.records.decks = createDefaultState(normalized).records.decks;
+    return assertValidLocalState(migrated, normalized);
+  }
+  return assertValidLocalState(candidate, normalized);
 }
 
 export function deriveLevel(lifetimeServicePointsGained) {

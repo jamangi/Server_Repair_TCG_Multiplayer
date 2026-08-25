@@ -209,6 +209,9 @@ function chooseSeatSafeIntent(projection, state) {
   const queue = projection.view.public_match.repair_queue;
   const selectedTicket = queue.find((ticket) => ticket.ticket_instance_id === projection.__selectedTicketId) ?? queue[0];
   const searchTokens = projection.view.utility_resources.search_tokens;
+  const relevantBenchIds = new Set((projection.view.diagnostic_bench ?? [])
+    .filter((entry) => entry.ticket_relevance.some((relevance) => relevance.relevant))
+    .map((entry) => entry.card_instance_id));
 
   if (state.forceRefresh) {
     const refresh = intents.find((intent) => intent.action_type === 'REFRESH');
@@ -228,10 +231,15 @@ function chooseSeatSafeIntent(projection, state) {
       const key = `${intent.ticket_instance_id}:${intent.candidate_fault_id}:${evidenceCount(projection, intent.ticket_instance_id)}`;
       return !state.hypothesisStates.has(key);
     }
+    if (intent.action_type === 'RUN_TEST') {
+      const ticket = queue.find((entry) => entry.ticket_instance_id === intent.ticket_instance_id);
+      const key = `${intent.ticket_instance_id}:${intent.card_instance_id}:${ticket?.machine_revision ?? 0}`;
+      return !state.diagnosticAttempts.has(key);
+    }
     if (intent.action_type !== 'COMMIT_ISOLATION') return true;
     const key = `${intent.ticket_instance_id}:${intent.candidate_fault_id}`;
     const previousAttempt = state.isolationAttemptEvidenceCounts.get(key);
-    return previousAttempt === undefined || evidenceCount(projection, intent.ticket_instance_id) > previousAttempt;
+    return previousAttempt === undefined || evidenceScore(projection, intent) > previousAttempt;
   });
   const ranked = usable.map((intent) => {
     let priority = 50;
@@ -240,7 +248,8 @@ function chooseSeatSafeIntent(projection, state) {
     else if (intent.action_type === 'PERFORM_VERIFY') priority = 2;
     else if (intent.action_type === 'PERFORM_REPAIR') priority = 3;
     else if (intent.action_type === 'COMMIT_ISOLATION') priority = evidenceScore(projection, intent) > 0 ? 4 : 20;
-    else if (intent.action_type === 'RUN_TEST' || intent.action_type === 'PLAY_CARD') priority = 6;
+    else if (intent.action_type === 'RUN_TEST') priority = relevantBenchIds.has(intent.card_instance_id) ? 6 : 25;
+    else if (intent.action_type === 'PLAY_CARD') priority = 6;
     else if (intent.action_type === 'DOCUMENT_LIVE') priority = 7;
     else if (intent.action_type === 'SEARCH') priority = 8;
     else if (intent.action_type === 'REFRESH') priority = 9;
@@ -274,6 +283,18 @@ async function submitProjectedIntent(page, intent, mode) {
       let diagnostic = page.locator(`[data-select-diagnostic="${intent.card_instance_id}"]`);
       if (!await diagnostic.count()) {
         await activate(page, page.getByRole('button', { name: 'Global', exact: true }), mode);
+        const message = await latestWorkerProjection(page);
+        const benchEntry = message.projection.view.diagnostic_bench.find(
+          (entry) => entry.card_instance_id === intent.card_instance_id,
+        );
+        const benchSearch = page.locator('[data-bench-search]');
+        if (mode === 'keyboard') {
+          await benchSearch.focus();
+          await page.keyboard.press('Control+A');
+          await page.keyboard.type(benchEntry.card_definition_id);
+        } else {
+          await benchSearch.fill(benchEntry.card_definition_id);
+        }
         diagnostic = page.locator(`[data-select-diagnostic="${intent.card_instance_id}"]`);
       }
       await activate(page, diagnostic, mode);
@@ -297,16 +318,23 @@ function freshSeatSafeState() {
     searchedDefinitions: new Set(),
     isolationAttemptEvidenceCounts: new Map(),
     hypothesisStates: new Set(),
+    diagnosticAttempts: new Set(),
   };
 }
 
 function rememberResolvedIntent(state, projection, intent, resolved) {
+  if (intent.action_type === 'RUN_TEST') {
+    const ticket = projection.view.public_match.repair_queue.find(
+      (entry) => entry.ticket_instance_id === intent.ticket_instance_id,
+    );
+    state.diagnosticAttempts.add(`${intent.ticket_instance_id}:${intent.card_instance_id}:${ticket?.machine_revision ?? 0}`);
+  }
   if (intent.action_type === 'SEARCH') {
     state.searchedDefinitions.add(`${intent.ticket_instance_id}:${intent.selected_card_definition_id}`);
   }
   if (intent.action_type === 'COMMIT_ISOLATION' && resolved.result?.resolution_code === 'ISOLATION_NOT_SUPPORTED') {
     const key = `${intent.ticket_instance_id}:${intent.candidate_fault_id}`;
-    state.isolationAttemptEvidenceCounts.set(key, evidenceCount(projection, intent.ticket_instance_id));
+    state.isolationAttemptEvidenceCounts.set(key, evidenceScore(projection, intent));
   }
   if (intent.action_type === 'REVISE_HYPOTHESIS') {
     const key = `${intent.ticket_instance_id}:${intent.candidate_fault_id}:${evidenceCount(projection, intent.ticket_instance_id)}`;
@@ -346,6 +374,7 @@ async function completeSoloFromSafeProjections(page, {
     searchedDefinitions: new Set(),
     isolationAttemptEvidenceCounts: new Map(),
     hypothesisStates: new Set(),
+    diagnosticAttempts: new Set(),
     eventTypes: new Set(),
     submittedIntents: 0,
   };
@@ -372,13 +401,19 @@ async function completeSoloFromSafeProjections(page, {
     for (const event of resolved.events ?? []) state.eventTypes.add(event.event_type);
 
     if (intent.action_type === 'REFRESH') state.forceRefresh = false;
+    if (intent.action_type === 'RUN_TEST') {
+      const ticket = projection.view.public_match.repair_queue.find(
+        (entry) => entry.ticket_instance_id === intent.ticket_instance_id,
+      );
+      state.diagnosticAttempts.add(`${intent.ticket_instance_id}:${intent.card_instance_id}:${ticket?.machine_revision ?? 0}`);
+    }
     if (intent.action_type === 'SEARCH') {
       state.forceSearch = false;
       state.searchedDefinitions.add(`${intent.ticket_instance_id ?? selectedTicketId}:${intent.selected_card_definition_id}`);
     }
     if (intent.action_type === 'COMMIT_ISOLATION' && resolved.result?.resolution_code === 'ISOLATION_NOT_SUPPORTED') {
       const key = `${intent.ticket_instance_id}:${intent.candidate_fault_id}`;
-      state.isolationAttemptEvidenceCounts.set(key, evidenceCount(projection, intent.ticket_instance_id));
+      state.isolationAttemptEvidenceCounts.set(key, evidenceScore(projection, intent));
     }
     if (intent.action_type === 'REVISE_HYPOTHESIS') {
       const key = `${intent.ticket_instance_id}:${intent.candidate_fault_id}:${evidenceCount(projection, intent.ticket_instance_id)}`;
@@ -796,18 +831,17 @@ test('a keyboard-only diagnosis-v2 shift completes without drag', async ({ page 
   expect(errors).toEqual([]);
 });
 
-test('ten-Ticket queues disclose repeated structures, prevent duplicate submissions, and confirm active-match exit', async ({ page }, testInfo) => {
+test('ten-Ticket queues maximize distinct fingerprints, prevent duplicate submissions, and confirm active-match exit', async ({ page }, testInfo) => {
   desktopOnly(testInfo);
   const errors = collectClientErrors(page);
   await installWorkerProbe(page, 3);
   await openRoute(page, '#/play/home');
   await setTicketCount(page, 10);
-  await expect(page.locator('#duplicate-disclosure')).toBeVisible();
-  await expect(page.locator('#duplicate-disclosure')).toContainText('repeated templates');
+  await expect(page.locator('#duplicate-disclosure')).toBeHidden();
   await activate(page, page.locator('#start-solo'));
   await expect(page.getByRole('heading', { name: 'Night-shift board' })).toBeVisible({ timeout: 20_000 });
   await expect(page.locator('.ticket-card')).toHaveCount(10);
-  await expect(page.locator('.game-disclosure')).toContainText('10-Ticket training queue');
+  await expect(page.locator('.game-disclosure')).toHaveCount(0);
   await expectNoPageOverflow(page);
 
   const directIntent = page.locator('[data-intent-id]').first();

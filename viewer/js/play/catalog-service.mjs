@@ -9,52 +9,11 @@ async function fetchJson(name, { fetchImpl, contentRoot }) {
   return response.json();
 }
 
-function freezeCatalog({ cards, decks, domain }) {
+function freezeCatalog({ cards, decks, domain, parts, coverage }) {
   const cardById = new Map(cards.cards.map((card) => [card.id, card]));
   const deckById = new Map(decks.decks.map((deck) => [deck.id, deck]));
   const domainById = new Map(domain.entities.map((entity) => [entity.id, entity]));
-  return Object.freeze({ cards, decks, domain, cardById, deckById, domainById });
-}
-
-function applyDiagnosisMigration({ cards, decks, domain, migration }) {
-  const nextCards = structuredClone(cards);
-  nextCards.ruleset_version = migration.successor_ruleset_version;
-  nextCards.card_catalog_version = migration.card_catalog_version;
-  nextCards.cards = nextCards.cards.map((card) => card.play_contract?.contract_type === 'DIAGNOSTIC'
-    ? { ...card, play_contract: { ...card.play_contract, placement: 'diagnostic_bench', disposition: 'remain_in_diagnostic_bench' } }
-    : card);
-  const byId = new Map(nextCards.cards.map((card) => [card.id, card]));
-  const source = decks.decks.find((deck) => deck.id === migration.response_deck.source_deck_id);
-  if (!source) throw new Error('The response-deck migration source is missing.');
-  const response = source.card_definition_ids.filter((id) =>
-    byId.get(id)?.play_contract?.contract_type !== 'DIAGNOSTIC');
-  const counts = new Map(response.map((id) => [id, 0]));
-  const migrated = [];
-  while (migrated.length < migration.response_deck.size) {
-    let added = false;
-    for (const id of response) {
-      if (migrated.length === migration.response_deck.size) break;
-      if ((counts.get(id) ?? 0) >= migration.response_deck.max_copies_per_card_id) continue;
-      migrated.push(id);
-      counts.set(id, (counts.get(id) ?? 0) + 1);
-      added = true;
-    }
-    if (!added) throw new Error('The pinned response-deck migration cannot produce a legal deck.');
-  }
-  return {
-    cards: nextCards,
-    decks: {
-      ruleset_version: migration.successor_ruleset_version,
-      card_catalog_version: migration.card_catalog_version,
-      decks: [{
-        id: migration.response_deck.successor_deck_id,
-        entity_type: 'deck',
-        display_name: 'Storage Response Deck v2',
-        card_definition_ids: migrated,
-      }],
-    },
-    domain,
-  };
+  return Object.freeze({ cards, decks, domain, parts, coverage, cardById, deckById, domainById });
 }
 
 export async function loadPlayCatalog({
@@ -63,13 +22,20 @@ export async function loadPlayCatalog({
   cache = true,
 } = {}) {
   const load = () => Promise.all([
-    fetchJson('card-catalog.json', { fetchImpl, contentRoot }),
-    fetchJson('decks.json', { fetchImpl, contentRoot }),
-    fetchJson('domain-snapshot.json', { fetchImpl, contentRoot }),
-    fetchJson('diagnosis-v2-migration.json', { fetchImpl, contentRoot }),
-  ]).then(([cards, decks, domain, migration]) => {
-    if (migration.successor_ruleset_version !== 'first-version-v2') throw new Error('Diagnosis migration version is incompatible.');
-    return freezeCatalog(applyDiagnosisMigration({ cards, decks, domain, migration }));
+    fetchJson('card-catalog-v3.json', { fetchImpl, contentRoot }),
+    fetchJson('decks-v3.json', { fetchImpl, contentRoot }),
+    fetchJson('domain-snapshot-v2.json', { fetchImpl, contentRoot }),
+    fetchJson('task-014-parts.json', { fetchImpl, contentRoot }),
+    fetchJson('playable-coverage-v3.json', { fetchImpl, contentRoot }),
+  ]).then(([cards, decks, domain, parts, coverage]) => {
+    if (cards.ruleset_version !== 'first-version-v2'
+        || cards.card_catalog_version !== 'core-card-catalog-coverage-v3'
+        || decks.deck_catalog_version !== 'core-response-decks-v3'
+        || parts.part_catalog_version !== 'ticket-parts-v1'
+        || coverage.coverage_version !== 'playable-coverage-v3') {
+      throw new Error('TASK-014 playable content versions are incompatible.');
+    }
+    return freezeCatalog({ cards, decks, domain, parts, coverage });
   });
   if (!cache) return load();
   catalogPromise ||= load().catch((error) => {
@@ -117,4 +83,55 @@ export function deckComposition(catalog, entries) {
     result[family] = (result[family] ?? 0) + entry.quantity;
   }
   return result;
+}
+
+export function deckCoverage(catalog, cardDefinitionIds) {
+  const counts = new Map();
+  for (const id of cardDefinitionIds) counts.set(id, (counts.get(id) ?? 0) + 1);
+  const fingerprints = (catalog.coverage?.fingerprints ?? []).map((entry) => {
+    const needed = new Map();
+    for (const id of entry.required_response_card_definition_ids) needed.set(id, (needed.get(id) ?? 0) + 1);
+    const missing = [...needed]
+      .filter(([id, count]) => (counts.get(id) ?? 0) < count)
+      .map(([id]) => id);
+    return {
+      fingerprint_id: entry.fingerprint_id,
+      subsystem: entry.subsystem,
+      compatible: missing.length === 0,
+      missing_card_definition_ids: missing,
+      required_counts: needed,
+    };
+  });
+  let maximumDistinct = 0;
+  const eligible = fingerprints.filter((entry) => entry.compatible);
+  const visit = (index, selected, remaining) => {
+    if (selected + (eligible.length - index) <= maximumDistinct) return;
+    if (index === eligible.length) {
+      maximumDistinct = Math.max(maximumDistinct, selected);
+      return;
+    }
+    const next = new Map(remaining);
+    let fits = true;
+    for (const [id, count] of eligible[index].required_counts) {
+      if ((next.get(id) ?? 0) < count) {
+        fits = false;
+        break;
+      }
+      next.set(id, next.get(id) - count);
+    }
+    if (fits) visit(index + 1, selected + 1, next);
+    visit(index + 1, selected, remaining);
+  };
+  visit(0, 0, counts);
+  const subsystemNames = [...new Set(fingerprints.map((entry) => entry.subsystem))].sort();
+  return {
+    eligible_unique_count: maximumDistinct,
+    individually_compatible_count: eligible.length,
+    supported_unique_count: fingerprints.length,
+    subsystems: Object.fromEntries(subsystemNames.map((name) => [
+      name,
+      fingerprints.filter((entry) => entry.subsystem === name && entry.compatible).length,
+    ])),
+    fingerprints: fingerprints.map(({ required_counts: _, ...entry }) => entry),
+  };
 }

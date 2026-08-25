@@ -15,6 +15,17 @@ import {
   buildTicketsV2,
   createDiagnosisV2Catalogs,
 } from '../builder/diagnosis-v2.mjs';
+import {
+  TASK_014_BUILDER_VERSION,
+  TASK_014_CARD_CATALOG_VERSION,
+  TASK_014_CONFIGURATION_VERSION,
+  TASK_014_DOMAIN_CONTENT_VERSION,
+  TASK_014_RULESET_VERSION,
+  TASK_014_STARTER_DECK_ID,
+  TASK_014_TICKET_CONTENT_VERSION,
+  buildTicketsV3,
+  createTask014Catalogs,
+} from '../builder/task-014.mjs';
 import * as engine from '../engine/index.mjs';
 import {
   choosePolicyIntent,
@@ -24,6 +35,7 @@ import {
 export const AUTOMATED_HARNESS_VERSION = 'automated-harness-v1';
 export const FOUNDATION_CAMPAIGN_ID = 'task-009-foundation-v1';
 export const DIAGNOSIS_V2_CAMPAIGN_ID = 'task-013-diagnosis-v2';
+export const TASK_014_CAMPAIGN_ID = 'task-014-playable-coverage-v3';
 
 const CONTENT_DIRECTORY = new URL('../../content/gameplay-v1/', import.meta.url);
 const VIRTUAL_EPOCH_MILLISECONDS = Date.UTC(2042, 0, 1, 0, 0, 0);
@@ -355,6 +367,17 @@ export async function loadDiagnosisV2Catalogs() {
   });
 }
 
+export async function loadTask014Catalogs() {
+  const [cards, decks, domain, parts, coverage] = await Promise.all([
+    readJson('card-catalog-v3.json'),
+    readJson('decks-v3.json'),
+    readJson('domain-snapshot-v2.json'),
+    readJson('task-014-parts.json'),
+    readJson('playable-coverage-v3.json'),
+  ]);
+  return createTask014Catalogs({ cards, decks, domain, parts, coverage });
+}
+
 function fixedSnapshots(group, ticketContent) {
   const byId = new Map(ticketContent.templates.map((template) => [template.ticket.id, template.ticket]));
   return group.ticket_source.ticket_definition_ids.map((id) => {
@@ -367,8 +390,10 @@ function fixedSnapshots(group, ticketContent) {
 function generatedSnapshots(group, seed, catalogs) {
   const configuration = clone(group.ticket_source.builder_configuration);
   configuration.seed = normalizedSeed(seed);
-  const result = catalogs.rulesetVersion === DIAGNOSIS_V2_RULESET_VERSION
-    ? buildTicketsV2({ configuration, catalogs })
+  const result = configuration.generator_version === TASK_014_BUILDER_VERSION
+    ? buildTicketsV3({ configuration, catalogs })
+    : catalogs.rulesetVersion === DIAGNOSIS_V2_RULESET_VERSION
+      ? buildTicketsV2({ configuration, catalogs })
     : buildTickets({
       configuration,
       ticketContent: catalogs.ticketContent,
@@ -938,5 +963,83 @@ export function createDiagnosisV2CampaignSettings(cardDefinitionIds) {
         stallPasses: null,
       })),
     ],
+  };
+}
+
+function task014BuilderConfiguration(id, fingerprintIds, catalogs) {
+  const requestedCount = fingerprintIds.length;
+  const starter = catalogs.decks.decks.find((deck) => deck.id === TASK_014_STARTER_DECK_ID);
+  const diagnosticIds = catalogs.cards.cards
+    .filter((card) => card.play_contract?.contract_type === 'DIAGNOSTIC')
+    .map((card) => card.id)
+    .sort();
+  const counts = {};
+  for (const cardId of starter.card_definition_ids) counts[cardId] = (counts[cardId] ?? 0) + 1;
+  return {
+    ...builderConfiguration(id, requestedCount, [...diagnosticIds, ...Object.keys(counts)].sort(), {
+      context: 'SIMULATION',
+      allowDuplicates: true,
+    }),
+    configuration_version: TASK_014_CONFIGURATION_VERSION,
+    generator_version: TASK_014_BUILDER_VERSION,
+    content_version: TASK_014_TICKET_CONTENT_VERSION,
+    domain_content_version: TASK_014_DOMAIN_CONTENT_VERSION,
+    card_catalog_version: TASK_014_CARD_CATALOG_VERSION,
+    allowed_fingerprint_ids: [...fingerprintIds],
+    diagnostic_card_definition_ids: diagnosticIds,
+    available_card_definition_counts: counts,
+    progressive_difficulty_profile: {
+      profile_id: 'progressive.simulation.task_014',
+      profile_version: 'task-014',
+      explicit_ceiling: 4,
+      bands: [{ start_generated_index: 0, end_generated_index: requestedCount - 1, target: 2, minimum: 1, maximum: 4 }],
+    },
+  };
+}
+
+export function createTask014CampaignSettings(catalogs) {
+  const alternateDeckId = 'deck.fixture.multisystem_response_reordered_v3';
+  const roots = [...catalogs.parts.fingerprint_roots].sort((left, right) => left.fingerprint_id.localeCompare(right.fingerprint_id));
+  return {
+    campaign_id: TASK_014_CAMPAIGN_ID,
+    harness_version: AUTOMATED_HARNESS_VERSION,
+    version_pins: {
+      ruleset_version: TASK_014_RULESET_VERSION,
+      card_catalog_version: TASK_014_CARD_CATALOG_VERSION,
+      domain_content_version: TASK_014_DOMAIN_CONTENT_VERSION,
+      ticket_content_version: TASK_014_TICKET_CONTENT_VERSION,
+      generator_version: TASK_014_BUILDER_VERSION,
+      harness_version: AUTOMATED_HARNESS_VERSION,
+      policy_versions: ['coverage-seat-safe-v3'],
+    },
+    setting_groups: [...roots.map((root, index) => group({
+      id: `task-014-${root.fingerprint_id.replace(/^fingerprint\./, '').replaceAll('.', '-')}`,
+      description: `Seat-safe generated coverage for ${root.fingerprint_id}.`,
+      mode: 'cooperative',
+      seats: [seat('player_a', 'coverage-seat-safe-v3', index % 2 === 0 ? TASK_014_STARTER_DECK_ID : alternateDeckId)],
+      ticketSource: {
+        source_type: 'generated',
+        builder_configuration: task014BuilderConfiguration(`builder.task_014.${root.fingerprint_id}`, [root.fingerprint_id], catalogs),
+      },
+      seeds: [String(14001 + index)],
+      turnCap: 220,
+      stallPasses: null,
+    })), group({
+      id: 'task-014-multi-ticket-resource-path',
+      description: 'Two generated Tickets prove exact response-deck, draw, Search, and Refresh reachability across one queue.',
+      mode: 'cooperative',
+      seats: [seat('player_a', 'coverage-seat-safe-v3', TASK_014_STARTER_DECK_ID)],
+      ticketSource: {
+        source_type: 'generated',
+        builder_configuration: task014BuilderConfiguration('builder.task_014.multi_ticket_resource_path', [
+          'fingerprint.boot.incorrect_order',
+          'fingerprint.network.incorrect_static_ip',
+        ], catalogs),
+      },
+      seeds: ['14998'],
+      startingTicketCount: 2,
+      turnCap: 440,
+      stallPasses: null,
+    })],
   };
 }

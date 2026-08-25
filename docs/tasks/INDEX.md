@@ -10,8 +10,7 @@ Active task:
 
 Active V0 training-ready sequence:
 
-- [`TASK-014-XHIGH: Expand playable content and Ticket generation`](TASK-014-expand-playable-content-and-ticket-generation.md) — approved PT-006 D and next in sequence; expands twelve causal fingerprints plus all 50 current Bench diagnostics with coverage-driven Cards/scenarios, material generation, unique-before-repeat queues, and exact resource solvability.
-- [`TASK-016-HIGH: Refine Diagnostic Bench and game-board composition`](TASK-016-refine-diagnostic-bench-board-layout.md) — approved and blocked on TASK-014; applies the Relevant/Global layouts, compact Ticket, fully visible Legal Action, viewport-aware queue, and responsive visual polish against representative content.
+- [`TASK-016-HIGH: Refine Diagnostic Bench and game-board composition`](TASK-016-refine-diagnostic-bench-board-layout.md) — approved and next in sequence; applies the Relevant/Global layouts, compact Ticket, fully visible Legal Action, viewport-aware queue, and responsive visual polish against representative content.
 - [`TASK-015-HIGH: Add guided tutorials and the solo solution-reveal experience`](TASK-015-add-guided-tutorial-and-solution-reveal.md) — approved PT-007 A and blocked on TASK-014 and TASK-016; teaches the final rules through two real seeded engine paths and presents the authoritative PT-005 A Give Up reveal.
 
 Reserved V0 illustration task:
@@ -22,10 +21,11 @@ Approved but deferred V2 task:
 
 - [`TASK-017-XHIGH: Create the Server Repair V2 Migration Seed`](TASK-017-create-server-repair-v2-migration-seed.md) — approved Migration Seed direction but deferred until the V0 product is training-ready; when reactivated, it audits V0 in bounded checkpoints and establishes the public dependency-inference V2 foundation without modifying V0 behavior.
 
-TASK-012-HIGH and TASK-013-XHIGH are complete. Remaining approved execution order: TASK-014-XHIGH → TASK-016-HIGH → TASK-015-HIGH. Scope TASK-011-HIGH after TASK-014. Return to TASK-017-XHIGH only when the project owner reactivates V2 migration.
+TASK-012-HIGH through TASK-014-XHIGH are complete. Remaining approved execution order: TASK-016-HIGH → TASK-015-HIGH. TASK-011-HIGH may now proceed where asset integration permits. Return to TASK-017-XHIGH only when the project owner reactivates V2 migration.
 
 Completed documentation and research tasks:
 
+- [`TASK-014-XHIGH: Expand playable content and Ticket generation`](TASK-014-expand-playable-content-and-ticket-generation.md) — completed 2026-08-24; promoted all 50 current Test/Command diagnostics, added twelve cross-subsystem causal fingerprints and their minimal response paths, assembled deterministic Tickets from typed authored parts, proved exact active-deck reachability and unique-before-repeat queues, published coverage audits, and reproduced a 13-run seat-safe campaign with no exceptions.
 - [`TASK-013-XHIGH: Synchronize approved post-playtest diagnosis rules`](TASK-013-synchronize-post-playtest-diagnosis-rules.md) — completed 2026-08-24; added the versioned Global/Relevant Diagnostic Bench, deterministic Candidate/outcome migration, typed alternative Isolation and elimination routes, retained Repair gating, atomic solo/training Give Up reveal, v1 coexistence, and reproducible v2 campaign.
 - [`TASK-012-HIGH: Fix solo-client interaction defects`](TASK-012-fix-solo-client-interaction-defects.md) — completed 2026-08-24; added semantic same-route scroll/focus/selection continuity, composition-safe real typing, explicit alternate Card targets, and persistent authoritative action-result routes without gameplay changes.
 - [`TASK-010: Add Library and local Solo Play to the static Viewer`](TASK-010-static-solo-play-client.md) — completed 2026-08-23; preserved the Domain Library and added the `solo-pages-v1` local Play shell, legal deck editor, profile/statistics and backup portability, Worker-authoritative 1–10 Ticket games, semantic motion, responsive Night-Shift visual system, deterministic Pages staging, and browser/visual acceptance. TASK-011-HIGH remains reserved for the full illustration set.

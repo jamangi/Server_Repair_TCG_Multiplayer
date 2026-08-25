@@ -1,4 +1,5 @@
 import { dialogWithRestore, downloadText, escapeHtml, setInlineNotice } from './dom-utils.mjs';
+import { deckCoverage } from './catalog-service.mjs';
 
 let activeDialog = null;
 
@@ -25,6 +26,12 @@ export function openSettingsDialog(context) {
   activeDialog?.remove();
   const snapshot = context.refreshSnapshot();
   const settings = snapshot.state.records.settings;
+  const activeDeck = snapshot.state.records.decks.decks.find(
+    (deck) => deck.deck_id === snapshot.state.records.decks.active_deck_id,
+  ) ?? null;
+  const eligibleUniqueCount = activeDeck
+    ? deckCoverage(context.catalog, activeDeck.card_definition_ids).eligible_unique_count
+    : 0;
   const dialog = document.createElement('dialog');
   dialog.className = 'play-dialog settings-dialog';
   dialog.setAttribute('aria-labelledby', 'settings-heading');
@@ -33,7 +40,7 @@ export function openSettingsDialog(context) {
     <header><p class="play-eyebrow">Solo Pages v2</p><h2 id="settings-heading">Settings &amp; local data</h2><p>Presentation choices do not change engine legality or frozen gameplay.</p></header>
     ${snapshot.diagnostic ? `<div class="storage-diagnostic" role="status" data-code="${escapeHtml(snapshot.diagnostic.code)}"><strong>${snapshot.persistence === 'MEMORY' ? 'Memory-only session' : 'Local data notice'}</strong><p>${escapeHtml(snapshot.diagnostic.message)}</p></div>` : ''}
     <form id="settings-form">
-      <section class="settings-section"><h3>Match setup</h3><label>Starting Tickets<select id="settings-ticket-count">${Array.from({ length: 10 }, (_, index) => index + 1).map((count) => `<option value="${count}"${count === settings.starting_ticket_count ? ' selected' : ''}>${count}</option>`).join('')}</select></label><p class="field-note">Queues above one Ticket may repeat causal fingerprints; queues above three necessarily repeat because the pinned pack contains three templates.</p></section>
+      <section class="settings-section"><h3>Match setup</h3><label>Starting Tickets<select id="settings-ticket-count">${Array.from({ length: 10 }, (_, index) => index + 1).map((count) => `<option value="${count}"${count === settings.starting_ticket_count ? ' selected' : ''}>${count}</option>`).join('')}</select></label><p class="field-note">The active deck can reach ${eligibleUniqueCount} distinct causal fingerprint${eligibleUniqueCount === 1 ? '' : 's'} at once. The Builder uses each eligible fingerprint before balanced deterministic repetition.</p></section>
       <section class="settings-section"><h3>Interaction</h3><label>Preferred Bench View<select id="settings-bench-view"><option value="RELEVANT"${settings.preferred_bench_view === 'RELEVANT' ? ' selected' : ''}>Relevant</option><option value="GLOBAL"${settings.preferred_bench_view === 'GLOBAL' ? ' selected' : ''}>Global</option></select></label><p class="field-note">This is an organization preference, not a difficulty setting. You can switch during play.</p><label>Motion<select id="settings-motion"><option value="SYSTEM"${settings.motion_preference === 'SYSTEM' ? ' selected' : ''}>Follow system</option><option value="FULL"${settings.motion_preference === 'FULL' ? ' selected' : ''}>Full explanatory motion</option><option value="REDUCED"${settings.motion_preference === 'REDUCED' ? ' selected' : ''}>Reduced motion</option></select></label><label class="switch-row"><input id="settings-drag" type="checkbox"${settings.drag_enabled ? ' checked' : ''}><span>Enable optional Card drag affordances</span></label><p class="field-note">Click and keyboard actions always remain available.</p><button type="submit" class="play-button play-button--primary">Save settings</button></section>
     </form>
     <section class="settings-section data-portability"><h3>Data portability</h3><p>Backups contain profile, decks, settings, processed result IDs, and local aggregates. Active Match state is never exported.</p><div class="button-row"><button type="button" class="play-button" data-export-backup>Export backup</button><label class="play-button file-button">Choose backup<input id="import-file" type="file" accept="application/json,.json"></label></div><div data-import-preview></div></section>
