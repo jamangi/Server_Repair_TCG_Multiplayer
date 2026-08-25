@@ -1,29 +1,24 @@
 # Post-TASK-010 playtest approvals
 
-Status: **PT-001 D, PT-002 A, PT-003 D, PT-004 A, PT-005 A, PT-006 D, and PT-007 A approved — 2026-08-24. The V0 training-ready track is active. UI-001 and UI-002 are pending after the TASK-016 hands-on review. Migration choices MS-001 A through MS-005 A and MS-007 A remain approved, but TASK-017 is deferred; MS-006 A's earlier parking sequence is superseded.**
+Status: **PT-001 D, PT-002 A, PT-003 D, PT-004 A, PT-005 A, PT-006 D, and PT-007 A approved — 2026-08-24. UI-001 A and UI-002 A approved — 2026-08-25. The V0 training-ready track is active. Migration choices MS-001 A through MS-005 A and MS-007 A remain approved, but TASK-017 is deferred; MS-006 A's earlier parking sequence is superseded.**
 
 ## Post-TASK-016 UI approvals
 
 These choices govern TASK-019 presentation only. They do not alter Card instances, hand/deck order, diagnostic availability, relevance authority, legal intents, costs, or results. TASK-018's modal/Ticket/contrast defects require no approval.
 
-### UI-001 — Diagnostic tile anatomy
+### UI-001 — Diagnostic tile anatomy — **A approved 2026-08-25**
 
-- **A — One shared compact tile in both Bench Views (recommended).** The shelf/grid tile shows type, cost, an undistorted illustration, and the complete title. Category, description, technical detail, and `Why relevant?`/Global catalog explanation move to Inspect. Relevant and Global may size the shared component differently but do not fork its semantic markup or interaction behavior.
+- **A — One shared compact tile in both Bench Views (approved).** The shelf/grid tile shows type, cost, an undistorted illustration, and the complete title. Category, description, technical detail, and `Why relevant?`/Global catalog explanation move to Inspect. Relevant and Global may size the shared component differently but do not fork its semantic markup or interaction behavior.
 - **B — Compact Relevant tile and richer Global tile.** Relevant uses the anatomy above; Global additionally keeps category and a short description visible in every tile. This exposes more information but recreates the density pressure that clipped the Ticket and hand.
 - **C — Keep the current tile information and only repair sizing.** Preserve type, cost, narrow art, title, rules excerpt, and inline relevance/catalog disclosure. This is the smallest change but retains competing information at shelf scale.
 
-### UI-002 — Response-hand behavior
+### UI-002 — Response-hand behavior — **A approved 2026-08-25**
 
-- **A — Shared adaptive hand with grouping, paging, and expansion (recommended).** Both Bench Views use one component. The collapsed hand shows up to five definition groups per page with full family/title, duplicate stacks/quantity, Card count, Deck/Discard counts, and Inspect. Expansion raises readable illustrated Cards over the center Bench while preserving the right rail. Grouping never merges authoritative instances, and every play resolves an explicit instance.
+- **A — Shared adaptive hand with grouping, paging, and expansion (approved).** Both Bench Views use one component. The collapsed hand shows up to five definition groups per page with full family/title, duplicate stacks/quantity, Card count, Deck/Discard counts, and Inspect. Expansion raises readable illustrated Cards over the center Bench while preserving the right rail. Grouping never merges authoritative instances, and every play resolves an explicit instance.
 - **B — Shared readable horizontal hand without grouping or expansion.** Increase every mini-Card enough to show family/title and use horizontal scrolling for overflow. This is simpler but makes six-plus Cards slower to survey and does not use Relevant-mode height as effectively.
 - **C — Separate hand layouts by Bench View.** Relevant uses illustrated mini-Cards while Global uses title chips. This can maximize each mode independently but duplicates component behavior and increases continuity/selection defects.
 
-Reply with:
-
-```text
-UI-001 A/B/C
-UI-002 A/B/C
-```
+The B/C alternatives remain decision provenance and are not implementation authority.
 
 This is the retained decision-provenance packet for the first hands-on solo-play findings. TASK-013 synchronized PT-001 D through PT-005 A into `first-version-v2` on 2026-08-24. Normative behavior now lives in `FROZEN_RULES.md`; existing `first-version-v1` artifacts remain pinned rather than reinterpreted.
 
@@ -31,7 +26,7 @@ The canonical remaining open-rule entry lives in [`UNFROZEN_RULES.md`](UNFROZEN_
 
 ## Approved V0 record
 
-The project owner approved `PT-001 D`, `PT-002 A`, `PT-003 D`, `PT-004 A`, `PT-005 A`, `PT-006 D`, and `PT-007 A` on 2026-08-24. TASK-012 and TASK-013 are complete: PT-001 D through PT-005 A now govern `first-version-v2`, `solo-pages-v2`, `ticket-builder-v2`, and the diagnosis-v2 content contracts. TASK-014 implements PT-006 D; TASK-016 stabilizes final board composition; and TASK-015 implements PT-007 A plus the polished PT-005 A reveal experience. The alternatives below remain decision provenance, not open implementation choices.
+The project owner approved `PT-001 D`, `PT-002 A`, `PT-003 D`, `PT-004 A`, `PT-005 A`, `PT-006 D`, and `PT-007 A` on 2026-08-24, then approved `UI-001 A` and `UI-002 A` on 2026-08-25. TASK-012 and TASK-013 are complete: PT-001 D through PT-005 A now govern `first-version-v2`, `solo-pages-v2`, `ticket-builder-v2`, and the diagnosis-v2 content contracts. TASK-014 implements PT-006 D; TASK-016 establishes the board composition; TASK-018/TASK-019 correct its post-playtest regressions under the approved UI contracts; and TASK-015 implements PT-007 A plus the polished PT-005 A reveal experience. The alternatives below remain decision provenance, not open implementation choices.
 
 ## Verified current facts
 

@@ -10,7 +10,7 @@ Active task:
 
 Queued V0 training-ready sequence:
 
-- [`TASK-019-HIGH: Refine Bench tiles and the adaptive response hand`](TASK-019-refine-bench-tiles-and-adaptive-response-hand.md) — proposed and blocked on TASK-018 plus UI-001/UI-002 approval; establishes readable shared diagnostic/hand components, better Relevant/Global height use, and consolidated active-Match CSS.
+- [`TASK-019-HIGH: Refine Bench tiles and the adaptive response hand`](TASK-019-refine-bench-tiles-and-adaptive-response-hand.md) — approved UI-001 A/UI-002 A and queued after TASK-018; establishes readable shared diagnostic/hand components, better Relevant/Global height use, and consolidated active-Match CSS.
 - [`TASK-015-HIGH: Add guided tutorials and the solo solution-reveal experience`](TASK-015-add-guided-tutorial-and-solution-reveal.md) — approved PT-007 A and re-blocked on TASK-018/TASK-019 so tutorials bind to stable dialogs, Bench tiles, hand controls, and final responsive geometry.
 
 Reserved V0 illustration task:

@@ -2,7 +2,7 @@
 
 ## Status
 
-**Proposed — blocked on TASK-018 and UI-001/UI-002 approval.** Execute after dialog/Ticket regressions are fixed and before TASK-015 locks tutorial highlights to the affected Bench and hand controls.
+**Approved scope — queued after TASK-018.** UI-001 A and UI-002 A were approved by the project owner on 2026-08-25. Execute after dialog/Ticket regressions are fixed and before TASK-015 locks tutorial highlights to the affected Bench and hand controls.
 
 ## Objective
 
@@ -26,9 +26,9 @@ TASK-016 successfully established the queue/center/right-rail frame and Basic/Le
 
 The implementation also added a large TASK-016 media block and then a later `Final cascade lock` for the same selectors. This layered override strategy makes computed layout depend on source order and encourages another patch-on-patch pass. Consolidate affected active-Match styles instead of adding a new terminal override section.
 
-## Proposed diagnostic-tile contract
+## Approved diagnostic-tile contract
 
-The following is the recommended UI-001 A contract. Do not execute it while approval is pending. If UI-001 B or C is approved, synchronize this section to that choice before activating the task.
+UI-001 A requires one shared compact diagnostic-tile anatomy in both Bench Views.
 
 At every supported density, a Bench tile must visibly preserve:
 
@@ -43,9 +43,9 @@ When the diagnostic is relevant to the selected Ticket, Inspect shows its player
 
 Relevant and Global should reuse one tile component/anatomy. Mode-specific grid columns or tile scale are allowed; mode-specific semantic markup and duplicated event logic are not.
 
-## Proposed adaptive-hand contract
+## Approved adaptive-hand contract
 
-The following is the recommended UI-002 A contract. Do not execute it while approval is pending. If UI-002 B or C is approved, synchronize this section to that choice before activating the task.
+UI-002 A requires one shared adaptive response-hand component with grouping, paging, and expansion in both Bench Views.
 
 ### Collapsed state
 
@@ -61,7 +61,7 @@ The following is the recommended UI-002 A contract. Do not execute it while appr
 - Preserve selected Card, page/group, scroll, focus, legal-target state, drag/click/keyboard equivalence, and TASK-012 continuity through expand/collapse and rerenders.
 - `Escape` may collapse the expanded non-modal hand only when focus is within that interaction and no real modal owns Escape. Restore focus to the expand control.
 
-If duplicate grouping is approved, selecting/playing must identify an explicit underlying Card Instance deterministically and visibly. A group cannot become a new authoritative object.
+Because duplicate grouping is approved, selecting/playing must identify an explicit underlying Card Instance deterministically and visibly. A group cannot become a new authoritative object.
 
 ## Mode-specific height and Ticket requirements
 
@@ -99,7 +99,7 @@ For each reference viewport, assert required child intersection and minimum read
 
 Run the full repository suite, staged Viewer verification, automated-game report verification, complete browser matrix, visual/accessibility/performance checks, and `git diff --check`.
 
-## Allowed paths after approval and prerequisites
+## Allowed paths after prerequisites
 
 - shared Card/diagnostic/hand presentation modules and local session presentation state
 - affected game-page, art, motion, continuity, and Play CSS
