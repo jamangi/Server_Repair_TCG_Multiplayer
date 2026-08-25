@@ -74,6 +74,9 @@
         "VERIFY_NOT_READY",
         "ILLEGAL_DOCUMENT_SOURCE",
         "UNSUPPORTED_ACTION_TYPE"
+        ,"ELIMINATION_NOT_SUPPORTED"
+        ,"GIVE_UP_NOT_ALLOWED"
+        ,"CONFIRMATION_REQUIRED"
       ]
     },
     "error_message": { "type": ["string", "null"] },
@@ -92,7 +95,9 @@
     "resolution_code": {
       "type": ["string", "null"],
       "enum": [null, "RESOLVED", "ISOLATION_NOT_SUPPORTED"]
-    }
+    },
+    "target_summary": { "type": ["string", "null"] },
+    "result_summary": { "type": ["string", "null"] }
   },
   "required": [
     "request_id",
@@ -110,7 +115,9 @@
     "rejected_at",
     "recovered_card_instance_id",
     "opened_resolution_window",
-    "resolution_code"
+    "resolution_code",
+    "target_summary",
+    "result_summary"
   ],
   "allOf": [
     {
@@ -121,6 +128,8 @@
           "error_code": { "const": null },
           "error_message": { "const": null },
           "rejected_at": { "const": null }
+          ,"target_summary": { "type": "string", "minLength": 1 }
+          ,"result_summary": { "type": "string", "minLength": 1 }
         }
       }
     },
@@ -140,6 +149,8 @@
           "team_events": { "maxItems": 0 },
           "private_events": { "maxItems": 0 },
           "rejected_at": { "const": "BEFORE_PAYMENT" }
+          ,"target_summary": { "const": null }
+          ,"result_summary": { "const": null }
         }
       }
     },

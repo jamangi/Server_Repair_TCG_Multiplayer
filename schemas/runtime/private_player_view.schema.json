@@ -13,6 +13,7 @@
     }
   },
   "properties": {
+    "projection_version": { "type": "string", "enum": ["engine-projection-v1", "engine-projection-v2"] },
     "player_id": { "$ref": "#/$defs/instanceId" },
     "match_id": { "$ref": "#/$defs/instanceId" },
     "team_id": { "type": ["string", "null"], "minLength": 1 },
@@ -30,12 +31,52 @@
         "required": ["card_instance_id", "card_definition_id"]
       }
     },
+    "diagnostic_bench": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "card_instance_id": { "$ref": "#/$defs/instanceId" },
+          "card_definition_id": { "$ref": "#/$defs/entityRef" },
+          "diagnostic_type": { "type": "string", "enum": ["TEST", "COMMAND"] },
+          "action_cost": { "type": "integer", "minimum": 0, "maximum": 2 },
+          "category": { "type": "string", "minLength": 1 },
+          "ticket_relevance": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "ticket_instance_id": { "$ref": "#/$defs/instanceId" },
+                "relevant": { "type": "boolean" },
+                "why_relevant_paths": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "entity_ids": { "type": "array", "items": { "$ref": "#/$defs/entityRef" }, "minItems": 1 },
+                      "relationship_roles": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+                    },
+                    "required": ["entity_ids", "relationship_roles"]
+                  }
+                }
+              },
+              "required": ["ticket_instance_id", "relevant", "why_relevant_paths"]
+            }
+          }
+        },
+        "required": ["card_instance_id", "card_definition_id", "diagnostic_type", "action_cost", "category", "ticket_relevance"]
+      }
+    },
     "deck_count": { "type": "integer", "minimum": 0 },
     "discard_card_instance_ids": {
       "type": "array",
       "items": { "$ref": "#/$defs/instanceId" },
       "uniqueItems": true
     },
+    "search_card_definition_ids": { "type": "array", "items": { "$ref": "#/$defs/entityRef" }, "uniqueItems": true },
     "utility_resources": {
       "type": "object",
       "additionalProperties": false,
@@ -56,6 +97,58 @@
       "type": "array",
       "items": { "$ref": "knowledge_state.schema.json" }
     },
+    "hypotheses": {
+      "type": "object",
+      "additionalProperties": { "type": "array", "items": { "$ref": "#/$defs/entityRef" }, "uniqueItems": true, "maxItems": 2 }
+    },
+    "documentable_actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "ticket_instance_id": { "$ref": "#/$defs/instanceId" },
+          "source_action_event_id": { "$ref": "#/$defs/instanceId" },
+          "source_result_event_id": { "$ref": "#/$defs/instanceId" },
+          "worklog_placeholder_event_id": { "$ref": "#/$defs/instanceId" },
+          "source_card_instance_id": { "$ref": "#/$defs/instanceId" },
+          "source_card_owner_player_id": { "$ref": "#/$defs/instanceId" },
+          "recovery_available": { "type": "boolean" }
+        },
+        "required": ["ticket_instance_id", "source_action_event_id", "source_result_event_id", "worklog_placeholder_event_id", "source_card_instance_id", "source_card_owner_player_id", "recovery_available"]
+      }
+    },
+    "closure_bundles": { "type": "object", "additionalProperties": { "type": "object" } },
+    "eliminations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "ticket_instance_id": { "$ref": "#/$defs/instanceId" },
+          "elimination_event_id": { "$ref": "#/$defs/instanceId" },
+          "candidate_fault_id": { "$ref": "#/$defs/entityRef" },
+          "eliminated": { "type": "boolean" },
+          "diagnosis_revision": { "type": "integer", "minimum": 0 },
+          "cited_evidence_event_ids": { "type": "array", "items": { "$ref": "#/$defs/instanceId" }, "uniqueItems": true }
+        },
+        "required": ["ticket_instance_id", "elimination_event_id", "candidate_fault_id", "eliminated", "diagnosis_revision", "cited_evidence_event_ids"]
+      }
+    },
+    "solution_reveals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "ticket_instance_id": { "$ref": "#/$defs/instanceId" },
+          "abandoned_at": { "type": "string", "format": "date-time" },
+          "solution_reveal": { "$ref": "ticket_state.schema.json#/$defs/solutionReveal" }
+        },
+        "required": ["ticket_instance_id", "abandoned_at", "solution_reveal"]
+      }
+    },
+    "diagnostic_relevance_notice": { "type": "string", "minLength": 1 },
     "authorized_events": {
       "type": "array",
       "items": {
@@ -82,6 +175,18 @@
           "card_instance_id": { "type": ["string", "null"], "minLength": 1 }
         },
         "required": ["action_type", "ticket_instance_id", "card_instance_id"]
+      }
+    },
+    "legal_intents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "action_type": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]+$" },
+          "payload": { "type": "object" }
+        },
+        "required": ["action_type", "payload"]
       }
     },
     "reconnect": {
@@ -115,9 +220,7 @@
     "deck_count",
     "discard_card_instance_ids",
     "utility_resources",
-    "knowledge_states",
     "authorized_events",
-    "legal_actions",
     "reconnect"
   ]
 }

@@ -1,12 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.local/client/local_settings.schema.json",
-  "title": "Solo Pages Local Settings v1",
+  "title": "Solo Pages Local Settings v2",
   "type": "object",
   "additionalProperties": false,
   "properties": {
     "schema_version": {
-      "const": "solo-settings-v1"
+      "const": "solo-settings-v2"
     },
     "starting_ticket_count": {
       "type": "integer",
@@ -23,12 +23,17 @@
     },
     "drag_enabled": {
       "type": "boolean"
+    },
+    "preferred_bench_view": {
+      "type": "string",
+      "enum": ["RELEVANT", "GLOBAL"]
     }
   },
   "required": [
     "schema_version",
     "starting_ticket_count",
     "motion_preference",
-    "drag_enabled"
+    "drag_enabled",
+    "preferred_bench_view"
   ]
 }

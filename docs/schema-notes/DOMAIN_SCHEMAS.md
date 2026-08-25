@@ -1,6 +1,6 @@
 # Domain schema package
 
-The domain package describes reusable authored technical knowledge and authored Repair Ticket content. It does not describe mutable match state. The synchronized contracts implement the approved gameplay surfaces in [`FROZEN_RULES.md`](../design/decisions/FROZEN_RULES.md); the Unfrozen ledger is currently empty.
+The domain package describes reusable authored technical knowledge and authored Repair Ticket content. It does not describe mutable match state. The synchronized contracts implement the approved gameplay surfaces in [`FROZEN_RULES.md`](../design/decisions/FROZEN_RULES.md); only deferred V2 dependency inference remains Unfrozen.
 
 ## Architectural boundary
 
@@ -16,10 +16,10 @@ The domain package describes reusable authored technical knowledge and authored 
 
 [`repair_ticket.schema.json`](../../schemas/domain/repair_ticket.schema.json) separates content that different audiences may eventually see:
 
-- `initial_symptom_ids` and `public_candidate_fault_ids` are authored public surfaces.
+- `initial_symptom_ids`, explicit `public_context_entity_ids`, and `public_candidate_fault_ids` are public surfaces. Under `repair-ticket-v2`, the Builder deterministically derives two through five Candidates from authored `associated_fault` relationships, always includes publicly plausible hidden Faults, and rejects indistinguishable distractors.
 - `server_only_truth` stores the causal Fault-instance blueprint and edge references. It must never enter a player-safe projection.
-- `authored_evidence_outcomes` maps an eligible source, target, and machine-state key to `SUPPORT`, `CONTRADICT`, `RULE_OUT`, `CONFIRM`, or `INCONCLUSIVE` candidate effects. An unexecuted outcome remains server-only.
-- `isolation_requirements` bind one actionable Fault instance to decisive diagnostic outcomes and, where authored, decisive failed-Verify outcomes. The latter is how a failed Verify can reopen Diagnosis without being treated as automatic Isolation.
+- `authored_evidence_outcomes` maps every playable diagnostic source, target, and reachable machine-state key to exactly one typed result. Candidate effects use `SUPPORT`, `CONTRADICT`, `RULE_OUT`, `CONFIRM`, or `INCONCLUSIVE`; zero-effect outcomes are explicitly `CLEAN`, `IRRELEVANT`, or `INCONCLUSIVE`. An unexecuted outcome remains server-only.
+- `isolation_requirements.routes` replace v1 flat citation counts with stable `DIRECT_OBSERVATION`, `DEFINITIVE_DIAGNOSTIC`, `CORROBORATED_SUPPORT`, `EVIDENCE_BACKED_ELIMINATION`, or `RECOVERY_DERIVED` alternatives. Each route has fixed candidate/target scope and typed fields rather than a loose expression bag.
 - `repair_requirements` and `authored_repair_outcomes` bind an accepted isolated Fault instance, exact Repair Procedure, eligible machine-state key, resulting state, resolved instances, and whether the transition is necessary for closure.
 - `verification_requirements` require current passes after the latest relevant Repair.
 - `closure_requirements` require the accepted Isolation, decisive Evidence, accepted-path Repairs, preserved failed Verifies, and all current passing Verifies.
@@ -57,6 +57,8 @@ A content validator must also confirm that:
 6. causal edges contain no self-loop and the selected relationship set is acyclic;
 7. every required closure member can be produced by a legal Card pool through the authored state path;
 8. Builder bounds, Progressive Difficulty bands, guarantees, duplicate fingerprints, and fallback identity are applied without relaxation; and
-9. server-only truth and unexecuted outcomes are absent from all player-safe views.
+9. server-only truth and unexecuted outcomes are absent from all ordinary player-safe views;
+10. every playable diagnostic has exactly one outcome per reachable state, every distractor has a `CONTRADICT`/`RULE_OUT` path, and every route ID and referenced outcome is unique and compatible; and
+11. a v2 Builder failure returns no partial batch, including candidate/relevance/outcome migration failures.
 
 Stable entity IDs and existing schema `$id` values remain public contracts. TASK-007 changes the shape of Repair Ticket content without renaming those IDs.

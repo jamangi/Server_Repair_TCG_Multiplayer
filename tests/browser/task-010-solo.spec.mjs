@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises';
 
 import { expect, test } from '@playwright/test';
 
-const LOCAL_STATE_KEY = 'server-repair-tcg:solo-pages-v1:state';
+const LOCAL_STATE_KEY = 'server-repair-tcg:solo-pages-v2:state';
 const DESKTOP_PROJECT = 'chromium-desktop';
 const UPDATE_VISUALS = process.env.UPDATE_TASK_010_VISUALS === '1';
 
@@ -268,7 +268,16 @@ async function submitProjectedIntent(page, intent, mode) {
   }
   if (intent.card_instance_id) {
     const card = page.locator(`[data-card-instance-id="${intent.card_instance_id}"]`);
-    if (await card.getAttribute('aria-pressed') !== 'true') await activate(page, card, mode);
+    if (await card.count()) {
+      if (await card.getAttribute('aria-pressed') !== 'true') await activate(page, card, mode);
+    } else {
+      let diagnostic = page.locator(`[data-select-diagnostic="${intent.card_instance_id}"]`);
+      if (!await diagnostic.count()) {
+        await activate(page, page.getByRole('button', { name: 'Global', exact: true }), mode);
+        diagnostic = page.locator(`[data-select-diagnostic="${intent.card_instance_id}"]`);
+      }
+      await activate(page, diagnostic, mode);
+    }
   }
 
   if (intent.action_type === 'SEARCH') {
@@ -279,6 +288,51 @@ async function submitProjectedIntent(page, intent, mode) {
   } else {
     await activate(page, page.locator(`[data-intent-id="${intent.intent_id}"]`), mode);
   }
+}
+
+function freshSeatSafeState() {
+  return {
+    forceRefresh: false,
+    forceSearch: false,
+    searchedDefinitions: new Set(),
+    isolationAttemptEvidenceCounts: new Map(),
+    hypothesisStates: new Set(),
+  };
+}
+
+function rememberResolvedIntent(state, projection, intent, resolved) {
+  if (intent.action_type === 'SEARCH') {
+    state.searchedDefinitions.add(`${intent.ticket_instance_id}:${intent.selected_card_definition_id}`);
+  }
+  if (intent.action_type === 'COMMIT_ISOLATION' && resolved.result?.resolution_code === 'ISOLATION_NOT_SUPPORTED') {
+    const key = `${intent.ticket_instance_id}:${intent.candidate_fault_id}`;
+    state.isolationAttemptEvidenceCounts.set(key, evidenceCount(projection, intent.ticket_instance_id));
+  }
+  if (intent.action_type === 'REVISE_HYPOTHESIS') {
+    const key = `${intent.ticket_instance_id}:${intent.candidate_fault_id}:${evidenceCount(projection, intent.ticket_instance_id)}`;
+    state.hypothesisStates.add(key);
+  }
+}
+
+async function advanceUntilLegalHeldCard(page, mode = 'click', maximumIntents = 40) {
+  const state = freshSeatSafeState();
+  for (let step = 0; step < maximumIntents; step += 1) {
+    const legalCard = page.locator('.play-card[data-legal-target="true"]').first();
+    if (await legalCard.count()) return legalCard;
+
+    const latest = await latestWorkerProjection(page);
+    expect(latest?.terminal_result, 'Match ended before a held response Card became legal.').toBeFalsy();
+    const projection = latest.projection;
+    projection.__selectedTicketId = await page.locator('.ticket-card[aria-current="true"]').getAttribute('data-ticket-id');
+    const intent = chooseSeatSafeIntent(projection, state);
+    expect(intent, `No projected setup intent at step ${step}`).toBeTruthy();
+    const beforeInbound = await page.evaluate(() => window.__soloMessagesFromWorker.length);
+    await submitProjectedIntent(page, intent, mode);
+    await expect.poll(() => page.evaluate(() => window.__soloMessagesFromWorker.length)).toBeGreaterThan(beforeInbound);
+    const resolved = await latestWorkerProjection(page);
+    rememberResolvedIntent(state, projection, intent, resolved);
+  }
+  throw new Error(`No held response Card became legal within ${maximumIntents} projected intents.`);
 }
 
 async function completeSoloFromSafeProjections(page, {
@@ -531,8 +585,9 @@ test('a click-only one-Ticket shift uses Search, Refresh, optional drag fallback
   await page.getByRole('button', { name: 'Close Settings' }).click();
   await startSolo(page, { count: 1, mode: 'click' });
 
-  const firstLegalCard = page.locator('.play-card[data-legal-target="true"]').first();
+  const firstLegalCard = await advanceUntilLegalHeldCard(page, 'click');
   await expect(firstLegalCard).toHaveAttribute('draggable', 'true');
+  const setupSubmissionCount = await page.evaluate(() => window.__soloMessagesToWorker.filter((message) => message.type === 'SUBMIT_INTENT').length);
   const submitCountBeforeInvalidDrag = await page.evaluate(() => window.__soloMessagesToWorker.filter((message) => message.type === 'SUBMIT_INTENT').length);
   const dataTransfer = await page.evaluateHandle(() => new DataTransfer());
   await firstLegalCard.dispatchEvent('dragstart', { dataTransfer });
@@ -564,7 +619,7 @@ test('a click-only one-Ticket shift uses Search, Refresh, optional drag fallback
 
   const outbound = await page.evaluate(() => structuredClone(window.__soloMessagesToWorker));
   const submissions = outbound.filter((message) => message.type === 'SUBMIT_INTENT');
-  expect(submissions.length).toBe(outcome.submittedIntents);
+  expect(submissions.length).toBe(setupSubmissionCount + outcome.submittedIntents);
   for (const message of submissions) {
     expect(Object.keys(message).sort()).toEqual(['intent_id', 'type']);
     expect(message.intent_id).toMatch(/^intent\.\d+\.\d{4}$/);
@@ -594,7 +649,7 @@ test('optional HTML drag submits one engine-projected opaque intent', async ({ p
   await page.getByRole('button', { name: 'Close Settings' }).click();
   await startSolo(page, { count: 1 });
 
-  const legalDragCard = page.locator('.play-card[data-legal-target="true"]').first();
+  const legalDragCard = await advanceUntilLegalHeldCard(page);
   const legalDropTarget = page.locator('.ticket-card[data-drop-target="true"]').first();
   await expect(legalDragCard).toHaveAttribute('draggable', 'true');
   const inboundBefore = await page.evaluate(() => window.__soloMessagesFromWorker.length);
@@ -648,7 +703,7 @@ test('touch-pointer drag captures, cancels safely, and submits one opaque projec
   await page.getByRole('button', { name: 'Close Settings' }).click();
   await startSolo(page, { count: 1 });
 
-  const touchCard = page.locator('.play-card[data-legal-target="true"]').first();
+  const touchCard = await advanceUntilLegalHeldCard(page);
   const ticket = page.locator('.ticket-card[data-drop-target="true"]').first();
   const cardBox = await touchCard.boundingBox();
   const ticketBox = await ticket.boundingBox();
@@ -725,7 +780,7 @@ test('preserve representative Home and live-game visual captures for every confi
   expect(errors).toEqual([]);
 });
 
-test('a keyboard-only advanced shift preserves failed Verify history and completes without drag', async ({ page }, testInfo) => {
+test('a keyboard-only diagnosis-v2 shift completes without drag', async ({ page }, testInfo) => {
   desktopOnly(testInfo);
   test.slow();
   const errors = collectClientErrors(page);
@@ -733,49 +788,11 @@ test('a keyboard-only advanced shift preserves failed Verify history and complet
   await openRoute(page, '#/play/home');
   await startSolo(page, { count: 1, mode: 'keyboard' });
   expect(await page.evaluate((key) => JSON.parse(localStorage.getItem(key)).records.settings.drag_enabled, LOCAL_STATE_KEY)).toBe(false);
-  await expect(page.locator('#selected-ticket-heading')).toHaveText('The Rebuild Still Needed');
-
-  await submitSpecificProjectedIntent(page, {
-    actionType: 'RUN_TEST',
-    cardDefinitionId: 'card.core.raid_status_inspection',
-  });
-  await submitSpecificProjectedIntent(page, {
-    actionType: 'RUN_TEST',
-    cardDefinitionId: 'card.core.drive_health_test',
-  });
-  await submitSpecificProjectedIntent(page, {
-    actionType: 'COMMIT_ISOLATION',
-    candidateFaultId: 'fault.storage.sas.drive_failed',
-  });
-  await submitSpecificProjectedIntent(page, {
-    actionType: 'PERFORM_REPAIR',
-    cardDefinitionId: 'card.core.replace_raid_member',
-  });
-  const failedVerify = await submitSpecificProjectedIntent(page, {
-    actionType: 'PERFORM_VERIFY',
-    cardDefinitionId: 'card.core.raid_health_verification',
-  });
-  expect(failedVerify.events.map((event) => event.event_type)).toContain('TICKET_RETURNED_TO_DIAGNOSIS');
-  await expect(page.locator('.ticket-sheet')).toHaveAttribute('class', /is-returned/);
-
-  await submitSpecificProjectedIntent(page, {
-    actionType: 'COMMIT_ISOLATION',
-    candidateFaultId: 'fault.storage.raid.degraded',
-  });
-  await submitSpecificProjectedIntent(page, {
-    actionType: 'PERFORM_REPAIR',
-    cardDefinitionId: 'card.core.rebuild_raid_array',
-  });
-  await submitSpecificProjectedIntent(page, {
-    actionType: 'PERFORM_VERIFY',
-    cardDefinitionId: 'card.core.raid_health_verification',
-  });
-  const closure = await submitSpecificProjectedIntent(page, { actionType: 'PUBLISH_CLOSURE' });
-  expect(closure.events.map((event) => event.event_type)).toContain('CLOSURE_PUBLISHED');
-  expect(closure.terminal_result.solo_wins).toBe(1);
-  expect(closure.terminal_result.failed_verifies).toBeGreaterThan(0);
+  const outcome = await completeSoloFromSafeProjections(page, { mode: 'keyboard' });
+  expect(outcome.eventTypes).toContain('CLOSURE_PUBLISHED');
+  expect(outcome.terminalResult.solo_wins).toBe(1);
   await expect(page.getByRole('heading', { name: 'Queue cleared' })).toBeVisible();
-  await expect(page.locator('.result-stat-grid')).toContainText(/Failed Verify\s*1/);
+  await expect(page.locator('.result-stat-grid')).toContainText(/Tickets closed\s*1/);
   expect(errors).toEqual([]);
 });
 

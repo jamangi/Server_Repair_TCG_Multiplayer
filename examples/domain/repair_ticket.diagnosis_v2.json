@@ -1,0 +1,266 @@
+{
+  "id": "ticket.storage.loose_cable",
+  "entity_type": "repair_ticket",
+  "presentation": {
+    "display_name": "The Missing Storage Path",
+    "short_description": "An expected storage device disappeared after a storage-path service window."
+  },
+  "source": {
+    "expansion_id": "expansion.gameplay_v1",
+    "version": "1.0.0",
+    "status": "published",
+    "search_tags": [
+      "storage",
+      "cable",
+      "missing device"
+    ]
+  },
+  "difficulty": 1,
+  "initial_symptom_ids": [
+    "symptom.storage.drive_missing"
+  ],
+  "public_candidate_fault_ids": [
+    "fault.storage.cable.loose",
+    "fault.storage.raid.controller_failed"
+  ],
+  "server_only_truth": {
+    "initial_machine_state_key": "machine_state.storage.cable_loose",
+    "fault_instances": [
+      {
+        "fault_instance_key": "fault_instance.storage.cable_loose",
+        "fault_id": "fault.storage.cable.loose",
+        "role": "ACTIONABLE",
+        "actionable": true,
+        "deepest": true,
+        "required_to_repair": true
+      }
+    ],
+    "causal_edge_ids": [],
+    "causal_edges": []
+  },
+  "authored_evidence_outcomes": [
+    {
+      "outcome_id": "evidence.storage.connector_unlatched",
+      "source_definition_id": "test.general.visual_inspection",
+      "target_ref": "fault_instance.storage.cable_loose",
+      "eligible_machine_state_key": "machine_state.storage.cable_loose",
+      "candidate_effects": [
+        {
+          "candidate_fault_id": "fault.storage.cable.loose",
+          "disposition": "CONFIRM"
+        },
+        {
+          "candidate_fault_id": "fault.storage.raid.controller_failed",
+          "disposition": "RULE_OUT"
+        }
+      ],
+      "observation_id": "symptom.storage.drive_missing",
+      "public_summary": "The connector is not latched; no visible cable damage is recorded.",
+      "outcome_classification": "CANDIDATE_EFFECT"
+    },
+    {
+      "outcome_id": "evidence.storage.inventory_missing",
+      "source_definition_id": "test.storage.device_inventory",
+      "target_ref": "fault_instance.storage.cable_loose",
+      "eligible_machine_state_key": "machine_state.storage.cable_loose",
+      "candidate_effects": [
+        {
+          "candidate_fault_id": "fault.storage.cable.loose",
+          "disposition": "SUPPORT"
+        }
+      ],
+      "observation_id": "symptom.storage.drive_missing",
+      "public_summary": "The expected storage device is absent from the authorized inventory.",
+      "outcome_classification": "CANDIDATE_EFFECT"
+    },
+    {
+      "outcome_id": "evidence.v2.ticket.storage.loose.cable.machine.state.storage.cable.loose.command.linux.smartctl",
+      "source_definition_id": "command.linux.smartctl",
+      "target_ref": "fault_instance.storage.cable_loose",
+      "eligible_machine_state_key": "machine_state.storage.cable_loose",
+      "candidate_effects": [],
+      "outcome_classification": "IRRELEVANT",
+      "observation_id": null,
+      "public_summary": "The diagnostic completed but produced no finding relevant to this Ticket."
+    },
+    {
+      "outcome_id": "evidence.v2.ticket.storage.loose.cable.machine.state.storage.cable.loose.test.storage.drive.health",
+      "source_definition_id": "test.storage.drive_health",
+      "target_ref": "fault_instance.storage.cable_loose",
+      "eligible_machine_state_key": "machine_state.storage.cable_loose",
+      "candidate_effects": [],
+      "outcome_classification": "CLEAN",
+      "observation_id": null,
+      "public_summary": "The diagnostic completed cleanly and produced no candidate-changing finding in this machine state."
+    },
+    {
+      "outcome_id": "evidence.v2.ticket.storage.loose.cable.machine.state.storage.cable.loose.test.storage.raid.status",
+      "source_definition_id": "test.storage.raid_status",
+      "target_ref": "fault_instance.storage.cable_loose",
+      "eligible_machine_state_key": "machine_state.storage.cable_loose",
+      "candidate_effects": [],
+      "outcome_classification": "CLEAN",
+      "observation_id": null,
+      "public_summary": "The diagnostic completed cleanly and produced no candidate-changing finding in this machine state."
+    },
+    {
+      "outcome_id": "evidence.v2.ticket.storage.loose.cable.machine.state.storage.cable.reseated.command.linux.smartctl",
+      "source_definition_id": "command.linux.smartctl",
+      "target_ref": "fault_instance.storage.cable_loose",
+      "eligible_machine_state_key": "machine_state.storage.cable_reseated",
+      "candidate_effects": [],
+      "outcome_classification": "IRRELEVANT",
+      "observation_id": null,
+      "public_summary": "The diagnostic completed but produced no finding relevant to this Ticket."
+    },
+    {
+      "outcome_id": "evidence.v2.ticket.storage.loose.cable.machine.state.storage.cable.reseated.test.general.visual.inspection",
+      "source_definition_id": "test.general.visual_inspection",
+      "target_ref": "fault_instance.storage.cable_loose",
+      "eligible_machine_state_key": "machine_state.storage.cable_reseated",
+      "candidate_effects": [],
+      "outcome_classification": "CLEAN",
+      "observation_id": null,
+      "public_summary": "The diagnostic completed cleanly and produced no candidate-changing finding in this machine state."
+    },
+    {
+      "outcome_id": "evidence.v2.ticket.storage.loose.cable.machine.state.storage.cable.reseated.test.storage.device.inventory",
+      "source_definition_id": "test.storage.device_inventory",
+      "target_ref": "fault_instance.storage.cable_loose",
+      "eligible_machine_state_key": "machine_state.storage.cable_reseated",
+      "candidate_effects": [],
+      "outcome_classification": "CLEAN",
+      "observation_id": null,
+      "public_summary": "The diagnostic completed cleanly and produced no candidate-changing finding in this machine state."
+    },
+    {
+      "outcome_id": "evidence.v2.ticket.storage.loose.cable.machine.state.storage.cable.reseated.test.storage.drive.health",
+      "source_definition_id": "test.storage.drive_health",
+      "target_ref": "fault_instance.storage.cable_loose",
+      "eligible_machine_state_key": "machine_state.storage.cable_reseated",
+      "candidate_effects": [],
+      "outcome_classification": "CLEAN",
+      "observation_id": null,
+      "public_summary": "The diagnostic completed cleanly and produced no candidate-changing finding in this machine state."
+    },
+    {
+      "outcome_id": "evidence.v2.ticket.storage.loose.cable.machine.state.storage.cable.reseated.test.storage.raid.status",
+      "source_definition_id": "test.storage.raid_status",
+      "target_ref": "fault_instance.storage.cable_loose",
+      "eligible_machine_state_key": "machine_state.storage.cable_reseated",
+      "candidate_effects": [],
+      "outcome_classification": "CLEAN",
+      "observation_id": null,
+      "public_summary": "The diagnostic completed cleanly and produced no candidate-changing finding in this machine state."
+    }
+  ],
+  "isolation_requirements": [
+    {
+      "requirement_id": "isolation.storage.cable_loose",
+      "target_fault_instance_key": "fault_instance.storage.cable_loose",
+      "candidate_fault_id": "fault.storage.cable.loose",
+      "classification": "ACTIONABLE_AND_DEEPEST",
+      "routes": [
+        {
+          "target_fault_instance_key": "fault_instance.storage.cable_loose",
+          "candidate_fault_id": "fault.storage.cable.loose",
+          "classification": "ACTIONABLE_AND_DEEPEST",
+          "route_id": "route.storage.cable_loose.direct_observation",
+          "route_kind": "DIRECT_OBSERVATION",
+          "eligible_outcome_ids": [
+            "evidence.storage.connector_unlatched"
+          ]
+        },
+        {
+          "target_fault_instance_key": "fault_instance.storage.cable_loose",
+          "candidate_fault_id": "fault.storage.cable.loose",
+          "classification": "ACTIONABLE_AND_DEEPEST",
+          "route_id": "route.storage.cable_loose.elimination",
+          "route_kind": "EVIDENCE_BACKED_ELIMINATION",
+          "supporting_outcome_ids": [
+            "evidence.storage.inventory_missing"
+          ],
+          "required_eliminated_candidate_fault_ids": [
+            "fault.storage.raid.controller_failed"
+          ]
+        }
+      ]
+    }
+  ],
+  "repair_requirements": [
+    {
+      "requirement_id": "repair_requirement.storage.reseat_cable",
+      "target_fault_instance_key": "fault_instance.storage.cable_loose",
+      "fault_id": "fault.storage.cable.loose",
+      "eligible_repair_procedure_ids": [
+        "repair.storage.reseat_cable"
+      ],
+      "eligible_repair_outcome_ids": [
+        "repair_outcome.storage.cable_reseated"
+      ]
+    }
+  ],
+  "authored_repair_outcomes": [
+    {
+      "outcome_id": "repair_outcome.storage.cable_reseated",
+      "repair_procedure_id": "repair.storage.reseat_cable",
+      "target_fault_instance_key": "fault_instance.storage.cable_loose",
+      "eligible_machine_state_key": "machine_state.storage.cable_loose",
+      "resulting_machine_state_key": "machine_state.storage.cable_reseated",
+      "resolved_fault_instance_keys": [
+        "fault_instance.storage.cable_loose"
+      ],
+      "necessary_for_closure": true,
+      "public_summary": "The isolated cable connection is reseated and latched."
+    }
+  ],
+  "verification_requirements": [
+    {
+      "requirement_id": "verification.storage.device_detected",
+      "validation_procedure_id": "verify.storage.device_detected",
+      "success_condition": "The expected storage device remains present across the authored detection check.",
+      "must_pass_after_latest_repair": true
+    }
+  ],
+  "authored_verification_outcomes": [
+    {
+      "outcome_id": "verification_outcome.storage.device_detected_pass",
+      "validation_procedure_id": "verify.storage.device_detected",
+      "requirement_id": "verification.storage.device_detected",
+      "eligible_machine_state_key": "machine_state.storage.cable_reseated",
+      "result": "PASS",
+      "resulting_machine_state_key": "machine_state.storage.cable_reseated",
+      "revealed_candidate_fault_ids": [],
+      "candidate_effects": [],
+      "public_summary": "The expected storage device is detected consistently after the reseat."
+    }
+  ],
+  "closure_requirements": {
+    "include_accepted_isolation": true,
+    "include_cited_decisive_evidence": true,
+    "include_every_repair_in_accepted_path": true,
+    "include_every_failed_verify_in_accepted_path": true,
+    "include_all_current_passing_verifies": true,
+    "required_fault_instance_keys": [
+      "fault_instance.storage.cable_loose"
+    ],
+    "required_isolation_requirement_ids": [
+      "isolation.storage.cable_loose"
+    ],
+    "required_repair_outcome_ids": [
+      "repair_outcome.storage.cable_reseated"
+    ],
+    "required_verification_requirement_ids": [
+      "verification.storage.device_detected"
+    ]
+  },
+  "generation_provenance": null,
+  "educational_objectives": [
+    "Use inventory and physical Evidence before changing machine state."
+  ],
+  "ruleset_version": "first-version-v2",
+  "ticket_contract_version": "repair-ticket-v2",
+  "public_context_entity_ids": [
+    "symptom.storage.drive_missing"
+  ]
+}

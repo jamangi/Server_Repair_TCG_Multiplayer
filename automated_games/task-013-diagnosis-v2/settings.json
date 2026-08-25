@@ -1,0 +1,191 @@
+{
+  "campaign_id": "task-013-diagnosis-v2",
+  "harness_version": "automated-harness-v1",
+  "setting_groups": [
+    {
+      "caps": {
+        "closures": 12,
+        "policy_stall_consecutive_passes": null,
+        "turns": 120
+      },
+      "collaboration_mode": "cooperative",
+      "description": "One seat clears the direct-observation Ticket using the global Diagnostic Bench.",
+      "fixture_kind": "ORDINARY",
+      "legal_card_pool_ids": [
+        "deck.core.storage_response_v2"
+      ],
+      "match_configuration": {
+        "max_refresh_tokens": 1,
+        "max_search_tokens": 5,
+        "play_context": "TRAINING",
+        "queue_minimum": 0,
+        "starting_refresh_tokens": 1,
+        "starting_search_tokens": 3,
+        "starting_ticket_count": 1,
+        "termination_score": -1,
+        "ticket_search_tokens": 1
+      },
+      "seats": [
+        {
+          "controller_type": "computer",
+          "deck_id": "deck.core.storage_response_v2",
+          "player_id": "player_a",
+          "policy_id": "methodical-seat-safe-v2",
+          "starting_service_points": 0
+        }
+      ],
+      "seeds": [
+        "13001",
+        "13002"
+      ],
+      "setting_group_id": "diagnosis-v2-fixed-direct-solo",
+      "ticket_source": {
+        "content_version": "core-ticket-templates-diagnosis-v2",
+        "source_type": "fixed",
+        "ticket_definition_ids": [
+          "ticket.storage.loose_cable"
+        ]
+      },
+      "virtual_clock": {
+        "epoch": "2042-01-01T00:00:00.000Z",
+        "seconds_per_decision": 5
+      }
+    },
+    {
+      "caps": {
+        "closures": 12,
+        "policy_stall_consecutive_passes": null,
+        "turns": 180
+      },
+      "collaboration_mode": "cooperative",
+      "description": "Two seats exercise generated diagnosis-v2 Tickets, attribution, and recovery routes.",
+      "fixture_kind": "ORDINARY",
+      "legal_card_pool_ids": [
+        "deck.core.storage_response_v2"
+      ],
+      "match_configuration": {
+        "max_refresh_tokens": 1,
+        "max_search_tokens": 5,
+        "play_context": "TRAINING",
+        "queue_minimum": 0,
+        "starting_refresh_tokens": 1,
+        "starting_search_tokens": 3,
+        "starting_ticket_count": 1,
+        "termination_score": -1,
+        "ticket_search_tokens": 1
+      },
+      "seats": [
+        {
+          "controller_type": "computer",
+          "deck_id": "deck.core.storage_response_v2",
+          "player_id": "player_a",
+          "policy_id": "methodical-seat-safe-v2",
+          "starting_service_points": 0
+        },
+        {
+          "controller_type": "computer",
+          "deck_id": "deck.core.storage_response_v2",
+          "player_id": "player_b",
+          "policy_id": "methodical-seat-safe-v2",
+          "starting_service_points": 0
+        }
+      ],
+      "seeds": [
+        "13101",
+        "13102"
+      ],
+      "setting_group_id": "diagnosis-v2-generated-recovery-team",
+      "ticket_source": {
+        "builder_configuration": {
+          "active_causal_fingerprints": [],
+          "allow_duplicate_causal_fingerprints": true,
+          "allowed_domain_ids": [],
+          "allowed_tags": [],
+          "authored_difficulty_bounds": {
+            "maximum": 4,
+            "minimum": 1
+          },
+          "card_catalog_version": "core-card-catalog-diagnosis-v2",
+          "causal_depth_bounds": {
+            "maximum": 1,
+            "minimum": 0
+          },
+          "configuration_version": "ticket-builder-v2",
+          "content_version": "core-ticket-templates-diagnosis-v2",
+          "domain_content_version": "core-domain-snapshot-v1",
+          "entity_type": "ticket_builder_configuration",
+          "excluded_domain_ids": [],
+          "excluded_tags": [],
+          "fallback_configuration_id": null,
+          "fault_count_bounds": {
+            "maximum": 3,
+            "minimum": 1
+          },
+          "generation_index_start": 0,
+          "generator_version": "ticket-builder-v2",
+          "guaranteed_categories": [],
+          "id": "builder.diagnosis_v2.recovery_team",
+          "inbound_branching_bounds": {
+            "maximum": 2,
+            "minimum": 0
+          },
+          "legal_card_definition_ids": [
+            "card.core.visual_inspection",
+            "card.core.raid_status_inspection",
+            "card.core.raid_console_snapshot",
+            "card.core.drive_health_test",
+            "card.core.storage_device_inventory",
+            "card.core.smartctl_drive_health",
+            "card.core.replace_raid_member",
+            "card.core.rebuild_raid_array",
+            "card.core.reseat_storage_cable",
+            "card.core.raid_health_verification",
+            "card.core.storage_detection_verification"
+          ],
+          "outbound_branching_bounds": {
+            "maximum": 2,
+            "minimum": 0
+          },
+          "progressive_difficulty_profile": {
+            "bands": [
+              {
+                "end_generated_index": 0,
+                "maximum": 4,
+                "minimum": 1,
+                "start_generated_index": 0,
+                "target": 2
+              }
+            ],
+            "explicit_ceiling": 4,
+            "profile_id": "progressive.simulation.diagnosis_v2",
+            "profile_version": "diagnosis-v2"
+          },
+          "requested_ticket_count": 1,
+          "required_actionable_fault_count_bounds": {
+            "maximum": 2,
+            "minimum": 1
+          },
+          "required_teaching_beats": [],
+          "scenario_or_mode_context": "TRAINING",
+          "seed": "match-seed"
+        },
+        "source_type": "generated"
+      },
+      "virtual_clock": {
+        "epoch": "2042-01-01T00:00:00.000Z",
+        "seconds_per_decision": 5
+      }
+    }
+  ],
+  "version_pins": {
+    "card_catalog_version": "core-card-catalog-diagnosis-v2",
+    "domain_content_version": "core-domain-snapshot-v1",
+    "generator_version": "ticket-builder-v2",
+    "harness_version": "automated-harness-v1",
+    "policy_versions": [
+      "methodical-seat-safe-v2"
+    ],
+    "ruleset_version": "first-version-v2",
+    "ticket_content_version": "core-ticket-templates-diagnosis-v2"
+  }
+}

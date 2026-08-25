@@ -4,9 +4,13 @@ import path from 'node:path';
 import test from 'node:test';
 
 import {
-  buildTickets,
-  validateBuilderConfiguration,
-} from '../viewer/generated/play/src/builder/ticket-builder.mjs';
+  DIAGNOSIS_V2_BUILDER_VERSION,
+  DIAGNOSIS_V2_CARD_CATALOG_VERSION,
+  DIAGNOSIS_V2_CONFIGURATION_VERSION,
+  DIAGNOSIS_V2_TICKET_CONTENT_VERSION,
+  buildTicketsV2,
+  createDiagnosisV2Catalogs,
+} from '../viewer/generated/play/src/builder/diagnosis-v2.mjs';
 import {
   createClientDataContext,
   createDefaultState,
@@ -132,6 +136,7 @@ function expectedResultSummaryKeys() {
     'assists',
     'documentation_actions',
     'elapsed_seconds',
+    'eliminations_recorded',
     'failed_verifies',
     'final_service_points',
     'invalid_or_capped_results',
@@ -153,6 +158,7 @@ function expectedResultSummaryKeys() {
     'summary_version',
     'tests_run',
     'tickets_closed',
+    'tickets_given_up',
     'turns_elapsed',
     'valid',
     'verify_attempts',
@@ -181,14 +187,14 @@ test('the module Worker is the sole Viewer importer of the canonical staged engi
     },
     {
       relative: 'play/solo-worker.mjs',
-      specifier: '../../generated/play/src/builder/ticket-builder.mjs',
+      specifier: '../../generated/play/src/builder/diagnosis-v2.mjs',
     },
   ]);
 
   const worker = await readText(WORKER_PATH);
   assert.match(worker, /projectPrivatePlayer\(state, PLAYER_ID, catalogs\.engineCatalogs\)/);
   assert.match(worker, /submitIntent\(\{[\s\S]*authenticatedPlayerId:\s*PLAYER_ID/);
-  assert.match(worker, /buildTickets\(\{/);
+  assert.match(worker, /buildTicketsV2\(\{/);
 });
 
 test('DOM-side modules neither import rules authority nor access or mutate authoritative Match, Card, or Ticket fields', async () => {
@@ -462,8 +468,10 @@ test('the Worker-derived 1/10 Ticket configurations preserve the approved duplic
     'ticketCount',
     'seed',
     'legalCardDefinitionIds',
-    'TICKET_BUILDER_CONFIGURATION_VERSION',
-    'TICKET_BUILDER_VERSION',
+    'DIAGNOSIS_V2_CONFIGURATION_VERSION',
+    'DIAGNOSIS_V2_BUILDER_VERSION',
+    'DIAGNOSIS_V2_TICKET_CONTENT_VERSION',
+    'DIAGNOSIS_V2_CARD_CATALOG_VERSION',
     `'use strict'; ${bounds}; ${builderConfiguration}; return builderConfiguration(ticketCount, seed, legalCardDefinitionIds);`,
   );
   const [ticketContent, domainCatalog, cardCatalog, deckCatalog] = await Promise.all([
@@ -472,7 +480,13 @@ test('the Worker-derived 1/10 Ticket configurations preserve the approved duplic
     readJson('content/gameplay-v1/card-catalog.json'),
     readJson('content/gameplay-v1/decks.json'),
   ]);
-  const starterDeck = deckCatalog.decks.find((deck) => deck.id === 'deck.core.storage_foundation');
+  const diagnosisCatalogs = createDiagnosisV2Catalogs({
+    cards: cardCatalog,
+    decks: deckCatalog,
+    domain: domainCatalog,
+    ticketContent,
+  });
+  const starterDeck = diagnosisCatalogs.decks.decks.find((deck) => deck.id === 'deck.core.storage_response_v2');
   const legalCardDefinitionIds = [...new Set(starterDeck.card_definition_ids)].sort();
 
   for (const ticketCount of [1, 10]) {
@@ -480,15 +494,17 @@ test('the Worker-derived 1/10 Ticket configurations preserve the approved duplic
       ticketCount,
       `task-010-worker-${ticketCount}`,
       legalCardDefinitionIds,
-      'ticket-builder-v1',
-      'ticket-builder-v1',
+      DIAGNOSIS_V2_CONFIGURATION_VERSION,
+      DIAGNOSIS_V2_BUILDER_VERSION,
+      DIAGNOSIS_V2_TICKET_CONTENT_VERSION,
+      DIAGNOSIS_V2_CARD_CATALOG_VERSION,
     );
-    assert.deepEqual(validateBuilderConfiguration(configuration), []);
+    assert.equal(configuration.configuration_version, DIAGNOSIS_V2_CONFIGURATION_VERSION);
     assert.equal(configuration.scenario_or_mode_context, 'TRAINING');
     assert.equal(configuration.requested_ticket_count, ticketCount);
     assert.equal(configuration.allow_duplicate_causal_fingerprints, true);
     assert.equal(configuration.progressive_difficulty_profile.bands[0].end_generated_index, ticketCount - 1);
-    const result = buildTickets({ configuration, ticketContent, domainCatalog, cardCatalog });
+    const result = buildTicketsV2({ configuration, catalogs: diagnosisCatalogs });
     assert.equal(result.status, 'SUCCESS');
     const selected = result.attempts.find((attempt) => attempt.attempt_id === result.selected_attempt_id);
     assert.equal(selected.ticket_snapshots.length, ticketCount);
@@ -521,7 +537,7 @@ test('the generated Pages stage is a strict allowlist with no Node-only or serve
     'tests',
     'tools',
   ]);
-  assert.equal(manifest.profile_id, 'solo-pages-v1');
+  assert.equal(manifest.profile_id, 'solo-pages-v2');
   assert.equal(manifest.hash_algorithm, 'sha256');
   assert.ok(manifest.files.length > 0);
   for (const entry of manifest.files) {
@@ -530,7 +546,8 @@ test('the generated Pages stage is a strict allowlist with no Node-only or serve
     assert.ok([...sourceParts, ...outputParts].every((part) => !forbiddenSegments.has(part)), entry.path);
     const allowed = /^src\/(?:engine|builder|shared)\/[a-z0-9._-]+\.mjs$/.test(entry.source)
       || (entry.source.startsWith('content/gameplay-v1/')
-        && gameplayFiles.has(entry.source.slice('content/gameplay-v1/'.length)))
+        && (gameplayFiles.has(entry.source.slice('content/gameplay-v1/'.length))
+          || entry.source.endsWith('/diagnosis-v2-migration.json')))
       || entry.source.startsWith('assets/')
       || entry.source.startsWith('viewer/assets/play/')
       || entry.source.startsWith('viewer/vendor/');
@@ -550,10 +567,18 @@ test('the generated Pages stage is a strict allowlist with no Node-only or serve
 });
 
 test('local persistence and export contain ledgers/aggregates only, never active Match State', async () => {
-  const [cardCatalog, deckCatalog] = await Promise.all([
+  const [baseCards, baseDecks, domain, ticketContent] = await Promise.all([
     readJson('content/gameplay-v1/card-catalog.json'),
     readJson('content/gameplay-v1/decks.json'),
+    readJson('content/gameplay-v1/domain-snapshot.json'),
+    readJson('content/gameplay-v1/ticket-templates.json'),
   ]);
+  const { cards: cardCatalog, decks: deckCatalog } = createDiagnosisV2Catalogs({
+    cards: baseCards,
+    decks: baseDecks,
+    domain,
+    ticketContent,
+  });
   const context = createClientDataContext({ cardCatalog, deckCatalog });
   const exportBundle = createExportBundle(
     createDefaultState(context),

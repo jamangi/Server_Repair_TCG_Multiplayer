@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.local/client/aggregate_statistics.schema.json",
-  "title": "Solo Pages Aggregate Statistics v1",
+  "title": "Solo Pages Aggregate Statistics v2",
   "description": "User-controlled local-only lifetime statistics with exactly-once Match and result ledgers.",
   "type": "object",
   "additionalProperties": false,
@@ -23,7 +23,7 @@
   },
   "properties": {
     "schema_version": {
-      "const": "solo-statistics-v1"
+      "const": "solo-statistics-v2"
     },
     "processed_match_start_ids": {
       "type": "array",
@@ -75,6 +75,8 @@
         "authoritative_elapsed_seconds": { "$ref": "#/$defs/counter" },
         "search_uses": { "$ref": "#/$defs/counter" },
         "refresh_uses": { "$ref": "#/$defs/counter" }
+        ,"eliminations_recorded": { "$ref": "#/$defs/counter" }
+        ,"tickets_given_up": { "$ref": "#/$defs/counter" }
       },
       "required": [
         "matches_started",
@@ -102,7 +104,9 @@
         "turns",
         "authoritative_elapsed_seconds",
         "search_uses",
-        "refresh_uses"
+        "refresh_uses",
+        "eliminations_recorded",
+        "tickets_given_up"
       ]
     }
   },

@@ -2,6 +2,7 @@ import { createCardDetailView, createDeckCardTile } from '../card-view.mjs';
 import { cardFamily, cardName, compactDeckCards, deckComposition } from '../catalog-service.mjs';
 import { cloneJson, dialogWithRestore, escapeHtml, setInlineNotice } from '../dom-utils.mjs';
 import { closeDialogWithMotion } from '../motion-coordinator.mjs';
+import { MAX_COPIES_PER_CARD_ID } from '../data/client-data.mjs';
 
 function deckReasons(deck) {
   const reasons = [];
@@ -10,7 +11,7 @@ function deckReasons(deck) {
   if (deck.card_definition_ids.length !== 30) reasons.push(`Add ${30 - deck.card_definition_ids.length} more Card${Math.abs(30 - deck.card_definition_ids.length) === 1 ? '' : 's'} to reach exactly 30.`);
   const counts = new Map();
   for (const id of deck.card_definition_ids) counts.set(id, (counts.get(id) ?? 0) + 1);
-  for (const [id, count] of counts) if (count > 3) reasons.push(`${id} has ${count} copies; maximum is 3.`);
+  for (const [id, count] of counts) if (count > MAX_COPIES_PER_CARD_ID) reasons.push(`${id} has ${count} copies; maximum is ${MAX_COPIES_PER_CARD_ID}.`);
   return reasons;
 }
 
@@ -33,7 +34,7 @@ export function renderDecks(root, context) {
   root.innerHTML = `
     <section class="play-route decks-route" aria-labelledby="decks-heading">
       <header class="play-page-heading" data-route-reveal>
-        <div><p class="play-eyebrow">Response kits</p><h1 id="decks-heading">Your Decks</h1><p>Saved decks contain exactly 30 Cards with no more than three copies of a definition.</p></div>
+        <div><p class="play-eyebrow">Response kits</p><h1 id="decks-heading">Your Decks</h1><p>Saved decks contain exactly 30 Repair/Verify response Cards with no more than ${MAX_COPIES_PER_CARD_ID} copies of a definition. Diagnostics live on the global Bench.</p></div>
         <button id="create-deck" type="button" class="play-button play-button--primary">Create empty draft</button>
       </header>
       <div class="decks-layout">
@@ -188,17 +189,18 @@ export function renderDeckEditor(root, context, deckId) {
   const grid = root.querySelector('.card-catalog-grid');
   const renderCardResults = () => {
     const counts = new Map(compactDeckCards(draft.card_definition_ids).map((entry) => [entry.card_definition_id, entry.quantity]));
-    const cards = context.catalog.cards.cards.filter((card) => matchesFilters(card, filters));
+    const cards = context.catalog.cards.cards.filter((card) =>
+      card.play_contract?.contract_type !== 'DIAGNOSTIC' && matchesFilters(card, filters));
     grid.replaceChildren();
     for (const card of cards) {
       const quantity = counts.get(card.id) ?? 0;
       grid.append(createDeckCardTile(card, {
         quantity,
-        canIncrement: quantity < 3 && draft.card_definition_ids.length < 30,
+        canIncrement: quantity < MAX_COPIES_PER_CARD_ID && draft.card_definition_ids.length < 30,
         canDecrement: quantity > 0,
         artResolver: context.artResolver,
         onAdjust: ({ cardId, delta }) => {
-          if (delta > 0 && (quantity >= 3 || draft.card_definition_ids.length >= 30)) return;
+          if (delta > 0 && (quantity >= MAX_COPIES_PER_CARD_ID || draft.card_definition_ids.length >= 30)) return;
           if (delta < 0) {
             const index = draft.card_definition_ids.lastIndexOf(cardId);
             if (index >= 0) draft.card_definition_ids.splice(index, 1);

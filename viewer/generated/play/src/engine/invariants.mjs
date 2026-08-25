@@ -67,10 +67,11 @@ export function validateState(state) {
       ['hand_card_instance_ids', 'hand'],
       ['discard_card_instance_ids', 'discard'],
       ['in_play_card_instance_ids', 'in_play'],
+      ['diagnostic_bench_card_instance_ids', 'diagnostic_bench'],
     ];
     const definitions = [];
     for (const [field, zone] of zones) {
-      for (const instanceId of player[field]) {
+      for (const instanceId of player[field] ?? []) {
         if (allZoneInstances.has(instanceId)) {
           errors.push(`${instanceId} appears in two zones`);
           continue;
@@ -85,13 +86,18 @@ export function validateState(state) {
         }
       }
     }
-    if (definitions.length !== player.deck_snapshot_card_definition_ids.length) {
+    if (definitions.length - (player.diagnostic_bench_card_instance_ids?.length ?? 0) !== player.deck_snapshot_card_definition_ids.length) {
       errors.push(`${player.player_id} Card Instance count does not match deck snapshot`);
     }
     const expected = new Map();
     const actual = new Map();
     for (const id of player.deck_snapshot_card_definition_ids) expected.set(id, (expected.get(id) ?? 0) + 1);
-    for (const id of definitions) actual.set(id, (actual.get(id) ?? 0) + 1);
+    const benchIds = new Set(player.diagnostic_bench_card_instance_ids ?? []);
+    for (const [instanceId, location] of allZoneInstances) {
+      if (!location.startsWith(`${player.player_id}.`) || benchIds.has(instanceId)) continue;
+      const id = state.card_instances[instanceId]?.card_definition_id;
+      if (id) actual.set(id, (actual.get(id) ?? 0) + 1);
+    }
     for (const [id, count] of expected) {
       if (actual.get(id) !== count) errors.push(`${player.player_id} does not reconcile ${id}`);
     }
@@ -127,7 +133,9 @@ export function validateState(state) {
   const activeIds = new Set(state.active_ticket_ids);
   for (const id of state.archived_ticket_ids) {
     if (activeIds.has(id)) errors.push(`${id} is active and archived`);
-    if (!state.archived_tickets[id]?.closure) errors.push(`${id} has no immutable archived closure`);
+    if (!state.archived_tickets[id]?.closure && !state.archived_tickets[id]?.abandonment) {
+      errors.push(`${id} has no immutable archive resolution`);
+    }
   }
   for (const id of state.active_ticket_ids) {
     const ticket = state.tickets[id];

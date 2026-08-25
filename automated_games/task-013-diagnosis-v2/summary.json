@@ -1,0 +1,252 @@
+{
+  "by_setting_group": [
+    {
+      "counts": {
+        "builder_unsatisfiable": 0,
+        "failed": 0,
+        "invalidated": 0,
+        "no_legal_progress_move": 0,
+        "policy_stall": 0,
+        "proven_stalemate": 0,
+        "requested": 2,
+        "simulation_cap": 0,
+        "started": 2,
+        "succeeded": 2
+      },
+      "results_by_seed": [
+        {
+          "classification": "SUCCEEDED",
+          "seeds": [
+            "13001",
+            "13002"
+          ],
+          "terminal_reason_codes": [
+            "QUEUE_EMPTY"
+          ]
+        }
+      ],
+      "seeds": [
+        "13001",
+        "13002"
+      ],
+      "setting_group_id": "diagnosis-v2-fixed-direct-solo",
+      "terminal_reasons": [
+        "QUEUE_EMPTY"
+      ],
+      "turn_distribution": {
+        "count": 2,
+        "maximum": 4,
+        "mean": 4,
+        "median": 4,
+        "minimum": 4,
+        "p95": 4
+      }
+    },
+    {
+      "counts": {
+        "builder_unsatisfiable": 0,
+        "failed": 0,
+        "invalidated": 0,
+        "no_legal_progress_move": 0,
+        "policy_stall": 0,
+        "proven_stalemate": 0,
+        "requested": 2,
+        "simulation_cap": 0,
+        "started": 2,
+        "succeeded": 2
+      },
+      "results_by_seed": [
+        {
+          "classification": "SUCCEEDED",
+          "seeds": [
+            "13101",
+            "13102"
+          ],
+          "terminal_reason_codes": [
+            "QUEUE_EMPTY"
+          ]
+        }
+      ],
+      "seeds": [
+        "13101",
+        "13102"
+      ],
+      "setting_group_id": "diagnosis-v2-generated-recovery-team",
+      "terminal_reasons": [
+        "QUEUE_EMPTY"
+      ],
+      "turn_distribution": {
+        "count": 2,
+        "maximum": 7,
+        "mean": 5,
+        "median": 5,
+        "minimum": 3,
+        "p95": 7
+      }
+    }
+  ],
+  "campaign_id": "task-013-diagnosis-v2",
+  "determinism": {
+    "compared_fields": [
+      "ticket_snapshot_digest",
+      "replay_digest",
+      "outcome",
+      "scores",
+      "turns"
+    ],
+    "identical_input_reruns": 4,
+    "mismatch_rows": [],
+    "mismatches": 0
+  },
+  "generated_by": "automated-harness-v1",
+  "overall": {
+    "builder_unsatisfiable": 0,
+    "failed": 0,
+    "invalidated": 0,
+    "no_legal_progress_move": 0,
+    "policy_stall": 0,
+    "proven_stalemate": 0,
+    "requested": 4,
+    "simulation_cap": 0,
+    "started": 4,
+    "succeeded": 4
+  },
+  "overall_turn_distribution": {
+    "count": 4,
+    "maximum": 7,
+    "mean": 4.5,
+    "median": 4,
+    "minimum": 3,
+    "p95": 7
+  },
+  "progress_move_audit": {
+    "affected_match_ids": [],
+    "any_no_legal_progress_move": false,
+    "pass_is_always_legal_and_not_counted_as_progress": true
+  },
+  "service_points": {
+    "player_profiles": [
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "seeds": [
+          "13001",
+          "13002"
+        ],
+        "setting_group_id": "diagnosis-v2-fixed-direct-solo",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "seeds": [
+          "13101",
+          "13102"
+        ],
+        "setting_group_id": "diagnosis-v2-generated-recovery-team",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_b",
+        "seeds": [
+          "13101",
+          "13102"
+        ],
+        "setting_group_id": "diagnosis-v2-generated-recovery-team",
+        "starting": 0
+      }
+    ],
+    "players": [
+      {
+        "final": 0,
+        "matches": 2,
+        "net": 0,
+        "player_id": "player_a",
+        "setting_group_id": "diagnosis-v2-fixed-direct-solo",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "matches": 2,
+        "net": 0,
+        "player_id": "player_a",
+        "setting_group_id": "diagnosis-v2-generated-recovery-team",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "matches": 2,
+        "net": 0,
+        "player_id": "player_b",
+        "setting_group_id": "diagnosis-v2-generated-recovery-team",
+        "starting": 0
+      }
+    ],
+    "team_profiles": [
+      {
+        "final": 2,
+        "net": 2,
+        "seeds": [
+          "13001",
+          "13002"
+        ],
+        "setting_group_id": "diagnosis-v2-fixed-direct-solo",
+        "starting": 0,
+        "team_id": "team.cooperative"
+      },
+      {
+        "final": 2,
+        "net": 2,
+        "seeds": [
+          "13101"
+        ],
+        "setting_group_id": "diagnosis-v2-generated-recovery-team",
+        "starting": 0,
+        "team_id": "team.cooperative"
+      },
+      {
+        "final": 4,
+        "net": 4,
+        "seeds": [
+          "13102"
+        ],
+        "setting_group_id": "diagnosis-v2-generated-recovery-team",
+        "starting": 0,
+        "team_id": "team.cooperative"
+      }
+    ],
+    "teams": [
+      {
+        "final": 4,
+        "matches": 2,
+        "net": 4,
+        "setting_group_id": "diagnosis-v2-fixed-direct-solo",
+        "starting": 0,
+        "team_id": "team.cooperative"
+      },
+      {
+        "final": 6,
+        "matches": 2,
+        "net": 6,
+        "setting_group_id": "diagnosis-v2-generated-recovery-team",
+        "starting": 0,
+        "team_id": "team.cooperative"
+      }
+    ]
+  },
+  "version_pins": {
+    "card_catalog_version": "core-card-catalog-diagnosis-v2",
+    "domain_content_version": "core-domain-snapshot-v1",
+    "generator_version": "ticket-builder-v2",
+    "harness_version": "automated-harness-v1",
+    "policy_versions": [
+      "methodical-seat-safe-v2"
+    ],
+    "ruleset_version": "first-version-v2",
+    "ticket_content_version": "core-ticket-templates-diagnosis-v2"
+  }
+}

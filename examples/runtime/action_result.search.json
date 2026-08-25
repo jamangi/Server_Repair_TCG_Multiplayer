@@ -98,5 +98,7 @@
   "rejected_at": null,
   "recovered_card_instance_id": null,
   "opened_resolution_window": "NONE",
-  "resolution_code": "RESOLVED"
+  "resolution_code": "RESOLVED",
+  "target_summary": "Player response draw deck.",
+  "result_summary": "Selected response Card moved to hand and the remaining deck was shuffled."
 }

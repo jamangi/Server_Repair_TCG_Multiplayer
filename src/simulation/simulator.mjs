@@ -5,6 +5,16 @@ import {
   TICKET_BUILDER_CONFIGURATION_VERSION,
   TICKET_BUILDER_VERSION,
 } from '../builder/ticket-builder.mjs';
+import {
+  DIAGNOSIS_V2_BUILDER_VERSION,
+  DIAGNOSIS_V2_CARD_CATALOG_VERSION,
+  DIAGNOSIS_V2_CONFIGURATION_VERSION,
+  DIAGNOSIS_V2_RESPONSE_DECK_ID,
+  DIAGNOSIS_V2_RULESET_VERSION,
+  DIAGNOSIS_V2_TICKET_CONTENT_VERSION,
+  buildTicketsV2,
+  createDiagnosisV2Catalogs,
+} from '../builder/diagnosis-v2.mjs';
 import * as engine from '../engine/index.mjs';
 import {
   choosePolicyIntent,
@@ -13,6 +23,7 @@ import {
 
 export const AUTOMATED_HARNESS_VERSION = 'automated-harness-v1';
 export const FOUNDATION_CAMPAIGN_ID = 'task-009-foundation-v1';
+export const DIAGNOSIS_V2_CAMPAIGN_ID = 'task-013-diagnosis-v2';
 
 const CONTENT_DIRECTORY = new URL('../../content/gameplay-v1/', import.meta.url);
 const VIRTUAL_EPOCH_MILLISECONDS = Date.UTC(2042, 0, 1, 0, 0, 0);
@@ -334,6 +345,16 @@ export async function loadFoundationCatalogs() {
   };
 }
 
+export async function loadDiagnosisV2Catalogs() {
+  const foundation = await loadFoundationCatalogs();
+  return createDiagnosisV2Catalogs({
+    cards: foundation.cards,
+    decks: foundation.decks,
+    domain: foundation.domain,
+    ticketContent: foundation.ticketContent,
+  });
+}
+
 function fixedSnapshots(group, ticketContent) {
   const byId = new Map(ticketContent.templates.map((template) => [template.ticket.id, template.ticket]));
   return group.ticket_source.ticket_definition_ids.map((id) => {
@@ -346,12 +367,14 @@ function fixedSnapshots(group, ticketContent) {
 function generatedSnapshots(group, seed, catalogs) {
   const configuration = clone(group.ticket_source.builder_configuration);
   configuration.seed = normalizedSeed(seed);
-  const result = buildTickets({
-    configuration,
-    ticketContent: catalogs.ticketContent,
-    domainCatalog: catalogs.domain,
-    cardCatalog: catalogs.cards,
-  });
+  const result = catalogs.rulesetVersion === DIAGNOSIS_V2_RULESET_VERSION
+    ? buildTicketsV2({ configuration, catalogs })
+    : buildTickets({
+      configuration,
+      ticketContent: catalogs.ticketContent,
+      domainCatalog: catalogs.domain,
+      cardCatalog: catalogs.cards,
+    });
   const selected = result.attempts.find((attempt) => attempt.attempt_id === result.selected_attempt_id);
   return {
     result,
@@ -447,6 +470,7 @@ export async function runAutomatedMatch(input, suppliedCatalogs = null) {
     seed: normalizedSeed(input.seed),
     now: now(),
     ticketSource: publicTicketSource(group, input.seed, built.result, snapshots),
+    rulesetVersion: input.version_pins.ruleset_version,
   });
 
   const policies = policyByPlayer(group);
@@ -833,6 +857,86 @@ export function createFoundationCampaignSettings(cardDefinitionIds) {
         stallPasses: 2,
         fixtureKind: 'POLICY_STALL',
       }),
+    ],
+  };
+}
+
+function diagnosisV2BuilderConfiguration(id, requestedCount, legalCardDefinitionIds) {
+  return {
+    ...builderConfiguration(id, requestedCount, legalCardDefinitionIds, {
+      context: 'TRAINING',
+      allowDuplicates: true,
+    }),
+    configuration_version: DIAGNOSIS_V2_CONFIGURATION_VERSION,
+    generator_version: DIAGNOSIS_V2_BUILDER_VERSION,
+    content_version: DIAGNOSIS_V2_TICKET_CONTENT_VERSION,
+    card_catalog_version: DIAGNOSIS_V2_CARD_CATALOG_VERSION,
+    progressive_difficulty_profile: {
+      profile_id: 'progressive.simulation.diagnosis_v2',
+      profile_version: 'diagnosis-v2',
+      explicit_ceiling: 4,
+      bands: [{
+        start_generated_index: 0,
+        end_generated_index: Math.max(0, requestedCount - 1),
+        target: 2,
+        minimum: 1,
+        maximum: 4,
+      }],
+    },
+  };
+}
+
+export function createDiagnosisV2CampaignSettings(cardDefinitionIds) {
+  const fixed = (ids) => ({
+    source_type: 'fixed',
+    content_version: DIAGNOSIS_V2_TICKET_CONTENT_VERSION,
+    ticket_definition_ids: ids,
+  });
+  const diagnosisSeat = (playerId) => seat(playerId, 'methodical-seat-safe-v2', DIAGNOSIS_V2_RESPONSE_DECK_ID);
+  const withTraining = (entry) => ({
+    ...entry,
+    match_configuration: { ...entry.match_configuration, play_context: 'TRAINING' },
+  });
+  return {
+    campaign_id: DIAGNOSIS_V2_CAMPAIGN_ID,
+    harness_version: AUTOMATED_HARNESS_VERSION,
+    version_pins: {
+      ruleset_version: DIAGNOSIS_V2_RULESET_VERSION,
+      card_catalog_version: DIAGNOSIS_V2_CARD_CATALOG_VERSION,
+      domain_content_version: 'core-domain-snapshot-v1',
+      ticket_content_version: DIAGNOSIS_V2_TICKET_CONTENT_VERSION,
+      generator_version: DIAGNOSIS_V2_BUILDER_VERSION,
+      harness_version: AUTOMATED_HARNESS_VERSION,
+      policy_versions: ['methodical-seat-safe-v2'],
+    },
+    setting_groups: [
+      withTraining(group({
+        id: 'diagnosis-v2-fixed-direct-solo',
+        description: 'One seat clears the direct-observation Ticket using the global Diagnostic Bench.',
+        mode: 'cooperative',
+        seats: [diagnosisSeat('player_a')],
+        ticketSource: fixed(['ticket.storage.loose_cable']),
+        seeds: ['13001', '13002'],
+        turnCap: 120,
+        stallPasses: null,
+      })),
+      withTraining(group({
+        id: 'diagnosis-v2-generated-recovery-team',
+        description: 'Two seats exercise generated diagnosis-v2 Tickets, attribution, and recovery routes.',
+        mode: 'cooperative',
+        seats: [diagnosisSeat('player_a'), diagnosisSeat('player_b')],
+        ticketSource: {
+          source_type: 'generated',
+          builder_configuration: diagnosisV2BuilderConfiguration(
+            'builder.diagnosis_v2.recovery_team',
+            1,
+            cardDefinitionIds,
+          ),
+        },
+        seeds: ['13101', '13102'],
+        turnCap: 180,
+        stallPasses: null,
+      })),
     ],
   };
 }

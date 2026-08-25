@@ -35,11 +35,20 @@ import {
   validateResultSummary,
 } from '../viewer/js/play/data/client-data.mjs';
 import { createStorageService } from '../viewer/js/play/storage-service.mjs';
+import { createDiagnosisV2Catalogs } from '../src/builder/diagnosis-v2.mjs';
 
 const repositoryRoot = path.resolve(import.meta.dirname, '..');
 const readJson = (relativePath) => JSON.parse(fs.readFileSync(path.join(repositoryRoot, relativePath), 'utf8'));
-const cardCatalog = readJson('content/gameplay-v1/card-catalog.json');
-const deckCatalog = readJson('content/gameplay-v1/decks.json');
+const baseCardCatalog = readJson('content/gameplay-v1/card-catalog.json');
+const baseDeckCatalog = readJson('content/gameplay-v1/decks.json');
+const diagnosisCatalogs = createDiagnosisV2Catalogs({
+  cards: baseCardCatalog,
+  decks: baseDeckCatalog,
+  domain: readJson('content/gameplay-v1/domain-snapshot.json'),
+  ticketContent: readJson('content/gameplay-v1/ticket-templates.json'),
+});
+const cardCatalog = diagnosisCatalogs.cards;
+const deckCatalog = diagnosisCatalogs.decks;
 const context = createClientDataContext({ cardCatalog, deckCatalog });
 
 const schemaFiles = fs.readdirSync(path.join(repositoryRoot, 'schemas/client'))
@@ -105,6 +114,8 @@ function resultSummary(overrides = {}) {
     elapsed_seconds: 225,
     search_uses: 1,
     refresh_uses: 1,
+    eliminations_recorded: 2,
+    tickets_given_up: 0,
     ...overrides,
   };
 }
@@ -112,29 +123,29 @@ function resultSummary(overrides = {}) {
 test('all five versioned client examples satisfy their strict JSON Schemas', () => {
   assert.equal(schemaFiles.length, 5);
   const examples = [
-    ['examples/client/local_profile.default.json', 'Solo Pages Local Profile v1'],
-    ['examples/client/deck_collection.default.json', 'Solo Pages Deck Collection v1'],
-    ['examples/client/local_settings.default.json', 'Solo Pages Local Settings v1'],
-    ['examples/client/aggregate_statistics.empty.json', 'Solo Pages Aggregate Statistics v1'],
-    ['examples/client/export_bundle.default.json', 'Solo Pages Export Bundle v1'],
+    ['examples/client/local_profile.default.json', 'Solo Pages Local Profile v2'],
+    ['examples/client/deck_collection.default.json', 'Solo Pages Response Deck Collection v2'],
+    ['examples/client/local_settings.default.json', 'Solo Pages Local Settings v2'],
+    ['examples/client/aggregate_statistics.empty.json', 'Solo Pages Aggregate Statistics v2'],
+    ['examples/client/export_bundle.default.json', 'Solo Pages Export Bundle v2'],
   ];
   for (const [file, title] of examples) {
     const errors = validateJsonSchema(readJson(file), schemaByTitle.get(title), registry);
     assert.deepEqual(errors, [], `${file}\n${errors.join('\n')}`);
   }
-  const exportSchema = schemaByTitle.get('Solo Pages Export Bundle v1');
+  const exportSchema = schemaByTitle.get('Solo Pages Export Bundle v2');
   assert.equal(exportSchema.$id, 'https://example.local/client/export_bundle.schema.json');
   assert.equal(readJson('examples/client/export_bundle.default.json').schema_version, EXPORT_VERSION);
 });
 
-test('first run copies the exact canonical Storage Foundation deck and pins content versions', () => {
+test('first run copies the exact diagnosis-v2 response deck and pins content versions', () => {
   const state = createDefaultState(context);
   assert.equal(state.storage_version, LOCAL_STATE_VERSION);
   assert.equal(state.records.decks.ruleset_version, RULESET_VERSION);
   assert.equal(state.records.decks.card_catalog_version, CARD_CATALOG_VERSION);
   assert.equal(state.records.decks.active_deck_id, STARTER_LOCAL_DECK_ID);
   const localDeck = state.records.decks.decks[0];
-  const canonical = deckCatalog.decks.find((deck) => deck.id === 'deck.core.storage_foundation');
+  const canonical = deckCatalog.decks.find((deck) => deck.id === 'deck.core.storage_response_v2');
   assert.deepEqual(localDeck.card_definition_ids, canonical.card_definition_ids);
   assert.equal(localDeck.source_deck_id, canonical.id);
   assert.equal(localDeck.deck_id, STARTER_LOCAL_DECK_ID);
@@ -165,9 +176,9 @@ test('strict local validation rejects unknown fields, IDs, unsafe names, invalid
   unknownCard.records.decks.decks[0].card_definition_ids[0] = 'card.core.not_published';
   assert.match(validateLocalState(unknownCard, context).map((entry) => entry.code).join(' '), /UNKNOWN_ID/);
 
-  const fourthCopy = structuredClone(source.records.decks.decks[0]);
-  fourthCopy.card_definition_ids[3] = fourthCopy.card_definition_ids[0];
-  assert.match(validateDeckDraft(fourthCopy, context, { requireLegal: true }).map((entry) => entry.code).join(' '), /DECK_COPY_LIMIT/);
+  const seventhCopy = structuredClone(source.records.decks.decks[0]);
+  seventhCopy.card_definition_ids[3] = seventhCopy.card_definition_ids[0];
+  assert.match(validateDeckDraft(seventhCopy, context, { requireLegal: true }).map((entry) => entry.code).join(' '), /DECK_COPY_LIMIT/);
 });
 
 test('deck drafts remain detached until a legal save and active deletion chooses the next ID deterministically', () => {
@@ -194,13 +205,16 @@ test('deck drafts remain detached until a legal save and active deletion chooses
   assert.equal(empty.decks.length, 0);
 });
 
-test('there are no invented prior persistence versions and unsupported versions are rejected instead of guessed', () => {
-  assert.deepEqual([...SUPPORTED_PRIOR_STORAGE_VERSIONS], []);
+test('v1 storage coexists under its original key and is never implicitly migrated', () => {
+  assert.deepEqual([...SUPPORTED_PRIOR_STORAGE_VERSIONS], ['solo-local-state-v1']);
   const current = createDefaultState(context);
   assert.deepEqual(migrateLocalState(current, context), current);
   const future = structuredClone(current);
-  future.storage_version = 'solo-local-state-v2';
+  future.storage_version = 'solo-local-state-v999';
   assert.throws(() => migrateLocalState(future, context), (error) => error.code === 'UNSUPPORTED_VERSION');
+  const legacy = structuredClone(current);
+  legacy.storage_version = 'solo-local-state-v1';
+  assert.throws(() => migrateLocalState(legacy, context), (error) => error.code === 'LEGACY_PROFILE_COEXISTS');
 });
 
 test('Worker safe summaries aggregate exactly once per result and completed Match ID', () => {
@@ -228,6 +242,8 @@ test('Worker safe summaries aggregate exactly once per result and completed Matc
   assert.equal(applied.value.totals.verify_failures, 1);
   assert.equal(applied.value.totals.failed_verify, 1);
   assert.equal(applied.value.totals.documentation, 2);
+  assert.equal(applied.value.totals.eliminations_recorded, 2);
+  assert.equal(applied.value.totals.tickets_given_up, 0);
   assert.equal(applied.value.totals.authoritative_elapsed_seconds, 225);
   assert.equal(applyMatchResult(applied.value, resultSummary(), context).applied, false);
   assert.throws(
@@ -269,7 +285,7 @@ test('imports reject oversize, corrupt, incompatible, prototype-polluting, unkno
   assert.throws(() => parseImportBundle(' '.repeat(MAX_IMPORT_BYTES + 1), context), (error) => error.code === 'OVERSIZED_IMPORT');
 
   const future = structuredClone(source);
-  future.schema_version = 'solo-export-v2';
+  future.schema_version = 'solo-export-v999';
   assert.throws(() => parseImportBundle(JSON.stringify(future), context), (error) => error.code === 'UNSUPPORTED_VERSION');
 
   const unknown = structuredClone(source);

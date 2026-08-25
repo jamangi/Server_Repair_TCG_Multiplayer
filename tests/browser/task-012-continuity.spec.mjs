@@ -142,6 +142,59 @@ async function submitAndWait(page, intentId) {
   await expect.poll(() => page.evaluate(() => window.__task012WorkerMessages.length)).toBeGreaterThan(before);
 }
 
+function scanCandidateEffects(value, target = []) {
+  if (Array.isArray(value)) {
+    for (const entry of value) scanCandidateEffects(entry, target);
+    return target;
+  }
+  if (!value || typeof value !== 'object') return target;
+  if (typeof value.candidate_fault_id === 'string' && typeof value.disposition === 'string') target.push(value);
+  for (const child of Object.values(value)) scanCandidateEffects(child, target);
+  return target;
+}
+
+function evidenceScore(view, candidateFaultId) {
+  const weights = { CONFIRM: 8, SUPPORT: 3, INCONCLUSIVE: 0, CONTRADICT: -4, RULE_OUT: -8 };
+  return scanCandidateEffects(view)
+    .filter((entry) => entry.candidate_fault_id === candidateFaultId)
+    .reduce((sum, entry) => sum + (weights[entry.disposition] ?? 0), 0);
+}
+
+async function advanceUntilHeldResponseIsLegal(page, maximumIntents = 30) {
+  for (let step = 0; step < maximumIntents; step += 1) {
+    const latest = await latestWorkerMessage(page);
+    const projection = latest.projection;
+    const heldIds = new Set(projection.view.hand.map((entry) => entry.card_instance_id));
+    if (projection.legal_intents.some((intent) => heldIds.has(intent.card_instance_id) && intent.ticket_instance_id)) return latest;
+
+    const positiveIsolation = projection.legal_intents
+      .filter((intent) => intent.action_type === 'COMMIT_ISOLATION')
+      .map((intent) => ({ intent, score: evidenceScore(projection.view, intent.candidate_fault_id) }))
+      .filter((entry) => entry.score > 0)
+      .sort((left, right) => right.score - left.score)[0]?.intent;
+    const benchIds = new Set((projection.view.diagnostic_bench ?? []).map((entry) => entry.card_instance_id));
+    const diagnostic = projection.legal_intents.find((intent) => intent.action_type === 'RUN_TEST'
+      && benchIds.has(intent.card_instance_id));
+    const intent = positiveIsolation ?? diagnostic;
+    expect(intent, `No diagnosis-v2 setup intent at step ${step}`).toBeTruthy();
+
+    if (intent.ticket_instance_id) {
+      const ticket = page.locator(`[data-ticket-id="${intent.ticket_instance_id}"]`);
+      if (await ticket.getAttribute('aria-current') !== 'true') await ticket.click();
+    }
+    if (benchIds.has(intent.card_instance_id)) {
+      let diagnosticButton = page.locator(`[data-select-diagnostic="${intent.card_instance_id}"]`);
+      if (!await diagnosticButton.count()) {
+        await page.getByRole('button', { name: 'Global', exact: true }).click();
+        diagnosticButton = page.locator(`[data-select-diagnostic="${intent.card_instance_id}"]`);
+      }
+      await diagnosticButton.click();
+    }
+    await submitAndWait(page, intent.intent_id);
+  }
+  throw new Error(`No held response Card became legal within ${maximumIntents} projected intents.`);
+}
+
 async function scrollPosition(locator) {
   return locator.evaluate((element) => ({ left: element.scrollLeft, top: element.scrollTop }));
 }
@@ -233,7 +286,7 @@ test('desktop same-route updates retain semantic Ticket scroll and accepted cros
   await page.locator(`[data-ticket-id="${secondTicketId}"]`).click();
   expectNear((await scrollPosition(page.locator('.ticket-sheet'))).top, secondSheetScroll.top);
 
-  const latest = await latestWorkerMessage(page);
+  const latest = await advanceUntilHeldResponseIsLegal(page);
   const projection = latest.projection;
   const ticketIds = projection.view.public_match.repair_queue.map((ticket) => ticket.ticket_instance_id);
   let alternate = null;
@@ -265,8 +318,9 @@ test('desktop same-route updates retain semantic Ticket scroll and accepted cros
   await expect(result).toContainText('Payment');
   await expect(result).toContainText(/1 Action/);
   await expect(result).toContainText('Result');
-  await expect(page.locator('.evidence-entry.is-result-target')).toBeVisible();
+  await expect(page.locator('.is-result-target')).toBeVisible();
 
+  await page.getByRole('tab', { name: 'Evidence' }).click();
   const evidencePanel = page.locator('.evidence-panel');
   const evidencePosition = await setScroll(evidencePanel, { top: 36 });
   expect(evidencePosition.maximumTop).toBeGreaterThan(0);
@@ -281,7 +335,7 @@ test('desktop same-route updates retain semantic Ticket scroll and accepted cros
   await page.getByRole('tab', { name: 'Evidence' }).click();
 
   await page.getByRole('button', { name: 'View result' }).click();
-  await expect(page.locator('.evidence-entry.is-result-target')).toBeFocused();
+  await expect(page.locator('.is-result-target')).toBeFocused();
 });
 
 test('narrow mobile rails and document position survive same-route reconstruction', async ({ page }, testInfo) => {

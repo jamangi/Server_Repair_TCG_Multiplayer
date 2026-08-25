@@ -1,27 +1,28 @@
-export const IMPLEMENTATION_PROFILE_ID = 'solo-pages-v1';
-export const LOCAL_STATE_VERSION = 'solo-local-state-v1';
-export const PROFILE_VERSION = 'solo-profile-v1';
-export const DECKS_VERSION = 'solo-decks-v1';
-export const SETTINGS_VERSION = 'solo-settings-v1';
-export const STATISTICS_VERSION = 'solo-statistics-v1';
-export const EXPORT_VERSION = 'solo-export-v1';
-export const RESULT_SUMMARY_VERSION = 'solo-result-summary-v1';
-export const RULESET_VERSION = 'first-version-v1';
-export const CARD_CATALOG_VERSION = 'core-card-catalog-v1';
-export const STORAGE_KEY = 'server-repair-tcg:solo-pages-v1:state';
+export const IMPLEMENTATION_PROFILE_ID = 'solo-pages-v2';
+export const LOCAL_STATE_VERSION = 'solo-local-state-v2';
+export const PROFILE_VERSION = 'solo-profile-v2';
+export const DECKS_VERSION = 'solo-decks-v2';
+export const SETTINGS_VERSION = 'solo-settings-v2';
+export const STATISTICS_VERSION = 'solo-statistics-v2';
+export const EXPORT_VERSION = 'solo-export-v2';
+export const RESULT_SUMMARY_VERSION = 'solo-result-summary-v2';
+export const RULESET_VERSION = 'first-version-v2';
+export const CARD_CATALOG_VERSION = 'core-card-catalog-diagnosis-v2';
+export const STORAGE_KEY = 'server-repair-tcg:solo-pages-v2:state';
 export const MAX_IMPORT_BYTES = 512 * 1024;
 export const PROFILE_NAME_MAX_LENGTH = 40;
 export const DECK_NAME_MAX_LENGTH = 48;
 export const MAX_SAVED_DECKS = 64;
-export const STARTER_SOURCE_DECK_ID = 'deck.core.storage_foundation';
-export const STARTER_LOCAL_DECK_ID = 'deck.local.storage_foundation';
+export const STARTER_SOURCE_DECK_ID = 'deck.core.storage_response_v2';
+export const STARTER_LOCAL_DECK_ID = 'deck.local.storage_response_v2';
+export const MAX_COPIES_PER_CARD_ID = 6;
 export const PROFILE_ICON_IDS = Object.freeze([
   'cosmetic.profile.console',
   'cosmetic.profile.field',
   'cosmetic.profile.storage',
   'cosmetic.profile.systems',
 ]);
-export const SUPPORTED_PRIOR_STORAGE_VERSIONS = Object.freeze([]);
+export const SUPPORTED_PRIOR_STORAGE_VERSIONS = Object.freeze(['solo-local-state-v1']);
 
 const PROFILE_KEYS = ['schema_version', 'profile_id', 'display_name', 'icon_id'];
 const DECK_KEYS = ['deck_id', 'display_name', 'source_deck_id', 'card_definition_ids'];
@@ -32,7 +33,7 @@ const DECK_COLLECTION_KEYS = [
   'active_deck_id',
   'decks',
 ];
-const SETTINGS_KEYS = ['schema_version', 'starting_ticket_count', 'motion_preference', 'drag_enabled'];
+const SETTINGS_KEYS = ['schema_version', 'starting_ticket_count', 'motion_preference', 'drag_enabled', 'preferred_bench_view'];
 const PROCESSED_RESULT_KEYS = ['match_id', 'result_id'];
 const STATISTIC_KEYS = [
   'matches_started',
@@ -61,6 +62,8 @@ const STATISTIC_KEYS = [
   'authoritative_elapsed_seconds',
   'search_uses',
   'refresh_uses',
+  'eliminations_recorded',
+  'tickets_given_up',
 ];
 const POINT_STATISTIC_KEYS = new Set([
   'starting_service_points_total',
@@ -89,6 +92,8 @@ const WORKER_RESULT_COUNTER_MAP = Object.freeze({
   elapsed_seconds: 'authoritative_elapsed_seconds',
   search_uses: 'search_uses',
   refresh_uses: 'refresh_uses',
+  eliminations_recorded: 'eliminations_recorded',
+  tickets_given_up: 'tickets_given_up',
 });
 const RESULT_OUTCOME_KEYS = [
   'solo_wins',
@@ -117,6 +122,7 @@ const RESULT_REASON_CODES = new Set([
   'SCORE_THRESHOLD',
   'STALEMATE',
   'SIMULATION_CAP',
+  'GIVE_UP',
 ]);
 const FORBIDDEN_PROPERTY_NAMES = new Set(['__proto__', 'prototype', 'constructor']);
 const STABLE_ID = /^[a-z0-9]+(?:[._-][a-z0-9]+)*$/;
@@ -216,18 +222,20 @@ export function createClientDataContext({ cardCatalog, deckCatalog }) {
   }
   if (cardCatalog.card_catalog_version !== CARD_CATALOG_VERSION
       || cardCatalog.ruleset_version !== RULESET_VERSION) {
-    throw new ClientDataError('INCOMPATIBLE_CONTENT', 'The card catalog version is not compatible with solo-pages-v1.');
+    throw new ClientDataError('INCOMPATIBLE_CONTENT', 'The card catalog version is not compatible with solo-pages-v2.');
   }
   if (deckCatalog.card_catalog_version !== CARD_CATALOG_VERSION
       || deckCatalog.ruleset_version !== RULESET_VERSION) {
-    throw new ClientDataError('INCOMPATIBLE_CONTENT', 'The deck catalog version is not compatible with solo-pages-v1.');
+    throw new ClientDataError('INCOMPATIBLE_CONTENT', 'The deck catalog version is not compatible with solo-pages-v2.');
   }
   const starterDeck = deckCatalog.decks.find((deck) => deck.id === STARTER_SOURCE_DECK_ID);
   if (!starterDeck) {
     throw new ClientDataError('MISSING_STARTER_DECK', `Missing ${STARTER_SOURCE_DECK_ID}.`);
   }
   return Object.freeze({
-    knownCardIds: new Set(cardCatalog.cards.map((card) => card.id)),
+    knownCardIds: new Set(cardCatalog.cards
+      .filter((card) => card.play_contract?.contract_type !== 'DIAGNOSTIC')
+      .map((card) => card.id)),
     knownSourceDeckIds: new Set(deckCatalog.decks.map((deck) => deck.id)),
     knownIconIds: new Set(PROFILE_ICON_IDS),
     starterDeck: structuredClone(starterDeck),
@@ -350,6 +358,7 @@ export function createDefaultState(context) {
         starting_ticket_count: 3,
         motion_preference: 'SYSTEM',
         drag_enabled: false,
+        preferred_bench_view: 'RELEVANT',
       },
       statistics: createEmptyStatistics(),
     },
@@ -401,8 +410,8 @@ export function validateDeckDraft(deck, context, { path = '$.deck', requireLegal
     }
     const count = (counts.get(cardId) ?? 0) + 1;
     counts.set(cardId, count);
-    if (count === 4) {
-      errors.push(issue(`${path}.card_definition_ids[${index}]`, 'DECK_COPY_LIMIT', `A deck cannot contain more than three copies of ${cardId}.`));
+    if (count === MAX_COPIES_PER_CARD_ID + 1) {
+      errors.push(issue(`${path}.card_definition_ids[${index}]`, 'DECK_COPY_LIMIT', `A response deck cannot contain more than ${MAX_COPIES_PER_CARD_ID} copies of ${cardId}.`));
     }
   });
   return errors;
@@ -454,6 +463,9 @@ export function validateSettings(settings, context) {
   }
   if (typeof settings.drag_enabled !== 'boolean') {
     errors.push(issue('$.settings.drag_enabled', 'INVALID_BOOLEAN', 'drag_enabled must be boolean.'));
+  }
+  if (!['RELEVANT', 'GLOBAL'].includes(settings.preferred_bench_view)) {
+    errors.push(issue('$.settings.preferred_bench_view', 'INVALID_BENCH_VIEW', 'preferred_bench_view must be RELEVANT or GLOBAL.'));
   }
   return errors;
 }
@@ -561,9 +573,15 @@ export function migrateLocalState(candidate, context) {
     throw new ClientDataError('INVALID_LOCAL_DATA', 'Local data must be an object.');
   }
   if (candidate.storage_version !== LOCAL_STATE_VERSION) {
+    if (SUPPORTED_PRIOR_STORAGE_VERSIONS.includes(candidate.storage_version)) {
+      throw new ClientDataError(
+        'LEGACY_PROFILE_COEXISTS',
+        'This solo-pages-v1 save remains pinned under its original storage key. Start a fresh solo-pages-v2 profile; no implicit deck or statistic migration is performed.',
+      );
+    }
     throw new ClientDataError(
       'UNSUPPORTED_VERSION',
-      `Unsupported local data version ${String(candidate.storage_version)}. No earlier Play persistence versions exist to migrate.`,
+      `Unsupported local data version ${String(candidate.storage_version)}.`,
     );
   }
   return assertValidLocalState(candidate, context);

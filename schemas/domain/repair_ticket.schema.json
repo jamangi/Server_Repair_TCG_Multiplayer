@@ -64,6 +64,26 @@
       },
       "required": ["candidate_fault_id", "disposition"]
     },
+    "isolationRoute": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "route_id": { "$ref": "#/$defs/stableId" },
+        "route_kind": {
+          "type": "string",
+          "enum": ["DIRECT_OBSERVATION", "DEFINITIVE_DIAGNOSTIC", "CORROBORATED_SUPPORT", "EVIDENCE_BACKED_ELIMINATION", "RECOVERY_DERIVED"]
+        },
+        "target_fault_instance_key": { "$ref": "#/$defs/stableId" },
+        "candidate_fault_id": { "$ref": "#/$defs/entityRef" },
+        "classification": { "type": "string", "enum": ["ACTIONABLE", "DEEPEST", "ACTIONABLE_AND_DEEPEST"] },
+        "eligible_outcome_ids": { "type": "array", "items": { "$ref": "#/$defs/stableId" }, "uniqueItems": true, "minItems": 1 },
+        "eligible_verification_outcome_ids": { "type": "array", "items": { "$ref": "#/$defs/stableId" }, "uniqueItems": true, "minItems": 1 },
+        "supporting_outcome_ids": { "type": "array", "items": { "$ref": "#/$defs/stableId" }, "uniqueItems": true, "minItems": 1 },
+        "required_eliminated_candidate_fault_ids": { "type": "array", "items": { "$ref": "#/$defs/entityRef" }, "uniqueItems": true, "minItems": 1 },
+        "minimum_distinct_outcomes": { "type": "integer", "minimum": 2 }
+      },
+      "required": ["route_id", "route_kind", "target_fault_instance_key", "candidate_fault_id", "classification"]
+    },
     "generationProvenance": {
       "type": ["object", "null"],
       "additionalProperties": false,
@@ -101,6 +121,8 @@
   "properties": {
     "id": { "$ref": "#/$defs/stableId" },
     "entity_type": { "const": "repair_ticket" },
+    "ruleset_version": { "const": "first-version-v2" },
+    "ticket_contract_version": { "const": "repair-ticket-v2" },
     "presentation": { "$ref": "#/$defs/presentation" },
     "source": { "$ref": "#/$defs/sourceMeta" },
     "difficulty": { "type": "integer", "minimum": 1, "maximum": 10 },
@@ -110,6 +132,11 @@
       "items": { "$ref": "#/$defs/entityRef" },
       "uniqueItems": true,
       "minItems": 1
+    },
+    "public_context_entity_ids": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/entityRef" },
+      "uniqueItems": true
     },
     "public_candidate_fault_ids": {
       "description": "Authored candidate set visible to every Player; it does not reveal which candidate is true.",
@@ -189,9 +216,9 @@
           "eligible_machine_state_key": { "$ref": "#/$defs/stableId" },
           "candidate_effects": {
             "type": "array",
-            "items": { "$ref": "#/$defs/candidateEffect" },
-            "minItems": 1
+            "items": { "$ref": "#/$defs/candidateEffect" }
           },
+          "outcome_classification": { "type": "string", "enum": ["CANDIDATE_EFFECT", "CLEAN", "IRRELEVANT", "INCONCLUSIVE"] },
           "observation_id": {
             "type": ["string", "null"],
             "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
@@ -234,28 +261,32 @@
             "type": "array",
             "items": { "$ref": "#/$defs/stableId" },
             "uniqueItems": true
+          },
+          "routes": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/isolationRoute" },
+            "minItems": 1
           }
         },
-        "anyOf": [
+        "oneOf": [
           {
-            "properties": {
-              "eligible_outcome_ids": { "minItems": 1 }
-            }
+            "required": [
+              "requirement_id",
+              "target_fault_instance_key",
+              "candidate_fault_id",
+              "classification",
+              "minimum_citations",
+              "eligible_outcome_ids",
+              "eligible_verification_outcome_ids"
+            ],
+            "anyOf": [
+              { "properties": { "eligible_outcome_ids": { "minItems": 1 } } },
+              { "properties": { "eligible_verification_outcome_ids": { "minItems": 1 } } }
+            ]
           },
           {
-            "properties": {
-              "eligible_verification_outcome_ids": { "minItems": 1 }
-            }
+            "required": ["requirement_id", "target_fault_instance_key", "candidate_fault_id", "classification", "routes"]
           }
-        ],
-        "required": [
-          "requirement_id",
-          "target_fault_instance_key",
-          "candidate_fault_id",
-          "classification",
-          "minimum_citations",
-          "eligible_outcome_ids",
-          "eligible_verification_outcome_ids"
         ]
       }
     },

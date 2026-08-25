@@ -72,5 +72,7 @@
   "rejected_at": null,
   "recovered_card_instance_id": null,
   "opened_resolution_window": "NONE",
-  "resolution_code": "RESOLVED"
+  "resolution_code": "RESOLVED",
+  "target_summary": "Failed SAS Drive on match.example.ticket.001.",
+  "result_summary": "Isolation accepted through definitive diagnostic Evidence."
 }

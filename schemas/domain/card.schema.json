@@ -266,7 +266,10 @@
           }
         },
         "disposition": {
-          "const": "discard"
+          "enum": ["discard", "remain_in_diagnostic_bench"]
+        },
+        "placement": {
+          "const": "diagnostic_bench"
         }
       },
       "required": [

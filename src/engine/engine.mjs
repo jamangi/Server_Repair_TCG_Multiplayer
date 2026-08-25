@@ -10,10 +10,15 @@ import {
 import { canonicalJson, deepClone, deterministicShuffle, digest, randomInt } from './determinism.mjs';
 import { appendEvent, appendWorklogPlaceholder, eventVisibleToPlayer } from './events.mjs';
 import { assertPlayerSafe, assertValidState } from './invariants.mjs';
+import {
+  DIAGNOSIS_V2_MAX_COPIES,
+  DIAGNOSIS_V2_RULESET_VERSION,
+} from '../builder/diagnosis-v2.mjs';
 
 const ACTION_TYPES = new Set([
   'PLAY_CARD',
   'RUN_TEST',
+  'SET_ELIMINATION',
   'REVISE_HYPOTHESIS',
   'COMMIT_ISOLATION',
   'PERFORM_REPAIR',
@@ -23,6 +28,7 @@ const ACTION_TYPES = new Set([
   'SEARCH',
   'REFRESH',
   'PASS_TURN',
+  'GIVE_UP_TICKET',
 ]);
 
 const TOP_LEVEL_REQUEST_FIELDS = new Set([
@@ -32,6 +38,7 @@ const TOP_LEVEL_REQUEST_FIELDS = new Set([
 const PAYLOAD_FIELDS = new Map([
   ['PLAY_CARD', new Set(['ticket_instance_id', 'card_instance_id', 'execution_definition_id', 'target_ref', 'observed_machine_revision'])],
   ['RUN_TEST', new Set(['ticket_instance_id', 'card_instance_id', 'execution_definition_id', 'target_ref', 'observed_machine_revision'])],
+  ['SET_ELIMINATION', new Set(['ticket_instance_id', 'candidate_fault_id', 'cited_evidence_event_ids', 'eliminated'])],
   ['REVISE_HYPOTHESIS', new Set(['ticket_instance_id', 'candidate_fault_ids'])],
   ['COMMIT_ISOLATION', new Set(['ticket_instance_id', 'candidate_fault_id', 'cited_evidence_event_ids'])],
   ['PERFORM_REPAIR', new Set(['ticket_instance_id', 'card_instance_id', 'repair_procedure_id', 'isolated_fault_instance_id'])],
@@ -45,7 +52,12 @@ const PAYLOAD_FIELDS = new Map([
   ['SEARCH', new Set(['selected_card_definition_id'])],
   ['REFRESH', new Set()],
   ['PASS_TURN', new Set()],
+  ['GIVE_UP_TICKET', new Set(['ticket_instance_id', 'confirmed'])],
 ]);
+
+const isDiagnosisV2 = (stateOrVersion) => (typeof stateOrVersion === 'string'
+  ? stateOrVersion
+  : stateOrVersion?.ruleset_version) === DIAGNOSIS_V2_RULESET_VERSION;
 
 class EngineRejection extends Error {
   constructor(code, message = code) {
@@ -99,14 +111,18 @@ function normalizeDecks(decksByPlayer, catalogs) {
   return result;
 }
 
-function validateDeck(cardIds, cards, playerId) {
+function validateDeck(cardIds, cards, playerId, rulesetVersion) {
   if (!Array.isArray(cardIds) || cardIds.length !== 30) throw new Error(`${playerId} deck must contain exactly 30 cards`);
   const copies = new Map();
   for (const id of cardIds) {
     if (!cards.has(id)) throw new Error(`${playerId} deck references unknown Card ${id}`);
+    if (isDiagnosisV2(rulesetVersion) && cardContractType(cards.get(id)) === 'DIAGNOSTIC') {
+      throw new Error(`${playerId} diagnosis-v2 response deck cannot contain diagnostic ${id}`);
+    }
     copies.set(id, (copies.get(id) ?? 0) + 1);
   }
-  for (const [id, count] of copies) if (count > 3) throw new Error(`${playerId} deck has ${count} copies of ${id}`);
+  const maximum = isDiagnosisV2(rulesetVersion) ? DIAGNOSIS_V2_MAX_COPIES : 3;
+  for (const [id, count] of copies) if (count > maximum) throw new Error(`${playerId} deck has ${count} copies of ${id}`);
 }
 
 function instantiateTicket(snapshot, matchId, index) {
@@ -135,6 +151,7 @@ function instantiateTicket(snapshot, matchId, index) {
     definition_snapshot: deepClone(snapshot),
     generation_provenance: deepClone(snapshot.generation_provenance ?? null),
     status: 'DIAGNOSIS',
+    diagnosis_revision: 0,
     machine_state_key: truth.initial_machine_state_key,
     machine_revision: 0,
     visible_symptom_ids: [...(snapshot.initial_symptom_ids ?? [])],
@@ -142,6 +159,7 @@ function instantiateTicket(snapshot, matchId, index) {
     fault_instances: faultInstances,
     authored_diagnostic_targets: authoredDiagnosticTargets,
     test_history: [],
+    elimination_history: [],
     isolation_history: [],
     current_repair_gate_isolation_event_id: null,
     accepted_path_isolation_event_ids: [],
@@ -153,6 +171,7 @@ function instantiateTicket(snapshot, matchId, index) {
     documentation_publications: [],
     worklog_entries: [],
     closure: null,
+    abandonment: null,
   };
 }
 
@@ -219,7 +238,11 @@ export function createMatch({
   seed,
   now,
   ticketSource = null,
+  rulesetVersion = 'first-version-v1',
 }) {
+  if (!['first-version-v1', DIAGNOSIS_V2_RULESET_VERSION].includes(rulesetVersion)) {
+    throw new Error(`Unsupported ruleset version ${rulesetVersion}`);
+  }
   const cards = cardMap(catalogs);
   const catalogVersion = cardCatalogVersion(catalogs);
   if (!catalogVersion) throw new Error('A pinned card_catalog_version is required');
@@ -228,7 +251,7 @@ export function createMatch({
   const state = {
     match_id: matchId,
     revision: 0,
-    ruleset_version: 'first-version-v1',
+    ruleset_version: rulesetVersion,
     card_catalog_version: catalogVersion,
     content_version: catalogs?.cards?.domain_content_version ?? catalogs?.content_version ?? 'unversioned',
     ticket_source: deepClone(ticketSource ?? {
@@ -251,6 +274,7 @@ export function createMatch({
     contribution_ledger: [],
     service_point_events: [],
     closure_statistics: [],
+    give_up_statistics: [],
     events: [],
     event_sequence: 0,
     action_records: [],
@@ -278,6 +302,7 @@ export function createMatch({
     hand_card_instance_ids: [],
     discard_card_instance_ids: [],
     in_play_card_instance_ids: [],
+    diagnostic_bench_card_instance_ids: [],
     search_tokens: config.starting_search_tokens,
     max_search_tokens: config.max_search_tokens,
     refresh_tokens: config.starting_refresh_tokens,
@@ -287,7 +312,7 @@ export function createMatch({
   }));
 
   for (const player of normalizedPlayers) {
-    validateDeck(player.deck_snapshot_card_definition_ids, cards, player.player_id);
+    validateDeck(player.deck_snapshot_card_definition_ids, cards, player.player_id, rulesetVersion);
     const instanceIds = player.deck_snapshot_card_definition_ids.map((cardDefinitionId, index) => {
       const instanceId = `${matchId}.card.${player.player_id}.${String(index + 1).padStart(3, '0')}`;
       state.card_instances[instanceId] = {
@@ -303,6 +328,25 @@ export function createMatch({
     });
     const shuffled = deterministicShuffle(instanceIds, seed, `setup.deck.${player.player_id}`);
     player.deck_card_instance_ids = shuffled.values;
+    if (isDiagnosisV2(rulesetVersion)) {
+      const diagnosticIds = [...cards.values()]
+        .filter((card) => cardContractType(card) === 'DIAGNOSTIC')
+        .map((card) => card.id)
+        .sort();
+      player.diagnostic_bench_card_instance_ids = diagnosticIds.map((cardDefinitionId, index) => {
+        const instanceId = `${matchId}.bench.${player.player_id}.${String(index + 1).padStart(3, '0')}`;
+        state.card_instances[instanceId] = {
+          card_instance_id: instanceId,
+          card_definition_id: cardDefinitionId,
+          owner_player_id: player.player_id,
+          controller_player_id: player.player_id,
+          zone: 'diagnostic_bench',
+          in_play_placement: null,
+          effect_state: null,
+        };
+        return instanceId;
+      });
+    }
     for (let draw = 0; draw < 5; draw += 1) {
       const instanceId = player.deck_card_instance_ids.shift();
       player.hand_card_instance_ids.push(instanceId);
@@ -366,6 +410,20 @@ function requireCardInHand(state, player, instanceId, cards, expectedActionType)
   if (!instance || instance.owner_player_id !== player.player_id || instance.zone !== 'hand') reject('ILLEGAL_CARD');
   const card = cards.get(instance.card_definition_id);
   if (!card || cardActionType(card) !== expectedActionType) reject('ILLEGAL_CARD');
+  if (![0, 1, 2].includes(cardCost(card))) reject('CONTENT_INVALID');
+  if (cardCost(card) > state.turn.actions_remaining) reject('INSUFFICIENT_ACTIONS');
+  if (cardCost(card) === 0 && state.turn.zero_action_card_names_played.includes(cardName(card))) {
+    reject('ZERO_ACTION_NAME_LIMIT');
+  }
+  return { instance, card };
+}
+
+function requireDiagnosticBenchCard(state, player, instanceId, cards) {
+  if (!isDiagnosisV2(state) || !player.diagnostic_bench_card_instance_ids.includes(instanceId)) reject('ILLEGAL_CARD');
+  const instance = state.card_instances[instanceId];
+  if (!instance || instance.owner_player_id !== player.player_id || instance.zone !== 'diagnostic_bench') reject('ILLEGAL_CARD');
+  const card = cards.get(instance.card_definition_id);
+  if (!card || cardContractType(card) !== 'DIAGNOSTIC' || cardActionType(card) !== 'RUN_TEST') reject('ILLEGAL_CARD');
   if (![0, 1, 2].includes(cardCost(card))) reject('CONTENT_INVALID');
   if (cardCost(card) > state.turn.actions_remaining) reject('INSUFFICIENT_ACTIONS');
   if (cardCost(card) === 0 && state.turn.zero_action_card_names_played.includes(cardName(card))) {
@@ -464,14 +522,21 @@ function endTurn(state, reason, now) {
 }
 
 function resultStatistics(state) {
-  const byPlayer = new Map(state.players.map((player) => [player.player_id, {
-    TEST: 0,
-    ISOLATION: 0,
-    REPAIR: 0,
-    VERIFY: 0,
-    DOCUMENTATION: 0,
-    REJECTED_ISOLATION: 0,
-  }]));
+  const byPlayer = new Map(state.players.map((player) => {
+    const metrics = {
+      TEST: 0,
+      ISOLATION: 0,
+      REPAIR: 0,
+      VERIFY: 0,
+      DOCUMENTATION: 0,
+      REJECTED_ISOLATION: 0,
+    };
+    if (isDiagnosisV2(state)) {
+      metrics.ELIMINATION = 0;
+      metrics.GIVE_UP = 0;
+    }
+    return [player.player_id, metrics];
+  }));
   for (const record of state.action_records) {
     const bucket = byPlayer.get(record.actor_player_id);
     if (!bucket) continue;
@@ -480,6 +545,8 @@ function resultStatistics(state) {
     if (record.action_type === 'PERFORM_REPAIR') bucket.REPAIR += 1;
     if (record.action_type === 'PERFORM_VERIFY') bucket.VERIFY += 1;
     if (record.action_type === 'DOCUMENT_LIVE') bucket.DOCUMENTATION += 1;
+    if (record.action_type === 'SET_ELIMINATION') bucket.ELIMINATION += 1;
+    if (record.action_type === 'GIVE_UP_TICKET') bucket.GIVE_UP += 1;
   }
   for (const event of state.events.filter((entry) => entry.event_type === 'ISOLATION_NOT_SUPPORTED')) {
     byPlayer.get(event.actor_player_id).REJECTED_ISOLATION += 1;
@@ -500,6 +567,7 @@ function evaluateTermination(state, now, extraReasons = []) {
     && activePlayers.every((player) => player.controller_type === 'computer')) reasons.push('NO_HUMANS');
   if (state.collaboration_mode === 'competitive' && activePlayers.length === 1) reasons.push('FORFEIT');
   if (state.configuration.queue_minimum === 0 && state.active_ticket_ids.length === 0) reasons.push('QUEUE_EMPTY');
+  if (state.active_ticket_ids.length === 0 && state.give_up_statistics.length > 0) reasons.push('GIVE_UP');
   if (state.configuration.termination_score !== -1) {
     if (state.collaboration_mode === 'cooperative') {
       if (Object.values(state.team_scores).some((score) => score >= state.configuration.termination_score)) {
@@ -515,7 +583,8 @@ function evaluateTermination(state, now, extraReasons = []) {
   const invalid = uniqueReasons.includes('ADMIN_INVALIDATION');
   let winnerPlayerIds = [];
   let winningTeamIds = [];
-  if (!invalid && !uniqueReasons.includes('NO_HUMANS') && !uniqueReasons.includes('SIMULATION_CAP')) {
+  if (!invalid && !uniqueReasons.includes('NO_HUMANS') && !uniqueReasons.includes('SIMULATION_CAP')
+      && !uniqueReasons.includes('GIVE_UP')) {
     if (state.collaboration_mode === 'cooperative') {
       if (uniqueReasons.some((reason) => ['QUEUE_EMPTY', 'SCORE_THRESHOLD'].includes(reason))) {
         const maximum = Math.max(...Object.values(state.team_scores));
@@ -569,6 +638,8 @@ function rejectedResult(state, request, code, message = code) {
     recovered_card_instance_id: null,
     opened_resolution_window: 'NONE',
     resolution_code: null,
+    target_summary: null,
+    result_summary: null,
   });
 }
 
@@ -576,7 +647,9 @@ function resolveDiagnostic(context) {
   const { state, request, player, cards, now, actionId } = context;
   const payload = request.payload;
   const ticket = activeTicket(state, payload.ticket_instance_id);
-  const { instance, card } = requireCardInHand(state, player, payload.card_instance_id, cards, request.action_type);
+  const { instance, card } = isDiagnosisV2(state)
+    ? requireDiagnosticBenchCard(state, player, payload.card_instance_id, cards)
+    : requireCardInHand(state, player, payload.card_instance_id, cards, request.action_type);
   if (cardContractType(card) !== 'DIAGNOSTIC') reject('ILLEGAL_CARD');
   const sourceDefinitionId = cardSourceDefinitionId(card);
   if (payload.execution_definition_id !== sourceDefinitionId) reject('ILLEGAL_CARD');
@@ -607,7 +680,9 @@ function resolveDiagnostic(context) {
   const cost = cardCost(card);
   spendActions(state, cost);
   if (cost === 0) state.turn.zero_action_card_names_played.push(cardName(card));
-  moveCard(state, player, instance.card_instance_id, 'hand_card_instance_ids', 'discard_card_instance_ids', 'discard');
+  if (!isDiagnosisV2(state)) {
+    moveCard(state, player, instance.card_instance_id, 'hand_card_instance_ids', 'discard_card_instance_ids', 'discard');
+  }
   const placeholder = appendWorklogPlaceholder(state, {
     ticket,
     actorPlayerId: player.player_id,
@@ -633,6 +708,10 @@ function resolveDiagnostic(context) {
       public_summary: outcome.public_summary,
       target_ref: payload.target_ref,
       machine_revision: ticket.machine_revision,
+      ...(isDiagnosisV2(state) ? {
+        diagnosis_revision: ticket.diagnosis_revision,
+        outcome_classification: outcome.outcome_classification ?? 'CANDIDATE_EFFECT',
+      } : {}),
     },
     now,
   });
@@ -645,6 +724,7 @@ function resolveDiagnostic(context) {
     source_definition_id: sourceDefinitionId,
     target_ref: payload.target_ref,
     machine_revision: ticket.machine_revision,
+    diagnosis_revision: ticket.diagnosis_revision,
   });
   addActionRecord(state, {
     actionId,
@@ -658,7 +738,12 @@ function resolveDiagnostic(context) {
     now,
   });
   maybeAutoEndTurn(state, now);
-  return { actionsSpent: cost, resolutionCode: 'RESOLVED' };
+  return {
+    actionsSpent: cost,
+    resolutionCode: 'RESOLVED',
+    targetSummary: `Diagnostic target ${payload.target_ref} on ${ticket.ticket_instance_id}.`,
+    resultSummary: outcome.public_summary,
+  };
 }
 
 function reviseHypothesis(context) {
@@ -689,18 +774,154 @@ function reviseHypothesis(context) {
   return { actionsSpent: 0, resolutionCode: 'RESOLVED' };
 }
 
-function matchingIsolationRequirement(ticket, candidateFaultId, citedEvents) {
-  const matching = ticket.definition_snapshot.isolation_requirements.filter((requirement) => {
-    if (requirement.candidate_fault_id !== candidateFaultId) return false;
-    const fault = ticket.fault_instances[requirement.target_fault_instance_key];
-    if (!fault?.actionable || fault.machine_status !== 'ACTIVE') return false;
-    const eligibleIds = new Set([
-      ...(requirement.eligible_outcome_ids ?? []),
-      ...(requirement.eligible_verification_outcome_ids ?? []),
-    ]);
-    const qualifyingCount = citedEvents.filter((event) => eligibleIds.has(event.payload.outcome_id)).length;
-    return qualifyingCount >= requirement.minimum_citations;
+function candidateDisposition(event, candidateFaultId) {
+  return event?.payload?.candidate_effects?.find(
+    (effect) => effect.candidate_fault_id === candidateFaultId,
+  )?.disposition ?? null;
+}
+
+function evidenceIsCurrent(ticket, event) {
+  if (!event || event.payload?.machine_revision !== ticket.machine_revision) return false;
+  if (!isDiagnosisV2(ticket.definition_snapshot.ruleset_version ?? 'first-version-v1')) return true;
+  return event.payload?.diagnosis_revision === ticket.diagnosis_revision;
+}
+
+function latestElimination(ticket, candidateFaultId, player) {
+  return [...ticket.elimination_history].reverse().find((record) =>
+    record.candidate_fault_id === candidateFaultId
+      && record.diagnosis_revision === ticket.diagnosis_revision
+      && (record.visibility === 'TEAM'
+        ? player.team_id !== null && record.visible_to_team_ids.includes(player.team_id)
+        : record.visible_to_player_ids.includes(player.player_id))) ?? null;
+}
+
+function setElimination(context) {
+  const { state, request, player, now, actionId } = context;
+  if (!isDiagnosisV2(state)) reject('UNSUPPORTED_ACTION_TYPE');
+  const payload = request.payload;
+  const ticket = activeTicket(state, payload.ticket_instance_id);
+  if (!['DIAGNOSIS', 'RETURNED_TO_DIAGNOSIS'].includes(ticket.status)) reject('ILLEGAL_TIMING');
+  if (!ticket.public_candidate_fault_ids.includes(payload.candidate_fault_id)
+      || typeof payload.eliminated !== 'boolean'
+      || !Array.isArray(payload.cited_evidence_event_ids)
+      || new Set(payload.cited_evidence_event_ids).size !== payload.cited_evidence_event_ids.length) {
+    reject('ILLEGAL_TARGET');
+  }
+  const previous = latestElimination(ticket, payload.candidate_fault_id, player);
+  if (previous?.eliminated === payload.eliminated) reject('NO_CHANGE');
+  const cited = payload.cited_evidence_event_ids.map((id) => eventById(state, id));
+  if (payload.eliminated) {
+    if (cited.length === 0 || cited.some((event) => !event
+      || !evidenceAuthorizedForPlayer(state, event, player)
+      || !['EVIDENCE_CREATED', 'VERIFY_EVIDENCE_CREATED'].includes(event.event_type)
+      || event.ticket_instance_id !== ticket.ticket_instance_id
+      || !evidenceIsCurrent(ticket, event)
+      || candidateDisposition(event, payload.candidate_fault_id) !== 'RULE_OUT')) {
+      reject('ELIMINATION_NOT_SUPPORTED');
+    }
+  } else if (cited.length !== 0) {
+    reject('ILLEGAL_TARGET');
+  }
+  const audience = defaultEvidenceVisibility(state, player);
+  const event = appendEvent(state, {
+    eventType: 'CANDIDATE_ELIMINATION_SET',
+    actorPlayerId: player.player_id,
+    ticketInstanceId: ticket.ticket_instance_id,
+    actionId,
+    ...audience,
+    payload: {
+      candidate_fault_id: payload.candidate_fault_id,
+      eliminated: payload.eliminated,
+      cited_evidence_event_ids: [...payload.cited_evidence_event_ids],
+      diagnosis_revision: ticket.diagnosis_revision,
+      supersedes_elimination_event_id: previous?.elimination_event_id ?? null,
+    },
+    now,
   });
+  ticket.elimination_history.push({
+    elimination_event_id: event.event_id,
+    player_id: player.player_id,
+    candidate_fault_id: payload.candidate_fault_id,
+    eliminated: payload.eliminated,
+    cited_evidence_event_ids: [...payload.cited_evidence_event_ids],
+    diagnosis_revision: ticket.diagnosis_revision,
+    visibility: audience.visibility,
+    visible_to_player_ids: [...audience.visibleToPlayerIds],
+    visible_to_team_ids: [...audience.visibleToTeamIds],
+    supersedes_elimination_event_id: previous?.elimination_event_id ?? null,
+    recorded_at: now,
+  });
+  addActionRecord(state, {
+    actionId,
+    request,
+    actorPlayerId: player.player_id,
+    ticketInstanceId: ticket.ticket_instance_id,
+    sourceResultEventId: event.event_id,
+    now,
+  });
+  return {
+    actionsSpent: 0,
+    resolutionCode: 'RESOLVED',
+    targetSummary: `${payload.candidate_fault_id} on ${ticket.ticket_instance_id}.`,
+    resultSummary: payload.eliminated ? 'Candidate marked ruled out for the current diagnosis stage.' : 'Candidate elimination reversed.',
+  };
+}
+
+function matchingIsolationRequirement(state, ticket, candidateFaultId, citedEvents, player) {
+  const matching = [];
+  for (const requirement of ticket.definition_snapshot.isolation_requirements) {
+    if (requirement.candidate_fault_id !== candidateFaultId) continue;
+    const fault = ticket.fault_instances[requirement.target_fault_instance_key];
+    if (!fault?.actionable || fault.machine_status !== 'ACTIVE') continue;
+    if (!Array.isArray(requirement.routes)) {
+      const eligibleIds = new Set([
+        ...(requirement.eligible_outcome_ids ?? []),
+        ...(requirement.eligible_verification_outcome_ids ?? []),
+      ]);
+      const qualifyingCount = citedEvents.filter((event) => eligibleIds.has(event.payload.outcome_id)).length;
+      if (qualifyingCount >= requirement.minimum_citations) {
+        matching.push({ ...requirement, matched_route: null, decisive_events: citedEvents.filter((event) => eligibleIds.has(event.payload.outcome_id)) });
+      }
+      continue;
+    }
+    const citedIds = new Set(citedEvents.map((event) => event.event_id));
+    const routes = [...requirement.routes].sort((left, right) => left.route_id.localeCompare(right.route_id));
+    for (const route of routes) {
+      let decisive = [];
+      if (['DIRECT_OBSERVATION', 'DEFINITIVE_DIAGNOSTIC', 'RECOVERY_DERIVED'].includes(route.route_kind)) {
+        const eligible = new Set([
+          ...(route.eligible_outcome_ids ?? []),
+          ...(route.eligible_verification_outcome_ids ?? []),
+        ]);
+        decisive = citedEvents.filter((event) => eligible.has(event.payload.outcome_id)
+          && evidenceIsCurrent(ticket, event)
+          && candidateDisposition(event, candidateFaultId) === 'CONFIRM');
+        if (decisive.length < 1) continue;
+      } else if (route.route_kind === 'CORROBORATED_SUPPORT') {
+        const eligible = new Set(route.eligible_outcome_ids ?? []);
+        decisive = citedEvents.filter((event) => eligible.has(event.payload.outcome_id)
+          && evidenceIsCurrent(ticket, event)
+          && candidateDisposition(event, candidateFaultId) === 'SUPPORT');
+        if (new Set(decisive.map((event) => event.payload.outcome_id)).size < route.minimum_distinct_outcomes) continue;
+      } else if (route.route_kind === 'EVIDENCE_BACKED_ELIMINATION') {
+        const supporting = new Set(route.supporting_outcome_ids ?? []);
+        decisive = citedEvents.filter((event) => supporting.has(event.payload.outcome_id)
+          && evidenceIsCurrent(ticket, event)
+          && ['SUPPORT', 'CONFIRM'].includes(candidateDisposition(event, candidateFaultId)));
+        if (decisive.length < 1) continue;
+        const eliminationRecords = route.required_eliminated_candidate_fault_ids.map((id) => latestElimination(ticket, id, player));
+        if (eliminationRecords.some((record) => !record?.eliminated
+          || record.cited_evidence_event_ids.some((id) => !citedIds.has(id)))) continue;
+        decisive.push(...eliminationRecords.flatMap((record) => record.cited_evidence_event_ids.map((id) => eventById(state, id))));
+      } else continue;
+      matching.push({
+        ...requirement,
+        matched_route: route,
+        decisive_events: [...new Map(decisive.filter(Boolean).map((event) => [event.event_id, event])).values()],
+      });
+      break;
+    }
+  }
   if (matching.length > 1) reject('CONTENT_INVALID');
   return matching[0] ?? null;
 }
@@ -730,7 +951,7 @@ function commitIsolation(context) {
     actionCost: 1,
     now,
   });
-  const requirement = matchingIsolationRequirement(ticket, payload.candidate_fault_id, citedEvents);
+  const requirement = matchingIsolationRequirement(state, ticket, payload.candidate_fault_id, citedEvents, player);
   const fault = requirement ? ticket.fault_instances[requirement.target_fault_instance_key] : null;
   const accepted = Boolean(requirement && fault?.actionable && fault.machine_status === 'ACTIVE');
 
@@ -766,14 +987,20 @@ function commitIsolation(context) {
       now,
     });
     maybeAutoEndTurn(state, now);
-    return { actionsSpent: 1, resolutionCode: 'ISOLATION_NOT_SUPPORTED' };
+    return {
+      actionsSpent: 1,
+      resolutionCode: 'ISOLATION_NOT_SUPPORTED',
+      targetSummary: `${payload.candidate_fault_id} on ${ticket.ticket_instance_id}.`,
+      resultSummary: 'Isolation was not supported; no prerequisite detail was disclosed.',
+    };
   }
 
   const decisiveIds = new Set([
     ...(requirement.eligible_outcome_ids ?? []),
     ...(requirement.eligible_verification_outcome_ids ?? []),
   ]);
-  const decisiveEvents = citedEvents.filter((event) => decisiveIds.has(event.payload.outcome_id));
+  const decisiveEvents = requirement.decisive_events
+    ?? citedEvents.filter((event) => decisiveIds.has(event.payload.outcome_id));
   const publicCitations = decisiveEvents
     .filter((event) => event.visibility === 'PUBLIC_MATCH')
     .map((event) => event.event_id);
@@ -788,6 +1015,10 @@ function commitIsolation(context) {
       classification: requirement.classification,
       cited_public_evidence_event_ids: publicCitations,
       cited_evidence_count: decisiveEvents.length,
+      ...(isDiagnosisV2(state) ? {
+        isolation_route_id: requirement.matched_route?.route_id ?? null,
+        contributing_player_ids: [...new Set(decisiveEvents.map((event) => event.actor_player_id).filter(Boolean))].sort(),
+      } : {}),
     },
     now,
   });
@@ -795,6 +1026,7 @@ function commitIsolation(context) {
   const record = {
     isolation_event_id: resultEvent.event_id,
     isolation_requirement_id: requirement.requirement_id,
+    isolation_route_id: requirement.matched_route?.route_id ?? null,
     player_id: player.player_id,
     candidate_fault_id: payload.candidate_fault_id,
     cited_evidence_event_ids: decisiveEvents.map((event) => event.event_id),
@@ -834,7 +1066,12 @@ function commitIsolation(context) {
     now,
   });
   maybeAutoEndTurn(state, now);
-  return { actionsSpent: 1, resolutionCode: 'RESOLVED' };
+  return {
+    actionsSpent: 1,
+    resolutionCode: 'RESOLVED',
+    targetSummary: `${payload.candidate_fault_id} on ${ticket.ticket_instance_id}.`,
+    resultSummary: `Isolation accepted through ${requirement.matched_route?.route_kind ?? 'legacy evidence threshold'}.`,
+  };
 }
 
 function performRepair(context) {
@@ -882,6 +1119,7 @@ function performRepair(context) {
   const beforeState = ticket.machine_state_key;
   ticket.machine_state_key = outcome.resulting_machine_state_key;
   ticket.machine_revision += 1;
+  if (isDiagnosisV2(state)) ticket.diagnosis_revision += 1;
   for (const key of outcome.resolved_fault_instance_keys) {
     if (ticket.fault_instances[key]) ticket.fault_instances[key].machine_status = 'RESOLVED';
   }
@@ -949,7 +1187,12 @@ function performRepair(context) {
     now,
   });
   maybeAutoEndTurn(state, now);
-  return { actionsSpent: cost, resolutionCode: 'RESOLVED' };
+  return {
+    actionsSpent: cost,
+    resolutionCode: 'RESOLVED',
+    targetSummary: `${gate.candidate_fault_id} on ${ticket.ticket_instance_id}.`,
+    resultSummary: outcome.public_summary,
+  };
 }
 
 function performVerify(context) {
@@ -991,6 +1234,9 @@ function performVerify(context) {
     for (const verify of ticket.verification_history) verify.is_current = false;
     ticket.current_verify_pass_event_ids = [];
   }
+  if (isDiagnosisV2(state) && ['FAIL', 'INCONCLUSIVE'].includes(outcome.result)) {
+    ticket.diagnosis_revision += 1;
+  }
   const verifyEvent = appendEvent(state, {
     eventType: 'VERIFY_RESOLVED',
     actorPlayerId: player.player_id,
@@ -1002,6 +1248,7 @@ function performVerify(context) {
       result: outcome.result,
       public_summary: outcome.public_summary,
       machine_revision: ticket.machine_revision,
+      ...(isDiagnosisV2(state) ? { diagnosis_revision: ticket.diagnosis_revision } : {}),
     },
     now,
   });
@@ -1019,6 +1266,7 @@ function performVerify(context) {
       source_definition_id: procedureId,
       candidate_effects: deepClone(outcome.candidate_effects ?? []),
       machine_revision: ticket.machine_revision,
+      ...(isDiagnosisV2(state) ? { diagnosis_revision: ticket.diagnosis_revision } : {}),
     },
     now,
   });
@@ -1033,6 +1281,7 @@ function performVerify(context) {
     requirement_id: outcome.requirement_id,
     result: outcome.result,
     machine_revision: ticket.machine_revision,
+    diagnosis_revision: ticket.diagnosis_revision,
     is_current: outcome.result === 'PASS',
     verified_at: now,
   };
@@ -1101,6 +1350,8 @@ function performVerify(context) {
   return {
     actionsSpent: cost,
     resolutionCode: 'RESOLVED',
+    targetSummary: `Verification ${procedureId} on ${ticket.ticket_instance_id}.`,
+    resultSummary: outcome.public_summary,
     openedResolutionWindow: ticket.status === 'READY_TO_CLOSE' ? 'CLOSURE' : 'NONE',
   };
 }
@@ -1118,8 +1369,12 @@ function documentLive(context) {
   if (!resultEvent || !eventVisibleToPlayer(resultEvent, player)) reject('ILLEGAL_DOCUMENT_SOURCE');
   const sourceInstance = state.card_instances[source.card_instance_id];
   const owner = sourceInstance ? playerById(state, sourceInstance.owner_player_id) : null;
-  if (!sourceInstance || !owner || sourceInstance.zone !== 'discard'
-    || !owner.discard_card_instance_ids.includes(sourceInstance.card_instance_id)) {
+  const persistentBenchSource = isDiagnosisV2(state)
+    && sourceInstance?.zone === 'diagnostic_bench'
+    && owner?.diagnostic_bench_card_instance_ids.includes(sourceInstance.card_instance_id);
+  if (!sourceInstance || !owner || (!persistentBenchSource
+    && (sourceInstance.zone !== 'discard'
+      || !owner.discard_card_instance_ids.includes(sourceInstance.card_instance_id)))) {
     reject('ILLEGAL_DOCUMENT_SOURCE');
   }
   spendActions(state, 1);
@@ -1146,7 +1401,7 @@ function documentLive(context) {
     payload: {
       source_action_event_id: payload.source_action_event_id,
       source_result_event_id: payload.source_result_event_id,
-      recovered_card_instance_id: sourceInstance.card_instance_id,
+      recovered_card_instance_id: persistentBenchSource ? null : sourceInstance.card_instance_id,
       published_result: {
         source_definition_id: resultEvent.payload.source_definition_id ?? null,
         candidate_effects: deepClone(resultEvent.payload.candidate_effects ?? []),
@@ -1177,20 +1432,22 @@ function documentLive(context) {
   ticket.worklog_entries.at(-1).source_result_event_id = publication.event_id;
   ticket.worklog_entries.at(-1).public_result_summary = 'A structured result was published to the Worklog.';
   source.documented = true;
-  moveCard(
-    state,
-    owner,
-    sourceInstance.card_instance_id,
-    'discard_card_instance_ids',
-    'hand_card_instance_ids',
-    'hand',
-  );
+  if (!persistentBenchSource) {
+    moveCard(
+      state,
+      owner,
+      sourceInstance.card_instance_id,
+      'discard_card_instance_ids',
+      'hand_card_instance_ids',
+      'hand',
+    );
+  }
   ticket.documentation_publications.push({
     publication_event_id: publication.event_id,
     source_action_event_id: payload.source_action_event_id,
     source_result_event_id: payload.source_result_event_id,
     publisher_player_id: player.player_id,
-    recovered_card_instance_id: sourceInstance.card_instance_id,
+    recovered_card_instance_id: persistentBenchSource ? null : sourceInstance.card_instance_id,
     published_at: now,
   });
   addActionRecord(state, {
@@ -1207,7 +1464,11 @@ function documentLive(context) {
   return {
     actionsSpent: 1,
     resolutionCode: 'RESOLVED',
-    recoveredCardInstanceId: sourceInstance.card_instance_id,
+    recoveredCardInstanceId: persistentBenchSource ? null : sourceInstance.card_instance_id,
+    targetSummary: `Worklog result ${payload.source_result_event_id} on ${ticket.ticket_instance_id}.`,
+    resultSummary: persistentBenchSource
+      ? 'Diagnostic Evidence was published; the persistent Bench item remained available.'
+      : 'Evidence was published and its response card was recovered.',
   };
 }
 
@@ -1596,6 +1857,136 @@ function publishClosure(context) {
   return { actionsSpent: 0, resolutionCode: 'RESOLVED' };
 }
 
+function solutionReveal(ticket) {
+  const snapshot = ticket.definition_snapshot;
+  const faultsByKey = new Map(snapshot.server_only_truth.fault_instances
+    .map((fault) => [fault.fault_instance_key, fault]));
+  const outcomeById = new Map([
+    ...snapshot.authored_evidence_outcomes,
+    ...snapshot.authored_verification_outcomes,
+  ].map((outcome) => [outcome.outcome_id, outcome]));
+  return {
+    faults: snapshot.server_only_truth.fault_instances.map((fault) => ({
+      fault_id: fault.fault_id,
+      role: fault.role,
+      actionable: fault.actionable,
+      deepest: fault.deepest,
+    })),
+    causal_links: snapshot.server_only_truth.causal_edges.map((edge) => ({
+      cause_fault_id: faultsByKey.get(edge.cause_fault_instance_key)?.fault_id ?? null,
+      effect_fault_id: faultsByKey.get(edge.effect_fault_instance_key)?.fault_id ?? null,
+    })),
+    evidence_solution: snapshot.isolation_requirements.flatMap((requirement) =>
+      (requirement.routes ?? []).map((route) => ({
+        candidate_fault_id: requirement.candidate_fault_id,
+        route_kind: route.route_kind,
+        evidence: [
+          ...(route.eligible_outcome_ids ?? []),
+          ...(route.eligible_verification_outcome_ids ?? []),
+          ...(route.supporting_outcome_ids ?? []),
+        ].map((id) => ({
+          source_definition_id: outcomeById.get(id)?.source_definition_id
+            ?? outcomeById.get(id)?.validation_procedure_id
+            ?? null,
+          summary: outcomeById.get(id)?.public_summary ?? id,
+        })),
+        eliminated_candidate_fault_ids: [...(route.required_eliminated_candidate_fault_ids ?? [])],
+      }))),
+    repair_solution: snapshot.authored_repair_outcomes
+      .filter((outcome) => outcome.necessary_for_closure)
+      .map((outcome) => ({ repair_procedure_id: outcome.repair_procedure_id, summary: outcome.public_summary })),
+    verification_solution: snapshot.authored_verification_outcomes
+      .filter((outcome) => outcome.result === 'PASS')
+      .map((outcome) => ({ validation_procedure_id: outcome.validation_procedure_id, summary: outcome.public_summary })),
+  };
+}
+
+function giveUpTicket(context) {
+  const { state, request, player, now, actionId } = context;
+  if (!isDiagnosisV2(state)) reject('UNSUPPORTED_ACTION_TYPE');
+  if (!['SOLO', 'TRAINING'].includes(state.configuration.play_context)) reject('GIVE_UP_NOT_ALLOWED');
+  if (request.payload.confirmed !== true) reject('CONFIRMATION_REQUIRED');
+  const ticket = activeTicket(state, request.payload.ticket_instance_id);
+  const reveal = solutionReveal(ticket);
+  const publicEvent = appendEvent(state, {
+    eventType: 'TICKET_GIVEN_UP',
+    actorPlayerId: player.player_id,
+    ticketInstanceId: ticket.ticket_instance_id,
+    actionId,
+    payload: {
+      removed_from_active_queue: true,
+      pending_contributions_voided: state.contribution_ledger.filter((entry) =>
+        entry.ticket_instance_id === ticket.ticket_instance_id && entry.settlement_status === 'PENDING').length,
+    },
+    now,
+  });
+  for (const contribution of state.contribution_ledger.filter((entry) =>
+    entry.ticket_instance_id === ticket.ticket_instance_id && entry.settlement_status === 'PENDING')) {
+    contribution.settlement_status = 'VOID_GIVE_UP';
+  }
+  const revealEvent = appendEvent(state, {
+    eventType: 'TICKET_SOLUTION_REVEALED',
+    actorPlayerId: player.player_id,
+    ticketInstanceId: ticket.ticket_instance_id,
+    actionId,
+    visibility: 'PRIVATE_PLAYER',
+    visibleToPlayerIds: [player.player_id],
+    payload: { solution_reveal: reveal },
+    now,
+  });
+  for (const entry of ticket.worklog_entries) entry.locked = true;
+  ticket.status = 'ABANDONED';
+  ticket.abandonment = {
+    give_up_event_id: publicEvent.event_id,
+    reveal_event_id: revealEvent.event_id,
+    player_id: player.player_id,
+    solution_reveal: reveal,
+    abandoned_at: now,
+  };
+  state.active_ticket_ids = state.active_ticket_ids.filter((id) => id !== ticket.ticket_instance_id);
+  state.archived_ticket_ids.push(ticket.ticket_instance_id);
+  state.archived_tickets[ticket.ticket_instance_id] = ticket;
+  delete state.tickets[ticket.ticket_instance_id];
+  state.give_up_statistics.push({
+    give_up_event_id: publicEvent.event_id,
+    ticket_instance_id: ticket.ticket_instance_id,
+    player_id: player.player_id,
+    abandoned_at: now,
+  });
+  const queue = reconcileQueue(state, now, actionId);
+  const terminalResult = evaluateTermination(state, now, queue.exhausted ? ['ADMIN_INVALIDATION'] : []);
+  appendEvent(state, {
+    eventType: 'TERMINAL_EVALUATED',
+    ticketInstanceId: ticket.ticket_instance_id,
+    actionId,
+    payload: {
+      terminal: terminalResult !== null,
+      reason_codes: terminalResult?.reason_codes ?? [],
+      evaluated_after_complete_transaction: true,
+    },
+    now,
+  });
+  if (terminalResult) {
+    state.result = terminalResult;
+    state.status = terminalResult.valid ? 'COMPLETED' : 'INVALIDATED';
+  }
+  addActionRecord(state, {
+    actionId,
+    request,
+    actorPlayerId: player.player_id,
+    ticketInstanceId: ticket.ticket_instance_id,
+    sourceResultEventId: revealEvent.event_id,
+    now,
+  });
+  endTurn(state, 'TICKET_GIVEN_UP', now);
+  return {
+    actionsSpent: 0,
+    resolutionCode: 'RESOLVED',
+    targetSummary: `Give up ${ticket.ticket_instance_id}.`,
+    resultSummary: 'Ticket abandoned and its complete solution revealed. Pending contributions were voided.',
+  };
+}
+
 function passTurn(context) {
   const { state, request, player, now, actionId } = context;
   addActionRecord(state, {
@@ -1611,6 +2002,7 @@ function passTurn(context) {
 function dispatch(context) {
   switch (context.request.action_type) {
     case 'RUN_TEST': return resolveDiagnostic(context);
+    case 'SET_ELIMINATION': return setElimination(context);
     case 'REVISE_HYPOTHESIS': return reviseHypothesis(context);
     case 'COMMIT_ISOLATION': return commitIsolation(context);
     case 'PERFORM_REPAIR': return performRepair(context);
@@ -1620,6 +2012,7 @@ function dispatch(context) {
     case 'SEARCH': return searchDeck(context);
     case 'REFRESH': return refreshDeck(context);
     case 'PASS_TURN': return passTurn(context);
+    case 'GIVE_UP_TICKET': return giveUpTicket(context);
     default: reject('UNSUPPORTED_ACTION_TYPE');
   }
 }
@@ -1691,6 +2084,8 @@ export function submitIntent({ state, request, authenticatedPlayerId, catalogs, 
     recovered_card_instance_id: outcome.recoveredCardInstanceId ?? null,
     opened_resolution_window: outcome.openedResolutionWindow ?? 'NONE',
     resolution_code: outcome.resolutionCode ?? 'RESOLVED',
+    target_summary: outcome.targetSummary ?? `${request.action_type} accepted.`,
+    result_summary: outcome.resultSummary ?? `${request.action_type} resolved and its authoritative result was recorded.`,
   });
   next.processed_requests[request.request_id] = {
     fingerprint,

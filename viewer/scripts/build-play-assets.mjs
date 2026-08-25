@@ -24,6 +24,7 @@ const GAMEPLAY_FILES = Object.freeze([
   'decks.json',
   'domain-snapshot.json',
   'ticket-templates.json',
+  'diagnosis-v2-migration.json',
 ]);
 
 const STATIC_ASSET_EXTENSIONS = new Set([
@@ -172,7 +173,7 @@ export async function createExpectedPlayManifest() {
   }
   return {
     format_version: 1,
-    profile_id: 'solo-pages-v1',
+    profile_id: 'solo-pages-v2',
     hash_algorithm: 'sha256',
     files,
   };

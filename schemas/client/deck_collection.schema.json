@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.local/client/deck_collection.schema.json",
-  "title": "Solo Pages Deck Collection v1",
+  "title": "Solo Pages Response Deck Collection v2",
   "description": "Saved local deck definitions. Draft editing state is deliberately not persisted here.",
   "type": "object",
   "additionalProperties": false,
@@ -49,13 +49,13 @@
   },
   "properties": {
     "schema_version": {
-      "const": "solo-decks-v1"
+      "const": "solo-decks-v2"
     },
     "ruleset_version": {
-      "const": "first-version-v1"
+      "const": "first-version-v2"
     },
     "card_catalog_version": {
-      "const": "core-card-catalog-v1"
+      "const": "core-card-catalog-diagnosis-v2"
     },
     "active_deck_id": {
       "type": [

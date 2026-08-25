@@ -4,10 +4,13 @@ import {
   submitIntent,
 } from '../../generated/play/src/engine/index.mjs';
 import {
-  buildTickets,
-  TICKET_BUILDER_CONFIGURATION_VERSION,
-  TICKET_BUILDER_VERSION,
-} from '../../generated/play/src/builder/ticket-builder.mjs';
+  buildTicketsV2,
+  createDiagnosisV2Catalogs,
+  DIAGNOSIS_V2_BUILDER_VERSION,
+  DIAGNOSIS_V2_CARD_CATALOG_VERSION,
+  DIAGNOSIS_V2_CONFIGURATION_VERSION,
+  DIAGNOSIS_V2_TICKET_CONTENT_VERSION,
+} from '../../generated/play/src/builder/diagnosis-v2.mjs';
 
 const PLAYER_ID = 'player.solo';
 const TEAM_ID = 'team.cooperative';
@@ -31,23 +34,15 @@ async function loadJson(name) {
 
 async function loadCatalogs() {
   if (catalogs) return catalogs;
-  const [cards, decks, domain, ticketContent] = await Promise.all([
+  const [cards, decks, domain, ticketContent, migration] = await Promise.all([
     loadJson('card-catalog.json'),
     loadJson('decks.json'),
     loadJson('domain-snapshot.json'),
     loadJson('ticket-templates.json'),
+    loadJson('diagnosis-v2-migration.json'),
   ]);
-  catalogs = {
-    cards,
-    decks,
-    domain,
-    ticketContent,
-    engineCatalogs: {
-      cards,
-      decks,
-      content_version: domain.domain_content_version,
-    },
-  };
+  if (migration.successor_ruleset_version !== 'first-version-v2') throw new Error('Diagnosis migration version is incompatible.');
+  catalogs = createDiagnosisV2Catalogs({ cards, decks, domain, ticketContent });
   return catalogs;
 }
 
@@ -59,14 +54,14 @@ function builderConfiguration(ticketCount, seed, legalCardDefinitionIds) {
   return {
     id: `builder_config.solo_pages.${ticketCount}`,
     entity_type: 'ticket_builder_configuration',
-    configuration_version: TICKET_BUILDER_CONFIGURATION_VERSION,
+    configuration_version: DIAGNOSIS_V2_CONFIGURATION_VERSION,
     scenario_or_mode_context: 'TRAINING',
     requested_ticket_count: ticketCount,
     seed,
-    generator_version: TICKET_BUILDER_VERSION,
-    content_version: 'core-ticket-templates-v1',
+    generator_version: DIAGNOSIS_V2_BUILDER_VERSION,
+    content_version: DIAGNOSIS_V2_TICKET_CONTENT_VERSION,
     domain_content_version: 'core-domain-snapshot-v1',
-    card_catalog_version: 'core-card-catalog-v1',
+    card_catalog_version: DIAGNOSIS_V2_CARD_CATALOG_VERSION,
     allowed_domain_ids: [],
     excluded_domain_ids: [],
     allowed_tags: [],
@@ -81,7 +76,7 @@ function builderConfiguration(ticketCount, seed, legalCardDefinitionIds) {
     outbound_branching_bounds: bounds(0, 2),
     progressive_difficulty_profile: {
       profile_id: 'progressive.solo_pages.foundation',
-      profile_version: 'solo-pages-v1',
+      profile_version: 'solo-pages-v2',
       explicit_ceiling: 4,
       bands: [{
         start_generated_index: 0,
@@ -130,7 +125,8 @@ function safeTicketPresentations(authoritativeState) {
 function safeIntentMetadata(intent, index, view) {
   const payload = intent.payload;
   const held = payload.card_instance_id
-    ? view.hand.find((card) => card.card_instance_id === payload.card_instance_id)
+    ? [...view.hand, ...(view.diagnostic_bench ?? [])]
+      .find((card) => card.card_instance_id === payload.card_instance_id)
     : null;
   return {
     intent_id: `intent.${view.revision}.${String(index + 1).padStart(4, '0')}`,
@@ -207,7 +203,7 @@ function terminalSummary() {
   const invalidOrCapped = !result.valid || reasonCodes.some((code) => ['SIMULATION_CAP', 'ADMIN_INVALIDATION'].includes(code));
 
   return {
-    summary_version: 'solo-result-summary-v1',
+    summary_version: 'solo-result-summary-v2',
     result_id: `result.${state.match_id}`,
     match_id: state.match_id,
     valid: result.valid,
@@ -237,6 +233,8 @@ function terminalSummary() {
     elapsed_seconds: elapsedSeconds,
     search_uses: actionRecords.filter((record) => record.action_type === 'SEARCH').length,
     refresh_uses: actionRecords.filter((record) => record.action_type === 'REFRESH').length,
+    eliminations_recorded: actionRecords.filter((record) => record.action_type === 'SET_ELIMINATION').length,
+    tickets_given_up: (state.give_up_statistics ?? []).length,
   };
 }
 
@@ -245,11 +243,9 @@ async function startMatch(payload) {
   assertStartPayload(payload);
   const loaded = await loadCatalogs();
   const configuration = builderConfiguration(payload.ticket_count, payload.seed, payload.card_definition_ids);
-  const builderResult = buildTickets({
+  const builderResult = buildTicketsV2({
     configuration,
-    ticketContent: loaded.ticketContent,
-    domainCatalog: loaded.domain,
-    cardCatalog: loaded.cards,
+    catalogs: loaded,
   });
   const attempt = selectedAttempt(builderResult);
   if (!attempt || builderResult.status !== 'SUCCESS' || attempt.ticket_snapshots.length !== payload.ticket_count) {
@@ -284,7 +280,9 @@ async function startMatch(payload) {
       max_refresh_tokens: 1,
       turn_cap: null,
       closure_cap: null,
+      play_context: 'SOLO',
     },
+    rulesetVersion: loaded.rulesetVersion,
     seed: payload.seed,
     now,
     ticketSource: {

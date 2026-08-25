@@ -1,0 +1,16 @@
+{
+  "request_id": "req_set_elimination",
+  "match_id": "match_demo_diagnosis_v2",
+  "player_id": "player_a",
+  "expected_revision": 7,
+  "action_type": "SET_ELIMINATION",
+  "payload": {
+    "ticket_instance_id": "ticketinst_diagnosis_v2_1",
+    "candidate_fault_id": "fault.storage.raid.controller_failed",
+    "cited_evidence_event_ids": [
+      "evt_rule_out_controller"
+    ],
+    "eliminated": true
+  },
+  "client_nonce": "nonce_set_elimination"
+}

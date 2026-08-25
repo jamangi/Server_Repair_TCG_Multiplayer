@@ -2877,6 +2877,155 @@ dialog.settings-dialog::backdrop {
   backdrop-filter: blur(8px);
 }
 
+/* TASK-013 Diagnostic Bench ------------------------------------------- */
+.play-app .diagnostic-bench {
+  margin-block: 1rem;
+  padding: 1rem;
+  border: 1px solid color-mix(in srgb, var(--play-test) 38%, transparent);
+  border-radius: 18px;
+  background: linear-gradient(145deg, color-mix(in srgb, var(--play-graphite-850) 94%, #173043), color-mix(in srgb, var(--play-graphite-850) 98%, #080d13));
+  box-shadow: 0 16px 38px rgb(0 0 0 / 24%);
+}
+
+.play-app .diagnostic-bench__heading,
+.play-app .diagnostic-bench__controls,
+.play-app .bench-view-switch,
+.play-app .bench-pagination {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  flex-wrap: wrap;
+}
+
+.play-app .diagnostic-bench__heading { justify-content: space-between; }
+.play-app .diagnostic-bench__heading h2 { margin: 0; }
+.play-app .diagnostic-bench__heading p { margin-block: .2rem; }
+
+.play-app .bench-view-switch {
+  padding: .25rem;
+  border: 1px solid var(--play-line);
+  border-radius: 999px;
+  background: rgb(0 0 0 / 22%);
+}
+
+.play-app .bench-view-switch button,
+.play-app .bench-pagination button {
+  min-height: 42px;
+  padding: .55rem .9rem;
+  border: 0;
+  border-radius: 999px;
+  color: var(--play-vellum-100);
+  background: transparent;
+  cursor: pointer;
+}
+
+.play-app .bench-view-switch button[aria-pressed="true"] {
+  color: #071017;
+  background: var(--play-test);
+  font-weight: 800;
+}
+
+.play-app .diagnostic-disclaimer {
+  margin-block: .65rem;
+  color: var(--play-muted);
+  font-size: .86rem;
+}
+
+.play-app .diagnostic-bench__controls {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(120px, 1fr));
+  margin-block: .75rem;
+}
+
+.play-app .diagnostic-bench__controls label {
+  display: grid;
+  gap: .25rem;
+  color: var(--play-muted);
+  font-size: .78rem;
+  font-weight: 700;
+}
+
+.play-app .diagnostic-bench__controls :is(input, select) {
+  min-height: 42px;
+  min-width: 0;
+}
+
+.play-app .diagnostic-bench__controls .switch-row {
+  display: flex;
+  align-items: center;
+  align-self: end;
+  min-height: 42px;
+}
+
+.play-app .diagnostic-bench__controls .switch-row input { min-height: auto; }
+.play-app .diagnostic-bench__count { margin-block: .5rem; color: var(--play-muted); font-size: .82rem; }
+
+.play-app .diagnostic-shelf {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .65rem;
+}
+
+.play-app .diagnostic-tile {
+  border: 1px solid var(--play-line);
+  border-radius: 13px;
+  overflow: clip;
+  background: rgb(3 9 14 / 56%);
+}
+
+.play-app .diagnostic-tile.is-selected { border-color: var(--play-test); box-shadow: 0 0 0 2px color-mix(in srgb, var(--play-test) 24%, transparent); }
+.play-app .diagnostic-tile[data-relevant="true"] { background: linear-gradient(145deg, rgb(11 38 48 / 80%), rgb(3 9 14 / 66%)); }
+
+.play-app .diagnostic-tile > button {
+  display: grid;
+  gap: .28rem;
+  width: 100%;
+  min-height: 104px;
+  padding: .7rem;
+  border: 0;
+  color: var(--play-vellum-100);
+  text-align: left;
+  background: transparent;
+  cursor: pointer;
+}
+
+.play-app .diagnostic-tile > button span,
+.play-app .diagnostic-tile > button small { color: var(--play-muted); }
+.play-app .diagnostic-tile details { padding: .45rem .7rem .65rem; border-top: 1px solid var(--play-line); font-size: .78rem; }
+.play-app .diagnostic-tile details p { margin: .4rem 0 0; color: var(--play-muted); }
+.play-app .bench-pagination { justify-content: center; margin-top: .75rem; }
+.play-app .candidate-row.is-eliminated { opacity: .72; }
+.play-app .candidate-row.is-eliminated > div:first-child > span { text-decoration: line-through; }
+.play-app .candidate-row small { display: block; color: var(--play-muted); }
+.play-app .basic-action--give-up { border-color: color-mix(in srgb, var(--play-danger) 70%, var(--play-line)); color: var(--play-danger); }
+.play-app .closure-chip--abandoned { border-color: color-mix(in srgb, var(--play-warning) 65%, var(--play-line)); }
+
+.play-app .solution-reveal {
+  margin-block: 1rem;
+  padding: .9rem;
+  border: 1px solid color-mix(in srgb, var(--play-warning) 55%, var(--play-line));
+  border-radius: 15px;
+  background: color-mix(in srgb, var(--play-warning) 7%, var(--play-graphite-850));
+}
+
+.play-app .solution-reveal > summary { cursor: pointer; font-weight: 850; }
+.play-app .solution-reveal__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .7rem; margin-top: .8rem; }
+.play-app .solution-reveal__grid section { padding: .7rem; border: 1px solid var(--play-line); border-radius: 11px; }
+.play-app .solution-reveal__grid h3 { margin-top: 0; }
+.play-app .solution-reveal__grid li span { display: block; margin-top: .2rem; color: var(--play-muted); }
+
+@media (max-width: 900px) {
+  .play-app .diagnostic-shelf { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .play-app .diagnostic-bench__controls { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 560px) {
+  .play-app .diagnostic-shelf,
+  .play-app .diagnostic-bench__controls,
+  .play-app .solution-reveal__grid { grid-template-columns: 1fr; }
+  .play-app .diagnostic-bench__heading { align-items: flex-start; }
+}
+
 .play-app .game-header {
   display: grid;
   grid-template-columns: minmax(15rem, 1fr) minmax(30rem, auto);

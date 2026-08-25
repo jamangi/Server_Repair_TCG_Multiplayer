@@ -1,0 +1,360 @@
+[
+  {
+    "builder_diagnostic_codes": [],
+    "classification": "SUCCEEDED",
+    "concessions": 0,
+    "contribution_counts": [
+      {
+        "assists": 0,
+        "closures": 1,
+        "documentation": 0,
+        "failed_verifies": 0,
+        "isolations": 2,
+        "player_id": "player_a",
+        "redundant_or_superseded_actions": 0,
+        "rejected_isolations": 1,
+        "repairs": 1,
+        "team_id": "team.cooperative",
+        "tests": 5,
+        "verifies": 1
+      }
+    ],
+    "determinism": {
+      "identical": true,
+      "mismatch_fields": []
+    },
+    "disconnects": 0,
+    "elapsed_virtual_time_seconds": 50,
+    "match_id": "task-013-diagnosis-v2.diagnosis-v2-fixed-direct-solo.seed-13001",
+    "no_legal_progress_move": false,
+    "outcome": {
+      "match_status": "COMPLETED",
+      "reason_codes": [
+        "QUEUE_EMPTY"
+      ],
+      "valid": true,
+      "winner_player_ids": [],
+      "winning_team_ids": [
+        "team.cooperative"
+      ]
+    },
+    "player_service_points": [
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "starting": 0
+      }
+    ],
+    "rejected_intent_codes": [],
+    "rejected_intents": 0,
+    "replay_digest": "a8e8534b3be681d191564afabb06fda716dc8511aaeb9658dc840b798b9a496f",
+    "rounds": 4,
+    "scores": {
+      "players": {
+        "player_a": 0
+      },
+      "teams": {
+        "team.cooperative": 2
+      }
+    },
+    "seed": "13001",
+    "setting_group_id": "diagnosis-v2-fixed-direct-solo",
+    "stall_classification": "NONE",
+    "started": true,
+    "team_service_points": [
+      {
+        "final": 2,
+        "net": 2,
+        "starting": 0,
+        "team_id": "team.cooperative"
+      }
+    ],
+    "terminal_reason_codes": [
+      "QUEUE_EMPTY"
+    ],
+    "ticket_snapshot_digest": "501748cd4e4bba4e3b1881b65d99a3e57cb87803b391657af3cd786a5084f22c",
+    "tickets_closed": 1,
+    "tickets_quarantined": 0,
+    "turns": 4
+  },
+  {
+    "builder_diagnostic_codes": [],
+    "classification": "SUCCEEDED",
+    "concessions": 0,
+    "contribution_counts": [
+      {
+        "assists": 0,
+        "closures": 1,
+        "documentation": 0,
+        "failed_verifies": 0,
+        "isolations": 2,
+        "player_id": "player_a",
+        "redundant_or_superseded_actions": 0,
+        "rejected_isolations": 1,
+        "repairs": 1,
+        "team_id": "team.cooperative",
+        "tests": 5,
+        "verifies": 1
+      }
+    ],
+    "determinism": {
+      "identical": true,
+      "mismatch_fields": []
+    },
+    "disconnects": 0,
+    "elapsed_virtual_time_seconds": 50,
+    "match_id": "task-013-diagnosis-v2.diagnosis-v2-fixed-direct-solo.seed-13002",
+    "no_legal_progress_move": false,
+    "outcome": {
+      "match_status": "COMPLETED",
+      "reason_codes": [
+        "QUEUE_EMPTY"
+      ],
+      "valid": true,
+      "winner_player_ids": [],
+      "winning_team_ids": [
+        "team.cooperative"
+      ]
+    },
+    "player_service_points": [
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "starting": 0
+      }
+    ],
+    "rejected_intent_codes": [],
+    "rejected_intents": 0,
+    "replay_digest": "08577d46728112a183292d084edf6c3809d3caaf585823a792aeee2e5b9b68b3",
+    "rounds": 4,
+    "scores": {
+      "players": {
+        "player_a": 0
+      },
+      "teams": {
+        "team.cooperative": 2
+      }
+    },
+    "seed": "13002",
+    "setting_group_id": "diagnosis-v2-fixed-direct-solo",
+    "stall_classification": "NONE",
+    "started": true,
+    "team_service_points": [
+      {
+        "final": 2,
+        "net": 2,
+        "starting": 0,
+        "team_id": "team.cooperative"
+      }
+    ],
+    "terminal_reason_codes": [
+      "QUEUE_EMPTY"
+    ],
+    "ticket_snapshot_digest": "501748cd4e4bba4e3b1881b65d99a3e57cb87803b391657af3cd786a5084f22c",
+    "tickets_closed": 1,
+    "tickets_quarantined": 0,
+    "turns": 4
+  },
+  {
+    "builder_diagnostic_codes": [],
+    "classification": "SUCCEEDED",
+    "concessions": 0,
+    "contribution_counts": [
+      {
+        "assists": 0,
+        "closures": 0,
+        "documentation": 0,
+        "failed_verifies": 0,
+        "isolations": 0,
+        "player_id": "player_a",
+        "redundant_or_superseded_actions": 0,
+        "rejected_isolations": 0,
+        "repairs": 1,
+        "team_id": "team.cooperative",
+        "tests": 1,
+        "verifies": 0
+      },
+      {
+        "assists": 0,
+        "closures": 1,
+        "documentation": 0,
+        "failed_verifies": 0,
+        "isolations": 1,
+        "player_id": "player_b",
+        "redundant_or_superseded_actions": 0,
+        "rejected_isolations": 0,
+        "repairs": 0,
+        "team_id": "team.cooperative",
+        "tests": 1,
+        "verifies": 1
+      }
+    ],
+    "determinism": {
+      "identical": true,
+      "mismatch_fields": []
+    },
+    "disconnects": 0,
+    "elapsed_virtual_time_seconds": 30,
+    "match_id": "task-013-diagnosis-v2.diagnosis-v2-generated-recovery-team.seed-13101",
+    "no_legal_progress_move": false,
+    "outcome": {
+      "match_status": "COMPLETED",
+      "reason_codes": [
+        "QUEUE_EMPTY"
+      ],
+      "valid": true,
+      "winner_player_ids": [],
+      "winning_team_ids": [
+        "team.cooperative"
+      ]
+    },
+    "player_service_points": [
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_b",
+        "starting": 0
+      }
+    ],
+    "rejected_intent_codes": [],
+    "rejected_intents": 0,
+    "replay_digest": "28084b23221551ef8dc0a44d0f73542cc32b5ecb1eb59682a5afcaf7622c13a8",
+    "rounds": 2,
+    "scores": {
+      "players": {
+        "player_a": 0,
+        "player_b": 0
+      },
+      "teams": {
+        "team.cooperative": 2
+      }
+    },
+    "seed": "13101",
+    "setting_group_id": "diagnosis-v2-generated-recovery-team",
+    "stall_classification": "NONE",
+    "started": true,
+    "team_service_points": [
+      {
+        "final": 2,
+        "net": 2,
+        "starting": 0,
+        "team_id": "team.cooperative"
+      }
+    ],
+    "terminal_reason_codes": [
+      "QUEUE_EMPTY"
+    ],
+    "ticket_snapshot_digest": "eb369de45564d7de946485f2366005335479889297e1b7668e39ffae78112e4b",
+    "tickets_closed": 1,
+    "tickets_quarantined": 0,
+    "turns": 3
+  },
+  {
+    "builder_diagnostic_codes": [],
+    "classification": "SUCCEEDED",
+    "concessions": 0,
+    "contribution_counts": [
+      {
+        "assists": 0,
+        "closures": 0,
+        "documentation": 3,
+        "failed_verifies": 0,
+        "isolations": 0,
+        "player_id": "player_a",
+        "redundant_or_superseded_actions": 0,
+        "rejected_isolations": 0,
+        "repairs": 2,
+        "team_id": "team.cooperative",
+        "tests": 1,
+        "verifies": 0
+      },
+      {
+        "assists": 0,
+        "closures": 1,
+        "documentation": 2,
+        "failed_verifies": 1,
+        "isolations": 2,
+        "player_id": "player_b",
+        "redundant_or_superseded_actions": 0,
+        "rejected_isolations": 0,
+        "repairs": 0,
+        "team_id": "team.cooperative",
+        "tests": 1,
+        "verifies": 2
+      }
+    ],
+    "determinism": {
+      "identical": true,
+      "mismatch_fields": []
+    },
+    "disconnects": 0,
+    "elapsed_virtual_time_seconds": 70,
+    "match_id": "task-013-diagnosis-v2.diagnosis-v2-generated-recovery-team.seed-13102",
+    "no_legal_progress_move": false,
+    "outcome": {
+      "match_status": "COMPLETED",
+      "reason_codes": [
+        "QUEUE_EMPTY"
+      ],
+      "valid": true,
+      "winner_player_ids": [],
+      "winning_team_ids": [
+        "team.cooperative"
+      ]
+    },
+    "player_service_points": [
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_b",
+        "starting": 0
+      }
+    ],
+    "rejected_intent_codes": [],
+    "rejected_intents": 0,
+    "replay_digest": "87a6033f4af0a88a823baf79c66df9e26f6f9e87bc7a4da61c72f3e400e06f6c",
+    "rounds": 4,
+    "scores": {
+      "players": {
+        "player_a": 0,
+        "player_b": 0
+      },
+      "teams": {
+        "team.cooperative": 4
+      }
+    },
+    "seed": "13102",
+    "setting_group_id": "diagnosis-v2-generated-recovery-team",
+    "stall_classification": "NONE",
+    "started": true,
+    "team_service_points": [
+      {
+        "final": 4,
+        "net": 4,
+        "starting": 0,
+        "team_id": "team.cooperative"
+      }
+    ],
+    "terminal_reason_codes": [
+      "QUEUE_EMPTY"
+    ],
+    "ticket_snapshot_digest": "0353754534345e748c2f5eba4043082c86fb52be0da7312d457fe77691732fb7",
+    "tickets_closed": 1,
+    "tickets_quarantined": 0,
+    "turns": 7
+  }
+]

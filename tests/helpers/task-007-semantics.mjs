@@ -70,13 +70,33 @@ export function validateAuthoredTicket(ticket) {
     if (!candidates.has(requirement.candidate_fault_id)) {
       errors.push(`${requirement.requirement_id}: Isolation candidate is not public`);
     }
-    for (const outcomeId of requirement.eligible_outcome_ids) {
+    const routeOutcomeIds = (requirement.routes ?? []).flatMap((route) => [
+      ...(route.eligible_outcome_ids ?? []),
+      ...(route.supporting_outcome_ids ?? []),
+    ]);
+    for (const outcomeId of [...(requirement.eligible_outcome_ids ?? []), ...routeOutcomeIds]) {
       const outcome = outcomes.get(outcomeId);
       if (!outcome) {
         errors.push(`${requirement.requirement_id}: unknown authored outcome ${outcomeId}`);
       } else if (!outcome.candidate_effects.some((effect) =>
         effect.candidate_fault_id === requirement.candidate_fault_id)) {
         errors.push(`${requirement.requirement_id}: outcome ${outcomeId} does not address its candidate`);
+      }
+    }
+    for (const route of requirement.routes ?? []) {
+      if (route.candidate_fault_id !== requirement.candidate_fault_id
+          || route.target_fault_instance_key !== requirement.target_fault_instance_key) {
+        errors.push(`${route.route_id}: route target differs from its Isolation requirement`);
+      }
+      for (const candidateId of route.required_eliminated_candidate_fault_ids ?? []) {
+        if (!candidates.has(candidateId)) errors.push(`${route.route_id}: eliminates undeclared candidate ${candidateId}`);
+      }
+      for (const outcomeId of route.eligible_verification_outcome_ids ?? []) {
+        const outcome = ticket.authored_verification_outcomes.find((entry) => entry.outcome_id === outcomeId);
+        if (!outcome) errors.push(`${route.route_id}: unknown authored Verify outcome ${outcomeId}`);
+        else if (!outcome.candidate_effects.some((effect) => effect.candidate_fault_id === requirement.candidate_fault_id)) {
+          errors.push(`${route.route_id}: Verify outcome ${outcomeId} does not address its candidate`);
+        }
       }
     }
   }

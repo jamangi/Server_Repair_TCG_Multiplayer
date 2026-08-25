@@ -86,6 +86,7 @@
           },
           "visibility": { "type": "string", "enum": ["PRIVATE_PLAYER", "TEAM"] },
           "machine_revision": { "type": "integer", "minimum": 0 },
+          "diagnosis_revision": { "type": "integer", "minimum": 0 },
           "captured_at": { "$ref": "#/$defs/timestamp" },
           "documented_by_publication_event_id": {
             "type": ["string", "null"],
@@ -106,6 +107,22 @@
           "captured_at",
           "documented_by_publication_event_id"
         ]
+      }
+    },
+    "elimination_records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "elimination_event_id": { "$ref": "#/$defs/instanceId" },
+          "candidate_fault_id": { "$ref": "#/$defs/entityRef" },
+          "eliminated": { "type": "boolean" },
+          "cited_evidence_event_ids": { "type": "array", "items": { "$ref": "#/$defs/instanceId" }, "uniqueItems": true },
+          "diagnosis_revision": { "type": "integer", "minimum": 0 },
+          "supersedes_elimination_event_id": { "type": ["string", "null"], "minLength": 1 }
+        },
+        "required": ["elimination_event_id", "candidate_fault_id", "eliminated", "cited_evidence_event_ids", "diagnosis_revision", "supersedes_elimination_event_id"]
       }
     },
     "last_updated_revision": { "type": "integer", "minimum": 0 }

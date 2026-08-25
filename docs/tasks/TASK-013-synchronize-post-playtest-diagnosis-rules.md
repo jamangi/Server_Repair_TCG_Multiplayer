@@ -2,7 +2,7 @@
 
 ## Status
 
-**Approved — queued after TASK-012.** PT-001 D, PT-002 A, PT-003 D, PT-004 A, and PT-005 A were approved by the project owner on 2026-08-24. TASK-012 must stabilize the browser interaction surface before this cross-cutting migration begins.
+**Completed — 2026-08-24.** PT-001 D, PT-002 A, PT-003 D, PT-004 A, and PT-005 A were approved by the project owner on 2026-08-24 and are synchronized under `first-version-v2`. `first-version-v1` artifacts remain pinned and reproducible.
 
 ## Approved authority
 
@@ -164,3 +164,37 @@ Do not add broad new Ticket/Card content, tutorial presentation, illustrations, 
 ## Completion boundary
 
 Complete only when all approved PT-001 through PT-005 decisions have one versioned normative interpretation; rules, schemas, engine, Builder proof, projections, policies, examples, migration behavior, solo adapter, and tests agree; old pinned artifacts remain reproducible; the corresponding Unfrozen pressures are removed; and no content/tutorial task must guess what the new diagnosis loop means.
+
+## Completion record — 2026-08-24
+
+### Outcome
+
+- Added the explicit `first-version-v2` successor contract. Six persistent diagnostics occupy a Worker-owned `diagnostic_bench` rather than the 30-card response deck; Relevant and Global are local views over identical legal intents. Relevance and player-safe explanations derive only from public graph context, and the functional board includes the approved filters, search, sort, pagination, selection, costs, disclaimer, keyboard/touch behavior, and preferred-view persistence.
+- The Builder now deterministically derives two to five publicly plausible Candidates, retains hidden actionable Faults, requires differentiable distractors, completes exactly one typed diagnostic outcome per source and reachable machine state, and fails complete-or-none with structured diagnostics. Generated template provenance receives the same v2 disposition migration as fixed Tickets.
+- Replaced flat Isolation counting in v2 with typed direct-observation, definitive-diagnostic, corroborated-support, Evidence-backed-elimination, and recovery-derived routes. Candidate-specific `CONFIRM`, team-visible contributor attribution, reversible/stage-bound `RULE_OUT`, generic unsupported responses, stale-revision handling, and the accepted-Isolation Repair gate are engine-authoritative and schema-valid.
+- Every accepted diagnostic creates player-visible Evidence, including clean, irrelevant, and no-effect results. Accepted resource-spending results carry authoritative target, payment/disposition, and outcome summaries; cross-Ticket diagnostic and Repair results remain reachable after rerender.
+- Added solo/training `GIVE_UP_TICKET`: confirmation atomically abandons and archives one Ticket, voids pending contributions, records exactly-once statistics, privately reveals the complete solution, prevents resumed play on revealed truth, reconciles the queue, and never records a solo win. Competitive/public views receive neither the intent nor the reveal.
+- Published the v2 solo/profile contract and migration note. `solo-pages-v1` storage and TASK-009 replay artifacts coexist unchanged; v2 uses a distinct storage key, response deck, schemas, statistics, campaign, staged assets, and actionable compatibility notice rather than implicit migration.
+
+### Verification
+
+| Command | Exit | Result |
+| --- | ---: | --- |
+| `node --check viewer/js/app.js`; `node --check viewer/js/data-loader.js`; `node --check viewer/js/entity-types.js` | 0 | baseline Viewer syntax passed |
+| `node --test tests/viewer-baseline.test.mjs` | 0 | 3 passed, 0 failed |
+| `node --check` on the changed Builder, engine, simulation, Worker, session, and Play page modules | 0 | successor modules passed syntax checks |
+| `node --test --test-reporter=spec tests/*.test.mjs` | 0 | 110 passed, 0 failed, 0 skipped |
+| `node --test tests/task-007-schema-contracts.test.mjs` | 0 | 21 schema, example, semantic, and reference checks passed |
+| `node viewer/scripts/build-play-assets.mjs`; `node viewer/scripts/verify-play-assets.mjs` | 0 | 34 deterministic Play assets staged and verified |
+| `node tools/run-automated-games.mjs --verify-report automated_games/task-009-foundation-v1` | 0 | 22 legacy rows verified; 12 successes, 10 retained exceptions, 0 deterministic mismatches |
+| `node --test tests/task-013-automated-campaign.test.mjs` | 0 | 4/4 v2 campaign runs succeeded and reproduced; 0 exceptions, rejections, or deterministic mismatches |
+| `.\\node_modules\\.bin\\playwright.CMD test tests/browser/task-010-solo.spec.mjs tests/browser/task-012-continuity.spec.mjs tests/browser/task-013-diagnostic-bench.spec.mjs` | 0 | 20 passed, 0 failed, 28 intentional project skips across desktop, tablet, mobile, and reduced-motion projects |
+| `git diff --check` | 0 | no whitespace errors |
+
+### Changed-file inventory
+
+Changes stay within the task allowlist: versioned decision/profile/migration and schema notes; domain, runtime, and client schemas/examples; the focused gameplay migration fixture; Builder, engine, projection, policy, and simulation modules; the four-file TASK-013 automated campaign; canonical and generated Play modules/assets; the functional Bench/profile/settings surfaces; browser and Node regression suites; this completion record; and `docs/tasks/INDEX.md`.
+
+### Unresolved items
+
+None. TASK-014 may now expand content against one settled diagnosis contract. TASK-015 and TASK-016 retain their own approved presentation/tutorial scope; no PT-006 or PT-007 work was started here.

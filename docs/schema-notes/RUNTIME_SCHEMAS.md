@@ -10,23 +10,25 @@ The runtime schemas describe durable match-state shapes, player-safe projections
 DIAGNOSIS --accepted Isolation--> REPAIR_READY -> AWAITING_VERIFY -> READY_TO_CLOSE -> CLOSED
     ^                                                     |
     `----------- RETURNED_TO_DIAGNOSIS <------------------' failed or inconclusive Verify
+
+SOLO/TRAINING active Ticket --confirmed Give Up--> ABANDONED (archived; private solution reveal)
 ```
 
 The diagram is a state summary, not seven one-way departments. Hypothesis revision and Tests iterate inside Diagnosis. `isolation_history`, `repair_history`, `verification_history`, `return_to_diagnosis_history`, `documentation_publications`, and Worklog IDs remain append-only across a return. A new accepted Isolation is required before another ordinary Repair.
 
 [`knowledge_state.schema.json`](../../schemas/runtime/knowledge_state.schema.json) contains only Player-private or cooperative-team beliefs and Evidence. [`fault_state.schema.json`](../../schemas/runtime/fault_state.schema.json) contains authoritative machine reality. A player-safe view never infers one from the other.
 
-The initial public candidate set is not required to contain every hidden causal Fault. Authored play may reveal a previously hidden candidate dynamically; Repair legality still resolves against the authoritative causal truth and its requirements rather than treating the public candidate list as truth.
+Under `first-version-v2`, the initial public Candidate set contains every hidden Fault plus plausible distractors and is bounded to two through five. It remains a possibility set rather than truth. `diagnosis_revision` advances when Repair or failed/inconclusive Verify invalidates earlier elimination claims; append-only elimination history remains auditable.
 
 ## Actions, payment, and utility resources
 
-[`action_request.schema.json`](../../schemas/runtime/action_request.schema.json) gives every intent a request ID, actor, target revision, action discriminator, and type-specific payload. It covers card execution plus the cardless actions Revise Hypothesis, Commit Isolation, Document Live, Publish Closure, Search, Refresh, and Pass.
+[`action_request.schema.json`](../../schemas/runtime/action_request.schema.json) gives every intent a request ID, actor, target revision, action discriminator, and type-specific payload. It covers card execution plus Revise Hypothesis, cited/reversible Set Elimination, Commit Isolation, Document Live, Publish Closure, Search, Refresh, Pass, and confirmed Solo/Training Give Up.
 
-[`action_result.schema.json`](../../schemas/runtime/action_result.schema.json) distinguishes an accepted paid action from a request rejected before payment. An unsupported Isolation is an accepted one-Action resolution with the generic `ISOLATION_NOT_SUPPORTED` resolution code; it is not a free request rejection. A stale revision rejects with zero Actions, zero utility resources, no card movement, and no events.
+[`action_result.schema.json`](../../schemas/runtime/action_result.schema.json) distinguishes an accepted paid action from a request rejected before payment. Every accepted result carries nonempty target and result summaries; every rejected result carries null summaries, zero Actions/resources, no card movement, and no events. An unsupported Isolation remains an accepted one-Action generic resolution.
 
 The engine derives the actor from the authenticated connection, compares the request's declared Player, rejects unexpected top-level or payload mutation fields, and applies changes only to a private clone after authentication, idempotency, revision, turn, target, and resource checks. Computer policies receive the same private Player projection and legal-intent list; they do not receive the working aggregate.
 
-Search spends one Action and one Search Token to select a remaining-deck card before shuffling the remainder. Refresh spends one Action and one Refresh Token to combine discard with the remaining deck. [`player_state.schema.json`](../../schemas/runtime/player_state.schema.json) stores public utility-resource counts/caps, the 30-card Ready snapshot, card zones, skipped empty draws, and reconnect cursors. It contains no empty-deck loss flag.
+Search spends one Action and one Search Token to select a remaining response-deck Card before shuffling the remainder. Refresh spends one Action and one Refresh Token to combine response discard with the remaining response deck. [`player_state.schema.json`](../../schemas/runtime/player_state.schema.json) separately records Worker-owned `diagnostic_bench_card_instance_ids`; Bench instances never enter hand, deck, or discard.
 
 [`turn_state.schema.json`](../../schemas/runtime/turn_state.schema.json) fixes two starting Actions, records `DRAWN` or `SKIPPED_EMPTY`, and holds an explicit `CLOSURE_RESOLUTION` window. That window precedes automatic zero-Action end-turn processing, so a successful Verify using the last Action can still be closed immediately for zero Actions.
 
@@ -47,7 +49,9 @@ For an accepted paid result, the placeholder is the first public event from that
 
 Every non-`SERVER_ONLY` payload is also constrained against direct authoritative-secret fields. Dependency-free semantic validation applies the same prohibition recursively so a nested object cannot smuggle causal truth, unexecuted outcomes, random state, deck order, opponent hands, or internal scoring modifiers into a player-safe event. Private and team projections additionally verify that each event and Knowledge State is addressed to the authenticated Player or that Player's team.
 
-[`public_match_view.schema.json`](../../schemas/runtime/public_match_view.schema.json) contains only public candidates, accepted Isolation, machine-state summaries, Verify summaries, Worklog projections, public utility counts, public turn state, scores, closure statistics, and the public result/statistics projection. [`private_player_view.schema.json`](../../schemas/runtime/private_player_view.schema.json) adds the authenticated hand, authorized private/team Knowledge States and events, legal actions, and reconnect cursor. Neither view can carry `server_only_truth` or authoritative `fault_states`.
+[`public_match_view.schema.json`](../../schemas/runtime/public_match_view.schema.json) adds diagnosis revision, typed accepted-Isolation attribution, and sanitized abandoned-Ticket records without solution truth. [`private_player_view.schema.json`](../../schemas/runtime/private_player_view.schema.json) adds the authenticated persistent Bench, player-safe relevance paths, eliminations, legal intents, and the confirming Player's archived solution reveals. Ordinary active views cannot carry `server_only_truth` or authoritative `fault_states`; the reveal uses a dedicated allowlisted shape rather than copying either object.
+
+Give Up voids pending contribution records with `VOID_GIVE_UP`, archives the Ticket with an exact abandonment/reveal record, and increments a distinct statistic. Public events expose abandonment only. Private reveal data enumerates Faults, causal links, Evidence/Isolation routes, necessary Repairs, and passing Verification; it is projected only after the Ticket can no longer accept play.
 
 ## Closure and causal scoring
 

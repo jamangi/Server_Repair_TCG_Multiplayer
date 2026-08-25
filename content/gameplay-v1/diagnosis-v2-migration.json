@@ -1,0 +1,21 @@
+{
+  "migration_version": "diagnosis-v2-migration-v1",
+  "base_ruleset_version": "first-version-v1",
+  "successor_ruleset_version": "first-version-v2",
+  "implementation_profile_id": "solo-pages-v2",
+  "card_catalog_version": "core-card-catalog-diagnosis-v2",
+  "ticket_content_version": "core-ticket-templates-diagnosis-v2",
+  "builder_version": "ticket-builder-v2",
+  "response_deck": {
+    "source_deck_id": "deck.core.storage_foundation",
+    "successor_deck_id": "deck.core.storage_response_v2",
+    "size": 30,
+    "max_copies_per_card_id": 6,
+    "diagnostics_removed_from_slots": true
+  },
+  "local_data": {
+    "legacy_storage_key": "server-repair-tcg:solo-pages-v1:state",
+    "successor_storage_key": "server-repair-tcg:solo-pages-v2:state",
+    "strategy": "COEXIST_NO_IMPLICIT_MIGRATION"
+  }
+}

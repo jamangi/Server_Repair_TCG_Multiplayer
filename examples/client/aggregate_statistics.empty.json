@@ -1,5 +1,5 @@
 {
-  "schema_version": "solo-statistics-v1",
+  "schema_version": "solo-statistics-v2",
   "processed_match_start_ids": [],
   "processed_match_results": [],
   "totals": {
@@ -28,6 +28,8 @@
     "turns": 0,
     "authoritative_elapsed_seconds": 0,
     "search_uses": 0,
-    "refresh_uses": 0
+    "refresh_uses": 0,
+    "eliminations_recorded": 0,
+    "tickets_given_up": 0
   }
 }

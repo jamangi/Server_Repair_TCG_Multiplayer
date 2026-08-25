@@ -134,7 +134,8 @@
         "deck",
         "hand",
         "discard",
-        "in_play"
+        "in_play",
+        "diagnostic_bench"
       ]
     },
     "in_play_placement": {
@@ -169,6 +170,7 @@
             "deck",
             "hand",
             "discard"
+            ,"diagnostic_bench"
           ]
         },
         "controller_player_id": {

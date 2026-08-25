@@ -17,6 +17,7 @@
       "additionalProperties": false,
       "properties": {
         "isolation_event_id": { "$ref": "#/$defs/instanceId" },
+        "isolation_route_id": { "type": ["string", "null"], "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$" },
         "player_id": { "$ref": "#/$defs/instanceId" },
         "candidate_fault_id": { "$ref": "#/$defs/entityRef" },
         "cited_evidence_event_ids": {
@@ -117,6 +118,7 @@
         "requirement_id": { "$ref": "#/$defs/entityRef" },
         "result": { "type": "string", "enum": ["PASS", "FAIL", "INCONCLUSIVE"] },
         "machine_revision": { "type": "integer", "minimum": 0 },
+        "diagnosis_revision": { "type": "integer", "minimum": 0 },
         "is_current": { "type": "boolean" },
         "verified_at_revision": { "type": "integer", "minimum": 0 },
         "verified_at": { "$ref": "#/$defs/timestamp" }
@@ -132,6 +134,83 @@
         "verified_at_revision",
         "verified_at"
       ]
+    },
+    "solutionReveal": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "faults": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "fault_id": { "$ref": "#/$defs/entityRef" },
+              "role": { "type": "string", "enum": ["ROOT", "INTERMEDIATE", "TERMINAL", "ACTIONABLE"] },
+              "actionable": { "type": "boolean" },
+              "deepest": { "type": "boolean" }
+            },
+            "required": ["fault_id", "role", "actionable", "deepest"]
+          }
+        },
+        "causal_links": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "cause_fault_id": { "type": ["string", "null"], "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$" },
+              "effect_fault_id": { "type": ["string", "null"], "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$" }
+            },
+            "required": ["cause_fault_id", "effect_fault_id"]
+          }
+        },
+        "evidence_solution": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "candidate_fault_id": { "$ref": "#/$defs/entityRef" },
+              "route_kind": { "type": "string", "enum": ["DIRECT_OBSERVATION", "DEFINITIVE_DIAGNOSTIC", "CORROBORATED_SUPPORT", "EVIDENCE_BACKED_ELIMINATION", "RECOVERY_DERIVED"] },
+              "evidence": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "source_definition_id": { "type": ["string", "null"], "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$" },
+                    "summary": { "type": "string", "minLength": 1 }
+                  },
+                  "required": ["source_definition_id", "summary"]
+                }
+              },
+              "eliminated_candidate_fault_ids": { "type": "array", "items": { "$ref": "#/$defs/entityRef" }, "uniqueItems": true }
+            },
+            "required": ["candidate_fault_id", "route_kind", "evidence", "eliminated_candidate_fault_ids"]
+          }
+        },
+        "repair_solution": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": { "repair_procedure_id": { "$ref": "#/$defs/entityRef" }, "summary": { "type": "string", "minLength": 1 } },
+            "required": ["repair_procedure_id", "summary"]
+          }
+        },
+        "verification_solution": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": { "validation_procedure_id": { "$ref": "#/$defs/entityRef" }, "summary": { "type": "string", "minLength": 1 } },
+            "required": ["validation_procedure_id", "summary"]
+          }
+        }
+      },
+      "required": ["faults", "causal_links", "evidence_solution", "repair_solution", "verification_solution"]
     },
     "closureRecord": {
       "type": "object",
@@ -218,10 +297,12 @@
         "AWAITING_VERIFY",
         "RETURNED_TO_DIAGNOSIS",
         "READY_TO_CLOSE",
-        "CLOSED"
+        "CLOSED",
+        "ABANDONED"
       ]
     },
     "machine_revision": { "type": "integer", "minimum": 0 },
+    "diagnosis_revision": { "type": "integer", "minimum": 0 },
     "visible_symptom_ids": {
       "type": "array",
       "items": { "$ref": "#/$defs/entityRef" },
@@ -241,6 +322,27 @@
     "isolation_history": {
       "type": "array",
       "items": { "$ref": "#/$defs/isolationRecord" }
+    },
+    "elimination_history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "elimination_event_id": { "$ref": "#/$defs/instanceId" },
+          "player_id": { "$ref": "#/$defs/instanceId" },
+          "candidate_fault_id": { "$ref": "#/$defs/entityRef" },
+          "eliminated": { "type": "boolean" },
+          "cited_evidence_event_ids": { "type": "array", "items": { "$ref": "#/$defs/instanceId" }, "uniqueItems": true },
+          "diagnosis_revision": { "type": "integer", "minimum": 0 },
+          "visibility": { "type": "string", "enum": ["PRIVATE_PLAYER", "TEAM"] },
+          "visible_to_player_ids": { "type": "array", "items": { "$ref": "#/$defs/instanceId" }, "uniqueItems": true },
+          "visible_to_team_ids": { "type": "array", "items": { "$ref": "#/$defs/instanceId" }, "uniqueItems": true },
+          "supersedes_elimination_event_id": { "type": ["string", "null"], "minLength": 1 },
+          "recorded_at": { "$ref": "#/$defs/timestamp" }
+        },
+        "required": ["elimination_event_id", "player_id", "candidate_fault_id", "eliminated", "cited_evidence_event_ids", "diagnosis_revision", "visibility", "visible_to_player_ids", "visible_to_team_ids", "supersedes_elimination_event_id", "recorded_at"]
+      }
     },
     "current_accepted_isolation_event_id": {
       "type": ["string", "null"],
@@ -328,7 +430,7 @@
           "point_value": { "const": 1 },
           "settlement_status": {
             "type": "string",
-            "enum": ["PENDING", "SETTLED", "SUPERSEDED", "INELIGIBLE"]
+            "enum": ["PENDING", "SETTLED", "SUPERSEDED", "INELIGIBLE", "VOID_GIVE_UP"]
           },
           "score_event_id": {
             "type": ["string", "null"],
@@ -353,6 +455,18 @@
         { "type": "null" },
         { "$ref": "#/$defs/closureRecord" }
       ]
+    },
+    "abandonment": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "give_up_event_id": { "$ref": "#/$defs/instanceId" },
+        "reveal_event_id": { "$ref": "#/$defs/instanceId" },
+        "player_id": { "$ref": "#/$defs/instanceId" },
+        "solution_reveal": { "$ref": "#/$defs/solutionReveal" },
+        "abandoned_at": { "$ref": "#/$defs/timestamp" }
+      },
+      "required": ["give_up_event_id", "reveal_event_id", "player_id", "solution_reveal", "abandoned_at"]
     },
     "archived": { "type": "boolean" }
   },
@@ -459,6 +573,17 @@
           "closure": { "$ref": "#/$defs/closureRecord" },
           "archived": { "const": true }
         }
+      }
+    },
+    {
+      "if": { "properties": { "status": { "const": "ABANDONED" } } },
+      "then": {
+        "properties": {
+          "closure": { "const": null },
+          "abandonment": { "type": "object" },
+          "archived": { "const": true }
+        },
+        "required": ["abandonment"]
       }
     }
   ]

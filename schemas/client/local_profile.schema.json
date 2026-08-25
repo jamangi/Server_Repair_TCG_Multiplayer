@@ -1,13 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.local/client/local_profile.schema.json",
-  "title": "Solo Pages Local Profile v1",
+  "title": "Solo Pages Local Profile v2",
   "description": "A local-only cosmetic identity. It contains no credential, account authority, or gameplay modifier.",
   "type": "object",
   "additionalProperties": false,
   "properties": {
     "schema_version": {
-      "const": "solo-profile-v1"
+      "const": "solo-profile-v2"
     },
     "profile_id": {
       "const": "profile.local"

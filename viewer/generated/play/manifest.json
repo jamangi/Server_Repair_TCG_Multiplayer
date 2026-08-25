@@ -1,6 +1,6 @@
 {
   "format_version": 1,
-  "profile_id": "solo-pages-v1",
+  "profile_id": "solo-pages-v2",
   "hash_algorithm": "sha256",
   "files": [
     {
@@ -100,6 +100,12 @@
       "sha256": "6ac09dee5bc86708a4d85da4749b860bd4c62d7463eb797cfa22125ec2773732"
     },
     {
+      "path": "content/gameplay-v1/diagnosis-v2-migration.json",
+      "source": "content/gameplay-v1/diagnosis-v2-migration.json",
+      "bytes": 806,
+      "sha256": "6cd770f82179682c91e7ef97c131a0e11ce0c029fa97ceb44a02a0693678ec77"
+    },
+    {
       "path": "content/gameplay-v1/domain-snapshot.json",
       "source": "content/gameplay-v1/domain-snapshot.json",
       "bytes": 14703,
@@ -116,6 +122,12 @@
       "source": "src/builder/canonical.mjs",
       "bytes": 1837,
       "sha256": "9d8f6db18311916334e4288b7a7c5b26f21e742582229991028de015b48fd760"
+    },
+    {
+      "path": "src/builder/diagnosis-v2.mjs",
+      "source": "src/builder/diagnosis-v2.mjs",
+      "bytes": 24349,
+      "sha256": "e9598443c8f415bba77fd46c30e800d20d0328660366705c2dde22d32368d1e1"
     },
     {
       "path": "src/builder/ticket-builder.mjs",
@@ -144,8 +156,8 @@
     {
       "path": "src/engine/engine.mjs",
       "source": "src/engine/engine.mjs",
-      "bytes": 71142,
-      "sha256": "4689a848e05cc72ca79a8a0c5279ed94e0e4fa1e496c5a3ae4ca1ca00432c27d"
+      "bytes": 89553,
+      "sha256": "19b19b99da5844fe6c095a7080a1022d381ba494182922b4e56f5f824c0a268e"
     },
     {
       "path": "src/engine/events.mjs",
@@ -156,20 +168,20 @@
     {
       "path": "src/engine/index.mjs",
       "source": "src/engine/index.mjs",
-      "bytes": 378,
-      "sha256": "70988e36f16eead4c1c90179d7c8121c7f128093242308e1fa93ffc4a0372958"
+      "bytes": 486,
+      "sha256": "c7fbebfc4239a3a71ddad797ef7bbb3bc5f26cf85a31adcf7a99fc1f059baaf3"
     },
     {
       "path": "src/engine/invariants.mjs",
       "source": "src/engine/invariants.mjs",
-      "bytes": 5757,
-      "sha256": "c8c75ed669c157c936da21a08ac55e76c604789731f1c46b3fab45752216070b"
+      "bytes": 6239,
+      "sha256": "260a4bfe972cae6901ea5bdce6ee338416af2edffd4ad8bdbc3f97f7360182c3"
     },
     {
       "path": "src/engine/projections.mjs",
       "source": "src/engine/projections.mjs",
-      "bytes": 19531,
-      "sha256": "8824cf02b799c12d46581b748e1eea422f4d32bceb8d3f869a4436f87f8a3940"
+      "bytes": 26041,
+      "sha256": "4d137f9d61b6c95a287d73e87c9b8ed76b6723d993ce8052b0c6f281dbcaa4b4"
     },
     {
       "path": "src/shared/sha256.mjs",

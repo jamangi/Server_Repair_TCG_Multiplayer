@@ -19,6 +19,7 @@ const DISPOSITION_WEIGHT = Object.freeze({
 
 export const SUPPORTED_POLICY_IDS = Object.freeze([
   'methodical-seat-safe-v1',
+  'methodical-seat-safe-v2',
   'publication-seat-safe-v1',
   'scripted-cooperative-v1',
   'scripted-competitive-v1',
@@ -104,17 +105,26 @@ function priority(policyId, view, option) {
   if (type === 'DOCUMENT_LIVE' && (publicationPolicy || failureVisible)) return 1;
   if (type === 'PERFORM_VERIFY') return 2;
   if (type === 'PERFORM_REPAIR') return 3;
+  if (type === 'SET_ELIMINATION') return 5;
   if (type === 'COMMIT_ISOLATION') {
     const score = candidateScore(view, option);
     const actorHasRejected = viewContains(view, 'ISOLATION_NOT_SUPPORTED');
     if (scripted && !actorHasRejected && score <= 0) return 4;
     return score > 0 ? 4 : 20;
   }
-  if (type === 'RUN_TEST' || type === 'PLAY_CARD') return 6;
+  if (type === 'RUN_TEST' || type === 'PLAY_CARD') {
+    const sourceId = payload(option).execution_definition_id;
+    const repeatedAtCurrentRevision = view.projection_version === 'engine-projection-v2'
+      && view.authorized_events?.some((event) => event.event_type === 'EVIDENCE_CREATED'
+        && event.payload?.source_definition_id === sourceId
+        && event.payload?.machine_revision === payload(option).observed_machine_revision);
+    return repeatedAtCurrentRevision ? 30 : 6;
+  }
   if (type === 'DOCUMENT_LIVE') return 7;
   if (type === 'SEARCH') return 8;
   if (type === 'REFRESH') return 9;
   if (type === 'REVISE_HYPOTHESIS') return 10;
+  if (type === 'GIVE_UP_TICKET') return 90;
   return 50;
 }
 

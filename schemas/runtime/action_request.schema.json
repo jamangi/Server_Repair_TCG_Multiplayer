@@ -53,6 +53,30 @@
       },
       "required": ["ticket_instance_id", "candidate_fault_id", "cited_evidence_event_ids"]
     },
+    "eliminationPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ticket_instance_id": { "$ref": "#/$defs/instanceId" },
+        "candidate_fault_id": { "$ref": "#/$defs/entityRef" },
+        "cited_evidence_event_ids": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/instanceId" },
+          "uniqueItems": true
+        },
+        "eliminated": { "type": "boolean" }
+      },
+      "required": ["ticket_instance_id", "candidate_fault_id", "cited_evidence_event_ids", "eliminated"]
+    },
+    "giveUpPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ticket_instance_id": { "$ref": "#/$defs/instanceId" },
+        "confirmed": { "const": true }
+      },
+      "required": ["ticket_instance_id", "confirmed"]
+    },
     "repairPayload": {
       "type": "object",
       "additionalProperties": false,
@@ -168,6 +192,7 @@
       "enum": [
         "PLAY_CARD",
         "RUN_TEST",
+        "SET_ELIMINATION",
         "REVISE_HYPOTHESIS",
         "COMMIT_ISOLATION",
         "PERFORM_REPAIR",
@@ -176,7 +201,8 @@
         "PUBLISH_CLOSURE",
         "SEARCH",
         "REFRESH",
-        "PASS_TURN"
+        "PASS_TURN",
+        "GIVE_UP_TICKET"
       ]
     },
     "payload": { "type": "object" },
@@ -192,6 +218,12 @@
     "client_nonce"
   ],
   "oneOf": [
+    {
+      "properties": {
+        "action_type": { "const": "SET_ELIMINATION" },
+        "payload": { "$ref": "#/$defs/eliminationPayload" }
+      }
+    },
     {
       "properties": {
         "action_type": { "const": "PLAY_CARD" },
@@ -269,6 +301,12 @@
       "properties": {
         "action_type": { "const": "PASS_TURN" },
         "payload": { "$ref": "#/$defs/emptyPayload" }
+      }
+    },
+    {
+      "properties": {
+        "action_type": { "const": "GIVE_UP_TICKET" },
+        "payload": { "$ref": "#/$defs/giveUpPayload" }
       }
     }
   ]

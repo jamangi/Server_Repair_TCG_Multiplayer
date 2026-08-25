@@ -91,5 +91,7 @@
   "rejected_at": null,
   "recovered_card_instance_id": null,
   "opened_resolution_window": "NONE",
-  "resolution_code": "ISOLATION_NOT_SUPPORTED"
+  "resolution_code": "ISOLATION_NOT_SUPPORTED",
+  "target_summary": "Candidate Fault on match.example.ticket.001.",
+  "result_summary": "Isolation was not supported; no prerequisite detail was disclosed."
 }

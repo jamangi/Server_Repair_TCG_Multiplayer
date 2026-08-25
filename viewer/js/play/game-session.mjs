@@ -8,6 +8,13 @@ export class SoloGameSession {
     this.active = false;
     this.selectedTicketId = null;
     this.selectedCardInstanceId = null;
+    this.benchView = null;
+    this.benchSearch = '';
+    this.benchTypeFilter = 'ALL';
+    this.benchCategory = 'ALL';
+    this.benchRelevantOnly = false;
+    this.benchSort = 'NAME';
+    this.benchPage = 1;
     this.panelTab = 'evidence';
     this.lastEvents = [];
     this.lastResult = null;
@@ -128,14 +135,18 @@ export class SoloGameSession {
   selectAvailableTicket() {
     const activeIds = this.projection?.view.public_match.repair_queue.map((ticket) => ticket.ticket_instance_id) ?? [];
     if (!activeIds.includes(this.selectedTicketId)) this.selectedTicketId = activeIds[0] ?? null;
-    const handIds = this.projection?.view.hand.map((card) => card.card_instance_id) ?? [];
-    if (!handIds.includes(this.selectedCardInstanceId)) this.selectedCardInstanceId = null;
+    const selectableIds = [
+      ...(this.projection?.view.hand ?? []),
+      ...(this.projection?.view.diagnostic_bench ?? []),
+    ].map((card) => card.card_instance_id);
+    if (!selectableIds.includes(this.selectedCardInstanceId)) this.selectedCardInstanceId = null;
   }
 
   motionFromEvents(events, terminal, result) {
     if (terminal) return 'result';
     if (events.some((event) => event.event_type === 'TICKET_RETURNED_TO_DIAGNOSIS')) return 'failedVerify';
     if (events.some((event) => event.event_type === 'CLOSURE_PUBLISHED')) return 'ticketClosed';
+    if (events.some((event) => event.event_type === 'TICKET_GIVEN_UP')) return 'ticketClosed';
     if (result?.accepted === false || result?.resolution_code === 'ISOLATION_NOT_SUPPORTED') return 'rejection';
     return 'actionResolved';
   }
@@ -156,6 +167,8 @@ export class SoloGameSession {
     if (verify) messages.push(`Verify ${verify.payload.result.toLowerCase()}: ${verify.payload.public_summary}`);
     if (events.some((event) => event.event_type === 'TICKET_RETURNED_TO_DIAGNOSIS')) messages.push('Failed Verify returned the Ticket to Diagnosis. Prior machine changes and history remain.');
     if (events.some((event) => event.event_type === 'CLOSURE_PUBLISHED')) messages.push('Ticket documented, closed, and archived.');
+    if (events.some((event) => event.event_type === 'TICKET_GIVEN_UP')) messages.push('Ticket abandoned. Its solution is revealed and no further actions can target it.');
+    if (events.some((event) => event.event_type === 'CANDIDATE_ELIMINATION_SET')) messages.push('Candidate elimination record updated for the current diagnosis stage.');
     if (result?.accepted === false) messages.push(`Action rejected: ${result.error_code}. No cost was paid.`);
     if (result?.resolution_code === 'ISOLATION_NOT_SUPPORTED') messages.push('Isolation was not supported. The Action was spent; hidden truth was not disclosed.');
     if (terminal) messages.push('Solo Match complete. Local result statistics are ready.');

@@ -58,7 +58,7 @@
     "passed": { "type": "boolean" },
     "turn_ended_reason": {
       "type": ["string", "null"],
-      "enum": [null, "VOLUNTARY", "NO_ACTIONS", "CLOSURE_PUBLISHED", "TIME_EXPIRED"]
+      "enum": [null, "VOLUNTARY", "NO_ACTIONS", "CLOSURE_PUBLISHED", "TICKET_GIVEN_UP", "TIME_EXPIRED"]
     }
   },
   "required": [

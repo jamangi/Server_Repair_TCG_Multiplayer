@@ -85,7 +85,7 @@ test('all domain/runtime schemas parse, retain unique IDs, and resolve every loc
 
 test('every domain/runtime example validates against the schema declared by its filename', () => {
   const fixtures = examplePaths();
-  assert.equal(fixtures.length, 38);
+  assert.equal(fixtures.length, 41);
   for (const relativePath of fixtures) assertFixtureValid(relativePath);
 });
 

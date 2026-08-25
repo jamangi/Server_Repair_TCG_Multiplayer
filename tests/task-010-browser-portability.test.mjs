@@ -272,7 +272,7 @@ test('missing or corrupt Play content and art fail closed with intentional image
       contentRoot,
       fetchImpl: async () => ({ ok: true, status: 200, json: async () => ({}) }),
     }),
-    TypeError,
+    /incompatible|missing/i,
   );
   await assert.rejects(
     loadArtManifest({ fetchImpl: async () => ({ ok: false, status: 503 }) }),

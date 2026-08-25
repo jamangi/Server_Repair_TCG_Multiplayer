@@ -20,7 +20,7 @@ JSON Schema validates object shape. Cross-file references, causal acyclicity, Ti
 | [`fault_causal_edge.schema.json`](domain/fault_causal_edge.schema.json) | One authored directed causal relationship between two Fault definitions. The complete selected graph must be acyclic. |
 | [`protocol.schema.json`](domain/protocol.schema.json) | A protocol or standard and its technical relationships. |
 | [`repair_procedure.schema.json`](domain/repair_procedure.schema.json) | An authored machine-changing procedure, its Fault targets, prerequisites, and Action cost. Runtime legality still requires accepted Isolation. |
-| [`repair_ticket.schema.json`](domain/repair_ticket.schema.json) | A complete authored troubleshooting scenario: public candidates, server-only causal truth, authored Evidence outcomes, Isolation/Repair/Verify requirements, and closure requirements. Fixed fixtures and Ticket Builder output share this contract. |
+| [`repair_ticket.schema.json`](domain/repair_ticket.schema.json) | A complete authored troubleshooting scenario: v2 public context/candidates, server-only causal truth, complete typed Evidence outcomes, alternative Isolation routes, Repair/Verify requirements, and closure requirements. Fixed fixtures and Ticket Builder output share this contract. |
 | [`symptom.schema.json`](domain/symptom.schema.json) | An observable symptom and its authored associations. A public symptom is not proof of a hidden Fault. |
 | [`test.schema.json`](domain/test.schema.json) | An Evidence-producing diagnostic definition and its targets, requirements, strength, and Action cost. Tests change Knowledge State, not machine state. |
 | [`ticket_builder_configuration.schema.json`](domain/ticket_builder_configuration.schema.json) | One immutable, version-pinned set of hard generation constraints, duplicate policy, legal card pool, seed, and optional explicit fallback reference. |
@@ -42,9 +42,9 @@ See [`DOMAIN_SCHEMAS.md`](../docs/schema-notes/DOMAIN_SCHEMAS.md) for the author
 | [`knowledge_state.schema.json`](runtime/knowledge_state.schema.json) | Private Player or cooperative-team beliefs and Evidence; it never substitutes for authoritative Fault state. |
 | [`match_state.schema.json`](runtime/match_state.schema.json) | The complete authoritative, versioned match aggregate. It must never be sent directly to a client. |
 | [`player_state.schema.json`](runtime/player_state.schema.json) | Authoritative Player seat, card zones, resources, Knowledge States, contribution links, and connection state. |
-| [`private_player_view.schema.json`](runtime/private_player_view.schema.json) | An authenticated Player projection containing the public view plus that Player's authorized hand, Evidence, events, and legal actions. |
-| [`public_match_view.schema.json`](runtime/public_match_view.schema.json) | A `PUBLIC_MATCH`-only projection safe for Players and Spectators. |
-| [`ticket_state.schema.json`](runtime/ticket_state.schema.json) | Ticket-owned lifecycle, machine revision, Isolation/Repair/Verify history, Documentation, pending causal contributions, and immutable closure record. |
+| [`private_player_view.schema.json`](runtime/private_player_view.schema.json) | An authenticated Player projection containing the public view plus hand, persistent Diagnostic Bench/relevance, authorized Evidence/eliminations, legal intents, and post-abandonment private reveals. |
+| [`public_match_view.schema.json`](runtime/public_match_view.schema.json) | A `PUBLIC_MATCH`-only projection safe for Players and Spectators, including sanitized closure and abandonment state but never solution truth. |
+| [`ticket_state.schema.json`](runtime/ticket_state.schema.json) | Ticket-owned lifecycle, machine/diagnosis revisions, elimination and Isolation/Repair/Verify history, Documentation, pending/void contributions, immutable closure, or terminal abandonment. |
 | [`turn_state.schema.json`](runtime/turn_state.schema.json) | Draw, two-Action turn accounting, zero-Action limits, and the immediate closure-resolution window. |
 
 See [`RUNTIME_SCHEMAS.md`](../docs/schema-notes/RUNTIME_SCHEMAS.md) for lifecycle, visibility, payment, Worklog, scoring, and fixture-validation details.

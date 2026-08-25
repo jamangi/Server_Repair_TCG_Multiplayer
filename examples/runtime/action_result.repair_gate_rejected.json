@@ -17,5 +17,7 @@
   "rejected_at": "BEFORE_PAYMENT",
   "recovered_card_instance_id": null,
   "opened_resolution_window": "NONE",
-  "resolution_code": null
+  "resolution_code": null,
+  "target_summary": null,
+  "result_summary": null
 }

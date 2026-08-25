@@ -1,7 +1,10 @@
-import { cardActionType, cardContractType, cardMap, cardName, cardSourceDefinitionId } from './catalogs.mjs';
+import { cardActionType, cardContractType, cardCost, cardMap, cardName, cardSourceDefinitionId } from './catalogs.mjs';
 import { canonicalJson } from './determinism.mjs';
 import { eventVisibleToPlayer } from './events.mjs';
 import { assertPlayerSafe } from './invariants.mjs';
+import { deriveDiagnosticRelevance, DIAGNOSIS_V2_RULESET_VERSION } from '../builder/diagnosis-v2.mjs';
+
+const isDiagnosisV2 = (state) => state.ruleset_version === DIAGNOSIS_V2_RULESET_VERSION;
 
 function playerById(state, playerId) {
   return state.players.find((player) => player.player_id === playerId) ?? null;
@@ -20,6 +23,7 @@ function publicTicket(state, ticket) {
     ticket_definition_id: ticket.ticket_definition_id,
     status: ticket.status,
     machine_revision: ticket.machine_revision,
+    diagnosis_revision: ticket.diagnosis_revision ?? 0,
     visible_symptom_ids: [...ticket.visible_symptom_ids],
     public_candidate_fault_ids: [...ticket.public_candidate_fault_ids],
     accepted_isolations: ticket.isolation_history
@@ -94,7 +98,7 @@ function publicClosedTicket(state, ticket) {
 
 export function projectPublicMatch(state) {
   const view = {
-    projection_version: 'engine-projection-v1',
+    projection_version: isDiagnosisV2(state) ? 'engine-projection-v2' : 'engine-projection-v1',
     match_id: state.match_id,
     revision: state.revision,
     ruleset_version: state.ruleset_version,
@@ -124,7 +128,19 @@ export function projectPublicMatch(state) {
       connection_status: player.connection_status,
     })),
     repair_queue: state.active_ticket_ids.map((id) => publicTicket(state, state.tickets[id])),
-    closed_tickets: state.archived_ticket_ids.map((id) => publicClosedTicket(state, state.archived_tickets[id])),
+    closed_tickets: state.archived_ticket_ids
+      .filter((id) => state.archived_tickets[id].closure)
+      .map((id) => publicClosedTicket(state, state.archived_tickets[id])),
+    abandoned_tickets: state.archived_ticket_ids
+      .filter((id) => state.archived_tickets[id].abandonment)
+      .map((id) => ({
+        ...publicTicket(state, state.archived_tickets[id]),
+        abandonment: {
+          give_up_event_id: state.archived_tickets[id].abandonment.give_up_event_id,
+          player_id: state.archived_tickets[id].abandonment.player_id,
+          abandoned_at: state.archived_tickets[id].abandonment.abandoned_at,
+        },
+      })),
     turn: state.turn === null ? null : {
       round_number: state.turn.round_number,
       turn_number: state.turn.turn_number,
@@ -149,6 +165,8 @@ export function projectPublicMatch(state) {
         ticket_instance_id: record.ticket_instance_id ?? null,
       })),
       completed_at: state.result.completed_at,
+      give_up_occurred: state.give_up_statistics.length > 0,
+      tickets_given_up: state.give_up_statistics.length,
     },
     public_events: state.events
       .filter((event) => event.visibility === 'PUBLIC_MATCH')
@@ -197,7 +215,8 @@ function privateBase(state, playerId) {
       && state.active_ticket_ids.includes(record.ticket_instance_id)
       && !record.documented
       && eventVisibleToPlayer(state.events.find((event) => event.event_id === record.source_result_event_id), player)
-      && state.card_instances[record.card_instance_id]?.zone === 'discard')
+      && (state.card_instances[record.card_instance_id]?.zone === 'discard'
+        || (isDiagnosisV2(state) && state.card_instances[record.card_instance_id]?.zone === 'diagnostic_bench')))
     .map((record) => ({
       ticket_instance_id: record.ticket_instance_id,
       source_action_event_id: record.placeholder_event_id,
@@ -205,6 +224,7 @@ function privateBase(state, playerId) {
       worklog_placeholder_event_id: record.placeholder_event_id,
       source_card_instance_id: record.card_instance_id,
       source_card_owner_player_id: state.card_instances[record.card_instance_id].owner_player_id,
+      recovery_available: state.card_instances[record.card_instance_id].zone === 'discard',
     }));
   const closureBundles = {};
   for (const ticketId of state.active_ticket_ids) {
@@ -215,7 +235,7 @@ function privateBase(state, playerId) {
     }
   }
   return {
-    projection_version: 'engine-projection-v1',
+    projection_version: isDiagnosisV2(state) ? 'engine-projection-v2' : 'engine-projection-v1',
     player_id: player.player_id,
     team_id: player.team_id,
     match_id: state.match_id,
@@ -225,6 +245,13 @@ function privateBase(state, playerId) {
       card_instance_id: id,
       card_definition_id: state.card_instances[id].card_definition_id,
     })),
+    diagnostic_bench: (player.diagnostic_bench_card_instance_ids ?? []).map((id) => {
+      const instance = state.card_instances[id];
+      return {
+        card_instance_id: id,
+        card_definition_id: instance.card_definition_id,
+      };
+    }),
     deck_count: player.deck_card_instance_ids.length,
     discard_card_instance_ids: [...player.discard_card_instance_ids],
     search_card_definition_ids: [...new Set(player.deck_card_instance_ids
@@ -239,6 +266,28 @@ function privateBase(state, playerId) {
     hypotheses: structuredClone(player.hypotheses),
     documentable_actions: documentableActions,
     closure_bundles: closureBundles,
+    eliminations: state.active_ticket_ids.flatMap((ticketId) => {
+      const ticket = state.tickets[ticketId];
+      return ticket.elimination_history.filter((record) => eventVisibleToPlayer(
+        state.events.find((event) => event.event_id === record.elimination_event_id),
+        player,
+      )).map((record) => ({
+        ticket_instance_id: ticketId,
+        elimination_event_id: record.elimination_event_id,
+        candidate_fault_id: record.candidate_fault_id,
+        eliminated: record.eliminated,
+        diagnosis_revision: record.diagnosis_revision,
+        cited_evidence_event_ids: [...record.cited_evidence_event_ids],
+      }));
+    }),
+    solution_reveals: state.archived_ticket_ids
+      .map((id) => state.archived_tickets[id])
+      .filter((ticket) => ticket.abandonment?.player_id === player.player_id)
+      .map((ticket) => ({
+        ticket_instance_id: ticket.ticket_instance_id,
+        abandoned_at: ticket.abandonment.abandoned_at,
+        solution_reveal: structuredClone(ticket.abandonment.solution_reveal),
+      })),
     reconnect: {
       snapshot_installed: true,
       snapshot_revision: state.revision,
@@ -257,6 +306,7 @@ function deriveLegalIntents(view, catalogs, state) {
   const actions = turn.actions_remaining;
 
   for (const ticket of publicState.repair_queue) {
+    const authoritativeTicket = state.tickets[ticket.ticket_instance_id];
     for (const candidateId of ticket.public_candidate_fault_ids) {
       const existing = view.hypotheses[ticket.ticket_instance_id] ?? [];
       if (existing.length !== 1 || existing[0] !== candidateId) {
@@ -267,7 +317,10 @@ function deriveLegalIntents(view, catalogs, state) {
       }
       const directCitationIds = view.authorized_events
         .filter((event) => ['EVIDENCE_CREATED', 'VERIFY_EVIDENCE_CREATED'].includes(event.event_type)
-          && event.ticket_instance_id === ticket.ticket_instance_id)
+          && event.ticket_instance_id === ticket.ticket_instance_id
+          && (!isDiagnosisV2(state)
+            || (event.payload.machine_revision === authoritativeTicket.machine_revision
+              && event.payload.diagnosis_revision === authoritativeTicket.diagnosis_revision)))
         .map((event) => event.event_id);
       const publishedCitationIds = view.authorized_events
         .filter((event) => event.visibility === 'PUBLIC_MATCH'
@@ -277,9 +330,48 @@ function deriveLegalIntents(view, catalogs, state) {
         .filter((id) => {
           const event = state.events.find((candidate) => candidate.event_id === id);
           return event && ['EVIDENCE_CREATED', 'VERIFY_EVIDENCE_CREATED'].includes(event.event_type)
-            && event.ticket_instance_id === ticket.ticket_instance_id;
+            && event.ticket_instance_id === ticket.ticket_instance_id
+            && (!isDiagnosisV2(state)
+              || (event.payload.machine_revision === authoritativeTicket.machine_revision
+                && event.payload.diagnosis_revision === authoritativeTicket.diagnosis_revision));
         });
       const citationIds = [...new Set([...directCitationIds, ...publishedCitationIds])].sort();
+      if (isDiagnosisV2(state) && ['DIAGNOSIS', 'RETURNED_TO_DIAGNOSIS'].includes(ticket.status)) {
+        const latest = [...view.eliminations].reverse().find((record) =>
+          record.ticket_instance_id === ticket.ticket_instance_id
+            && record.candidate_fault_id === candidateId
+            && record.diagnosis_revision === authoritativeTicket.diagnosis_revision);
+        if (latest?.eliminated) {
+          intents.push({
+            action_type: 'SET_ELIMINATION',
+            payload: {
+              ticket_instance_id: ticket.ticket_instance_id,
+              candidate_fault_id: candidateId,
+              cited_evidence_event_ids: [],
+              eliminated: false,
+            },
+          });
+        } else {
+          const ruleOutIds = view.authorized_events.filter((event) =>
+            ['EVIDENCE_CREATED', 'VERIFY_EVIDENCE_CREATED'].includes(event.event_type)
+              && event.ticket_instance_id === ticket.ticket_instance_id
+              && event.payload.machine_revision === authoritativeTicket.machine_revision
+              && event.payload.diagnosis_revision === authoritativeTicket.diagnosis_revision
+              && event.payload.candidate_effects?.some((effect) =>
+                effect.candidate_fault_id === candidateId && effect.disposition === 'RULE_OUT'))
+            .map((event) => event.event_id)
+            .sort();
+          if (ruleOutIds.length > 0) intents.push({
+            action_type: 'SET_ELIMINATION',
+            payload: {
+              ticket_instance_id: ticket.ticket_instance_id,
+              candidate_fault_id: candidateId,
+              cited_evidence_event_ids: ruleOutIds,
+              eliminated: true,
+            },
+          });
+        }
+      }
       if (actions >= 1
         && ['DIAGNOSIS', 'RETURNED_TO_DIAGNOSIS'].includes(ticket.status)
         && citationIds.length > 0) {
@@ -296,9 +388,15 @@ function deriveLegalIntents(view, catalogs, state) {
     if (view.closure_bundles[ticket.ticket_instance_id]) {
       intents.push({ action_type: 'PUBLISH_CLOSURE', payload: view.closure_bundles[ticket.ticket_instance_id] });
     }
+    if (isDiagnosisV2(state) && ['SOLO', 'TRAINING'].includes(state.configuration.play_context)) {
+      intents.push({
+        action_type: 'GIVE_UP_TICKET',
+        payload: { ticket_instance_id: ticket.ticket_instance_id, confirmed: true },
+      });
+    }
   }
 
-  for (const held of view.hand) {
+  for (const held of [...view.hand, ...(view.diagnostic_bench ?? [])]) {
     const card = cards.get(held.card_definition_id);
     if (!card || card.cost > actions) continue;
     const name = cardName(card);
@@ -410,6 +508,36 @@ function deriveLegalIntents(view, catalogs, state) {
 
 export function projectPrivatePlayer(state, playerId, catalogs) {
   const base = privateBase(state, playerId);
+  if (isDiagnosisV2(state)) {
+    const cards = cardMap(catalogs);
+    const relevanceByTicket = new Map(state.active_ticket_ids.map((ticketId) => {
+      const ticket = state.tickets[ticketId];
+      return [ticketId, deriveDiagnosticRelevance({
+        ticket: {
+          initial_symptom_ids: [...ticket.visible_symptom_ids],
+          public_candidate_fault_ids: [...ticket.public_candidate_fault_ids],
+          public_context_entity_ids: [...(ticket.definition_snapshot.public_context_entity_ids ?? [])],
+        },
+        domainCatalog: catalogs.domain,
+        cardCatalog: catalogs.cards,
+      })];
+    }));
+    base.diagnostic_bench = base.diagnostic_bench.map((entry) => {
+      const card = cards.get(entry.card_definition_id);
+      return {
+        ...entry,
+        diagnostic_type: card?.card_type === 'command' ? 'COMMAND' : 'TEST',
+        action_cost: cardCost(card),
+        category: card?.presentation?.subsystem ?? card?.card_type ?? 'general',
+        ticket_relevance: state.active_ticket_ids.map((ticketId) => ({
+          ticket_instance_id: ticketId,
+          ...(relevanceByTicket.get(ticketId)?.get(entry.card_definition_id)
+            ?? { relevant: false, why_relevant_paths: [] }),
+        })),
+      };
+    });
+    base.diagnostic_relevance_notice = 'Relevant is an advisory public-relationship filter. The authored graph may be incomplete; Global shows the complete playable catalog.';
+  }
   const view = { ...base, legal_intents: deriveLegalIntents(base, catalogs, state) };
   return assertPlayerSafe(view);
 }

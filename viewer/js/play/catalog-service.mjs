@@ -16,6 +16,47 @@ function freezeCatalog({ cards, decks, domain }) {
   return Object.freeze({ cards, decks, domain, cardById, deckById, domainById });
 }
 
+function applyDiagnosisMigration({ cards, decks, domain, migration }) {
+  const nextCards = structuredClone(cards);
+  nextCards.ruleset_version = migration.successor_ruleset_version;
+  nextCards.card_catalog_version = migration.card_catalog_version;
+  nextCards.cards = nextCards.cards.map((card) => card.play_contract?.contract_type === 'DIAGNOSTIC'
+    ? { ...card, play_contract: { ...card.play_contract, placement: 'diagnostic_bench', disposition: 'remain_in_diagnostic_bench' } }
+    : card);
+  const byId = new Map(nextCards.cards.map((card) => [card.id, card]));
+  const source = decks.decks.find((deck) => deck.id === migration.response_deck.source_deck_id);
+  if (!source) throw new Error('The response-deck migration source is missing.');
+  const response = source.card_definition_ids.filter((id) =>
+    byId.get(id)?.play_contract?.contract_type !== 'DIAGNOSTIC');
+  const counts = new Map(response.map((id) => [id, 0]));
+  const migrated = [];
+  while (migrated.length < migration.response_deck.size) {
+    let added = false;
+    for (const id of response) {
+      if (migrated.length === migration.response_deck.size) break;
+      if ((counts.get(id) ?? 0) >= migration.response_deck.max_copies_per_card_id) continue;
+      migrated.push(id);
+      counts.set(id, (counts.get(id) ?? 0) + 1);
+      added = true;
+    }
+    if (!added) throw new Error('The pinned response-deck migration cannot produce a legal deck.');
+  }
+  return {
+    cards: nextCards,
+    decks: {
+      ruleset_version: migration.successor_ruleset_version,
+      card_catalog_version: migration.card_catalog_version,
+      decks: [{
+        id: migration.response_deck.successor_deck_id,
+        entity_type: 'deck',
+        display_name: 'Storage Response Deck v2',
+        card_definition_ids: migrated,
+      }],
+    },
+    domain,
+  };
+}
+
 export async function loadPlayCatalog({
   fetchImpl = globalThis.fetch,
   contentRoot = CONTENT_ROOT,
@@ -25,7 +66,11 @@ export async function loadPlayCatalog({
     fetchJson('card-catalog.json', { fetchImpl, contentRoot }),
     fetchJson('decks.json', { fetchImpl, contentRoot }),
     fetchJson('domain-snapshot.json', { fetchImpl, contentRoot }),
-  ]).then(([cards, decks, domain]) => freezeCatalog({ cards, decks, domain }));
+    fetchJson('diagnosis-v2-migration.json', { fetchImpl, contentRoot }),
+  ]).then(([cards, decks, domain, migration]) => {
+    if (migration.successor_ruleset_version !== 'first-version-v2') throw new Error('Diagnosis migration version is incompatible.');
+    return freezeCatalog(applyDiagnosisMigration({ cards, decks, domain, migration }));
+  });
   if (!cache) return load();
   catalogPromise ||= load().catch((error) => {
     catalogPromise = null;

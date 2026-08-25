@@ -46,9 +46,11 @@
     }
   },
   "properties": {
+    "projection_version": { "type": "string", "enum": ["engine-projection-v1", "engine-projection-v2"] },
     "match_id": { "$ref": "#/$defs/instanceId" },
     "revision": { "type": "integer", "minimum": 0 },
     "ruleset_version": { "type": "string", "minLength": 1 },
+    "card_catalog_version": { "type": "string", "minLength": 1 },
     "status": { "type": "string", "enum": ["SETUP", "ACTIVE", "COMPLETED", "ABORTED", "INVALIDATED"] },
     "collaboration_mode": { "type": "string", "enum": ["competitive", "cooperative"] },
     "players": {
@@ -59,8 +61,12 @@
         "properties": {
           "player_id": { "$ref": "#/$defs/instanceId" },
           "display_name": { "type": "string", "minLength": 1 },
+          "controller_type": { "type": "string", "enum": ["human", "computer"] },
           "team_id": { "type": ["string", "null"], "minLength": 1 },
+          "seat_number": { "type": "integer", "minimum": 1 },
+          "active": { "type": "boolean" },
           "service_points": { "type": "integer" },
+          "team_service_points": { "type": ["integer", "null"] },
           "hand_count": { "type": "integer", "minimum": 0 },
           "deck_count": { "type": "integer", "minimum": 0 },
           "discard_card_definition_ids": {
@@ -117,6 +123,8 @@
               "READY_TO_CLOSE"
             ]
           },
+          "machine_revision": { "type": "integer", "minimum": 0 },
+          "diagnosis_revision": { "type": "integer", "minimum": 0 },
           "visible_symptom_ids": {
             "type": "array",
             "items": { "$ref": "#/$defs/entityRef" },
@@ -154,6 +162,22 @@
               "classification"
             ]
           },
+          "accepted_isolations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "isolation_event_id": { "$ref": "#/$defs/instanceId" },
+                "candidate_fault_id": { "$ref": "#/$defs/entityRef" },
+                "public_fault_instance_id": { "$ref": "#/$defs/instanceId" },
+                "contributor_player_id": { "$ref": "#/$defs/instanceId" },
+                "classification": { "type": "string", "enum": ["ACTIONABLE", "DEEPEST", "ACTIONABLE_AND_DEEPEST"] },
+                "cited_public_evidence_event_ids": { "type": "array", "items": { "$ref": "#/$defs/instanceId" }, "uniqueItems": true }
+              },
+              "required": ["isolation_event_id", "candidate_fault_id", "public_fault_instance_id", "contributor_player_id", "classification", "cited_public_evidence_event_ids"]
+            }
+          },
           "repair_summaries": {
             "type": "array",
             "items": {
@@ -163,9 +187,11 @@
                 "repair_event_id": { "$ref": "#/$defs/instanceId" },
                 "player_id": { "$ref": "#/$defs/instanceId" },
                 "repair_procedure_id": { "$ref": "#/$defs/entityRef" },
-                "machine_state_summary": { "type": "string", "minLength": 1 }
+                "machine_state_summary": { "type": "string", "minLength": 1 },
+                "public_summary": { "type": "string", "minLength": 1 },
+                "machine_revision": { "type": "integer", "minimum": 0 }
               },
-              "required": ["repair_event_id", "player_id", "repair_procedure_id", "machine_state_summary"]
+              "required": ["repair_event_id", "player_id", "repair_procedure_id"]
             }
           },
           "verify_summaries": {
@@ -175,7 +201,9 @@
               "additionalProperties": false,
               "properties": {
                 "verify_event_id": { "$ref": "#/$defs/instanceId" },
+                "player_id": { "$ref": "#/$defs/instanceId" },
                 "validation_procedure_id": { "$ref": "#/$defs/entityRef" },
+                "requirement_id": { "$ref": "#/$defs/entityRef" },
                 "result": { "type": "string", "enum": ["PASS", "FAIL", "INCONCLUSIVE"] },
                 "is_current": { "type": "boolean" }
               },
@@ -194,13 +222,20 @@
           "status",
           "visible_symptom_ids",
           "public_candidate_fault_ids",
-          "accepted_isolation",
           "repair_summaries",
           "verify_summaries",
           "worklog",
           "ready_to_close"
         ]
       }
+    },
+    "closed_tickets": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
+    "abandoned_tickets": {
+      "type": "array",
+      "items": { "type": "object" }
     },
     "turn": {
       "type": ["object", "null"],
@@ -219,7 +254,8 @@
           "type": "array",
           "items": { "$ref": "#/$defs/instanceId" },
           "uniqueItems": true
-        }
+        },
+        "zero_action_card_names_played": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true }
       },
       "required": [
         "round_number",
@@ -252,6 +288,7 @@
         ]
       }
     },
+    "service_point_events": { "type": "array", "items": { "type": "object" } },
     "result": {
       "type": ["object", "null"],
       "additionalProperties": false,
@@ -297,6 +334,8 @@
           }
         },
         "completed_at": { "$ref": "#/$defs/timestamp" }
+        ,"give_up_occurred": { "type": "boolean" }
+        ,"tickets_given_up": { "type": "integer", "minimum": 0 }
       },
       "required": [
         "winner_player_ids",

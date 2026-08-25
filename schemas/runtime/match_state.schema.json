@@ -50,7 +50,8 @@
           "additionalProperties": { "type": "integer", "minimum": -99, "maximum": 99 }
         },
         "deck_size": { "const": 30 },
-        "max_copies_per_card_id": { "const": 3 },
+        "max_copies_per_card_id": { "enum": [3, 6] },
+        "play_context": { "type": "string", "enum": ["SOLO", "TRAINING", "MULTIPLAYER"] },
         "opening_hand_size": { "const": 5 },
         "actions_per_turn": { "const": 2 },
         "starting_search_tokens": { "type": "integer", "minimum": 0 },
@@ -144,7 +145,7 @@
           "point_value": { "const": 1 },
           "settlement_status": {
             "type": "string",
-            "enum": ["PENDING", "SETTLED", "SUPERSEDED", "INELIGIBLE"]
+            "enum": ["PENDING", "SETTLED", "SUPERSEDED", "INELIGIBLE", "VOID_GIVE_UP"]
           }
         },
         "required": [
@@ -225,6 +226,20 @@
         ]
       }
     },
+    "give_up_statistics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "give_up_event_id": { "$ref": "#/$defs/instanceId" },
+          "ticket_instance_id": { "$ref": "#/$defs/instanceId" },
+          "player_id": { "$ref": "#/$defs/instanceId" },
+          "abandoned_at": { "$ref": "#/$defs/timestamp" }
+        },
+        "required": ["give_up_event_id", "ticket_instance_id", "player_id", "abandoned_at"]
+      }
+    },
     "events": {
       "type": "array",
       "items": { "$ref": "game_event.schema.json" }
@@ -261,6 +276,7 @@
               "SCORE_THRESHOLD",
               "STALEMATE",
               "SIMULATION_CAP"
+              ,"GIVE_UP"
             ]
           },
           "minItems": 1,
@@ -298,6 +314,8 @@
                   "AUTHORITATIVE_SECONDS",
                   "DISCONNECT",
                   "CONCESSION"
+                  ,"ELIMINATION"
+                  ,"GIVE_UP"
                 ]
               },
               "value": { "type": "integer", "minimum": 0 },

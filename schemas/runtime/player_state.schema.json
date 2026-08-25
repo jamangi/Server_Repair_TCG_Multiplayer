@@ -44,6 +44,11 @@
       "items": { "$ref": "#/$defs/instanceId" },
       "uniqueItems": true
     },
+    "diagnostic_bench_card_instance_ids": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/instanceId" },
+      "uniqueItems": true
+    },
     "opening_hand_drawn": { "type": "boolean" },
     "empty_draws_skipped": { "type": "integer", "minimum": 0 },
     "utility_resources": {

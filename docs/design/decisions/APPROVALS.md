@@ -2,13 +2,13 @@
 
 Status: **PT-001 D, PT-002 A, PT-003 D, PT-004 A, PT-005 A, PT-006 D, and PT-007 A approved — 2026-08-24. The V0 training-ready track is active. Migration choices MS-001 A through MS-005 A and MS-007 A remain approved, but TASK-017 is deferred; MS-006 A's earlier parking sequence is superseded.**
 
-This is a non-authoritative review packet for the first hands-on solo-play findings. Approved choices must be synchronized through TASK-013 before code relies on them. Existing `first-version-v1` behavior remains authoritative until then.
+This is the retained decision-provenance packet for the first hands-on solo-play findings. TASK-013 synchronized PT-001 D through PT-005 A into `first-version-v2` on 2026-08-24. Normative behavior now lives in `FROZEN_RULES.md`; existing `first-version-v1` artifacts remain pinned rather than reinterpreted.
 
-The canonical open-rule entries live in [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md). This file supplies reviewable lettered choices without creating a second rules ledger. After resolution, the selected behavior belongs in `FROZEN_RULES.md`; this packet remains only as decision provenance or may be retired through the approving task.
+The canonical remaining open-rule entry lives in [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md). This file supplies reviewable lettered choices without creating a second rules ledger. The selected PT-001 through PT-005 behavior belongs in `FROZEN_RULES.md`; the alternatives below are non-authoritative provenance.
 
 ## Approved V0 record
 
-The project owner approved `PT-001 D`, `PT-002 A`, `PT-003 D`, `PT-004 A`, `PT-005 A`, `PT-006 D`, and `PT-007 A` on 2026-08-24. TASK-012 proceeds first; TASK-013 synchronizes PT-001 through PT-005 into a successor V0 rules version; TASK-014 implements PT-006 D; TASK-016 stabilizes final board composition; and TASK-015 implements PT-007 A plus the PT-005 A reveal experience. The alternatives below remain decision provenance, not open implementation choices.
+The project owner approved `PT-001 D`, `PT-002 A`, `PT-003 D`, `PT-004 A`, `PT-005 A`, `PT-006 D`, and `PT-007 A` on 2026-08-24. TASK-012 and TASK-013 are complete: PT-001 D through PT-005 A now govern `first-version-v2`, `solo-pages-v2`, `ticket-builder-v2`, and the diagnosis-v2 content contracts. TASK-014 implements PT-006 D; TASK-016 stabilizes final board composition; and TASK-015 implements PT-007 A plus the polished PT-005 A reveal experience. The alternatives below remain decision provenance, not open implementation choices.
 
 ## Verified current facts
 

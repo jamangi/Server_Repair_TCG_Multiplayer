@@ -1,5 +1,7 @@
 # Solo Pages v1 implementation profile
 
+> **Successor:** Current post-playtest Solo play is defined by [`SOLO_PAGES_PROFILE_V2.md`](SOLO_PAGES_PROFILE_V2.md). This v1 profile remains immutable for existing `solo-pages-v1` saves and exports.
+
 > **Status:** TASK-010 implementation profile. This document derives a browser-local solo product configuration from the frozen `first-version-v1` ruleset. It does not copy, fork, or override the Frozen Rules ledger.
 
 ## Identity and authority

@@ -1,0 +1,12 @@
+{
+  "request_id": "req_give_up_ticket",
+  "match_id": "match_demo_diagnosis_v2",
+  "player_id": "player_a",
+  "expected_revision": 8,
+  "action_type": "GIVE_UP_TICKET",
+  "payload": {
+    "ticket_instance_id": "ticketinst_diagnosis_v2_1",
+    "confirmed": true
+  },
+  "client_nonce": "nonce_give_up_ticket"
+}

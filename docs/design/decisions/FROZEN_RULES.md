@@ -2,11 +2,75 @@
 
 This document records directions explicitly approved for the Server Repair TCG. "Frozen" means implementations and tests may rely on the rule. A frozen rule may still be changed deliberately through a documented rules-version migration.
 
-The consolidated rules version approved on 2026-08-23 is `first-version-v1`.
+The consolidated foundation approved on 2026-08-23 remains pinned as `first-version-v1`. The post-playtest diagnosis successor approved on 2026-08-24 is `first-version-v2`. A persisted Match, Ticket snapshot, replay, profile, deck, or statistic record is interpreted only under its recorded version; the successor never reinterprets a v1 artifact.
 
 Start with [`DECISION_INDEX.md`](DECISION_INDEX.md) for the decision hierarchy. Accepted unresolved decisions, new proposals that require rules review, and pressure against this ledger belong in [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md). Git history and completed task records preserve the retired candidate and synchronization ledgers.
 
 The rules in §§9–15 were approved from the Candidate-Frozen Example Profile v0.0 review on 2026-08-22. The example package's named Tickets, deterministic deck orders, account fixtures, balance audits, screens, and animations remain non-authoritative fixtures.
+
+## Diagnosis successor authority — `first-version-v2`
+
+This section is the normative successor overlay for PT-001 D, PT-002 A, PT-003 D, PT-004 A, and PT-005 A. Rules not changed here continue to inherit the foundation sections below. `first-version-v1`, its TASK-009 replay campaign, and `solo-pages-v1` remain frozen historical behavior.
+
+### Global Diagnostic Bench and response deck
+
+- Every Card Definition in the pinned playable catalog whose contract is `DIAGNOSTIC` is available from the start as one persistent authoritative Card Instance per Player in `diagnostic_bench`. Diagnostics never occupy the 30-card response deck, never enter draw or discard, and remain on the Bench after execution or Documentation. Search and Refresh operate only on response-deck Cards.
+- A Bench diagnostic retains its printed zero-, one-, or two-Action cost and the ordinary same-name zero-Action-per-turn limit. It is legal only when the selected Ticket target and current machine revision have exactly one deterministic authored outcome. Repetition is otherwise ordinary diagnostic play; a Bench View does not grant or remove legality.
+- The currently pinned migration pack has six playable diagnostic Card Definitions and five response Card Definitions. Its deterministic starter response deck has 30 copies, exactly six of each response definition. `first-version-v2` therefore permits at most six copies of one response Card ID. This is a minimal-pack migration rule, not broad content expansion.
+- `RELEVANT` and `GLOBAL` are local views over the same Bench instances and identical legal intents. Relevant is the default focused shelf. Global exposes the complete playable catalog with search, Test/Command, category, optional Relevant filter, deterministic sort, and bounded pagination. View, filter, sort, search, page, and selection state are presentation state: switching them cannot change Match state, replay identity, cost, result, score, statistics, policy input, or difficulty.
+- Relevance is advisory and player-safe. It starts from the Ticket's public Symptoms, public Candidates, and explicit public context; traverses deterministically ordered authored relationship edges in either direction for at most three edges; and exposes only the resulting relationship path. It never consults hidden Fault instances or unexecuted outcomes. The UI must state that the curated graph may be incomplete and that an unmarked diagnostic is not declared useless.
+- Bench diagnostics may be documented. Publication makes their already-authorized result public but does not recover, duplicate, remove, or otherwise mutate the persistent Bench item.
+
+### Diagnostic results and the no-silent-action invariant
+
+For a diagnostic source, target, machine state, and diagnosis revision, the Ticket must provide exactly one typed Evidence outcome. Every accepted Test or Command appends visible Evidence and a comprehensible observation even when there is no candidate effect. The result classification is one of:
+
+- `CANDIDATE_EFFECT`: one or more candidate dispositions change;
+- `CLEAN`: the diagnostic completed cleanly in the current state;
+- `IRRELEVANT`: the diagnostic completed but found nothing related to this Ticket; or
+- `INCONCLUSIVE`: the diagnostic ran but could not distinguish a candidate.
+
+Candidate dispositions have these exact meanings:
+
+- `SUPPORT` raises confidence but is independently insufficient unless an authored corroborated route says otherwise.
+- `CONTRADICT` is Evidence against a candidate but does not complete elimination and is never equivalent to `RULE_OUT`.
+- `RULE_OUT` is sufficient only to create or support an explicitly cited elimination record for that same candidate, target, visibility, and diagnosis revision.
+- `CONFIRM` is decisive positive Evidence for that candidate when a typed route names the outcome and the authored target/state is current. It does not turn a non-actionable condition into a Repair gateway.
+- `INCONCLUSIVE` changes no candidate assessment.
+
+Every other accepted action that spends an Action, Card, Search/Refresh token, or limited resource must likewise produce a typed player-visible result event. An accepted action result names its target, authoritative payment/disposition, and result summary. `RESOLVED` with payment but no projected feedback is invalid. A rejected request remains pre-payment with zero resource cost, no state mutation, no event, and null target/result summaries. Cross-Ticket results stay in authorized event history and the client must retain a direct route to the actual target after rerender.
+
+### Candidate derivation, Hypotheses, and elimination
+
+- The Builder deterministically collects Faults connected by `associated_fault` from the Ticket's public Symptoms and explicit component/subsystem/causal context. It always includes every hidden Fault instance, requires each hidden Fault to have that public plausibility link, then fills remaining slots with lexically ordered plausible distractors. The final public set contains two through five unique candidates.
+- Every distractor must have an authored current-state diagnostic outcome that `CONTRADICT`s or `RULE_OUT`s it. Missing public plausibility, omitted hidden Faults, incomplete outcome coverage, an invalid count, or an indistinguishable distractor is a complete Builder failure with structured diagnostics and no partial Ticket batch.
+- A public Candidate is a possibility, not truth. A private/team Hypothesis remains a free marker of up to two Candidates and receives no truth response. An Evidence disposition is one immutable diagnostic claim. An elimination is a separate chronological player/team knowledge record. None of these replaces server-only Fault truth.
+- Set Elimination is a free basic action during Diagnosis. Competitive eliminations are private; cooperative eliminations are team-visible. Setting `eliminated=true` requires at least one authorized same-Ticket, current-machine, current-diagnosis Evidence citation with candidate-specific `RULE_OUT`. `CONTRADICT` alone is insufficient. Reversal is free and cites no Evidence; the new record points to the record it supersedes. Repeating the same current value is rejected.
+- Repair and failed/inconclusive Verify advance the diagnosis revision. Earlier eliminations and their citations remain historical but cannot satisfy a later route. Eliminations neither spend Cards nor score; accepted elimination actions and Give Ups have distinct statistics.
+
+### Typed alternative Isolation routes
+
+Each actionable Fault-stage requirement owns one or more stable route IDs. Routes are a typed OR list; every field inside one route is ANDed. There is no client-evaluated expression language.
+
+- `DIRECT_OBSERVATION` and `DEFINITIVE_DIAGNOSTIC` require at least one cited, authorized, current outcome named by the route with candidate-specific `CONFIRM`.
+- `CORROBORATED_SUPPORT` requires the route's threshold of distinct named outcomes, each current and candidate-specific `SUPPORT`. Outcomes deliberately assigned to this path must not be mislabeled `CONFIRM`.
+- `EVIDENCE_BACKED_ELIMINATION` requires current named supporting Evidence for the selected Fault plus the route's listed current elimination records. The Commit must cite both the supporting outcomes and every Evidence event underlying those eliminations.
+- `RECOVERY_DERIVED` requires a current named failed/inconclusive Verify Evidence outcome with candidate-specific `CONFIRM` after the newly actionable stage is exposed.
+
+Commit Isolation still costs one Action. All cited Evidence must be authorized to the committing Player, from the same Ticket, current for its route, and candidate-specific. When a route succeeds, the committing Player owns the single accepted Isolation contribution for that active Fault/stage; every Player whose decisive Evidence was used remains listed on the accepted event. Team/public Evidence may combine, private Evidence may not cross its audience boundary, and deterministic route-ID order resolves equivalent alternatives. A later attempt against an already isolated stage follows ordinary timing/idempotency rules; a newly actionable causal stage is new Isolation work.
+
+Failure returns only the generic paid `ISOLATION_NOT_SUPPORTED` result and discloses no missing hidden prerequisite. Candidate-specific `CONFIRM` cannot be rejected for failure to meet an unrelated flat citation count. Legacy v1 flat requirements remain v1-only; v2 Tickets persist typed routes.
+
+### Repair gateway and failed Verify
+
+Accepted Isolation remains mandatory for every ordinary Repair. `first-version-v2` adds no speculative or parts-cannon Repair path. A Repair Card is paid and discarded only when it targets the exact active isolated Fault and an authored current-state outcome exists. Failed or inconclusive Verify preserves history, returns the Ticket to Diagnosis, advances the diagnosis revision, and may provide recovery-derived Evidence for a later causal stage; it never silently authorizes Repair.
+
+### Solo/training Give Up
+
+- `GIVE_UP_TICKET` is exposed only in `SOLO` or `TRAINING`, is free, and requires an explicit `confirmed=true` request. It is absent from competitive/public multiplayer.
+- One accepted Give Up atomically emits a public abandonment event and a private reveal event for the confirming Player; locks the Worklog; marks the Ticket `ABANDONED`; voids every pending contribution as `VOID_GIVE_UP`; removes and archives the Ticket; reconciles the remaining queue; records one give-up statistic; evaluates terminal state; and ends the turn. Replaying the request through idempotency cannot record it twice.
+- The private reveal contains the hidden Faults and causal links, every eligible Evidence/Isolation route, necessary Repairs, and passing Verify path. Public projections contain only that the Ticket was abandoned. Because the Ticket is archived, no later intent may target or resume play on revealed truth.
+- Remaining Tickets continue normally. If Give Up empties the queue, the Match completes with reason `GIVE_UP`, no winning Player/team, and no solo win. A Match in which any Ticket was given up cannot be recorded as a solo win even if earlier Tickets closed.
 
 ## 1. Core educational loop
 
