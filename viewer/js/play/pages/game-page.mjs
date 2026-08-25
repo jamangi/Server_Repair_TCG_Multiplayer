@@ -2,6 +2,7 @@ import { bindResolvedImage } from '../art-resolver.mjs';
 import { createCardDetailView, createCardView, setCardViewState } from '../card-view.mjs';
 import { cardName, domainName } from '../catalog-service.mjs';
 import { escapeHtml, formatDuration, formatInteger } from '../dom-utils.mjs';
+import { groupHandInstances, instanceForGroup, pageHandGroups } from '../hand-view.mjs';
 import { closePlayDialog, openPlayDialog } from '../motion-coordinator.mjs';
 
 const STATUS_LABELS = Object.freeze({
@@ -286,13 +287,17 @@ export function renderGame(root, context) {
   const benchPageCount = Math.max(1, Math.ceil(visibleBench.length / benchPageSize));
   session.benchPage = Math.min(Math.max(1, session.benchPage), benchPageCount);
   const pagedBench = visibleBench.slice((session.benchPage - 1) * benchPageSize, session.benchPage * benchPageSize);
+  const handGroups = groupHandInstances(view.hand);
+  const handPage = pageHandGroups(handGroups, session.handPage);
+  session.handPage = handPage.page;
 
   const archivedCount = publicMatch.closed_tickets.length + (publicMatch.abandoned_tickets ?? []).length;
   const benchStart = visibleBench.length ? (session.benchPage - 1) * benchPageSize + 1 : 0;
   const benchEnd = Math.min(session.benchPage * benchPageSize, visibleBench.length);
   const selectedCost = selectedCard?.action_cost ?? context.catalog.cardById.get(selectedCard?.card_definition_id)?.action_cost ?? 0;
+  const textReflow = Number.parseFloat(getComputedStyle(document.documentElement).fontSize) >= 24;
   root.innerHTML = `
-    <section class="play-route game-route game-route--${session.benchView.toLowerCase()}" aria-labelledby="game-heading">
+    <section class="play-route game-route game-route--${session.benchView.toLowerCase()}${textReflow ? ' game-route--text-reflow' : ''}" aria-labelledby="game-heading">
       <header class="game-header" data-route-reveal><div><p class="play-eyebrow">Solo training board</p><h1 id="game-heading">Night-shift board</h1><p>Round ${publicMatch.turn?.round_number ?? '—'} · Turn ${publicMatch.turn?.turn_number ?? '—'} · ${escapeHtml(publicMatch.turn?.phase?.replaceAll('_', ' ') || publicMatch.status)}</p></div><dl class="game-resources" data-continuity-scroll="game:resources"><div><dt>Points</dt><dd>${player.team_service_points ?? player.service_points}</dd></div><div><dt>Actions</dt><dd>${publicMatch.turn?.actions_remaining ?? 0} / 2</dd></div><div><dt>Search</dt><dd>${view.utility_resources.search_tokens}</dd></div><div><dt>Refresh</dt><dd>${view.utility_resources.refresh_tokens}</dd></div><div><dt>Deck / discard</dt><dd>${view.deck_count} / ${view.discard_card_instance_ids.length}</dd></div></dl></header>
       ${projection.duplicate_ticket_disclosure ? `<p class="duplicate-disclosure game-disclosure"><strong>${projection.ticket_count}-Ticket queue:</strong> repeated causal fingerprints remain independent machine and Evidence records.</p>` : ''}
       ${solutionRevealMarkup(view.solution_reveals ?? [], context.catalog, projection)}
@@ -301,7 +306,7 @@ export function renderGame(root, context) {
         <main class="board-center">
           <section class="ticket-sheet${selectedTicket?.status === 'RETURNED_TO_DIAGNOSIS' ? ' is-returned' : ''}" aria-labelledby="selected-ticket-heading" aria-current="true" data-route-reveal>${selectedTicket ? `<div class="ticket-sheet__art play-art-slot"><img id="ticket-placeholder-art" width="900" height="420" alt=""></div><div class="ticket-sheet__summary"><header><p class="ticket-code">${escapeHtml(selectedTicket.ticket_instance_id)}</p><h2 id="selected-ticket-heading">${escapeHtml(presentation?.display_name || selectedTicket.ticket_definition_id)}</h2><span class="ticket-status" data-status="${selectedTicket.status}">${escapeHtml(STATUS_LABELS[selectedTicket.status] || selectedTicket.status)}</span><span class="ticket-sheet__revision">Machine revision ${selectedTicket.machine_revision}</span></header><p class="ticket-sheet__symptom"><strong>Symptom:</strong> ${escapeHtml(domainName(context.catalog, selectedTicket.visible_symptom_ids[0]))}${selectedTicket.visible_symptom_ids.length > 1 ? ` +${selectedTicket.visible_symptom_ids.length - 1} more` : ''}</p><ul class="candidate-chip-row" aria-label="Candidate faults">${candidateSummaryMarkup(selectedTicket, session, context)}</ul><button type="button" class="play-button play-button--quiet view-full-ticket" data-view-full-ticket>View full Ticket</button></div>` : '<p>No active Ticket.</p>'}</section>
           <section class="diagnostic-bench" aria-labelledby="diagnostic-bench-heading" data-route-reveal><header class="diagnostic-bench__heading"><div><p class="play-eyebrow">Persistent catalog</p><h2 id="diagnostic-bench-heading">Diagnostic Bench</h2><p>${session.benchView === 'RELEVANT' ? `${relevantCount} of ${bench.length} connected by public relationships.` : `${bench.length} total diagnostics. Local filters never change legality.`}</p></div><div class="bench-view-switch" role="group" aria-label="Bench View"><button type="button" data-bench-view="RELEVANT" aria-pressed="${session.benchView === 'RELEVANT'}">Relevant</button><button type="button" data-bench-view="GLOBAL" aria-pressed="${session.benchView === 'GLOBAL'}">Global</button></div></header><p class="diagnostic-disclaimer">${escapeHtml(view.diagnostic_relevance_notice || '')}</p><div class="diagnostic-bench__controls">${session.benchView === 'GLOBAL' ? `<label>Search<input type="search" data-bench-search data-continuity-key="game:bench-search" value="${escapeHtml(session.benchSearch)}" placeholder="Search diagnostics"></label>` : ''}<div class="bench-type-tabs" role="group" aria-label="Diagnostic type"><button type="button" data-bench-type-button="ALL" aria-pressed="${session.benchTypeFilter === 'ALL'}">All</button><button type="button" data-bench-type-button="TEST" aria-pressed="${session.benchTypeFilter === 'TEST'}">Test</button><button type="button" data-bench-type-button="COMMAND" aria-pressed="${session.benchTypeFilter === 'COMMAND'}">Command</button></div>${session.benchView === 'GLOBAL' ? `<label>Subsystem<select data-bench-category><option value="ALL">All</option>${categories.map((category) => `<option value="${escapeHtml(category)}"${session.benchCategory === category ? ' selected' : ''}>${escapeHtml(category)}</option>`).join('')}</select></label><label>Sort<select data-bench-sort><option value="NAME">Name</option><option value="TYPE"${session.benchSort === 'TYPE' ? ' selected' : ''}>Type</option><option value="COST"${session.benchSort === 'COST' ? ' selected' : ''}>Cost</option><option value="SUBSYSTEM"${session.benchSort === 'SUBSYSTEM' ? ' selected' : ''}>Subsystem</option></select></label><label class="switch-row"><input type="checkbox" data-bench-relevant${session.benchRelevantOnly ? ' checked' : ''}>Relevant</label><label class="switch-row"><input type="checkbox" data-bench-runnable${session.benchRunnableOnly ? ' checked' : ''}>Runnable</label>` : ''}</div><div class="diagnostic-bench__count" role="status" aria-live="polite">Showing ${benchStart}–${benchEnd} of ${visibleBench.length}</div><div class="diagnostic-shelf" data-bench-card-list>${pagedBench.length ? '' : '<div class="empty-panel"><p>No diagnostics match these local filters.</p></div>'}</div><div class="bench-pagination"><button type="button" data-bench-page="${session.benchPage - 1}"${session.benchPage === 1 ? ' disabled' : ''}>Previous</button><span>Page ${session.benchPage} / ${benchPageCount}</span><button type="button" data-bench-page="${session.benchPage + 1}"${session.benchPage === benchPageCount ? ' disabled' : ''}>Next</button></div></section>
-          <section class="hand-rail" aria-labelledby="hand-heading" data-route-reveal><div class="hand-rail__heading"><div><p class="play-eyebrow">Private hand</p><h2 id="hand-heading">Cards</h2></div><span>${view.hand.length} in hand</span></div><div class="hand-rail__cards" data-continuity-scroll="game:hand"></div></section>
+          <section class="hand-rail" aria-labelledby="hand-heading" data-expanded="${session.handExpanded}"><header class="hand-rail__heading"><div><p class="play-eyebrow">Private hand</p><h2 id="hand-heading">Response hand</h2></div><p class="hand-rail__counts"><strong>${view.hand.length} Cards</strong><span>Deck ${view.deck_count}</span><span>Discard ${view.discard_card_instance_ids.length}</span></p><button type="button" class="hand-expand-toggle" data-toggle-hand data-continuity-key="game:hand-toggle" aria-expanded="${session.handExpanded}" aria-controls="response-hand-groups">${session.handExpanded ? 'Collapse hand' : 'Expand hand'}</button></header><div class="hand-rail__body"><div class="hand-rail__range" role="status" aria-live="polite">Groups ${handPage.start}–${handPage.end} of ${handGroups.length} · Page ${handPage.page} / ${handPage.pageCount}</div><div id="response-hand-groups" class="hand-rail__cards" data-continuity-scroll="game:hand"></div>${handPage.pageCount > 1 ? `<nav class="hand-pagination" aria-label="Response hand pages"><button type="button" data-hand-page="${handPage.page - 1}"${handPage.page === 1 ? ' disabled' : ''}>Previous</button><button type="button" data-hand-page="${handPage.page + 1}"${handPage.page === handPage.pageCount ? ' disabled' : ''}>Next</button></nav>` : ''}</div></section>
         </main>
         <aside class="investigation-rail">
           <section class="intelligence-panel" data-route-reveal><div class="intelligence-tabs" role="tablist" aria-label="Ticket intelligence"><button type="button" role="tab" data-continuity-key="game-panel-evidence" data-panel-tab="evidence" aria-selected="${session.panelTab === 'evidence'}">Evidence</button><button type="button" role="tab" data-continuity-key="game-panel-worklog" data-panel-tab="worklog" aria-selected="${session.panelTab === 'worklog'}">Worklog</button></div><section class="evidence-panel" data-continuity-scroll="game:ticket:${escapeHtml(selectedTicket?.ticket_instance_id || 'none')}:evidence" role="tabpanel" data-panel="evidence"${session.panelTab === 'evidence' ? '' : ' hidden'}><div class="section-heading"><div><p class="play-eyebrow">Knowledge state</p><h2>Evidence</h2></div><span>Team</span></div>${selectedTicket ? renderEvidence(view.authorized_events, selectedTicket.ticket_instance_id, context.catalog, session.lastEvents, session.lastAction?.result_event_id) : ''}</section><section class="worklog-panel" data-continuity-scroll="game:ticket:${escapeHtml(selectedTicket?.ticket_instance_id || 'none')}:worklog" role="tabpanel" data-panel="worklog"${session.panelTab === 'worklog' ? '' : ' hidden'}><div class="section-heading"><div><p class="play-eyebrow">Immutable sequence</p><h2>Worklog</h2></div><span>${selectedTicket?.worklog.length || 0}</span></div>${selectedTicket ? renderWorklog(selectedTicket, session.lastEvents, session.lastAction?.result_event_id) : ''}</section></section>
@@ -318,10 +323,6 @@ export function renderGame(root, context) {
   for (const entry of pagedBench) {
     const card = context.catalog.cardById.get(entry.card_definition_id);
     const relevance = relevanceFor(entry);
-    const why = relevance.why_relevant_paths?.[0];
-    const explanation = why
-      ? why.entity_ids.map((id) => domainName(context.catalog, id)).join(' → ')
-      : 'No authored public relationship path is available; Global access does not imply relevance or legality.';
     const legal = projection.legal_intents.some((intent) => intent.card_instance_id === entry.card_instance_id);
     const tile = document.createElement('article');
     tile.className = `diagnostic-tile${entry.card_instance_id === session.selectedCardInstanceId ? ' is-selected' : ''}`;
@@ -336,16 +337,15 @@ export function renderGame(root, context) {
     cardView.dataset.selectDiagnostic = entry.card_instance_id;
     tile.dataset.runnable = String(legal);
     setCardViewState(cardView, { resolving: session.resolving && entry.card_instance_id === session.selectedCardInstanceId });
-    const details = document.createElement('details');
-    const tileName = document.createElement('span');
-    tileName.className = 'diagnostic-tile__name';
-    tileName.textContent = cardName(card);
-    const summary = document.createElement('summary');
-    summary.textContent = relevance.relevant ? 'Why relevant?' : 'Catalog note';
-    const note = document.createElement('p');
-    note.textContent = explanation;
-    details.append(summary, note);
-    tile.append(cardView, tileName, details);
+    cardView.querySelector('.play-card__rules')?.remove();
+    cardView.querySelector('.play-card__footer')?.remove();
+    const inspect = document.createElement('button');
+    inspect.type = 'button';
+    inspect.className = 'diagnostic-tile__inspect';
+    inspect.dataset.inspectDiagnostic = entry.card_instance_id;
+    inspect.textContent = 'Inspect';
+    inspect.setAttribute('aria-label', `Inspect ${cardName(card)}`);
+    tile.append(cardView, inspect);
     benchShelf.append(tile);
   }
   const hand = root.querySelector('.hand-rail__cards');
@@ -367,12 +367,13 @@ export function renderGame(root, context) {
       cardView.style.removeProperty('z-index');
     }, 180);
   };
-  for (const held of view.hand) {
+  for (const group of handPage.groups) {
+    const held = instanceForGroup(group, session.selectedCardInstanceId);
     const card = context.catalog.cardById.get(held.card_definition_id);
     const hasLegal = projection.legal_intents.some((intent) => intent.card_instance_id === held.card_instance_id);
     let suppressActivation = false;
     const cardView = createCardView(card, {
-      variant: 'hand',
+      variant: session.handExpanded ? 'hand' : 'compact',
       interactive: true,
       selected: held.card_instance_id === session.selectedCardInstanceId,
       cardInstanceId: held.card_instance_id,
@@ -387,6 +388,10 @@ export function renderGame(root, context) {
         context.rerender();
       },
     });
+    cardView.querySelector('.play-card__footer')?.remove();
+    const rules = cardView.querySelector('.play-card__rules');
+    if (session.handExpanded && rules) rules.textContent = card?.presentation?.short_description || card.rules_text;
+    else rules?.remove();
     setCardViewState(cardView, { legalTarget: hasLegal, resolving: session.resolving && held.card_instance_id === session.selectedCardInstanceId });
     if (newDrawIds.has(held.card_instance_id)) cardView.dataset.newDraw = 'true';
     if (context.snapshot.state.records.settings.drag_enabled && hasLegal) {
@@ -480,10 +485,72 @@ export function renderGame(root, context) {
       cardView.addEventListener('pointerup', (event) => finishPointerDrag(event));
       cardView.addEventListener('pointercancel', (event) => finishPointerDrag(event, true));
     }
-    hand.append(cardView);
+    const groupView = document.createElement('article');
+    groupView.className = `hand-group${group.instances.length > 1 ? ' hand-group--stacked' : ''}`;
+    groupView.dataset.handGroup = group.card_definition_id;
+    groupView.dataset.quantity = String(group.instances.length);
+    const groupMeta = document.createElement('div');
+    groupMeta.className = 'hand-group__meta';
+    const quantity = document.createElement('span');
+    quantity.className = 'hand-group__quantity';
+    quantity.textContent = `×${group.instances.length}`;
+    quantity.setAttribute('aria-label', `${group.instances.length} copies`);
+    const inspect = document.createElement('button');
+    inspect.type = 'button';
+    inspect.className = 'hand-group__inspect';
+    inspect.dataset.inspectHand = held.card_instance_id;
+    inspect.textContent = 'Inspect';
+    inspect.setAttribute('aria-label', `Inspect ${cardName(card)}`);
+    groupMeta.append(quantity, inspect);
+    if (group.instances.length > 1) {
+      const copies = document.createElement('div');
+      copies.className = 'hand-group__copies';
+      copies.setAttribute('aria-label', `${cardName(card)} copies`);
+      const activeCopy = group.instances.indexOf(held) + 1;
+      const using = document.createElement('span');
+      using.textContent = `Using copy ${activeCopy}`;
+      copies.append(using);
+      group.instances.forEach((instance, index) => {
+        if (instance.card_instance_id === held.card_instance_id) return;
+        const copy = document.createElement('button');
+        copy.type = 'button';
+        copy.dataset.selectHand = instance.card_instance_id;
+        copy.dataset.cardInstanceId = instance.card_instance_id;
+        copy.textContent = `Use copy ${index + 1}`;
+        copies.append(copy);
+      });
+      groupView.append(cardView, groupMeta, copies);
+    } else {
+      groupView.append(cardView, groupMeta);
+    }
+    hand.append(groupView);
   }
 
   const submit = (intentId) => session.submit(intentId);
+  const openCardInspect = (cardInstanceId, opener) => {
+    const instance = [...view.hand, ...bench].find((entry) => entry.card_instance_id === cardInstanceId);
+    if (!instance) return;
+    const diagnostic = bench.find((entry) => entry.card_instance_id === cardInstanceId);
+    let diagnosticContext = null;
+    if (diagnostic) {
+      const relevance = relevanceFor(diagnostic);
+      const path = relevance.why_relevant_paths?.[0]?.entity_ids
+        ?.map((id) => domainName(context.catalog, id)).join(' → ');
+      diagnosticContext = {
+        relevant: relevance.relevant === true,
+        category: diagnostic.category,
+        path,
+        notice: view.diagnostic_relevance_notice,
+        catalogExplanation: 'Global keeps the complete diagnostic catalog available for investigation. A diagnostic that is not marked relevant may still become useful as public relationships or the machine state change; this label does not decide legality.',
+      };
+    }
+    const dialog = root.querySelector('#game-card-dialog');
+    dialog.querySelector('[data-dialog-content]').replaceChildren(createCardDetailView(
+      context.catalog.cardById.get(instance.card_definition_id),
+      { artResolver: context.artResolver, diagnosticContext },
+    ));
+    openPlayDialog(dialog, opener);
+  };
   const revealActionResult = () => {
     const record = session.lastAction;
     if (!record?.target_ticket_id || !record.result_event_id) return;
@@ -501,6 +568,38 @@ export function renderGame(root, context) {
     });
   };
   const onClick = (event) => {
+    const handToggle = event.target.closest('[data-toggle-hand]');
+    if (handToggle) {
+      session.handExpanded = !session.handExpanded;
+      session.restoreHandToggleFocus = true;
+      session.lastMotion = null;
+      context.rerender();
+      return;
+    }
+    const handPageButton = event.target.closest('[data-hand-page]');
+    if (handPageButton && !handPageButton.disabled) {
+      session.handPage = Number(handPageButton.dataset.handPage);
+      context.rerender();
+      requestAnimationFrame(() => root.querySelector('.hand-rail__cards .play-card')?.focus({ preventScroll: true }));
+      return;
+    }
+    const handSelection = event.target.closest('[data-select-hand]');
+    if (handSelection) {
+      session.selectedCardInstanceId = handSelection.dataset.selectHand;
+      session.lastMotion = null;
+      context.rerender();
+      return;
+    }
+    const diagnosticInspect = event.target.closest('[data-inspect-diagnostic]');
+    if (diagnosticInspect) {
+      openCardInspect(diagnosticInspect.dataset.inspectDiagnostic, diagnosticInspect);
+      return;
+    }
+    const handInspect = event.target.closest('[data-inspect-hand]');
+    if (handInspect) {
+      openCardInspect(handInspect.dataset.inspectHand, handInspect);
+      return;
+    }
     const benchView = event.target.closest('[data-bench-view]');
     if (benchView) {
       session.benchView = benchView.dataset.benchView;
@@ -554,9 +653,7 @@ export function renderGame(root, context) {
       openPlayDialog(dialog, event.target.closest('[data-view-full-ticket]'));
     }
     if (event.target.closest('[data-inspect-selected]') && selectedCard) {
-      const dialog = root.querySelector('#game-card-dialog');
-      dialog.querySelector('[data-dialog-content]').replaceChildren(createCardDetailView(context.catalog.cardById.get(selectedCard.card_definition_id), { artResolver: context.artResolver }));
-      openPlayDialog(dialog, event.target.closest('[data-inspect-selected]'));
+      openCardInspect(selectedCard.card_instance_id, event.target.closest('[data-inspect-selected]'));
     }
     const closeDialog = event.target.closest('[data-close-dialog]');
     if (closeDialog) closePlayDialog(root.querySelector(closeDialog.dataset.closeDialog === 'full-ticket' ? '#full-ticket-dialog' : '#game-card-dialog'));
@@ -605,10 +702,18 @@ export function renderGame(root, context) {
       event.preventDefault();
       return;
     }
-    if (!session.dragCardInstanceId) return;
-    session.dragCardInstanceId = null;
-    clearDragTargets();
-    settleDraggedCard(root.querySelector('[data-pointer-dragging="true"]'));
+    if (session.dragCardInstanceId) {
+      session.dragCardInstanceId = null;
+      clearDragTargets();
+      settleDraggedCard(root.querySelector('[data-pointer-dragging="true"]'));
+      event.preventDefault();
+      return;
+    }
+    const handRail = root.querySelector('.hand-rail[data-expanded="true"]');
+    if (!handRail?.contains(document.activeElement) || document.querySelector('dialog[open]')) return;
+    session.handExpanded = false;
+    session.restoreHandToggleFocus = true;
+    context.rerender();
     event.preventDefault();
   };
   root.addEventListener('click', onClick);
@@ -618,6 +723,11 @@ export function renderGame(root, context) {
   root.addEventListener('dragover', onDragOver);
   root.addEventListener('dragleave', onDragLeave);
   root.addEventListener('drop', onDrop);
+
+  if (session.restoreHandToggleFocus) {
+    session.restoreHandToggleFocus = false;
+    root.querySelector('[data-toggle-hand]')?.focus({ preventScroll: true });
+  }
 
   const pendingMotion = session.lastMotion;
   session.lastMotion = null;

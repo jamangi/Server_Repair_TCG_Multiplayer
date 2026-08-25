@@ -2,7 +2,7 @@
 
 ## Status
 
-**Approved scope — queued after TASK-018.** UI-001 A and UI-002 A were approved by the project owner on 2026-08-25. Execute after dialog/Ticket regressions are fixed and before TASK-015 locks tutorial highlights to the affected Bench and hand controls.
+**Complete — 2026-08-25.** UI-001 A and UI-002 A are implemented and verified. The shared Bench tile, contextual Inspect detail, grouped/paged/expandable response hand, responsive geometry, and consolidated active-Match CSS are ready for TASK-015 tutorial highlights.
 
 ## Objective
 
@@ -112,3 +112,44 @@ Do not change schemas, domain content, Card ownership/zones, hand/deck order, di
 ## Completion boundary
 
 Complete only when the approved shared diagnostic tile and adaptive hand are legible, state-safe, accessible, and visually coherent in both Bench Views; Relevant and Global use their available height without clipping required Ticket/action content or leaving avoidable dead space; Inspect owns detailed/relevance information; affected CSS is consolidated instead of further layered; child-level and human visual QA pass; and gameplay/replay authority remains byte-for-byte equivalent for identical intents.
+
+## Completion record — 2026-08-25
+
+### Outcome
+
+- Replaced the narrow TASK-016 diagnostic presentation with one shared compact tile in Relevant and Global. Every tile now preserves full family, cost, landscape art, two-line title, and an explicit Inspect route; shelf rules/detail markup was removed.
+- Added player-safe diagnostic Inspect context. Relevant entries expose `Why relevant?`, their public relationship path, and the incomplete-graph notice; other entries explain Global/catalog availability without inferring legality or truth.
+- Added a shared adaptive response hand that groups definitions without merging instances, pages five groups deterministically, reports Cards/Deck/Discard and range/page, preserves explicit duplicate-copy selection, and removes the misleading in-hand `DISCARD` footer.
+- Added a non-modal expanded hand over the center work surface with readable art and concise descriptions. It stays below the selected Ticket and left of the persistent action rail; dialog Escape remains modal-owned, while focused hand Escape collapses safely and restores the toggle focus.
+- Consolidated the competing TASK-016 and `Final cascade lock` declarations into one active-Match composition layer. Relevant uses its saved height for the hand and intelligence rail, Global preserves catalog density, and short desktop, tablet, phone, reduced-motion, and 200% text reflow keep required child anatomy visible.
+- Preserved engine projections, legal intents, action costs, Match/replay state, hand order, and every authoritative Card Instance. Presentation interactions emitted no Worker intent and identical projected intents remained byte-for-byte unchanged.
+
+### Verification
+
+| Command | Exit | Result |
+| --- | ---: | --- |
+| `node viewer/scripts/build-play-assets.mjs`; `node viewer/scripts/verify-play-assets.mjs` | 0 | 40 deterministic Play assets staged and verified |
+| `node --check viewer/js/app.js`; `node --check viewer/js/data-loader.js`; `node --check viewer/js/entity-types.js` | 0 | baseline Viewer syntax passed |
+| `node --check` on the four affected Play modules | 0 | hand, Card detail, session, and game-page syntax passed |
+| `node --test tests/viewer-baseline.test.mjs` | 0 | 3 passed, 0 failed, 0 skipped |
+| `node --test tests/*.test.mjs` | 0 | 121 passed, 0 failed, 0 skipped |
+| `node tools/run-automated-games.mjs --verify-report automated_games/task-009-foundation-v1` | 0 | 22 frozen rows verified with 0 deterministic mismatches |
+| `node tools/run-task-014-campaign.mjs --verify-report automated_games/task-014-playable-coverage-v3` | 0 | 13 expanded-content rows verified with 0 deterministic mismatches |
+| Playwright TASK-019 behavior/viewport matrix | 0 | 5 passed, 0 failed, 3 intentional project skips |
+| Complete Playwright browser matrix (`--workers=6`) | 0 | 41 passed, 0 failed, 55 intentional project skips |
+| TASK-019 focused visual regeneration and written human QA | 0 | Relevant/Global desktop, expanded, tablet, phone, reduced-motion, and reflow evidence passed |
+| `git diff --check` | 0 | no whitespace errors |
+
+### Visual and CSS evidence
+
+- `docs/ui-plan/task-019-css-inventory.md` records the removed cascade debt and the winning desktop, tablet, phone, reduced-motion, and text-reflow compositions.
+- `docs/ui-plan/task-019-visual-qa.md` records the human comparison against TASK-016 defect images and the accepted TASK-019 capture set.
+- `tests/visual/task-019/` contains deterministic Relevant/Global desktop, expanded-hand, tablet, phone, and reduced-motion captures.
+
+### Changed-file inventory
+
+Changes are confined to the task allowlist: Play Card/hand/session/game-page presentation and Play CSS; the new hand grouping helper; affected TASK-010/TASK-012 browser compatibility tests; new TASK-019 Node/browser/visual evidence; CSS and human-QA documentation; this task/index; and the TASK-015 dependency status. Rebuilt generated Play assets remained byte-identical.
+
+### Unresolved items
+
+None for TASK-019. TASK-015 is unblocked and may now bind its tutorial overlays to the final Bench tiles, response-hand controls, Inspect routes, and responsive geometry.

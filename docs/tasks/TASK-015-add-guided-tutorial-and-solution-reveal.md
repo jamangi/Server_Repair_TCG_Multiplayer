@@ -2,7 +2,7 @@
 
 ## Status
 
-**Approved scope — blocked on TASK-019.** PT-007 A and the prerequisite PT-005 A reveal behavior were approved by the project owner on 2026-08-24. TASK-013, TASK-014, TASK-016, and corrective TASK-018 are complete; TASK-018 stabilized reusable dialogs and selected-Ticket visibility. TASK-019 must still finalize the diagnostic tiles, adaptive response hand, and responsive geometry before tutorial overlays bind to those controls.
+**Approved scope — ready after TASK-019.** PT-007 A and the prerequisite PT-005 A reveal behavior were approved by the project owner on 2026-08-24. TASK-013, TASK-014, TASK-016, corrective TASK-018, and TASK-019 are complete. Tutorial overlays may now bind to the finalized diagnostic tiles, adaptive response hand, Inspect routes, and responsive geometry.
 
 ## Approved authority
 

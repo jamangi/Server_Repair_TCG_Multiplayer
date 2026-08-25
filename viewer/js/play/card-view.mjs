@@ -228,6 +228,7 @@ export function createDeckCardTile(card, {
 
 export function createCardDetailView(card, {
   artResolver = null,
+  diagnosticContext = null,
   documentRef = globalThis.document,
 } = {}) {
   const documentObject = requireDocument(documentRef);
@@ -247,6 +248,27 @@ export function createCardDetailView(card, {
       element(documentObject, "h4", "play-eyebrow", "Purpose"),
       element(documentObject, "p", "card-detail__description", description),
     );
+  }
+  if (diagnosticContext) {
+    copy.append(
+      element(documentObject, "h4", "play-eyebrow", "Subsystem"),
+      element(documentObject, "p", "card-detail__category", text(diagnosticContext.category, "Uncategorized")),
+    );
+    if (diagnosticContext.relevant) {
+      copy.append(
+        element(documentObject, "h4", "play-eyebrow", "Why relevant?"),
+        element(documentObject, "p", "card-detail__relevance-path", text(diagnosticContext.path, "A public relationship marks this diagnostic as relevant.")),
+        element(documentObject, "p", "card-detail__relevance-notice", text(diagnosticContext.notice, "Public relationship coverage may be incomplete.")),
+      );
+    } else {
+      copy.append(
+        element(documentObject, "h4", "play-eyebrow", "Global catalog availability"),
+        element(documentObject, "p", "card-detail__catalog-note", text(
+          diagnosticContext.catalogExplanation,
+          "Global keeps the complete diagnostic catalog available. Not being marked relevant does not mean a diagnostic is useless or illegal.",
+        )),
+      );
+    }
   }
   const educational = text(card?.educational_text);
   if (educational) {

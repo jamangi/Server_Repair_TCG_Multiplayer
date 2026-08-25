@@ -16,6 +16,9 @@ export class SoloGameSession {
     this.benchRunnableOnly = false;
     this.benchSort = 'NAME';
     this.benchPage = 1;
+    this.handPage = 1;
+    this.handExpanded = false;
+    this.restoreHandToggleFocus = false;
     this.panelTab = 'evidence';
     this.lastEvents = [];
     this.lastResult = null;
@@ -197,6 +200,7 @@ export class SoloGameSession {
     this.active = false;
     this.resolving = false;
     this.pendingIntent = null;
+    this.handExpanded = false;
   }
 
   endSession() {

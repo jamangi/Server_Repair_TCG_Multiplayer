@@ -270,13 +270,45 @@ async function latestWorkerProjection(page) {
   });
 }
 
+async function revealPagedHandCard(page, cardInstanceId, mode) {
+  const card = page.locator(`[data-card-instance-id="${cardInstanceId}"]`);
+  for (let guard = 0; guard < 20; guard += 1) {
+    const previous = page.locator('.hand-pagination [data-hand-page]').first();
+    if (!await previous.count() || await previous.isDisabled()) break;
+    await activate(page, previous, mode);
+  }
+  for (let guard = 0; guard < 20; guard += 1) {
+    if (await card.count()) return card;
+    const next = page.locator('.hand-pagination [data-hand-page]').last();
+    if (!await next.count() || await next.isDisabled()) break;
+    await activate(page, next, mode);
+  }
+  return card;
+}
+
+async function revealPagedLegalHandCard(page, mode) {
+  const legalCard = page.locator('.hand-rail__cards .play-card[data-legal-target="true"]').first();
+  for (let guard = 0; guard < 20; guard += 1) {
+    const previous = page.locator('.hand-pagination [data-hand-page]').first();
+    if (!await previous.count() || await previous.isDisabled()) break;
+    await activate(page, previous, mode);
+  }
+  for (let guard = 0; guard < 20; guard += 1) {
+    if (await legalCard.count()) return legalCard;
+    const next = page.locator('.hand-pagination [data-hand-page]').last();
+    if (!await next.count() || await next.isDisabled()) break;
+    await activate(page, next, mode);
+  }
+  return legalCard;
+}
+
 async function submitProjectedIntent(page, intent, mode) {
   if (intent.ticket_instance_id) {
     const ticket = page.locator(`[data-ticket-id="${intent.ticket_instance_id}"]`);
     if (await ticket.getAttribute('aria-current') !== 'true') await activate(page, ticket, mode);
   }
   if (intent.card_instance_id) {
-    const card = page.locator(`[data-card-instance-id="${intent.card_instance_id}"]`);
+    const card = await revealPagedHandCard(page, intent.card_instance_id, mode);
     if (await card.count()) {
       if (await card.getAttribute('aria-pressed') !== 'true') await activate(page, card, mode);
     } else {
@@ -349,7 +381,7 @@ function rememberResolvedIntent(state, projection, intent, resolved) {
 async function advanceUntilLegalHeldCard(page, mode = 'click', maximumIntents = 40) {
   const state = freshSeatSafeState();
   for (let step = 0; step < maximumIntents; step += 1) {
-    const legalCard = page.locator('.play-card[data-legal-target="true"]').first();
+    const legalCard = await revealPagedLegalHandCard(page, mode);
     if (await legalCard.count()) return legalCard;
 
     const latest = await latestWorkerProjection(page);
@@ -530,6 +562,7 @@ test('Deck, Profile, Settings, export/import, and destructive confirmations are 
   await expect(page.locator('#deck-card-dialog')).toBeVisible();
   await expect(page.locator('#deck-card-dialog .card-detail')).toBeVisible();
   await page.keyboard.press('Escape');
+  await expect(page.locator('#deck-card-dialog')).not.toBeVisible();
   await expect(inspect).toBeFocused();
 
   await activate(page, page.getByRole('button', { name: 'Edit', exact: true }), 'keyboard');
@@ -753,7 +786,7 @@ test('touch-pointer drag captures, cancels safely, and submits one opaque projec
   const start = { x: cardBox.x + cardBox.width / 2, y: cardBox.y + cardBox.height / 2 };
   const target = { x: ticketBox.x + ticketBox.width / 2, y: ticketBox.y + ticketBox.height / 2 };
   const dispatch = (type, pointerId, point, buttons) => page.evaluate((eventInit) => {
-    const card = document.querySelector('.play-card[data-legal-target="true"]');
+    const card = document.querySelector('.hand-rail__cards .play-card[data-legal-target="true"]');
     if (!card) throw new Error('Touch test could not find a legal card.');
     card.dispatchEvent(new PointerEvent(eventInit.type, {
       bubbles: true,

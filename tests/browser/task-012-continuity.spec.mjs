@@ -371,10 +371,13 @@ test('narrow mobile rails and document position survive same-route reconstructio
   const handRail = page.locator('.hand-rail__cards');
   const resources = page.locator('.game-resources');
   const ticketPosition = await setScroll(ticketRail, { left: 90 });
-  const handPosition = await setScroll(handRail, { left: 110 });
+  const nextHandPage = page.locator('.hand-pagination [data-hand-page]').last();
+  await expect(nextHandPage).toBeEnabled();
+  await nextHandPage.click();
+  const handPageAnnouncement = await page.locator('.hand-rail__range').textContent();
   const resourcePosition = await setScroll(resources, { left: 70 });
   expect(ticketPosition.maximumLeft).toBeGreaterThan(0);
-  expect(handPosition.maximumLeft).toBeGreaterThan(0);
+  expect(handPageAnnouncement).toContain('Page 2 /');
   expect(resourcePosition.maximumLeft).toBeGreaterThan(0);
 
   await page.evaluate(() => window.scrollTo({ top: 520, behavior: 'instant' }));
@@ -386,7 +389,8 @@ test('narrow mobile rails and document position survive same-route reconstructio
   });
 
   expectNear((await scrollPosition(ticketRail)).left, ticketPosition.left);
-  expectNear((await scrollPosition(handRail)).left, handPosition.left);
+  await expect(page.locator('.hand-rail__range')).toHaveText(handPageAnnouncement);
+  await expect(handRail.locator('[data-card-instance-id]')).not.toHaveCount(0);
   expectNear((await scrollPosition(resources)).left, resourcePosition.left);
   expectNear(await page.evaluate(() => window.scrollY), documentTop);
   await expect(page.locator('.ticket-card[aria-current="true"]')).toBeFocused();
