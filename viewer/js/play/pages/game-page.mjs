@@ -1,4 +1,10 @@
 import { bindResolvedImage } from '../art-resolver.mjs';
+import {
+  buildSelectedActionPresentation,
+  currentDiagnosticResult,
+  isDiagnosticRunnableOnTicket,
+  projectedDropIntent,
+} from '../action-presentation.mjs';
 import { benchPageSizeForViewport } from '../bench-view.mjs';
 import { createCardDetailView, createCardView, setCardViewState } from '../card-view.mjs';
 import { cardName, domainName } from '../catalog-service.mjs';
@@ -43,6 +49,43 @@ function actionLabel(intent, projection, catalog) {
   if (intent.action_type === 'DOCUMENT_LIVE') return `${base} · ${ticket}`;
   if (card && ticket) return `${base}: ${card} → ${ticket}`;
   return ticket ? `${base}: ${ticket}` : base;
+}
+
+function selectedActionMarkup({
+  selectedCard,
+  selectedCardDefinition,
+  selectedCost,
+  presentation,
+  selectedTicketId,
+  projection,
+  catalog,
+  resolving,
+}) {
+  if (!selectedCard) return '<span>Select a diagnostic or response Card to inspect its projected target and cost.</span>';
+  const diagnostic = presentation.selectionKind === 'BENCH_DIAGNOSTIC';
+  const targetId = presentation.actionIntents[0]?.ticket_instance_id
+    ?? (diagnostic ? selectedTicketId : null);
+  const target = targetId ? ticketName(projection, targetId) : 'No projected target';
+  const alternateTargetNames = presentation.alternateTicketIds.map((ticketId) => ticketName(projection, ticketId));
+  const status = presentation.statusMessage
+    ? diagnostic
+      ? `<p class="target-scope target-scope--status" data-diagnostic-status="${escapeHtml(presentation.statusCode)}" data-continuity-key="game:selected-diagnostic-action" tabindex="-1" role="status"><strong>Selected Ticket status.</strong> ${escapeHtml(presentation.statusMessage)}</p>`
+      : `<span>${escapeHtml(presentation.statusMessage)}</span>`
+    : '';
+  const choices = presentation.actionIntents.map((intent, index) => {
+    const componentChoice = diagnostic && presentation.targetKind === 'TICKET_COMPONENT'
+      && presentation.actionIntents.length > 1;
+    const label = componentChoice
+      ? `${actionLabel(intent, projection, catalog)} · Component target ${index + 1}`
+      : actionLabel(intent, projection, catalog);
+    const continuity = diagnostic && index === 0 ? ' data-continuity-key="game:selected-diagnostic-action"' : '';
+    return `<button type="button" class="play-button play-button--primary" data-intent-id="${escapeHtml(intent.intent_id)}" data-target-ticket-id="${escapeHtml(intent.ticket_instance_id || '')}"${componentChoice ? ` data-component-target-choice="${index + 1}"` : ''}${continuity}${resolving ? ' disabled' : ''}>${diagnostic ? 'Confirm &amp; ' : ''}${escapeHtml(label)}</button>`;
+  }).join('');
+  const actionChoices = diagnostic && presentation.targetKind === 'TICKET_COMPONENT'
+    && presentation.actionIntents.length > 1
+    ? `<fieldset class="diagnostic-target-choices"><legend>Choose a component target on ${escapeHtml(target)}</legend>${choices}</fieldset>`
+    : choices;
+  return `<header><strong>${escapeHtml(cardName(selectedCardDefinition))}</strong><span>${escapeHtml(diagnostic ? selectedCard.diagnostic_type : 'RESPONSE CARD')}</span></header><dl><div><dt>Target</dt><dd>${escapeHtml(target)}</dd></div><div><dt>Cost</dt><dd>${selectedCost} Action${selectedCost === 1 ? '' : 's'}</dd></div></dl><button type="button" class="play-button play-button--quiet" data-inspect-selected>Inspect</button>${alternateTargetNames.length ? `<p class="target-scope target-scope--alternate" data-alternate-target><strong>Alternate target only.</strong> This response Card cannot apply to the displayed Ticket, ${escapeHtml(ticketName(projection, selectedTicketId))}. Submitting targets ${escapeHtml(alternateTargetNames.join(' or '))}.</p>` : ''}${status}${actionChoices}`;
 }
 
 function eventSummary(event, catalog) {
@@ -249,16 +292,15 @@ export function renderGame(root, context) {
     session.selectedCardInstanceId = firstEligibleInstance(selectedHandGroup, projection.legal_intents)?.card_instance_id ?? null;
   }
   const selectedCard = [...view.hand, ...bench].find((card) => card.card_instance_id === session.selectedCardInstanceId) ?? null;
-  const selectedIsDiagnostic = bench.some((card) => card.card_instance_id === selectedCard?.card_instance_id);
-  const cardIntents = selectedCard ? projection.legal_intents.filter((intent) => intent.card_instance_id === selectedCard.card_instance_id) : [];
-  const cardTargetsDisplayedTicket = cardIntents.some((intent) => intent.ticket_instance_id === session.selectedTicketId);
-  const prioritizedCardIntents = cardTargetsDisplayedTicket
-    ? cardIntents.filter((intent) => intent.ticket_instance_id === session.selectedTicketId)
-    : cardIntents;
-  const alternateTargetNames = [...new Set(prioritizedCardIntents
-    .map((intent) => intent.ticket_instance_id)
-    .filter((ticketId) => ticketId && ticketId !== session.selectedTicketId)
-    .map((ticketId) => ticketName(projection, ticketId)))];
+  const selectedCardDefinition = context.catalog.cardById.get(selectedCard?.card_definition_id);
+  const actionPresentation = buildSelectedActionPresentation({
+    selectedCard,
+    diagnosticBench: bench,
+    legalIntents: projection.legal_intents,
+    selectedTicket,
+    cardDefinition: selectedCardDefinition,
+    authorizedEvents: view.authorized_events,
+  });
   const documentIntents = projection.legal_intents.filter((intent) => intent.action_type === 'DOCUMENT_LIVE' && intent.ticket_instance_id === session.selectedTicketId);
   const closureIntent = projection.legal_intents.find((intent) => intent.action_type === 'PUBLISH_CLOSURE' && intent.ticket_instance_id === session.selectedTicketId);
   const searchIntents = projection.legal_intents.filter((intent) => intent.action_type === 'SEARCH');
@@ -279,7 +321,11 @@ export function renderGame(root, context) {
     if (session.benchView === 'GLOBAL' && session.benchRelevantOnly && !relevant) return false;
     if (session.benchTypeFilter !== 'ALL' && entry.diagnostic_type !== session.benchTypeFilter) return false;
     if (session.benchCategory !== 'ALL' && entry.category !== session.benchCategory) return false;
-    if (session.benchRunnableOnly && !projection.legal_intents.some((intent) => intent.card_instance_id === entry.card_instance_id)) return false;
+    if (session.benchRunnableOnly && !isDiagnosticRunnableOnTicket(
+      projection.legal_intents,
+      entry.card_instance_id,
+      session.selectedTicketId,
+    )) return false;
     if (normalizedQuery && !`${entry.card_definition_id} ${cardName(card)} ${card?.rules_text ?? ''}`.toLocaleLowerCase().includes(normalizedQuery)) return false;
     return true;
   }).sort((left, right) => {
@@ -301,7 +347,7 @@ export function renderGame(root, context) {
   const archivedCount = publicMatch.closed_tickets.length + (publicMatch.abandoned_tickets ?? []).length;
   const benchStart = visibleBench.length ? (session.benchPage - 1) * benchPageSize + 1 : 0;
   const benchEnd = Math.min(session.benchPage * benchPageSize, visibleBench.length);
-  const selectedCost = selectedCard?.action_cost ?? context.catalog.cardById.get(selectedCard?.card_definition_id)?.action_cost ?? 0;
+  const selectedCost = selectedCard?.action_cost ?? selectedCardDefinition?.action_cost ?? 0;
   const textReflow = Number.parseFloat(getComputedStyle(document.documentElement).fontSize) >= 24;
   root.innerHTML = `
     <section class="play-route game-route game-route--${session.benchView.toLowerCase()}${textReflow ? ' game-route--text-reflow' : ''}" aria-labelledby="game-heading">
@@ -317,7 +363,7 @@ export function renderGame(root, context) {
         </main>
         <aside class="investigation-rail">
           <section class="intelligence-panel" data-route-reveal><div class="intelligence-tabs" role="tablist" aria-label="Ticket intelligence"><button type="button" role="tab" data-continuity-key="game-panel-evidence" data-panel-tab="evidence" aria-selected="${session.panelTab === 'evidence'}">Evidence</button><button type="button" role="tab" data-continuity-key="game-panel-worklog" data-panel-tab="worklog" aria-selected="${session.panelTab === 'worklog'}">Worklog</button></div><section class="evidence-panel" data-continuity-scroll="game:ticket:${escapeHtml(selectedTicket?.ticket_instance_id || 'none')}:evidence" role="tabpanel" data-panel="evidence"${session.panelTab === 'evidence' ? '' : ' hidden'}><div class="section-heading"><div><p class="play-eyebrow">Knowledge state</p><h2>Evidence</h2></div><span>Team</span></div>${selectedTicket ? renderEvidence(view.authorized_events, selectedTicket.ticket_instance_id, context.catalog, session.lastEvents, session.lastAction?.result_event_id) : ''}</section><section class="worklog-panel" data-continuity-scroll="game:ticket:${escapeHtml(selectedTicket?.ticket_instance_id || 'none')}:worklog" role="tabpanel" data-panel="worklog"${session.panelTab === 'worklog' ? '' : ' hidden'}><div class="section-heading"><div><p class="play-eyebrow">Immutable sequence</p><h2>Worklog</h2></div><span>${selectedTicket?.worklog.length || 0}</span></div>${selectedTicket ? renderWorklog(selectedTicket, session.lastEvents, session.lastAction?.result_event_id) : ''}</section></section>
-          <section class="action-dock legal-action-panel" aria-labelledby="actions-heading" data-route-reveal><div class="section-heading"><div><p class="play-eyebrow">Engine-projected</p><h2 id="actions-heading">Legal Action</h2></div><span>${session.resolving ? 'Resolving' : 'Ready'}</span></div><div class="selected-card-actions">${selectedCard ? `<header><strong>${escapeHtml(cardName(context.catalog.cardById.get(selectedCard.card_definition_id)))}</strong><span>${escapeHtml(selectedIsDiagnostic ? selectedCard.diagnostic_type : 'HAND CARD')}</span></header><dl><div><dt>Target</dt><dd>${escapeHtml(prioritizedCardIntents[0]?.ticket_instance_id ? ticketName(projection, prioritizedCardIntents[0].ticket_instance_id) : 'No projected target')}</dd></div><div><dt>Cost</dt><dd>${selectedCost} Action${selectedCost === 1 ? '' : 's'}</dd></div></dl><button type="button" class="play-button play-button--quiet" data-inspect-selected>Inspect</button>${alternateTargetNames.length ? `<p class="target-scope target-scope--alternate" data-alternate-target><strong>Alternate target only.</strong> This Card cannot apply to the displayed Ticket, ${escapeHtml(ticketName(projection, session.selectedTicketId))}. Submitting targets ${escapeHtml(alternateTargetNames.join(' or '))}.</p>` : ''}${prioritizedCardIntents.map((intent) => `<button type="button" class="play-button play-button--primary" data-intent-id="${intent.intent_id}" data-target-ticket-id="${escapeHtml(intent.ticket_instance_id || '')}"${session.resolving ? ' disabled' : ''}>${selectedIsDiagnostic ? 'Confirm &amp; ' : ''}${escapeHtml(actionLabel(intent, projection, context.catalog))}</button>`).join('') || '<span>No legal play for this selection and machine revision.</span>'}` : '<span>Select a diagnostic or hand Card to inspect its projected target and cost.</span>'}</div>${actionResultMarkup(session, projection, context.catalog)}${session.resolving ? '<span class="intent-resolving" role="status">Resolving authoritative intent…</span>' : ''}</section>
+          <section class="action-dock legal-action-panel" aria-labelledby="actions-heading" data-route-reveal><div class="section-heading"><div><p class="play-eyebrow">Engine-projected</p><h2 id="actions-heading">Legal Action</h2></div><span>${session.resolving ? 'Resolving' : 'Ready'}</span></div><div class="selected-card-actions">${selectedActionMarkup({ selectedCard, selectedCardDefinition, selectedCost, presentation: actionPresentation, selectedTicketId: session.selectedTicketId, projection, catalog: context.catalog, resolving: session.resolving })}</div>${actionResultMarkup(session, projection, context.catalog)}${session.resolving ? '<span class="intent-resolving" role="status">Resolving authoritative intent…</span>' : ''}</section>
           <section class="basic-actions-panel" aria-labelledby="basic-actions-heading"><div class="section-heading"><div><p class="play-eyebrow">Always available</p><h2 id="basic-actions-heading">Basic Actions</h2></div><span>${publicMatch.turn?.actions_remaining ?? 0} A</span></div><div class="basic-action-row"><label class="search-action">Search · ${view.utility_resources.search_tokens}<select id="search-intent"${searchIntents.length ? '' : ' disabled'}>${searchIntents.map((intent) => `<option value="${intent.intent_id}">${escapeHtml(cardName(context.catalog.cardById.get(intent.selected_card_definition_id)))}</option>`).join('') || '<option>Unavailable</option>'}</select><button type="button" class="basic-action" data-submit-search${!searchIntents.length || session.resolving ? ' disabled' : ''}>Search</button></label><button type="button" class="basic-action"${refreshIntent ? ` data-intent-id="${refreshIntent.intent_id}"` : ''}${!refreshIntent || session.resolving ? ' disabled' : ''}>Refresh · ${view.utility_resources.refresh_tokens}</button><button type="button" class="basic-action basic-action--give-up"${giveUpIntent ? ` data-give-up-intent="${giveUpIntent.intent_id}"` : ''}${!giveUpIntent || session.resolving ? ' disabled' : ''}>Give Up</button><button type="button" class="basic-action basic-action--pass"${passIntent ? ` data-intent-id="${passIntent.intent_id}"` : ''}${!passIntent || session.resolving ? ' disabled' : ''}>Pass</button></div></section>
         </aside>
       </div>
@@ -330,7 +376,18 @@ export function renderGame(root, context) {
   for (const entry of pagedBench) {
     const card = context.catalog.cardById.get(entry.card_definition_id);
     const relevance = relevanceFor(entry);
-    const legal = projection.legal_intents.some((intent) => intent.card_instance_id === entry.card_instance_id);
+    const legal = isDiagnosticRunnableOnTicket(
+      projection.legal_intents,
+      entry.card_instance_id,
+      session.selectedTicketId,
+    );
+    const completed = !legal && currentDiagnosticResult({
+      authorizedEvents: view.authorized_events,
+      cardDefinition: card,
+      ticketInstanceId: session.selectedTicketId,
+      machineRevision: selectedTicket?.machine_revision,
+    });
+    const availabilityLabel = legal ? 'Runnable now' : completed ? 'Completed' : 'Unavailable now';
     const tile = document.createElement('article');
     tile.className = `diagnostic-tile${entry.card_instance_id === session.selectedCardInstanceId ? ' is-selected' : ''}`;
     tile.dataset.relevant = String(relevance.relevant);
@@ -343,15 +400,20 @@ export function renderGame(root, context) {
     });
     cardView.dataset.selectDiagnostic = entry.card_instance_id;
     tile.dataset.runnable = String(legal);
-    setCardViewState(cardView, { resolving: session.resolving && entry.card_instance_id === session.selectedCardInstanceId });
+    tile.dataset.completedCurrentRevision = String(Boolean(completed));
+    setCardViewState(cardView, {
+      legalTarget: legal,
+      resolving: session.resolving && entry.card_instance_id === session.selectedCardInstanceId,
+    });
     cardView.querySelector('.play-card__rules')?.remove();
     cardView.querySelector('.play-card__footer')?.remove();
     const inspect = document.createElement('button');
     inspect.type = 'button';
     inspect.className = 'diagnostic-tile__inspect';
     inspect.dataset.inspectDiagnostic = entry.card_instance_id;
-    inspect.textContent = 'Inspect';
-    inspect.setAttribute('aria-label', `Inspect ${cardName(card)}`);
+    inspect.dataset.availability = legal ? 'RUNNABLE' : completed ? 'COMPLETED_CURRENT_REVISION' : 'UNAVAILABLE';
+    inspect.textContent = `Inspect · ${availabilityLabel}`;
+    inspect.setAttribute('aria-label', `Inspect ${cardName(card)}. ${availabilityLabel} on ${ticketName(projection, session.selectedTicketId)}.`);
     tile.append(cardView, inspect);
     benchShelf.append(tile);
   }
@@ -463,8 +525,13 @@ export function renderGame(root, context) {
         clearDragTargets();
         const ticketButton = ticketAtPoint(event.clientX, event.clientY);
         if (ticketButton) {
-          const legal = projection.legal_intents.some((intent) => intent.card_instance_id === held.card_instance_id
-            && intent.ticket_instance_id === ticketButton.dataset.ticketId);
+          const legal = projectedDropIntent({
+            legalIntents: projection.legal_intents,
+            diagnosticBench: bench,
+            cardInstanceId: held.card_instance_id,
+            ticketInstanceId: ticketButton.dataset.ticketId,
+            selectedTicketId: session.selectedTicketId,
+          });
           ticketButton.dataset[legal ? 'dragTarget' : 'dragInvalid'] = 'true';
         }
         event.preventDefault();
@@ -478,8 +545,13 @@ export function renderGame(root, context) {
         if (session.cancelPointerDrag === cancelPointerDrag) session.cancelPointerDrag = null;
         const ticketButton = cancelled ? null : ticketAtPoint(event.clientX, event.clientY);
         const legal = wasActive && ticketButton
-          ? projection.legal_intents.find((intent) => intent.card_instance_id === held.card_instance_id
-            && intent.ticket_instance_id === ticketButton.dataset.ticketId)
+          ? projectedDropIntent({
+            legalIntents: projection.legal_intents,
+            diagnosticBench: bench,
+            cardInstanceId: held.card_instance_id,
+            ticketInstanceId: ticketButton.dataset.ticketId,
+            selectedTicketId: session.selectedTicketId,
+          })
           : null;
         clearDragTargets();
         session.dragCardInstanceId = null;
@@ -664,7 +736,13 @@ export function renderGame(root, context) {
   const onDragOver = (event) => {
     const ticketButton = event.target.closest('[data-drop-target]');
     if (!ticketButton || !session.dragCardInstanceId) return;
-    const legal = projection.legal_intents.some((intent) => intent.card_instance_id === session.dragCardInstanceId && intent.ticket_instance_id === ticketButton.dataset.ticketId);
+    const legal = projectedDropIntent({
+      legalIntents: projection.legal_intents,
+      diagnosticBench: bench,
+      cardInstanceId: session.dragCardInstanceId,
+      ticketInstanceId: ticketButton.dataset.ticketId,
+      selectedTicketId: session.selectedTicketId,
+    });
     if (legal) {
       event.preventDefault();
       event.dataTransfer.dropEffect = 'move';
@@ -675,7 +753,13 @@ export function renderGame(root, context) {
   const onDrop = (event) => {
     const ticketButton = event.target.closest('[data-drop-target]');
     if (!ticketButton || !session.dragCardInstanceId) return;
-    const legal = projection.legal_intents.find((intent) => intent.card_instance_id === session.dragCardInstanceId && intent.ticket_instance_id === ticketButton.dataset.ticketId);
+    const legal = projectedDropIntent({
+      legalIntents: projection.legal_intents,
+      diagnosticBench: bench,
+      cardInstanceId: session.dragCardInstanceId,
+      ticketInstanceId: ticketButton.dataset.ticketId,
+      selectedTicketId: session.selectedTicketId,
+    });
     ticketButton.removeAttribute('data-drag-target');
     session.dragCardInstanceId = null;
     if (legal) {
@@ -723,6 +807,11 @@ export function renderGame(root, context) {
   if (session.restoreHandToggleFocus) {
     session.restoreHandToggleFocus = false;
     root.querySelector('[data-toggle-hand]')?.focus({ preventScroll: true });
+  }
+  if (session.restoreDiagnosticActionFocus) {
+    session.restoreDiagnosticActionFocus = false;
+    root.querySelector('[data-continuity-key="game:selected-diagnostic-action"]')
+      ?.focus({ preventScroll: true });
   }
 
   const pendingMotion = session.lastMotion;

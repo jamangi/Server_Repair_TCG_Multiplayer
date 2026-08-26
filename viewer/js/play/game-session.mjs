@@ -1,3 +1,5 @@
+import { isBenchDiagnosticInstance } from './action-presentation.mjs';
+
 export class SoloGameSession {
   constructor({ onChange, onAnnounce, onStarted, onCompleted } = {}) {
     this.worker = null;
@@ -19,6 +21,7 @@ export class SoloGameSession {
     this.handPage = 1;
     this.handExpanded = false;
     this.restoreHandToggleFocus = false;
+    this.restoreDiagnosticActionFocus = false;
     this.panelTab = 'evidence';
     this.lastEvents = [];
     this.lastResult = null;
@@ -84,6 +87,10 @@ export class SoloGameSession {
     if (message.type === 'INTENT_RESOLVED') {
       const previousActions = this.projection?.view.public_match.turn?.actions_remaining;
       const submittedIntent = this.pendingIntent;
+      const submittedBenchDiagnostic = isBenchDiagnosticInstance(
+        submittedIntent?.card_instance_id,
+        this.projection?.view.diagnostic_bench,
+      );
       this.pendingIntent = null;
       this.resolving = false;
       this.projection = message.projection;
@@ -102,6 +109,9 @@ export class SoloGameSession {
         result_event_id: resultEvent?.event_id ?? null,
         result_event_type: resultEvent?.event_type ?? null,
       } : null;
+      this.restoreDiagnosticActionFocus = Boolean(
+        submittedBenchDiagnostic && this.lastAction?.accepted,
+      );
       this.terminalResult = message.terminal_result;
       const activeTicketIds = message.projection.view.public_match.repair_queue
         .map((ticket) => ticket.ticket_instance_id);

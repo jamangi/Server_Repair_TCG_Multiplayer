@@ -2,7 +2,7 @@
 
 ## Status
 
-**Approved scope — queued after TASK-021.** PT-007 A and the prerequisite PT-005 A reveal behavior were approved by the project owner on 2026-08-24. TASK-013, TASK-014, TASK-016, corrective TASK-018, TASK-019, and TASK-020 are complete. TASK-021 must first correct Bench-diagnostic target continuity so the tutorial does not teach or encode the post-run alternate-Ticket fallback defect.
+**Approved scope — active after completed TASK-021.** PT-007 A and the prerequisite PT-005 A reveal behavior were approved by the project owner on 2026-08-24. TASK-013, TASK-014, TASK-016, corrective TASK-018, TASK-019, TASK-020, and TASK-021 are complete. Tutorial checkpoints may now bind to the corrected selected-Ticket Bench-diagnostic contract without teaching or encoding the former post-run alternate-Ticket fallback defect.
 
 ## Approved authority
 

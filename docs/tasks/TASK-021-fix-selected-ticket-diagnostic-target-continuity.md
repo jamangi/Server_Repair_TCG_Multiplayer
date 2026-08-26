@@ -2,7 +2,7 @@
 
 ## Status
 
-**Owner-directed defect correction — active.** A post-TASK-020 playtest showed a successfully run Relevant diagnostic remaining selected and the Legal Action panel immediately replacing its completed selected-Ticket action with `Alternate target only` plus one confirmation button for each other active Ticket. Correct this before TASK-015 teaches diagnostic targeting. PT-008 B preserves the current rejection-before-payment rule and requires a clear completed/current-revision explanation.
+**Complete — 2026-08-26.** The Viewer now scopes persistent Bench-diagnostic presentation and every equivalent input route to the displayed Ticket, retains a calm completed/current-revision result state after resolution, and preserves TASK-012's explicit alternate-target behavior for held response Cards without changing authoritative legality.
 
 ## Objective
 
@@ -106,3 +106,45 @@ Do not change diagnostic relevance derivation, authored outcomes, Ticket generat
 ## Completion boundary
 
 Complete only when a Bench diagnostic always acts in the displayed Ticket's context; a successful run leaves an unmistakable selected-Ticket result instead of goading the Player toward other Tickets; unavailable/completed diagnostics fail closed with player-safe status; another Ticket becomes a diagnostic target only after the Player deliberately selects it; TASK-012 response-Card alternate targeting remains intact; deterministic tests reproduce the original cause and prevent recurrence; and authoritative intents/events remain unchanged.
+
+## Completion record — 2026-08-26
+
+### Outcome
+
+- Added one named action-presentation model that explicitly separates persistent Bench diagnostics from private response Cards. Bench choices are scoped to the selected Ticket; response Cards retain the intentional TASK-012 alternate-target fallback.
+- Reproduced the reported sequence with the real TASK-014 Builder and engine: one diagnostic began legal on `Booting the Wrong Device`, `Network Path Down`, and `Redundancy Path Unavailable`; its accepted Ticket-A run spent exactly one Action and created current-revision Evidence; Ticket A then lost only its own intent while Tickets B and C remained authoritative legal targets.
+- Kept the selected Ticket and diagnostic after resolution, restored focus to its result status, retained the persistent authoritative action result/Evidence route, and replaced cross-Ticket buttons with a calm completed/current-revision, no-additional-payment explanation.
+- Made Relevant/Global `Runnable`, tile availability, and Global Runnable filtering selected-Ticket specific. A completed diagnostic remains inspectable and separately marked from relevance.
+- Applied the same selected-Ticket policy to click, keyboard, touch, pointer drag, HTML drag, and drop. Multiple component intents within one Ticket render as explicit labeled choices; invalid duplicate `ACTIVE_TICKET` intents fail closed.
+- Left engine projection, intent legality, result events, action costs, once-per-revision rules, response-Card legality, schemas, Builder/content, and generated Play assets unchanged.
+
+### Verification
+
+| Command | Exit | Result |
+| --- | ---: | --- |
+| `node viewer/scripts/build-play-assets.mjs`; `node viewer/scripts/verify-play-assets.mjs` | 0 | 40 deterministic Play assets staged and verified byte-equivalent |
+| `node --check viewer/js/app.js`; `node --check viewer/js/data-loader.js`; `node --check viewer/js/entity-types.js` | 0 | baseline Viewer syntax passed |
+| `node --check` on the TASK-021 presentation, game-page, session, and browser-spec modules | 0 | all affected JavaScript modules passed syntax validation |
+| `node --test tests/viewer-baseline.test.mjs` | 0 | 3 passed, 0 failed, 0 skipped |
+| `node --test tests/*.mjs` | 0 | 132 passed, 0 failed, 0 skipped |
+| `node tools/run-automated-games.mjs --verify-report automated_games/task-009-foundation-v1` | 0 | 22 frozen rows verified; 0 deterministic mismatches |
+| `node tools/run-task-014-campaign.mjs --verify-report automated_games/task-014-playable-coverage-v3` | 0 | 13 expanded-content rows verified; 0 deterministic mismatches |
+| Focused TASK-021 Playwright matrix | 0 | 5 passed, 0 failed, 3 intentional project skips |
+| TASK-012/TASK-013/TASK-019/TASK-020/TASK-021 compatibility matrix | 0 | 22 passed, 0 failed, 22 intentional project skips |
+| Complete Playwright browser matrix (`--workers=6`) | 0 | 52 passed, 0 failed, 64 intentional project skips |
+| Focused three-Ticket visual regeneration and written human QA | 0 | before/after desktop captures passed selected-Ticket, result, hierarchy, overflow, and legibility review |
+| `git diff --check` | 0 | no whitespace errors |
+
+### Visual evidence
+
+- `docs/ui-plan/task-021-visual-qa.md` records the human comparison with the reported defect and the accepted deterministic captures.
+- `tests/visual/task-021/three-ticket-before-run-1920x1080.png` shows exactly one confirmation for the displayed Ticket while the private projection contains three legal Ticket targets.
+- `tests/visual/task-021/three-ticket-completed-1920x1080.png` shows the same selected Ticket and diagnostic after resolution, with its persistent result and no alternate-Ticket warning, names, or confirmation buttons.
+
+### Changed-file inventory
+
+Changes remain inside the task allowlist: one Viewer-only action-presentation helper; game session/page and affected Play CSS; focused Node/browser/visual tests; visual-QA documentation; this task/index; and TASK-015 dependency status. Canonical engine, schemas, content, generated Play assets, and authoritative rules remain unchanged.
+
+### Unresolved items
+
+None for TASK-021. TASK-015 is unblocked and is now the active training-ready feature task.

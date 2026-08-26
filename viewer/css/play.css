@@ -3259,6 +3259,34 @@ dialog.settings-dialog::backdrop {
   line-height: 1.4;
 }
 
+.play-app .target-scope--status {
+  border-color: rgba(95, 184, 214, 0.42);
+  color: #d7eaf0;
+  background: rgba(18, 74, 91, 0.24);
+}
+
+.play-app .target-scope--status[data-diagnostic-status="COMPLETED_CURRENT_REVISION"] {
+  border-color: rgba(116, 201, 153, 0.48);
+  color: #d8f0e2;
+  background: rgba(28, 91, 60, 0.25);
+}
+
+.play-app .diagnostic-target-choices {
+  display: grid;
+  grid-column: 1 / -1;
+  gap: 0.4rem;
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+.play-app .diagnostic-target-choices legend {
+  padding: 0;
+  color: var(--play-muted);
+  font-size: 0.72rem;
+}
+
 .play-app .ticket-sheet__art { aspect-ratio: 2.15 / 1; overflow: hidden; border: 2px solid #252724; border-radius: var(--play-radius-sm); background: #07141b; }
 .play-app .ticket-sheet__art img { width: 100%; height: 100%; object-fit: cover; }
 .play-app .ticket-sheet > header { margin-block: var(--play-space-5); }
@@ -3464,6 +3492,10 @@ dialog.settings-dialog::backdrop {
   font: 800 0.68rem/1 var(--play-font-display);
   cursor: pointer;
 }
+
+.play-app .diagnostic-tile[data-runnable="false"] .play-card { opacity: 0.78; }
+.play-app .diagnostic-tile[data-completed-current-revision="true"] { border-color: rgba(116, 201, 153, 0.46); }
+.play-app .diagnostic-tile__inspect[data-availability="RUNNABLE"] { color: #d8f5e4; }
 
 .play-app .hand-rail__counts { display: flex; flex-wrap: wrap; gap: 0.2rem 0.55rem; margin: 0; color: var(--play-muted); font-size: 0.66rem; }
 .play-app .hand-rail__counts strong { flex-basis: 100%; color: #e7f5f8; }
