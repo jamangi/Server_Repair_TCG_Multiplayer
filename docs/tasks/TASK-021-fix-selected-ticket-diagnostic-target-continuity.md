@@ -2,7 +2,7 @@
 
 ## Status
 
-**Owner-directed defect correction — paused at PT-008 decision gate.** A post-TASK-020 playtest showed a successfully run Relevant diagnostic remaining selected and the Legal Action panel immediately replacing its completed selected-Ticket action with `Alternate target only` plus one confirmation button for each other active Ticket. The selected-Ticket scoping defect exists under every PT-008 option, but its correct post-run state depends on whether same-state repeats remain rejected or become paid redundant reproductions. If PT-008 A is approved, run TASK-022 first and then this task. If PT-008 B is approved, proceed with this task directly.
+**Owner-directed defect correction — active.** A post-TASK-020 playtest showed a successfully run Relevant diagnostic remaining selected and the Legal Action panel immediately replacing its completed selected-Ticket action with `Alternate target only` plus one confirmation button for each other active Ticket. Correct this before TASK-015 teaches diagnostic targeting. PT-008 B preserves the current rejection-before-payment rule and requires a clear completed/current-revision explanation.
 
 ## Objective
 
@@ -26,7 +26,7 @@ The screenshot is consistent with this exact sequence:
 
 1. `Firmware Boot Device Inventory` is Relevant and initially runnable on displayed Ticket `Booting the Wrong Device`.
 2. The Player confirms it and the engine resolves the selected-Ticket intent. The diagnostic remains in the persistent Bench and remains selected.
-3. Under the currently frozen rule, the engine suppresses a repeat of the same authored outcome on the same machine revision, so that Ticket no longer has a legal intent for this diagnostic. PT-008 may replace this rule before implementation of this task.
+3. The engine correctly suppresses a repeat of the same authored outcome on the same machine revision, so that Ticket no longer has a legal intent for this diagnostic.
 4. The private projection still contains legal intents for the same persistent diagnostic on `Network Path Down` and `Redundancy Path Unavailable`.
 5. `game-page.mjs` sees no remaining intent for the displayed Ticket and falls back to **all** remaining intents for the selected Card. It therefore renders the generic TASK-012 `Alternate target only` warning and two confirmation buttons.
 
@@ -34,7 +34,7 @@ The yellow surface is a pre-submission scope warning, not an engine rejection, a
 
 TASK-012 intentionally required this fallback for a held response Card that cannot target the displayed Ticket. The renderer later applied one shared `selectedCard` fallback to both private hand Cards and persistent Bench diagnostics. That generalization is the defect.
 
-Relevant is still an advisory public-relationship classification, not a promise that a diagnostic is presently runnable. The UI must communicate relevance and current selected-Ticket runnability as separate concepts without redirecting the Player. Under PT-008 A, an affordable same-state repeat is runnable but explicitly redundant; under PT-008 B, the completed diagnostic is unavailable until relevant state changes.
+Relevant is still an advisory public-relationship classification, not a promise that a diagnostic is presently runnable. A diagnostic may remain Relevant after it has already been run for the current machine revision. The UI must communicate relevance and current selected-Ticket availability as separate concepts without redirecting the Player.
 
 ## Selected-Ticket Bench contract
 
@@ -50,7 +50,7 @@ For a selected Bench diagnostic in Relevant or Global:
 ## Post-resolution and unavailable states
 
 - After an accepted diagnostic, keep the displayed Ticket selected, reveal/highlight its persistent result, and preserve Evidence/Worklog continuity as TASK-012 requires.
-- Retaining the diagnostic's visual selection is allowed. Under PT-008 A/TASK-022, its action area presents the selected-Ticket paid-reproduction state. Under PT-008 B, it changes to a calm status such as `Completed for this machine revision` or a player-safe generic `Not currently runnable on this Ticket`. Neither state may offer another Ticket automatically.
+- Retaining the diagnostic's visual selection is allowed, but its action area must change to a calm selected-Ticket status such as `Completed for this machine revision — no Action spent` or a player-safe generic `Not currently runnable on this Ticket — no Action spent`; it must not offer another Ticket automatically.
 - Do not claim a precise reason from DOM inference. Use already authorized result/history data, or add the smallest player-safe projection discriminator if precise `completed`, `insufficient Actions`, or `unavailable` messaging cannot otherwise be stated safely. Any projection addition must be schema-versioned, deterministic, and must not expose authored outcome IDs, hidden truth, or unexecuted results.
 - A Relevant-but-completed diagnostic remains available for Inspect and may stay in Relevant results. Its tile should distinguish `Relevant` from `Runnable now` and may expose a completed/current-revision state.
 - Global `Runnable` filtering and any `data-runnable`/disabled styling must be evaluated for the selected Ticket, not for whether the diagnostic has an intent anywhere in the queue.
@@ -83,7 +83,7 @@ Add Node and browser regressions proving:
 - after the accepted run, its Evidence/result remains visible for that Ticket and no `Alternate target only`, other Ticket name, or cross-Ticket diagnostic button appears;
 - no second action or resource is spent by the post-resolution presentation transition;
 - selecting Ticket B deliberately makes the same diagnostic target Ticket B when its projected intent is legal;
-- a completed/current-revision diagnostic remains inspectable and obeys the approved PT-008 repeat contract on that Ticket;
+- a completed/current-revision diagnostic remains inspectable, cannot be resubmitted on that Ticket, and clearly says that no Action was spent;
 - Relevant classification and selected-Ticket runnability are tested independently;
 - Global `Runnable` includes only diagnostics runnable on the displayed Ticket;
 - zero Actions, repeat-zero-action restrictions, changed machine revision, and unavailable outcomes fail closed without client-side truth inference;
@@ -101,7 +101,7 @@ Run canonical/staged parity checks, the full Node suite, automated-game report v
 - `docs/ui-plan/**`
 - this task, `docs/tasks/INDEX.md`, TASK-015 dependency/tutorial wording, and directly affected user documentation
 
-Do not independently change diagnostic repetition semantics. Obey the PT-008 rule synchronized by TASK-022 (if A) or the preserved once-per-machine-revision rule (if B). Do not change diagnostic relevance derivation, authored outcomes, Ticket generation, action costs, Card zones/disposition, engine target legality, hidden-information policy, response-Card cross-Ticket legality, or multiplayer semantics.
+Do not change diagnostic relevance derivation, authored outcomes, Ticket generation, action costs, once-per-machine-revision rules, Card zones/disposition, engine target legality, hidden-information policy, response-Card cross-Ticket legality, or multiplayer semantics.
 
 ## Completion boundary
 

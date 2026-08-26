@@ -1,6 +1,6 @@
 # Post-TASK-010 playtest approvals
 
-Status: **PT-001 D, PT-002 A, PT-003 D, PT-004 A, PT-005 A, PT-006 D, and PT-007 A approved — 2026-08-24. UI-001 A and UI-002 A approved — 2026-08-25. PT-008 is open. The V0 training-ready track is waiting on that repeat-diagnostic decision before TASK-021/TASK-022 sequencing is finalized. Migration choices MS-001 A through MS-005 A and MS-007 A remain approved, but TASK-017 is deferred; MS-006 A's earlier parking sequence is superseded.**
+Status: **PT-001 D, PT-002 A, PT-003 D, PT-004 A, PT-005 A, PT-006 D, and PT-007 A approved — 2026-08-24. UI-001 A and UI-002 A approved — 2026-08-25. PT-008 B approved — 2026-08-26. The V0 training-ready track is active. Migration choices MS-001 A through MS-005 A and MS-007 A remain approved, but TASK-017 is deferred; MS-006 A's earlier parking sequence is superseded.**
 
 ## Post-TASK-016 UI approvals
 
@@ -234,13 +234,13 @@ Cover Observe, diagnostics, Evidence, candidate management, Isolation, Repair, V
 
 Add a rules reference and dismissible callouts without a locked guided sequence. This is lighter but does not prove a complete path through the actual engine.
 
-## PT-008 — Same-state diagnostic repetition — **approval required**
+## PT-008 — Same-state diagnostic repetition — **B approved 2026-08-26**
 
 Frozen §11 currently rejects an identical same-diagnostic, same-target, same-machine-revision execution before payment when no new authored outcome exists. That is a defensible anti-farming shortcut, but it makes a deterministic, non-mutating diagnostic feel less repeatable than its model implies and directly produces the post-run discontinuity described by TASK-021.
 
 This decision applies to deliberate **new** action requests. Retrying the exact same request/idempotency key remains request replay: it must return the original result without another event or charge. A changed target, machine revision, or future authoritative diagnostic condition is a fresh observation rather than a same-state duplicate.
 
-### A — Paid redundant repeat with explicit Evidence lineage (recommended)
+### A — Paid redundant repeat with explicit Evidence lineage
 
 Allow a Player to deliberately run the same Test or Command again against the same target and unchanged machine revision. The new execution:
 
@@ -253,15 +253,15 @@ Allow a Player to deliberately run the same Test or Command again against the sa
 
 The original Evidence remains the canonical citable observation. The duplicate is still visible Evidence of what the Player chose and what the game returned, but its non-contributing status is authoritative rather than inferred from copy. Automated policies must not loop on redundant repeats merely because they remain legal.
 
-### B — Preserve rejection before payment and explain it
+### B — Preserve rejection before payment and explain it (approved)
 
-Keep the current rule. Once an equivalent outcome exists for the target and machine revision, the diagnostic remains inspectable but is not runnable until relevant state changes. The UI must say that the current revision already has this result and that no Action was spent. This minimizes engine/schema changes but preserves the counter-intuitive restriction.
+Keep the current rule. Once an equivalent outcome exists for the target and machine revision, the diagnostic remains inspectable but is not runnable until relevant state changes. The UI must say that the current revision already has this result and that no Action was spent. This avoids duplicate-Evidence lineage, citation, scoring, replay, and automated-policy complexity while retaining the existing anti-redundancy rule.
 
 ### C — Paid repeat recorded only as redundant Worklog
 
 Allow the repeat and spend its cost, but create a typed redundant-action result only in the Worklog rather than another Evidence item. This avoids duplicate Evidence semantics, but conflicts with the established invariant that every accepted diagnostic creates a diagnostic Evidence result and makes the reproduced observation harder to find.
 
-TASK-022-XHIGH is the proposed implementation contract for Option A. TASK-021-HIGH remains the selected-Ticket scoping correction under every option, but follows TASK-022 if A is approved so its post-run UI is built against the final repeat contract. If B is approved, TASK-022 is closed without implementation and TASK-021 proceeds directly. Option C requires revising TASK-022's Evidence-specific contract before activation.
+The project owner selected B after reviewing the complexity of Option A. Frozen §11 already expresses B, so no rules-version or engine migration is required. The proposed TASK-022 was withdrawn. TASK-021-HIGH owns the necessary selected-Ticket scoping and clear completed/current-revision explanation without changing diagnostic repetition rules.
 
 ## Migration Seed and Server Repair V2
 
