@@ -4,13 +4,15 @@ Tasks are implementation contracts. A builder must read `AGENTS.md` and then the
 
 Beginning with TASK-011, the displayed task ID includes the recommended reasoning-effort suffix used when starting that task. `HIGH` denotes substantial but bounded implementation/research; `XHIGH` denotes a cross-cutting semantic, architectural, or broad content migration. The stable task number and existing filename do not change, preserving links and history.
 
-Active task:
+Active decision gate:
 
-- [`TASK-021-HIGH: Fix selected-Ticket diagnostic target continuity`](TASK-021-fix-selected-ticket-diagnostic-target-continuity.md) — owner-directed defect correction; stop completed/unavailable Bench diagnostics from falling through to other active Tickets while preserving TASK-012's explicit alternate-target behavior for private response Cards.
+- **PT-008 — same-state diagnostic repetition.** Approval is required before the next implementation task. Option A is recommended: allow a deliberate paid repeat as explicit redundant, non-citable Evidence while preserving exact-request idempotency and anti-farming invariants.
 
 Queued V0 training-ready sequence:
 
-- [`TASK-015-HIGH: Add guided tutorials and the solo solution-reveal experience`](TASK-015-add-guided-tutorial-and-solution-reveal.md) — approved PT-007 A; queued after TASK-021 so tutorial checkpoints bind to the corrected selected-Ticket diagnostic contract.
+- [`TASK-022-XHIGH: Allow paid redundant diagnostic repeats`](TASK-022-allow-paid-redundant-diagnostic-repeats.md) — proposed and blocked on PT-008 A; synchronize the rule, distinguish gameplay repetition from request replay, add explicit canonical/duplicate Evidence lineage, and prevent repeat farming across Isolation, scoring, statistics, and automated policies.
+- [`TASK-021-HIGH: Fix selected-Ticket diagnostic target continuity`](TASK-021-fix-selected-ticket-diagnostic-target-continuity.md) — paused at PT-008; follows TASK-022 under Option A, or proceeds directly under Option B. Bench diagnostics must remain scoped to the displayed Ticket while TASK-012's private response-Card alternate targeting remains intact.
+- [`TASK-015-HIGH: Add guided tutorials and the solo solution-reveal experience`](TASK-015-add-guided-tutorial-and-solution-reveal.md) — approved PT-007 A; queued after TASK-021 so tutorial checkpoints bind to the final repeat and selected-Ticket diagnostic contracts.
 
 Reserved V0 illustration task:
 
@@ -20,7 +22,7 @@ Approved but deferred V2 task:
 
 - [`TASK-017-XHIGH: Create the Server Repair V2 Migration Seed`](TASK-017-create-server-repair-v2-migration-seed.md) — approved Migration Seed direction but deferred until the V0 product is training-ready; when reactivated, it audits V0 in bounded checkpoints and establishes the public dependency-inference V2 foundation without modifying V0 behavior.
 
-TASK-012-HIGH through TASK-014-XHIGH, TASK-016-HIGH, and TASK-018-HIGH through TASK-020-HIGH are complete. TASK-021-HIGH is the active interaction correction; TASK-015-HIGH follows as the remaining training-ready feature task. TASK-011-HIGH may proceed where asset integration permits. Return to TASK-017-XHIGH only when the project owner reactivates V2 migration.
+TASK-012-HIGH through TASK-014-XHIGH, TASK-016-HIGH, and TASK-018-HIGH through TASK-020-HIGH are complete. PT-008 is the active decision gate. Under the recommended Option A, the implementation order is TASK-022-XHIGH, TASK-021-HIGH, then TASK-015-HIGH; under Option B, TASK-022 closes and TASK-021/TASK-015 proceed. TASK-011-HIGH may follow the training-ready sequence or proceed where asset integration permits. Return to TASK-017-XHIGH only when the project owner reactivates V2 migration.
 
 Completed documentation and research tasks:
 
