@@ -95,6 +95,11 @@
         "eliminations_recorded": 0,
         "tickets_given_up": 0
       }
+    },
+    "tutorials": {
+      "schema_version": "solo-tutorial-progress-v1",
+      "catalog_version": "tutorial-checkpoints-v1",
+      "completed_tutorial_ids": []
     }
   }
 }

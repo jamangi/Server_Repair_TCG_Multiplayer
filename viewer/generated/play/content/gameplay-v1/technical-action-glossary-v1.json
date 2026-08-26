@@ -1,0 +1,26 @@
+{
+  "glossary_version": "technical-action-glossary-v1",
+  "review_status": "reviewed",
+  "terms": [
+    { "id": "term.atx", "term": "ATX", "expansion": "Advanced Technology Extended", "note": "A common PC power and board form-factor specification; it must not be assumed for proprietary server connectors." },
+    { "id": "term.bios", "term": "BIOS", "expansion": "basic input/output system", "note": "Firmware that initializes hardware and participates in platform startup." },
+    { "id": "term.bmc", "term": "BMC", "expansion": "baseboard management controller", "note": "A controller used for out-of-band platform management and sensor access." },
+    { "id": "term.cpu", "term": "CPU", "expansion": "central processing unit", "note": "The server processor." },
+    { "id": "term.dhcp", "term": "DHCP", "expansion": "Dynamic Host Configuration Protocol", "note": "A protocol used to provide hosts with network configuration." },
+    { "id": "term.dimm", "term": "DIMM", "expansion": "dual in-line memory module", "note": "A removable memory module form factor." },
+    { "id": "term.ecc", "term": "ECC", "expansion": "error-correcting code", "note": "Memory error-detection and correction information; correction limits and reporting vary by platform." },
+    { "id": "term.icmp", "term": "ICMP", "expansion": "Internet Control Message Protocol", "note": "A network control protocol used by ping for Echo requests and replies." },
+    { "id": "term.ip", "term": "IP", "expansion": "Internet Protocol", "note": "The network-layer protocol family used for addressed packet delivery." },
+    { "id": "term.ipmi", "term": "IPMI", "expansion": "Intelligent Platform Management Interface", "note": "A platform-management interface used for sensors, events, and controller access." },
+    { "id": "term.ipv4", "term": "IPv4", "expansion": "Internet Protocol version 4", "note": "The version 4 Internet Protocol address and packet format." },
+    { "id": "term.nvme", "term": "NVMe", "expansion": "Non-Volatile Memory Express", "note": "A storage protocol for nonvolatile memory, commonly transported over PCIe." },
+    { "id": "term.pci", "term": "PCI", "expansion": "Peripheral Component Interconnect", "note": "A computer expansion-bus family." },
+    { "id": "term.pcie", "term": "PCIe", "expansion": "Peripheral Component Interconnect Express", "note": "The serial expansion interconnect used by many server adapters and NVMe devices." },
+    { "id": "term.post", "term": "POST", "expansion": "Power-On Self-Test", "note": "Firmware initialization and startup checks performed after power-on." },
+    { "id": "term.psu", "term": "PSU", "expansion": "power supply unit", "note": "A module that converts input power into the outputs required by the server." },
+    { "id": "term.raid", "term": "RAID", "expansion": "redundant array of independent disks", "note": "A storage arrangement that combines devices for performance, redundancy, or both, depending on level." },
+    { "id": "term.rpm", "term": "RPM", "expansion": "revolutions per minute", "note": "A rotational-speed unit used for fan telemetry." },
+    { "id": "term.smart", "term": "SMART", "expansion": "Self-Monitoring, Analysis and Reporting Technology", "note": "A drive-health reporting system whose attributes and thresholds can be vendor-specific." },
+    { "id": "term.uefi", "term": "UEFI", "expansion": "Unified Extensible Firmware Interface", "note": "A platform firmware interface that defines boot management and other services." }
+  ]
+}

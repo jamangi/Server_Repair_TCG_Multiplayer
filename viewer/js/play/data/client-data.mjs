@@ -6,9 +6,12 @@ export const SETTINGS_VERSION = 'solo-settings-v2';
 export const STATISTICS_VERSION = 'solo-statistics-v2';
 export const EXPORT_VERSION = 'solo-export-v2';
 export const RESULT_SUMMARY_VERSION = 'solo-result-summary-v2';
+export const TUTORIAL_PROGRESS_VERSION = 'solo-tutorial-progress-v1';
+export const TUTORIAL_CATALOG_VERSION = 'tutorial-checkpoints-v1';
 export const RULESET_VERSION = 'first-version-v2';
 export const CARD_CATALOG_VERSION = 'core-card-catalog-diagnosis-v2';
-export const EXPANDED_CARD_CATALOG_VERSION = 'core-card-catalog-coverage-v3';
+export const PRIOR_EXPANDED_CARD_CATALOG_VERSION = 'core-card-catalog-coverage-v3';
+export const EXPANDED_CARD_CATALOG_VERSION = 'core-card-catalog-technical-copy-v4';
 export const STORAGE_KEY = 'server-repair-tcg:solo-pages-v2:state';
 export const MAX_IMPORT_BYTES = 512 * 1024;
 export const PROFILE_NAME_MAX_LENGTH = 40;
@@ -73,7 +76,7 @@ const POINT_STATISTIC_KEYS = new Set([
   'lifetime_service_points_gained',
 ]);
 const STATISTICS_KEYS = ['schema_version', 'processed_match_start_ids', 'processed_match_results', 'totals'];
-const LOCAL_RECORD_KEYS = ['profile', 'decks', 'settings', 'statistics'];
+const LOCAL_RECORD_KEYS = ['profile', 'decks', 'settings', 'statistics', 'tutorials'];
 const LOCAL_STATE_KEYS = ['storage_version', 'records'];
 const EXPORT_KEYS = ['schema_version', 'implementation_profile_id', 'exported_at', 'records'];
 const WORKER_RESULT_COUNTER_MAP = Object.freeze({
@@ -372,6 +375,11 @@ export function createDefaultState(context) {
         preferred_bench_view: 'RELEVANT',
       },
       statistics: createEmptyStatistics(),
+      tutorials: {
+        schema_version: TUTORIAL_PROGRESS_VERSION,
+        catalog_version: TUTORIAL_CATALOG_VERSION,
+        completed_tutorial_ids: [],
+      },
     },
   };
   return assertValidLocalState(state, normalized);
@@ -545,6 +553,21 @@ export function validateStatistics(statistics, context) {
   return errors;
 }
 
+export function validateTutorialProgress(progress, context) {
+  normalizeContext(context);
+  const errors = [];
+  const path = '$.tutorials';
+  if (!validateExactKeys(progress, ['schema_version', 'catalog_version', 'completed_tutorial_ids'], path, errors)) return errors;
+  validateVersion(progress.schema_version, TUTORIAL_PROGRESS_VERSION, `${path}.schema_version`, errors);
+  validateVersion(progress.catalog_version, TUTORIAL_CATALOG_VERSION, `${path}.catalog_version`, errors);
+  validateUniqueStrings(progress.completed_tutorial_ids, `${path}.completed_tutorial_ids`, errors);
+  const known = new Set(['tutorial.fundamentals', 'tutorial.verify_recovery']);
+  for (const [index, id] of (progress.completed_tutorial_ids ?? []).entries()) {
+    if (!known.has(id)) errors.push(issue(`${path}.completed_tutorial_ids[${index}]`, 'UNKNOWN_ID', `Unknown tutorial ${id}.`));
+  }
+  return errors;
+}
+
 function validateRecords(records, context, path = '$.records') {
   const errors = [];
   if (!validateExactKeys(records, LOCAL_RECORD_KEYS, path, errors)) return errors;
@@ -552,6 +575,7 @@ function validateRecords(records, context, path = '$.records') {
   errors.push(...validateDeckCollection(records.decks, context));
   errors.push(...validateSettings(records.settings, context));
   errors.push(...validateStatistics(records.statistics, context));
+  errors.push(...validateTutorialProgress(records.tutorials, context));
   return errors;
 }
 
@@ -596,13 +620,35 @@ export function migrateLocalState(candidate, context) {
     );
   }
   const normalized = normalizeContext(context);
+  let working = cloneJson(candidate);
+  if (isPlainObject(working.records) && !Object.hasOwn(working.records, 'tutorials')) {
+    working.records.tutorials = createDefaultState(normalized).records.tutorials;
+  }
   if (normalized.cardCatalogVersion === EXPANDED_CARD_CATALOG_VERSION
-      && candidate.records?.decks?.card_catalog_version === CARD_CATALOG_VERSION) {
-    const migrated = cloneJson(candidate);
+      && working.records?.decks?.card_catalog_version === CARD_CATALOG_VERSION) {
+    const migrated = working;
     migrated.records.decks = createDefaultState(normalized).records.decks;
     return assertValidLocalState(migrated, normalized);
   }
-  return assertValidLocalState(candidate, normalized);
+  if (normalized.cardCatalogVersion === EXPANDED_CARD_CATALOG_VERSION
+      && working.records?.decks?.card_catalog_version === PRIOR_EXPANDED_CARD_CATALOG_VERSION) {
+    const migrated = working;
+    migrated.records.decks.card_catalog_version = EXPANDED_CARD_CATALOG_VERSION;
+    return assertValidLocalState(migrated, normalized);
+  }
+  return assertValidLocalState(working, normalized);
+}
+
+export function recordTutorialCompletion(progress, tutorialId, context) {
+  const errors = validateTutorialProgress(progress, context);
+  if (errors.length) throw new ClientDataError('INVALID_LOCAL_DATA', 'Tutorial progress failed validation.', errors);
+  const next = cloneJson(progress);
+  if (!['tutorial.fundamentals', 'tutorial.verify_recovery'].includes(tutorialId)) {
+    throw new ClientDataError('UNKNOWN_TUTORIAL', `Unknown tutorial ${String(tutorialId)}.`);
+  }
+  if (!next.completed_tutorial_ids.includes(tutorialId)) next.completed_tutorial_ids.push(tutorialId);
+  next.completed_tutorial_ids.sort();
+  return next;
 }
 
 export function deriveLevel(lifetimeServicePointsGained) {

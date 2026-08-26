@@ -1,7 +1,7 @@
 {
-  "deck_catalog_version": "core-response-decks-v3",
+  "deck_catalog_version": "core-response-decks-v4",
   "ruleset_version": "first-version-v2",
-  "card_catalog_version": "core-card-catalog-coverage-v3",
+  "card_catalog_version": "core-card-catalog-technical-copy-v4",
   "decks": [
     {
       "id": "deck.core.multisystem_response_v3",

@@ -2,7 +2,7 @@
 
 ## Status
 
-**Approved scope — queued after TASK-023 and TASK-024.** PT-007 A and the prerequisite PT-005 A reveal behavior were approved by the project owner on 2026-08-24. TASK-013, TASK-014, TASK-016, and corrective TASK-018 through TASK-021 are complete. TASK-023 first restores Ticket-state legibility; TASK-024 then establishes the reusable technical descriptions, notes, and mechanic/learning separation that tutorial copy must consume rather than duplicate.
+**Complete — 2026-08-26.** Two pinned, replayable, real-engine Tutorials now cover the fundamentals and failed-Verify recovery paths; local completion is cosmetic/exportable, player-safe Isolation guidance exposes no truth, and solo Give Up renders an authoritative post-transition solution sequence with preserved-history comparison.
 
 ## Approved authority
 

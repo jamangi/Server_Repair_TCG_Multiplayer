@@ -51,6 +51,37 @@
   --play-team: #68d5f2;
   --play-public: #79df99;
 
+  /* Semantic state by surface. Solid fills keep contrast deterministic over textures. */
+  --play-dark-candidate-fg: #e4eef1;
+  --play-dark-candidate-bg: #132630;
+  --play-dark-candidate-border: #7093a2;
+  --play-dark-hypothesis-fg: #e8fbff;
+  --play-dark-hypothesis-bg: #123b49;
+  --play-dark-hypothesis-border: #72d9ed;
+  --play-dark-eliminated-fg: #ddd8d1;
+  --play-dark-eliminated-bg: #2c2928;
+  --play-dark-eliminated-border: #a79c91;
+  --play-dark-state-focus: #b8effb;
+  --play-paper-candidate-fg: #1d2926;
+  --play-paper-candidate-bg: #d8e1dc;
+  --play-paper-candidate-border: #586862;
+  --play-paper-hypothesis-fg: #183b44;
+  --play-paper-hypothesis-bg: #bcdce3;
+  --play-paper-hypothesis-border: #2f606a;
+  --play-paper-eliminated-fg: #3f3731;
+  --play-paper-eliminated-bg: #d8d0c5;
+  --play-paper-eliminated-border: #655e56;
+  --play-paper-accepted-fg: #25432d;
+  --play-paper-accepted-bg: #cce1cf;
+  --play-paper-accepted-border: #3d6948;
+  --play-paper-returned-fg: #4b3313;
+  --play-paper-returned-bg: #f1d6ab;
+  --play-paper-returned-border: #76541d;
+  --play-paper-disabled-fg: #eef1f0;
+  --play-paper-disabled-bg: #435056;
+  --play-paper-disabled-border: #9fb1b5;
+  --play-paper-state-focus: #0b5363;
+
   /* Type */
   --play-font-ui: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --play-font-display: "Arial Narrow", "Roboto Condensed", "Aptos Narrow", var(--play-font-ui);
@@ -1211,6 +1242,17 @@
   font-size: 0.68rem;
   text-transform: uppercase;
 }
+
+.play-app .card-detail__reference-name { min-width: 0; color: #b8effb; font-weight: 800; overflow-wrap: anywhere; }
+.play-app .card-detail__facts { display: grid; gap: 0.35rem; margin: 0 0 var(--play-space-3); }
+.play-app .card-detail__fact { display: grid; grid-template-columns: minmax(7rem, 30%) minmax(0, 1fr); gap: 0.65rem; padding: 0.5rem 0.6rem; border: 1px solid rgba(95, 184, 214, 0.22); background: rgba(4, 14, 20, 0.62); }
+.play-app .card-detail__fact dt { color: #9ed7e6; font-size: 0.72rem; font-weight: 900; text-transform: uppercase; }
+.play-app .card-detail__fact dd { margin: 0; color: #e4eef1; }
+.play-app .card-detail__subheading { margin: 0; color: #c6edf5; }
+.play-app .card-detail__method-list { display: grid; gap: 0.35rem; margin: 0 0 var(--play-space-3); }
+.play-app .card-detail__advanced { padding: 0.6rem 0.7rem; border: 1px solid rgba(141, 167, 177, 0.35); border-radius: 0.55rem; color: var(--play-muted); }
+.play-app .card-detail__advanced summary { min-height: 44px; color: #c6edf5; font-weight: 800; cursor: pointer; }
+.play-app .card-detail__advanced code { display: block; margin-bottom: 0.45rem; overflow-wrap: anywhere; }
 
 /* Profile, settings, and dialogs --------------------------------------- */
 
@@ -2475,18 +2517,75 @@
   align-items: center;
   min-width: 0;
   padding: 0.28rem 0.5rem;
-  border: 1px solid rgba(122, 148, 168, 0.32);
+  border: 1px solid var(--play-dark-candidate-border);
   border-radius: 999px;
-  color: #c9d5dc;
-  background: rgba(4, 12, 18, 0.68);
+  color: var(--play-dark-candidate-fg);
+  background: var(--play-dark-candidate-bg);
   font-size: 0.69rem;
   white-space: nowrap;
 }
 
 .play-app .candidate-chip span { overflow: hidden; text-overflow: ellipsis; }
-.play-app .candidate-chip small { color: #9ed7e6; font-size: 0.58rem; font-weight: 900; text-transform: uppercase; }
-.play-app .candidate-chip.is-hypothesis { border-color: rgba(91, 201, 226, 0.72); background: rgba(31, 121, 148, 0.2); }
-.play-app .candidate-chip.is-eliminated { opacity: 0.62; text-decoration: line-through; }
+.play-app .candidate-chip small { color: inherit; font-size: 0.58rem; font-weight: 900; text-transform: uppercase; }
+.play-app .candidate-chip.is-hypothesis { border: 3px double var(--play-dark-hypothesis-border); color: var(--play-dark-hypothesis-fg); background: var(--play-dark-hypothesis-bg); }
+.play-app .candidate-chip.is-hypothesis small::before { content: "◆ "; }
+.play-app .candidate-chip.is-eliminated { border-color: var(--play-dark-eliminated-border); color: var(--play-dark-eliminated-fg); background: var(--play-dark-eliminated-bg); text-decoration: line-through; }
+.play-app .candidate-chip.is-eliminated small::before { content: "× "; text-decoration: none; }
+
+.play-app .ticket-sheet .candidate-chip {
+  border-color: var(--play-paper-candidate-border);
+  color: var(--play-paper-candidate-fg);
+  background: var(--play-paper-candidate-bg);
+}
+
+.play-app .ticket-sheet .candidate-chip.is-hypothesis {
+  border-color: var(--play-paper-hypothesis-border);
+  color: var(--play-paper-hypothesis-fg);
+  background: var(--play-paper-hypothesis-bg);
+}
+
+.play-app .ticket-sheet .candidate-chip.is-eliminated {
+  border-color: var(--play-paper-eliminated-border);
+  color: var(--play-paper-eliminated-fg);
+  background: var(--play-paper-eliminated-bg);
+}
+
+.play-app .ticket-sheet .candidate-chip[data-selected="true"] {
+  outline-color: var(--play-paper-state-focus);
+}
+
+.play-app .ticket-sheet :focus-visible {
+  outline-color: var(--play-paper-state-focus);
+  box-shadow: 0 0 0 6px rgba(11, 83, 99, 0.2);
+}
+
+.play-app .ticket-sheet.is-returned {
+  border-color: var(--play-paper-returned-border);
+  box-shadow: inset 0.45rem 0 0 var(--play-paper-returned-border), inset 0 0 36px rgba(99, 68, 30, 0.12), var(--play-depth-3);
+}
+
+.play-app .ticket-status {
+  display: inline-flex;
+  min-height: 1.5rem;
+  align-items: center;
+  padding: 0.18rem 0.45rem;
+  border: 1px solid var(--play-paper-candidate-border);
+  border-radius: 999px;
+  color: var(--play-paper-candidate-fg);
+  background: var(--play-paper-candidate-bg);
+  font-weight: 900;
+}
+
+.play-app .ticket-status[data-status="RETURNED_TO_DIAGNOSIS"] {
+  border-color: var(--play-paper-returned-border);
+  color: var(--play-paper-returned-fg);
+  background: var(--play-paper-returned-bg);
+}
+
+.play-app .ticket-status[data-status="RETURNED_TO_DIAGNOSIS"]::before {
+  margin-right: 0.28rem;
+  content: "↩";
+}
 
 .play-app .evidence-dispositions { display: grid; gap: 0.35rem; margin-top: 0.55rem; }
 .play-app .evidence-disposition { display: flex; gap: 0.45rem; align-items: center; padding: 0.42rem 0.55rem; border: 1px solid rgba(95, 184, 214, 0.26); border-radius: 0.5rem; color: #c5d4dc; background: rgba(4, 13, 19, 0.58); font-size: 0.72rem; }
@@ -2504,11 +2603,25 @@
 .play-app .bench-type-tabs button { min-height: 44px; padding: 0 0.65rem; border: 0; border-right: 1px solid rgba(95, 184, 214, 0.2); color: #91a9b5; background: rgba(4, 12, 18, 0.7); cursor: pointer; }
 .play-app .bench-type-tabs button:last-child { border-right: 0; }
 .play-app .bench-type-tabs button[aria-pressed="true"] { color: #e8f7fb; background: rgba(46, 141, 168, 0.38); }
-.play-app .full-ticket-dialog { width: min(60rem, calc(100% - 2rem)); max-height: min(88dvh, 58rem); padding: 1rem; overflow: auto; }
+.play-app .full-ticket-dialog { width: min(60rem, calc(100% - 2rem)); max-height: min(88dvh, 58rem); padding: 1rem; overflow: auto; border-color: #5a635e; color: var(--play-ink-900); color-scheme: light; background: var(--play-vellum-100); }
 .play-app .full-ticket-detail { display: grid; gap: 0.8rem; }
 .play-app .full-ticket-detail > header { padding: 0.5rem 3.2rem 0.25rem 0.5rem; }
-.play-app .ticket-workflow { padding: 0.85rem; border: 1px solid rgba(95, 184, 214, 0.24); border-radius: 0.75rem; background: rgba(3, 11, 17, 0.54); }
+.play-app .full-ticket-dialog .dialog-close { border-color: #5b6764; color: var(--play-ink-900); background: #d6ded9; }
+.play-app .ticket-workflow { padding: 0.85rem; border: 1px solid var(--play-paper-candidate-border); border-radius: 0.75rem; background: #e0e5dd; }
 .play-app .ticket-workflow h3 { margin: 0 0 0.55rem; }
+
+.play-app .full-ticket-dialog :focus-visible {
+  outline-color: var(--play-paper-state-focus);
+  box-shadow: 0 0 0 6px rgba(11, 83, 99, 0.2);
+}
+
+.play-app .full-ticket-dialog .basic-action:disabled {
+  border-color: var(--play-paper-disabled-border);
+  color: var(--play-paper-disabled-fg);
+  background: var(--play-paper-disabled-bg);
+  filter: none;
+  opacity: 1;
+}
 
 
 @media (max-width: 430px) {
@@ -2588,7 +2701,14 @@
   .play-app .play-panel,
   .play-app .repair-ticket,
   .play-app .ticket-queue-item,
-  .play-app .play-card {
+  .play-app .play-card,
+  .play-app .ticket-sheet,
+  .play-app .full-ticket-dialog,
+  .play-app .candidate-chip,
+  .play-app .candidate-row,
+  .play-app .accepted-isolation,
+  .play-app .ticket-status,
+  .play-app .evidence-disposition {
     forced-color-adjust: auto;
     background: Canvas;
     color: CanvasText;
@@ -2598,7 +2718,12 @@
   .play-app .repair-ticket,
   .play-app .ticket-queue-item,
   .play-app .play-button,
-  .play-app .basic-action {
+  .play-app .basic-action,
+  .play-app .candidate-chip,
+  .play-app .candidate-row,
+  .play-app .accepted-isolation,
+  .play-app .ticket-status,
+  .play-app .evidence-disposition {
     border: 2px solid ButtonText;
   }
 
@@ -2804,6 +2929,12 @@
   font: 850 1.2rem/1.1 var(--play-font-display);
   text-transform: uppercase;
 }
+
+.play-app .tutorial-launcher { display: grid; gap: 0.55rem; padding: 0.8rem; border: 1px solid rgba(93, 196, 224, 0.36); border-radius: 0.8rem; background: rgba(5, 24, 33, 0.72); }
+.play-app .tutorial-launcher :is(h3, p) { margin: 0; }
+.play-app .tutorial-launcher__list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.55rem; }
+.play-app .tutorial-launcher__list button { display: grid; gap: 0.2rem; min-height: 58px; text-align: left; }
+.play-app .tutorial-launcher__list small { color: var(--play-muted); }
 
 .play-app .composition-row {
   display: grid;
@@ -3063,10 +3194,32 @@ dialog.settings-dialog::backdrop {
 }
 
 .play-app .solution-reveal > summary { cursor: pointer; font-weight: 850; }
-.play-app .solution-reveal__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .7rem; margin-top: .8rem; }
-.play-app .solution-reveal__grid section { padding: .7rem; border: 1px solid var(--play-line); border-radius: 11px; }
-.play-app .solution-reveal__grid h3 { margin-top: 0; }
-.play-app .solution-reveal__grid li span { display: block; margin-top: .2rem; color: var(--play-muted); }
+.play-app .solution-reveal__sequence { display: grid; gap: .7rem; padding: 0; margin: .8rem 0; list-style: none; }
+.play-app .solution-reveal__sequence section,
+.play-app .solution-reveal__comparison,
+.play-app .solution-reveal__error { padding: .8rem; border: 1px solid var(--play-line); border-radius: 11px; background: rgba(4, 14, 20, 0.48); }
+.play-app .solution-reveal__sequence h3,
+.play-app .solution-reveal__comparison h3,
+.play-app .solution-reveal__error h3 { margin-top: 0; }
+.play-app .solution-reveal__sequence li span { display: block; margin-top: .25rem; color: var(--play-muted); }
+.play-app .solution-reveal__error { border-width: 2px; border-color: var(--play-danger); color: #ffd9d4; }
+
+.play-app .tutorial-coach { display: grid; grid-template-columns: minmax(15rem, 0.75fr) minmax(24rem, 1.7fr) auto; gap: 0.75rem; align-items: center; padding: 0.7rem 0.85rem; border: 2px solid #68d7ee; border-radius: 0.8rem; color: #eafaff; background: linear-gradient(115deg, #0b3442, #081923); box-shadow: 0 0 0 3px rgba(104, 215, 238, 0.14), var(--play-depth-2); }
+.play-app .tutorial-coach header { min-width: 0; }
+.play-app .tutorial-coach h2 { margin: 0.1rem 0 0; font-size: 1rem; }
+.play-app .tutorial-coach__copy { max-height: 5.5rem; overflow: auto; color: #c9e7ef; font-size: 0.76rem; }
+.play-app .tutorial-coach__copy p { margin: 0 0 0.4rem; }
+.play-app .tutorial-coach__copy p:last-child { margin-bottom: 0; }
+.play-app .tutorial-coach__controls { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 0.4rem; }
+.play-app .tutorial-coach__controls .play-button { min-height: 44px; padding: 0.45rem 0.65rem; }
+.play-app .tutorial-wait { max-width: 15rem; color: #fff0be; font-size: 0.72rem; font-weight: 800; }
+.play-app [data-tutorial-target="true"] { position: relative; outline: 4px solid #79e6ff; outline-offset: 3px; }
+.play-app [data-tutorial-target="true"]::after { position: absolute; z-index: 50; top: 0.25rem; left: 0.25rem; padding: 0.2rem 0.4rem; border: 2px solid #042b36; border-radius: 0.35rem; content: "Tutorial target"; color: #04171d; background: #c4f6ff; font-size: 0.62rem; font-weight: 950; letter-spacing: 0.05em; pointer-events: none; text-transform: uppercase; }
+.play-app [data-tutorial-paused="true"] { text-decoration: line-through; }
+.play-app .isolation-guidance { padding: 0.75rem; border: 2px dashed var(--play-paper-hypothesis-border); border-radius: 0.75rem; color: var(--play-paper-candidate-fg); background: #edf0e8; }
+.play-app .isolation-guidance > summary { min-height: 44px; color: var(--play-paper-hypothesis-fg); font-weight: 900; cursor: pointer; }
+.play-app .isolation-guidance p { margin: 0.55rem 0; }
+.play-app .isolation-guidance li { margin-block: 0.35rem; }
 
 @media (max-width: 900px) {
   .play-app .diagnostic-shelf { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -3297,6 +3450,15 @@ dialog.settings-dialog::backdrop {
 .play-app .candidate-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--play-space-3); align-items: center; padding: 0.75rem; border: 1px solid rgba(92, 117, 116, 0.5); border-radius: var(--play-radius-xs); background: rgba(183, 211, 209, 0.25); }
 .play-app .candidate-row > div:first-child { display: grid; gap: 0.2rem; min-width: 0; }
 .play-app .candidate-row code { font-size: 0.68rem; }
+.play-app .full-ticket-dialog .candidate-row { border-color: var(--play-paper-candidate-border); color: var(--play-paper-candidate-fg); background: var(--play-paper-candidate-bg); }
+.play-app .full-ticket-dialog .candidate-row.is-hypothesis { border: 3px double var(--play-paper-hypothesis-border); color: var(--play-paper-hypothesis-fg); background: var(--play-paper-hypothesis-bg); }
+.play-app .full-ticket-dialog .candidate-row.is-eliminated { border-color: var(--play-paper-eliminated-border); color: var(--play-paper-eliminated-fg); background: var(--play-paper-eliminated-bg); text-decoration: line-through; opacity: 1; }
+.play-app .full-ticket-dialog .candidate-row small,
+.play-app .full-ticket-dialog .candidate-row code { color: inherit; }
+.play-app .full-ticket-dialog .candidate-marker { font-weight: 900; }
+.play-app .full-ticket-dialog .candidate-marker::before { content: "◆ "; }
+.play-app .full-ticket-dialog .accepted-isolation { border-color: var(--play-paper-accepted-border); color: var(--play-paper-accepted-fg); background: var(--play-paper-accepted-bg); }
+.play-app [data-semantic-surface="paper"] .basic-action:disabled { border-color: var(--play-paper-disabled-border); color: var(--play-paper-disabled-fg); background: var(--play-paper-disabled-bg); filter: none; opacity: 1; }
 .play-app .candidate-actions { display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: flex-end; }
 .play-app .candidate-actions .basic-action { min-height: 44px; }
 
@@ -3373,6 +3535,23 @@ dialog.settings-dialog::backdrop {
   background: linear-gradient(145deg, rgba(20, 42, 54, 0.84), rgba(5, 14, 20, 0.94));
   box-shadow: var(--play-inset), var(--play-depth-2);
 }
+
+.play-app .result-panel:has(.solution-reveal) { grid-template-columns: minmax(0, 1fr); }
+.play-app .result-panel > * { min-width: 0; }
+.play-app .result-panel > h1 { margin: 0; font-size: clamp(2rem, 5vw, 4.2rem); }
+.play-app .result-panel > .play-eyebrow,
+.play-app .result-panel > h1,
+.play-app .result-panel > p { margin-block: 0; }
+.play-app .result-panel .result-score { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.45rem 0.8rem; margin: 0; padding: 0.8rem 1rem; border-left: 4px solid var(--play-info); background: rgba(8, 29, 39, 0.68); }
+.play-app .result-panel .result-score strong { font-size: 2rem; }
+.play-app .result-stat-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.55rem; margin: 0; }
+.play-app .result-stat-grid > div { padding: 0.65rem 0.75rem; border: 1px solid var(--play-line); border-radius: 0.65rem; background: rgba(4, 14, 20, 0.5); }
+.play-app .result-stat-grid dt { color: var(--play-muted); font-size: 0.7rem; }
+.play-app .result-stat-grid dd { margin: 0.25rem 0 0; font-weight: 850; }
+.play-app .result-reasons,
+.play-app .result-record-status,
+.play-app .result-panel .authority-note { margin: 0; }
+.play-app .result-panel .button-row { margin: 0; }
 
 /* Large screens keep the whole decision desk in one viewport: queue, Ticket,
    intelligence, hand, and the engine-projected action dock. Dense Ticket
@@ -3474,6 +3653,7 @@ dialog.settings-dialog::backdrop {
   .play-app .action-result-notice { margin-inline: 0.55rem; }
   .play-app .action-result-notice dl { grid-template-columns: 1fr; }
   .play-app .result-panel { grid-template-columns: 1fr; }
+  .play-app .result-stat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 /* Active Match composition: one intentional layer for Ticket, Bench, hand, and action rail. */
@@ -3546,10 +3726,14 @@ dialog.settings-dialog::backdrop {
   }
   body.active-match-layout .play-app .game-route--global { --ticket-row: 8.5rem; }
   body.active-match-layout .play-app .game-route--text-reflow { --ticket-row: 12rem; --hand-row: clamp(14rem, 32dvh, 23rem); }
+  body.active-match-layout .play-app .game-route:has(.tutorial-coach) { grid-template-rows: auto minmax(6rem, auto) auto minmax(0, 1fr); }
   body.active-match-layout .play-app .game-route > :is(.game-header, .game-disclosure, .game-board) { grid-column: 1; }
   body.active-match-layout .play-app .game-header { grid-row: 1; }
-  body.active-match-layout .play-app .game-disclosure { grid-row: 2; }
-  body.active-match-layout .play-app .game-board { grid-row: 3; }
+  body.active-match-layout .play-app .tutorial-coach { grid-column: 1; grid-row: 2; min-height: 0; }
+  body.active-match-layout .play-app .game-route:has(.tutorial-coach) .game-disclosure { grid-row: 3; }
+  body.active-match-layout .play-app .game-route:has(.tutorial-coach) .game-board { grid-row: 4; }
+  body.active-match-layout .play-app .game-route:not(:has(.tutorial-coach)) .game-disclosure { grid-row: 2; }
+  body.active-match-layout .play-app .game-route:not(:has(.tutorial-coach)) .game-board { grid-row: 3; }
   body.active-match-layout .play-app .game-header { display: grid; grid-template-columns: auto minmax(34rem, 1fr); gap: 1rem; align-items: center; min-height: 3rem; padding: 0.35rem 0.7rem; }
   body.active-match-layout .play-app .game-header h1 { display: inline; margin-right: 0.6rem; font-size: 1.05rem; }
   body.active-match-layout .play-app .game-header > div > p { display: inline; margin: 0; font-size: 0.7rem; }
@@ -3573,11 +3757,12 @@ dialog.settings-dialog::backdrop {
   body.active-match-layout .play-app .game-board--global .ticket-sheet { grid-template-columns: 8.6rem minmax(0, 1fr); }
   body.active-match-layout .play-app .ticket-sheet::before { display: none; }
   body.active-match-layout .play-app .ticket-sheet__art { min-height: 0; height: 100%; aspect-ratio: auto; margin: 0; border-radius: 0.5rem; }
-  body.active-match-layout .play-app .ticket-sheet__summary { display: grid; grid-template: auto auto auto / minmax(0, 1fr) auto; gap: 0.3rem 0.55rem; min-width: 0; padding: 0.2rem 0.35rem 0.2rem 0.65rem; }
+  body.active-match-layout .play-app .ticket-sheet__summary { display: grid; grid-template: auto auto auto / minmax(0, 1fr) auto; gap: 0.15rem 0.55rem; min-width: 0; padding: 0.1rem 0.35rem 0.1rem 0.65rem; }
   body.active-match-layout .play-app .ticket-sheet__summary header { display: flex; grid-column: 1 / -1; flex-wrap: wrap; gap: 0.25rem 0.45rem; align-items: center; min-width: 0; }
   body.active-match-layout .play-app .ticket-sheet__summary h2 { margin: 0; overflow: visible; font-size: 1rem; line-height: 1.1; white-space: normal; }
   body.active-match-layout .play-app .ticket-sheet__summary .ticket-code { margin: 0; font-size: 0.58rem; }
   body.active-match-layout .play-app .ticket-sheet__summary .ticket-status { margin-left: auto; font-size: 0.56rem; white-space: nowrap; }
+  body.active-match-layout .play-app .ticket-sheet__summary .ticket-status { min-height: 0; padding-block: 0; }
   body.active-match-layout .play-app .ticket-sheet__revision { color: var(--play-ink-700); font-size: 0.58rem; font-weight: 800; white-space: nowrap; }
   body.active-match-layout .play-app .ticket-sheet__symptom { grid-column: 1; margin: 0; overflow: visible; color: var(--play-ink-900); font-size: 0.72rem; line-height: 1.25; white-space: normal; }
   body.active-match-layout .play-app .ticket-sheet .candidate-chip-row { grid-column: 1 / -1; }
@@ -3639,6 +3824,8 @@ dialog.settings-dialog::backdrop {
   body.active-match-layout .play-app .investigation-rail > .intelligence-panel { grid-area: auto; grid-column: 1; grid-row: 1; }
   body.active-match-layout .play-app .investigation-rail > .legal-action-panel { grid-area: auto; grid-column: 1; grid-row: 2; }
   body.active-match-layout .play-app .investigation-rail > .basic-actions-panel { grid-area: auto; grid-column: 1; grid-row: 3; }
+  body.active-match-layout .play-app .investigation-rail:has(.intelligence-panel [data-tutorial-target="true"]) { grid-template-rows: minmax(10rem, 1fr) minmax(7rem, auto) auto; }
+  body.active-match-layout .play-app .investigation-rail:has(.intelligence-panel [data-tutorial-target="true"]) .legal-action-panel { max-height: 12rem; overflow: auto; scrollbar-width: thin; }
   body.active-match-layout .play-app .intelligence-panel { display: grid; grid-template-rows: auto minmax(0, 1fr); min-width: 0; min-height: 0; height: auto; overflow: hidden; }
   body.active-match-layout .play-app .intelligence-panel > [role="tabpanel"] { min-height: 0; max-height: none; padding: 0.55rem; overflow: auto; scrollbar-width: thin; }
   body.active-match-layout .play-app .legal-action-panel { display: grid; gap: 0.4rem; max-height: none; min-height: 8.2rem; padding: 0.55rem; margin: 0; overflow: visible; }
@@ -3676,6 +3863,7 @@ dialog.settings-dialog::backdrop {
   body.active-match-layout { overflow-x: hidden; }
   body.active-match-layout .play-subnav { display: none; }
   body.active-match-layout .play-app .game-route { width: 100%; max-width: none; padding: 0.55rem; }
+  body.active-match-layout .play-app .tutorial-coach { grid-template-columns: 1fr; }
   body.active-match-layout .play-app .game-board { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-areas: none; grid-template-rows: none; grid-auto-flow: row; gap: 0.65rem; height: auto; min-height: 0; }
   body.active-match-layout .play-app :is(.board-center, .investigation-rail) { display: contents; }
   body.active-match-layout .play-app .ticket-queue { grid-area: auto; grid-column: 1; order: 1; width: 100%; min-width: 0; overflow: hidden; }

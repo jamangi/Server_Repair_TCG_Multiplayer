@@ -433,7 +433,7 @@
       "entity_type": "command",
       "presentation": {
         "display_name": "List Detailed IPMI System Events",
-        "short_description": "Reads detailed System Event Log entries through a compatible IPMI interface."
+        "short_description": "Reads detailed System Event Log entries through an Intelligent Platform Management Interface (IPMI) connection."
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -464,7 +464,7 @@
       "entity_type": "command",
       "presentation": {
         "display_name": "Read NVMe Health Log",
-        "short_description": "Reads critical warnings, media errors, temperature, and endurance from an NVMe device."
+        "short_description": "Reads the Self-Monitoring, Analysis and Reporting Technology (SMART) health log for a Non-Volatile Memory Express (NVMe) device, including warnings, media errors, temperature, and endurance."
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -815,7 +815,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Magnified CPU Socket Inspection",
-        "short_description": "Inspects socket contact alignment, contamination, damage, and mounting evidence under controlled magnification."
+        "short_description": "Inspects central processing unit (CPU) socket contact alignment, contamination, damage, and mounting evidence under controlled magnification."
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -851,14 +851,14 @@
       ],
       "diagnostic_strength": 4,
       "action_cost": 1,
-      "education_text": "Compare the uniform contact pattern from multiple angles and do not touch contacts during an inspection-only Test."
+      "education_text": "Compare the uniform contact pattern from multiple angles and do not touch contacts during an inspection-only test."
     },
     {
       "id": "test.cooling.location_cross_substitution",
       "entity_type": "test",
       "presentation": {
         "display_name": "Fan-to-Location Cross-Substitution",
-        "short_description": "Temporarily swaps compatible fans to determine whether a telemetry fault follows the fan or stays at its connector."
+        "short_description": "Temporarily swaps compatible fans between documented locations to learn whether a telemetry fault follows the fan or remains at its connector."
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -905,14 +905,14 @@
       ],
       "diagnostic_strength": 4,
       "action_cost": 2,
-      "education_text": "This is a diagnostic substitution, not a permanent replacement. Restore the authored machine state after the comparison."
+      "education_text": "This is a diagnostic substitution, not a permanent replacement. Restore the original machine state after the comparison."
     },
     {
       "id": "test.power.distribution_path_isolation",
       "entity_type": "test",
       "presentation": {
         "display_name": "Power Distribution Path Isolation",
-        "short_description": "Compares known-good PSUs across bays and minimum configuration to isolate a shared power-distribution fault."
+        "short_description": "Compares known-good power supply units (PSUs) across supported bays and minimum configuration to isolate a shared power-distribution fault."
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -965,7 +965,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "BMC Recovery-State Test",
-        "short_description": "Determines whether the management controller is reachable, resettable, in recovery mode, or unrecoverable."
+        "short_description": "Determines whether the baseboard management controller (BMC) is reachable, resettable, in recovery mode, or unrecoverable."
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -1008,7 +1008,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Firmware Version Compatibility Review",
-        "short_description": "Compares BIOS, BMC, storage, network, and device firmware against an approved compatible baseline."
+        "short_description": "Compares basic input/output system (BIOS), baseboard management controller (BMC), storage, network, and device firmware with an approved compatible baseline."
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -1057,7 +1057,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Predictive Drive Health Analysis",
-        "short_description": "Reviews SMART, controller, media-error, and endurance evidence before an online drive fails completely."
+        "short_description": "Reviews Self-Monitoring, Analysis and Reporting Technology (SMART), controller, media-error, and endurance data before an online drive fails completely."
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -1104,7 +1104,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Drive Bay Path Isolation",
-        "short_description": "Uses protected inventory and compatible known-good media to determine whether a failure follows a drive or remains at one bay."
+        "short_description": "Uses protected inventory and compatible known-good media to learn whether a storage failure follows a drive or remains at one bay or backplane path."
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -1159,7 +1159,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Event Log Freshness Test",
-        "short_description": "Preserves current logs, refreshes management state, and checks whether the target alert returns under the complaint conditions."
+        "short_description": "Preserves current management logs, refreshes controller state, and checks whether the target alert returns under the complaint conditions."
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -1197,14 +1197,14 @@
       ],
       "diagnostic_strength": 3,
       "action_cost": 1,
-      "education_text": "Preserve evidence before clearing. A cleared display alone is not proof; the relevant machine state must be exercised again."
+      "education_text": "Preserve evidence before clearing. A cleared display alone is not proof; exercise the relevant machine state again."
     },
     {
       "id": "test.network.link_counter_soak",
       "entity_type": "test",
       "presentation": {
         "display_name": "Network Link and Counter Soak",
-        "short_description": "Observes link transitions and interface error counters over a defined interval after a firmware-related change."
+        "short_description": "Observes Ethernet link transitions and interface error counters over a defined interval after a firmware-related change."
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",

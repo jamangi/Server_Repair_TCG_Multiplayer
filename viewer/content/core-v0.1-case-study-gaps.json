@@ -109,7 +109,7 @@
       "entity_type": "command",
       "presentation": {
         "display_name": "dhclient Lease Request",
-        "short_description": "Releases or requests a DHCP lease and can display the client transaction in verbose mode."
+        "short_description": "Requests or releases an Internet Protocol version 4 (IPv4) lease from a Dynamic Host Configuration Protocol (DHCP) service and can show the client exchange."
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -140,7 +140,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Residual-Power Drain Test",
-        "short_description": "Safely removes all power, discharges residual state, then compares symptoms after controlled re-energization."
+        "short_description": "Safely removes all external power, discharges residual state, and then compares symptoms after controlled re-energization."
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -194,14 +194,14 @@
       ],
       "diagnostic_strength": 1,
       "action_cost": 1,
-      "education_text": "Follow protocol.safety.deenergize_discharge and the platform service instructions; redundant power feeds must all be removed before discharge."
+      "education_text": "Follow the approved de-energization procedure and platform instructions; remove every redundant power feed before discharge."
     },
     {
       "id": "test.power.output_voltage_measurement",
       "entity_type": "test",
       "presentation": {
         "display_name": "Power Output Voltage Measurement",
-        "short_description": "Measures documented power rails and power-good signals with an appropriate meter and platform pinout."
+        "short_description": "Measures documented power rails and power-good signals with an appropriate meter and the platform connector pinout."
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -249,14 +249,14 @@
       ],
       "diagnostic_strength": 3,
       "action_cost": 2,
-      "education_text": "Do not generalize an ATX pinout to a proprietary or hot-swap server interface; use model-specific service documentation and electrical safety controls."
+      "education_text": "Do not generalize an Advanced Technology Extended (ATX) pinout to a proprietary or hot-swap server interface; use model-specific documentation and electrical-safety controls."
     },
     {
       "id": "test.network.dhcp_transaction_trace",
       "entity_type": "test",
       "presentation": {
         "display_name": "DHCP Transaction Trace",
-        "short_description": "Interprets the DHCP client transaction to distinguish an absent offer from client-side address configuration problems."
+        "short_description": "Interprets a Dynamic Host Configuration Protocol (DHCP) client exchange to distinguish an absent server offer from client-side address-configuration problems."
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -309,7 +309,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "DHCP Address Pool Audit",
-        "short_description": "Inspects free-address capacity, active leases, exclusions, and stale reservations on the DHCP service."
+        "short_description": "Inspects free-address capacity, active leases, exclusions, and stale reservations on the Dynamic Host Configuration Protocol (DHCP) service."
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",

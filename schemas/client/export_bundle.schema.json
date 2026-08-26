@@ -31,13 +31,17 @@
         },
         "statistics": {
           "$ref": "aggregate_statistics.schema.json"
+        },
+        "tutorials": {
+          "$ref": "tutorial_progress.schema.json"
         }
       },
       "required": [
         "profile",
         "decks",
         "settings",
-        "statistics"
+        "statistics",
+        "tutorials"
       ]
     }
   },

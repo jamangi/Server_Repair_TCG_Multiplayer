@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/client/tutorial_progress.schema.json",
+  "title": "Solo tutorial progress v1",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "const": "solo-tutorial-progress-v1" },
+    "catalog_version": { "const": "tutorial-checkpoints-v1" },
+    "completed_tutorial_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "enum": ["tutorial.fundamentals", "tutorial.verify_recovery"] }
+    }
+  },
+  "required": ["schema_version", "catalog_version", "completed_tutorial_ids"]
+}

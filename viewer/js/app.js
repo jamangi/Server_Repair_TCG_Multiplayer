@@ -22,6 +22,13 @@ function normalizeRoute(hash = location.hash) {
   const path = raw.startsWith('/') ? raw : `/${raw}`;
   if (!raw || path === '/') return { hash: '#/library', area: 'library', name: 'library', params: {} };
   if (path === '/library') return { hash: '#/library', area: 'library', name: 'library', params: {} };
+  const libraryRecord = path.match(/^\/library\/([a-z0-9._-]+)$/);
+  if (libraryRecord) return {
+    hash: `#/library/${libraryRecord[1]}`,
+    area: 'library',
+    name: 'library',
+    params: { recordId: libraryRecord[1] },
+  };
   if (path === '/play/home') return { hash: '#/play/home', area: 'play', name: 'home', params: {} };
   if (path === '/play/decks') return { hash: '#/play/decks', area: 'play', name: 'decks', params: {} };
   const deckEditor = path.match(/^\/play\/decks\/([a-z0-9._-]+)\/edit$/);
@@ -85,7 +92,8 @@ async function routeApplication() {
   try {
     if (next.area === 'library') {
       if (activeArea === 'play') playModule?.unmountPlay?.();
-      await mountLibrary(appRoot, { announce });
+      if (activeArea === 'library') unmountLibrary();
+      await mountLibrary(appRoot, { announce, route: next });
     } else {
       if (activeArea === 'library') unmountLibrary();
       const module = await ensurePlayModule();

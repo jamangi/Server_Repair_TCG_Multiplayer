@@ -1,6 +1,7 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { assertTask024TechnicalCopy } from './technical-copy-quality.mjs';
 
 const scriptPath = fileURLToPath(import.meta.url);
 const repositoryRoot = path.resolve(path.dirname(scriptPath), '..', '..');
@@ -12,6 +13,30 @@ const sorted = (values) => [...values].sort(stableCompare);
 
 const readJson = async (filename) => JSON.parse(await readFile(filename, 'utf8'));
 const writeJson = async (filename, value) => writeFile(filename, `${JSON.stringify(value, null, 2)}\n`, 'utf8');
+
+function technicalDescription(entity) {
+  const value = entity?.presentation?.short_description?.trim();
+  if (!value) throw new Error(`${entity?.id ?? 'Unknown playable action'} lacks required technical copy.`);
+  return value;
+}
+
+function technicalNote(entity) {
+  const value = entity?.education_text?.trim();
+  return value || null;
+}
+
+function diagnosticRules(entity, targets) {
+  const target = targets.length > 0 ? 'a compatible component on the displayed Ticket' : 'the displayed Ticket';
+  return `Run this ${entity.entity_type === 'command' ? 'Command' : 'Test'} on ${target}. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.`;
+}
+
+function repairRules() {
+  return 'Use after the team accepts an Isolation that this procedure can repair. Discard after use; Verify is still required.';
+}
+
+function verifyRules() {
+  return 'Use after a Repair to check a listed Ticket requirement. Discard after use.';
+}
 
 function addRelationship(relationships, role, entityId) {
   if (typeof entityId !== 'string') return;
@@ -81,14 +106,14 @@ function diagnosticCard(entity, parts, entityById) {
     entity_type: 'card',
     presentation: {
       display_name: entity.presentation?.display_name ?? entity.id,
-      short_description: entity.presentation?.short_description ?? entity.purpose ?? 'Run this diagnostic against an eligible active Ticket.',
+      short_description: technicalDescription(entity),
     },
     source: sourceMeta(['global_bench', entity.entity_type, category]),
     card_type: entity.entity_type,
     archetypes: sorted(new Set(['global_bench', category])),
     cost,
     tags: sorted(new Set(['diagnostic', entity.entity_type, category])),
-    rules_text: `Run ${entity.id} on one compatible active Ticket and resolve its single authored current-state Evidence outcome.`,
+    rules_text: diagnosticRules(entity, targets),
     primary_domain_reference: {
       entity_id: entity.id,
       entity_type: entity.entity_type,
@@ -114,7 +139,7 @@ function diagnosticCard(entity, parts, entityById) {
       disposition: 'remain_in_diagnostic_bench',
       placement: 'diagnostic_bench',
     },
-    educational_text: entity.education_text ?? entity.educational_text ?? entity.purpose ?? 'Treat the result as Evidence, not as an automatic diagnosis.',
+    ...(technicalNote(entity) ? { educational_text: technicalNote(entity) } : {}),
     rarity: 'common',
   };
 }
@@ -126,14 +151,14 @@ function repairCard(procedure, faultIds, entityById) {
     entity_type: 'card',
     presentation: {
       display_name: procedure.presentation?.display_name ?? procedure.id,
-      short_description: procedure.presentation?.short_description ?? `Perform ${procedure.id} after accepted Isolation.`,
+      short_description: technicalDescription(procedure),
     },
     source: sourceMeta(['response', 'repair', procedure.id.split('.')[1]]),
     card_type: 'repair_procedure',
     archetypes: sorted(new Set(['response', procedure.id.split('.')[1]])),
     cost: procedure.action_cost,
     tags: sorted(new Set(['repair', procedure.id.split('.')[1]])),
-    rules_text: `After accepted Isolation, apply ${procedure.id} to its compatible actionable Fault.`,
+    rules_text: repairRules(),
     primary_domain_reference: { entity_id: procedure.id, entity_type: 'repair_procedure', role: 'execution', inherit_illustration: true },
     additional_domain_references: faultIds.map((id) => ({ entity_id: id, entity_type: entityById.get(id)?.entity_type ?? 'fault', role: 'subject' })),
     play_contract: {
@@ -145,7 +170,7 @@ function repairCard(procedure, faultIds, entityById) {
       resolution: [{ resolution_type: 'AUTHORED_REPAIR', repair_procedure_id: procedure.id }],
       disposition: 'discard',
     },
-    educational_text: procedure.education_text ?? procedure.educational_text ?? 'Repair changes machine state; Verify still determines recovery.',
+    ...(technicalNote(procedure) ? { educational_text: technicalNote(procedure) } : {}),
     rarity: 'common',
   };
 }
@@ -158,14 +183,14 @@ function verifyCard(validation, entityById) {
     entity_type: 'card',
     presentation: {
       display_name: validation.presentation?.display_name ?? validation.id,
-      short_description: validation.presentation?.short_description ?? `Evaluate ${validation.id} after the latest Repair.`,
+      short_description: technicalDescription(validation),
     },
     source: sourceMeta(['response', 'verify', validation.id.split('.')[1]]),
     card_type: 'verification',
     archetypes: sorted(new Set(['response', validation.id.split('.')[1]])),
     cost: validation.action_cost,
     tags: sorted(new Set(['verify', validation.id.split('.')[1]])),
-    rules_text: `Evaluate ${validation.id} for a named active Ticket requirement after its latest Repair.`,
+    rules_text: verifyRules(),
     primary_domain_reference: { entity_id: validation.id, entity_type: 'validation_procedure', role: 'execution', inherit_illustration: true },
     additional_domain_references: faults.map((id) => ({ entity_id: id, entity_type: entityById.get(id)?.entity_type ?? 'fault', role: 'subject' })),
     play_contract: {
@@ -177,7 +202,7 @@ function verifyCard(validation, entityById) {
       resolution: [{ resolution_type: 'AUTHORED_VERIFY', validation_procedure_id: validation.id }],
       disposition: 'discard',
     },
-    educational_text: validation.education_text ?? validation.educational_text ?? 'A current passing Verify is required before closure.',
+    ...(technicalNote(validation) ? { educational_text: technicalNote(validation) } : {}),
     rarity: 'common',
   };
 }
@@ -221,6 +246,8 @@ export async function buildTask014Content() {
   const entities = rawEntities.map(normalizedEntity).sort((left, right) => stableCompare(left.id, right.id));
   const entityById = new Map(entities.map((entity) => [entity.id, entity]));
   const parts = await readJson(path.join(gameplayRoot, 'task-014-parts.json'));
+  const glossary = await readJson(path.join(gameplayRoot, 'technical-action-glossary-v1.json'));
+  const reviewLedger = await readJson(path.join(gameplayRoot, 'technical-copy-review-v1.json'));
 
   const diagnostics = entities.filter((entity) => ['test', 'command'].includes(entity.entity_type));
   if (diagnostics.filter((entity) => entity.entity_type === 'test').length !== 37
@@ -316,7 +343,7 @@ export async function buildTask014Content() {
   const typeCounts = Object.fromEntries(entities.map((entry) => entry.entity_type).filter((value, index, values) => values.indexOf(value) === index)
     .sort(stableCompare).map((type) => [type, entities.filter((entry) => entry.entity_type === type).length]));
   const coverage = {
-    coverage_version: 'playable-coverage-v3',
+    coverage_version: 'playable-coverage-v4',
     part_catalog_version: parts.part_catalog_version,
     ticket_content_version: parts.ticket_content_version,
     domain_content_version: parts.domain_content_version,
@@ -342,6 +369,14 @@ export async function buildTask014Content() {
     outcome_families: parts.diagnostic_outcome_families,
     fingerprints: coverageFingerprints,
   };
+
+  assertTask024TechnicalCopy({
+    entities,
+    cards,
+    selectedIds: coverage.selected_action_definition_ids,
+    glossary,
+    ledger: reviewLedger,
+  });
 
   if (coverage.inventory.knowledge_records !== 257 || coverage.inventory.action_bearing_records !== 107
       || coverage.inventory.supported_fingerprints !== 12 || coverage.inventory.promoted_diagnostics !== 50) {

@@ -1,9 +1,10 @@
 # Schema package
 
-The schemas are draft, versioned contracts for two different kinds of data:
+The schemas are draft, versioned contracts for three different kinds of data:
 
 - [`domain/`](domain/) describes authored technical knowledge, card definitions, and Repair Ticket definitions that exist independently of a match.
 - [`runtime/`](runtime/) describes mutable authoritative match state, immutable events, action requests/results, and player-safe projections.
+- [`client/`](client/) describes browser-local profile, settings, decks, statistics, tutorial progress, and validated export data that never grants gameplay authority.
 
 Domain data answers **what a technical concept or playable definition is**. Runtime data answers **what has happened to one match instance and what a particular audience may see**. A runtime object normally references a domain definition by stable ID instead of copying its name, illustration, educational content, or rules definition.
 
@@ -24,6 +25,8 @@ JSON Schema validates object shape. Cross-file references, causal acyclicity, Ti
 | [`repair_ticket.schema.json`](domain/repair_ticket.schema.json) | A complete authored troubleshooting scenario: v2 public context/candidates, server-only causal truth, complete typed Evidence outcomes, alternative Isolation routes, Repair/Verify requirements, and closure requirements. Fixed fixtures and Ticket Builder output share this contract. |
 | [`symptom.schema.json`](domain/symptom.schema.json) | An observable symptom and its authored associations. A public symptom is not proof of a hidden Fault. |
 | [`test.schema.json`](domain/test.schema.json) | An Evidence-producing diagnostic definition and its targets, requirements, strength, and Action cost. Tests change Knowledge State, not machine state. |
+| [`technical_action_glossary.schema.json`](domain/technical_action_glossary.schema.json) | Reviewed first-use expansions and concise distinctions for terminology used by published playable actions. |
+| [`technical_copy_review.schema.json`](domain/technical_copy_review.schema.json) | The source, acronym, uncertainty, review-status, and exact-copy digest ledger for every published playable action. |
 | [`ticket_builder_configuration.schema.json`](domain/ticket_builder_configuration.schema.json) | One immutable, version-pinned set of hard generation constraints, duplicate policy, legal card pool, seed, and optional explicit fallback reference. |
 | [`ticket_builder_result.schema.json`](domain/ticket_builder_result.schema.json) | The complete server-only audit of a primary and optional fallback Builder attempt, including structured diagnostics or complete Ticket snapshots—never partial output. |
 | [`ticket_part_catalog.schema.json`](domain/ticket_part_catalog.schema.json) | Versioned compatible authored Ticket parts used for deterministic assembly, including fingerprints, public context, truth, outcomes, routes, Repair, Verify, closure, and teaching metadata. |
@@ -50,6 +53,18 @@ See [`DOMAIN_SCHEMAS.md`](../docs/schema-notes/DOMAIN_SCHEMAS.md) for the author
 | [`turn_state.schema.json`](runtime/turn_state.schema.json) | Draw, two-Action turn accounting, zero-Action limits, and the immediate closure-resolution window. |
 
 See [`RUNTIME_SCHEMAS.md`](../docs/schema-notes/RUNTIME_SCHEMAS.md) for lifecycle, visibility, payment, Worklog, scoring, and fixture-validation details.
+
+## Client schemas
+
+| Schema | Local-client responsibility |
+| --- | --- |
+| [`local_profile.schema.json`](client/local_profile.schema.json) | Local display name and cosmetic icon selection. |
+| [`deck_collection.schema.json`](client/deck_collection.schema.json) | Version-pinned legal local response decks. |
+| [`local_settings.schema.json`](client/local_settings.schema.json) | Match setup and presentation preferences. |
+| [`aggregate_statistics.schema.json`](client/aggregate_statistics.schema.json) | Idempotent local solo result aggregates. |
+| [`tutorial_catalog.schema.json`](client/tutorial_catalog.schema.json) | Pinned semantic Tutorial checkpoints, expected authoritative events, and real-content references. |
+| [`tutorial_progress.schema.json`](client/tutorial_progress.schema.json) | Cosmetic local completion IDs for replayable Tutorials. |
+| [`export_bundle.schema.json`](client/export_bundle.schema.json) | Validated local backup envelope; active Match and solution truth are excluded. |
 
 ## Important boundaries
 

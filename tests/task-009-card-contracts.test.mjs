@@ -120,7 +120,7 @@ test('approved Card Definition and Card Instance schema IDs remain stable', () =
   assert.equal(cardInstanceSchema.$id, 'https://example.local/runtime/card_instance.schema.json');
 });
 
-test('server-side domain snapshot is the exact selected 20-record illustrated subset', () => {
+test('server-side domain snapshot is the exact selected 20-record illustrated identity subset', () => {
   assert.equal(domainSnapshot.domain_content_version, 'core-domain-snapshot-v1');
   assert.equal(domainSnapshot.entities.length, 20);
   assert.equal(domainById.size, 20);
@@ -154,7 +154,9 @@ test('server-side domain snapshot is the exact selected 20-record illustrated su
     const source = viewerById.get(entity.id);
     assert.ok(source, `${entity.id} is absent from the selected viewer input`);
     assert.equal(entity.entity_type, source.entity_type, `${entity.id} type changed during snapshotting`);
-    assert.deepEqual(entity.presentation, source.presentation, `${entity.id} presentation changed during snapshotting`);
+    const { short_description: _legacyDescription, ...legacyPresentation } = entity.presentation;
+    const { short_description: _currentDescription, ...currentPresentation } = source.presentation;
+    assert.deepEqual(legacyPresentation, currentPresentation, `${entity.id} stable presentation changed during snapshotting`);
     assert.ok(entity.presentation.illustration.asset_id);
     assert.ok(entity.presentation.illustration.alt_text);
     for (const relationship of entity.relationships) {

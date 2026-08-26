@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/technical_action_glossary.schema.json",
+  "title": "Technical action glossary",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "stableId": { "type": "string", "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$" }
+  },
+  "properties": {
+    "glossary_version": { "$ref": "#/$defs/stableId" },
+    "review_status": { "const": "reviewed" },
+    "terms": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": { "$ref": "#/$defs/stableId" },
+          "term": { "type": "string", "minLength": 1 },
+          "expansion": { "type": "string", "minLength": 1 },
+          "note": { "type": "string", "minLength": 1 }
+        },
+        "required": ["id", "term", "expansion", "note"]
+      }
+    }
+  },
+  "required": ["glossary_version", "review_status", "terms"]
+}

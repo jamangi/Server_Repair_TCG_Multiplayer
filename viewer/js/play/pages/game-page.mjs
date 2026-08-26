@@ -173,7 +173,8 @@ function candidateMarkup(ticket, session, context) {
       record.ticket_instance_id === ticket.ticket_instance_id
         && record.candidate_fault_id === candidateId
         && record.diagnosis_revision === ticket.diagnosis_revision)?.eliminated === true;
-    return `<li class="candidate-row${current ? ' is-hypothesis' : ''}${eliminated ? ' is-eliminated' : ''}"><div><span>${escapeHtml(domainName(context.catalog, candidateId))}</span><code>${escapeHtml(candidateId)}</code>${eliminated ? '<small>Ruled out for this diagnosis stage</small>' : ''}</div><div class="candidate-actions">${hypothesis ? `<button type="button" class="basic-action basic-action--hypothesis" data-intent-id="${hypothesis.intent_id}"${session.resolving ? ' disabled' : ''}>Hypothesize</button>` : current ? '<span class="candidate-marker">Current hypothesis</span>' : ''}${elimination ? `<button type="button" class="basic-action" data-intent-id="${elimination.intent_id}"${session.resolving ? ' disabled' : ''}>${eliminated ? 'Reinstate' : 'Rule out'}</button>` : ''}${isolation ? `<button type="button" class="basic-action basic-action--isolate" data-intent-id="${isolation.intent_id}"${session.resolving ? ' disabled' : ''}>Isolate</button>` : ''}</div></li>`;
+    const state = eliminated ? 'ruled-out' : current ? 'hypothesis' : 'candidate';
+    return `<li class="candidate-row${current ? ' is-hypothesis' : ''}${eliminated ? ' is-eliminated' : ''}" data-candidate-state="${state}" data-candidate-id="${escapeHtml(candidateId)}"><div><span>${escapeHtml(domainName(context.catalog, candidateId))}</span><code>${escapeHtml(candidateId)}</code>${eliminated ? '<small>Ruled out for this diagnosis stage</small>' : ''}</div><div class="candidate-actions">${hypothesis ? `<button type="button" class="basic-action basic-action--hypothesis" data-intent-id="${hypothesis.intent_id}"${session.resolving ? ' disabled' : ''}>Hypothesize</button>` : current ? '<span class="candidate-marker">Current hypothesis</span>' : ''}${elimination ? `<button type="button" class="basic-action" data-intent-id="${elimination.intent_id}"${session.resolving ? ' disabled' : ''}>${eliminated ? 'Reinstate' : 'Rule out'}</button>` : ''}${isolation ? `<button type="button" class="basic-action basic-action--isolate" data-intent-id="${isolation.intent_id}"${session.resolving ? ' disabled' : ''}>Isolate</button>` : ''}</div></li>`;
   }).join('');
 }
 
@@ -184,7 +185,9 @@ function candidateSummaryMarkup(ticket, session, context) {
       record.ticket_instance_id === ticket.ticket_instance_id
         && record.candidate_fault_id === candidateId
         && record.diagnosis_revision === ticket.diagnosis_revision)?.eliminated === true;
-    return `<li class="candidate-chip${hypotheses.has(candidateId) ? ' is-hypothesis' : ''}${eliminated ? ' is-eliminated' : ''}"><span>${escapeHtml(domainName(context.catalog, candidateId))}</span>${hypotheses.has(candidateId) ? '<small>Hypothesis</small>' : eliminated ? '<small>Ruled out</small>' : ''}</li>`;
+    const state = eliminated ? 'ruled-out' : hypotheses.has(candidateId) ? 'hypothesis' : 'candidate';
+    const stateLabel = state === 'hypothesis' ? '<small>Hypothesis</small>' : state === 'ruled-out' ? '<small>Ruled out</small>' : '';
+    return `<li class="candidate-chip${state === 'hypothesis' ? ' is-hypothesis' : ''}${state === 'ruled-out' ? ' is-eliminated' : ''}" data-candidate-state="${state}" data-candidate-id="${escapeHtml(candidateId)}"><span>${escapeHtml(domainName(context.catalog, candidateId))}</span>${stateLabel}</li>`;
   }).join('');
 }
 
@@ -193,24 +196,88 @@ function ticketWorkflowMarkup(documentIntents, closureIntent, session) {
   return `<section class="ticket-workflow"><h3>Documentation workflow</h3><div class="candidate-actions">${documentIntents.map((intent) => `<button type="button" class="basic-action basic-action--document" data-intent-id="${intent.intent_id}"${session.resolving ? ' disabled' : ''}>Document Live</button>`).join('')}${closureIntent ? `<button type="button" class="basic-action basic-action--close" data-intent-id="${closureIntent.intent_id}"${session.resolving ? ' disabled' : ''}>Document &amp; Close</button>` : ''}</div></section>`;
 }
 
+function isolationGuidanceMarkup(ticket, session, context) {
+  const projection = session.projection;
+  const evidence = projection.view.authorized_events.filter((event) =>
+    event.ticket_instance_id === ticket.ticket_instance_id
+      && ['EVIDENCE_CREATED', 'VERIFY_EVIDENCE_CREATED'].includes(event.event_type));
+  const isolationIntents = projection.legal_intents.filter((intent) =>
+    intent.action_type === 'COMMIT_ISOLATION' && intent.ticket_instance_id === ticket.ticket_instance_id);
+  const cited = new Set(isolationIntents.flatMap((intent) => intent.cited_evidence_event_ids ?? []));
+  const dispositions = evidence.flatMap((event) => (event.payload?.candidate_effects ?? []).map((effect) => ({
+    sequence: event.sequence,
+    disposition: effect.disposition,
+    candidate: domainName(context.catalog, effect.candidate_fault_id),
+    cited: cited.has(event.event_id),
+  })));
+  const phaseAccepts = ['DIAGNOSIS', 'RETURNED_TO_DIAGNOSIS'].includes(ticket.status);
+  return `<details class="isolation-guidance"><summary>Why can’t I isolate?</summary><div>
+    <p><strong>Current phase:</strong> ${phaseAccepts ? 'Diagnosis accepts Isolation attempts.' : `${escapeHtml(STATUS_LABELS[ticket.status] || ticket.status)} does not accept a new Isolation.`}</p>
+    <p><strong>Projected route:</strong> ${isolationIntents.length ? `${isolationIntents.length} candidate route${isolationIntents.length === 1 ? ' is' : 's are'} supported by currently authorized information.` : 'No candidate route is currently supported by the authorized Evidence, valid current-stage eliminations, and public prerequisites.'}</p>
+    <p><strong>Projected citations:</strong> ${cited.size ? [...cited].map((id) => evidence.find((event) => event.event_id === id)?.sequence).filter(Number.isFinite).map((sequence) => `Evidence #${sequence}`).join(', ') : 'None selected by a projected legal Isolation.'}</p>
+    ${dispositions.length ? `<ul>${dispositions.map((item) => `<li><strong>${escapeHtml(item.disposition)}</strong> · ${escapeHtml(item.candidate)} · Evidence #${item.sequence}${item.cited ? ' · selected citation' : ''}</li>`).join('')}</ul>` : '<p>No candidate-changing disposition has been recorded yet. Clean, unrelated, and inconclusive findings still remain Evidence.</p>'}
+    <p>CONFIRM is decisive only for its named Candidate; SUPPORT may need corroboration; CONTRADICT and RULE_OUT weigh against a Candidate; INCONCLUSIVE does not decide it. A confirmed non-actionable condition does not open Repair.</p>
+    <p>An unsupported attempt deliberately does not say whether the Candidate was wrong or the Evidence was insufficient. Inspect Evidence, run another relevant diagnostic, update a cited notebook elimination, or use Give Up if you want to abandon this Ticket and authorize its private solution reveal.</p>
+  </div></details>`;
+}
+
 function fullTicketMarkup(ticket, presentation, session, context, documentIntents, closureIntent) {
   if (!ticket) return '<p>No active Ticket.</p>';
-  return `<div class="full-ticket-detail">
+  return `<div class="full-ticket-detail" data-semantic-surface="paper">
     <header><p class="ticket-code">${escapeHtml(ticket.ticket_instance_id)}</p><h2 id="full-ticket-heading">${escapeHtml(presentation?.display_name || ticket.ticket_definition_id)}</h2><p>${escapeHtml(presentation?.short_description || 'Generated repair scenario')}</p><span class="ticket-status" data-status="${ticket.status}">${escapeHtml(STATUS_LABELS[ticket.status] || ticket.status)}</span></header>
     <section class="ticket-symptoms"><h3>Observe · visible symptoms</h3><ul>${ticket.visible_symptom_ids.map((id) => `<li>${escapeHtml(domainName(context.catalog, id))}<code>${escapeHtml(id)}</code></li>`).join('')}</ul></section>
     <section class="machine-state-strip"><span>Machine state</span><strong>${escapeHtml(presentation?.machine_state_summary || 'No authorized machine-state change recorded.')}</strong><small>Machine revision ${ticket.machine_revision} · diagnosis stage ${ticket.diagnosis_revision} · Repair changes state; Verify proves recovery.</small></section>
     <section class="candidate-tray"${ticket.status === 'RETURNED_TO_DIAGNOSIS' ? ' data-diagnosis-reopened="true"' : ''}><div class="section-heading"><div><p class="play-eyebrow">Hypothesize ↔ Test</p><h3>Candidate faults</h3></div><span>${ticket.public_candidate_fault_ids.length}</span></div><ul>${candidateMarkup(ticket, session, context)}</ul></section>
-    <section class="accepted-isolation"><h3>Accepted Isolation</h3>${ticket.accepted_isolations.length ? ticket.accepted_isolations.map((record) => `<article><strong>${escapeHtml(domainName(context.catalog, record.candidate_fault_id))}</strong><span>${escapeHtml(record.classification.replaceAll('_', ' '))}</span><small>${record.cited_public_evidence_event_ids.length} public citation${record.cited_public_evidence_event_ids.length === 1 ? '' : 's'}</small></article>`).join('') : '<p>No actionable fault accepted yet. CONFIRM Evidence is decisive, but only an Accepted Isolation opens Repair.</p>'}</section>
+    <section class="accepted-isolation" data-isolation-state="${ticket.accepted_isolations.length ? 'accepted' : 'pending'}"><h3>Accepted Isolation</h3>${ticket.accepted_isolations.length ? ticket.accepted_isolations.map((record) => `<article><strong>${escapeHtml(domainName(context.catalog, record.candidate_fault_id))}</strong><span>${escapeHtml(record.classification.replaceAll('_', ' '))}</span><small>${record.cited_public_evidence_event_ids.length} public citation${record.cited_public_evidence_event_ids.length === 1 ? '' : 's'}</small></article>`).join('') : '<p>No actionable fault accepted yet. CONFIRM Evidence is decisive, but only an Accepted Isolation opens Repair.</p>'}</section>
+    ${isolationGuidanceMarkup(ticket, session, context)}
     ${ticketWorkflowMarkup(documentIntents, closureIntent, session)}
   </div>`;
 }
 
-function solutionRevealMarkup(reveals, catalog, projection) {
+function solutionRevealMarkup(view, catalog, projection) {
+  const reveals = view.solution_reveals ?? [];
   if (!reveals.length) return '';
   return reveals.map((entry) => {
     const reveal = entry.solution_reveal;
-    return `<details class="solution-reveal" open><summary>Solution revealed · ${escapeHtml(ticketName(projection, entry.ticket_instance_id))}</summary><div class="solution-reveal__grid"><section><h3>Causal truth</h3><ul>${reveal.faults.map((fault) => `<li><strong>${escapeHtml(domainName(catalog, fault.fault_id))}</strong> · ${escapeHtml(fault.role.toLowerCase())}${fault.actionable ? ' · actionable' : ''}</li>`).join('')}</ul>${reveal.causal_links.length ? `<p>${reveal.causal_links.map((link) => `${domainName(catalog, link.cause_fault_id)} → ${domainName(catalog, link.effect_fault_id)}`).map(escapeHtml).join('<br>')}</p>` : '<p>Single-fault path.</p>'}</section><section><h3>Required Evidence</h3><ul>${reveal.evidence_solution.map((route) => `<li><strong>${escapeHtml(route.route_kind.replaceAll('_', ' '))}</strong>${route.evidence.map((item) => `<span>${escapeHtml(item.summary)}</span>`).join('')}</li>`).join('')}</ul></section><section><h3>Repair</h3><ul>${reveal.repair_solution.map((item) => `<li>${escapeHtml(item.summary)}</li>`).join('')}</ul></section><section><h3>Verify</h3><ul>${reveal.verification_solution.map((item) => `<li>${escapeHtml(item.summary)}</li>`).join('')}</ul></section></div><p>No further play can target this archived Ticket.</p></details>`;
+    const archived = (view.public_match.abandoned_tickets ?? []).find((ticket) => ticket.ticket_instance_id === entry.ticket_instance_id);
+    const actualEvidence = view.authorized_events.filter((event) => event.ticket_instance_id === entry.ticket_instance_id
+      && ['EVIDENCE_CREATED', 'VERIFY_EVIDENCE_CREATED'].includes(event.event_type));
+    const requiredSources = [...new Set(reveal.evidence_solution.flatMap((route) =>
+      route.evidence.map((item) => item.source_definition_id).filter(Boolean)))];
+    const actualSources = new Set(actualEvidence.map((event) => event.payload?.source_definition_id).filter(Boolean));
+    const missingSources = requiredSources.filter((id) => !actualSources.has(id));
+    const unresolvedIds = [
+      ...reveal.faults.map((fault) => fault.fault_id),
+      ...requiredSources,
+      ...reveal.repair_solution.map((item) => item.repair_procedure_id),
+      ...reveal.verification_solution.map((item) => item.validation_procedure_id),
+    ].filter((id) => id && !catalog.domainById.has(id));
+    const contentError = !reveal.faults.length || !reveal.evidence_solution.length
+      || !reveal.repair_solution.length || !reveal.verification_solution.length || unresolvedIds.length;
+    return `<details class="solution-reveal" open data-reveal-authorized="true"><summary>Solution revealed · ${escapeHtml(ticketName(projection, entry.ticket_instance_id))}</summary>
+      ${contentError ? `<section class="solution-reveal__error" role="alert" data-code="REVEAL_CONTENT_INCONSISTENT"><h3>Content consistency error</h3><p>The authored solution is incomplete or references unavailable playable content. This is a content error, not a Player failure.</p></section>` : ''}
+      <ol class="solution-reveal__sequence">
+        <li><section><h3>1 · Observe and original Candidates</h3><p><strong>Symptoms:</strong> ${(archived?.visible_symptom_ids ?? []).map((id) => escapeHtml(domainName(catalog, id))).join(', ') || 'No public symptom snapshot available.'}</p><p>These original Candidates came from the Ticket’s public symptom/context relationships:</p><ul>${(archived?.public_candidate_fault_ids ?? []).map((id) => `<li>${escapeHtml(domainName(catalog, id))}</li>`).join('')}</ul></section></li>
+        <li><section><h3>2 · Causal truth</h3><p><strong>Hidden causal truth</strong> is shown only after Give Up is accepted.</p><ul>${reveal.faults.map((fault) => { const role = fault.role.toLowerCase(); return `<li><strong>${escapeHtml(domainName(catalog, fault.fault_id))}</strong> · ${escapeHtml(role)}${fault.actionable && role !== 'actionable' ? ' · actionable' : ''}</li>`; }).join('')}</ul>${reveal.causal_links.length ? `<p>${reveal.causal_links.map((link) => `${domainName(catalog, link.cause_fault_id)} → ${domainName(catalog, link.effect_fault_id)}`).map(escapeHtml).join('<br>')}</p>` : '<p>Single-fault path.</p>'}</section></li>
+        <li><section><h3>3 · Required Evidence path</h3><ul>${reveal.evidence_solution.map((route) => `<li><strong>${escapeHtml(route.route_kind.replaceAll('_', ' '))}</strong><span>Candidate: ${escapeHtml(domainName(catalog, route.candidate_fault_id))}</span>${route.evidence.map((item) => `<span>${item.source_definition_id ? `${escapeHtml(domainName(catalog, item.source_definition_id))}: ` : ''}${escapeHtml(item.summary)}</span>`).join('')}${route.eliminated_candidate_fault_ids.length ? `<span>Eliminate: ${route.eliminated_candidate_fault_ids.map((id) => escapeHtml(domainName(catalog, id))).join(', ')}</span>` : ''}</li>`).join('')}</ul></section></li>
+        <li><section><h3>4 · Eligible Repair</h3><ul>${reveal.repair_solution.map((item) => `<li><strong>${escapeHtml(domainName(catalog, item.repair_procedure_id))}</strong><span>${escapeHtml(item.summary)}</span></li>`).join('')}</ul></section></li>
+        <li><section><h3>5 · Verify and closure</h3><ul>${reveal.verification_solution.map((item) => `<li><strong>${escapeHtml(domainName(catalog, item.validation_procedure_id))}</strong><span>${escapeHtml(item.summary)}</span></li>`).join('')}</ul><p>Closure requires the accepted path, its decisive citations, every necessary Repair, preserved failed Verifies, and all current passing Verify requirements.</p></section></li>
+      </ol>
+      <section class="solution-reveal__comparison"><h3>Your investigation compared with the required path</h3>${actualEvidence.length ? `<ul>${actualEvidence.map((event) => `<li><strong>Evidence #${event.sequence}</strong> · ${event.payload?.source_definition_id ? escapeHtml(domainName(catalog, event.payload.source_definition_id)) : 'Recorded finding'} · ${escapeHtml(event.payload?.public_summary || 'Authorized result retained.')}</li>`).join('')}</ul>` : '<p>No diagnostic Evidence was recorded before Give Up.</p>'}<p>${missingSources.length ? `Required diagnostic sources not yet recorded: ${missingSources.map((id) => escapeHtml(domainName(catalog, id))).join(', ')}.` : 'Your recorded Evidence included every diagnostic source named by at least one revealed route.'} Optional or redundant work remains valid history; it is not retroactively labeled illegal.</p><p>${archived?.worklog?.length ?? 0} immutable Worklog ${archived?.worklog?.length === 1 ? 'entry was' : 'entries were'} preserved and locked.</p></section>
+      <p>No further play can target this archived Ticket. The reveal is private to this local Player and is never written into Profile or backup data.</p>
+    </details>`;
   }).join('');
+}
+
+function tutorialCoachMarkup(session) {
+  const tutorial = session.tutorial;
+  if (!tutorial || tutorial.completed) return '';
+  const checkpoint = tutorial.displayed;
+  return `<aside class="tutorial-coach" aria-labelledby="tutorial-step-heading" data-tutorial-checkpoint="${escapeHtml(checkpoint.id)}">
+    <header><p class="play-eyebrow">${tutorial.isReviewing ? 'Review · no state rewind' : `Guided step ${tutorial.index + 1} of ${tutorial.definition.checkpoints.length}`}</p><h2 id="tutorial-step-heading" tabindex="-1">${escapeHtml(checkpoint.title)}</h2></header>
+    <div class="tutorial-coach__copy">${checkpoint.body.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join('')}</div>
+    <div class="tutorial-coach__controls">${checkpoint.checkpoint_kind === 'EXPLAIN' || tutorial.isReviewing ? `<button type="button" class="play-button play-button--primary" data-tutorial-continue>${tutorial.isReviewing ? 'Return to current step' : 'Continue'}</button>` : '<span class="tutorial-wait">Complete the highlighted real Match action to continue.</span>'}<button type="button" class="play-button" data-tutorial-back${tutorial.index < 1 ? ' disabled' : ''}>Back / re-explain</button><button type="button" class="play-button" data-tutorial-restart>Restart</button><button type="button" class="play-button play-button--danger" data-tutorial-exit>Exit tutorial</button></div>
+  </aside>`;
 }
 
 function resultMarkup(session, context) {
@@ -223,7 +290,7 @@ function resultMarkup(session, context) {
         <p class="play-eyebrow" data-result-reveal>Local solo result</p>
         <h1 id="result-heading" tabindex="-1" data-result-reveal>${status}</h1>
         <p data-result-reveal>${won ? 'Every Ticket was closed through an Evidence-backed causal record.' : 'Review the terminal reasons and preserve the useful history.'}</p>
-        ${solutionRevealMarkup(session.projection?.view.solution_reveals ?? [], context.catalog, session.projection)}
+        ${solutionRevealMarkup(session.projection?.view ?? { solution_reveals: [] }, context.catalog, session.projection)}
         <div class="result-score" data-result-reveal><span>Service Points</span><strong>${formatInteger(result.final_service_points)}</strong><small>+${formatInteger(result.service_points_gained)} this Match</small></div>
         <dl class="result-stat-grid" data-result-reveal>
           <div><dt>Tickets closed</dt><dd>${result.tickets_closed}</dd></div>
@@ -240,9 +307,9 @@ function resultMarkup(session, context) {
           <div><dt>Redundant / superseded</dt><dd>${result.redundant_or_superseded_actions}</dd></div>
         </dl>
         <details class="result-reasons" data-result-reveal><summary>Terminal reasons</summary><ul>${result.reason_codes.map((reason) => `<li><code>${escapeHtml(reason)}</code></li>`).join('')}</ul></details>
-        <p class="result-record-status" data-result-reveal>${session.resultApplied === false ? 'This result was already present; lifetime totals were not incremented twice.' : 'Result recorded exactly once in this local Profile.'}</p>
-        <div class="button-row" data-result-reveal><button type="button" class="play-button play-button--primary" data-finish-game="#/play/home">Return Home</button><button type="button" class="play-button" data-finish-game="#/play/profile">View Profile</button></div>
-        <p class="authority-note" data-result-reveal>Local statistics are user-controlled and are not competitive records.</p>
+        <p class="result-record-status" data-result-reveal>${session.tutorial ? 'Tutorial completion recorded as local replay progress only.' : session.resultApplied === false ? 'This result was already present; lifetime totals were not incremented twice.' : 'Result recorded exactly once in this local Profile.'}</p>
+        <div class="button-row" data-result-reveal><button type="button" class="play-button play-button--primary" data-finish-game="#/play/home">Return Home</button>${session.tutorial ? `<button type="button" class="play-button" data-restart-completed-tutorial="${escapeHtml(session.tutorial.definition.id)}">Replay tutorial</button>` : '<button type="button" class="play-button" data-finish-game="#/play/profile">View Profile</button>'}</div>
+        <p class="authority-note" data-result-reveal>${session.tutorial ? 'Tutorial completion is local progress only. This Match did not change Profile points or statistics.' : 'Local statistics are user-controlled and are not competitive records.'}</p>
       </div>
     </section>`;
 }
@@ -266,6 +333,8 @@ export function renderGame(root, context) {
     const onClick = (event) => {
       const finish = event.target.closest('[data-finish-game]');
       if (finish) context.finishGame(finish.dataset.finishGame);
+      const replay = event.target.closest('[data-restart-completed-tutorial]');
+      if (replay) context.restartTutorial(replay.dataset.restartCompletedTutorial);
     };
     root.addEventListener('click', onClick);
     requestAnimationFrame(() => {
@@ -352,12 +421,13 @@ export function renderGame(root, context) {
   root.innerHTML = `
     <section class="play-route game-route game-route--${session.benchView.toLowerCase()}${textReflow ? ' game-route--text-reflow' : ''}" aria-labelledby="game-heading">
       <header class="game-header" data-route-reveal><div><p class="play-eyebrow">Solo training board</p><h1 id="game-heading">Night-shift board</h1><p>Round ${publicMatch.turn?.round_number ?? '—'} · Turn ${publicMatch.turn?.turn_number ?? '—'} · ${escapeHtml(publicMatch.turn?.phase?.replaceAll('_', ' ') || publicMatch.status)}</p></div><dl class="game-resources" data-continuity-scroll="game:resources"><div><dt>Points</dt><dd>${player.team_service_points ?? player.service_points}</dd></div><div><dt>Actions</dt><dd>${publicMatch.turn?.actions_remaining ?? 0} / 2</dd></div><div><dt>Search</dt><dd>${view.utility_resources.search_tokens}</dd></div><div><dt>Refresh</dt><dd>${view.utility_resources.refresh_tokens}</dd></div><div><dt>Deck / discard</dt><dd>${view.deck_count} / ${view.discard_card_instance_ids.length}</dd></div></dl></header>
+      ${tutorialCoachMarkup(session)}
       ${projection.duplicate_ticket_disclosure ? `<p class="duplicate-disclosure game-disclosure"><strong>${projection.ticket_count}-Ticket queue:</strong> repeated causal fingerprints remain independent machine and Evidence records.</p>` : ''}
-      ${solutionRevealMarkup(view.solution_reveals ?? [], context.catalog, projection)}
+      ${solutionRevealMarkup(view, context.catalog, projection)}
       <div class="game-board game-board--${session.benchView.toLowerCase()}">
         <aside class="ticket-queue" aria-labelledby="queue-heading" data-route-reveal><div class="section-heading"><div><p class="play-eyebrow">Shared queue</p><h2 id="queue-heading">Active Tickets</h2></div><span>${tickets.length}</span></div><div class="ticket-queue__list" data-continuity-scroll="game:tickets">${tickets.map((ticket, index) => `<button type="button" class="ticket-card${ticket.ticket_instance_id === lastClosureTicket ? ' is-closing' : ''}" data-ticket-id="${escapeHtml(ticket.ticket_instance_id)}" aria-current="${ticket.ticket_instance_id === session.selectedTicketId}" data-drop-target="true"><span class="ticket-card__index">SR-${String(index + 1).padStart(3, '0')}</span><strong>${escapeHtml(ticketName(projection, ticket.ticket_instance_id))}</strong><span>${escapeHtml(STATUS_LABELS[ticket.status] || ticket.status)}</span><small>Revision ${ticket.machine_revision}</small></button>`).join('')}</div><details class="closed-ticket-list"><summary>Archived <span>${archivedCount}</span></summary><div>${publicMatch.closed_tickets.map((ticket) => `<div class="closure-chip${ticket.ticket_instance_id === lastClosureTicket ? ' is-new' : ''}"><span>Closed</span><strong>${escapeHtml(ticketName(projection, ticket.ticket_instance_id))}</strong></div>`).join('')}${(publicMatch.abandoned_tickets ?? []).map((ticket) => `<div class="closure-chip closure-chip--abandoned"><span>Given up</span><strong>${escapeHtml(ticketName(projection, ticket.ticket_instance_id))}</strong></div>`).join('') || '<p>None yet.</p>'}</div></details></aside>
         <main class="board-center">
-          <section class="ticket-sheet${selectedTicket?.status === 'RETURNED_TO_DIAGNOSIS' ? ' is-returned' : ''}" aria-labelledby="selected-ticket-heading" aria-current="true" data-route-reveal>${selectedTicket ? `<div class="ticket-sheet__art play-art-slot"><img id="ticket-placeholder-art" width="900" height="420" alt=""></div><div class="ticket-sheet__summary"><header><p class="ticket-code">${escapeHtml(selectedTicket.ticket_instance_id)}</p><h2 id="selected-ticket-heading">${escapeHtml(presentation?.display_name || selectedTicket.ticket_definition_id)}</h2><span class="ticket-status" data-status="${selectedTicket.status}">${escapeHtml(STATUS_LABELS[selectedTicket.status] || selectedTicket.status)}</span><span class="ticket-sheet__revision">Machine revision ${selectedTicket.machine_revision}</span></header><p class="ticket-sheet__symptom"><strong>Symptom:</strong> ${escapeHtml(domainName(context.catalog, selectedTicket.visible_symptom_ids[0]))}${selectedTicket.visible_symptom_ids.length > 1 ? ` +${selectedTicket.visible_symptom_ids.length - 1} more` : ''}</p><ul class="candidate-chip-row" aria-label="Candidate faults">${candidateSummaryMarkup(selectedTicket, session, context)}</ul><button type="button" class="play-button play-button--quiet view-full-ticket" data-view-full-ticket>View full Ticket</button></div>` : '<p>No active Ticket.</p>'}</section>
+          <section class="ticket-sheet${selectedTicket?.status === 'RETURNED_TO_DIAGNOSIS' ? ' is-returned' : ''}" aria-labelledby="selected-ticket-heading" aria-current="true" data-semantic-surface="paper" data-ticket-state="${escapeHtml(selectedTicket?.status || 'EMPTY')}" data-route-reveal>${selectedTicket ? `<div class="ticket-sheet__art play-art-slot"><img id="ticket-placeholder-art" width="900" height="420" alt=""></div><div class="ticket-sheet__summary"><header><p class="ticket-code">${escapeHtml(selectedTicket.ticket_instance_id)}</p><h2 id="selected-ticket-heading">${escapeHtml(presentation?.display_name || selectedTicket.ticket_definition_id)}</h2><span class="ticket-status" data-status="${selectedTicket.status}">${escapeHtml(STATUS_LABELS[selectedTicket.status] || selectedTicket.status)}</span><span class="ticket-sheet__revision">Machine revision ${selectedTicket.machine_revision}</span></header><p class="ticket-sheet__symptom"><strong>Symptom:</strong> ${escapeHtml(domainName(context.catalog, selectedTicket.visible_symptom_ids[0]))}${selectedTicket.visible_symptom_ids.length > 1 ? ` +${selectedTicket.visible_symptom_ids.length - 1} more` : ''}</p><ul class="candidate-chip-row" aria-label="Candidate faults">${candidateSummaryMarkup(selectedTicket, session, context)}</ul><button type="button" class="play-button play-button--quiet view-full-ticket" data-view-full-ticket>View full Ticket</button></div>` : '<p>No active Ticket.</p>'}</section>
             <section class="diagnostic-bench" aria-labelledby="diagnostic-bench-heading" data-bench-page-size="${benchPageSize}" data-route-reveal><header class="diagnostic-bench__heading"><div><p class="play-eyebrow">Persistent catalog</p><h2 id="diagnostic-bench-heading">Diagnostic Bench</h2><p>${session.benchView === 'RELEVANT' ? `${relevantCount} of ${bench.length} connected by public relationships.` : `${bench.length} total diagnostics. Local filters never change legality.`}</p></div><div class="bench-view-switch" role="group" aria-label="Bench View"><button type="button" data-bench-view="RELEVANT" aria-pressed="${session.benchView === 'RELEVANT'}">Relevant</button><button type="button" data-bench-view="GLOBAL" aria-pressed="${session.benchView === 'GLOBAL'}">Global</button></div></header><p class="diagnostic-disclaimer">${escapeHtml(view.diagnostic_relevance_notice || '')}</p><div class="diagnostic-bench__controls">${session.benchView === 'GLOBAL' ? `<label>Search<input type="search" data-bench-search data-continuity-key="game:bench-search" value="${escapeHtml(session.benchSearch)}" placeholder="Search diagnostics"></label>` : ''}<div class="bench-type-tabs" role="group" aria-label="Diagnostic type"><button type="button" data-bench-type-button="ALL" aria-pressed="${session.benchTypeFilter === 'ALL'}">All</button><button type="button" data-bench-type-button="TEST" aria-pressed="${session.benchTypeFilter === 'TEST'}">Test</button><button type="button" data-bench-type-button="COMMAND" aria-pressed="${session.benchTypeFilter === 'COMMAND'}">Command</button></div>${session.benchView === 'GLOBAL' ? `<label>Subsystem<select data-bench-category><option value="ALL">All</option>${categories.map((category) => `<option value="${escapeHtml(category)}"${session.benchCategory === category ? ' selected' : ''}>${escapeHtml(category)}</option>`).join('')}</select></label><label>Sort<select data-bench-sort><option value="NAME">Name</option><option value="TYPE"${session.benchSort === 'TYPE' ? ' selected' : ''}>Type</option><option value="COST"${session.benchSort === 'COST' ? ' selected' : ''}>Cost</option><option value="SUBSYSTEM"${session.benchSort === 'SUBSYSTEM' ? ' selected' : ''}>Subsystem</option></select></label><label class="switch-row"><input type="checkbox" data-bench-relevant${session.benchRelevantOnly ? ' checked' : ''}>Relevant</label><label class="switch-row"><input type="checkbox" data-bench-runnable${session.benchRunnableOnly ? ' checked' : ''}>Runnable</label>` : ''}</div><div class="diagnostic-bench__count" role="status" aria-live="polite">Showing ${benchStart}–${benchEnd} of ${visibleBench.length}</div><div class="diagnostic-shelf" data-bench-card-list style="--bench-columns: ${benchPageSize}">${pagedBench.length ? '' : '<div class="empty-panel"><p>No diagnostics match these local filters.</p></div>'}</div><div class="bench-pagination"><button type="button" data-bench-page="${session.benchPage - 1}"${session.benchPage === 1 ? ' disabled' : ''}>Previous</button><span>Page ${session.benchPage} / ${benchPageCount}</span><button type="button" data-bench-page="${session.benchPage + 1}"${session.benchPage === benchPageCount ? ' disabled' : ''}>Next</button></div></section>
           <section class="hand-rail" aria-labelledby="hand-heading" data-expanded="${session.handExpanded}" data-hand-page-size="${handPageSize}"><header class="hand-rail__heading"><div><p class="play-eyebrow">Private hand</p><h2 id="hand-heading">Response hand</h2></div><p class="hand-rail__counts"><strong>${view.hand.length} Cards</strong><span>Deck ${view.deck_count}</span><span>Discard ${view.discard_card_instance_ids.length}</span></p><button type="button" class="hand-expand-toggle" data-toggle-hand data-continuity-key="game:hand-toggle" aria-expanded="${session.handExpanded}" aria-controls="response-hand-groups">${session.handExpanded ? 'Collapse hand' : 'Expand hand'}</button></header><div class="hand-rail__body"><div class="hand-rail__range" role="status" aria-live="polite">Groups ${handPage.start}–${handPage.end} of ${handGroups.length} · Page ${handPage.page} / ${handPage.pageCount}</div><div id="response-hand-groups" class="hand-rail__cards" data-continuity-scroll="game:hand" style="--hand-columns: ${handPageSize}"></div>${handPage.pageCount > 1 ? `<nav class="hand-pagination" aria-label="Response hand pages"><button type="button" data-hand-page="${handPage.page - 1}"${handPage.page === 1 ? ' disabled' : ''}>Previous</button><button type="button" data-hand-page="${handPage.page + 1}"${handPage.page === handPage.pageCount ? ' disabled' : ''}>Next</button></nav>` : ''}</div></section>
         </main>
@@ -613,7 +683,7 @@ export function renderGame(root, context) {
     const dialog = root.querySelector('#game-card-dialog');
     dialog.querySelector('[data-dialog-content]').replaceChildren(createCardDetailView(
       context.catalog.cardById.get(instance.card_definition_id),
-      { artResolver: context.artResolver, diagnosticContext, handContext },
+      { artResolver: context.artResolver, domainById: context.catalog.domainById, diagnosticContext, handContext },
     ));
     openPlayDialog(dialog, opener);
   };
@@ -634,6 +704,26 @@ export function renderGame(root, context) {
     });
   };
   const onClick = (event) => {
+    if (event.target.closest('[data-tutorial-continue]')) {
+      if (session.tutorial?.continueExplanation()) context.rerender();
+      return;
+    }
+    if (event.target.closest('[data-tutorial-back]')) {
+      if (session.tutorial?.reviewPrevious()) context.rerender();
+      return;
+    }
+    if (event.target.closest('[data-tutorial-restart]')) {
+      if (confirm('Restart this Tutorial from its pinned first checkpoint? Current Tutorial Match state will be discarded.')) {
+        context.restartTutorial(session.tutorial.definition.id);
+      }
+      return;
+    }
+    if (event.target.closest('[data-tutorial-exit]')) {
+      if (confirm('Exit this Tutorial? Current Tutorial Match state is not saved and no completion will be recorded.')) {
+        context.finishGame('#/play/home');
+      }
+      return;
+    }
     const handToggle = event.target.closest('[data-toggle-hand]');
     if (handToggle) {
       session.handExpanded = !session.handExpanded;
@@ -702,7 +792,7 @@ export function renderGame(root, context) {
     const intent = event.target.closest('[data-intent-id]');
     if (intent) submit(intent.dataset.intentId);
     const giveUp = event.target.closest('[data-give-up-intent]');
-    if (giveUp && confirm(`Give up ${ticketName(projection, session.selectedTicketId)}? Pending contributions will be voided and the complete solution revealed.`)) {
+    if (giveUp && confirm(`Give up ${ticketName(projection, session.selectedTicketId)}? This abandons and archives only this Ticket, locks its Worklog, voids pending contributions without awarding their points, records one give-up statistic, and leaves the complete solution revealed privately. Remaining Tickets continue; if this is the last Ticket, the Match ends without a solo win. This cannot be resumed.`)) {
       submit(giveUp.dataset.giveUpIntent);
     }
     if (event.target.closest('[data-view-action-result]')) revealActionResult();
@@ -817,6 +907,7 @@ export function renderGame(root, context) {
   const pendingMotion = session.lastMotion;
   session.lastMotion = null;
   if (pendingMotion) requestAnimationFrame(() => context.motion(pendingMotion, root));
+  session.tutorial?.apply(root, projection);
   return () => {
     session.cancelPointerDrag?.();
     session.cancelPointerDrag = null;

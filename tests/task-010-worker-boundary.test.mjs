@@ -198,6 +198,10 @@ test('the module Worker is the sole Viewer importer of the canonical staged engi
       relative: 'play/solo-worker.mjs',
       specifier: '../../generated/play/src/builder/task-014.mjs',
     },
+    {
+      relative: 'play/solo-worker.mjs',
+      specifier: '../../generated/play/src/builder/diagnosis-v2.mjs',
+    },
   ]);
 
   const worker = await readText(WORKER_PATH);
@@ -342,6 +346,7 @@ test('Worker output stays projection-safe and emits only audience-filtered event
     'candidate_fault_id',
     'card_definition_id',
     'card_instance_id',
+    'cited_evidence_event_ids',
     'intent_id',
     'selected_card_definition_id',
     'source_action_event_id',
@@ -541,6 +546,9 @@ test('the generated Pages stage is a strict allowlist with no Node-only or serve
     'card-catalog-v3.json',
     'decks-v3.json',
     'playable-coverage-v3.json',
+    'technical-action-glossary-v1.json',
+    'technical-copy-review-v1.json',
+    'tutorials-v1.json',
   ]);
   const forbiddenSegments = new Set([
     'automated_games',
@@ -608,7 +616,7 @@ test('local persistence and export contain ledgers/aggregates only, never active
     'records',
     'schema_version',
   ]);
-  assert.deepEqual(Object.keys(exportBundle.records).sort(), ['decks', 'profile', 'settings', 'statistics']);
+  assert.deepEqual(Object.keys(exportBundle.records).sort(), ['decks', 'profile', 'settings', 'statistics', 'tutorials']);
   const serialized = JSON.stringify(exportBundle);
   for (const forbidden of [
     'active_match',

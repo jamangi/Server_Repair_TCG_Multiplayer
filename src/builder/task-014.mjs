@@ -5,9 +5,9 @@ export const TASK_014_RULESET_VERSION = 'first-version-v2';
 export const TASK_014_BUILDER_VERSION = 'ticket-builder-v3';
 export const TASK_014_CONFIGURATION_VERSION = 'ticket-builder-v3';
 export const TASK_014_TICKET_CONTENT_VERSION = 'core-ticket-parts-v3';
-export const TASK_014_DOMAIN_CONTENT_VERSION = 'core-domain-snapshot-v2';
-export const TASK_014_CARD_CATALOG_VERSION = 'core-card-catalog-coverage-v3';
-export const TASK_014_DECK_CATALOG_VERSION = 'core-response-decks-v3';
+export const TASK_014_DOMAIN_CONTENT_VERSION = 'core-domain-snapshot-technical-copy-v3';
+export const TASK_014_CARD_CATALOG_VERSION = 'core-card-catalog-technical-copy-v4';
+export const TASK_014_DECK_CATALOG_VERSION = 'core-response-decks-v4';
 export const TASK_014_PART_CATALOG_VERSION = 'ticket-parts-v1';
 export const TASK_014_STARTER_DECK_ID = 'deck.core.multisystem_response_v3';
 
@@ -515,7 +515,7 @@ export function createTask014Catalogs({ cards, decks, domain, parts, coverage })
       || decks.deck_catalog_version !== TASK_014_DECK_CATALOG_VERSION
       || domain.domain_content_version !== TASK_014_DOMAIN_CONTENT_VERSION
       || parts.part_catalog_version !== TASK_014_PART_CATALOG_VERSION
-      || coverage.coverage_version !== 'playable-coverage-v3') {
+      || coverage.coverage_version !== 'playable-coverage-v4') {
     throw new Error('TASK-014 catalog versions are incompatible.');
   }
   return {

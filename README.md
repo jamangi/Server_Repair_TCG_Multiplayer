@@ -6,7 +6,7 @@ Players are technicians, not opposing armies. They compete or cooperate by troub
 
 ## Play now
 
-Open the [Server Repair GitHub Pages application](https://jamangi.github.io/Server_Repair_TCG_Multiplayer/) and select **Play**. No installation, local server, account, or sign-in is required.
+Open the [Server Repair GitHub Pages application](https://jamangi.github.io/Server_Repair_TCG_Multiplayer/) and select **Play**. New technicians can start with the deterministic **Troubleshooting fundamentals** tutorial, then replay the failed-Verify recovery tutorial from Home or Settings. No installation, local server, account, or sign-in is required.
 
 The current game is a browser-local solo training client. Decks, profile choices, settings, and statistics stay in that browser unless exported from Settings. An active Match is intentionally not resumable after leaving or reloading it.
 
@@ -148,7 +148,7 @@ python -m http.server 8080 --directory viewer
 
 Then open <http://127.0.0.1:8080/>. Do not open `viewer/index.html` through the `file://` protocol because browsers cannot reliably fetch its JSON content that way.
 
-The Library exposes faults, symptoms, components, tests, tools, commands, repairs, validations, and protocols through search, filtering, sorting, and record details. Play provides a versioned local profile, legal 30-card decks, Settings and backup portability, and deterministic finite solo matches. A dedicated module Worker owns each active Match; active Match state is intentionally not resumable or included in exports.
+The Library exposes faults, symptoms, components, tests, tools, commands, repairs, validations, and protocols through search, filtering, sorting, and record details. Play provides a versioned local profile, legal 30-card decks, Settings and backup portability, two real-engine guided tutorials, player-safe “Why can’t I isolate?” guidance, and deterministic finite solo matches. A dedicated module Worker owns each active Match; active Match state is intentionally not resumable or included in exports. In solo play, **Give Up** abandons and archives the selected Ticket, voids its pending contributions, records the give-up, and only then privately presents the authoritative authored solution and compares it with the preserved investigation.
 
 After changing `viewer/content/*.json`, rebuild its generated manifest:
 

@@ -13,6 +13,7 @@ import {
   migrateLocalState,
   parseImportBundle,
   recordMatchStart as recordStatisticsMatchStart,
+  recordTutorialCompletion as recordPureTutorialCompletion,
   saveDeck as savePureDeck,
   setActiveDeck as setPureActiveDeck,
   stableStringify,
@@ -252,6 +253,13 @@ export function createStorageService(options) {
     return { ...result, applied };
   }
 
+  function recordTutorialCompletion(tutorialId) {
+    return update((state) => {
+      state.records.tutorials = recordPureTutorialCompletion(state.records.tutorials, tutorialId, context);
+      return state;
+    });
+  }
+
   return Object.freeze({
     key,
     load,
@@ -267,5 +275,6 @@ export function createStorageService(options) {
     deleteDeck,
     recordMatchStart,
     applyMatchResult,
+    recordTutorialCompletion,
   });
 }

@@ -1,5 +1,5 @@
 import { createArtResolver, loadArtManifest } from './art-resolver.mjs';
-import { loadPlayCatalog } from './catalog-service.mjs';
+import { loadPlayCatalog, loadTutorialCatalog } from './catalog-service.mjs';
 import { createClientDataContext } from './data/client-data.mjs';
 import { SoloGameSession } from './game-session.mjs';
 import { configureMotion, runMotion, teardownPlayDialogs } from './motion-coordinator.mjs';
@@ -10,12 +10,14 @@ import { renderProfile } from './pages/profile-page.mjs';
 import { closeSettingsDialog, openSettingsDialog } from './settings-dialog.mjs';
 import { createStorageService } from './storage-service.mjs';
 import { createUiContinuity } from './ui-continuity.mjs';
+import { TutorialController } from './tutorial-controller.mjs';
 
 let root = null;
 let route = null;
 let pageRoot = null;
 let pageCleanup = null;
 let catalog = null;
+let tutorialCatalog = null;
 let artResolver = null;
 let storage = null;
 let initializePromise = null;
@@ -44,8 +46,9 @@ function applyMotionPreference(preference) {
 }
 
 async function initialize() {
-  initializePromise ||= Promise.all([loadPlayCatalog(), loadArtManifest()]).then(([loadedCatalog, manifest]) => {
+  initializePromise ||= Promise.all([loadPlayCatalog(), loadTutorialCatalog(), loadArtManifest()]).then(([loadedCatalog, loadedTutorialCatalog, manifest]) => {
     catalog = loadedCatalog;
+    tutorialCatalog = loadedTutorialCatalog;
     artResolver = createArtResolver({ manifest, domainEntities: catalog.domain.entities });
     storage = createStorageService({
       context: createClientDataContext({ cardCatalog: catalog.cards, deckCatalog: catalog.decks }),
@@ -62,9 +65,11 @@ function freshSnapshot() {
 
 function contextForRender() {
   const snapshot = freshSnapshot();
+  const activeCatalog = game?.catalog ?? catalog;
   return {
     snapshot,
-    catalog,
+    catalog: activeCatalog,
+    tutorialCatalog,
     artResolver,
     storage,
     ui,
@@ -78,6 +83,8 @@ function contextForRender() {
       applyMotionPreference(next.motion_preference);
     },
     beginMatch,
+    beginTutorial,
+    restartTutorial,
     finishGame,
     refresh: contextForRender,
     refreshSnapshot: freshSnapshot,
@@ -91,7 +98,7 @@ function playNavigationMarkup() {
     ['decks', '#/play/decks', 'Decks'],
     ['profile', '#/play/profile', 'Profile'],
   ];
-  return `<nav class="play-subnav" aria-label="Play navigation">${links.map(([name, hash, label]) => `<a href="${hash}"${route.name === name || (name === 'decks' && route.name === 'deck-edit') ? ' aria-current="page"' : ''}>${label}</a>`).join('')}<span class="play-subnav__mode">Local solo</span></nav>`;
+  return `<nav class="play-subnav" aria-label="Play navigation">${links.map(([name, hash, label]) => `<a href="${hash}"${route.name === name || (name === 'decks' && route.name === 'deck-edit') ? ' aria-current="page"' : ''}>${label}</a>`).join('')}<span class="play-subnav__mode">${game?.tutorial ? 'Guided tutorial' : 'Local solo'}</span></nav>`;
 }
 
 function renderShell() {
@@ -170,6 +177,7 @@ function beginMatch() {
   };
   gameStartInitiated = false;
   game = new SoloGameSession({
+    catalog,
     onChange: () => {
       if (route?.name === 'game') rerender();
     },
@@ -195,6 +203,67 @@ function beginMatch() {
     },
   });
   navigate('#/play/game');
+}
+
+function beginTutorial(tutorialId) {
+  const snapshot = freshSnapshot();
+  if (snapshot.recovery_required) {
+    openSettings();
+    announce('Recover local data before starting a Tutorial.');
+    return;
+  }
+  const definition = tutorialCatalog.tutorials.tutorials.find((tutorial) => tutorial.id === tutorialId);
+  const deck = tutorialCatalog.decks.decks[0];
+  if (!definition || !deck) {
+    announce('The requested Tutorial is not compatible with the pinned content.');
+    return;
+  }
+  if (game?.hasActiveMatch()) game.endSession();
+  const matchId = createLocalId(`local.${tutorialId.replaceAll('.', '-')}`);
+  const controller = new TutorialController(definition, {
+    catalog: tutorialCatalog,
+    announce,
+    onComplete(completedId) {
+      try {
+        storage.recordTutorialCompletion(completedId);
+      } catch (error) {
+        ui.storageWarning = error.message;
+        announce(`Tutorial completed, but local progress could not be saved: ${error.message}`);
+      }
+    },
+  });
+  pendingStart = {
+    match_id: matchId,
+    seed: definition.seed,
+    ticket_count: 1,
+    display_name: snapshot.state.records.profile.display_name,
+    deck_id: deck.id,
+    card_definition_ids: [...deck.card_definition_ids],
+    tutorial_id: definition.id,
+  };
+  gameStartInitiated = false;
+  game = new SoloGameSession({
+    catalog: tutorialCatalog,
+    tutorial: controller,
+    onChange: () => {
+      if (route?.name === 'game') rerender();
+    },
+    onAnnounce: announce,
+    onStarted: () => { pendingStart = null; },
+    onCompleted: () => {
+      game.resultApplied = true;
+    },
+  });
+  if (route?.name === 'game') rerender();
+  else navigate('#/play/game');
+}
+
+function restartTutorial(tutorialId) {
+  game?.endSession();
+  game = null;
+  pendingStart = null;
+  gameStartInitiated = false;
+  beginTutorial(tutorialId);
 }
 
 function startPendingGame() {
@@ -271,6 +340,12 @@ export function openSettings() {
     refreshSnapshot: freshSnapshot,
     announce,
     motion: runMotion,
+    tutorials: tutorialCatalog?.tutorials?.tutorials ?? [],
+    tutorialProgress: freshSnapshot().state.records.tutorials,
+    onStartTutorial(tutorialId) {
+      closeSettingsDialog({ restoreFocus: false, immediate: true });
+      beginTutorial(tutorialId);
+    },
     onSettingsSaved(next) {
       applyMotionPreference(next.motion_preference);
       rerender();

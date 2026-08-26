@@ -120,8 +120,8 @@ function resultSummary(overrides = {}) {
   };
 }
 
-test('all five versioned client examples satisfy their strict JSON Schemas', () => {
-  assert.equal(schemaFiles.length, 5);
+test('all versioned client examples satisfy their strict JSON Schemas', () => {
+  assert.equal(schemaFiles.length, 7);
   const examples = [
     ['examples/client/local_profile.default.json', 'Solo Pages Local Profile v2'],
     ['examples/client/deck_collection.default.json', 'Solo Pages Response Deck Collection v2'],

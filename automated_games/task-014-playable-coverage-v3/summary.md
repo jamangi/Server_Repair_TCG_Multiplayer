@@ -13,7 +13,7 @@ This committed campaign requested **13** runs. **13** matches started; **13** su
 
 ## Turn distribution
 
-Across started matches: minimum 3, median 19, p95 27, maximum 27, mean 17.92. The p95 uses the nearest-rank definition.
+Across started matches: minimum 3, median 19, p95 27, maximum 27, mean 18. The p95 uses the nearest-rank definition.
 
 | Setting group | Requested | Started | Succeeded | Failed | Min | Median | P95 | Max | Mean |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -29,7 +29,7 @@ Across started matches: minimum 3, median 19, p95 27, maximum 27, mean 17.92. Th
 | task-014-storage-loose_cable | 1 | 1 | 1 | 0 | 23 | 23 | 23 | 23 | 23 |
 | task-014-thermal-clogged_heatsink | 1 | 1 | 1 | 0 | 19 | 19 | 19 | 19 | 19 |
 | task-014-thermal-failed_fan | 1 | 1 | 1 | 0 | 19 | 19 | 19 | 19 | 19 |
-| task-014-multi-ticket-resource-path | 1 | 1 | 1 | 0 | 23 | 23 | 23 | 23 | 23 |
+| task-014-multi-ticket-resource-path | 1 | 1 | 1 | 0 | 24 | 24 | 24 | 24 | 24 |
 
 ## Results by setting and seed
 

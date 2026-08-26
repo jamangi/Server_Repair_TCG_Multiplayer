@@ -2,7 +2,7 @@
 
 ## Status
 
-**Owner-directed information architecture and content-quality enhancement — queued after TASK-023 and before TASK-015.** The playable game is functional, but many action descriptions expose engine vocabulary instead of helping a technician decide what a diagnostic, Repair, or Verify does. The tutorial must consume the corrected content model rather than compensating for weak reusable reference copy.
+**Complete — 2026-08-26.** All 71 published playable actions now use reviewed domain-owned technical descriptions, Cards and Library details share that source, mechanics remain structurally separate, and the quality/review-ledger gates reject placeholders, internal vocabulary, drift, and incomplete provenance.
 
 ## Objective
 

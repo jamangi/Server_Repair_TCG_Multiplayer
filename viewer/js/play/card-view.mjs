@@ -1,4 +1,5 @@
 import { bindResolvedImage, getCardFamily } from "./art-resolver.mjs";
+import { gameDetails, resolveCardTechnicalCopy } from "./technical-action-copy.mjs";
 
 const VIEW_VARIANTS = new Set(["hand", "grid", "detail", "compact"]);
 
@@ -78,7 +79,7 @@ function appendCardFace(documentRef, root, card, options) {
       documentRef,
       "p",
       "play-card__rules",
-      text(card?.rules_text, text(card?.presentation?.short_description, "No rules text available.")),
+      text(card?.presentation?.short_description, text(card?.rules_text, "No description available.")),
     ),
   );
   root.append(body);
@@ -228,6 +229,7 @@ export function createDeckCardTile(card, {
 
 export function createCardDetailView(card, {
   artResolver = null,
+  domainById = null,
   diagnosticContext = null,
   handContext = null,
   documentRef = globalThis.document,
@@ -243,10 +245,11 @@ export function createCardDetailView(card, {
   }));
 
   const copy = element(documentObject, "div", "card-detail__copy");
-  const description = text(card?.presentation?.short_description);
+  const technical = resolveCardTechnicalCopy(card, domainById);
+  const description = technical?.description || text(card?.presentation?.short_description);
   if (description) {
     copy.append(
-      element(documentObject, "h4", "play-eyebrow", "Purpose"),
+      element(documentObject, "h4", "play-eyebrow", "What it does"),
       element(documentObject, "p", "card-detail__description", description),
     );
   }
@@ -275,36 +278,75 @@ export function createCardDetailView(card, {
     const quantity = Math.max(1, Number(handContext.quantity) || 1);
     copy.append(
       element(documentObject, "h4", "play-eyebrow", "Current hand stack"),
-      element(documentObject, "p", "card-detail__hand-quantity", `${quantity} ${quantity === 1 ? "copy" : "copies"} currently in hand. Play resolves to the first eligible real Card in preserved hand order.`),
+      element(documentObject, "p", "card-detail__hand-quantity", `${quantity} ${quantity === 1 ? "copy" : "copies"} currently in hand.`),
     );
   }
-  const educational = text(card?.educational_text);
+  const educational = technical?.note || text(card?.educational_text);
   if (educational) {
     copy.append(
-      element(documentObject, "h4", "play-eyebrow", "Technical note"),
+      element(documentObject, "h4", "play-eyebrow", technical?.noteLabel || "Interpretation note"),
       element(documentObject, "p", "card-detail__education", educational),
     );
   }
 
-  const references = [
-    card?.primary_domain_reference,
-    ...(Array.isArray(card?.additional_domain_references)
-      ? card.additional_domain_references
-      : []),
-  ].filter((reference) => text(reference?.entity_id));
+  if (technical?.method?.facts.length || technical?.method?.lists.length) {
+    copy.append(element(documentObject, "h4", "play-eyebrow", "Technical method"));
+    if (technical.method.facts.length) {
+      const facts = element(documentObject, "dl", "card-detail__facts");
+      for (const [label, value] of technical.method.facts) {
+        const row = element(documentObject, "div", "card-detail__fact");
+        row.append(element(documentObject, "dt", "", label), element(documentObject, "dd", "", value));
+        facts.append(row);
+      }
+      copy.append(facts);
+    }
+    for (const [label, values] of technical.method.lists) {
+      copy.append(element(documentObject, "h5", "card-detail__subheading", label));
+      const list = element(documentObject, "ol", "card-detail__method-list");
+      for (const value of values) list.append(element(documentObject, "li", "", value));
+      copy.append(list);
+    }
+  }
+
+  const gameplay = technical?.game || gameDetails(card);
+  copy.append(element(documentObject, "h4", "play-eyebrow", "In this game"));
+  const gameFacts = element(documentObject, "dl", "card-detail__facts card-detail__facts--game");
+  for (const [label, value] of [
+    ["Action cost", `${String(card?.cost ?? "Unknown")} Action${card?.cost === 1 ? "" : "s"}`],
+    ["Target", gameplay.target],
+    ["Prerequisite", gameplay.prerequisites],
+    ["Result", gameplay.result],
+    ["After use", gameplay.disposition],
+  ]) {
+    const row = element(documentObject, "div", "card-detail__fact");
+    row.append(element(documentObject, "dt", "", label), element(documentObject, "dd", "", value));
+    gameFacts.append(row);
+  }
+  copy.append(gameFacts);
+
+  const fallbackReferences = [card?.primary_domain_reference, ...(card?.additional_domain_references ?? [])]
+    .filter((reference) => text(reference?.entity_id))
+    .map((reference) => ({ id: reference.entity_id, name: reference.entity_id, role: reference.role }));
+  const references = technical?.references?.length ? technical.references : fallbackReferences;
   if (references.length > 0) {
     copy.append(element(documentObject, "h4", "play-eyebrow", "Technical references"));
     const list = element(documentObject, "ul", "card-detail__references");
     for (const reference of references) {
       const item = element(documentObject, "li", "card-detail__reference");
-      item.append(
-        element(documentObject, "span", "card-detail__reference-id", reference.entity_id),
-        element(documentObject, "span", "card-detail__reference-role", text(reference.role, "reference")),
-      );
+      const name = element(documentObject, reference.href ? "a" : "span", "card-detail__reference-name", reference.name);
+      if (reference.href) name.href = reference.href;
+      item.append(name, element(documentObject, "span", "card-detail__reference-role", text(reference.role, "Reference")));
       list.append(item);
     }
     copy.append(list);
   }
+  const advanced = element(documentObject, "details", "card-detail__advanced");
+  advanced.append(element(documentObject, "summary", "", "Advanced IDs and authored game text"));
+  advanced.append(
+    element(documentObject, "code", "card-detail__reference-id", text(card?.primary_domain_reference?.entity_id)),
+    element(documentObject, "p", "card-detail__rules-text", text(card?.rules_text)),
+  );
+  copy.append(advanced);
   detail.append(copy);
   return detail;
 }

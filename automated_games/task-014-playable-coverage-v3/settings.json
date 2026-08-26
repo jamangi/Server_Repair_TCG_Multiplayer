@@ -73,7 +73,7 @@
             "card.response.verify.storage.raid_healthy": 1,
             "card.response.verify.thermal.load_test": 2
           },
-          "card_catalog_version": "core-card-catalog-coverage-v3",
+          "card_catalog_version": "core-card-catalog-technical-copy-v4",
           "causal_depth_bounds": {
             "maximum": 1,
             "minimum": 0
@@ -132,7 +132,7 @@
             "card.bench.test.thermal.fan_telemetry",
             "card.bench.test.thermal.temperature_monitoring"
           ],
-          "domain_content_version": "core-domain-snapshot-v2",
+          "domain_content_version": "core-domain-snapshot-technical-copy-v3",
           "entity_type": "ticket_builder_configuration",
           "excluded_domain_ids": [],
           "excluded_tags": [],
@@ -327,7 +327,7 @@
             "card.response.verify.storage.raid_healthy": 1,
             "card.response.verify.thermal.load_test": 2
           },
-          "card_catalog_version": "core-card-catalog-coverage-v3",
+          "card_catalog_version": "core-card-catalog-technical-copy-v4",
           "causal_depth_bounds": {
             "maximum": 1,
             "minimum": 0
@@ -386,7 +386,7 @@
             "card.bench.test.thermal.fan_telemetry",
             "card.bench.test.thermal.temperature_monitoring"
           ],
-          "domain_content_version": "core-domain-snapshot-v2",
+          "domain_content_version": "core-domain-snapshot-technical-copy-v3",
           "entity_type": "ticket_builder_configuration",
           "excluded_domain_ids": [],
           "excluded_tags": [],
@@ -581,7 +581,7 @@
             "card.response.verify.storage.raid_healthy": 1,
             "card.response.verify.thermal.load_test": 2
           },
-          "card_catalog_version": "core-card-catalog-coverage-v3",
+          "card_catalog_version": "core-card-catalog-technical-copy-v4",
           "causal_depth_bounds": {
             "maximum": 1,
             "minimum": 0
@@ -640,7 +640,7 @@
             "card.bench.test.thermal.fan_telemetry",
             "card.bench.test.thermal.temperature_monitoring"
           ],
-          "domain_content_version": "core-domain-snapshot-v2",
+          "domain_content_version": "core-domain-snapshot-technical-copy-v3",
           "entity_type": "ticket_builder_configuration",
           "excluded_domain_ids": [],
           "excluded_tags": [],
@@ -835,7 +835,7 @@
             "card.response.verify.storage.raid_healthy": 1,
             "card.response.verify.thermal.load_test": 2
           },
-          "card_catalog_version": "core-card-catalog-coverage-v3",
+          "card_catalog_version": "core-card-catalog-technical-copy-v4",
           "causal_depth_bounds": {
             "maximum": 1,
             "minimum": 0
@@ -894,7 +894,7 @@
             "card.bench.test.thermal.fan_telemetry",
             "card.bench.test.thermal.temperature_monitoring"
           ],
-          "domain_content_version": "core-domain-snapshot-v2",
+          "domain_content_version": "core-domain-snapshot-technical-copy-v3",
           "entity_type": "ticket_builder_configuration",
           "excluded_domain_ids": [],
           "excluded_tags": [],
@@ -1089,7 +1089,7 @@
             "card.response.verify.storage.raid_healthy": 1,
             "card.response.verify.thermal.load_test": 2
           },
-          "card_catalog_version": "core-card-catalog-coverage-v3",
+          "card_catalog_version": "core-card-catalog-technical-copy-v4",
           "causal_depth_bounds": {
             "maximum": 1,
             "minimum": 0
@@ -1148,7 +1148,7 @@
             "card.bench.test.thermal.fan_telemetry",
             "card.bench.test.thermal.temperature_monitoring"
           ],
-          "domain_content_version": "core-domain-snapshot-v2",
+          "domain_content_version": "core-domain-snapshot-technical-copy-v3",
           "entity_type": "ticket_builder_configuration",
           "excluded_domain_ids": [],
           "excluded_tags": [],
@@ -1343,7 +1343,7 @@
             "card.response.verify.storage.raid_healthy": 1,
             "card.response.verify.thermal.load_test": 2
           },
-          "card_catalog_version": "core-card-catalog-coverage-v3",
+          "card_catalog_version": "core-card-catalog-technical-copy-v4",
           "causal_depth_bounds": {
             "maximum": 1,
             "minimum": 0
@@ -1402,7 +1402,7 @@
             "card.bench.test.thermal.fan_telemetry",
             "card.bench.test.thermal.temperature_monitoring"
           ],
-          "domain_content_version": "core-domain-snapshot-v2",
+          "domain_content_version": "core-domain-snapshot-technical-copy-v3",
           "entity_type": "ticket_builder_configuration",
           "excluded_domain_ids": [],
           "excluded_tags": [],
@@ -1597,7 +1597,7 @@
             "card.response.verify.storage.raid_healthy": 1,
             "card.response.verify.thermal.load_test": 2
           },
-          "card_catalog_version": "core-card-catalog-coverage-v3",
+          "card_catalog_version": "core-card-catalog-technical-copy-v4",
           "causal_depth_bounds": {
             "maximum": 1,
             "minimum": 0
@@ -1656,7 +1656,7 @@
             "card.bench.test.thermal.fan_telemetry",
             "card.bench.test.thermal.temperature_monitoring"
           ],
-          "domain_content_version": "core-domain-snapshot-v2",
+          "domain_content_version": "core-domain-snapshot-technical-copy-v3",
           "entity_type": "ticket_builder_configuration",
           "excluded_domain_ids": [],
           "excluded_tags": [],
@@ -1851,7 +1851,7 @@
             "card.response.verify.storage.raid_healthy": 1,
             "card.response.verify.thermal.load_test": 2
           },
-          "card_catalog_version": "core-card-catalog-coverage-v3",
+          "card_catalog_version": "core-card-catalog-technical-copy-v4",
           "causal_depth_bounds": {
             "maximum": 1,
             "minimum": 0
@@ -1910,7 +1910,7 @@
             "card.bench.test.thermal.fan_telemetry",
             "card.bench.test.thermal.temperature_monitoring"
           ],
-          "domain_content_version": "core-domain-snapshot-v2",
+          "domain_content_version": "core-domain-snapshot-technical-copy-v3",
           "entity_type": "ticket_builder_configuration",
           "excluded_domain_ids": [],
           "excluded_tags": [],
@@ -2105,7 +2105,7 @@
             "card.response.verify.storage.raid_healthy": 1,
             "card.response.verify.thermal.load_test": 2
           },
-          "card_catalog_version": "core-card-catalog-coverage-v3",
+          "card_catalog_version": "core-card-catalog-technical-copy-v4",
           "causal_depth_bounds": {
             "maximum": 1,
             "minimum": 0
@@ -2164,7 +2164,7 @@
             "card.bench.test.thermal.fan_telemetry",
             "card.bench.test.thermal.temperature_monitoring"
           ],
-          "domain_content_version": "core-domain-snapshot-v2",
+          "domain_content_version": "core-domain-snapshot-technical-copy-v3",
           "entity_type": "ticket_builder_configuration",
           "excluded_domain_ids": [],
           "excluded_tags": [],
@@ -2359,7 +2359,7 @@
             "card.response.verify.storage.raid_healthy": 1,
             "card.response.verify.thermal.load_test": 2
           },
-          "card_catalog_version": "core-card-catalog-coverage-v3",
+          "card_catalog_version": "core-card-catalog-technical-copy-v4",
           "causal_depth_bounds": {
             "maximum": 1,
             "minimum": 0
@@ -2418,7 +2418,7 @@
             "card.bench.test.thermal.fan_telemetry",
             "card.bench.test.thermal.temperature_monitoring"
           ],
-          "domain_content_version": "core-domain-snapshot-v2",
+          "domain_content_version": "core-domain-snapshot-technical-copy-v3",
           "entity_type": "ticket_builder_configuration",
           "excluded_domain_ids": [],
           "excluded_tags": [],
@@ -2613,7 +2613,7 @@
             "card.response.verify.storage.raid_healthy": 1,
             "card.response.verify.thermal.load_test": 2
           },
-          "card_catalog_version": "core-card-catalog-coverage-v3",
+          "card_catalog_version": "core-card-catalog-technical-copy-v4",
           "causal_depth_bounds": {
             "maximum": 1,
             "minimum": 0
@@ -2672,7 +2672,7 @@
             "card.bench.test.thermal.fan_telemetry",
             "card.bench.test.thermal.temperature_monitoring"
           ],
-          "domain_content_version": "core-domain-snapshot-v2",
+          "domain_content_version": "core-domain-snapshot-technical-copy-v3",
           "entity_type": "ticket_builder_configuration",
           "excluded_domain_ids": [],
           "excluded_tags": [],
@@ -2867,7 +2867,7 @@
             "card.response.verify.storage.raid_healthy": 1,
             "card.response.verify.thermal.load_test": 2
           },
-          "card_catalog_version": "core-card-catalog-coverage-v3",
+          "card_catalog_version": "core-card-catalog-technical-copy-v4",
           "causal_depth_bounds": {
             "maximum": 1,
             "minimum": 0
@@ -2926,7 +2926,7 @@
             "card.bench.test.thermal.fan_telemetry",
             "card.bench.test.thermal.temperature_monitoring"
           ],
-          "domain_content_version": "core-domain-snapshot-v2",
+          "domain_content_version": "core-domain-snapshot-technical-copy-v3",
           "entity_type": "ticket_builder_configuration",
           "excluded_domain_ids": [],
           "excluded_tags": [],
@@ -3122,7 +3122,7 @@
             "card.response.verify.storage.raid_healthy": 1,
             "card.response.verify.thermal.load_test": 2
           },
-          "card_catalog_version": "core-card-catalog-coverage-v3",
+          "card_catalog_version": "core-card-catalog-technical-copy-v4",
           "causal_depth_bounds": {
             "maximum": 1,
             "minimum": 0
@@ -3181,7 +3181,7 @@
             "card.bench.test.thermal.fan_telemetry",
             "card.bench.test.thermal.temperature_monitoring"
           ],
-          "domain_content_version": "core-domain-snapshot-v2",
+          "domain_content_version": "core-domain-snapshot-technical-copy-v3",
           "entity_type": "ticket_builder_configuration",
           "excluded_domain_ids": [],
           "excluded_tags": [],
@@ -3307,8 +3307,8 @@
     }
   ],
   "version_pins": {
-    "card_catalog_version": "core-card-catalog-coverage-v3",
-    "domain_content_version": "core-domain-snapshot-v2",
+    "card_catalog_version": "core-card-catalog-technical-copy-v4",
+    "domain_content_version": "core-domain-snapshot-technical-copy-v3",
     "generator_version": "ticket-builder-v3",
     "harness_version": "automated-harness-v1",
     "policy_versions": [

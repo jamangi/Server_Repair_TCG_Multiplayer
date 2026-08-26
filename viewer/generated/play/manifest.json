@@ -90,8 +90,8 @@
     {
       "path": "content/gameplay-v1/card-catalog-v3.json",
       "source": "content/gameplay-v1/card-catalog-v3.json",
-      "bytes": 144831,
-      "sha256": "f3dca617a5c8a5dbe084af3269e777ea1992cc29a1f91b9c900c88e3b002a0c9"
+      "bytes": 154205,
+      "sha256": "e2810a99ce02b1d57ef5613e3d9d09647f5fea8dd8b3b4074baacea09bc055ef"
     },
     {
       "path": "content/gameplay-v1/card-catalog.json",
@@ -102,8 +102,8 @@
     {
       "path": "content/gameplay-v1/decks-v3.json",
       "source": "content/gameplay-v1/decks-v3.json",
-      "bytes": 3661,
-      "sha256": "33ab22132062360390a20b35fa28aee5ee9698281f6424e1decf73bc7841a8e4"
+      "bytes": 3667,
+      "sha256": "8d9fc3ef8aa5d3932dd4fbb9349b915f4087b2c357caede6f559a2c2c24467f4"
     },
     {
       "path": "content/gameplay-v1/decks.json",
@@ -120,8 +120,8 @@
     {
       "path": "content/gameplay-v1/domain-snapshot-v2.json",
       "source": "content/gameplay-v1/domain-snapshot-v2.json",
-      "bytes": 404990,
-      "sha256": "cac32ced91ce46dfe991c857f4db444a6bad3d65f867c28b28b5e2558986b843"
+      "bytes": 418934,
+      "sha256": "3af0332d64895c5247a101d858a94fe63ffe88ae0b7c0849fe92cd244a0c1c74"
     },
     {
       "path": "content/gameplay-v1/domain-snapshot.json",
@@ -132,20 +132,38 @@
     {
       "path": "content/gameplay-v1/playable-coverage-v3.json",
       "source": "content/gameplay-v1/playable-coverage-v3.json",
-      "bytes": 29062,
-      "sha256": "ef2b90e924aa95afdef41593a017686cffecf0b971e09815ce82b24c00e8e86c"
+      "bytes": 29083,
+      "sha256": "87ed2e481221485aaef3221dcf2d0a1a4979971631db5284fa3e73745d20b065"
     },
     {
       "path": "content/gameplay-v1/task-014-parts.json",
       "source": "content/gameplay-v1/task-014-parts.json",
-      "bytes": 35817,
-      "sha256": "f94ce4e7f91606e70213e764d17eedd2b5f40aa68939d8f8d953daf111469266"
+      "bytes": 35838,
+      "sha256": "06614e06602164e54dc36737aea89d573cd0d1b76ce863a0352a2f45e1be6c56"
+    },
+    {
+      "path": "content/gameplay-v1/technical-action-glossary-v1.json",
+      "source": "content/gameplay-v1/technical-action-glossary-v1.json",
+      "bytes": 3511,
+      "sha256": "434672167386e47dc627659c070e9e8e57cfcb199bfc5ac46b397d2d2efa6022"
+    },
+    {
+      "path": "content/gameplay-v1/technical-copy-review-v1.json",
+      "source": "content/gameplay-v1/technical-copy-review-v1.json",
+      "bytes": 41126,
+      "sha256": "092837fac4eb36e75cfd245c8004cc5c7c906570431c9f6481dd9fd5e99b2f8c"
     },
     {
       "path": "content/gameplay-v1/ticket-templates.json",
       "source": "content/gameplay-v1/ticket-templates.json",
       "bytes": 25093,
       "sha256": "e967c524ba36905ae18edafbf066c229838010cded57855f884fcfecf4ce74db"
+    },
+    {
+      "path": "content/gameplay-v1/tutorials-v1.json",
+      "source": "content/gameplay-v1/tutorials-v1.json",
+      "bytes": 17398,
+      "sha256": "9c9d51f6ac49c9c903d8943310fa66d10193060108f913db6164349bdd52d1aa"
     },
     {
       "path": "src/builder/canonical.mjs",
@@ -162,8 +180,8 @@
     {
       "path": "src/builder/task-014.mjs",
       "source": "src/builder/task-014.mjs",
-      "bytes": 35231,
-      "sha256": "559ba8dfbb1446b4c25f30535ef7a9b8bfeabd8f9b15d65e243eaa72c4676946"
+      "bytes": 35252,
+      "sha256": "484986b45b87ec709dc708a5f081d34e274a2b8f9fc3151216950c57c380ce71"
     },
     {
       "path": "src/builder/ticket-builder.mjs",

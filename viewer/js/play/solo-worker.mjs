@@ -12,6 +12,14 @@ import {
   TASK_014_DOMAIN_CONTENT_VERSION,
   TASK_014_TICKET_CONTENT_VERSION,
 } from '../../generated/play/src/builder/task-014.mjs';
+import {
+  DIAGNOSIS_V2_BUILDER_VERSION,
+  DIAGNOSIS_V2_CARD_CATALOG_VERSION,
+  DIAGNOSIS_V2_CONFIGURATION_VERSION,
+  DIAGNOSIS_V2_TICKET_CONTENT_VERSION,
+  buildTicketsV2,
+  createDiagnosisV2Catalogs,
+} from '../../generated/play/src/builder/diagnosis-v2.mjs';
 
 const PLAYER_ID = 'player.solo';
 const TEAM_ID = 'team.cooperative';
@@ -44,6 +52,26 @@ async function loadCatalogs() {
   ]);
   catalogs = createTask014Catalogs({ cards, decks, domain, parts, coverage });
   return catalogs;
+}
+
+async function loadTutorialCatalogs() {
+  const [cards, decks, domain, ticketContent, tutorialContent] = await Promise.all([
+    loadJson('card-catalog.json'),
+    loadJson('decks.json'),
+    loadJson('domain-snapshot.json'),
+    loadJson('ticket-templates.json'),
+    loadJson('tutorials-v1.json'),
+  ]);
+  const loaded = createDiagnosisV2Catalogs({ cards, decks, domain, ticketContent });
+  if (tutorialContent.tutorial_catalog_version !== 'tutorial-checkpoints-v1'
+      || tutorialContent.ruleset_version !== loaded.rulesetVersion
+      || tutorialContent.builder_version !== DIAGNOSIS_V2_BUILDER_VERSION
+      || tutorialContent.configuration_version !== DIAGNOSIS_V2_CONFIGURATION_VERSION
+      || tutorialContent.ticket_content_version !== DIAGNOSIS_V2_TICKET_CONTENT_VERSION
+      || tutorialContent.card_catalog_version !== DIAGNOSIS_V2_CARD_CATALOG_VERSION) {
+    throw new Error('Tutorial content versions are incompatible with the local authority.');
+  }
+  return { loaded, tutorialContent };
 }
 
 function bounds(minimum, maximum) {
@@ -107,9 +135,44 @@ function builderConfiguration(ticketCount, seed, responseCardDefinitionIds, load
   };
 }
 
+function tutorialBuilderConfiguration(definition, responseCardDefinitionIds, loadedCatalogs) {
+  return {
+    id: `builder_config.${definition.id}`,
+    entity_type: 'ticket_builder_configuration',
+    configuration_version: DIAGNOSIS_V2_CONFIGURATION_VERSION,
+    scenario_or_mode_context: 'TRAINING',
+    requested_ticket_count: 1,
+    seed: definition.seed,
+    generator_version: DIAGNOSIS_V2_BUILDER_VERSION,
+    content_version: DIAGNOSIS_V2_TICKET_CONTENT_VERSION,
+    domain_content_version: loadedCatalogs.domain.domain_content_version,
+    card_catalog_version: DIAGNOSIS_V2_CARD_CATALOG_VERSION,
+    allowed_domain_ids: [], excluded_domain_ids: [], allowed_tags: [], excluded_tags: [],
+    guaranteed_categories: [], required_teaching_beats: [definition.required_teaching_beat],
+    authored_difficulty_bounds: bounds(1, 4),
+    fault_count_bounds: bounds(1, 3),
+    required_actionable_fault_count_bounds: bounds(1, 2),
+    causal_depth_bounds: bounds(0, 1),
+    inbound_branching_bounds: bounds(0, 2),
+    outbound_branching_bounds: bounds(0, 2),
+    progressive_difficulty_profile: {
+      profile_id: `progressive.${definition.id}`,
+      profile_version: 'tutorial-checkpoints-v1',
+      explicit_ceiling: 4,
+      bands: [{ start_generated_index: 0, end_generated_index: 0, target: 2, minimum: 1, maximum: 4 }],
+    },
+    generation_index_start: 0,
+    allow_duplicate_causal_fingerprints: false,
+    active_causal_fingerprints: [],
+    legal_card_definition_ids: loadedCatalogs.cards.cards.map((card) => card.id).sort(),
+    available_card_definition_counts: compactCounts(responseCardDefinitionIds),
+    fallback_configuration_id: null,
+  };
+}
+
 function assertStartPayload(payload) {
   if (!payload || typeof payload !== 'object' || Array.isArray(payload)) throw new Error('Start payload is invalid.');
-  const allowed = new Set(['match_id', 'seed', 'ticket_count', 'display_name', 'deck_id', 'card_definition_ids']);
+  const allowed = new Set(['match_id', 'seed', 'ticket_count', 'display_name', 'deck_id', 'card_definition_ids', 'tutorial_id']);
   if (Object.keys(payload).some((key) => !allowed.has(key))) throw new Error('Start payload contains an unknown field.');
   if (typeof payload.match_id !== 'string' || payload.match_id.length > 120 || !SAFE_ID.test(payload.match_id)) throw new Error('Match ID is invalid.');
   if (typeof payload.seed !== 'string' || payload.seed.length < 1 || payload.seed.length > 160) throw new Error('Seed is invalid.');
@@ -119,6 +182,9 @@ function assertStartPayload(payload) {
   if (!Array.isArray(payload.card_definition_ids) || payload.card_definition_ids.length !== 30
     || payload.card_definition_ids.some((id) => typeof id !== 'string' || !SAFE_ID.test(id))) {
     throw new Error('Deck snapshot must contain exactly 30 valid Card identifiers.');
+  }
+  if (payload.tutorial_id !== undefined && (typeof payload.tutorial_id !== 'string' || !SAFE_ID.test(payload.tutorial_id))) {
+    throw new Error('Tutorial ID is invalid.');
   }
 }
 
@@ -148,6 +214,7 @@ function safeIntentMetadata(intent, index, view) {
     card_instance_id: payload.card_instance_id ?? null,
     card_definition_id: held?.card_definition_id ?? payload.selected_card_definition_id ?? null,
     candidate_fault_id: payload.candidate_fault_id ?? payload.candidate_fault_ids?.[0] ?? null,
+    cited_evidence_event_ids: [...(payload.cited_evidence_event_ids ?? [])],
     source_action_event_id: payload.source_action_event_id ?? null,
     selected_card_definition_id: payload.selected_card_definition_id ?? null,
   };
@@ -254,16 +321,35 @@ function terminalSummary() {
 async function startMatch(payload) {
   if (state) throw new Error('A local Match is already active.');
   assertStartPayload(payload);
-  const loaded = await loadCatalogs();
-  const configuration = builderConfiguration(payload.ticket_count, payload.seed, payload.card_definition_ids, loaded);
-  const builderResult = buildTicketsV3({
-    configuration,
-    catalogs: loaded,
-  });
+  let definition = null;
+  let loaded;
+  let configuration;
+  let builderResult;
+  if (payload.tutorial_id) {
+    const tutorial = await loadTutorialCatalogs();
+    definition = tutorial.tutorialContent.tutorials.find((entry) => entry.id === payload.tutorial_id) ?? null;
+    if (!definition) throw new Error('The requested Tutorial does not exist in the pinned catalog.');
+    if (payload.seed !== definition.seed || payload.ticket_count !== 1) throw new Error('Tutorial start pins do not match its versioned definition.');
+    loaded = tutorial.loaded;
+    configuration = tutorialBuilderConfiguration(definition, payload.card_definition_ids, loaded);
+    builderResult = buildTicketsV2({ configuration, catalogs: loaded });
+  } else {
+    loaded = await loadCatalogs();
+    configuration = builderConfiguration(payload.ticket_count, payload.seed, payload.card_definition_ids, loaded);
+    builderResult = buildTicketsV3({ configuration, catalogs: loaded });
+  }
+  catalogs = loaded;
   const attempt = selectedAttempt(builderResult);
   if (!attempt || builderResult.status !== 'SUCCESS' || attempt.ticket_snapshots.length !== payload.ticket_count) {
     const codes = builderResult.attempts.flatMap((candidate) => candidate.diagnostics.map((item) => item.code));
     throw new Error(`Ticket Builder could not create a complete Match (${[...new Set(codes)].join(', ') || 'unknown diagnostic'}).`);
+  }
+  if (definition) {
+    const selectedTemplate = loaded.ticketContent.templates.find((entry) =>
+      entry.template_id === attempt.selected_template_ids[0]);
+    if (selectedTemplate?.ticket?.id !== definition.expected_ticket_definition_id) {
+      throw new Error('Tutorial Builder output did not match its pinned Ticket checkpoint contract.');
+    }
   }
   const now = new Date().toISOString();
   startedAtMilliseconds = Date.parse(now);
@@ -297,7 +383,7 @@ async function startMatch(payload) {
       max_refresh_tokens: 1,
       turn_cap: null,
       closure_cap: null,
-      play_context: 'SOLO',
+      play_context: definition ? 'TRAINING' : 'SOLO',
     },
     rulesetVersion: loaded.rulesetVersion,
     seed: payload.seed,

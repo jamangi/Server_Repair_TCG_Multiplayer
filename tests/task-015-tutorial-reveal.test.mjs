@@ -1,0 +1,312 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import test from 'node:test';
+
+import {
+  DIAGNOSIS_V2_BUILDER_VERSION,
+  DIAGNOSIS_V2_CARD_CATALOG_VERSION,
+  DIAGNOSIS_V2_CONFIGURATION_VERSION,
+  DIAGNOSIS_V2_TICKET_CONTENT_VERSION,
+  buildTicketsV2,
+  createDiagnosisV2Catalogs,
+} from '../src/builder/diagnosis-v2.mjs';
+import { validateTicketSolvability } from '../src/builder/ticket-solvability.mjs';
+import {
+  createMatch,
+  getLegalIntents,
+  projectPrivatePlayer,
+  projectPublicMatch,
+  submitIntent,
+} from '../src/engine/index.mjs';
+import {
+  createClientDataContext,
+  createDefaultState,
+  recordTutorialCompletion,
+  validateTutorialProgress,
+} from '../viewer/js/play/data/client-data.mjs';
+import { TutorialController, validateTutorialReferences } from '../viewer/js/play/tutorial-controller.mjs';
+import { loadSchemaRegistry, validateJsonSchema } from './helpers/json-schema-validator.mjs';
+
+const ROOT = path.resolve(import.meta.dirname, '..');
+const readJson = (relative) => JSON.parse(fs.readFileSync(path.join(ROOT, relative), 'utf8'));
+const source = {
+  cards: readJson('content/gameplay-v1/card-catalog.json'),
+  decks: readJson('content/gameplay-v1/decks.json'),
+  domain: readJson('content/gameplay-v1/domain-snapshot.json'),
+  ticketContent: readJson('content/gameplay-v1/ticket-templates.json'),
+};
+const tutorials = readJson('content/gameplay-v1/tutorials-v1.json');
+const catalogs = createDiagnosisV2Catalogs(source);
+const PLAYER = 'player.tutorial';
+const TEAM = 'team.tutorial';
+
+function configuration(definition) {
+  return {
+    id: `builder_config.${definition.id}`,
+    entity_type: 'ticket_builder_configuration',
+    configuration_version: DIAGNOSIS_V2_CONFIGURATION_VERSION,
+    scenario_or_mode_context: 'TRAINING',
+    requested_ticket_count: 1,
+    seed: definition.seed,
+    generator_version: DIAGNOSIS_V2_BUILDER_VERSION,
+    content_version: DIAGNOSIS_V2_TICKET_CONTENT_VERSION,
+    domain_content_version: catalogs.domain.domain_content_version,
+    card_catalog_version: DIAGNOSIS_V2_CARD_CATALOG_VERSION,
+    allowed_domain_ids: [], excluded_domain_ids: [], allowed_tags: [], excluded_tags: [],
+    guaranteed_categories: [], required_teaching_beats: [definition.required_teaching_beat],
+    authored_difficulty_bounds: { minimum: 1, maximum: 4 },
+    fault_count_bounds: { minimum: 1, maximum: 3 },
+    required_actionable_fault_count_bounds: { minimum: 1, maximum: 2 },
+    causal_depth_bounds: { minimum: 0, maximum: 1 },
+    inbound_branching_bounds: { minimum: 0, maximum: 2 },
+    outbound_branching_bounds: { minimum: 0, maximum: 2 },
+    progressive_difficulty_profile: {
+      profile_id: `progressive.${definition.id}`,
+      profile_version: tutorials.tutorial_catalog_version,
+      explicit_ceiling: 4,
+      bands: [{ start_generated_index: 0, end_generated_index: 0, target: 2, minimum: 1, maximum: 4 }],
+    },
+    generation_index_start: 0,
+    allow_duplicate_causal_fingerprints: false,
+    active_causal_fingerprints: [],
+    legal_card_definition_ids: catalogs.cards.cards.map((card) => card.id).sort(),
+    fallback_configuration_id: null,
+  };
+}
+
+function builtTicket(definition) {
+  const result = buildTicketsV2({ configuration: configuration(definition), catalogs });
+  assert.equal(result.status, 'SUCCESS', JSON.stringify(result.attempts));
+  const attempt = result.attempts.find((entry) => entry.attempt_id === result.selected_attempt_id);
+  assert.equal(attempt.ticket_snapshots.length, 1);
+  const selectedTemplate = catalogs.ticketContent.templates.find((entry) =>
+    entry.template_id === attempt.selected_template_ids[0]);
+  assert.equal(selectedTemplate.ticket.id, definition.expected_ticket_definition_id);
+  return { result, ticket: attempt.ticket_snapshots[0] };
+}
+
+function createTutorialMatch(definition, ticket) {
+  return createMatch({
+    matchId: `match.${definition.id}`,
+    players: [{
+      player_id: PLAYER,
+      display_name: 'Tutorial technician',
+      controller_type: 'human',
+      team_id: TEAM,
+      seat_number: 1,
+    }],
+    decksByPlayer: { [PLAYER]: catalogs.decks.decks[0].card_definition_ids },
+    ticketSnapshots: [ticket],
+    catalogs: catalogs.engineCatalogs,
+    configuration: {
+      collaboration_mode: 'cooperative',
+      execution_mode: 'offline',
+      starting_ticket_count: 1,
+      queue_minimum: 0,
+      termination_score: -1,
+      starting_search_tokens: 3,
+      ticket_search_tokens: 1,
+      max_search_tokens: 5,
+      starting_refresh_tokens: 1,
+      max_refresh_tokens: 1,
+      turn_cap: null,
+      closure_cap: null,
+      play_context: 'TRAINING',
+    },
+    rulesetVersion: catalogs.rulesetVersion,
+    seed: definition.seed,
+    now: '2026-08-26T12:00:00.000Z',
+    ticketSource: {
+      source_type: 'generated',
+      content_version: catalogs.ticketContent.ticket_content_version,
+      generator_version: DIAGNOSIS_V2_BUILDER_VERSION,
+      configuration_id: `builder_config.${definition.id}`,
+      seed: definition.seed,
+      builder_result_id: `builder_result.${definition.id}`,
+    },
+  });
+}
+
+function primaryCardId(sourceDefinitionId) {
+  return catalogs.cards.cards.find((card) =>
+    card.primary_domain_reference?.entity_id === sourceDefinitionId)?.id ?? null;
+}
+
+function latestConfirmedCandidate(state) {
+  for (let index = state.events.length - 1; index >= 0; index -= 1) {
+    const effect = state.events[index].payload?.candidate_effects?.find((entry) => entry.disposition === 'CONFIRM');
+    if (effect) return effect.candidate_fault_id;
+  }
+  return null;
+}
+
+function sourceCardMatches(state, intent, sourceDefinitionId) {
+  const selected = intent.payload.selected_card_definition_id;
+  const held = intent.payload.card_instance_id
+    ? state.card_instances[intent.payload.card_instance_id]?.card_definition_id
+    : null;
+  return (selected ?? held) === primaryCardId(sourceDefinitionId);
+}
+
+function intendedAction(state, checkpoint) {
+  const intents = getLegalIntents({ state, playerId: PLAYER, catalogs: catalogs.engineCatalogs });
+  return intents.find((intent) => {
+    if (intent.action_type !== checkpoint.action_type) return false;
+    if (checkpoint.source_definition_id && checkpoint.action_type === 'RUN_TEST') {
+      return intent.payload.execution_definition_id === checkpoint.source_definition_id;
+    }
+    if (checkpoint.source_definition_id && !sourceCardMatches(state, intent, checkpoint.source_definition_id)) return false;
+    if (checkpoint.candidate_source === 'LATEST_CONFIRM') {
+      return intent.payload.candidate_fault_id === latestConfirmedCandidate(state);
+    }
+    return true;
+  }) ?? null;
+}
+
+function helperAction(state, checkpoint) {
+  const intents = getLegalIntents({ state, playerId: PLAYER, catalogs: catalogs.engineCatalogs });
+  const cardId = checkpoint.source_definition_id ? primaryCardId(checkpoint.source_definition_id) : null;
+  if (cardId && checkpoint.support_action_types.includes('SEARCH')) {
+    const search = intents.find((intent) => intent.action_type === 'SEARCH'
+      && intent.payload.selected_card_definition_id === cardId);
+    if (search) return search;
+  }
+  if (checkpoint.support_action_types.includes('REFRESH')) {
+    const refresh = intents.find((intent) => intent.action_type === 'REFRESH');
+    if (refresh) return refresh;
+  }
+  if (checkpoint.support_action_types.includes('PASS_TURN')) {
+    return intents.find((intent) => intent.action_type === 'PASS_TURN') ?? null;
+  }
+  return null;
+}
+
+function submit(state, intent, sequence) {
+  assert.ok(intent, 'Expected a real legal tutorial intent');
+  return submitIntent({
+    state,
+    request: {
+      request_id: `${state.match_id}.request.${String(sequence).padStart(4, '0')}`,
+      match_id: state.match_id,
+      player_id: PLAYER,
+      expected_revision: state.revision,
+      action_type: intent.action_type,
+      payload: structuredClone(intent.payload),
+      client_nonce: `tutorial.${sequence}`,
+    },
+    authenticatedPlayerId: PLAYER,
+    catalogs: catalogs.engineCatalogs,
+    now: new Date(Date.parse('2026-08-26T12:00:00.000Z') + sequence * 1000).toISOString(),
+  });
+}
+
+function replayTutorial(definition) {
+  const { ticket } = builtTicket(definition);
+  let state = createTutorialMatch(definition, ticket);
+  let sequence = 0;
+  const observed = new Set();
+  for (const checkpoint of definition.checkpoints) {
+    if (checkpoint.checkpoint_kind === 'EXPLAIN') continue;
+    let intent = intendedAction(state, checkpoint);
+    for (let guard = 0; !intent && guard < 12; guard += 1) {
+      sequence += 1;
+      const helper = helperAction(state, checkpoint);
+      assert.ok(helper, `${checkpoint.id} has no permitted helper intent at revision ${state.revision}`);
+      const transition = submit(state, helper, sequence);
+      assert.equal(transition.result.accepted, true);
+      state = transition.state;
+      intent = intendedAction(state, checkpoint);
+    }
+    sequence += 1;
+    const before = state.events.length;
+    assert.ok(intent, `${checkpoint.id} never exposed its expected legal intent`);
+    const transition = submit(state, intent, sequence);
+    assert.equal(transition.result.accepted, true, `${checkpoint.id}: ${transition.result.error_code}`);
+    state = transition.state;
+    const eventTypes = new Set(state.events.slice(before).map((event) => event.event_type));
+    checkpoint.expected_event_types.forEach((type) => {
+      assert.ok(eventTypes.has(type), `${checkpoint.id} did not produce ${type}`);
+      observed.add(type);
+    });
+  }
+  assert.equal(state.status, 'COMPLETED');
+  return { state, observed };
+}
+
+test('tutorial catalogs and local progress are versioned, schema-valid, and reference real content', () => {
+  const baseRegistry = loadSchemaRegistry(ROOT);
+  const tutorialSchema = readJson('schemas/client/tutorial_catalog.schema.json');
+  const progressSchema = readJson('schemas/client/tutorial_progress.schema.json');
+  const registry = {
+    schemas: [...baseRegistry.schemas, { schema: tutorialSchema }, { schema: progressSchema }],
+    byId: new Map([...baseRegistry.byId, [tutorialSchema.$id, tutorialSchema], [progressSchema.$id, progressSchema]]),
+  };
+  assert.deepEqual(validateJsonSchema(tutorials, tutorialSchema, registry), []);
+  const catalog = {
+    ...catalogs,
+    cardById: new Map(catalogs.cards.cards.map((card) => [card.id, card])),
+  };
+  assert.deepEqual(validateTutorialReferences(tutorials, catalog), []);
+
+  const expandedCards = readJson('content/gameplay-v1/card-catalog-v3.json');
+  const expandedDecks = readJson('content/gameplay-v1/decks-v3.json');
+  const clientContext = createClientDataContext({ cardCatalog: expandedCards, deckCatalog: expandedDecks });
+  const progress = createDefaultState(clientContext).records.tutorials;
+  assert.deepEqual(validateTutorialProgress(progress, clientContext), []);
+  const completed = recordTutorialCompletion(progress, 'tutorial.fundamentals', clientContext);
+  assert.deepEqual(validateJsonSchema(completed, progressSchema, registry), []);
+  assert.deepEqual(completed.completed_tutorial_ids, ['tutorial.fundamentals']);
+});
+
+test('each pinned tutorial Builder output is independently solvable and replays through the real engine', () => {
+  for (const definition of tutorials.tutorials) {
+    const { ticket } = builtTicket(definition);
+    const solvability = validateTicketSolvability(ticket, {
+      domainCatalog: catalogs.domain,
+      cardCatalog: catalogs.cards,
+      legalCardDefinitionIds: configuration(definition).legal_card_definition_ids,
+    });
+    assert.equal(solvability.valid, true, JSON.stringify(solvability.errors));
+    const { state, observed } = replayTutorial(definition);
+    assert.equal(state.archived_ticket_ids.length, 1);
+    if (definition.id === 'tutorial.verify_recovery') {
+      assert.ok(observed.has('TICKET_RETURNED_TO_DIAGNOSIS'));
+      assert.equal(state.tickets[state.archived_ticket_ids[0]]?.verification_history?.some((entry) => entry.result === 'FAIL')
+        ?? state.archived_tickets[state.archived_ticket_ids[0]].verification_history.some((entry) => entry.result === 'FAIL'), true);
+    }
+  }
+});
+
+test('tutorial overlay only constrains real legal intents and does not inspect hidden truth', () => {
+  const definition = tutorials.tutorials[0];
+  const catalog = { ...catalogs, cardById: new Map(catalogs.cards.cards.map((card) => [card.id, card])) };
+  const controller = new TutorialController(definition, { catalog });
+  controller.continueExplanation();
+  controller.continueExplanation();
+  const state = createTutorialMatch(definition, builtTicket(definition).ticket);
+  const projection = projectPrivatePlayer(state, PLAYER, catalogs.engineCatalogs);
+  const legal = getLegalIntents({ state, playerId: PLAYER, catalogs: catalogs.engineCatalogs });
+  const hypothesis = legal.find((intent) => intent.action_type === 'REVISE_HYPOTHESIS');
+  const pass = legal.find((intent) => intent.action_type === 'PASS_TURN');
+  assert.equal(controller.isIntentAllowed({ action_type: hypothesis.action_type }, projection), true);
+  assert.equal(controller.isIntentAllowed({ action_type: pass.action_type }, projection), false);
+  assert.doesNotMatch(JSON.stringify(definition), /server_only_truth|actual_present|eligible_outcome_id/);
+});
+
+test('Give Up keeps truth out of pre-reveal projections and reveals only after the authoritative transition', () => {
+  const definition = tutorials.tutorials[0];
+  let state = createTutorialMatch(definition, builtTicket(definition).ticket);
+  assert.doesNotMatch(JSON.stringify(projectPublicMatch(state)), /solution_reveal|server_only_truth/);
+  assert.deepEqual(projectPrivatePlayer(state, PLAYER, catalogs.engineCatalogs).solution_reveals, []);
+  const giveUp = getLegalIntents({ state, playerId: PLAYER, catalogs: catalogs.engineCatalogs })
+    .find((intent) => intent.action_type === 'GIVE_UP_TICKET');
+  const transition = submit(state, giveUp, 1);
+  assert.equal(transition.result.accepted, true);
+  state = transition.state;
+  const reveal = projectPrivatePlayer(state, PLAYER, catalogs.engineCatalogs).solution_reveals[0];
+  assert.ok(reveal.solution_reveal.faults.length > 0);
+  assert.equal(state.status, 'COMPLETED');
+  assert.ok(state.result.reason_codes.includes('GIVE_UP'));
+  assert.equal(state.give_up_statistics.length, 1);
+});

@@ -6,12 +6,11 @@ Beginning with TASK-011, the displayed task ID includes the recommended reasonin
 
 Active task:
 
-- [`TASK-023-HIGH: Correct Ticket semantic-state contrast`](TASK-023-correct-ticket-semantic-state-contrast.md) — owner-directed accessibility correction; replace the reported pale hypothesized-Candidate text on the cream Ticket with surface-aware, measured semantic styling without gameplay changes.
+- No implementation task is active.
 
 Queued V0 training-ready sequence:
 
-- [`TASK-024-XHIGH: Author domain-sourced technical action copy`](TASK-024-author-domain-sourced-technical-action-copy.md) — rewrite and validate the 71 playable Test/Command/Repair/Validation domain records as useful technical references, make Cards and Library share that authority, separate game mechanics from learning copy, and block placeholder/internal prose.
-- [`TASK-015-HIGH: Add guided tutorials and the solo solution-reveal experience`](TASK-015-add-guided-tutorial-and-solution-reveal.md) — approved PT-007 A; queued after TASK-023/TASK-024 so tutorial checkpoints inherit legible Ticket states and reviewed reusable technical copy instead of duplicating or compensating for it.
+- The approved training-ready sequence through TASK-024 and TASK-015 is complete.
 
 Reserved V0 illustration task:
 
@@ -21,10 +20,13 @@ Approved but deferred V2 task:
 
 - [`TASK-017-XHIGH: Create the Server Repair V2 Migration Seed`](TASK-017-create-server-repair-v2-migration-seed.md) — approved Migration Seed direction but deferred until the V0 product is training-ready; when reactivated, it audits V0 in bounded checkpoints and establishes the public dependency-inference V2 foundation without modifying V0 behavior.
 
-TASK-012-HIGH through TASK-014-XHIGH, TASK-016-HIGH, and TASK-018-HIGH through TASK-021-HIGH are complete. PT-008 B is approved and the proposed TASK-022 was withdrawn without implementation. The recommended training-ready order is TASK-023-HIGH, TASK-024-XHIGH, then TASK-015-HIGH. TASK-011-HIGH may follow that sequence or proceed where asset integration permits; TASK-024 must preserve its illustration boundary. Return to TASK-017-XHIGH only when the project owner reactivates V2 migration.
+TASK-012-HIGH through TASK-016-HIGH, TASK-018-HIGH through TASK-021-HIGH, TASK-023-HIGH, and TASK-024-XHIGH are complete. PT-008 B is approved and the proposed TASK-022 was withdrawn without implementation. TASK-011-HIGH remains reserved but has no task contract in `docs/tasks/`; implementation must wait for that specification. Return to TASK-017-XHIGH only when the project owner reactivates V2 migration.
 
 Completed documentation and research tasks:
 
+- [`TASK-015-HIGH: Add guided tutorials and the solo solution-reveal experience`](TASK-015-add-guided-tutorial-and-solution-reveal.md) — completed 2026-08-26; added two pinned real-engine tutorials, semantic checkpoints with accessible focus/highlights and replay controls, exportable cosmetic progress, projection-only Isolation guidance, and a rules-faithful post-Give-Up solution/history comparison.
+- [`TASK-024-XHIGH: Author domain-sourced technical action copy`](TASK-024-author-domain-sourced-technical-action-copy.md) — completed 2026-08-26; replaced placeholder/internal prose across all 71 published actions, made Card and Library views consume shared domain authority, separated mechanics from learning copy, and added glossary, provenance ledger, and publication-quality gates.
+- [`TASK-023-HIGH: Correct Ticket semantic-state contrast`](TASK-023-correct-ticket-semantic-state-contrast.md) — completed 2026-08-26; separated paper and dark-board semantic tokens, restored measured Candidate/Hypothesis/elimination/status/accepted/returned/disabled contrast with visible non-color cues, and added responsive, focus, forced-colors, and computed-color regressions without gameplay changes.
 - [`TASK-021-HIGH: Fix selected-Ticket diagnostic target continuity`](TASK-021-fix-selected-ticket-diagnostic-target-continuity.md) — completed 2026-08-26; scoped persistent Bench-diagnostic presentation and equivalent input routes to the displayed Ticket, preserved accepted result/focus/Evidence continuity with explicit current-revision availability, retained deliberate Ticket switching and component choices, and left TASK-012 response-Card alternate targeting intact without authority changes.
 - [`TASK-020-HIGH: Normalize the one-row Bench and spatial response hand`](TASK-020-normalize-one-row-bench-and-response-hand.md) — completed 2026-08-25; normalized Relevant/Global to one equal-scale diagnostic row with width-derived paging, invested the recovered height in a readable illustrated hand, and replaced per-copy tabs with deterministic accessible stacks without authority changes.
 - [`TASK-019-HIGH: Refine Bench tiles and the adaptive response hand`](TASK-019-refine-bench-tiles-and-adaptive-response-hand.md) — completed 2026-08-25; introduced shared legible diagnostic tiles and contextual Inspect detail, an instance-safe grouped/paged/expandable response hand, deliberate Relevant/Global height use, responsive child-level QA, and one consolidated active-Match CSS composition without authority changes.

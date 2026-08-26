@@ -30,6 +30,9 @@ const GAMEPLAY_FILES = Object.freeze([
   'card-catalog-v3.json',
   'decks-v3.json',
   'playable-coverage-v3.json',
+  'technical-action-glossary-v1.json',
+  'technical-copy-review-v1.json',
+  'tutorials-v1.json',
 ]);
 
 const STATIC_ASSET_EXTENSIONS = new Set([

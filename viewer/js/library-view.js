@@ -5,6 +5,7 @@ import {
   categoryFor,
 } from './entity-types.js';
 import { createUiContinuity } from './play/ui-continuity.mjs';
+import { domainMethod, isTechnicalAction, technicalNoteLabel } from './play/technical-action-copy.mjs';
 
 const state = {
   records: [],
@@ -88,6 +89,27 @@ function formatValue(value) {
 function detailMarkup(record) {
   const skipped = new Set(['presentation', 'source', 'entity_type', '_pack_id', '_pack_name']);
   const illustration = record.presentation?.illustration;
+  if (isTechnicalAction(record)) {
+    const domainById = new Map(state.records.map((entry) => [entry.id, entry]));
+    const method = domainMethod(record, domainById);
+    const note = record.education_text?.trim();
+    const referenceMarkup = method.references.length ? `<h3>Related technical records</h3><ul class="library-reference-list">${method.references.map((reference) => `<li><a href="${escapeHtml(reference.href)}">${escapeHtml(reference.name)}</a><span>${escapeHtml(reference.role)}</span></li>`).join('')}</ul>` : '';
+    return `
+      <span class="library-pill">${escapeHtml(labels[record.entity_type] || record.entity_type)}</span>
+      <h2 id="library-detail-title">${escapeHtml(displayName(record))}</h2>
+      <section class="library-learning-section"><h3>What it does</h3><p>${escapeHtml(description(record))}</p></section>
+      ${note ? `<section class="library-learning-section library-learning-section--note"><h3>${escapeHtml(technicalNoteLabel(record))}</h3><p>${escapeHtml(note)}</p></section>` : ''}
+      <section class="library-learning-section"><h3>Technical method</h3>
+        ${method.facts.length ? `<dl class="library-facts">${method.facts.map(([label, value]) => `<div><dt>${escapeHtml(label)}</dt><dd>${label === 'Syntax' ? `<code>${escapeHtml(value)}</code>` : escapeHtml(value)}</dd></div>`).join('')}</dl>` : ''}
+        ${method.lists.map(([label, values]) => `<h4>${escapeHtml(label)}</h4><${record.entity_type === 'repair_procedure' ? 'ol' : 'ul'}>${values.map((value) => `<li>${escapeHtml(value)}</li>`).join('')}</${record.entity_type === 'repair_procedure' ? 'ol' : 'ul'}>`).join('')}
+      </section>
+      ${referenceMarkup}
+      ${illustration ? `<h3>Illustration</h3><p>${escapeHtml(illustration.alt_text || '')}</p>` : ''}
+      <details class="library-advanced"><summary>Advanced IDs and authored fields</summary><p><code>${escapeHtml(record.id)}</code></p><table>${Object.entries(record)
+        .filter(([key]) => !skipped.has(key) && !['education_text', 'purpose', 'capabilities', 'steps_summary', 'success_conditions'].includes(key))
+        .map(([key, value]) => `<tr><th scope="row">${escapeHtml(key.replaceAll('_', ' '))}</th><td>${formatValue(value)}</td></tr>`)
+        .join('')}</table><p>Pack: ${escapeHtml(record._pack_name || '')}</p></details>`;
+  }
   return `
     <span class="library-pill">${escapeHtml(labels[record.entity_type] || record.entity_type)}</span>
     <h2 id="library-detail-title">${escapeHtml(displayName(record))}</h2>
@@ -106,7 +128,7 @@ function resultCardsMarkup(rows) {
         <button type="button" class="library-card" data-record-id="${escapeHtml(record.id)}">
           <span class="library-pill">${escapeHtml(labels[record.entity_type] || record.entity_type)}</span>
           ${categoryFor(record) ? `<span class="library-pill">${escapeHtml(categoryFor(record))}</span>` : ''}
-          <h2>${escapeHtml(displayName(record))}</h2><p>${escapeHtml(description(record))}</p><code>${escapeHtml(record.id)}</code>
+          <h2>${escapeHtml(displayName(record))}</h2><p>${escapeHtml(description(record))}</p>
         </button>`).join('');
 }
 
@@ -219,13 +241,13 @@ function onClick(event) {
   }
   const card = event.target.closest('[data-record-id]');
   if (card) {
-    state.openRecordId = card.dataset.recordId;
-    render();
+    location.hash = `#/library/${encodeURIComponent(card.dataset.recordId)}`;
     return;
   }
   if (event.target.id === 'close') {
     state.openRecordId = null;
     mountedRoot.querySelector('#dialog')?.close();
+    if (location.hash.startsWith('#/library/')) location.hash = '#/library';
   }
 }
 
@@ -233,18 +255,22 @@ function onDialogClick(event) {
   if (event.target.id === 'dialog') {
     state.openRecordId = null;
     event.target.close();
+    if (location.hash.startsWith('#/library/')) location.hash = '#/library';
   }
 }
 
 function onDialogClose(event) {
-  if (event.target.id === 'dialog') state.openRecordId = null;
+  if (event.target.id !== 'dialog') return;
+  state.openRecordId = null;
+  if (location.hash.startsWith('#/library/')) location.hash = '#/library';
 }
 
-export async function mountLibrary(root, { announce = () => {} } = {}) {
+export async function mountLibrary(root, { announce = () => {}, route = null } = {}) {
   mountedRoot = root;
   root.innerHTML = '<section class="route-loading" aria-busy="true"><p>Loading Domain Library…</p></section>';
   await ensureContent();
   if (mountedRoot !== root) return;
+  if (route?.params?.recordId) state.openRecordId = route.params.recordId;
   render({ preserveContinuity: false });
   root.addEventListener('input', onInput);
   root.addEventListener('compositionstart', onCompositionStart);

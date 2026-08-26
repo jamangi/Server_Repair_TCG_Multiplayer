@@ -25,6 +25,8 @@ export function renderHome(root, context) {
   const repetitionBeginsAt = (coverage?.eligible_unique_count ?? 0) + 1;
   const duplicateDisclosure = Boolean(coverage && settings.starting_ticket_count >= repetitionBeginsAt);
   const matchCompatible = Boolean(activeDeck && coverage?.eligible_unique_count > 0);
+  const tutorials = context.tutorialCatalog?.tutorials?.tutorials ?? [];
+  const completedTutorials = new Set(records.tutorials?.completed_tutorial_ids ?? []);
 
   root.innerHTML = `
     <section class="play-route home-route" aria-labelledby="home-heading">
@@ -55,6 +57,12 @@ export function renderHome(root, context) {
             <h3 id="active-deck-heading">${activeDeck ? escapeHtml(activeDeck.display_name) : 'No active legal deck'}</h3>
             ${activeDeck ? `<p>${activeDeck.card_definition_ids.length} Cards · legal response deck</p><div class="composition-row">${compositionMarkup(composition)}</div><p class="${matchCompatible ? '' : 'status-warning'}"><strong>${coverage.eligible_unique_count} of ${coverage.supported_unique_count}</strong> supported causal fingerprints have a complete path with this deck. ${coverage.eligible_unique_count ? `Repetition can begin at Ticket ${repetitionBeginsAt}.` : 'No Match can start until at least one complete Repair/Verify path is available.'}</p>` : '<p class="status-warning">Choose or build a legal 30-card deck before starting.</p>'}
             <a class="play-link" href="#/play/decks">Review decks</a>
+          </section>
+          <section class="tutorial-launcher" aria-labelledby="tutorial-heading">
+            <p class="play-eyebrow">Guided practice</p>
+            <h3 id="tutorial-heading">Tutorials</h3>
+            <p>Use pinned Tickets and ordinary legal engine actions. Tutorial results never change Profile statistics.</p>
+            <div class="tutorial-launcher__list">${tutorials.map((tutorial) => `<button type="button" class="play-button" data-start-tutorial="${escapeHtml(tutorial.id)}"><span>${escapeHtml(tutorial.title)}</span><small>${completedTutorials.has(tutorial.id) ? 'Completed · replay' : 'Start tutorial'}</small></button>`).join('')}</div>
           </section>
           <label class="ticket-count-control" for="ticket-count">
             Starting Tickets
@@ -90,6 +98,11 @@ export function renderHome(root, context) {
   const onClick = (event) => {
     if (event.target.closest('[data-open-settings]')) {
       context.openSettings();
+      return;
+    }
+    const tutorial = event.target.closest('[data-start-tutorial]');
+    if (tutorial) {
+      context.beginTutorial(tutorial.dataset.startTutorial);
       return;
     }
     if (event.target.closest('#start-solo')) context.beginMatch();

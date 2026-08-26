@@ -76,7 +76,7 @@ export function renderDecks(root, context) {
     if (!card) return;
     const dialog = root.querySelector('#deck-card-dialog');
     const content = dialog.querySelector('[data-dialog-content]');
-    content.replaceChildren(createCardDetailView(card, { artResolver: context.artResolver }));
+    content.replaceChildren(createCardDetailView(card, { artResolver: context.artResolver, domainById: context.catalog.domainById }));
     openPlayDialog(dialog, opener);
   };
 
@@ -216,7 +216,7 @@ export function renderDeckEditor(root, context, deckId) {
         },
         onInspect: ({ cardId }) => {
           const dialog = root.querySelector('#editor-card-dialog');
-          dialog.querySelector('[data-dialog-content]').replaceChildren(createCardDetailView(context.catalog.cardById.get(cardId), { artResolver: context.artResolver }));
+          dialog.querySelector('[data-dialog-content]').replaceChildren(createCardDetailView(context.catalog.cardById.get(cardId), { artResolver: context.artResolver, domainById: context.catalog.domainById }));
           openPlayDialog(dialog);
         },
       }));

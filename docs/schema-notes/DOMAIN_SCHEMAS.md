@@ -44,6 +44,8 @@ This is the authored output contract shared by fixed fixtures and deterministic 
 - `ticket_builder_configuration.schema.json`
 - `ticket_builder_result.schema.json`
 - `card.schema.json`
+- `technical_action_glossary.schema.json`
+- `technical_copy_review.schema.json`
 
 ## Validation beyond JSON Schema
 
@@ -60,5 +62,6 @@ A content validator must also confirm that:
 9. server-only truth and unexecuted outcomes are absent from all ordinary player-safe views;
 10. every playable diagnostic has exactly one outcome per reachable state, every distractor has a `CONTRADICT`/`RULE_OUT` path, and every route ID and referenced outcome is unique and compatible; and
 11. a v2 Builder failure returns no partial batch, including candidate/relevance/outcome migration failures.
+12. every published playable action has one reviewed, family-appropriate technical description; generated Card copy equals that authoritative domain copy; glossary expansions and review-ledger hashes resolve; and learner-facing text contains neither placeholder templates nor engine-contract vocabulary.
 
 Stable entity IDs and existing schema `$id` values remain public contracts. TASK-007 changes the shape of Repair Ticket content without renaming those IDs.

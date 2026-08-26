@@ -2,7 +2,7 @@
 
 ## Status
 
-**Owner-directed accessibility defect correction — active.** Post-TASK-021 playtesting shows a hypothesized Candidate Fault rendered as very pale cyan text on the cream compact-Ticket surface. The state is difficult and uncomfortable to read even though the same palette is acceptable on the dark board.
+**Complete — 2026-08-26.** Paper and dark-board semantic states now use separate, measured foreground/fill/border/focus tokens. The compact and full Ticket preserve visible Hypothesis, Ruled out, accepted-Isolation, returned-diagnosis, disabled, and focus cues; the reported hypothesized Candidate measures 8.29:1 against its solid paper-state fill without changing gameplay authority.
 
 ## Objective
 

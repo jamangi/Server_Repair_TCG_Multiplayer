@@ -1,6 +1,6 @@
 {
-  "card_catalog_version": "core-card-catalog-coverage-v3",
-  "domain_content_version": "core-domain-snapshot-v2",
+  "card_catalog_version": "core-card-catalog-technical-copy-v4",
+  "domain_content_version": "core-domain-snapshot-technical-copy-v3",
   "ruleset_version": "first-version-v2",
   "global_bench_version": "global-bench-v1",
   "cards": [
@@ -9,7 +9,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "List Detailed IPMI System Events",
-        "short_description": "Reads detailed System Event Log entries through a compatible IPMI interface."
+        "short_description": "Reads detailed System Event Log entries through an Intelligent Platform Management Interface (IPMI) connection."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -32,7 +32,7 @@
         "diagnostic",
         "ipmi"
       ],
-      "rules_text": "Run command.ipmi.sel_elist on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Command on a compatible component on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "command.ipmi.sel_elist",
         "entity_type": "command",
@@ -86,7 +86,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "dhclient Lease Request",
-        "short_description": "Releases or requests a DHCP lease and can display the client transaction in verbose mode."
+        "short_description": "Requests or releases an Internet Protocol version 4 (IPv4) lease from a Dynamic Host Configuration Protocol (DHCP) service and can show the client exchange."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -109,7 +109,7 @@
         "diagnostic",
         "linux"
       ],
-      "rules_text": "Run command.linux.dhclient on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Command on a compatible component on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "command.linux.dhclient",
         "entity_type": "command",
@@ -157,7 +157,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "dmesg",
-        "short_description": "Inspect kernel messages."
+        "short_description": "Prints the Linux kernel ring buffer so a technician can correlate driver, device-discovery, input/output, and hardware messages with the incident."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -180,7 +180,7 @@
         "diagnostic",
         "linux"
       ],
-      "rules_text": "Run command.linux.dmesg on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Command on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "command.linux.dmesg",
         "entity_type": "command",
@@ -207,7 +207,7 @@
         "disposition": "remain_in_diagnostic_bench",
         "placement": "diagnostic_bench"
       },
-      "educational_text": "Inspect kernel messages.",
+      "educational_text": "Access may require elevated privileges, and the finite ring buffer can overwrite older messages; preserve relevant output promptly.",
       "rarity": "common"
     },
     {
@@ -215,7 +215,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "ethtool",
-        "short_description": "Inspect Ethernet link and adapter settings."
+        "short_description": "Queries a Linux Ethernet interface for carrier, negotiated speed and duplex, supported modes, driver details, and available counters."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -238,7 +238,7 @@
         "diagnostic",
         "linux"
       ],
-      "rules_text": "Run command.linux.ethtool on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Command on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "command.linux.ethtool",
         "entity_type": "command",
@@ -265,7 +265,7 @@
         "disposition": "remain_in_diagnostic_bench",
         "placement": "diagnostic_bench"
       },
-      "educational_text": "Inspect Ethernet link and adapter settings.",
+      "educational_text": "Counter names and support vary by driver and hardware; compare changes over a defined interval.",
       "rarity": "common"
     },
     {
@@ -273,7 +273,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "free -h",
-        "short_description": "Display memory usage."
+        "short_description": "Summarizes Linux physical and swap memory in human-readable units, including the kernel estimate of memory available for new work."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -296,7 +296,7 @@
         "diagnostic",
         "linux"
       ],
-      "rules_text": "Run command.linux.free_h on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Command on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "command.linux.free_h",
         "entity_type": "command",
@@ -323,7 +323,7 @@
         "disposition": "remain_in_diagnostic_bench",
         "placement": "diagnostic_bench"
       },
-      "educational_text": "Display memory usage.",
+      "educational_text": "Cached memory is often reclaimable, so a low free value alone does not establish memory exhaustion.",
       "rarity": "common"
     },
     {
@@ -331,7 +331,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "ip addr",
-        "short_description": "Inspect interfaces and addresses."
+        "short_description": "Shows Linux network interfaces and their Internet Protocol (IP) addresses, prefixes, scopes, and address lifetimes."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -354,7 +354,7 @@
         "diagnostic",
         "linux"
       ],
-      "rules_text": "Run command.linux.ip_addr on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Command on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "command.linux.ip_addr",
         "entity_type": "command",
@@ -387,7 +387,7 @@
         "disposition": "remain_in_diagnostic_bench",
         "placement": "diagnostic_bench"
       },
-      "educational_text": "Inspect interfaces and addresses.",
+      "educational_text": "An assigned address does not prove that the gateway, name service, or remote destination is reachable.",
       "rarity": "common"
     },
     {
@@ -395,7 +395,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "ip route",
-        "short_description": "Inspect routing and default gateway."
+        "short_description": "Shows Linux kernel routing entries, including destination prefixes, next hops, interfaces, and the default route."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -418,7 +418,7 @@
         "diagnostic",
         "linux"
       ],
-      "rules_text": "Run command.linux.ip_route on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Command on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "command.linux.ip_route",
         "entity_type": "command",
@@ -451,7 +451,7 @@
         "disposition": "remain_in_diagnostic_bench",
         "placement": "diagnostic_bench"
       },
-      "educational_text": "Inspect routing and default gateway.",
+      "educational_text": "Policy routing and multiple tables can change the selected path; the main table may not tell the whole story.",
       "rarity": "common"
     },
     {
@@ -459,7 +459,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "journalctl",
-        "short_description": "Inspect system journal logs."
+        "short_description": "Reads the systemd journal and can filter structured operating-system logs by boot, service, time, or priority."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -482,7 +482,7 @@
         "diagnostic",
         "linux"
       ],
-      "rules_text": "Run command.linux.journalctl on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Command on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "command.linux.journalctl",
         "entity_type": "command",
@@ -509,7 +509,7 @@
         "disposition": "remain_in_diagnostic_bench",
         "placement": "diagnostic_bench"
       },
-      "educational_text": "Inspect system journal logs.",
+      "educational_text": "Visibility depends on permissions and retention settings; an absent entry may mean the journal was not persistent or accessible.",
       "rarity": "common"
     },
     {
@@ -517,7 +517,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "lsblk",
-        "short_description": "List block devices."
+        "short_description": "Lists Linux block-device topology and attributes from sysfs and the device database, helping map disks, partitions, and logical devices."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -540,7 +540,7 @@
         "diagnostic",
         "linux"
       ],
-      "rules_text": "Run command.linux.lsblk on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Command on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "command.linux.lsblk",
         "entity_type": "command",
@@ -573,7 +573,7 @@
         "disposition": "remain_in_diagnostic_bench",
         "placement": "diagnostic_bench"
       },
-      "educational_text": "List block devices.",
+      "educational_text": "Device names and default output columns can vary; record stable identifiers such as serial or worldwide name when available.",
       "rarity": "common"
     },
     {
@@ -581,7 +581,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "lspci",
-        "short_description": "List PCI/PCIe devices."
+        "short_description": "Lists devices enumerated on the Peripheral Component Interconnect (PCI) buses, including Peripheral Component Interconnect Express (PCIe) adapters and their identifiers."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -604,7 +604,7 @@
         "diagnostic",
         "linux"
       ],
-      "rules_text": "Run command.linux.lspci on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Command on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "command.linux.lspci",
         "entity_type": "command",
@@ -637,7 +637,7 @@
         "disposition": "remain_in_diagnostic_bench",
         "placement": "diagnostic_bench"
       },
-      "educational_text": "List PCI/PCIe devices.",
+      "educational_text": "Enumeration proves visibility, not full function; driver binding and device-specific tests may still be required.",
       "rarity": "common"
     },
     {
@@ -645,7 +645,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Read NVMe Health Log",
-        "short_description": "Reads critical warnings, media errors, temperature, and endurance from an NVMe device."
+        "short_description": "Reads the Self-Monitoring, Analysis and Reporting Technology (SMART) health log for a Non-Volatile Memory Express (NVMe) device, including warnings, media errors, temperature, and endurance."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -668,7 +668,7 @@
         "diagnostic",
         "linux"
       ],
-      "rules_text": "Run command.linux.nvme_smart_log on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Command on a compatible component on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "command.linux.nvme_smart_log",
         "entity_type": "command",
@@ -728,7 +728,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "smartctl",
-        "short_description": "Inspect supported drive health data."
+        "short_description": "Reports available Self-Monitoring, Analysis and Reporting Technology (SMART) status, attributes, error logs, and self-test history for a supported drive."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -751,7 +751,7 @@
         "diagnostic",
         "linux"
       ],
-      "rules_text": "Run command.linux.smartctl on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Command on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "command.linux.smartctl",
         "entity_type": "command",
@@ -784,7 +784,7 @@
         "disposition": "remain_in_diagnostic_bench",
         "placement": "diagnostic_bench"
       },
-      "educational_text": "Inspect supported drive health data.",
+      "educational_text": "Attributes and thresholds are vendor-specific, and a passing overall status does not guarantee that a drive is healthy.",
       "rarity": "common"
     },
     {
@@ -792,7 +792,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "ping",
-        "short_description": "Test IP reachability."
+        "short_description": "Sends Internet Control Message Protocol (ICMP) Echo Requests and reports replies, packet loss, and round-trip timing for an Internet Protocol destination."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -815,7 +815,7 @@
         "diagnostic",
         "network"
       ],
-      "rules_text": "Run command.network.ping on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Command on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "command.network.ping",
         "entity_type": "command",
@@ -848,7 +848,7 @@
         "disposition": "remain_in_diagnostic_bench",
         "placement": "diagnostic_bench"
       },
-      "educational_text": "Test IP reachability.",
+      "educational_text": "Firewalls and hosts may block or rate-limit Echo traffic, so no reply does not by itself prove the destination or service is down.",
       "rarity": "common"
     },
     {
@@ -856,7 +856,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Firmware Boot Device Inventory",
-        "short_description": "Firmware Boot Device Inventory gathers troubleshooting evidence."
+        "short_description": "Compares firmware-detected boot devices and their order with the intended startup source, distinguishing a missing device from a misordered boot path."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -879,7 +879,7 @@
         "diagnostic",
         "test"
       ],
-      "rules_text": "Run test.boot.device_inventory on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Test on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "test.boot.device_inventory",
         "entity_type": "test",
@@ -906,7 +906,7 @@
         "disposition": "remain_in_diagnostic_bench",
         "placement": "diagnostic_bench"
       },
-      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "educational_text": "Firmware detection does not prove that the selected device contains a working operating-system loader.",
       "rarity": "common"
     },
     {
@@ -914,7 +914,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "POST Code Analysis",
-        "short_description": "POST Code Analysis gathers troubleshooting evidence."
+        "short_description": "Records Power-On Self-Test (POST) codes and indicators, then maps them to the platform fault reference to identify the startup stage that did not complete."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -937,7 +937,7 @@
         "diagnostic",
         "test"
       ],
-      "rules_text": "Run test.boot.post_code_analysis on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Test on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "test.boot.post_code_analysis",
         "entity_type": "test",
@@ -964,7 +964,7 @@
         "disposition": "remain_in_diagnostic_bench",
         "placement": "diagnostic_bench"
       },
-      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "educational_text": "Code meanings are platform-specific; use the exact server model and firmware documentation.",
       "rarity": "common"
     },
     {
@@ -972,7 +972,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "POST Observation",
-        "short_description": "POST Observation gathers troubleshooting evidence."
+        "short_description": "Observes Power-On Self-Test (POST) progress, console output, indicator codes, and audible signals to locate where startup stops or degrades."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -995,7 +995,7 @@
         "diagnostic",
         "test"
       ],
-      "rules_text": "Run test.boot.post_observation on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Test on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "test.boot.post_observation",
         "entity_type": "test",
@@ -1022,7 +1022,7 @@
         "disposition": "remain_in_diagnostic_bench",
         "placement": "diagnostic_bench"
       },
-      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "educational_text": "Record the complete sequence and timing; the last visible code is not always the component that caused the failure.",
       "rarity": "common"
     },
     {
@@ -1030,7 +1030,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Magnified CPU Socket Inspection",
-        "short_description": "Inspects socket contact alignment, contamination, damage, and mounting evidence under controlled magnification."
+        "short_description": "Inspects central processing unit (CPU) socket contact alignment, contamination, damage, and mounting evidence under controlled magnification."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -1053,7 +1053,7 @@
         "diagnostic",
         "test"
       ],
-      "rules_text": "Run test.compute.socket_magnified_inspection on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Test on a compatible component on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "test.compute.socket_magnified_inspection",
         "entity_type": "test",
@@ -1088,7 +1088,7 @@
         "disposition": "remain_in_diagnostic_bench",
         "placement": "diagnostic_bench"
       },
-      "educational_text": "Compare the uniform contact pattern from multiple angles and do not touch contacts during an inspection-only Test.",
+      "educational_text": "Compare the uniform contact pattern from multiple angles and do not touch contacts during an inspection-only test.",
       "rarity": "common"
     },
     {
@@ -1096,7 +1096,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Fan-to-Location Cross-Substitution",
-        "short_description": "Temporarily swaps compatible fans to determine whether a telemetry fault follows the fan or stays at its connector."
+        "short_description": "Temporarily swaps compatible fans between documented locations to learn whether a telemetry fault follows the fan or remains at its connector."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -1119,7 +1119,7 @@
         "diagnostic",
         "test"
       ],
-      "rules_text": "Run test.cooling.location_cross_substitution on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Test on a compatible component on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "test.cooling.location_cross_substitution",
         "entity_type": "test",
@@ -1160,7 +1160,7 @@
         "disposition": "remain_in_diagnostic_bench",
         "placement": "diagnostic_bench"
       },
-      "educational_text": "This is a diagnostic substitution, not a permanent replacement. Restore the authored machine state after the comparison.",
+      "educational_text": "This is a diagnostic substitution, not a permanent replacement. Restore the original machine state after the comparison.",
       "rarity": "common"
     },
     {
@@ -1168,7 +1168,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Continuity Test",
-        "short_description": "Continuity Test gathers troubleshooting evidence."
+        "short_description": "Checks whether a documented, de-energized electrical path conducts between specified endpoints, revealing an open or unintended connection."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -1191,7 +1191,7 @@
         "electrical",
         "test"
       ],
-      "rules_text": "Run test.electrical.continuity on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Test on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "test.electrical.continuity",
         "entity_type": "test",
@@ -1218,7 +1218,7 @@
         "disposition": "remain_in_diagnostic_bench",
         "placement": "diagnostic_bench"
       },
-      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "educational_text": "Never measure continuity on an energized circuit; isolate the path and follow the platform electrical-safety procedure.",
       "rarity": "common"
     },
     {
@@ -1226,7 +1226,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Firmware Settings Review",
-        "short_description": "Firmware Settings Review gathers troubleshooting evidence."
+        "short_description": "Compares firmware boot, hardware, clock, and management settings with the approved baseline to identify reset or unintended configuration changes."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -1249,7 +1249,7 @@
         "firmware",
         "test"
       ],
-      "rules_text": "Run test.firmware.settings_review on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Test on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "test.firmware.settings_review",
         "entity_type": "test",
@@ -1276,7 +1276,7 @@
         "disposition": "remain_in_diagnostic_bench",
         "placement": "diagnostic_bench"
       },
-      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "educational_text": "Record current values before changing them; defaults and setting names vary by platform and firmware release.",
       "rarity": "common"
     },
     {
@@ -1284,7 +1284,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Firmware Version Compatibility Review",
-        "short_description": "Compares BIOS, BMC, storage, network, and device firmware against an approved compatible baseline."
+        "short_description": "Compares basic input/output system (BIOS), baseboard management controller (BMC), storage, network, and device firmware with an approved compatible baseline."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -1307,7 +1307,7 @@
         "firmware",
         "test"
       ],
-      "rules_text": "Run test.firmware.version_compatibility on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Test on a compatible component on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "test.firmware.version_compatibility",
         "entity_type": "test",
@@ -1368,7 +1368,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Minimum Configuration Test",
-        "short_description": "Minimum Configuration Test gathers troubleshooting evidence."
+        "short_description": "Reduces the server to its documented minimum boot configuration and observes power and startup behavior to separate core-platform faults from removable-device faults."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -1391,7 +1391,7 @@
         "general",
         "test"
       ],
-      "rules_text": "Run test.general.minimum_configuration on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Test on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "test.general.minimum_configuration",
         "entity_type": "test",
@@ -1418,7 +1418,7 @@
         "disposition": "remain_in_diagnostic_bench",
         "placement": "diagnostic_bench"
       },
-      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "educational_text": "Record every removed connection and reintroduce components one at a time according to the platform service procedure.",
       "rarity": "common"
     },
     {
@@ -1426,7 +1426,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Visual Inspection",
-        "short_description": "Visual Inspection gathers troubleshooting evidence."
+        "short_description": "Checks accessible hardware for loose seating, damaged connectors, blocked airflow, contamination, and other visible conditions that can explain the reported symptom."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -1449,7 +1449,7 @@
         "general",
         "test"
       ],
-      "rules_text": "Run test.general.visual_inspection on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Test on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "test.general.visual_inspection",
         "entity_type": "test",
@@ -1476,7 +1476,7 @@
         "disposition": "remain_in_diagnostic_bench",
         "placement": "diagnostic_bench"
       },
-      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "educational_text": "De-energize and apply electrostatic-discharge controls whenever the platform service procedure requires internal access.",
       "rarity": "common"
     },
     {
@@ -1484,7 +1484,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "BMC Recovery-State Test",
-        "short_description": "Determines whether the management controller is reachable, resettable, in recovery mode, or unrecoverable."
+        "short_description": "Determines whether the baseboard management controller (BMC) is reachable, resettable, in recovery mode, or unrecoverable."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -1507,7 +1507,7 @@
         "management",
         "test"
       ],
-      "rules_text": "Run test.management.bmc_recovery_state on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Test on a compatible component on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "test.management.bmc_recovery_state",
         "entity_type": "test",
@@ -1550,7 +1550,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Event Log Freshness Test",
-        "short_description": "Preserves current logs, refreshes management state, and checks whether the target alert returns under the complaint conditions."
+        "short_description": "Preserves current management logs, refreshes controller state, and checks whether the target alert returns under the complaint conditions."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -1573,7 +1573,7 @@
         "management",
         "test"
       ],
-      "rules_text": "Run test.management.event_log_freshness on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Test on a compatible component on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "test.management.event_log_freshness",
         "entity_type": "test",
@@ -1614,7 +1614,7 @@
         "disposition": "remain_in_diagnostic_bench",
         "placement": "diagnostic_bench"
       },
-      "educational_text": "Preserve evidence before clearing. A cleared display alone is not proof; the relevant machine state must be exercised again.",
+      "educational_text": "Preserve evidence before clearing. A cleared display alone is not proof; exercise the relevant machine state again.",
       "rarity": "common"
     },
     {
@@ -1622,7 +1622,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Memory Diagnostic",
-        "short_description": "Memory Diagnostic gathers troubleshooting evidence."
+        "short_description": "Exercises dual in-line memory modules (DIMMs) with memory patterns and sustained access while observing error-correcting code (ECC) reports, failures, and affected locations."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -1645,7 +1645,7 @@
         "memory",
         "test"
       ],
-      "rules_text": "Run test.memory.diagnostic on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Test on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "test.memory.diagnostic",
         "entity_type": "test",
@@ -1672,7 +1672,7 @@
         "disposition": "remain_in_diagnostic_bench",
         "placement": "diagnostic_bench"
       },
-      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "educational_text": "A clean pass reduces suspicion for the tested conditions but cannot rule out every intermittent, temperature-dependent, or slot-specific fault.",
       "rarity": "common"
     },
     {
@@ -1680,7 +1680,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Known-Good DIMM Substitution",
-        "short_description": "Known-Good DIMM Substitution gathers troubleshooting evidence."
+        "short_description": "Temporarily substitutes a compatible known-good dual in-line memory module (DIMM) and compares startup, inventory, and errors to separate a module fault from a slot or channel fault."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -1703,7 +1703,7 @@
         "memory",
         "test"
       ],
-      "rules_text": "Run test.memory.known_good_substitution on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Test on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "test.memory.known_good_substitution",
         "entity_type": "test",
@@ -1730,7 +1730,7 @@
         "disposition": "remain_in_diagnostic_bench",
         "placement": "diagnostic_bench"
       },
-      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "educational_text": "Follow the platform population rules and restore the original configuration after the comparison.",
       "rarity": "common"
     },
     {
@@ -1738,7 +1738,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Single-DIMM Isolation",
-        "short_description": "Single-DIMM Isolation gathers troubleshooting evidence."
+        "short_description": "Tests one compatible dual in-line memory module (DIMM) at a time in approved slots, comparing startup, detected capacity, and errors to isolate a module, population, or channel problem."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -1761,7 +1761,7 @@
         "memory",
         "test"
       ],
-      "rules_text": "Run test.memory.single_dimm_isolation on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Test on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "test.memory.single_dimm_isolation",
         "entity_type": "test",
@@ -1788,7 +1788,7 @@
         "disposition": "remain_in_diagnostic_bench",
         "placement": "diagnostic_bench"
       },
-      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "educational_text": "Slot order and minimum population vary by platform; use the server memory-population map.",
       "rarity": "common"
     },
     {
@@ -1796,7 +1796,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Known-Good Ethernet Cable Test",
-        "short_description": "Known-Good Ethernet Cable Test gathers troubleshooting evidence."
+        "short_description": "Replaces the current Ethernet cable with a verified compatible cable and compares carrier, error counters, and reachability to isolate the cable from the adapter or switch port."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -1819,7 +1819,7 @@
         "network",
         "test"
       ],
-      "rules_text": "Run test.network.cable_substitution on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Test on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "test.network.cable_substitution",
         "entity_type": "test",
@@ -1846,7 +1846,7 @@
         "disposition": "remain_in_diagnostic_bench",
         "placement": "diagnostic_bench"
       },
-      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "educational_text": "Keep the adapter and switch-port configuration unchanged during the comparison.",
       "rarity": "common"
     },
     {
@@ -1854,7 +1854,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "DHCP Address Pool Audit",
-        "short_description": "Inspects free-address capacity, active leases, exclusions, and stale reservations on the DHCP service."
+        "short_description": "Inspects free-address capacity, active leases, exclusions, and stale reservations on the Dynamic Host Configuration Protocol (DHCP) service."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -1877,7 +1877,7 @@
         "network",
         "test"
       ],
-      "rules_text": "Run test.network.dhcp_pool_audit on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Test on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "test.network.dhcp_pool_audit",
         "entity_type": "test",
@@ -1912,7 +1912,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "DHCP Transaction Trace",
-        "short_description": "Interprets the DHCP client transaction to distinguish an absent offer from client-side address configuration problems."
+        "short_description": "Interprets a Dynamic Host Configuration Protocol (DHCP) client exchange to distinguish an absent server offer from client-side address-configuration problems."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -1935,7 +1935,7 @@
         "network",
         "test"
       ],
-      "rules_text": "Run test.network.dhcp_transaction_trace on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Test on a compatible component on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "test.network.dhcp_transaction_trace",
         "entity_type": "test",
@@ -1978,7 +1978,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Interface Configuration Inspection",
-        "short_description": "Interface Configuration Inspection gathers troubleshooting evidence."
+        "short_description": "Reviews interface state, Internet Protocol (IP) addresses and prefixes, lease information, routes, and the default gateway to identify an incorrect or missing network configuration."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -2001,7 +2001,7 @@
         "network",
         "test"
       ],
-      "rules_text": "Run test.network.interface_config on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Test on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "test.network.interface_config",
         "entity_type": "test",
@@ -2028,7 +2028,7 @@
         "disposition": "remain_in_diagnostic_bench",
         "placement": "diagnostic_bench"
       },
-      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "educational_text": "A correct address and route do not prove physical link or application-level service; test those layers separately.",
       "rarity": "common"
     },
     {
@@ -2036,7 +2036,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Network Link Test",
-        "short_description": "Network Link Test gathers troubleshooting evidence."
+        "short_description": "Observes Ethernet carrier, negotiated speed and duplex, indicators, and link errors to determine whether the physical link is present and stable."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -2059,7 +2059,7 @@
         "network",
         "test"
       ],
-      "rules_text": "Run test.network.link on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Test on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "test.network.link",
         "entity_type": "test",
@@ -2086,7 +2086,7 @@
         "disposition": "remain_in_diagnostic_bench",
         "placement": "diagnostic_bench"
       },
-      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "educational_text": "Link up proves only the local physical connection; it does not establish address configuration or end-to-end reachability.",
       "rarity": "common"
     },
     {
@@ -2094,7 +2094,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Network Link and Counter Soak",
-        "short_description": "Observes link transitions and interface error counters over a defined interval after a firmware-related change."
+        "short_description": "Observes Ethernet link transitions and interface error counters over a defined interval after a firmware-related change."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -2117,7 +2117,7 @@
         "network",
         "test"
       ],
-      "rules_text": "Run test.network.link_counter_soak on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Test on a compatible component on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "test.network.link_counter_soak",
         "entity_type": "test",
@@ -2160,7 +2160,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Ping Connectivity Test",
-        "short_description": "Ping Connectivity Test gathers troubleshooting evidence."
+        "short_description": "Sends Internet Control Message Protocol (ICMP) Echo probes to selected local, gateway, and remote destinations to measure basic Internet Protocol reachability, loss, and timing."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -2183,7 +2183,7 @@
         "network",
         "test"
       ],
-      "rules_text": "Run test.network.ping on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Test on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "test.network.ping",
         "entity_type": "test",
@@ -2210,7 +2210,7 @@
         "disposition": "remain_in_diagnostic_bench",
         "placement": "diagnostic_bench"
       },
-      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "educational_text": "Echo traffic may be blocked or rate-limited, and a reply does not prove that the required application service works.",
       "rarity": "common"
     },
     {
@@ -2218,7 +2218,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "PCIe Device Inventory",
-        "short_description": "PCIe Device Inventory gathers troubleshooting evidence."
+        "short_description": "Compares enumerated Peripheral Component Interconnect Express (PCIe) devices, identifiers, and link information with the expected hardware inventory to find a missing or unexpected adapter."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -2241,7 +2241,7 @@
         "pcie",
         "test"
       ],
-      "rules_text": "Run test.pcie.inventory on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Test on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "test.pcie.inventory",
         "entity_type": "test",
@@ -2268,7 +2268,7 @@
         "disposition": "remain_in_diagnostic_bench",
         "placement": "diagnostic_bench"
       },
-      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "educational_text": "Enumeration proves that a device is visible, not that its driver and full function are healthy.",
       "rarity": "common"
     },
     {
@@ -2276,7 +2276,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Power Distribution Path Isolation",
-        "short_description": "Compares known-good PSUs across bays and minimum configuration to isolate a shared power-distribution fault."
+        "short_description": "Compares known-good power supply units (PSUs) across supported bays and minimum configuration to isolate a shared power-distribution fault."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -2299,7 +2299,7 @@
         "power",
         "test"
       ],
-      "rules_text": "Run test.power.distribution_path_isolation on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Test on a compatible component on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "test.power.distribution_path_isolation",
         "entity_type": "test",
@@ -2348,7 +2348,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Known-Good PSU Test",
-        "short_description": "Known-Good PSU Test gathers troubleshooting evidence."
+        "short_description": "Temporarily substitutes a compatible known-good power supply unit (PSU) and compares power, status, and bay behavior to separate a supply fault from a shared distribution fault."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -2371,7 +2371,7 @@
         "power",
         "test"
       ],
-      "rules_text": "Run test.power.known_good_psu on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Test on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "test.power.known_good_psu",
         "entity_type": "test",
@@ -2398,7 +2398,7 @@
         "disposition": "remain_in_diagnostic_bench",
         "placement": "diagnostic_bench"
       },
-      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "educational_text": "Hot-swap support and redundancy requirements vary by platform; follow the approved power-supply procedure.",
       "rarity": "common"
     },
     {
@@ -2406,7 +2406,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Power Output Voltage Measurement",
-        "short_description": "Measures documented power rails and power-good signals with an appropriate meter and platform pinout."
+        "short_description": "Measures documented power rails and power-good signals with an appropriate meter and the platform connector pinout."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -2429,7 +2429,7 @@
         "power",
         "test"
       ],
-      "rules_text": "Run test.power.output_voltage_measurement on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Test on a compatible component on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "test.power.output_voltage_measurement",
         "entity_type": "test",
@@ -2470,7 +2470,7 @@
         "disposition": "remain_in_diagnostic_bench",
         "placement": "diagnostic_bench"
       },
-      "educational_text": "Do not generalize an ATX pinout to a proprietary or hot-swap server interface; use model-specific service documentation and electrical safety controls.",
+      "educational_text": "Do not generalize an Advanced Technology Extended (ATX) pinout to a proprietary or hot-swap server interface; use model-specific documentation and electrical-safety controls.",
       "rarity": "common"
     },
     {
@@ -2478,7 +2478,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "PSU Status Inspection",
-        "short_description": "PSU Status Inspection gathers troubleshooting evidence."
+        "short_description": "Reviews power supply unit (PSU) presence, indicators, management sensors, input state, output state, and event codes to distinguish a failed or unseated supply from a shared power problem."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -2501,7 +2501,7 @@
         "power",
         "test"
       ],
-      "rules_text": "Run test.power.psu_status on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Test on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "test.power.psu_status",
         "entity_type": "test",
@@ -2528,7 +2528,7 @@
         "disposition": "remain_in_diagnostic_bench",
         "placement": "diagnostic_bench"
       },
-      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "educational_text": "Indicator meanings and sensor thresholds are platform-specific; correlate them with the exact model documentation.",
       "rarity": "common"
     },
     {
@@ -2536,7 +2536,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Residual-Power Drain Test",
-        "short_description": "Safely removes all power, discharges residual state, then compares symptoms after controlled re-energization."
+        "short_description": "Safely removes all external power, discharges residual state, and then compares symptoms after controlled re-energization."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -2559,7 +2559,7 @@
         "power",
         "test"
       ],
-      "rules_text": "Run test.power.residual_power_drain on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Test on a compatible component on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "test.power.residual_power_drain",
         "entity_type": "test",
@@ -2606,7 +2606,7 @@
         "disposition": "remain_in_diagnostic_bench",
         "placement": "diagnostic_bench"
       },
-      "educational_text": "Follow protocol.safety.deenergize_discharge and the platform service instructions; redundant power feeds must all be removed before discharge.",
+      "educational_text": "Follow the approved de-energization procedure and platform instructions; remove every redundant power feed before discharge.",
       "rarity": "common"
     },
     {
@@ -2614,7 +2614,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Drive Bay Path Isolation",
-        "short_description": "Uses protected inventory and compatible known-good media to determine whether a failure follows a drive or remains at one bay."
+        "short_description": "Uses protected inventory and compatible known-good media to learn whether a storage failure follows a drive or remains at one bay or backplane path."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -2637,7 +2637,7 @@
         "storage",
         "test"
       ],
-      "rules_text": "Run test.storage.bay_path_isolation on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Test on a compatible component on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "test.storage.bay_path_isolation",
         "entity_type": "test",
@@ -2692,7 +2692,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Storage Device Inventory",
-        "short_description": "Storage Device Inventory gathers troubleshooting evidence."
+        "short_description": "Compares storage devices reported by firmware, controller, and operating-system layers, including model, serial, capacity, and path, to locate where an expected device disappears."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -2715,7 +2715,7 @@
         "storage",
         "test"
       ],
-      "rules_text": "Run test.storage.device_inventory on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Test on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "test.storage.device_inventory",
         "entity_type": "test",
@@ -2742,7 +2742,7 @@
         "disposition": "remain_in_diagnostic_bench",
         "placement": "diagnostic_bench"
       },
-      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "educational_text": "Visibility at one layer does not prove end-to-end path health; preserve bay and serial mapping across every view.",
       "rarity": "common"
     },
     {
@@ -2750,7 +2750,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Drive Health Test",
-        "short_description": "Drive Health Test gathers troubleshooting evidence."
+        "short_description": "Reads supported drive-health status, media-error data, predictive warnings, and self-test history to identify a failed or degrading storage device."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -2773,7 +2773,7 @@
         "storage",
         "test"
       ],
-      "rules_text": "Run test.storage.drive_health on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Test on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "test.storage.drive_health",
         "entity_type": "test",
@@ -2800,7 +2800,7 @@
         "disposition": "remain_in_diagnostic_bench",
         "placement": "diagnostic_bench"
       },
-      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "educational_text": "Vendor attributes and thresholds vary; protect data before destructive testing, firmware work, or replacement.",
       "rarity": "common"
     },
     {
@@ -2808,7 +2808,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Predictive Drive Health Analysis",
-        "short_description": "Reviews SMART, controller, media-error, and endurance evidence before an online drive fails completely."
+        "short_description": "Reviews Self-Monitoring, Analysis and Reporting Technology (SMART), controller, media-error, and endurance data before an online drive fails completely."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -2831,7 +2831,7 @@
         "storage",
         "test"
       ],
-      "rules_text": "Run test.storage.predictive_health on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Test on a compatible component on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "test.storage.predictive_health",
         "entity_type": "test",
@@ -2886,7 +2886,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "RAID Status Inspection",
-        "short_description": "RAID Status Inspection gathers troubleshooting evidence."
+        "short_description": "Reads redundant array of independent disks (RAID) controller, array, member, redundancy, rebuild, and error state to distinguish a failed member, degraded array, or controller-visibility problem."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -2909,7 +2909,7 @@
         "storage",
         "test"
       ],
-      "rules_text": "Run test.storage.raid_status on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Test on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "test.storage.raid_status",
         "entity_type": "test",
@@ -2936,7 +2936,7 @@
         "disposition": "remain_in_diagnostic_bench",
         "placement": "diagnostic_bench"
       },
-      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "educational_text": "Preserve controller metadata and the serial-to-bay map before replacing or moving any array member.",
       "rarity": "common"
     },
     {
@@ -2944,7 +2944,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Management Event Log Review",
-        "short_description": "Management Event Log Review gathers troubleshooting evidence."
+        "short_description": "Correlates timestamped baseboard management controller (BMC) event-log and sensor entries with the complaint to identify affected hardware and recurrence."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -2967,7 +2967,7 @@
         "system",
         "test"
       ],
-      "rules_text": "Run test.system.bmc_logs on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Test on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "test.system.bmc_logs",
         "entity_type": "test",
@@ -2994,7 +2994,7 @@
         "disposition": "remain_in_diagnostic_bench",
         "placement": "diagnostic_bench"
       },
-      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "educational_text": "Check controller time, event age, and repeated entries; a historical alert may not describe the current machine state.",
       "rarity": "common"
     },
     {
@@ -3002,7 +3002,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Controlled Stress Test",
-        "short_description": "Controlled Stress Test gathers troubleshooting evidence."
+        "short_description": "Applies an approved processor, memory, or combined workload while monitoring temperatures, hardware errors, and resets to reproduce intermittent memory or thermal behavior."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -3025,7 +3025,7 @@
         "system",
         "test"
       ],
-      "rules_text": "Run test.system.controlled_stress on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Test on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "test.system.controlled_stress",
         "entity_type": "test",
@@ -3052,7 +3052,7 @@
         "disposition": "remain_in_diagnostic_bench",
         "placement": "diagnostic_bench"
       },
-      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "educational_text": "Define stop limits and protect production data before loading the system; stop immediately at unsafe temperature or instability.",
       "rarity": "common"
     },
     {
@@ -3060,7 +3060,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Fan Telemetry Inspection",
-        "short_description": "Fan Telemetry Inspection gathers troubleshooting evidence."
+        "short_description": "Compares commanded and reported fan speed in revolutions per minute (RPM), presence, sensor transitions, and physical rotation to separate a failed fan from its sense path."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -3083,7 +3083,7 @@
         "test",
         "thermal"
       ],
-      "rules_text": "Run test.thermal.fan_telemetry on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Test on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "test.thermal.fan_telemetry",
         "entity_type": "test",
@@ -3110,7 +3110,7 @@
         "disposition": "remain_in_diagnostic_bench",
         "placement": "diagnostic_bench"
       },
-      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "educational_text": "Brief or location-specific dropouts can disappear in an instantaneous reading; correlate telemetry with observation over time.",
       "rarity": "common"
     },
     {
@@ -3118,7 +3118,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Temperature Monitoring",
-        "short_description": "Temperature Monitoring gathers troubleshooting evidence."
+        "short_description": "Observes processor and platform temperature sensors at idle and under a controlled load, revealing trends, limit crossings, and thermal-shutdown conditions."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -3141,7 +3141,7 @@
         "test",
         "thermal"
       ],
-      "rules_text": "Run test.thermal.temperature_monitoring on one compatible active Ticket and resolve its single authored current-state Evidence outcome.",
+      "rules_text": "Run this Test on the displayed Ticket. Add its diagnostic finding to the work record; it remains available on the Diagnostic Bench.",
       "primary_domain_reference": {
         "entity_id": "test.thermal.temperature_monitoring",
         "entity_type": "test",
@@ -3168,7 +3168,7 @@
         "disposition": "remain_in_diagnostic_bench",
         "placement": "diagnostic_bench"
       },
-      "educational_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "educational_text": "Sensor locations, limits, and control behavior vary by platform; compare readings with the approved thermal specification.",
       "rarity": "common"
     },
     {
@@ -3176,7 +3176,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Correct Boot Order",
-        "short_description": "Correct Boot Order corrective procedure."
+        "short_description": "Changes firmware boot priority so the approved operating-system loader is attempted before unintended devices."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -3198,7 +3198,7 @@
         "boot",
         "repair"
       ],
-      "rules_text": "After accepted Isolation, apply repair.boot.correct_order to its compatible actionable Fault.",
+      "rules_text": "Use after the team accepts an Isolation that this procedure can repair. Discard after use; Verify is still required.",
       "primary_domain_reference": {
         "entity_id": "repair.boot.correct_order",
         "entity_type": "repair_procedure",
@@ -3235,7 +3235,7 @@
         ],
         "disposition": "discard"
       },
-      "educational_text": "Repairs change machine state and should be followed by verification.",
+      "educational_text": "Unified Extensible Firmware Interface (UEFI) platforms may separate persistent BootOrder from a one-time BootNext selection.",
       "rarity": "common"
     },
     {
@@ -3243,7 +3243,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Replace Failed DIMM",
-        "short_description": "Replace Failed DIMM corrective procedure."
+        "short_description": "Removes the isolated failed dual in-line memory module (DIMM) and installs a compatible replacement in the same approved population position."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -3265,7 +3265,7 @@
         "memory",
         "repair"
       ],
-      "rules_text": "After accepted Isolation, apply repair.memory.replace_dimm to its compatible actionable Fault.",
+      "rules_text": "Use after the team accepts an Isolation that this procedure can repair. Discard after use; Verify is still required.",
       "primary_domain_reference": {
         "entity_id": "repair.memory.replace_dimm",
         "entity_type": "repair_procedure",
@@ -3302,7 +3302,7 @@
         ],
         "disposition": "discard"
       },
-      "educational_text": "Repairs change machine state and should be followed by verification.",
+      "educational_text": "Module type, rank, capacity, and population rules are platform-specific; do not substitute by connector fit alone.",
       "rarity": "common"
     },
     {
@@ -3310,7 +3310,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Reseat DIMM",
-        "short_description": "Reseat DIMM corrective procedure."
+        "short_description": "Removes and reinstalls the isolated dual in-line memory module (DIMM) so both retaining latches engage and the module follows the approved population map."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -3332,7 +3332,7 @@
         "memory",
         "repair"
       ],
-      "rules_text": "After accepted Isolation, apply repair.memory.reseat_dimm to its compatible actionable Fault.",
+      "rules_text": "Use after the team accepts an Isolation that this procedure can repair. Discard after use; Verify is still required.",
       "primary_domain_reference": {
         "entity_id": "repair.memory.reseat_dimm",
         "entity_type": "repair_procedure",
@@ -3369,7 +3369,7 @@
         ],
         "disposition": "discard"
       },
-      "educational_text": "Repairs change machine state and should be followed by verification.",
+      "educational_text": "Do not touch module contacts or force a keyed module; follow the server service procedure.",
       "rarity": "common"
     },
     {
@@ -3377,7 +3377,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Correct Static IP Configuration",
-        "short_description": "Correct Static IP Configuration corrective procedure."
+        "short_description": "Replaces an incorrect static Internet Protocol (IP) address, prefix, or gateway with the approved network configuration."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -3399,7 +3399,7 @@
         "network",
         "repair"
       ],
-      "rules_text": "After accepted Isolation, apply repair.network.correct_static_ip to its compatible actionable Fault.",
+      "rules_text": "Use after the team accepts an Isolation that this procedure can repair. Discard after use; Verify is still required.",
       "primary_domain_reference": {
         "entity_id": "repair.network.correct_static_ip",
         "entity_type": "repair_procedure",
@@ -3436,7 +3436,7 @@
         ],
         "disposition": "discard"
       },
-      "educational_text": "Repairs change machine state and should be followed by verification.",
+      "educational_text": "Changing a management address can terminate the current remote session; arrange alternate access first.",
       "rarity": "common"
     },
     {
@@ -3444,7 +3444,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Replace Ethernet Cable",
-        "short_description": "Replace Ethernet Cable corrective procedure."
+        "short_description": "Removes the isolated faulty Ethernet cable and installs a compatible cable between the same documented adapter and switch ports."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -3466,7 +3466,7 @@
         "network",
         "repair"
       ],
-      "rules_text": "After accepted Isolation, apply repair.network.replace_cable to its compatible actionable Fault.",
+      "rules_text": "Use after the team accepts an Isolation that this procedure can repair. Discard after use; Verify is still required.",
       "primary_domain_reference": {
         "entity_id": "repair.network.replace_cable",
         "entity_type": "repair_procedure",
@@ -3503,7 +3503,7 @@
         ],
         "disposition": "discard"
       },
-      "educational_text": "Repairs change machine state and should be followed by verification.",
+      "educational_text": "Keep the endpoints fixed so the later link and connectivity checks validate the cable change rather than a different switch path.",
       "rarity": "common"
     },
     {
@@ -3511,7 +3511,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Replace Failed PSU",
-        "short_description": "Replace Failed PSU corrective procedure."
+        "short_description": "Removes the isolated failed power supply unit (PSU) and installs a compatible replacement in the documented bay."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -3533,7 +3533,7 @@
         "power",
         "repair"
       ],
-      "rules_text": "After accepted Isolation, apply repair.power.replace_psu to its compatible actionable Fault.",
+      "rules_text": "Use after the team accepts an Isolation that this procedure can repair. Discard after use; Verify is still required.",
       "primary_domain_reference": {
         "entity_id": "repair.power.replace_psu",
         "entity_type": "repair_procedure",
@@ -3570,7 +3570,7 @@
         ],
         "disposition": "discard"
       },
-      "educational_text": "Repairs change machine state and should be followed by verification.",
+      "educational_text": "Never assume a redundant supply makes replacement safe; required load, feed, and hot-swap conditions vary by platform.",
       "rarity": "common"
     },
     {
@@ -3578,7 +3578,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Reseat PSU",
-        "short_description": "Reseat PSU corrective procedure."
+        "short_description": "Removes and fully reinstalls the isolated power supply unit (PSU) so its bay connector and retention mechanism engage correctly."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -3600,7 +3600,7 @@
         "power",
         "repair"
       ],
-      "rules_text": "After accepted Isolation, apply repair.power.reseat_psu to its compatible actionable Fault.",
+      "rules_text": "Use after the team accepts an Isolation that this procedure can repair. Discard after use; Verify is still required.",
       "primary_domain_reference": {
         "entity_id": "repair.power.reseat_psu",
         "entity_type": "repair_procedure",
@@ -3637,7 +3637,7 @@
         ],
         "disposition": "discard"
       },
-      "educational_text": "Repairs change machine state and should be followed by verification.",
+      "educational_text": "A lit indicator after reseating does not prove stable output or restored redundancy; perform the power verification.",
       "rarity": "common"
     },
     {
@@ -3645,7 +3645,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Replace Failed NVMe Device",
-        "short_description": "Replace Failed NVMe Device corrective procedure."
+        "short_description": "Replaces the isolated failed Non-Volatile Memory Express (NVMe) device while preserving its documented bay, namespace, and storage-role mapping."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -3667,7 +3667,7 @@
         "repair",
         "storage"
       ],
-      "rules_text": "After accepted Isolation, apply repair.storage.replace_nvme to its compatible actionable Fault.",
+      "rules_text": "Use after the team accepts an Isolation that this procedure can repair. Discard after use; Verify is still required.",
       "primary_domain_reference": {
         "entity_id": "repair.storage.replace_nvme",
         "entity_type": "repair_procedure",
@@ -3704,7 +3704,7 @@
         ],
         "disposition": "discard"
       },
-      "educational_text": "Repairs change machine state and should be followed by verification.",
+      "educational_text": "Hot-plug support and initialization vary by platform; never remove a device selected only by a changing operating-system name.",
       "rarity": "common"
     },
     {
@@ -3712,7 +3712,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Replace Failed RAID Member",
-        "short_description": "Replace Failed RAID Member corrective procedure."
+        "short_description": "Replaces the exact failed member of a redundant array of independent disks (RAID) with a compatible drive so the controller can restore redundancy."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -3734,7 +3734,7 @@
         "repair",
         "storage"
       ],
-      "rules_text": "After accepted Isolation, apply repair.storage.replace_raid_member to its compatible actionable Fault.",
+      "rules_text": "Use after the team accepts an Isolation that this procedure can repair. Discard after use; Verify is still required.",
       "primary_domain_reference": {
         "entity_id": "repair.storage.replace_raid_member",
         "entity_type": "repair_procedure",
@@ -3771,7 +3771,7 @@
         ],
         "disposition": "discard"
       },
-      "educational_text": "Repairs change machine state and should be followed by verification.",
+      "educational_text": "Removing the wrong member from a degraded array can cause data loss; do not act on bay light or device name alone.",
       "rarity": "common"
     },
     {
@@ -3779,7 +3779,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Reseat Storage Cable",
-        "short_description": "Reseat Storage Cable corrective procedure."
+        "short_description": "Disconnects, inspects, and securely reconnects the isolated storage data cable at its documented endpoints."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -3801,7 +3801,7 @@
         "repair",
         "storage"
       ],
-      "rules_text": "After accepted Isolation, apply repair.storage.reseat_cable to its compatible actionable Fault.",
+      "rules_text": "Use after the team accepts an Isolation that this procedure can repair. Discard after use; Verify is still required.",
       "primary_domain_reference": {
         "entity_id": "repair.storage.reseat_cable",
         "entity_type": "repair_procedure",
@@ -3838,7 +3838,7 @@
         ],
         "disposition": "discard"
       },
-      "educational_text": "Repairs change machine state and should be followed by verification.",
+      "educational_text": "Preserve controller and drive mapping, and follow the platform de-energization procedure for internal cabling.",
       "rarity": "common"
     },
     {
@@ -3846,7 +3846,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Clean Cooling Path",
-        "short_description": "Clean Cooling Path corrective procedure."
+        "short_description": "Removes the isolated dust or debris restriction from the heatsink and documented airflow path without altering component placement."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -3868,7 +3868,7 @@
         "repair",
         "thermal"
       ],
-      "rules_text": "After accepted Isolation, apply repair.thermal.clean_cooling_path to its compatible actionable Fault.",
+      "rules_text": "Use after the team accepts an Isolation that this procedure can repair. Discard after use; Verify is still required.",
       "primary_domain_reference": {
         "entity_id": "repair.thermal.clean_cooling_path",
         "entity_type": "repair_procedure",
@@ -3905,7 +3905,7 @@
         ],
         "disposition": "discard"
       },
-      "educational_text": "Repairs change machine state and should be followed by verification.",
+      "educational_text": "Do not damage fan bearings, connector wiring, or heatsink fins, and do not use an unapproved liquid or conductive cleaning method.",
       "rarity": "common"
     },
     {
@@ -3913,7 +3913,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Replace Chassis Fan",
-        "short_description": "Replace Chassis Fan corrective procedure."
+        "short_description": "Removes the isolated failed chassis fan and installs a compatible replacement in the same cooling location."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -3935,7 +3935,7 @@
         "repair",
         "thermal"
       ],
-      "rules_text": "After accepted Isolation, apply repair.thermal.replace_fan to its compatible actionable Fault.",
+      "rules_text": "Use after the team accepts an Isolation that this procedure can repair. Discard after use; Verify is still required.",
       "primary_domain_reference": {
         "entity_id": "repair.thermal.replace_fan",
         "entity_type": "repair_procedure",
@@ -3972,7 +3972,7 @@
         ],
         "disposition": "discard"
       },
-      "educational_text": "Repairs change machine state and should be followed by verification.",
+      "educational_text": "Fan interchangeability and hot-swap support vary by platform; connector fit alone is not proof of compatibility.",
       "rarity": "common"
     },
     {
@@ -3980,7 +3980,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Normal Boot Verification",
-        "short_description": "Normal Boot Verification confirms the repaired state."
+        "short_description": "Performs normal cold and warm starts and checks that firmware selects the intended boot entry, the operating-system loader starts, and the original boot error does not recur."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -4002,7 +4002,7 @@
         "boot",
         "verify"
       ],
-      "rules_text": "Evaluate verify.boot.normal_boot for a named active Ticket requirement after its latest Repair.",
+      "rules_text": "Use after a Repair to check a listed Ticket requirement. Discard after use.",
       "primary_domain_reference": {
         "entity_id": "verify.boot.normal_boot",
         "entity_type": "validation_procedure",
@@ -4046,7 +4046,7 @@
         ],
         "disposition": "discard"
       },
-      "educational_text": "Verification evaluates whether the repair produced the required operational state.",
+      "educational_text": "A one-time boot override is not proof that the persistent boot order is corrected.",
       "rarity": "common"
     },
     {
@@ -4054,7 +4054,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Memory Verification",
-        "short_description": "Memory Verification confirms the repaired state."
+        "short_description": "Runs the approved full memory diagnostic and a representative workload, requiring expected capacity with no new reportable memory errors or instability."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -4076,7 +4076,7 @@
         "memory",
         "verify"
       ],
-      "rules_text": "Evaluate verify.memory.full_test for a named active Ticket requirement after its latest Repair.",
+      "rules_text": "Use after a Repair to check a listed Ticket requirement. Discard after use.",
       "primary_domain_reference": {
         "entity_id": "verify.memory.full_test",
         "entity_type": "validation_procedure",
@@ -4120,7 +4120,7 @@
         ],
         "disposition": "discard"
       },
-      "educational_text": "Verification evaluates whether the repair produced the required operational state.",
+      "educational_text": "Error-correcting code (ECC) thresholds and the required observation interval are platform policy; record both with the result.",
       "rarity": "common"
     },
     {
@@ -4128,7 +4128,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Memory Inventory Verification",
-        "short_description": "Memory Inventory Verification confirms the repaired state."
+        "short_description": "Checks firmware and operating-system memory inventory after restart, requiring the expected dual in-line memory modules (DIMMs), capacity, and channels with no population warning."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -4150,7 +4150,7 @@
         "memory",
         "verify"
       ],
-      "rules_text": "Evaluate verify.memory.inventory for a named active Ticket requirement after its latest Repair.",
+      "rules_text": "Use after a Repair to check a listed Ticket requirement. Discard after use.",
       "primary_domain_reference": {
         "entity_id": "verify.memory.inventory",
         "entity_type": "validation_procedure",
@@ -4189,7 +4189,7 @@
         ],
         "disposition": "discard"
       },
-      "educational_text": "Verification evaluates whether the repair produced the required operational state.",
+      "educational_text": "Inventory verifies presence and layout, not sustained memory reliability; use the full memory verification when the fault requires it.",
       "rarity": "common"
     },
     {
@@ -4197,7 +4197,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Network Connectivity Verification",
-        "short_description": "Network Connectivity Verification confirms the repaired state."
+        "short_description": "Checks the repaired interface configuration and reaches representative local, gateway, and required remote destinations, providing an operational connectivity signal."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -4219,7 +4219,7 @@
         "network",
         "verify"
       ],
-      "rules_text": "Evaluate verify.network.connectivity for a named active Ticket requirement after its latest Repair.",
+      "rules_text": "Use after a Repair to check a listed Ticket requirement. Discard after use.",
       "primary_domain_reference": {
         "entity_id": "verify.network.connectivity",
         "entity_type": "validation_procedure",
@@ -4263,7 +4263,7 @@
         ],
         "disposition": "discard"
       },
-      "educational_text": "Verification evaluates whether the repair produced the required operational state.",
+      "educational_text": "A single Internet Control Message Protocol (ICMP) reply is not enough; verify the actual service and path required by the work order.",
       "rarity": "common"
     },
     {
@@ -4271,7 +4271,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Network Link Verification",
-        "short_description": "Network Link Verification confirms the repaired state."
+        "short_description": "Observes stable Ethernet carrier at the expected speed and duplex while counters remain within the approved error threshold."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -4293,7 +4293,7 @@
         "network",
         "verify"
       ],
-      "rules_text": "Evaluate verify.network.link for a named active Ticket requirement after its latest Repair.",
+      "rules_text": "Use after a Repair to check a listed Ticket requirement. Discard after use.",
       "primary_domain_reference": {
         "entity_id": "verify.network.link",
         "entity_type": "validation_procedure",
@@ -4337,7 +4337,7 @@
         ],
         "disposition": "discard"
       },
-      "educational_text": "Verification evaluates whether the repair produced the required operational state.",
+      "educational_text": "Stable link does not prove address configuration or application connectivity; those require separate checks.",
       "rarity": "common"
     },
     {
@@ -4345,7 +4345,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Stable Power Verification",
-        "short_description": "Stable Power Verification confirms the repaired state."
+        "short_description": "Exercises repeated starts and a representative load while requiring healthy power-supply status, stable power, and the intended redundancy with no recurring alert."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -4367,7 +4367,7 @@
         "power",
         "verify"
       ],
-      "rules_text": "Evaluate verify.power.stable for a named active Ticket requirement after its latest Repair.",
+      "rules_text": "Use after a Repair to check a listed Ticket requirement. Discard after use.",
       "primary_domain_reference": {
         "entity_id": "verify.power.stable",
         "entity_type": "validation_procedure",
@@ -4411,7 +4411,7 @@
         ],
         "disposition": "discard"
       },
-      "educational_text": "Verification evaluates whether the repair produced the required operational state.",
+      "educational_text": "Use platform-defined load, redundancy, and observation criteria rather than a brief idle check.",
       "rarity": "common"
     },
     {
@@ -4419,7 +4419,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Storage Detection Verification",
-        "short_description": "Storage Detection Verification confirms the repaired state."
+        "short_description": "Checks firmware, controller, and operating-system inventory across restart, requiring the expected storage device and path with no new input/output errors."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -4441,7 +4441,7 @@
         "storage",
         "verify"
       ],
-      "rules_text": "Evaluate verify.storage.device_detected for a named active Ticket requirement after its latest Repair.",
+      "rules_text": "Use after a Repair to check a listed Ticket requirement. Discard after use.",
       "primary_domain_reference": {
         "entity_id": "verify.storage.device_detected",
         "entity_type": "validation_procedure",
@@ -4485,7 +4485,7 @@
         ],
         "disposition": "discard"
       },
-      "educational_text": "Verification evaluates whether the repair produced the required operational state.",
+      "educational_text": "Detection alone does not establish media health or array redundancy; run the fault-specific storage verification when required.",
       "rarity": "common"
     },
     {
@@ -4493,7 +4493,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "RAID Healthy Verification",
-        "short_description": "RAID Healthy Verification confirms the repaired state."
+        "short_description": "Monitors the redundant array of independent disks (RAID) until every required member is online, rebuild work is complete, and redundancy is restored without new controller or media alerts."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -4515,7 +4515,7 @@
         "storage",
         "verify"
       ],
-      "rules_text": "Evaluate verify.storage.raid_healthy for a named active Ticket requirement after its latest Repair.",
+      "rules_text": "Use after a Repair to check a listed Ticket requirement. Discard after use.",
       "primary_domain_reference": {
         "entity_id": "verify.storage.raid_healthy",
         "entity_type": "validation_procedure",
@@ -4564,7 +4564,7 @@
         ],
         "disposition": "discard"
       },
-      "educational_text": "Verification evaluates whether the repair produced the required operational state.",
+      "educational_text": "Do not call a rebuilding or merely accessible array healthy; preserve the final controller report and member map.",
       "rarity": "common"
     },
     {
@@ -4572,7 +4572,7 @@
       "entity_type": "card",
       "presentation": {
         "display_name": "Thermal Load Verification",
-        "short_description": "Thermal Load Verification confirms the repaired state."
+        "short_description": "Applies an approved representative load while monitoring temperatures, fan response, and stability, requiring no thermal alert, throttling outside policy, shutdown, or reset."
       },
       "source": {
         "expansion_id": "expansion.task_014",
@@ -4594,7 +4594,7 @@
         "thermal",
         "verify"
       ],
-      "rules_text": "Evaluate verify.thermal.load_test for a named active Ticket requirement after its latest Repair.",
+      "rules_text": "Use after a Repair to check a listed Ticket requirement. Discard after use.",
       "primary_domain_reference": {
         "entity_id": "verify.thermal.load_test",
         "entity_type": "validation_procedure",
@@ -4648,7 +4648,7 @@
         ],
         "disposition": "discard"
       },
-      "educational_text": "Verification evaluates whether the repair produced the required operational state.",
+      "educational_text": "Use platform-specific sensor limits, workload, duration, and stop conditions; protect production data before stressing the server.",
       "rarity": "common"
     }
   ]

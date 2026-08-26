@@ -8,7 +8,7 @@
       "entity_type": "repair_procedure",
       "presentation": {
         "display_name": "Reseat DIMM",
-        "short_description": "Reseat DIMM corrective procedure.",
+        "short_description": "Removes and reinstalls the isolated dual in-line memory module (DIMM) so both retaining latches engage and the module follows the approved population map.",
         "illustration": {
           "asset_id": "art.repair.memory.reseat_dimm",
           "alt_text": "Technical reference illustration for Reseat DIMM."
@@ -32,17 +32,19 @@
         "protocol.safety.esd"
       ],
       "steps_summary": [
-        "Perform reseat dimm according to approved platform procedure."
+        "Record the module and slot, then de-energize the server.",
+        "Apply electrostatic-discharge controls and inspect the slot and contacts.",
+        "Reinstall the module evenly until both latches engage."
       ],
       "action_cost": 1,
-      "education_text": "Repairs change machine state and should be followed by verification."
+      "education_text": "Do not touch module contacts or force a keyed module; follow the server service procedure."
     },
     {
       "id": "repair.memory.replace_dimm",
       "entity_type": "repair_procedure",
       "presentation": {
         "display_name": "Replace Failed DIMM",
-        "short_description": "Replace Failed DIMM corrective procedure.",
+        "short_description": "Removes the isolated failed dual in-line memory module (DIMM) and installs a compatible replacement in the same approved population position.",
         "illustration": {
           "asset_id": "art.repair.memory.replace_dimm",
           "alt_text": "Technical reference illustration for Replace Failed DIMM."
@@ -67,10 +69,12 @@
         "protocol.safety.esd"
       ],
       "steps_summary": [
-        "Perform replace failed dimm according to approved platform procedure."
+        "Record the failed module and physical slot.",
+        "De-energize and apply electrostatic-discharge controls required by the service procedure.",
+        "Install the compatible replacement and restore the documented population."
       ],
       "action_cost": 1,
-      "education_text": "Repairs change machine state and should be followed by verification."
+      "education_text": "Module type, rank, capacity, and population rules are platform-specific; do not substitute by connector fit alone."
     },
     {
       "id": "repair.memory.correct_population",
@@ -112,7 +116,7 @@
       "entity_type": "repair_procedure",
       "presentation": {
         "display_name": "Reseat PSU",
-        "short_description": "Reseat PSU corrective procedure.",
+        "short_description": "Removes and fully reinstalls the isolated power supply unit (PSU) so its bay connector and retention mechanism engage correctly.",
         "illustration": {
           "asset_id": "art.repair.power.reseat_psu",
           "alt_text": "Technical reference illustration for Reseat PSU."
@@ -134,17 +138,19 @@
       "required_tool_ids": [],
       "required_protocol_ids": [],
       "steps_summary": [
-        "Perform reseat psu according to approved platform procedure."
+        "Confirm the affected bay and current redundancy.",
+        "Follow the platform hot-swap or de-energization procedure.",
+        "Reinsert the supply evenly until the latch and connector are fully engaged."
       ],
       "action_cost": 1,
-      "education_text": "Repairs change machine state and should be followed by verification."
+      "education_text": "A lit indicator after reseating does not prove stable output or restored redundancy; perform the power verification."
     },
     {
       "id": "repair.power.replace_psu",
       "entity_type": "repair_procedure",
       "presentation": {
         "display_name": "Replace Failed PSU",
-        "short_description": "Replace Failed PSU corrective procedure.",
+        "short_description": "Removes the isolated failed power supply unit (PSU) and installs a compatible replacement in the documented bay.",
         "illustration": {
           "asset_id": "art.repair.power.replace_psu",
           "alt_text": "Technical reference illustration for Replace Failed PSU."
@@ -167,10 +173,12 @@
       "required_tool_ids": [],
       "required_protocol_ids": [],
       "steps_summary": [
-        "Perform replace failed psu according to approved platform procedure."
+        "Confirm the failed unit, bay, input feed, and current redundancy.",
+        "Follow the platform hot-swap or de-energization procedure.",
+        "Seat and secure the compatible replacement without claiming stable power yet."
       ],
       "action_cost": 1,
-      "education_text": "Repairs change machine state and should be followed by verification."
+      "education_text": "Never assume a redundant supply makes replacement safe; required load, feed, and hot-swap conditions vary by platform."
     },
     {
       "id": "repair.power.reconnect_input",
@@ -210,7 +218,7 @@
       "entity_type": "repair_procedure",
       "presentation": {
         "display_name": "Replace Failed RAID Member",
-        "short_description": "Replace Failed RAID Member corrective procedure.",
+        "short_description": "Replaces the exact failed member of a redundant array of independent disks (RAID) with a compatible drive so the controller can restore redundancy.",
         "illustration": {
           "asset_id": "art.repair.storage.replace_raid_member",
           "alt_text": "Technical reference illustration for Replace Failed RAID Member."
@@ -235,10 +243,12 @@
       "required_tool_ids": [],
       "required_protocol_ids": [],
       "steps_summary": [
-        "Perform replace failed raid member according to approved platform procedure."
+        "Protect data and confirm the failed member by serial number and bay.",
+        "Follow the controller and platform member-replacement procedure.",
+        "Install the compatible drive and preserve the controller metadata and rebuild plan."
       ],
       "action_cost": 1,
-      "education_text": "Repairs change machine state and should be followed by verification."
+      "education_text": "Removing the wrong member from a degraded array can cause data loss; do not act on bay light or device name alone."
     },
     {
       "id": "repair.storage.rebuild_array",
@@ -278,7 +288,7 @@
       "entity_type": "repair_procedure",
       "presentation": {
         "display_name": "Reseat Storage Cable",
-        "short_description": "Reseat Storage Cable corrective procedure.",
+        "short_description": "Disconnects, inspects, and securely reconnects the isolated storage data cable at its documented endpoints.",
         "illustration": {
           "asset_id": "art.repair.storage.reseat_cable",
           "alt_text": "Technical reference illustration for Reseat Storage Cable."
@@ -301,10 +311,12 @@
       "required_tool_ids": [],
       "required_protocol_ids": [],
       "steps_summary": [
-        "Perform reseat storage cable according to approved platform procedure."
+        "Record cable routing and endpoints, then place the system in the required power state.",
+        "Inspect connectors and cable for damage before reconnecting both ends.",
+        "Restore routing and strain relief without changing unrelated storage connections."
       ],
       "action_cost": 1,
-      "education_text": "Repairs change machine state and should be followed by verification."
+      "education_text": "Preserve controller and drive mapping, and follow the platform de-energization procedure for internal cabling."
     },
     {
       "id": "repair.storage.replace_cable",
@@ -344,7 +356,7 @@
       "entity_type": "repair_procedure",
       "presentation": {
         "display_name": "Replace Failed NVMe Device",
-        "short_description": "Replace Failed NVMe Device corrective procedure.",
+        "short_description": "Replaces the isolated failed Non-Volatile Memory Express (NVMe) device while preserving its documented bay, namespace, and storage-role mapping.",
         "illustration": {
           "asset_id": "art.repair.storage.replace_nvme",
           "alt_text": "Technical reference illustration for Replace Failed NVMe Device."
@@ -368,10 +380,12 @@
       "required_tool_ids": [],
       "required_protocol_ids": [],
       "steps_summary": [
-        "Perform replace failed nvme device according to approved platform procedure."
+        "Protect data and record the exact device serial, bay, namespace, and controller relationship.",
+        "Follow the platform removal procedure and install a compatible replacement.",
+        "Restore the required namespace or array membership without assuming detection or health."
       ],
       "action_cost": 1,
-      "education_text": "Repairs change machine state and should be followed by verification."
+      "education_text": "Hot-plug support and initialization vary by platform; never remove a device selected only by a changing operating-system name."
     },
     {
       "id": "repair.storage.replace_raid_controller",
@@ -411,7 +425,7 @@
       "entity_type": "repair_procedure",
       "presentation": {
         "display_name": "Correct Boot Order",
-        "short_description": "Correct Boot Order corrective procedure.",
+        "short_description": "Changes firmware boot priority so the approved operating-system loader is attempted before unintended devices.",
         "illustration": {
           "asset_id": "art.repair.boot.correct_order",
           "alt_text": "Technical reference illustration for Correct Boot Order."
@@ -434,10 +448,12 @@
       "required_tool_ids": [],
       "required_protocol_ids": [],
       "steps_summary": [
-        "Perform correct boot order according to approved platform procedure."
+        "Record the current boot entries and any one-time override.",
+        "Place the approved operating-system boot entry in the intended persistent order.",
+        "Save the setting without claiming recovery until a normal boot is verified."
       ],
       "action_cost": 1,
-      "education_text": "Repairs change machine state and should be followed by verification."
+      "education_text": "Unified Extensible Firmware Interface (UEFI) platforms may separate persistent BootOrder from a one-time BootNext selection."
     },
     {
       "id": "repair.boot.repair_bootloader",
@@ -544,7 +560,7 @@
       "entity_type": "repair_procedure",
       "presentation": {
         "display_name": "Replace Chassis Fan",
-        "short_description": "Replace Chassis Fan corrective procedure.",
+        "short_description": "Removes the isolated failed chassis fan and installs a compatible replacement in the same cooling location.",
         "illustration": {
           "asset_id": "art.repair.thermal.replace_fan",
           "alt_text": "Technical reference illustration for Replace Chassis Fan."
@@ -567,17 +583,19 @@
       "required_tool_ids": [],
       "required_protocol_ids": [],
       "steps_summary": [
-        "Perform replace chassis fan according to approved platform procedure."
+        "Record the failed fan location and platform redundancy state.",
+        "Follow the approved hot-swap or de-energization procedure.",
+        "Install the compatible fan and restore every shroud or airflow guide."
       ],
       "action_cost": 1,
-      "education_text": "Repairs change machine state and should be followed by verification."
+      "education_text": "Fan interchangeability and hot-swap support vary by platform; connector fit alone is not proof of compatibility."
     },
     {
       "id": "repair.thermal.clean_cooling_path",
       "entity_type": "repair_procedure",
       "presentation": {
         "display_name": "Clean Cooling Path",
-        "short_description": "Clean Cooling Path corrective procedure.",
+        "short_description": "Removes the isolated dust or debris restriction from the heatsink and documented airflow path without altering component placement.",
         "illustration": {
           "asset_id": "art.repair.thermal.clean_cooling_path",
           "alt_text": "Technical reference illustration for Clean Cooling Path."
@@ -600,10 +618,12 @@
       "required_tool_ids": [],
       "required_protocol_ids": [],
       "steps_summary": [
-        "Perform clean cooling path according to approved platform procedure."
+        "De-energize and open the server according to the service procedure.",
+        "Protect components while removing debris with an approved method.",
+        "Restore shrouds, filters, and airflow guides in their documented positions."
       ],
       "action_cost": 1,
-      "education_text": "Repairs change machine state and should be followed by verification."
+      "education_text": "Do not damage fan bearings, connector wiring, or heatsink fins, and do not use an unapproved liquid or conductive cleaning method."
     },
     {
       "id": "repair.thermal.restore_heatsink_contact",
@@ -676,7 +696,7 @@
       "entity_type": "repair_procedure",
       "presentation": {
         "display_name": "Replace Ethernet Cable",
-        "short_description": "Replace Ethernet Cable corrective procedure.",
+        "short_description": "Removes the isolated faulty Ethernet cable and installs a compatible cable between the same documented adapter and switch ports.",
         "illustration": {
           "asset_id": "art.repair.network.replace_cable",
           "alt_text": "Technical reference illustration for Replace Ethernet Cable."
@@ -699,17 +719,19 @@
       "required_tool_ids": [],
       "required_protocol_ids": [],
       "steps_summary": [
-        "Perform replace ethernet cable according to approved platform procedure."
+        "Record both endpoints and the existing cable path.",
+        "Install a cable of the approved category and length.",
+        "Secure and label the path without changing port configuration."
       ],
       "action_cost": 1,
-      "education_text": "Repairs change machine state and should be followed by verification."
+      "education_text": "Keep the endpoints fixed so the later link and connectivity checks validate the cable change rather than a different switch path."
     },
     {
       "id": "repair.network.correct_static_ip",
       "entity_type": "repair_procedure",
       "presentation": {
         "display_name": "Correct Static IP Configuration",
-        "short_description": "Correct Static IP Configuration corrective procedure.",
+        "short_description": "Replaces an incorrect static Internet Protocol (IP) address, prefix, or gateway with the approved network configuration.",
         "illustration": {
           "asset_id": "art.repair.network.correct_static_ip",
           "alt_text": "Technical reference illustration for Correct Static IP Configuration."
@@ -733,10 +755,12 @@
       "required_tool_ids": [],
       "required_protocol_ids": [],
       "steps_summary": [
-        "Perform correct static ip configuration according to approved platform procedure."
+        "Record the current address, prefix, gateway, and management-access path.",
+        "Apply the approved static configuration to the intended interface.",
+        "Preserve rollback access until connectivity is verified."
       ],
       "action_cost": 1,
-      "education_text": "Repairs change machine state and should be followed by verification."
+      "education_text": "Changing a management address can terminate the current remote session; arrange alternate access first."
     },
     {
       "id": "repair.pcie.reseat_card",
@@ -881,7 +905,7 @@
       "entity_type": "validation_procedure",
       "presentation": {
         "display_name": "Memory Verification",
-        "short_description": "Memory Verification confirms the repaired state.",
+        "short_description": "Runs the approved full memory diagnostic and a representative workload, requiring expected capacity with no new reportable memory errors or instability.",
         "illustration": {
           "asset_id": "art.verify.memory.full_test",
           "alt_text": "Technical reference illustration for Memory Verification."
@@ -904,17 +928,19 @@
       "target_component_ids": [],
       "required_tool_ids": [],
       "success_conditions": [
-        "Original fault condition no longer appears and required operation succeeds."
+        "The full approved memory diagnostic completes.",
+        "Expected memory capacity and channels remain available.",
+        "No new reportable corrected or uncorrected memory errors, crashes, or resets occur during the acceptance interval."
       ],
       "action_cost": 1,
-      "education_text": "Verification evaluates whether the repair produced the required operational state."
+      "education_text": "Error-correcting code (ECC) thresholds and the required observation interval are platform policy; record both with the result."
     },
     {
       "id": "verify.memory.inventory",
       "entity_type": "validation_procedure",
       "presentation": {
         "display_name": "Memory Inventory Verification",
-        "short_description": "Memory Inventory Verification confirms the repaired state.",
+        "short_description": "Checks firmware and operating-system memory inventory after restart, requiring the expected dual in-line memory modules (DIMMs), capacity, and channels with no population warning.",
         "illustration": {
           "asset_id": "art.verify.memory.inventory",
           "alt_text": "Technical reference illustration for Memory Inventory Verification."
@@ -937,17 +963,19 @@
       "target_component_ids": [],
       "required_tool_ids": [],
       "success_conditions": [
-        "Original fault condition no longer appears and required operation succeeds."
+        "Every expected DIMM appears in the documented slot.",
+        "Total capacity and available channels match the approved configuration.",
+        "No population or seating warning returns after restart."
       ],
       "action_cost": 1,
-      "education_text": "Verification evaluates whether the repair produced the required operational state."
+      "education_text": "Inventory verifies presence and layout, not sustained memory reliability; use the full memory verification when the fault requires it."
     },
     {
       "id": "verify.power.stable",
       "entity_type": "validation_procedure",
       "presentation": {
         "display_name": "Stable Power Verification",
-        "short_description": "Stable Power Verification confirms the repaired state.",
+        "short_description": "Exercises repeated starts and a representative load while requiring healthy power-supply status, stable power, and the intended redundancy with no recurring alert.",
         "illustration": {
           "asset_id": "art.verify.power.stable",
           "alt_text": "Technical reference illustration for Stable Power Verification."
@@ -971,17 +999,19 @@
       "target_component_ids": [],
       "required_tool_ids": [],
       "success_conditions": [
-        "Original fault condition no longer appears and required operation succeeds."
+        "Cold starts complete repeatedly without the original power symptom.",
+        "Power-supply and power-good status remain healthy during representative load.",
+        "Required redundancy is restored and no new target event appears."
       ],
       "action_cost": 1,
-      "education_text": "Verification evaluates whether the repair produced the required operational state."
+      "education_text": "Use platform-defined load, redundancy, and observation criteria rather than a brief idle check."
     },
     {
       "id": "verify.storage.device_detected",
       "entity_type": "validation_procedure",
       "presentation": {
         "display_name": "Storage Detection Verification",
-        "short_description": "Storage Detection Verification confirms the repaired state.",
+        "short_description": "Checks firmware, controller, and operating-system inventory across restart, requiring the expected storage device and path with no new input/output errors.",
         "illustration": {
           "asset_id": "art.verify.storage.device_detected",
           "alt_text": "Technical reference illustration for Storage Detection Verification."
@@ -1005,17 +1035,19 @@
       "target_component_ids": [],
       "required_tool_ids": [],
       "success_conditions": [
-        "Original fault condition no longer appears and required operation succeeds."
+        "The expected device appears at every required inventory layer.",
+        "Serial, bay, capacity, and path match the recorded replacement or reconnection.",
+        "No new input/output error or missing-device event occurs during the acceptance check."
       ],
       "action_cost": 1,
-      "education_text": "Verification evaluates whether the repair produced the required operational state."
+      "education_text": "Detection alone does not establish media health or array redundancy; run the fault-specific storage verification when required."
     },
     {
       "id": "verify.storage.raid_healthy",
       "entity_type": "validation_procedure",
       "presentation": {
         "display_name": "RAID Healthy Verification",
-        "short_description": "RAID Healthy Verification confirms the repaired state.",
+        "short_description": "Monitors the redundant array of independent disks (RAID) until every required member is online, rebuild work is complete, and redundancy is restored without new controller or media alerts.",
         "illustration": {
           "asset_id": "art.verify.storage.raid_healthy",
           "alt_text": "Technical reference illustration for RAID Healthy Verification."
@@ -1040,17 +1072,19 @@
       "target_component_ids": [],
       "required_tool_ids": [],
       "success_conditions": [
-        "Original fault condition no longer appears and required operation succeeds."
+        "The array reports its approved optimal or healthy state.",
+        "Every required member is online and any rebuild is complete.",
+        "No new controller, media, or predictive alert occurs during the acceptance interval."
       ],
       "action_cost": 1,
-      "education_text": "Verification evaluates whether the repair produced the required operational state."
+      "education_text": "Do not call a rebuilding or merely accessible array healthy; preserve the final controller report and member map."
     },
     {
       "id": "verify.boot.normal_boot",
       "entity_type": "validation_procedure",
       "presentation": {
         "display_name": "Normal Boot Verification",
-        "short_description": "Normal Boot Verification confirms the repaired state.",
+        "short_description": "Performs normal cold and warm starts and checks that firmware selects the intended boot entry, the operating-system loader starts, and the original boot error does not recur.",
         "illustration": {
           "asset_id": "art.verify.boot.normal_boot",
           "alt_text": "Technical reference illustration for Normal Boot Verification."
@@ -1074,10 +1108,12 @@
       "target_component_ids": [],
       "required_tool_ids": [],
       "success_conditions": [
-        "Original fault condition no longer appears and required operation succeeds."
+        "The intended persistent boot entry is selected.",
+        "The operating-system loader and required operating environment start normally.",
+        "The original missing-device, wrong-device, or loader error does not recur."
       ],
       "action_cost": 1,
-      "education_text": "Verification evaluates whether the repair produced the required operational state."
+      "education_text": "A one-time boot override is not proof that the persistent boot order is corrected."
     },
     {
       "id": "verify.firmware.settings_persist",
@@ -1117,7 +1153,7 @@
       "entity_type": "validation_procedure",
       "presentation": {
         "display_name": "Thermal Load Verification",
-        "short_description": "Thermal Load Verification confirms the repaired state.",
+        "short_description": "Applies an approved representative load while monitoring temperatures, fan response, and stability, requiring no thermal alert, throttling outside policy, shutdown, or reset.",
         "illustration": {
           "asset_id": "art.verify.thermal.load_test",
           "alt_text": "Technical reference illustration for Thermal Load Verification."
@@ -1143,17 +1179,19 @@
       "target_component_ids": [],
       "required_tool_ids": [],
       "success_conditions": [
-        "Original fault condition no longer appears and required operation succeeds."
+        "Temperatures remain within platform limits for the acceptance interval.",
+        "Fan response is stable and no target thermal alert returns.",
+        "The server completes the representative workload without thermal shutdown or reset."
       ],
       "action_cost": 1,
-      "education_text": "Verification evaluates whether the repair produced the required operational state."
+      "education_text": "Use platform-specific sensor limits, workload, duration, and stop conditions; protect production data before stressing the server."
     },
     {
       "id": "verify.network.link",
       "entity_type": "validation_procedure",
       "presentation": {
         "display_name": "Network Link Verification",
-        "short_description": "Network Link Verification confirms the repaired state.",
+        "short_description": "Observes stable Ethernet carrier at the expected speed and duplex while counters remain within the approved error threshold.",
         "illustration": {
           "asset_id": "art.verify.network.link",
           "alt_text": "Technical reference illustration for Network Link Verification."
@@ -1177,17 +1215,19 @@
       "target_component_ids": [],
       "required_tool_ids": [],
       "success_conditions": [
-        "Original fault condition no longer appears and required operation succeeds."
+        "Carrier remains present through the acceptance interval.",
+        "Negotiated speed and duplex match the approved link.",
+        "No disqualifying error-counter growth or link transition occurs."
       ],
       "action_cost": 1,
-      "education_text": "Verification evaluates whether the repair produced the required operational state."
+      "education_text": "Stable link does not prove address configuration or application connectivity; those require separate checks."
     },
     {
       "id": "verify.network.connectivity",
       "entity_type": "validation_procedure",
       "presentation": {
         "display_name": "Network Connectivity Verification",
-        "short_description": "Network Connectivity Verification confirms the repaired state.",
+        "short_description": "Checks the repaired interface configuration and reaches representative local, gateway, and required remote destinations, providing an operational connectivity signal.",
         "illustration": {
           "asset_id": "art.verify.network.connectivity",
           "alt_text": "Technical reference illustration for Network Connectivity Verification."
@@ -1211,10 +1251,12 @@
       "target_component_ids": [],
       "required_tool_ids": [],
       "success_conditions": [
-        "Original fault condition no longer appears and required operation succeeds."
+        "The interface has the approved address, prefix, and route.",
+        "The local gateway and required remote destination are reachable by approved probes.",
+        "The required network service succeeds without the original connectivity symptom."
       ],
       "action_cost": 1,
-      "education_text": "Verification evaluates whether the repair produced the required operational state."
+      "education_text": "A single Internet Control Message Protocol (ICMP) reply is not enough; verify the actual service and path required by the work order."
     },
     {
       "id": "verify.pcie.device_present",

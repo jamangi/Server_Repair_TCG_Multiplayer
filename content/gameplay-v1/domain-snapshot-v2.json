@@ -1,5 +1,5 @@
 {
-  "domain_content_version": "core-domain-snapshot-v2",
+  "domain_content_version": "core-domain-snapshot-technical-copy-v3",
   "source_manifest_format_version": 1,
   "source_pack_ids": [
     "core_v0_1_case_study_gaps",
@@ -18,7 +18,7 @@
       "entity_type": "command",
       "presentation": {
         "display_name": "List Detailed IPMI System Events",
-        "short_description": "Reads detailed System Event Log entries through a compatible IPMI interface."
+        "short_description": "Reads detailed System Event Log entries through an Intelligent Platform Management Interface (IPMI) connection."
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -55,7 +55,7 @@
       "entity_type": "command",
       "presentation": {
         "display_name": "dhclient Lease Request",
-        "short_description": "Releases or requests a DHCP lease and can display the client transaction in verbose mode."
+        "short_description": "Requests or releases an Internet Protocol version 4 (IPv4) lease from a Dynamic Host Configuration Protocol (DHCP) service and can show the client exchange."
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -92,7 +92,7 @@
       "entity_type": "command",
       "presentation": {
         "display_name": "dmesg",
-        "short_description": "Inspect kernel messages.",
+        "short_description": "Prints the Linux kernel ring buffer so a technician can correlate driver, device-discovery, input/output, and hardware messages with the incident.",
         "illustration": {
           "asset_id": "art.command.linux.dmesg",
           "alt_text": "Technical reference illustration for dmesg."
@@ -109,10 +109,14 @@
       },
       "platform": "linux",
       "syntax": "dmesg",
-      "purpose": "Inspect kernel messages.",
-      "capabilities": [],
+      "purpose": "Review kernel messages for device initialization, driver, input/output, and hardware events.",
+      "capabilities": [
+        "Read the kernel ring buffer",
+        "Review device and driver messages",
+        "Correlate messages with the incident timeline"
+      ],
       "related_test_ids": [],
-      "education_text": "Inspect kernel messages.",
+      "education_text": "Access may require elevated privileges, and the finite ring buffer can overwrite older messages; preserve relevant output promptly.",
       "relationships": []
     },
     {
@@ -120,7 +124,7 @@
       "entity_type": "command",
       "presentation": {
         "display_name": "ethtool",
-        "short_description": "Inspect Ethernet link and adapter settings.",
+        "short_description": "Queries a Linux Ethernet interface for carrier, negotiated speed and duplex, supported modes, driver details, and available counters.",
         "illustration": {
           "asset_id": "art.command.linux.ethtool",
           "alt_text": "Technical reference illustration for ethtool."
@@ -137,10 +141,14 @@
       },
       "platform": "linux",
       "syntax": "ethtool <interface>",
-      "purpose": "Inspect Ethernet link and adapter settings.",
-      "capabilities": [],
+      "purpose": "Inspect link negotiation and adapter state without treating link state as proof of end-to-end connectivity.",
+      "capabilities": [
+        "Read carrier and negotiated link settings",
+        "Inspect supported Ethernet modes",
+        "Read driver-exposed interface statistics"
+      ],
       "related_test_ids": [],
-      "education_text": "Inspect Ethernet link and adapter settings.",
+      "education_text": "Counter names and support vary by driver and hardware; compare changes over a defined interval.",
       "relationships": []
     },
     {
@@ -148,7 +156,7 @@
       "entity_type": "command",
       "presentation": {
         "display_name": "free -h",
-        "short_description": "Display memory usage.",
+        "short_description": "Summarizes Linux physical and swap memory in human-readable units, including the kernel estimate of memory available for new work.",
         "illustration": {
           "asset_id": "art.command.linux.free_h",
           "alt_text": "Technical reference illustration for free -h."
@@ -165,10 +173,14 @@
       },
       "platform": "linux",
       "syntax": "free -h",
-      "purpose": "Display memory usage.",
-      "capabilities": [],
+      "purpose": "Compare total, used, available, cache, and swap memory when investigating capacity pressure.",
+      "capabilities": [
+        "Summarize physical memory",
+        "Summarize swap usage",
+        "Report estimated available memory"
+      ],
       "related_test_ids": [],
-      "education_text": "Display memory usage.",
+      "education_text": "Cached memory is often reclaimable, so a low free value alone does not establish memory exhaustion.",
       "relationships": []
     },
     {
@@ -176,7 +188,7 @@
       "entity_type": "command",
       "presentation": {
         "display_name": "ip addr",
-        "short_description": "Inspect interfaces and addresses.",
+        "short_description": "Shows Linux network interfaces and their Internet Protocol (IP) addresses, prefixes, scopes, and address lifetimes.",
         "illustration": {
           "asset_id": "art.command.linux.ip_addr",
           "alt_text": "Technical reference illustration for ip addr."
@@ -193,12 +205,16 @@
       },
       "platform": "linux",
       "syntax": "ip addr",
-      "purpose": "Inspect interfaces and addresses.",
-      "capabilities": [],
+      "purpose": "Inspect the host address configuration and interface state used by the current network path.",
+      "capabilities": [
+        "List interface addresses",
+        "Show address scope and lifetime",
+        "Show interface state flags"
+      ],
       "related_test_ids": [
         "test.network.interface_config"
       ],
-      "education_text": "Inspect interfaces and addresses.",
+      "education_text": "An assigned address does not prove that the gateway, name service, or remote destination is reachable.",
       "relationships": [
         {
           "role": "related_test",
@@ -211,7 +227,7 @@
       "entity_type": "command",
       "presentation": {
         "display_name": "ip route",
-        "short_description": "Inspect routing and default gateway.",
+        "short_description": "Shows Linux kernel routing entries, including destination prefixes, next hops, interfaces, and the default route.",
         "illustration": {
           "asset_id": "art.command.linux.ip_route",
           "alt_text": "Technical reference illustration for ip route."
@@ -228,12 +244,16 @@
       },
       "platform": "linux",
       "syntax": "ip route",
-      "purpose": "Inspect routing and default gateway.",
-      "capabilities": [],
+      "purpose": "Determine which routing-table path the host is configured to use for a destination.",
+      "capabilities": [
+        "List routes and default gateways",
+        "Show next-hop and output-interface choices",
+        "Inspect route attributes"
+      ],
       "related_test_ids": [
         "test.network.interface_config"
       ],
-      "education_text": "Inspect routing and default gateway.",
+      "education_text": "Policy routing and multiple tables can change the selected path; the main table may not tell the whole story.",
       "relationships": [
         {
           "role": "related_test",
@@ -246,7 +266,7 @@
       "entity_type": "command",
       "presentation": {
         "display_name": "journalctl",
-        "short_description": "Inspect system journal logs.",
+        "short_description": "Reads the systemd journal and can filter structured operating-system logs by boot, service, time, or priority.",
         "illustration": {
           "asset_id": "art.command.linux.journalctl",
           "alt_text": "Technical reference illustration for journalctl."
@@ -263,10 +283,14 @@
       },
       "platform": "linux",
       "syntax": "journalctl",
-      "purpose": "Inspect system journal logs.",
-      "capabilities": [],
+      "purpose": "Correlate service, kernel, and boot events from the systemd journal with the incident timeline.",
+      "capabilities": [
+        "Read structured journal entries",
+        "Filter by boot, unit, time, and priority",
+        "Follow newly appended entries"
+      ],
       "related_test_ids": [],
-      "education_text": "Inspect system journal logs.",
+      "education_text": "Visibility depends on permissions and retention settings; an absent entry may mean the journal was not persistent or accessible.",
       "relationships": []
     },
     {
@@ -274,7 +298,7 @@
       "entity_type": "command",
       "presentation": {
         "display_name": "lsblk",
-        "short_description": "List block devices.",
+        "short_description": "Lists Linux block-device topology and attributes from sysfs and the device database, helping map disks, partitions, and logical devices.",
         "illustration": {
           "asset_id": "art.command.linux.lsblk",
           "alt_text": "Technical reference illustration for lsblk."
@@ -291,12 +315,16 @@
       },
       "platform": "linux",
       "syntax": "lsblk",
-      "purpose": "List block devices.",
-      "capabilities": [],
+      "purpose": "Inventory block devices and their parent-child relationships without claiming that an enumerated device is healthy.",
+      "capabilities": [
+        "List block devices",
+        "Show device topology",
+        "Report selected device attributes"
+      ],
       "related_test_ids": [
         "test.storage.device_inventory"
       ],
-      "education_text": "List block devices.",
+      "education_text": "Device names and default output columns can vary; record stable identifiers such as serial or worldwide name when available.",
       "relationships": [
         {
           "role": "related_test",
@@ -309,7 +337,7 @@
       "entity_type": "command",
       "presentation": {
         "display_name": "lspci",
-        "short_description": "List PCI/PCIe devices.",
+        "short_description": "Lists devices enumerated on the Peripheral Component Interconnect (PCI) buses, including Peripheral Component Interconnect Express (PCIe) adapters and their identifiers.",
         "illustration": {
           "asset_id": "art.command.linux.lspci",
           "alt_text": "Technical reference illustration for lspci."
@@ -326,12 +354,16 @@
       },
       "platform": "linux",
       "syntax": "lspci",
-      "purpose": "List PCI/PCIe devices.",
-      "capabilities": [],
+      "purpose": "Confirm whether expected PCI or PCIe hardware is visible to the operating system.",
+      "capabilities": [
+        "List enumerated PCI devices",
+        "Report vendor and device identifiers",
+        "Expose verbose configuration when requested"
+      ],
       "related_test_ids": [
         "test.pcie.inventory"
       ],
-      "education_text": "List PCI/PCIe devices.",
+      "education_text": "Enumeration proves visibility, not full function; driver binding and device-specific tests may still be required.",
       "relationships": [
         {
           "role": "related_test",
@@ -344,7 +376,7 @@
       "entity_type": "command",
       "presentation": {
         "display_name": "Read NVMe Health Log",
-        "short_description": "Reads critical warnings, media errors, temperature, and endurance from an NVMe device."
+        "short_description": "Reads the Self-Monitoring, Analysis and Reporting Technology (SMART) health log for a Non-Volatile Memory Express (NVMe) device, including warnings, media errors, temperature, and endurance."
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -381,7 +413,7 @@
       "entity_type": "command",
       "presentation": {
         "display_name": "smartctl",
-        "short_description": "Inspect supported drive health data.",
+        "short_description": "Reports available Self-Monitoring, Analysis and Reporting Technology (SMART) status, attributes, error logs, and self-test history for a supported drive.",
         "illustration": {
           "asset_id": "art.command.linux.smartctl",
           "alt_text": "Technical reference illustration for smartctl."
@@ -398,12 +430,16 @@
       },
       "platform": "linux",
       "syntax": "smartctl -a <device>",
-      "purpose": "Inspect supported drive health data.",
-      "capabilities": [],
+      "purpose": "Inspect supported drive-health data and recorded errors before choosing a destructive test or replacement.",
+      "capabilities": [
+        "Read SMART health status",
+        "Read device attributes and error logs",
+        "Read self-test history"
+      ],
       "related_test_ids": [
         "test.storage.drive_health"
       ],
-      "education_text": "Inspect supported drive health data.",
+      "education_text": "Attributes and thresholds are vendor-specific, and a passing overall status does not guarantee that a drive is healthy.",
       "relationships": [
         {
           "role": "related_test",
@@ -416,7 +452,7 @@
       "entity_type": "command",
       "presentation": {
         "display_name": "ping",
-        "short_description": "Test IP reachability.",
+        "short_description": "Sends Internet Control Message Protocol (ICMP) Echo Requests and reports replies, packet loss, and round-trip timing for an Internet Protocol destination.",
         "illustration": {
           "asset_id": "art.command.network.ping",
           "alt_text": "Technical reference illustration for ping."
@@ -433,12 +469,16 @@
       },
       "platform": "cross_platform",
       "syntax": "ping <destination>",
-      "purpose": "Test IP reachability.",
-      "capabilities": [],
+      "purpose": "Check basic IP reachability and response timing to a chosen host or gateway.",
+      "capabilities": [
+        "Send ICMP Echo Requests",
+        "Measure replies and packet loss",
+        "Report round-trip timing"
+      ],
       "related_test_ids": [
         "test.network.ping"
       ],
-      "education_text": "Test IP reachability.",
+      "education_text": "Firewalls and hosts may block or rate-limit Echo traffic, so no reply does not by itself prove the destination or service is down.",
       "relationships": [
         {
           "role": "related_test",
@@ -5820,7 +5860,7 @@
       "entity_type": "repair_procedure",
       "presentation": {
         "display_name": "Correct Boot Order",
-        "short_description": "Correct Boot Order corrective procedure.",
+        "short_description": "Changes firmware boot priority so the approved operating-system loader is attempted before unintended devices.",
         "illustration": {
           "asset_id": "art.repair.boot.correct_order",
           "alt_text": "Technical reference illustration for Correct Boot Order."
@@ -5843,10 +5883,12 @@
       "required_tool_ids": [],
       "required_protocol_ids": [],
       "steps_summary": [
-        "Perform correct boot order according to approved platform procedure."
+        "Record the current boot entries and any one-time override.",
+        "Place the approved operating-system boot entry in the intended persistent order.",
+        "Save the setting without claiming recovery until a normal boot is verified."
       ],
       "action_cost": 1,
-      "education_text": "Repairs change machine state and should be followed by verification.",
+      "education_text": "Unified Extensible Firmware Interface (UEFI) platforms may separate persistent BootOrder from a one-time BootNext selection.",
       "relationships": [
         {
           "role": "target_fault",
@@ -6295,7 +6337,7 @@
       "entity_type": "repair_procedure",
       "presentation": {
         "display_name": "Replace Failed DIMM",
-        "short_description": "Replace Failed DIMM corrective procedure.",
+        "short_description": "Removes the isolated failed dual in-line memory module (DIMM) and installs a compatible replacement in the same approved population position.",
         "illustration": {
           "asset_id": "art.repair.memory.replace_dimm",
           "alt_text": "Technical reference illustration for Replace Failed DIMM."
@@ -6320,10 +6362,12 @@
         "protocol.safety.esd"
       ],
       "steps_summary": [
-        "Perform replace failed dimm according to approved platform procedure."
+        "Record the failed module and physical slot.",
+        "De-energize and apply electrostatic-discharge controls required by the service procedure.",
+        "Install the compatible replacement and restore the documented population."
       ],
       "action_cost": 1,
-      "education_text": "Repairs change machine state and should be followed by verification.",
+      "education_text": "Module type, rank, capacity, and population rules are platform-specific; do not substitute by connector fit alone.",
       "relationships": [
         {
           "role": "protocol_requirement",
@@ -6340,7 +6384,7 @@
       "entity_type": "repair_procedure",
       "presentation": {
         "display_name": "Reseat DIMM",
-        "short_description": "Reseat DIMM corrective procedure.",
+        "short_description": "Removes and reinstalls the isolated dual in-line memory module (DIMM) so both retaining latches engage and the module follows the approved population map.",
         "illustration": {
           "asset_id": "art.repair.memory.reseat_dimm",
           "alt_text": "Technical reference illustration for Reseat DIMM."
@@ -6364,10 +6408,12 @@
         "protocol.safety.esd"
       ],
       "steps_summary": [
-        "Perform reseat dimm according to approved platform procedure."
+        "Record the module and slot, then de-energize the server.",
+        "Apply electrostatic-discharge controls and inspect the slot and contacts.",
+        "Reinstall the module evenly until both latches engage."
       ],
       "action_cost": 1,
-      "education_text": "Repairs change machine state and should be followed by verification.",
+      "education_text": "Do not touch module contacts or force a keyed module; follow the server service procedure.",
       "relationships": [
         {
           "role": "protocol_requirement",
@@ -6433,7 +6479,7 @@
       "entity_type": "repair_procedure",
       "presentation": {
         "display_name": "Correct Static IP Configuration",
-        "short_description": "Correct Static IP Configuration corrective procedure.",
+        "short_description": "Replaces an incorrect static Internet Protocol (IP) address, prefix, or gateway with the approved network configuration.",
         "illustration": {
           "asset_id": "art.repair.network.correct_static_ip",
           "alt_text": "Technical reference illustration for Correct Static IP Configuration."
@@ -6457,10 +6503,12 @@
       "required_tool_ids": [],
       "required_protocol_ids": [],
       "steps_summary": [
-        "Perform correct static ip configuration according to approved platform procedure."
+        "Record the current address, prefix, gateway, and management-access path.",
+        "Apply the approved static configuration to the intended interface.",
+        "Preserve rollback access until connectivity is verified."
       ],
       "action_cost": 1,
-      "education_text": "Repairs change machine state and should be followed by verification.",
+      "education_text": "Changing a management address can terminate the current remote session; arrange alternate access first.",
       "relationships": [
         {
           "role": "target_fault",
@@ -6512,7 +6560,7 @@
       "entity_type": "repair_procedure",
       "presentation": {
         "display_name": "Replace Ethernet Cable",
-        "short_description": "Replace Ethernet Cable corrective procedure.",
+        "short_description": "Removes the isolated faulty Ethernet cable and installs a compatible cable between the same documented adapter and switch ports.",
         "illustration": {
           "asset_id": "art.repair.network.replace_cable",
           "alt_text": "Technical reference illustration for Replace Ethernet Cable."
@@ -6535,10 +6583,12 @@
       "required_tool_ids": [],
       "required_protocol_ids": [],
       "steps_summary": [
-        "Perform replace ethernet cable according to approved platform procedure."
+        "Record both endpoints and the existing cable path.",
+        "Install a cable of the approved category and length.",
+        "Secure and label the path without changing port configuration."
       ],
       "action_cost": 1,
-      "education_text": "Repairs change machine state and should be followed by verification.",
+      "education_text": "Keep the endpoints fixed so the later link and connectivity checks validate the cable change rather than a different switch path.",
       "relationships": [
         {
           "role": "target_fault",
@@ -6740,7 +6790,7 @@
       "entity_type": "repair_procedure",
       "presentation": {
         "display_name": "Replace Failed PSU",
-        "short_description": "Replace Failed PSU corrective procedure.",
+        "short_description": "Removes the isolated failed power supply unit (PSU) and installs a compatible replacement in the documented bay.",
         "illustration": {
           "asset_id": "art.repair.power.replace_psu",
           "alt_text": "Technical reference illustration for Replace Failed PSU."
@@ -6763,10 +6813,12 @@
       "required_tool_ids": [],
       "required_protocol_ids": [],
       "steps_summary": [
-        "Perform replace failed psu according to approved platform procedure."
+        "Confirm the failed unit, bay, input feed, and current redundancy.",
+        "Follow the platform hot-swap or de-energization procedure.",
+        "Seat and secure the compatible replacement without claiming stable power yet."
       ],
       "action_cost": 1,
-      "education_text": "Repairs change machine state and should be followed by verification.",
+      "education_text": "Never assume a redundant supply makes replacement safe; required load, feed, and hot-swap conditions vary by platform.",
       "relationships": [
         {
           "role": "target_fault",
@@ -6779,7 +6831,7 @@
       "entity_type": "repair_procedure",
       "presentation": {
         "display_name": "Reseat PSU",
-        "short_description": "Reseat PSU corrective procedure.",
+        "short_description": "Removes and fully reinstalls the isolated power supply unit (PSU) so its bay connector and retention mechanism engage correctly.",
         "illustration": {
           "asset_id": "art.repair.power.reseat_psu",
           "alt_text": "Technical reference illustration for Reseat PSU."
@@ -6801,10 +6853,12 @@
       "required_tool_ids": [],
       "required_protocol_ids": [],
       "steps_summary": [
-        "Perform reseat psu according to approved platform procedure."
+        "Confirm the affected bay and current redundancy.",
+        "Follow the platform hot-swap or de-energization procedure.",
+        "Reinsert the supply evenly until the latch and connector are fully engaged."
       ],
       "action_cost": 1,
-      "education_text": "Repairs change machine state and should be followed by verification.",
+      "education_text": "A lit indicator after reseating does not prove stable output or restored redundancy; perform the power verification.",
       "relationships": [
         {
           "role": "target_fault",
@@ -7033,7 +7087,7 @@
       "entity_type": "repair_procedure",
       "presentation": {
         "display_name": "Replace Failed NVMe Device",
-        "short_description": "Replace Failed NVMe Device corrective procedure.",
+        "short_description": "Replaces the isolated failed Non-Volatile Memory Express (NVMe) device while preserving its documented bay, namespace, and storage-role mapping.",
         "illustration": {
           "asset_id": "art.repair.storage.replace_nvme",
           "alt_text": "Technical reference illustration for Replace Failed NVMe Device."
@@ -7057,10 +7111,12 @@
       "required_tool_ids": [],
       "required_protocol_ids": [],
       "steps_summary": [
-        "Perform replace failed nvme device according to approved platform procedure."
+        "Protect data and record the exact device serial, bay, namespace, and controller relationship.",
+        "Follow the platform removal procedure and install a compatible replacement.",
+        "Restore the required namespace or array membership without assuming detection or health."
       ],
       "action_cost": 1,
-      "education_text": "Repairs change machine state and should be followed by verification.",
+      "education_text": "Hot-plug support and initialization vary by platform; never remove a device selected only by a changing operating-system name.",
       "relationships": [
         {
           "role": "target_fault",
@@ -7162,7 +7218,7 @@
       "entity_type": "repair_procedure",
       "presentation": {
         "display_name": "Replace Failed RAID Member",
-        "short_description": "Replace Failed RAID Member corrective procedure.",
+        "short_description": "Replaces the exact failed member of a redundant array of independent disks (RAID) with a compatible drive so the controller can restore redundancy.",
         "illustration": {
           "asset_id": "art.repair.storage.replace_raid_member",
           "alt_text": "Technical reference illustration for Replace Failed RAID Member."
@@ -7187,10 +7243,12 @@
       "required_tool_ids": [],
       "required_protocol_ids": [],
       "steps_summary": [
-        "Perform replace failed raid member according to approved platform procedure."
+        "Protect data and confirm the failed member by serial number and bay.",
+        "Follow the controller and platform member-replacement procedure.",
+        "Install the compatible drive and preserve the controller metadata and rebuild plan."
       ],
       "action_cost": 1,
-      "education_text": "Repairs change machine state and should be followed by verification.",
+      "education_text": "Removing the wrong member from a degraded array can cause data loss; do not act on bay light or device name alone.",
       "relationships": [
         {
           "role": "target_fault",
@@ -7207,7 +7265,7 @@
       "entity_type": "repair_procedure",
       "presentation": {
         "display_name": "Reseat Storage Cable",
-        "short_description": "Reseat Storage Cable corrective procedure.",
+        "short_description": "Disconnects, inspects, and securely reconnects the isolated storage data cable at its documented endpoints.",
         "illustration": {
           "asset_id": "art.repair.storage.reseat_cable",
           "alt_text": "Technical reference illustration for Reseat Storage Cable."
@@ -7230,10 +7288,12 @@
       "required_tool_ids": [],
       "required_protocol_ids": [],
       "steps_summary": [
-        "Perform reseat storage cable according to approved platform procedure."
+        "Record cable routing and endpoints, then place the system in the required power state.",
+        "Inspect connectors and cable for damage before reconnecting both ends.",
+        "Restore routing and strain relief without changing unrelated storage connections."
       ],
       "action_cost": 1,
-      "education_text": "Repairs change machine state and should be followed by verification.",
+      "education_text": "Preserve controller and drive mapping, and follow the platform de-energization procedure for internal cabling.",
       "relationships": [
         {
           "role": "target_fault",
@@ -7246,7 +7306,7 @@
       "entity_type": "repair_procedure",
       "presentation": {
         "display_name": "Clean Cooling Path",
-        "short_description": "Clean Cooling Path corrective procedure.",
+        "short_description": "Removes the isolated dust or debris restriction from the heatsink and documented airflow path without altering component placement.",
         "illustration": {
           "asset_id": "art.repair.thermal.clean_cooling_path",
           "alt_text": "Technical reference illustration for Clean Cooling Path."
@@ -7269,10 +7329,12 @@
       "required_tool_ids": [],
       "required_protocol_ids": [],
       "steps_summary": [
-        "Perform clean cooling path according to approved platform procedure."
+        "De-energize and open the server according to the service procedure.",
+        "Protect components while removing debris with an approved method.",
+        "Restore shrouds, filters, and airflow guides in their documented positions."
       ],
       "action_cost": 1,
-      "education_text": "Repairs change machine state and should be followed by verification.",
+      "education_text": "Do not damage fan bearings, connector wiring, or heatsink fins, and do not use an unapproved liquid or conductive cleaning method.",
       "relationships": [
         {
           "role": "target_fault",
@@ -7285,7 +7347,7 @@
       "entity_type": "repair_procedure",
       "presentation": {
         "display_name": "Replace Chassis Fan",
-        "short_description": "Replace Chassis Fan corrective procedure.",
+        "short_description": "Removes the isolated failed chassis fan and installs a compatible replacement in the same cooling location.",
         "illustration": {
           "asset_id": "art.repair.thermal.replace_fan",
           "alt_text": "Technical reference illustration for Replace Chassis Fan."
@@ -7308,10 +7370,12 @@
       "required_tool_ids": [],
       "required_protocol_ids": [],
       "steps_summary": [
-        "Perform replace chassis fan according to approved platform procedure."
+        "Record the failed fan location and platform redundancy state.",
+        "Follow the approved hot-swap or de-energization procedure.",
+        "Install the compatible fan and restore every shroud or airflow guide."
       ],
       "action_cost": 1,
-      "education_text": "Repairs change machine state and should be followed by verification.",
+      "education_text": "Fan interchangeability and hot-swap support vary by platform; connector fit alone is not proof of compatibility.",
       "relationships": [
         {
           "role": "target_fault",
@@ -8875,7 +8939,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Firmware Boot Device Inventory",
-        "short_description": "Firmware Boot Device Inventory gathers troubleshooting evidence.",
+        "short_description": "Compares firmware-detected boot devices and their order with the intended startup source, distinguishing a missing device from a misordered boot path.",
         "illustration": {
           "asset_id": "art.test.boot.device_inventory",
           "alt_text": "Technical reference illustration for Firmware Boot Device Inventory."
@@ -8928,7 +8992,7 @@
       ],
       "diagnostic_strength": 2,
       "action_cost": 1,
-      "education_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "education_text": "Firmware detection does not prove that the selected device contains a working operating-system loader.",
       "relationships": [
         {
           "role": "evidence_target",
@@ -8949,7 +9013,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "POST Code Analysis",
-        "short_description": "POST Code Analysis gathers troubleshooting evidence.",
+        "short_description": "Records Power-On Self-Test (POST) codes and indicators, then maps them to the platform fault reference to identify the startup stage that did not complete.",
         "illustration": {
           "asset_id": "art.test.boot.post_code_analysis",
           "alt_text": "Technical reference illustration for POST Code Analysis."
@@ -8984,7 +9048,7 @@
       ],
       "diagnostic_strength": 3,
       "action_cost": 1,
-      "education_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "education_text": "Code meanings are platform-specific; use the exact server model and firmware documentation.",
       "relationships": [
         {
           "role": "evidence_target",
@@ -8997,7 +9061,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "POST Observation",
-        "short_description": "POST Observation gathers troubleshooting evidence.",
+        "short_description": "Observes Power-On Self-Test (POST) progress, console output, indicator codes, and audible signals to locate where startup stops or degrades.",
         "illustration": {
           "asset_id": "art.test.boot.post_observation",
           "alt_text": "Technical reference illustration for POST Observation."
@@ -9020,7 +9084,7 @@
       "evidence_rules": [],
       "diagnostic_strength": 1,
       "action_cost": 0,
-      "education_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "education_text": "Record the complete sequence and timing; the last visible code is not always the component that caused the failure.",
       "relationships": []
     },
     {
@@ -9028,7 +9092,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Magnified CPU Socket Inspection",
-        "short_description": "Inspects socket contact alignment, contamination, damage, and mounting evidence under controlled magnification."
+        "short_description": "Inspects central processing unit (CPU) socket contact alignment, contamination, damage, and mounting evidence under controlled magnification."
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -9064,7 +9128,7 @@
       ],
       "diagnostic_strength": 4,
       "action_cost": 1,
-      "education_text": "Compare the uniform contact pattern from multiple angles and do not touch contacts during an inspection-only Test.",
+      "education_text": "Compare the uniform contact pattern from multiple angles and do not touch contacts during an inspection-only test.",
       "relationships": [
         {
           "role": "evidence_target",
@@ -9081,7 +9145,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Fan-to-Location Cross-Substitution",
-        "short_description": "Temporarily swaps compatible fans to determine whether a telemetry fault follows the fan or stays at its connector."
+        "short_description": "Temporarily swaps compatible fans between documented locations to learn whether a telemetry fault follows the fan or remains at its connector."
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -9128,7 +9192,7 @@
       ],
       "diagnostic_strength": 4,
       "action_cost": 2,
-      "education_text": "This is a diagnostic substitution, not a permanent replacement. Restore the authored machine state after the comparison.",
+      "education_text": "This is a diagnostic substitution, not a permanent replacement. Restore the original machine state after the comparison.",
       "relationships": [
         {
           "role": "evidence_target",
@@ -9153,7 +9217,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Continuity Test",
-        "short_description": "Continuity Test gathers troubleshooting evidence.",
+        "short_description": "Checks whether a documented, de-energized electrical path conducts between specified endpoints, revealing an open or unintended connection.",
         "illustration": {
           "asset_id": "art.test.electrical.continuity",
           "alt_text": "Technical reference illustration for Continuity Test."
@@ -9178,7 +9242,7 @@
       "evidence_rules": [],
       "diagnostic_strength": 3,
       "action_cost": 1,
-      "education_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "education_text": "Never measure continuity on an energized circuit; isolate the path and follow the platform electrical-safety procedure.",
       "relationships": []
     },
     {
@@ -9186,7 +9250,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Firmware Settings Review",
-        "short_description": "Firmware Settings Review gathers troubleshooting evidence.",
+        "short_description": "Compares firmware boot, hardware, clock, and management settings with the approved baseline to identify reset or unintended configuration changes.",
         "illustration": {
           "asset_id": "art.test.firmware.settings_review",
           "alt_text": "Technical reference illustration for Firmware Settings Review."
@@ -9238,7 +9302,7 @@
       ],
       "diagnostic_strength": 2,
       "action_cost": 1,
-      "education_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "education_text": "Record current values before changing them; defaults and setting names vary by platform and firmware release.",
       "relationships": [
         {
           "role": "evidence_target",
@@ -9259,7 +9323,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Firmware Version Compatibility Review",
-        "short_description": "Compares BIOS, BMC, storage, network, and device firmware against an approved compatible baseline."
+        "short_description": "Compares basic input/output system (BIOS), baseboard management controller (BMC), storage, network, and device firmware with an approved compatible baseline."
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -9330,7 +9394,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Minimum Configuration Test",
-        "short_description": "Minimum Configuration Test gathers troubleshooting evidence.",
+        "short_description": "Reduces the server to its documented minimum boot configuration and observes power and startup behavior to separate core-platform faults from removable-device faults.",
         "illustration": {
           "asset_id": "art.test.general.minimum_configuration",
           "alt_text": "Technical reference illustration for Minimum Configuration Test."
@@ -9382,7 +9446,7 @@
       ],
       "diagnostic_strength": 2,
       "action_cost": 2,
-      "education_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "education_text": "Record every removed connection and reintroduce components one at a time according to the platform service procedure.",
       "relationships": [
         {
           "role": "evidence_target",
@@ -9403,7 +9467,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Visual Inspection",
-        "short_description": "Visual Inspection gathers troubleshooting evidence.",
+        "short_description": "Checks accessible hardware for loose seating, damaged connectors, blocked airflow, contamination, and other visible conditions that can explain the reported symptom.",
         "illustration": {
           "asset_id": "art.test.general.visual_inspection",
           "alt_text": "Technical reference illustration for Visual Inspection."
@@ -9525,7 +9589,7 @@
       ],
       "diagnostic_strength": 1,
       "action_cost": 0,
-      "education_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "education_text": "De-energize and apply electrostatic-discharge controls whenever the platform service procedure requires internal access.",
       "relationships": [
         {
           "role": "evidence_target",
@@ -9578,7 +9642,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "BMC Recovery-State Test",
-        "short_description": "Determines whether the management controller is reachable, resettable, in recovery mode, or unrecoverable."
+        "short_description": "Determines whether the baseboard management controller (BMC) is reachable, resettable, in recovery mode, or unrecoverable."
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -9631,7 +9695,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Event Log Freshness Test",
-        "short_description": "Preserves current logs, refreshes management state, and checks whether the target alert returns under the complaint conditions."
+        "short_description": "Preserves current management logs, refreshes controller state, and checks whether the target alert returns under the complaint conditions."
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -9669,7 +9733,7 @@
       ],
       "diagnostic_strength": 3,
       "action_cost": 1,
-      "education_text": "Preserve evidence before clearing. A cleared display alone is not proof; the relevant machine state must be exercised again.",
+      "education_text": "Preserve evidence before clearing. A cleared display alone is not proof; exercise the relevant machine state again.",
       "relationships": [
         {
           "role": "evidence_target",
@@ -9690,7 +9754,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Memory Diagnostic",
-        "short_description": "Memory Diagnostic gathers troubleshooting evidence.",
+        "short_description": "Exercises dual in-line memory modules (DIMMs) with memory patterns and sustained access while observing error-correcting code (ECC) reports, failures, and affected locations.",
         "illustration": {
           "asset_id": "art.test.memory.diagnostic",
           "alt_text": "Technical reference illustration for Memory Diagnostic."
@@ -9733,7 +9797,7 @@
       ],
       "diagnostic_strength": 3,
       "action_cost": 1,
-      "education_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "education_text": "A clean pass reduces suspicion for the tested conditions but cannot rule out every intermittent, temperature-dependent, or slot-specific fault.",
       "relationships": [
         {
           "role": "evidence_target",
@@ -9750,7 +9814,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Known-Good DIMM Substitution",
-        "short_description": "Known-Good DIMM Substitution gathers troubleshooting evidence.",
+        "short_description": "Temporarily substitutes a compatible known-good dual in-line memory module (DIMM) and compares startup, inventory, and errors to separate a module fault from a slot or channel fault.",
         "illustration": {
           "asset_id": "art.test.memory.known_good_substitution",
           "alt_text": "Technical reference illustration for Known-Good DIMM Substitution."
@@ -9787,7 +9851,7 @@
       ],
       "diagnostic_strength": 4,
       "action_cost": 2,
-      "education_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "education_text": "Follow the platform population rules and restore the original configuration after the comparison.",
       "relationships": [
         {
           "role": "evidence_target",
@@ -9800,7 +9864,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Single-DIMM Isolation",
-        "short_description": "Single-DIMM Isolation gathers troubleshooting evidence.",
+        "short_description": "Tests one compatible dual in-line memory module (DIMM) at a time in approved slots, comparing startup, detected capacity, and errors to isolate a module, population, or channel problem.",
         "illustration": {
           "asset_id": "art.test.memory.single_dimm_isolation",
           "alt_text": "Technical reference illustration for Single-DIMM Isolation."
@@ -9863,7 +9927,7 @@
       ],
       "diagnostic_strength": 3,
       "action_cost": 2,
-      "education_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "education_text": "Slot order and minimum population vary by platform; use the server memory-population map.",
       "relationships": [
         {
           "role": "evidence_target",
@@ -9888,7 +9952,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Known-Good Ethernet Cable Test",
-        "short_description": "Known-Good Ethernet Cable Test gathers troubleshooting evidence.",
+        "short_description": "Replaces the current Ethernet cable with a verified compatible cable and compares carrier, error counters, and reachability to isolate the cable from the adapter or switch port.",
         "illustration": {
           "asset_id": "art.test.network.cable_substitution",
           "alt_text": "Technical reference illustration for Known-Good Ethernet Cable Test."
@@ -9938,7 +10002,7 @@
       ],
       "diagnostic_strength": 4,
       "action_cost": 1,
-      "education_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "education_text": "Keep the adapter and switch-port configuration unchanged during the comparison.",
       "relationships": [
         {
           "role": "evidence_target",
@@ -9955,7 +10019,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "DHCP Address Pool Audit",
-        "short_description": "Inspects free-address capacity, active leases, exclusions, and stale reservations on the DHCP service."
+        "short_description": "Inspects free-address capacity, active leases, exclusions, and stale reservations on the Dynamic Host Configuration Protocol (DHCP) service."
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -10013,7 +10077,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "DHCP Transaction Trace",
-        "short_description": "Interprets the DHCP client transaction to distinguish an absent offer from client-side address configuration problems."
+        "short_description": "Interprets a Dynamic Host Configuration Protocol (DHCP) client exchange to distinguish an absent server offer from client-side address-configuration problems."
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -10080,7 +10144,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Interface Configuration Inspection",
-        "short_description": "Interface Configuration Inspection gathers troubleshooting evidence.",
+        "short_description": "Reviews interface state, Internet Protocol (IP) addresses and prefixes, lease information, routes, and the default gateway to identify an incorrect or missing network configuration.",
         "illustration": {
           "asset_id": "art.test.network.interface_config",
           "alt_text": "Technical reference illustration for Interface Configuration Inspection."
@@ -10128,7 +10192,7 @@
       ],
       "diagnostic_strength": 3,
       "action_cost": 1,
-      "education_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "education_text": "A correct address and route do not prove physical link or application-level service; test those layers separately.",
       "relationships": [
         {
           "role": "evidence_target",
@@ -10145,7 +10209,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Network Link Test",
-        "short_description": "Network Link Test gathers troubleshooting evidence.",
+        "short_description": "Observes Ethernet carrier, negotiated speed and duplex, indicators, and link errors to determine whether the physical link is present and stable.",
         "illustration": {
           "asset_id": "art.test.network.link",
           "alt_text": "Technical reference illustration for Network Link Test."
@@ -10206,7 +10270,7 @@
       ],
       "diagnostic_strength": 2,
       "action_cost": 1,
-      "education_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "education_text": "Link up proves only the local physical connection; it does not establish address configuration or end-to-end reachability.",
       "relationships": [
         {
           "role": "evidence_target",
@@ -10231,7 +10295,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Network Link and Counter Soak",
-        "short_description": "Observes link transitions and interface error counters over a defined interval after a firmware-related change."
+        "short_description": "Observes Ethernet link transitions and interface error counters over a defined interval after a firmware-related change."
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -10286,7 +10350,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Ping Connectivity Test",
-        "short_description": "Ping Connectivity Test gathers troubleshooting evidence.",
+        "short_description": "Sends Internet Control Message Protocol (ICMP) Echo probes to selected local, gateway, and remote destinations to measure basic Internet Protocol reachability, loss, and timing.",
         "illustration": {
           "asset_id": "art.test.network.ping",
           "alt_text": "Technical reference illustration for Ping Connectivity Test."
@@ -10331,7 +10395,7 @@
       ],
       "diagnostic_strength": 2,
       "action_cost": 1,
-      "education_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "education_text": "Echo traffic may be blocked or rate-limited, and a reply does not prove that the required application service works.",
       "relationships": [
         {
           "role": "evidence_target",
@@ -10348,7 +10412,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "PCIe Device Inventory",
-        "short_description": "PCIe Device Inventory gathers troubleshooting evidence.",
+        "short_description": "Compares enumerated Peripheral Component Interconnect Express (PCIe) devices, identifiers, and link information with the expected hardware inventory to find a missing or unexpected adapter.",
         "illustration": {
           "asset_id": "art.test.pcie.inventory",
           "alt_text": "Technical reference illustration for PCIe Device Inventory."
@@ -10402,7 +10466,7 @@
       ],
       "diagnostic_strength": 2,
       "action_cost": 1,
-      "education_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "education_text": "Enumeration proves that a device is visible, not that its driver and full function are healthy.",
       "relationships": [
         {
           "role": "evidence_target",
@@ -10423,7 +10487,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Power Distribution Path Isolation",
-        "short_description": "Compares known-good PSUs across bays and minimum configuration to isolate a shared power-distribution fault."
+        "short_description": "Compares known-good power supply units (PSUs) across supported bays and minimum configuration to isolate a shared power-distribution fault."
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -10494,7 +10558,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Known-Good PSU Test",
-        "short_description": "Known-Good PSU Test gathers troubleshooting evidence.",
+        "short_description": "Temporarily substitutes a compatible known-good power supply unit (PSU) and compares power, status, and bay behavior to separate a supply fault from a shared distribution fault.",
         "illustration": {
           "asset_id": "art.test.power.known_good_psu",
           "alt_text": "Technical reference illustration for Known-Good PSU Test."
@@ -10541,7 +10605,7 @@
       ],
       "diagnostic_strength": 4,
       "action_cost": 2,
-      "education_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "education_text": "Hot-swap support and redundancy requirements vary by platform; follow the approved power-supply procedure.",
       "relationships": [
         {
           "role": "evidence_target",
@@ -10558,7 +10622,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Power Output Voltage Measurement",
-        "short_description": "Measures documented power rails and power-good signals with an appropriate meter and platform pinout."
+        "short_description": "Measures documented power rails and power-good signals with an appropriate meter and the platform connector pinout."
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -10606,7 +10670,7 @@
       ],
       "diagnostic_strength": 3,
       "action_cost": 2,
-      "education_text": "Do not generalize an ATX pinout to a proprietary or hot-swap server interface; use model-specific service documentation and electrical safety controls.",
+      "education_text": "Do not generalize an Advanced Technology Extended (ATX) pinout to a proprietary or hot-swap server interface; use model-specific documentation and electrical-safety controls.",
       "relationships": [
         {
           "role": "evidence_target",
@@ -10631,7 +10695,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "PSU Status Inspection",
-        "short_description": "PSU Status Inspection gathers troubleshooting evidence.",
+        "short_description": "Reviews power supply unit (PSU) presence, indicators, management sensors, input state, output state, and event codes to distinguish a failed or unseated supply from a shared power problem.",
         "illustration": {
           "asset_id": "art.test.power.psu_status",
           "alt_text": "Technical reference illustration for PSU Status Inspection."
@@ -10673,7 +10737,7 @@
       ],
       "diagnostic_strength": 2,
       "action_cost": 1,
-      "education_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "education_text": "Indicator meanings and sensor thresholds are platform-specific; correlate them with the exact model documentation.",
       "relationships": [
         {
           "role": "evidence_target",
@@ -10690,7 +10754,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Residual-Power Drain Test",
-        "short_description": "Safely removes all power, discharges residual state, then compares symptoms after controlled re-energization."
+        "short_description": "Safely removes all external power, discharges residual state, and then compares symptoms after controlled re-energization."
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -10744,7 +10808,7 @@
       ],
       "diagnostic_strength": 1,
       "action_cost": 1,
-      "education_text": "Follow protocol.safety.deenergize_discharge and the platform service instructions; redundant power feeds must all be removed before discharge.",
+      "education_text": "Follow the approved de-energization procedure and platform instructions; remove every redundant power feed before discharge.",
       "relationships": [
         {
           "role": "evidence_target",
@@ -10777,7 +10841,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Drive Bay Path Isolation",
-        "short_description": "Uses protected inventory and compatible known-good media to determine whether a failure follows a drive or remains at one bay."
+        "short_description": "Uses protected inventory and compatible known-good media to learn whether a storage failure follows a drive or remains at one bay or backplane path."
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -10854,7 +10918,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Storage Device Inventory",
-        "short_description": "Storage Device Inventory gathers troubleshooting evidence.",
+        "short_description": "Compares storage devices reported by firmware, controller, and operating-system layers, including model, serial, capacity, and path, to locate where an expected device disappears.",
         "illustration": {
           "asset_id": "art.test.storage.device_inventory",
           "alt_text": "Technical reference illustration for Storage Device Inventory."
@@ -10935,7 +10999,7 @@
       ],
       "diagnostic_strength": 2,
       "action_cost": 1,
-      "education_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "education_text": "Visibility at one layer does not prove end-to-end path health; preserve bay and serial mapping across every view.",
       "relationships": [
         {
           "role": "evidence_target",
@@ -10968,7 +11032,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Drive Health Test",
-        "short_description": "Drive Health Test gathers troubleshooting evidence.",
+        "short_description": "Reads supported drive-health status, media-error data, predictive warnings, and self-test history to identify a failed or degrading storage device.",
         "illustration": {
           "asset_id": "art.test.storage.drive_health",
           "alt_text": "Technical reference illustration for Drive Health Test."
@@ -11025,7 +11089,7 @@
       ],
       "diagnostic_strength": 3,
       "action_cost": 1,
-      "education_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "education_text": "Vendor attributes and thresholds vary; protect data before destructive testing, firmware work, or replacement.",
       "relationships": [
         {
           "role": "evidence_target",
@@ -11046,7 +11110,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Predictive Drive Health Analysis",
-        "short_description": "Reviews SMART, controller, media-error, and endurance evidence before an online drive fails completely."
+        "short_description": "Reviews Self-Monitoring, Analysis and Reporting Technology (SMART), controller, media-error, and endurance data before an online drive fails completely."
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -11111,7 +11175,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "RAID Status Inspection",
-        "short_description": "RAID Status Inspection gathers troubleshooting evidence.",
+        "short_description": "Reads redundant array of independent disks (RAID) controller, array, member, redundancy, rebuild, and error state to distinguish a failed member, degraded array, or controller-visibility problem.",
         "illustration": {
           "asset_id": "art.test.storage.raid_status",
           "alt_text": "Technical reference illustration for RAID Status Inspection."
@@ -11178,7 +11242,7 @@
       ],
       "diagnostic_strength": 3,
       "action_cost": 1,
-      "education_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "education_text": "Preserve controller metadata and the serial-to-bay map before replacing or moving any array member.",
       "relationships": [
         {
           "role": "evidence_target",
@@ -11203,7 +11267,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Management Event Log Review",
-        "short_description": "Management Event Log Review gathers troubleshooting evidence.",
+        "short_description": "Correlates timestamped baseboard management controller (BMC) event-log and sensor entries with the complaint to identify affected hardware and recurrence.",
         "illustration": {
           "asset_id": "art.test.system.bmc_logs",
           "alt_text": "Technical reference illustration for Management Event Log Review."
@@ -11331,7 +11395,7 @@
       ],
       "diagnostic_strength": 3,
       "action_cost": 1,
-      "education_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "education_text": "Check controller time, event age, and repeated entries; a historical alert may not describe the current machine state.",
       "relationships": [
         {
           "role": "evidence_target",
@@ -11380,7 +11444,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Controlled Stress Test",
-        "short_description": "Controlled Stress Test gathers troubleshooting evidence.",
+        "short_description": "Applies an approved processor, memory, or combined workload while monitoring temperatures, hardware errors, and resets to reproduce intermittent memory or thermal behavior.",
         "illustration": {
           "asset_id": "art.test.system.controlled_stress",
           "alt_text": "Technical reference illustration for Controlled Stress Test."
@@ -11424,7 +11488,7 @@
       ],
       "diagnostic_strength": 3,
       "action_cost": 2,
-      "education_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "education_text": "Define stop limits and protect production data before loading the system; stop immediately at unsafe temperature or instability.",
       "relationships": [
         {
           "role": "evidence_target",
@@ -11441,7 +11505,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Fan Telemetry Inspection",
-        "short_description": "Fan Telemetry Inspection gathers troubleshooting evidence.",
+        "short_description": "Compares commanded and reported fan speed in revolutions per minute (RPM), presence, sensor transitions, and physical rotation to separate a failed fan from its sense path.",
         "illustration": {
           "asset_id": "art.test.thermal.fan_telemetry",
           "alt_text": "Technical reference illustration for Fan Telemetry Inspection."
@@ -11498,7 +11562,7 @@
       ],
       "diagnostic_strength": 3,
       "action_cost": 1,
-      "education_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "education_text": "Brief or location-specific dropouts can disappear in an instantaneous reading; correlate telemetry with observation over time.",
       "relationships": [
         {
           "role": "evidence_target",
@@ -11519,7 +11583,7 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Temperature Monitoring",
-        "short_description": "Temperature Monitoring gathers troubleshooting evidence.",
+        "short_description": "Observes processor and platform temperature sensors at idle and under a controlled load, revealing trends, limit crossings, and thermal-shutdown conditions.",
         "illustration": {
           "asset_id": "art.test.thermal.temperature_monitoring",
           "alt_text": "Technical reference illustration for Temperature Monitoring."
@@ -11585,7 +11649,7 @@
       ],
       "diagnostic_strength": 3,
       "action_cost": 1,
-      "education_text": "Tests change the technician knowledge state; they do not directly repair the machine.",
+      "education_text": "Sensor locations, limits, and control behavior vary by platform; compare readings with the approved thermal specification.",
       "relationships": [
         {
           "role": "evidence_target",
@@ -12035,7 +12099,7 @@
       "entity_type": "validation_procedure",
       "presentation": {
         "display_name": "Normal Boot Verification",
-        "short_description": "Normal Boot Verification confirms the repaired state.",
+        "short_description": "Performs normal cold and warm starts and checks that firmware selects the intended boot entry, the operating-system loader starts, and the original boot error does not recur.",
         "illustration": {
           "asset_id": "art.verify.boot.normal_boot",
           "alt_text": "Technical reference illustration for Normal Boot Verification."
@@ -12059,10 +12123,12 @@
       "target_component_ids": [],
       "required_tool_ids": [],
       "success_conditions": [
-        "Original fault condition no longer appears and required operation succeeds."
+        "The intended persistent boot entry is selected.",
+        "The operating-system loader and required operating environment start normally.",
+        "The original missing-device, wrong-device, or loader error does not recur."
       ],
       "action_cost": 1,
-      "education_text": "Verification evaluates whether the repair produced the required operational state.",
+      "education_text": "A one-time boot override is not proof that the persistent boot order is corrected.",
       "relationships": [
         {
           "role": "validates_fault",
@@ -12458,7 +12524,7 @@
       "entity_type": "validation_procedure",
       "presentation": {
         "display_name": "Memory Verification",
-        "short_description": "Memory Verification confirms the repaired state.",
+        "short_description": "Runs the approved full memory diagnostic and a representative workload, requiring expected capacity with no new reportable memory errors or instability.",
         "illustration": {
           "asset_id": "art.verify.memory.full_test",
           "alt_text": "Technical reference illustration for Memory Verification."
@@ -12481,10 +12547,12 @@
       "target_component_ids": [],
       "required_tool_ids": [],
       "success_conditions": [
-        "Original fault condition no longer appears and required operation succeeds."
+        "The full approved memory diagnostic completes.",
+        "Expected memory capacity and channels remain available.",
+        "No new reportable corrected or uncorrected memory errors, crashes, or resets occur during the acceptance interval."
       ],
       "action_cost": 1,
-      "education_text": "Verification evaluates whether the repair produced the required operational state.",
+      "education_text": "Error-correcting code (ECC) thresholds and the required observation interval are platform policy; record both with the result.",
       "relationships": [
         {
           "role": "validates_fault",
@@ -12505,7 +12573,7 @@
       "entity_type": "validation_procedure",
       "presentation": {
         "display_name": "Memory Inventory Verification",
-        "short_description": "Memory Inventory Verification confirms the repaired state.",
+        "short_description": "Checks firmware and operating-system memory inventory after restart, requiring the expected dual in-line memory modules (DIMMs), capacity, and channels with no population warning.",
         "illustration": {
           "asset_id": "art.verify.memory.inventory",
           "alt_text": "Technical reference illustration for Memory Inventory Verification."
@@ -12528,10 +12596,12 @@
       "target_component_ids": [],
       "required_tool_ids": [],
       "success_conditions": [
-        "Original fault condition no longer appears and required operation succeeds."
+        "Every expected DIMM appears in the documented slot.",
+        "Total capacity and available channels match the approved configuration.",
+        "No population or seating warning returns after restart."
       ],
       "action_cost": 1,
-      "education_text": "Verification evaluates whether the repair produced the required operational state.",
+      "education_text": "Inventory verifies presence and layout, not sustained memory reliability; use the full memory verification when the fault requires it.",
       "relationships": [
         {
           "role": "validates_fault",
@@ -12548,7 +12618,7 @@
       "entity_type": "validation_procedure",
       "presentation": {
         "display_name": "Network Connectivity Verification",
-        "short_description": "Network Connectivity Verification confirms the repaired state.",
+        "short_description": "Checks the repaired interface configuration and reaches representative local, gateway, and required remote destinations, providing an operational connectivity signal.",
         "illustration": {
           "asset_id": "art.verify.network.connectivity",
           "alt_text": "Technical reference illustration for Network Connectivity Verification."
@@ -12572,10 +12642,12 @@
       "target_component_ids": [],
       "required_tool_ids": [],
       "success_conditions": [
-        "Original fault condition no longer appears and required operation succeeds."
+        "The interface has the approved address, prefix, and route.",
+        "The local gateway and required remote destination are reachable by approved probes.",
+        "The required network service succeeds without the original connectivity symptom."
       ],
       "action_cost": 1,
-      "education_text": "Verification evaluates whether the repair produced the required operational state.",
+      "education_text": "A single Internet Control Message Protocol (ICMP) reply is not enough; verify the actual service and path required by the work order.",
       "relationships": [
         {
           "role": "validates_fault",
@@ -12644,7 +12716,7 @@
       "entity_type": "validation_procedure",
       "presentation": {
         "display_name": "Network Link Verification",
-        "short_description": "Network Link Verification confirms the repaired state.",
+        "short_description": "Observes stable Ethernet carrier at the expected speed and duplex while counters remain within the approved error threshold.",
         "illustration": {
           "asset_id": "art.verify.network.link",
           "alt_text": "Technical reference illustration for Network Link Verification."
@@ -12668,10 +12740,12 @@
       "target_component_ids": [],
       "required_tool_ids": [],
       "success_conditions": [
-        "Original fault condition no longer appears and required operation succeeds."
+        "Carrier remains present through the acceptance interval.",
+        "Negotiated speed and duplex match the approved link.",
+        "No disqualifying error-counter growth or link transition occurs."
       ],
       "action_cost": 1,
-      "education_text": "Verification evaluates whether the repair produced the required operational state.",
+      "education_text": "Stable link does not prove address configuration or application connectivity; those require separate checks.",
       "relationships": [
         {
           "role": "validates_fault",
@@ -12784,7 +12858,7 @@
       "entity_type": "validation_procedure",
       "presentation": {
         "display_name": "Stable Power Verification",
-        "short_description": "Stable Power Verification confirms the repaired state.",
+        "short_description": "Exercises repeated starts and a representative load while requiring healthy power-supply status, stable power, and the intended redundancy with no recurring alert.",
         "illustration": {
           "asset_id": "art.verify.power.stable",
           "alt_text": "Technical reference illustration for Stable Power Verification."
@@ -12808,10 +12882,12 @@
       "target_component_ids": [],
       "required_tool_ids": [],
       "success_conditions": [
-        "Original fault condition no longer appears and required operation succeeds."
+        "Cold starts complete repeatedly without the original power symptom.",
+        "Power-supply and power-good status remain healthy during representative load.",
+        "Required redundancy is restored and no new target event appears."
       ],
       "action_cost": 1,
-      "education_text": "Verification evaluates whether the repair produced the required operational state.",
+      "education_text": "Use platform-defined load, redundancy, and observation criteria rather than a brief idle check.",
       "relationships": [
         {
           "role": "validates_fault",
@@ -12886,7 +12962,7 @@
       "entity_type": "validation_procedure",
       "presentation": {
         "display_name": "Storage Detection Verification",
-        "short_description": "Storage Detection Verification confirms the repaired state.",
+        "short_description": "Checks firmware, controller, and operating-system inventory across restart, requiring the expected storage device and path with no new input/output errors.",
         "illustration": {
           "asset_id": "art.verify.storage.device_detected",
           "alt_text": "Technical reference illustration for Storage Detection Verification."
@@ -12910,10 +12986,12 @@
       "target_component_ids": [],
       "required_tool_ids": [],
       "success_conditions": [
-        "Original fault condition no longer appears and required operation succeeds."
+        "The expected device appears at every required inventory layer.",
+        "Serial, bay, capacity, and path match the recorded replacement or reconnection.",
+        "No new input/output error or missing-device event occurs during the acceptance check."
       ],
       "action_cost": 1,
-      "education_text": "Verification evaluates whether the repair produced the required operational state.",
+      "education_text": "Detection alone does not establish media health or array redundancy; run the fault-specific storage verification when required.",
       "relationships": [
         {
           "role": "validates_fault",
@@ -12998,7 +13076,7 @@
       "entity_type": "validation_procedure",
       "presentation": {
         "display_name": "RAID Healthy Verification",
-        "short_description": "RAID Healthy Verification confirms the repaired state.",
+        "short_description": "Monitors the redundant array of independent disks (RAID) until every required member is online, rebuild work is complete, and redundancy is restored without new controller or media alerts.",
         "illustration": {
           "asset_id": "art.verify.storage.raid_healthy",
           "alt_text": "Technical reference illustration for RAID Healthy Verification."
@@ -13023,10 +13101,12 @@
       "target_component_ids": [],
       "required_tool_ids": [],
       "success_conditions": [
-        "Original fault condition no longer appears and required operation succeeds."
+        "The array reports its approved optimal or healthy state.",
+        "Every required member is online and any rebuild is complete.",
+        "No new controller, media, or predictive alert occurs during the acceptance interval."
       ],
       "action_cost": 1,
-      "education_text": "Verification evaluates whether the repair produced the required operational state.",
+      "education_text": "Do not call a rebuilding or merely accessible array healthy; preserve the final controller report and member map.",
       "relationships": [
         {
           "role": "validates_fault",
@@ -13093,7 +13173,7 @@
       "entity_type": "validation_procedure",
       "presentation": {
         "display_name": "Thermal Load Verification",
-        "short_description": "Thermal Load Verification confirms the repaired state.",
+        "short_description": "Applies an approved representative load while monitoring temperatures, fan response, and stability, requiring no thermal alert, throttling outside policy, shutdown, or reset.",
         "illustration": {
           "asset_id": "art.verify.thermal.load_test",
           "alt_text": "Technical reference illustration for Thermal Load Verification."
@@ -13119,10 +13199,12 @@
       "target_component_ids": [],
       "required_tool_ids": [],
       "success_conditions": [
-        "Original fault condition no longer appears and required operation succeeds."
+        "Temperatures remain within platform limits for the acceptance interval.",
+        "Fan response is stable and no target thermal alert returns.",
+        "The server completes the representative workload without thermal shutdown or reset."
       ],
       "action_cost": 1,
-      "education_text": "Verification evaluates whether the repair produced the required operational state.",
+      "education_text": "Use platform-specific sensor limits, workload, duration, and stop conditions; protect production data before stressing the server.",
       "relationships": [
         {
           "role": "validates_fault",

@@ -1,7 +1,7 @@
 import { isBenchDiagnosticInstance } from './action-presentation.mjs';
 
 export class SoloGameSession {
-  constructor({ onChange, onAnnounce, onStarted, onCompleted } = {}) {
+  constructor({ onChange, onAnnounce, onStarted, onCompleted, tutorial = null, catalog = null } = {}) {
     this.worker = null;
     this.projection = null;
     this.terminalResult = null;
@@ -35,6 +35,8 @@ export class SoloGameSession {
     this.onStarted = onStarted ?? (() => {});
     this.onCompleted = onCompleted ?? (() => {});
     this.startPromise = null;
+    this.tutorial = tutorial;
+    this.catalog = catalog;
   }
 
   start(payload) {
@@ -78,6 +80,7 @@ export class SoloGameSession {
       this.onStarted(message.projection);
       const startingActions = message.projection.view.public_match.turn?.actions_remaining;
       this.onAnnounce(`Solo Match started. Opening hand drawn and first turn ready${Number.isSafeInteger(startingActions) ? ` with ${startingActions} Actions` : ''}.`);
+      this.tutorial?.announceCurrent();
       this.resolveStart?.(message.projection);
       this.resolveStart = null;
       this.rejectStart = null;
@@ -109,6 +112,9 @@ export class SoloGameSession {
         result_event_id: resultEvent?.event_id ?? null,
         result_event_type: resultEvent?.event_type ?? null,
       } : null;
+      if (submittedIntent && this.tutorial) {
+        this.tutorial.handleResolution(submittedIntent, this.lastEvents, message.result, message.projection);
+      }
       this.restoreDiagnosticActionFocus = Boolean(
         submittedBenchDiagnostic && this.lastAction?.accepted,
       );
@@ -125,6 +131,11 @@ export class SoloGameSession {
       this.selectAvailableTicket();
       this.lastMotion = this.motionFromEvents(this.lastEvents, this.terminalResult, message.result);
       this.announceEvents(this.lastEvents, message.result, this.terminalResult, previousActions);
+      if (submittedIntent && this.tutorial) {
+        if (this.tutorial.completed) {
+          this.tutorial.announce(`${this.tutorial.definition.title} complete. Tutorial progress was recorded locally without changing Match statistics.`);
+        } else this.tutorial.announceCurrent();
+      }
       if (this.terminalResult) {
         this.active = false;
         this.onCompleted(this.terminalResult);
@@ -193,6 +204,7 @@ export class SoloGameSession {
     if (!this.worker || !this.active || this.resolving) return false;
     if (!this.projection?.legal_intents.some((intent) => intent.intent_id === intentId)) return false;
     const selected = this.projection.legal_intents.find((intent) => intent.intent_id === intentId);
+    if (this.tutorial && !this.tutorial.submit(selected, this.projection)) return false;
     this.selectedCardInstanceId = selected.card_instance_id ?? this.selectedCardInstanceId;
     this.pendingIntent = structuredClone(selected);
     this.resolving = true;

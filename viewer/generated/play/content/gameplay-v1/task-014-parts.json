@@ -4,9 +4,9 @@
   "generator_version": "ticket-builder-v3",
   "configuration_version": "ticket-builder-v3",
   "ticket_content_version": "core-ticket-parts-v3",
-  "domain_content_version": "core-domain-snapshot-v2",
-  "card_catalog_version": "core-card-catalog-coverage-v3",
-  "deck_catalog_version": "core-response-decks-v3",
+  "domain_content_version": "core-domain-snapshot-technical-copy-v3",
+  "card_catalog_version": "core-card-catalog-technical-copy-v4",
+  "deck_catalog_version": "core-response-decks-v4",
   "outcome_family_version": "diagnostic-outcome-families-v1",
   "command_action_costs": {
     "command.ipmi.sel_elist": 1,

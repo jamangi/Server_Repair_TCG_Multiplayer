@@ -1,9 +1,9 @@
 {
-  "coverage_version": "playable-coverage-v3",
+  "coverage_version": "playable-coverage-v4",
   "part_catalog_version": "ticket-parts-v1",
   "ticket_content_version": "core-ticket-parts-v3",
-  "domain_content_version": "core-domain-snapshot-v2",
-  "card_catalog_version": "core-card-catalog-coverage-v3",
+  "domain_content_version": "core-domain-snapshot-technical-copy-v3",
+  "card_catalog_version": "core-card-catalog-technical-copy-v4",
   "source_manifest_files": [
     "./core-v0.1-case-study-gaps.json",
     "./core-v0.1-components.json",
