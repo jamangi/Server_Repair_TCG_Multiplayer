@@ -1,6 +1,6 @@
 # Gameplay reference images
 
-This folder contains the approved **Night-Shift Operations Desk** visual references: one project-owner-supplied vanilla proof of concept and its screenshot establish the TASK-010 minimum implementation floor; three original AI-generated references establish the desktop, component, and mobile targets; later project-owner-supplied studies explore Relevant and Global Diagnostic Bench compositions; a three-image TASK-016 comparison set records the post-TASK-014 baseline beside refined Global and Relevant layout directions; and two TASK-020 targets refine the shared one-row Bench and spatial response hand. Together they communicate composition, material, illustration density, card family grammar, responsive hierarchy, catalog-density alternatives, and achievable browser-native depth.
+This folder contains the approved **Night-Shift Operations Desk** visual references: one project-owner-supplied vanilla proof of concept and its screenshot establish the TASK-010 minimum implementation floor; three original AI-generated references establish the desktop, component, and mobile targets; later project-owner-supplied studies explore Relevant and Global Diagnostic Bench compositions; a three-image TASK-016 comparison set records the post-TASK-014 baseline beside refined Global and Relevant layout directions; two TASK-020 targets refine the shared one-row Bench and spatial response hand; and two TASK-021 captures document a post-diagnostic target-continuity defect. Together they communicate composition, material, illustration density, card family grammar, responsive hierarchy, catalog-density alternatives, achievable browser-native depth, and observed interaction regressions.
 
 They are not:
 
@@ -188,6 +188,16 @@ Use it for cross-mode parity: Relevant uses the same compact tile scale and one-
 
 Both images are composition targets rather than gameplay fixtures. Do not copy their incidental Card/diagnostic membership, art, costs, quantities, Ticket facts, or filter results. The accepted deterministic TASK-019 captures are the before-state evidence; TASK-020 must compare measured row count, tile geometry, and hand allocation as well as visual comfort.
 
+## 09 — TASK-021 selected-Ticket target-continuity defect
+
+![Post-diagnostic alternate-target defect](./task-021-post-diagnostic-alternate-target-defect.png)
+
+This capture shows the defect after `Firmware Boot Device Inventory` was run for the displayed `Booting the Wrong Device` Ticket. The Bench diagnostic remains selected, but its selected-Ticket intent has been consumed for the current machine revision; generic Card fallback then presents the same diagnostic against the two other active Tickets. The yellow `Alternate target only` surface is a client scope warning, not the result of the completed test or an engine rejection.
+
+![Ticket queue context for the alternate-target defect](./task-021-ticket-queue-context.png)
+
+This crop confirms that `Network Path Down` and `Redundancy Path Unavailable` are the other queue entries named by the two unexpected confirmation buttons. Use both captures as deterministic reproduction targets for TASK-021. Do not treat their Ticket names, diagnostic membership, costs, or Match state as canonical content.
+
 ## Generation provenance
 
 - Minimum reference provenance: project-owner-supplied standalone Server Repair HTML/CSS/JavaScript proof of concept and exact screenshot, added 2026-08-23. The source is committed only as a readable visual reference and is not part of the Viewer runtime.
@@ -195,6 +205,7 @@ Both images are composition targets rather than gameplay fixtures. Do not copy t
 - TASK-016 comparison provenance: one project-owner-supplied post-TASK-014 Viewer capture (2535×1291) and two project-owner-supplied layout studies (1672×941), added 2026-08-25. They document a before/Global/Relevant composition comparison, not runtime assets or authoritative fixtures.
 - TASK-016 post-pass provenance: two project-owner-supplied implementation captures (2543×1291 Relevant and 2551×1293 Global) plus one 1263×95 response-hand composition crop, added 2026-08-25. They are defect/interaction references for TASK-018/TASK-019, not runtime assets or gameplay fixtures. The accompanying modal recording is translated into deterministic reproduction steps in TASK-018 rather than committed as a large binary.
 - TASK-020 target provenance: two project-owner-supplied 1764×892 one-row layout studies, added 2026-08-25. They define proportional and duplicate-stack direction for TASK-020, not exact content, breakpoint counts, or gameplay authority.
+- TASK-021 defect provenance: one project-owner-supplied 2124×788 post-action capture and one 677×640 Ticket-queue crop, added 2026-08-26. They document observed Viewer behavior for regression reproduction, not desired gameplay or authority.
 - Mode: built-in image generation, with targeted built-in edit passes.
 - Date: 2026-08-23.
 - Source references: four user-supplied screenshots used only for general layout/aesthetic lessons; not committed.

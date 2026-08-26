@@ -6,7 +6,11 @@ Beginning with TASK-011, the displayed task ID includes the recommended reasonin
 
 Active task:
 
-- [`TASK-015-HIGH: Add guided tutorials and the solo solution-reveal experience`](TASK-015-add-guided-tutorial-and-solution-reveal.md) — approved PT-007 A; add engine-driven fundamentals and recovery tutorials now that the final Bench/hand geometry is complete.
+- [`TASK-021-HIGH: Fix selected-Ticket diagnostic target continuity`](TASK-021-fix-selected-ticket-diagnostic-target-continuity.md) — owner-directed defect correction; stop completed/unavailable Bench diagnostics from falling through to other active Tickets while preserving TASK-012's explicit alternate-target behavior for private response Cards.
+
+Queued V0 training-ready sequence:
+
+- [`TASK-015-HIGH: Add guided tutorials and the solo solution-reveal experience`](TASK-015-add-guided-tutorial-and-solution-reveal.md) — approved PT-007 A; queued after TASK-021 so tutorial checkpoints bind to the corrected selected-Ticket diagnostic contract.
 
 Reserved V0 illustration task:
 
@@ -16,7 +20,7 @@ Approved but deferred V2 task:
 
 - [`TASK-017-XHIGH: Create the Server Repair V2 Migration Seed`](TASK-017-create-server-repair-v2-migration-seed.md) — approved Migration Seed direction but deferred until the V0 product is training-ready; when reactivated, it audits V0 in bounded checkpoints and establishes the public dependency-inference V2 foundation without modifying V0 behavior.
 
-TASK-012-HIGH through TASK-014-XHIGH, TASK-016-HIGH, and TASK-018-HIGH through TASK-020-HIGH are complete. TASK-015-HIGH is the active remaining training-ready feature task. TASK-011-HIGH may proceed where asset integration permits. Return to TASK-017-XHIGH only when the project owner reactivates V2 migration.
+TASK-012-HIGH through TASK-014-XHIGH, TASK-016-HIGH, and TASK-018-HIGH through TASK-020-HIGH are complete. TASK-021-HIGH is the active interaction correction; TASK-015-HIGH follows as the remaining training-ready feature task. TASK-011-HIGH may proceed where asset integration permits. Return to TASK-017-XHIGH only when the project owner reactivates V2 migration.
 
 Completed documentation and research tasks:
 

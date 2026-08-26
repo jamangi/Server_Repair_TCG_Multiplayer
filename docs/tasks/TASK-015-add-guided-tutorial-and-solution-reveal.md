@@ -2,7 +2,7 @@
 
 ## Status
 
-**Approved scope — active.** PT-007 A and the prerequisite PT-005 A reveal behavior were approved by the project owner on 2026-08-24. TASK-013, TASK-014, TASK-016, corrective TASK-018, TASK-019, and TASK-020 are complete, so tutorial overlays may now bind to the final controls and responsive geometry.
+**Approved scope — queued after TASK-021.** PT-007 A and the prerequisite PT-005 A reveal behavior were approved by the project owner on 2026-08-24. TASK-013, TASK-014, TASK-016, corrective TASK-018, TASK-019, and TASK-020 are complete. TASK-021 must first correct Bench-diagnostic target continuity so the tutorial does not teach or encode the post-run alternate-Ticket fallback defect.
 
 ## Approved authority
 
@@ -18,7 +18,7 @@ Tutorials are not substitutes for tests. They demonstrate the real engine path; 
 
 Read completely before editing:
 
-- `AGENTS.md`, root `README.md`, this task, `docs/tasks/INDEX.md`, and completed TASK-012 through TASK-014 plus TASK-016, TASK-018, TASK-019, and TASK-020;
+- `AGENTS.md`, root `README.md`, this task, `docs/tasks/INDEX.md`, and completed TASK-012 through TASK-014 plus TASK-016 and TASK-018 through TASK-021;
 - the approved rules/profile, Ticket/Card/Knowledge/Event/projection schemas, and solution-reveal contract;
 - the final playable catalog, coverage matrix, seeded Ticket provenance, and automated-game paths;
 - all solo Play pages/session/Worker/motion/accessibility modules and TASK-010 visual references;
@@ -41,7 +41,7 @@ In the approved order and terminology:
 1. **Observe:** Symptoms, public Candidates, machine-state summary, Ticket selection, queue, Evidence, and immutable Worklog are different information surfaces.
 2. **Turn resources:** opening availability, two Actions, Card/bench costs, hand/response deck, Search/Refresh if retained, discard, and Pass.
 3. **Hypothesis:** a private/team working belief is not a guess submission and receives no truth feedback.
-4. **Diagnostics:** how to select the highlighted Test/Command, verify its target Ticket, spend Actions, follow a cross-Ticket result, and read `SUPPORT`, `CONTRADICT`, `RULE_OUT`, `CONFIRM`, and `INCONCLUSIVE` under their approved normative meanings. Explain that clean, negative, unrelated, and inconclusive findings are still recorded Evidence; a result with no candidate effect is not missing feedback.
+4. **Diagnostics:** how to select the highlighted Test/Command, verify that the displayed Ticket is its target, spend Actions, follow its persistent result, understand completed/current-revision availability, and read `SUPPORT`, `CONTRADICT`, `RULE_OUT`, `CONFIRM`, and `INCONCLUSIVE` under their approved normative meanings. Explain that clean, negative, unrelated, and inconclusive findings are still recorded Evidence; a result with no candidate effect is not missing feedback. Bench diagnostics never silently redirect to another Ticket; any deliberately demonstrated cross-Ticket result must use the separately explicit private response-Card contract.
 5. **Candidate management:** how the approved elimination/notebook model works, whether it costs an Action, what Evidence is cited, and why a remaining candidate is not automatically revealed as true.
 6. **Isolation:** direct observation, definitive diagnostic, corroborated support, elimination, and recovery-derived routes where approved; how citations are chosen; why candidate-specific `CONFIRM` is decisive for an active actionable Fault; why a confirmed non-actionable condition does not open Repair; how multiple Players may contribute Evidence but only one accepted event owns a Fault/stage; why an unsupported attempt remains generic; and why the current UI may withhold or disable a legal-looking action.
 7. **Repair:** machine-state change, Card disposition, accepted-Isolation or approved speculative threshold, and why Repair does not prove success.
@@ -99,7 +99,7 @@ Add Node and browser tests proving:
 - wrong actions remain unavailable or receive instructional recovery without state fabrication;
 - refresh/reload/version mismatch, exit/restart, focus restoration, scroll continuity, and modal behavior are safe;
 - click, keyboard, touch, reduced-motion, and live-announcement paths reach completion;
-- every paid tutorial action exposes its target, payment, and persistent result, including a diagnostic with no candidate effect and an intentionally demonstrated cross-Ticket result where the approved tutorial scope permits one;
+- every paid tutorial action exposes its target, payment, and persistent result, including a diagnostic with no candidate effect and, where the approved tutorial scope permits one, an intentionally demonstrated **response-Card** cross-Ticket result that does not weaken selected-Ticket Bench behavior;
 - pre-reveal help contains no hidden truth;
 - Give Up confirmation, one-intent submission, lifecycle/stat effects, post-transition reveal, and no-resume boundary match the approved engine contract;
 - every revealed required path independently passes the Builder solvability oracle; and
