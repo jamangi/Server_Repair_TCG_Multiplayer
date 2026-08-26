@@ -6,7 +6,12 @@ Beginning with TASK-011, the displayed task ID includes the recommended reasonin
 
 Active task:
 
-- [`TASK-015-HIGH: Add guided tutorials and the solo solution-reveal experience`](TASK-015-add-guided-tutorial-and-solution-reveal.md) — approved PT-007 A; now unblocked so tutorial checkpoints can bind to TASK-021's corrected selected-Ticket diagnostic contract.
+- [`TASK-023-HIGH: Correct Ticket semantic-state contrast`](TASK-023-correct-ticket-semantic-state-contrast.md) — owner-directed accessibility correction; replace the reported pale hypothesized-Candidate text on the cream Ticket with surface-aware, measured semantic styling without gameplay changes.
+
+Queued V0 training-ready sequence:
+
+- [`TASK-024-XHIGH: Author domain-sourced technical action copy`](TASK-024-author-domain-sourced-technical-action-copy.md) — rewrite and validate the 71 playable Test/Command/Repair/Validation domain records as useful technical references, make Cards and Library share that authority, separate game mechanics from learning copy, and block placeholder/internal prose.
+- [`TASK-015-HIGH: Add guided tutorials and the solo solution-reveal experience`](TASK-015-add-guided-tutorial-and-solution-reveal.md) — approved PT-007 A; queued after TASK-023/TASK-024 so tutorial checkpoints inherit legible Ticket states and reviewed reusable technical copy instead of duplicating or compensating for it.
 
 Reserved V0 illustration task:
 
@@ -16,7 +21,7 @@ Approved but deferred V2 task:
 
 - [`TASK-017-XHIGH: Create the Server Repair V2 Migration Seed`](TASK-017-create-server-repair-v2-migration-seed.md) — approved Migration Seed direction but deferred until the V0 product is training-ready; when reactivated, it audits V0 in bounded checkpoints and establishes the public dependency-inference V2 foundation without modifying V0 behavior.
 
-TASK-012-HIGH through TASK-014-XHIGH, TASK-016-HIGH, and TASK-018-HIGH through TASK-021-HIGH are complete. PT-008 B is approved and the proposed TASK-022 was withdrawn without implementation. TASK-015-HIGH is the remaining active training-ready feature task. TASK-011-HIGH may follow the training-ready sequence or proceed where asset integration permits. Return to TASK-017-XHIGH only when the project owner reactivates V2 migration.
+TASK-012-HIGH through TASK-014-XHIGH, TASK-016-HIGH, and TASK-018-HIGH through TASK-021-HIGH are complete. PT-008 B is approved and the proposed TASK-022 was withdrawn without implementation. The recommended training-ready order is TASK-023-HIGH, TASK-024-XHIGH, then TASK-015-HIGH. TASK-011-HIGH may follow that sequence or proceed where asset integration permits; TASK-024 must preserve its illustration boundary. Return to TASK-017-XHIGH only when the project owner reactivates V2 migration.
 
 Completed documentation and research tasks:
 

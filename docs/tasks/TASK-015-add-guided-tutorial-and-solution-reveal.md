@@ -2,7 +2,7 @@
 
 ## Status
 
-**Approved scope — active after completed TASK-021.** PT-007 A and the prerequisite PT-005 A reveal behavior were approved by the project owner on 2026-08-24. TASK-013, TASK-014, TASK-016, corrective TASK-018, TASK-019, TASK-020, and TASK-021 are complete. Tutorial checkpoints may now bind to the corrected selected-Ticket Bench-diagnostic contract without teaching or encoding the former post-run alternate-Ticket fallback defect.
+**Approved scope — queued after TASK-023 and TASK-024.** PT-007 A and the prerequisite PT-005 A reveal behavior were approved by the project owner on 2026-08-24. TASK-013, TASK-014, TASK-016, and corrective TASK-018 through TASK-021 are complete. TASK-023 first restores Ticket-state legibility; TASK-024 then establishes the reusable technical descriptions, notes, and mechanic/learning separation that tutorial copy must consume rather than duplicate.
 
 ## Approved authority
 
@@ -18,7 +18,7 @@ Tutorials are not substitutes for tests. They demonstrate the real engine path; 
 
 Read completely before editing:
 
-- `AGENTS.md`, root `README.md`, this task, `docs/tasks/INDEX.md`, and completed TASK-012 through TASK-014 plus TASK-016 and TASK-018 through TASK-021;
+- `AGENTS.md`, root `README.md`, this task, `docs/tasks/INDEX.md`, completed TASK-012 through TASK-014 plus TASK-016 and TASK-018 through TASK-021, then prerequisite TASK-023 and TASK-024;
 - the approved rules/profile, Ticket/Card/Knowledge/Event/projection schemas, and solution-reveal contract;
 - the final playable catalog, coverage matrix, seeded Ticket provenance, and automated-game paths;
 - all solo Play pages/session/Worker/motion/accessibility modules and TASK-010 visual references;
