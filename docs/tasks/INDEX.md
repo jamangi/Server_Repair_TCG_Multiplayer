@@ -6,17 +6,21 @@ Beginning with TASK-011, the displayed task ID includes the recommended reasonin
 
 Active task:
 
-- None. The approved V0 training-ready sequence is complete; TASK-017-XHIGH remains deferred until the project owner reactivates V2 migration.
+- [`TASK-025-HIGH: Refine Documentation and archived Ticket review`](TASK-025-refine-documentation-and-archived-ticket-review.md) — add a no-cost-until-confirmed Document Live preview, precise publication attribution, and projection-only archived-Ticket Evidence/Worklog inspection without changing frozen behavior.
 
-Queued V0 training-ready sequence:
+Queued Story Mode sequence:
 
-- The approved training-ready sequence through TASK-024 and TASK-015 is complete.
+- [`TASK-026-XHIGH: Build the declarative Story runtime foundation`](TASK-026-build-declarative-story-runtime.md) — blocked by STORY-001 through STORY-004 approval and TASK-025; define a deterministic typed interpreter, layered display model, validation, checkpoints, and portable story state without a visible production campaign.
+- [`TASK-027-XHIGH: Blueprint the Story campaign graph and Match plan`](TASK-027-blueprint-story-campaign-graph.md) — blocked by TASK-026 and STORY-003/STORY-005; specify every beat, branch, reusable setting, exact Match configuration, and solvability proof before writing full dialogue.
+- [`TASK-028-HIGH: Integrate the Story player and Match bridge`](TASK-028-integrate-story-player-and-match-bridge.md) — blocked by TASK-025 through TASK-027 and STORY-002/STORY-004/STORY-005; add the Story tab, accessible layered scene player, durable checkpoint UX, portability, and real Story→Match→result→Story handoff.
+- [`TASK-029-XHIGH: Author the Story campaign scripts and choreography`](TASK-029-author-story-campaign-scripts.md) — blocked by TASK-027/TASK-028; turn the approved graph into technically grounded dialogue, choices, route variants, and layer choreography without changing runtime or Match semantics.
+- [`TASK-030-XHIGH: Create and integrate original Story Mode art`](TASK-030-create-story-mode-art.md) — blocked by TASK-029 and STORY-006; produce provenance-complete painterly backgrounds, character variants, inserts, and responsive runtime assets from the validated script inventory.
 
 Approved but deferred V2 task:
 
 - [`TASK-017-XHIGH: Create the Server Repair V2 Migration Seed`](TASK-017-create-server-repair-v2-migration-seed.md) — approved Migration Seed direction but deferred until the V0 product is training-ready; when reactivated, it audits V0 in bounded checkpoints and establishes the public dependency-inference V2 foundation without modifying V0 behavior.
 
-TASK-011-HIGH through TASK-016-HIGH, TASK-018-HIGH through TASK-021-HIGH, TASK-023-HIGH, and TASK-024-XHIGH are complete. PT-008 B is approved and the proposed TASK-022 was withdrawn without implementation. Return to TASK-017-XHIGH only when the project owner reactivates V2 migration.
+TASK-011-HIGH through TASK-016-HIGH, TASK-018-HIGH through TASK-021-HIGH, TASK-023-HIGH, and TASK-024-XHIGH are complete. PT-008 B is approved and the proposed TASK-022 was withdrawn without implementation. Complete TASK-025 before beginning the approved Story sequence. Return to TASK-017-XHIGH only when the project owner reactivates V2 migration.
 
 Completed documentation and research tasks:
 

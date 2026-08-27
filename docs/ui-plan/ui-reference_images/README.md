@@ -2,6 +2,8 @@
 
 This folder contains the approved **Night-Shift Operations Desk** visual references: one project-owner-supplied vanilla proof of concept and its screenshot establish the TASK-010 minimum implementation floor; three original AI-generated references establish the desktop, component, and mobile targets; later project-owner-supplied studies explore Relevant and Global Diagnostic Bench compositions; a three-image TASK-016 comparison set records the post-TASK-014 baseline beside refined Global and Relevant layout directions; two TASK-020 targets refine the shared one-row Bench and spatial response hand; and two TASK-021 captures document a post-diagnostic target-continuity defect. Together they communicate composition, material, illustration density, card family grammar, responsive hierarchy, catalog-density alternatives, achievable browser-native depth, and observed interaction regressions.
 
+Future Story Mode art uses the separate original direction in [`docs/story/VISUAL_DIRECTION.md`](../../story/VISUAL_DIRECTION.md). The project-owner-supplied painterly screenshots discussed while planning that direction were visibly watermarked or of uncertain redistribution provenance, so their pixels are intentionally not committed. The written direction captures only general qualities and TASK-030 requires original production assets.
+
 They are not:
 
 - canonical card or Ticket illustrations;

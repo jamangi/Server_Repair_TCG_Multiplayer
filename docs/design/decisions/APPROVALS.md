@@ -1,6 +1,6 @@
 # Post-TASK-010 playtest approvals
 
-Status: **PT-001 D, PT-002 A, PT-003 D, PT-004 A, PT-005 A, PT-006 D, and PT-007 A approved — 2026-08-24. UI-001 A and UI-002 A approved — 2026-08-25. PT-008 B approved — 2026-08-26. The V0 training-ready track is active. Migration choices MS-001 A through MS-005 A and MS-007 A remain approved, but TASK-017 is deferred; MS-006 A's earlier parking sequence is superseded.**
+Status: **PT-001 D, PT-002 A, PT-003 D, PT-004 A, PT-005 A, PT-006 D, and PT-007 A approved — 2026-08-24. UI-001 A and UI-002 A approved — 2026-08-25. PT-008 B approved — 2026-08-26. TASK-025 may proceed without a rule choice. STORY-001 through STORY-006 are open and block TASK-026 through TASK-030. Migration choices MS-001 A through MS-005 A and MS-007 A remain approved, but TASK-017 is deferred; MS-006 A's earlier parking sequence is superseded.**
 
 ## Post-TASK-016 UI approvals
 
@@ -262,6 +262,57 @@ Keep the current rule. Once an equivalent outcome exists for the target and mach
 Allow the repeat and spend its cost, but create a typed redundant-action result only in the Worklog rather than another Evidence item. This avoids duplicate Evidence semantics, but conflicts with the established invariant that every accepted diagnostic creates a diagnostic Evidence result and makes the reproduced observation harder to find.
 
 The project owner selected B after reviewing the complexity of Option A. Frozen §11 already expresses B, so no rules-version or engine migration is required. The proposed TASK-022 was withdrawn. TASK-021-HIGH owns the necessary selected-Ticket scoping and clear completed/current-revision explanation without changing diagnostic repetition rules.
+
+## Story Mode architecture approvals
+
+These choices govern TASK-026 through TASK-030. They do not change current V0 gameplay, active-Match persistence, or the working story proposal until approved and synchronized. TASK-025 does not depend on them.
+
+### STORY-001 — Story authoring format
+
+- **A — Versioned declarative story packs (recommended).** Author chapter-sized data files containing stable labels and typed statements. A tested JavaScript interpreter executes the contract; story content cannot run arbitrary code. This gives authors scale, validation, deterministic replay, portability, and a clean security boundary.
+- **B — Trusted JavaScript modules.** Author labels and branches directly as JS functions. This is familiar and flexible but makes content capable of bypassing validation/state boundaries and makes large-scale editing/migration harder.
+- **C — A custom Ren'Py-like text language.** Build a dedicated parser and pleasant prose-first syntax. This could eventually be author-friendly, but it adds a language/tooling project before the first campaign. It may remain a future authoring front end that compiles to Option A.
+
+### STORY-002 — Durable checkpoint and interruption policy
+
+- **A — Stable boundaries plus explicit checkpoints (recommended).** Persist at scene/chapter boundaries, authored safe checkpoints, immediately before a Story Match, and after its accepted result. Leaving mid-scene restarts that bounded segment; leaving a current non-resumable Match restarts it from the pre-Match checkpoint. The UI explains restart versus resume.
+- **B — Exact statement and active-Match resume.** Serialize the program counter, layers, call stack, transition state, and full engine Match. This promises maximal continuity but greatly expands migrations, privacy, deterministic restoration, stale-content, and exploit surfaces.
+- **C — Manual chapter saves only.** Smallest contract, but routine navigation/reload can lose too much progress and feels hostile in a browser application.
+
+### STORY-003 — Branch predicate authority
+
+- **A — Typed story predicates (recommended).** Branch on approved story flags/choices, story-scoped Service Points, and normalized prior Match outcomes through a restricted condition tree. Global lifetime statistics remain available for display but do not accidentally rewrite campaign continuity.
+- **B — Service Points only.** Easy to understand but cannot express remembered choices or meaningful non-score outcomes.
+- **C — Arbitrary JavaScript predicates.** Very flexible but unreviewable, difficult to migrate, and able to couple story content to internal or hidden state.
+
+### STORY-004 — Story Match interruption
+
+- **A — Preserve the current no-active-Match-resume rule (recommended).** Persist a pre-Match Story checkpoint; if the page is left/reloaded, clearly offer to restart that configured Match. Only an authoritative terminal result advances the Story.
+- **B — Resume Story Matches only.** Add full Match serialization/restoration for campaign play while Local solo remains non-resumable. This creates two lifecycle contracts and requires a larger engine/session migration.
+- **C — Treat interruption as abandonment.** Advance an authored failure/abandon branch. This is dramatic but punishes ordinary browser interruption and can distort statistics.
+
+### STORY-005 — Story Match deck policy
+
+- **A — Use the active legal Player deck with preflight (recommended).** Each Story Match is solvability-proved against the active deck contract. If the selected deck cannot support the scenario, route to Decks with a clear requirement summary and return path; never start an unwinnable Match.
+- **B — Authored loaner deck per Match.** Guarantees a controlled teaching path and simplest proof, but weakens the purpose of deck building during the campaign.
+- **C — Let the Player choose active or loaner deck each Match.** Flexible, but doubles balance, result-context, tutorial, and narrative QA for every encounter.
+
+### STORY-006 — Production art direction and source boundary
+
+- **A — Original painterly static 2D assets (recommended).** Use [`docs/story/VISUAL_DIRECTION.md`](../../story/VISUAL_DIRECTION.md) to commission/generate original server-repair backgrounds, character variants, and inserts with complete provenance. Watermarked/uncleared reference pixels are not copied or committed.
+- **B — Require a user-supplied licensed reference pack before art production.** Strongest explicit source control but delays visual development even though a prose direction can support original work.
+- **C — Extend the current realistic gameplay-illustration language into Story scenes.** Reuses a proven pipeline and palette, but offers less distinction between narrative scenes and Cards/Tickets.
+
+Recommended reply format:
+
+```text
+STORY-001 A
+STORY-002 A
+STORY-003 A
+STORY-004 A
+STORY-005 A
+STORY-006 A
+```
 
 ## Migration Seed and Server Repair V2
 

@@ -52,7 +52,7 @@ Rejected, derivative, or superseded ideas need not remain in the active foundati
 
 ## Foundation status
 
-The V0 training-ready sequence through TASK-024 and TASK-015 is complete under approved PT-001 D, PT-002 A, PT-003 D, PT-004 A, PT-005 A, PT-006 D, and PT-007 A. TASK-011-HIGH is now the active, fully specified illustration pass against the stable 71-Card catalog and 33-Symptom Ticket vocabulary. The V2 Migration Seed direction remains approved except that MS-006 A's prior parking sequence is superseded; TASK-017 is deferred until the project owner returns to it.
+The V0 training-ready sequence through TASK-024 and TASK-015 is complete under approved PT-001 D, PT-002 A, PT-003 D, PT-004 A, PT-005 A, PT-006 D, and PT-007 A. TASK-025-HIGH is the active bounded Documentation/archive refinement. TASK-026 through TASK-030 form a proposed Story Mode sequence and remain blocked by the open STORY-001 through STORY-006 choices in `APPROVALS.md`; they do not alter frozen gameplay while unapproved. The V2 Migration Seed direction remains approved except that MS-006 A's prior parking sequence is superseded; TASK-017 is deferred until the project owner returns to it.
 
 ## Maintenance rules
 

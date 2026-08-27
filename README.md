@@ -80,6 +80,12 @@ This repository currently contains:
 
 The repository now contains both the playable rules-engine foundation and a deliberately scoped player-facing local solo client. It does not yet contain a multiplayer transport/server, Room or account runtime, campaign runtime, cloud persistence, or the production multiplayer client. The first-version rules foundation is frozen; schemas remain draft implementation contracts, and recommended models remain non-normative architecture guidance.
 
+## Planned next work
+
+[`TASK-025-HIGH`](docs/tasks/TASK-025-refine-documentation-and-archived-ticket-review.md) is the active V0 refinement: confirm Document Live through an exact preview, record what was published, and make archived Ticket Evidence/Worklog history reviewable. It does not change Documentation legality or visibility.
+
+Story Mode is planned but not implemented. Its proposed order is declarative runtime foundation (TASK-026), campaign graph and solvability-proved Match plan (TASK-027), accessible Story player and authoritative Match bridge (TASK-028), full dramatic scripts/choreography (TASK-029), then original painterly static 2D art (TASK-030). Story progress will use durable scene/Match-boundary checkpoints; this does not imply that an active local Match can be resumed. See the [task index](docs/tasks/INDEX.md), [Story README](docs/story/README.md), and pending [Story approvals](docs/design/decisions/APPROVALS.md).
+
 ## Design source of truth
 
 Read the design documents in this order:

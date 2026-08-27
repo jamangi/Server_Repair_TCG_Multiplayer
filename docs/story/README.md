@@ -14,7 +14,8 @@ Story documents may explain why a player sees a Ticket queue, Worklog, private E
 2. [`CHARACTERS.md`](CHARACTERS.md) — the player-character model and initial ensemble, including future portrait hooks.
 3. [`VOICE.md`](VOICE.md) — tone, point of view, dialogue registers, terminology, and a sample campaign-to-match transition.
 4. [`REAL_WORLD_INSPIRATION.md`](REAL_WORLD_INSPIRATION.md) — sourced notes on SMS InfoComm and the line between operational research and fictional adaptation.
-5. [`gameplay_candidates/`](gameplay_candidates/) — story-facing presentation and content ideas constrained by frozen system actions; genuinely new behavior still requires the normal design-decision lifecycle.
+5. [`VISUAL_DIRECTION.md`](VISUAL_DIRECTION.md) — an original painterly night-shift art grammar, layer-ready composition rules, and the provenance boundary for future Story Mode assets.
+6. [`gameplay_candidates/`](gameplay_candidates/) — story-facing presentation and content ideas constrained by frozen system actions; genuinely new behavior still requires the normal design-decision lifecycle.
 
 ## Authority labels
 
@@ -36,3 +37,15 @@ The loop is iterative rather than a one-way conveyor. Hypothesize and Test can r
 - [`APP_SHELL.md`](gameplay_candidates/APP_SHELL.md) — a campaign and workplace layer that can coexist with the provisional multiplayer application shell.
 
 Before promoting any story candidate, reconcile it with the frozen rules and the open questions or pressure recorded in [`docs/design/decisions/`](../design/decisions/DECISION_INDEX.md).
+
+## Planned implementation sequence
+
+Story Mode is not implemented yet. The proposed sequence is intentionally separated so architecture is proven before campaign volume makes it expensive to change:
+
+1. [`TASK-026-XHIGH`](../tasks/TASK-026-build-declarative-story-runtime.md) — versioned declarative runtime, typed conditions/statements, layer model, checkpoints, and validation.
+2. [`TASK-027-XHIGH`](../tasks/TASK-027-blueprint-story-campaign-graph.md) — complete beat/branch graph and solvability-proved Match configurations.
+3. [`TASK-028-HIGH`](../tasks/TASK-028-integrate-story-player-and-match-bridge.md) — Story tab, accessible scene player, persistence/portability, and authoritative Match bridge.
+4. [`TASK-029-XHIGH`](../tasks/TASK-029-author-story-campaign-scripts.md) — final dialogue, choices, continuity, outcome variants, and choreography.
+5. [`TASK-030-XHIGH`](../tasks/TASK-030-create-story-mode-art.md) — original painterly backgrounds, character variants, inserts, provenance, and responsive integration.
+
+The architecture deliberately borrows useful visual-novel concepts—stable labels, jump/call/return, declarative statements, and layered rendering—without adopting executable story scripts or treating another engine's syntax as this project's contract.
