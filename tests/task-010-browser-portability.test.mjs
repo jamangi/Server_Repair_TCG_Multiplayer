@@ -189,7 +189,8 @@ test('generated Play manifest is deterministic, complete, denylist-clean, and fr
   }
 
   const denylisted = /(^|\/)(?:simulation|tests?|tools?|reports?|automated_games)(?:\/|$)/;
-  assert.ok(expected.files.every((entry) => !denylisted.test(entry.path)),
+  assert.ok(expected.files.every((entry) => entry.path.startsWith('assets/play/canonical/')
+    || !denylisted.test(entry.path)),
     'server/simulation/test/report material must not be staged');
   for (const entry of expected.files.filter((file) => file.path.endsWith('.mjs'))) {
     const source = await readFile(path.join(GENERATED_PLAY_ROOT, ...entry.path.split('/')), 'utf8');

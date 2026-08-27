@@ -5,14 +5,14 @@
  * for an asset_id and never derive a filename from a card title or array index.
  */
 
-export const PLAY_ASSET_MANIFEST_VERSION = "play-assets-v1";
+export const PLAY_ASSET_MANIFEST_VERSION = "play-assets-v2";
 export const DEFAULT_PLAY_ASSET_MANIFEST_URL = new URL(
   "../../assets/play/assets.json",
   import.meta.url,
 );
 
 const STABLE_ID = /^[a-z0-9]+(?:[._-][a-z0-9]+)*$/;
-const SAFE_ASSET_PATH = /^(?:[a-z0-9_-]+\/)*[a-z0-9_-]+\.svg$/;
+const SAFE_ASSET_PATH = /^(?:[a-z0-9_-]+\/)*[a-z0-9_-]+\.(?:avif|png|svg|webp)$/;
 const MANIFEST_KEYS = new Set(["asset_manifest_version", "assets", "profile_icons"]);
 const ASSET_KEYS = new Set(["src", "kind", "category", "alt_text"]);
 const PROFILE_ICON_KEYS = new Set(["asset_id", "label"]);
@@ -305,7 +305,10 @@ export function createArtResolver({
     });
   }
 
-  function resolveTicketArt(ticket, { decorative = false } = {}) {
+  function resolveTicketArt(ticket, {
+    decorative = false,
+    visibleSymptomIds = ticket?.visible_symptom_ids ?? [],
+  } = {}) {
     const direct = illustrationOf(ticket);
     if (direct) {
       const resolved = assetResult(direct.assetId, {
@@ -317,6 +320,20 @@ export function createArtResolver({
         return resolved;
       }
     }
+
+    const publicSymptomId = Array.isArray(visibleSymptomIds)
+      ? visibleSymptomIds.find((id) => isNonEmptyString(id))
+      : null;
+    if (publicSymptomId) {
+      const inherited = resolveEntityArt(publicSymptomId, { decorative });
+      if (inherited) {
+        return Object.freeze({
+          ...inherited,
+          source: "public-symptom",
+        });
+      }
+    }
+
     return assetResult("placeholder.ticket.storage", {
       altText: decorative
         ? ""

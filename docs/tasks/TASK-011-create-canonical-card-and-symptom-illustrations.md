@@ -2,7 +2,7 @@
 
 ## Status
 
-**Ready.** The expanded 71-Card playable catalog, 33-Symptom Ticket vocabulary, technical action copy, board composition, and tutorial surfaces are stable enough to illustrate without designing against placeholders. This task is the active V0 task.
+**Complete — 2026-08-26.** All 71 published playable actions and all 33 public gameplay Symptoms now have reviewed canonical art, Cards inherit their primary-domain illustration, generated Tickets inherit the first public visible-Symptom panorama without hidden-Fault input, Library and Play share the manifest-backed resolver, and deterministic provenance/dimension/byte/staging/browser gates pass.
 
 ## Objective
 
@@ -206,3 +206,34 @@ Do not change stable entity IDs, gameplay contracts, costs, legal targets, outco
 ## Completion boundary
 
 Complete only when all 71 published playable actions and all 33 gameplay Symptoms have reviewed canonical, performant, technically plausible art; Cards inherit rather than duplicate domain illustrations; generated Tickets use deterministic public-Symptom panoramas without hidden-information leakage; the same stable assets enrich Library and Play; every real slot crops without distortion; fallbacks remain reliable; provenance and review are auditable; staged Pages bytes are deterministic; and the full gameplay/test matrix remains behaviorally unchanged.
+
+## Completion record — 2026-08-26
+
+The completed canonical set contains 104 approved illustrations: 71 action images (37 Tests, 13 Commands, 12 Repairs, and 9 Verifications) at 800×450 delivery resolution, plus 33 Symptom panoramas at 1200×360. The staged WebP set is 6,184,304 bytes; every file is within its individual budget and there are no approved size exceptions. High-resolution masters, generation/edit provenance, prompts, review decisions, the deterministic inventory, 14 family/subsystem contact sheets, and five representative UI screenshots are committed under `art_sources/task-011/`, `docs/art/`, and `tests/visual/task-011/`.
+
+The implementation adds canonical illustration metadata to the scoped domain records and synchronized gameplay snapshots, versions the safe raster asset manifest, stages byte-identical browser assets, and provides shared Library/Play resolution. Cards inherit from their primary domain record. Tickets use direct art when present, otherwise the first public visible Symptom, without hidden-Fault or outcome inputs. Canonical-art load failures retain the established intentional fallbacks.
+
+Recorded verification:
+
+| Command | Exit | Result |
+| --- | ---: | --- |
+| `node tools/apply-task-011-art-metadata.mjs` | 0 | 104 domain records, 11 foundation projections, and 104 assets synchronized |
+| `node viewer/scripts/build-task-014-content.mjs` | 0 | 71 Cards and 12 paths regenerated from 257 domain records |
+| `node viewer/scripts/build-manifest.mjs` | 0 | 9 Viewer content packs indexed |
+| `node viewer/scripts/build-play-assets.mjs` | 0 | 147 staged assets generated |
+| `node viewer/scripts/verify-play-assets.mjs` | 0 | 147 staged assets verified byte-for-byte |
+| `node viewer/scripts/verify-task-011-art.mjs` | 0 | 104 canonical illustrations and 104 approvals verified; 6,184,304 staged bytes |
+| `node --check viewer/js/app.js` | 0 | Passed |
+| `node --check viewer/js/data-loader.js` | 0 | Passed |
+| `node --check viewer/js/entity-types.js` | 0 | Passed |
+| `node --test tests/viewer-baseline.test.mjs` | 0 | 3 passed, 0 failed |
+| `node --test tests/viewer-content-schema.test.mjs` | 0 | 3 passed, 0 failed |
+| `node --test tests/task-011-canonical-art.test.mjs` | 0 | 6 passed, 0 failed |
+| `node --test tests/*.mjs` | 0 | 151 passed, 0 failed |
+| `node tools/run-automated-games.mjs --verify-report automated_games/task-009-foundation-v1` | 0 | 22 rows verified; 12 successes, 10 retained exceptions, 0 mismatches |
+| `node tools/run-task-014-campaign.mjs --verify-report automated_games/task-014-playable-coverage-v3` | 0 | 13 rows verified, 0 mismatches |
+| `pnpm exec playwright test tests/browser/task-011-canonical-art.spec.mjs` | 0 | 6 passed, 6 intentionally skipped across the project matrix |
+| `pnpm exec playwright test` | 0 | 76 passed, 88 intentionally skipped, 0 failed |
+| `git diff --check` | 0 | Passed |
+
+Changed files are confined to the task-approved domain metadata and generated projections; canonical source/delivery assets; art inventory, provenance, contact sheets, and visual evidence; the shared resolver and affected Library/Card/Ticket presentation; deterministic asset tooling; focused tests and narrowly required existing-test compatibility; generated manifests; and directly affected documentation. Unresolved items: none.

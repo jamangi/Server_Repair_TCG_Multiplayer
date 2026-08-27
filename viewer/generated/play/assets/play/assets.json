@@ -1,77 +1,83 @@
 {
-  "asset_manifest_version": "play-assets-v1",
+  "asset_manifest_version": "play-assets-v2",
   "assets": {
-    "decorative.home.night_shift_desk": {
-      "src": "decorative/night-shift-desk.svg",
-      "kind": "decorative",
-      "category": "environment",
-      "alt_text": ""
-    },
-    "placeholder.card.test": {
-      "src": "placeholders/test-diagnostics.svg",
-      "kind": "placeholder",
-      "category": "test",
-      "alt_text": "Abstract diagnostic scan across illuminated server bays."
-    },
-    "placeholder.card.command": {
-      "src": "placeholders/command-console.svg",
-      "kind": "placeholder",
+    "art.command.ipmi.sel_elist": {
+      "src": "canonical/actions/commands/command-ipmi-sel-elist.webp",
+      "kind": "canonical",
       "category": "command",
-      "alt_text": "Abstract terminal display and structured system output."
+      "alt_text": "Dark service console with abstract List Detailed IPMI System Events output beside enterprise server hardware."
     },
-    "placeholder.card.repair": {
-      "src": "placeholders/repair-bench.svg",
-      "kind": "placeholder",
-      "category": "repair",
-      "alt_text": "Abstract repair bench with an open drive bay and service tool."
+    "art.command.linux.dhclient": {
+      "src": "canonical/actions/commands/command-linux-dhclient.webp",
+      "kind": "canonical",
+      "category": "command",
+      "alt_text": "Dark service console with abstract dhclient Lease Request output beside enterprise server hardware."
     },
-    "placeholder.card.verify": {
-      "src": "placeholders/verify-readout.svg",
-      "kind": "placeholder",
-      "category": "verify",
-      "alt_text": "Abstract green validation pulse across stable server readouts."
+    "art.command.linux.dmesg": {
+      "src": "canonical/actions/commands/command-linux-dmesg.webp",
+      "kind": "canonical",
+      "category": "command",
+      "alt_text": "Dark service console with abstract dmesg output beside enterprise server hardware."
     },
-    "placeholder.card.generic": {
-      "src": "placeholders/generic-server.svg",
-      "kind": "placeholder",
-      "category": "generic",
-      "alt_text": "Abstract server rack under a focused inspection light."
+    "art.command.linux.ethtool": {
+      "src": "canonical/actions/commands/command-linux-ethtool.webp",
+      "kind": "canonical",
+      "category": "command",
+      "alt_text": "Dark service console with abstract ethtool output beside enterprise server hardware."
     },
-    "placeholder.ticket.storage": {
-      "src": "placeholders/ticket-storage.svg",
-      "kind": "placeholder",
-      "category": "ticket",
-      "alt_text": "Storage server bays and cable paths under night-shift lighting."
+    "art.command.linux.free_h": {
+      "src": "canonical/actions/commands/command-linux-free-h.webp",
+      "kind": "canonical",
+      "category": "command",
+      "alt_text": "Dark service console with abstract free -h output beside enterprise server hardware."
     },
-    "cosmetic.profile.console": {
-      "src": "profile-icons/console-specialist.svg",
-      "kind": "cosmetic",
-      "category": "profile_icon",
-      "alt_text": "Console specialist profile icon."
+    "art.command.linux.ip_addr": {
+      "src": "canonical/actions/commands/command-linux-ip-addr.webp",
+      "kind": "canonical",
+      "category": "command",
+      "alt_text": "Dark service console with abstract ip addr output beside enterprise server hardware."
     },
-    "cosmetic.profile.field": {
-      "src": "profile-icons/field-technician.svg",
-      "kind": "cosmetic",
-      "category": "profile_icon",
-      "alt_text": "Field technician profile icon."
+    "art.command.linux.ip_route": {
+      "src": "canonical/actions/commands/command-linux-ip-route.webp",
+      "kind": "canonical",
+      "category": "command",
+      "alt_text": "Dark service console with abstract ip route output beside enterprise server hardware."
     },
-    "cosmetic.profile.storage": {
-      "src": "profile-icons/storage-specialist.svg",
-      "kind": "cosmetic",
-      "category": "profile_icon",
-      "alt_text": "Storage specialist profile icon."
+    "art.command.linux.journalctl": {
+      "src": "canonical/actions/commands/command-linux-journalctl.webp",
+      "kind": "canonical",
+      "category": "command",
+      "alt_text": "Dark service console with abstract journalctl output beside enterprise server hardware."
     },
-    "cosmetic.profile.systems": {
-      "src": "profile-icons/systems-operator.svg",
-      "kind": "cosmetic",
-      "category": "profile_icon",
-      "alt_text": "Systems operator profile icon."
+    "art.command.linux.lsblk": {
+      "src": "canonical/actions/commands/command-linux-lsblk.webp",
+      "kind": "canonical",
+      "category": "command",
+      "alt_text": "Dark service console with abstract lsblk output beside enterprise server hardware."
+    },
+    "art.command.linux.lspci": {
+      "src": "canonical/actions/commands/command-linux-lspci.webp",
+      "kind": "canonical",
+      "category": "command",
+      "alt_text": "Dark service console with abstract lspci output beside enterprise server hardware."
+    },
+    "art.command.linux.nvme_smart_log": {
+      "src": "canonical/actions/commands/command-linux-nvme-smart-log.webp",
+      "kind": "canonical",
+      "category": "command",
+      "alt_text": "Dark service console with abstract Read NVMe Health Log output beside enterprise server hardware."
     },
     "art.command.linux.smartctl": {
-      "src": "placeholders/command-console.svg",
-      "kind": "placeholder",
+      "src": "canonical/actions/commands/command-linux-smartctl.webp",
+      "kind": "canonical",
       "category": "command",
-      "alt_text": "Technical reference placeholder for smartctl."
+      "alt_text": "Dark service console with abstract smartctl output beside enterprise server hardware."
+    },
+    "art.command.network.ping": {
+      "src": "canonical/actions/commands/command-network-ping.webp",
+      "kind": "canonical",
+      "category": "command",
+      "alt_text": "Dark service console with abstract ping output beside enterprise server hardware."
     },
     "art.component.storage.raid_controller": {
       "src": "placeholders/generic-server.svg",
@@ -115,59 +121,503 @@
       "category": "fault",
       "alt_text": "Technical reference placeholder for a failed SAS drive."
     },
+    "art.repair.boot.correct_order": {
+      "src": "canonical/actions/repairs/repair-boot-correct-order.webp",
+      "kind": "canonical",
+      "category": "repair_procedure",
+      "alt_text": "Correct Boot Order in progress at a night-shift server service bench, before verification."
+    },
+    "art.repair.memory.replace_dimm": {
+      "src": "canonical/actions/repairs/repair-memory-replace-dimm.webp",
+      "kind": "canonical",
+      "category": "repair_procedure",
+      "alt_text": "Replace Failed DIMM in progress at a night-shift server service bench, before verification."
+    },
+    "art.repair.memory.reseat_dimm": {
+      "src": "canonical/actions/repairs/repair-memory-reseat-dimm.webp",
+      "kind": "canonical",
+      "category": "repair_procedure",
+      "alt_text": "Reseat DIMM in progress at a night-shift server service bench, before verification."
+    },
+    "art.repair.network.correct_static_ip": {
+      "src": "canonical/actions/repairs/repair-network-correct-static-ip.webp",
+      "kind": "canonical",
+      "category": "repair_procedure",
+      "alt_text": "Correct Static IP Configuration in progress at a night-shift server service bench, before verification."
+    },
+    "art.repair.network.replace_cable": {
+      "src": "canonical/actions/repairs/repair-network-replace-cable.webp",
+      "kind": "canonical",
+      "category": "repair_procedure",
+      "alt_text": "Replace Ethernet Cable in progress at a night-shift server service bench, before verification."
+    },
+    "art.repair.power.replace_psu": {
+      "src": "canonical/actions/repairs/repair-power-replace-psu.webp",
+      "kind": "canonical",
+      "category": "repair_procedure",
+      "alt_text": "Replace Failed PSU in progress at a night-shift server service bench, before verification."
+    },
+    "art.repair.power.reseat_psu": {
+      "src": "canonical/actions/repairs/repair-power-reseat-psu.webp",
+      "kind": "canonical",
+      "category": "repair_procedure",
+      "alt_text": "Reseat PSU in progress at a night-shift server service bench, before verification."
+    },
     "art.repair.storage.rebuild_array": {
       "src": "placeholders/repair-bench.svg",
       "kind": "placeholder",
       "category": "repair_procedure",
       "alt_text": "Technical reference placeholder for rebuilding a RAID array."
     },
-    "art.repair.storage.replace_raid_member": {
-      "src": "placeholders/repair-bench.svg",
-      "kind": "placeholder",
+    "art.repair.storage.replace_nvme": {
+      "src": "canonical/actions/repairs/repair-storage-replace-nvme.webp",
+      "kind": "canonical",
       "category": "repair_procedure",
-      "alt_text": "Technical reference placeholder for replacing a RAID member."
+      "alt_text": "Replace Failed NVMe Device in progress at a night-shift server service bench, before verification."
+    },
+    "art.repair.storage.replace_raid_member": {
+      "src": "canonical/actions/repairs/repair-storage-replace-raid-member.webp",
+      "kind": "canonical",
+      "category": "repair_procedure",
+      "alt_text": "Replace Failed RAID Member in progress at a night-shift server service bench, before verification."
     },
     "art.repair.storage.reseat_cable": {
-      "src": "placeholders/repair-bench.svg",
-      "kind": "placeholder",
+      "src": "canonical/actions/repairs/repair-storage-reseat-cable.webp",
+      "kind": "canonical",
       "category": "repair_procedure",
-      "alt_text": "Technical reference placeholder for reseating a storage cable."
+      "alt_text": "Reseat Storage Cable in progress at a night-shift server service bench, before verification."
+    },
+    "art.repair.thermal.clean_cooling_path": {
+      "src": "canonical/actions/repairs/repair-thermal-clean-cooling-path.webp",
+      "kind": "canonical",
+      "category": "repair_procedure",
+      "alt_text": "Clean Cooling Path in progress at a night-shift server service bench, before verification."
+    },
+    "art.repair.thermal.replace_fan": {
+      "src": "canonical/actions/repairs/repair-thermal-replace-fan.webp",
+      "kind": "canonical",
+      "category": "repair_procedure",
+      "alt_text": "Replace Chassis Fan in progress at a night-shift server service bench, before verification."
+    },
+    "art.symptom.boot.bootloader_error": {
+      "src": "canonical/symptoms/boot/symptom-boot-bootloader-error.webp",
+      "kind": "canonical",
+      "category": "symptom",
+      "alt_text": "Wide night-shift server view showing storage is detected but OS boot does not proceed normally without identifying its cause."
+    },
+    "art.symptom.boot.memory_warning": {
+      "src": "canonical/symptoms/memory/symptom-boot-memory-warning.webp",
+      "kind": "canonical",
+      "category": "symptom",
+      "alt_text": "Wide night-shift server view showing firmware or management telemetry reports memory trouble without identifying its cause."
+    },
+    "art.symptom.boot.no_boot_device": {
+      "src": "canonical/symptoms/boot/symptom-boot-no-boot-device.webp",
+      "kind": "canonical",
+      "category": "symptom",
+      "alt_text": "Wide night-shift server view showing pOST completes but no usable boot device is found without identifying its cause."
+    },
+    "art.symptom.boot.no_post": {
+      "src": "canonical/symptoms/boot/symptom-boot-no-post.webp",
+      "kind": "canonical",
+      "category": "symptom",
+      "alt_text": "Wide night-shift server view showing power-On Self-Test does not complete without identifying its cause."
+    },
+    "art.symptom.boot.wrong_device": {
+      "src": "canonical/symptoms/boot/symptom-boot-wrong-device.webp",
+      "kind": "canonical",
+      "category": "symptom",
+      "alt_text": "Wide night-shift server view showing the server attempts to boot from an unintended source without identifying its cause."
+    },
+    "art.symptom.firmware.settings_reset": {
+      "src": "canonical/symptoms/firmware/symptom-firmware-settings-reset.webp",
+      "kind": "canonical",
+      "category": "symptom",
+      "alt_text": "Wide night-shift server view showing firmware settings or clock values unexpectedly revert without identifying its cause."
+    },
+    "art.symptom.firmware.update_failed": {
+      "src": "canonical/symptoms/firmware/symptom-firmware-update-failed.webp",
+      "kind": "canonical",
+      "category": "symptom",
+      "alt_text": "Wide night-shift server view showing an approved firmware job is rejected, interrupted, or cannot initialize its target without identifying its cause."
+    },
+    "art.symptom.management.alert_persists": {
+      "src": "canonical/symptoms/management/symptom-management-alert-persists.webp",
+      "kind": "canonical",
+      "category": "symptom",
+      "alt_text": "Wide night-shift server view showing management continues to report a component fault after current checks show the component healthy without identifying its cause."
+    },
+    "art.symptom.management.bmc_not_responding": {
+      "src": "canonical/symptoms/management/symptom-management-bmc-not-responding.webp",
+      "kind": "canonical",
+      "category": "symptom",
+      "alt_text": "Wide night-shift server view showing the server reports that its management controller is unavailable or never becomes ready without identifying its cause."
+    },
+    "art.symptom.management.lifecycle_unavailable": {
+      "src": "canonical/symptoms/management/symptom-management-lifecycle-unavailable.webp",
+      "kind": "canonical",
+      "category": "symptom",
+      "alt_text": "Wide night-shift server view showing firmware inventory, update, or preboot lifecycle functions are disabled or inaccessible without identifying its cause."
+    },
+    "art.symptom.memory.ecc_errors": {
+      "src": "canonical/symptoms/memory/symptom-memory-ecc-errors.webp",
+      "kind": "canonical",
+      "category": "symptom",
+      "alt_text": "Wide night-shift server view showing corrected or uncorrected memory errors are reported without identifying its cause."
+    },
+    "art.symptom.memory.reduced_capacity": {
+      "src": "canonical/symptoms/memory/symptom-memory-reduced-capacity.webp",
+      "kind": "canonical",
+      "category": "symptom",
+      "alt_text": "Wide night-shift server view showing less memory is detected than expected without identifying its cause."
+    },
+    "art.symptom.network.link_flapping": {
+      "src": "canonical/symptoms/network/symptom-network-link-flapping.webp",
+      "kind": "canonical",
+      "category": "symptom",
+      "alt_text": "Wide night-shift server view showing a network port repeatedly transitions between link up and link down without identifying its cause."
+    },
+    "art.symptom.network.no_connectivity": {
+      "src": "canonical/symptoms/network/symptom-network-no-connectivity.webp",
+      "kind": "canonical",
+      "category": "symptom",
+      "alt_text": "Wide night-shift server view showing expected network destinations cannot be reached without identifying its cause."
+    },
+    "art.symptom.network.no_dhcp_lease": {
+      "src": "canonical/symptoms/network/symptom-network-no-dhcp-lease.webp",
+      "kind": "canonical",
+      "category": "symptom",
+      "alt_text": "Wide night-shift server view showing a DHCP client does not obtain the expected lease without identifying its cause."
+    },
+    "art.symptom.network.no_link": {
+      "src": "canonical/symptoms/network/symptom-network-no-link.webp",
+      "kind": "canonical",
+      "category": "symptom",
+      "alt_text": "Wide night-shift server view showing network interface reports no physical carrier without identifying its cause."
+    },
+    "art.symptom.network.wrong_ip": {
+      "src": "canonical/symptoms/network/symptom-network-wrong-ip.webp",
+      "kind": "canonical",
+      "category": "symptom",
+      "alt_text": "Wide night-shift server view showing address, prefix, or gateway is incorrect without identifying its cause."
+    },
+    "art.symptom.pcie.device_missing": {
+      "src": "canonical/symptoms/pcie/symptom-pcie-device-missing.webp",
+      "kind": "canonical",
+      "category": "symptom",
+      "alt_text": "Wide night-shift server view showing an expected PCIe device does not enumerate without identifying its cause."
+    },
+    "art.symptom.power.no_power": {
+      "src": "canonical/symptoms/power/symptom-power-no-power.webp",
+      "kind": "canonical",
+      "category": "symptom",
+      "alt_text": "Wide night-shift server view showing no normal response to power-on without identifying its cause."
+    },
+    "art.symptom.power.redundancy_warning": {
+      "src": "canonical/symptoms/power/symptom-power-redundancy-warning.webp",
+      "kind": "canonical",
+      "category": "symptom",
+      "alt_text": "Wide night-shift server view showing one redundant power path is unavailable without identifying its cause."
+    },
+    "art.symptom.power.voltage_out_of_range": {
+      "src": "canonical/symptoms/power/symptom-power-voltage-out-of-range.webp",
+      "kind": "canonical",
+      "category": "symptom",
+      "alt_text": "Wide night-shift server view showing management telemetry or POST reports an invalid voltage or power-good condition without identifying its cause."
+    },
+    "art.symptom.storage.drive_fault_led": {
+      "src": "canonical/symptoms/storage/symptom-storage-drive-fault-led.webp",
+      "kind": "canonical",
+      "category": "symptom",
+      "alt_text": "Wide night-shift server view showing a drive bay or management interface reports a fault without identifying its cause."
     },
     "art.symptom.storage.drive_missing": {
-      "src": "placeholders/ticket-storage.svg",
-      "kind": "placeholder",
+      "src": "canonical/symptoms/storage/symptom-storage-drive-missing.webp",
+      "kind": "canonical",
       "category": "symptom",
-      "alt_text": "Technical reference placeholder for a missing drive symptom."
+      "alt_text": "Wide night-shift server view showing an expected drive is not detected without identifying its cause."
+    },
+    "art.symptom.storage.io_errors": {
+      "src": "canonical/symptoms/storage/symptom-storage-io-errors.webp",
+      "kind": "canonical",
+      "category": "symptom",
+      "alt_text": "Wide night-shift server view showing storage operations generate errors or timeouts without identifying its cause."
+    },
+    "art.symptom.storage.predictive_failure_warning": {
+      "src": "canonical/symptoms/storage/symptom-storage-predictive-failure-warning.webp",
+      "kind": "canonical",
+      "category": "symptom",
+      "alt_text": "Wide night-shift server view showing a drive remains online but reports failure prediction, excessive media errors, or exhausted endurance without identifying its cause."
     },
     "art.symptom.storage.raid_degraded": {
-      "src": "placeholders/verify-readout.svg",
-      "kind": "placeholder",
+      "src": "canonical/symptoms/storage/symptom-storage-raid-degraded.webp",
+      "kind": "canonical",
       "category": "symptom",
-      "alt_text": "Technical reference placeholder for a degraded RAID symptom."
+      "alt_text": "Wide night-shift server view showing array redundancy is reduced without identifying its cause."
+    },
+    "art.symptom.system.device_errors": {
+      "src": "canonical/symptoms/system/symptom-system-device-errors.webp",
+      "kind": "canonical",
+      "category": "symptom",
+      "alt_text": "Wide night-shift server view showing several unrelated devices report errors without identifying its cause."
+    },
+    "art.symptom.system.intermittent_crash": {
+      "src": "canonical/symptoms/system/symptom-system-intermittent-crash.webp",
+      "kind": "canonical",
+      "category": "symptom",
+      "alt_text": "Wide night-shift server view showing workload or OS crashes sporadically without identifying its cause."
+    },
+    "art.symptom.system.random_reboot": {
+      "src": "canonical/symptoms/system/symptom-system-random-reboot.webp",
+      "kind": "canonical",
+      "category": "symptom",
+      "alt_text": "Wide night-shift server view showing server restarts without intended operator action without identifying its cause."
+    },
+    "art.symptom.thermal.fan_warning": {
+      "src": "canonical/symptoms/thermal/symptom-thermal-fan-warning.webp",
+      "kind": "canonical",
+      "category": "symptom",
+      "alt_text": "Wide night-shift server view showing a fan is missing, stalled, or below expected speed without identifying its cause."
+    },
+    "art.symptom.thermal.fans_loud": {
+      "src": "canonical/symptoms/thermal/symptom-thermal-fans-loud.webp",
+      "kind": "canonical",
+      "category": "symptom",
+      "alt_text": "Wide night-shift server view showing fans run unusually fast or loudly without identifying its cause."
+    },
+    "art.symptom.thermal.high_cpu_temp": {
+      "src": "canonical/symptoms/thermal/symptom-thermal-high-cpu-temp.webp",
+      "kind": "canonical",
+      "category": "symptom",
+      "alt_text": "Wide night-shift server view showing processor temperature is above expected range without identifying its cause."
+    },
+    "art.symptom.thermal.shutdown_under_load": {
+      "src": "canonical/symptoms/thermal/symptom-thermal-shutdown-under-load.webp",
+      "kind": "canonical",
+      "category": "symptom",
+      "alt_text": "Wide night-shift server view showing server powers off or resets during sustained load without identifying its cause."
+    },
+    "art.test.boot.device_inventory": {
+      "src": "canonical/actions/tests/test-boot-device-inventory.webp",
+      "kind": "canonical",
+      "category": "test",
+      "alt_text": "Night-shift server test setup for Firmware Boot Device Inventory, staged without indicating a result."
+    },
+    "art.test.boot.post_code_analysis": {
+      "src": "canonical/actions/tests/test-boot-post-code-analysis.webp",
+      "kind": "canonical",
+      "category": "test",
+      "alt_text": "Night-shift server test setup for POST Code Analysis, staged without indicating a result."
+    },
+    "art.test.boot.post_observation": {
+      "src": "canonical/actions/tests/test-boot-post-observation.webp",
+      "kind": "canonical",
+      "category": "test",
+      "alt_text": "Night-shift server test setup for POST Observation, staged without indicating a result."
+    },
+    "art.test.compute.socket_magnified_inspection": {
+      "src": "canonical/actions/tests/test-compute-socket-magnified-inspection.webp",
+      "kind": "canonical",
+      "category": "test",
+      "alt_text": "Night-shift server test setup for Magnified CPU Socket Inspection, staged without indicating a result."
+    },
+    "art.test.cooling.location_cross_substitution": {
+      "src": "canonical/actions/tests/test-cooling-location-cross-substitution.webp",
+      "kind": "canonical",
+      "category": "test",
+      "alt_text": "Night-shift server test setup for Fan-to-Location Cross-Substitution, staged without indicating a result."
+    },
+    "art.test.electrical.continuity": {
+      "src": "canonical/actions/tests/test-electrical-continuity.webp",
+      "kind": "canonical",
+      "category": "test",
+      "alt_text": "Night-shift server test setup for Continuity Test, staged without indicating a result."
+    },
+    "art.test.firmware.settings_review": {
+      "src": "canonical/actions/tests/test-firmware-settings-review.webp",
+      "kind": "canonical",
+      "category": "test",
+      "alt_text": "Night-shift server test setup for Firmware Settings Review, staged without indicating a result."
+    },
+    "art.test.firmware.version_compatibility": {
+      "src": "canonical/actions/tests/test-firmware-version-compatibility.webp",
+      "kind": "canonical",
+      "category": "test",
+      "alt_text": "Night-shift server test setup for Firmware Version Compatibility Review, staged without indicating a result."
+    },
+    "art.test.general.minimum_configuration": {
+      "src": "canonical/actions/tests/test-general-minimum-configuration.webp",
+      "kind": "canonical",
+      "category": "test",
+      "alt_text": "Night-shift server test setup for Minimum Configuration Test, staged without indicating a result."
     },
     "art.test.general.visual_inspection": {
-      "src": "placeholders/test-diagnostics.svg",
-      "kind": "placeholder",
+      "src": "canonical/actions/tests/test-general-visual-inspection.webp",
+      "kind": "canonical",
       "category": "test",
-      "alt_text": "Technical reference placeholder for visual inspection."
+      "alt_text": "Night-shift server test setup for Visual Inspection, staged without indicating a result."
+    },
+    "art.test.management.bmc_recovery_state": {
+      "src": "canonical/actions/tests/test-management-bmc-recovery-state.webp",
+      "kind": "canonical",
+      "category": "test",
+      "alt_text": "Night-shift server test setup for BMC Recovery-State Test, staged without indicating a result."
+    },
+    "art.test.management.event_log_freshness": {
+      "src": "canonical/actions/tests/test-management-event-log-freshness.webp",
+      "kind": "canonical",
+      "category": "test",
+      "alt_text": "Night-shift server test setup for Event Log Freshness Test, staged without indicating a result."
+    },
+    "art.test.memory.diagnostic": {
+      "src": "canonical/actions/tests/test-memory-diagnostic.webp",
+      "kind": "canonical",
+      "category": "test",
+      "alt_text": "Night-shift server test setup for Memory Diagnostic, staged without indicating a result."
+    },
+    "art.test.memory.known_good_substitution": {
+      "src": "canonical/actions/tests/test-memory-known-good-substitution.webp",
+      "kind": "canonical",
+      "category": "test",
+      "alt_text": "Night-shift server test setup for Known-Good DIMM Substitution, staged without indicating a result."
+    },
+    "art.test.memory.single_dimm_isolation": {
+      "src": "canonical/actions/tests/test-memory-single-dimm-isolation.webp",
+      "kind": "canonical",
+      "category": "test",
+      "alt_text": "Night-shift server test setup for Single-DIMM Isolation, staged without indicating a result."
+    },
+    "art.test.network.cable_substitution": {
+      "src": "canonical/actions/tests/test-network-cable-substitution.webp",
+      "kind": "canonical",
+      "category": "test",
+      "alt_text": "Night-shift server test setup for Known-Good Ethernet Cable Test, staged without indicating a result."
+    },
+    "art.test.network.dhcp_pool_audit": {
+      "src": "canonical/actions/tests/test-network-dhcp-pool-audit.webp",
+      "kind": "canonical",
+      "category": "test",
+      "alt_text": "Night-shift server test setup for DHCP Address Pool Audit, staged without indicating a result."
+    },
+    "art.test.network.dhcp_transaction_trace": {
+      "src": "canonical/actions/tests/test-network-dhcp-transaction-trace.webp",
+      "kind": "canonical",
+      "category": "test",
+      "alt_text": "Night-shift server test setup for DHCP Transaction Trace, staged without indicating a result."
+    },
+    "art.test.network.interface_config": {
+      "src": "canonical/actions/tests/test-network-interface-config.webp",
+      "kind": "canonical",
+      "category": "test",
+      "alt_text": "Night-shift server test setup for Interface Configuration Inspection, staged without indicating a result."
+    },
+    "art.test.network.link": {
+      "src": "canonical/actions/tests/test-network-link.webp",
+      "kind": "canonical",
+      "category": "test",
+      "alt_text": "Night-shift server test setup for Network Link Test, staged without indicating a result."
+    },
+    "art.test.network.link_counter_soak": {
+      "src": "canonical/actions/tests/test-network-link-counter-soak.webp",
+      "kind": "canonical",
+      "category": "test",
+      "alt_text": "Night-shift server test setup for Network Link and Counter Soak, staged without indicating a result."
+    },
+    "art.test.network.ping": {
+      "src": "canonical/actions/tests/test-network-ping.webp",
+      "kind": "canonical",
+      "category": "test",
+      "alt_text": "Night-shift server test setup for Ping Connectivity Test, staged without indicating a result."
+    },
+    "art.test.pcie.inventory": {
+      "src": "canonical/actions/tests/test-pcie-inventory.webp",
+      "kind": "canonical",
+      "category": "test",
+      "alt_text": "Night-shift server test setup for PCIe Device Inventory, staged without indicating a result."
+    },
+    "art.test.power.distribution_path_isolation": {
+      "src": "canonical/actions/tests/test-power-distribution-path-isolation.webp",
+      "kind": "canonical",
+      "category": "test",
+      "alt_text": "Night-shift server test setup for Power Distribution Path Isolation, staged without indicating a result."
+    },
+    "art.test.power.known_good_psu": {
+      "src": "canonical/actions/tests/test-power-known-good-psu.webp",
+      "kind": "canonical",
+      "category": "test",
+      "alt_text": "Night-shift server test setup for Known-Good PSU Test, staged without indicating a result."
+    },
+    "art.test.power.output_voltage_measurement": {
+      "src": "canonical/actions/tests/test-power-output-voltage-measurement.webp",
+      "kind": "canonical",
+      "category": "test",
+      "alt_text": "Night-shift server test setup for Power Output Voltage Measurement, staged without indicating a result."
+    },
+    "art.test.power.psu_status": {
+      "src": "canonical/actions/tests/test-power-psu-status.webp",
+      "kind": "canonical",
+      "category": "test",
+      "alt_text": "Night-shift server test setup for PSU Status Inspection, staged without indicating a result."
+    },
+    "art.test.power.residual_power_drain": {
+      "src": "canonical/actions/tests/test-power-residual-power-drain.webp",
+      "kind": "canonical",
+      "category": "test",
+      "alt_text": "Night-shift server test setup for Residual-Power Drain Test, staged without indicating a result."
+    },
+    "art.test.storage.bay_path_isolation": {
+      "src": "canonical/actions/tests/test-storage-bay-path-isolation.webp",
+      "kind": "canonical",
+      "category": "test",
+      "alt_text": "Night-shift server test setup for Drive Bay Path Isolation, staged without indicating a result."
     },
     "art.test.storage.device_inventory": {
-      "src": "placeholders/test-diagnostics.svg",
-      "kind": "placeholder",
+      "src": "canonical/actions/tests/test-storage-device-inventory.webp",
+      "kind": "canonical",
       "category": "test",
-      "alt_text": "Technical reference placeholder for storage device inventory."
+      "alt_text": "Night-shift server test setup for Storage Device Inventory, staged without indicating a result."
     },
     "art.test.storage.drive_health": {
-      "src": "placeholders/test-diagnostics.svg",
-      "kind": "placeholder",
+      "src": "canonical/actions/tests/test-storage-drive-health.webp",
+      "kind": "canonical",
       "category": "test",
-      "alt_text": "Technical reference placeholder for drive health testing."
+      "alt_text": "Night-shift server test setup for Drive Health Test, staged without indicating a result."
+    },
+    "art.test.storage.predictive_health": {
+      "src": "canonical/actions/tests/test-storage-predictive-health.webp",
+      "kind": "canonical",
+      "category": "test",
+      "alt_text": "Night-shift server test setup for Predictive Drive Health Analysis, staged without indicating a result."
     },
     "art.test.storage.raid_status": {
-      "src": "placeholders/test-diagnostics.svg",
-      "kind": "placeholder",
+      "src": "canonical/actions/tests/test-storage-raid-status.webp",
+      "kind": "canonical",
       "category": "test",
-      "alt_text": "Technical reference placeholder for RAID status inspection."
+      "alt_text": "Night-shift server test setup for RAID Status Inspection, staged without indicating a result."
+    },
+    "art.test.system.bmc_logs": {
+      "src": "canonical/actions/tests/test-system-bmc-logs.webp",
+      "kind": "canonical",
+      "category": "test",
+      "alt_text": "Night-shift server test setup for Management Event Log Review, staged without indicating a result."
+    },
+    "art.test.system.controlled_stress": {
+      "src": "canonical/actions/tests/test-system-controlled-stress.webp",
+      "kind": "canonical",
+      "category": "test",
+      "alt_text": "Night-shift server test setup for Controlled Stress Test, staged without indicating a result."
+    },
+    "art.test.thermal.fan_telemetry": {
+      "src": "canonical/actions/tests/test-thermal-fan-telemetry.webp",
+      "kind": "canonical",
+      "category": "test",
+      "alt_text": "Night-shift server test setup for Fan Telemetry Inspection, staged without indicating a result."
+    },
+    "art.test.thermal.temperature_monitoring": {
+      "src": "canonical/actions/tests/test-thermal-temperature-monitoring.webp",
+      "kind": "canonical",
+      "category": "test",
+      "alt_text": "Night-shift server test setup for Temperature Monitoring, staged without indicating a result."
     },
     "art.tool.storage.raid_console": {
       "src": "placeholders/command-console.svg",
@@ -175,17 +625,125 @@
       "category": "tool",
       "alt_text": "Technical reference placeholder for a RAID management utility."
     },
-    "art.verify.storage.device_detected": {
-      "src": "placeholders/verify-readout.svg",
-      "kind": "placeholder",
+    "art.verify.boot.normal_boot": {
+      "src": "canonical/actions/verifications/verify-boot-normal-boot.webp",
+      "kind": "canonical",
       "category": "validation_procedure",
-      "alt_text": "Technical reference placeholder for storage detection verification."
+      "alt_text": "Neutral post-repair measurement setup for Normal Boot Verification, without indicating a pass or failure."
+    },
+    "art.verify.memory.full_test": {
+      "src": "canonical/actions/verifications/verify-memory-full-test.webp",
+      "kind": "canonical",
+      "category": "validation_procedure",
+      "alt_text": "Neutral post-repair measurement setup for Memory Verification, without indicating a pass or failure."
+    },
+    "art.verify.memory.inventory": {
+      "src": "canonical/actions/verifications/verify-memory-inventory.webp",
+      "kind": "canonical",
+      "category": "validation_procedure",
+      "alt_text": "Neutral post-repair measurement setup for Memory Inventory Verification, without indicating a pass or failure."
+    },
+    "art.verify.network.connectivity": {
+      "src": "canonical/actions/verifications/verify-network-connectivity.webp",
+      "kind": "canonical",
+      "category": "validation_procedure",
+      "alt_text": "Neutral post-repair measurement setup for Network Connectivity Verification, without indicating a pass or failure."
+    },
+    "art.verify.network.link": {
+      "src": "canonical/actions/verifications/verify-network-link.webp",
+      "kind": "canonical",
+      "category": "validation_procedure",
+      "alt_text": "Neutral post-repair measurement setup for Network Link Verification, without indicating a pass or failure."
+    },
+    "art.verify.power.stable": {
+      "src": "canonical/actions/verifications/verify-power-stable.webp",
+      "kind": "canonical",
+      "category": "validation_procedure",
+      "alt_text": "Neutral post-repair measurement setup for Stable Power Verification, without indicating a pass or failure."
+    },
+    "art.verify.storage.device_detected": {
+      "src": "canonical/actions/verifications/verify-storage-device-detected.webp",
+      "kind": "canonical",
+      "category": "validation_procedure",
+      "alt_text": "Neutral post-repair measurement setup for Storage Detection Verification, without indicating a pass or failure."
     },
     "art.verify.storage.raid_healthy": {
+      "src": "canonical/actions/verifications/verify-storage-raid-healthy.webp",
+      "kind": "canonical",
+      "category": "validation_procedure",
+      "alt_text": "Neutral post-repair measurement setup for RAID Healthy Verification, without indicating a pass or failure."
+    },
+    "art.verify.thermal.load_test": {
+      "src": "canonical/actions/verifications/verify-thermal-load-test.webp",
+      "kind": "canonical",
+      "category": "validation_procedure",
+      "alt_text": "Neutral post-repair measurement setup for Thermal Load Verification, without indicating a pass or failure."
+    },
+    "cosmetic.profile.console": {
+      "src": "profile-icons/console-specialist.svg",
+      "kind": "cosmetic",
+      "category": "profile_icon",
+      "alt_text": "Console specialist profile icon."
+    },
+    "cosmetic.profile.field": {
+      "src": "profile-icons/field-technician.svg",
+      "kind": "cosmetic",
+      "category": "profile_icon",
+      "alt_text": "Field technician profile icon."
+    },
+    "cosmetic.profile.storage": {
+      "src": "profile-icons/storage-specialist.svg",
+      "kind": "cosmetic",
+      "category": "profile_icon",
+      "alt_text": "Storage specialist profile icon."
+    },
+    "cosmetic.profile.systems": {
+      "src": "profile-icons/systems-operator.svg",
+      "kind": "cosmetic",
+      "category": "profile_icon",
+      "alt_text": "Systems operator profile icon."
+    },
+    "decorative.home.night_shift_desk": {
+      "src": "decorative/night-shift-desk.svg",
+      "kind": "decorative",
+      "category": "environment",
+      "alt_text": ""
+    },
+    "placeholder.card.command": {
+      "src": "placeholders/command-console.svg",
+      "kind": "placeholder",
+      "category": "command",
+      "alt_text": "Abstract terminal display and structured system output."
+    },
+    "placeholder.card.generic": {
+      "src": "placeholders/generic-server.svg",
+      "kind": "placeholder",
+      "category": "generic",
+      "alt_text": "Abstract server rack under a focused inspection light."
+    },
+    "placeholder.card.repair": {
+      "src": "placeholders/repair-bench.svg",
+      "kind": "placeholder",
+      "category": "repair",
+      "alt_text": "Abstract repair bench with an open drive bay and service tool."
+    },
+    "placeholder.card.test": {
+      "src": "placeholders/test-diagnostics.svg",
+      "kind": "placeholder",
+      "category": "test",
+      "alt_text": "Abstract diagnostic scan across illuminated server bays."
+    },
+    "placeholder.card.verify": {
       "src": "placeholders/verify-readout.svg",
       "kind": "placeholder",
-      "category": "validation_procedure",
-      "alt_text": "Technical reference placeholder for RAID health verification."
+      "category": "verify",
+      "alt_text": "Abstract green validation pulse across stable server readouts."
+    },
+    "placeholder.ticket.storage": {
+      "src": "placeholders/ticket-storage.svg",
+      "kind": "placeholder",
+      "category": "ticket",
+      "alt_text": "Storage server bays and cable paths under night-shift lighting."
     }
   },
   "profile_icons": [

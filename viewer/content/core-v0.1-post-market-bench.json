@@ -97,7 +97,14 @@
       "entity_type": "symptom",
       "presentation": {
         "display_name": "BMC Not Responding",
-        "short_description": "The server reports that its management controller is unavailable or never becomes ready."
+        "short_description": "The server reports that its management controller is unavailable or never becomes ready.",
+        "illustration": {
+          "asset_id": "art.symptom.management.bmc_not_responding",
+          "alt_text": "Wide night-shift server view showing the server reports that its management controller is unavailable or never becomes ready without identifying its cause.",
+          "caption": "Canonical symptom illustration for BMC Not Responding.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
+        }
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -124,7 +131,14 @@
       "entity_type": "symptom",
       "presentation": {
         "display_name": "Lifecycle Management Unavailable",
-        "short_description": "Firmware inventory, update, or preboot lifecycle functions are disabled or inaccessible."
+        "short_description": "Firmware inventory, update, or preboot lifecycle functions are disabled or inaccessible.",
+        "illustration": {
+          "asset_id": "art.symptom.management.lifecycle_unavailable",
+          "alt_text": "Wide night-shift server view showing firmware inventory, update, or preboot lifecycle functions are disabled or inaccessible without identifying its cause.",
+          "caption": "Canonical symptom illustration for Lifecycle Management Unavailable.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
+        }
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -151,7 +165,14 @@
       "entity_type": "symptom",
       "presentation": {
         "display_name": "Firmware Update Failed",
-        "short_description": "An approved firmware job is rejected, interrupted, or cannot initialize its target."
+        "short_description": "An approved firmware job is rejected, interrupted, or cannot initialize its target.",
+        "illustration": {
+          "asset_id": "art.symptom.firmware.update_failed",
+          "alt_text": "Wide night-shift server view showing an approved firmware job is rejected, interrupted, or cannot initialize its target without identifying its cause.",
+          "caption": "Canonical symptom illustration for Firmware Update Failed.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
+        }
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -180,7 +201,14 @@
       "entity_type": "symptom",
       "presentation": {
         "display_name": "Voltage Outside Expected Range",
-        "short_description": "Management telemetry or POST reports an invalid voltage or power-good condition."
+        "short_description": "Management telemetry or POST reports an invalid voltage or power-good condition.",
+        "illustration": {
+          "asset_id": "art.symptom.power.voltage_out_of_range",
+          "alt_text": "Wide night-shift server view showing management telemetry or POST reports an invalid voltage or power-good condition without identifying its cause.",
+          "caption": "Canonical symptom illustration for Voltage Outside Expected Range.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
+        }
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -207,7 +235,14 @@
       "entity_type": "symptom",
       "presentation": {
         "display_name": "Predictive Drive Failure Warning",
-        "short_description": "A drive remains online but reports failure prediction, excessive media errors, or exhausted endurance."
+        "short_description": "A drive remains online but reports failure prediction, excessive media errors, or exhausted endurance.",
+        "illustration": {
+          "asset_id": "art.symptom.storage.predictive_failure_warning",
+          "alt_text": "Wide night-shift server view showing a drive remains online but reports failure prediction, excessive media errors, or exhausted endurance without identifying its cause.",
+          "caption": "Canonical symptom illustration for Predictive Drive Failure Warning.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
+        }
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -236,7 +271,14 @@
       "entity_type": "symptom",
       "presentation": {
         "display_name": "Network Link Flapping",
-        "short_description": "A network port repeatedly transitions between link up and link down."
+        "short_description": "A network port repeatedly transitions between link up and link down.",
+        "illustration": {
+          "asset_id": "art.symptom.network.link_flapping",
+          "alt_text": "Wide night-shift server view showing a network port repeatedly transitions between link up and link down without identifying its cause.",
+          "caption": "Canonical symptom illustration for Network Link Flapping.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
+        }
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -264,7 +306,14 @@
       "entity_type": "symptom",
       "presentation": {
         "display_name": "Hardware Alert Persists After Recovery",
-        "short_description": "Management continues to report a component fault after current checks show the component healthy."
+        "short_description": "Management continues to report a component fault after current checks show the component healthy.",
+        "illustration": {
+          "asset_id": "art.symptom.management.alert_persists",
+          "alt_text": "Wide night-shift server view showing management continues to report a component fault after current checks show the component healthy without identifying its cause.",
+          "caption": "Canonical symptom illustration for Hardware Alert Persists After Recovery.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
+        }
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -433,7 +482,14 @@
       "entity_type": "command",
       "presentation": {
         "display_name": "List Detailed IPMI System Events",
-        "short_description": "Reads detailed System Event Log entries through an Intelligent Platform Management Interface (IPMI) connection."
+        "short_description": "Reads detailed System Event Log entries through an Intelligent Platform Management Interface (IPMI) connection.",
+        "illustration": {
+          "asset_id": "art.command.ipmi.sel_elist",
+          "alt_text": "Dark service console with abstract List Detailed IPMI System Events output beside enterprise server hardware.",
+          "caption": "Canonical command illustration for List Detailed IPMI System Events.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
+        }
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -464,7 +520,14 @@
       "entity_type": "command",
       "presentation": {
         "display_name": "Read NVMe Health Log",
-        "short_description": "Reads the Self-Monitoring, Analysis and Reporting Technology (SMART) health log for a Non-Volatile Memory Express (NVMe) device, including warnings, media errors, temperature, and endurance."
+        "short_description": "Reads the Self-Monitoring, Analysis and Reporting Technology (SMART) health log for a Non-Volatile Memory Express (NVMe) device, including warnings, media errors, temperature, and endurance.",
+        "illustration": {
+          "asset_id": "art.command.linux.nvme_smart_log",
+          "alt_text": "Dark service console with abstract Read NVMe Health Log output beside enterprise server hardware.",
+          "caption": "Canonical command illustration for Read NVMe Health Log.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
+        }
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -815,7 +878,14 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Magnified CPU Socket Inspection",
-        "short_description": "Inspects central processing unit (CPU) socket contact alignment, contamination, damage, and mounting evidence under controlled magnification."
+        "short_description": "Inspects central processing unit (CPU) socket contact alignment, contamination, damage, and mounting evidence under controlled magnification.",
+        "illustration": {
+          "asset_id": "art.test.compute.socket_magnified_inspection",
+          "alt_text": "Night-shift server test setup for Magnified CPU Socket Inspection, staged without indicating a result.",
+          "caption": "Canonical test illustration for Magnified CPU Socket Inspection.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
+        }
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -858,7 +928,14 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Fan-to-Location Cross-Substitution",
-        "short_description": "Temporarily swaps compatible fans between documented locations to learn whether a telemetry fault follows the fan or remains at its connector."
+        "short_description": "Temporarily swaps compatible fans between documented locations to learn whether a telemetry fault follows the fan or remains at its connector.",
+        "illustration": {
+          "asset_id": "art.test.cooling.location_cross_substitution",
+          "alt_text": "Night-shift server test setup for Fan-to-Location Cross-Substitution, staged without indicating a result.",
+          "caption": "Canonical test illustration for Fan-to-Location Cross-Substitution.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
+        }
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -912,7 +989,14 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Power Distribution Path Isolation",
-        "short_description": "Compares known-good power supply units (PSUs) across supported bays and minimum configuration to isolate a shared power-distribution fault."
+        "short_description": "Compares known-good power supply units (PSUs) across supported bays and minimum configuration to isolate a shared power-distribution fault.",
+        "illustration": {
+          "asset_id": "art.test.power.distribution_path_isolation",
+          "alt_text": "Night-shift server test setup for Power Distribution Path Isolation, staged without indicating a result.",
+          "caption": "Canonical test illustration for Power Distribution Path Isolation.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
+        }
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -965,7 +1049,14 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "BMC Recovery-State Test",
-        "short_description": "Determines whether the baseboard management controller (BMC) is reachable, resettable, in recovery mode, or unrecoverable."
+        "short_description": "Determines whether the baseboard management controller (BMC) is reachable, resettable, in recovery mode, or unrecoverable.",
+        "illustration": {
+          "asset_id": "art.test.management.bmc_recovery_state",
+          "alt_text": "Night-shift server test setup for BMC Recovery-State Test, staged without indicating a result.",
+          "caption": "Canonical test illustration for BMC Recovery-State Test.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
+        }
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -1008,7 +1099,14 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Firmware Version Compatibility Review",
-        "short_description": "Compares basic input/output system (BIOS), baseboard management controller (BMC), storage, network, and device firmware with an approved compatible baseline."
+        "short_description": "Compares basic input/output system (BIOS), baseboard management controller (BMC), storage, network, and device firmware with an approved compatible baseline.",
+        "illustration": {
+          "asset_id": "art.test.firmware.version_compatibility",
+          "alt_text": "Night-shift server test setup for Firmware Version Compatibility Review, staged without indicating a result.",
+          "caption": "Canonical test illustration for Firmware Version Compatibility Review.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
+        }
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -1057,7 +1155,14 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Predictive Drive Health Analysis",
-        "short_description": "Reviews Self-Monitoring, Analysis and Reporting Technology (SMART), controller, media-error, and endurance data before an online drive fails completely."
+        "short_description": "Reviews Self-Monitoring, Analysis and Reporting Technology (SMART), controller, media-error, and endurance data before an online drive fails completely.",
+        "illustration": {
+          "asset_id": "art.test.storage.predictive_health",
+          "alt_text": "Night-shift server test setup for Predictive Drive Health Analysis, staged without indicating a result.",
+          "caption": "Canonical test illustration for Predictive Drive Health Analysis.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
+        }
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -1104,7 +1209,14 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Drive Bay Path Isolation",
-        "short_description": "Uses protected inventory and compatible known-good media to learn whether a storage failure follows a drive or remains at one bay or backplane path."
+        "short_description": "Uses protected inventory and compatible known-good media to learn whether a storage failure follows a drive or remains at one bay or backplane path.",
+        "illustration": {
+          "asset_id": "art.test.storage.bay_path_isolation",
+          "alt_text": "Night-shift server test setup for Drive Bay Path Isolation, staged without indicating a result.",
+          "caption": "Canonical test illustration for Drive Bay Path Isolation.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
+        }
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -1159,7 +1271,14 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Event Log Freshness Test",
-        "short_description": "Preserves current management logs, refreshes controller state, and checks whether the target alert returns under the complaint conditions."
+        "short_description": "Preserves current management logs, refreshes controller state, and checks whether the target alert returns under the complaint conditions.",
+        "illustration": {
+          "asset_id": "art.test.management.event_log_freshness",
+          "alt_text": "Night-shift server test setup for Event Log Freshness Test, staged without indicating a result.",
+          "caption": "Canonical test illustration for Event Log Freshness Test.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
+        }
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -1204,7 +1323,14 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Network Link and Counter Soak",
-        "short_description": "Observes Ethernet link transitions and interface error counters over a defined interval after a firmware-related change."
+        "short_description": "Observes Ethernet link transitions and interface error counters over a defined interval after a firmware-related change.",
+        "illustration": {
+          "asset_id": "art.test.network.link_counter_soak",
+          "alt_text": "Night-shift server test setup for Network Link and Counter Soak, staged without indicating a result.",
+          "caption": "Canonical test illustration for Network Link and Counter Soak.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
+        }
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",

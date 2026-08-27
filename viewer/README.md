@@ -75,6 +75,13 @@ Then visit `http://localhost:8000/`.
 
 Run `node viewer/scripts/verify-play-assets.mjs` to confirm that the staged Play subtree is complete, hash-matched, and free of denylisted server/simulation material.
 
+Run `node viewer/scripts/verify-task-011-art.mjs` to validate the 104 reviewed
+canonical illustrations, their domain/manifest inheritance, exact action and
+Symptom dimensions, provenance, review state, byte budgets, and staged-byte
+equivalence. Library detail loads only the opened domain illustration; playable
+Cards inherit their primary-domain art and generated Tickets inherit the first
+public visible Symptom unless direct Ticket art is explicitly authored.
+
 ## Illustrations
 
 Records may contain reusable illustration references, for example:

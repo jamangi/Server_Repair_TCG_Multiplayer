@@ -243,7 +243,10 @@
         "short_description": "Lists Linux block-device topology and attributes from sysfs and the device database, helping map disks, partitions, and logical devices.",
         "illustration": {
           "asset_id": "art.command.linux.lsblk",
-          "alt_text": "Technical reference illustration for lsblk."
+          "alt_text": "Dark service console with abstract lsblk output beside enterprise server hardware.",
+          "caption": "Canonical command illustration for lsblk.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -276,7 +279,10 @@
         "short_description": "Lists devices enumerated on the Peripheral Component Interconnect (PCI) buses, including Peripheral Component Interconnect Express (PCIe) adapters and their identifiers.",
         "illustration": {
           "asset_id": "art.command.linux.lspci",
-          "alt_text": "Technical reference illustration for lspci."
+          "alt_text": "Dark service console with abstract lspci output beside enterprise server hardware.",
+          "caption": "Canonical command illustration for lspci.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -309,7 +315,10 @@
         "short_description": "Prints the Linux kernel ring buffer so a technician can correlate driver, device-discovery, input/output, and hardware messages with the incident.",
         "illustration": {
           "asset_id": "art.command.linux.dmesg",
-          "alt_text": "Technical reference illustration for dmesg."
+          "alt_text": "Dark service console with abstract dmesg output beside enterprise server hardware.",
+          "caption": "Canonical command illustration for dmesg.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -340,7 +349,10 @@
         "short_description": "Shows Linux network interfaces and their Internet Protocol (IP) addresses, prefixes, scopes, and address lifetimes.",
         "illustration": {
           "asset_id": "art.command.linux.ip_addr",
-          "alt_text": "Technical reference illustration for ip addr."
+          "alt_text": "Dark service console with abstract ip addr output beside enterprise server hardware.",
+          "caption": "Canonical command illustration for ip addr.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -373,7 +385,10 @@
         "short_description": "Sends Internet Control Message Protocol (ICMP) Echo Requests and reports replies, packet loss, and round-trip timing for an Internet Protocol destination.",
         "illustration": {
           "asset_id": "art.command.network.ping",
-          "alt_text": "Technical reference illustration for ping."
+          "alt_text": "Dark service console with abstract ping output beside enterprise server hardware.",
+          "caption": "Canonical command illustration for ping.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -406,7 +421,10 @@
         "short_description": "Summarizes Linux physical and swap memory in human-readable units, including the kernel estimate of memory available for new work.",
         "illustration": {
           "asset_id": "art.command.linux.free_h",
-          "alt_text": "Technical reference illustration for free -h."
+          "alt_text": "Dark service console with abstract free -h output beside enterprise server hardware.",
+          "caption": "Canonical command illustration for free -h.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -437,7 +455,10 @@
         "short_description": "Reports available Self-Monitoring, Analysis and Reporting Technology (SMART) status, attributes, error logs, and self-test history for a supported drive.",
         "illustration": {
           "asset_id": "art.command.linux.smartctl",
-          "alt_text": "Technical reference illustration for smartctl."
+          "alt_text": "Dark service console with abstract smartctl output beside enterprise server hardware.",
+          "caption": "Canonical command illustration for smartctl.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -470,7 +491,10 @@
         "short_description": "Reads the systemd journal and can filter structured operating-system logs by boot, service, time, or priority.",
         "illustration": {
           "asset_id": "art.command.linux.journalctl",
-          "alt_text": "Technical reference illustration for journalctl."
+          "alt_text": "Dark service console with abstract journalctl output beside enterprise server hardware.",
+          "caption": "Canonical command illustration for journalctl.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -501,7 +525,10 @@
         "short_description": "Shows Linux kernel routing entries, including destination prefixes, next hops, interfaces, and the default route.",
         "illustration": {
           "asset_id": "art.command.linux.ip_route",
-          "alt_text": "Technical reference illustration for ip route."
+          "alt_text": "Dark service console with abstract ip route output beside enterprise server hardware.",
+          "caption": "Canonical command illustration for ip route.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -534,7 +561,10 @@
         "short_description": "Queries a Linux Ethernet interface for carrier, negotiated speed and duplex, supported modes, driver details, and available counters.",
         "illustration": {
           "asset_id": "art.command.linux.ethtool",
-          "alt_text": "Technical reference illustration for ethtool."
+          "alt_text": "Dark service console with abstract ethtool output beside enterprise server hardware.",
+          "caption": "Canonical command illustration for ethtool.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -565,7 +595,10 @@
         "short_description": "Checks accessible hardware for loose seating, damaged connectors, blocked airflow, contamination, and other visible conditions that can explain the reported symptom.",
         "illustration": {
           "asset_id": "art.test.general.visual_inspection",
-          "alt_text": "Technical reference illustration for Visual Inspection."
+          "alt_text": "Night-shift server test setup for Visual Inspection, staged without indicating a result.",
+          "caption": "Canonical test illustration for Visual Inspection.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -694,7 +727,10 @@
         "short_description": "Reduces the server to its documented minimum boot configuration and observes power and startup behavior to separate core-platform faults from removable-device faults.",
         "illustration": {
           "asset_id": "art.test.general.minimum_configuration",
-          "alt_text": "Technical reference illustration for Minimum Configuration Test."
+          "alt_text": "Night-shift server test setup for Minimum Configuration Test, staged without indicating a result.",
+          "caption": "Canonical test illustration for Minimum Configuration Test.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -753,7 +789,10 @@
         "short_description": "Exercises dual in-line memory modules (DIMMs) with memory patterns and sustained access while observing error-correcting code (ECC) reports, failures, and affected locations.",
         "illustration": {
           "asset_id": "art.test.memory.diagnostic",
-          "alt_text": "Technical reference illustration for Memory Diagnostic."
+          "alt_text": "Night-shift server test setup for Memory Diagnostic, staged without indicating a result.",
+          "caption": "Canonical test illustration for Memory Diagnostic.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -803,7 +842,10 @@
         "short_description": "Tests one compatible dual in-line memory module (DIMM) at a time in approved slots, comparing startup, detected capacity, and errors to isolate a module, population, or channel problem.",
         "illustration": {
           "asset_id": "art.test.memory.single_dimm_isolation",
-          "alt_text": "Technical reference illustration for Single-DIMM Isolation."
+          "alt_text": "Night-shift server test setup for Single-DIMM Isolation, staged without indicating a result.",
+          "caption": "Canonical test illustration for Single-DIMM Isolation.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -873,7 +915,10 @@
         "short_description": "Temporarily substitutes a compatible known-good dual in-line memory module (DIMM) and compares startup, inventory, and errors to separate a module fault from a slot or channel fault.",
         "illustration": {
           "asset_id": "art.test.memory.known_good_substitution",
-          "alt_text": "Technical reference illustration for Known-Good DIMM Substitution."
+          "alt_text": "Night-shift server test setup for Known-Good DIMM Substitution, staged without indicating a result.",
+          "caption": "Canonical test illustration for Known-Good DIMM Substitution.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -917,7 +962,10 @@
         "short_description": "Reviews power supply unit (PSU) presence, indicators, management sensors, input state, output state, and event codes to distinguish a failed or unseated supply from a shared power problem.",
         "illustration": {
           "asset_id": "art.test.power.psu_status",
-          "alt_text": "Technical reference illustration for PSU Status Inspection."
+          "alt_text": "Night-shift server test setup for PSU Status Inspection, staged without indicating a result.",
+          "caption": "Canonical test illustration for PSU Status Inspection.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -966,7 +1014,10 @@
         "short_description": "Temporarily substitutes a compatible known-good power supply unit (PSU) and compares power, status, and bay behavior to separate a supply fault from a shared distribution fault.",
         "illustration": {
           "asset_id": "art.test.power.known_good_psu",
-          "alt_text": "Technical reference illustration for Known-Good PSU Test."
+          "alt_text": "Night-shift server test setup for Known-Good PSU Test, staged without indicating a result.",
+          "caption": "Canonical test illustration for Known-Good PSU Test.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -1020,7 +1071,10 @@
         "short_description": "Checks whether a documented, de-energized electrical path conducts between specified endpoints, revealing an open or unintended connection.",
         "illustration": {
           "asset_id": "art.test.electrical.continuity",
-          "alt_text": "Technical reference illustration for Continuity Test."
+          "alt_text": "Night-shift server test setup for Continuity Test, staged without indicating a result.",
+          "caption": "Canonical test illustration for Continuity Test.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -1052,7 +1106,10 @@
         "short_description": "Reads redundant array of independent disks (RAID) controller, array, member, redundancy, rebuild, and error state to distinguish a failed member, degraded array, or controller-visibility problem.",
         "illustration": {
           "asset_id": "art.test.storage.raid_status",
-          "alt_text": "Technical reference illustration for RAID Status Inspection."
+          "alt_text": "Night-shift server test setup for RAID Status Inspection, staged without indicating a result.",
+          "caption": "Canonical test illustration for RAID Status Inspection.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -1126,7 +1183,10 @@
         "short_description": "Reads supported drive-health status, media-error data, predictive warnings, and self-test history to identify a failed or degrading storage device.",
         "illustration": {
           "asset_id": "art.test.storage.drive_health",
-          "alt_text": "Technical reference illustration for Drive Health Test."
+          "alt_text": "Night-shift server test setup for Drive Health Test, staged without indicating a result.",
+          "caption": "Canonical test illustration for Drive Health Test.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -1190,7 +1250,10 @@
         "short_description": "Compares storage devices reported by firmware, controller, and operating-system layers, including model, serial, capacity, and path, to locate where an expected device disappears.",
         "illustration": {
           "asset_id": "art.test.storage.device_inventory",
-          "alt_text": "Technical reference illustration for Storage Device Inventory."
+          "alt_text": "Night-shift server test setup for Storage Device Inventory, staged without indicating a result.",
+          "caption": "Canonical test illustration for Storage Device Inventory.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -1278,7 +1341,10 @@
         "short_description": "Observes Power-On Self-Test (POST) progress, console output, indicator codes, and audible signals to locate where startup stops or degrades.",
         "illustration": {
           "asset_id": "art.test.boot.post_observation",
-          "alt_text": "Technical reference illustration for POST Observation."
+          "alt_text": "Night-shift server test setup for POST Observation, staged without indicating a result.",
+          "caption": "Canonical test illustration for POST Observation.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -1308,7 +1374,10 @@
         "short_description": "Records Power-On Self-Test (POST) codes and indicators, then maps them to the platform fault reference to identify the startup stage that did not complete.",
         "illustration": {
           "asset_id": "art.test.boot.post_code_analysis",
-          "alt_text": "Technical reference illustration for POST Code Analysis."
+          "alt_text": "Night-shift server test setup for POST Code Analysis, staged without indicating a result.",
+          "caption": "Canonical test illustration for POST Code Analysis.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -1350,7 +1419,10 @@
         "short_description": "Compares firmware-detected boot devices and their order with the intended startup source, distinguishing a missing device from a misordered boot path.",
         "illustration": {
           "asset_id": "art.test.boot.device_inventory",
-          "alt_text": "Technical reference illustration for Firmware Boot Device Inventory."
+          "alt_text": "Night-shift server test setup for Firmware Boot Device Inventory, staged without indicating a result.",
+          "caption": "Canonical test illustration for Firmware Boot Device Inventory.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -1410,7 +1482,10 @@
         "short_description": "Observes Ethernet carrier, negotiated speed and duplex, indicators, and link errors to determine whether the physical link is present and stable.",
         "illustration": {
           "asset_id": "art.test.network.link",
-          "alt_text": "Technical reference illustration for Network Link Test."
+          "alt_text": "Night-shift server test setup for Network Link Test, staged without indicating a result.",
+          "caption": "Canonical test illustration for Network Link Test.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -1478,7 +1553,10 @@
         "short_description": "Sends Internet Control Message Protocol (ICMP) Echo probes to selected local, gateway, and remote destinations to measure basic Internet Protocol reachability, loss, and timing.",
         "illustration": {
           "asset_id": "art.test.network.ping",
-          "alt_text": "Technical reference illustration for Ping Connectivity Test."
+          "alt_text": "Night-shift server test setup for Ping Connectivity Test, staged without indicating a result.",
+          "caption": "Canonical test illustration for Ping Connectivity Test.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -1530,7 +1608,10 @@
         "short_description": "Reviews interface state, Internet Protocol (IP) addresses and prefixes, lease information, routes, and the default gateway to identify an incorrect or missing network configuration.",
         "illustration": {
           "asset_id": "art.test.network.interface_config",
-          "alt_text": "Technical reference illustration for Interface Configuration Inspection."
+          "alt_text": "Night-shift server test setup for Interface Configuration Inspection, staged without indicating a result.",
+          "caption": "Canonical test illustration for Interface Configuration Inspection.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -1585,7 +1666,10 @@
         "short_description": "Replaces the current Ethernet cable with a verified compatible cable and compares carrier, error counters, and reachability to isolate the cable from the adapter or switch port.",
         "illustration": {
           "asset_id": "art.test.network.cable_substitution",
-          "alt_text": "Technical reference illustration for Known-Good Ethernet Cable Test."
+          "alt_text": "Night-shift server test setup for Known-Good Ethernet Cable Test, staged without indicating a result.",
+          "caption": "Canonical test illustration for Known-Good Ethernet Cable Test.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -1642,7 +1726,10 @@
         "short_description": "Compares enumerated Peripheral Component Interconnect Express (PCIe) devices, identifiers, and link information with the expected hardware inventory to find a missing or unexpected adapter.",
         "illustration": {
           "asset_id": "art.test.pcie.inventory",
-          "alt_text": "Technical reference illustration for PCIe Device Inventory."
+          "alt_text": "Night-shift server test setup for PCIe Device Inventory, staged without indicating a result.",
+          "caption": "Canonical test illustration for PCIe Device Inventory.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -1703,7 +1790,10 @@
         "short_description": "Observes processor and platform temperature sensors at idle and under a controlled load, revealing trends, limit crossings, and thermal-shutdown conditions.",
         "illustration": {
           "asset_id": "art.test.thermal.temperature_monitoring",
-          "alt_text": "Technical reference illustration for Temperature Monitoring."
+          "alt_text": "Night-shift server test setup for Temperature Monitoring, staged without indicating a result.",
+          "caption": "Canonical test illustration for Temperature Monitoring.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -1776,7 +1866,10 @@
         "short_description": "Compares commanded and reported fan speed in revolutions per minute (RPM), presence, sensor transitions, and physical rotation to separate a failed fan from its sense path.",
         "illustration": {
           "asset_id": "art.test.thermal.fan_telemetry",
-          "alt_text": "Technical reference illustration for Fan Telemetry Inspection."
+          "alt_text": "Night-shift server test setup for Fan Telemetry Inspection, staged without indicating a result.",
+          "caption": "Canonical test illustration for Fan Telemetry Inspection.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -1840,7 +1933,10 @@
         "short_description": "Applies an approved processor, memory, or combined workload while monitoring temperatures, hardware errors, and resets to reproduce intermittent memory or thermal behavior.",
         "illustration": {
           "asset_id": "art.test.system.controlled_stress",
-          "alt_text": "Technical reference illustration for Controlled Stress Test."
+          "alt_text": "Night-shift server test setup for Controlled Stress Test, staged without indicating a result.",
+          "caption": "Canonical test illustration for Controlled Stress Test.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -1891,7 +1987,10 @@
         "short_description": "Correlates timestamped baseboard management controller (BMC) event-log and sensor entries with the complaint to identify affected hardware and recurrence.",
         "illustration": {
           "asset_id": "art.test.system.bmc_logs",
-          "alt_text": "Technical reference illustration for Management Event Log Review."
+          "alt_text": "Night-shift server test setup for Management Event Log Review, staged without indicating a result.",
+          "caption": "Canonical test illustration for Management Event Log Review.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -2026,7 +2125,10 @@
         "short_description": "Compares firmware boot, hardware, clock, and management settings with the approved baseline to identify reset or unintended configuration changes.",
         "illustration": {
           "asset_id": "art.test.firmware.settings_review",
-          "alt_text": "Technical reference illustration for Firmware Settings Review."
+          "alt_text": "Night-shift server test setup for Firmware Settings Review, staged without indicating a result.",
+          "caption": "Canonical test illustration for Firmware Settings Review.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {

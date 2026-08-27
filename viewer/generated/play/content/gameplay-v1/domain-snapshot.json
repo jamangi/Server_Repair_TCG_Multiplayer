@@ -35,7 +35,10 @@
         "short_description": "Inspect supported drive health data.",
         "illustration": {
           "asset_id": "art.command.linux.smartctl",
-          "alt_text": "Technical reference illustration for smartctl."
+          "alt_text": "Dark service console with abstract smartctl output beside enterprise server hardware.",
+          "caption": "Canonical command illustration for smartctl.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "relationships": [
@@ -251,7 +254,10 @@
         "short_description": "Replace Failed RAID Member corrective procedure.",
         "illustration": {
           "asset_id": "art.repair.storage.replace_raid_member",
-          "alt_text": "Technical reference illustration for Replace Failed RAID Member."
+          "alt_text": "Replace Failed RAID Member in progress at a night-shift server service bench, before verification.",
+          "caption": "Canonical repair illustration for Replace Failed RAID Member.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "relationships": [
@@ -269,7 +275,10 @@
         "short_description": "Reseat Storage Cable corrective procedure.",
         "illustration": {
           "asset_id": "art.repair.storage.reseat_cable",
-          "alt_text": "Technical reference illustration for Reseat Storage Cable."
+          "alt_text": "Reseat Storage Cable in progress at a night-shift server service bench, before verification.",
+          "caption": "Canonical repair illustration for Reseat Storage Cable.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "relationships": [
@@ -287,7 +296,10 @@
         "short_description": "An expected drive is not detected.",
         "illustration": {
           "asset_id": "art.symptom.storage.drive_missing",
-          "alt_text": "Technical reference illustration for Drive Missing."
+          "alt_text": "Wide night-shift server view showing an expected drive is not detected without identifying its cause.",
+          "caption": "Canonical symptom illustration for Drive Missing.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "relationships": [
@@ -317,7 +329,10 @@
         "short_description": "Array redundancy is reduced.",
         "illustration": {
           "asset_id": "art.symptom.storage.raid_degraded",
-          "alt_text": "Technical reference illustration for RAID Degraded."
+          "alt_text": "Wide night-shift server view showing array redundancy is reduced without identifying its cause.",
+          "caption": "Canonical symptom illustration for RAID Degraded.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "relationships": [
@@ -347,7 +362,10 @@
         "short_description": "Visual Inspection gathers troubleshooting evidence.",
         "illustration": {
           "asset_id": "art.test.general.visual_inspection",
-          "alt_text": "Technical reference illustration for Visual Inspection."
+          "alt_text": "Night-shift server test setup for Visual Inspection, staged without indicating a result.",
+          "caption": "Canonical test illustration for Visual Inspection.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "relationships": [
@@ -365,7 +383,10 @@
         "short_description": "Storage Device Inventory gathers troubleshooting evidence.",
         "illustration": {
           "asset_id": "art.test.storage.device_inventory",
-          "alt_text": "Technical reference illustration for Storage Device Inventory."
+          "alt_text": "Night-shift server test setup for Storage Device Inventory, staged without indicating a result.",
+          "caption": "Canonical test illustration for Storage Device Inventory.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "relationships": [
@@ -383,7 +404,10 @@
         "short_description": "Drive Health Test gathers troubleshooting evidence.",
         "illustration": {
           "asset_id": "art.test.storage.drive_health",
-          "alt_text": "Technical reference illustration for Drive Health Test."
+          "alt_text": "Night-shift server test setup for Drive Health Test, staged without indicating a result.",
+          "caption": "Canonical test illustration for Drive Health Test.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "relationships": [
@@ -405,7 +429,10 @@
         "short_description": "RAID Status Inspection gathers troubleshooting evidence.",
         "illustration": {
           "asset_id": "art.test.storage.raid_status",
-          "alt_text": "Technical reference illustration for RAID Status Inspection."
+          "alt_text": "Night-shift server test setup for RAID Status Inspection, staged without indicating a result.",
+          "caption": "Canonical test illustration for RAID Status Inspection.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "relationships": [
@@ -444,7 +471,10 @@
         "short_description": "Storage Detection Verification confirms the repaired state.",
         "illustration": {
           "asset_id": "art.verify.storage.device_detected",
-          "alt_text": "Technical reference illustration for Storage Detection Verification."
+          "alt_text": "Neutral post-repair measurement setup for Storage Detection Verification, without indicating a pass or failure.",
+          "caption": "Canonical verify illustration for Storage Detection Verification.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "relationships": [
@@ -462,7 +492,10 @@
         "short_description": "RAID Healthy Verification confirms the repaired state.",
         "illustration": {
           "asset_id": "art.verify.storage.raid_healthy",
-          "alt_text": "Technical reference illustration for RAID Healthy Verification."
+          "alt_text": "Neutral post-repair measurement setup for RAID Healthy Verification, without indicating a pass or failure.",
+          "caption": "Canonical verify illustration for RAID Healthy Verification.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "relationships": [

@@ -109,7 +109,14 @@
       "entity_type": "command",
       "presentation": {
         "display_name": "dhclient Lease Request",
-        "short_description": "Requests or releases an Internet Protocol version 4 (IPv4) lease from a Dynamic Host Configuration Protocol (DHCP) service and can show the client exchange."
+        "short_description": "Requests or releases an Internet Protocol version 4 (IPv4) lease from a Dynamic Host Configuration Protocol (DHCP) service and can show the client exchange.",
+        "illustration": {
+          "asset_id": "art.command.linux.dhclient",
+          "alt_text": "Dark service console with abstract dhclient Lease Request output beside enterprise server hardware.",
+          "caption": "Canonical command illustration for dhclient Lease Request.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
+        }
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -140,7 +147,14 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Residual-Power Drain Test",
-        "short_description": "Safely removes all external power, discharges residual state, and then compares symptoms after controlled re-energization."
+        "short_description": "Safely removes all external power, discharges residual state, and then compares symptoms after controlled re-energization.",
+        "illustration": {
+          "asset_id": "art.test.power.residual_power_drain",
+          "alt_text": "Night-shift server test setup for Residual-Power Drain Test, staged without indicating a result.",
+          "caption": "Canonical test illustration for Residual-Power Drain Test.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
+        }
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -201,7 +215,14 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "Power Output Voltage Measurement",
-        "short_description": "Measures documented power rails and power-good signals with an appropriate meter and the platform connector pinout."
+        "short_description": "Measures documented power rails and power-good signals with an appropriate meter and the platform connector pinout.",
+        "illustration": {
+          "asset_id": "art.test.power.output_voltage_measurement",
+          "alt_text": "Night-shift server test setup for Power Output Voltage Measurement, staged without indicating a result.",
+          "caption": "Canonical test illustration for Power Output Voltage Measurement.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
+        }
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -256,7 +277,14 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "DHCP Transaction Trace",
-        "short_description": "Interprets a Dynamic Host Configuration Protocol (DHCP) client exchange to distinguish an absent server offer from client-side address-configuration problems."
+        "short_description": "Interprets a Dynamic Host Configuration Protocol (DHCP) client exchange to distinguish an absent server offer from client-side address-configuration problems.",
+        "illustration": {
+          "asset_id": "art.test.network.dhcp_transaction_trace",
+          "alt_text": "Night-shift server test setup for DHCP Transaction Trace, staged without indicating a result.",
+          "caption": "Canonical test illustration for DHCP Transaction Trace.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
+        }
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",
@@ -309,7 +337,14 @@
       "entity_type": "test",
       "presentation": {
         "display_name": "DHCP Address Pool Audit",
-        "short_description": "Inspects free-address capacity, active leases, exclusions, and stale reservations on the Dynamic Host Configuration Protocol (DHCP) service."
+        "short_description": "Inspects free-address capacity, active leases, exclusions, and stale reservations on the Dynamic Host Configuration Protocol (DHCP) service.",
+        "illustration": {
+          "asset_id": "art.test.network.dhcp_pool_audit",
+          "alt_text": "Night-shift server test setup for DHCP Address Pool Audit, staged without indicating a result.",
+          "caption": "Canonical test illustration for DHCP Address Pool Audit.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
+        }
       },
       "source": {
         "expansion_id": "expansion.core_v0_1",

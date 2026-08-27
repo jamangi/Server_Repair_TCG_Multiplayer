@@ -6,7 +6,7 @@ Beginning with TASK-011, the displayed task ID includes the recommended reasonin
 
 Active task:
 
-- [`TASK-011-HIGH: Create canonical Card and symptom Ticket illustrations`](TASK-011-create-canonical-card-and-symptom-illustrations.md) — ready; produce 71 domain-inherited playable-action illustrations and 33 public-Symptom Ticket panoramas through a measured, provenance-tracked, batch-safe art pipeline without changing gameplay.
+- None. The approved V0 training-ready sequence is complete; TASK-017-XHIGH remains deferred until the project owner reactivates V2 migration.
 
 Queued V0 training-ready sequence:
 
@@ -16,10 +16,11 @@ Approved but deferred V2 task:
 
 - [`TASK-017-XHIGH: Create the Server Repair V2 Migration Seed`](TASK-017-create-server-repair-v2-migration-seed.md) — approved Migration Seed direction but deferred until the V0 product is training-ready; when reactivated, it audits V0 in bounded checkpoints and establishes the public dependency-inference V2 foundation without modifying V0 behavior.
 
-TASK-012-HIGH through TASK-016-HIGH, TASK-018-HIGH through TASK-021-HIGH, TASK-023-HIGH, and TASK-024-XHIGH are complete. PT-008 B is approved and the proposed TASK-022 was withdrawn without implementation. TASK-011-HIGH is now specified and active. Return to TASK-017-XHIGH only when the project owner reactivates V2 migration.
+TASK-011-HIGH through TASK-016-HIGH, TASK-018-HIGH through TASK-021-HIGH, TASK-023-HIGH, and TASK-024-XHIGH are complete. PT-008 B is approved and the proposed TASK-022 was withdrawn without implementation. Return to TASK-017-XHIGH only when the project owner reactivates V2 migration.
 
 Completed documentation and research tasks:
 
+- [`TASK-011-HIGH: Create canonical Card and symptom Ticket illustrations`](TASK-011-create-canonical-card-and-symptom-illustrations.md) — completed 2026-08-26; delivered 71 domain-inherited playable-action illustrations and 33 public-Symptom Ticket panoramas, shared Library/Play resolution, deterministic provenance and asset validation, reviewed contact sheets, responsive crops, and safe placeholder fallback without gameplay changes.
 - [`TASK-015-HIGH: Add guided tutorials and the solo solution-reveal experience`](TASK-015-add-guided-tutorial-and-solution-reveal.md) — completed 2026-08-26; added two pinned real-engine tutorials, semantic checkpoints with accessible focus/highlights and replay controls, exportable cosmetic progress, projection-only Isolation guidance, and a rules-faithful post-Give-Up solution/history comparison.
 - [`TASK-024-XHIGH: Author domain-sourced technical action copy`](TASK-024-author-domain-sourced-technical-action-copy.md) — completed 2026-08-26; replaced placeholder/internal prose across all 71 published actions, made Card and Library views consume shared domain authority, separated mechanics from learning copy, and added glossary, provenance ledger, and publication-quality gates.
 - [`TASK-023-HIGH: Correct Ticket semantic-state contrast`](TASK-023-correct-ticket-semantic-state-contrast.md) — completed 2026-08-26; separated paper and dark-board semantic tokens, restored measured Candidate/Hypothesis/elimination/status/accepted/returned/disabled contrast with visible non-color cues, and added responsive, focus, forced-colors, and computed-color regressions without gameplay changes.

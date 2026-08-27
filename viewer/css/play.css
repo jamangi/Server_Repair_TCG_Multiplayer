@@ -2606,6 +2606,8 @@
 .play-app .full-ticket-dialog { width: min(60rem, calc(100% - 2rem)); max-height: min(88dvh, 58rem); padding: 1rem; overflow: auto; border-color: #5a635e; color: var(--play-ink-900); color-scheme: light; background: var(--play-vellum-100); }
 .play-app .full-ticket-detail { display: grid; gap: 0.8rem; }
 .play-app .full-ticket-detail > header { padding: 0.5rem 3.2rem 0.25rem 0.5rem; }
+.play-app .full-ticket-art { margin: 0; overflow: hidden; aspect-ratio: 2.15 / 1; border: 2px solid #252724; border-radius: var(--play-radius-sm); background: #07141b; box-shadow: inset 0 0 0 1px rgb(255 255 255 / 8%); }
+.play-app .full-ticket-art img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .play-app .full-ticket-dialog .dialog-close { border-color: #5b6764; color: var(--play-ink-900); background: #d6ded9; }
 .play-app .ticket-workflow { padding: 0.85rem; border: 1px solid var(--play-paper-candidate-border); border-radius: 0.75rem; background: #e0e5dd; }
 .play-app .ticket-workflow h3 { margin: 0 0 0.55rem; }
@@ -3885,7 +3887,7 @@ dialog.settings-dialog::backdrop {
 
 @media (max-width: 760px) {
   body.active-match-layout .play-app .ticket-sheet { grid-template-columns: minmax(0, 1fr); padding: 0.65rem; margin: 0; }
-  body.active-match-layout .play-app .ticket-sheet__art { display: none; }
+  body.active-match-layout .play-app .ticket-sheet__art { display: block; width: 100%; aspect-ratio: 3.35 / 1; }
   body.active-match-layout .play-app .ticket-sheet__summary { min-width: 0; }
   body.active-match-layout .play-app .view-full-ticket { grid-column: 1; }
   body.active-match-layout .play-app .diagnostic-bench { min-height: 50rem; padding: 0.65rem; }

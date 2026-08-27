@@ -11,7 +11,10 @@
         "short_description": "No normal response to power-on.",
         "illustration": {
           "asset_id": "art.symptom.power.no_power",
-          "alt_text": "Technical reference illustration for No Power."
+          "alt_text": "Wide night-shift server view showing no normal response to power-on without identifying its cause.",
+          "caption": "Canonical symptom illustration for No Power.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -45,7 +48,10 @@
         "short_description": "One redundant power path is unavailable.",
         "illustration": {
           "asset_id": "art.symptom.power.redundancy_warning",
-          "alt_text": "Technical reference illustration for Power Redundancy Warning."
+          "alt_text": "Wide night-shift server view showing one redundant power path is unavailable without identifying its cause.",
+          "caption": "Canonical symptom illustration for Power Redundancy Warning.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -78,7 +84,10 @@
         "short_description": "Power-On Self-Test does not complete.",
         "illustration": {
           "asset_id": "art.symptom.boot.no_post",
-          "alt_text": "Technical reference illustration for No POST."
+          "alt_text": "Wide night-shift server view showing power-On Self-Test does not complete without identifying its cause.",
+          "caption": "Canonical symptom illustration for No POST.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -114,7 +123,10 @@
         "short_description": "Firmware or management telemetry reports memory trouble.",
         "illustration": {
           "asset_id": "art.symptom.boot.memory_warning",
-          "alt_text": "Technical reference illustration for Memory Warning."
+          "alt_text": "Wide night-shift server view showing firmware or management telemetry reports memory trouble without identifying its cause.",
+          "caption": "Canonical symptom illustration for Memory Warning.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -146,7 +158,10 @@
         "short_description": "Corrected or uncorrected memory errors are reported.",
         "illustration": {
           "asset_id": "art.symptom.memory.ecc_errors",
-          "alt_text": "Technical reference illustration for ECC Errors."
+          "alt_text": "Wide night-shift server view showing corrected or uncorrected memory errors are reported without identifying its cause.",
+          "caption": "Canonical symptom illustration for ECC Errors.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -178,7 +193,10 @@
         "short_description": "Less memory is detected than expected.",
         "illustration": {
           "asset_id": "art.symptom.memory.reduced_capacity",
-          "alt_text": "Technical reference illustration for Reduced Detected Memory."
+          "alt_text": "Wide night-shift server view showing less memory is detected than expected without identifying its cause.",
+          "caption": "Canonical symptom illustration for Reduced Detected Memory.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -213,7 +231,10 @@
         "short_description": "POST completes but no usable boot device is found.",
         "illustration": {
           "asset_id": "art.symptom.boot.no_boot_device",
-          "alt_text": "Technical reference illustration for No Boot Device."
+          "alt_text": "Wide night-shift server view showing pOST completes but no usable boot device is found without identifying its cause.",
+          "caption": "Canonical symptom illustration for No Boot Device.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -248,7 +269,10 @@
         "short_description": "The server attempts to boot from an unintended source.",
         "illustration": {
           "asset_id": "art.symptom.boot.wrong_device",
-          "alt_text": "Technical reference illustration for Wrong Boot Device."
+          "alt_text": "Wide night-shift server view showing the server attempts to boot from an unintended source without identifying its cause.",
+          "caption": "Canonical symptom illustration for Wrong Boot Device.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -280,7 +304,10 @@
         "short_description": "Storage is detected but OS boot does not proceed normally.",
         "illustration": {
           "asset_id": "art.symptom.boot.bootloader_error",
-          "alt_text": "Technical reference illustration for Bootloader Error."
+          "alt_text": "Wide night-shift server view showing storage is detected but OS boot does not proceed normally without identifying its cause.",
+          "caption": "Canonical symptom illustration for Bootloader Error.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -311,7 +338,10 @@
         "short_description": "Array redundancy is reduced.",
         "illustration": {
           "asset_id": "art.symptom.storage.raid_degraded",
-          "alt_text": "Technical reference illustration for RAID Degraded."
+          "alt_text": "Wide night-shift server view showing array redundancy is reduced without identifying its cause.",
+          "caption": "Canonical symptom illustration for RAID Degraded.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -344,7 +374,10 @@
         "short_description": "An expected drive is not detected.",
         "illustration": {
           "asset_id": "art.symptom.storage.drive_missing",
-          "alt_text": "Technical reference illustration for Drive Missing."
+          "alt_text": "Wide night-shift server view showing an expected drive is not detected without identifying its cause.",
+          "caption": "Canonical symptom illustration for Drive Missing.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -381,7 +414,10 @@
         "short_description": "Storage operations generate errors or timeouts.",
         "illustration": {
           "asset_id": "art.symptom.storage.io_errors",
-          "alt_text": "Technical reference illustration for Storage I/O Errors."
+          "alt_text": "Wide night-shift server view showing storage operations generate errors or timeouts without identifying its cause.",
+          "caption": "Canonical symptom illustration for Storage I/O Errors.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -417,7 +453,10 @@
         "short_description": "A drive bay or management interface reports a fault.",
         "illustration": {
           "asset_id": "art.symptom.storage.drive_fault_led",
-          "alt_text": "Technical reference illustration for Drive Fault Indicator."
+          "alt_text": "Wide night-shift server view showing a drive bay or management interface reports a fault without identifying its cause.",
+          "caption": "Canonical symptom illustration for Drive Fault Indicator.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -450,7 +489,10 @@
         "short_description": "Processor temperature is above expected range.",
         "illustration": {
           "asset_id": "art.symptom.thermal.high_cpu_temp",
-          "alt_text": "Technical reference illustration for High CPU Temperature."
+          "alt_text": "Wide night-shift server view showing processor temperature is above expected range without identifying its cause.",
+          "caption": "Canonical symptom illustration for High CPU Temperature.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -485,7 +527,10 @@
         "short_description": "Fans run unusually fast or loudly.",
         "illustration": {
           "asset_id": "art.symptom.thermal.fans_loud",
-          "alt_text": "Technical reference illustration for Fans Running Loud."
+          "alt_text": "Wide night-shift server view showing fans run unusually fast or loudly without identifying its cause.",
+          "caption": "Canonical symptom illustration for Fans Running Loud.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -521,7 +566,10 @@
         "short_description": "Server powers off or resets during sustained load.",
         "illustration": {
           "asset_id": "art.symptom.thermal.shutdown_under_load",
-          "alt_text": "Technical reference illustration for Shutdown Under Load."
+          "alt_text": "Wide night-shift server view showing server powers off or resets during sustained load without identifying its cause.",
+          "caption": "Canonical symptom illustration for Shutdown Under Load.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -555,7 +603,10 @@
         "short_description": "A fan is missing, stalled, or below expected speed.",
         "illustration": {
           "asset_id": "art.symptom.thermal.fan_warning",
-          "alt_text": "Technical reference illustration for Fan Warning."
+          "alt_text": "Wide night-shift server view showing a fan is missing, stalled, or below expected speed without identifying its cause.",
+          "caption": "Canonical symptom illustration for Fan Warning.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -587,7 +638,10 @@
         "short_description": "Network interface reports no physical carrier.",
         "illustration": {
           "asset_id": "art.symptom.network.no_link",
-          "alt_text": "Technical reference illustration for No Ethernet Link."
+          "alt_text": "Wide night-shift server view showing network interface reports no physical carrier without identifying its cause.",
+          "caption": "Canonical symptom illustration for No Ethernet Link.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -621,7 +675,10 @@
         "short_description": "Expected network destinations cannot be reached.",
         "illustration": {
           "asset_id": "art.symptom.network.no_connectivity",
-          "alt_text": "Technical reference illustration for No Network Connectivity."
+          "alt_text": "Wide night-shift server view showing expected network destinations cannot be reached without identifying its cause.",
+          "caption": "Canonical symptom illustration for No Network Connectivity.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -656,7 +713,10 @@
         "short_description": "Address, prefix, or gateway is incorrect.",
         "illustration": {
           "asset_id": "art.symptom.network.wrong_ip",
-          "alt_text": "Technical reference illustration for Unexpected IP Configuration."
+          "alt_text": "Wide night-shift server view showing address, prefix, or gateway is incorrect without identifying its cause.",
+          "caption": "Canonical symptom illustration for Unexpected IP Configuration.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -688,7 +748,10 @@
         "short_description": "A DHCP client does not obtain the expected lease.",
         "illustration": {
           "asset_id": "art.symptom.network.no_dhcp_lease",
-          "alt_text": "Technical reference illustration for No DHCP Lease."
+          "alt_text": "Wide night-shift server view showing a DHCP client does not obtain the expected lease without identifying its cause.",
+          "caption": "Canonical symptom illustration for No DHCP Lease.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -720,7 +783,10 @@
         "short_description": "An expected PCIe device does not enumerate.",
         "illustration": {
           "asset_id": "art.symptom.pcie.device_missing",
-          "alt_text": "Technical reference illustration for PCIe Device Missing."
+          "alt_text": "Wide night-shift server view showing an expected PCIe device does not enumerate without identifying its cause.",
+          "caption": "Canonical symptom illustration for PCIe Device Missing.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -751,7 +817,10 @@
         "short_description": "Firmware settings or clock values unexpectedly revert.",
         "illustration": {
           "asset_id": "art.symptom.firmware.settings_reset",
-          "alt_text": "Technical reference illustration for Firmware Settings Reset."
+          "alt_text": "Wide night-shift server view showing firmware settings or clock values unexpectedly revert without identifying its cause.",
+          "caption": "Canonical symptom illustration for Firmware Settings Reset.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -782,7 +851,10 @@
         "short_description": "Server restarts without intended operator action.",
         "illustration": {
           "asset_id": "art.symptom.system.random_reboot",
-          "alt_text": "Technical reference illustration for Unexpected Reboot."
+          "alt_text": "Wide night-shift server view showing server restarts without intended operator action without identifying its cause.",
+          "caption": "Canonical symptom illustration for Unexpected Reboot.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -815,7 +887,10 @@
         "short_description": "Workload or OS crashes sporadically.",
         "illustration": {
           "asset_id": "art.symptom.system.intermittent_crash",
-          "alt_text": "Technical reference illustration for Intermittent Crash."
+          "alt_text": "Wide night-shift server view showing workload or OS crashes sporadically without identifying its cause.",
+          "caption": "Canonical symptom illustration for Intermittent Crash.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -847,7 +922,10 @@
         "short_description": "Several unrelated devices report errors.",
         "illustration": {
           "asset_id": "art.symptom.system.device_errors",
-          "alt_text": "Technical reference illustration for Multiple Device Errors."
+          "alt_text": "Wide night-shift server view showing several unrelated devices report errors without identifying its cause.",
+          "caption": "Canonical symptom illustration for Multiple Device Errors.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {

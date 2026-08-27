@@ -5,6 +5,11 @@ import {
   categoryFor,
 } from './entity-types.js';
 import { createUiContinuity } from './play/ui-continuity.mjs';
+import {
+  bindResolvedImage,
+  createArtResolver,
+  loadArtManifest,
+} from './play/art-resolver.mjs';
 import { domainMethod, isTechnicalAction, technicalNoteLabel } from './play/technical-action-copy.mjs';
 
 const state = {
@@ -19,6 +24,7 @@ const state = {
   scrollY: 0,
   loaded: false,
   error: null,
+  artResolver: null,
 };
 
 let loadPromise = null;
@@ -43,10 +49,19 @@ const description = (record) => record.presentation?.short_description
 async function ensureContent() {
   if (!loadPromise) {
     loadPromise = loadAllContent()
-      .then(({ manifest, packs, records }) => {
+      .then(async ({ manifest, packs, records }) => {
         state.records = records;
         state.packs = packs;
         state.manifest = manifest;
+        try {
+          const artManifest = await loadArtManifest();
+          state.artResolver = createArtResolver({
+            manifest: artManifest,
+            domainEntities: records,
+          });
+        } catch {
+          state.artResolver = null;
+        }
         state.loaded = true;
       })
       .catch((error) => {
@@ -89,6 +104,8 @@ function formatValue(value) {
 function detailMarkup(record) {
   const skipped = new Set(['presentation', 'source', 'entity_type', '_pack_id', '_pack_name']);
   const illustration = record.presentation?.illustration;
+  const resolvedArt = state.artResolver?.resolveEntityArt?.(record);
+  const artMarkup = resolvedArt ? `<figure class="library-detail-art play-art-slot" data-family="${escapeHtml(record.entity_type)}"><img data-library-detail-art width="${record.entity_type === 'symptom' ? '1200' : '800'}" height="${record.entity_type === 'symptom' ? '360' : '450'}" alt=""><figcaption>${escapeHtml(illustration?.caption || displayName(record))}</figcaption></figure>` : '';
   if (isTechnicalAction(record)) {
     const domainById = new Map(state.records.map((entry) => [entry.id, entry]));
     const method = domainMethod(record, domainById);
@@ -97,6 +114,7 @@ function detailMarkup(record) {
     return `
       <span class="library-pill">${escapeHtml(labels[record.entity_type] || record.entity_type)}</span>
       <h2 id="library-detail-title">${escapeHtml(displayName(record))}</h2>
+      ${artMarkup}
       <section class="library-learning-section"><h3>What it does</h3><p>${escapeHtml(description(record))}</p></section>
       ${note ? `<section class="library-learning-section library-learning-section--note"><h3>${escapeHtml(technicalNoteLabel(record))}</h3><p>${escapeHtml(note)}</p></section>` : ''}
       <section class="library-learning-section"><h3>Technical method</h3>
@@ -113,6 +131,7 @@ function detailMarkup(record) {
   return `
     <span class="library-pill">${escapeHtml(labels[record.entity_type] || record.entity_type)}</span>
     <h2 id="library-detail-title">${escapeHtml(displayName(record))}</h2>
+    ${artMarkup}
     <p>${escapeHtml(description(record))}</p>
     ${illustration ? `<h3>Illustration</h3><p><code>${escapeHtml(illustration.asset_id)}</code><br>${escapeHtml(illustration.alt_text || '')}</p>` : ''}
     <h3>Domain data</h3>
@@ -121,6 +140,12 @@ function detailMarkup(record) {
     .map(([key, value]) => `<tr><th scope="row">${escapeHtml(key.replaceAll('_', ' '))}</th><td>${formatValue(value)}</td></tr>`)
     .join('')}</table>
     <p>Pack: ${escapeHtml(record._pack_name || '')}</p>`;
+}
+
+function bindLibraryDetailArt(record) {
+  const image = mountedRoot?.querySelector('[data-library-detail-art]');
+  const resolution = state.artResolver?.resolveEntityArt?.(record);
+  if (image && resolution) bindResolvedImage(image, resolution, { eager: true });
 }
 
 function resultCardsMarkup(rows) {
@@ -199,6 +224,7 @@ function render({ preserveContinuity = true } = {}) {
     const record = state.records.find((candidate) => candidate.id === state.openRecordId);
     if (record) {
       mountedRoot.querySelector('#detail').innerHTML = detailMarkup(record);
+      bindLibraryDetailArt(record);
       dialog.showModal();
     } else {
       state.openRecordId = null;

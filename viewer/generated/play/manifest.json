@@ -6,8 +6,632 @@
     {
       "path": "assets/play/assets.json",
       "source": "viewer/assets/play/assets.json",
-      "bytes": 7549,
-      "sha256": "5180bd11f8b4814e752bee6891d2df3881cc95f50d26ea250c0e93b45be72d6a"
+      "bytes": 36700,
+      "sha256": "458e555a4f0a0b0d5d25809b3cf9d3706c94883a55d9fa6bf9994c059ef4b61a"
+    },
+    {
+      "path": "assets/play/canonical/actions/commands/command-ipmi-sel-elist.webp",
+      "source": "viewer/assets/play/canonical/actions/commands/command-ipmi-sel-elist.webp",
+      "bytes": 40838,
+      "sha256": "2df3f9b04bcb5177c526294e92d368ddc6bdd82949083e70abfa6642e24837d0"
+    },
+    {
+      "path": "assets/play/canonical/actions/commands/command-linux-dhclient.webp",
+      "source": "viewer/assets/play/canonical/actions/commands/command-linux-dhclient.webp",
+      "bytes": 44128,
+      "sha256": "4a2e9a10b60c4b9de03d111e3cf73ab420b041a09fd67fbb5c8fd5fd3a4085a1"
+    },
+    {
+      "path": "assets/play/canonical/actions/commands/command-linux-dmesg.webp",
+      "source": "viewer/assets/play/canonical/actions/commands/command-linux-dmesg.webp",
+      "bytes": 48742,
+      "sha256": "dc3245a4050fc5fdfd16e27b461813008c1112c5040731bfda88eaeaa53ee588"
+    },
+    {
+      "path": "assets/play/canonical/actions/commands/command-linux-ethtool.webp",
+      "source": "viewer/assets/play/canonical/actions/commands/command-linux-ethtool.webp",
+      "bytes": 49924,
+      "sha256": "7462d2507dc7484252c923419791d164417cd9d919233d8970afe6201a1fc6d3"
+    },
+    {
+      "path": "assets/play/canonical/actions/commands/command-linux-free-h.webp",
+      "source": "viewer/assets/play/canonical/actions/commands/command-linux-free-h.webp",
+      "bytes": 52834,
+      "sha256": "c7966ead0a9c48758896af29649e227642111f8a438f759b8be5f13b347f3519"
+    },
+    {
+      "path": "assets/play/canonical/actions/commands/command-linux-ip-addr.webp",
+      "source": "viewer/assets/play/canonical/actions/commands/command-linux-ip-addr.webp",
+      "bytes": 56096,
+      "sha256": "499d10c90df4976cf2b201958d98e4d937a65a9d24c88b4f7318ff42c6b0a2dd"
+    },
+    {
+      "path": "assets/play/canonical/actions/commands/command-linux-ip-route.webp",
+      "source": "viewer/assets/play/canonical/actions/commands/command-linux-ip-route.webp",
+      "bytes": 48670,
+      "sha256": "67b015fd81bb6ed83c7566b2311e26b0402492c2ae8d901b3dddb9dc00e859dc"
+    },
+    {
+      "path": "assets/play/canonical/actions/commands/command-linux-journalctl.webp",
+      "source": "viewer/assets/play/canonical/actions/commands/command-linux-journalctl.webp",
+      "bytes": 48350,
+      "sha256": "8a73450ba928ec0fa3a121b28647fe0465836ecbef6b65ae61a930943a1c4662"
+    },
+    {
+      "path": "assets/play/canonical/actions/commands/command-linux-lsblk.webp",
+      "source": "viewer/assets/play/canonical/actions/commands/command-linux-lsblk.webp",
+      "bytes": 51960,
+      "sha256": "3b14140625390d7cbc977e605251c7444e0b886b2b644305397a2232c98ebbc5"
+    },
+    {
+      "path": "assets/play/canonical/actions/commands/command-linux-lspci.webp",
+      "source": "viewer/assets/play/canonical/actions/commands/command-linux-lspci.webp",
+      "bytes": 47732,
+      "sha256": "6bc835b4e174551f56b934374979da95e693397296e0ea9561d28b446e99d7d5"
+    },
+    {
+      "path": "assets/play/canonical/actions/commands/command-linux-nvme-smart-log.webp",
+      "source": "viewer/assets/play/canonical/actions/commands/command-linux-nvme-smart-log.webp",
+      "bytes": 57822,
+      "sha256": "47697c7530d4a85d4251ee81471ed716970c3457febfa310f8a1a899a5fd9f60"
+    },
+    {
+      "path": "assets/play/canonical/actions/commands/command-linux-smartctl.webp",
+      "source": "viewer/assets/play/canonical/actions/commands/command-linux-smartctl.webp",
+      "bytes": 59678,
+      "sha256": "fe22ff5946dc640f2987564ab1aeb9d7fb981f5f6069edb65e341654637e045b"
+    },
+    {
+      "path": "assets/play/canonical/actions/commands/command-network-ping.webp",
+      "source": "viewer/assets/play/canonical/actions/commands/command-network-ping.webp",
+      "bytes": 47848,
+      "sha256": "628b8fd32b83d697e84f69f6ff8495fca0a77e11b8ef4dca3ca989f50db9a311"
+    },
+    {
+      "path": "assets/play/canonical/actions/repairs/repair-boot-correct-order.webp",
+      "source": "viewer/assets/play/canonical/actions/repairs/repair-boot-correct-order.webp",
+      "bytes": 55450,
+      "sha256": "99015b0db4b8d13f24479ea234cafc24c7ffbc5c33c0a7d39b54e7550d1e65d5"
+    },
+    {
+      "path": "assets/play/canonical/actions/repairs/repair-memory-replace-dimm.webp",
+      "source": "viewer/assets/play/canonical/actions/repairs/repair-memory-replace-dimm.webp",
+      "bytes": 82936,
+      "sha256": "7f1081b82af874c95a112c002dacaa72d6fbbc599a770047b80315b6424231ea"
+    },
+    {
+      "path": "assets/play/canonical/actions/repairs/repair-memory-reseat-dimm.webp",
+      "source": "viewer/assets/play/canonical/actions/repairs/repair-memory-reseat-dimm.webp",
+      "bytes": 72372,
+      "sha256": "6e8427d4147c60cda22bb1fffce80a9ee353df365632f434f34a9ffd66535ab5"
+    },
+    {
+      "path": "assets/play/canonical/actions/repairs/repair-network-correct-static-ip.webp",
+      "source": "viewer/assets/play/canonical/actions/repairs/repair-network-correct-static-ip.webp",
+      "bytes": 53462,
+      "sha256": "908381716d2b4ee0bb42a825330616bb75f91d5be83962e830799ba6fc51be56"
+    },
+    {
+      "path": "assets/play/canonical/actions/repairs/repair-network-replace-cable.webp",
+      "source": "viewer/assets/play/canonical/actions/repairs/repair-network-replace-cable.webp",
+      "bytes": 61078,
+      "sha256": "a13c1c4870828fae03bf92746622963e9b94ccf12262dbe859a8947b79364ee7"
+    },
+    {
+      "path": "assets/play/canonical/actions/repairs/repair-power-replace-psu.webp",
+      "source": "viewer/assets/play/canonical/actions/repairs/repair-power-replace-psu.webp",
+      "bytes": 54322,
+      "sha256": "9bf18672a9b2dadbaf605b9433c5257b99873028b67784b6bff4bc396cc5175f"
+    },
+    {
+      "path": "assets/play/canonical/actions/repairs/repair-power-reseat-psu.webp",
+      "source": "viewer/assets/play/canonical/actions/repairs/repair-power-reseat-psu.webp",
+      "bytes": 44086,
+      "sha256": "ce01b2eefce87dfda1ba789ab401563c6e52225110d055993278407a69f45b60"
+    },
+    {
+      "path": "assets/play/canonical/actions/repairs/repair-storage-replace-nvme.webp",
+      "source": "viewer/assets/play/canonical/actions/repairs/repair-storage-replace-nvme.webp",
+      "bytes": 73554,
+      "sha256": "4db896fac9d68e90d991a742b6973709c603db2be352353f65a99574cf86189e"
+    },
+    {
+      "path": "assets/play/canonical/actions/repairs/repair-storage-replace-raid-member.webp",
+      "source": "viewer/assets/play/canonical/actions/repairs/repair-storage-replace-raid-member.webp",
+      "bytes": 59904,
+      "sha256": "9f095645b70c639b047b83d90140906d14925fa5a598c59baabc342ad15c4953"
+    },
+    {
+      "path": "assets/play/canonical/actions/repairs/repair-storage-reseat-cable.webp",
+      "source": "viewer/assets/play/canonical/actions/repairs/repair-storage-reseat-cable.webp",
+      "bytes": 76532,
+      "sha256": "327e8a35aeac923135acbb1022d9c66f7babf8cb58ce33d037c2705bd0a582ae"
+    },
+    {
+      "path": "assets/play/canonical/actions/repairs/repair-thermal-clean-cooling-path.webp",
+      "source": "viewer/assets/play/canonical/actions/repairs/repair-thermal-clean-cooling-path.webp",
+      "bytes": 66360,
+      "sha256": "d9f485f8db0b1522d33f00ff9e262e1d7180aa8d4addf8408748a8a26370097f"
+    },
+    {
+      "path": "assets/play/canonical/actions/repairs/repair-thermal-replace-fan.webp",
+      "source": "viewer/assets/play/canonical/actions/repairs/repair-thermal-replace-fan.webp",
+      "bytes": 68218,
+      "sha256": "92e69b207ae3cc8d8a225a787baca689940609b6e5d069638cfea56663156381"
+    },
+    {
+      "path": "assets/play/canonical/actions/tests/test-boot-device-inventory.webp",
+      "source": "viewer/assets/play/canonical/actions/tests/test-boot-device-inventory.webp",
+      "bytes": 50148,
+      "sha256": "93fbcc97089094b0365c9e27c2fa0ef86469493cb8268885252d2f2d36c29d4b"
+    },
+    {
+      "path": "assets/play/canonical/actions/tests/test-boot-post-code-analysis.webp",
+      "source": "viewer/assets/play/canonical/actions/tests/test-boot-post-code-analysis.webp",
+      "bytes": 54528,
+      "sha256": "1f32ca6e0b70c19ec23ac385d2129c8d9c033df778375827835de8cbea260a76"
+    },
+    {
+      "path": "assets/play/canonical/actions/tests/test-boot-post-observation.webp",
+      "source": "viewer/assets/play/canonical/actions/tests/test-boot-post-observation.webp",
+      "bytes": 46176,
+      "sha256": "32c36e734c3d4c531197e3bf6c420606cb6a5e8946f730c5094d4456bf75d1ec"
+    },
+    {
+      "path": "assets/play/canonical/actions/tests/test-compute-socket-magnified-inspection.webp",
+      "source": "viewer/assets/play/canonical/actions/tests/test-compute-socket-magnified-inspection.webp",
+      "bytes": 82986,
+      "sha256": "10095b810a567f8f778d3d09f752653f93a8c9703ce5b277a0e3dfa65420036d"
+    },
+    {
+      "path": "assets/play/canonical/actions/tests/test-cooling-location-cross-substitution.webp",
+      "source": "viewer/assets/play/canonical/actions/tests/test-cooling-location-cross-substitution.webp",
+      "bytes": 76348,
+      "sha256": "c9d4290de2323bcd100aada9605f318aa0ea3d044b3db2d23cf174a31b80db6a"
+    },
+    {
+      "path": "assets/play/canonical/actions/tests/test-electrical-continuity.webp",
+      "source": "viewer/assets/play/canonical/actions/tests/test-electrical-continuity.webp",
+      "bytes": 50692,
+      "sha256": "c8f0f04c992822d227f55ca213613c8cf36d11f108ce5b8c2d22798704f7d770"
+    },
+    {
+      "path": "assets/play/canonical/actions/tests/test-firmware-settings-review.webp",
+      "source": "viewer/assets/play/canonical/actions/tests/test-firmware-settings-review.webp",
+      "bytes": 60278,
+      "sha256": "d6cf600a99d45e7dfeef8b3a614f53c7a06dfec0d255742c656e4f400616c02f"
+    },
+    {
+      "path": "assets/play/canonical/actions/tests/test-firmware-version-compatibility.webp",
+      "source": "viewer/assets/play/canonical/actions/tests/test-firmware-version-compatibility.webp",
+      "bytes": 45582,
+      "sha256": "14f498d7496c0a421402677379d6c85e606049fc4226019722c173fd91aba7e9"
+    },
+    {
+      "path": "assets/play/canonical/actions/tests/test-general-minimum-configuration.webp",
+      "source": "viewer/assets/play/canonical/actions/tests/test-general-minimum-configuration.webp",
+      "bytes": 70068,
+      "sha256": "fae8ee353fc7dc3c178154f0251806ffb4931459d6af89bc0b80b07526a89500"
+    },
+    {
+      "path": "assets/play/canonical/actions/tests/test-general-visual-inspection.webp",
+      "source": "viewer/assets/play/canonical/actions/tests/test-general-visual-inspection.webp",
+      "bytes": 61500,
+      "sha256": "9134c1d8ed34294df7ddac00dfffc9ff73fa3ee14054673322067d652b2c7c48"
+    },
+    {
+      "path": "assets/play/canonical/actions/tests/test-management-bmc-recovery-state.webp",
+      "source": "viewer/assets/play/canonical/actions/tests/test-management-bmc-recovery-state.webp",
+      "bytes": 57756,
+      "sha256": "673012082e97ed25ae7d951f6782dc774a10a63e0f5c30184302104b7a7e7d94"
+    },
+    {
+      "path": "assets/play/canonical/actions/tests/test-management-event-log-freshness.webp",
+      "source": "viewer/assets/play/canonical/actions/tests/test-management-event-log-freshness.webp",
+      "bytes": 57806,
+      "sha256": "37be84366539a52a107f0af88b1bb2811c9a9c8f4fba25238f0c42c5aca8c37c"
+    },
+    {
+      "path": "assets/play/canonical/actions/tests/test-memory-diagnostic.webp",
+      "source": "viewer/assets/play/canonical/actions/tests/test-memory-diagnostic.webp",
+      "bytes": 83072,
+      "sha256": "bf913ceffcebacc43bda3916d0cf0343757175de9550e2b6a33c3f7035ca67b2"
+    },
+    {
+      "path": "assets/play/canonical/actions/tests/test-memory-known-good-substitution.webp",
+      "source": "viewer/assets/play/canonical/actions/tests/test-memory-known-good-substitution.webp",
+      "bytes": 76774,
+      "sha256": "e5f7c39b567e28d82cc5e2bfe984aa9ec8fd5308e08a27320d207229a579ccc6"
+    },
+    {
+      "path": "assets/play/canonical/actions/tests/test-memory-single-dimm-isolation.webp",
+      "source": "viewer/assets/play/canonical/actions/tests/test-memory-single-dimm-isolation.webp",
+      "bytes": 58180,
+      "sha256": "57785baded981abf215fed9ac6842a3d1acc6f062f3c4291a2c9fe9efe81f6be"
+    },
+    {
+      "path": "assets/play/canonical/actions/tests/test-network-cable-substitution.webp",
+      "source": "viewer/assets/play/canonical/actions/tests/test-network-cable-substitution.webp",
+      "bytes": 55088,
+      "sha256": "5debf788a929dac4f49bef563047cb5111f4126fea5afbc306466cad8285bc98"
+    },
+    {
+      "path": "assets/play/canonical/actions/tests/test-network-dhcp-pool-audit.webp",
+      "source": "viewer/assets/play/canonical/actions/tests/test-network-dhcp-pool-audit.webp",
+      "bytes": 47794,
+      "sha256": "86904c17f328f24f3ba17f86a2509cedfdeec497c5c3475d8ee6261ad641a088"
+    },
+    {
+      "path": "assets/play/canonical/actions/tests/test-network-dhcp-transaction-trace.webp",
+      "source": "viewer/assets/play/canonical/actions/tests/test-network-dhcp-transaction-trace.webp",
+      "bytes": 49484,
+      "sha256": "180f391ec2dd4f9d3702f2d53dd2aeeb0b26014564f438a55ebc305a0f5e99de"
+    },
+    {
+      "path": "assets/play/canonical/actions/tests/test-network-interface-config.webp",
+      "source": "viewer/assets/play/canonical/actions/tests/test-network-interface-config.webp",
+      "bytes": 57756,
+      "sha256": "85a71e5e71152befa5f2f6ca7aec2d799c260b27d2757f0b5265ba18bce849b5"
+    },
+    {
+      "path": "assets/play/canonical/actions/tests/test-network-link-counter-soak.webp",
+      "source": "viewer/assets/play/canonical/actions/tests/test-network-link-counter-soak.webp",
+      "bytes": 53256,
+      "sha256": "9278c6d8b788ae05a08946254107505b7959b910ef91374103b9c5795108422b"
+    },
+    {
+      "path": "assets/play/canonical/actions/tests/test-network-link.webp",
+      "source": "viewer/assets/play/canonical/actions/tests/test-network-link.webp",
+      "bytes": 56504,
+      "sha256": "9de54393422221cd9255a1912d69779341b6047413e806f4ea00b9f48272c2cf"
+    },
+    {
+      "path": "assets/play/canonical/actions/tests/test-network-ping.webp",
+      "source": "viewer/assets/play/canonical/actions/tests/test-network-ping.webp",
+      "bytes": 50140,
+      "sha256": "432d601d5e0b7338be4b62843995cb6e384d241d1314a6dd53b5184a84e38891"
+    },
+    {
+      "path": "assets/play/canonical/actions/tests/test-pcie-inventory.webp",
+      "source": "viewer/assets/play/canonical/actions/tests/test-pcie-inventory.webp",
+      "bytes": 70022,
+      "sha256": "2be26b8d93d7cf14049557356bb138c0cdd8dc6cb0bcfa1a53b212f268611184"
+    },
+    {
+      "path": "assets/play/canonical/actions/tests/test-power-distribution-path-isolation.webp",
+      "source": "viewer/assets/play/canonical/actions/tests/test-power-distribution-path-isolation.webp",
+      "bytes": 53664,
+      "sha256": "b10b80961910cc764cf8f18d176231d7f2fb663b66edbca4972cc00c3cae76ef"
+    },
+    {
+      "path": "assets/play/canonical/actions/tests/test-power-known-good-psu.webp",
+      "source": "viewer/assets/play/canonical/actions/tests/test-power-known-good-psu.webp",
+      "bytes": 68172,
+      "sha256": "d07fafbd4dd5c5e08357b01323c2b15abb957e36858a06b091a113486b0c1893"
+    },
+    {
+      "path": "assets/play/canonical/actions/tests/test-power-output-voltage-measurement.webp",
+      "source": "viewer/assets/play/canonical/actions/tests/test-power-output-voltage-measurement.webp",
+      "bytes": 58842,
+      "sha256": "8071249d96aa4fe90404ebabece60a09a31b5aab224e8333047ab9f3e3dfafae"
+    },
+    {
+      "path": "assets/play/canonical/actions/tests/test-power-psu-status.webp",
+      "source": "viewer/assets/play/canonical/actions/tests/test-power-psu-status.webp",
+      "bytes": 63966,
+      "sha256": "e559cceaa06a572336ce546f576f1561d2aba3df9c96b4f5ce69d458c6e48338"
+    },
+    {
+      "path": "assets/play/canonical/actions/tests/test-power-residual-power-drain.webp",
+      "source": "viewer/assets/play/canonical/actions/tests/test-power-residual-power-drain.webp",
+      "bytes": 67264,
+      "sha256": "479fdd2e548bf1155ad616d4a7d728ac385916a90e1d2a2620737416aca0cfab"
+    },
+    {
+      "path": "assets/play/canonical/actions/tests/test-storage-bay-path-isolation.webp",
+      "source": "viewer/assets/play/canonical/actions/tests/test-storage-bay-path-isolation.webp",
+      "bytes": 61934,
+      "sha256": "ce65528a04ed5b4ecd125a949856c080391acb449a4c6696db64c31873c6961c"
+    },
+    {
+      "path": "assets/play/canonical/actions/tests/test-storage-device-inventory.webp",
+      "source": "viewer/assets/play/canonical/actions/tests/test-storage-device-inventory.webp",
+      "bytes": 58872,
+      "sha256": "d693a163da9e4c39101e04de4272c02631be26edaf975303dfbd1fe1d43638c9"
+    },
+    {
+      "path": "assets/play/canonical/actions/tests/test-storage-drive-health.webp",
+      "source": "viewer/assets/play/canonical/actions/tests/test-storage-drive-health.webp",
+      "bytes": 63550,
+      "sha256": "32671c29891be51829768fc6d68a5f53fedd8d6ee3efe921f652d0724e647923"
+    },
+    {
+      "path": "assets/play/canonical/actions/tests/test-storage-predictive-health.webp",
+      "source": "viewer/assets/play/canonical/actions/tests/test-storage-predictive-health.webp",
+      "bytes": 60962,
+      "sha256": "3f4ffb75cfe3b4c3054416f16383aea183e0dd641eaf4d4f84cfc4a54fe23524"
+    },
+    {
+      "path": "assets/play/canonical/actions/tests/test-storage-raid-status.webp",
+      "source": "viewer/assets/play/canonical/actions/tests/test-storage-raid-status.webp",
+      "bytes": 58870,
+      "sha256": "622aea1a86dcb54e4641bbba2d458697c35e99c5fd30b914c9eb640a9d93a143"
+    },
+    {
+      "path": "assets/play/canonical/actions/tests/test-system-bmc-logs.webp",
+      "source": "viewer/assets/play/canonical/actions/tests/test-system-bmc-logs.webp",
+      "bytes": 56196,
+      "sha256": "e39549dbf3e77860a42ca9915e582a6a31aac59a059df39c3d99eab5c6af6209"
+    },
+    {
+      "path": "assets/play/canonical/actions/tests/test-system-controlled-stress.webp",
+      "source": "viewer/assets/play/canonical/actions/tests/test-system-controlled-stress.webp",
+      "bytes": 61974,
+      "sha256": "2986483a5d1f00bcd936fc3d39ee4fd62f48982189790c66ddc3b6f55c213aa3"
+    },
+    {
+      "path": "assets/play/canonical/actions/tests/test-thermal-fan-telemetry.webp",
+      "source": "viewer/assets/play/canonical/actions/tests/test-thermal-fan-telemetry.webp",
+      "bytes": 59440,
+      "sha256": "b491ee5f2032d771533b78f19fa52d8a28c7db3f0a1e0ab6b1f16e2a03c3fb70"
+    },
+    {
+      "path": "assets/play/canonical/actions/tests/test-thermal-temperature-monitoring.webp",
+      "source": "viewer/assets/play/canonical/actions/tests/test-thermal-temperature-monitoring.webp",
+      "bytes": 65964,
+      "sha256": "1d39bbd7d2cf4a4cf56df803940b74489507f26a5656923b2c07aebd6f35d866"
+    },
+    {
+      "path": "assets/play/canonical/actions/verifications/verify-boot-normal-boot.webp",
+      "source": "viewer/assets/play/canonical/actions/verifications/verify-boot-normal-boot.webp",
+      "bytes": 53716,
+      "sha256": "abf9939c838cedeb751d6c4f9ea6e5d61b6c8d6ab431777d0b53d363d8464757"
+    },
+    {
+      "path": "assets/play/canonical/actions/verifications/verify-memory-full-test.webp",
+      "source": "viewer/assets/play/canonical/actions/verifications/verify-memory-full-test.webp",
+      "bytes": 72758,
+      "sha256": "df1f6940698a9b6537aa4c55d014901d0458665d4113d0cc18b2ad0ee6c09de1"
+    },
+    {
+      "path": "assets/play/canonical/actions/verifications/verify-memory-inventory.webp",
+      "source": "viewer/assets/play/canonical/actions/verifications/verify-memory-inventory.webp",
+      "bytes": 64948,
+      "sha256": "3de87303be0c93ee9d417e694ce8e8296f7acfae4cf43fead9c0a8a0a594f3c7"
+    },
+    {
+      "path": "assets/play/canonical/actions/verifications/verify-network-connectivity.webp",
+      "source": "viewer/assets/play/canonical/actions/verifications/verify-network-connectivity.webp",
+      "bytes": 58778,
+      "sha256": "654472962050c7d0481ed914448ff96ebcd2973fa72a1f361ef78698514599e3"
+    },
+    {
+      "path": "assets/play/canonical/actions/verifications/verify-network-link.webp",
+      "source": "viewer/assets/play/canonical/actions/verifications/verify-network-link.webp",
+      "bytes": 49050,
+      "sha256": "90ed9f829b9a87c85b13afdcf22efd35f350fa921c7b064436ee2d4475c2b712"
+    },
+    {
+      "path": "assets/play/canonical/actions/verifications/verify-power-stable.webp",
+      "source": "viewer/assets/play/canonical/actions/verifications/verify-power-stable.webp",
+      "bytes": 68596,
+      "sha256": "933e80c523dcbaa14e6969ecc84276cf4b13631af45c2e75aec2ae29c35858e8"
+    },
+    {
+      "path": "assets/play/canonical/actions/verifications/verify-storage-device-detected.webp",
+      "source": "viewer/assets/play/canonical/actions/verifications/verify-storage-device-detected.webp",
+      "bytes": 52658,
+      "sha256": "844af77f1e9096ac503cf1e00fdbe21fda073becc9407b3efcacdbcd5fe95578"
+    },
+    {
+      "path": "assets/play/canonical/actions/verifications/verify-storage-raid-healthy.webp",
+      "source": "viewer/assets/play/canonical/actions/verifications/verify-storage-raid-healthy.webp",
+      "bytes": 53892,
+      "sha256": "66e754126c73e49b067f24a66102e372380a789597c865e72688eed0295dbba8"
+    },
+    {
+      "path": "assets/play/canonical/actions/verifications/verify-thermal-load-test.webp",
+      "source": "viewer/assets/play/canonical/actions/verifications/verify-thermal-load-test.webp",
+      "bytes": 62576,
+      "sha256": "5161f47fc10f3d7466f3a385a15198cbd26a162e149828732f5d2ec0e221a1a3"
+    },
+    {
+      "path": "assets/play/canonical/symptoms/boot/symptom-boot-bootloader-error.webp",
+      "source": "viewer/assets/play/canonical/symptoms/boot/symptom-boot-bootloader-error.webp",
+      "bytes": 51402,
+      "sha256": "75fca07072d0cc4c6e9886296a3ae5a7d548a09ffce8c20f596f8c92307fef67"
+    },
+    {
+      "path": "assets/play/canonical/symptoms/boot/symptom-boot-no-boot-device.webp",
+      "source": "viewer/assets/play/canonical/symptoms/boot/symptom-boot-no-boot-device.webp",
+      "bytes": 40824,
+      "sha256": "30e1daa49b4a7cf788a7d47f7738f2e214ba423b2a5f5d049b9286d20024424f"
+    },
+    {
+      "path": "assets/play/canonical/symptoms/boot/symptom-boot-no-post.webp",
+      "source": "viewer/assets/play/canonical/symptoms/boot/symptom-boot-no-post.webp",
+      "bytes": 51714,
+      "sha256": "d53ea49595e244fdaa11cfb1c5daa81f1ec6162ba826b10cefeda630a47da819"
+    },
+    {
+      "path": "assets/play/canonical/symptoms/boot/symptom-boot-wrong-device.webp",
+      "source": "viewer/assets/play/canonical/symptoms/boot/symptom-boot-wrong-device.webp",
+      "bytes": 46582,
+      "sha256": "6400bf355c73443819f0dcf0fa0b9578a21905a447deb1782874588b0440bdd6"
+    },
+    {
+      "path": "assets/play/canonical/symptoms/firmware/symptom-firmware-settings-reset.webp",
+      "source": "viewer/assets/play/canonical/symptoms/firmware/symptom-firmware-settings-reset.webp",
+      "bytes": 49700,
+      "sha256": "36056a5a27b5a044340a3c7e68e0428561cdcd6ed919588b1eb97a015da053f1"
+    },
+    {
+      "path": "assets/play/canonical/symptoms/firmware/symptom-firmware-update-failed.webp",
+      "source": "viewer/assets/play/canonical/symptoms/firmware/symptom-firmware-update-failed.webp",
+      "bytes": 56774,
+      "sha256": "78febe8f14fb272a1375189cf03ca586e175f7ab43467532f145cb654899964b"
+    },
+    {
+      "path": "assets/play/canonical/symptoms/management/symptom-management-alert-persists.webp",
+      "source": "viewer/assets/play/canonical/symptoms/management/symptom-management-alert-persists.webp",
+      "bytes": 49392,
+      "sha256": "e8cc98d02cbc104799f2944b51c044859c648fde75fca0c54ef61e11ac2a41d6"
+    },
+    {
+      "path": "assets/play/canonical/symptoms/management/symptom-management-bmc-not-responding.webp",
+      "source": "viewer/assets/play/canonical/symptoms/management/symptom-management-bmc-not-responding.webp",
+      "bytes": 53832,
+      "sha256": "b5a580bd0e8fa0ae68b8202bf6394eb4b3d410188d12a03a249a09e8170494b9"
+    },
+    {
+      "path": "assets/play/canonical/symptoms/management/symptom-management-lifecycle-unavailable.webp",
+      "source": "viewer/assets/play/canonical/symptoms/management/symptom-management-lifecycle-unavailable.webp",
+      "bytes": 51442,
+      "sha256": "21231ee19ee513ecc250a4a858c2b0a0d5b29320c43f0a925805e3b0b6b29c56"
+    },
+    {
+      "path": "assets/play/canonical/symptoms/memory/symptom-boot-memory-warning.webp",
+      "source": "viewer/assets/play/canonical/symptoms/memory/symptom-boot-memory-warning.webp",
+      "bytes": 77312,
+      "sha256": "38e014c5adaf250af7b6f3d95671516f00557fd37c3d4b2b394496049eabe923"
+    },
+    {
+      "path": "assets/play/canonical/symptoms/memory/symptom-memory-ecc-errors.webp",
+      "source": "viewer/assets/play/canonical/symptoms/memory/symptom-memory-ecc-errors.webp",
+      "bytes": 43080,
+      "sha256": "fec216c062479e9c2f67ff9883ff6b747585c4f45f529b623e86920856eb59a4"
+    },
+    {
+      "path": "assets/play/canonical/symptoms/memory/symptom-memory-reduced-capacity.webp",
+      "source": "viewer/assets/play/canonical/symptoms/memory/symptom-memory-reduced-capacity.webp",
+      "bytes": 64376,
+      "sha256": "ffbbb522e84a1f743071754794555dfebfef09af4108c2f58a47cf81d3edca61"
+    },
+    {
+      "path": "assets/play/canonical/symptoms/network/symptom-network-link-flapping.webp",
+      "source": "viewer/assets/play/canonical/symptoms/network/symptom-network-link-flapping.webp",
+      "bytes": 52782,
+      "sha256": "29a76cfc8772ae63a80962b23de3e404ce320fd5c4e904a5c20261c961fc91a9"
+    },
+    {
+      "path": "assets/play/canonical/symptoms/network/symptom-network-no-connectivity.webp",
+      "source": "viewer/assets/play/canonical/symptoms/network/symptom-network-no-connectivity.webp",
+      "bytes": 52316,
+      "sha256": "e62e28d41fb28222d387678a2b898fada6cb299f58bdbbc2b61467642dd5ecfa"
+    },
+    {
+      "path": "assets/play/canonical/symptoms/network/symptom-network-no-dhcp-lease.webp",
+      "source": "viewer/assets/play/canonical/symptoms/network/symptom-network-no-dhcp-lease.webp",
+      "bytes": 57924,
+      "sha256": "04a67fed1ec98c11ea881a2e44cbdaf07576cf1efbedb8148dc99bccb9a21d82"
+    },
+    {
+      "path": "assets/play/canonical/symptoms/network/symptom-network-no-link.webp",
+      "source": "viewer/assets/play/canonical/symptoms/network/symptom-network-no-link.webp",
+      "bytes": 72496,
+      "sha256": "2032dad219d66acc03340d718563dfed9734b217f74c6bd22617dc3c58535240"
+    },
+    {
+      "path": "assets/play/canonical/symptoms/network/symptom-network-wrong-ip.webp",
+      "source": "viewer/assets/play/canonical/symptoms/network/symptom-network-wrong-ip.webp",
+      "bytes": 87238,
+      "sha256": "db346a068b03574c5e4e9b997e165cce89e1d94e9cff237e7ee6f2ef9046b23b"
+    },
+    {
+      "path": "assets/play/canonical/symptoms/pcie/symptom-pcie-device-missing.webp",
+      "source": "viewer/assets/play/canonical/symptoms/pcie/symptom-pcie-device-missing.webp",
+      "bytes": 51702,
+      "sha256": "f3ca5788010cf0e8f0fcdcde3a08e26b2c0daecf09b729f52e33e41a0455a177"
+    },
+    {
+      "path": "assets/play/canonical/symptoms/power/symptom-power-no-power.webp",
+      "source": "viewer/assets/play/canonical/symptoms/power/symptom-power-no-power.webp",
+      "bytes": 52728,
+      "sha256": "2afdce6416891e2743808568c87daffd5dd20da9298a8a423b48930396f1270e"
+    },
+    {
+      "path": "assets/play/canonical/symptoms/power/symptom-power-redundancy-warning.webp",
+      "source": "viewer/assets/play/canonical/symptoms/power/symptom-power-redundancy-warning.webp",
+      "bytes": 78748,
+      "sha256": "45f893cac62d58e3a7fe5a51e4f5510ad985c58c45613a75cc6625de9235a108"
+    },
+    {
+      "path": "assets/play/canonical/symptoms/power/symptom-power-voltage-out-of-range.webp",
+      "source": "viewer/assets/play/canonical/symptoms/power/symptom-power-voltage-out-of-range.webp",
+      "bytes": 82232,
+      "sha256": "eae4cee87998f0e92be9810849ee526b81211d42ad392f2587db98f7fe5153da"
+    },
+    {
+      "path": "assets/play/canonical/symptoms/storage/symptom-storage-drive-fault-led.webp",
+      "source": "viewer/assets/play/canonical/symptoms/storage/symptom-storage-drive-fault-led.webp",
+      "bytes": 53140,
+      "sha256": "26b2cdfd324c69351956cbe49d4abf72efc1aca43dfa618b8266772597be2dd2"
+    },
+    {
+      "path": "assets/play/canonical/symptoms/storage/symptom-storage-drive-missing.webp",
+      "source": "viewer/assets/play/canonical/symptoms/storage/symptom-storage-drive-missing.webp",
+      "bytes": 65644,
+      "sha256": "4e7340cfc853222a1a912750af01bcde15d8aa938b17385af9b2fa670f33267c"
+    },
+    {
+      "path": "assets/play/canonical/symptoms/storage/symptom-storage-io-errors.webp",
+      "source": "viewer/assets/play/canonical/symptoms/storage/symptom-storage-io-errors.webp",
+      "bytes": 77166,
+      "sha256": "2ac7925392ec48d4732ee527730f8be436004f0a907049758c709e7df2ccfbbc"
+    },
+    {
+      "path": "assets/play/canonical/symptoms/storage/symptom-storage-predictive-failure-warning.webp",
+      "source": "viewer/assets/play/canonical/symptoms/storage/symptom-storage-predictive-failure-warning.webp",
+      "bytes": 66172,
+      "sha256": "c29f1ffab42765f86746a13e0650ad44c6c0998af663ab2527df65d904220be3"
+    },
+    {
+      "path": "assets/play/canonical/symptoms/storage/symptom-storage-raid-degraded.webp",
+      "source": "viewer/assets/play/canonical/symptoms/storage/symptom-storage-raid-degraded.webp",
+      "bytes": 52742,
+      "sha256": "22bf462439fbac8e62b5c7e87d61daeee6bb3af512c796f1e9e876b9a6ee4196"
+    },
+    {
+      "path": "assets/play/canonical/symptoms/system/symptom-system-device-errors.webp",
+      "source": "viewer/assets/play/canonical/symptoms/system/symptom-system-device-errors.webp",
+      "bytes": 67772,
+      "sha256": "0afc42138be5baeabc13c8faa0c5114a1f30f1f6986f2f71686f98130b977848"
+    },
+    {
+      "path": "assets/play/canonical/symptoms/system/symptom-system-intermittent-crash.webp",
+      "source": "viewer/assets/play/canonical/symptoms/system/symptom-system-intermittent-crash.webp",
+      "bytes": 81832,
+      "sha256": "71f1e6c727d504de474a98d851a70d4c1f9ba4e69d18da3b9191d1439bca9fdc"
+    },
+    {
+      "path": "assets/play/canonical/symptoms/system/symptom-system-random-reboot.webp",
+      "source": "viewer/assets/play/canonical/symptoms/system/symptom-system-random-reboot.webp",
+      "bytes": 58396,
+      "sha256": "1b1f32a2dc5151eb2c40dc21ba479bf343a0f5750924a8c115b59bb2f3588f12"
+    },
+    {
+      "path": "assets/play/canonical/symptoms/thermal/symptom-thermal-fan-warning.webp",
+      "source": "viewer/assets/play/canonical/symptoms/thermal/symptom-thermal-fan-warning.webp",
+      "bytes": 80064,
+      "sha256": "6afd540d48b098ebc947c5ed93ff20026eea101c4de438f7107f0bf875fdeab6"
+    },
+    {
+      "path": "assets/play/canonical/symptoms/thermal/symptom-thermal-fans-loud.webp",
+      "source": "viewer/assets/play/canonical/symptoms/thermal/symptom-thermal-fans-loud.webp",
+      "bytes": 58914,
+      "sha256": "1592b231eeee7e1e555c6f96a0ec3b640d424f6e5b4ab104469cfd0c8af44872"
+    },
+    {
+      "path": "assets/play/canonical/symptoms/thermal/symptom-thermal-high-cpu-temp.webp",
+      "source": "viewer/assets/play/canonical/symptoms/thermal/symptom-thermal-high-cpu-temp.webp",
+      "bytes": 54768,
+      "sha256": "90e4b869ba32e3431be11fefb16c0ed4543263a75062ed593bd6c1383b3075c6"
+    },
+    {
+      "path": "assets/play/canonical/symptoms/thermal/symptom-thermal-shutdown-under-load.webp",
+      "source": "viewer/assets/play/canonical/symptoms/thermal/symptom-thermal-shutdown-under-load.webp",
+      "bytes": 51622,
+      "sha256": "dd6ea75905caa7af5f6d7a26cc7ae3843fc568c57f90ed756334abd53aacdbfa"
     },
     {
       "path": "assets/play/decorative/night-shift-desk.svg",
@@ -120,14 +744,14 @@
     {
       "path": "content/gameplay-v1/domain-snapshot-v2.json",
       "source": "content/gameplay-v1/domain-snapshot-v2.json",
-      "bytes": 418934,
-      "sha256": "3af0332d64895c5247a101d858a94fe63ffe88ae0b7c0849fe92cd244a0c1c74"
+      "bytes": 456995,
+      "sha256": "2e55fc92b725d869b67b3ea73c701c55db49f9b9a2f49bcff981cebaca687a2f"
     },
     {
       "path": "content/gameplay-v1/domain-snapshot.json",
       "source": "content/gameplay-v1/domain-snapshot.json",
-      "bytes": 14703,
-      "sha256": "255cbae625610fbd7fce9d07fb6fe0ced4397211dab13f72bd181adf6764a0ae"
+      "bytes": 18181,
+      "sha256": "9642d0ca376ac2777da25d2cb28176a33c5704ba50d4471e1eaf9e7c255b51a0"
     },
     {
       "path": "content/gameplay-v1/playable-coverage-v3.json",

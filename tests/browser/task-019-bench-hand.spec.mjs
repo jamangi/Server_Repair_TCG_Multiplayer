@@ -54,6 +54,10 @@ async function expectDiagnosticAnatomy(page) {
         artWidth: art.getBoundingClientRect().width,
         artHeight: art.getBoundingClientRect().height,
         naturalWidth: image.naturalWidth,
+        intrinsicWidth: Number(image.getAttribute('width')),
+        intrinsicHeight: Number(image.getAttribute('height')),
+        artStatus: image.dataset.artStatus,
+        loading: image.loading,
         objectFit: getComputedStyle(image).objectFit,
         childIntersections: [card, family, cost, title, art, inspect].every(intersects),
         hasRules: Boolean(node.querySelector('.play-card__rules')),
@@ -67,7 +71,13 @@ async function expectDiagnosticAnatomy(page) {
     expect(anatomy.titleOverflow).toBeLessThanOrEqual(1);
     expect(anatomy.artWidth).toBeGreaterThan(20);
     expect(anatomy.artHeight).toBeGreaterThan(20);
-    expect(anatomy.naturalWidth).toBeGreaterThan(0);
+    if (anatomy.artStatus === 'loading') {
+      expect(anatomy.loading).toBe('lazy');
+      expect(anatomy.intrinsicWidth).toBe(800);
+      expect(anatomy.intrinsicHeight).toBe(450);
+    } else {
+      expect(anatomy.naturalWidth).toBeGreaterThan(0);
+    }
     expect(anatomy.objectFit).toMatch(/cover|contain/);
     expect(anatomy.childIntersections).toBe(true);
     expect(anatomy.hasRules).toBe(false);

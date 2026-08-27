@@ -568,7 +568,11 @@ test('the generated Pages stage is a strict allowlist with no Node-only or serve
   for (const entry of manifest.files) {
     const sourceParts = entry.source.split('/');
     const outputParts = entry.path.split('/');
-    assert.ok([...sourceParts, ...outputParts].every((part) => !forbiddenSegments.has(part)), entry.path);
+    const canonicalIllustration = entry.source.startsWith('viewer/assets/play/canonical/')
+      && entry.path.startsWith('assets/play/canonical/')
+      && entry.path.endsWith('.webp');
+    assert.ok(canonicalIllustration
+      || [...sourceParts, ...outputParts].every((part) => !forbiddenSegments.has(part)), entry.path);
     const allowed = /^src\/(?:engine|builder|shared)\/[a-z0-9._-]+\.mjs$/.test(entry.source)
       || (entry.source.startsWith('content/gameplay-v1/')
         && (gameplayFiles.has(entry.source.slice('content/gameplay-v1/'.length))

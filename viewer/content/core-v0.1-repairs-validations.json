@@ -11,7 +11,10 @@
         "short_description": "Removes and reinstalls the isolated dual in-line memory module (DIMM) so both retaining latches engage and the module follows the approved population map.",
         "illustration": {
           "asset_id": "art.repair.memory.reseat_dimm",
-          "alt_text": "Technical reference illustration for Reseat DIMM."
+          "alt_text": "Reseat DIMM in progress at a night-shift server service bench, before verification.",
+          "caption": "Canonical repair illustration for Reseat DIMM.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -47,7 +50,10 @@
         "short_description": "Removes the isolated failed dual in-line memory module (DIMM) and installs a compatible replacement in the same approved population position.",
         "illustration": {
           "asset_id": "art.repair.memory.replace_dimm",
-          "alt_text": "Technical reference illustration for Replace Failed DIMM."
+          "alt_text": "Replace Failed DIMM in progress at a night-shift server service bench, before verification.",
+          "caption": "Canonical repair illustration for Replace Failed DIMM.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -119,7 +125,10 @@
         "short_description": "Removes and fully reinstalls the isolated power supply unit (PSU) so its bay connector and retention mechanism engage correctly.",
         "illustration": {
           "asset_id": "art.repair.power.reseat_psu",
-          "alt_text": "Technical reference illustration for Reseat PSU."
+          "alt_text": "Reseat PSU in progress at a night-shift server service bench, before verification.",
+          "caption": "Canonical repair illustration for Reseat PSU.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -153,7 +162,10 @@
         "short_description": "Removes the isolated failed power supply unit (PSU) and installs a compatible replacement in the documented bay.",
         "illustration": {
           "asset_id": "art.repair.power.replace_psu",
-          "alt_text": "Technical reference illustration for Replace Failed PSU."
+          "alt_text": "Replace Failed PSU in progress at a night-shift server service bench, before verification.",
+          "caption": "Canonical repair illustration for Replace Failed PSU.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -221,7 +233,10 @@
         "short_description": "Replaces the exact failed member of a redundant array of independent disks (RAID) with a compatible drive so the controller can restore redundancy.",
         "illustration": {
           "asset_id": "art.repair.storage.replace_raid_member",
-          "alt_text": "Technical reference illustration for Replace Failed RAID Member."
+          "alt_text": "Replace Failed RAID Member in progress at a night-shift server service bench, before verification.",
+          "caption": "Canonical repair illustration for Replace Failed RAID Member.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -291,7 +306,10 @@
         "short_description": "Disconnects, inspects, and securely reconnects the isolated storage data cable at its documented endpoints.",
         "illustration": {
           "asset_id": "art.repair.storage.reseat_cable",
-          "alt_text": "Technical reference illustration for Reseat Storage Cable."
+          "alt_text": "Reseat Storage Cable in progress at a night-shift server service bench, before verification.",
+          "caption": "Canonical repair illustration for Reseat Storage Cable.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -359,7 +377,10 @@
         "short_description": "Replaces the isolated failed Non-Volatile Memory Express (NVMe) device while preserving its documented bay, namespace, and storage-role mapping.",
         "illustration": {
           "asset_id": "art.repair.storage.replace_nvme",
-          "alt_text": "Technical reference illustration for Replace Failed NVMe Device."
+          "alt_text": "Replace Failed NVMe Device in progress at a night-shift server service bench, before verification.",
+          "caption": "Canonical repair illustration for Replace Failed NVMe Device.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -428,7 +449,10 @@
         "short_description": "Changes firmware boot priority so the approved operating-system loader is attempted before unintended devices.",
         "illustration": {
           "asset_id": "art.repair.boot.correct_order",
-          "alt_text": "Technical reference illustration for Correct Boot Order."
+          "alt_text": "Correct Boot Order in progress at a night-shift server service bench, before verification.",
+          "caption": "Canonical repair illustration for Correct Boot Order.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -563,7 +587,10 @@
         "short_description": "Removes the isolated failed chassis fan and installs a compatible replacement in the same cooling location.",
         "illustration": {
           "asset_id": "art.repair.thermal.replace_fan",
-          "alt_text": "Technical reference illustration for Replace Chassis Fan."
+          "alt_text": "Replace Chassis Fan in progress at a night-shift server service bench, before verification.",
+          "caption": "Canonical repair illustration for Replace Chassis Fan.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -598,7 +625,10 @@
         "short_description": "Removes the isolated dust or debris restriction from the heatsink and documented airflow path without altering component placement.",
         "illustration": {
           "asset_id": "art.repair.thermal.clean_cooling_path",
-          "alt_text": "Technical reference illustration for Clean Cooling Path."
+          "alt_text": "Clean Cooling Path in progress at a night-shift server service bench, before verification.",
+          "caption": "Canonical repair illustration for Clean Cooling Path.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -699,7 +729,10 @@
         "short_description": "Removes the isolated faulty Ethernet cable and installs a compatible cable between the same documented adapter and switch ports.",
         "illustration": {
           "asset_id": "art.repair.network.replace_cable",
-          "alt_text": "Technical reference illustration for Replace Ethernet Cable."
+          "alt_text": "Replace Ethernet Cable in progress at a night-shift server service bench, before verification.",
+          "caption": "Canonical repair illustration for Replace Ethernet Cable.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -734,7 +767,10 @@
         "short_description": "Replaces an incorrect static Internet Protocol (IP) address, prefix, or gateway with the approved network configuration.",
         "illustration": {
           "asset_id": "art.repair.network.correct_static_ip",
-          "alt_text": "Technical reference illustration for Correct Static IP Configuration."
+          "alt_text": "Correct Static IP Configuration in progress at a night-shift server service bench, before verification.",
+          "caption": "Canonical repair illustration for Correct Static IP Configuration.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -908,7 +944,10 @@
         "short_description": "Runs the approved full memory diagnostic and a representative workload, requiring expected capacity with no new reportable memory errors or instability.",
         "illustration": {
           "asset_id": "art.verify.memory.full_test",
-          "alt_text": "Technical reference illustration for Memory Verification."
+          "alt_text": "Neutral post-repair measurement setup for Memory Verification, without indicating a pass or failure.",
+          "caption": "Canonical verify illustration for Memory Verification.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -943,7 +982,10 @@
         "short_description": "Checks firmware and operating-system memory inventory after restart, requiring the expected dual in-line memory modules (DIMMs), capacity, and channels with no population warning.",
         "illustration": {
           "asset_id": "art.verify.memory.inventory",
-          "alt_text": "Technical reference illustration for Memory Inventory Verification."
+          "alt_text": "Neutral post-repair measurement setup for Memory Inventory Verification, without indicating a pass or failure.",
+          "caption": "Canonical verify illustration for Memory Inventory Verification.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -978,7 +1020,10 @@
         "short_description": "Exercises repeated starts and a representative load while requiring healthy power-supply status, stable power, and the intended redundancy with no recurring alert.",
         "illustration": {
           "asset_id": "art.verify.power.stable",
-          "alt_text": "Technical reference illustration for Stable Power Verification."
+          "alt_text": "Neutral post-repair measurement setup for Stable Power Verification, without indicating a pass or failure.",
+          "caption": "Canonical verify illustration for Stable Power Verification.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -1014,7 +1059,10 @@
         "short_description": "Checks firmware, controller, and operating-system inventory across restart, requiring the expected storage device and path with no new input/output errors.",
         "illustration": {
           "asset_id": "art.verify.storage.device_detected",
-          "alt_text": "Technical reference illustration for Storage Detection Verification."
+          "alt_text": "Neutral post-repair measurement setup for Storage Detection Verification, without indicating a pass or failure.",
+          "caption": "Canonical verify illustration for Storage Detection Verification.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -1050,7 +1098,10 @@
         "short_description": "Monitors the redundant array of independent disks (RAID) until every required member is online, rebuild work is complete, and redundancy is restored without new controller or media alerts.",
         "illustration": {
           "asset_id": "art.verify.storage.raid_healthy",
-          "alt_text": "Technical reference illustration for RAID Healthy Verification."
+          "alt_text": "Neutral post-repair measurement setup for RAID Healthy Verification, without indicating a pass or failure.",
+          "caption": "Canonical verify illustration for RAID Healthy Verification.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -1087,7 +1138,10 @@
         "short_description": "Performs normal cold and warm starts and checks that firmware selects the intended boot entry, the operating-system loader starts, and the original boot error does not recur.",
         "illustration": {
           "asset_id": "art.verify.boot.normal_boot",
-          "alt_text": "Technical reference illustration for Normal Boot Verification."
+          "alt_text": "Neutral post-repair measurement setup for Normal Boot Verification, without indicating a pass or failure.",
+          "caption": "Canonical verify illustration for Normal Boot Verification.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -1156,7 +1210,10 @@
         "short_description": "Applies an approved representative load while monitoring temperatures, fan response, and stability, requiring no thermal alert, throttling outside policy, shutdown, or reset.",
         "illustration": {
           "asset_id": "art.verify.thermal.load_test",
-          "alt_text": "Technical reference illustration for Thermal Load Verification."
+          "alt_text": "Neutral post-repair measurement setup for Thermal Load Verification, without indicating a pass or failure.",
+          "caption": "Canonical verify illustration for Thermal Load Verification.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -1194,7 +1251,10 @@
         "short_description": "Observes stable Ethernet carrier at the expected speed and duplex while counters remain within the approved error threshold.",
         "illustration": {
           "asset_id": "art.verify.network.link",
-          "alt_text": "Technical reference illustration for Network Link Verification."
+          "alt_text": "Neutral post-repair measurement setup for Network Link Verification, without indicating a pass or failure.",
+          "caption": "Canonical verify illustration for Network Link Verification.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {
@@ -1230,7 +1290,10 @@
         "short_description": "Checks the repaired interface configuration and reaches representative local, gateway, and required remote destinations, providing an operational connectivity signal.",
         "illustration": {
           "asset_id": "art.verify.network.connectivity",
-          "alt_text": "Technical reference illustration for Network Connectivity Verification."
+          "alt_text": "Neutral post-repair measurement setup for Network Connectivity Verification, without indicating a pass or failure.",
+          "caption": "Canonical verify illustration for Network Connectivity Verification.",
+          "crop_hint": "center",
+          "license_note": "Generated for TASK-011 with OpenAI built-in image generation; repository use follows applicable OpenAI terms and the repository license."
         }
       },
       "source": {

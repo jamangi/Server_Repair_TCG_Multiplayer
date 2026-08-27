@@ -90,6 +90,10 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .library-dialog th, .library-dialog td { padding: 8px 0; border-bottom: 1px solid var(--shell-line); vertical-align: top; text-align: left; }
 .library-dialog th { width: 30%; color: var(--shell-muted); font-weight: 500; }
 .library-dialog pre { overflow-wrap: anywhere; white-space: pre-wrap; }
+.library-detail-art { margin: 18px 0; overflow: hidden; border: 1px solid var(--shell-line); border-radius: 14px; background: #07141b; box-shadow: 0 14px 34px rgb(0 0 0 / 32%); }
+.library-detail-art img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
+.library-detail-art[data-family="symptom"] img { aspect-ratio: 10 / 3; }
+.library-detail-art figcaption { padding: 9px 12px; color: var(--shell-muted); font-size: .82rem; }
 .library-learning-section { padding: 14px 16px; margin: 16px 0; border: 1px solid var(--shell-line); border-radius: 12px; background: rgb(18 29 42 / 72%); }
 .library-learning-section h3 { margin-top: 0; }
 .library-learning-section--note { border-left: 4px solid #e8b760; }

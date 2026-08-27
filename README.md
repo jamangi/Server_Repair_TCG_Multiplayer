@@ -68,6 +68,7 @@ This repository currently contains:
 - starter technical catalogs and recommended match models;
 - synchronized draft domain and runtime schemas with valid and invalid examples;
 - a version-pinned playable pack with 71 typed Card Definitions: all 50 current Test/Command diagnostics in the Global Bench plus the 12 Repairs and nine Validations required by twelve supported causal fingerprints across storage, memory, power, boot, thermal, and network;
+- 104 reviewed canonical night-shift illustrations: 71 domain-owned playable-action images inherited by Cards and 33 public-Symptom panoramas inherited by generated Tickets without hidden-Fault input;
 - a dependency-free deterministic engine for authenticated intents, private/team/public Evidence, exact Isolation-to-Repair gates, failed Verify returns, Documentation, atomic closure, scoring, queue reconciliation, and offline terminal results;
 - a part-assembling deterministic Ticket Builder with exact diagnostic/outcome and active-deck resource proof, complete-or-none validation, unique-before-repeat queues, balanced repetition, structured diagnostics, and reproducible provenance;
 - seat-safe cooperative and competitive computer policies plus the frozen 22-run foundation campaign and a 13-run expanded-content campaign covering every supported fingerprint and a multi-Ticket resource path;
@@ -163,4 +164,5 @@ After changing canonical engine, Builder, gameplay, Play modules, assets, or the
 ```powershell
 node viewer/scripts/build-play-assets.mjs
 node viewer/scripts/verify-play-assets.mjs
+node viewer/scripts/verify-task-011-art.mjs
 ```
