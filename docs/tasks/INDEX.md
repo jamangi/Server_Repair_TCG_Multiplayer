@@ -6,21 +6,17 @@ Beginning with TASK-011, the displayed task ID includes the recommended reasonin
 
 Active task:
 
-- No implementation task is active.
+- [`TASK-011-HIGH: Create canonical Card and symptom Ticket illustrations`](TASK-011-create-canonical-card-and-symptom-illustrations.md) — ready; produce 71 domain-inherited playable-action illustrations and 33 public-Symptom Ticket panoramas through a measured, provenance-tracked, batch-safe art pipeline without changing gameplay.
 
 Queued V0 training-ready sequence:
 
 - The approved training-ready sequence through TASK-024 and TASK-015 is complete.
 
-Reserved V0 illustration task:
-
-- **TASK-011-HIGH — canonical Card illustrations.** Scope after TASK-014 stabilizes the expanded playable catalog, avoiding throwaway art and asset migration. It may then proceed independently of TASK-016/TASK-015 where asset integration permits.
-
 Approved but deferred V2 task:
 
 - [`TASK-017-XHIGH: Create the Server Repair V2 Migration Seed`](TASK-017-create-server-repair-v2-migration-seed.md) — approved Migration Seed direction but deferred until the V0 product is training-ready; when reactivated, it audits V0 in bounded checkpoints and establishes the public dependency-inference V2 foundation without modifying V0 behavior.
 
-TASK-012-HIGH through TASK-016-HIGH, TASK-018-HIGH through TASK-021-HIGH, TASK-023-HIGH, and TASK-024-XHIGH are complete. PT-008 B is approved and the proposed TASK-022 was withdrawn without implementation. TASK-011-HIGH remains reserved but has no task contract in `docs/tasks/`; implementation must wait for that specification. Return to TASK-017-XHIGH only when the project owner reactivates V2 migration.
+TASK-012-HIGH through TASK-016-HIGH, TASK-018-HIGH through TASK-021-HIGH, TASK-023-HIGH, and TASK-024-XHIGH are complete. PT-008 B is approved and the proposed TASK-022 was withdrawn without implementation. TASK-011-HIGH is now specified and active. Return to TASK-017-XHIGH only when the project owner reactivates V2 migration.
 
 Completed documentation and research tasks:
 
@@ -35,7 +31,7 @@ Completed documentation and research tasks:
 - [`TASK-014-XHIGH: Expand playable content and Ticket generation`](TASK-014-expand-playable-content-and-ticket-generation.md) — completed 2026-08-24; promoted all 50 current Test/Command diagnostics, added twelve cross-subsystem causal fingerprints and their minimal response paths, assembled deterministic Tickets from typed authored parts, proved exact active-deck reachability and unique-before-repeat queues, published coverage audits, and reproduced a 13-run seat-safe campaign with no exceptions.
 - [`TASK-013-XHIGH: Synchronize approved post-playtest diagnosis rules`](TASK-013-synchronize-post-playtest-diagnosis-rules.md) — completed 2026-08-24; added the versioned Global/Relevant Diagnostic Bench, deterministic Candidate/outcome migration, typed alternative Isolation and elimination routes, retained Repair gating, atomic solo/training Give Up reveal, v1 coexistence, and reproducible v2 campaign.
 - [`TASK-012-HIGH: Fix solo-client interaction defects`](TASK-012-fix-solo-client-interaction-defects.md) — completed 2026-08-24; added semantic same-route scroll/focus/selection continuity, composition-safe real typing, explicit alternate Card targets, and persistent authoritative action-result routes without gameplay changes.
-- [`TASK-010: Add Library and local Solo Play to the static Viewer`](TASK-010-static-solo-play-client.md) — completed 2026-08-23; preserved the Domain Library and added the `solo-pages-v1` local Play shell, legal deck editor, profile/statistics and backup portability, Worker-authoritative 1–10 Ticket games, semantic motion, responsive Night-Shift visual system, deterministic Pages staging, and browser/visual acceptance. TASK-011-HIGH remains reserved for the full illustration set.
+- [`TASK-010: Add Library and local Solo Play to the static Viewer`](TASK-010-static-solo-play-client.md) — completed 2026-08-23; preserved the Domain Library and added the `solo-pages-v1` local Play shell, legal deck editor, profile/statistics and backup portability, Worker-authoritative 1–10 Ticket games, semantic motion, responsive Night-Shift visual system, deterministic Pages staging, and browser/visual acceptance. Its illustration placeholder boundary is now the active TASK-011-HIGH contract.
 - [`TASK-009: Build the playable gameplay foundation`](TASK-009-gameplay-foundation.md) — completed 2026-08-23; synchronized executable Card/Ticket contracts, deterministic authoritative engine, constraint-driven Ticket Builder, seat-safe simulator, and a reproducible 22-run campaign with 0 deterministic mismatches.
 - [`TASK-008: Freeze the first-version foundation`](TASK-008-freeze-first-version-foundation.md) — completed 2026-08-23; all 89 reviewed open items and four pressures resolved, affected artifacts synchronized, and the Unfrozen ledger emptied.
 - [`TASK-007: Synchronize approved gameplay rules`](TASK-007-synchronize-approved-gameplay-rules.md) — completed 2026-08-23; `SYNC-014`–`SYNC-020` reconciled across design documents, schemas, examples, candidate flows, story/UI candidates, wireframes, and tests. `SCORE-001` and `GEN-001` remained unfrozen at that task's boundary and were later resolved by TASK-008.

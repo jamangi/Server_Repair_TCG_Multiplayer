@@ -198,6 +198,18 @@ This capture shows the defect after `Firmware Boot Device Inventory` was run for
 
 This crop confirms that `Network Path Down` and `Redundancy Path Unavailable` are the other queue entries named by the two unexpected confirmation buttons. Use both captures as deterministic reproduction targets for TASK-021. Do not treat their Ticket names, diagnostic membership, costs, or Match state as canonical content.
 
+## 10 — TASK-011 canonical illustration direction
+
+TASK-011 uses the existing references rather than adding implementation screenshots as art masters:
+
+- `01-night-shift-board-desktop.png` is the preferred realism, lighting, and tactile-world target;
+- `02-card-ticket-specimens.png` establishes approximately 16:9 action art and a categorically separate panoramic Ticket illustration;
+- `03-night-shift-board-mobile.png` demonstrates why critical subjects need a central crop-safe composition;
+- `task-020-global-one-row-target.png` and `task-020-relevant-one-row-target.png` show the real one-row Bench and response-hand crop pressure; and
+- `ui-minimum.png` remains the atmosphere floor, not a license to retain generic placeholder imagery.
+
+The measured runtime contract is 16:9 for Test/Command/Repair/Verify source art and a separate 10:3 public-Symptom panorama designed to survive both 2.15:1 full-Ticket and 3.35:1 compact-Ticket crops. These references guide scene language only. Production art may not copy incidental text, costs, subjects, hidden answers, outcomes, or generated UI ornament from the pixels.
+
 ## Generation provenance
 
 - Minimum reference provenance: project-owner-supplied standalone Server Repair HTML/CSS/JavaScript proof of concept and exact screenshot, added 2026-08-23. The source is committed only as a readable visual reference and is not part of the Viewer runtime.
