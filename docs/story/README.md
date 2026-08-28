@@ -66,4 +66,12 @@ Production now loads `content/story-v1/campaigns/quiet-cascade-characterization-
 
 The owner approved [`STORY-008 A`](../design/decisions/APPROVALS.md#story-008--characterization-pass-creative-discretion--a-approved-2026-08-28), so reference and backstory selections do not require a per-character approval stop. Canonical names, roles, visual identities, established relationships, protagonist customization, and gameplay authority remain fixed boundaries.
 
+## Repair, coverage, and expansion sequence
+
+Hands-on play after characterization exposed a final-Match launch defect and a missing episode-level review path. It also made clear that the next campaign should be chosen from measured training gaps rather than a guessed list of incidents.
+
+TASK-037 through TASK-046 now separate that work into: final Shift 6 repair; replay; exact campaign/domain coverage; an evidence-gated expansion protocol; minimum-Q case research; coherent domain integration; a six-episode Story+Match blueprint; context-complete scripts; gap-only original art; and one versioned release. In this sequence, an **episode** means one player-facing story sequence plus one real Match. That terminology avoids conflating the current campaign's four script chapters with its six Shifts/Matches. See the [task index](../tasks/INDEX.md) for the active task, exact order, and dependencies.
+
+TASK-038 awaits [`STORY-009`](../design/decisions/APPROVALS.md#story-009--completed-episode-replay-semantics--awaiting-approval). The recommended choice keeps canonical progress immutable and runs prior Matches as non-scoring review sessions. That choice does not block the final-Match repair, coverage audit, protocol, or research work.
+
 The architecture deliberately borrows useful visual-novel concepts—stable labels, jump/call/return, declarative statements, and layered rendering—without adopting executable story scripts or treating another engine's syntax as this project's contract.

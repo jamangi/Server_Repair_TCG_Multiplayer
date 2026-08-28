@@ -1,6 +1,6 @@
 # Post-TASK-010 playtest approvals
 
-Status: **PT-001 D, PT-002 A, PT-003 D, PT-004 A, PT-005 A, PT-006 D, and PT-007 A approved — 2026-08-24. UI-001 A and UI-002 A approved — 2026-08-25. PT-008 B approved — 2026-08-26. STORY-001 A through STORY-006 A approved — 2026-08-27; STORY-007 A and STORY-008 A approved — 2026-08-28. TASK-025 and the TASK-026 through TASK-030 Story sequence are complete; TASK-033 through TASK-036 form the planned characterization sequence. Migration choices MS-001 A through MS-005 A and MS-007 A remain approved, but TASK-017 is deferred; MS-006 A's earlier parking sequence is superseded.**
+Status: **PT-001 D, PT-002 A, PT-003 D, PT-004 A, PT-005 A, PT-006 D, and PT-007 A approved — 2026-08-24. UI-001 A and UI-002 A approved — 2026-08-25. PT-008 B approved — 2026-08-26. STORY-001 A through STORY-006 A approved — 2026-08-27; STORY-007 A and STORY-008 A approved — 2026-08-28. STORY-009 is awaiting approval. TASK-025, TASK-026 through TASK-030, and TASK-033 through TASK-036 are complete. Migration choices MS-001 A through MS-005 A and MS-007 A remain approved, but TASK-017 is deferred; MS-006 A's earlier parking sequence is superseded.**
 
 ## Post-TASK-016 UI approvals
 
@@ -340,6 +340,20 @@ Approved reply record:
 
 ```text
 STORY-008 A
+```
+
+### STORY-009 — Completed-episode replay semantics — **awaiting approval**
+
+TASK-038 will make completed Story episodes selectable from Chapter history. The choice determines whether a replay is a non-canonical practice session, a destructive rewind, or dialogue-only review. It does not block TASK-037 or the coverage/expansion sequence.
+
+- **A — Non-canonical review session (recommended).** Preserve the canonical checkpoint, choices, Match results, Story Service Points, ending, Profile statistics, and next-episode eligibility. Replay the selected cutscene in an isolated review context and allow its real configured Match as explicitly labeled practice; completion, Give Up, interruption, or route leave returns to Chapter history without accepting another canonical Story result or statistic.
+- **B — Confirmed canonical rewind.** Selecting an earlier episode warns that later Story checkpoints, choices, results, points, and ending will be discarded, then resumes the campaign canonically from that episode. This supports a true alternate playthrough but makes ordinary concept review destructive.
+- **C — Cutscene-only review.** Replay completed dialogue/choices without launching the Match. This is safest and smallest, but it does not let a Player practice the technical concepts associated with the episode.
+
+Reply with one line:
+
+```text
+STORY-009 A
 ```
 
 ## Migration Seed and Server Repair V2

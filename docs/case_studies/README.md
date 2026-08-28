@@ -32,6 +32,8 @@ Current research drafts:
 - [`SERVER-REPAIR-DOMAIN-EXPANSION-DRAFT-2026-08-23.txt`](research_drafts/SERVER-REPAIR-DOMAIN-EXPANSION-DRAFT-2026-08-23.txt) surveys post-market repair-bench cases and records the reconciliation behind the Core v0.1 expansion.
 - [`CASE-STUDY-CANDIDATE-DOMAIN-RECONCILIATION-2026-08-23.md`](research_drafts/CASE-STUDY-CANDIDATE-DOMAIN-RECONCILIATION-2026-08-23.md) compares the v0.1 case-study candidates and example card catalog with the live domain database, documenting the gaps promoted into Core v0.1.
 
+The planned Story expansion deliberately reuses this inventory. TASK-039 first measures what campaign one actually teaches; TASK-040 then defines how measured gaps determine Q; TASK-041 begins with the 72-entry v0.1 backlog and adds only the minimum qualifying cases needed to support six distinct Story+Match episodes. Research remains non-authoritative until TASK-042 performs schema, relationship, provenance, Card/Ticket, deck-reachability, and solvability review.
+
 ## Method
 
 Each qualifying source must establish the initial symptom, the paired fault or a clearly equivalent concrete cause, and a real troubleshooting sequence. The reduction assigns exactly one category to every atomic step: Observe, Hypothesize, Test, Isolate, Repair, Verify, or Document. Diagnosis remains the umbrella process `Hypothesize ↔ Test → Isolate`.

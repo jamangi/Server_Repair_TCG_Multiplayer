@@ -4,7 +4,22 @@ Tasks are implementation contracts. A builder must read `AGENTS.md` and then the
 
 Beginning with TASK-011, the displayed task ID includes the recommended reasoning-effort suffix used when starting that task. `HIGH` denotes substantial but bounded implementation/research; `XHIGH` denotes a cross-cutting semantic, architectural, or broad content migration. The stable task number and existing filename do not change, preserving links and history.
 
-Active task: **none assigned.**
+Active task: **[`TASK-037-HIGH: Fix the final Story Match handoff`](TASK-037-fix-final-story-match-handoff.md).**
+
+Planned Story repair, coverage, and expansion sequence:
+
+1. [`TASK-037-HIGH: Fix the final Story Match handoff`](TASK-037-fix-final-story-match-handoff.md) — reproduce the reported five-Shift saved-progress boundary, launch the already-authored Shift 6 exactly once, and make the current-content ending explicit.
+2. [`TASK-038-HIGH: Add completed Story chapter replay`](TASK-038-add-story-chapter-replay.md) — make Chapter history actionable under pending `STORY-009`; this may be deferred without blocking coverage or expansion.
+3. [`TASK-039-HIGH: Audit campaign-one domain coverage`](TASK-039-audit-story-domain-coverage.md) — map all six Shifts to exact Ticket, Symptom, Fault, diagnostic, Repair, Verify, and supporting-domain roles with honest denominators.
+4. [`TASK-040-HIGH: Define the Story and domain expansion protocol`](TASK-040-define-story-expansion-protocol.md) — turn measured gaps into a gated, reusable research-to-release method and compute rather than guess Q.
+5. [`TASK-041-XHIGH: Research the expansion case set`](TASK-041-research-expansion-cases.md) — reuse the existing 72-case backlog, calculate Q, and collect only the additional qualifying cases needed for six distinct episodes.
+6. [`TASK-042-XHIGH: Integrate the approved expansion domain network`](TASK-042-integrate-expansion-domain-network.md) — add the smallest sourced object/relationship/Card/Ticket set and prove deck reachability and solvability.
+7. [`TASK-043-XHIGH: Blueprint the six-episode Story expansion`](TASK-043-blueprint-six-episode-story-expansion.md) — design six one-cutscene-plus-one-Match episodes with exact configurations, graph, checkpoints, and coverage goals.
+8. [`TASK-044-XHIGH: Author the six-episode expansion scripts`](TASK-044-author-story-expansion-scripts.md) — produce the context-complete, characterized, technically bounded candidate scripts and choreography.
+9. [`TASK-045-XHIGH: Create the Story expansion art`](TASK-045-create-story-expansion-art.md) — fill only proven art gaps with original, responsive, provenance-complete assets.
+10. [`TASK-046-XHIGH: Release the six-episode Story expansion`](TASK-046-release-six-episode-story-expansion.md) — integrate one versioned expansion, migrate progress safely, re-audit coverage, and verify the complete twelve-Match journey.
+
+Dependency note: TASK-038 awaits `STORY-009`; if that choice is still open after TASK-037, continue with TASK-039 and return to replay once approved. TASK-039 through TASK-046 do not require a replay-policy choice until TASK-046 needs expanded-episode replay metadata.
 
 Completed characterization sequence:
 
