@@ -2,7 +2,7 @@
 
 ## Status
 
-**Planned; blocked only by `STORY-009`.** TASK-037 is a prerequisite.
+**Planned and approved under `STORY-009 A`.** TASK-037 remains the only prerequisite.
 
 ## Objective
 
@@ -16,10 +16,10 @@ Read completely before editing `AGENTS.md`, this task, TASK-026 through TASK-030
 
 ## Replay contract
 
-- Implement only the `STORY-009` choice approved by the owner.
+- Implement `STORY-009 A` as a non-canonical review session. Preserve the canonical checkpoint, branch choices, Match results, Story Service Points, ending, Profile statistics, and next-episode eligibility.
 - List only episodes proven complete by accepted durable Match results; derive titles and boundaries from authored metadata rather than `index + 1` assumptions.
 - Clearly distinguish canonical Continue, review replay, whole-Story reset, and any destructive rewind policy.
-- Preserve the canonical checkpoint, branch choices, Match results, ending, Story Service Points, and next-episode eligibility unless the approved option explicitly authorizes rewind.
+- Never offer or imply canonical rewind. Later canonical Story progress remains immutable during review.
 - A review Match must use the ordinary engine and authored configuration. Any non-scoring/practice boundary must be enforced outside the engine result rather than by weakening engine authority.
 - Route leave, reload, interruption, Give Up, completion, import/export, and content migration must return to a coherent replay or canonical-home state.
 - Replay must never duplicate canonical Match acceptance, Profile statistics, Story rewards, or completion history accidentally.

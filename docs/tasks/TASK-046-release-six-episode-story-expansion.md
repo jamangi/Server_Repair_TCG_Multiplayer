@@ -2,7 +2,7 @@
 
 ## Status
 
-**Planned.** Depends on TASK-043 through TASK-045 and TASK-038 if replay is approved for the expanded episodes.
+**Planned.** Depends on TASK-038 and TASK-043 through TASK-045 so expanded episodes inherit the approved replay contract.
 
 ## Objective
 
