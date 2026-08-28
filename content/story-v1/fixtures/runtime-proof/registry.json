@@ -1,0 +1,58 @@
+{
+  "registry_version": "story-registry-v1",
+  "variables": [
+    {
+      "variable_id": "fixture.reviewed",
+      "value_type": "BOOLEAN",
+      "default": false
+    }
+  ],
+  "assets": [
+    {
+      "asset_id": "asset.fixture.background.lab",
+      "layer": "BACKGROUND",
+      "required": true,
+      "alt_text_id": null
+    },
+    {
+      "asset_id": "asset.fixture.eva.neutral",
+      "layer": "CHARACTER",
+      "required": true,
+      "alt_text_id": null
+    },
+    {
+      "asset_id": "asset.fixture.eva.active",
+      "layer": "CHARACTER",
+      "required": true,
+      "alt_text_id": null
+    },
+    {
+      "asset_id": "asset.fixture.console",
+      "layer": "TRANSIENT",
+      "required": false,
+      "alt_text_id": "fixture.alt.console"
+    }
+  ],
+  "characters": [
+    {
+      "character_id": "character.fixture.eva",
+      "name_text_id": "fixture.name.eva",
+      "poses": [
+        {
+          "pose_id": "neutral",
+          "asset_id": "asset.fixture.eva.neutral"
+        },
+        {
+          "pose_id": "active",
+          "asset_id": "asset.fixture.eva.active"
+        }
+      ]
+    }
+  ],
+  "matches": [
+    {
+      "match_ref": "match.fixture.diagnosis"
+    }
+  ],
+  "declared_loops": []
+}

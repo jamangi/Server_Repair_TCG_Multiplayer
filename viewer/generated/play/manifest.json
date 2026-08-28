@@ -790,6 +790,84 @@
       "sha256": "9c9d51f6ac49c9c903d8943310fa66d10193060108f913db6164349bdd52d1aa"
     },
     {
+      "path": "content/story-v1/campaigns/quiet-cascade/manifest.json",
+      "source": "content/story-v1/campaigns/quiet-cascade/manifest.json",
+      "bytes": 505,
+      "sha256": "bc1b810d40e20f062444446d69c4ee180f07eefe61ff38667678f9f92dd95d02"
+    },
+    {
+      "path": "content/story-v1/campaigns/quiet-cascade/matches.json",
+      "source": "content/story-v1/campaigns/quiet-cascade/matches.json",
+      "bytes": 10981,
+      "sha256": "2b1f7d6bb4ed05bb47739555215ccc0156073e00d6be69be7de8be00820bcf82"
+    },
+    {
+      "path": "content/story-v1/campaigns/quiet-cascade/registry.json",
+      "source": "content/story-v1/campaigns/quiet-cascade/registry.json",
+      "bytes": 6818,
+      "sha256": "f1f8133984f47af23beef2e83dabd98393b473a9df910307507099643897be1f"
+    },
+    {
+      "path": "content/story-v1/campaigns/quiet-cascade/scripts/chapter-01.json",
+      "source": "content/story-v1/campaigns/quiet-cascade/scripts/chapter-01.json",
+      "bytes": 14007,
+      "sha256": "2d97816a9939c838d10ecdfcbebfd2dfc6677c7d7594cd9a8a80fa2d463b2955"
+    },
+    {
+      "path": "content/story-v1/campaigns/quiet-cascade/scripts/chapter-02.json",
+      "source": "content/story-v1/campaigns/quiet-cascade/scripts/chapter-02.json",
+      "bytes": 12861,
+      "sha256": "4162ebd38427fff0d14e45912923e8b8547b3abe32d960b69f5b14d8a5431f2f"
+    },
+    {
+      "path": "content/story-v1/campaigns/quiet-cascade/scripts/chapter-03.json",
+      "source": "content/story-v1/campaigns/quiet-cascade/scripts/chapter-03.json",
+      "bytes": 9748,
+      "sha256": "2eb7f4d3d94b894985cd0c062afd4afe74f7422a4e9132b2b880a54f39d0a8b1"
+    },
+    {
+      "path": "content/story-v1/campaigns/quiet-cascade/scripts/chapter-04.json",
+      "source": "content/story-v1/campaigns/quiet-cascade/scripts/chapter-04.json",
+      "bytes": 14772,
+      "sha256": "6c2607a511902494ee92647cdbe9453c84c796a550e2a37df6c9ce7d8d896a8e"
+    },
+    {
+      "path": "content/story-v1/campaigns/quiet-cascade/texts/en.json",
+      "source": "content/story-v1/campaigns/quiet-cascade/texts/en.json",
+      "bytes": 21313,
+      "sha256": "6c8f4a93e2015c3edd7427506946f5dc32191d8fdc19550a11a3ee1dbfbd998e"
+    },
+    {
+      "path": "content/story-v1/fixtures/runtime-proof/chapter-a.json",
+      "source": "content/story-v1/fixtures/runtime-proof/chapter-a.json",
+      "bytes": 3498,
+      "sha256": "3cdda8e66a96045dccb353f9d853d7a18ebf59eddd00151ba492285893903847"
+    },
+    {
+      "path": "content/story-v1/fixtures/runtime-proof/chapter-b.json",
+      "source": "content/story-v1/fixtures/runtime-proof/chapter-b.json",
+      "bytes": 3625,
+      "sha256": "4a55a2d3e6817c0cf15df4c4d1b469cb32874b0e34bce1e20d3a272cfb20805b"
+    },
+    {
+      "path": "content/story-v1/fixtures/runtime-proof/manifest.json",
+      "source": "content/story-v1/fixtures/runtime-proof/manifest.json",
+      "bytes": 423,
+      "sha256": "99b112612c1d2aa004a5ce28225713b31bb4b5870d758497297b7ca312480fdb"
+    },
+    {
+      "path": "content/story-v1/fixtures/runtime-proof/registry.json",
+      "source": "content/story-v1/fixtures/runtime-proof/registry.json",
+      "bytes": 1215,
+      "sha256": "f66deb4ff5ce657b805a8e281269f225a26012b9d5fc4ebf9b1f63055b19b23a"
+    },
+    {
+      "path": "content/story-v1/fixtures/runtime-proof/text.en.json",
+      "source": "content/story-v1/fixtures/runtime-proof/text.en.json",
+      "bytes": 1422,
+      "sha256": "2d7872fc9706bd268d0d69a44ede6b25dc977aaf82a1884063ac910d408b6831"
+    },
+    {
       "path": "src/builder/canonical.mjs",
       "source": "src/builder/canonical.mjs",
       "bytes": 1837,
@@ -866,6 +944,48 @@
       "source": "src/shared/sha256.mjs",
       "bytes": 4478,
       "sha256": "24ac0e5eaa6f70ec118b779813ef924ece6084ad0daa1f407767391cd53baa94"
+    },
+    {
+      "path": "src/story/checkpoint.mjs",
+      "source": "src/story/checkpoint.mjs",
+      "bytes": 10657,
+      "sha256": "2985f233b90bad7c929b22454749fb911ebad06169a55615d979ec5aea522090"
+    },
+    {
+      "path": "src/story/conditions.mjs",
+      "source": "src/story/conditions.mjs",
+      "bytes": 2056,
+      "sha256": "650516a6263e4f02f61e9074404ae5c8172106a533a7b80be890eea233805197"
+    },
+    {
+      "path": "src/story/constants.mjs",
+      "source": "src/story/constants.mjs",
+      "bytes": 2137,
+      "sha256": "e4f7115fabff96996d3f75b7f5c69c290caed1f7e891e34f379599a105b4449d"
+    },
+    {
+      "path": "src/story/index.mjs",
+      "source": "src/story/index.mjs",
+      "bytes": 446,
+      "sha256": "392e6980b59c607d314d38fcab9e8a8c62dfdae37edf52bc4a29b8bb0992b435"
+    },
+    {
+      "path": "src/story/interpreter.mjs",
+      "source": "src/story/interpreter.mjs",
+      "bytes": 14875,
+      "sha256": "0aa8ea042fc4fbc59c7186c61606dabc54fe798c4ffcd55ed71fda38c90cd7d1"
+    },
+    {
+      "path": "src/story/match-boundary.mjs",
+      "source": "src/story/match-boundary.mjs",
+      "bytes": 7190,
+      "sha256": "b6b97b7fdfc92b729ba270b9f7b8dca0a2094ff602ae81dc12695396522e87bf"
+    },
+    {
+      "path": "src/story/validator.mjs",
+      "source": "src/story/validator.mjs",
+      "bytes": 36541,
+      "sha256": "ecd23ffae6eba7946efd7677c6aeb75a8c2a0b586b1a474657d8c91ff0a520ce"
     },
     {
       "path": "vendor/animejs/4.5.0/LICENSE.md",

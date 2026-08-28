@@ -1,0 +1,476 @@
+[
+  {
+    "builder_diagnostic_codes": [],
+    "classification": "SUCCEEDED",
+    "concessions": 0,
+    "contribution_counts": [
+      {
+        "assists": 0,
+        "closures": 1,
+        "documentation": 11,
+        "failed_verifies": 0,
+        "isolations": 2,
+        "player_id": "player_a",
+        "redundant_or_superseded_actions": 0,
+        "rejected_isolations": 1,
+        "repairs": 1,
+        "team_id": "team.cooperative",
+        "tests": 10,
+        "verifies": 1
+      }
+    ],
+    "determinism": {
+      "identical": true,
+      "mismatch_fields": []
+    },
+    "disconnects": 0,
+    "elapsed_virtual_time_seconds": 140,
+    "match_id": "task-027-quiet-cascade-v1.story-qc01-shift-01.seed-story.quiet_cascade.s01.v1",
+    "no_legal_progress_move": false,
+    "outcome": {
+      "match_status": "COMPLETED",
+      "reason_codes": [
+        "QUEUE_EMPTY"
+      ],
+      "valid": true,
+      "winner_player_ids": [],
+      "winning_team_ids": [
+        "team.cooperative"
+      ]
+    },
+    "player_service_points": [
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "starting": 0
+      }
+    ],
+    "rejected_intent_codes": [],
+    "rejected_intents": 0,
+    "replay_digest": "b6681aedaa2bbfb78f4f988d167f8be9997ac6e445cd05e98eb16891cfbcc02e",
+    "rounds": 14,
+    "scores": {
+      "players": {
+        "player_a": 0
+      },
+      "teams": {
+        "team.cooperative": 2
+      }
+    },
+    "seed": "story.quiet_cascade.s01.v1",
+    "setting_group_id": "story-qc01-shift-01",
+    "stall_classification": "NONE",
+    "started": true,
+    "team_service_points": [
+      {
+        "final": 2,
+        "net": 2,
+        "starting": 0,
+        "team_id": "team.cooperative"
+      }
+    ],
+    "terminal_reason_codes": [
+      "QUEUE_EMPTY"
+    ],
+    "ticket_snapshot_digest": "d97de951837616a5818c553df32471e4c84d55db8f11b8c9086d1cdebdfa94e9",
+    "tickets_closed": 1,
+    "tickets_quarantined": 0,
+    "turns": 14
+  },
+  {
+    "builder_diagnostic_codes": [],
+    "classification": "SUCCEEDED",
+    "concessions": 0,
+    "contribution_counts": [
+      {
+        "assists": 0,
+        "closures": 2,
+        "documentation": 32,
+        "failed_verifies": 0,
+        "isolations": 88,
+        "player_id": "player_a",
+        "redundant_or_superseded_actions": 0,
+        "rejected_isolations": 86,
+        "repairs": 2,
+        "team_id": "team.cooperative",
+        "tests": 47,
+        "verifies": 2
+      }
+    ],
+    "determinism": {
+      "identical": true,
+      "mismatch_fields": []
+    },
+    "disconnects": 0,
+    "elapsed_virtual_time_seconds": 1205,
+    "match_id": "task-027-quiet-cascade-v1.story-qc01-shift-02.seed-story.quiet_cascade.s02.v1",
+    "no_legal_progress_move": false,
+    "outcome": {
+      "match_status": "COMPLETED",
+      "reason_codes": [
+        "QUEUE_EMPTY"
+      ],
+      "valid": true,
+      "winner_player_ids": [],
+      "winning_team_ids": [
+        "team.cooperative"
+      ]
+    },
+    "player_service_points": [
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "starting": 0
+      }
+    ],
+    "rejected_intent_codes": [],
+    "rejected_intents": 0,
+    "replay_digest": "741721ce58b2504912a9193b360e8b00fd74cad23a2835795697c549b4fb0c71",
+    "rounds": 93,
+    "scores": {
+      "players": {
+        "player_a": 0
+      },
+      "teams": {
+        "team.cooperative": 4
+      }
+    },
+    "seed": "story.quiet_cascade.s02.v1",
+    "setting_group_id": "story-qc01-shift-02",
+    "stall_classification": "NONE",
+    "started": true,
+    "team_service_points": [
+      {
+        "final": 4,
+        "net": 4,
+        "starting": 0,
+        "team_id": "team.cooperative"
+      }
+    ],
+    "terminal_reason_codes": [
+      "QUEUE_EMPTY"
+    ],
+    "ticket_snapshot_digest": "914b464d5a71f1e4e4ce0d9328bdda2384be580f7624331f06e70e7f7b357d57",
+    "tickets_closed": 2,
+    "tickets_quarantined": 0,
+    "turns": 93
+  },
+  {
+    "builder_diagnostic_codes": [],
+    "classification": "SUCCEEDED",
+    "concessions": 0,
+    "contribution_counts": [
+      {
+        "assists": 0,
+        "closures": 2,
+        "documentation": 1,
+        "failed_verifies": 0,
+        "isolations": 2,
+        "player_id": "player_a",
+        "redundant_or_superseded_actions": 0,
+        "rejected_isolations": 0,
+        "repairs": 2,
+        "team_id": "team.cooperative",
+        "tests": 27,
+        "verifies": 3
+      }
+    ],
+    "determinism": {
+      "identical": true,
+      "mismatch_fields": []
+    },
+    "disconnects": 0,
+    "elapsed_virtual_time_seconds": 185,
+    "match_id": "task-027-quiet-cascade-v1.story-qc01-shift-03.seed-story.quiet_cascade.s03.v1",
+    "no_legal_progress_move": false,
+    "outcome": {
+      "match_status": "COMPLETED",
+      "reason_codes": [
+        "QUEUE_EMPTY"
+      ],
+      "valid": true,
+      "winner_player_ids": [],
+      "winning_team_ids": [
+        "team.cooperative"
+      ]
+    },
+    "player_service_points": [
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "starting": 0
+      }
+    ],
+    "rejected_intent_codes": [],
+    "rejected_intents": 0,
+    "replay_digest": "603f775c3ef9f0775736d217e72a1ecd44357508d404d7c5e060e58ff208f19a",
+    "rounds": 21,
+    "scores": {
+      "players": {
+        "player_a": 0
+      },
+      "teams": {
+        "team.cooperative": 4
+      }
+    },
+    "seed": "story.quiet_cascade.s03.v1",
+    "setting_group_id": "story-qc01-shift-03",
+    "stall_classification": "NONE",
+    "started": true,
+    "team_service_points": [
+      {
+        "final": 4,
+        "net": 4,
+        "starting": 0,
+        "team_id": "team.cooperative"
+      }
+    ],
+    "terminal_reason_codes": [
+      "QUEUE_EMPTY"
+    ],
+    "ticket_snapshot_digest": "f7d16f16dedd07d178bb153354c54ca7853ca79ddbe685a2a69d3e7787be9831",
+    "tickets_closed": 2,
+    "tickets_quarantined": 0,
+    "turns": 21
+  },
+  {
+    "builder_diagnostic_codes": [],
+    "classification": "SUCCEEDED",
+    "concessions": 0,
+    "contribution_counts": [
+      {
+        "assists": 0,
+        "closures": 2,
+        "documentation": 0,
+        "failed_verifies": 0,
+        "isolations": 31,
+        "player_id": "player_a",
+        "redundant_or_superseded_actions": 0,
+        "rejected_isolations": 29,
+        "repairs": 2,
+        "team_id": "team.cooperative",
+        "tests": 18,
+        "verifies": 2
+      }
+    ],
+    "determinism": {
+      "identical": true,
+      "mismatch_fields": []
+    },
+    "disconnects": 0,
+    "elapsed_virtual_time_seconds": 275,
+    "match_id": "task-027-quiet-cascade-v1.story-qc01-shift-04.seed-story.quiet_cascade.s04.v1",
+    "no_legal_progress_move": false,
+    "outcome": {
+      "match_status": "COMPLETED",
+      "reason_codes": [
+        "QUEUE_EMPTY"
+      ],
+      "valid": true,
+      "winner_player_ids": [],
+      "winning_team_ids": [
+        "team.cooperative"
+      ]
+    },
+    "player_service_points": [
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "starting": 0
+      }
+    ],
+    "rejected_intent_codes": [],
+    "rejected_intents": 0,
+    "replay_digest": "afff3628433255a4e9364a89414fccfdc6ef84ed3d0d72e3020f2542b586eebf",
+    "rounds": 29,
+    "scores": {
+      "players": {
+        "player_a": 0
+      },
+      "teams": {
+        "team.cooperative": 4
+      }
+    },
+    "seed": "story.quiet_cascade.s04.v1",
+    "setting_group_id": "story-qc01-shift-04",
+    "stall_classification": "NONE",
+    "started": true,
+    "team_service_points": [
+      {
+        "final": 4,
+        "net": 4,
+        "starting": 0,
+        "team_id": "team.cooperative"
+      }
+    ],
+    "terminal_reason_codes": [
+      "QUEUE_EMPTY"
+    ],
+    "ticket_snapshot_digest": "e6e8977253e0b8a1be8e841e41accc3a382afc24c4bc4ac1a06eb0c85dafa2cf",
+    "tickets_closed": 2,
+    "tickets_quarantined": 0,
+    "turns": 29
+  },
+  {
+    "builder_diagnostic_codes": [],
+    "classification": "SUCCEEDED",
+    "concessions": 0,
+    "contribution_counts": [
+      {
+        "assists": 0,
+        "closures": 2,
+        "documentation": 32,
+        "failed_verifies": 0,
+        "isolations": 134,
+        "player_id": "player_a",
+        "redundant_or_superseded_actions": 0,
+        "rejected_isolations": 132,
+        "repairs": 2,
+        "team_id": "team.cooperative",
+        "tests": 43,
+        "verifies": 4
+      }
+    ],
+    "determinism": {
+      "identical": true,
+      "mismatch_fields": []
+    },
+    "disconnects": 0,
+    "elapsed_virtual_time_seconds": 1490,
+    "match_id": "task-027-quiet-cascade-v1.story-qc01-shift-05.seed-story.quiet_cascade.s05.v1",
+    "no_legal_progress_move": false,
+    "outcome": {
+      "match_status": "COMPLETED",
+      "reason_codes": [
+        "QUEUE_EMPTY"
+      ],
+      "valid": true,
+      "winner_player_ids": [],
+      "winning_team_ids": [
+        "team.cooperative"
+      ]
+    },
+    "player_service_points": [
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "starting": 0
+      }
+    ],
+    "rejected_intent_codes": [],
+    "rejected_intents": 0,
+    "replay_digest": "0382b0647d1f55e014dee03f9175f95fe1338dbd0c405fdb2ddb243902e11941",
+    "rounds": 112,
+    "scores": {
+      "players": {
+        "player_a": 0
+      },
+      "teams": {
+        "team.cooperative": 4
+      }
+    },
+    "seed": "story.quiet_cascade.s05.v1",
+    "setting_group_id": "story-qc01-shift-05",
+    "stall_classification": "NONE",
+    "started": true,
+    "team_service_points": [
+      {
+        "final": 4,
+        "net": 4,
+        "starting": 0,
+        "team_id": "team.cooperative"
+      }
+    ],
+    "terminal_reason_codes": [
+      "QUEUE_EMPTY"
+    ],
+    "ticket_snapshot_digest": "86be5df482a468579d039004bdc1b7af12b8437125ceb09b38d2d4416b342f9c",
+    "tickets_closed": 2,
+    "tickets_quarantined": 0,
+    "turns": 112
+  },
+  {
+    "builder_diagnostic_codes": [],
+    "classification": "SUCCEEDED",
+    "concessions": 0,
+    "contribution_counts": [
+      {
+        "assists": 0,
+        "closures": 3,
+        "documentation": 64,
+        "failed_verifies": 0,
+        "isolations": 262,
+        "player_id": "player_a",
+        "redundant_or_superseded_actions": 0,
+        "rejected_isolations": 259,
+        "repairs": 3,
+        "team_id": "team.cooperative",
+        "tests": 86,
+        "verifies": 5
+      }
+    ],
+    "determinism": {
+      "identical": true,
+      "mismatch_fields": []
+    },
+    "disconnects": 0,
+    "elapsed_virtual_time_seconds": 3735,
+    "match_id": "task-027-quiet-cascade-v1.story-qc01-shift-06.seed-story.quiet_cascade.s06.v1",
+    "no_legal_progress_move": false,
+    "outcome": {
+      "match_status": "COMPLETED",
+      "reason_codes": [
+        "QUEUE_EMPTY"
+      ],
+      "valid": true,
+      "winner_player_ids": [],
+      "winning_team_ids": [
+        "team.cooperative"
+      ]
+    },
+    "player_service_points": [
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "starting": 0
+      }
+    ],
+    "rejected_intent_codes": [],
+    "rejected_intents": 0,
+    "replay_digest": "1ec8f526f97dcf99ec925e3b278974e01c3a4cafabdc565ba88a82bc92473ee4",
+    "rounds": 217,
+    "scores": {
+      "players": {
+        "player_a": 0
+      },
+      "teams": {
+        "team.cooperative": 6
+      }
+    },
+    "seed": "story.quiet_cascade.s06.v1",
+    "setting_group_id": "story-qc01-shift-06",
+    "stall_classification": "NONE",
+    "started": true,
+    "team_service_points": [
+      {
+        "final": 6,
+        "net": 6,
+        "starting": 0,
+        "team_id": "team.cooperative"
+      }
+    ],
+    "terminal_reason_codes": [
+      "QUEUE_EMPTY"
+    ],
+    "ticket_snapshot_digest": "78f4ffe6f1d7b5be60c6a282929095008a6811cabada8dfafd1d9701e8ab41dc",
+    "tickets_closed": 3,
+    "tickets_quarantined": 0,
+    "turns": 217
+  }
+]

@@ -35,6 +35,16 @@ const GAMEPLAY_FILES = Object.freeze([
   'tutorials-v1.json',
 ]);
 
+const STORY_RUNTIME_FILES = Object.freeze([
+  'checkpoint.mjs',
+  'conditions.mjs',
+  'constants.mjs',
+  'index.mjs',
+  'interpreter.mjs',
+  'match-boundary.mjs',
+  'validator.mjs',
+]);
+
 const STATIC_ASSET_EXTENSIONS = new Set([
   '.avif', '.gif', '.jpeg', '.jpg', '.json', '.md', '.png', '.svg', '.txt', '.webp', '.woff', '.woff2',
 ]);
@@ -117,10 +127,33 @@ async function sourceEntries() {
     }
   }
 
+  for (const filename of STORY_RUNTIME_FILES) {
+    entries.push({
+      source: `src/story/${filename}`,
+      output: `src/story/${filename}`,
+    });
+  }
+
   for (const filename of GAMEPLAY_FILES) {
     entries.push({
       source: `content/gameplay-v1/${filename}`,
       output: `content/gameplay-v1/${filename}`,
+    });
+  }
+
+  const storyFiles = await walkRegularFiles(path.join(REPOSITORY_ROOT, 'content', 'story-v1'), {
+    allowedExtensions: new Set(['.json']),
+    required: true,
+  });
+  for (const relative of storyFiles) {
+    const normalizedRelative = normalizePath(relative);
+    const stageable = normalizedRelative.startsWith('fixtures/')
+      || /^campaigns\/[^/]+\/(?:manifest|registry|matches)\.json$/.test(normalizedRelative)
+      || /^campaigns\/[^/]+\/(?:scripts|texts)\/[a-z0-9._/-]+\.json$/.test(normalizedRelative);
+    if (!stageable) continue;
+    entries.push({
+      source: normalizePath(path.join('content/story-v1', normalizedRelative)),
+      output: normalizePath(path.join('content/story-v1', normalizedRelative)),
     });
   }
 

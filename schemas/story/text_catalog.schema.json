@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/story/text_catalog.schema.json",
+  "title": "Story text catalog v1",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "text_catalog_version": { "const": "story-text-catalog-v1" },
+    "locale": { "type": "string", "pattern": "^[a-z]{2}(?:-[A-Z]{2})?$" },
+    "entries": {
+      "type": "object",
+      "additionalProperties": { "type": "string", "minLength": 1 }
+    }
+  },
+  "required": ["text_catalog_version", "locale", "entries"]
+}

@@ -1,0 +1,142 @@
+{
+  "script_version": "story-script-v1",
+  "script_id": "script.fixture.chapter-a",
+  "chapter_id": "chapter.fixture.a",
+  "statements": [
+    {
+      "type": "label",
+      "label_id": "fixture.entry"
+    },
+    {
+      "type": "scene",
+      "scene_id": "fixture.scene.lab",
+      "background_asset_id": "asset.fixture.background.lab",
+      "location_text_id": "fixture.location.lab",
+      "time_text_id": "fixture.time.shift",
+      "transition": "FADE",
+      "checkpoint_id": "checkpoint.fixture.start"
+    },
+    {
+      "type": "show",
+      "tag": "fixture.eva",
+      "layer": "characters",
+      "character_id": "character.fixture.eva",
+      "pose_id": "neutral",
+      "position": "LEFT",
+      "transition": "FADE"
+    },
+    {
+      "type": "say",
+      "statement_id": "statement.fixture.intro",
+      "speaker_key": "character.fixture.eva",
+      "text_id": "fixture.intro",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "choice",
+      "choice_id": "fixture.choice.opening",
+      "prompt_text_id": "fixture.choice.prompt",
+      "options": [
+        {
+          "option_id": "inspect",
+          "text_id": "fixture.choice.inspect",
+          "jump_label": "fixture.cut.inspect",
+          "writes": [
+            {
+              "variable_id": "fixture.reviewed",
+              "value": true
+            }
+          ]
+        },
+        {
+          "option_id": "skip",
+          "text_id": "fixture.choice.skip",
+          "jump_label": "fixture.cut.skip",
+          "writes": [
+            {
+              "variable_id": "fixture.reviewed",
+              "value": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "label",
+      "label_id": "fixture.cut.inspect"
+    },
+    {
+      "type": "show",
+      "tag": "fixture.eva",
+      "layer": "characters",
+      "character_id": "character.fixture.eva",
+      "pose_id": "active",
+      "position": "CENTER",
+      "transition": "CUT"
+    },
+    {
+      "type": "narrate",
+      "statement_id": "statement.fixture.cut.inspect",
+      "text_id": "fixture.cut.inspect",
+      "style_key": "NARRATION"
+    },
+    {
+      "type": "jump",
+      "label_id": "fixture.after.cut"
+    },
+    {
+      "type": "label",
+      "label_id": "fixture.cut.skip"
+    },
+    {
+      "type": "narrate",
+      "statement_id": "statement.fixture.cut.skip",
+      "text_id": "fixture.cut.skip",
+      "style_key": "NARRATION"
+    },
+    {
+      "type": "label",
+      "label_id": "fixture.after.cut"
+    },
+    {
+      "type": "if",
+      "condition": {
+        "op": "VARIABLE_EQUALS",
+        "variable_id": "fixture.reviewed",
+        "value": true
+      },
+      "then_label": "fixture.remembered.inspect",
+      "else_label": "fixture.remembered.skip"
+    },
+    {
+      "type": "label",
+      "label_id": "fixture.remembered.inspect"
+    },
+    {
+      "type": "say",
+      "statement_id": "statement.fixture.remembered.inspect",
+      "speaker_key": "character.fixture.eva",
+      "text_id": "fixture.remembered.inspect",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "jump",
+      "label_id": "fixture.cross.file"
+    },
+    {
+      "type": "label",
+      "label_id": "fixture.remembered.skip"
+    },
+    {
+      "type": "say",
+      "statement_id": "statement.fixture.remembered.skip",
+      "speaker_key": "character.fixture.eva",
+      "text_id": "fixture.remembered.skip",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "jump",
+      "label_id": "fixture.cross.file"
+    }
+  ]
+}

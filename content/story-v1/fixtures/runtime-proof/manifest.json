@@ -1,0 +1,20 @@
+{
+  "pack_version": "story-pack-v1",
+  "pack_id": "fixture.runtime-proof",
+  "content_version": "v0.0.0",
+  "default_locale": "en",
+  "entry_label": "fixture.entry",
+  "library_entry_labels": [
+    "fixture.library.outer"
+  ],
+  "max_call_depth": 8,
+  "max_settle_steps": 128,
+  "scripts": [
+    "chapter-a.json",
+    "chapter-b.json"
+  ],
+  "text_catalogs": {
+    "en": "text.en.json"
+  },
+  "registry": "registry.json"
+}

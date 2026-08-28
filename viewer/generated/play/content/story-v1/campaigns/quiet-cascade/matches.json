@@ -1,0 +1,214 @@
+{
+  "match_configuration_version": "story-match-configuration-v1",
+  "campaign_id": "story.campaign.quiet_cascade.v1",
+  "builder_profile": {
+    "scenario_or_mode_context": "CAMPAIGN",
+    "ruleset_version": "first-version-v2",
+    "generator_version": "ticket-builder-v3",
+    "configuration_version": "ticket-builder-v3",
+    "ticket_content_version": "core-ticket-parts-v3",
+    "domain_content_version": "core-domain-snapshot-technical-copy-v3",
+    "card_catalog_version": "core-card-catalog-technical-copy-v4",
+    "deck_catalog_version": "core-response-decks-v4",
+    "part_catalog_version": "ticket-parts-v1",
+    "authored_difficulty_bounds": { "minimum": 1, "maximum": 4 },
+    "fault_count_bounds": { "minimum": 1, "maximum": 3 },
+    "required_actionable_fault_count_bounds": { "minimum": 1, "maximum": 2 },
+    "causal_depth_bounds": { "minimum": 0, "maximum": 1 },
+    "inbound_branching_bounds": { "minimum": 0, "maximum": 2 },
+    "outbound_branching_bounds": { "minimum": 0, "maximum": 2 },
+    "progressive_difficulty_profile_id": "progressive.story.quiet_cascade.v1",
+    "progressive_difficulty_profile_version": "story-campaign-v1",
+    "progressive_difficulty_target": 2,
+    "progressive_difficulty_ceiling": 4,
+    "allow_duplicate_causal_fingerprints": false,
+    "generation_index_start": 0
+  },
+  "match_profile": {
+    "collaboration_mode": "cooperative",
+    "player_count": 1,
+    "queue_minimum": 0,
+    "termination_score": -1,
+    "starting_search_tokens": 3,
+    "ticket_search_tokens": 1,
+    "max_search_tokens": 5,
+    "starting_refresh_tokens": 1,
+    "max_refresh_tokens": 1,
+    "actions_per_turn": 2,
+    "turn_time_limit_seconds": null,
+    "player_time_limit_seconds": null
+  },
+  "deck_policy": {
+    "policy": "ACTIVE_PLAYER_DECK_PREFLIGHT",
+    "canonical_proof_deck_id": "deck.core.multisystem_response_v3",
+    "on_failure": "OPEN_DECKS_AND_RETRY_FROM_PRE_MATCH_CHECKPOINT",
+    "rules": [
+      "The active deck must be legal under the pinned card catalog.",
+      "The Builder derives exact response counts and proves the complete configured queue before launch.",
+      "Failure creates no partial Ticket batch and does not advance Story."
+    ]
+  },
+  "normalized_result_contract": {
+    "schema_version": "story-match-result-v1",
+    "branch_fields": [
+      "completion",
+      "valid",
+      "story_service_points_gained",
+      "tickets_closed",
+      "tickets_given_up",
+      "documented_outcome",
+      "verified_outcome"
+    ],
+    "contribution_fields": [
+      "tests_run",
+      "isolations_accepted",
+      "repairs_performed",
+      "verify_passes",
+      "documentation_actions"
+    ]
+  },
+  "matches": [
+    {
+      "match_ref": "story.match.qc01.shift01.wrong_device",
+      "chapter_id": "story.chapter.qc01.learn_the_line",
+      "shift_id": "story.shift.qc01.01",
+      "title_text_id": "text.qc01.match.shift01.title",
+      "setup_text_id": "text.qc01.match.shift01.setup",
+      "seed": "story.quiet_cascade.s01.v1",
+      "requested_ticket_count": 1,
+      "allowed_fingerprint_ids": ["fingerprint.boot.incorrect_order"],
+      "expected_ticket_definition_ids": ["ticket.generated.ef8a4924e707349bce5c2be7"],
+      "expected_ticket_snapshot_digests": ["821769a6021482074d523c723dc08a6b9bd2885820eabe11a9011b199fc6dacb"],
+      "required_response_card_counts": {
+        "card.response.repair.boot.correct_order": 1,
+        "card.response.verify.boot.normal_boot": 1
+      },
+      "pre_match_checkpoint_id": "checkpoint.qc01.shift01.pre_match",
+      "post_match_checkpoint_id": "checkpoint.qc01.shift01.post_match",
+      "launch_label": "story.qc01.shift01.match",
+      "return_label": "story.qc01.shift01.return",
+      "completed_label": "story.qc01.shift01.success",
+      "abandoned_label": "story.qc01.shift01.abandon"
+    },
+    {
+      "match_ref": "story.match.qc01.shift02.power_lot",
+      "chapter_id": "story.chapter.qc01.learn_the_line",
+      "shift_id": "story.shift.qc01.02",
+      "title_text_id": "text.qc01.match.shift02.title",
+      "setup_text_id": "text.qc01.match.shift02.setup",
+      "seed": "story.quiet_cascade.s02.v1",
+      "requested_ticket_count": 2,
+      "allowed_fingerprint_ids": ["fingerprint.power.unseated_psu", "fingerprint.power.failed_psu"],
+      "expected_ticket_definition_ids": ["ticket.generated.a10b8767580c9453c679a326", "ticket.generated.8ee2c08bae1e3d005b35bff5"],
+      "expected_ticket_snapshot_digests": ["c55b2fb6c7aee2644929ecdd803b3b3f5155b5ec4426b43e4953d0082391e0f7", "8c7810616e535b8f62d3303e501bfcfdf8c9071df23903e2727b6fcb476e0d4b"],
+      "required_response_card_counts": {
+        "card.response.repair.power.reseat_psu": 1,
+        "card.response.repair.power.replace_psu": 1,
+        "card.response.verify.power.stable": 2
+      },
+      "pre_match_checkpoint_id": "checkpoint.qc01.shift02.pre_match",
+      "post_match_checkpoint_id": "checkpoint.qc01.shift02.post_match",
+      "launch_label": "story.qc01.shift02.match",
+      "return_label": "story.qc01.shift02.return",
+      "completed_label": "story.qc01.shift02.success",
+      "abandoned_label": "story.qc01.shift02.abandon"
+    },
+    {
+      "match_ref": "story.match.qc01.shift03.memory_compare",
+      "chapter_id": "story.chapter.qc01.follow_repeaters",
+      "shift_id": "story.shift.qc01.03",
+      "title_text_id": "text.qc01.match.shift03.title",
+      "setup_text_id": "text.qc01.match.shift03.setup",
+      "seed": "story.quiet_cascade.s03.v1",
+      "requested_ticket_count": 2,
+      "allowed_fingerprint_ids": ["fingerprint.memory.unseated_dimm", "fingerprint.memory.failed_dimm"],
+      "expected_ticket_definition_ids": ["ticket.generated.75ea6ec9e60d64c7cac4caa5", "ticket.generated.424c8fab1db6aed25058ab78"],
+      "expected_ticket_snapshot_digests": ["1bd3ccabc476313a0420cb9889ab5e7b84c60c250aa32f3d4f009f614f2c47e5", "268c91a53ad795437e6690b2a5cc843071eea627671f2168b7a0dca00941a9c7"],
+      "required_response_card_counts": {
+        "card.response.repair.memory.replace_dimm": 1,
+        "card.response.repair.memory.reseat_dimm": 1,
+        "card.response.verify.memory.full_test": 2,
+        "card.response.verify.memory.inventory": 1
+      },
+      "pre_match_checkpoint_id": "checkpoint.qc01.shift03.pre_match",
+      "post_match_checkpoint_id": "checkpoint.qc01.shift03.post_match",
+      "launch_label": "story.qc01.shift03.match",
+      "return_label": "story.qc01.shift03.return",
+      "completed_label": "story.qc01.shift03.success",
+      "abandoned_label": "story.qc01.shift03.abandon"
+    },
+    {
+      "match_ref": "story.match.qc01.shift04.passes_cold",
+      "chapter_id": "story.chapter.qc01.follow_repeaters",
+      "shift_id": "story.shift.qc01.04",
+      "title_text_id": "text.qc01.match.shift04.title",
+      "setup_text_id": "text.qc01.match.shift04.setup",
+      "seed": "story.quiet_cascade.s04.v1",
+      "requested_ticket_count": 2,
+      "allowed_fingerprint_ids": ["fingerprint.thermal.failed_fan", "fingerprint.thermal.clogged_heatsink"],
+      "expected_ticket_definition_ids": ["ticket.generated.6e55cf55154d356da2e91126", "ticket.generated.f60b9ce132c74c33f607df6d"],
+      "expected_ticket_snapshot_digests": ["ce86a008060199c2f5c5cb2ed763385e8766315e35a2ce1b9b3e19fa39627a95", "b8f877726a0d4356575d9efeb51c8226c674687ba0806ba067142ffc3f90c8cd"],
+      "required_response_card_counts": {
+        "card.response.repair.thermal.replace_fan": 1,
+        "card.response.repair.thermal.clean_cooling_path": 1,
+        "card.response.verify.thermal.load_test": 2
+      },
+      "pre_match_checkpoint_id": "checkpoint.qc01.shift04.pre_match",
+      "post_match_checkpoint_id": "checkpoint.qc01.shift04.post_match",
+      "launch_label": "story.qc01.shift04.match",
+      "return_label": "story.qc01.shift04.return",
+      "completed_label": "story.qc01.shift04.success",
+      "abandoned_label": "story.qc01.shift04.abandon"
+    },
+    {
+      "match_ref": "story.match.qc01.shift05.no_offer",
+      "chapter_id": "story.chapter.qc01.read_worklogs",
+      "shift_id": "story.shift.qc01.05",
+      "title_text_id": "text.qc01.match.shift05.title",
+      "setup_text_id": "text.qc01.match.shift05.setup",
+      "seed": "story.quiet_cascade.s05.v1",
+      "requested_ticket_count": 2,
+      "allowed_fingerprint_ids": ["fingerprint.network.failed_cable", "fingerprint.network.incorrect_static_ip"],
+      "expected_ticket_definition_ids": ["ticket.generated.759fd75d6ac043a57d6673d7", "ticket.generated.cbc8003979ffdaca83b41d7d"],
+      "expected_ticket_snapshot_digests": ["45f7e05c9d9a57f0e324c34d21dd1420d7c0f76ec0c4753b1494414a292697bd", "4de1801512399068fea5881be79955af674ae35eff511d7a1d75101d6c0085d2"],
+      "required_response_card_counts": {
+        "card.response.repair.network.correct_static_ip": 1,
+        "card.response.repair.network.replace_cable": 1,
+        "card.response.verify.network.connectivity": 2,
+        "card.response.verify.network.link": 1
+      },
+      "pre_match_checkpoint_id": "checkpoint.qc01.shift05.pre_match",
+      "post_match_checkpoint_id": "checkpoint.qc01.shift05.post_match",
+      "launch_label": "story.qc01.shift05.match",
+      "return_label": "story.qc01.shift05.return",
+      "completed_label": "story.qc01.shift05.success",
+      "abandoned_label": "story.qc01.shift05.abandon"
+    },
+    {
+      "match_ref": "story.match.qc01.shift06.quiet_cascade",
+      "chapter_id": "story.chapter.qc01.put_truth_in_service",
+      "shift_id": "story.shift.qc01.06",
+      "title_text_id": "text.qc01.match.shift06.title",
+      "setup_text_id": "text.qc01.match.shift06.setup",
+      "seed": "story.quiet_cascade.s06.v1",
+      "requested_ticket_count": 3,
+      "allowed_fingerprint_ids": ["fingerprint.storage.loose_cable", "fingerprint.storage.failed_sas_member", "fingerprint.boot.missing_nvme"],
+      "expected_ticket_definition_ids": ["ticket.generated.3ec80b1b0e7221ac725aedf9", "ticket.generated.45a70010dd4752f864990575", "ticket.generated.5352abd871c2e9076be92a0b"],
+      "expected_ticket_snapshot_digests": ["1c74ad0725e500ac01d4c356f17551fee11678a88b35ca5b591ff056a2efdff2", "863ca5c0e0a72f9440e3352c80b070f4bde1ca166c801e79425821adfa7f4420", "b06dc5a7d12c29af78edd71f7a82a611d971844e6e71863e142bc293f4e6af27"],
+      "required_response_card_counts": {
+        "card.response.repair.storage.replace_nvme": 1,
+        "card.response.repair.storage.reseat_cable": 1,
+        "card.response.repair.storage.replace_raid_member": 1,
+        "card.response.verify.storage.device_detected": 2,
+        "card.response.verify.boot.normal_boot": 1,
+        "card.response.verify.storage.raid_healthy": 1
+      },
+      "pre_match_checkpoint_id": "checkpoint.qc01.shift06.pre_match",
+      "post_match_checkpoint_id": "checkpoint.qc01.shift06.post_match",
+      "launch_label": "story.qc01.shift06.match",
+      "return_label": "story.qc01.shift06.return",
+      "completed_label": "story.qc01.shift06.success",
+      "abandoned_label": "story.qc01.shift06.abandon"
+    }
+  ]
+}

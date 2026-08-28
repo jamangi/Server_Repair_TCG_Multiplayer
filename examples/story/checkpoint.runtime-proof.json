@@ -1,0 +1,16 @@
+{
+  "schema_version": "story-checkpoint-v1",
+  "pack_id": "fixture.runtime-proof",
+  "content_version": "v0.0.0",
+  "checkpoint_id": "checkpoint.fixture.start",
+  "variables": {
+    "fixture.reviewed": false
+  },
+  "choices": {},
+  "story_service_points": 0,
+  "branch_history": [],
+  "match_results": [],
+  "pending_match": null,
+  "returned_match": null,
+  "digest": "efd0994359feb8eb30d93100a9fb3676dce022eb43bfb849f66b3714adc21250"
+}

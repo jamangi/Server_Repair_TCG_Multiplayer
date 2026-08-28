@@ -1,0 +1,25 @@
+{
+  "text_catalog_version": "story-text-catalog-v1",
+  "locale": "en",
+  "entries": {
+    "fixture.location.lab": "Training Lab",
+    "fixture.time.shift": "First shift",
+    "fixture.name.eva": "Eva",
+    "fixture.alt.console": "A console showing a warning indicator.",
+    "fixture.intro": "The alert is active. What should we inspect first?",
+    "fixture.choice.prompt": "Choose an opening move.",
+    "fixture.choice.inspect": "Inspect the console.",
+    "fixture.choice.skip": "Keep the current evidence.",
+    "fixture.cut.inspect": "Eva leans toward the console and reviews the signal.",
+    "fixture.cut.skip": "The team leaves the console untouched.",
+    "fixture.remembered.inspect": "You chose to gather one more observation.",
+    "fixture.remembered.skip": "You chose to preserve the original observation.",
+    "fixture.library.outer": "Eva opens the shared troubleshooting procedure.",
+    "fixture.library.inner": "The procedure asks for a bounded test before repair.",
+    "fixture.library.return": "The procedure returns control to the incident.",
+    "fixture.match.complete": "The Match result was accepted and the evidence loop is complete.",
+    "fixture.match.other": "The Match ended without a completed result.",
+    "fixture.points.high": "The accepted result added enough Story Service Points.",
+    "fixture.points.low": "The accepted result added fewer than two Story Service Points."
+  }
+}

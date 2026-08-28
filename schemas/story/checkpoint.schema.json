@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/story/checkpoint.schema.json",
+  "title": "Durable Story checkpoint v1",
+  "$defs": {
+    "pending_match": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": { "const": "story-match-context-v1" },
+        "match_ref": { "$ref": "common.schema.json#/$defs/stable_id" },
+        "return_label": { "$ref": "common.schema.json#/$defs/stable_id" },
+        "pre_match_checkpoint_id": { "$ref": "common.schema.json#/$defs/stable_id" },
+        "post_match_checkpoint_id": { "$ref": "common.schema.json#/$defs/stable_id" }
+      },
+      "required": ["schema_version", "match_ref", "return_label", "pre_match_checkpoint_id", "post_match_checkpoint_id"]
+    },
+    "returned_match": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": { "const": "story-match-context-v1" },
+        "match_ref": { "$ref": "common.schema.json#/$defs/stable_id" },
+        "result_id": { "$ref": "common.schema.json#/$defs/stable_id" },
+        "match_id": { "$ref": "common.schema.json#/$defs/stable_id" }
+      },
+      "required": ["schema_version", "match_ref", "result_id", "match_id"]
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "const": "story-checkpoint-v1" },
+    "pack_id": { "$ref": "common.schema.json#/$defs/stable_id" },
+    "content_version": { "$ref": "common.schema.json#/$defs/stable_id" },
+    "checkpoint_id": { "$ref": "common.schema.json#/$defs/stable_id" },
+    "variables": {
+      "type": "object",
+      "additionalProperties": {
+        "anyOf": [
+          { "type": "boolean" },
+          { "type": "string" },
+          { "type": "integer", "minimum": -9007199254740991, "maximum": 9007199254740991 }
+        ]
+      }
+    },
+    "choices": {
+      "type": "object",
+      "additionalProperties": { "$ref": "common.schema.json#/$defs/stable_id" }
+    },
+    "story_service_points": { "$ref": "common.schema.json#/$defs/natural" },
+    "branch_history": {
+      "type": "array",
+      "maxItems": 4096,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "sequence": { "$ref": "common.schema.json#/$defs/positive" },
+          "choice_id": { "$ref": "common.schema.json#/$defs/stable_id" },
+          "option_id": { "$ref": "common.schema.json#/$defs/stable_id" }
+        },
+        "required": ["sequence", "choice_id", "option_id"]
+      }
+    },
+    "match_results": {
+      "type": "array",
+      "maxItems": 1024,
+      "items": { "$ref": "match_result.schema.json" }
+    },
+    "pending_match": {
+      "anyOf": [
+        { "$ref": "#/$defs/pending_match" },
+        { "type": "null" }
+      ]
+    },
+    "returned_match": {
+      "anyOf": [
+        { "$ref": "#/$defs/returned_match" },
+        { "type": "null" }
+      ]
+    },
+    "digest": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+  },
+  "required": [
+    "schema_version", "pack_id", "content_version", "checkpoint_id", "variables", "choices",
+    "story_service_points", "branch_history", "match_results", "pending_match", "returned_match", "digest"
+  ]
+}

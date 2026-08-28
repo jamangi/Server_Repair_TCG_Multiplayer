@@ -1,0 +1,149 @@
+{
+  "script_version": "story-script-v1",
+  "script_id": "script.fixture.chapter-b",
+  "chapter_id": "chapter.fixture.b",
+  "statements": [
+    {
+      "type": "label",
+      "label_id": "fixture.cross.file"
+    },
+    {
+      "type": "call",
+      "label_id": "fixture.library.outer"
+    },
+    {
+      "type": "checkpoint",
+      "checkpoint_id": "checkpoint.fixture.before-match",
+      "resume_label": "fixture.launch"
+    },
+    {
+      "type": "label",
+      "label_id": "fixture.launch"
+    },
+    {
+      "type": "start_match",
+      "match_ref": "match.fixture.diagnosis",
+      "return_label": "fixture.after-match",
+      "pre_match_checkpoint_id": "checkpoint.fixture.pre-match",
+      "post_match_checkpoint_id": "checkpoint.fixture.post-match"
+    },
+    {
+      "type": "label",
+      "label_id": "fixture.after-match"
+    },
+    {
+      "type": "if",
+      "condition": {
+        "op": "MATCH_RESULT",
+        "match_ref": "match.fixture.diagnosis",
+        "field": "completion",
+        "comparator": "EQUALS",
+        "value": "COMPLETED"
+      },
+      "then_label": "fixture.match.completed",
+      "else_label": "fixture.match.other"
+    },
+    {
+      "type": "label",
+      "label_id": "fixture.match.completed"
+    },
+    {
+      "type": "narrate",
+      "statement_id": "statement.fixture.match.complete",
+      "text_id": "fixture.match.complete",
+      "style_key": "NARRATION"
+    },
+    {
+      "type": "if",
+      "condition": {
+        "op": "STORY_POINTS_AT_LEAST",
+        "value": 2
+      },
+      "then_label": "fixture.points.high",
+      "else_label": "fixture.points.low"
+    },
+    {
+      "type": "label",
+      "label_id": "fixture.points.high"
+    },
+    {
+      "type": "narrate",
+      "statement_id": "statement.fixture.points.high",
+      "text_id": "fixture.points.high",
+      "style_key": "NARRATION"
+    },
+    {
+      "type": "end",
+      "ending_id": "ending.fixture.success",
+      "checkpoint_id": "checkpoint.fixture.end.success"
+    },
+    {
+      "type": "label",
+      "label_id": "fixture.points.low"
+    },
+    {
+      "type": "narrate",
+      "statement_id": "statement.fixture.points.low",
+      "text_id": "fixture.points.low",
+      "style_key": "NARRATION"
+    },
+    {
+      "type": "end",
+      "ending_id": "ending.fixture.low",
+      "checkpoint_id": "checkpoint.fixture.end.low"
+    },
+    {
+      "type": "label",
+      "label_id": "fixture.match.other"
+    },
+    {
+      "type": "narrate",
+      "statement_id": "statement.fixture.match.other",
+      "text_id": "fixture.match.other",
+      "style_key": "NARRATION"
+    },
+    {
+      "type": "end",
+      "ending_id": "ending.fixture.other",
+      "checkpoint_id": "checkpoint.fixture.end.other"
+    },
+    {
+      "type": "label",
+      "label_id": "fixture.library.outer"
+    },
+    {
+      "type": "say",
+      "statement_id": "statement.fixture.library.outer",
+      "speaker_key": "character.fixture.eva",
+      "text_id": "fixture.library.outer",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "call",
+      "label_id": "fixture.library.inner"
+    },
+    {
+      "type": "say",
+      "statement_id": "statement.fixture.library.return",
+      "speaker_key": "character.fixture.eva",
+      "text_id": "fixture.library.return",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "return"
+    },
+    {
+      "type": "label",
+      "label_id": "fixture.library.inner"
+    },
+    {
+      "type": "narrate",
+      "statement_id": "statement.fixture.library.inner",
+      "text_id": "fixture.library.inner",
+      "style_key": "NARRATION"
+    },
+    {
+      "type": "return"
+    }
+  ]
+}

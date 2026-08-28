@@ -1,0 +1,101 @@
+{
+  "registry_version": "story-registry-v1",
+  "variables": [
+    { "variable_id": "story.qc01.intake_context", "value_type": "STRING", "default": "UNSET" },
+    { "variable_id": "story.qc01.mentor_question", "value_type": "STRING", "default": "UNSET" },
+    { "variable_id": "story.qc01.record_policy", "value_type": "STRING", "default": "UNSET" },
+    { "variable_id": "story.qc01.client_frame", "value_type": "STRING", "default": "UNSET" }
+  ],
+  "assets": [
+    { "asset_id": "story.bg.trinity.inflow.predawn_storm", "layer": "BACKGROUND", "required": true, "alt_text_id": "text.qc01.asset.bg.inflow" },
+    { "asset_id": "story.bg.trinity.core_floor.night_storm", "layer": "BACKGROUND", "required": true, "alt_text_id": "text.qc01.asset.bg.core_floor" },
+    { "asset_id": "story.bg.trinity.trace.night", "layer": "BACKGROUND", "required": true, "alt_text_id": "text.qc01.asset.bg.trace" },
+    { "asset_id": "story.bg.trinity.validation_gate.predawn", "layer": "BACKGROUND", "required": true, "alt_text_id": "text.qc01.asset.bg.gate" },
+    { "asset_id": "story.bg.trinity.knowledge_systems.night", "layer": "BACKGROUND", "required": true, "alt_text_id": "text.qc01.asset.bg.knowledge" },
+    { "asset_id": "story.bg.trinity.client_review.dawn", "layer": "BACKGROUND", "required": true, "alt_text_id": "text.qc01.asset.bg.client_review" },
+    { "asset_id": "story.asset.character.ev_shaw.focused", "layer": "CHARACTER", "required": true, "alt_text_id": "text.qc01.asset.character.ev.focused" },
+    { "asset_id": "story.asset.character.ev_shaw.concerned", "layer": "CHARACTER", "required": true, "alt_text_id": "text.qc01.asset.character.ev.concerned" },
+    { "asset_id": "story.asset.character.inez_calder.amused", "layer": "CHARACTER", "required": true, "alt_text_id": "text.qc01.asset.character.inez.amused" },
+    { "asset_id": "story.asset.character.inez_calder.focused", "layer": "CHARACTER", "required": true, "alt_text_id": "text.qc01.asset.character.inez.focused" },
+    { "asset_id": "story.asset.character.malik_okoye.focused", "layer": "CHARACTER", "required": true, "alt_text_id": "text.qc01.asset.character.malik.focused" },
+    { "asset_id": "story.asset.character.malik_okoye.defensive", "layer": "CHARACTER", "required": true, "alt_text_id": "text.qc01.asset.character.malik.defensive" },
+    { "asset_id": "story.asset.character.sora_chen.focused", "layer": "CHARACTER", "required": true, "alt_text_id": "text.qc01.asset.character.sora.focused" },
+    { "asset_id": "story.asset.character.sora_chen.approving", "layer": "CHARACTER", "required": true, "alt_text_id": "text.qc01.asset.character.sora.approving" },
+    { "asset_id": "story.asset.character.hana_park.skeptical", "layer": "CHARACTER", "required": true, "alt_text_id": "text.qc01.asset.character.hana.skeptical" },
+    { "asset_id": "story.asset.character.hana_park.relief", "layer": "CHARACTER", "required": true, "alt_text_id": "text.qc01.asset.character.hana.relief" },
+    { "asset_id": "story.asset.character.jonah_reed.defensive", "layer": "CHARACTER", "required": true, "alt_text_id": "text.qc01.asset.character.jonah.defensive" },
+    { "asset_id": "story.asset.character.jonah_reed.thoughtful", "layer": "CHARACTER", "required": true, "alt_text_id": "text.qc01.asset.character.jonah.thoughtful" },
+    { "asset_id": "story.asset.character.priya_nayar.concerned", "layer": "CHARACTER", "required": true, "alt_text_id": "text.qc01.asset.character.priya.concerned" },
+    { "asset_id": "story.asset.character.priya_nayar.resolved", "layer": "CHARACTER", "required": true, "alt_text_id": "text.qc01.asset.character.priya.resolved" },
+    { "asset_id": "story.insert.qc01.repeat_serial_history", "layer": "TRANSIENT", "required": true, "alt_text_id": "text.qc01.asset.insert.repeat_serial" },
+    { "asset_id": "story.insert.qc01.sift_provenance_gap", "layer": "TRANSIENT", "required": true, "alt_text_id": "text.qc01.asset.insert.sift_gap" },
+    { "asset_id": "story.insert.qc01.final_incident_queue", "layer": "TRANSIENT", "required": true, "alt_text_id": "text.qc01.asset.insert.final_queue" }
+  ],
+  "characters": [
+    {
+      "character_id": "story.character.ev_shaw",
+      "name_text_id": "text.qc01.character.ev.name",
+      "poses": [
+        { "pose_id": "focused", "asset_id": "story.asset.character.ev_shaw.focused" },
+        { "pose_id": "concerned", "asset_id": "story.asset.character.ev_shaw.concerned" }
+      ]
+    },
+    {
+      "character_id": "story.character.inez_calder",
+      "name_text_id": "text.qc01.character.inez.name",
+      "poses": [
+        { "pose_id": "amused", "asset_id": "story.asset.character.inez_calder.amused" },
+        { "pose_id": "focused", "asset_id": "story.asset.character.inez_calder.focused" }
+      ]
+    },
+    {
+      "character_id": "story.character.malik_okoye",
+      "name_text_id": "text.qc01.character.malik.name",
+      "poses": [
+        { "pose_id": "focused", "asset_id": "story.asset.character.malik_okoye.focused" },
+        { "pose_id": "defensive", "asset_id": "story.asset.character.malik_okoye.defensive" }
+      ]
+    },
+    {
+      "character_id": "story.character.sora_chen",
+      "name_text_id": "text.qc01.character.sora.name",
+      "poses": [
+        { "pose_id": "focused", "asset_id": "story.asset.character.sora_chen.focused" },
+        { "pose_id": "approving", "asset_id": "story.asset.character.sora_chen.approving" }
+      ]
+    },
+    {
+      "character_id": "story.character.hana_park",
+      "name_text_id": "text.qc01.character.hana.name",
+      "poses": [
+        { "pose_id": "skeptical", "asset_id": "story.asset.character.hana_park.skeptical" },
+        { "pose_id": "relief", "asset_id": "story.asset.character.hana_park.relief" }
+      ]
+    },
+    {
+      "character_id": "story.character.jonah_reed",
+      "name_text_id": "text.qc01.character.jonah.name",
+      "poses": [
+        { "pose_id": "defensive", "asset_id": "story.asset.character.jonah_reed.defensive" },
+        { "pose_id": "thoughtful", "asset_id": "story.asset.character.jonah_reed.thoughtful" }
+      ]
+    },
+    {
+      "character_id": "story.character.priya_nayar",
+      "name_text_id": "text.qc01.character.priya.name",
+      "poses": [
+        { "pose_id": "concerned", "asset_id": "story.asset.character.priya_nayar.concerned" },
+        { "pose_id": "resolved", "asset_id": "story.asset.character.priya_nayar.resolved" }
+      ]
+    }
+  ],
+  "matches": [
+    { "match_ref": "story.match.qc01.shift01.wrong_device" },
+    { "match_ref": "story.match.qc01.shift02.power_lot" },
+    { "match_ref": "story.match.qc01.shift03.memory_compare" },
+    { "match_ref": "story.match.qc01.shift04.passes_cold" },
+    { "match_ref": "story.match.qc01.shift05.no_offer" },
+    { "match_ref": "story.match.qc01.shift06.quiet_cascade" }
+  ],
+  "declared_loops": []
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/story/pack.schema.json",
+  "title": "Loaded Story bundle v1",
+  "description": "The in-memory bundle assembled from a manifest's reviewed JSON files before semantic validation.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "manifest": { "$ref": "manifest.schema.json" },
+    "registry": { "$ref": "registry.schema.json" },
+    "texts": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "$ref": "text_catalog.schema.json" }
+    },
+    "scripts": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "script.schema.json" }
+    }
+  },
+  "required": ["manifest", "registry", "texts", "scripts"]
+}

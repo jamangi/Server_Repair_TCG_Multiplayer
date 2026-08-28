@@ -39,6 +39,8 @@ function normalizeRoute(hash = location.hash) {
     params: { deckId: deckEditor[1] },
   };
   if (path === '/play/profile') return { hash: '#/play/profile', area: 'play', name: 'profile', params: {} };
+  if (path === '/play/story') return { hash: '#/play/story', area: 'play', name: 'story', params: {} };
+  if (path === '/play/story/scene') return { hash: '#/play/story/scene', area: 'play', name: 'story-scene', params: {} };
   if (path === '/play/game') return { hash: '#/play/game', area: 'play', name: 'game', params: {} };
   return { hash: '#/library', area: 'library', name: 'library', params: {}, replacedInvalid: true };
 }
@@ -61,6 +63,8 @@ function updateChrome(route) {
     decks: 'Decks',
     'deck-edit': 'Deck Editor',
     profile: 'Profile',
+    story: 'Story',
+    'story-scene': 'Story Scene',
     game: 'Solo Repair',
   };
   document.title = `${titles[route.name] || 'Server Repair'} · Server Repair`;

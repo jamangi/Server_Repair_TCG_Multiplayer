@@ -314,6 +314,19 @@ STORY-005 A
 STORY-006 A
 ```
 
+### STORY-007 — Campaign-one canon package — **owner approval requested 2026-08-27**
+
+TASK-027 through TASK-030 turn the existing Story working premise into the first complete, editable production campaign. The implementation can be reviewed and playtested without freezing these names or visual identities, but publication as settled canon needs one explicit owner choice—especially because `Second Current Serviceworks` still carries a name/trademark-review note in the Story foundation.
+
+- **A — Approve the existing campaign-one package as canon (recommended).** Use the 2049 Trinity Hub setting, Second Current Serviceworks, Continuity Rotation, Civic Atlas, The Quiet Cascade, SIFT, the established nine-person ensemble, and the customizable Crossline Technician as the canonical first-campaign package. TASK-030's reviewed original character art becomes the visual anchor for that ensemble; later edits require ordinary versioned content/art migration rather than silent identity replacement.
+- **B — Keep the package as production-candidate content.** Ship the complete playable campaign and original art for structural/playtest use, but continue labeling its proper names and character identities as candidate material until the owner supplies revisions or approves A. Runtime, Match, checkpoint, and portability contracts remain unaffected.
+
+Requested reply:
+
+```text
+STORY-007 A
+```
+
 ## Migration Seed and Server Repair V2
 
 The Version 2 proposal is a separate migration track, not another PT-003 option. If approved, V2 does not inherit “authored disposition” as its normal Evidence architecture. Review [`TASK-017`](../../tasks/TASK-017-create-server-repair-v2-migration-seed.md) for the complete bounded audit, ontology, proof, and repository contract.

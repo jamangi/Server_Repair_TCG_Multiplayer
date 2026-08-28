@@ -573,11 +573,12 @@ test('the generated Pages stage is a strict allowlist with no Node-only or serve
       && entry.path.endsWith('.webp');
     assert.ok(canonicalIllustration
       || [...sourceParts, ...outputParts].every((part) => !forbiddenSegments.has(part)), entry.path);
-    const allowed = /^src\/(?:engine|builder|shared)\/[a-z0-9._-]+\.mjs$/.test(entry.source)
+    const allowed = /^src\/(?:engine|builder|shared|story)\/[a-z0-9._-]+\.mjs$/.test(entry.source)
       || (entry.source.startsWith('content/gameplay-v1/')
         && (gameplayFiles.has(entry.source.slice('content/gameplay-v1/'.length))
           || entry.source.endsWith('/diagnosis-v2-migration.json')))
       || entry.source.startsWith('assets/')
+      || entry.source.startsWith('content/story-v1/')
       || entry.source.startsWith('viewer/assets/play/')
       || entry.source.startsWith('viewer/vendor/');
     assert.equal(allowed, true, `unexpected staged source ${entry.source}`);
@@ -620,7 +621,7 @@ test('local persistence and export contain ledgers/aggregates only, never active
     'records',
     'schema_version',
   ]);
-  assert.deepEqual(Object.keys(exportBundle.records).sort(), ['decks', 'profile', 'settings', 'statistics', 'tutorials']);
+  assert.deepEqual(Object.keys(exportBundle.records).sort(), ['decks', 'profile', 'settings', 'statistics', 'story', 'tutorials']);
   const serialized = JSON.stringify(exportBundle);
   for (const forbidden of [
     'active_match',
@@ -654,5 +655,5 @@ test('local persistence and export contain ledgers/aggregates only, never active
     const source = await readText(path.join(VIEWER_JS_ROOT, ...relative.split('/')));
     if (/\blocalStorage\b/.test(source)) localStorageUsers.push(relative);
   }
-  assert.deepEqual(localStorageUsers, ['play/storage-service.mjs']);
+  assert.deepEqual(localStorageUsers, ['play/storage-service.mjs', 'play/story-client.mjs']);
 });

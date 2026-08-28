@@ -517,10 +517,28 @@ function resultMarkup(session, context) {
   const archiveRecords = buildArchivedTicketRecords(session.projection);
   const won = result.solo_wins === 1;
   const status = won ? 'Queue cleared' : result.solo_stalemates ? 'Proven stalemate' : result.invalid_or_capped_results ? 'Invalid or capped' : 'Shift ended';
+  const storyMatch = Boolean(session.storyContext);
+  const canContinueStory = Boolean(
+    storyMatch && session.storyContinuationReady && session.storyMatchResult,
+  );
+  const recordStatus = session.tutorial
+    ? 'Tutorial completion recorded as local replay progress only.'
+    : session.resultApplied === false
+      ? 'This result was already present; lifetime totals were not incremented twice.'
+      : session.resultApplied === true
+        ? 'Result recorded exactly once in this local Profile.'
+        : `The Match is complete, but its Profile record could not be saved${context.ui?.storageWarning ? `: ${context.ui.storageWarning}` : '.'}`;
+  const storyReturn = storyMatch
+    ? `<div class="story-result-return" data-result-reveal>
+        ${session.storyReturnError ? `<p class="play-global-notice" data-tone="error" role="alert">The Match record is safe, but Story cannot advance: ${escapeHtml(session.storyReturnError)}</p>` : ''}
+        ${canContinueStory ? '<button type="button" class="play-button play-button--primary" data-continue-story>Continue Story</button>' : ''}
+        <p>${canContinueStory ? 'Cross the reviewed post-Match checkpoint exactly once.' : session.storyReturnError ? 'Return to Story Home to recover from the last durable checkpoint.' : 'The result is being validated separately from Profile statistics.'}</p>
+      </div>`
+    : '';
   return `
     <section class="play-route result-route" aria-labelledby="result-heading">
       <div class="result-panel">
-        <p class="play-eyebrow" data-result-reveal>Local solo result</p>
+        <p class="play-eyebrow" data-result-reveal>${storyMatch ? 'Story Match result' : 'Local solo result'}</p>
         <h1 id="result-heading" tabindex="-1" data-result-reveal>${status}</h1>
         <p data-result-reveal>${won ? 'Every Ticket was closed through an Evidence-backed causal record.' : 'Review the terminal reasons and preserve the useful history.'}</p>
         ${solutionRevealMarkup(session.projection?.view ?? { solution_reveals: [] }, context.catalog, session.projection, true)}
@@ -541,16 +559,17 @@ function resultMarkup(session, context) {
         </dl>
         <details class="result-reasons" data-result-reveal><summary>Terminal reasons</summary><ul>${result.reason_codes.map((reason) => `<li><code>${escapeHtml(reason)}</code></li>`).join('')}</ul></details>
         <section class="result-archive" aria-labelledby="result-archive-heading" data-result-reveal><div><p class="play-eyebrow">Completed records</p><h2 id="result-archive-heading">Archived Tickets</h2></div><div class="result-archive__list">${archivedTicketButtonsMarkup(archiveRecords, session.projection)}</div></section>
-        <p class="result-record-status" data-result-reveal>${session.tutorial ? 'Tutorial completion recorded as local replay progress only.' : session.resultApplied === false ? 'This result was already present; lifetime totals were not incremented twice.' : 'Result recorded exactly once in this local Profile.'}</p>
-        <div class="button-row" data-result-reveal><button type="button" class="play-button play-button--primary" data-finish-game="#/play/home">Return Home</button>${session.tutorial ? `<button type="button" class="play-button" data-restart-completed-tutorial="${escapeHtml(session.tutorial.definition.id)}">Replay tutorial</button>` : '<button type="button" class="play-button" data-finish-game="#/play/profile">View Profile</button>'}</div>
-        <p class="authority-note" data-result-reveal>${session.tutorial ? 'Tutorial completion is local progress only. This Match did not change Profile points or statistics.' : 'Local statistics are user-controlled and are not competitive records.'}</p>
+        <p class="result-record-status"${session.resultApplied === null && !session.tutorial ? ' data-tone="error" role="alert"' : ''} data-result-reveal>${escapeHtml(recordStatus)}</p>
+        ${storyReturn}
+        <div class="button-row" data-result-reveal><button type="button" class="play-button${storyMatch ? '' : ' play-button--primary'}" data-finish-game="${storyMatch ? '#/play/story' : '#/play/home'}">${storyMatch ? 'Story Home' : 'Return Home'}</button>${session.tutorial ? `<button type="button" class="play-button" data-restart-completed-tutorial="${escapeHtml(session.tutorial.definition.id)}">Replay tutorial</button>` : '<button type="button" class="play-button" data-finish-game="#/play/profile">View Profile</button>'}</div>
+        <p class="authority-note" data-result-reveal>${session.tutorial ? 'Tutorial completion is local progress only. This Match did not change Profile points or statistics.' : storyMatch ? 'The engine remains authoritative for Match facts and Profile statistics. Story consumes only the validated, bounded result above.' : 'Local statistics are user-controlled and are not competitive records.'}</p>
       </div>
       <dialog id="archived-ticket-dialog" class="play-dialog archived-ticket-dialog" aria-labelledby="archive-review-heading"><div data-archive-dialog-content></div></dialog>
     </section>`;
 }
 
-function gameLoadingMarkup(error = null) {
-  return `<section class="play-route"><div class="game-loading"${error ? ' role="alert"' : ' aria-busy="true"'}><p class="play-eyebrow">Local authority</p><h1>${error ? 'Solo Match could not start' : 'Building repair queue…'}</h1><p>${escapeHtml(error || 'The Ticket Builder and engine are preparing a complete deterministic Match in a dedicated Worker.')}</p>${error ? '<div class="button-row"><a class="play-button play-button--primary" href="#/play/decks">Review Deck coverage</a><a class="play-button" href="#/play/home">Return Home</a></div>' : ''}</div></section>`;
+function gameLoadingMarkup(error = null, { story = false } = {}) {
+  return `<section class="play-route"><div class="game-loading"${error ? ' role="alert"' : ' aria-busy="true"'}><p class="play-eyebrow">Local authority</p><h1>${error ? `${story ? 'Story' : 'Solo'} Match could not start` : 'Building repair queue…'}</h1><p>${escapeHtml(error || 'The Ticket Builder and engine are preparing a complete deterministic Match in a dedicated Worker.')}</p>${error ? `<div class="button-row"><a class="play-button play-button--primary" href="#/play/decks">Review Deck coverage</a><a class="play-button" href="${story ? '#/play/story' : '#/play/home'}">${story ? 'Story Home' : 'Return Home'}</a></div>` : ''}</div></section>`;
 }
 
 function openArchivedTicketDialog(root, session, context, ticketId, opener) {
@@ -575,11 +594,11 @@ function focusAuthorizedSolution(root, ticketId) {
 export function renderGame(root, context) {
   const session = context.game;
   if (session.error) {
-    root.innerHTML = gameLoadingMarkup(session.error);
+    root.innerHTML = gameLoadingMarkup(session.error, { story: Boolean(session.storyContext) });
     return () => {};
   }
   if (!session.projection) {
-    root.innerHTML = gameLoadingMarkup();
+    root.innerHTML = gameLoadingMarkup(null, { story: Boolean(session.storyContext) });
     return () => {};
   }
   if (session.terminalResult) {
@@ -603,6 +622,7 @@ export function renderGame(root, context) {
       }
       const finish = event.target.closest('[data-finish-game]');
       if (finish) context.finishGame(finish.dataset.finishGame);
+      if (event.target.closest('[data-continue-story]')) context.continueStory();
       const replay = event.target.closest('[data-restart-completed-tutorial]');
       if (replay) context.restartTutorial(replay.dataset.restartCompletedTutorial);
     };

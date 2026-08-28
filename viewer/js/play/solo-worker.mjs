@@ -20,6 +20,13 @@ import {
   buildTicketsV2,
   createDiagnosisV2Catalogs,
 } from '../../generated/play/src/builder/diagnosis-v2.mjs';
+import {
+  STORY_MATCH_RESULT_VERSION,
+  createStoryBuilderConfiguration,
+  loadStoryMatchRegistry,
+  preflightStoryDeck,
+  resolveStoryMatch,
+} from './story-match-registry.mjs';
 
 const PLAYER_ID = 'player.solo';
 const TEAM_ID = 'team.cooperative';
@@ -32,6 +39,7 @@ let startedAtMilliseconds = null;
 let requestSequence = 0;
 let intentLookup = new Map();
 let matchMetadata = null;
+let storyContext = null;
 
 const clone = (value) => structuredClone(value);
 
@@ -82,6 +90,43 @@ function compactCounts(cardDefinitionIds) {
   const counts = {};
   for (const id of cardDefinitionIds) counts[id] = (counts[id] ?? 0) + 1;
   return counts;
+}
+
+function exactKeys(value, expected) {
+  const keys = Object.keys(value).sort();
+  return keys.length === expected.length
+    && keys.every((key, index) => key === [...expected].sort()[index]);
+}
+
+function assertStoryContext(candidate, definition) {
+  const expected = [
+    'schema_version', 'context_token', 'match_ref', 'checkpoint_id', 'return_label',
+  ];
+  if (!candidate || typeof candidate !== 'object' || Array.isArray(candidate)
+      || !exactKeys(candidate, expected)
+      || candidate.schema_version !== 'story-match-context-v1'
+      || typeof candidate.context_token !== 'string'
+      || candidate.context_token.length < 16
+      || candidate.context_token.length > 160
+      || !SAFE_ID.test(candidate.context_token)
+      || candidate.match_ref !== definition.match_ref
+      || candidate.checkpoint_id !== definition.pre_match_checkpoint_id
+      || candidate.return_label !== definition.return_label) {
+    throw new Error('Story Match context is stale, mismatched, or malformed.');
+  }
+  return clone(candidate);
+}
+
+function assertStoryPreflightPayload(payload) {
+  if (!payload || typeof payload !== 'object' || Array.isArray(payload)
+      || !exactKeys(payload, ['match_ref', 'card_definition_ids'])
+      || typeof payload.match_ref !== 'string'
+      || !SAFE_ID.test(payload.match_ref)
+      || !Array.isArray(payload.card_definition_ids)
+      || payload.card_definition_ids.length !== 30
+      || payload.card_definition_ids.some((id) => typeof id !== 'string' || !SAFE_ID.test(id))) {
+    throw new Error('Story Match preflight request is invalid.');
+  }
 }
 
 function builderConfiguration(ticketCount, seed, responseCardDefinitionIds, loadedCatalogs) {
@@ -172,7 +217,7 @@ function tutorialBuilderConfiguration(definition, responseCardDefinitionIds, loa
 
 function assertStartPayload(payload) {
   if (!payload || typeof payload !== 'object' || Array.isArray(payload)) throw new Error('Start payload is invalid.');
-  const allowed = new Set(['match_id', 'seed', 'ticket_count', 'display_name', 'deck_id', 'card_definition_ids', 'tutorial_id']);
+  const allowed = new Set(['match_id', 'seed', 'ticket_count', 'display_name', 'deck_id', 'card_definition_ids', 'tutorial_id', 'story_context']);
   if (Object.keys(payload).some((key) => !allowed.has(key))) throw new Error('Start payload contains an unknown field.');
   if (typeof payload.match_id !== 'string' || payload.match_id.length > 120 || !SAFE_ID.test(payload.match_id)) throw new Error('Match ID is invalid.');
   if (typeof payload.seed !== 'string' || payload.seed.length < 1 || payload.seed.length > 160) throw new Error('Seed is invalid.');
@@ -186,10 +231,126 @@ function assertStartPayload(payload) {
   if (payload.tutorial_id !== undefined && (typeof payload.tutorial_id !== 'string' || !SAFE_ID.test(payload.tutorial_id))) {
     throw new Error('Tutorial ID is invalid.');
   }
+  if (payload.tutorial_id !== undefined && payload.story_context !== undefined) {
+    throw new Error('A Match cannot be both a Tutorial and a Story Match.');
+  }
 }
 
 function selectedAttempt(result) {
   return result.attempts.find((attempt) => attempt.attempt_id === result.selected_attempt_id) ?? null;
+}
+
+function diagnosticCardIds(loadedCatalogs) {
+  return loadedCatalogs.cards.cards
+    .filter((card) => card.play_contract?.contract_type === 'DIAGNOSTIC')
+    .map((card) => card.id)
+    .sort();
+}
+
+function storyBuild({ registry, definition, cardDefinitionIds, loadedCatalogs, configurationId }) {
+  const configuration = createStoryBuilderConfiguration({
+    registry,
+    definition,
+    cardDefinitionIds,
+    diagnosticCardIds: diagnosticCardIds(loadedCatalogs),
+    configurationId,
+  });
+  const builderResult = buildTicketsV3({ configuration, catalogs: loadedCatalogs });
+  return { configuration, builderResult, attempt: selectedAttempt(builderResult) };
+}
+
+function assertReviewedStoryBatch(definition, attempt, builderResult) {
+  if (!attempt || builderResult.status !== 'SUCCESS'
+      || attempt.ticket_snapshots.length !== definition.requested_ticket_count) {
+    throw new Error('The reviewed Story Ticket batch is unavailable in this content version.');
+  }
+  const definitionIds = attempt.ticket_snapshots.map((snapshot) => snapshot.id);
+  if (JSON.stringify(definitionIds) !== JSON.stringify(definition.expected_ticket_definition_ids)
+      || JSON.stringify(attempt.ticket_snapshot_digests) !== JSON.stringify(definition.expected_ticket_snapshot_digests)) {
+    throw new Error('Story Ticket generation did not match the reviewed registry pins.');
+  }
+}
+
+async function prepareStoryMatch(matchRef, cardDefinitionIds, { includeSnapshots = false } = {}) {
+  const [registry, loadedCatalogs] = await Promise.all([loadStoryMatchRegistry(), loadCatalogs()]);
+  const definition = resolveStoryMatch(registry, matchRef);
+  const requirementCheck = preflightStoryDeck(definition, cardDefinitionIds);
+  if (!requirementCheck.ok) {
+    return {
+      result: Object.freeze({
+        ok: false,
+        code: requirementCheck.code,
+        match_ref: definition.match_ref,
+        ticket_count: definition.requested_ticket_count,
+        missing: requirementCheck.missing,
+      }),
+      registry,
+      definition,
+      loadedCatalogs,
+    };
+  }
+
+  const canonicalDeck = loadedCatalogs.decks.decks.find(
+    (deck) => deck.id === registry.deckPolicy.canonical_proof_deck_id,
+  );
+  if (!canonicalDeck) throw new Error('The Story canonical proof deck is missing from the pinned catalog.');
+  const canonical = storyBuild({
+    registry,
+    definition,
+    cardDefinitionIds: canonicalDeck.card_definition_ids,
+    loadedCatalogs,
+  });
+  assertReviewedStoryBatch(definition, canonical.attempt, canonical.builderResult);
+
+  const activeProof = storyBuild({
+    registry,
+    definition,
+    cardDefinitionIds,
+    loadedCatalogs,
+    configurationId: `builder.story.preflight.${definition.shift_id.split('.').at(-1)}`,
+  });
+  if (!activeProof.attempt || activeProof.builderResult.status !== 'SUCCESS'
+      || activeProof.attempt.ticket_snapshots.length !== definition.requested_ticket_count) {
+    const diagnostics = activeProof.builderResult.attempts
+      .flatMap((attempt) => attempt.diagnostics.map((diagnostic) => diagnostic.code));
+    return {
+      result: Object.freeze({
+        ok: false,
+        code: 'DECK_SOLVABILITY_UNPROVEN',
+        match_ref: definition.match_ref,
+        ticket_count: definition.requested_ticket_count,
+        missing: Object.freeze([]),
+        reason_codes: Object.freeze([...new Set(diagnostics)].sort()),
+      }),
+      registry,
+      definition,
+      loadedCatalogs,
+    };
+  }
+
+  return {
+    result: Object.freeze({
+      ok: true,
+      code: 'READY',
+      match_ref: definition.match_ref,
+      ticket_count: definition.requested_ticket_count,
+      missing: Object.freeze([]),
+    }),
+    registry,
+    definition,
+    loadedCatalogs,
+    ...(includeSnapshots ? {
+      configuration: canonical.configuration,
+      builderResult: canonical.builderResult,
+      attempt: canonical.attempt,
+    } : {}),
+  };
+}
+
+async function preflightStoryMatch(payload) {
+  assertStoryPreflightPayload(payload);
+  const prepared = await prepareStoryMatch(payload.match_ref, payload.card_definition_ids);
+  postMessage({ type: 'STORY_MATCH_PREFLIGHT', result: prepared.result });
 }
 
 function safeTicketPresentations(authoritativeState) {
@@ -318,21 +479,69 @@ function terminalSummary() {
   };
 }
 
+function terminalStoryResult(summary) {
+  if (!summary || !storyContext) return null;
+  const completion = !summary.valid
+    ? 'INVALID'
+    : summary.tickets_given_up > 0 ? 'ABANDONED' : 'COMPLETED';
+  return {
+    schema_version: STORY_MATCH_RESULT_VERSION,
+    result_id: summary.result_id,
+    match_id: summary.match_id,
+    match_ref: storyContext.match_ref,
+    completion,
+    valid: summary.valid,
+    reason_codes: [...summary.reason_codes],
+    story_service_points_gained: Math.max(0, summary.service_points_gained),
+    tickets_closed: summary.tickets_closed,
+    tickets_given_up: summary.tickets_given_up,
+    documented_outcome: summary.documentation_actions > 0,
+    verified_outcome: summary.verify_passes > 0,
+    contributions: {
+      tests_run: summary.tests_run,
+      isolations_accepted: summary.isolations_accepted,
+      repairs_performed: summary.repairs_performed,
+      verify_passes: summary.verify_passes,
+      documentation_actions: summary.documentation_actions,
+    },
+  };
+}
+
 async function startMatch(payload) {
   if (state) throw new Error('A local Match is already active.');
   assertStartPayload(payload);
-  let definition = null;
+  let tutorialDefinition = null;
+  let storyDefinition = null;
+  let nextStoryContext = null;
   let loaded;
   let configuration;
   let builderResult;
   if (payload.tutorial_id) {
     const tutorial = await loadTutorialCatalogs();
-    definition = tutorial.tutorialContent.tutorials.find((entry) => entry.id === payload.tutorial_id) ?? null;
-    if (!definition) throw new Error('The requested Tutorial does not exist in the pinned catalog.');
-    if (payload.seed !== definition.seed || payload.ticket_count !== 1) throw new Error('Tutorial start pins do not match its versioned definition.');
+    tutorialDefinition = tutorial.tutorialContent.tutorials.find((entry) => entry.id === payload.tutorial_id) ?? null;
+    if (!tutorialDefinition) throw new Error('The requested Tutorial does not exist in the pinned catalog.');
+    if (payload.seed !== tutorialDefinition.seed || payload.ticket_count !== 1) throw new Error('Tutorial start pins do not match its versioned definition.');
     loaded = tutorial.loaded;
-    configuration = tutorialBuilderConfiguration(definition, payload.card_definition_ids, loaded);
+    configuration = tutorialBuilderConfiguration(tutorialDefinition, payload.card_definition_ids, loaded);
     builderResult = buildTicketsV2({ configuration, catalogs: loaded });
+  } else if (payload.story_context) {
+    const prepared = await prepareStoryMatch(
+      payload.story_context.match_ref,
+      payload.card_definition_ids,
+      { includeSnapshots: true },
+    );
+    if (!prepared.result.ok) {
+      throw new Error(`The active deck did not pass Story Match preflight (${prepared.result.code}).`);
+    }
+    storyDefinition = prepared.definition;
+    nextStoryContext = assertStoryContext(payload.story_context, storyDefinition);
+    if (payload.seed !== storyDefinition.seed
+        || payload.ticket_count !== storyDefinition.requested_ticket_count) {
+      throw new Error('Story Match start pins do not match the reviewed registry.');
+    }
+    loaded = prepared.loadedCatalogs;
+    configuration = prepared.configuration;
+    builderResult = prepared.builderResult;
   } else {
     loaded = await loadCatalogs();
     configuration = builderConfiguration(payload.ticket_count, payload.seed, payload.card_definition_ids, loaded);
@@ -344,10 +553,10 @@ async function startMatch(payload) {
     const codes = builderResult.attempts.flatMap((candidate) => candidate.diagnostics.map((item) => item.code));
     throw new Error(`Ticket Builder could not create a complete Match (${[...new Set(codes)].join(', ') || 'unknown diagnostic'}).`);
   }
-  if (definition) {
+  if (tutorialDefinition) {
     const selectedTemplate = loaded.ticketContent.templates.find((entry) =>
       entry.template_id === attempt.selected_template_ids[0]);
-    if (selectedTemplate?.ticket?.id !== definition.expected_ticket_definition_id) {
+    if (selectedTemplate?.ticket?.id !== tutorialDefinition.expected_ticket_definition_id) {
       throw new Error('Tutorial Builder output did not match its pinned Ticket checkpoint contract.');
     }
   }
@@ -358,7 +567,7 @@ async function startMatch(payload) {
     deck_id: payload.deck_id,
     has_repeated_fingerprint: new Set(attempt.selected_template_ids).size < attempt.selected_template_ids.length,
   };
-  state = createMatch({
+  const nextState = createMatch({
     matchId: payload.match_id,
     players: [{
       player_id: PLAYER_ID,
@@ -383,7 +592,9 @@ async function startMatch(payload) {
       max_refresh_tokens: 1,
       turn_cap: null,
       closure_cap: null,
-      play_context: definition ? 'TRAINING' : 'SOLO',
+      // Story carries its own validated return context, but the Match itself keeps
+      // the ordinary Solo rules contract (including Give Up and settlement).
+      play_context: tutorialDefinition ? 'TRAINING' : 'SOLO',
     },
     rulesetVersion: loaded.rulesetVersion,
     seed: payload.seed,
@@ -397,7 +608,13 @@ async function startMatch(payload) {
       builder_result_id: builderResult.id,
     },
   });
-  postMessage({ type: 'MATCH_STARTED', projection: project() });
+  state = nextState;
+  storyContext = nextStoryContext;
+  postMessage({
+    type: 'MATCH_STARTED',
+    projection: project(),
+    story_context: storyContext ? clone(storyContext) : null,
+  });
 }
 
 function submitSelectedIntent(intentId) {
@@ -428,13 +645,16 @@ function submitSelectedIntent(intentId) {
     ...outcome.result.private_events,
     ...outcome.result.team_events,
   ].filter((event, index, values) => values.findIndex((candidate) => candidate.event_id === event.event_id) === index);
+  const terminalResult = terminalSummary();
   postMessage({
     type: 'INTENT_RESOLVED',
     accepted: outcome.result.accepted,
     result: outcome.result,
     events: safeEvents,
     projection,
-    terminal_result: terminalSummary(),
+    terminal_result: terminalResult,
+    story_context: storyContext ? clone(storyContext) : null,
+    story_match_result: terminalStoryResult(terminalResult),
   });
 }
 
@@ -444,6 +664,7 @@ function clearMatch() {
   requestSequence = 0;
   intentLookup = new Map();
   matchMetadata = null;
+  storyContext = null;
 }
 
 self.addEventListener('message', async (event) => {
@@ -451,6 +672,7 @@ self.addEventListener('message', async (event) => {
   try {
     if (!message || typeof message !== 'object' || Array.isArray(message)) throw new Error('Worker message is invalid.');
     if (message.type === 'START_MATCH') await startMatch(message.payload);
+    else if (message.type === 'PREFLIGHT_STORY_MATCH') await preflightStoryMatch(message.payload);
     else if (message.type === 'SUBMIT_INTENT') submitSelectedIntent(message.intent_id);
     else if (message.type === 'END_SESSION') {
       clearMatch();

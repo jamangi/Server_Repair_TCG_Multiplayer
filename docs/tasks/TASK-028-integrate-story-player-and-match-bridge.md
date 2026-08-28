@@ -2,7 +2,7 @@
 
 ## Status
 
-**Approved and queued; blocked by TASK-025 through TASK-027 completion.** STORY-002 A, STORY-004 A, and STORY-005 A are synchronized into this contract.
+**Completed 2026-08-28.** STORY-002 A, STORY-004 A, and STORY-005 A remain synchronized into this contract. See the shared [TASK-026 through TASK-030 completion record](../story/TASK-026-030-COMPLETION.md).
 
 ## Objective
 

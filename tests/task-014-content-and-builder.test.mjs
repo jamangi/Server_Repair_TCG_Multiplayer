@@ -44,9 +44,16 @@ const clientSchemaFiles = fs.readdirSync(path.join(ROOT, 'schemas/client'))
     filePath: path.join(ROOT, 'schemas/client', name),
     schema: readJson(`schemas/client/${name}`),
   }));
+const storySchemaFiles = fs.readdirSync(path.join(ROOT, 'schemas/story'))
+  .filter((name) => name.endsWith('.json'))
+  .sort()
+  .map((name) => ({
+    filePath: path.join(ROOT, 'schemas/story', name),
+    schema: readJson(`schemas/story/${name}`),
+  }));
 const clientSchemas = {
-  schemas: clientSchemaFiles,
-  byId: new Map(clientSchemaFiles.map(({ schema }) => [schema.$id, schema])),
+  schemas: [...clientSchemaFiles, ...storySchemaFiles],
+  byId: new Map([...clientSchemaFiles, ...storySchemaFiles].map(({ schema }) => [schema.$id, schema])),
 };
 const clientSchemaByTitle = new Map(clientSchemaFiles.map(({ schema }) => [schema.title, schema]));
 const starter = catalogs.decks.decks.find((deck) => deck.id === 'deck.core.multisystem_response_v3');
@@ -286,7 +293,7 @@ test('expanded local data exports validate and existing diagnosis-v2 profiles re
   const exported = createExportBundle(current, clientContext, '2042-01-01T00:00:00.000Z');
   assert.deepEqual(validateJsonSchema(
     exported,
-    clientSchemaByTitle.get('Solo Pages Export Bundle v2'),
+    clientSchemaByTitle.get('Solo Pages Export Bundle v3'),
     clientSchemas,
   ), []);
 

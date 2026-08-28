@@ -8,7 +8,7 @@ Players are technicians, not opposing armies. They compete or cooperate by troub
 
 Open the [Server Repair GitHub Pages application](https://jamangi.github.io/Server_Repair_TCG_Multiplayer/) and select **Play**. New technicians can start with the deterministic **Troubleshooting fundamentals** tutorial, then replay the failed-Verify recovery tutorial from Home or Settings. No installation, local server, account, or sign-in is required.
 
-The current game is a browser-local solo training client. Decks, profile choices, settings, and statistics stay in that browser unless exported from Settings. An active Match is intentionally not resumable after leaving or reloading it.
+The current game is a browser-local solo and Story training client. Decks, profile choices, settings, statistics, and durable Story checkpoints stay in that browser unless exported from Settings. An active Match is intentionally not resumable after leaving or reloading it; Story restarts that configured Match from its pre-Match checkpoint instead of pretending to restore engine state.
 
 ## Troubleshooting loop
 
@@ -73,18 +73,22 @@ This repository currently contains:
 - a part-assembling deterministic Ticket Builder with exact diagnostic/outcome and active-deck resource proof, complete-or-none validation, unique-before-repeat queues, balanced repetition, structured diagnostics, and reproducible provenance;
 - seat-safe cooperative and competitive computer policies plus the frozen 22-run foundation campaign and a 13-run expanded-content campaign covering every supported fingerprint and a multi-Ticket resource path;
 - a working static GitHub Pages application with the established Domain Library plus a browser-local solo Play slice, 50-item Relevant/Global Diagnostic Bench, coverage-aware deck editor and Home preflight, profile/statistics, validated backup portability, Worker-authoritative 1–10 Ticket matches, deliberate Documentation previews, and read-only archived Ticket records;
+- a deterministic declarative Story runtime with strict typed statements and conditions, bounded jump/call/return control flow, layered display commands, stable checkpoint digests, normalized Match boundaries, explicit v2-to-v3 local/export migration, and a non-canon proof fixture;
+- the complete production-candidate *The Quiet Cascade* campaign: four chapters, six solvability-proved real Matches covering all twelve current causal fingerprints, 324 reachable statements, 48 route/outcome traversals, three ending bands, and exact replayable Builder/engine reports;
+- an accessible Story destination and scene player that connects durable checkpoints to ordinary Worker-authoritative solo Matches, handles interruption as an explicit restart, and accepts an authoritative terminal result exactly once without changing Local solo behavior;
+- 23 original painterly Story assets—six reusable environments, seven characters with two poses each, and three technical inserts—plus three same-layer fallbacks, 78 responsive WebP derivatives, strict runtime resolution, complete generation provenance, and reviewed contact sheets;
 - a versioned case-study research system with a completed pilot spanning several troubleshooting subsystems;
-- a provisional story foundation with a fictional company, campaign frame, ensemble, voice guide, and story-derived gameplay candidates;
+- a working story foundation with a fictional company, campaign frame, ensemble, voice guide, production-candidate campaign, and story-derived gameplay candidates; STORY-007 remains the explicit owner decision for freezing those names and visual identities as canon;
 - a non-authoritative, replayable candidate-flow package that combines temporary rules, exact card/deck/Ticket fixtures, complete matches, and landing-to-logout campaign and multiplayer journeys;
 - provisional UI planning and original wireframes for the future playable application.
 
-The repository now contains both the playable rules-engine foundation and a deliberately scoped player-facing local solo client. It does not yet contain a multiplayer transport/server, Room or account runtime, campaign runtime, cloud persistence, or the production multiplayer client. The first-version rules foundation is frozen; schemas remain draft implementation contracts, and recommended models remain non-normative architecture guidance.
+The repository now contains the playable rules-engine foundation and a deliberately scoped player-facing local solo/Story client. It does not yet contain a multiplayer transport/server, Room or account runtime, cloud persistence, or the production multiplayer client. The first-version rules foundation is frozen; schemas remain draft implementation contracts, and recommended models remain non-normative architecture guidance.
 
 ## Planned next work
 
-[`TASK-025-HIGH`](docs/tasks/TASK-025-refine-documentation-and-archived-ticket-review.md) is complete: Document Live now confirms the exact publishable result before spending an Action, and archived Ticket Evidence/Worklog history is reviewable without widening visibility.
+TASK-026 through TASK-030 are complete: the declarative runtime, campaign graph and solvability proofs, accessible Story player and authoritative Match bridge, full scripts/choreography, and original responsive painterly art now form one playable production-candidate Story slice. Cutscene choices, story-scoped Service Points, and normalized Match outcomes drive typed branches; durable scene/Match-boundary checkpoints never imply active-Match resume. See the [task index](docs/tasks/INDEX.md), [Story README](docs/story/README.md), [runtime contract](docs/story/RUNTIME.md), [campaign record](docs/story/campaigns/QUIET_CASCADE.md), and [art production record](docs/art/TASK-030-STORY-ART.md).
 
-Story Mode is approved but not implemented. [`TASK-026-XHIGH`](docs/tasks/TASK-026-build-declarative-story-runtime.md) is active; it begins the ordered sequence of declarative runtime foundation, campaign graph and solvability-proved Match plan (TASK-027), accessible Story player and authoritative Match bridge (TASK-028), full dramatic scripts/choreography (TASK-029), then original painterly static 2D art (TASK-030). Cutscene decisions, story-scoped Service Points, and normalized Match outcomes can all drive typed branches. Story progress will use durable scene/Match-boundary checkpoints; this does not imply that an active local Match can be resumed. See the [task index](docs/tasks/INDEX.md), [Story README](docs/story/README.md), and approved [Story decisions](docs/design/decisions/APPROVALS.md).
+The only Story owner decision left by this pass is [`STORY-007`](docs/design/decisions/APPROVALS.md): approve the campaign-one names and original character identities as frozen canon, or continue treating the complete package as production-candidate content. The deferred V2 Migration Seed remains inactive until the project owner reactivates it.
 
 ## Design source of truth
 
@@ -155,7 +159,7 @@ python -m http.server 8080 --directory viewer
 
 Then open <http://127.0.0.1:8080/>. Do not open `viewer/index.html` through the `file://` protocol because browsers cannot reliably fetch its JSON content that way.
 
-The Library exposes faults, symptoms, components, tests, tools, commands, repairs, validations, and protocols through search, filtering, sorting, and record details. Play provides a versioned local profile, legal 30-card decks, Settings and backup portability, two real-engine guided tutorials, player-safe “Why can’t I isolate?” guidance, and deterministic finite solo matches. A dedicated module Worker owns each active Match; active Match state is intentionally not resumable or included in exports. In solo play, **Give Up** abandons and archives the selected Ticket, voids its pending contributions, records the give-up, and only then privately presents the authoritative authored solution and compares it with the preserved investigation.
+The Library exposes faults, symptoms, components, tests, tools, commands, repairs, validations, and protocols through search, filtering, sorting, and record details. Play provides a versioned local profile, legal 30-card decks, Settings and backup portability, two real-engine guided tutorials, player-safe “Why can’t I isolate?” guidance, deterministic finite solo matches, and the complete production-candidate Story campaign. A dedicated module Worker owns each active Match; active Match state is intentionally not resumable or included in exports. Story persists only approved declarative checkpoints and normalized terminal results, then restarts an interrupted configured Match from its pre-Match boundary. In solo play, **Give Up** abandons and archives the selected Ticket, voids its pending contributions, records the give-up, and only then privately presents the authoritative authored solution and compares it with the preserved investigation.
 
 After changing `viewer/content/*.json`, rebuild its generated manifest:
 
@@ -171,4 +175,5 @@ After changing canonical engine, Builder, gameplay, Play modules, assets, or the
 node viewer/scripts/build-play-assets.mjs
 node viewer/scripts/verify-play-assets.mjs
 node viewer/scripts/verify-task-011-art.mjs
+node viewer/scripts/verify-task-030-art.mjs
 ```

@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/story/registry.schema.json",
+  "title": "Story registry v1",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "registry_version": { "const": "story-registry-v1" },
+    "variables": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "type": "object", "additionalProperties": false,
+            "properties": {
+              "variable_id": { "$ref": "common.schema.json#/$defs/stable_id" },
+              "value_type": { "const": "BOOLEAN" },
+              "default": { "type": "boolean" }
+            },
+            "required": ["variable_id", "value_type", "default"]
+          },
+          {
+            "type": "object", "additionalProperties": false,
+            "properties": {
+              "variable_id": { "$ref": "common.schema.json#/$defs/stable_id" },
+              "value_type": { "const": "STRING" },
+              "default": { "type": "string" }
+            },
+            "required": ["variable_id", "value_type", "default"]
+          },
+          {
+            "type": "object", "additionalProperties": false,
+            "properties": {
+              "variable_id": { "$ref": "common.schema.json#/$defs/stable_id" },
+              "value_type": { "const": "INTEGER" },
+              "default": { "type": "integer", "minimum": -9007199254740991, "maximum": 9007199254740991 }
+            },
+            "required": ["variable_id", "value_type", "default"]
+          }
+        ]
+      }
+    },
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "asset_id": { "$ref": "common.schema.json#/$defs/stable_id" },
+          "layer": { "enum": ["BACKGROUND", "CHARACTER", "TRANSIENT"] },
+          "required": { "type": "boolean" },
+          "alt_text_id": {
+            "anyOf": [
+              { "$ref": "common.schema.json#/$defs/stable_id" },
+              { "type": "null" }
+            ]
+          }
+        },
+        "required": ["asset_id", "layer", "required", "alt_text_id"]
+      }
+    },
+    "characters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "character_id": { "$ref": "common.schema.json#/$defs/stable_id" },
+          "name_text_id": { "$ref": "common.schema.json#/$defs/stable_id" },
+          "poses": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "pose_id": { "$ref": "common.schema.json#/$defs/stable_id" },
+                "asset_id": { "$ref": "common.schema.json#/$defs/stable_id" }
+              },
+              "required": ["pose_id", "asset_id"]
+            }
+          }
+        },
+        "required": ["character_id", "name_text_id", "poses"]
+      }
+    },
+    "matches": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": { "match_ref": { "$ref": "common.schema.json#/$defs/stable_id" } },
+        "required": ["match_ref"]
+      }
+    },
+    "declared_loops": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "loop_id": { "$ref": "common.schema.json#/$defs/stable_id" },
+          "entry_label": { "$ref": "common.schema.json#/$defs/stable_id" },
+          "maximum_visits": { "$ref": "common.schema.json#/$defs/positive" }
+        },
+        "required": ["loop_id", "entry_label", "maximum_visits"]
+      }
+    }
+  },
+  "required": ["registry_version", "variables", "assets", "characters", "matches", "declared_loops"]
+}

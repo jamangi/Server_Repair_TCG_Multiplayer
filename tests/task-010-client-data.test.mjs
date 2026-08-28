@@ -24,6 +24,7 @@ import {
   deleteDeck,
   deriveLevel,
   migrateLocalState,
+  migrateExportBundle,
   parseImportBundle,
   recordMatchStart,
   saveDeck,
@@ -58,11 +59,19 @@ const schemaFiles = fs.readdirSync(path.join(repositoryRoot, 'schemas/client'))
     filePath: path.join(repositoryRoot, 'schemas/client', name),
     schema: readJson(`schemas/client/${name}`),
   }));
+const storySchemaFiles = fs.readdirSync(path.join(repositoryRoot, 'schemas/story'))
+  .filter((name) => name.endsWith('.json'))
+  .sort()
+  .map((name) => ({
+    filePath: path.join(repositoryRoot, 'schemas/story', name),
+    schema: readJson(`schemas/story/${name}`),
+  }));
+const allSchemaFiles = [...schemaFiles, ...storySchemaFiles];
 const registry = {
-  schemas: schemaFiles,
-  byId: new Map(schemaFiles.map(({ schema }) => [schema.$id, schema])),
+  schemas: allSchemaFiles,
+  byId: new Map(allSchemaFiles.map(({ schema }) => [schema.$id, schema])),
 };
-const schemaByTitle = new Map(schemaFiles.map(({ schema }) => [schema.title, schema]));
+const schemaByTitle = new Map(allSchemaFiles.map(({ schema }) => [schema.title, schema]));
 
 class FakeStorage {
   constructor() {
@@ -121,21 +130,25 @@ function resultSummary(overrides = {}) {
 }
 
 test('all versioned client examples satisfy their strict JSON Schemas', () => {
-  assert.equal(schemaFiles.length, 7);
+  assert.equal(schemaFiles.length, 8);
   const examples = [
     ['examples/client/local_profile.default.json', 'Solo Pages Local Profile v2'],
     ['examples/client/deck_collection.default.json', 'Solo Pages Response Deck Collection v2'],
     ['examples/client/local_settings.default.json', 'Solo Pages Local Settings v2'],
     ['examples/client/aggregate_statistics.empty.json', 'Solo Pages Aggregate Statistics v2'],
-    ['examples/client/export_bundle.default.json', 'Solo Pages Export Bundle v2'],
+    ['examples/story/progress.empty.json', 'Solo Story progress record v1'],
   ];
   for (const [file, title] of examples) {
     const errors = validateJsonSchema(readJson(file), schemaByTitle.get(title), registry);
     assert.deepEqual(errors, [], `${file}\n${errors.join('\n')}`);
   }
-  const exportSchema = schemaByTitle.get('Solo Pages Export Bundle v2');
+  const exportSchema = schemaByTitle.get('Solo Pages Export Bundle v3');
   assert.equal(exportSchema.$id, 'https://example.local/client/export_bundle.schema.json');
-  assert.equal(readJson('examples/client/export_bundle.default.json').schema_version, EXPORT_VERSION);
+  const legacy = readJson('examples/client/export_bundle.default.json');
+  assert.equal(legacy.schema_version, 'solo-export-v2');
+  const migrated = migrateExportBundle(legacy, context);
+  assert.equal(migrated.schema_version, EXPORT_VERSION);
+  assert.deepEqual(validateJsonSchema(migrated, exportSchema, registry), []);
 });
 
 test('first run copies the exact diagnosis-v2 response deck and pins content versions', () => {
@@ -205,16 +218,27 @@ test('deck drafts remain detached until a legal save and active deletion chooses
   assert.equal(empty.decks.length, 0);
 });
 
-test('v1 storage coexists under its original key and is never implicitly migrated', () => {
-  assert.deepEqual([...SUPPORTED_PRIOR_STORAGE_VERSIONS], ['solo-local-state-v1']);
+test('v1 storage coexists while v2 migrates explicitly to v3 without changing non-Story records', () => {
+  assert.deepEqual([...SUPPORTED_PRIOR_STORAGE_VERSIONS], ['solo-local-state-v1', 'solo-local-state-v2']);
   const current = createDefaultState(context);
   assert.deepEqual(migrateLocalState(current, context), current);
+  const prior = structuredClone(current);
+  prior.storage_version = 'solo-local-state-v2';
+  delete prior.records.story;
+  const preserved = structuredClone(prior.records);
+  const migrated = migrateLocalState(prior, context);
+  assert.equal(migrated.storage_version, LOCAL_STATE_VERSION);
+  assert.deepEqual(
+    Object.fromEntries(Object.entries(migrated.records).filter(([key]) => key !== 'story')),
+    preserved,
+  );
+  assert.equal(migrated.records.story.schema_version, 'story-progress-record-v1');
   const future = structuredClone(current);
   future.storage_version = 'solo-local-state-v999';
   assert.throws(() => migrateLocalState(future, context), (error) => error.code === 'UNSUPPORTED_VERSION');
-  const legacy = structuredClone(current);
-  legacy.storage_version = 'solo-local-state-v1';
-  assert.throws(() => migrateLocalState(legacy, context), (error) => error.code === 'LEGACY_PROFILE_COEXISTS');
+  const v1 = structuredClone(current);
+  v1.storage_version = 'solo-local-state-v1';
+  assert.throws(() => migrateLocalState(v1, context), (error) => error.code === 'LEGACY_PROFILE_COEXISTS');
 });
 
 test('Worker safe summaries aggregate exactly once per result and completed Match ID', () => {

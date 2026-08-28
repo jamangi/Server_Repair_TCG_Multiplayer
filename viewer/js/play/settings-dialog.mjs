@@ -15,6 +15,8 @@ function previewMarkup(preview) {
         <div><dt>Active deck</dt><dd>${preview.active_deck ? escapeHtml(preview.active_deck.display_name) : 'None'}</dd></div>
         <div><dt>Matches</dt><dd>${preview.statistics.matches_completed} completed</dd></div>
         <div><dt>Level</dt><dd>${preview.statistics.level}</dd></div>
+        <div><dt>Story checkpoint</dt><dd>${preview.story.checkpoint_id ? escapeHtml(preview.story.checkpoint_id) : 'Not begun'}</dd></div>
+        <div><dt>Story Matches</dt><dd>${preview.story.completed_match_count} accepted${preview.story.result_waiting ? ' · result waiting' : ''}</dd></div>
       </dl>
       <details><summary>Version pins</summary><pre>${escapeHtml(JSON.stringify(preview.versions, null, 2))}</pre></details>
       <ul class="import-warnings">${preview.warnings.map((warning) => `<li>${escapeHtml(warning)}</li>`).join('')}</ul>
@@ -48,8 +50,8 @@ export function openSettingsDialog(context) {
       <section class="settings-section"><h3>Interaction</h3><label>Preferred Bench View<select id="settings-bench-view"><option value="RELEVANT"${settings.preferred_bench_view === 'RELEVANT' ? ' selected' : ''}>Relevant</option><option value="GLOBAL"${settings.preferred_bench_view === 'GLOBAL' ? ' selected' : ''}>Global</option></select></label><p class="field-note">This is an organization preference, not a difficulty setting. You can switch during play.</p><label>Motion<select id="settings-motion"><option value="SYSTEM"${settings.motion_preference === 'SYSTEM' ? ' selected' : ''}>Follow system</option><option value="FULL"${settings.motion_preference === 'FULL' ? ' selected' : ''}>Full explanatory motion</option><option value="REDUCED"${settings.motion_preference === 'REDUCED' ? ' selected' : ''}>Reduced motion</option></select></label><label class="switch-row"><input id="settings-drag" type="checkbox"${settings.drag_enabled ? ' checked' : ''}><span>Enable optional Card drag affordances</span></label><p class="field-note">Click and keyboard actions always remain available.</p><button type="submit" class="play-button play-button--primary">Save settings</button></section>
     </form>
     <section class="settings-section tutorial-help"><h3>Help &amp; guided practice</h3><p>Tutorials use pinned content and real Worker-authoritative actions. Replay does not award points or change Match statistics.</p><div class="button-column">${(context.tutorials ?? []).map((tutorial) => `<button type="button" class="play-button" data-settings-tutorial="${escapeHtml(tutorial.id)}"><span>${escapeHtml(tutorial.title)}</span><small>${context.tutorialProgress?.completed_tutorial_ids?.includes(tutorial.id) ? 'Completed · replay from start' : 'Start from beginning'}</small></button>`).join('')}</div><p class="field-note">During a Match, “Why can’t I isolate?” uses only authorized phase, Evidence, disposition, citation, and elimination information. Give Up is the only path that reveals solution truth.</p></section>
-    <section class="settings-section data-portability"><h3>Data portability</h3><p>Backups contain profile, decks, settings, processed result IDs, local aggregates, and cosmetic Tutorial completion. Active Match and solution-reveal state are never exported.</p><div class="button-row"><button type="button" class="play-button" data-export-backup>Export backup</button><label class="play-button file-button">Choose backup<input id="import-file" type="file" accept="application/json,.json"></label></div><div data-import-preview></div></section>
-    <section class="settings-section danger-zone"><h3>Reset local data</h3><p>Restore the canonical starter profile and deck. This also clears local lifetime statistics.</p><button type="button" class="play-button play-button--danger" data-reset-local>Reset local data</button></section>
+    <section class="settings-section data-portability"><h3>Data portability</h3><p>Backups contain profile, decks, settings, processed result IDs, local aggregates, Tutorial completion, and versioned durable Story progress. Active Matches, Story authority tokens, and solution-reveal state are never exported.</p><div class="button-row"><button type="button" class="play-button" data-export-backup>Export backup</button><label class="play-button file-button">Choose backup<input id="import-file" type="file" accept="application/json,.json"></label></div><div data-import-preview></div></section>
+    <section class="settings-section danger-zone"><h3>Reset local data</h3><p>Restore the canonical starter profile and deck. This also clears local lifetime statistics, Tutorials, and Story progress.</p><button type="button" class="play-button play-button--danger" data-reset-local>Reset local data</button></section>
     <p data-inline-notice class="inline-notice" role="status" hidden></p>`;
   document.body.append(dialog);
   activeDialog = dialog;
@@ -100,7 +102,7 @@ export function openSettingsDialog(context) {
 
   const replaceImport = () => {
     if (!preparedImport || !dialog.querySelector('#confirm-import-check')?.checked) return;
-    if (!confirm('Replace all current local profile, deck, settings, and statistics records?')) return;
+    if (!confirm('Replace all current local profile, deck, settings, statistics, Tutorial, and Story records?')) return;
     try {
       context.storage.replaceFromImport(preparedImport, { confirmed: true });
       context.onDataReplaced();
@@ -112,7 +114,7 @@ export function openSettingsDialog(context) {
   };
 
   const resetData = () => {
-    if (!confirm('Reset all local profile, decks, settings, and statistics? This cannot be undone.')) return;
+    if (!confirm('Reset all local profile, decks, settings, statistics, Tutorials, and Story progress? This cannot be undone.')) return;
     try {
       context.storage.reset({ confirmed: true });
       context.onDataReplaced();
@@ -122,7 +124,6 @@ export function openSettingsDialog(context) {
       setInlineNotice(dialog, error.message, 'error');
     }
   };
-
   const onClick = (event) => {
     if (event.target.closest('[data-close-settings]')) closePlayDialog(dialog);
     if (event.target.closest('[data-export-backup]') || event.target.closest('[data-download-current]')) exportCurrent();

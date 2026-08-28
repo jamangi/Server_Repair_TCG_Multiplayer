@@ -19,6 +19,7 @@ import {
   stableStringify,
   validateProfile,
   validateSettings,
+  validateStoryProgress,
   byteLength,
 } from './data/client-data.mjs';
 
@@ -67,6 +68,27 @@ export function createStorageService(options) {
     ? { code: 'STORAGE_UNAVAILABLE', message: 'Local storage is unavailable; this session is using memory only.' }
     : null;
   let recoveryRequired = false;
+  let storyImportValidator = options.storyImportValidator ?? null;
+  if (storyImportValidator !== null && typeof storyImportValidator !== 'function') {
+    throw new ClientDataError('INVALID_STORY_VALIDATOR', 'Story import validator must be a function.');
+  }
+
+  function validateImportedStory(progress) {
+    if (!storyImportValidator) return;
+    try {
+      storyImportValidator(clone(progress));
+    } catch (error) {
+      throw new ClientDataError(
+        'INVALID_IMPORT',
+        'Imported Story progress is incompatible with the installed campaign content.',
+        [{
+          path: '$.records.story',
+          code: 'STORY_CONTENT_MISMATCH',
+          message: error instanceof Error ? error.message : 'Story progress failed campaign validation.',
+        }],
+      );
+    }
+  }
 
   function snapshot() {
     return {
@@ -163,6 +185,7 @@ export function createStorageService(options) {
 
   function prepareImport(jsonText) {
     const bundle = parseImportBundle(jsonText, context);
+    validateImportedStory(bundle.records.story);
     return {
       bundle,
       preview: createImportPreview(bundle, context),
@@ -174,7 +197,15 @@ export function createStorageService(options) {
     if (!confirmed) throw new ClientDataError('CONFIRMATION_REQUIRED', 'Import replacement requires explicit confirmation.');
     if (!prepared || !prepared.bundle) throw new ClientDataError('INVALID_IMPORT', 'A validated import preview is required.');
     const candidate = localStateFromExport(clone(prepared.bundle), context);
+    validateImportedStory(candidate.records.story);
     return write(candidate, { allowRecovery: true });
+  }
+
+  function setStoryImportValidator(validator) {
+    if (typeof validator !== 'function') {
+      throw new ClientDataError('INVALID_STORY_VALIDATOR', 'Story import validator must be a function.');
+    }
+    storyImportValidator = validator;
   }
 
   function reset({ confirmed = false } = {}) {
@@ -260,6 +291,15 @@ export function createStorageService(options) {
     });
   }
 
+  function saveStoryProgress(progress) {
+    const errors = validateStoryProgress(progress, context);
+    if (errors.length > 0) throw new ClientDataError('INVALID_STORY_PROGRESS', 'Story progress failed validation.', errors);
+    return update((state) => {
+      state.records.story = clone(progress);
+      return state;
+    });
+  }
+
   return Object.freeze({
     key,
     load,
@@ -276,5 +316,7 @@ export function createStorageService(options) {
     recordMatchStart,
     applyMatchResult,
     recordTutorialCompletion,
+    saveStoryProgress,
+    setStoryImportValidator,
   });
 }

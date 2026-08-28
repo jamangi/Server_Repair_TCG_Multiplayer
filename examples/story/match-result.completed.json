@@ -1,0 +1,21 @@
+{
+  "schema_version": "story-match-result-v1",
+  "result_id": "result.fixture.001",
+  "match_id": "match.fixture.001",
+  "match_ref": "match.fixture.diagnosis",
+  "completion": "COMPLETED",
+  "valid": true,
+  "reason_codes": ["QUEUE_EMPTY"],
+  "story_service_points_gained": 3,
+  "tickets_closed": 1,
+  "tickets_given_up": 0,
+  "documented_outcome": true,
+  "verified_outcome": true,
+  "contributions": {
+    "tests_run": 2,
+    "isolations_accepted": 1,
+    "repairs_performed": 1,
+    "verify_passes": 1,
+    "documentation_actions": 1
+  }
+}

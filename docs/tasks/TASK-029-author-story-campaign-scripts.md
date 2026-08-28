@@ -2,7 +2,7 @@
 
 ## Status
 
-**Approved and queued; blocked by TASK-027 and TASK-028 completion.**
+**Completed 2026-08-28.** The authored campaign remains production-candidate pending STORY-007; see the shared [TASK-026 through TASK-030 completion record](../story/TASK-026-030-COMPLETION.md).
 
 ## Objective
 

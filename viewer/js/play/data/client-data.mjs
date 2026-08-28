@@ -1,13 +1,19 @@
+import { sha256Hex } from '../../../generated/play/src/shared/sha256.mjs';
+
 export const IMPLEMENTATION_PROFILE_ID = 'solo-pages-v2';
-export const LOCAL_STATE_VERSION = 'solo-local-state-v2';
+export const LOCAL_STATE_VERSION = 'solo-local-state-v3';
 export const PROFILE_VERSION = 'solo-profile-v2';
 export const DECKS_VERSION = 'solo-decks-v2';
 export const SETTINGS_VERSION = 'solo-settings-v2';
 export const STATISTICS_VERSION = 'solo-statistics-v2';
-export const EXPORT_VERSION = 'solo-export-v2';
+export const EXPORT_VERSION = 'solo-export-v3';
 export const RESULT_SUMMARY_VERSION = 'solo-result-summary-v2';
 export const TUTORIAL_PROGRESS_VERSION = 'solo-tutorial-progress-v1';
 export const TUTORIAL_CATALOG_VERSION = 'tutorial-checkpoints-v1';
+export const STORY_PROGRESS_VERSION = 'story-progress-record-v1';
+export const STORY_CHECKPOINT_VERSION = 'story-checkpoint-v1';
+export const STORY_MATCH_CONTEXT_VERSION = 'story-match-context-v1';
+export const STORY_MATCH_RESULT_VERSION = 'story-match-result-v1';
 export const RULESET_VERSION = 'first-version-v2';
 export const CARD_CATALOG_VERSION = 'core-card-catalog-diagnosis-v2';
 export const PRIOR_EXPANDED_CARD_CATALOG_VERSION = 'core-card-catalog-coverage-v3';
@@ -27,7 +33,8 @@ export const PROFILE_ICON_IDS = Object.freeze([
   'cosmetic.profile.storage',
   'cosmetic.profile.systems',
 ]);
-export const SUPPORTED_PRIOR_STORAGE_VERSIONS = Object.freeze(['solo-local-state-v1']);
+export const SUPPORTED_PRIOR_STORAGE_VERSIONS = Object.freeze(['solo-local-state-v1', 'solo-local-state-v2']);
+export const SUPPORTED_PRIOR_EXPORT_VERSIONS = Object.freeze(['solo-export-v2']);
 
 const PROFILE_KEYS = ['schema_version', 'profile_id', 'display_name', 'icon_id'];
 const DECK_KEYS = ['deck_id', 'display_name', 'source_deck_id', 'card_definition_ids'];
@@ -76,7 +83,21 @@ const POINT_STATISTIC_KEYS = new Set([
   'lifetime_service_points_gained',
 ]);
 const STATISTICS_KEYS = ['schema_version', 'processed_match_start_ids', 'processed_match_results', 'totals'];
-const LOCAL_RECORD_KEYS = ['profile', 'decks', 'settings', 'statistics', 'tutorials'];
+const STORY_PROGRESS_KEYS = ['schema_version', 'pack_id', 'content_version', 'checkpoint', 'pending_result', 'completed_ending_id'];
+const STORY_CHECKPOINT_KEYS = [
+  'schema_version', 'pack_id', 'content_version', 'checkpoint_id', 'variables', 'choices',
+  'story_service_points', 'branch_history', 'match_results', 'pending_match', 'returned_match', 'digest',
+];
+const STORY_MATCH_RESULT_KEYS = [
+  'schema_version', 'result_id', 'match_id', 'match_ref', 'completion', 'valid', 'reason_codes',
+  'story_service_points_gained', 'tickets_closed', 'tickets_given_up', 'documented_outcome',
+  'verified_outcome', 'contributions',
+];
+const STORY_CONTRIBUTION_KEYS = ['tests_run', 'isolations_accepted', 'repairs_performed', 'verify_passes', 'documentation_actions'];
+const STORY_PENDING_MATCH_KEYS = ['schema_version', 'match_ref', 'return_label', 'pre_match_checkpoint_id', 'post_match_checkpoint_id'];
+const STORY_RETURNED_MATCH_KEYS = ['schema_version', 'match_ref', 'result_id', 'match_id'];
+const STORY_PENDING_RESULT_KEYS = ['result', 'checkpoint_id', 'return_label'];
+const LOCAL_RECORD_KEYS = ['profile', 'decks', 'settings', 'statistics', 'tutorials', 'story'];
 const LOCAL_STATE_KEYS = ['storage_version', 'records'];
 const EXPORT_KEYS = ['schema_version', 'implementation_profile_id', 'exported_at', 'records'];
 const WORKER_RESULT_COUNTER_MAP = Object.freeze({
@@ -338,6 +359,17 @@ export function createEmptyStatistics() {
   };
 }
 
+export function createEmptyStoryProgress() {
+  return {
+    schema_version: STORY_PROGRESS_VERSION,
+    pack_id: null,
+    content_version: null,
+    checkpoint: null,
+    pending_result: null,
+    completed_ending_id: null,
+  };
+}
+
 export function createDefaultState(context) {
   const normalized = normalizeContext(context);
   const starter = normalized.starterDeck;
@@ -380,6 +412,7 @@ export function createDefaultState(context) {
         catalog_version: TUTORIAL_CATALOG_VERSION,
         completed_tutorial_ids: [],
       },
+      story: createEmptyStoryProgress(),
     },
   };
   return assertValidLocalState(state, normalized);
@@ -568,6 +601,192 @@ export function validateTutorialProgress(progress, context) {
   return errors;
 }
 
+function validateStoryMatchResultRecord(result, path, errors) {
+  if (!validateExactKeys(result, STORY_MATCH_RESULT_KEYS, path, errors)) return;
+  validateVersion(result.schema_version, STORY_MATCH_RESULT_VERSION, `${path}.schema_version`, errors);
+  for (const field of ['result_id', 'match_id', 'match_ref']) validateStableId(result[field], `${path}.${field}`, errors);
+  if (!['COMPLETED', 'ABANDONED', 'INVALID'].includes(result.completion)) {
+    errors.push(issue(`${path}.completion`, 'INVALID_COMPLETION', 'Unknown Story Match completion.'));
+  }
+  if (typeof result.valid !== 'boolean') errors.push(issue(`${path}.valid`, 'INVALID_BOOLEAN', 'valid must be boolean.'));
+  if (result.completion === 'INVALID' && result.valid === true) {
+    errors.push(issue(`${path}.valid`, 'RESULT_MISMATCH', 'An INVALID completion cannot be valid.'));
+  }
+  if (!Array.isArray(result.reason_codes) || result.reason_codes.length < 1) {
+    errors.push(issue(`${path}.reason_codes`, 'INVALID_REASON_CODES', 'At least one reason code is required.'));
+  } else {
+    const seen = new Set();
+    result.reason_codes.forEach((code, index) => {
+      if (typeof code !== 'string' || !/^[A-Z0-9_]+$/.test(code)) {
+        errors.push(issue(`${path}.reason_codes[${index}]`, 'INVALID_REASON_CODE', 'Expected an uppercase stable reason code.'));
+      }
+      if (seen.has(code)) errors.push(issue(`${path}.reason_codes[${index}]`, 'DUPLICATE_ID', `Duplicate reason code ${code}.`));
+      seen.add(code);
+    });
+  }
+  for (const field of ['story_service_points_gained', 'tickets_closed', 'tickets_given_up']) {
+    validateCounter(result[field], `${path}.${field}`, errors);
+  }
+  for (const field of ['documented_outcome', 'verified_outcome']) {
+    if (typeof result[field] !== 'boolean') errors.push(issue(`${path}.${field}`, 'INVALID_BOOLEAN', `${field} must be boolean.`));
+  }
+  if (validateExactKeys(result.contributions, STORY_CONTRIBUTION_KEYS, `${path}.contributions`, errors)) {
+    for (const field of STORY_CONTRIBUTION_KEYS) validateCounter(result.contributions[field], `${path}.contributions.${field}`, errors);
+    if (Number.isSafeInteger(result.contributions.documentation_actions)
+        && result.documented_outcome !== (result.contributions.documentation_actions > 0)) {
+      errors.push(issue(`${path}.documented_outcome`, 'RESULT_MISMATCH', 'documented_outcome must match documentation_actions.'));
+    }
+    if (Number.isSafeInteger(result.contributions.verify_passes)
+        && result.verified_outcome !== (result.contributions.verify_passes > 0)) {
+      errors.push(issue(`${path}.verified_outcome`, 'RESULT_MISMATCH', 'verified_outcome must match verify_passes.'));
+    }
+  }
+}
+
+function validateStoryMatchContext(context, path, errors) {
+  if (!validateExactKeys(context, STORY_PENDING_MATCH_KEYS, path, errors)) return;
+  validateVersion(context.schema_version, STORY_MATCH_CONTEXT_VERSION, `${path}.schema_version`, errors);
+  for (const field of ['match_ref', 'return_label', 'pre_match_checkpoint_id', 'post_match_checkpoint_id']) {
+    validateStableId(context[field], `${path}.${field}`, errors);
+  }
+  if (context.pre_match_checkpoint_id === context.post_match_checkpoint_id) {
+    errors.push(issue(`${path}.post_match_checkpoint_id`, 'DUPLICATE_ID', 'Pre- and post-Match checkpoints must differ.'));
+  }
+}
+
+function validateReturnedStoryMatch(context, path, errors) {
+  if (!validateExactKeys(context, STORY_RETURNED_MATCH_KEYS, path, errors)) return;
+  validateVersion(context.schema_version, STORY_MATCH_CONTEXT_VERSION, `${path}.schema_version`, errors);
+  for (const field of ['match_ref', 'result_id', 'match_id']) validateStableId(context[field], `${path}.${field}`, errors);
+}
+
+function validateStoryCheckpoint(checkpoint, path, errors) {
+  if (!validateExactKeys(checkpoint, STORY_CHECKPOINT_KEYS, path, errors)) return;
+  validateVersion(checkpoint.schema_version, STORY_CHECKPOINT_VERSION, `${path}.schema_version`, errors);
+  for (const field of ['pack_id', 'content_version', 'checkpoint_id']) validateStableId(checkpoint[field], `${path}.${field}`, errors);
+  if (!isPlainObject(checkpoint.variables)) {
+    errors.push(issue(`${path}.variables`, 'EXPECTED_OBJECT', 'Story variables must be an object.'));
+  } else {
+    for (const [id, value] of Object.entries(checkpoint.variables)) {
+      validateStableId(id, `${path}.variables.${id}`, errors);
+      if (!(typeof value === 'boolean' || typeof value === 'string' || Number.isSafeInteger(value))) {
+        errors.push(issue(`${path}.variables.${id}`, 'INVALID_STORY_VALUE', 'Story variables may contain booleans, strings, or safe integers.'));
+      }
+    }
+  }
+  if (!isPlainObject(checkpoint.choices)) {
+    errors.push(issue(`${path}.choices`, 'EXPECTED_OBJECT', 'Remembered choices must be an object.'));
+  } else {
+    for (const [choiceId, optionId] of Object.entries(checkpoint.choices)) {
+      validateStableId(choiceId, `${path}.choices.${choiceId}`, errors);
+      validateStableId(optionId, `${path}.choices.${choiceId}`, errors);
+    }
+  }
+  validateCounter(checkpoint.story_service_points, `${path}.story_service_points`, errors);
+  if (!Array.isArray(checkpoint.branch_history) || checkpoint.branch_history.length > 4096) {
+    errors.push(issue(`${path}.branch_history`, 'INVALID_BRANCH_HISTORY', 'Branch history must be a bounded array.'));
+  } else {
+    let priorSequence = -1;
+    checkpoint.branch_history.forEach((entry, index) => {
+      const entryPath = `${path}.branch_history[${index}]`;
+      if (!validateExactKeys(entry, ['sequence', 'choice_id', 'option_id'], entryPath, errors)) return;
+      validateCounter(entry.sequence, `${entryPath}.sequence`, errors);
+      validateStableId(entry.choice_id, `${entryPath}.choice_id`, errors);
+      validateStableId(entry.option_id, `${entryPath}.option_id`, errors);
+      if (Number.isSafeInteger(entry.sequence) && entry.sequence <= priorSequence) {
+        errors.push(issue(`${entryPath}.sequence`, 'ORDER_MISMATCH', 'Branch sequence values must increase.'));
+      }
+      priorSequence = entry.sequence;
+    });
+  }
+  if (!Array.isArray(checkpoint.match_results) || checkpoint.match_results.length > 1024) {
+    errors.push(issue(`${path}.match_results`, 'INVALID_MATCH_RESULTS', 'Match results must be a bounded array.'));
+  } else {
+    const resultIds = new Set();
+    const matchIds = new Set();
+    let earnedPoints = 0;
+    checkpoint.match_results.forEach((result, index) => {
+      validateStoryMatchResultRecord(result, `${path}.match_results[${index}]`, errors);
+      if (resultIds.has(result?.result_id)) errors.push(issue(`${path}.match_results[${index}].result_id`, 'DUPLICATE_ID', 'Duplicate Story result ID.'));
+      if (matchIds.has(result?.match_id)) errors.push(issue(`${path}.match_results[${index}].match_id`, 'DUPLICATE_ID', 'Duplicate Story Match ID.'));
+      resultIds.add(result?.result_id);
+      matchIds.add(result?.match_id);
+      if (Number.isSafeInteger(result?.story_service_points_gained)) {
+        const next = earnedPoints + result.story_service_points_gained;
+        if (!Number.isSafeInteger(next)) errors.push(issue(`${path}.match_results[${index}]`, 'STORY_POINTS_OVERFLOW', 'Story Match points exceed the safe integer range.'));
+        else earnedPoints = next;
+      }
+    });
+    if (Number.isSafeInteger(checkpoint.story_service_points) && checkpoint.story_service_points !== earnedPoints) {
+      errors.push(issue(`${path}.story_service_points`, 'POINT_TOTAL_MISMATCH', 'Story Service Points must equal normalized Match-result gains.'));
+    }
+  }
+  if (checkpoint.pending_match !== null) validateStoryMatchContext(checkpoint.pending_match, `${path}.pending_match`, errors);
+  if (checkpoint.returned_match !== null) validateReturnedStoryMatch(checkpoint.returned_match, `${path}.returned_match`, errors);
+  if (checkpoint.pending_match !== null && checkpoint.returned_match !== null) {
+    errors.push(issue(path, 'MATCH_CONTEXT_CONFLICT', 'Pending and returned Match contexts cannot coexist.'));
+  }
+  if (isPlainObject(checkpoint.returned_match) && Array.isArray(checkpoint.match_results)) {
+    const result = checkpoint.match_results.find((entry) => entry?.result_id === checkpoint.returned_match.result_id);
+    if (!result || result.match_id !== checkpoint.returned_match.match_id || result.match_ref !== checkpoint.returned_match.match_ref) {
+      errors.push(issue(`${path}.returned_match`, 'RESULT_MISMATCH', 'Returned Match context must identify a stored normalized result.'));
+    }
+  }
+  if (typeof checkpoint.digest !== 'string' || !/^[a-f0-9]{64}$/.test(checkpoint.digest)) {
+    errors.push(issue(`${path}.digest`, 'INVALID_DIGEST', 'Checkpoint digest must be lowercase SHA-256 hexadecimal.'));
+  } else {
+    const { digest, ...body } = checkpoint;
+    if (sha256Hex(stableStringify(body)) !== digest) {
+      errors.push(issue(`${path}.digest`, 'DIGEST_MISMATCH', 'Checkpoint digest does not match its durable data.'));
+    }
+  }
+}
+
+export function validateStoryProgress(progress, context) {
+  normalizeContext(context);
+  const errors = [];
+  const path = '$.story';
+  if (!validateExactKeys(progress, STORY_PROGRESS_KEYS, path, errors)) return errors;
+  validateVersion(progress.schema_version, STORY_PROGRESS_VERSION, `${path}.schema_version`, errors);
+  validateStableId(progress.pack_id, `${path}.pack_id`, errors, { nullable: true });
+  validateStableId(progress.content_version, `${path}.content_version`, errors, { nullable: true });
+  validateStableId(progress.completed_ending_id, `${path}.completed_ending_id`, errors, { nullable: true });
+  if ((progress.pack_id === null) !== (progress.content_version === null)) {
+    errors.push(issue(path, 'CONTENT_ID_MISMATCH', 'Story pack and content version must both be null or both be stable IDs.'));
+  }
+  if (progress.pack_id === null
+      && (progress.checkpoint !== null || progress.pending_result !== null || progress.completed_ending_id !== null)) {
+    errors.push(issue(path, 'EMPTY_STORY_MISMATCH', 'Empty Story progress cannot contain checkpoint, result, or ending data.'));
+  }
+  if (progress.checkpoint !== null) {
+    validateStoryCheckpoint(progress.checkpoint, `${path}.checkpoint`, errors);
+    if (progress.checkpoint?.pack_id !== progress.pack_id || progress.checkpoint?.content_version !== progress.content_version) {
+      errors.push(issue(`${path}.checkpoint`, 'CONTENT_ID_MISMATCH', 'Checkpoint content must match its Story progress record.'));
+    }
+  }
+  if (progress.pending_result !== null) {
+    const pendingPath = `${path}.pending_result`;
+    if (validateExactKeys(progress.pending_result, STORY_PENDING_RESULT_KEYS, pendingPath, errors)) {
+      validateStoryMatchResultRecord(progress.pending_result.result, `${pendingPath}.result`, errors);
+      validateStableId(progress.pending_result.checkpoint_id, `${pendingPath}.checkpoint_id`, errors);
+      validateStableId(progress.pending_result.return_label, `${pendingPath}.return_label`, errors);
+      const pending = progress.checkpoint?.pending_match;
+      if (!pending
+          || progress.pending_result.checkpoint_id !== pending.pre_match_checkpoint_id
+          || progress.pending_result.return_label !== pending.return_label
+          || progress.pending_result.result?.match_ref !== pending.match_ref) {
+        errors.push(issue(pendingPath, 'RESULT_MISMATCH', 'Pending result must match the durable pre-Match context.'));
+      }
+      if (progress.checkpoint?.match_results?.some((result) =>
+        result.result_id === progress.pending_result.result?.result_id
+        || result.match_id === progress.pending_result.result?.match_id)) {
+        errors.push(issue(`${pendingPath}.result`, 'DUPLICATE_ID', 'Pending result has already been accepted.'));
+      }
+    }
+  }
+  return errors;
+}
+
 function validateRecords(records, context, path = '$.records') {
   const errors = [];
   if (!validateExactKeys(records, LOCAL_RECORD_KEYS, path, errors)) return errors;
@@ -576,6 +795,7 @@ function validateRecords(records, context, path = '$.records') {
   errors.push(...validateSettings(records.settings, context));
   errors.push(...validateStatistics(records.statistics, context));
   errors.push(...validateTutorialProgress(records.tutorials, context));
+  errors.push(...validateStoryProgress(records.story, context));
   return errors;
 }
 
@@ -607,13 +827,14 @@ export function migrateLocalState(candidate, context) {
   if (!isPlainObject(candidate)) {
     throw new ClientDataError('INVALID_LOCAL_DATA', 'Local data must be an object.');
   }
-  if (candidate.storage_version !== LOCAL_STATE_VERSION) {
-    if (SUPPORTED_PRIOR_STORAGE_VERSIONS.includes(candidate.storage_version)) {
-      throw new ClientDataError(
-        'LEGACY_PROFILE_COEXISTS',
-        'This solo-pages-v1 save remains pinned under its original storage key. Start a fresh solo-pages-v2 profile; no implicit deck or statistic migration is performed.',
-      );
-    }
+  if (candidate.storage_version === 'solo-local-state-v1') {
+    throw new ClientDataError(
+      'LEGACY_PROFILE_COEXISTS',
+      'This solo-pages-v1 save remains pinned under its original storage key. Start a fresh solo-pages-v2 profile; no implicit deck or statistic migration is performed.',
+    );
+  }
+  if (candidate.storage_version !== LOCAL_STATE_VERSION
+      && candidate.storage_version !== 'solo-local-state-v2') {
     throw new ClientDataError(
       'UNSUPPORTED_VERSION',
       `Unsupported local data version ${String(candidate.storage_version)}.`,
@@ -621,8 +842,14 @@ export function migrateLocalState(candidate, context) {
   }
   const normalized = normalizeContext(context);
   let working = cloneJson(candidate);
-  if (isPlainObject(working.records) && !Object.hasOwn(working.records, 'tutorials')) {
-    working.records.tutorials = createDefaultState(normalized).records.tutorials;
+  if (working.storage_version === 'solo-local-state-v2') {
+    working.storage_version = LOCAL_STATE_VERSION;
+    if (isPlainObject(working.records) && !Object.hasOwn(working.records, 'tutorials')) {
+      working.records.tutorials = createDefaultState(normalized).records.tutorials;
+    }
+    if (isPlainObject(working.records) && !Object.hasOwn(working.records, 'story')) {
+      working.records.story = createEmptyStoryProgress();
+    }
   }
   if (normalized.cardCatalogVersion === EXPANDED_CARD_CATALOG_VERSION
       && working.records?.decks?.card_catalog_version === CARD_CATALOG_VERSION) {
@@ -898,6 +1125,29 @@ export function validateExportBundle(bundle, context) {
   return errors;
 }
 
+export function migrateExportBundle(candidate, context) {
+  normalizeContext(context);
+  if (!isPlainObject(candidate)) throw new ClientDataError('INVALID_IMPORT', 'Import bundle must be an object.');
+  const unsafe = findForbiddenProperties(candidate);
+  if (unsafe.length > 0) throw new ClientDataError('UNSAFE_IMPORT', 'Import contains unsafe object properties.', unsafe);
+  if (candidate.schema_version === EXPORT_VERSION) return cloneJson(candidate);
+  if (!SUPPORTED_PRIOR_EXPORT_VERSIONS.includes(candidate.schema_version)) {
+    throw new ClientDataError('UNSUPPORTED_VERSION', `Unsupported export version ${String(candidate.schema_version)}.`);
+  }
+  const migrated = cloneJson(candidate);
+  migrated.schema_version = EXPORT_VERSION;
+  if (isPlainObject(migrated.records) && !Object.hasOwn(migrated.records, 'story')) {
+    migrated.records.story = createEmptyStoryProgress();
+  }
+  const errors = validateExportBundle(migrated, context);
+  if (errors.length > 0) {
+    const code = errors.some((entry) => entry.code === 'PROTOTYPE_POLLUTION_KEY' || entry.code === 'UNSAFE_PROTOTYPE')
+      ? 'UNSAFE_IMPORT' : 'INVALID_IMPORT';
+    throw new ClientDataError(code, 'Migrated import failed validation.', errors);
+  }
+  return migrated;
+}
+
 export function parseImportBundle(jsonText, context) {
   if (typeof jsonText !== 'string') throw new ClientDataError('INVALID_IMPORT', 'Import input must be JSON text.');
   if (byteLength(jsonText) > MAX_IMPORT_BYTES) {
@@ -909,6 +1159,7 @@ export function parseImportBundle(jsonText, context) {
   } catch {
     throw new ClientDataError('CORRUPT_IMPORT', 'Import is not valid JSON.');
   }
+  bundle = migrateExportBundle(bundle, context);
   const errors = validateExportBundle(bundle, context);
   if (errors.length > 0) {
     const code = errors.some((entry) => entry.code === 'UNSUPPORTED_VERSION')
@@ -922,8 +1173,10 @@ export function parseImportBundle(jsonText, context) {
 }
 
 export function createImportPreview(bundle, context) {
-  const errors = validateExportBundle(bundle, context);
+  const migrated = migrateExportBundle(bundle, context);
+  const errors = validateExportBundle(migrated, context);
   if (errors.length > 0) throw new ClientDataError('INVALID_IMPORT', 'Import failed validation.', errors);
+  bundle = migrated;
   const active = bundle.records.decks.decks.find(
     (deck) => deck.deck_id === bundle.records.decks.active_deck_id,
   ) ?? null;
@@ -945,17 +1198,26 @@ export function createImportPreview(bundle, context) {
       lifetime_service_points_gained: totals.lifetime_service_points_gained,
       level: deriveLevel(totals.lifetime_service_points_gained),
     },
+    story: {
+      pack_id: bundle.records.story.pack_id,
+      content_version: bundle.records.story.content_version,
+      checkpoint_id: bundle.records.story.checkpoint?.checkpoint_id ?? null,
+      completed_match_count: bundle.records.story.checkpoint?.match_results?.length ?? 0,
+      result_waiting: bundle.records.story.pending_result !== null,
+      completed_ending_id: bundle.records.story.completed_ending_id,
+    },
     versions: {
       export: bundle.schema_version,
       profile: bundle.records.profile.schema_version,
       decks: bundle.records.decks.schema_version,
       settings: bundle.records.settings.schema_version,
       statistics: bundle.records.statistics.schema_version,
+      story: bundle.records.story.schema_version,
       ruleset: bundle.records.decks.ruleset_version,
       card_catalog: bundle.records.decks.card_catalog_version,
     },
     warnings: [
-      'Import replaces all current local profile, deck, settings, and statistics records.',
+      'Import replaces all current local profile, deck, settings, statistics, tutorial, and Story records.',
       'Imported statistics are local and user-controlled; they are not competitive records.',
       'Download the current local backup before confirming replacement.',
     ],
@@ -963,10 +1225,11 @@ export function createImportPreview(bundle, context) {
 }
 
 export function localStateFromExport(bundle, context) {
-  const errors = validateExportBundle(bundle, context);
+  const migrated = migrateExportBundle(bundle, context);
+  const errors = validateExportBundle(migrated, context);
   if (errors.length > 0) throw new ClientDataError('INVALID_IMPORT', 'Import failed validation.', errors);
   return assertValidLocalState({
     storage_version: LOCAL_STATE_VERSION,
-    records: cloneJson(bundle.records),
+    records: cloneJson(migrated.records),
   }, context);
 }

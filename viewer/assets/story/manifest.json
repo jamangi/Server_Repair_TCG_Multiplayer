@@ -1,0 +1,539 @@
+{
+  "asset_manifest_version": "story-art-v1",
+  "campaign_id": "story.campaign.quiet_cascade.v1",
+  "assets": {
+    "story.asset.character.ev_shaw.concerned": {
+      "layer": "CHARACTER",
+      "kind": "production",
+      "sources": {
+        "desktop": "characters/ev-shaw-concerned-desktop.webp",
+        "mobile": "characters/ev-shaw-concerned-mobile.webp",
+        "reduced_data": "characters/ev-shaw-concerned-reduced-data.webp"
+      },
+      "alt_text": "Ev Shaw listens with visible concern, withholding judgment.",
+      "decorative": false,
+      "fallback_asset_id": "story.fallback.character",
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.4
+      },
+      "protected_zones": []
+    },
+    "story.asset.character.ev_shaw.focused": {
+      "layer": "CHARACTER",
+      "kind": "production",
+      "sources": {
+        "desktop": "characters/ev-shaw-focused-desktop.webp",
+        "mobile": "characters/ev-shaw-focused-mobile.webp",
+        "reduced_data": "characters/ev-shaw-focused-reduced-data.webp"
+      },
+      "alt_text": "Ev Shaw stands compactly focused in a charcoal floor jacket.",
+      "decorative": false,
+      "fallback_asset_id": "story.fallback.character",
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.4
+      },
+      "protected_zones": []
+    },
+    "story.asset.character.hana_park.relief": {
+      "layer": "CHARACTER",
+      "kind": "production",
+      "sources": {
+        "desktop": "characters/hana-park-relief-desktop.webp",
+        "mobile": "characters/hana-park-relief-mobile.webp",
+        "reduced_data": "characters/hana-park-relief-reduced-data.webp"
+      },
+      "alt_text": "Hana Park stands with the traveler tablet and a quietly relieved expression.",
+      "decorative": false,
+      "fallback_asset_id": "story.fallback.character",
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.4
+      },
+      "protected_zones": []
+    },
+    "story.asset.character.hana_park.skeptical": {
+      "layer": "CHARACTER",
+      "kind": "production",
+      "sources": {
+        "desktop": "characters/hana-park-skeptical-desktop.webp",
+        "mobile": "characters/hana-park-skeptical-mobile.webp",
+        "reduced_data": "characters/hana-park-skeptical-reduced-data.webp"
+      },
+      "alt_text": "Hana Park holds a traveler at the Validation Gate with a skeptical, exact expression.",
+      "decorative": false,
+      "fallback_asset_id": "story.fallback.character",
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.4
+      },
+      "protected_zones": []
+    },
+    "story.asset.character.inez_calder.amused": {
+      "layer": "CHARACTER",
+      "kind": "production",
+      "sources": {
+        "desktop": "characters/inez-calder-amused-desktop.webp",
+        "mobile": "characters/inez-calder-amused-mobile.webp",
+        "reduced_data": "characters/inez-calder-amused-reduced-data.webp"
+      },
+      "alt_text": "Inez Calder holds a dock scanner with a dry, knowing smile.",
+      "decorative": false,
+      "fallback_asset_id": "story.fallback.character",
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.4
+      },
+      "protected_zones": []
+    },
+    "story.asset.character.inez_calder.focused": {
+      "layer": "CHARACTER",
+      "kind": "production",
+      "sources": {
+        "desktop": "characters/inez-calder-focused-desktop.webp",
+        "mobile": "characters/inez-calder-focused-mobile.webp",
+        "reduced_data": "characters/inez-calder-focused-reduced-data.webp"
+      },
+      "alt_text": "Inez Calder holds a dock scanner, focused on the intake work ahead.",
+      "decorative": false,
+      "fallback_asset_id": "story.fallback.character",
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.4
+      },
+      "protected_zones": []
+    },
+    "story.asset.character.jonah_reed.defensive": {
+      "layer": "CHARACTER",
+      "kind": "production",
+      "sources": {
+        "desktop": "characters/jonah-reed-defensive-desktop.webp",
+        "mobile": "characters/jonah-reed-defensive-mobile.webp",
+        "reduced_data": "characters/jonah-reed-defensive-reduced-data.webp"
+      },
+      "alt_text": "Jonah Reed holds the closed Worklog tablet in a guarded, attentive stance.",
+      "decorative": false,
+      "fallback_asset_id": "story.fallback.character",
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.4
+      },
+      "protected_zones": []
+    },
+    "story.asset.character.jonah_reed.thoughtful": {
+      "layer": "CHARACTER",
+      "kind": "production",
+      "sources": {
+        "desktop": "characters/jonah-reed-thoughtful-desktop.webp",
+        "mobile": "characters/jonah-reed-thoughtful-mobile.webp",
+        "reduced_data": "characters/jonah-reed-thoughtful-reduced-data.webp"
+      },
+      "alt_text": "Jonah Reed pauses thoughtfully with a closed Worklog tablet.",
+      "decorative": false,
+      "fallback_asset_id": "story.fallback.character",
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.4
+      },
+      "protected_zones": []
+    },
+    "story.asset.character.malik_okoye.defensive": {
+      "layer": "CHARACTER",
+      "kind": "production",
+      "sources": {
+        "desktop": "characters/malik-okoye-defensive-desktop.webp",
+        "mobile": "characters/malik-okoye-defensive-mobile.webp",
+        "reduced_data": "characters/malik-okoye-defensive-reduced-data.webp"
+      },
+      "alt_text": "Malik Okoye holds the Rigline test cable in a guarded stance.",
+      "decorative": false,
+      "fallback_asset_id": "story.fallback.character",
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.4
+      },
+      "protected_zones": []
+    },
+    "story.asset.character.malik_okoye.focused": {
+      "layer": "CHARACTER",
+      "kind": "production",
+      "sources": {
+        "desktop": "characters/malik-okoye-focused-desktop.webp",
+        "mobile": "characters/malik-okoye-focused-mobile.webp",
+        "reduced_data": "characters/malik-okoye-focused-reduced-data.webp"
+      },
+      "alt_text": "Malik Okoye holds a coiled Rigline test cable with focused attention.",
+      "decorative": false,
+      "fallback_asset_id": "story.fallback.character",
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.4
+      },
+      "protected_zones": []
+    },
+    "story.asset.character.priya_nayar.concerned": {
+      "layer": "CHARACTER",
+      "kind": "production",
+      "sources": {
+        "desktop": "characters/priya-nayar-concerned-desktop.webp",
+        "mobile": "characters/priya-nayar-concerned-mobile.webp",
+        "reduced_data": "characters/priya-nayar-concerned-reduced-data.webp"
+      },
+      "alt_text": "Priya Nayar reviews the lot summary with practical concern.",
+      "decorative": false,
+      "fallback_asset_id": "story.fallback.character",
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.4
+      },
+      "protected_zones": []
+    },
+    "story.asset.character.priya_nayar.resolved": {
+      "layer": "CHARACTER",
+      "kind": "production",
+      "sources": {
+        "desktop": "characters/priya-nayar-resolved-desktop.webp",
+        "mobile": "characters/priya-nayar-resolved-mobile.webp",
+        "reduced_data": "characters/priya-nayar-resolved-reduced-data.webp"
+      },
+      "alt_text": "Priya Nayar holds the completed brief with a resolved, steady expression.",
+      "decorative": false,
+      "fallback_asset_id": "story.fallback.character",
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.4
+      },
+      "protected_zones": []
+    },
+    "story.asset.character.sora_chen.approving": {
+      "layer": "CHARACTER",
+      "kind": "production",
+      "sources": {
+        "desktop": "characters/sora-chen-approving-desktop.webp",
+        "mobile": "characters/sora-chen-approving-mobile.webp",
+        "reduced_data": "characters/sora-chen-approving-reduced-data.webp"
+      },
+      "alt_text": "Sora Chen offers restrained approval, one hand extended and a closed notebook at her side.",
+      "decorative": false,
+      "fallback_asset_id": "story.fallback.character",
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.4
+      },
+      "protected_zones": []
+    },
+    "story.asset.character.sora_chen.focused": {
+      "layer": "CHARACTER",
+      "kind": "production",
+      "sources": {
+        "desktop": "characters/sora-chen-focused-desktop.webp",
+        "mobile": "characters/sora-chen-focused-mobile.webp",
+        "reduced_data": "characters/sora-chen-focused-reduced-data.webp"
+      },
+      "alt_text": "Sora Chen stands ready to question an assumption, one hand raised and a closed notebook at her side.",
+      "decorative": false,
+      "fallback_asset_id": "story.fallback.character",
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.4
+      },
+      "protected_zones": []
+    },
+    "story.bg.trinity.client_review.dawn": {
+      "layer": "BACKGROUND",
+      "kind": "production",
+      "sources": {
+        "desktop": "backgrounds/trinity-client-review-dawn-desktop.webp",
+        "mobile": "backgrounds/trinity-client-review-dawn-mobile.webp",
+        "reduced_data": "backgrounds/trinity-client-review-dawn-reduced-data.webp"
+      },
+      "alt_text": "A practical client-review room at dawn, with a physical lot summary prepared for discussion.",
+      "decorative": false,
+      "fallback_asset_id": "story.fallback.background",
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.38
+      },
+      "protected_zones": [
+        {
+          "x": 0.0,
+          "y": 0.66,
+          "width": 1.0,
+          "height": 0.34
+        },
+        {
+          "x": 0.0,
+          "y": 0.0,
+          "width": 0.3,
+          "height": 0.12
+        }
+      ]
+    },
+    "story.bg.trinity.core_floor.night_storm": {
+      "layer": "BACKGROUND",
+      "kind": "production",
+      "sources": {
+        "desktop": "backgrounds/trinity-core-floor-night-storm-desktop.webp",
+        "mobile": "backgrounds/trinity-core-floor-night-storm-mobile.webp",
+        "reduced_data": "backgrounds/trinity-core-floor-night-storm-reduced-data.webp"
+      },
+      "alt_text": "The night-shift Core Floor, with an inspection bench, instrumented test racks, and a safely opened server chassis.",
+      "decorative": false,
+      "fallback_asset_id": "story.fallback.background",
+      "focal_point": {
+        "x": 0.53,
+        "y": 0.38
+      },
+      "protected_zones": [
+        {
+          "x": 0.0,
+          "y": 0.66,
+          "width": 1.0,
+          "height": 0.34
+        },
+        {
+          "x": 0.0,
+          "y": 0.0,
+          "width": 0.3,
+          "height": 0.12
+        }
+      ]
+    },
+    "story.bg.trinity.inflow.predawn_storm": {
+      "layer": "BACKGROUND",
+      "kind": "production",
+      "sources": {
+        "desktop": "backgrounds/trinity-inflow-predawn-storm-desktop.webp",
+        "mobile": "backgrounds/trinity-inflow-predawn-storm-mobile.webp",
+        "reduced_data": "backgrounds/trinity-inflow-predawn-storm-reduced-data.webp"
+      },
+      "alt_text": "The Inflow dock before sunrise, wet from a storm, with return cages under amber work lights.",
+      "decorative": false,
+      "fallback_asset_id": "story.fallback.background",
+      "focal_point": {
+        "x": 0.55,
+        "y": 0.38
+      },
+      "protected_zones": [
+        {
+          "x": 0.0,
+          "y": 0.66,
+          "width": 1.0,
+          "height": 0.34
+        },
+        {
+          "x": 0.0,
+          "y": 0.0,
+          "width": 0.3,
+          "height": 0.12
+        }
+      ]
+    },
+    "story.bg.trinity.knowledge_systems.night": {
+      "layer": "BACKGROUND",
+      "kind": "production",
+      "sources": {
+        "desktop": "backgrounds/trinity-knowledge-systems-night-desktop.webp",
+        "mobile": "backgrounds/trinity-knowledge-systems-night-mobile.webp",
+        "reduced_data": "backgrounds/trinity-knowledge-systems-night-reduced-data.webp"
+      },
+      "alt_text": "The Knowledge Systems desk, where attributable Worklog histories appear on a restrained timeline display.",
+      "decorative": false,
+      "fallback_asset_id": "story.fallback.background",
+      "focal_point": {
+        "x": 0.52,
+        "y": 0.36
+      },
+      "protected_zones": [
+        {
+          "x": 0.0,
+          "y": 0.66,
+          "width": 1.0,
+          "height": 0.34
+        },
+        {
+          "x": 0.0,
+          "y": 0.0,
+          "width": 0.3,
+          "height": 0.12
+        }
+      ]
+    },
+    "story.bg.trinity.trace.night": {
+      "layer": "BACKGROUND",
+      "kind": "production",
+      "sources": {
+        "desktop": "backgrounds/trinity-trace-night-desktop.webp",
+        "mobile": "backgrounds/trinity-trace-night-mobile.webp",
+        "reduced_data": "backgrounds/trinity-trace-night-reduced-data.webp"
+      },
+      "alt_text": "A Trace analysis bench lit by a task lamp, with instruments and a hand-drawn fault tree.",
+      "decorative": false,
+      "fallback_asset_id": "story.fallback.background",
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.39
+      },
+      "protected_zones": [
+        {
+          "x": 0.0,
+          "y": 0.66,
+          "width": 1.0,
+          "height": 0.34
+        },
+        {
+          "x": 0.0,
+          "y": 0.0,
+          "width": 0.3,
+          "height": 0.12
+        }
+      ]
+    },
+    "story.bg.trinity.validation_gate.predawn": {
+      "layer": "BACKGROUND",
+      "kind": "production",
+      "sources": {
+        "desktop": "backgrounds/trinity-validation-gate-predawn-desktop.webp",
+        "mobile": "backgrounds/trinity-validation-gate-predawn-mobile.webp",
+        "reduced_data": "backgrounds/trinity-validation-gate-predawn-reduced-data.webp"
+      },
+      "alt_text": "The Validation Gate audit area, with a traveler station and distinct hold and release tags.",
+      "decorative": false,
+      "fallback_asset_id": "story.fallback.background",
+      "focal_point": {
+        "x": 0.52,
+        "y": 0.38
+      },
+      "protected_zones": [
+        {
+          "x": 0.0,
+          "y": 0.66,
+          "width": 1.0,
+          "height": 0.34
+        },
+        {
+          "x": 0.0,
+          "y": 0.0,
+          "width": 0.3,
+          "height": 0.12
+        }
+      ]
+    },
+    "story.fallback.background": {
+      "layer": "BACKGROUND",
+      "kind": "fallback",
+      "sources": {
+        "desktop": "fallbacks/fallback-background-desktop.webp",
+        "mobile": "fallbacks/fallback-background-mobile.webp",
+        "reduced_data": "fallbacks/fallback-background-reduced-data.webp"
+      },
+      "alt_text": "",
+      "decorative": true,
+      "fallback_asset_id": null,
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.4
+      },
+      "protected_zones": [
+        {
+          "x": 0.0,
+          "y": 0.66,
+          "width": 1.0,
+          "height": 0.34
+        },
+        {
+          "x": 0.0,
+          "y": 0.0,
+          "width": 0.3,
+          "height": 0.12
+        }
+      ]
+    },
+    "story.fallback.character": {
+      "layer": "CHARACTER",
+      "kind": "fallback",
+      "sources": {
+        "desktop": "fallbacks/fallback-character-desktop.webp",
+        "mobile": "fallbacks/fallback-character-mobile.webp",
+        "reduced_data": "fallbacks/fallback-character-reduced-data.webp"
+      },
+      "alt_text": "",
+      "decorative": true,
+      "fallback_asset_id": null,
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.4
+      },
+      "protected_zones": []
+    },
+    "story.fallback.transient": {
+      "layer": "TRANSIENT",
+      "kind": "fallback",
+      "sources": {
+        "desktop": "fallbacks/fallback-transient-desktop.webp",
+        "mobile": "fallbacks/fallback-transient-mobile.webp",
+        "reduced_data": "fallbacks/fallback-transient-reduced-data.webp"
+      },
+      "alt_text": "",
+      "decorative": true,
+      "fallback_asset_id": null,
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.4
+      },
+      "protected_zones": []
+    },
+    "story.insert.qc01.final_incident_queue": {
+      "layer": "TRANSIENT",
+      "kind": "production",
+      "sources": {
+        "desktop": "inserts/qc01-final-incident-queue-desktop.webp",
+        "mobile": "inserts/qc01-final-incident-queue-mobile.webp",
+        "reduced_data": "inserts/qc01-final-incident-queue-reduced-data.webp"
+      },
+      "alt_text": "A three-Ticket incident board lists a missing boot device, intermittent storage-path errors, and reduced array redundancy without naming their causes.",
+      "decorative": false,
+      "fallback_asset_id": "story.fallback.transient",
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.4
+      },
+      "protected_zones": []
+    },
+    "story.insert.qc01.repeat_serial_history": {
+      "layer": "TRANSIENT",
+      "kind": "production",
+      "sources": {
+        "desktop": "inserts/qc01-repeat-serial-history-desktop.webp",
+        "mobile": "inserts/qc01-repeat-serial-history-mobile.webp",
+        "reduced_data": "inserts/qc01-repeat-serial-history-reduced-data.webp"
+      },
+      "alt_text": "A player-safe serial-history summary links one returned unit to a prior case whose Verify note only said that the unit tested good.",
+      "decorative": false,
+      "fallback_asset_id": "story.fallback.transient",
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.4
+      },
+      "protected_zones": []
+    },
+    "story.insert.qc01.sift_provenance_gap": {
+      "layer": "TRANSIENT",
+      "kind": "production",
+      "sources": {
+        "desktop": "inserts/qc01-sift-provenance-gap-desktop.webp",
+        "mobile": "inserts/qc01-sift-provenance-gap-mobile.webp",
+        "reduced_data": "inserts/qc01-sift-provenance-gap-reduced-data.webp"
+      },
+      "alt_text": "A source-coverage summary distinguishes recorded results, unpublished outputs, missing context, and recommendation confidence.",
+      "decorative": false,
+      "fallback_asset_id": "story.fallback.transient",
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.4
+      },
+      "protected_zones": []
+    }
+  }
+}

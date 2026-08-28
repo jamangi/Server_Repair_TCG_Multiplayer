@@ -2,7 +2,7 @@
 
 ## Status
 
-**Approved and queued; blocked only by TASK-029 completion.** STORY-006 A is synchronized into this contract.
+**Completed 2026-08-28.** STORY-006 A remains synchronized into this contract. The campaign identities and visual anchors remain production-candidate pending STORY-007; see the shared [TASK-026 through TASK-030 completion record](../story/TASK-026-030-COMPLETION.md).
 
 ## Objective
 

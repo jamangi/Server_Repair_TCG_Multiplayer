@@ -1,7 +1,61 @@
 import { isBenchDiagnosticInstance } from './action-presentation.mjs';
 
+const STORY_CONTEXT_KEYS = Object.freeze([
+  'schema_version', 'context_token', 'match_ref', 'checkpoint_id', 'return_label',
+]);
+
+function sameStoryContext(candidate, expected) {
+  if (!candidate || !expected || typeof candidate !== 'object' || typeof expected !== 'object'
+      || Array.isArray(candidate) || Array.isArray(expected)) return false;
+  const candidateKeys = Object.keys(candidate).sort();
+  const expectedKeys = Object.keys(expected).sort();
+  const contractKeys = [...STORY_CONTEXT_KEYS].sort();
+  return candidateKeys.length === contractKeys.length
+    && expectedKeys.length === contractKeys.length
+    && candidateKeys.every((key, index) => key === contractKeys[index])
+    && expectedKeys.every((key, index) => key === contractKeys[index])
+    && STORY_CONTEXT_KEYS.every((key) => candidate[key] === expected[key]);
+}
+
+export function preflightStoryMatch(payload, {
+  workerFactory = null,
+} = {}) {
+  if (!workerFactory && typeof Worker !== 'function') {
+    return Promise.reject(new Error('This browser does not support the module Worker required for Story Match preflight.'));
+  }
+  const createWorker = workerFactory ?? (() => new Worker(new URL('./solo-worker.mjs', import.meta.url), {
+    type: 'module',
+    name: 'server-repair-story-preflight',
+  }));
+  return new Promise((resolve, reject) => {
+    let worker;
+    let timeout;
+    try {
+      worker = createWorker();
+    } catch (error) {
+      reject(error);
+      return;
+    }
+    const settle = (callback, value) => {
+      clearTimeout(timeout);
+      worker?.terminate();
+      worker = null;
+      callback(value);
+    };
+    worker.addEventListener('message', (event) => {
+      if (event.data?.type === 'STORY_MATCH_PREFLIGHT') settle(resolve, event.data.result);
+      else if (event.data?.type === 'WORKER_ERROR') settle(reject, new Error(event.data.message));
+    });
+    worker.addEventListener('error', (event) => {
+      settle(reject, new Error(event.message || 'The Story Match preflight Worker stopped unexpectedly.'));
+    });
+    timeout = setTimeout(() => settle(reject, new Error('Story Match preflight timed out without changing Story progress.')), 30000);
+    worker.postMessage({ type: 'PREFLIGHT_STORY_MATCH', payload });
+  });
+}
+
 export class SoloGameSession {
-  constructor({ onChange, onAnnounce, onStarted, onCompleted, tutorial = null, catalog = null } = {}) {
+  constructor({ onChange, onAnnounce, onStarted, onCompleted, tutorial = null, catalog = null, storyContext = null } = {}) {
     this.worker = null;
     this.projection = null;
     this.terminalResult = null;
@@ -39,12 +93,23 @@ export class SoloGameSession {
     this.startPromise = null;
     this.tutorial = tutorial;
     this.catalog = catalog;
+    this.storyContext = storyContext ? structuredClone(storyContext) : null;
+    this.storyMatchResult = null;
+    this.storyContinuationReady = false;
+    this.storyReturnError = null;
   }
 
   start(payload) {
     if (this.worker) throw new Error('A solo Worker session already exists.');
     if (typeof Worker !== 'function') {
       this.error = 'This browser does not support the module Worker required for local authority.';
+      this.onChange();
+      return Promise.reject(new Error(this.error));
+    }
+    const payloadContext = payload?.story_context ?? null;
+    if (Boolean(payloadContext) !== Boolean(this.storyContext)
+        || (this.storyContext && !sameStoryContext(payloadContext, this.storyContext))) {
+      this.error = 'Story Match launch context is missing or mismatched.';
       this.onChange();
       return Promise.reject(new Error(this.error));
     }
@@ -75,13 +140,23 @@ export class SoloGameSession {
 
   handleMessage(message) {
     if (message.type === 'MATCH_STARTED') {
+      if (this.storyContext && !sameStoryContext(message.story_context, this.storyContext)) {
+        this.error = 'Story Match authority returned a mismatched context.';
+        this.terminate();
+        this.rejectStart?.(new Error(this.error));
+        this.resolveStart = null;
+        this.rejectStart = null;
+        this.onAnnounce(this.error);
+        this.onChange();
+        return;
+      }
       this.projection = message.projection;
       this.active = true;
       this.selectedTicketId = message.projection.view.public_match.repair_queue[0]?.ticket_instance_id ?? null;
       this.lastMotion = 'route';
       this.onStarted(message.projection);
       const startingActions = message.projection.view.public_match.turn?.actions_remaining;
-      this.onAnnounce(`Solo Match started. Opening hand drawn and first turn ready${Number.isSafeInteger(startingActions) ? ` with ${startingActions} Actions` : ''}.`);
+      this.onAnnounce(`${this.storyContext ? 'Story' : 'Solo'} Match started. Opening hand drawn and first turn ready${Number.isSafeInteger(startingActions) ? ` with ${startingActions} Actions` : ''}.`);
       this.tutorial?.announceCurrent();
       this.resolveStart?.(message.projection);
       this.resolveStart = null;
@@ -156,7 +231,18 @@ export class SoloGameSession {
       }
       if (this.terminalResult) {
         this.active = false;
-        this.onCompleted(this.terminalResult);
+        const returnedContext = message.story_context ?? null;
+        const candidate = message.story_match_result ?? null;
+        this.storyContinuationReady = Boolean(this.storyContext
+          && sameStoryContext(returnedContext, this.storyContext)
+          && candidate?.schema_version === 'story-match-result-v1'
+          && candidate?.match_id === this.terminalResult.match_id
+          && candidate?.match_ref === this.storyContext.match_ref);
+        this.storyMatchResult = this.storyContinuationReady ? structuredClone(candidate) : null;
+        if (this.storyContext && !this.storyContinuationReady) {
+          this.onAnnounce('The Match result was recorded, but its Story return context did not validate. Story progress was not advanced.');
+        }
+        this.onCompleted(this.terminalResult, this.storyMatchResult);
       }
       this.onChange();
       return;
@@ -220,7 +306,7 @@ export class SoloGameSession {
     if (events.some((event) => event.event_type === 'CANDIDATE_ELIMINATION_SET')) messages.push('Candidate elimination record updated for the current diagnosis stage.');
     if (result?.accepted === false) messages.push(`Action rejected: ${result.error_code}. No cost was paid.`);
     if (result?.resolution_code === 'ISOLATION_NOT_SUPPORTED') messages.push('Isolation was not supported. The Action was spent; hidden truth was not disclosed.');
-    if (terminal) messages.push('Solo Match complete. Local result statistics are ready.');
+    if (terminal) messages.push(`${this.storyContext ? 'Story' : 'Solo'} Match complete. Local result statistics are ready.`);
     if (messages.length) this.onAnnounce(messages.join(' '));
   }
 

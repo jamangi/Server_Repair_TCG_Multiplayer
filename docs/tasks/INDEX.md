@@ -6,20 +6,23 @@ Beginning with TASK-011, the displayed task ID includes the recommended reasonin
 
 Active task:
 
-- [`TASK-026-XHIGH: Build the declarative Story runtime foundation`](TASK-026-build-declarative-story-runtime.md) — define a deterministic typed interpreter, choice/flag/score/outcome branching, layered display model, validation, checkpoints, and portable story state without a visible production campaign.
+- None. The TASK-026 through TASK-030 Story Mode sequence completed on 2026-08-28; the campaign package remains production-candidate pending `STORY-007` owner approval.
 
-Approved Story Mode sequence:
+Completed Story Mode sequence:
 
-- [`TASK-027-XHIGH: Blueprint the Story campaign graph and Match plan`](TASK-027-blueprint-story-campaign-graph.md) — approved and blocked by TASK-026; specify every beat, cutscene decision, delayed branch, reusable setting, exact Match configuration, and solvability proof before writing full dialogue.
-- [`TASK-028-HIGH: Integrate the Story player and Match bridge`](TASK-028-integrate-story-player-and-match-bridge.md) — approved and blocked by TASK-025 through TASK-027; add the Story tab, accessible layered scene player, durable checkpoint UX, portability, and real Story→Match→result→Story handoff.
-- [`TASK-029-XHIGH: Author the Story campaign scripts and choreography`](TASK-029-author-story-campaign-scripts.md) — approved and blocked by TASK-027/TASK-028; turn the approved graph into technically grounded dialogue, immediate and remembered choices, route variants, and layer choreography without changing runtime or Match semantics.
-- [`TASK-030-XHIGH: Create and integrate original Story Mode art`](TASK-030-create-story-mode-art.md) — approved and blocked by TASK-029; produce provenance-complete painterly backgrounds, character variants, inserts, and responsive runtime assets from the validated script inventory.
+- [`TASK-026-XHIGH: Build the declarative Story runtime foundation`](TASK-026-build-declarative-story-runtime.md) — completed 2026-08-28; delivered the deterministic typed interpreter, validation, checkpoints, Match boundary, and portable Story state.
+- [`TASK-027-XHIGH: Blueprint the Story campaign graph and Match plan`](TASK-027-blueprint-story-campaign-graph.md) — completed 2026-08-28; delivered the machine-validated Quiet Cascade graph, exact Match configurations, and solvability proof.
+- [`TASK-028-HIGH: Integrate the Story player and Match bridge`](TASK-028-integrate-story-player-and-match-bridge.md) — completed 2026-08-28; delivered the accessible Story destination, durable checkpoint UX, portability, and real Story→Match→result→Story handoff.
+- [`TASK-029-XHIGH: Author the Story campaign scripts and choreography`](TASK-029-author-story-campaign-scripts.md) — completed 2026-08-28; delivered the complete technically grounded campaign scripts, choices, route variants, and layered choreography.
+- [`TASK-030-XHIGH: Create and integrate original Story Mode art`](TASK-030-create-story-mode-art.md) — completed 2026-08-28; delivered provenance-complete responsive backgrounds, character variants, inserts, contact sheets, and safe fallbacks.
+
+The sequence-wide deliverables and focused proof are recorded in [`TASK-026-030-COMPLETION.md`](../story/TASK-026-030-COMPLETION.md).
 
 Approved but deferred V2 task:
 
 - [`TASK-017-XHIGH: Create the Server Repair V2 Migration Seed`](TASK-017-create-server-repair-v2-migration-seed.md) — approved Migration Seed direction but deferred until the V0 product is training-ready; when reactivated, it audits V0 in bounded checkpoints and establishes the public dependency-inference V2 foundation without modifying V0 behavior.
 
-TASK-011-HIGH through TASK-016-HIGH, TASK-018-HIGH through TASK-021-HIGH, and TASK-023-HIGH through TASK-025-HIGH are complete. PT-008 B is approved and the proposed TASK-022 was withdrawn without implementation. Begin the approved Story sequence with TASK-026. Return to TASK-017-XHIGH only when the project owner reactivates V2 migration.
+TASK-011-HIGH through TASK-016-HIGH, TASK-018-HIGH through TASK-021-HIGH, TASK-023-HIGH through TASK-030-XHIGH are complete. PT-008 B is approved and the proposed TASK-022 was withdrawn without implementation. Return to TASK-017-XHIGH only when the project owner reactivates V2 migration.
 
 Completed documentation and research tasks:
 

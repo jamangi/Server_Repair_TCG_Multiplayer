@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/client/story_progress.schema.json",
+  "title": "Solo Story progress record v1",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "const": "story-progress-record-v1" },
+    "pack_id": {
+      "anyOf": [
+        { "$ref": "https://example.local/story/common.schema.json#/$defs/stable_id" },
+        { "type": "null" }
+      ]
+    },
+    "content_version": {
+      "anyOf": [
+        { "$ref": "https://example.local/story/common.schema.json#/$defs/stable_id" },
+        { "type": "null" }
+      ]
+    },
+    "checkpoint": {
+      "anyOf": [
+        { "$ref": "https://example.local/story/checkpoint.schema.json" },
+        { "type": "null" }
+      ]
+    },
+    "pending_result": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "result": { "$ref": "https://example.local/story/match_result.schema.json" },
+            "checkpoint_id": { "$ref": "https://example.local/story/common.schema.json#/$defs/stable_id" },
+            "return_label": { "$ref": "https://example.local/story/common.schema.json#/$defs/stable_id" }
+          },
+          "required": ["result", "checkpoint_id", "return_label"]
+        },
+        { "type": "null" }
+      ]
+    },
+    "completed_ending_id": {
+      "anyOf": [
+        { "$ref": "https://example.local/story/common.schema.json#/$defs/stable_id" },
+        { "type": "null" }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "type": "object",
+        "properties": { "pack_id": { "type": "null" } },
+        "required": ["pack_id"]
+      },
+      "then": {
+        "type": "object",
+        "properties": {
+          "content_version": { "type": "null" },
+          "checkpoint": { "type": "null" },
+          "pending_result": { "type": "null" },
+          "completed_ending_id": { "type": "null" }
+        }
+      }
+    },
+    {
+      "if": {
+        "type": "object",
+        "properties": { "checkpoint": { "type": "null" } },
+        "required": ["checkpoint"]
+      },
+      "then": {
+        "type": "object",
+        "properties": { "pending_result": { "type": "null" } }
+      }
+    }
+  ],
+  "required": ["schema_version", "pack_id", "content_version", "checkpoint", "pending_result", "completed_ending_id"]
+}
