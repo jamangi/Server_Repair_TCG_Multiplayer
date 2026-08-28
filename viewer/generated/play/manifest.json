@@ -834,8 +834,8 @@
     {
       "path": "src/engine/engine.mjs",
       "source": "src/engine/engine.mjs",
-      "bytes": 89553,
-      "sha256": "19b19b99da5844fe6c095a7080a1022d381ba494182922b4e56f5f824c0a268e"
+      "bytes": 89634,
+      "sha256": "d16ae54abcafc152b5200d10f1ffd7fc59e816c7f7426fd6eba6cf5ef5c3ba7d"
     },
     {
       "path": "src/engine/events.mjs",

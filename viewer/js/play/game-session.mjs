@@ -22,6 +22,8 @@ export class SoloGameSession {
     this.handExpanded = false;
     this.restoreHandToggleFocus = false;
     this.restoreDiagnosticActionFocus = false;
+    this.restoreDocumentedWorklogFocus = null;
+    this.documentPreview = null;
     this.panelTab = 'evidence';
     this.lastEvents = [];
     this.lastResult = null;
@@ -100,6 +102,9 @@ export class SoloGameSession {
       this.lastEvents = message.events || [];
       this.lastResult = message.result;
       const targetTicketId = submittedIntent?.ticket_instance_id ?? null;
+      const documentedWorklogId = submittedIntent?.action_type === 'DOCUMENT_LIVE'
+        ? submittedIntent.source_action_event_id
+        : null;
       const resultEvent = this.lastEvents.find((event) => event.ticket_instance_id === targetTicketId
         && ['EVIDENCE_CREATED', 'VERIFY_RESOLVED', 'VERIFY_EVIDENCE_CREATED', 'ISOLATION_ACCEPTED', 'ISOLATION_NOT_SUPPORTED'].includes(event.event_type))
         ?? this.lastEvents.find((event) => event.ticket_instance_id === targetTicketId)
@@ -109,9 +114,22 @@ export class SoloGameSession {
         intent: submittedIntent,
         result: message.result,
         target_ticket_id: targetTicketId,
-        result_event_id: resultEvent?.event_id ?? null,
-        result_event_type: resultEvent?.event_type ?? null,
+        result_event_id: documentedWorklogId ?? resultEvent?.event_id ?? null,
+        result_event_type: documentedWorklogId ? 'WORKLOG_PUBLICATION' : resultEvent?.event_type ?? null,
       } : null;
+      if (submittedIntent?.action_type === 'DOCUMENT_LIVE') {
+        if (this.lastAction.accepted) {
+          this.documentPreview = null;
+          this.restoreDocumentedWorklogFocus = documentedWorklogId;
+          this.selectedTicketId = targetTicketId;
+          this.panelTab = 'worklog';
+        } else if (this.documentPreview) {
+          this.documentPreview.rejection = {
+            error_code: message.result?.error_code ?? 'DOCUMENTATION_REJECTED',
+            error_message: message.result?.error_message ?? 'The authority rejected this Documentation action.',
+          };
+        }
+      }
       if (submittedIntent && this.tutorial) {
         this.tutorial.handleResolution(submittedIntent, this.lastEvents, message.result, message.projection);
       }
@@ -147,6 +165,12 @@ export class SoloGameSession {
       this.error = message.message;
       this.resolving = false;
       this.pendingIntent = null;
+      if (this.documentPreview) {
+        this.documentPreview.rejection = {
+          error_code: 'WORKER_ERROR',
+          error_message: message.message,
+        };
+      }
       this.rejectStart?.(new Error(message.message));
       this.resolveStart = null;
       this.rejectStart = null;
@@ -223,6 +247,8 @@ export class SoloGameSession {
     this.resolving = false;
     this.pendingIntent = null;
     this.handExpanded = false;
+    this.documentPreview = null;
+    this.restoreDocumentedWorklogFocus = null;
   }
 
   endSession() {

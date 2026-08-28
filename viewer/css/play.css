@@ -2598,6 +2598,11 @@
 .play-app .closed-ticket-list { padding: 0.45rem 0.6rem; border-top: 1px solid rgba(95, 184, 214, 0.2); }
 .play-app .closed-ticket-list > summary { display: flex; justify-content: space-between; min-height: 44px; align-items: center; color: #b5c8d2; font-size: 0.76rem; font-weight: 900; cursor: pointer; }
 .play-app .closed-ticket-list > div { display: grid; gap: 0.35rem; max-height: 9rem; overflow: auto; }
+.play-app .archive-ticket-button { display: grid; grid-template-columns: auto minmax(0, 1fr); min-height: 48px; gap: 0.2rem 0.55rem; align-items: center; padding: 0.55rem 0.65rem; border: 1px solid rgba(95, 184, 214, 0.34); border-radius: 0.55rem; color: #d9ecf1; text-align: left; background: rgba(7, 22, 30, 0.86); cursor: pointer; }
+.play-app .archive-ticket-button > span { color: #91b3bd; font-size: 0.65rem; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; }
+.play-app .archive-ticket-button > strong { min-width: 0; overflow-wrap: anywhere; }
+.play-app .archive-ticket-button > code { grid-column: 1 / -1; color: #8da7b0; font-size: 0.62rem; overflow-wrap: anywhere; }
+.play-app .archive-ticket-button:focus-visible { outline: 3px solid var(--play-focus); outline-offset: 2px; }
 
 .play-app .bench-type-tabs { display: flex; border: 1px solid rgba(95, 184, 214, 0.3); border-radius: 0.6rem; overflow: hidden; }
 .play-app .bench-type-tabs button { min-height: 44px; padding: 0 0.65rem; border: 0; border-right: 1px solid rgba(95, 184, 214, 0.2); color: #91a9b5; background: rgba(4, 12, 18, 0.7); cursor: pointer; }
@@ -2611,6 +2616,59 @@
 .play-app .full-ticket-dialog .dialog-close { border-color: #5b6764; color: var(--play-ink-900); background: #d6ded9; }
 .play-app .ticket-workflow { padding: 0.85rem; border: 1px solid var(--play-paper-candidate-border); border-radius: 0.75rem; background: #e0e5dd; }
 .play-app .ticket-workflow h3 { margin: 0 0 0.55rem; }
+.play-app .documentation-workflow { grid-column: 1 / -1; padding: 0.75rem; border: 1px solid rgba(119, 196, 218, 0.34); border-radius: var(--play-radius-sm); background: rgba(10, 39, 49, 0.54); }
+.play-app .documentation-workflow h3 { margin: 0; font-size: 0.9rem; }
+.play-app .documentation-workflow > p { margin: 0.25rem 0 0.55rem; color: #9db6be; font-size: 0.72rem; }
+.play-app .documentation-workflow .candidate-actions { justify-content: flex-start; }
+.play-app .documentation-workflow .basic-action--document { border-color: rgba(93, 216, 198, 0.58); color: #dbfff8; background: rgba(20, 86, 77, 0.52); }
+.play-app .full-ticket-dialog .documentation-workflow { border-color: var(--play-paper-candidate-border); color: var(--play-paper-candidate-fg); background: #e0e5dd; }
+.play-app .full-ticket-dialog .documentation-workflow > p { color: var(--play-paper-candidate-fg); }
+.play-app .full-ticket-dialog .documentation-workflow .basic-action--document { border-color: var(--play-paper-state-public); color: var(--play-paper-candidate-fg); background: #d4e5df; }
+
+.play-app .document-preview-dialog { width: min(94vw, 48rem); }
+.play-app .document-preview__body { display: grid; gap: var(--play-space-4); }
+.play-app .document-preview__facts,
+.play-app .archive-review__summary dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--play-space-3); margin: 0; }
+.play-app .document-preview__facts > div,
+.play-app .archive-review__summary dl > div { min-width: 0; padding: 0.7rem; border: 1px solid var(--play-line); border-radius: var(--play-radius-sm); background: rgba(8, 29, 39, 0.72); }
+.play-app .document-preview__facts dt,
+.play-app .archive-review__summary dt { color: #8fb2bd; font-size: 0.65rem; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; }
+.play-app .document-preview__facts dd,
+.play-app .archive-review__summary dd { margin: 0.3rem 0 0; color: #e3f2f5; overflow-wrap: anywhere; }
+.play-app .document-preview__facts code { display: block; margin-top: 0.25rem; color: #8fb2bd; font-size: 0.62rem; }
+.play-app .document-preview__summary { padding: var(--play-space-4); border: 2px solid rgba(93, 216, 198, 0.55); border-radius: var(--play-radius-md); background: rgba(16, 69, 63, 0.32); }
+.play-app .document-preview__summary h3 { margin-top: 0; }
+.play-app .document-preview__summary blockquote { margin: 0; color: #ecfffb; font: 750 1rem/1.5 var(--play-font-paper); }
+.play-app .document-preview__consequence { margin: 0; color: #c8dce1; }
+.play-app .document-preview__rejection { padding: var(--play-space-3); border: 2px solid var(--play-danger); border-radius: var(--play-radius-sm); color: #ffe4df; background: rgba(117, 39, 39, 0.35); }
+.play-app .document-preview__rejection h3,
+.play-app .document-preview__rejection p { margin: 0 0 0.4rem; }
+.play-app .document-preview__actions { display: flex; justify-content: flex-end; gap: var(--play-space-2); }
+
+.play-app .archived-ticket-dialog { width: min(94vw, 64rem); }
+.play-app .archive-review__body { display: grid; gap: var(--play-space-4); }
+.play-app .archive-review__summary h3,
+.play-app .archive-history-region h3 { margin-top: 0; }
+.play-app .archive-history-region { display: grid; max-height: min(58dvh, 38rem); gap: var(--play-space-5); padding: var(--play-space-3); overflow: auto; border: 1px solid var(--play-line); border-radius: var(--play-radius-md); background: rgba(2, 10, 15, 0.65); scrollbar-width: thin; }
+.play-app .archive-evidence-list,
+.play-app .archive-worklog-list { display: grid; gap: var(--play-space-2); }
+.play-app .archive-evidence { padding: 0.7rem; border: 1px solid rgba(107, 187, 210, 0.3); border-radius: var(--play-radius-sm); background: rgba(6, 20, 28, 0.84); }
+.play-app .archive-evidence header,
+.play-app .archive-evidence footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.4rem; }
+.play-app .archive-evidence footer { color: #8faab3; font-size: 0.7rem; }
+.play-app .archive-milestones ol { display: grid; gap: var(--play-space-2); padding: 0; margin: 0; list-style: none; }
+.play-app .archive-milestones li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0.25rem 0.65rem; padding: 0.7rem; border-left: 3px solid var(--play-public); background: rgba(10, 33, 43, 0.7); }
+.play-app .archive-milestones li > span { color: #83a5af; font: 0.64rem/1.4 var(--play-font-mono); }
+.play-app .archive-milestones li > p,
+.play-app .archive-milestones li > small { grid-column: 2; margin: 0; }
+.play-app .archive-milestones li > small { color: #8faab3; }
+.play-app .archive-solution-link { justify-self: start; }
+.play-app .result-archive { display: grid; gap: var(--play-space-3); }
+.play-app .result-archive__list { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: var(--play-space-2); }
+.play-app .worklog-entry[data-worklog-state="awaiting-documentation"] { border-style: dashed; }
+.play-app .worklog-entry[data-worklog-state="published"] { border-left: 3px solid var(--play-public); }
+.play-app .worklog-entry[data-worklog-state="documentation-action"] { border-left: 3px double #c99aff; background: rgba(42, 24, 61, 0.55); }
+.play-app .worklog-entry footer { margin-top: 0.5rem; color: #8faab3; font-size: 0.68rem; }
 
 .play-app .full-ticket-dialog :focus-visible {
   outline-color: var(--play-paper-state-focus);
@@ -3224,6 +3282,11 @@ dialog.settings-dialog::backdrop {
 .play-app .isolation-guidance li { margin-block: 0.35rem; }
 
 @media (max-width: 900px) {
+  .play-app .document-preview__facts,
+  .play-app .archive-review__summary dl { grid-template-columns: 1fr; }
+  .play-app .document-preview__actions { display: grid; grid-template-columns: 1fr 1fr; }
+  .play-app .document-preview__actions .play-button { width: 100%; }
+  .play-app .archive-history-region { max-height: 55dvh; }
   .play-app .diagnostic-shelf { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .play-app .diagnostic-bench__controls { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
@@ -3830,7 +3893,8 @@ dialog.settings-dialog::backdrop {
   body.active-match-layout .play-app .investigation-rail:has(.intelligence-panel [data-tutorial-target="true"]) .legal-action-panel { max-height: 12rem; overflow: auto; scrollbar-width: thin; }
   body.active-match-layout .play-app .intelligence-panel { display: grid; grid-template-rows: auto minmax(0, 1fr); min-width: 0; min-height: 0; height: auto; overflow: hidden; }
   body.active-match-layout .play-app .intelligence-panel > [role="tabpanel"] { min-height: 0; max-height: none; padding: 0.55rem; overflow: auto; scrollbar-width: thin; }
-  body.active-match-layout .play-app .legal-action-panel { display: grid; gap: 0.4rem; max-height: none; min-height: 8.2rem; padding: 0.55rem; margin: 0; overflow: visible; }
+  body.active-match-layout .play-app .legal-action-panel { display: grid; gap: 0.4rem; max-height: min(18rem, 38dvh); min-height: 8.2rem; padding: 0.55rem; margin: 0; overflow: auto; scrollbar-width: thin; }
+  body.active-match-layout .play-app .documentation-workflow .candidate-actions { display: grid; grid-template-columns: minmax(0, 1fr); max-height: 7.5rem; overflow: auto; scrollbar-width: thin; }
   body.active-match-layout .play-app .selected-card-actions { display: grid; grid-template-columns: 1fr auto; gap: 0.35rem; align-items: center; }
   body.active-match-layout .play-app .selected-card-actions :is(header, dl, span, p) { grid-column: 1 / -1; }
   body.active-match-layout .play-app .selected-card-actions dl { display: grid; grid-template-columns: 1fr 1fr; gap: 0.3rem; margin: 0; }

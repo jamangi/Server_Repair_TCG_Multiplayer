@@ -338,8 +338,12 @@ async function submitProjectedIntent(page, intent, mode) {
     if (mode === 'keyboard') await chooseSelectOptionWithKeyboard(page, select, intent.intent_id);
     else await select.selectOption(intent.intent_id);
     await activate(page, page.locator('[data-submit-search]'), mode);
+  } else if (intent.action_type === 'DOCUMENT_LIVE') {
+    await activate(page, page.locator(`[data-preview-document="${intent.intent_id}"]`).first(), mode);
+    await expect(page.locator('#document-preview-dialog')).toBeVisible();
+    await activate(page, page.locator('[data-submit-document]'), mode);
   } else {
-    const projectedAction = page.locator(`[data-intent-id="${intent.intent_id}"]`);
+    const projectedAction = page.locator(`[data-intent-id="${intent.intent_id}"]`).first();
     if (!await projectedAction.isVisible() && await page.getByRole('button', { name: 'View full Ticket' }).isVisible()) {
       await activate(page, page.getByRole('button', { name: 'View full Ticket' }), mode);
     }

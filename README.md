@@ -72,7 +72,7 @@ This repository currently contains:
 - a dependency-free deterministic engine for authenticated intents, private/team/public Evidence, exact Isolation-to-Repair gates, failed Verify returns, Documentation, atomic closure, scoring, queue reconciliation, and offline terminal results;
 - a part-assembling deterministic Ticket Builder with exact diagnostic/outcome and active-deck resource proof, complete-or-none validation, unique-before-repeat queues, balanced repetition, structured diagnostics, and reproducible provenance;
 - seat-safe cooperative and competitive computer policies plus the frozen 22-run foundation campaign and a 13-run expanded-content campaign covering every supported fingerprint and a multi-Ticket resource path;
-- a working static GitHub Pages application with the established Domain Library plus a browser-local solo Play slice, 50-item Relevant/Global Diagnostic Bench, coverage-aware deck editor and Home preflight, profile/statistics, validated backup portability, and Worker-authoritative 1–10 Ticket matches;
+- a working static GitHub Pages application with the established Domain Library plus a browser-local solo Play slice, 50-item Relevant/Global Diagnostic Bench, coverage-aware deck editor and Home preflight, profile/statistics, validated backup portability, Worker-authoritative 1–10 Ticket matches, deliberate Documentation previews, and read-only archived Ticket records;
 - a versioned case-study research system with a completed pilot spanning several troubleshooting subsystems;
 - a provisional story foundation with a fictional company, campaign frame, ensemble, voice guide, and story-derived gameplay candidates;
 - a non-authoritative, replayable candidate-flow package that combines temporary rules, exact card/deck/Ticket fixtures, complete matches, and landing-to-logout campaign and multiplayer journeys;
@@ -82,9 +82,9 @@ The repository now contains both the playable rules-engine foundation and a deli
 
 ## Planned next work
 
-[`TASK-025-HIGH`](docs/tasks/TASK-025-refine-documentation-and-archived-ticket-review.md) is the active V0 refinement: confirm Document Live through an exact preview, record what was published, and make archived Ticket Evidence/Worklog history reviewable. It does not change Documentation legality or visibility.
+[`TASK-025-HIGH`](docs/tasks/TASK-025-refine-documentation-and-archived-ticket-review.md) is complete: Document Live now confirms the exact publishable result before spending an Action, and archived Ticket Evidence/Worklog history is reviewable without widening visibility.
 
-Story Mode is approved but not implemented. Its order is declarative runtime foundation (TASK-026), campaign graph and solvability-proved Match plan (TASK-027), accessible Story player and authoritative Match bridge (TASK-028), full dramatic scripts/choreography (TASK-029), then original painterly static 2D art (TASK-030). Cutscene decisions, story-scoped Service Points, and normalized Match outcomes can all drive typed branches. Story progress will use durable scene/Match-boundary checkpoints; this does not imply that an active local Match can be resumed. See the [task index](docs/tasks/INDEX.md), [Story README](docs/story/README.md), and approved [Story decisions](docs/design/decisions/APPROVALS.md).
+Story Mode is approved but not implemented. [`TASK-026-XHIGH`](docs/tasks/TASK-026-build-declarative-story-runtime.md) is active; it begins the ordered sequence of declarative runtime foundation, campaign graph and solvability-proved Match plan (TASK-027), accessible Story player and authoritative Match bridge (TASK-028), full dramatic scripts/choreography (TASK-029), then original painterly static 2D art (TASK-030). Cutscene decisions, story-scoped Service Points, and normalized Match outcomes can all drive typed branches. Story progress will use durable scene/Match-boundary checkpoints; this does not imply that an active local Match can be resumed. See the [task index](docs/tasks/INDEX.md), [Story README](docs/story/README.md), and approved [Story decisions](docs/design/decisions/APPROVALS.md).
 
 ## Design source of truth
 

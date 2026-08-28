@@ -6,7 +6,7 @@ const TARGET_SELECTORS = Object.freeze({
   EVIDENCE: '.evidence-panel',
   ISOLATION_GUIDANCE: '.isolation-guidance, .view-full-ticket',
   HAND: '.hand-rail',
-  DOCUMENTATION: '.ticket-workflow, .view-full-ticket',
+  DOCUMENTATION: '.documentation-workflow',
   BASIC_ACTIONS: '.basic-actions-panel',
   RESULT: '.result-panel',
 });
@@ -149,8 +149,9 @@ export class TutorialController {
     if (!root) return;
     root.dataset.tutorialId = this.definition.id;
     root.querySelectorAll('[data-tutorial-target]').forEach((node) => node.removeAttribute('data-tutorial-target'));
-    for (const button of root.querySelectorAll('[data-intent-id]')) {
-      const intent = projection?.legal_intents?.find((candidate) => candidate.intent_id === button.dataset.intentId);
+    for (const button of root.querySelectorAll('[data-intent-id], [data-preview-document]')) {
+      const intentId = button.dataset.intentId ?? button.dataset.previewDocument;
+      const intent = projection?.legal_intents?.find((candidate) => candidate.intent_id === intentId);
       if (intent && !this.isIntentAllowed(intent, projection)) {
         button.disabled = true;
         button.dataset.tutorialPaused = 'true';

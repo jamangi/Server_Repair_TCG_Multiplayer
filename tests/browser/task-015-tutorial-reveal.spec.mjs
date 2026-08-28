@@ -109,10 +109,17 @@ async function submitProjectedIntent(page, intent, mode) {
     }
   }
 
-  let button = page.locator(`[data-intent-id="${intent.intent_id}"]`);
+  if (intent.action_type === 'DOCUMENT_LIVE') {
+    await activate(page, page.locator(`[data-preview-document="${intent.intent_id}"]`).first(), mode);
+    await expect(page.locator('#document-preview-dialog')).toBeVisible();
+    await activate(page, page.locator('[data-submit-document]'), mode);
+    return;
+  }
+
+  let button = page.locator(`[data-intent-id="${intent.intent_id}"]`).first();
   if (!await button.isVisible() && await page.locator('[data-view-full-ticket]').isVisible()) {
     await activate(page, page.locator('[data-view-full-ticket]'), mode);
-    button = page.locator(`[data-intent-id="${intent.intent_id}"]`);
+    button = page.locator(`[data-intent-id="${intent.intent_id}"]`).first();
   }
   await activate(page, button, mode);
 }
@@ -145,7 +152,9 @@ async function enabledExpectedIntent(page, projection, checkpoint) {
   const candidates = projection.legal_intents.filter((intent) => intent.action_type === checkpoint.action_type
     && (!cardId || intent.card_definition_id === cardId));
   for (const candidate of candidates) {
-    const button = page.locator(`[data-intent-id="${candidate.intent_id}"]`);
+    const button = candidate.action_type === 'DOCUMENT_LIVE'
+      ? page.locator(`[data-preview-document="${candidate.intent_id}"]`).first()
+      : page.locator(`[data-intent-id="${candidate.intent_id}"]`).first();
     if (await button.count() && !await button.isDisabled()) return candidate;
     if (candidate.card_instance_id
       && await page.locator(`[data-card-instance-id="${candidate.card_instance_id}"]`).count()) return candidate;
@@ -172,8 +181,10 @@ async function completeTutorial(page, definition, mode, { captureRecovery = fals
 
     const latest = await latestMessage(page);
     let intent = await enabledExpectedIntent(page, latest.projection, checkpoint);
-    if (!intent || (await page.locator(`[data-intent-id="${intent.intent_id}"]`).count()
-      && await page.locator(`[data-intent-id="${intent.intent_id}"]`).isDisabled())) {
+    const projectedControl = intent?.action_type === 'DOCUMENT_LIVE'
+      ? page.locator(`[data-preview-document="${intent.intent_id}"]`).first()
+      : page.locator(`[data-intent-id="${intent?.intent_id}"]`).first();
+    if (!intent || (await projectedControl.count() && await projectedControl.isDisabled())) {
       intent = helperProjectedIntent(latest.projection, checkpoint);
     }
     expect(intent, `${checkpoint.id} did not expose an expected or recovery intent`).toBeTruthy();
@@ -213,6 +224,16 @@ test('both real-engine tutorials complete with replay progress and recovery hist
   expect(fundamentalsEvents.has('ISOLATION_ACCEPTED')).toBe(true);
   expect(fundamentalsEvents.has('VERIFY_RESOLVED')).toBe(true);
   expect(fundamentalsEvents.has('CLOSURE_PUBLISHED')).toBe(true);
+  const closedArchive = page.locator('.result-archive [data-archive-ticket-id]').first();
+  await expect(closedArchive).toContainText('Closed');
+  await activate(page, closedArchive, 'keyboard');
+  await expect(page.locator('#archived-ticket-dialog')).toBeVisible();
+  await expect(page.locator('#archived-ticket-dialog')).toContainText('Chronological Worklog');
+  await expect(page.locator('#archived-ticket-dialog [data-intent-id], #archived-ticket-dialog [data-preview-document]')).toHaveCount(0);
+  await expect(page.locator('#archived-ticket-dialog [data-view-solution-ticket]')).toHaveCount(0);
+  await expect(page.locator('#archived-ticket-dialog')).not.toContainText('Hidden causal truth');
+  await page.keyboard.press('Escape');
+  await expect(closedArchive).toBeFocused();
   await activate(page, page.getByRole('button', { name: 'Return Home' }), 'click');
   await expect(page.locator(`[data-start-tutorial="${fundamentals.id}"]`)).toContainText('Completed · replay');
 

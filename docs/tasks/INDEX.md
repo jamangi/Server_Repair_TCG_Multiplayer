@@ -6,11 +6,10 @@ Beginning with TASK-011, the displayed task ID includes the recommended reasonin
 
 Active task:
 
-- [`TASK-025-HIGH: Refine Documentation and archived Ticket review`](TASK-025-refine-documentation-and-archived-ticket-review.md) — add a no-cost-until-confirmed Document Live preview, precise publication attribution, and projection-only archived-Ticket Evidence/Worklog inspection without changing frozen behavior.
+- [`TASK-026-XHIGH: Build the declarative Story runtime foundation`](TASK-026-build-declarative-story-runtime.md) — define a deterministic typed interpreter, choice/flag/score/outcome branching, layered display model, validation, checkpoints, and portable story state without a visible production campaign.
 
-Approved queued Story Mode sequence:
+Approved Story Mode sequence:
 
-- [`TASK-026-XHIGH: Build the declarative Story runtime foundation`](TASK-026-build-declarative-story-runtime.md) — approved and blocked only by TASK-025 completion; define a deterministic typed interpreter, choice/flag/score/outcome branching, layered display model, validation, checkpoints, and portable story state without a visible production campaign.
 - [`TASK-027-XHIGH: Blueprint the Story campaign graph and Match plan`](TASK-027-blueprint-story-campaign-graph.md) — approved and blocked by TASK-026; specify every beat, cutscene decision, delayed branch, reusable setting, exact Match configuration, and solvability proof before writing full dialogue.
 - [`TASK-028-HIGH: Integrate the Story player and Match bridge`](TASK-028-integrate-story-player-and-match-bridge.md) — approved and blocked by TASK-025 through TASK-027; add the Story tab, accessible layered scene player, durable checkpoint UX, portability, and real Story→Match→result→Story handoff.
 - [`TASK-029-XHIGH: Author the Story campaign scripts and choreography`](TASK-029-author-story-campaign-scripts.md) — approved and blocked by TASK-027/TASK-028; turn the approved graph into technically grounded dialogue, immediate and remembered choices, route variants, and layer choreography without changing runtime or Match semantics.
@@ -20,10 +19,11 @@ Approved but deferred V2 task:
 
 - [`TASK-017-XHIGH: Create the Server Repair V2 Migration Seed`](TASK-017-create-server-repair-v2-migration-seed.md) — approved Migration Seed direction but deferred until the V0 product is training-ready; when reactivated, it audits V0 in bounded checkpoints and establishes the public dependency-inference V2 foundation without modifying V0 behavior.
 
-TASK-011-HIGH through TASK-016-HIGH, TASK-018-HIGH through TASK-021-HIGH, TASK-023-HIGH, and TASK-024-XHIGH are complete. PT-008 B is approved and the proposed TASK-022 was withdrawn without implementation. Complete TASK-025 before beginning the approved Story sequence. Return to TASK-017-XHIGH only when the project owner reactivates V2 migration.
+TASK-011-HIGH through TASK-016-HIGH, TASK-018-HIGH through TASK-021-HIGH, and TASK-023-HIGH through TASK-025-HIGH are complete. PT-008 B is approved and the proposed TASK-022 was withdrawn without implementation. Begin the approved Story sequence with TASK-026. Return to TASK-017-XHIGH only when the project owner reactivates V2 migration.
 
 Completed documentation and research tasks:
 
+- [`TASK-025-HIGH: Refine Documentation and archived Ticket review`](TASK-025-refine-documentation-and-archived-ticket-review.md) — completed 2026-08-27; added authenticated exact-result previews with mutation-free cancellation and single-submit protection, precise in-place Worklog publication attribution, and accessible projection-only archived Ticket records without changing frozen behavior.
 - [`TASK-011-HIGH: Create canonical Card and symptom Ticket illustrations`](TASK-011-create-canonical-card-and-symptom-illustrations.md) — completed 2026-08-26; delivered 71 domain-inherited playable-action illustrations and 33 public-Symptom Ticket panoramas, shared Library/Play resolution, deterministic provenance and asset validation, reviewed contact sheets, responsive crops, and safe placeholder fallback without gameplay changes.
 - [`TASK-015-HIGH: Add guided tutorials and the solo solution-reveal experience`](TASK-015-add-guided-tutorial-and-solution-reveal.md) — completed 2026-08-26; added two pinned real-engine tutorials, semantic checkpoints with accessible focus/highlights and replay controls, exportable cosmetic progress, projection-only Isolation guidance, and a rules-faithful post-Give-Up solution/history comparison.
 - [`TASK-024-XHIGH: Author domain-sourced technical action copy`](TASK-024-author-domain-sourced-technical-action-copy.md) — completed 2026-08-26; replaced placeholder/internal prose across all 71 published actions, made Card and Library views consume shared domain authority, separated mechanics from learning copy, and added glossary, provenance ledger, and publication-quality gates.

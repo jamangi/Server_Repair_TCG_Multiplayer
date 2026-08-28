@@ -2,7 +2,7 @@
 
 ## Status
 
-**Active.** This is the next V0 task. It is a bounded operational-record and Viewer interaction pass; it changes neither Documentation legality nor information visibility.
+**Complete — 2026-08-27.** Document Live now uses an exact no-cost-until-confirmed preview derived from authenticated legal intents, publication attribution preserves the original Worklog record and timing, and closed or abandoned Tickets open as projection-only read-only records. Documentation legality, visibility, scoring, and stable IDs are unchanged.
 
 ## Objective
 

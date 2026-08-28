@@ -626,7 +626,10 @@ test('Document Live publishes structured Evidence, enables cross-seat citations,
   state = exchange.state;
   const sourceEvent = exchange.result.private_events.find((event) => event.event_type === 'EVIDENCE_CREATED');
   const sourceAction = state.action_records.at(-1);
+  const ticketId = sourceAction.ticket_instance_id;
   const sourceCardId = sourceAction.card_instance_id;
+  const originalEntryBefore = structuredClone(state.tickets[ticketId].worklog_entries
+    .find((entry) => entry.placeholder_event_id === sourceAction.placeholder_event_id));
   const documentIntent = getLegalIntents({ state, playerId: actor, catalogs })
     .find((option) => option.action_type === 'DOCUMENT_LIVE');
   assert.ok(documentIntent);
@@ -637,8 +640,18 @@ test('Document Live publishes structured Evidence, enables cross-seat citations,
   const publication = exchange.result.public_events.find((event) => event.event_type === 'WORKLOG_PUBLICATION');
   assert.equal(publication.payload.source_result_event_id, sourceEvent.event_id);
   assert.deepEqual(publication.payload.published_result.candidate_effects, sourceEvent.payload.candidate_effects);
-  assert.equal(projectPublicMatch(state).repair_queue[0].worklog[0].public_result_summary,
+  const projectedWorklog = projectPublicMatch(state).repair_queue[0].worklog;
+  const enrichedOriginal = projectedWorklog.find((entry) => entry.placeholder_event_id === sourceAction.placeholder_event_id);
+  const documentationTrace = projectedWorklog.find((entry) => entry.source_name === 'Document Live');
+  assert.equal(enrichedOriginal.public_result_summary,
     'The first actionable Fault is visibly confirmed.');
+  assert.equal(enrichedOriginal.sequence, originalEntryBefore.sequence);
+  assert.equal(enrichedOriginal.action_time, originalEntryBefore.action_time);
+  assert.equal(enrichedOriginal.publication_time, publication.created_at);
+  assert.equal(documentationTrace.public_result_summary,
+    `Published ${originalEntryBefore.source_name} result from Worklog #${originalEntryBefore.sequence}.`);
+  assert.notEqual(documentationTrace.placeholder_event_id, enrichedOriginal.placeholder_event_id);
+  assert.equal(exchange.result.actions_spent, 1);
 
   const beforeRepeat = canonicalJson(state);
   const repeated = send(state, actor, 'DOCUMENT_LIVE', documentIntent.payload);

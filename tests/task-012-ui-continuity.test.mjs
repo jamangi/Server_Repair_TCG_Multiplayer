@@ -82,3 +82,71 @@ test('payment presentation reports authoritative spend and forces rejected actio
     '0 Actions · 0 Search tokens · 0 Refresh tokens · no Card spent',
   );
 });
+
+function documentationProjection({ legal = true, actions = 1 } = {}) {
+  const ticketId = 'match.ticket.001';
+  return {
+    legal_intents: legal ? [{
+      intent_id: 'intent.4.0001',
+      action_type: 'DOCUMENT_LIVE',
+      ticket_instance_id: ticketId,
+      source_action_event_id: 'event.worklog.005',
+    }] : [],
+    ticket_presentations: { [ticketId]: { display_name: 'Documentation Ticket' } },
+    view: {
+      hand: [],
+      diagnostic_bench: [],
+      public_match: {
+        repair_queue: [{ ticket_instance_id: ticketId }],
+        turn: { actions_remaining: actions },
+      },
+    },
+  };
+}
+
+test('Document Live settlement retains rejection context and routes accepted focus to the original Worklog entry', () => {
+  const submissions = [];
+  const session = new SoloGameSession();
+  session.worker = { postMessage: (message) => submissions.push(message) };
+  session.active = true;
+  session.projection = documentationProjection();
+  session.selectedTicketId = 'match.ticket.001';
+  session.documentPreview = {
+    intent_id: 'intent.4.0001',
+    ticket_instance_id: 'match.ticket.001',
+    source_action_event_id: 'event.worklog.005',
+    public_summary: 'Exact authorized summary.',
+  };
+
+  assert.equal(session.submit('intent.4.0001'), true);
+  assert.equal(session.submit('intent.4.0001'), false);
+  assert.deepEqual(submissions, [{ type: 'SUBMIT_INTENT', intent_id: 'intent.4.0001' }]);
+  session.handleMessage({
+    type: 'INTENT_RESOLVED',
+    projection: documentationProjection(),
+    events: [],
+    result: { accepted: false, error_code: 'ILLEGAL_DOCUMENT_SOURCE' },
+    terminal_result: null,
+  });
+  assert.equal(session.documentPreview.rejection.error_code, 'ILLEGAL_DOCUMENT_SOURCE');
+  assert.equal(session.lastAction.accepted, false);
+  assert.equal(session.lastAction.result_event_id, 'event.worklog.005');
+
+  assert.equal(session.submit('intent.4.0001'), true);
+  session.handleMessage({
+    type: 'INTENT_RESOLVED',
+    projection: documentationProjection({ legal: false, actions: 0 }),
+    events: [{
+      event_id: 'event.publication.009',
+      event_type: 'WORKLOG_PUBLICATION',
+      ticket_instance_id: 'match.ticket.001',
+      payload: {},
+    }],
+    result: { accepted: true, actions_spent: 1 },
+    terminal_result: null,
+  });
+  assert.equal(session.documentPreview, null);
+  assert.equal(session.panelTab, 'worklog');
+  assert.equal(session.lastAction.result_event_id, 'event.worklog.005');
+  assert.equal(session.restoreDocumentedWorklogFocus, 'event.worklog.005');
+});

@@ -1430,7 +1430,8 @@ function documentLive(context) {
   originalEntry.publication_time = now;
   originalEntry.publisher_player_id = player.player_id;
   ticket.worklog_entries.at(-1).source_result_event_id = publication.event_id;
-  ticket.worklog_entries.at(-1).public_result_summary = 'A structured result was published to the Worklog.';
+  const publicationTrace = `Published ${originalEntry.source_name} result from Worklog #${originalEntry.sequence}.`;
+  ticket.worklog_entries.at(-1).public_result_summary = publicationTrace;
   source.documented = true;
   if (!persistentBenchSource) {
     moveCard(
@@ -1467,8 +1468,8 @@ function documentLive(context) {
     recoveredCardInstanceId: persistentBenchSource ? null : sourceInstance.card_instance_id,
     targetSummary: `Worklog result ${payload.source_result_event_id} on ${ticket.ticket_instance_id}.`,
     resultSummary: persistentBenchSource
-      ? 'Diagnostic Evidence was published; the persistent Bench item remained available.'
-      : 'Evidence was published and its response card was recovered.',
+      ? `${publicationTrace} The persistent Diagnostic Bench item remained available.`
+      : `${publicationTrace} The source response Card returned to hand.`,
   };
 }
 
