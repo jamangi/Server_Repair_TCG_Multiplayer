@@ -55,12 +55,14 @@ The owner approved [`STORY-007 A`](../design/decisions/APPROVALS.md#story-007--c
 
 ## Characterization sequence
 
-Hands-on reading found that the campaign's compact insider conclusions can arrive before a newcomer understands the workflow, pain point, or term they address, and that the current cast voice is more uniform than the original editorial pass claimed. The corrective sequence keeps comprehension and personality separate until one final production migration:
+Hands-on reading found that the campaign's compact insider conclusions could arrive before a newcomer understood the workflow, pain point, or term they addressed, and that the cast voice was more uniform than the original editorial pass claimed. The completed corrective sequence kept comprehension and personality separate until one final production migration:
 
 1. [`TASK-033-HIGH`](../tasks/TASK-033-audit-story-context-and-comprehension.md) — completed; the [newcomer-context audit](campaigns/QUIET_CASCADE_CONTEXT_AUDIT.md), machine [context ledger](reports/QUIET_CASCADE_CONTEXT_LEDGER.json), and [cold-reader questions](reports/QUIET_CASCADE_COMPREHENSION_QUESTIONS.md) reconcile all reachable production-facing copy without changing it.
 2. [`TASK-034-XHIGH`](../tasks/TASK-034-build-context-complete-story-dialogue-draft.md) — completed; the [non-live candidate revision](revisions/quiet-cascade-characterization-v2/CONTEXT_CHANGELOG.md) resolves every audited concept and locks per-line payloads across all 48 route transcripts while leaving the live campaign untouched.
-3. [`TASK-035-HIGH`](../tasks/TASK-035-deepen-character-bibles-and-voice-spec.md) — deepen the nine canonical characters and create practical voice-translation cards from transformed public-domain reference constellations.
-4. [`TASK-036-XHIGH`](../tasks/TASK-036-integrate-story-characterization-pass.md) — translate the context-complete payloads through those voices and ship one versioned campaign migration with full topology, checkpoint, Match, and transcript proof.
+3. [`TASK-035-HIGH`](../tasks/TASK-035-deepen-character-bibles-and-voice-spec.md) — completed nine canonical character bibles and practical voice-translation cards from transformed public-domain reference constellations.
+4. [`TASK-036-XHIGH`](../tasks/TASK-036-integrate-story-characterization-pass.md) — shipped the context-complete payloads through those voices as one versioned campaign migration with full topology, checkpoint, Match, and transcript proof.
+
+Production now loads `content/story-v1/campaigns/quiet-cascade-characterization-v2/`. The original `quiet-cascade/` directory remains immutable migration and comparison history. See the [final dialogue comparison](revisions/quiet-cascade-characterization-v2/FINAL_DIALOGUE_COMPARISON.md), [48 side-by-side route transcripts](revisions/quiet-cascade-characterization-v2/FINAL_ROUTE_TRANSCRIPTS.md), [character reference ledger](CHARACTER_REFERENCE_LEDGER.md), and [voice cards](CHARACTER_VOICE_CARDS.md).
 
 The owner approved [`STORY-008 A`](../design/decisions/APPROVALS.md#story-008--characterization-pass-creative-discretion--a-approved-2026-08-28), so reference and backstory selections do not require a per-character approval stop. Canonical names, roles, visual identities, established relationships, protagonist customization, and gameplay authority remain fixed boundaries.
 

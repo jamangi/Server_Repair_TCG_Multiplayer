@@ -2,7 +2,7 @@
 
 ## Status
 
-**Queued after TASK-033 through TASK-035.** This is the only task in the sequence that changes the live campaign. It combines the context-complete candidate with the approved voice bibles in one versioned production migration.
+**Completed 2026-08-28.** The context-complete draft and approved voice bibles ship together as `quiet-cascade-characterization-v2`; v1 remains immutable and migrates only after digest verification at the same durable checkpoint.
 
 ## Objective
 

@@ -117,11 +117,13 @@ test('Story navigation, accessible scene, real Match, and exact-once return form
   await expect(history).not.toBeVisible();
   if (UPDATE_VISUALS) await captureVisual(page, 'tests/visual/task-028/story-scene-desktop.png');
 
-  for (let step = 0; step < 4 && !await page.locator('[data-story-choice]').count(); step += 1) {
+  for (let step = 0; step < 8 && !await page.locator('[data-story-choice]').count(); step += 1) {
     await page.locator('[data-story-advance]').click();
   }
   const choices = page.locator('[data-story-choice]');
-  await expect(page.locator('.story-choices legend')).toHaveText('Choose the first context to carry forward.');
+  await expect(page.locator('.story-choices legend')).toHaveText(
+    'Choose which public history should lead; both will remain in the handoff.',
+  );
   await expect(choices).toHaveCount(2);
   await expect(page.locator('[data-story-art-alternative="transient"]')).toContainText('serial-history summary');
   await expect(choices.first()).toBeFocused();

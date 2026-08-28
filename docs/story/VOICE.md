@@ -216,3 +216,41 @@ Before approving a campaign scene, ask:
 6. Does humor preserve everyone's competence and dignity?
 7. If the scene starts a match, is the player's primary activity clearly the repair work that follows?
 8. If the scene follows a match, does it react to what the player actually established rather than an assumed perfect solution?
+
+## Payload-to-voice translation method
+
+TASK-034's context payload is the floor below which a line may not fall. Voice is a way of arranging and relating that meaning, not permission to replace it.
+
+1. **Lock the payload.** Copy the observation or source, confidence, scope, temporal status, public/private boundary, technical terms, promised consequence, and newcomer context into a short checklist.
+2. **Name the situation.** Record speaker, addressee, location, power relationship, pressure register, what each person wants, and what the previous displayed turn already established.
+3. **Choose one voice lever.** Prefer a reasoning tactic—contrast, question, sequence, audience framing, source chain, or release criterion—over a catchphrase. A relationship beat can change address or order without adding a new fact.
+4. **Draft from the payload.** Change rhythm, syntax, order within the turn, humor, hesitation, or metaphor only while every locked item remains recoverable to a newcomer.
+5. **Run the subtraction test.** Remove the joke or personal clause. The technical statement must remain accurate. Remove the technical statement. The texture should still sound like the same person rather than generic decoration.
+6. **Compare three columns.** Preserve a deterministic original/context-draft/final row. If final meaning differs, amend the payload ledger explicitly before integration; prose cannot silently win.
+7. **Read in route context.** Check first-use explanations, neighboring turns, choice acknowledgment, result state, hidden information, mobile density, and whether the protagonist remains temperament-flexible.
+
+### Semantic locks
+
+A colorful rewrite must not change who observed a fact, what artifact supplied it, whether it is current or historical, whether it is verified or merely reported, what Candidate remains possible, what a Match established, what a choice promises, or what another team is authorized to do. It must not manufacture Evidence, Isolation, Repair, Verify, Documentation, closure, Service Points, or a shared cause. A private Give Up answer stays inside that archived Ticket.
+
+Gameplay terms are capitalized when they name authored game state: Ticket, Candidate, Hypothesis, Test, Evidence, Isolation, Repair, Verify, Documentation, Worklog, Gate, Story Service Points, Give Up, Bench, Rigline, Trace, Inflow, First Look, SIFT, and Civic Atlas. Natural surrounding language should keep the explanation from reading like a glossary.
+
+## Personal-texture policy
+
+Across a campaign, roughly **five to ten percent of a speaking character's dialogue moments** may carry a personal nugget, off-duty concern, habitual observation, relationship beat, or idiosyncratic joke. This is a restraint range, not a quota per scene or a requirement that every person mention a hobby. Urgent safety, first-use context, and result authority come first.
+
+Each used speaker should still receive at least one memorable non-procedural beat across the campaign. A beat counts only when it arises naturally from the room, object, relationship, or pressure and does not compete with the payload. TASK-036 may use only facts marked `Campaign-safe` in `CHARACTERS.md`; `Iceberg` facts remain explanatory material for writers and must not appear. The final comparison ledger should mark personal-texture lines so campaign-level percentage and one-per-speaker coverage are reviewable.
+
+Good texture is removable without changing the technical conclusion, but its placement changes how the relationship feels. Poor texture is a hobby pasted onto an urgent instruction, a catchphrase repeated until it becomes a label, or private biography used to force intimacy with the customizable protagonist.
+
+## Anti-drift and distinction review
+
+- **Anonymized read:** hide names and job titles in a sample from each speaker. Reviewers should distinguish the reasoning tactic, rhythm, and relationship more often than chance without depending only on specialist jargon.
+- **Register spread:** compare ordinary floor conversation, pressure/conflict, and reflective/debrief language. A person's priorities persist while sentence length and social tactic change.
+- **Trait frequency:** no favorite construction, joke type, metaphor source, or personal object should appear in every scene. Repetition belongs to an institutional problem only when the route needs it.
+- **Dignity check:** error, impatience, defensiveness, humor, and correction do not erase competence. Identity, age, trauma, disability, accent, or language fluency never substitutes for a voice design.
+- **Relationship check:** a line should change when addressed upward, downward, to a peer, or to the protagonist, even when its payload does not.
+- **Quiet-line permission:** connective language may simply orient, acknowledge, or let a conclusion land. Not every displayed turn needs a maxim.
+- **Player boundary:** ensemble specificity must not assign the player a home, family, education, hobby, belief, fixed mood, or personal history. Player options name an investigative priority or attitude broad enough for multiple temperaments.
+
+`CHARACTER_VOICE_CARDS.md` is the operational exercise set for these rules. Its examples translate TASK-034 context-complete payloads and are guidance; production text remains controlled by the versioned campaign and its final comparison ledger.

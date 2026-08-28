@@ -86,25 +86,25 @@
     {
       "incoming_references": 2,
       "label_id": "story.qc01.prologue.converge",
-      "location": "story.script.qc01.chapter01:20",
+      "location": "story.script.qc01.chapter01:23",
       "reachable": true
     },
     {
       "incoming_references": 2,
       "label_id": "story.qc01.shift02.match",
-      "location": "story.script.qc01.chapter01:48",
+      "location": "story.script.qc01.chapter01:53",
       "reachable": true
     },
     {
       "incoming_references": 2,
       "label_id": "story.qc01.act01.context_ack",
-      "location": "story.script.qc01.chapter01:71",
+      "location": "story.script.qc01.chapter01:78",
       "reachable": true
     },
     {
       "incoming_references": 2,
       "label_id": "story.qc01.act01.gate",
-      "location": "story.script.qc01.chapter01:79",
+      "location": "story.script.qc01.chapter01:86",
       "reachable": true
     },
     {
@@ -116,55 +116,55 @@
     {
       "incoming_references": 2,
       "label_id": "story.qc01.act02.converge",
-      "location": "story.script.qc01.chapter02:19",
+      "location": "story.script.qc01.chapter02:20",
       "reachable": true
     },
     {
       "incoming_references": 2,
       "label_id": "story.qc01.shift04.match",
-      "location": "story.script.qc01.chapter02:45",
+      "location": "story.script.qc01.chapter02:46",
       "reachable": true
     },
     {
       "incoming_references": 2,
       "label_id": "story.qc01.act02.mentor_ack",
-      "location": "story.script.qc01.chapter02:66",
+      "location": "story.script.qc01.chapter02:67",
       "reachable": true
     },
     {
       "incoming_references": 2,
       "label_id": "story.qc01.act02.debrief",
-      "location": "story.script.qc01.chapter02:74",
+      "location": "story.script.qc01.chapter02:75",
       "reachable": true
     },
     {
       "incoming_references": 2,
       "label_id": "story.qc01.act03.converge",
-      "location": "story.script.qc01.chapter03:22",
+      "location": "story.script.qc01.chapter03:23",
       "reachable": true
     },
     {
       "incoming_references": 2,
       "label_id": "story.qc01.act03.record_ack",
-      "location": "story.script.qc01.chapter03:49",
+      "location": "story.script.qc01.chapter03:50",
       "reachable": true
     },
     {
       "incoming_references": 2,
       "label_id": "story.qc01.act03.debrief",
-      "location": "story.script.qc01.chapter03:57",
+      "location": "story.script.qc01.chapter03:58",
       "reachable": true
     },
     {
       "incoming_references": 2,
       "label_id": "story.qc01.act04.converge",
-      "location": "story.script.qc01.chapter04:21",
+      "location": "story.script.qc01.chapter04:22",
       "reachable": true
     },
     {
       "incoming_references": 2,
       "label_id": "story.qc01.act04.ending_gate",
-      "location": "story.script.qc01.chapter04:51",
+      "location": "story.script.qc01.chapter04:52",
       "reachable": true
     }
   ],
@@ -173,55 +173,55 @@
     "checkpoints": 29,
     "choices": 4,
     "conditionals": 15,
-    "dialogue": 90,
+    "dialogue": 100,
     "labels": 66,
     "matches": 6,
-    "narration": 5,
+    "narration": 6,
     "returns": 0,
     "scenes": 24,
     "scripts": 4,
-    "statements": 324,
+    "statements": 335,
     "terminal_statements": 6
   },
   "cycles": [],
   "dead_ends": [
-    "story.script.qc01.chapter04:63",
-    "story.script.qc01.chapter04:66",
-    "story.script.qc01.chapter04:75",
-    "story.script.qc01.chapter04:78",
-    "story.script.qc01.chapter04:87",
-    "story.script.qc01.chapter04:90"
+    "story.script.qc01.chapter04:64",
+    "story.script.qc01.chapter04:67",
+    "story.script.qc01.chapter04:76",
+    "story.script.qc01.chapter04:79",
+    "story.script.qc01.chapter04:88",
+    "story.script.qc01.chapter04:91"
   ],
   "endings": [
     {
       "checkpoint_id": "checkpoint.qc01.ending.release.outcomes",
       "ending_id": "ending.qc01.defensible_release",
-      "location": "story.script.qc01.chapter04:63"
+      "location": "story.script.qc01.chapter04:64"
     },
     {
       "checkpoint_id": "checkpoint.qc01.ending.release.uncertainty",
       "ending_id": "ending.qc01.defensible_release",
-      "location": "story.script.qc01.chapter04:66"
+      "location": "story.script.qc01.chapter04:67"
     },
     {
       "checkpoint_id": "checkpoint.qc01.ending.bounded.outcomes",
       "ending_id": "ending.qc01.bounded_account",
-      "location": "story.script.qc01.chapter04:75"
+      "location": "story.script.qc01.chapter04:76"
     },
     {
       "checkpoint_id": "checkpoint.qc01.ending.bounded.uncertainty",
       "ending_id": "ending.qc01.bounded_account",
-      "location": "story.script.qc01.chapter04:78"
+      "location": "story.script.qc01.chapter04:79"
     },
     {
       "checkpoint_id": "checkpoint.qc01.ending.hold.outcomes",
       "ending_id": "ending.qc01.gate_hold",
-      "location": "story.script.qc01.chapter04:87"
+      "location": "story.script.qc01.chapter04:88"
     },
     {
       "checkpoint_id": "checkpoint.qc01.ending.hold.uncertainty",
       "ending_id": "ending.qc01.gate_hold",
-      "location": "story.script.qc01.chapter04:90"
+      "location": "story.script.qc01.chapter04:91"
     }
   ],
   "entry_labels": [
@@ -237,109 +237,109 @@
     {
       "incoming_references": 1,
       "label_id": "story.qc01.prologue.choice_context",
-      "location": "story.script.qc01.chapter01:8",
+      "location": "story.script.qc01.chapter01:10",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.prologue.package_route",
-      "location": "story.script.qc01.chapter01:11",
+      "location": "story.script.qc01.chapter01:14",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.prologue.worklog_route",
-      "location": "story.script.qc01.chapter01:15",
+      "location": "story.script.qc01.chapter01:18",
       "reachable": true
     },
     {
       "incoming_references": 2,
       "label_id": "story.qc01.prologue.converge",
-      "location": "story.script.qc01.chapter01:20",
+      "location": "story.script.qc01.chapter01:23",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.shift01.match",
-      "location": "story.script.qc01.chapter01:25",
+      "location": "story.script.qc01.chapter01:28",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.shift01.return",
-      "location": "story.script.qc01.chapter01:32",
+      "location": "story.script.qc01.chapter01:37",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.shift01.success",
-      "location": "story.script.qc01.chapter01:34",
+      "location": "story.script.qc01.chapter01:39",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.shift01.abandon",
-      "location": "story.script.qc01.chapter01:41",
+      "location": "story.script.qc01.chapter01:46",
       "reachable": true
     },
     {
       "incoming_references": 2,
       "label_id": "story.qc01.shift02.match",
-      "location": "story.script.qc01.chapter01:48",
+      "location": "story.script.qc01.chapter01:53",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.shift02.return",
-      "location": "story.script.qc01.chapter01:55",
+      "location": "story.script.qc01.chapter01:60",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.shift02.success",
-      "location": "story.script.qc01.chapter01:57",
+      "location": "story.script.qc01.chapter01:62",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.shift02.abandon",
-      "location": "story.script.qc01.chapter01:64",
+      "location": "story.script.qc01.chapter01:70",
       "reachable": true
     },
     {
       "incoming_references": 2,
       "label_id": "story.qc01.act01.context_ack",
-      "location": "story.script.qc01.chapter01:71",
+      "location": "story.script.qc01.chapter01:78",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.act01.package_ack",
-      "location": "story.script.qc01.chapter01:73",
+      "location": "story.script.qc01.chapter01:80",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.act01.worklog_ack",
-      "location": "story.script.qc01.chapter01:76",
+      "location": "story.script.qc01.chapter01:83",
       "reachable": true
     },
     {
       "incoming_references": 2,
       "label_id": "story.qc01.act01.gate",
-      "location": "story.script.qc01.chapter01:79",
+      "location": "story.script.qc01.chapter01:86",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.act01.earned",
-      "location": "story.script.qc01.chapter01:81",
+      "location": "story.script.qc01.chapter01:88",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.act01.support",
-      "location": "story.script.qc01.chapter01:86",
+      "location": "story.script.qc01.chapter01:93",
       "reachable": true
     },
     {
@@ -351,91 +351,91 @@
     {
       "incoming_references": 1,
       "label_id": "story.qc01.act02.rigline_route",
-      "location": "story.script.qc01.chapter02:9",
+      "location": "story.script.qc01.chapter02:10",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.act02.trace_route",
-      "location": "story.script.qc01.chapter02:14",
+      "location": "story.script.qc01.chapter02:15",
       "reachable": true
     },
     {
       "incoming_references": 2,
       "label_id": "story.qc01.act02.converge",
-      "location": "story.script.qc01.chapter02:19",
+      "location": "story.script.qc01.chapter02:20",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.shift03.match",
-      "location": "story.script.qc01.chapter02:22",
+      "location": "story.script.qc01.chapter02:23",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.shift03.return",
-      "location": "story.script.qc01.chapter02:29",
+      "location": "story.script.qc01.chapter02:30",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.shift03.success",
-      "location": "story.script.qc01.chapter02:31",
+      "location": "story.script.qc01.chapter02:32",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.shift03.abandon",
-      "location": "story.script.qc01.chapter02:38",
+      "location": "story.script.qc01.chapter02:39",
       "reachable": true
     },
     {
       "incoming_references": 2,
       "label_id": "story.qc01.shift04.match",
-      "location": "story.script.qc01.chapter02:45",
+      "location": "story.script.qc01.chapter02:46",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.shift04.return",
-      "location": "story.script.qc01.chapter02:52",
+      "location": "story.script.qc01.chapter02:53",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.shift04.success",
-      "location": "story.script.qc01.chapter02:54",
+      "location": "story.script.qc01.chapter02:55",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.shift04.abandon",
-      "location": "story.script.qc01.chapter02:60",
+      "location": "story.script.qc01.chapter02:61",
       "reachable": true
     },
     {
       "incoming_references": 2,
       "label_id": "story.qc01.act02.mentor_ack",
-      "location": "story.script.qc01.chapter02:66",
+      "location": "story.script.qc01.chapter02:67",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.act02.reproduce_ack",
-      "location": "story.script.qc01.chapter02:68",
+      "location": "story.script.qc01.chapter02:69",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.act02.discriminate_ack",
-      "location": "story.script.qc01.chapter02:71",
+      "location": "story.script.qc01.chapter02:72",
       "reachable": true
     },
     {
       "incoming_references": 2,
       "label_id": "story.qc01.act02.debrief",
-      "location": "story.script.qc01.chapter02:74",
+      "location": "story.script.qc01.chapter02:75",
       "reachable": true
     },
     {
@@ -447,67 +447,67 @@
     {
       "incoming_references": 1,
       "label_id": "story.qc01.act03.preserve_route",
-      "location": "story.script.qc01.chapter03:12",
+      "location": "story.script.qc01.chapter03:13",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.act03.summary_route",
-      "location": "story.script.qc01.chapter03:17",
+      "location": "story.script.qc01.chapter03:18",
       "reachable": true
     },
     {
       "incoming_references": 2,
       "label_id": "story.qc01.act03.converge",
-      "location": "story.script.qc01.chapter03:22",
+      "location": "story.script.qc01.chapter03:23",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.shift05.match",
-      "location": "story.script.qc01.chapter03:26",
+      "location": "story.script.qc01.chapter03:27",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.shift05.return",
-      "location": "story.script.qc01.chapter03:33",
+      "location": "story.script.qc01.chapter03:34",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.shift05.success",
-      "location": "story.script.qc01.chapter03:35",
+      "location": "story.script.qc01.chapter03:36",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.shift05.abandon",
-      "location": "story.script.qc01.chapter03:42",
+      "location": "story.script.qc01.chapter03:43",
       "reachable": true
     },
     {
       "incoming_references": 2,
       "label_id": "story.qc01.act03.record_ack",
-      "location": "story.script.qc01.chapter03:49",
+      "location": "story.script.qc01.chapter03:50",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.act03.negatives_ack",
-      "location": "story.script.qc01.chapter03:51",
+      "location": "story.script.qc01.chapter03:52",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.act03.summary_ack",
-      "location": "story.script.qc01.chapter03:54",
+      "location": "story.script.qc01.chapter03:55",
       "reachable": true
     },
     {
       "incoming_references": 2,
       "label_id": "story.qc01.act03.debrief",
-      "location": "story.script.qc01.chapter03:57",
+      "location": "story.script.qc01.chapter03:58",
       "reachable": true
     },
     {
@@ -519,109 +519,109 @@
     {
       "incoming_references": 1,
       "label_id": "story.qc01.act04.outcomes_route",
-      "location": "story.script.qc01.chapter04:11",
+      "location": "story.script.qc01.chapter04:12",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.act04.uncertainty_route",
-      "location": "story.script.qc01.chapter04:16",
+      "location": "story.script.qc01.chapter04:17",
       "reachable": true
     },
     {
       "incoming_references": 2,
       "label_id": "story.qc01.act04.converge",
-      "location": "story.script.qc01.chapter04:21",
+      "location": "story.script.qc01.chapter04:22",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.shift06.match",
-      "location": "story.script.qc01.chapter04:26",
+      "location": "story.script.qc01.chapter04:27",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.shift06.return",
-      "location": "story.script.qc01.chapter04:33",
+      "location": "story.script.qc01.chapter04:34",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.shift06.success",
-      "location": "story.script.qc01.chapter04:35",
+      "location": "story.script.qc01.chapter04:36",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.shift06.abandon",
-      "location": "story.script.qc01.chapter04:43",
+      "location": "story.script.qc01.chapter04:44",
       "reachable": true
     },
     {
       "incoming_references": 2,
       "label_id": "story.qc01.act04.ending_gate",
-      "location": "story.script.qc01.chapter04:51",
+      "location": "story.script.qc01.chapter04:52",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.ending.below_release",
-      "location": "story.script.qc01.chapter04:53",
+      "location": "story.script.qc01.chapter04:54",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.ending.release",
-      "location": "story.script.qc01.chapter04:55",
+      "location": "story.script.qc01.chapter04:56",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.ending.release.outcomes",
-      "location": "story.script.qc01.chapter04:61",
+      "location": "story.script.qc01.chapter04:62",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.ending.release.uncertainty",
-      "location": "story.script.qc01.chapter04:64",
+      "location": "story.script.qc01.chapter04:65",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.ending.bounded",
-      "location": "story.script.qc01.chapter04:67",
+      "location": "story.script.qc01.chapter04:68",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.ending.bounded.outcomes",
-      "location": "story.script.qc01.chapter04:73",
+      "location": "story.script.qc01.chapter04:74",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.ending.bounded.uncertainty",
-      "location": "story.script.qc01.chapter04:76",
+      "location": "story.script.qc01.chapter04:77",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.ending.hold",
-      "location": "story.script.qc01.chapter04:79",
+      "location": "story.script.qc01.chapter04:80",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.ending.hold.outcomes",
-      "location": "story.script.qc01.chapter04:85",
+      "location": "story.script.qc01.chapter04:86",
       "reachable": true
     },
     {
       "incoming_references": 1,
       "label_id": "story.qc01.ending.hold.uncertainty",
-      "location": "story.script.qc01.chapter04:88",
+      "location": "story.script.qc01.chapter04:89",
       "reachable": true
     }
   ],
@@ -684,7 +684,7 @@
     "story.character.priya_nayar",
     "story.character.sora_chen"
   ],
-  "reachable_statement_count": 324,
+  "reachable_statement_count": 335,
   "report_version": "story-graph-report-v1",
   "unique_ending_ids": [
     "ending.qc01.bounded_account",

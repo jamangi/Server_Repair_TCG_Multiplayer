@@ -1,0 +1,520 @@
+{
+  "by_setting_group": [
+    {
+      "counts": {
+        "builder_unsatisfiable": 0,
+        "failed": 0,
+        "invalidated": 0,
+        "no_legal_progress_move": 0,
+        "policy_stall": 0,
+        "proven_stalemate": 0,
+        "requested": 1,
+        "simulation_cap": 0,
+        "started": 1,
+        "succeeded": 1
+      },
+      "results_by_seed": [
+        {
+          "classification": "SUCCEEDED",
+          "seeds": [
+            "story.quiet_cascade.s01.v1"
+          ],
+          "terminal_reason_codes": [
+            "QUEUE_EMPTY"
+          ]
+        }
+      ],
+      "seeds": [
+        "story.quiet_cascade.s01.v1"
+      ],
+      "setting_group_id": "story-qc01-shift-01",
+      "terminal_reasons": [
+        "QUEUE_EMPTY"
+      ],
+      "turn_distribution": {
+        "count": 1,
+        "maximum": 14,
+        "mean": 14,
+        "median": 14,
+        "minimum": 14,
+        "p95": 14
+      }
+    },
+    {
+      "counts": {
+        "builder_unsatisfiable": 0,
+        "failed": 0,
+        "invalidated": 0,
+        "no_legal_progress_move": 0,
+        "policy_stall": 0,
+        "proven_stalemate": 0,
+        "requested": 1,
+        "simulation_cap": 0,
+        "started": 1,
+        "succeeded": 1
+      },
+      "results_by_seed": [
+        {
+          "classification": "SUCCEEDED",
+          "seeds": [
+            "story.quiet_cascade.s02.v1"
+          ],
+          "terminal_reason_codes": [
+            "QUEUE_EMPTY"
+          ]
+        }
+      ],
+      "seeds": [
+        "story.quiet_cascade.s02.v1"
+      ],
+      "setting_group_id": "story-qc01-shift-02",
+      "terminal_reasons": [
+        "QUEUE_EMPTY"
+      ],
+      "turn_distribution": {
+        "count": 1,
+        "maximum": 93,
+        "mean": 93,
+        "median": 93,
+        "minimum": 93,
+        "p95": 93
+      }
+    },
+    {
+      "counts": {
+        "builder_unsatisfiable": 0,
+        "failed": 0,
+        "invalidated": 0,
+        "no_legal_progress_move": 0,
+        "policy_stall": 0,
+        "proven_stalemate": 0,
+        "requested": 1,
+        "simulation_cap": 0,
+        "started": 1,
+        "succeeded": 1
+      },
+      "results_by_seed": [
+        {
+          "classification": "SUCCEEDED",
+          "seeds": [
+            "story.quiet_cascade.s03.v1"
+          ],
+          "terminal_reason_codes": [
+            "QUEUE_EMPTY"
+          ]
+        }
+      ],
+      "seeds": [
+        "story.quiet_cascade.s03.v1"
+      ],
+      "setting_group_id": "story-qc01-shift-03",
+      "terminal_reasons": [
+        "QUEUE_EMPTY"
+      ],
+      "turn_distribution": {
+        "count": 1,
+        "maximum": 21,
+        "mean": 21,
+        "median": 21,
+        "minimum": 21,
+        "p95": 21
+      }
+    },
+    {
+      "counts": {
+        "builder_unsatisfiable": 0,
+        "failed": 0,
+        "invalidated": 0,
+        "no_legal_progress_move": 0,
+        "policy_stall": 0,
+        "proven_stalemate": 0,
+        "requested": 1,
+        "simulation_cap": 0,
+        "started": 1,
+        "succeeded": 1
+      },
+      "results_by_seed": [
+        {
+          "classification": "SUCCEEDED",
+          "seeds": [
+            "story.quiet_cascade.s04.v1"
+          ],
+          "terminal_reason_codes": [
+            "QUEUE_EMPTY"
+          ]
+        }
+      ],
+      "seeds": [
+        "story.quiet_cascade.s04.v1"
+      ],
+      "setting_group_id": "story-qc01-shift-04",
+      "terminal_reasons": [
+        "QUEUE_EMPTY"
+      ],
+      "turn_distribution": {
+        "count": 1,
+        "maximum": 29,
+        "mean": 29,
+        "median": 29,
+        "minimum": 29,
+        "p95": 29
+      }
+    },
+    {
+      "counts": {
+        "builder_unsatisfiable": 0,
+        "failed": 0,
+        "invalidated": 0,
+        "no_legal_progress_move": 0,
+        "policy_stall": 0,
+        "proven_stalemate": 0,
+        "requested": 1,
+        "simulation_cap": 0,
+        "started": 1,
+        "succeeded": 1
+      },
+      "results_by_seed": [
+        {
+          "classification": "SUCCEEDED",
+          "seeds": [
+            "story.quiet_cascade.s05.v1"
+          ],
+          "terminal_reason_codes": [
+            "QUEUE_EMPTY"
+          ]
+        }
+      ],
+      "seeds": [
+        "story.quiet_cascade.s05.v1"
+      ],
+      "setting_group_id": "story-qc01-shift-05",
+      "terminal_reasons": [
+        "QUEUE_EMPTY"
+      ],
+      "turn_distribution": {
+        "count": 1,
+        "maximum": 112,
+        "mean": 112,
+        "median": 112,
+        "minimum": 112,
+        "p95": 112
+      }
+    },
+    {
+      "counts": {
+        "builder_unsatisfiable": 0,
+        "failed": 0,
+        "invalidated": 0,
+        "no_legal_progress_move": 0,
+        "policy_stall": 0,
+        "proven_stalemate": 0,
+        "requested": 1,
+        "simulation_cap": 0,
+        "started": 1,
+        "succeeded": 1
+      },
+      "results_by_seed": [
+        {
+          "classification": "SUCCEEDED",
+          "seeds": [
+            "story.quiet_cascade.s06.v1"
+          ],
+          "terminal_reason_codes": [
+            "QUEUE_EMPTY"
+          ]
+        }
+      ],
+      "seeds": [
+        "story.quiet_cascade.s06.v1"
+      ],
+      "setting_group_id": "story-qc01-shift-06",
+      "terminal_reasons": [
+        "QUEUE_EMPTY"
+      ],
+      "turn_distribution": {
+        "count": 1,
+        "maximum": 217,
+        "mean": 217,
+        "median": 217,
+        "minimum": 217,
+        "p95": 217
+      }
+    }
+  ],
+  "campaign_id": "task-027-quiet-cascade-v1",
+  "determinism": {
+    "compared_fields": [
+      "ticket_snapshot_digest",
+      "replay_digest",
+      "outcome",
+      "scores",
+      "turns"
+    ],
+    "identical_input_reruns": 6,
+    "mismatch_rows": [],
+    "mismatches": 0
+  },
+  "generated_by": "automated-harness-v1",
+  "overall": {
+    "builder_unsatisfiable": 0,
+    "failed": 0,
+    "invalidated": 0,
+    "no_legal_progress_move": 0,
+    "policy_stall": 0,
+    "proven_stalemate": 0,
+    "requested": 6,
+    "simulation_cap": 0,
+    "started": 6,
+    "succeeded": 6
+  },
+  "overall_turn_distribution": {
+    "count": 6,
+    "maximum": 217,
+    "mean": 81,
+    "median": 61,
+    "minimum": 14,
+    "p95": 217
+  },
+  "progress_move_audit": {
+    "affected_match_ids": [],
+    "any_no_legal_progress_move": false,
+    "pass_is_always_legal_and_not_counted_as_progress": true
+  },
+  "service_points": {
+    "player_profiles": [
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "seeds": [
+          "story.quiet_cascade.s01.v1"
+        ],
+        "setting_group_id": "story-qc01-shift-01",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "seeds": [
+          "story.quiet_cascade.s02.v1"
+        ],
+        "setting_group_id": "story-qc01-shift-02",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "seeds": [
+          "story.quiet_cascade.s03.v1"
+        ],
+        "setting_group_id": "story-qc01-shift-03",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "seeds": [
+          "story.quiet_cascade.s04.v1"
+        ],
+        "setting_group_id": "story-qc01-shift-04",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "seeds": [
+          "story.quiet_cascade.s05.v1"
+        ],
+        "setting_group_id": "story-qc01-shift-05",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "seeds": [
+          "story.quiet_cascade.s06.v1"
+        ],
+        "setting_group_id": "story-qc01-shift-06",
+        "starting": 0
+      }
+    ],
+    "players": [
+      {
+        "final": 0,
+        "matches": 1,
+        "net": 0,
+        "player_id": "player_a",
+        "setting_group_id": "story-qc01-shift-01",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "matches": 1,
+        "net": 0,
+        "player_id": "player_a",
+        "setting_group_id": "story-qc01-shift-02",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "matches": 1,
+        "net": 0,
+        "player_id": "player_a",
+        "setting_group_id": "story-qc01-shift-03",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "matches": 1,
+        "net": 0,
+        "player_id": "player_a",
+        "setting_group_id": "story-qc01-shift-04",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "matches": 1,
+        "net": 0,
+        "player_id": "player_a",
+        "setting_group_id": "story-qc01-shift-05",
+        "starting": 0
+      },
+      {
+        "final": 0,
+        "matches": 1,
+        "net": 0,
+        "player_id": "player_a",
+        "setting_group_id": "story-qc01-shift-06",
+        "starting": 0
+      }
+    ],
+    "team_profiles": [
+      {
+        "final": 2,
+        "net": 2,
+        "seeds": [
+          "story.quiet_cascade.s01.v1"
+        ],
+        "setting_group_id": "story-qc01-shift-01",
+        "starting": 0,
+        "team_id": "team.cooperative"
+      },
+      {
+        "final": 4,
+        "net": 4,
+        "seeds": [
+          "story.quiet_cascade.s02.v1"
+        ],
+        "setting_group_id": "story-qc01-shift-02",
+        "starting": 0,
+        "team_id": "team.cooperative"
+      },
+      {
+        "final": 4,
+        "net": 4,
+        "seeds": [
+          "story.quiet_cascade.s03.v1"
+        ],
+        "setting_group_id": "story-qc01-shift-03",
+        "starting": 0,
+        "team_id": "team.cooperative"
+      },
+      {
+        "final": 4,
+        "net": 4,
+        "seeds": [
+          "story.quiet_cascade.s04.v1"
+        ],
+        "setting_group_id": "story-qc01-shift-04",
+        "starting": 0,
+        "team_id": "team.cooperative"
+      },
+      {
+        "final": 4,
+        "net": 4,
+        "seeds": [
+          "story.quiet_cascade.s05.v1"
+        ],
+        "setting_group_id": "story-qc01-shift-05",
+        "starting": 0,
+        "team_id": "team.cooperative"
+      },
+      {
+        "final": 6,
+        "net": 6,
+        "seeds": [
+          "story.quiet_cascade.s06.v1"
+        ],
+        "setting_group_id": "story-qc01-shift-06",
+        "starting": 0,
+        "team_id": "team.cooperative"
+      }
+    ],
+    "teams": [
+      {
+        "final": 2,
+        "matches": 1,
+        "net": 2,
+        "setting_group_id": "story-qc01-shift-01",
+        "starting": 0,
+        "team_id": "team.cooperative"
+      },
+      {
+        "final": 4,
+        "matches": 1,
+        "net": 4,
+        "setting_group_id": "story-qc01-shift-02",
+        "starting": 0,
+        "team_id": "team.cooperative"
+      },
+      {
+        "final": 4,
+        "matches": 1,
+        "net": 4,
+        "setting_group_id": "story-qc01-shift-03",
+        "starting": 0,
+        "team_id": "team.cooperative"
+      },
+      {
+        "final": 4,
+        "matches": 1,
+        "net": 4,
+        "setting_group_id": "story-qc01-shift-04",
+        "starting": 0,
+        "team_id": "team.cooperative"
+      },
+      {
+        "final": 4,
+        "matches": 1,
+        "net": 4,
+        "setting_group_id": "story-qc01-shift-05",
+        "starting": 0,
+        "team_id": "team.cooperative"
+      },
+      {
+        "final": 6,
+        "matches": 1,
+        "net": 6,
+        "setting_group_id": "story-qc01-shift-06",
+        "starting": 0,
+        "team_id": "team.cooperative"
+      }
+    ]
+  },
+  "version_pins": {
+    "card_catalog_version": "core-card-catalog-technical-copy-v4",
+    "domain_content_version": "core-domain-snapshot-technical-copy-v3",
+    "generator_version": "ticket-builder-v3",
+    "harness_version": "automated-harness-v1",
+    "policy_versions": [
+      "coverage-seat-safe-v3"
+    ],
+    "ruleset_version": "first-version-v2",
+    "ticket_content_version": "core-ticket-parts-v3"
+  }
+}

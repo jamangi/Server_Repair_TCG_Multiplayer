@@ -10,7 +10,7 @@ import {
 } from '../src/story/quiet-cascade-report.mjs';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
-const CAMPAIGN_ROOT = path.join(ROOT, 'content/story-v1/campaigns/quiet-cascade');
+const CAMPAIGN_ROOT = path.join(ROOT, 'content/story-v1/campaigns/quiet-cascade-characterization-v2');
 const readJson = (filePath) => JSON.parse(fs.readFileSync(filePath, 'utf8'));
 
 function loadBundle() {
@@ -98,7 +98,7 @@ test('48 deterministic routes cover every choice option, both Match outcomes, an
 });
 
 test('committed route matrix and ending-band transcripts are generated from current scripts', () => {
-  const committed = readJson(path.join(ROOT, 'automated_games/task-027-quiet-cascade-v1/route-matrix.json'));
+  const committed = readJson(path.join(ROOT, 'automated_games/task-036-quiet-cascade-characterization-v2/route-matrix.json'));
   const recomputed = summarizeQuietCascadeRoutes(traverseQuietCascadeRoutes(bundle, matchRegistry));
   assert.deepEqual(committed, recomputed);
   const transcript = fs.readFileSync(path.join(ROOT, 'docs/story/reports/QUIET_CASCADE_ROUTE_TRANSCRIPTS.md'), 'utf8');

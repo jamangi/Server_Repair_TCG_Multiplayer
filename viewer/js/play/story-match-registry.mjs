@@ -1,7 +1,7 @@
 export const STORY_MATCH_CONFIGURATION_VERSION = 'story-match-configuration-v1';
 export const STORY_MATCH_RESULT_VERSION = 'story-match-result-v1';
 export const DEFAULT_STORY_MATCH_REGISTRY_URL = new URL(
-  '../../generated/play/content/story-v1/campaigns/quiet-cascade/matches.json',
+  '../../generated/play/content/story-v1/campaigns/quiet-cascade-characterization-v2/matches.json',
   import.meta.url,
 );
 

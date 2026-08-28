@@ -1,6 +1,6 @@
 # Quiet Cascade continuity ledger
 
-Status: production ledger for `story.campaign.quiet_cascade.v1`
+Status: **production ledger for `quiet-cascade-characterization-v2`; v1 retained for migration history**
 
 This ledger separates facts that every route may rely on from facts that exist only after a remembered choice or normalized Match return. It is not an author-only solution ledger and intentionally contains no hidden Fault, Evidence-outcome, or required-action disclosure.
 
@@ -79,3 +79,18 @@ No additional character is introduced. The seven used characters are all establi
 - Branch history is additive and bounded. Reconvergence may acknowledge a choice but cannot silently rewrite it.
 - Scene changes clear transient inserts. Any later reappearance is an explicit `show` using the same registered asset ID.
 - Motion is decorative. Every critical fact appears in accessible text and remains intelligible with transitions disabled.
+
+## Characterization-v2 continuity
+
+- The successor adds eleven displayed statements and replaces localized text without changing a label, variable, choice/option, condition, jump, checkpoint, Match reference/configuration, ending, Service Point gate, character/pose, background, or transient asset.
+- The registry, `matches.json`, and graph are byte-identical to v1. Production contains 335 reachable statements: 100 dialogue, six narration, and the unchanged structural inventory.
+- TASK-034 is the semantic floor. The final 124-row comparison records the original, context draft, final text, speaker/source, route coverage, gap IDs, and texture marker; there are no payload amendments.
+- Seven marked texture beats cover all seven speakers at 7% of 100 dialogue moments. Inez's scanner boundary, Malik's label maker, Sora's agenda diagrams, Hana's euphemism, Jonah's Rigline past, Priya's smoothing caution, and Ev/Priya's framing relationship may color their lines but establish no game fact.
+- Campaign-safe biography may be used only under `CHARACTERS.md`; Iceberg facts remain off-page. Luis and Bea stay canonical but silent in campaign one.
+- The protagonist remains a First Look Crossline Technician on the Continuity Rotation. No final line assigns home, family, education, hobby, belief, fixed mood, or personal history.
+
+## Content-version migration continuity
+
+`quiet-cascade-content-v1` is accepted only as the reviewed predecessor of `quiet-cascade-characterization-v2` for the same `story.campaign.quiet_cascade.v1` pack. Migration restores and verifies the v1 checkpoint and digest against a v1 manifest, preserves the checkpoint ID, variables, choices, points, branch history, Match results, pending Match/result, and ending marker, then changes the content version and computes a new digest. The runtime validates the result against the successor pack before persistence.
+
+This is an explicit restart at the same durable boundary, never a claim that an active Match or in-memory scene survived. Scene, pre-Match, pending-result, post-Match, ending, reload/route-leave, and import/export tests cover the path. A tampered digest, unknown predecessor, altered pack ID, or unstable authored ID requires recovery instead of best-effort conversion.

@@ -1,0 +1,163 @@
+{
+  "all_batches_constructible_and_pinned": true,
+  "batches": [
+    {
+      "builder_result_id": "builder_result.eccee2b1cb950b1b17f640e5",
+      "configuration_id": "builder.story.quiet_cascade.s01",
+      "diagnostics": [],
+      "exact_pin_match": true,
+      "expected_ticket_definition_ids": [
+        "ticket.generated.ef8a4924e707349bce5c2be7"
+      ],
+      "expected_ticket_snapshot_digests": [
+        "821769a6021482074d523c723dc08a6b9bd2885820eabe11a9011b199fc6dacb"
+      ],
+      "match_ref": "story.match.qc01.shift01.wrong_device",
+      "seed": "story.quiet_cascade.s01.v1",
+      "selected_attempt_id": "builder_attempt.cb98087dd4cc7e4985562b6d",
+      "status": "SUCCESS",
+      "ticket_definition_ids": [
+        "ticket.generated.ef8a4924e707349bce5c2be7"
+      ],
+      "ticket_snapshot_digests": [
+        "821769a6021482074d523c723dc08a6b9bd2885820eabe11a9011b199fc6dacb"
+      ]
+    },
+    {
+      "builder_result_id": "builder_result.91f1a92712d4b84de968e145",
+      "configuration_id": "builder.story.quiet_cascade.s02",
+      "diagnostics": [],
+      "exact_pin_match": true,
+      "expected_ticket_definition_ids": [
+        "ticket.generated.a10b8767580c9453c679a326",
+        "ticket.generated.8ee2c08bae1e3d005b35bff5"
+      ],
+      "expected_ticket_snapshot_digests": [
+        "c55b2fb6c7aee2644929ecdd803b3b3f5155b5ec4426b43e4953d0082391e0f7",
+        "8c7810616e535b8f62d3303e501bfcfdf8c9071df23903e2727b6fcb476e0d4b"
+      ],
+      "match_ref": "story.match.qc01.shift02.power_lot",
+      "seed": "story.quiet_cascade.s02.v1",
+      "selected_attempt_id": "builder_attempt.e857ceff4ccb26f53fa2d384",
+      "status": "SUCCESS",
+      "ticket_definition_ids": [
+        "ticket.generated.a10b8767580c9453c679a326",
+        "ticket.generated.8ee2c08bae1e3d005b35bff5"
+      ],
+      "ticket_snapshot_digests": [
+        "c55b2fb6c7aee2644929ecdd803b3b3f5155b5ec4426b43e4953d0082391e0f7",
+        "8c7810616e535b8f62d3303e501bfcfdf8c9071df23903e2727b6fcb476e0d4b"
+      ]
+    },
+    {
+      "builder_result_id": "builder_result.adb83775f7e621405af0db75",
+      "configuration_id": "builder.story.quiet_cascade.s03",
+      "diagnostics": [],
+      "exact_pin_match": true,
+      "expected_ticket_definition_ids": [
+        "ticket.generated.75ea6ec9e60d64c7cac4caa5",
+        "ticket.generated.424c8fab1db6aed25058ab78"
+      ],
+      "expected_ticket_snapshot_digests": [
+        "1bd3ccabc476313a0420cb9889ab5e7b84c60c250aa32f3d4f009f614f2c47e5",
+        "268c91a53ad795437e6690b2a5cc843071eea627671f2168b7a0dca00941a9c7"
+      ],
+      "match_ref": "story.match.qc01.shift03.memory_compare",
+      "seed": "story.quiet_cascade.s03.v1",
+      "selected_attempt_id": "builder_attempt.f121920201c8f079c13faf45",
+      "status": "SUCCESS",
+      "ticket_definition_ids": [
+        "ticket.generated.75ea6ec9e60d64c7cac4caa5",
+        "ticket.generated.424c8fab1db6aed25058ab78"
+      ],
+      "ticket_snapshot_digests": [
+        "1bd3ccabc476313a0420cb9889ab5e7b84c60c250aa32f3d4f009f614f2c47e5",
+        "268c91a53ad795437e6690b2a5cc843071eea627671f2168b7a0dca00941a9c7"
+      ]
+    },
+    {
+      "builder_result_id": "builder_result.dac9e754ff2251b42958d479",
+      "configuration_id": "builder.story.quiet_cascade.s04",
+      "diagnostics": [],
+      "exact_pin_match": true,
+      "expected_ticket_definition_ids": [
+        "ticket.generated.6e55cf55154d356da2e91126",
+        "ticket.generated.f60b9ce132c74c33f607df6d"
+      ],
+      "expected_ticket_snapshot_digests": [
+        "ce86a008060199c2f5c5cb2ed763385e8766315e35a2ce1b9b3e19fa39627a95",
+        "b8f877726a0d4356575d9efeb51c8226c674687ba0806ba067142ffc3f90c8cd"
+      ],
+      "match_ref": "story.match.qc01.shift04.passes_cold",
+      "seed": "story.quiet_cascade.s04.v1",
+      "selected_attempt_id": "builder_attempt.3b3d7cb7f36a788361660c25",
+      "status": "SUCCESS",
+      "ticket_definition_ids": [
+        "ticket.generated.6e55cf55154d356da2e91126",
+        "ticket.generated.f60b9ce132c74c33f607df6d"
+      ],
+      "ticket_snapshot_digests": [
+        "ce86a008060199c2f5c5cb2ed763385e8766315e35a2ce1b9b3e19fa39627a95",
+        "b8f877726a0d4356575d9efeb51c8226c674687ba0806ba067142ffc3f90c8cd"
+      ]
+    },
+    {
+      "builder_result_id": "builder_result.087ab77a93cedacc0354d7c9",
+      "configuration_id": "builder.story.quiet_cascade.s05",
+      "diagnostics": [],
+      "exact_pin_match": true,
+      "expected_ticket_definition_ids": [
+        "ticket.generated.759fd75d6ac043a57d6673d7",
+        "ticket.generated.cbc8003979ffdaca83b41d7d"
+      ],
+      "expected_ticket_snapshot_digests": [
+        "45f7e05c9d9a57f0e324c34d21dd1420d7c0f76ec0c4753b1494414a292697bd",
+        "4de1801512399068fea5881be79955af674ae35eff511d7a1d75101d6c0085d2"
+      ],
+      "match_ref": "story.match.qc01.shift05.no_offer",
+      "seed": "story.quiet_cascade.s05.v1",
+      "selected_attempt_id": "builder_attempt.a48666f528cc53e357ccc572",
+      "status": "SUCCESS",
+      "ticket_definition_ids": [
+        "ticket.generated.759fd75d6ac043a57d6673d7",
+        "ticket.generated.cbc8003979ffdaca83b41d7d"
+      ],
+      "ticket_snapshot_digests": [
+        "45f7e05c9d9a57f0e324c34d21dd1420d7c0f76ec0c4753b1494414a292697bd",
+        "4de1801512399068fea5881be79955af674ae35eff511d7a1d75101d6c0085d2"
+      ]
+    },
+    {
+      "builder_result_id": "builder_result.1384c0e84e24b363a2496cf8",
+      "configuration_id": "builder.story.quiet_cascade.s06",
+      "diagnostics": [],
+      "exact_pin_match": true,
+      "expected_ticket_definition_ids": [
+        "ticket.generated.3ec80b1b0e7221ac725aedf9",
+        "ticket.generated.45a70010dd4752f864990575",
+        "ticket.generated.5352abd871c2e9076be92a0b"
+      ],
+      "expected_ticket_snapshot_digests": [
+        "1c74ad0725e500ac01d4c356f17551fee11678a88b35ca5b591ff056a2efdff2",
+        "863ca5c0e0a72f9440e3352c80b070f4bde1ca166c801e79425821adfa7f4420",
+        "b06dc5a7d12c29af78edd71f7a82a611d971844e6e71863e142bc293f4e6af27"
+      ],
+      "match_ref": "story.match.qc01.shift06.quiet_cascade",
+      "seed": "story.quiet_cascade.s06.v1",
+      "selected_attempt_id": "builder_attempt.40ef29bb1dc06f3b4c80d976",
+      "status": "SUCCESS",
+      "ticket_definition_ids": [
+        "ticket.generated.3ec80b1b0e7221ac725aedf9",
+        "ticket.generated.45a70010dd4752f864990575",
+        "ticket.generated.5352abd871c2e9076be92a0b"
+      ],
+      "ticket_snapshot_digests": [
+        "1c74ad0725e500ac01d4c356f17551fee11678a88b35ca5b591ff056a2efdff2",
+        "863ca5c0e0a72f9440e3352c80b070f4bde1ca166c801e79425821adfa7f4420",
+        "b06dc5a7d12c29af78edd71f7a82a611d971844e6e71863e142bc293f4e6af27"
+      ]
+    }
+  ],
+  "campaign_id": "story.campaign.quiet_cascade.v1",
+  "proof_version": "story-builder-proof-v1"
+}

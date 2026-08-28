@@ -1,0 +1,660 @@
+{
+  "script_version": "story-script-v1",
+  "script_id": "story.script.qc01.chapter01",
+  "chapter_id": "story.chapter.qc01.learn_the_line",
+  "statements": [
+    {
+      "type": "label",
+      "label_id": "story.qc01.entry"
+    },
+    {
+      "type": "scene",
+      "scene_id": "story.scene.qc01.inflow_open",
+      "background_asset_id": "story.bg.trinity.inflow.predawn_storm",
+      "location_text_id": "text.qc01.location.inflow",
+      "time_text_id": "text.qc01.time.predawn",
+      "transition": "DISSOLVE",
+      "checkpoint_id": "checkpoint.qc01.chapter01.entry"
+    },
+    {
+      "type": "show",
+      "tag": "cast.inez",
+      "layer": "characters",
+      "character_id": "story.character.inez_calder",
+      "pose_id": "focused",
+      "position": "RIGHT",
+      "transition": "FADE"
+    },
+    {
+      "type": "narrate",
+      "statement_id": "story.qc01.ch01.open.01",
+      "text_id": "text.qc01.ch01.open.01",
+      "style_key": "NARRATION"
+    },
+    {
+      "type": "narrate",
+      "statement_id": "story.qc01.ch01.open.02",
+      "text_id": "text.qc01.ch01.open.02",
+      "style_key": "NARRATION"
+    },
+    {
+      "type": "narrate",
+      "statement_id": "story.qc01.v2.context.role.01",
+      "text_id": "text.qc01.v2.context.role.01",
+      "style_key": "NARRATION"
+    },
+    {
+      "type": "show",
+      "tag": "insert.repeat_serial",
+      "layer": "transient",
+      "asset_id": "story.insert.qc01.repeat_serial_history",
+      "position": "CENTER",
+      "transition": "FADE"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc01.ch01.open.03",
+      "speaker_key": "story.character.inez_calder",
+      "text_id": "text.qc01.ch01.open.03",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc01.v2.context.inflow.01",
+      "speaker_key": "story.character.inez_calder",
+      "text_id": "text.qc01.v2.context.inflow.01",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "jump",
+      "label_id": "story.qc01.prologue.choice_context"
+    },
+    {
+      "type": "label",
+      "label_id": "story.qc01.prologue.choice_context"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc01.ch01.open.04",
+      "speaker_key": "story.character.inez_calder",
+      "text_id": "text.qc01.ch01.open.04",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc01.v2.context.records.01",
+      "speaker_key": "story.character.inez_calder",
+      "text_id": "text.qc01.v2.context.records.01",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "choice",
+      "choice_id": "choice.qc01.intake_context",
+      "prompt_text_id": "text.qc01.ch01.choice.intake.prompt",
+      "options": [
+        {
+          "option_id": "package_provenance",
+          "text_id": "text.qc01.ch01.choice.intake.package",
+          "jump_label": "story.qc01.prologue.package_route",
+          "writes": [
+            {
+              "variable_id": "story.qc01.intake_context",
+              "value": "PACKAGE_PROVENANCE"
+            }
+          ]
+        },
+        {
+          "option_id": "prior_worklog",
+          "text_id": "text.qc01.ch01.choice.intake.worklog",
+          "jump_label": "story.qc01.prologue.worklog_route",
+          "writes": [
+            {
+              "variable_id": "story.qc01.intake_context",
+              "value": "PRIOR_WORKLOG"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "label",
+      "label_id": "story.qc01.prologue.package_route"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc01.ch01.package.01",
+      "speaker_key": "story.character.inez_calder",
+      "text_id": "text.qc01.ch01.package.01",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc01.ch01.package.02",
+      "speaker_key": "story.character.inez_calder",
+      "text_id": "text.qc01.ch01.package.02",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "jump",
+      "label_id": "story.qc01.prologue.converge"
+    },
+    {
+      "type": "label",
+      "label_id": "story.qc01.prologue.worklog_route"
+    },
+    {
+      "type": "show",
+      "tag": "cast.ev",
+      "layer": "characters",
+      "character_id": "story.character.ev_shaw",
+      "pose_id": "concerned",
+      "position": "LEFT",
+      "transition": "FADE"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc01.ch01.worklog.01",
+      "speaker_key": "story.character.ev_shaw",
+      "text_id": "text.qc01.ch01.worklog.01",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc01.ch01.worklog.02",
+      "speaker_key": "story.character.ev_shaw",
+      "text_id": "text.qc01.ch01.worklog.02",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "jump",
+      "label_id": "story.qc01.prologue.converge"
+    },
+    {
+      "type": "label",
+      "label_id": "story.qc01.prologue.converge"
+    },
+    {
+      "type": "hide",
+      "tag": "insert.repeat_serial",
+      "layer": "transient",
+      "transition": "FADE"
+    },
+    {
+      "type": "show",
+      "tag": "cast.ev",
+      "layer": "characters",
+      "character_id": "story.character.ev_shaw",
+      "pose_id": "focused",
+      "position": "LEFT",
+      "transition": "FADE"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc01.ch01.converge.01",
+      "speaker_key": "story.character.ev_shaw",
+      "text_id": "text.qc01.ch01.converge.01",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "jump",
+      "label_id": "story.qc01.shift01.match"
+    },
+    {
+      "type": "label",
+      "label_id": "story.qc01.shift01.match"
+    },
+    {
+      "type": "scene",
+      "scene_id": "story.scene.qc01.shift01.core_floor",
+      "background_asset_id": "story.bg.trinity.core_floor.night_storm",
+      "location_text_id": "text.qc01.location.core_floor",
+      "time_text_id": "text.qc01.time.shift_start",
+      "transition": "DISSOLVE",
+      "checkpoint_id": "checkpoint.qc01.shift01.scene"
+    },
+    {
+      "type": "hide",
+      "tag": "cast.inez",
+      "layer": "characters",
+      "transition": "CUT"
+    },
+    {
+      "type": "show",
+      "tag": "cast.ev",
+      "layer": "characters",
+      "character_id": "story.character.ev_shaw",
+      "pose_id": "focused",
+      "position": "LEFT",
+      "transition": "FADE"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc01.ch01.shift01.01",
+      "speaker_key": "story.character.ev_shaw",
+      "text_id": "text.qc01.ch01.shift01.01",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc01.v2.context.lifecycle.01",
+      "speaker_key": "story.character.ev_shaw",
+      "text_id": "text.qc01.v2.context.lifecycle.01",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc01.ch01.shift01.02",
+      "speaker_key": "story.character.ev_shaw",
+      "text_id": "text.qc01.ch01.shift01.02",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc01.v2.context.lifecycle.02",
+      "speaker_key": "story.character.ev_shaw",
+      "text_id": "text.qc01.v2.context.lifecycle.02",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "start_match",
+      "match_ref": "story.match.qc01.shift01.wrong_device",
+      "return_label": "story.qc01.shift01.return",
+      "pre_match_checkpoint_id": "checkpoint.qc01.shift01.pre_match",
+      "post_match_checkpoint_id": "checkpoint.qc01.shift01.post_match"
+    },
+    {
+      "type": "label",
+      "label_id": "story.qc01.shift01.return"
+    },
+    {
+      "type": "if",
+      "condition": {
+        "op": "MATCH_RESULT",
+        "match_ref": "story.match.qc01.shift01.wrong_device",
+        "field": "completion",
+        "comparator": "EQUALS",
+        "value": "COMPLETED"
+      },
+      "then_label": "story.qc01.shift01.success",
+      "else_label": "story.qc01.shift01.abandon"
+    },
+    {
+      "type": "label",
+      "label_id": "story.qc01.shift01.success"
+    },
+    {
+      "type": "scene",
+      "scene_id": "story.scene.qc01.shift01.gate_success",
+      "background_asset_id": "story.bg.trinity.validation_gate.predawn",
+      "location_text_id": "text.qc01.location.gate",
+      "time_text_id": "text.qc01.time.predawn",
+      "transition": "DISSOLVE"
+    },
+    {
+      "type": "hide",
+      "tag": "cast.ev",
+      "layer": "characters",
+      "transition": "CUT"
+    },
+    {
+      "type": "show",
+      "tag": "cast.hana",
+      "layer": "characters",
+      "character_id": "story.character.hana_park",
+      "pose_id": "relief",
+      "position": "RIGHT",
+      "transition": "FADE"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc01.ch01.shift01.success.01",
+      "speaker_key": "story.character.hana_park",
+      "text_id": "text.qc01.ch01.shift01.success.01",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc01.ch01.shift01.success.02",
+      "speaker_key": "story.character.hana_park",
+      "text_id": "text.qc01.ch01.shift01.success.02",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "jump",
+      "label_id": "story.qc01.shift02.match"
+    },
+    {
+      "type": "label",
+      "label_id": "story.qc01.shift01.abandon"
+    },
+    {
+      "type": "scene",
+      "scene_id": "story.scene.qc01.shift01.gate_abandon",
+      "background_asset_id": "story.bg.trinity.validation_gate.predawn",
+      "location_text_id": "text.qc01.location.gate",
+      "time_text_id": "text.qc01.time.predawn",
+      "transition": "DISSOLVE"
+    },
+    {
+      "type": "hide",
+      "tag": "cast.ev",
+      "layer": "characters",
+      "transition": "CUT"
+    },
+    {
+      "type": "show",
+      "tag": "cast.hana",
+      "layer": "characters",
+      "character_id": "story.character.hana_park",
+      "pose_id": "skeptical",
+      "position": "RIGHT",
+      "transition": "FADE"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc01.ch01.shift01.abandon.01",
+      "speaker_key": "story.character.hana_park",
+      "text_id": "text.qc01.ch01.shift01.abandon.01",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc01.ch01.shift01.abandon.02",
+      "speaker_key": "story.character.hana_park",
+      "text_id": "text.qc01.ch01.shift01.abandon.02",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "jump",
+      "label_id": "story.qc01.shift02.match"
+    },
+    {
+      "type": "label",
+      "label_id": "story.qc01.shift02.match"
+    },
+    {
+      "type": "scene",
+      "scene_id": "story.scene.qc01.shift02.core_floor",
+      "background_asset_id": "story.bg.trinity.core_floor.night_storm",
+      "location_text_id": "text.qc01.location.core_floor",
+      "time_text_id": "text.qc01.time.late_shift",
+      "transition": "DISSOLVE",
+      "checkpoint_id": "checkpoint.qc01.shift02.scene"
+    },
+    {
+      "type": "hide",
+      "tag": "cast.hana",
+      "layer": "characters",
+      "transition": "CUT"
+    },
+    {
+      "type": "show",
+      "tag": "cast.ev",
+      "layer": "characters",
+      "character_id": "story.character.ev_shaw",
+      "pose_id": "concerned",
+      "position": "LEFT",
+      "transition": "FADE"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc01.ch01.shift02.01",
+      "speaker_key": "story.character.ev_shaw",
+      "text_id": "text.qc01.ch01.shift02.01",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc01.ch01.shift02.02",
+      "speaker_key": "story.character.ev_shaw",
+      "text_id": "text.qc01.ch01.shift02.02",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "start_match",
+      "match_ref": "story.match.qc01.shift02.power_lot",
+      "return_label": "story.qc01.shift02.return",
+      "pre_match_checkpoint_id": "checkpoint.qc01.shift02.pre_match",
+      "post_match_checkpoint_id": "checkpoint.qc01.shift02.post_match"
+    },
+    {
+      "type": "label",
+      "label_id": "story.qc01.shift02.return"
+    },
+    {
+      "type": "if",
+      "condition": {
+        "op": "MATCH_RESULT",
+        "match_ref": "story.match.qc01.shift02.power_lot",
+        "field": "completion",
+        "comparator": "EQUALS",
+        "value": "COMPLETED"
+      },
+      "then_label": "story.qc01.shift02.success",
+      "else_label": "story.qc01.shift02.abandon"
+    },
+    {
+      "type": "label",
+      "label_id": "story.qc01.shift02.success"
+    },
+    {
+      "type": "scene",
+      "scene_id": "story.scene.qc01.shift02.gate_success",
+      "background_asset_id": "story.bg.trinity.validation_gate.predawn",
+      "location_text_id": "text.qc01.location.gate",
+      "time_text_id": "text.qc01.time.predawn",
+      "transition": "DISSOLVE"
+    },
+    {
+      "type": "hide",
+      "tag": "cast.ev",
+      "layer": "characters",
+      "transition": "CUT"
+    },
+    {
+      "type": "show",
+      "tag": "cast.hana",
+      "layer": "characters",
+      "character_id": "story.character.hana_park",
+      "pose_id": "relief",
+      "position": "RIGHT",
+      "transition": "FADE"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc01.ch01.shift02.success.01",
+      "speaker_key": "story.character.hana_park",
+      "text_id": "text.qc01.ch01.shift02.success.01",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc01.ch01.shift02.success.02",
+      "speaker_key": "story.character.hana_park",
+      "text_id": "text.qc01.ch01.shift02.success.02",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc01.v2.context.points.success.01",
+      "speaker_key": "story.character.hana_park",
+      "text_id": "text.qc01.v2.context.points.success.01",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "jump",
+      "label_id": "story.qc01.act01.context_ack"
+    },
+    {
+      "type": "label",
+      "label_id": "story.qc01.shift02.abandon"
+    },
+    {
+      "type": "scene",
+      "scene_id": "story.scene.qc01.shift02.gate_abandon",
+      "background_asset_id": "story.bg.trinity.validation_gate.predawn",
+      "location_text_id": "text.qc01.location.gate",
+      "time_text_id": "text.qc01.time.predawn",
+      "transition": "DISSOLVE"
+    },
+    {
+      "type": "hide",
+      "tag": "cast.ev",
+      "layer": "characters",
+      "transition": "CUT"
+    },
+    {
+      "type": "show",
+      "tag": "cast.hana",
+      "layer": "characters",
+      "character_id": "story.character.hana_park",
+      "pose_id": "skeptical",
+      "position": "RIGHT",
+      "transition": "FADE"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc01.ch01.shift02.abandon.01",
+      "speaker_key": "story.character.hana_park",
+      "text_id": "text.qc01.ch01.shift02.abandon.01",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc01.ch01.shift02.abandon.02",
+      "speaker_key": "story.character.hana_park",
+      "text_id": "text.qc01.ch01.shift02.abandon.02",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc01.v2.context.points.abandon.01",
+      "speaker_key": "story.character.hana_park",
+      "text_id": "text.qc01.v2.context.points.abandon.01",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "jump",
+      "label_id": "story.qc01.act01.context_ack"
+    },
+    {
+      "type": "label",
+      "label_id": "story.qc01.act01.context_ack"
+    },
+    {
+      "type": "if",
+      "condition": {
+        "op": "CHOICE_IS",
+        "choice_id": "choice.qc01.intake_context",
+        "option_id": "package_provenance"
+      },
+      "then_label": "story.qc01.act01.package_ack",
+      "else_label": "story.qc01.act01.worklog_ack"
+    },
+    {
+      "type": "label",
+      "label_id": "story.qc01.act01.package_ack"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc01.ch01.ack.package.01",
+      "speaker_key": "story.character.hana_park",
+      "text_id": "text.qc01.ch01.ack.package.01",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "jump",
+      "label_id": "story.qc01.act01.gate"
+    },
+    {
+      "type": "label",
+      "label_id": "story.qc01.act01.worklog_ack"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc01.ch01.ack.worklog.01",
+      "speaker_key": "story.character.hana_park",
+      "text_id": "text.qc01.ch01.ack.worklog.01",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "jump",
+      "label_id": "story.qc01.act01.gate"
+    },
+    {
+      "type": "label",
+      "label_id": "story.qc01.act01.gate"
+    },
+    {
+      "type": "if",
+      "condition": {
+        "op": "STORY_POINTS_AT_LEAST",
+        "value": 4
+      },
+      "then_label": "story.qc01.act01.earned",
+      "else_label": "story.qc01.act01.support"
+    },
+    {
+      "type": "label",
+      "label_id": "story.qc01.act01.earned"
+    },
+    {
+      "type": "show",
+      "tag": "cast.ev",
+      "layer": "characters",
+      "character_id": "story.character.ev_shaw",
+      "pose_id": "focused",
+      "position": "LEFT",
+      "transition": "FADE"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc01.ch01.gate.earned.01",
+      "speaker_key": "story.character.ev_shaw",
+      "text_id": "text.qc01.ch01.gate.earned.01",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc01.ch01.gate.earned.02",
+      "speaker_key": "story.character.hana_park",
+      "text_id": "text.qc01.ch01.gate.earned.02",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "jump",
+      "label_id": "story.qc01.act02.entry"
+    },
+    {
+      "type": "label",
+      "label_id": "story.qc01.act01.support"
+    },
+    {
+      "type": "show",
+      "tag": "cast.ev",
+      "layer": "characters",
+      "character_id": "story.character.ev_shaw",
+      "pose_id": "concerned",
+      "position": "LEFT",
+      "transition": "FADE"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc01.ch01.gate.support.01",
+      "speaker_key": "story.character.ev_shaw",
+      "text_id": "text.qc01.ch01.gate.support.01",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc01.ch01.gate.support.02",
+      "speaker_key": "story.character.hana_park",
+      "text_id": "text.qc01.ch01.gate.support.02",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "jump",
+      "label_id": "story.qc01.act02.entry"
+    }
+  ]
+}

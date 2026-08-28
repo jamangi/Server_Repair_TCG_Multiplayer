@@ -4,18 +4,14 @@ Tasks are implementation contracts. A builder must read `AGENTS.md` and then the
 
 Beginning with TASK-011, the displayed task ID includes the recommended reasoning-effort suffix used when starting that task. `HIGH` denotes substantial but bounded implementation/research; `XHIGH` denotes a cross-cutting semantic, architectural, or broad content migration. The stable task number and existing filename do not change, preserving links and history.
 
-Active task:
+Active task: **none assigned.**
 
-- [`TASK-035-HIGH: Deepen character bibles and voice-translation rules`](TASK-035-deepen-character-bibles-and-voice-spec.md) — ready; enrich all nine canonical characters through original, continuity-safe backstories and transformed public-domain reference constellations, then translate the context-complete payloads into practical voice guidance.
-
-Queued characterization sequence:
-
-1. [`TASK-036-XHIGH: Integrate the Story characterization pass`](TASK-036-integrate-story-characterization-pass.md) — follows TASK-033 through TASK-035; revoice the context-complete draft and perform one versioned live campaign migration with full topology, checkpoint, Match, and transcript proof.
-
-Completed characterization-preparation tasks:
+Completed characterization sequence:
 
 - [`TASK-033-HIGH: Audit Story context and newcomer comprehension`](TASK-033-audit-story-context-and-comprehension.md) — completed 2026-08-28; reconciled all 113 production-facing narrative/choice/Match surfaces across 48 routes and converted 13 newcomer-context findings into a stable, guarded context ledger.
 - [`TASK-034-XHIGH: Build the context-complete Story dialogue draft`](TASK-034-build-context-complete-story-dialogue-draft.md) — completed 2026-08-28; delivered the non-live 124-line candidate and payload layer with deterministic full-route transcripts while pinning the production campaign byte-for-byte.
+- [`TASK-035-HIGH: Deepen character bibles and voice-translation rules`](TASK-035-deepen-character-bibles-and-voice-spec.md) — completed 2026-08-28; deepened all nine canon characters, documented transformed public-domain constellations, and supplied fourteen payload-locked exercises across seven distinct speaking voices.
+- [`TASK-036-XHIGH: Integrate the Story characterization pass`](TASK-036-integrate-story-characterization-pass.md) — completed 2026-08-28; shipped the single `quiet-cascade-characterization-v2` migration with 124 original/context/final comparisons, seven restrained texture beats, stable topology, and checkpoint-safe v1 progress migration.
 
 Completed procedural UI audio sequence:
 
@@ -36,7 +32,7 @@ Approved but deferred V2 task:
 
 - [`TASK-017-XHIGH: Create the Server Repair V2 Migration Seed`](TASK-017-create-server-repair-v2-migration-seed.md) — approved Migration Seed direction but deferred until the V0 product is training-ready; when reactivated, it audits V0 in bounded checkpoints and establishes the public dependency-inference V2 foundation without modifying V0 behavior.
 
-TASK-011-HIGH through TASK-016-HIGH, TASK-018-HIGH through TASK-021-HIGH, and TASK-023-HIGH through TASK-034-XHIGH are complete. TASK-035-HIGH is next; TASK-036-XHIGH follows. `STORY-008 A` removes the per-character approval gate without relaxing canon or originality boundaries. PT-008 B is approved and the proposed TASK-022 was withdrawn without implementation. Return to TASK-017-XHIGH only when the project owner reactivates V2 migration.
+TASK-011-HIGH through TASK-016-HIGH, TASK-018-HIGH through TASK-021-HIGH, and TASK-023-HIGH through TASK-036-XHIGH are complete. `STORY-008 A` removed the per-character approval gate without relaxing canon or originality boundaries. PT-008 B is approved and the proposed TASK-022 was withdrawn without implementation. Return to TASK-017-XHIGH only when the project owner reactivates V2 migration.
 
 Completed documentation and research tasks:
 

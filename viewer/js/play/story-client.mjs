@@ -1,4 +1,5 @@
 import { buildStoryHomeModel, buildStorySceneModel } from './story-ui-model.mjs';
+import { migrateStoryProgress } from './story-content-migration.mjs';
 import { loadStoryMatchRegistry, resolveStoryMatch } from './story-match-registry.mjs';
 
 export const STORY_PROGRESS_RECORD_VERSION = 'story-progress-record-v1';
@@ -6,7 +7,7 @@ export const STORY_PROGRESS_BACKUP_VERSION = 'story-progress-backup-v1';
 export const STORY_PROGRESS_STORAGE_KEY = 'server-repair-tcg:story-progress-v1';
 
 const DEFAULT_ROOT = new URL(
-  '../../generated/play/content/story-v1/campaigns/quiet-cascade/',
+  '../../generated/play/content/story-v1/campaigns/quiet-cascade-characterization-v2/',
   import.meta.url,
 );
 const DEFAULT_RUNTIME_URL = new URL('../../generated/play/src/story/index.mjs', import.meta.url);
@@ -99,6 +100,12 @@ function validateProgressRecord(candidate, { bundle, runtime }) {
     });
   }
   return { value: clone(candidate), restored };
+}
+
+function prepareProgressRecord(candidate, { bundle, runtime }) {
+  const migration = migrateStoryProgress(candidate, { bundle, runtime });
+  const validated = validateProgressRecord(migration.value, { bundle, runtime });
+  return { ...validated, migrated_from: migration.migrated_from };
 }
 
 function createContextToken() {
@@ -214,7 +221,8 @@ export async function createStoryClient({
     try {
       const candidate = storedProgress();
       if (!candidate || candidate.pack_id === null) return;
-      const validated = validateProgressRecord(candidate, { bundle, runtime });
+      const validated = prepareProgressRecord(candidate, { bundle, runtime });
+      if (validated.migrated_from !== null) persistProgress(validated.value);
       progress = validated.value;
       state = validated.restored;
     } catch (storageError) {
@@ -301,7 +309,7 @@ export async function createStoryClient({
     get error() { return error; },
 
     validateProgress(candidate) {
-      return validateProgressRecord(candidate, { bundle, runtime }).value;
+      return prepareProgressRecord(candidate, { bundle, runtime }).value;
     },
 
     homeModel() {
@@ -512,7 +520,7 @@ export async function createStoryClient({
           || typeof candidate.exported_at !== 'string') {
         throw new Error('Story backup is malformed or unsupported.');
       }
-      const validated = validateProgressRecord(candidate.progress, { bundle, runtime });
+      const validated = prepareProgressRecord(candidate.progress, { bundle, runtime });
       return Object.freeze({
         value: validated.value,
         preview: Object.freeze({

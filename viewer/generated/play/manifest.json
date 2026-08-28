@@ -790,6 +790,54 @@
       "sha256": "9c9d51f6ac49c9c903d8943310fa66d10193060108f913db6164349bdd52d1aa"
     },
     {
+      "path": "content/story-v1/campaigns/quiet-cascade-characterization-v2/manifest.json",
+      "source": "content/story-v1/campaigns/quiet-cascade-characterization-v2/manifest.json",
+      "bytes": 514,
+      "sha256": "c90325f9cc3a93dddc335a4dedf61df91b7e4e9627ded660810ce2f67bf5a924"
+    },
+    {
+      "path": "content/story-v1/campaigns/quiet-cascade-characterization-v2/matches.json",
+      "source": "content/story-v1/campaigns/quiet-cascade-characterization-v2/matches.json",
+      "bytes": 10981,
+      "sha256": "2b1f7d6bb4ed05bb47739555215ccc0156073e00d6be69be7de8be00820bcf82"
+    },
+    {
+      "path": "content/story-v1/campaigns/quiet-cascade-characterization-v2/registry.json",
+      "source": "content/story-v1/campaigns/quiet-cascade-characterization-v2/registry.json",
+      "bytes": 6818,
+      "sha256": "f1f8133984f47af23beef2e83dabd98393b473a9df910307507099643897be1f"
+    },
+    {
+      "path": "content/story-v1/campaigns/quiet-cascade-characterization-v2/scripts/chapter-01.json",
+      "source": "content/story-v1/campaigns/quiet-cascade-characterization-v2/scripts/chapter-01.json",
+      "bytes": 18434,
+      "sha256": "941c68f09578cb2e3753809ef9f1fb53fe6325b3a002c1179156915e3929e91d"
+    },
+    {
+      "path": "content/story-v1/campaigns/quiet-cascade-characterization-v2/scripts/chapter-02.json",
+      "source": "content/story-v1/campaigns/quiet-cascade-characterization-v2/scripts/chapter-02.json",
+      "bytes": 16060,
+      "sha256": "731397c3e827b0a4ecc941b4e1ec1496bf942d48a07740d84965f39201b249d9"
+    },
+    {
+      "path": "content/story-v1/campaigns/quiet-cascade-characterization-v2/scripts/chapter-03.json",
+      "source": "content/story-v1/campaigns/quiet-cascade-characterization-v2/scripts/chapter-03.json",
+      "bytes": 12078,
+      "sha256": "628a209c922c7751732e6020d304231b934d4283a94dc2f8001e4b94821bbb1d"
+    },
+    {
+      "path": "content/story-v1/campaigns/quiet-cascade-characterization-v2/scripts/chapter-04.json",
+      "source": "content/story-v1/campaigns/quiet-cascade-characterization-v2/scripts/chapter-04.json",
+      "bytes": 18064,
+      "sha256": "80d70b4f036158a21c0438647ca215a110295994527aa57d0e4d61ad1899a647"
+    },
+    {
+      "path": "content/story-v1/campaigns/quiet-cascade-characterization-v2/texts/en.json",
+      "source": "content/story-v1/campaigns/quiet-cascade-characterization-v2/texts/en.json",
+      "bytes": 27075,
+      "sha256": "53b34a7e3081772e974df5ca839d8f9af6d0282e6b3f3513fc872ccfbe66ed7f"
+    },
+    {
       "path": "content/story-v1/campaigns/quiet-cascade/manifest.json",
       "source": "content/story-v1/campaigns/quiet-cascade/manifest.json",
       "bytes": 505,

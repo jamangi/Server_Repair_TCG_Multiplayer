@@ -1,0 +1,3466 @@
+{
+  "deterministic_digest_count": 48,
+  "edge_coverage": {
+    "choices": {
+      "choice.qc01.client_frame": {
+        "bounded_uncertainty_first": 24,
+        "verified_outcomes_first": 24
+      },
+      "choice.qc01.intake_context": {
+        "package_provenance": 24,
+        "prior_worklog": 24
+      },
+      "choice.qc01.mentor_question": {
+        "discriminate_candidates": 24,
+        "reproduce_condition": 24
+      },
+      "choice.qc01.record_policy": {
+        "lead_with_summary": 24,
+        "preserve_negative_results": 24
+      }
+    },
+    "endings": {
+      "ending.qc01.bounded_account": 16,
+      "ending.qc01.defensible_release": 16,
+      "ending.qc01.gate_hold": 16
+    },
+    "match_completion": {
+      "story.match.qc01.shift01.wrong_device": {
+        "ABANDONED": 16,
+        "COMPLETED": 32
+      },
+      "story.match.qc01.shift02.power_lot": {
+        "ABANDONED": 16,
+        "COMPLETED": 32
+      },
+      "story.match.qc01.shift03.memory_compare": {
+        "ABANDONED": 16,
+        "COMPLETED": 32
+      },
+      "story.match.qc01.shift04.passes_cold": {
+        "ABANDONED": 16,
+        "COMPLETED": 32
+      },
+      "story.match.qc01.shift05.no_offer": {
+        "ABANDONED": 32,
+        "COMPLETED": 16
+      },
+      "story.match.qc01.shift06.quiet_cascade": {
+        "ABANDONED": 32,
+        "COMPLETED": 16
+      }
+    }
+  },
+  "route_count": 48,
+  "route_report_version": "story-route-report-v1",
+  "routes": [
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "package_provenance",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "reproduce_condition",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "preserve_negative_results",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "verified_outcomes_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "verified_outcomes_first",
+        "choice.qc01.intake_context": "package_provenance",
+        "choice.qc01.mentor_question": "reproduce_condition",
+        "choice.qc01.record_policy": "preserve_negative_results"
+      },
+      "ending_id": "ending.qc01.defensible_release",
+      "final_digest": "fcc8d50518c389275d71306f877db054c608bf74431d38d1cb003e0cb215593c",
+      "match_results": [
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 2
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 6
+        }
+      ],
+      "requested_band": "release",
+      "route_id": "route.qc01.release.00",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 24
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "package_provenance",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "reproduce_condition",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "preserve_negative_results",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "verified_outcomes_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "verified_outcomes_first",
+        "choice.qc01.intake_context": "package_provenance",
+        "choice.qc01.mentor_question": "reproduce_condition",
+        "choice.qc01.record_policy": "preserve_negative_results"
+      },
+      "ending_id": "ending.qc01.bounded_account",
+      "final_digest": "d3bf161adf9b298720aa2cc7ecee7e5a3194a6ab3a29c59d7c8bec3e9df2acea",
+      "match_results": [
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 2
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 0
+        }
+      ],
+      "requested_band": "bounded",
+      "route_id": "route.qc01.bounded.00",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 14
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "package_provenance",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "reproduce_condition",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "preserve_negative_results",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "verified_outcomes_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "verified_outcomes_first",
+        "choice.qc01.intake_context": "package_provenance",
+        "choice.qc01.mentor_question": "reproduce_condition",
+        "choice.qc01.record_policy": "preserve_negative_results"
+      },
+      "ending_id": "ending.qc01.gate_hold",
+      "final_digest": "606b1f482907c1925efa9d112830ab7c85a7f4fa524c88650689e6e847f4f936",
+      "match_results": [
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 0
+        }
+      ],
+      "requested_band": "hold",
+      "route_id": "route.qc01.hold.00",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 0
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "prior_worklog",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "reproduce_condition",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "preserve_negative_results",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "verified_outcomes_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "verified_outcomes_first",
+        "choice.qc01.intake_context": "prior_worklog",
+        "choice.qc01.mentor_question": "reproduce_condition",
+        "choice.qc01.record_policy": "preserve_negative_results"
+      },
+      "ending_id": "ending.qc01.defensible_release",
+      "final_digest": "e183c6665a7aa5250df52f44f0d00b3b6a5b3ae4150f597d1599c46a8f66a973",
+      "match_results": [
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 2
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 6
+        }
+      ],
+      "requested_band": "release",
+      "route_id": "route.qc01.release.01",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 24
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "prior_worklog",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "reproduce_condition",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "preserve_negative_results",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "verified_outcomes_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "verified_outcomes_first",
+        "choice.qc01.intake_context": "prior_worklog",
+        "choice.qc01.mentor_question": "reproduce_condition",
+        "choice.qc01.record_policy": "preserve_negative_results"
+      },
+      "ending_id": "ending.qc01.bounded_account",
+      "final_digest": "186bd91c5a3756a0661b814aaf43498d12d582a4d513d01982df35fb74eb4f3a",
+      "match_results": [
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 2
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 0
+        }
+      ],
+      "requested_band": "bounded",
+      "route_id": "route.qc01.bounded.01",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 14
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "prior_worklog",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "reproduce_condition",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "preserve_negative_results",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "verified_outcomes_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "verified_outcomes_first",
+        "choice.qc01.intake_context": "prior_worklog",
+        "choice.qc01.mentor_question": "reproduce_condition",
+        "choice.qc01.record_policy": "preserve_negative_results"
+      },
+      "ending_id": "ending.qc01.gate_hold",
+      "final_digest": "a6bd74af93826bb2b9b10168f48b7aaaff4c89bdee5b2d00e9fd74d0b46d14a0",
+      "match_results": [
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 0
+        }
+      ],
+      "requested_band": "hold",
+      "route_id": "route.qc01.hold.01",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 0
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "package_provenance",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "discriminate_candidates",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "preserve_negative_results",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "verified_outcomes_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "verified_outcomes_first",
+        "choice.qc01.intake_context": "package_provenance",
+        "choice.qc01.mentor_question": "discriminate_candidates",
+        "choice.qc01.record_policy": "preserve_negative_results"
+      },
+      "ending_id": "ending.qc01.defensible_release",
+      "final_digest": "c5c91eb516576bd4bc11341d8a94befa5ddccd66780b9876559ecc3b51ef7a82",
+      "match_results": [
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 2
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 6
+        }
+      ],
+      "requested_band": "release",
+      "route_id": "route.qc01.release.02",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 24
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "package_provenance",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "discriminate_candidates",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "preserve_negative_results",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "verified_outcomes_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "verified_outcomes_first",
+        "choice.qc01.intake_context": "package_provenance",
+        "choice.qc01.mentor_question": "discriminate_candidates",
+        "choice.qc01.record_policy": "preserve_negative_results"
+      },
+      "ending_id": "ending.qc01.bounded_account",
+      "final_digest": "00eda071807c6a941df76849ceb44e185818d6cd8b1597567285829e17a35364",
+      "match_results": [
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 2
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 0
+        }
+      ],
+      "requested_band": "bounded",
+      "route_id": "route.qc01.bounded.02",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 14
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "package_provenance",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "discriminate_candidates",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "preserve_negative_results",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "verified_outcomes_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "verified_outcomes_first",
+        "choice.qc01.intake_context": "package_provenance",
+        "choice.qc01.mentor_question": "discriminate_candidates",
+        "choice.qc01.record_policy": "preserve_negative_results"
+      },
+      "ending_id": "ending.qc01.gate_hold",
+      "final_digest": "9d9726216d254a3a64ee78543ebfb6b59c3d9f7f1c14d1b03307b4491933193a",
+      "match_results": [
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 0
+        }
+      ],
+      "requested_band": "hold",
+      "route_id": "route.qc01.hold.02",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 0
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "prior_worklog",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "discriminate_candidates",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "preserve_negative_results",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "verified_outcomes_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "verified_outcomes_first",
+        "choice.qc01.intake_context": "prior_worklog",
+        "choice.qc01.mentor_question": "discriminate_candidates",
+        "choice.qc01.record_policy": "preserve_negative_results"
+      },
+      "ending_id": "ending.qc01.defensible_release",
+      "final_digest": "f475dfa695c00f242025d616e68e534544f657a393bbd89019021ef344fc422b",
+      "match_results": [
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 2
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 6
+        }
+      ],
+      "requested_band": "release",
+      "route_id": "route.qc01.release.03",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 24
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "prior_worklog",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "discriminate_candidates",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "preserve_negative_results",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "verified_outcomes_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "verified_outcomes_first",
+        "choice.qc01.intake_context": "prior_worklog",
+        "choice.qc01.mentor_question": "discriminate_candidates",
+        "choice.qc01.record_policy": "preserve_negative_results"
+      },
+      "ending_id": "ending.qc01.bounded_account",
+      "final_digest": "0b147b4ddf5585555a53cd9dc02d9d86b9af00e35147b12ff852c02407d12d6c",
+      "match_results": [
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 2
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 0
+        }
+      ],
+      "requested_band": "bounded",
+      "route_id": "route.qc01.bounded.03",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 14
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "prior_worklog",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "discriminate_candidates",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "preserve_negative_results",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "verified_outcomes_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "verified_outcomes_first",
+        "choice.qc01.intake_context": "prior_worklog",
+        "choice.qc01.mentor_question": "discriminate_candidates",
+        "choice.qc01.record_policy": "preserve_negative_results"
+      },
+      "ending_id": "ending.qc01.gate_hold",
+      "final_digest": "2b84084b6495438f24567fc6bf9d68b07152c7ef1be78de0991bfbc67d5cc57a",
+      "match_results": [
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 0
+        }
+      ],
+      "requested_band": "hold",
+      "route_id": "route.qc01.hold.03",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 0
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "package_provenance",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "reproduce_condition",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "lead_with_summary",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "verified_outcomes_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "verified_outcomes_first",
+        "choice.qc01.intake_context": "package_provenance",
+        "choice.qc01.mentor_question": "reproduce_condition",
+        "choice.qc01.record_policy": "lead_with_summary"
+      },
+      "ending_id": "ending.qc01.defensible_release",
+      "final_digest": "2ea6c90f84c3e6908d2229d3aaa18af6a7f793492644034b8e4ac798c1349ac8",
+      "match_results": [
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 2
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 6
+        }
+      ],
+      "requested_band": "release",
+      "route_id": "route.qc01.release.04",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 24
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "package_provenance",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "reproduce_condition",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "lead_with_summary",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "verified_outcomes_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "verified_outcomes_first",
+        "choice.qc01.intake_context": "package_provenance",
+        "choice.qc01.mentor_question": "reproduce_condition",
+        "choice.qc01.record_policy": "lead_with_summary"
+      },
+      "ending_id": "ending.qc01.bounded_account",
+      "final_digest": "17522b0d977749b1aa56e731571ab4f671217722782b5e8a6ae91ec7755047a0",
+      "match_results": [
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 2
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 0
+        }
+      ],
+      "requested_band": "bounded",
+      "route_id": "route.qc01.bounded.04",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 14
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "package_provenance",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "reproduce_condition",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "lead_with_summary",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "verified_outcomes_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "verified_outcomes_first",
+        "choice.qc01.intake_context": "package_provenance",
+        "choice.qc01.mentor_question": "reproduce_condition",
+        "choice.qc01.record_policy": "lead_with_summary"
+      },
+      "ending_id": "ending.qc01.gate_hold",
+      "final_digest": "99d89cbb168bdd95600f726ce850588cacf3d5128368c58d2e9c7d97a399c77c",
+      "match_results": [
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 0
+        }
+      ],
+      "requested_band": "hold",
+      "route_id": "route.qc01.hold.04",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 0
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "prior_worklog",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "reproduce_condition",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "lead_with_summary",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "verified_outcomes_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "verified_outcomes_first",
+        "choice.qc01.intake_context": "prior_worklog",
+        "choice.qc01.mentor_question": "reproduce_condition",
+        "choice.qc01.record_policy": "lead_with_summary"
+      },
+      "ending_id": "ending.qc01.defensible_release",
+      "final_digest": "3f3eba406ce020a1e4cd62f61ef4226ed2ab888789d26b16096073fc8e92cd40",
+      "match_results": [
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 2
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 6
+        }
+      ],
+      "requested_band": "release",
+      "route_id": "route.qc01.release.05",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 24
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "prior_worklog",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "reproduce_condition",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "lead_with_summary",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "verified_outcomes_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "verified_outcomes_first",
+        "choice.qc01.intake_context": "prior_worklog",
+        "choice.qc01.mentor_question": "reproduce_condition",
+        "choice.qc01.record_policy": "lead_with_summary"
+      },
+      "ending_id": "ending.qc01.bounded_account",
+      "final_digest": "76528f37ecefe8044248fc2ec6b8fd9a7dd1ca1cebe2522273e48516ca9d0729",
+      "match_results": [
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 2
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 0
+        }
+      ],
+      "requested_band": "bounded",
+      "route_id": "route.qc01.bounded.05",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 14
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "prior_worklog",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "reproduce_condition",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "lead_with_summary",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "verified_outcomes_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "verified_outcomes_first",
+        "choice.qc01.intake_context": "prior_worklog",
+        "choice.qc01.mentor_question": "reproduce_condition",
+        "choice.qc01.record_policy": "lead_with_summary"
+      },
+      "ending_id": "ending.qc01.gate_hold",
+      "final_digest": "5ac19ff81ae122d0063945fddf4170cd55dcb3edd24aa560a8810454cf68d780",
+      "match_results": [
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 0
+        }
+      ],
+      "requested_band": "hold",
+      "route_id": "route.qc01.hold.05",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 0
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "package_provenance",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "discriminate_candidates",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "lead_with_summary",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "verified_outcomes_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "verified_outcomes_first",
+        "choice.qc01.intake_context": "package_provenance",
+        "choice.qc01.mentor_question": "discriminate_candidates",
+        "choice.qc01.record_policy": "lead_with_summary"
+      },
+      "ending_id": "ending.qc01.defensible_release",
+      "final_digest": "e7c5195e7ea72517dcd12ab7f1bdd1115c7d8e70788e7a6745f5d76adaedcf93",
+      "match_results": [
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 2
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 6
+        }
+      ],
+      "requested_band": "release",
+      "route_id": "route.qc01.release.06",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 24
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "package_provenance",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "discriminate_candidates",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "lead_with_summary",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "verified_outcomes_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "verified_outcomes_first",
+        "choice.qc01.intake_context": "package_provenance",
+        "choice.qc01.mentor_question": "discriminate_candidates",
+        "choice.qc01.record_policy": "lead_with_summary"
+      },
+      "ending_id": "ending.qc01.bounded_account",
+      "final_digest": "dbfd1dcc5218a593bd56d7940c50ca756373992ad733fdc4e64aaef97e13eda5",
+      "match_results": [
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 2
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 0
+        }
+      ],
+      "requested_band": "bounded",
+      "route_id": "route.qc01.bounded.06",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 14
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "package_provenance",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "discriminate_candidates",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "lead_with_summary",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "verified_outcomes_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "verified_outcomes_first",
+        "choice.qc01.intake_context": "package_provenance",
+        "choice.qc01.mentor_question": "discriminate_candidates",
+        "choice.qc01.record_policy": "lead_with_summary"
+      },
+      "ending_id": "ending.qc01.gate_hold",
+      "final_digest": "3d64ebc20a96dec6160a091ea69aa7d8d13e046ae7337db090aa88ed798f5e6a",
+      "match_results": [
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 0
+        }
+      ],
+      "requested_band": "hold",
+      "route_id": "route.qc01.hold.06",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 0
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "prior_worklog",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "discriminate_candidates",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "lead_with_summary",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "verified_outcomes_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "verified_outcomes_first",
+        "choice.qc01.intake_context": "prior_worklog",
+        "choice.qc01.mentor_question": "discriminate_candidates",
+        "choice.qc01.record_policy": "lead_with_summary"
+      },
+      "ending_id": "ending.qc01.defensible_release",
+      "final_digest": "5412bcc52474d81d4269e6c947f56ca4868128945cd3883c8e867ff60c807eaa",
+      "match_results": [
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 2
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 6
+        }
+      ],
+      "requested_band": "release",
+      "route_id": "route.qc01.release.07",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 24
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "prior_worklog",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "discriminate_candidates",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "lead_with_summary",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "verified_outcomes_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "verified_outcomes_first",
+        "choice.qc01.intake_context": "prior_worklog",
+        "choice.qc01.mentor_question": "discriminate_candidates",
+        "choice.qc01.record_policy": "lead_with_summary"
+      },
+      "ending_id": "ending.qc01.bounded_account",
+      "final_digest": "a344ba1e3ffbff278f3b8da81e654871512d4fd8a05039c4504b9b1775abc2ef",
+      "match_results": [
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 2
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 0
+        }
+      ],
+      "requested_band": "bounded",
+      "route_id": "route.qc01.bounded.07",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 14
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "prior_worklog",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "discriminate_candidates",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "lead_with_summary",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "verified_outcomes_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "verified_outcomes_first",
+        "choice.qc01.intake_context": "prior_worklog",
+        "choice.qc01.mentor_question": "discriminate_candidates",
+        "choice.qc01.record_policy": "lead_with_summary"
+      },
+      "ending_id": "ending.qc01.gate_hold",
+      "final_digest": "4aef4806d34edcd515c9fd9576d14f0a5af1d9801ddcdbd5ce7e4ed9b4255359",
+      "match_results": [
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 0
+        }
+      ],
+      "requested_band": "hold",
+      "route_id": "route.qc01.hold.07",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 0
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "package_provenance",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "reproduce_condition",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "preserve_negative_results",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "bounded_uncertainty_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "bounded_uncertainty_first",
+        "choice.qc01.intake_context": "package_provenance",
+        "choice.qc01.mentor_question": "reproduce_condition",
+        "choice.qc01.record_policy": "preserve_negative_results"
+      },
+      "ending_id": "ending.qc01.defensible_release",
+      "final_digest": "0b7764f2c34b98ae9c1e76a451f108010ea427093e3f852ac319d8bcdb22ffb7",
+      "match_results": [
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 2
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 6
+        }
+      ],
+      "requested_band": "release",
+      "route_id": "route.qc01.release.08",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 24
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "package_provenance",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "reproduce_condition",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "preserve_negative_results",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "bounded_uncertainty_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "bounded_uncertainty_first",
+        "choice.qc01.intake_context": "package_provenance",
+        "choice.qc01.mentor_question": "reproduce_condition",
+        "choice.qc01.record_policy": "preserve_negative_results"
+      },
+      "ending_id": "ending.qc01.bounded_account",
+      "final_digest": "27147ebe1a6107e16793eef2b6314804b687f0cdd7b6b7aa40b14b55cccc131a",
+      "match_results": [
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 2
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 0
+        }
+      ],
+      "requested_band": "bounded",
+      "route_id": "route.qc01.bounded.08",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 14
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "package_provenance",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "reproduce_condition",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "preserve_negative_results",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "bounded_uncertainty_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "bounded_uncertainty_first",
+        "choice.qc01.intake_context": "package_provenance",
+        "choice.qc01.mentor_question": "reproduce_condition",
+        "choice.qc01.record_policy": "preserve_negative_results"
+      },
+      "ending_id": "ending.qc01.gate_hold",
+      "final_digest": "6fa8e55fb02ec276603b2fa044e6e36f045c70e814f06905bd18776eeb25ea8f",
+      "match_results": [
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 0
+        }
+      ],
+      "requested_band": "hold",
+      "route_id": "route.qc01.hold.08",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 0
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "prior_worklog",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "reproduce_condition",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "preserve_negative_results",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "bounded_uncertainty_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "bounded_uncertainty_first",
+        "choice.qc01.intake_context": "prior_worklog",
+        "choice.qc01.mentor_question": "reproduce_condition",
+        "choice.qc01.record_policy": "preserve_negative_results"
+      },
+      "ending_id": "ending.qc01.defensible_release",
+      "final_digest": "d78f9d016feb28e8bc348e2e272c6e189f38017e8a83abbf2fb42272ad057139",
+      "match_results": [
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 2
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 6
+        }
+      ],
+      "requested_band": "release",
+      "route_id": "route.qc01.release.09",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 24
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "prior_worklog",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "reproduce_condition",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "preserve_negative_results",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "bounded_uncertainty_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "bounded_uncertainty_first",
+        "choice.qc01.intake_context": "prior_worklog",
+        "choice.qc01.mentor_question": "reproduce_condition",
+        "choice.qc01.record_policy": "preserve_negative_results"
+      },
+      "ending_id": "ending.qc01.bounded_account",
+      "final_digest": "73d08098b6328ae6d10b4157cc8f1dc3701de08cfe8338084accb5184d8bf2b5",
+      "match_results": [
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 2
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 0
+        }
+      ],
+      "requested_band": "bounded",
+      "route_id": "route.qc01.bounded.09",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 14
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "prior_worklog",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "reproduce_condition",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "preserve_negative_results",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "bounded_uncertainty_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "bounded_uncertainty_first",
+        "choice.qc01.intake_context": "prior_worklog",
+        "choice.qc01.mentor_question": "reproduce_condition",
+        "choice.qc01.record_policy": "preserve_negative_results"
+      },
+      "ending_id": "ending.qc01.gate_hold",
+      "final_digest": "8a33a901246afd23e5f2a0d55a02fc0f701e361402ba50ce172137f878ea580b",
+      "match_results": [
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 0
+        }
+      ],
+      "requested_band": "hold",
+      "route_id": "route.qc01.hold.09",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 0
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "package_provenance",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "discriminate_candidates",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "preserve_negative_results",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "bounded_uncertainty_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "bounded_uncertainty_first",
+        "choice.qc01.intake_context": "package_provenance",
+        "choice.qc01.mentor_question": "discriminate_candidates",
+        "choice.qc01.record_policy": "preserve_negative_results"
+      },
+      "ending_id": "ending.qc01.defensible_release",
+      "final_digest": "473bf0cb3a2d4125a6fad766c4e2ddccf58a157b4adc13a866f1913b92945d73",
+      "match_results": [
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 2
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 6
+        }
+      ],
+      "requested_band": "release",
+      "route_id": "route.qc01.release.10",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 24
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "package_provenance",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "discriminate_candidates",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "preserve_negative_results",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "bounded_uncertainty_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "bounded_uncertainty_first",
+        "choice.qc01.intake_context": "package_provenance",
+        "choice.qc01.mentor_question": "discriminate_candidates",
+        "choice.qc01.record_policy": "preserve_negative_results"
+      },
+      "ending_id": "ending.qc01.bounded_account",
+      "final_digest": "63e7c1b1debfbbe245ad3970315643b5df734c7e4dbe230166a04f48b5023cb2",
+      "match_results": [
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 2
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 0
+        }
+      ],
+      "requested_band": "bounded",
+      "route_id": "route.qc01.bounded.10",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 14
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "package_provenance",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "discriminate_candidates",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "preserve_negative_results",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "bounded_uncertainty_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "bounded_uncertainty_first",
+        "choice.qc01.intake_context": "package_provenance",
+        "choice.qc01.mentor_question": "discriminate_candidates",
+        "choice.qc01.record_policy": "preserve_negative_results"
+      },
+      "ending_id": "ending.qc01.gate_hold",
+      "final_digest": "812c7bcd0084f9101c2dc93ab6f76b5c6e35a17569f53c5d7771e20958c00e0d",
+      "match_results": [
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 0
+        }
+      ],
+      "requested_band": "hold",
+      "route_id": "route.qc01.hold.10",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 0
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "prior_worklog",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "discriminate_candidates",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "preserve_negative_results",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "bounded_uncertainty_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "bounded_uncertainty_first",
+        "choice.qc01.intake_context": "prior_worklog",
+        "choice.qc01.mentor_question": "discriminate_candidates",
+        "choice.qc01.record_policy": "preserve_negative_results"
+      },
+      "ending_id": "ending.qc01.defensible_release",
+      "final_digest": "a545fc3077cb025ce60e30645bb843fd39f2e207d23310353cfea0ce89be67b0",
+      "match_results": [
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 2
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 6
+        }
+      ],
+      "requested_band": "release",
+      "route_id": "route.qc01.release.11",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 24
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "prior_worklog",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "discriminate_candidates",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "preserve_negative_results",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "bounded_uncertainty_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "bounded_uncertainty_first",
+        "choice.qc01.intake_context": "prior_worklog",
+        "choice.qc01.mentor_question": "discriminate_candidates",
+        "choice.qc01.record_policy": "preserve_negative_results"
+      },
+      "ending_id": "ending.qc01.bounded_account",
+      "final_digest": "42410e8c8920c17785ae12f4ea269d49de27dfc18b79f7736f88cc8cda8564fd",
+      "match_results": [
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 2
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 0
+        }
+      ],
+      "requested_band": "bounded",
+      "route_id": "route.qc01.bounded.11",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 14
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "prior_worklog",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "discriminate_candidates",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "preserve_negative_results",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "bounded_uncertainty_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "bounded_uncertainty_first",
+        "choice.qc01.intake_context": "prior_worklog",
+        "choice.qc01.mentor_question": "discriminate_candidates",
+        "choice.qc01.record_policy": "preserve_negative_results"
+      },
+      "ending_id": "ending.qc01.gate_hold",
+      "final_digest": "31bf68162324ec1f352b7ed6e058c845df2bf72dbe64d9b5651a4d6381da7411",
+      "match_results": [
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 0
+        }
+      ],
+      "requested_band": "hold",
+      "route_id": "route.qc01.hold.11",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 0
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "package_provenance",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "reproduce_condition",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "lead_with_summary",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "bounded_uncertainty_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "bounded_uncertainty_first",
+        "choice.qc01.intake_context": "package_provenance",
+        "choice.qc01.mentor_question": "reproduce_condition",
+        "choice.qc01.record_policy": "lead_with_summary"
+      },
+      "ending_id": "ending.qc01.defensible_release",
+      "final_digest": "44996e02d7ccf54b7fc8b612df5e0b3610d4467513b9e6c1f4e40f1d2dcb80cd",
+      "match_results": [
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 2
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 6
+        }
+      ],
+      "requested_band": "release",
+      "route_id": "route.qc01.release.12",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 24
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "package_provenance",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "reproduce_condition",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "lead_with_summary",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "bounded_uncertainty_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "bounded_uncertainty_first",
+        "choice.qc01.intake_context": "package_provenance",
+        "choice.qc01.mentor_question": "reproduce_condition",
+        "choice.qc01.record_policy": "lead_with_summary"
+      },
+      "ending_id": "ending.qc01.bounded_account",
+      "final_digest": "385018eaeab2a87c7288a2f459712fb13941c2ae6f3816c61e0a00c1da0100bc",
+      "match_results": [
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 2
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 0
+        }
+      ],
+      "requested_band": "bounded",
+      "route_id": "route.qc01.bounded.12",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 14
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "package_provenance",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "reproduce_condition",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "lead_with_summary",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "bounded_uncertainty_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "bounded_uncertainty_first",
+        "choice.qc01.intake_context": "package_provenance",
+        "choice.qc01.mentor_question": "reproduce_condition",
+        "choice.qc01.record_policy": "lead_with_summary"
+      },
+      "ending_id": "ending.qc01.gate_hold",
+      "final_digest": "8fb7ea91042b5c4479de53ffee6c3884979a22aaa860f342bb03ece93ef28897",
+      "match_results": [
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 0
+        }
+      ],
+      "requested_band": "hold",
+      "route_id": "route.qc01.hold.12",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 0
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "prior_worklog",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "reproduce_condition",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "lead_with_summary",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "bounded_uncertainty_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "bounded_uncertainty_first",
+        "choice.qc01.intake_context": "prior_worklog",
+        "choice.qc01.mentor_question": "reproduce_condition",
+        "choice.qc01.record_policy": "lead_with_summary"
+      },
+      "ending_id": "ending.qc01.defensible_release",
+      "final_digest": "a526c8f63b13bcdc52a20b6a49ed007e2cbe180ddb64c8da401f6b826b0d7336",
+      "match_results": [
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 2
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 6
+        }
+      ],
+      "requested_band": "release",
+      "route_id": "route.qc01.release.13",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 24
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "prior_worklog",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "reproduce_condition",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "lead_with_summary",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "bounded_uncertainty_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "bounded_uncertainty_first",
+        "choice.qc01.intake_context": "prior_worklog",
+        "choice.qc01.mentor_question": "reproduce_condition",
+        "choice.qc01.record_policy": "lead_with_summary"
+      },
+      "ending_id": "ending.qc01.bounded_account",
+      "final_digest": "a79ec37a25ac118ca25ca8629b6158e82ad7719bdc438a8865dc5d177e3c0de9",
+      "match_results": [
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 2
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 0
+        }
+      ],
+      "requested_band": "bounded",
+      "route_id": "route.qc01.bounded.13",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 14
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "prior_worklog",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "reproduce_condition",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "lead_with_summary",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "bounded_uncertainty_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "bounded_uncertainty_first",
+        "choice.qc01.intake_context": "prior_worklog",
+        "choice.qc01.mentor_question": "reproduce_condition",
+        "choice.qc01.record_policy": "lead_with_summary"
+      },
+      "ending_id": "ending.qc01.gate_hold",
+      "final_digest": "7c5abdb4f4a700c9ed163ff7d17a22a42a3bc3f52a7686b805c9b6c442bd4281",
+      "match_results": [
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 0
+        }
+      ],
+      "requested_band": "hold",
+      "route_id": "route.qc01.hold.13",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 0
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "package_provenance",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "discriminate_candidates",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "lead_with_summary",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "bounded_uncertainty_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "bounded_uncertainty_first",
+        "choice.qc01.intake_context": "package_provenance",
+        "choice.qc01.mentor_question": "discriminate_candidates",
+        "choice.qc01.record_policy": "lead_with_summary"
+      },
+      "ending_id": "ending.qc01.defensible_release",
+      "final_digest": "c85de819457d05e82dde50e763bed8d561767bedcef1591ec3fc7730b1925a34",
+      "match_results": [
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 2
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 6
+        }
+      ],
+      "requested_band": "release",
+      "route_id": "route.qc01.release.14",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 24
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "package_provenance",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "discriminate_candidates",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "lead_with_summary",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "bounded_uncertainty_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "bounded_uncertainty_first",
+        "choice.qc01.intake_context": "package_provenance",
+        "choice.qc01.mentor_question": "discriminate_candidates",
+        "choice.qc01.record_policy": "lead_with_summary"
+      },
+      "ending_id": "ending.qc01.bounded_account",
+      "final_digest": "2c25cc0d42d6813ef9f84531e7c8eac3e1c330b06c0faf63882e735f0434d210",
+      "match_results": [
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 2
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 0
+        }
+      ],
+      "requested_band": "bounded",
+      "route_id": "route.qc01.bounded.14",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 14
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "package_provenance",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "discriminate_candidates",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "lead_with_summary",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "bounded_uncertainty_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "bounded_uncertainty_first",
+        "choice.qc01.intake_context": "package_provenance",
+        "choice.qc01.mentor_question": "discriminate_candidates",
+        "choice.qc01.record_policy": "lead_with_summary"
+      },
+      "ending_id": "ending.qc01.gate_hold",
+      "final_digest": "a47de1d8fb3bc30920a466e42a02b7de999e2f362bfdce6fcb82d03e7a4096cc",
+      "match_results": [
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 0
+        }
+      ],
+      "requested_band": "hold",
+      "route_id": "route.qc01.hold.14",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 0
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "prior_worklog",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "discriminate_candidates",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "lead_with_summary",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "bounded_uncertainty_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "bounded_uncertainty_first",
+        "choice.qc01.intake_context": "prior_worklog",
+        "choice.qc01.mentor_question": "discriminate_candidates",
+        "choice.qc01.record_policy": "lead_with_summary"
+      },
+      "ending_id": "ending.qc01.defensible_release",
+      "final_digest": "cce652c0c7a44c209df4b0c619117d47b05cf72f0a27011ca43adfdedbb5d160",
+      "match_results": [
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 2
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 6
+        }
+      ],
+      "requested_band": "release",
+      "route_id": "route.qc01.release.15",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 24
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "prior_worklog",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "discriminate_candidates",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "lead_with_summary",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "bounded_uncertainty_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "bounded_uncertainty_first",
+        "choice.qc01.intake_context": "prior_worklog",
+        "choice.qc01.mentor_question": "discriminate_candidates",
+        "choice.qc01.record_policy": "lead_with_summary"
+      },
+      "ending_id": "ending.qc01.bounded_account",
+      "final_digest": "e11a004e8a16255db85bd9243c960c12cf05eecd781c059319078bb87095db57",
+      "match_results": [
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 2
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "COMPLETED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 4
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 0
+        }
+      ],
+      "requested_band": "bounded",
+      "route_id": "route.qc01.bounded.15",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 14
+    },
+    {
+      "branch_history": [
+        {
+          "choice_id": "choice.qc01.intake_context",
+          "option_id": "prior_worklog",
+          "sequence": 9
+        },
+        {
+          "choice_id": "choice.qc01.mentor_question",
+          "option_id": "discriminate_candidates",
+          "sequence": 32
+        },
+        {
+          "choice_id": "choice.qc01.record_policy",
+          "option_id": "lead_with_summary",
+          "sequence": 54
+        },
+        {
+          "choice_id": "choice.qc01.client_frame",
+          "option_id": "bounded_uncertainty_first",
+          "sequence": 70
+        }
+      ],
+      "checkpoint_effect_count": 24,
+      "choices": {
+        "choice.qc01.client_frame": "bounded_uncertainty_first",
+        "choice.qc01.intake_context": "prior_worklog",
+        "choice.qc01.mentor_question": "discriminate_candidates",
+        "choice.qc01.record_policy": "lead_with_summary"
+      },
+      "ending_id": "ending.qc01.gate_hold",
+      "final_digest": "9a162058639cbc3ab61c3d0b168f6fa8b2631d379c559527e253ff4378fd9e96",
+      "match_results": [
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift01.wrong_device",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift02.power_lot",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift03.memory_compare",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift04.passes_cold",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift05.no_offer",
+          "story_service_points_gained": 0
+        },
+        {
+          "completion": "ABANDONED",
+          "match_ref": "story.match.qc01.shift06.quiet_cascade",
+          "story_service_points_gained": 0
+        }
+      ],
+      "requested_band": "hold",
+      "route_id": "route.qc01.hold.15",
+      "speaker_visibility_violations": [],
+      "start_match_effect_count": 6,
+      "steps": 82,
+      "story_service_points": 0
+    }
+  ]
+}

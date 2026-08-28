@@ -15,8 +15,8 @@ import {
 } from './quiet-cascade-report.mjs';
 
 const ROOT = path.resolve(import.meta.dirname, '../..');
-const CAMPAIGN_ROOT = path.join(ROOT, 'content/story-v1/campaigns/quiet-cascade');
-const AUTOMATED_ROOT = path.join(ROOT, 'automated_games/task-027-quiet-cascade-v1');
+const CAMPAIGN_ROOT = path.join(ROOT, 'content/story-v1/campaigns/quiet-cascade-characterization-v2');
+const AUTOMATED_ROOT = path.join(ROOT, 'automated_games/task-036-quiet-cascade-characterization-v2');
 const REPORT_ROOT = path.join(ROOT, 'docs/story/reports');
 
 const readJson = async (filePath) => JSON.parse(await fs.readFile(filePath, 'utf8'));

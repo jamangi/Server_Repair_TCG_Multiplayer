@@ -1,22 +1,22 @@
 # Quiet Cascade editorial and production audit
 
-Status: completed source-copy audit for `story.campaign.quiet_cascade.v1`
+Status: **completed TASK-036 production audit for `quiet-cascade-characterization-v2`**
 
 ## Scope reviewed
 
-- four chapter scripts and the `en` source catalog;
+- the preserved v1 source, TASK-034 context draft, and final successor `en` catalog;
 - four remembered, reconvergent choices and their delayed acknowledgments;
 - six pre-/post-Match bridges, including completed and abandonment fallbacks;
 - the nested 20/12 Story Service Point gate and all six terminal variants;
 - seven established characters, six reusable backgrounds, and three technical inserts;
-- deterministic transcripts for all three ending bands and the machine route matrix covering every choice option.
+- deterministic original/context/final comparisons for 124 surfaces, complete 48-route final transcripts, and the machine route matrix covering every choice option.
 
 ## Editorial findings
 
 | Audit | Result | Production rule retained |
 | --- | --- | --- |
-| Voice differentiation | Pass | Inez speaks through custody/material detail; Ev through handoff scope; Malik through fixtures/conditions; Sora through discriminating Evidence; Hana through closure authority; Jonah through provenance; Priya through operational usefulness |
-| Repeated exposition | Pass | The independent-fault boundary recurs at each handoff with a different operational consequence, not identical wording |
+| Voice differentiation | Pass with evidence | Seven voice cards supplied fourteen payload exercises; 51 TASK-034 lines received an additional voice revision. An anonymized review distinguishes physical contrast, consequence questions, controlled demonstration, counterfactual branching, auditable criteria, provenance chains, and audience-bound modal language rather than names or jargon alone |
+| Repeated exposition | Pass with evidence | All 124 displayed surfaces were compared in original/context/final form. No exact final dialogue duplicate exists; the independent-fault boundary recurs only where a different handoff or result gives it a new operational consequence |
 | Choice intent | Pass | Every option expresses a legitimate priority, takes an immediate route, writes typed memory, reconverges, and receives later acknowledgment |
 | Terminology | Pass | Observe, Hypothesis, Test, Evidence, Isolate, Repair, Verify, Document/Worklog, Ticket, Match, Service Points, Search, and Refresh retain frozen meanings |
 | Hidden-information safety | Pass | Story setups name only public symptom/subsystem/workplace context; scripts never name the hidden Fault, required diagnostic, correct Repair, or unchosen outcome before Match authorization |
@@ -24,8 +24,8 @@ Status: completed source-copy audit for `story.campaign.quiet_cascade.v1`
 | Technical causal claims | Pass | No common component root, supplier defect, field condition, or shared repair is asserted. The campaign-wide cascade is explicitly organizational |
 | Safety framing | Pass | Abandonment and low contribution preserve bounded gaps without shaming; Gate Hold is an operational fallback |
 | Privacy/provenance | Pass | SIFT sees authorized records only and cannot recover missing provenance or private Match truth |
-| Localization readiness | Pass | Text is keyed, avoids raster-only meaning, expands the SIFT role in context, and does not splice grammatical fragments around variable values |
-| Mobile dialogue density | Pass with production note | Source entries are generally one or two sentences. Viewer must scroll dialogue rather than truncate; no critical distinction is encoded only in a long compound sentence |
+| Localization readiness | Pass | All 124 reviewed surfaces have stable text IDs, no fragment splicing or inline newlines, and no meaning that depends on a raster asset or speaker name |
+| Mobile dialogue density | Pass | The final catalog has no empty or over-420-character entry; browser review covers 360-pixel mobile, 200% zoom/reflow, long-copy choices, and scrollable transcript behavior without clipping |
 | Motion/reduced motion | Pass | Transitions communicate rhythm only. Entrances, poses, inserts, and lighting carry no unique required information |
 
 ## Technical copy checkpoints
@@ -74,8 +74,23 @@ Expected canonical totals:
 
 These synthetic route returns validate Story topology only. The separate TASK-027 automated campaign plays all six canonical Match batches through the real engine with a seat-safe policy and identical-input reruns.
 
+## TASK-033–036 integration evidence
+
+| Proof | Result |
+| --- | --- |
+| Newcomer context | All 13 audited gaps are resolved; all 20 comprehension questions retain direct answers and eleven first-use definitions precede shorthand on every applicable route |
+| Semantic lock | 113 original surfaces and eleven additions map one-to-one into the final ledger; 85 context revisions and 51 further voice revisions required zero payload amendments |
+| Voice and dignity | All seven speakers have ordinary, pressure, and reflective registers; mistakes and defensiveness remain technically credible, and no voice relies on accent, identity shorthand, or humiliation |
+| Personal texture | Seven of 100 speaking moments are marked (7%), exactly one per current speaker. The beats use campaign-safe habit, humor, or relationship detail and do not modify a technical conclusion |
+| Choice acknowledgment | Both options of all four choices appear under release, bounded, and hold patterns in the 48-route comparison; immediate and delayed meaning is preserved |
+| Hidden information | Final copy contains no hidden Fault, fingerprint, required-response Card ID, private result reuse, unearned Evidence, or shared technical cause |
+| Technical authority | Six Match definitions, twelve pinned Ticket snapshots, normalized result acceptance, and the 24-point ceiling are unchanged |
+| Versioning | v1 remains immutable. A v1 checkpoint digest is verified before content-version replacement, the same durable checkpoint is re-digested for `quiet-cascade-characterization-v2`, and unknown/tampered records fail closed |
+
+The machine-readable comparison is [`FINAL_DIALOGUE_COMPARISON.json`](../revisions/quiet-cascade-characterization-v2/FINAL_DIALOGUE_COMPARISON.json); the compact human comparison is [`FINAL_DIALOGUE_COMPARISON.md`](../revisions/quiet-cascade-characterization-v2/FINAL_DIALOGUE_COMPARISON.md); and [`FINAL_ROUTE_TRANSCRIPTS.md`](../revisions/quiet-cascade-characterization-v2/FINAL_ROUTE_TRANSCRIPTS.md) contains all 48 side-by-side route transcripts.
+
 ## Deferred production polish
 
-- Final recorded voice timing and subtitle line breaks belong to a later audio/localization task; no timing values are embedded in source.
+- Recorded character voices are not part of this task. Text, keyboard, reduced-motion, silent, and localized presentation remain complete without audio timing.
 - Final art may refine crop focal points within the protected zones in `BACKGROUNDS.md`, but it must keep logical asset IDs and accessible text stable.
 - If future playable content introduces a proven failed-Verify scenario, it requires a new reviewed Match configuration and graph revision. It must not be retrofitted into these seeds through dialogue alone.

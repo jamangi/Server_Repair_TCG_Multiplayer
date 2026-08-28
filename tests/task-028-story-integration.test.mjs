@@ -17,7 +17,7 @@ import { createClientDataContext } from '../viewer/js/play/data/client-data.mjs'
 import { createStorageService } from '../viewer/js/play/storage-service.mjs';
 
 const repositoryRoot = new URL('../', import.meta.url);
-const campaignRoot = new URL('content/story-v1/campaigns/quiet-cascade/', repositoryRoot);
+const campaignRoot = new URL('content/story-v1/campaigns/quiet-cascade-characterization-v2/', repositoryRoot);
 const runtimeUrl = new URL('src/story/index.mjs', repositoryRoot);
 
 async function fileFetch(input) {
@@ -197,7 +197,7 @@ test('a failed pre-Match checkpoint write cannot expose or launch the Match boun
 });
 
 test('Story Match registry preflight stays separate from canonical Builder provenance', async () => {
-  const candidate = await json('content/story-v1/campaigns/quiet-cascade/matches.json');
+  const candidate = await json('content/story-v1/campaigns/quiet-cascade-characterization-v2/matches.json');
   const registry = validateStoryMatchRegistry(candidate);
   const definition = registry.matches.get('story.match.qc01.shift01.wrong_device');
   const deck = await canonicalDeck();

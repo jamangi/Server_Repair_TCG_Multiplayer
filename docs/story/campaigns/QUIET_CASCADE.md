@@ -109,11 +109,14 @@ No additional recurring character is required. The established ensemble covers I
 
 The committed TASK-027 engine campaign completed all six configured queues with the canonical proof deck in 14, 93, 21, 29, 112, and 217 turns respectively. All six identical-input reruns matched Ticket snapshots, replay digests, outcomes, scores, and turn counts. Builder reconstruction matched all twelve pinned Ticket IDs and snapshot SHA-256 digests. The final three-Ticket proof is intentionally called out as a tight automated-policy case: 217 turns under a 220-turn cap. This is proof of current constructibility and completion, not a claim that a human route should take 217 turns or that the cap can safely be reduced without a new run.
 
-The generated graph report records 324 reachable statements, 66 labels, 24 scenes, four choices, six Match nodes, 29 checkpoint IDs, no unreachable label, and no cycle. The 48-route matrix covers both options of every remembered choice, completed and abandoned return handling for all six Matches, and each of the three ending bands.
+The characterization-v2 graph report records 335 reachable statements, 66 labels, 24 scenes, four choices, six Match nodes, 29 checkpoint IDs, no unreachable label, and no cycle. The 48-route matrix covers both options of every remembered choice, completed and abandoned return handling for all six Matches, and each of the three ending bands. The original 324-statement v1 source remains unchanged for migration and before/after review.
 
 - Machine graph report: [`QUIET_CASCADE_GRAPH_REPORT.json`](../reports/QUIET_CASCADE_GRAPH_REPORT.json)
 - Human graph report: [`QUIET_CASCADE_GRAPH_REPORT.md`](../reports/QUIET_CASCADE_GRAPH_REPORT.md)
 - Ending-band editorial transcripts: [`QUIET_CASCADE_ROUTE_TRANSCRIPTS.md`](../reports/QUIET_CASCADE_ROUTE_TRANSCRIPTS.md)
-- Automated engine artifacts: `automated_games/task-027-quiet-cascade-v1/`
+- Current automated engine artifacts: `automated_games/task-036-quiet-cascade-characterization-v2/`
+- Preserved v1 engine/source history: `automated_games/task-027-quiet-cascade-v1/` and `content/story-v1/campaigns/quiet-cascade/`
+- Full original/context/final comparison: [`FINAL_DIALOGUE_COMPARISON.md`](../revisions/quiet-cascade-characterization-v2/FINAL_DIALOGUE_COMPARISON.md)
+- All 48 side-by-side route transcripts: [`FINAL_ROUTE_TRANSCRIPTS.md`](../revisions/quiet-cascade-characterization-v2/FINAL_ROUTE_TRANSCRIPTS.md)
 
 `node src/story/generate-quiet-cascade-reports.mjs` reruns the expensive engine proof twice per Match and regenerates every report. `node src/story/generate-quiet-cascade-reports.mjs --reports-only` preserves the committed engine runs while deterministically rebuilding Builder pins, graph analysis, route coverage, and transcripts after source-copy review.

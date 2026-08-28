@@ -2,7 +2,7 @@
 
 ## Status
 
-**Queued after TASK-034.** Character and backstory choices are owner-pre-approved under `STORY-008 A`; no per-character approval stop is required. This task does not edit production or candidate campaign dialogue. TASK-036 depends on its completed voice bibles.
+**Completed 2026-08-28.** All nine canon characters now have continuity-safe deep bibles and transformed public-domain reference constellations; the seven current speakers have payload-locked translation cards. Production and candidate dialogue remained unchanged within this task.
 
 ## Objective
 

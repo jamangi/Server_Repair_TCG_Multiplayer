@@ -585,10 +585,10 @@ test('the generated Pages stage is a strict allowlist with no Node-only or serve
   }
 
   const actualFiles = await listFiles(GENERATED_ROOT);
-  assert.deepEqual(actualFiles, [
+  assert.deepEqual([...actualFiles].sort(), [
     'manifest.json',
     ...manifest.files.map((entry) => entry.path),
-  ].sort((left, right) => left.localeCompare(right)));
+  ].sort());
   for (const relative of actualFiles.filter((file) => /\.(?:mjs|js)$/.test(file))) {
     const source = await readText(path.join(GENERATED_ROOT, ...relative.split('/')));
     assert.doesNotMatch(source, /(?:from\s*|import\s*\()['"]node:/, relative);

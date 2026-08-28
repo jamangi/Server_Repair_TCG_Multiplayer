@@ -6,14 +6,14 @@ Generated from the declarative Story pack. The JSON companion is authoritative f
 
 - Entry labels: `story.qc01.entry`
 - Scripts: 4
-- Statements: 324
+- Statements: 335
 - Labels: 66
 - Scenes: 24
-- Dialogue / narration: 90 / 5
+- Dialogue / narration: 100 / 6
 - Choices / conditions: 4 / 15
 - Match nodes: 6
 - Checkpoints: 29
-- Reachable statements: 324
+- Reachable statements: 335
 - Unreachable labels: 0
 - Undeclared cycles: 0
 - Calls / returns: 0 / 0
