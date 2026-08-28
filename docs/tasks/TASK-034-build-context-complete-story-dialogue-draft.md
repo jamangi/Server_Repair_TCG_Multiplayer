@@ -2,7 +2,7 @@
 
 ## Status
 
-**Queued after TASK-033.** This task produces a validated candidate copy layer; it does not replace the live campaign. TASK-035 uses the context-complete lines to develop character voices, and TASK-036 performs the single production migration.
+**Completed 2026-08-28.** Delivered a deterministic non-live candidate layer with 113 production mappings, 11 stable anchored additions, locked semantic payloads, and all 48 route transcripts. The live campaign remains byte-identical; TASK-035 can now develop voices from context-complete copy.
 
 ## Objective
 
