@@ -53,4 +53,15 @@ TASK-026 through TASK-030 now provide the complete first Story Mode foundation. 
 
 The owner approved [`STORY-007 A`](../design/decisions/APPROVALS.md#story-007--campaign-one-canon-package--a-approved-2026-08-28) on 2026-08-28. The shipped names, identities, setting, campaign premise, and reviewed character-art anchors are canonical for campaign one. This content approval does not promote Story prose into gameplay-rule authority.
 
+## Planned characterization sequence
+
+Hands-on reading found that the campaign's compact insider conclusions can arrive before a newcomer understands the workflow, pain point, or term they address, and that the current cast voice is more uniform than the original editorial pass claimed. The corrective sequence keeps comprehension and personality separate until one final production migration:
+
+1. [`TASK-033-HIGH`](../tasks/TASK-033-audit-story-context-and-comprehension.md) — audit all reachable narrative copy against a smart-but-new employee reader model and build the context/first-use ledger.
+2. [`TASK-034-XHIGH`](../tasks/TASK-034-build-context-complete-story-dialogue-draft.md) — produce a non-live context-complete candidate that explains environment, normal procedure, failure mode, consequence, insight, and Player action without tutorial dumping.
+3. [`TASK-035-HIGH`](../tasks/TASK-035-deepen-character-bibles-and-voice-spec.md) — deepen the nine canonical characters and create practical voice-translation cards from transformed public-domain reference constellations.
+4. [`TASK-036-XHIGH`](../tasks/TASK-036-integrate-story-characterization-pass.md) — translate the context-complete payloads through those voices and ship one versioned campaign migration with full topology, checkpoint, Match, and transcript proof.
+
+The owner approved [`STORY-008 A`](../design/decisions/APPROVALS.md#story-008--characterization-pass-creative-discretion--a-approved-2026-08-28), so reference and backstory selections do not require a per-character approval stop. Canonical names, roles, visual identities, established relationships, protagonist customization, and gameplay authority remain fixed boundaries.
+
 The architecture deliberately borrows useful visual-novel concepts—stable labels, jump/call/return, declarative statements, and layered rendering—without adopting executable story scripts or treating another engine's syntax as this project's contract.

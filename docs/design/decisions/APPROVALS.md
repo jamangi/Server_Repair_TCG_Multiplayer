@@ -1,6 +1,6 @@
 # Post-TASK-010 playtest approvals
 
-Status: **PT-001 D, PT-002 A, PT-003 D, PT-004 A, PT-005 A, PT-006 D, and PT-007 A approved — 2026-08-24. UI-001 A and UI-002 A approved — 2026-08-25. PT-008 B approved — 2026-08-26. STORY-001 A through STORY-006 A approved — 2026-08-27; STORY-007 A approved — 2026-08-28. TASK-025 and the TASK-026 through TASK-030 Story sequence are complete. Migration choices MS-001 A through MS-005 A and MS-007 A remain approved, but TASK-017 is deferred; MS-006 A's earlier parking sequence is superseded.**
+Status: **PT-001 D, PT-002 A, PT-003 D, PT-004 A, PT-005 A, PT-006 D, and PT-007 A approved — 2026-08-24. UI-001 A and UI-002 A approved — 2026-08-25. PT-008 B approved — 2026-08-26. STORY-001 A through STORY-006 A approved — 2026-08-27; STORY-007 A and STORY-008 A approved — 2026-08-28. TASK-025 and the TASK-026 through TASK-030 Story sequence are complete; TASK-033 through TASK-036 form the planned characterization sequence. Migration choices MS-001 A through MS-005 A and MS-007 A remain approved, but TASK-017 is deferred; MS-006 A's earlier parking sequence is superseded.**
 
 ## Post-TASK-016 UI approvals
 
@@ -325,6 +325,21 @@ Approved reply record:
 
 ```text
 STORY-007 A
+```
+
+### STORY-008 — Characterization-pass creative discretion — **A approved 2026-08-28**
+
+The project owner pre-approved the characterization pass's backstory and fictional-reference choices so TASK-035 does not require per-character option review.
+
+- **A — Builder selects continuity-safe backstories and transformed public-domain reference constellations (approved).** Deepen the nine canonical ensemble characters and select documented public-domain fictional references as analytical inputs. Retain established names, roles, relationships, visual identities, technical competence, and the customizable protagonist boundary. Blend multiple abstract influence dimensions; do not copy source phrasing, catchphrases, plots, complete personalities, or identity stereotypes. Choices must remain compatible with current art, Story topology, gameplay authority, and the semantic payload established by TASK-033/TASK-034.
+- **B — Return each character package for owner approval.** Prepare reference and backstory options but block the final voice bible until the owner selects each package.
+
+Approval A grants creative discretion inside the stated canon/originality boundary. It does not pre-approve new characters, changed identities, new art, Story branches, Match changes, or technical claims.
+
+Approved reply record:
+
+```text
+STORY-008 A
 ```
 
 ## Migration Seed and Server Repair V2

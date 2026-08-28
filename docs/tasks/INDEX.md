@@ -4,7 +4,15 @@ Tasks are implementation contracts. A builder must read `AGENTS.md` and then the
 
 Beginning with TASK-011, the displayed task ID includes the recommended reasoning-effort suffix used when starting that task. `HIGH` denotes substantial but bounded implementation/research; `XHIGH` denotes a cross-cutting semantic, architectural, or broad content migration. The stable task number and existing filename do not change, preserving links and history.
 
-Active task: **none selected.**
+Active task:
+
+- [`TASK-033-HIGH: Audit Story context and newcomer comprehension`](TASK-033-audit-story-context-and-comprehension.md) — ready; reconcile every reachable Quiet Cascade narrative line against an intelligent-newcomer reader model and produce the complete context/first-use ledger without changing production copy.
+
+Queued characterization sequence:
+
+1. [`TASK-034-XHIGH: Build the context-complete Story dialogue draft`](TASK-034-build-context-complete-story-dialogue-draft.md) — follows TASK-033; resolve the ledger into a validated candidate copy layer while keeping the live campaign untouched.
+2. [`TASK-035-HIGH: Deepen character bibles and voice-translation rules`](TASK-035-deepen-character-bibles-and-voice-spec.md) — follows TASK-034; enrich all nine canonical characters through original, continuity-safe backstories and transformed public-domain reference constellations under approved `STORY-008 A`.
+3. [`TASK-036-XHIGH: Integrate the Story characterization pass`](TASK-036-integrate-story-characterization-pass.md) — follows TASK-033 through TASK-035; revoice the context-complete draft and perform one versioned live campaign migration with full topology, checkpoint, Match, and transcript proof.
 
 Completed procedural UI audio sequence:
 
@@ -25,7 +33,7 @@ Approved but deferred V2 task:
 
 - [`TASK-017-XHIGH: Create the Server Repair V2 Migration Seed`](TASK-017-create-server-repair-v2-migration-seed.md) — approved Migration Seed direction but deferred until the V0 product is training-ready; when reactivated, it audits V0 in bounded checkpoints and establishes the public dependency-inference V2 foundation without modifying V0 behavior.
 
-TASK-011-HIGH through TASK-016-HIGH, TASK-018-HIGH through TASK-021-HIGH, and TASK-023-HIGH through TASK-032-HIGH are complete. No later implementation task is active. PT-008 B is approved and the proposed TASK-022 was withdrawn without implementation. Return to TASK-017-XHIGH only when the project owner reactivates V2 migration.
+TASK-011-HIGH through TASK-016-HIGH, TASK-018-HIGH through TASK-021-HIGH, and TASK-023-HIGH through TASK-032-HIGH are complete. TASK-033-HIGH is next; TASK-034-XHIGH through TASK-036-XHIGH follow in order. `STORY-008 A` removes the per-character approval gate without relaxing canon or originality boundaries. PT-008 B is approved and the proposed TASK-022 was withdrawn without implementation. Return to TASK-017-XHIGH only when the project owner reactivates V2 migration.
 
 Completed documentation and research tasks:
 
