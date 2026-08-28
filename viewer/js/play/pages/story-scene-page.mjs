@@ -60,6 +60,7 @@ export function renderStoryScene(root, context) {
         context.rerender({ focus: '[data-story-advance]' });
       } catch (error) {
         context.announce(error.message || 'Story recovery failed.');
+        void context.sfx?.playInteraction('global.visible.rejection');
       }
     };
     root.querySelector('[data-story-recover]')?.addEventListener('click', recover);
@@ -108,27 +109,29 @@ export function renderStoryScene(root, context) {
   });
 
   let submitted = false;
-  const submit = async (operation) => {
+  const submit = async (operation, successInteractionId = null) => {
     if (submitted || model.pending) return;
     submitted = true;
     root.querySelectorAll('[data-story-choice], [data-story-advance]').forEach((button) => { button.disabled = true; });
     try {
       await operation();
+      if (successInteractionId) void context.sfx?.playInteraction(successInteractionId);
     } catch (error) {
       submitted = false;
       context.announce(error.message || 'Story intent was rejected. No branch was selected.');
       context.rerender();
+      void context.sfx?.playInteraction('global.visible.rejection');
     }
   };
   const history = root.querySelector('.story-history-dialog');
   const onClick = (event) => {
     const choice = event.target.closest('[data-story-choice]');
     if (choice) {
-      submit(() => context.story.choose(choice.dataset.storyChoice));
+      submit(() => context.story.choose(choice.dataset.storyChoice), 'story.scene.choice');
       return;
     }
     if (event.target.closest('[data-story-advance]')) {
-      submit(() => context.story.advance());
+      submit(() => context.story.advance(), 'story.scene.advance');
       return;
     }
     if (event.target.closest('[data-story-history]')) {
@@ -145,7 +148,7 @@ export function renderStoryScene(root, context) {
     const choice = model.choices[Number(event.key) - 1];
     if (!choice) return;
     event.preventDefault();
-    submit(() => context.story.choose(choice.optionId));
+    submit(() => context.story.choose(choice.optionId), 'story.scene.choice');
   };
   root.addEventListener('click', onClick);
   root.addEventListener('keydown', onKeyDown);

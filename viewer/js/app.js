@@ -1,10 +1,13 @@
 import { mountLibrary, unmountLibrary } from './library-view.js';
+import { createSfxService } from './sfx-service.mjs';
 
 const appRoot = document.querySelector('#app');
 const announcer = document.querySelector('#announcer');
 const libraryTab = document.querySelector('#library-tab');
 const playTab = document.querySelector('#play-tab');
 const settingsTrigger = document.querySelector('#settings-trigger');
+const sfx = createSfxService({ initialVolumePercent: 0 });
+sfx.start();
 
 let activeRoute = null;
 let activeArea = null;
@@ -142,4 +145,9 @@ window.addEventListener('beforeunload', (event) => {
   event.returnValue = '';
 });
 
-await routeApplication();
+await Promise.all([
+  routeApplication(),
+  ensurePlayModule()
+    .then((module) => module.connectSfxService?.(sfx))
+    .catch(() => {}),
+]);

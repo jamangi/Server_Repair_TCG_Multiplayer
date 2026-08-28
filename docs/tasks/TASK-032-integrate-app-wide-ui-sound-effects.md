@@ -2,7 +2,7 @@
 
 ## Status
 
-**Queued after TASK-031.** The former audio-asset rights blocker is removed. Begin after TASK-031 produces and validates the complete semantic interaction and recipe catalogue.
+**Completed 2026-08-28.** Added one dependency-free outer-shell Web Audio service, generated catalog-driven runtime recipes/mappings, trusted-activation and bounded polyphony/cleanup policy, desktop/keyboard/touch suppression and precedence, and strict `sfx_volume_percent` persistence at default 40 with 0–100 Settings/Preview/export/import/reset support. No sample, network audio request, framework, or external synthesis dependency was added.
 
 ## Objective
 

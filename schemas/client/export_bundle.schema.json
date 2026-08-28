@@ -1,13 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.local/client/export_bundle.schema.json",
-  "title": "Solo Pages Export Bundle v3",
+  "title": "Solo Pages Export Bundle v4",
   "description": "A local-only backup. It excludes active Match State, credentials, Ticket truth, Card definitions, and rules text.",
   "type": "object",
   "additionalProperties": false,
   "properties": {
     "schema_version": {
-      "const": "solo-export-v3"
+      "const": "solo-export-v4"
     },
     "implementation_profile_id": {
       "const": "solo-pages-v2"

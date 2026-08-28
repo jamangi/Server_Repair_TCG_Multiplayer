@@ -74,7 +74,7 @@ export function createStorageService(options) {
   }
 
   function validateImportedStory(progress) {
-    if (!storyImportValidator) return;
+    if (!storyImportValidator || progress?.pack_id === null) return;
     try {
       storyImportValidator(clone(progress));
     } catch (error) {

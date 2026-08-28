@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://server-repair.example/schemas/client/sfx_ui_catalog.schema.json",
+  "title": "Server Repair UI SFX interaction catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "audit_date", "scope", "intent_precedence", "interactions"],
+  "properties": {
+    "schema_version": { "const": "sfx-ui-catalog-v1" },
+    "audit_date": { "type": "string", "format": "date" },
+    "scope": { "type": "string", "minLength": 1 },
+    "intent_precedence": {
+      "const": ["ERROR", "CANCEL", "POPUP_OPEN", "POPUP_CLOSE", "SWIPE", "SELECT", "CURSOR", "NO_SFX"]
+    },
+    "interactions": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/interaction" }
+    }
+  },
+  "$defs": {
+    "interaction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "destination", "page", "region", "source_modules", "control_family", "inputs", "trigger_phase", "event_type", "eligibility", "intent", "priority", "precedence", "cooldown_ms", "dedupe_group", "overlap_policy", "suppression", "recipe_id", "selector", "audit_status", "rationale"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z][a-z0-9]*(?:\\.[a-z0-9]+)+$" },
+        "destination": { "type": "string", "minLength": 1 },
+        "page": { "type": "string", "minLength": 1 },
+        "region": { "type": "string", "minLength": 1 },
+        "source_modules": { "type": "array", "minItems": 1, "items": { "type": "string", "pattern": "^viewer/" } },
+        "control_family": { "type": "string", "minLength": 1 },
+        "inputs": { "type": "array", "minItems": 1, "items": { "enum": ["mouse", "keyboard", "touch", "programmatic"] } },
+        "trigger_phase": { "type": "string", "minLength": 1 },
+        "event_type": { "enum": ["click", "change", "input", "pointerover", "focusin", "drop", "custom", "none"] },
+        "eligibility": { "type": "string", "minLength": 1 },
+        "intent": { "enum": ["CURSOR", "SELECT", "CANCEL", "POPUP_OPEN", "POPUP_CLOSE", "ERROR", "SWIPE", "NO_SFX"] },
+        "priority": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "precedence": { "type": "string", "minLength": 1 },
+        "cooldown_ms": { "type": "integer", "minimum": 0, "maximum": 1000 },
+        "dedupe_group": { "type": "string", "minLength": 1 },
+        "overlap_policy": { "enum": ["drop", "interrupt", "mix", "none"] },
+        "suppression": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "recipe_id": { "type": ["string", "null"] },
+        "selector": { "type": ["string", "null"] },
+        "audit_status": { "enum": ["MAPPED", "NO_SFX"] },
+        "rationale": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

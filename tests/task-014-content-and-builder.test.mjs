@@ -293,7 +293,7 @@ test('expanded local data exports validate and existing diagnosis-v2 profiles re
   const exported = createExportBundle(current, clientContext, '2042-01-01T00:00:00.000Z');
   assert.deepEqual(validateJsonSchema(
     exported,
-    clientSchemaByTitle.get('Solo Pages Export Bundle v3'),
+    clientSchemaByTitle.get('Solo Pages Export Bundle v4'),
     clientSchemas,
   ), []);
 

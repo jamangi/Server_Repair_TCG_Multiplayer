@@ -4,13 +4,12 @@ Tasks are implementation contracts. A builder must read `AGENTS.md` and then the
 
 Beginning with TASK-011, the displayed task ID includes the recommended reasoning-effort suffix used when starting that task. `HIGH` denotes substantial but bounded implementation/research; `XHIGH` denotes a cross-cutting semantic, architectural, or broad content migration. The stable task number and existing filename do not change, preserving links and history.
 
-Active task:
+Active task: **none selected.**
 
-- [`TASK-031-HIGH: Catalogue SFX-capable UI interactions and procedural recipes`](TASK-031-catalogue-sfx-capable-ui-interactions.md) — ready; audit every Library, Play, Profile, Settings, active-Match, and Story interaction plus all twelve repository-owned procedural recipe candidates into separate, validated catalogues without adding playback.
+Completed procedural UI audio sequence:
 
-Queued task:
-
-- [`TASK-032-HIGH: Integrate app-wide procedural UI sound effects`](TASK-032-integrate-app-wide-ui-sound-effects.md) — follows TASK-031; implement one accessible Web Audio synthesis service, validated recipes, and a persisted 0–100 app-wide SFX volume setting without sampled audio or external audio dependencies.
+- [`TASK-031-HIGH: Catalogue SFX-capable UI interactions and procedural recipes`](TASK-031-catalogue-sfx-capable-ui-interactions.md) — completed 2026-08-28; reviewed all twelve repository-owned prototype recipes, justified one production Error extension, and mapped 68 current interaction families across Library, Settings, every Play destination, active Matches, Story, desktop/keyboard/touch, and intentional silence.
+- [`TASK-032-HIGH: Integrate app-wide procedural UI sound effects`](TASK-032-integrate-app-wide-ui-sound-effects.md) — completed 2026-08-28; delivered one accessible catalog-driven Web Audio service, strict trusted-activation/precedence/cooldown/polyphony/cleanup behavior, and a portable 0–100 app-wide SFX volume setting without sampled audio or external dependencies.
 
 Completed Story Mode sequence:
 
@@ -26,7 +25,7 @@ Approved but deferred V2 task:
 
 - [`TASK-017-XHIGH: Create the Server Repair V2 Migration Seed`](TASK-017-create-server-repair-v2-migration-seed.md) — approved Migration Seed direction but deferred until the V0 product is training-ready; when reactivated, it audits V0 in bounded checkpoints and establishes the public dependency-inference V2 foundation without modifying V0 behavior.
 
-TASK-011-HIGH through TASK-016-HIGH, TASK-018-HIGH through TASK-021-HIGH, TASK-023-HIGH through TASK-030-XHIGH are complete. TASK-031-HIGH is next and TASK-032-HIGH follows after catalogue completion; the procedural strategy removes the former third-party audio-rights blocker. PT-008 B is approved and the proposed TASK-022 was withdrawn without implementation. Return to TASK-017-XHIGH only when the project owner reactivates V2 migration.
+TASK-011-HIGH through TASK-016-HIGH, TASK-018-HIGH through TASK-021-HIGH, and TASK-023-HIGH through TASK-032-HIGH are complete. No later implementation task is active. PT-008 B is approved and the proposed TASK-022 was withdrawn without implementation. Return to TASK-017-XHIGH only when the project owner reactivates V2 migration.
 
 Completed documentation and research tasks:
 

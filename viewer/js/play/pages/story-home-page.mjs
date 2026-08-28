@@ -54,15 +54,17 @@ export function renderStoryHome(root, context) {
     </section>`;
 
   let busy = false;
-  const run = async (operation) => {
+  const run = async (operation, successInteractionId = null) => {
     if (busy) return;
     busy = true;
     root.querySelectorAll('button').forEach((button) => { button.disabled = true; });
     try {
       await operation();
+      if (successInteractionId) void context.sfx?.playInteraction(successInteractionId);
     } catch (error) {
       setInlineNotice(root, error.message || 'Story progress could not be updated.', 'error');
       context.announce('Story progress could not be updated.');
+      void context.sfx?.playInteraction('global.visible.rejection');
       busy = false;
       root.querySelectorAll('button').forEach((button) => { button.disabled = false; });
     }
@@ -73,7 +75,7 @@ export function renderStoryHome(root, context) {
       run(async () => {
         const result = await context.story.openPrimary();
         context.navigate(result?.route || '#/play/story/scene');
-      });
+      }, 'story.home.primary');
       return;
     }
     const replay = event.target.closest('[data-story-replay]');

@@ -10,6 +10,7 @@ on:
       - "src/shared/**"
       - "content/gameplay-v1/**"
       - "assets/**"
+      - "docs/audio/**"
       - "package.json"
       - "pnpm-lock.yaml"
       - "tests/task-010-browser-portability.test.mjs"
@@ -44,10 +45,14 @@ jobs:
         run: node viewer/scripts/verify-play-assets.mjs
       - name: Build browser-safe Play runtime
         run: node viewer/scripts/build-play-assets.mjs
+      - name: Build browser-safe SFX runtime catalog
+        run: node viewer/scripts/build-sfx-assets.mjs
       - name: Verify Play runtime allowlist, integrity, and committed freshness
         run: |
           node viewer/scripts/verify-play-assets.mjs
           git diff --exit-code -- viewer/generated/play
+          node viewer/scripts/verify-sfx-assets.mjs
+          git diff --exit-code -- viewer/generated/sfx
       - name: Validate viewer content
         run: node --test tests/viewer-content-schema.test.mjs tests/viewer-baseline.test.mjs tests/task-010-browser-portability.test.mjs
       - name: Configure Pages

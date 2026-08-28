@@ -271,9 +271,11 @@ export function renderDeckEditor(root, context, deckId) {
       context.ui.editorOriginal = cloneJson(draft);
       context.ui.editorDirty = false;
       context.announce(`${draft.display_name} saved.`);
+      void context.sfx?.playInteraction('deck.editor.save', { trustedEvent: event });
       context.navigate('#/play/decks');
     } catch (error) {
       setInlineNotice(root, error.message, 'error');
+      void context.sfx?.playInteraction('global.visible.rejection', { trustedEvent: event });
     }
   };
   root.addEventListener('input', onInput);

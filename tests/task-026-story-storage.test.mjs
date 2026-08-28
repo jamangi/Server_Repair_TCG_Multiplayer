@@ -110,13 +110,17 @@ function progressFromCheckpoint(checkpoint) {
   };
 }
 
-test('v2 local state migrates once to v3 and preserves every non-Story record exactly', () => {
+test('v2 local state migrates to v4, preserving records while adding Story and the SFX default', () => {
   const prior = createDefaultState(context);
   prior.storage_version = 'solo-local-state-v2';
   prior.records.profile.display_name = 'Preserved Technician';
+  prior.records.settings.schema_version = 'solo-settings-v2';
   prior.records.settings.motion_preference = 'REDUCED';
+  delete prior.records.settings.sfx_volume_percent;
   delete prior.records.story;
   const preserved = structuredClone(prior.records);
+  preserved.settings.schema_version = 'solo-settings-v3';
+  preserved.settings.sfx_volume_percent = 40;
 
   const migrated = migrateLocalState(prior, context);
   assert.equal(migrated.storage_version, LOCAL_STATE_VERSION);
@@ -212,13 +216,17 @@ test('Story validation rejects future, extra, mismatched, duplicate, and digest-
   assert.ok(validateStoryProgress(mismatch, context).some((entry) => entry.code === 'RESULT_MISMATCH'));
 });
 
-test('v2 exports migrate to v3 with non-Story records unchanged and an empty Story record', () => {
+test('v2 exports migrate to v4 with preserved records, an empty Story record, and the SFX default', () => {
   const current = createDefaultState(context);
   current.records.profile.display_name = 'Legacy Export Technician';
   const prior = createExportBundle(current, context, '2026-08-27T12:00:00.000Z');
   prior.schema_version = 'solo-export-v2';
+  prior.records.settings.schema_version = 'solo-settings-v2';
+  delete prior.records.settings.sfx_volume_percent;
   delete prior.records.story;
   const preserved = structuredClone(prior.records);
+  preserved.settings.schema_version = 'solo-settings-v3';
+  preserved.settings.sfx_volume_percent = 40;
 
   const migrated = parseImportBundle(JSON.stringify(prior), context);
   assert.equal(migrated.schema_version, EXPORT_VERSION);

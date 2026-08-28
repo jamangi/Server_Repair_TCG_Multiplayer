@@ -1,12 +1,12 @@
 import { sha256Hex } from '../../../generated/play/src/shared/sha256.mjs';
 
 export const IMPLEMENTATION_PROFILE_ID = 'solo-pages-v2';
-export const LOCAL_STATE_VERSION = 'solo-local-state-v3';
+export const LOCAL_STATE_VERSION = 'solo-local-state-v4';
 export const PROFILE_VERSION = 'solo-profile-v2';
 export const DECKS_VERSION = 'solo-decks-v2';
-export const SETTINGS_VERSION = 'solo-settings-v2';
+export const SETTINGS_VERSION = 'solo-settings-v3';
 export const STATISTICS_VERSION = 'solo-statistics-v2';
-export const EXPORT_VERSION = 'solo-export-v3';
+export const EXPORT_VERSION = 'solo-export-v4';
 export const RESULT_SUMMARY_VERSION = 'solo-result-summary-v2';
 export const TUTORIAL_PROGRESS_VERSION = 'solo-tutorial-progress-v1';
 export const TUTORIAL_CATALOG_VERSION = 'tutorial-checkpoints-v1';
@@ -33,8 +33,8 @@ export const PROFILE_ICON_IDS = Object.freeze([
   'cosmetic.profile.storage',
   'cosmetic.profile.systems',
 ]);
-export const SUPPORTED_PRIOR_STORAGE_VERSIONS = Object.freeze(['solo-local-state-v1', 'solo-local-state-v2']);
-export const SUPPORTED_PRIOR_EXPORT_VERSIONS = Object.freeze(['solo-export-v2']);
+export const SUPPORTED_PRIOR_STORAGE_VERSIONS = Object.freeze(['solo-local-state-v1', 'solo-local-state-v2', 'solo-local-state-v3']);
+export const SUPPORTED_PRIOR_EXPORT_VERSIONS = Object.freeze(['solo-export-v2', 'solo-export-v3']);
 
 const PROFILE_KEYS = ['schema_version', 'profile_id', 'display_name', 'icon_id'];
 const DECK_KEYS = ['deck_id', 'display_name', 'source_deck_id', 'card_definition_ids'];
@@ -45,7 +45,7 @@ const DECK_COLLECTION_KEYS = [
   'active_deck_id',
   'decks',
 ];
-const SETTINGS_KEYS = ['schema_version', 'starting_ticket_count', 'motion_preference', 'drag_enabled', 'preferred_bench_view'];
+const SETTINGS_KEYS = ['schema_version', 'starting_ticket_count', 'motion_preference', 'drag_enabled', 'preferred_bench_view', 'sfx_volume_percent'];
 const PROCESSED_RESULT_KEYS = ['match_id', 'result_id'];
 const STATISTIC_KEYS = [
   'matches_started',
@@ -405,6 +405,7 @@ export function createDefaultState(context) {
         motion_preference: 'SYSTEM',
         drag_enabled: false,
         preferred_bench_view: 'RELEVANT',
+        sfx_volume_percent: 40,
       },
       statistics: createEmptyStatistics(),
       tutorials: {
@@ -518,6 +519,11 @@ export function validateSettings(settings, context) {
   }
   if (!['RELEVANT', 'GLOBAL'].includes(settings.preferred_bench_view)) {
     errors.push(issue('$.settings.preferred_bench_view', 'INVALID_BENCH_VIEW', 'preferred_bench_view must be RELEVANT or GLOBAL.'));
+  }
+  if (!Number.isInteger(settings.sfx_volume_percent)
+      || settings.sfx_volume_percent < 0
+      || settings.sfx_volume_percent > 100) {
+    errors.push(issue('$.settings.sfx_volume_percent', 'INVALID_SFX_VOLUME', 'Sound-effect volume must be an integer from 0 through 100.'));
   }
   return errors;
 }
@@ -834,7 +840,7 @@ export function migrateLocalState(candidate, context) {
     );
   }
   if (candidate.storage_version !== LOCAL_STATE_VERSION
-      && candidate.storage_version !== 'solo-local-state-v2') {
+      && !['solo-local-state-v2', 'solo-local-state-v3'].includes(candidate.storage_version)) {
     throw new ClientDataError(
       'UNSUPPORTED_VERSION',
       `Unsupported local data version ${String(candidate.storage_version)}.`,
@@ -842,13 +848,18 @@ export function migrateLocalState(candidate, context) {
   }
   const normalized = normalizeContext(context);
   let working = cloneJson(candidate);
-  if (working.storage_version === 'solo-local-state-v2') {
+  if (['solo-local-state-v2', 'solo-local-state-v3'].includes(working.storage_version)) {
     working.storage_version = LOCAL_STATE_VERSION;
     if (isPlainObject(working.records) && !Object.hasOwn(working.records, 'tutorials')) {
       working.records.tutorials = createDefaultState(normalized).records.tutorials;
     }
     if (isPlainObject(working.records) && !Object.hasOwn(working.records, 'story')) {
       working.records.story = createEmptyStoryProgress();
+    }
+    if (isPlainObject(working.records?.settings)
+        && working.records.settings.schema_version === 'solo-settings-v2') {
+      working.records.settings.schema_version = SETTINGS_VERSION;
+      working.records.settings.sfx_volume_percent = 40;
     }
   }
   if (normalized.cardCatalogVersion === EXPANDED_CARD_CATALOG_VERSION
@@ -1139,6 +1150,11 @@ export function migrateExportBundle(candidate, context) {
   if (isPlainObject(migrated.records) && !Object.hasOwn(migrated.records, 'story')) {
     migrated.records.story = createEmptyStoryProgress();
   }
+  if (isPlainObject(migrated.records?.settings)
+      && migrated.records.settings.schema_version === 'solo-settings-v2') {
+    migrated.records.settings.schema_version = SETTINGS_VERSION;
+    migrated.records.settings.sfx_volume_percent = 40;
+  }
   const errors = validateExportBundle(migrated, context);
   if (errors.length > 0) {
     const code = errors.some((entry) => entry.code === 'PROTOTYPE_POLLUTION_KEY' || entry.code === 'UNSAFE_PROTOTYPE')
@@ -1205,6 +1221,9 @@ export function createImportPreview(bundle, context) {
       completed_match_count: bundle.records.story.checkpoint?.match_results?.length ?? 0,
       result_waiting: bundle.records.story.pending_result !== null,
       completed_ending_id: bundle.records.story.completed_ending_id,
+    },
+    settings: {
+      sfx_volume_percent: bundle.records.settings.sfx_volume_percent,
     },
     versions: {
       export: bundle.schema_version,

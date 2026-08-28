@@ -77,7 +77,7 @@ Leaving or reloading during a Match restores `AWAITING_MATCH` from the pre-Match
 
 ## Durable progress and migration
 
-Local data version `solo-local-state-v3` and export version `solo-export-v3` add one exact `records.story` value:
+Local data version `solo-local-state-v3` and export version `solo-export-v3` originally added one exact `records.story` value:
 
 ```js
 {
@@ -94,7 +94,7 @@ The all-null form means that no Story pack has started. An active record pins pa
 
 Durable checkpoints contain only version/content/checkpoint IDs, approved variables and choices, bounded branch and normalized-result histories, Story-scoped Service Points, pending or returned Match context, and a canonical SHA-256 digest. They exclude the DOM, display layers, transcript animation, call stack, arbitrary program counter, and active engine state.
 
-Migration from local v2 to v3 adds the empty Story record and preserves profile, decks, settings, statistics, and tutorials exactly. V2 export import does the same before strict v3 validation and preview. V1 remains pinned to its original coexistence policy. Unknown/future versions, extra fields, mismatched content, corrupt digests, duplicate results, or cross-context pending results fail before replacement. Confirmed import is one atomic replacement; failed validation or storage writes preserve the prior complete snapshot.
+Current local version `solo-local-state-v4` and export version `solo-export-v4` retain that Story record and add only the bounded `solo-settings-v3.sfx_volume_percent` presentation preference. Migration from local v2/v3 adds any missing empty Story record, upgrades settings with the default volume `40`, and preserves profile, decks, statistics, tutorials, and existing Story progress. V2/v3 export import does the same before strict v4 validation and preview. V1 remains pinned to its original coexistence policy. Unknown/future versions, extra fields, mismatched content, corrupt digests, duplicate results, or cross-context pending results fail before replacement. Confirmed import is one atomic replacement; failed validation or storage writes preserve the prior complete snapshot.
 
 ## Static Viewer staging
 

@@ -1,0 +1,277 @@
+{
+  "schema_version": "sfx-recipe-catalog-v1",
+  "source_prototype": "sound_effects/ui_sound_lab_single.html",
+  "prototype_recipe_count": 12,
+  "production_extension_count": 1,
+  "runtime_policy": {
+    "global_max_voices": 8,
+    "family_max_voices": { "CURSOR": 1, "SELECT": 2, "CANCEL": 1, "POPUP_OPEN": 1, "POPUP_CLOSE": 1, "ERROR": 1, "SWIPE": 1 },
+    "interruption_groups": { "CURSOR": "cursor", "SELECT": "selection", "CANCEL": "popup", "POPUP_OPEN": "popup", "POPUP_CLOSE": "popup", "ERROR": "feedback", "SWIPE": "spatial" }
+  },
+  "recipes": [
+    {
+      "id": "sfx.cancel.mechanical",
+      "prototype_id": "cancel1",
+      "label": "Cancel A",
+      "family": "CANCEL",
+      "status": "APPROVED",
+      "duration_ms": 55,
+      "attack_ms": 2,
+      "release_ms": 45,
+      "filter": { "type": "highpass", "frequency_hz": 1600, "q": 0.7 },
+      "delay": { "time_ms": 0, "wet_mix": 0, "feedback": 0 },
+      "gain_trim": 0.58,
+      "maximum_simultaneous_voices": 1,
+      "interruption_group": "popup",
+      "sources": [
+        { "type": "noise", "gain": 0.24, "start_frequency_hz": 0, "end_frequency_hz": 0 },
+        { "type": "square", "gain": 0.16, "start_frequency_hz": 150, "end_frequency_hz": 150 }
+      ],
+      "listening_note": "Fast mechanical stop; readable without implying a fault.",
+      "production_use": "Primary cancel cue."
+    },
+    {
+      "id": "sfx.cancel.crystalline",
+      "prototype_id": "cancel2",
+      "label": "Cancel B",
+      "family": "CANCEL",
+      "status": "RETAINED_VARIANT",
+      "duration_ms": 85,
+      "attack_ms": 2,
+      "release_ms": 66,
+      "filter": { "type": "highpass", "frequency_hz": 500, "q": 0.7 },
+      "delay": { "time_ms": 35, "wet_mix": 0.12, "feedback": 0.08 },
+      "gain_trim": 0.5,
+      "maximum_simultaneous_voices": 1,
+      "interruption_group": "popup",
+      "sources": [
+        { "type": "triangle", "gain": 0.2, "start_frequency_hz": 520, "end_frequency_hz": 230 }
+      ],
+      "listening_note": "Clear descending alternative, but longer and more tonal than Cancel A.",
+      "production_use": "Reviewed alternative; not selected for routine cancellation."
+    },
+    {
+      "id": "sfx.cursor.mechanical",
+      "prototype_id": "cursor1",
+      "label": "Cursor A",
+      "family": "CURSOR",
+      "status": "APPROVED",
+      "duration_ms": 28,
+      "attack_ms": 1,
+      "release_ms": 23,
+      "filter": { "type": "highpass", "frequency_hz": 1300, "q": 0.7 },
+      "delay": { "time_ms": 0, "wet_mix": 0, "feedback": 0 },
+      "gain_trim": 0.34,
+      "maximum_simultaneous_voices": 1,
+      "interruption_group": "cursor",
+      "sources": [
+        { "type": "square", "gain": 0.16, "start_frequency_hz": 980, "end_frequency_hz": 820 }
+      ],
+      "listening_note": "Short, dry focus tick with the best positional clarity.",
+      "production_use": "Eligible mouse entry."
+    },
+    {
+      "id": "sfx.cursor.noise",
+      "prototype_id": "cursor2",
+      "label": "Cursor B",
+      "family": "CURSOR",
+      "status": "EXCLUDED",
+      "duration_ms": 22,
+      "attack_ms": 1,
+      "release_ms": 18,
+      "filter": { "type": "highpass", "frequency_hz": 2600, "q": 0.7 },
+      "delay": { "time_ms": 0, "wet_mix": 0, "feedback": 0 },
+      "gain_trim": 0.28,
+      "maximum_simultaneous_voices": 1,
+      "interruption_group": "cursor",
+      "sources": [
+        { "type": "noise", "gain": 0.34, "start_frequency_hz": 0, "end_frequency_hz": 0 }
+      ],
+      "listening_note": "The high-passed burst becomes abrasive under repeated traversal.",
+      "production_use": "Catalogued for traceability; excluded from runtime mappings."
+    },
+    {
+      "id": "sfx.cursor.rise",
+      "prototype_id": "cursor3",
+      "label": "Cursor C",
+      "family": "CURSOR",
+      "status": "APPROVED",
+      "duration_ms": 40,
+      "attack_ms": 1,
+      "release_ms": 34,
+      "filter": { "type": "highpass", "frequency_hz": 500, "q": 0.7 },
+      "delay": { "time_ms": 0, "wet_mix": 0, "feedback": 0 },
+      "gain_trim": 0.3,
+      "maximum_simultaneous_voices": 1,
+      "interruption_group": "cursor",
+      "sources": [
+        { "type": "sine", "gain": 0.18, "start_frequency_hz": 760, "end_frequency_hz": 1280 }
+      ],
+      "listening_note": "Gentle upward marker distinguishes deliberate keyboard focus from hover.",
+      "production_use": "Eligible keyboard focus."
+    },
+    {
+      "id": "sfx.cursor.fall",
+      "prototype_id": "cursor4",
+      "label": "Cursor D",
+      "family": "CURSOR",
+      "status": "RETAINED_VARIANT",
+      "duration_ms": 44,
+      "attack_ms": 1,
+      "release_ms": 37,
+      "filter": { "type": "highpass", "frequency_hz": 650, "q": 0.7 },
+      "delay": { "time_ms": 0, "wet_mix": 0, "feedback": 0 },
+      "gain_trim": 0.3,
+      "maximum_simultaneous_voices": 1,
+      "interruption_group": "cursor",
+      "sources": [
+        { "type": "triangle", "gain": 0.18, "start_frequency_hz": 1250, "end_frequency_hz": 720 }
+      ],
+      "listening_note": "Readable descending focus alternative, but too close to cancel semantics.",
+      "production_use": "Reviewed alternative; not mapped."
+    },
+    {
+      "id": "sfx.popup.close",
+      "prototype_id": "popupClose",
+      "label": "Popup Close",
+      "family": "POPUP_CLOSE",
+      "status": "APPROVED",
+      "duration_ms": 75,
+      "attack_ms": 2,
+      "release_ms": 60,
+      "filter": { "type": "highpass", "frequency_hz": 1050, "q": 0.7 },
+      "delay": { "time_ms": 0, "wet_mix": 0, "feedback": 0 },
+      "gain_trim": 0.48,
+      "maximum_simultaneous_voices": 1,
+      "interruption_group": "popup",
+      "sources": [
+        { "type": "noise", "gain": 0.17, "start_frequency_hz": 0, "end_frequency_hz": 0 },
+        { "type": "square", "gain": 0.19, "start_frequency_hz": 520, "end_frequency_hz": 230 }
+      ],
+      "listening_note": "Compact downward mechanical closure.",
+      "production_use": "Non-cancel dismissal after a completed popup action."
+    },
+    {
+      "id": "sfx.popup.open",
+      "prototype_id": "popupOpen",
+      "label": "Popup Open",
+      "family": "POPUP_OPEN",
+      "status": "APPROVED",
+      "duration_ms": 120,
+      "attack_ms": 3,
+      "release_ms": 92,
+      "filter": { "type": "highpass", "frequency_hz": 350, "q": 0.7 },
+      "delay": { "time_ms": 47, "wet_mix": 0.16, "feedback": 0.1 },
+      "gain_trim": 0.46,
+      "maximum_simultaneous_voices": 1,
+      "interruption_group": "popup",
+      "sources": [
+        { "type": "triangle", "gain": 0.2, "start_frequency_hz": 360, "end_frequency_hz": 1160 }
+      ],
+      "listening_note": "The upward sweep clearly marks a newly opened layer.",
+      "production_use": "Dialog and explicit detail-layer opening."
+    },
+    {
+      "id": "sfx.select.mechanical",
+      "prototype_id": "select1",
+      "label": "Select A",
+      "family": "SELECT",
+      "status": "APPROVED",
+      "duration_ms": 47,
+      "attack_ms": 2,
+      "release_ms": 38,
+      "filter": { "type": "highpass", "frequency_hz": 1450, "q": 0.7 },
+      "delay": { "time_ms": 0, "wet_mix": 0, "feedback": 0 },
+      "gain_trim": 0.5,
+      "maximum_simultaneous_voices": 2,
+      "interruption_group": "selection",
+      "sources": [
+        { "type": "square", "gain": 0.23, "start_frequency_hz": 720, "end_frequency_hz": 720 },
+        { "type": "noise", "gain": 0.12, "start_frequency_hz": 0, "end_frequency_hz": 0 }
+      ],
+      "listening_note": "Immediate mechanical acknowledgement; remains legible at low master gain.",
+      "production_use": "Routine button, link, tab, and committed-value selection."
+    },
+    {
+      "id": "sfx.select.confirm",
+      "prototype_id": "select2",
+      "label": "Select B",
+      "family": "SELECT",
+      "status": "RETAINED_VARIANT",
+      "duration_ms": 95,
+      "attack_ms": 3,
+      "release_ms": 74,
+      "filter": { "type": "highpass", "frequency_hz": 420, "q": 0.7 },
+      "delay": { "time_ms": 31, "wet_mix": 0.1, "feedback": 0.08 },
+      "gain_trim": 0.45,
+      "maximum_simultaneous_voices": 2,
+      "interruption_group": "selection",
+      "sources": [
+        { "type": "sine", "gain": 0.2, "start_frequency_hz": 540, "end_frequency_hz": 1640 }
+      ],
+      "listening_note": "Positive tonal confirmation, reserved to avoid over-rewarding routine input.",
+      "production_use": "Explicit Preview and completed durable saves."
+    },
+    {
+      "id": "sfx.swipe.forward",
+      "prototype_id": "swipe1",
+      "label": "Swipe A",
+      "family": "SWIPE",
+      "status": "APPROVED",
+      "duration_ms": 105,
+      "attack_ms": 3,
+      "release_ms": 82,
+      "filter": { "type": "highpass", "frequency_hz": 330, "q": 0.7 },
+      "delay": { "time_ms": 0, "wet_mix": 0, "feedback": 0 },
+      "gain_trim": 0.42,
+      "maximum_simultaneous_voices": 1,
+      "interruption_group": "spatial",
+      "sources": [
+        { "type": "triangle", "gain": 0.2, "start_frequency_hz": 430, "end_frequency_hz": 1000 }
+      ],
+      "listening_note": "Directional rise reads as forward spatial movement.",
+      "production_use": "Forward page, Story beat, and accepted drag transition."
+    },
+    {
+      "id": "sfx.swipe.back",
+      "prototype_id": "swipe2",
+      "label": "Swipe B",
+      "family": "SWIPE",
+      "status": "APPROVED",
+      "duration_ms": 105,
+      "attack_ms": 3,
+      "release_ms": 82,
+      "filter": { "type": "highpass", "frequency_hz": 330, "q": 0.7 },
+      "delay": { "time_ms": 43, "wet_mix": 0.1, "feedback": 0.08 },
+      "gain_trim": 0.4,
+      "maximum_simultaneous_voices": 1,
+      "interruption_group": "spatial",
+      "sources": [
+        { "type": "sine", "gain": 0.2, "start_frequency_hz": 1000, "end_frequency_hz": 390 }
+      ],
+      "listening_note": "Directional fall reads as backward spatial movement.",
+      "production_use": "Previous page and backward review transition."
+    },
+    {
+      "id": "sfx.error.rejected",
+      "prototype_id": null,
+      "label": "Visible rejection",
+      "family": "ERROR",
+      "status": "PRODUCTION_EXTENSION",
+      "duration_ms": 72,
+      "attack_ms": 2,
+      "release_ms": 58,
+      "filter": { "type": "highpass", "frequency_hz": 700, "q": 0.8 },
+      "delay": { "time_ms": 0, "wet_mix": 0, "feedback": 0 },
+      "gain_trim": 0.42,
+      "maximum_simultaneous_voices": 1,
+      "interruption_group": "feedback",
+      "sources": [
+        { "type": "triangle", "gain": 0.16, "start_frequency_hz": 290, "end_frequency_hz": 180 },
+        { "type": "noise", "gain": 0.08, "start_frequency_hz": 0, "end_frequency_hz": 0 }
+      ],
+      "listening_note": "A low, restrained rejection marker that does not resemble success or browser alarms.",
+      "production_use": "Only after an in-app rejection is visibly presented."
+    }
+  ]
+}

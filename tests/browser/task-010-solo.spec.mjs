@@ -619,7 +619,7 @@ test('Deck, Profile, Settings, export/import, and destructive confirmations are 
     mimeType: 'application/json',
     buffer: Buffer.from('{"__proto__":{"polluted":true}}'),
   });
-  await expect(settings.locator('[data-inline-notice]')).toContainText(/rejected|invalid|JSON|field/i);
+  await expect(settings.locator('[data-inline-notice]')).toContainText(/rejected|invalid|unsafe|forbidden|JSON|field/i);
   expect(await page.evaluate((key) => JSON.parse(localStorage.getItem(key)).records.profile.display_name, LOCAL_STATE_KEY)).toBe('Browser Shift Lead');
 
   await settings.locator('#import-file').setInputFiles(backupPath);

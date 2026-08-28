@@ -83,9 +83,11 @@ export function renderProfile(root, context) {
       context.ui.profileSavedId = `${draft.display_name}\0${draft.icon_id}`;
       context.ui.profileDirty = false;
       context.announce('Profile saved.');
+      void context.sfx?.playInteraction('profile.save', { trustedEvent: event });
       context.rerender();
     } catch (error) {
       setInlineNotice(root, error.message, 'error');
+      void context.sfx?.playInteraction('global.visible.rejection', { trustedEvent: event });
     }
   };
   root.addEventListener('input', onInput);

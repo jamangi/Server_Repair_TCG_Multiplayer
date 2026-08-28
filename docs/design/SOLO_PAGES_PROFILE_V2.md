@@ -37,7 +37,7 @@ Both views select the same Worker-owned Bench instance and feed the same legal-a
 
 ## Local data and statistics
 
-The v2 local record versions are `solo-profile-v2`, `solo-decks-v2`, `solo-settings-v2`, `solo-statistics-v2`, and `solo-export-v2`. Settings export `preferred_bench_view`. Result ledgers add `eliminations_recorded` and `tickets_given_up`; completed result IDs still apply exactly once. Active Match state, Bench Card Instances, eliminations, authorized Evidence, and solution reveals are never written to local storage or backup export.
+The v2 identity record versions remain `solo-profile-v2`, `solo-decks-v2`, and `solo-statistics-v2`. Later presentation-only additions advanced the aggregate local state to `solo-local-state-v4`, settings to `solo-settings-v3`, and exports to `solo-export-v4`; settings now export both `preferred_bench_view` and `sfx_volume_percent`. Result ledgers add `eliminations_recorded` and `tickets_given_up`; completed result IDs still apply exactly once. Active Match state, Bench Card Instances, eliminations, authorized Evidence, and solution reveals are never written to local storage or backup export.
 
 The v1 and v2 storage keys coexist. The client performs no implicit profile, response-deck, or statistics conversion because diagnostic deck removal and the copy-limit change have no lossless record-level interpretation. Presenting a v1 bundle to the v2 importer returns `LEGACY_PROFILE_COEXISTS` with instructions to keep the old profile and start a fresh v2 record. Unknown future versions still fail as unsupported.
 

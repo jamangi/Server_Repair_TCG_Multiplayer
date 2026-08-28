@@ -130,11 +130,11 @@ function resultSummary(overrides = {}) {
 }
 
 test('all versioned client examples satisfy their strict JSON Schemas', () => {
-  assert.equal(schemaFiles.length, 8);
+  assert.equal(schemaFiles.length, 10);
   const examples = [
     ['examples/client/local_profile.default.json', 'Solo Pages Local Profile v2'],
     ['examples/client/deck_collection.default.json', 'Solo Pages Response Deck Collection v2'],
-    ['examples/client/local_settings.default.json', 'Solo Pages Local Settings v2'],
+    ['examples/client/local_settings.default.json', 'Solo Pages Local Settings v3'],
     ['examples/client/aggregate_statistics.empty.json', 'Solo Pages Aggregate Statistics v2'],
     ['examples/story/progress.empty.json', 'Solo Story progress record v1'],
   ];
@@ -142,7 +142,7 @@ test('all versioned client examples satisfy their strict JSON Schemas', () => {
     const errors = validateJsonSchema(readJson(file), schemaByTitle.get(title), registry);
     assert.deepEqual(errors, [], `${file}\n${errors.join('\n')}`);
   }
-  const exportSchema = schemaByTitle.get('Solo Pages Export Bundle v3');
+  const exportSchema = schemaByTitle.get('Solo Pages Export Bundle v4');
   assert.equal(exportSchema.$id, 'https://example.local/client/export_bundle.schema.json');
   const legacy = readJson('examples/client/export_bundle.default.json');
   assert.equal(legacy.schema_version, 'solo-export-v2');
@@ -218,21 +218,25 @@ test('deck drafts remain detached until a legal save and active deletion chooses
   assert.equal(empty.decks.length, 0);
 });
 
-test('v1 storage coexists while v2 migrates explicitly to v3 without changing non-Story records', () => {
-  assert.deepEqual([...SUPPORTED_PRIOR_STORAGE_VERSIONS], ['solo-local-state-v1', 'solo-local-state-v2']);
+test('v1 storage coexists while v2/v3 migrate explicitly to v4 with bounded settings defaults', () => {
+  assert.deepEqual([...SUPPORTED_PRIOR_STORAGE_VERSIONS], ['solo-local-state-v1', 'solo-local-state-v2', 'solo-local-state-v3']);
   const current = createDefaultState(context);
   assert.deepEqual(migrateLocalState(current, context), current);
   const prior = structuredClone(current);
   prior.storage_version = 'solo-local-state-v2';
   delete prior.records.story;
-  const preserved = structuredClone(prior.records);
+  prior.records.settings.schema_version = 'solo-settings-v2';
+  delete prior.records.settings.sfx_volume_percent;
   const migrated = migrateLocalState(prior, context);
   assert.equal(migrated.storage_version, LOCAL_STATE_VERSION);
-  assert.deepEqual(
-    Object.fromEntries(Object.entries(migrated.records).filter(([key]) => key !== 'story')),
-    preserved,
-  );
+  assert.equal(migrated.records.settings.schema_version, 'solo-settings-v3');
+  assert.equal(migrated.records.settings.sfx_volume_percent, 40);
   assert.equal(migrated.records.story.schema_version, 'story-progress-record-v1');
+  const priorV3 = structuredClone(current);
+  priorV3.storage_version = 'solo-local-state-v3';
+  priorV3.records.settings.schema_version = 'solo-settings-v2';
+  delete priorV3.records.settings.sfx_volume_percent;
+  assert.equal(migrateLocalState(priorV3, context).records.settings.sfx_volume_percent, 40);
   const future = structuredClone(current);
   future.storage_version = 'solo-local-state-v999';
   assert.throws(() => migrateLocalState(future, context), (error) => error.code === 'UNSUPPORTED_VERSION');

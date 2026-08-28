@@ -1,7 +1,8 @@
 {
-  "schema_version": "solo-settings-v2",
+  "schema_version": "solo-settings-v3",
   "starting_ticket_count": 3,
   "motion_preference": "SYSTEM",
   "drag_enabled": false,
-  "preferred_bench_view": "RELEVANT"
+  "preferred_bench_view": "RELEVANT",
+  "sfx_volume_percent": 40
 }

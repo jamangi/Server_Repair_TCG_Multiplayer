@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://server-repair.example/schemas/client/sfx_recipe_catalog.schema.json",
+  "title": "Server Repair SFX recipe catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "source_prototype", "prototype_recipe_count", "production_extension_count", "runtime_policy", "recipes"],
+  "properties": {
+    "schema_version": { "const": "sfx-recipe-catalog-v1" },
+    "source_prototype": { "type": "string", "minLength": 1 },
+    "prototype_recipe_count": { "type": "integer", "minimum": 0 },
+    "production_extension_count": { "type": "integer", "minimum": 0 },
+    "runtime_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["global_max_voices", "family_max_voices", "interruption_groups"],
+      "properties": {
+        "global_max_voices": { "type": "integer", "minimum": 1, "maximum": 16 },
+        "family_max_voices": { "type": "object" },
+        "interruption_groups": { "type": "object" }
+      }
+    },
+    "recipes": {
+      "type": "array",
+      "minItems": 12,
+      "items": { "$ref": "#/$defs/recipe" }
+    }
+  },
+  "$defs": {
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "gain", "start_frequency_hz", "end_frequency_hz"],
+      "properties": {
+        "type": { "enum": ["noise", "sine", "square", "triangle"] },
+        "gain": { "type": "number", "minimum": 0, "maximum": 1 },
+        "start_frequency_hz": { "type": "number", "minimum": 0, "maximum": 20000 },
+        "end_frequency_hz": { "type": "number", "minimum": 0, "maximum": 20000 }
+      }
+    },
+    "recipe": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "prototype_id", "label", "family", "status", "duration_ms", "attack_ms", "release_ms", "filter", "delay", "gain_trim", "maximum_simultaneous_voices", "interruption_group", "sources", "listening_note", "production_use"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^sfx\\.[a-z]+\\.[a-z]+$" },
+        "prototype_id": { "type": ["string", "null"] },
+        "label": { "type": "string", "minLength": 1 },
+        "family": { "enum": ["CURSOR", "SELECT", "CANCEL", "POPUP_OPEN", "POPUP_CLOSE", "ERROR", "SWIPE"] },
+        "status": { "enum": ["APPROVED", "RETAINED_VARIANT", "EXCLUDED", "PRODUCTION_EXTENSION"] },
+        "duration_ms": { "type": "number", "minimum": 10, "maximum": 250 },
+        "attack_ms": { "type": "number", "minimum": 0, "maximum": 30 },
+        "release_ms": { "type": "number", "minimum": 1, "maximum": 240 },
+        "filter": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "frequency_hz", "q"],
+          "properties": {
+            "type": { "enum": ["highpass", "lowpass", "bandpass"] },
+            "frequency_hz": { "type": "number", "minimum": 20, "maximum": 20000 },
+            "q": { "type": "number", "minimum": 0.01, "maximum": 20 }
+          }
+        },
+        "delay": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["time_ms", "wet_mix", "feedback"],
+          "properties": {
+            "time_ms": { "type": "number", "minimum": 0, "maximum": 100 },
+            "wet_mix": { "type": "number", "minimum": 0, "maximum": 0.3 },
+            "feedback": { "type": "number", "minimum": 0, "maximum": 0.25 }
+          }
+        },
+        "gain_trim": { "type": "number", "minimum": 0, "maximum": 1 },
+        "maximum_simultaneous_voices": { "type": "integer", "minimum": 1, "maximum": 16 },
+        "interruption_group": { "type": "string", "minLength": 1 },
+        "sources": { "type": "array", "minItems": 1, "maxItems": 3, "items": { "$ref": "#/$defs/source" } },
+        "listening_note": { "type": "string", "minLength": 1 },
+        "production_use": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

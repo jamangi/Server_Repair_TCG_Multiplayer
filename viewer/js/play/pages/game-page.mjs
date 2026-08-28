@@ -926,7 +926,7 @@ export function renderGame(root, context) {
         session.dragCardInstanceId = null;
         if (wasActive) {
           event.preventDefault();
-          if (legal) submit(legal.intent_id);
+          if (legal) submit(legal.intent_id, { sfxInteractionId: 'game.drag.commit' });
           else settleDraggedCard(cardView);
         }
       };
@@ -957,7 +957,7 @@ export function renderGame(root, context) {
     hand.append(groupView);
   }
 
-  const submit = (intentId) => session.submit(intentId);
+  const submit = (intentId, options) => session.submit(intentId, options);
   const openDocumentPreview = (model, opener) => {
     if (!model) return;
     session.documentPreview = {
@@ -1217,7 +1217,7 @@ export function renderGame(root, context) {
     session.dragCardInstanceId = null;
     if (legal) {
       event.preventDefault();
-      submit(legal.intent_id);
+      submit(legal.intent_id, { sfxInteractionId: 'game.drag.commit' });
     }
   };
   const onDragCancel = (event) => {

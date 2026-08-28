@@ -65,6 +65,8 @@ See [`RUNTIME_SCHEMAS.md`](../docs/schema-notes/RUNTIME_SCHEMAS.md) for lifecycl
 | [`tutorial_catalog.schema.json`](client/tutorial_catalog.schema.json) | Pinned semantic Tutorial checkpoints, expected authoritative events, and real-content references. |
 | [`tutorial_progress.schema.json`](client/tutorial_progress.schema.json) | Cosmetic local completion IDs for replayable Tutorials. |
 | [`export_bundle.schema.json`](client/export_bundle.schema.json) | Validated local backup envelope; active Match and solution truth are excluded. |
+| [`sfx_recipe_catalog.schema.json`](client/sfx_recipe_catalog.schema.json) | Procedural UI recipe parameters, prototype provenance, and bounded runtime voice policy. |
+| [`sfx_ui_catalog.schema.json`](client/sfx_ui_catalog.schema.json) | App-wide interaction-to-intent/recipe mappings and explicit `NO_SFX` dispositions. |
 
 ## Important boundaries
 

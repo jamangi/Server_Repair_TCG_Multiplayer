@@ -15,6 +15,7 @@ function previewMarkup(preview) {
         <div><dt>Active deck</dt><dd>${preview.active_deck ? escapeHtml(preview.active_deck.display_name) : 'None'}</dd></div>
         <div><dt>Matches</dt><dd>${preview.statistics.matches_completed} completed</dd></div>
         <div><dt>Level</dt><dd>${preview.statistics.level}</dd></div>
+        <div><dt>Sound effects</dt><dd>${preview.settings.sfx_volume_percent}%</dd></div>
         <div><dt>Story checkpoint</dt><dd>${preview.story.checkpoint_id ? escapeHtml(preview.story.checkpoint_id) : 'Not begun'}</dd></div>
         <div><dt>Story Matches</dt><dd>${preview.story.completed_match_count} accepted${preview.story.result_waiting ? ' · result waiting' : ''}</dd></div>
       </dl>
@@ -47,7 +48,9 @@ export function openSettingsDialog(context) {
     ${snapshot.diagnostic ? `<div class="storage-diagnostic" role="status" data-code="${escapeHtml(snapshot.diagnostic.code)}"><strong>${snapshot.persistence === 'MEMORY' ? 'Memory-only session' : 'Local data notice'}</strong><p>${escapeHtml(snapshot.diagnostic.message)}</p></div>` : ''}
     <form id="settings-form">
       <section class="settings-section"><h3>Match setup</h3><label>Starting Tickets<select id="settings-ticket-count">${Array.from({ length: 10 }, (_, index) => index + 1).map((count) => `<option value="${count}"${count === settings.starting_ticket_count ? ' selected' : ''}>${count}</option>`).join('')}</select></label><p class="field-note">The active deck can reach ${eligibleUniqueCount} distinct causal fingerprint${eligibleUniqueCount === 1 ? '' : 's'} at once. The Builder uses each eligible fingerprint before balanced deterministic repetition.</p></section>
-      <section class="settings-section"><h3>Interaction</h3><label>Preferred Bench View<select id="settings-bench-view"><option value="RELEVANT"${settings.preferred_bench_view === 'RELEVANT' ? ' selected' : ''}>Relevant</option><option value="GLOBAL"${settings.preferred_bench_view === 'GLOBAL' ? ' selected' : ''}>Global</option></select></label><p class="field-note">This is an organization preference, not a difficulty setting. You can switch during play.</p><label>Motion<select id="settings-motion"><option value="SYSTEM"${settings.motion_preference === 'SYSTEM' ? ' selected' : ''}>Follow system</option><option value="FULL"${settings.motion_preference === 'FULL' ? ' selected' : ''}>Full explanatory motion</option><option value="REDUCED"${settings.motion_preference === 'REDUCED' ? ' selected' : ''}>Reduced motion</option></select></label><label class="switch-row"><input id="settings-drag" type="checkbox"${settings.drag_enabled ? ' checked' : ''}><span>Enable optional Card drag affordances</span></label><p class="field-note">Click and keyboard actions always remain available.</p><button type="submit" class="play-button play-button--primary">Save settings</button></section>
+      <section class="settings-section"><h3>Interaction</h3><label>Preferred Bench View<select id="settings-bench-view"><option value="RELEVANT"${settings.preferred_bench_view === 'RELEVANT' ? ' selected' : ''}>Relevant</option><option value="GLOBAL"${settings.preferred_bench_view === 'GLOBAL' ? ' selected' : ''}>Global</option></select></label><p class="field-note">This is an organization preference, not a difficulty setting. You can switch during play.</p><label>Motion<select id="settings-motion"><option value="SYSTEM"${settings.motion_preference === 'SYSTEM' ? ' selected' : ''}>Follow system</option><option value="FULL"${settings.motion_preference === 'FULL' ? ' selected' : ''}>Full explanatory motion</option><option value="REDUCED"${settings.motion_preference === 'REDUCED' ? ' selected' : ''}>Reduced motion</option></select></label><label class="switch-row"><input id="settings-drag" type="checkbox"${settings.drag_enabled ? ' checked' : ''}><span>Enable optional Card drag affordances</span></label><p class="field-note">Click and keyboard actions always remain available.</p></section>
+      <section class="settings-section settings-audio"><h3>Sound effects</h3><label for="settings-sfx-volume">Volume <output id="settings-sfx-volume-output" for="settings-sfx-volume">${settings.sfx_volume_percent}%</output></label><input id="settings-sfx-volume" type="range" min="0" max="100" step="1" value="${settings.sfx_volume_percent}" aria-describedby="settings-sfx-volume-note"><p id="settings-sfx-volume-note" class="field-note">0% is fully off. Moving the slider is silent; use Preview to hear the current unsaved level.</p><button type="button" class="play-button" data-preview-sfx>Preview</button></section>
+      <section class="settings-section"><button type="submit" class="play-button play-button--primary">Save settings</button></section>
     </form>
     <section class="settings-section tutorial-help"><h3>Help &amp; guided practice</h3><p>Tutorials use pinned content and real Worker-authoritative actions. Replay does not award points or change Match statistics.</p><div class="button-column">${(context.tutorials ?? []).map((tutorial) => `<button type="button" class="play-button" data-settings-tutorial="${escapeHtml(tutorial.id)}"><span>${escapeHtml(tutorial.title)}</span><small>${context.tutorialProgress?.completed_tutorial_ids?.includes(tutorial.id) ? 'Completed · replay from start' : 'Start from beginning'}</small></button>`).join('')}</div><p class="field-note">During a Match, “Why can’t I isolate?” uses only authorized phase, Evidence, disposition, citation, and elimination information. Give Up is the only path that reveals solution truth.</p></section>
     <section class="settings-section data-portability"><h3>Data portability</h3><p>Backups contain profile, decks, settings, processed result IDs, local aggregates, Tutorial completion, and versioned durable Story progress. Active Matches, Story authority tokens, and solution-reveal state are never exported.</p><div class="button-row"><button type="button" class="play-button" data-export-backup>Export backup</button><label class="play-button file-button">Choose backup<input id="import-file" type="file" accept="application/json,.json"></label></div><div data-import-preview></div></section>
@@ -64,13 +67,16 @@ export function openSettingsDialog(context) {
     next.motion_preference = dialog.querySelector('#settings-motion').value;
     next.drag_enabled = dialog.querySelector('#settings-drag').checked;
     next.preferred_bench_view = dialog.querySelector('#settings-bench-view').value;
+    next.sfx_volume_percent = Number(dialog.querySelector('#settings-sfx-volume').value);
     try {
       context.storage.saveSettings(next);
       context.onSettingsSaved(next);
       setInlineNotice(dialog, 'Settings saved.', 'success');
       context.announce('Settings saved.');
+      void context.sfx?.playInteraction('settings.save', { trustedEvent: event });
     } catch (error) {
       setInlineNotice(dialog, error.message, 'error');
+      void context.sfx?.playInteraction('global.visible.rejection', { trustedEvent: event });
     }
   };
 
@@ -81,6 +87,7 @@ export function openSettingsDialog(context) {
       setInlineNotice(dialog, 'Backup download prepared.', 'success');
     } catch (error) {
       setInlineNotice(dialog, error.message, 'error');
+      void context.sfx?.playInteraction('global.visible.rejection');
     }
   };
 
@@ -97,6 +104,7 @@ export function openSettingsDialog(context) {
       const details = Array.isArray(error.details) ? ` ${error.details.map((item) => item.message).join(' ')}` : '';
       setInlineNotice(dialog, `${error.message}${details}`, 'error');
       context.announce('Backup rejected. No local data changed.');
+      void context.sfx?.playInteraction('global.visible.rejection');
     }
   };
 
@@ -110,6 +118,7 @@ export function openSettingsDialog(context) {
       context.announce('Local data replaced from the validated backup.');
     } catch (error) {
       setInlineNotice(dialog, error.message, 'error');
+      void context.sfx?.playInteraction('global.visible.rejection');
     }
   };
 
@@ -122,9 +131,17 @@ export function openSettingsDialog(context) {
       context.announce('Local data reset to defaults.');
     } catch (error) {
       setInlineNotice(dialog, error.message, 'error');
+      void context.sfx?.playInteraction('global.visible.rejection');
     }
   };
   const onClick = (event) => {
+    if (event.target.closest('[data-preview-sfx]')) {
+      const previewVolume = Number(dialog.querySelector('#settings-sfx-volume').value);
+      void context.sfx?.playInteraction('settings.volume.preview', {
+        trustedEvent: event,
+        volumeOverride: previewVolume,
+      });
+    }
     if (event.target.closest('[data-close-settings]')) closePlayDialog(dialog);
     if (event.target.closest('[data-export-backup]') || event.target.closest('[data-download-current]')) exportCurrent();
     if (event.target.closest('[data-confirm-import]')) replaceImport();
@@ -136,15 +153,21 @@ export function openSettingsDialog(context) {
     if (event.target.id === 'import-file') readImport(event.target.files?.[0]);
     if (event.target.id === 'confirm-import-check') dialog.querySelector('[data-confirm-import]').disabled = !event.target.checked;
   };
+  const onInput = (event) => {
+    if (event.target.id !== 'settings-sfx-volume') return;
+    dialog.querySelector('#settings-sfx-volume-output').value = `${event.target.value}%`;
+  };
   const cleanup = () => {
     dialog.removeEventListener('click', onClick);
     dialog.removeEventListener('change', onChange);
+    dialog.removeEventListener('input', onInput);
     dialog.querySelector('#settings-form')?.removeEventListener('submit', saveSettings);
     if (activeDialog === dialog) activeDialog = null;
     dialog.remove();
   };
   dialog.addEventListener('click', onClick);
   dialog.addEventListener('change', onChange);
+  dialog.addEventListener('input', onInput);
   dialog.querySelector('#settings-form').addEventListener('submit', saveSettings);
   dialog.addEventListener('close', cleanup, { once: true });
   openPlayDialog(dialog);

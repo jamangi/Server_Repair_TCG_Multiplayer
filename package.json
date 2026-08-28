@@ -8,8 +8,10 @@
     "build:content-manifest": "node viewer/scripts/build-manifest.mjs",
     "build:task-014-content": "node viewer/scripts/build-task-014-content.mjs",
     "build:play-assets": "node viewer/scripts/build-play-assets.mjs",
+    "build:sfx-assets": "node viewer/scripts/build-sfx-assets.mjs",
     "verify:task-011-art": "node viewer/scripts/verify-task-011-art.mjs",
     "verify:play-assets": "node viewer/scripts/verify-play-assets.mjs",
+    "verify:sfx-assets": "node viewer/scripts/verify-sfx-assets.mjs",
     "test:node": "node --test tests/*.test.mjs",
     "test:browser": "playwright test"
   },

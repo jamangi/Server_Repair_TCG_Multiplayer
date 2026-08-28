@@ -2,7 +2,7 @@
 
 ## Status
 
-**Ready — next task.** This task is a read-only UI/reference audit plus documentation and validation tooling. It does not add playback. TASK-032 depends on its completed catalogues.
+**Completed 2026-08-28.** Catalogued all twelve prototype recipes plus the justified production Error extension, mapped 68 current interaction families across every destination (55 audible and 13 explicit `NO_SFX`), and added machine-readable schemas, source/route validation, and reviewed listening/maintenance guidance. This task itself did not add playback; TASK-032 consumed the stable catalogues.
 
 ## Objective
 

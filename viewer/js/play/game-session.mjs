@@ -55,7 +55,7 @@ export function preflightStoryMatch(payload, {
 }
 
 export class SoloGameSession {
-  constructor({ onChange, onAnnounce, onStarted, onCompleted, tutorial = null, catalog = null, storyContext = null } = {}) {
+  constructor({ onChange, onAnnounce, onStarted, onCompleted, onSfx, tutorial = null, catalog = null, storyContext = null } = {}) {
     this.worker = null;
     this.projection = null;
     this.terminalResult = null;
@@ -83,6 +83,7 @@ export class SoloGameSession {
     this.lastResult = null;
     this.lastAction = null;
     this.pendingIntent = null;
+    this.pendingSfxInteractionId = null;
     this.lastMotion = null;
     this.resultApplied = null;
     this.cancelPointerDrag = null;
@@ -90,6 +91,7 @@ export class SoloGameSession {
     this.onAnnounce = onAnnounce ?? (() => {});
     this.onStarted = onStarted ?? (() => {});
     this.onCompleted = onCompleted ?? (() => {});
+    this.onSfx = onSfx ?? (() => {});
     this.startPromise = null;
     this.tutorial = tutorial;
     this.catalog = catalog;
@@ -129,6 +131,7 @@ export class SoloGameSession {
       this.rejectStart = null;
       this.onAnnounce(this.error);
       this.onChange();
+      queueMicrotask(() => this.onSfx('global.visible.rejection'));
     });
     this.startPromise = new Promise((resolve, reject) => {
       this.resolveStart = resolve;
@@ -148,6 +151,7 @@ export class SoloGameSession {
         this.rejectStart = null;
         this.onAnnounce(this.error);
         this.onChange();
+        queueMicrotask(() => this.onSfx('global.visible.rejection'));
         return;
       }
       this.projection = message.projection;
@@ -167,11 +171,13 @@ export class SoloGameSession {
     if (message.type === 'INTENT_RESOLVED') {
       const previousActions = this.projection?.view.public_match.turn?.actions_remaining;
       const submittedIntent = this.pendingIntent;
+      const submittedSfxInteractionId = this.pendingSfxInteractionId;
       const submittedBenchDiagnostic = isBenchDiagnosticInstance(
         submittedIntent?.card_instance_id,
         this.projection?.view.diagnostic_bench,
       );
       this.pendingIntent = null;
+      this.pendingSfxInteractionId = null;
       this.resolving = false;
       this.projection = message.projection;
       this.lastEvents = message.events || [];
@@ -245,6 +251,13 @@ export class SoloGameSession {
         this.onCompleted(this.terminalResult, this.storyMatchResult);
       }
       this.onChange();
+      if (submittedIntent) {
+        queueMicrotask(() => this.onSfx(
+          this.lastAction?.accepted
+            ? submittedSfxInteractionId ?? 'game.workflow.controls'
+            : 'game.visible.rejection',
+        ));
+      }
       return;
     }
     if (message.type === 'WORKER_ERROR') {
@@ -262,6 +275,7 @@ export class SoloGameSession {
       this.rejectStart = null;
       this.onAnnounce(`Local authority error: ${message.message}`);
       this.onChange();
+      queueMicrotask(() => this.onSfx('game.visible.rejection'));
       return;
     }
     if (message.type === 'SESSION_ENDED') this.terminate();
@@ -310,13 +324,14 @@ export class SoloGameSession {
     if (messages.length) this.onAnnounce(messages.join(' '));
   }
 
-  submit(intentId) {
+  submit(intentId, { sfxInteractionId = 'game.workflow.controls' } = {}) {
     if (!this.worker || !this.active || this.resolving) return false;
     if (!this.projection?.legal_intents.some((intent) => intent.intent_id === intentId)) return false;
     const selected = this.projection.legal_intents.find((intent) => intent.intent_id === intentId);
     if (this.tutorial && !this.tutorial.submit(selected, this.projection)) return false;
     this.selectedCardInstanceId = selected.card_instance_id ?? this.selectedCardInstanceId;
     this.pendingIntent = structuredClone(selected);
+    this.pendingSfxInteractionId = sfxInteractionId;
     this.resolving = true;
     this.lastMotion = null;
     this.worker.postMessage({ type: 'SUBMIT_INTENT', intent_id: intentId });
@@ -332,6 +347,7 @@ export class SoloGameSession {
     this.active = false;
     this.resolving = false;
     this.pendingIntent = null;
+    this.pendingSfxInteractionId = null;
     this.handExpanded = false;
     this.documentPreview = null;
     this.restoreDocumentedWorklogFocus = null;

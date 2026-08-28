@@ -25,6 +25,7 @@ let tutorialCatalog = null;
 let artResolver = null;
 let storage = null;
 let story = null;
+let sfx = null;
 let initializePromise = null;
 let navigate = (hash) => { location.hash = hash; };
 let announce = () => {};
@@ -104,6 +105,7 @@ async function initialize() {
     });
     const snapshot = storage.load();
     applyMotionPreference(snapshot.state.records.settings.motion_preference);
+    sfx?.setVolumePercent(snapshot.state.records.settings.sfx_volume_percent);
     try {
       story = await createStoryClient({
         playArtResolver: artResolver,
@@ -149,10 +151,12 @@ function contextForRender() {
     navigate,
     announce,
     motion: runMotion,
+    sfx,
     openSettings,
     saveSettings(next) {
       storage.saveSettings(next);
       applyMotionPreference(next.motion_preference);
+      sfx?.setVolumePercent(next.sfx_volume_percent);
     },
     beginMatch,
     beginTutorial,
@@ -263,6 +267,7 @@ function beginMatch() {
   gameStartInitiated = false;
   game = new SoloGameSession({
     catalog,
+    onSfx: (interactionId) => { void sfx?.playInteraction(interactionId); },
     onChange: () => {
       if (route?.name === 'game') rerender();
     },
@@ -327,6 +332,7 @@ async function beginStoryMatch({ context, definition }) {
   const session = new SoloGameSession({
     catalog,
     storyContext: context,
+    onSfx: (interactionId) => { void sfx?.playInteraction(interactionId); },
     onChange: () => {
       if (route?.name === 'game') rerender();
     },
@@ -410,6 +416,7 @@ function beginTutorial(tutorialId) {
   game = new SoloGameSession({
     catalog: tutorialCatalog,
     tutorial: controller,
+    onSfx: (interactionId) => { void sfx?.playInteraction(interactionId); },
     onChange: () => {
       if (route?.name === 'game') rerender();
     },
@@ -526,6 +533,7 @@ export function openSettings() {
     refreshSnapshot: freshSnapshot,
     announce,
     motion: runMotion,
+    sfx,
     tutorials: tutorialCatalog?.tutorials?.tutorials ?? [],
     tutorialProgress: freshSnapshot().state.records.tutorials,
     onStartTutorial(tutorialId) {
@@ -534,15 +542,25 @@ export function openSettings() {
     },
     onSettingsSaved(next) {
       applyMotionPreference(next.motion_preference);
+      sfx?.setVolumePercent(next.sfx_volume_percent);
       rerender();
     },
     onDataReplaced() {
       resetTransientEditors();
       story?.reloadProgress?.();
       applyMotionPreference(freshSnapshot().state.records.settings.motion_preference);
+      sfx?.setVolumePercent(freshSnapshot().state.records.settings.sfx_volume_percent);
       rerender();
     },
   });
+}
+
+export async function connectSfxService(service) {
+  sfx = service ?? null;
+  await initialize();
+  const volume = freshSnapshot().state.records.settings.sfx_volume_percent;
+  sfx?.setVolumePercent(volume);
+  return volume;
 }
 
 export function unmountPlay() {

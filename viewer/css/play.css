@@ -3122,6 +3122,27 @@ dialog.settings-dialog::backdrop {
   backdrop-filter: blur(8px);
 }
 
+dialog.settings-dialog .settings-audio label {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--play-space-4);
+  align-items: baseline;
+}
+
+dialog.settings-dialog .settings-audio output {
+  min-width: 3.5rem;
+  color: #a8efff;
+  font: 800 1rem/1 var(--play-font-display);
+  text-align: right;
+}
+
+dialog.settings-dialog #settings-sfx-volume {
+  width: 100%;
+  min-height: 2.75rem;
+  margin: 0;
+  accent-color: #47d2f2;
+}
+
 /* TASK-013 Diagnostic Bench ------------------------------------------- */
 .play-app .diagnostic-bench {
   margin-block: 1rem;
