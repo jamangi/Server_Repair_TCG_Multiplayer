@@ -40,7 +40,7 @@ Before promoting any story candidate, reconcile it with the frozen rules and the
 
 ## Planned implementation sequence
 
-Story Mode is not implemented yet. The proposed sequence is intentionally separated so architecture is proven before campaign volume makes it expensive to change:
+Story Mode is not implemented yet. STORY-001 A through STORY-006 A approve the following sequence, intentionally separated so architecture is proven before campaign volume makes it expensive to change:
 
 1. [`TASK-026-XHIGH`](../tasks/TASK-026-build-declarative-story-runtime.md) — versioned declarative runtime, typed conditions/statements, layer model, checkpoints, and validation.
 2. [`TASK-027-XHIGH`](../tasks/TASK-027-blueprint-story-campaign-graph.md) — complete beat/branch graph and solvability-proved Match configurations.

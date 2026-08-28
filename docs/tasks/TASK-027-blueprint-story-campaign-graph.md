@@ -2,7 +2,7 @@
 
 ## Status
 
-**Queued; blocked by TASK-026 and STORY-003/STORY-005 approval.**
+**Approved and queued; blocked only by TASK-026 completion.** STORY-003 A and STORY-005 A are synchronized into this contract.
 
 ## Objective
 
@@ -14,6 +14,7 @@ Read completely before editing:
 
 - `AGENTS.md`, root `README.md`, this task, `docs/tasks/INDEX.md`, TASK-005, TASK-009, TASK-014, TASK-015, TASK-024, and completed TASK-026;
 - all `docs/story/` material, including the cast, voice, research boundary, visual direction, and candidates;
+- the six project-owned Story references indexed by [`docs/ui-plan/ui-reference_images/README.md`](../ui-plan/ui-reference_images/README.md#11--story-mode-composition-and-art-direction) for scene-family, background, ensemble, dialogue, and choice planning—not canonical names, faces, dialogue, or plot;
 - frozen rules, current playable catalog, Ticket Builder composition/provenance, solvability oracle, tutorials, results/statistics, deck validation, and automated-game reports;
 - the Story pack/condition/Match-boundary schemas and validators created by TASK-026.
 
@@ -39,9 +40,9 @@ Narrative necessity never overrides the engine. A story branch cannot silently f
 
 ## Branch design
 
-- Use meaningful but bounded choices. Different routes may reveal character, operational priority, training order, or later context without pretending every decision creates wholly separate production.
+- Use meaningful but bounded cutscene choices. An option may route immediately and/or write a typed remembered decision that changes dialogue or topology later. Different routes may reveal character, operational priority, training order, or later context without pretending every decision creates wholly separate production.
 - State whether a branch is exclusive, reconvergent, optional/callable, or terminal. Preserve enough history for later dialogue to acknowledge material choices.
-- Service Point gates must use the approved story-scoped value and explicit thresholds. Include a fallback path at every gate; no Player is stranded by a score they can no longer change.
+- Service Point gates are optional alongside remembered decisions and normalized Match outcomes. They must use the approved story-scoped value and explicit thresholds. Include a fallback path at every gate; no Player is stranded by a score they can no longer change.
 - Introduce mechanics in a teachable order and reuse the real tutorials/help rather than putting rules lectures into every scene.
 - Keep advanced nuance optional: redundancy, intermittent/load conditions, misleading telemetry, and ambiguous results may appear later only when current V0 content and Builder can prove the scenario.
 

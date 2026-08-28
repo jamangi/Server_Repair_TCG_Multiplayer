@@ -2,7 +2,7 @@
 
 ## Status
 
-**Queued; blocked by TASK-026, reviewed TASK-027 fixtures, TASK-025, and STORY-002/STORY-004/STORY-005 approval.**
+**Approved and queued; blocked by TASK-025 through TASK-027 completion.** STORY-002 A, STORY-004 A, and STORY-005 A are synchronized into this contract.
 
 ## Objective
 
@@ -16,10 +16,11 @@ Add a polished, accessible Story destination to the static Play shell and connec
 
 ## Story scene player
 
+- Review the project-owned [`choice/dialogue reference`](../ui-plan/ui-reference_images/story-mode-choice-dialogue-reference.png) and [`dialogue screen reference`](../ui-plan/ui-reference_images/story-mode-dialogue-inflow-reference.png) as composition targets. Their exact text, pictured people, controls, and scene state are illustrative rather than canonical.
 - Render TASK-026's display model: persistent background, replaceable tagged characters, transient overlays, and accessible HTML screen layer.
 - Support speaker/name box, dialogue/narration, choices, transcript/history, auto/advance controls only where safe, keyboard/touch, focus visibility, readable zoom/reflow, captions/text alternatives, reduced motion, and motion cancellation.
 - Use original placeholders/resolvers until TASK-030. Missing optional art must not block the story; missing required statements, characters, or Match references fail with a useful recovery path.
-- The player cannot skip through a pending choice, double-advance a statement, or activate obscured controls during a transition.
+- The player cannot skip through a pending choice, double-advance a statement, or activate obscured controls during a transition. Selecting a choice records the typed decision and follows the interpreter's explicit destination atomically; DOM routing cannot choose the branch independently.
 
 ## Match bridge
 

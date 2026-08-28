@@ -2,7 +2,7 @@
 
 ## Status
 
-**Queued; blocked by completed TASK-027, TASK-028, and story decision approval.**
+**Approved and queued; blocked by TASK-027 and TASK-028 completion.**
 
 ## Objective
 
@@ -14,13 +14,14 @@ Read completely before editing:
 
 - `AGENTS.md`, this task, root `README.md`, `docs/tasks/INDEX.md`, TASK-005, TASK-015, TASK-024, and completed TASK-026 through TASK-028;
 - all `docs/story/`, especially `STORY.md`, `CHARACTERS.md`, `VOICE.md`, `VISUAL_DIRECTION.md`, approved additions/backgrounds, and the complete TASK-027 campaign blueprint;
+- the six project-owned Story references indexed by [`docs/ui-plan/ui-reference_images/README.md`](../ui-plan/ui-reference_images/README.md#11--story-mode-composition-and-art-direction), using their dialogue/choice rhythm, environmental scale, and ensemble readability without copying incidental text or treating depicted identities as canon;
 - Story authoring schema/validation, Viewer scene-player constraints, frozen rules, domain terminology, playable Match configurations, and solution/privacy boundary.
 
 ## Authoring contract
 
 - Write every production label and branch in the declarative format. Do not change runtime code to accommodate a scene shortcut.
 - Preserve each node's approved entry/exit, branch predicate, checkpoint, Match reference, and normalized outcome handling. Request a graph revision when drama requires a semantic change.
-- Give choices distinct intent and later acknowledgment; avoid false choices whose wording promises an effect the graph cannot represent.
+- Give choices distinct intent and later acknowledgment. Use both immediate route choices and remembered decisions whose consequences appear in later labels; avoid false choices whose wording promises an effect the graph cannot represent.
 - Keep technical action meaningful and accurate. Expand acronyms naturally, let characters differ in expertise/voice, and avoid turning dialogue into a service manual or tutorial dump.
 - Foreshadow public context but never reveal a hidden Fault, required Evidence, or correct diagnostic before engine authorization. Do not let a character know more than their role and current information allow.
 - Write success, abandonment, restart, low/high contribution, and relevant branch variants without shaming the learner or claiming certainty the result does not support.

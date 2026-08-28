@@ -1,8 +1,8 @@
 # Gameplay reference images
 
-This folder contains the approved **Night-Shift Operations Desk** visual references: one project-owner-supplied vanilla proof of concept and its screenshot establish the TASK-010 minimum implementation floor; three original AI-generated references establish the desktop, component, and mobile targets; later project-owner-supplied studies explore Relevant and Global Diagnostic Bench compositions; a three-image TASK-016 comparison set records the post-TASK-014 baseline beside refined Global and Relevant layout directions; two TASK-020 targets refine the shared one-row Bench and spatial response hand; and two TASK-021 captures document a post-diagnostic target-continuity defect. Together they communicate composition, material, illustration density, card family grammar, responsive hierarchy, catalog-density alternatives, achievable browser-native depth, and observed interaction regressions.
+This folder contains the approved **Night-Shift Operations Desk** visual references: one project-owner-supplied vanilla proof of concept and its screenshot establish the TASK-010 minimum implementation floor; three original AI-generated references establish the desktop, component, and mobile targets; later project-owner-supplied studies explore Relevant and Global Diagnostic Bench compositions; a three-image TASK-016 comparison set records the post-TASK-014 baseline beside refined Global and Relevant layout directions; two TASK-020 targets refine the shared one-row Bench and spatial response hand; two TASK-021 captures document a post-diagnostic target-continuity defect; and six project-owned Story studies establish the approved visual-novel composition and painterly production direction. Together they communicate composition, material, illustration density, card family grammar, responsive hierarchy, catalog-density alternatives, achievable browser-native depth, observed interaction regressions, and future narrative presentation.
 
-Future Story Mode art uses the separate original direction in [`docs/story/VISUAL_DIRECTION.md`](../../story/VISUAL_DIRECTION.md). The project-owner-supplied painterly screenshots discussed while planning that direction were visibly watermarked or of uncertain redistribution provenance, so their pixels are intentionally not committed. The written direction captures only general qualities and TASK-030 requires original production assets.
+Future Story Mode art uses the separate original direction in [`docs/story/VISUAL_DIRECTION.md`](../../story/VISUAL_DIRECTION.md) plus the project-owned references in section 11. Earlier third-party painterly screenshots discussed while planning that direction were visibly watermarked or of uncertain redistribution provenance, so those pixels remain intentionally uncommitted. TASK-030 requires original production assets and must distinguish planning references from shippable scene art.
 
 They are not:
 
@@ -212,6 +212,46 @@ TASK-011 uses the existing references rather than adding implementation screensh
 
 The measured runtime contract is 16:9 for Test/Command/Repair/Verify source art and a separate 10:3 public-Symptom panorama designed to survive both 2.15:1 full-Ticket and 3.35:1 compact-Ticket crops. These references guide scene language only. Production art may not copy incidental text, costs, subjects, hidden answers, outcomes, or generated UI ornament from the pixels.
 
+## 11 — Story Mode composition and art direction
+
+The project owner confirms these six images were created by this project's own task for Story planning and may be used as source references. They establish direction, not exact UI copy, canonical cast identity, scene continuity, equipment truth, or finished production assets.
+
+### Choice and dialogue composition
+
+![Story choice and dialogue composition](./story-mode-choice-dialogue-reference.png)
+
+Use for two-character staging around technical work, a persistent dialogue/screen layer, clear speaker identity, three visible choices, selected-choice focus, and History/Back affordances. TASK-026 uses it to prove immediate and remembered cutscene decisions; TASK-028 uses it for accessible player interaction; TASK-029 replaces every incidental line with approved script content.
+
+### Repair-floor background
+
+![Night-shift repair-floor background](./story-mode-background-repair-floor-reference.png)
+
+Use for wide environmental scale, cool storm light against warm task lamps, grounded server-repair detail, and protected lower-left negative space. It is a background study, not a requirement that a campaign scene contain this exact weather or bench.
+
+### Inflow dock background
+
+![Inflow dock background](./story-mode-background-inflow-dock-reference.png)
+
+Use for receiving/return-cage atmosphere, wet predawn light, physical logistics, depth, and dialogue-safe foreground. Incidental labels are illustrative and must not be copied into production.
+
+### Painterly technician ensemble A
+
+![Painterly technician ensemble A](./story-mode-character-ensemble-a-reference.png)
+
+Use for cohesive painterly rendering, age/role/tool distinction, workwear variation, strong silhouettes, and restrained family accents. The pictured people are not automatically the established cast.
+
+### Inflow dialogue screen
+
+![Inflow character dialogue screen](./story-mode-dialogue-inflow-reference.png)
+
+Use for character-over-environment balance, location/time marker, nameplate, large readable dialogue, protected screen layer, and History/Auto/Continue hierarchy. Exact names and words are non-canonical reference copy.
+
+### Painterly technician ensemble B
+
+![Painterly technician ensemble B](./story-mode-character-ensemble-b-reference.png)
+
+Use as a broader alternate ensemble study for silhouette, role, tool, color, and personality differentiation. TASK-027 resolves actual cast needs and TASK-030 maintains identity consistency across the approved asset set.
+
 ## Generation provenance
 
 - Minimum reference provenance: project-owner-supplied standalone Server Repair HTML/CSS/JavaScript proof of concept and exact screenshot, added 2026-08-23. The source is committed only as a readable visual reference and is not part of the Viewer runtime.
@@ -220,6 +260,7 @@ The measured runtime contract is 16:9 for Test/Command/Repair/Verify source art 
 - TASK-016 post-pass provenance: two project-owner-supplied implementation captures (2543×1291 Relevant and 2551×1293 Global) plus one 1263×95 response-hand composition crop, added 2026-08-25. They are defect/interaction references for TASK-018/TASK-019, not runtime assets or gameplay fixtures. The accompanying modal recording is translated into deterministic reproduction steps in TASK-018 rather than committed as a large binary.
 - TASK-020 target provenance: two project-owner-supplied 1764×892 one-row layout studies, added 2026-08-25. They define proportional and duplicate-stack direction for TASK-020, not exact content, breakpoint counts, or gameplay authority.
 - TASK-021 defect provenance: one project-owner-supplied 2124×788 post-action capture and one 677×640 Ticket-queue crop, added 2026-08-26. They document observed Viewer behavior for regression reproduction, not desired gameplay or authority.
+- Story Mode reference provenance: six project-owned task-generated planning images supplied by the project owner and added 2026-08-27—five at 1672×941 and one ensemble at 1693×929. The project owner explicitly authorizes their use as Story references. They are planning assets rather than automatic canon or production scene files; TASK-030 must preserve source/provenance details for any derivative or replacement production asset.
 - TASK-011 production provenance: 104 original images generated with the built-in image-generation tool on 2026-08-26, with targeted built-in edits for pseudo-text, electrical safety, and neutral-outcome corrections. The five committed UI references above guided lighting, material, and crop language only; `source_pixels_used` is false for every subject. Per-ID prompts, generation references, edit history, usage notes, hashes, and approval records are preserved in `art_sources/task-011/generation-log.json`, while complete family/subsystem contact sheets are in `docs/art/task-011-contact-sheets/`.
 - Mode: built-in image generation, with targeted built-in edit passes.
 - Date: 2026-08-23.

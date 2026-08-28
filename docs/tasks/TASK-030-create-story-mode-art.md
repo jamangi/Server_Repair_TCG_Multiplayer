@@ -2,7 +2,7 @@
 
 ## Status
 
-**Queued; blocked by TASK-029 and STORY-006 approval.**
+**Approved and queued; blocked only by TASK-029 completion.** STORY-006 A is synchronized into this contract.
 
 ## Objective
 
@@ -14,6 +14,7 @@ Read completely before editing:
 
 - `AGENTS.md`, this task, `docs/tasks/INDEX.md`, TASK-011, and completed TASK-026 through TASK-029;
 - `docs/story/VISUAL_DIRECTION.md`, `BACKGROUNDS.md`, character registries, final scripts, asset-reference report, and Story player crop/layer contracts;
+- all six project-owned source references in [`docs/ui-plan/ui-reference_images/`](../ui-plan/ui-reference_images/README.md#11--story-mode-composition-and-art-direction), which may guide the approved campaign's painterly lighting, environment scale, portrait cohesion, dialogue-safe composition, and choice-screen hierarchy;
 - TASK-011 provenance tooling/lessons, image resolver, accessibility/performance guidance, and current asset verification.
 
 ## Production contract
@@ -22,7 +23,7 @@ Read completely before editing:
 - Follow the original painterly night-shift direction: grounded technical environments, visible brush character, strong value grouping, human stakes, and restrained cool/warm service lighting.
 - Keep every character identifiable across expressions and scenes. Preserve approved physical details, clothing, protective equipment, role, and age; prevent unreviewed identity drift.
 - Use layer-ready compositions, transparent character/foreground assets where required, protected dialogue zones, mobile-safe focal crops, and text-free imagery.
-- Never copy or edit unlicensed/watermarked reference frames, imitate a named living artist, include third-party brands, add pseudo-text, or depict unsafe/incorrect service practice without intentional narrative correction.
+- The six project-owned Story references may be used as visual source references, but they remain planning images rather than automatically shippable scene art or canonical cast sheets. Never copy or edit other unlicensed/watermarked frames, imitate a named living artist, include third-party brands, add pseudo-text, or depict unsafe/incorrect service practice without intentional narrative correction.
 
 ## Asset and provenance requirements
 
