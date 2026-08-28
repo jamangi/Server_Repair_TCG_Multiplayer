@@ -6,11 +6,11 @@ Beginning with TASK-011, the displayed task ID includes the recommended reasonin
 
 Active task:
 
-- [`TASK-031-HIGH: Catalogue SFX-capable UI interactions`](TASK-031-catalogue-sfx-capable-ui-interactions.md) — ready; audit every Library, Play, Profile, Settings, active-Match, and Story interaction into human- and machine-readable semantic SFX catalogues without adding playback or publishing licensed audio.
+- [`TASK-031-HIGH: Catalogue SFX-capable UI interactions and procedural recipes`](TASK-031-catalogue-sfx-capable-ui-interactions.md) — ready; audit every Library, Play, Profile, Settings, active-Match, and Story interaction plus all twelve repository-owned procedural recipe candidates into separate, validated catalogues without adding playback.
 
 Queued task:
 
-- [`TASK-032-HIGH: Integrate app-wide UI sound effects`](TASK-032-integrate-app-wide-ui-sound-effects.md) — follows TASK-031; implement one accessible semantic audio service and persisted 0–100 app-wide SFX volume setting. Public asset integration is blocked until written JDSherbert permission explicitly covers public-repository/static-web delivery or a rights-compatible replacement pack is supplied.
+- [`TASK-032-HIGH: Integrate app-wide procedural UI sound effects`](TASK-032-integrate-app-wide-ui-sound-effects.md) — follows TASK-031; implement one accessible Web Audio synthesis service, validated recipes, and a persisted 0–100 app-wide SFX volume setting without sampled audio or external audio dependencies.
 
 Completed Story Mode sequence:
 
@@ -26,7 +26,7 @@ Approved but deferred V2 task:
 
 - [`TASK-017-XHIGH: Create the Server Repair V2 Migration Seed`](TASK-017-create-server-repair-v2-migration-seed.md) — approved Migration Seed direction but deferred until the V0 product is training-ready; when reactivated, it audits V0 in bounded checkpoints and establishes the public dependency-inference V2 foundation without modifying V0 behavior.
 
-TASK-011-HIGH through TASK-016-HIGH, TASK-018-HIGH through TASK-021-HIGH, TASK-023-HIGH through TASK-030-XHIGH are complete. TASK-031-HIGH is next and TASK-032-HIGH follows after catalogue completion and audio-rights clearance. PT-008 B is approved and the proposed TASK-022 was withdrawn without implementation. Return to TASK-017-XHIGH only when the project owner reactivates V2 migration.
+TASK-011-HIGH through TASK-016-HIGH, TASK-018-HIGH through TASK-021-HIGH, TASK-023-HIGH through TASK-030-XHIGH are complete. TASK-031-HIGH is next and TASK-032-HIGH follows after catalogue completion; the procedural strategy removes the former third-party audio-rights blocker. PT-008 B is approved and the proposed TASK-022 was withdrawn without implementation. Return to TASK-017-XHIGH only when the project owner reactivates V2 migration.
 
 Completed documentation and research tasks:
 

@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Procedural UI Sound Lab</title>
+  <style>
+:root {
+  --bg: #050b12;
+  --panel: rgba(8, 20, 31, .92);
+  --panel2: rgba(10, 28, 43, .96);
+  --line: rgba(104, 207, 255, .28);
+  --line2: rgba(104, 207, 255, .55);
+  --text: #d9f4ff;
+  --muted: #6e9aad;
+  --cyan: #7de9ff;
+  --cyan2: #28b9e8;
+  --amber: #ffc66d;
+  --red: #ff6f69;
+  --shadow: 0 20px 60px rgba(0,0,0,.45);
+}
+* { box-sizing:border-box; }
+html,body { margin:0; min-height:100%; background:radial-gradient(circle at 50% -20%, #18354a 0, #07121d 37%, #03070c 75%); color:var(--text); font-family:Inter,Segoe UI,Arial,sans-serif; }
+body::before { content:""; position:fixed; inset:0; pointer-events:none; opacity:.16; background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px); background-size:4px 4px; }
+button { font:inherit; }
+.shell { width:min(1180px, calc(100% - 32px)); margin:30px auto 50px; }
+.topbar { display:flex; align-items:flex-end; justify-content:space-between; gap:20px; border-bottom:1px solid var(--line); padding:4px 4px 18px; }
+.eyebrow { letter-spacing:.22em; color:var(--cyan); font-size:11px; margin:0 0 8px; font-weight:700; }
+h1 { margin:0; font-size:clamp(28px,4vw,48px); letter-spacing:.02em; font-weight:700; }
+.lede { margin:9px 0 0; max-width:760px; color:#8bb5c7; line-height:1.55; }
+.audio-status { border:1px solid var(--line2); background:rgba(46,171,215,.08); padding:10px 14px; font-size:12px; letter-spacing:.14em; color:var(--cyan); box-shadow:inset 0 0 20px rgba(65,200,255,.06); white-space:nowrap; }
+.grid { display:grid; grid-template-columns:minmax(0,1.55fr) minmax(330px,.75fr); gap:18px; margin-top:18px; }
+.panel { background:linear-gradient(180deg,rgba(14,34,50,.94),rgba(5,14,23,.96)); border:1px solid var(--line); box-shadow:var(--shadow), inset 0 0 40px rgba(58,187,241,.025); position:relative; overflow:hidden; }
+.panel::after { content:""; position:absolute; inset:0; pointer-events:none; border:1px solid rgba(255,255,255,.03); }
+.panel-title { display:flex; justify-content:space-between; gap:16px; padding:11px 14px; border-bottom:1px solid var(--line); color:#bceefe; letter-spacing:.16em; font-size:12px; background:linear-gradient(90deg,rgba(50,170,216,.13),transparent 65%); }
+.tiny { color:#5d91a6; font-size:10px; }
+.demo-stage { padding:18px; display:grid; gap:16px; }
+.target-card { position:relative; min-height:150px; border:1px solid rgba(107,213,255,.4); display:flex; flex-direction:column; justify-content:flex-end; padding:20px; background:radial-gradient(circle at 75% 20%,rgba(64,195,239,.16),transparent 36%),linear-gradient(135deg,#0b2635,#07151e); overflow:hidden; cursor:pointer; transition:.18s ease; }
+.target-card:hover { transform:translateY(-1px); border-color:rgba(130,231,255,.8); box-shadow:0 0 30px rgba(66,184,225,.12); }
+.target-card.selected::before { content:""; position:absolute; inset:9px; border:1px solid rgba(125,233,255,.16); }
+.target-card strong { font-size:27px; letter-spacing:.08em; }
+.target-card small,.target-id { color:#79a9bc; }
+.target-id { margin-bottom:4px; font-size:11px; letter-spacing:.2em; }
+.scanline { position:absolute; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,var(--cyan),transparent); top:28%; opacity:.55; animation:scan 3.2s linear infinite; }
+@keyframes scan { 0%{transform:translateY(-35px);opacity:0} 20%{opacity:.5} 80%{opacity:.5} 100%{transform:translateY(120px);opacity:0} }
+.button-row { display:flex; flex-wrap:wrap; gap:10px; }
+.ui-btn,.icon-close,.sound-item { border:1px solid rgba(105,210,255,.45); background:linear-gradient(180deg,rgba(30,103,132,.32),rgba(8,35,49,.46)); color:#d9f8ff; cursor:pointer; }
+.ui-btn { min-width:120px; padding:12px 18px; letter-spacing:.12em; font-size:12px; font-weight:700; transition:.12s ease; }
+.ui-btn:hover { border-color:var(--cyan); background:linear-gradient(180deg,rgba(46,149,189,.42),rgba(8,45,61,.58)); box-shadow:0 0 18px rgba(55,190,235,.13); }
+.ui-btn:active { transform:translateY(1px); }
+.ui-btn.danger { border-color:rgba(255,112,105,.45); color:#ffaaa5; background:linear-gradient(180deg,rgba(144,41,37,.24),rgba(52,14,15,.4)); }
+.cursor-zone { min-height:155px; position:relative; border:1px solid rgba(106,191,221,.23); overflow:hidden; cursor:crosshair; background:#06101a; }
+.cursor-grid { position:absolute; inset:0; background-image:linear-gradient(rgba(83,180,217,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(83,180,217,.09) 1px,transparent 1px); background-size:26px 26px; mask-image:radial-gradient(circle at center,black,transparent 85%); }
+.cursor-readout { position:absolute; left:15px; bottom:13px; display:flex; flex-direction:column; gap:3px; font-size:10px; color:#5d94a9; letter-spacing:.12em; pointer-events:none; }
+.cursor-readout b { color:#abdcec; font-size:12px; }
+.swipe-zone { border:1px solid rgba(104,207,255,.22); overflow:hidden; position:relative; padding:12px 0 28px; touch-action:pan-y; user-select:none; cursor:grab; }
+.swipe-zone:active { cursor:grabbing; }
+.swipe-track { display:flex; gap:12px; padding:0 12px; transition:transform .26s cubic-bezier(.2,.8,.2,1); }
+.swipe-card { flex:0 0 calc(65% - 6px); height:105px; display:grid; place-items:center; border:1px solid rgba(109,210,247,.25); background:linear-gradient(135deg,rgba(24,77,100,.48),rgba(5,23,34,.7)); color:#56879a; letter-spacing:.16em; font-size:13px; }
+.swipe-card.active { border-color:rgba(125,233,255,.62); color:#daf9ff; box-shadow:inset 0 0 22px rgba(61,190,239,.08); }
+.swipe-hint { position:absolute; bottom:7px; right:12px; font-size:10px; letter-spacing:.12em; color:#52798a; }
+.sound-panel { min-height:100%; }
+.sound-list { padding:12px; display:grid; gap:8px; }
+.sound-item { text-align:left; padding:11px 12px; display:grid; grid-template-columns:34px 1fr auto; gap:9px; align-items:center; transition:.12s ease; }
+.sound-item:hover { border-color:var(--cyan); transform:translateX(2px); }
+.sound-item .num { color:#4d879e; font-size:10px; }
+.sound-item strong { font-size:12px; letter-spacing:.08em; }
+.sound-item em { font-style:normal; font-size:9px; color:#779eb0; letter-spacing:.08em; }
+.sound-item.mechanical em { color:#e7b75f; }
+.sound-item.crystalline em { color:#8acfff; }
+.recipe-panel { margin-top:18px; }
+.recipe-panel pre { margin:0; padding:16px 18px 20px; min-height:120px; color:#93c8dc; font:12px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace; white-space:pre-wrap; }
+.modal-backdrop { position:fixed; inset:0; background:rgba(0,6,11,.74); display:grid; place-items:center; padding:18px; opacity:0; pointer-events:none; transition:.18s ease; backdrop-filter:blur(4px); z-index:10; }
+.modal-backdrop.open { opacity:1; pointer-events:auto; }
+.modal { width:min(520px,100%); border:1px solid rgba(124,229,255,.55); background:linear-gradient(180deg,#0d2636,#07131d); box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 50px rgba(62,191,237,.08); transform:translateY(8px) scale(.985); transition:.18s ease; }
+.modal-backdrop.open .modal { transform:none; }
+.modal-head { display:flex; justify-content:space-between; align-items:flex-start; padding:17px 18px; border-bottom:1px solid var(--line); }
+.modal-head h2 { margin:0; font-size:21px; }
+.icon-close { width:36px; height:34px; font-size:20px; }
+.modal-body { padding:18px; color:#91b9c9; line-height:1.55; }
+.meter { height:8px; border:1px solid rgba(120,219,255,.3); margin-bottom:18px; padding:1px; }
+.meter span { display:block; height:100%; background:linear-gradient(90deg,#1d83ac,#79e8ff); box-shadow:0 0 12px rgba(98,220,255,.22); }
+.modal-actions { display:flex; gap:10px; margin-top:18px; }
+@media (max-width:850px) { .grid{grid-template-columns:1fr}.audio-status{display:none}.target-card{min-height:130px}.swipe-card{flex-basis:78%} }
+
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">PROCEDURAL UI AUDIO PROTOTYPE</p>
+        <h1>Command Interface Sound Lab</h1>
+        <p class="lede">Twelve synthesized interaction cues: dry mechanical ticks and crystalline pitch-swept chirps.</p>
+      </div>
+      <div class="audio-status" id="audioStatus">AUDIO: READY</div>
+    </header>
+
+    <main class="grid">
+      <section class="panel primary-panel">
+        <div class="panel-title">
+          <span>INTERACTION DEMO</span>
+          <span class="tiny">CLICK / DRAG / SWIPE</span>
+        </div>
+
+        <div class="demo-stage">
+          <div class="target-card selected" id="targetCard">
+            <div class="scanline"></div>
+            <span class="target-id">UNIT // 07</span>
+            <strong>VANGUARD NODE</strong>
+            <small>Click card to cycle SELECT cues</small>
+          </div>
+
+          <div class="button-row">
+            <button class="ui-btn select-btn" id="selectButton">SELECT</button>
+            <button class="ui-btn" id="openModal">OPEN PANEL</button>
+            <button class="ui-btn danger" id="cancelButton">CANCEL</button>
+          </div>
+
+          <div class="cursor-zone" id="cursorZone">
+            <div class="cursor-grid"></div>
+            <div class="cursor-readout">
+              <span>CURSOR TELEMETRY</span>
+              <b id="cursorReadout">MOVE POINTER HERE</b>
+            </div>
+          </div>
+
+          <div class="swipe-zone" id="swipeZone">
+            <div class="swipe-track">
+              <div class="swipe-card active">ALPHA</div>
+              <div class="swipe-card">BETA</div>
+              <div class="swipe-card">GAMMA</div>
+              <div class="swipe-card">DELTA</div>
+            </div>
+            <div class="swipe-hint">Drag or swipe horizontally</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel sound-panel">
+        <div class="panel-title">
+          <span>SOUND MATRIX</span>
+          <span class="tiny">12 CUES</span>
+        </div>
+        <div class="sound-list" id="soundList"></div>
+      </section>
+    </main>
+
+    <section class="panel recipe-panel">
+      <div class="panel-title">
+        <span>ACTIVE SYNTH RECIPE</span>
+        <span class="tiny">WEB AUDIO PARAMS</span>
+      </div>
+      <pre id="recipeView">Click any sound in the matrix to inspect its synthesis recipe.</pre>
+    </section>
+  </div>
+
+  <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-head">
+        <div>
+          <span class="eyebrow">TACTICAL OVERLAY</span>
+          <h2 id="modalTitle">Signal Routing</h2>
+        </div>
+        <button class="icon-close" id="closeModal" aria-label="Close">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="meter"><span style="width:72%"></span></div>
+        <p>Opening this panel plays <b>Popup Open</b>. Closing it plays <b>Popup Close</b>. Cancel remains mapped separately.</p>
+        <div class="modal-actions">
+          <button class="ui-btn" id="confirmModal">CONFIRM</button>
+          <button class="ui-btn danger" id="cancelModal">CANCEL</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+(() => {
+  // Dependency-free procedural UI synth, designed to work from file://.
+  // Each recipe uses a compact, data-driven set of Web Audio parameters:
+  // oscillator/noise source + amplitude envelope + pitch envelope + filtering.
+
+  let ctx = null;
+  let master = null;
+  let selectToggle = 0;
+  let cancelToggle = 0;
+  let swipeToggle = 0;
+  let cursorIndex = 0;
+  let lastCursorSound = 0;
+
+  const recipes = {
+    cancel1: { label:'Cancel A', category:'cancel', profile:'mechanical', source:'noise+square', duration:.055, hp:1600, squareFreq:150, noiseGain:.24, toneGain:.16, decay:24 },
+    cancel2: { label:'Cancel B', category:'cancel', profile:'crystalline', source:'triangle', duration:.085, startFreq:520, endFreq:230, hp:500, delay:.035, delayMix:.12, decay:18 },
+
+    cursor1: { label:'Cursor A', category:'cursor', profile:'mechanical', source:'square', duration:.028, startFreq:980, endFreq:820, hp:1300, decay:36 },
+    cursor2: { label:'Cursor B', category:'cursor', profile:'mechanical', source:'noise', duration:.022, hp:2600, noiseGain:.34, decay:45 },
+    cursor3: { label:'Cursor C', category:'cursor', profile:'crystalline', source:'sine', duration:.040, startFreq:760, endFreq:1280, hp:500, decay:30 },
+    cursor4: { label:'Cursor D', category:'cursor', profile:'crystalline', source:'triangle', duration:.044, startFreq:1250, endFreq:720, hp:650, decay:29 },
+
+    popupClose: { label:'Popup Close', category:'popup close', profile:'mechanical', source:'noise+square', duration:.075, squareFreq:210, startFreq:520, endFreq:230, hp:1050, noiseGain:.17, toneGain:.19, decay:18 },
+    popupOpen: { label:'Popup Open', category:'popup open', profile:'crystalline', source:'triangle', duration:.120, startFreq:360, endFreq:1160, hp:350, delay:.047, delayMix:.16, decay:13 },
+
+    select1: { label:'Select A', category:'select', profile:'mechanical', source:'square+noise', duration:.047, squareFreq:720, hp:1450, noiseGain:.12, toneGain:.23, decay:29 },
+    select2: { label:'Select B', category:'select', profile:'crystalline', source:'sine', duration:.095, startFreq:540, endFreq:1640, hp:420, delay:.031, delayMix:.10, decay:18 },
+
+    swipe1: { label:'Swipe A', category:'swipe', profile:'crystalline', source:'triangle', duration:.105, startFreq:430, endFreq:1000, hp:330, decay:17 },
+    swipe2: { label:'Swipe B', category:'swipe', profile:'crystalline', source:'sine', duration:.105, startFreq:1000, endFreq:390, hp:330, delay:.043, delayMix:.10, decay:17 }
+  };
+
+  function ensureAudio() {
+    if (!ctx) {
+      ctx = new (window.AudioContext || window.webkitAudioContext)();
+      master = ctx.createGain();
+      master.gain.value = 0.22;
+      master.connect(ctx.destination);
+    }
+    if (ctx.state === 'suspended') ctx.resume();
+  }
+
+  function makeNoiseBuffer(duration) {
+    const len = Math.max(1, Math.ceil(ctx.sampleRate * duration));
+    const buf = ctx.createBuffer(1, len, ctx.sampleRate);
+    const out = buf.getChannelData(0);
+    for (let i=0;i<len;i++) out[i] = Math.random()*2-1;
+    return buf;
+  }
+
+  function connectWithOptionalDelay(source, gain, recipe, destination) {
+    if (!recipe.delay) {
+      gain.connect(destination);
+      return;
+    }
+    gain.connect(destination);
+    const delay = ctx.createDelay(.2);
+    const wet = ctx.createGain();
+    delay.delayTime.value = recipe.delay;
+    wet.gain.value = recipe.delayMix ?? .1;
+    gain.connect(delay);
+    delay.connect(wet);
+    wet.connect(destination);
+  }
+
+  function createFilter(recipe) {
+    if (!recipe.hp) return null;
+    const f = ctx.createBiquadFilter();
+    f.type = 'highpass';
+    f.frequency.value = recipe.hp;
+    f.Q.value = .7;
+    return f;
+  }
+
+  function playTone(recipe, now, destination, type, freqA, freqB, gainAmount=.25) {
+    const osc = ctx.createOscillator();
+    const g = ctx.createGain();
+    const filter = createFilter(recipe);
+    osc.type = type;
+    const start = Math.max(30, freqA ?? recipe.startFreq ?? recipe.squareFreq ?? 600);
+    const end = Math.max(30, freqB ?? recipe.endFreq ?? start);
+    osc.frequency.setValueAtTime(start, now);
+    if (end !== start) osc.frequency.exponentialRampToValueAtTime(end, now + Math.min(recipe.duration, .065));
+    g.gain.setValueAtTime(gainAmount, now);
+    g.gain.exponentialRampToValueAtTime(.0001, now + recipe.duration);
+    osc.connect(g);
+    if (filter) {
+      g.connect(filter);
+      connectWithOptionalDelay(osc, filter, recipe, destination);
+    } else {
+      connectWithOptionalDelay(osc, g, recipe, destination);
+    }
+    osc.start(now);
+    osc.stop(now + recipe.duration + .03);
+  }
+
+  function playNoise(recipe, now, destination, gainAmount=.22) {
+    const src = ctx.createBufferSource();
+    const g = ctx.createGain();
+    const filter = createFilter(recipe);
+    src.buffer = makeNoiseBuffer(recipe.duration + .01);
+    g.gain.setValueAtTime(gainAmount, now);
+    g.gain.exponentialRampToValueAtTime(.0001, now + recipe.duration);
+    src.connect(g);
+    if (filter) {
+      g.connect(filter);
+      filter.connect(destination);
+    } else g.connect(destination);
+    src.start(now);
+    src.stop(now + recipe.duration + .02);
+  }
+
+  function play(id) {
+    ensureAudio();
+    const r = recipes[id];
+    const now = ctx.currentTime + .003;
+    const bus = ctx.createGain();
+    bus.gain.value = 1;
+    bus.connect(master);
+
+    if (r.source.includes('noise')) playNoise(r, now, bus, r.noiseGain ?? .18);
+    if (r.source.includes('square')) playTone(r, now, bus, 'square', r.startFreq ?? r.squareFreq, r.endFreq ?? r.squareFreq, r.toneGain ?? .2);
+    else if (r.source.includes('triangle')) playTone(r, now, bus, 'triangle', r.startFreq, r.endFreq, .26);
+    else if (r.source.includes('sine')) playTone(r, now, bus, 'sine', r.startFreq, r.endFreq, .28);
+
+    showRecipe(id);
+  }
+
+  function showRecipe(id) {
+    const r = recipes[id];
+    const pretty = {
+      cue: r.label,
+      category: r.category,
+      profile: r.profile === 'mechanical' ? 'mechanical / transient' : 'crystalline / pitch-swept',
+      source: r.source,
+      duration_ms: Math.round(r.duration*1000),
+      high_pass_hz: r.hp ?? null,
+      pitch_hz: r.startFreq ? `${r.startFreq} → ${r.endFreq}` : (r.squareFreq ?? 'noise only'),
+      delay_ms: r.delay ? Math.round(r.delay*1000) : 0,
+      design_note: r.profile === 'mechanical'
+        ? 'Very short amplitude decay + high-pass filtering = dry mechanical snap.'
+        : 'Short pitch sweep + clean oscillator + subtle echo = crystalline chirp.'
+    };
+    document.getElementById('recipeView').textContent = JSON.stringify(pretty, null, 2);
+  }
+
+  // Build sound matrix.
+  const order = ['cancel1','cancel2','cursor1','cursor2','cursor3','cursor4','popupClose','popupOpen','select1','select2','swipe1','swipe2'];
+  const soundList = document.getElementById('soundList');
+  order.forEach((id, i) => {
+    const r = recipes[id];
+    const b = document.createElement('button');
+    b.className = `sound-item ${r.profile}`;
+    b.innerHTML = `<span class="num">${String(i+1).padStart(2,'0')}</span><strong>${r.label}</strong><em>${r.profile.toUpperCase()}</em>`;
+    b.addEventListener('click', () => play(id));
+    soundList.appendChild(b);
+  });
+
+  // Select interaction: alternate between two select sounds.
+  const selectAction = () => {
+    const id = selectToggle++ % 2 === 0 ? 'select1' : 'select2';
+    play(id);
+    document.getElementById('targetCard').classList.toggle('selected');
+  };
+  document.getElementById('selectButton').addEventListener('click', selectAction);
+  document.getElementById('targetCard').addEventListener('click', selectAction);
+
+  // Cancel interaction: alternate between cancel cues.
+  document.getElementById('cancelButton').addEventListener('click', () => play(cancelToggle++ % 2 === 0 ? 'cancel1' : 'cancel2'));
+
+  // Modal sounds.
+  const backdrop = document.getElementById('modalBackdrop');
+  function openModal() { play('popupOpen'); backdrop.classList.add('open'); backdrop.setAttribute('aria-hidden','false'); }
+  function closeModal() { play('popupClose'); backdrop.classList.remove('open'); backdrop.setAttribute('aria-hidden','true'); }
+  document.getElementById('openModal').addEventListener('click', openModal);
+  document.getElementById('closeModal').addEventListener('click', closeModal);
+  document.getElementById('confirmModal').addEventListener('click', () => { play('select2'); setTimeout(closeModal, 65); });
+  document.getElementById('cancelModal').addEventListener('click', () => { play('cancel1'); backdrop.classList.remove('open'); backdrop.setAttribute('aria-hidden','true'); });
+  backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
+
+  // Cursor cues: four quadrants, throttled so movement isn't noisy.
+  const cursorZone = document.getElementById('cursorZone');
+  cursorZone.addEventListener('pointermove', e => {
+    const rect = cursorZone.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width;
+    const y = (e.clientY - rect.top) / rect.height;
+    const next = (x >= .5 ? 1 : 0) + (y >= .5 ? 2 : 0);
+    document.getElementById('cursorReadout').textContent = `X ${Math.round(x*100).toString().padStart(3,'0')} // Y ${Math.round(y*100).toString().padStart(3,'0')}`;
+    const now = performance.now();
+    if (next !== cursorIndex && now - lastCursorSound > 70) {
+      cursorIndex = next;
+      lastCursorSound = now;
+      play(`cursor${next+1}`);
+    }
+  });
+
+  // Swipe / drag carousel with two alternating swipe cues.
+  const swipeZone = document.getElementById('swipeZone');
+  const track = swipeZone.querySelector('.swipe-track');
+  const cards = [...track.children];
+  let startX = 0, dragging = false, cardIndex = 0;
+  function updateCarousel(directionSound=true) {
+    const width = swipeZone.clientWidth;
+    const offset = cardIndex * (width * .65 + 12);
+    track.style.transform = `translateX(${-offset}px)`;
+    cards.forEach((c,i)=>c.classList.toggle('active', i===cardIndex));
+    if (directionSound) play(swipeToggle++ % 2 === 0 ? 'swipe1' : 'swipe2');
+  }
+  swipeZone.addEventListener('pointerdown', e => { dragging=true; startX=e.clientX; swipeZone.setPointerCapture?.(e.pointerId); });
+  swipeZone.addEventListener('pointerup', e => {
+    if (!dragging) return;
+    dragging=false;
+    const dx=e.clientX-startX;
+    if (Math.abs(dx) > 35) {
+      cardIndex = Math.max(0, Math.min(cards.length-1, cardIndex + (dx < 0 ? 1 : -1)));
+      updateCarousel(true);
+    }
+  });
+  swipeZone.addEventListener('pointercancel', ()=>dragging=false);
+
+  // Keyboard convenience.
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && backdrop.classList.contains('open')) closeModal();
+  });
+})();
+
+  </script>
+</body>
+</html>
