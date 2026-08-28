@@ -2,7 +2,7 @@
 
 ## Status
 
-**Completed 2026-08-28.** STORY-003 A and STORY-005 A remain synchronized into this contract. The campaign package remains production-candidate pending STORY-007; see the shared [TASK-026 through TASK-030 completion record](../story/TASK-026-030-COMPLETION.md).
+**Completed 2026-08-28.** STORY-003 A and STORY-005 A remain synchronized into this contract. STORY-007 A canonizes the delivered campaign-one package; see the shared [TASK-026 through TASK-030 completion record](../story/TASK-026-030-COMPLETION.md).
 
 ## Objective
 

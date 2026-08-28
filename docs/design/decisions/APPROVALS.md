@@ -1,6 +1,6 @@
 # Post-TASK-010 playtest approvals
 
-Status: **PT-001 D, PT-002 A, PT-003 D, PT-004 A, PT-005 A, PT-006 D, and PT-007 A approved — 2026-08-24. UI-001 A and UI-002 A approved — 2026-08-25. PT-008 B approved — 2026-08-26. STORY-001 A through STORY-006 A approved — 2026-08-27. TASK-025 may proceed without a rule choice; the Story sequence is approval-ready and waits only on its task prerequisites. Migration choices MS-001 A through MS-005 A and MS-007 A remain approved, but TASK-017 is deferred; MS-006 A's earlier parking sequence is superseded.**
+Status: **PT-001 D, PT-002 A, PT-003 D, PT-004 A, PT-005 A, PT-006 D, and PT-007 A approved — 2026-08-24. UI-001 A and UI-002 A approved — 2026-08-25. PT-008 B approved — 2026-08-26. STORY-001 A through STORY-006 A approved — 2026-08-27; STORY-007 A approved — 2026-08-28. TASK-025 and the TASK-026 through TASK-030 Story sequence are complete. Migration choices MS-001 A through MS-005 A and MS-007 A remain approved, but TASK-017 is deferred; MS-006 A's earlier parking sequence is superseded.**
 
 ## Post-TASK-016 UI approvals
 
@@ -314,14 +314,14 @@ STORY-005 A
 STORY-006 A
 ```
 
-### STORY-007 — Campaign-one canon package — **owner approval requested 2026-08-27**
+### STORY-007 — Campaign-one canon package — **A approved 2026-08-28**
 
-TASK-027 through TASK-030 turn the existing Story working premise into the first complete, editable production campaign. The implementation can be reviewed and playtested without freezing these names or visual identities, but publication as settled canon needs one explicit owner choice—especially because `Second Current Serviceworks` still carries a name/trademark-review note in the Story foundation.
+TASK-027 through TASK-030 turned the existing Story working premise into the first complete, editable production campaign. Publication as settled canon required the explicit owner choice recorded below. That project-level canon approval does not replace ordinary name or trademark due diligence before a commercial release.
 
-- **A — Approve the existing campaign-one package as canon (recommended).** Use the 2049 Trinity Hub setting, Second Current Serviceworks, Continuity Rotation, Civic Atlas, The Quiet Cascade, SIFT, the established nine-person ensemble, and the customizable Crossline Technician as the canonical first-campaign package. TASK-030's reviewed original character art becomes the visual anchor for that ensemble; later edits require ordinary versioned content/art migration rather than silent identity replacement.
+- **A — Approve the existing campaign-one package as canon (approved).** Use the 2049 Trinity Hub setting, Second Current Serviceworks, Continuity Rotation, Civic Atlas, The Quiet Cascade, SIFT, the established nine-person ensemble, and the customizable Crossline Technician as the canonical first-campaign package. TASK-030's reviewed original character art becomes the visual anchor for that ensemble; later edits require ordinary versioned content/art migration rather than silent identity replacement.
 - **B — Keep the package as production-candidate content.** Ship the complete playable campaign and original art for structural/playtest use, but continue labeling its proper names and character identities as candidate material until the owner supplies revisions or approves A. Runtime, Match, checkpoint, and portability contracts remain unaffected.
 
-Requested reply:
+Approved reply record:
 
 ```text
 STORY-007 A

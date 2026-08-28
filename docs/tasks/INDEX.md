@@ -6,7 +6,7 @@ Beginning with TASK-011, the displayed task ID includes the recommended reasonin
 
 Active task:
 
-- None. The TASK-026 through TASK-030 Story Mode sequence completed on 2026-08-28; the campaign package remains production-candidate pending `STORY-007` owner approval.
+- None. The TASK-026 through TASK-030 Story Mode sequence completed on 2026-08-28, and `STORY-007 A` now canonizes its campaign-one names and visual identities.
 
 Completed Story Mode sequence:
 

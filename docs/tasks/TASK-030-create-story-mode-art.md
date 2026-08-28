@@ -2,7 +2,7 @@
 
 ## Status
 
-**Completed 2026-08-28.** STORY-006 A remains synchronized into this contract. The campaign identities and visual anchors remain production-candidate pending STORY-007; see the shared [TASK-026 through TASK-030 completion record](../story/TASK-026-030-COMPLETION.md).
+**Completed 2026-08-28.** STORY-006 A remains synchronized into this contract. STORY-007 A canonizes the campaign identities and makes TASK-030's reviewed original character art their visual anchor; see the shared [TASK-026 through TASK-030 completion record](../story/TASK-026-030-COMPLETION.md).
 
 ## Objective
 

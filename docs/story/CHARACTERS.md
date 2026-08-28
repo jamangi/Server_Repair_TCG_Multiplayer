@@ -1,8 +1,8 @@
 # Character foundation
 
-Status: **working ensemble for review**
+Status: **canonical campaign-one ensemble under STORY-007 A**
 
-All names, biographies, relationships, and visual hooks are fictional. They are not based on identifiable SMS InfoComm or Wistron employees. Portrait notes are prompts for later art direction, not generated assets or final character designs.
+All names, biographies, relationships, and visual hooks are fictional. They are not based on identifiable SMS InfoComm or Wistron employees. TASK-030's reviewed original character art is the canonical visual anchor for this ensemble; these prose notes remain its continuity and art-direction source rather than a substitute asset specification.
 
 ## Ensemble principle
 

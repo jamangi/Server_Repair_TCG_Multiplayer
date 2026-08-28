@@ -1,6 +1,6 @@
 # Story foundation
 
-Status: **working premise for review**
+Status: **canonical campaign-one setting and premise under STORY-007 A**
 
 ## The one-sentence version
 
@@ -59,7 +59,7 @@ The facility is visually dense but not cyberpunk clutter. Every label, light, to
 
 ## The company: Second Current Serviceworks
 
-**Second Current Serviceworks**, usually shortened to **Second Current**, is the working fictional-company name. It requires normal name and trademark review before public release.
+**Second Current Serviceworks**, usually shortened to **Second Current**, is the canonical fictional-company name for campaign one under STORY-007 A. Project canon approval does not replace normal name and trademark due diligence before a commercial release.
 
 Second Current is a global product-lifecycle company. Manufacturers, infrastructure operators, insurers, public agencies, and fleet owners send it returned equipment that must be triaged, repaired, refurbished, harvested, audited, or responsibly retired. Trinity Hub specializes in enterprise computers, storage, networking equipment, and high-density compute.
 
@@ -192,7 +192,7 @@ Each campaign episode can use the following rhythm without requiring every beat 
 
 The result should be authored around ranges of legitimate outcomes, not only a single perfect score. A technically correct but poorly documented shift can advance the plot differently from a meticulous root-cause resolution. Exact branching and reward rules remain candidates.
 
-## Campaign One candidate: The Quiet Cascade
+## Campaign One: The Quiet Cascade
 
 ### Inciting contract
 
@@ -277,9 +277,9 @@ No single manager needs to embody all institutional pressure. Most characters sh
 - Do not make Documentation a post-episode lore dump. It is an operational act with chronology, audience, and consequences.
 - Do not use fictional future technology to hand-wave away the real technical concepts the game aims to teach.
 
-## Working premises that need user review
+## Canonical campaign-one premises
 
-The following choices make the package coherent but are not frozen canon:
+STORY-007 A freezes the following choices as campaign-one canon:
 
 1. the year **2049**;
 2. **Trinity Hub** as the primary North Texas location;

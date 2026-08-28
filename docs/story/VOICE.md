@@ -1,6 +1,6 @@
 # Voice and narrative style
 
-Status: **working voice guide for review**
+Status: **implemented campaign-one voice guide; STORY-007 A canonizes the surrounding campaign package**
 
 ## Voice promise
 

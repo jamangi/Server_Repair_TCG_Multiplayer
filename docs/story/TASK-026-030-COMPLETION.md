@@ -4,7 +4,7 @@
 
 TASK-026 through TASK-030 completed on 2026-08-28 as one integrated Story Mode foundation pass. The runtime, campaign, player, Match bridge, authored scenes, and original art are implemented for structural review and playtesting.
 
-The Quiet Cascade names, character identities, and visual anchors remain **production-candidate** material. [`STORY-007`](../design/decisions/APPROVALS.md#story-007--campaign-one-canon-package--owner-approval-requested-2026-08-27) is the sole owner-approval item from this pass; no implementation or validation result silently canonizes that package.
+The project owner approved [`STORY-007 A`](../design/decisions/APPROVALS.md#story-007--campaign-one-canon-package--a-approved-2026-08-28) on 2026-08-28. The Quiet Cascade names, character identities, and visual anchors are therefore the canonical campaign-one package; future revisions require ordinary versioned content or art migration.
 
 ## Deliverable inventory
 
@@ -13,7 +13,7 @@ The Quiet Cascade names, character identities, and visual anchors remain **produ
 | TASK-026 | Versioned declarative Story schemas and packs; deterministic typed interpreter; static validation; bounded call/return and transition behavior; durable checkpoints; Match boundary; Settings portability and rollback proof; non-canon fixture examples. | `src/story/`, `schemas/story/`, `schemas/client/`, `content/story-v1/fixtures/`, `examples/story/`, `tests/task-026-*`, generated Story staging. |
 | TASK-027 | Quiet Cascade campaign brief, stable graph, chapter/shift structure, exact six-Match plan, checkpoint and branch coverage reports, Builder/solvability proof, reusable background plan, and automated play evidence. | `content/story-v1/campaigns/quiet-cascade/`, `docs/story/campaigns/`, `docs/story/BACKGROUNDS.md`, `docs/story/reports/`, `automated_games/task-027-quiet-cascade-v1/`, `tests/task-027-*`. |
 | TASK-028 | Story navigation and Home/scene pages; accessible layered player; keyboard, touch, transcript, reduced-motion and responsive behavior; durable restart semantics; fail-closed Story context; real Worker-authoritative Match return; atomic Story import validation. | `viewer/js/play/story-*`, `viewer/js/play/pages/story-*`, related Play shell/storage/session modules, `viewer/css/play.css`, `viewer/scripts/build-play-assets.mjs`, `tests/task-028-*`, `tests/browser/task-028-*`, `tests/visual/task-028/`. |
-| TASK-029 | Complete production-candidate dialogue, narration, immediate and remembered choices, route variants, Match debriefs, choreography, localized text, continuity/editorial ledgers, and route transcripts. | `content/story-v1/campaigns/quiet-cascade/`, `docs/story/campaigns/`, `docs/story/reports/`, `tests/task-029-*`. |
+| TASK-029 | Complete canonical campaign-one dialogue, narration, immediate and remembered choices, route variants, Match debriefs, choreography, localized text, continuity/editorial ledgers, and route transcripts. | `content/story-v1/campaigns/quiet-cascade/`, `docs/story/campaigns/`, `docs/story/reports/`, `tests/task-029-*`. |
 | TASK-030 | Original provenance-recorded Story masters; responsive optimized assets and deterministic manifest; reusable resolver; accessible descriptions and fallbacks; inventory, contact sheets, build/verification tooling, and asset tests. | `art_sources/task-030/`, `viewer/assets/story/`, `viewer/js/play/story-art-resolver.mjs`, `tools/build-task-030-story-art.py`, `viewer/scripts/verify-task-030-art.mjs`, `docs/art/`, `tests/task-030-*`. |
 
 Generated Viewer staging under `viewer/generated/play/` is derived through the canonical build path rather than maintained as a second content authority.
@@ -44,6 +44,6 @@ All commands below were run from the repository root against the stable final so
 
 ## Owner decision boundary
 
-- Open owner approval: `STORY-007` only.
-- Current publication posture: production-candidate, corresponding to `STORY-007 B` unless and until the owner explicitly approves `STORY-007 A` or supplies a revision.
-- Runtime, checkpoint, Match, portability, asset-manifest, and validation contracts do not depend on canon approval and remain stable across a later content migration.
+- Owner approval completed: `STORY-007 A` on 2026-08-28.
+- Current publication posture: canonical campaign-one names, identities, setting, premise, and reviewed visual anchors.
+- This approval changes content authority rather than runtime behavior. Runtime, checkpoint, Match, portability, asset-manifest, and validation contracts remain unchanged.

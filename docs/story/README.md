@@ -1,6 +1,6 @@
 # Story and fictional context
 
-Status: **implemented production candidate; story canon remains pending owner approval in `STORY-007` and no story document is gameplay-rule authority**
+Status: **implemented canonical campaign-one package under `STORY-007 A`; no story document is gameplay-rule authority**
 
 This directory gives Server Repair TCG a time, place, workplace, cast, campaign frame, and narrative voice. Its purpose is to make the troubleshooting loop feel like a lived activity performed by people whose work matters:
 
@@ -51,6 +51,6 @@ TASK-026 through TASK-030 now provide the complete first Story Mode foundation. 
 4. [`TASK-029-XHIGH`](../tasks/TASK-029-author-story-campaign-scripts.md) — complete dialogue, choices, continuity, outcome variants, transcripts, and choreography.
 5. [`TASK-030-XHIGH`](../tasks/TASK-030-create-story-mode-art.md) — original painterly backgrounds, character variants, inserts, deterministic provenance, fallbacks, and responsive integration.
 
-The shipped campaign remains a production candidate until the owner resolves [`STORY-007`](../design/decisions/APPROVALS.md). That approval can canonize or revise names, identities, setting, and campaign premise without promoting Story prose into gameplay authority.
+The owner approved [`STORY-007 A`](../design/decisions/APPROVALS.md#story-007--campaign-one-canon-package--a-approved-2026-08-28) on 2026-08-28. The shipped names, identities, setting, campaign premise, and reviewed character-art anchors are canonical for campaign one. This content approval does not promote Story prose into gameplay-rule authority.
 
 The architecture deliberately borrows useful visual-novel concepts—stable labels, jump/call/return, declarative statements, and layered rendering—without adopting executable story scripts or treating another engine's syntax as this project's contract.

@@ -710,7 +710,7 @@ def main() -> None:
             "review_state": "approved",
             "review_notes": [
                 "Reviewed for identity continuity, text-free composition, technical safety, crop survival, overlay clearance, and absence of hidden gameplay answers.",
-                "Approved for TASK-030 candidate-campaign integration; STORY-007 remains the owner-facing canon package decision.",
+                "Approved for canonical campaign-one integration under STORY-007 A on 2026-08-28.",
             ],
             "approval": {
                 "status": "approved",

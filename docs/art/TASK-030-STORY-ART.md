@@ -1,6 +1,6 @@
 # TASK-030 Story art production record
 
-Status: **completed production package for the campaign-one candidate; STORY-007 controls canon approval**
+Status: **completed canonical campaign-one production package under STORY-007 A**
 
 TASK-030 supplies the complete static 2D presentation layer for every reachable asset reference in *The Quiet Cascade*. Story behavior remains usable when this optional layer is missing: dialogue, choices, technical facts, and Match authority stay in HTML, declarative content, and the ordinary Worker-backed engine.
 
