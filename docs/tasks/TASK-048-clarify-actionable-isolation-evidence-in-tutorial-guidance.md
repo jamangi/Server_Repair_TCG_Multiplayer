@@ -41,6 +41,7 @@ Read completely before editing:
 
 - The guidance must state, in direct terms, that RAID Array Degraded **is confirmed**.
 - It must immediately explain that this candidate is a non-actionable condition: it describes the array state but does not identify the repairable cause and therefore cannot open Repair.
+- At this exact post-RAID-Status checkpoint, include a brief, down-to-earth real-world bridge. It should convey, without requiring prior RAID expertise: “Although this Ticket is a simulation, the distinction mirrors real server work: a degraded array confirms that redundancy has been lost, but it does not yet tell you whether the drive, cable or backplane path, power, controller, or configuration is what should be repaired.” The final wording may be shorter, but it must explicitly connect that uncertainty to why Repair can remain unavailable after a valid `CONFIRM`.
 - It must separately state that Failed SAS Drive is actionable but is currently **supported, not confirmed** by this Evidence, so the accepted repair-opening route is not yet available.
 - The tutorial must connect the next Drive Health Test to that specific evidence gap without revealing its hidden authored outcome before the result is authorized.
 - Use player-facing names first. Stable IDs and technical dispositions may remain available as secondary detail, not as the only explanation.
@@ -56,13 +57,15 @@ Read completely before editing:
 ### Tutorial copy and sequence
 
 - Rewrite the affected coach copy so it first names what the Evidence established, then what remains unresolved, then why that blocks Repair, and finally the next legal learning action.
+- Present the real-world bridge at the moment the player can see both the `CONFIRM` disposition and the locked Repair route. Do not bury it in a glossary, Card detail, or later summary.
+- Keep it concise and conversational: teach the difference between confirming a system condition and identifying a safe component-level repair target, rather than listing every possible RAID failure mode as required memorization.
 - Keep the lesson's intended concept: a candidate-specific disposition does not automatically establish an actionable repair target.
 - Preserve all pinned Ticket identities, outcomes, legal intents, Action costs, Worklog behavior, completion, and replay progress.
 
 ## Verification
 
 - Add focused projection/rendering tests for the exact mixed `CONFIRM` non-actionable + `SUPPORT` actionable Evidence event.
-- Assert the output includes all four facts: confirmed array condition, non-actionable role, supported actionable drive candidate, and no accepted repair-opening route yet.
+- Assert the output includes all five facts: confirmed array condition, non-actionable role, real-world component uncertainty, supported actionable drive candidate, and no accepted repair-opening route yet.
 - Assert that unseen truth and unauthorized result payloads remain absent before the Drive Health Test.
 - Complete the tutorial through the real Drive Health result, accepted Isolation, Repair, Verify, Documentation, and closure to prove the clarified checkpoint does not change authority.
 - Cover a legal actionable CONFIRM route, a non-actionable CONFIRM route, support requiring corroboration, ruled-out/contradicted candidates, and no-evidence state so the reusable guidance does not overfit one Ticket.
