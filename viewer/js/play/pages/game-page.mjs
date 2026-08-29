@@ -518,10 +518,14 @@ function resultMarkup(session, context) {
   const won = result.solo_wins === 1;
   const status = won ? 'Queue cleared' : result.solo_stalemates ? 'Proven stalemate' : result.invalid_or_capped_results ? 'Invalid or capped' : 'Shift ended';
   const storyMatch = Boolean(session.storyContext);
+  const storyReview = Boolean(session.storyReview);
+  const storyMode = storyMatch || storyReview;
   const canContinueStory = Boolean(
     storyMatch && session.storyContinuationReady && session.storyMatchResult,
   );
-  const recordStatus = session.tutorial
+  const recordStatus = storyReview
+    ? 'Practice result only. It was not added to canonical Story history, rewards, or Profile statistics.'
+    : session.tutorial
     ? 'Tutorial completion recorded as local replay progress only.'
     : session.resultApplied === false
       ? 'This result was already present; lifetime totals were not incremented twice.'
@@ -538,7 +542,7 @@ function resultMarkup(session, context) {
   return `
     <section class="play-route result-route" aria-labelledby="result-heading">
       <div class="result-panel">
-        <p class="play-eyebrow" data-result-reveal>${storyMatch ? 'Story Match result' : 'Local solo result'}</p>
+        <p class="play-eyebrow" data-result-reveal>${storyReview ? 'Story practice result' : storyMatch ? 'Story Match result' : 'Local solo result'}</p>
         <h1 id="result-heading" tabindex="-1" data-result-reveal>${status}</h1>
         <p data-result-reveal>${won ? 'Every Ticket was closed through an Evidence-backed causal record.' : 'Review the terminal reasons and preserve the useful history.'}</p>
         ${solutionRevealMarkup(session.projection?.view ?? { solution_reveals: [] }, context.catalog, session.projection, true)}
@@ -561,8 +565,8 @@ function resultMarkup(session, context) {
         <section class="result-archive" aria-labelledby="result-archive-heading" data-result-reveal><div><p class="play-eyebrow">Completed records</p><h2 id="result-archive-heading">Archived Tickets</h2></div><div class="result-archive__list">${archivedTicketButtonsMarkup(archiveRecords, session.projection)}</div></section>
         <p class="result-record-status"${session.resultApplied === null && !session.tutorial ? ' data-tone="error" role="alert"' : ''} data-result-reveal>${escapeHtml(recordStatus)}</p>
         ${storyReturn}
-        <div class="button-row" data-result-reveal><button type="button" class="play-button${storyMatch ? '' : ' play-button--primary'}" data-finish-game="${storyMatch ? '#/play/story' : '#/play/home'}">${storyMatch ? 'Story Home' : 'Return Home'}</button>${session.tutorial ? `<button type="button" class="play-button" data-restart-completed-tutorial="${escapeHtml(session.tutorial.definition.id)}">Replay tutorial</button>` : '<button type="button" class="play-button" data-finish-game="#/play/profile">View Profile</button>'}</div>
-        <p class="authority-note" data-result-reveal>${session.tutorial ? 'Tutorial completion is local progress only. This Match did not change Profile points or statistics.' : storyMatch ? 'The engine remains authoritative for Match facts and Profile statistics. Story consumes only the validated, bounded result above.' : 'Local statistics are user-controlled and are not competitive records.'}</p>
+        <div class="button-row" data-result-reveal><button type="button" class="play-button${storyMode ? '' : ' play-button--primary'}" data-finish-game="${storyMode ? '#/play/story' : '#/play/home'}">${storyReview ? 'Return to Chapter history' : storyMatch ? 'Story Home' : 'Return Home'}</button>${session.tutorial ? `<button type="button" class="play-button" data-restart-completed-tutorial="${escapeHtml(session.tutorial.definition.id)}">Replay tutorial</button>` : storyReview ? '' : '<button type="button" class="play-button" data-finish-game="#/play/profile">View Profile</button>'}</div>
+        <p class="authority-note" data-result-reveal>${storyReview ? 'The ordinary engine remains authoritative for this practice Match. The client intentionally discards its result outside the engine boundary, so it cannot change canonical Story or Profile statistics.' : session.tutorial ? 'Tutorial completion is local progress only. This Match did not change Profile points or statistics.' : storyMatch ? 'The engine remains authoritative for Match facts and Profile statistics. Story consumes only the validated, bounded result above.' : 'Local statistics are user-controlled and are not competitive records.'}</p>
       </div>
       <dialog id="archived-ticket-dialog" class="play-dialog archived-ticket-dialog" aria-labelledby="archive-review-heading"><div data-archive-dialog-content></div></dialog>
     </section>`;
@@ -594,11 +598,11 @@ function focusAuthorizedSolution(root, ticketId) {
 export function renderGame(root, context) {
   const session = context.game;
   if (session.error) {
-    root.innerHTML = gameLoadingMarkup(session.error, { story: Boolean(session.storyContext) });
+    root.innerHTML = gameLoadingMarkup(session.error, { story: Boolean(session.storyContext || session.storyReview) });
     return () => {};
   }
   if (!session.projection) {
-    root.innerHTML = gameLoadingMarkup(null, { story: Boolean(session.storyContext) });
+    root.innerHTML = gameLoadingMarkup(null, { story: Boolean(session.storyContext || session.storyReview) });
     return () => {};
   }
   if (session.terminalResult) {

@@ -2,7 +2,7 @@
 
 ## Status
 
-**Planned and approved under `STORY-009 A`.** TASK-037 remains the only prerequisite.
+**Completed 2026-08-28 under `STORY-009 A`.** Chapter history now derives completed Shift episodes from authored Match metadata and a versioned review-boundary registry. Each replay is an isolated cutscene plus ordinary configured practice Match; it uses only session-scoped interruption metadata and never writes canonical Story checkpoints, choices, results, rewards, endings, exports, or Profile statistics. Scene reload resumes the review, Match reload returns coherently to Chapter history, and completion, Give Up, route leave, reset, import, and v1 migration preserve the exact canonical position.
 
 ## Objective
 

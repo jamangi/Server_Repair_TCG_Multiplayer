@@ -15,6 +15,7 @@ export function buildStorySceneModel(display, {
   transcript = [],
   pending = false,
   auto = false,
+  review = null,
   error = null,
 } = {}) {
   const source = display && typeof display === 'object' ? display : {};
@@ -101,6 +102,10 @@ export function buildStorySceneModel(display, {
     }),
     pending: Boolean(pending),
     auto: Boolean(auto),
+    review: review?.active === true ? Object.freeze({
+      active: true,
+      label: clean(review.label) || 'Story episode',
+    }) : null,
     error: clean(error),
   });
 }
@@ -141,6 +146,8 @@ export function buildStoryHomeModel(snapshot, { activeDeck = null } = {}) {
       label: clean(entry?.label),
       replayable: entry?.replayable === true,
     })).filter((entry) => entry.id && entry.label)),
+    reviewInterrupted: source.review_interrupted === true,
+    reviewNotice: clean(source.review_notice),
     error: clean(source.error),
   });
 }

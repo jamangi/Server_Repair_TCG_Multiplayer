@@ -6,6 +6,7 @@ export {
   canonicalStoryJson,
   storyDigest,
   createDurableCheckpoint,
+  createStoryReviewState,
   restoreStoryCheckpoint,
 } from './checkpoint.mjs';
 export { normalizeStoryMatchResult, acceptStoryMatchResult } from './match-boundary.mjs';

@@ -17,6 +17,15 @@ function sameStoryContext(candidate, expected) {
     && STORY_CONTEXT_KEYS.every((key) => candidate[key] === expected[key]);
 }
 
+function sameStoryReview(candidate, expected) {
+  if (!candidate || !expected || typeof candidate !== 'object' || typeof expected !== 'object'
+      || Array.isArray(candidate) || Array.isArray(expected)) return false;
+  return Object.keys(candidate).length === 2
+    && candidate.schema_version === 'story-review-session-v1'
+    && candidate.schema_version === expected.schema_version
+    && candidate.match_ref === expected.match_ref;
+}
+
 export function preflightStoryMatch(payload, {
   workerFactory = null,
 } = {}) {
@@ -55,7 +64,7 @@ export function preflightStoryMatch(payload, {
 }
 
 export class SoloGameSession {
-  constructor({ onChange, onAnnounce, onStarted, onCompleted, onSfx, tutorial = null, catalog = null, storyContext = null } = {}) {
+  constructor({ onChange, onAnnounce, onStarted, onCompleted, onSfx, tutorial = null, catalog = null, storyContext = null, storyReview = null } = {}) {
     this.worker = null;
     this.projection = null;
     this.terminalResult = null;
@@ -96,8 +105,10 @@ export class SoloGameSession {
     this.tutorial = tutorial;
     this.catalog = catalog;
     this.storyContext = storyContext ? structuredClone(storyContext) : null;
+    this.storyReview = storyReview ? structuredClone(storyReview) : null;
     this.storyMatchResult = null;
     this.storyContinuationReady = false;
+    this.storyReviewResultReady = false;
     this.storyReturnError = null;
   }
 
@@ -109,8 +120,11 @@ export class SoloGameSession {
       return Promise.reject(new Error(this.error));
     }
     const payloadContext = payload?.story_context ?? null;
+    const payloadReview = payload?.story_review ?? null;
     if (Boolean(payloadContext) !== Boolean(this.storyContext)
-        || (this.storyContext && !sameStoryContext(payloadContext, this.storyContext))) {
+        || (this.storyContext && !sameStoryContext(payloadContext, this.storyContext))
+        || Boolean(payloadReview) !== Boolean(this.storyReview)
+        || (this.storyReview && !sameStoryReview(payloadReview, this.storyReview))) {
       this.error = 'Story Match launch context is missing or mismatched.';
       this.onChange();
       return Promise.reject(new Error(this.error));
@@ -154,13 +168,25 @@ export class SoloGameSession {
         queueMicrotask(() => this.onSfx('global.visible.rejection'));
         return;
       }
+      if (this.storyReview && !sameStoryReview(message.story_review, this.storyReview)) {
+        this.error = 'Story practice authority returned a mismatched review context.';
+        this.terminate();
+        this.rejectStart?.(new Error(this.error));
+        this.resolveStart = null;
+        this.rejectStart = null;
+        this.onAnnounce(this.error);
+        this.onChange();
+        queueMicrotask(() => this.onSfx('global.visible.rejection'));
+        return;
+      }
       this.projection = message.projection;
       this.active = true;
       this.selectedTicketId = message.projection.view.public_match.repair_queue[0]?.ticket_instance_id ?? null;
       this.lastMotion = 'route';
       this.onStarted(message.projection);
       const startingActions = message.projection.view.public_match.turn?.actions_remaining;
-      this.onAnnounce(`${this.storyContext ? 'Story' : 'Solo'} Match started. Opening hand drawn and first turn ready${Number.isSafeInteger(startingActions) ? ` with ${startingActions} Actions` : ''}.`);
+      const matchMode = this.storyReview ? 'Story practice' : this.storyContext ? 'Story' : 'Solo';
+      this.onAnnounce(`${matchMode} Match started. Opening hand drawn and first turn ready${Number.isSafeInteger(startingActions) ? ` with ${startingActions} Actions` : ''}.`);
       this.tutorial?.announceCurrent();
       this.resolveStart?.(message.projection);
       this.resolveStart = null;
@@ -238,6 +264,7 @@ export class SoloGameSession {
       if (this.terminalResult) {
         this.active = false;
         const returnedContext = message.story_context ?? null;
+        const returnedReview = message.story_review ?? null;
         const candidate = message.story_match_result ?? null;
         this.storyContinuationReady = Boolean(this.storyContext
           && sameStoryContext(returnedContext, this.storyContext)
@@ -247,6 +274,13 @@ export class SoloGameSession {
         this.storyMatchResult = this.storyContinuationReady ? structuredClone(candidate) : null;
         if (this.storyContext && !this.storyContinuationReady) {
           this.onAnnounce('The Match result was recorded, but its Story return context did not validate. Story progress was not advanced.');
+        }
+        this.storyReviewResultReady = Boolean(
+          this.storyReview && sameStoryReview(returnedReview, this.storyReview),
+        );
+        if (this.storyReview && !this.storyReviewResultReady) {
+          this.storyReturnError = 'The practice result returned without its validated Story review context.';
+          this.onAnnounce('The practice Match ended, but its Story review context did not validate. Canonical progress remains unchanged.');
         }
         this.onCompleted(this.terminalResult, this.storyMatchResult);
       }
@@ -320,7 +354,9 @@ export class SoloGameSession {
     if (events.some((event) => event.event_type === 'CANDIDATE_ELIMINATION_SET')) messages.push('Candidate elimination record updated for the current diagnosis stage.');
     if (result?.accepted === false) messages.push(`Action rejected: ${result.error_code}. No cost was paid.`);
     if (result?.resolution_code === 'ISOLATION_NOT_SUPPORTED') messages.push('Isolation was not supported. The Action was spent; hidden truth was not disclosed.');
-    if (terminal) messages.push(`${this.storyContext ? 'Story' : 'Solo'} Match complete. Local result statistics are ready.`);
+    if (terminal) messages.push(this.storyReview
+      ? 'Story practice Match complete. Its result will not change Story or Profile statistics.'
+      : `${this.storyContext ? 'Story' : 'Solo'} Match complete. Local result statistics are ready.`);
     if (messages.length) this.onAnnounce(messages.join(' '));
   }
 

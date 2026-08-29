@@ -5,6 +5,8 @@ import { loadStoryMatchRegistry, resolveStoryMatch } from './story-match-registr
 export const STORY_PROGRESS_RECORD_VERSION = 'story-progress-record-v1';
 export const STORY_PROGRESS_BACKUP_VERSION = 'story-progress-backup-v1';
 export const STORY_PROGRESS_STORAGE_KEY = 'server-repair-tcg:story-progress-v1';
+export const STORY_REVIEW_SESSION_VERSION = 'story-review-session-v1';
+export const STORY_REVIEW_SESSION_STORAGE_KEY = 'server-repair-tcg:story-review-v1';
 
 const DEFAULT_ROOT = new URL(
   '../../generated/play/content/story-v1/campaigns/quiet-cascade-characterization-v2/',
@@ -50,6 +52,35 @@ async function loadBundle({ rootUrl, fetchImpl }) {
     textPairsPromise,
   ]);
   return { manifest, registry, scripts, texts: Object.fromEntries(textPairs) };
+}
+
+async function loadReviewEpisodes({ rootUrl, fetchImpl }) {
+  const response = await fetchImpl(new URL('review-episodes.json', rootUrl), { cache: 'no-store' });
+  if (!response?.ok) return null;
+  const source = await response.json();
+  if (!exactKeys(source, ['schema_version', 'campaign_id', 'content_version', 'episodes'])
+      || source.schema_version !== 'story-review-episodes-v1'
+      || typeof source.campaign_id !== 'string' || !SAFE_ID.test(source.campaign_id)
+      || typeof source.content_version !== 'string' || !SAFE_ID.test(source.content_version)
+      || !Array.isArray(source.episodes)) {
+    throw new Error('Story review metadata is malformed or unsupported.');
+  }
+  const episodes = new Map();
+  for (const entry of source.episodes) {
+    if (!exactKeys(entry, ['match_ref', 'replay_entry_checkpoint_id'])
+        || typeof entry.match_ref !== 'string' || !SAFE_ID.test(entry.match_ref)
+        || typeof entry.replay_entry_checkpoint_id !== 'string'
+        || !SAFE_ID.test(entry.replay_entry_checkpoint_id)
+        || episodes.has(entry.match_ref)) {
+      throw new Error('Story review episode metadata is malformed or duplicated.');
+    }
+    episodes.set(entry.match_ref, Object.freeze(clone(entry)));
+  }
+  return Object.freeze({
+    campaignId: source.campaign_id,
+    contentVersion: source.content_version,
+    episodes,
+  });
 }
 
 function emptyRecord(bundle) {
@@ -134,6 +165,7 @@ export async function createStoryClient({
   announce = () => {},
   progressStore = null,
   storageImpl = globalThis.localStorage,
+  sessionStorageImpl = globalThis.sessionStorage,
   fetchImpl = globalThis.fetch,
   rootUrl = DEFAULT_ROOT,
   runtimeUrl = DEFAULT_RUNTIME_URL,
@@ -144,6 +176,7 @@ export async function createStoryClient({
     loadBundle({ rootUrl, fetchImpl }),
     loadStoryMatchRegistry({ url: new URL('matches.json', rootUrl), fetchImpl }),
   ]);
+  const reviewRegistry = await loadReviewEpisodes({ rootUrl, fetchImpl });
   const issues = runtime.validateStoryPack(bundle);
   if (issues.length) {
     const error = new Error(`Story content has ${issues.length} validation issue${issues.length === 1 ? '' : 's'}.`);
@@ -153,10 +186,34 @@ export async function createStoryClient({
   if (matchRegistry.campaignId !== bundle.manifest.pack_id) {
     throw new Error('Story Match registry belongs to a different campaign pack.');
   }
+  if (reviewRegistry
+      && (reviewRegistry.campaignId !== bundle.manifest.pack_id
+        || reviewRegistry.contentVersion !== bundle.manifest.content_version)) {
+    throw new Error('Story review metadata belongs to a different campaign pack or content version.');
+  }
+  const reviewEntries = reviewRegistry?.episodes ?? new Map();
+  const reviewMetadataRequired = bundle.manifest.content_version === 'quiet-cascade-characterization-v2';
+  if (reviewMetadataRequired && reviewEntries.size !== matchRegistry.matches.size) {
+    throw new Error('Current Story content must declare one reviewed episode boundary per Match.');
+  }
+  for (const matchRef of reviewEntries.keys()) {
+    if (!matchRegistry.matches.has(matchRef)) {
+      throw new Error(`Story review metadata references an unregistered Match: ${matchRef}.`);
+    }
+  }
+  const reviewEntryFor = (matchRef) => reviewEntries.get(matchRef) ?? null;
 
   const authoredMatchBoundaries = new Map();
+  const authoredCheckpoints = new Set();
   for (const script of bundle.scripts) {
     for (const statement of script.statements) {
+      for (const checkpointId of [
+        statement.checkpoint_id,
+        statement.pre_match_checkpoint_id,
+        statement.post_match_checkpoint_id,
+      ]) {
+        if (checkpointId) authoredCheckpoints.add(checkpointId);
+      }
       if (statement.type !== 'start_match') continue;
       authoredMatchBoundaries.set(statement.match_ref, {
         return_label: statement.return_label,
@@ -173,7 +230,9 @@ export async function createStoryClient({
     if (!authored
         || authored.return_label !== definition.return_label
         || authored.pre_match_checkpoint_id !== definition.pre_match_checkpoint_id
-        || authored.post_match_checkpoint_id !== definition.post_match_checkpoint_id) {
+        || authored.post_match_checkpoint_id !== definition.post_match_checkpoint_id
+        || (reviewMetadataRequired
+          && !authoredCheckpoints.has(reviewEntryFor(matchRef)?.replay_entry_checkpoint_id))) {
       throw new Error(`Story Match boundary ${matchRef} is inconsistent across reviewed content.`);
     }
   }
@@ -205,6 +264,9 @@ export async function createStoryClient({
   let auto = false;
   let error = null;
   let activeMatchContext = null;
+  let review = null;
+  let reviewNotice = null;
+  let reviewInterrupted = false;
 
   const storedProgress = () => {
     if (progressStore?.load) return clone(progressStore.load());
@@ -215,6 +277,26 @@ export async function createStoryClient({
   const persistProgress = (next) => {
     if (progressStore?.save) progressStore.save(clone(next));
     else if (storageImpl) storageImpl.setItem(STORY_PROGRESS_STORAGE_KEY, JSON.stringify(next));
+  };
+
+  const clearReviewMarker = () => {
+    try {
+      sessionStorageImpl?.removeItem(STORY_REVIEW_SESSION_STORAGE_KEY);
+    } catch {
+      // A blocked session store cannot affect canonical Story authority.
+    }
+  };
+
+  const writeReviewMarker = (definition, phase) => {
+    if (!sessionStorageImpl) return;
+    const marker = {
+      schema_version: STORY_REVIEW_SESSION_VERSION,
+      pack_id: bundle.manifest.pack_id,
+      content_version: bundle.manifest.content_version,
+      match_ref: definition.match_ref,
+      phase,
+    };
+    sessionStorageImpl.setItem(STORY_REVIEW_SESSION_STORAGE_KEY, JSON.stringify(marker));
   };
 
   const readStored = () => {
@@ -280,7 +362,82 @@ export async function createStoryClient({
     });
   };
 
+  const completedResultFor = (matchRef) => (progress.checkpoint?.match_results ?? [])
+    .find((result) => result.match_ref === matchRef) ?? null;
+
+  const reviewLabel = (definition) => {
+    const shift = Number(definition.shift_id.split('.').at(-1));
+    const title = textCatalog[definition.title_text_id] || titleFromStableId(definition.match_ref, 'Story episode');
+    return `Shift ${shift} · ${title}`;
+  };
+
+  const createReview = (definition) => {
+    if (!progress.checkpoint || !completedResultFor(definition.match_ref)) {
+      throw new Error('Only episodes with an accepted durable Match result can be reviewed.');
+    }
+    const reviewEntry = reviewEntryFor(definition.match_ref);
+    if (!reviewEntry) {
+      throw new Error('This episode has no approved review entry boundary.');
+    }
+    return {
+      definition,
+      state: runtime.createStoryReviewState(
+        progress.checkpoint,
+        reviewEntry.replay_entry_checkpoint_id,
+        bundle,
+      ),
+      display: null,
+    };
+  };
+
+  const launchReviewMatch = async (context, pendingMatch) => {
+    const definition = review?.definition;
+    if (!definition
+        || context.schema_version !== 'story-match-context-v1'
+        || context.match_ref !== definition.match_ref
+        || context.checkpoint_id !== definition.pre_match_checkpoint_id
+        || !pendingMatch
+        || pendingMatch.match_ref !== definition.match_ref
+        || pendingMatch.return_label !== definition.return_label
+        || pendingMatch.pre_match_checkpoint_id !== definition.pre_match_checkpoint_id
+        || pendingMatch.post_match_checkpoint_id !== definition.post_match_checkpoint_id) {
+      throw new Error('Story review reached an unapproved Match boundary.');
+    }
+    writeReviewMarker(definition, 'MATCH');
+    await onStartMatch({
+      context: null,
+      review: {
+        schema_version: STORY_REVIEW_SESSION_VERSION,
+        match_ref: definition.match_ref,
+        label: reviewLabel(definition),
+      },
+      definition: clone(definition),
+      deck: clone(activeDeck()),
+    });
+  };
+
+  const applyReviewIntent = async (intent, { notify = true } = {}) => {
+    if (!review) throw new Error('No Story review is active.');
+    const outcome = runtime.reduceStory(review.state, intent, bundle);
+    review.state = outcome.state;
+    review.display = outcome.display;
+    const start = outcome.effects.find((effect) => effect.type === 'START_MATCH');
+    if (start) {
+      try {
+        await launchReviewMatch(start.context, review.state.pending_match);
+      } catch (launchError) {
+        clearReviewMarker();
+        review = null;
+        reviewNotice = 'Story practice could not start. Canonical Story progress was preserved.';
+        throw launchError;
+      }
+    }
+    if (notify) onChange();
+    return outcome;
+  };
+
   const applyIntent = async (intent) => {
+    if (review) return applyReviewIntent(intent);
     const currentState = state ?? runtime.createStoryState(bundle);
     const outcome = runtime.reduceStory(currentState, intent, bundle);
     // A checkpoint is the authority to cross a durable boundary. Commit it
@@ -302,6 +459,33 @@ export async function createStoryClient({
   };
 
   readStored();
+  try {
+    const rawMarker = sessionStorageImpl?.getItem(STORY_REVIEW_SESSION_STORAGE_KEY);
+    if (rawMarker) {
+      const marker = JSON.parse(rawMarker);
+      if (!exactKeys(marker, ['schema_version', 'pack_id', 'content_version', 'match_ref', 'phase'])
+          || marker.schema_version !== STORY_REVIEW_SESSION_VERSION
+          || marker.pack_id !== bundle.manifest.pack_id
+          || marker.content_version !== bundle.manifest.content_version
+          || !['SCENE', 'MATCH'].includes(marker.phase)) {
+        throw new Error('Stored Story review marker is malformed.');
+      }
+      const definition = resolveStoryMatch(matchRegistry, marker.match_ref);
+      if (!completedResultFor(definition.match_ref)) throw new Error('Stored Story review is no longer eligible.');
+      if (marker.phase === 'SCENE') {
+        review = createReview(definition);
+        await applyReviewIntent({ type: 'BEGIN' }, { notify: false });
+      } else {
+        reviewInterrupted = true;
+        reviewNotice = `${reviewLabel(definition)} practice was interrupted. Canonical Story progress is unchanged.`;
+        clearReviewMarker();
+      }
+    }
+  } catch {
+    review = null;
+    reviewInterrupted = false;
+    clearReviewMarker();
+  }
 
   return Object.freeze({
     get pack() { return clone(bundle.manifest); },
@@ -316,11 +500,15 @@ export async function createStoryClient({
       const pending = progress.checkpoint?.pending_match ?? state?.pending_match ?? null;
       const pendingResult = progress.pending_result;
       const deck = activeDeck();
-      const history = (progress.checkpoint?.match_results ?? []).map((result, index) => ({
-        id: result.result_id,
-        label: `Shift ${index + 1} · ${result.completion.toLowerCase()}`,
-        replayable: false,
-      }));
+      const history = [...matchRegistry.matches.values()].flatMap((entry) => {
+        const result = completedResultFor(entry.match_ref);
+        if (!result) return [];
+        return [{
+          id: entry.match_ref,
+          label: `${reviewLabel(entry)} · ${result.completion.toLowerCase()}`,
+          replayable: Boolean(reviewEntryFor(entry.match_ref)),
+        }];
+      });
       const checkpointId = progress.checkpoint?.checkpoint_id ?? null;
       const definition = pending
         ? resolveStoryMatch(matchRegistry, pending.match_ref)
@@ -348,6 +536,8 @@ export async function createStoryClient({
             ? 'Campaign one is complete. More Story content is in development.'
             : undefined,
         interrupted_match: Boolean(pending && !pendingResult),
+        review_interrupted: reviewInterrupted,
+        review_notice: reviewNotice,
         can_open: !error && !progress.completed_ending_id,
         history,
         error,
@@ -355,17 +545,18 @@ export async function createStoryClient({
     },
 
     sceneModel() {
-      const decorated = display ? {
-        ...display,
-        background: display.background ? {
-          ...display.background,
-          alt_text_id: assetAltText.get(display.background.asset_id) || null,
+      const activeDisplay = review?.display ?? display;
+      const decorated = activeDisplay ? {
+        ...activeDisplay,
+        background: activeDisplay.background ? {
+          ...activeDisplay.background,
+          alt_text_id: assetAltText.get(activeDisplay.background.asset_id) || null,
         } : null,
-        characters: display.characters.map((item) => ({
+        characters: activeDisplay.characters.map((item) => ({
           ...item,
           alt_text_id: assetAltText.get(item.asset_id) || null,
         })),
-        transient: display.transient.map((item) => ({
+        transient: activeDisplay.transient.map((item) => ({
           ...item,
           alt_text_id: assetAltText.get(item.asset_id) || null,
         })),
@@ -376,12 +567,19 @@ export async function createStoryClient({
         artResolver: storyArtResolver,
         transcript: decorated?.screens?.transcript ?? [],
         auto,
+        review: review ? { active: true, label: reviewLabel(review.definition) } : null,
         error: error || (!decorated ? 'Return to Story Home to begin or restore this segment.' : null),
       });
     },
 
     async openPrimary() {
       if (error) throw new Error(error);
+      if (review) {
+        clearReviewMarker();
+        review = null;
+      }
+      reviewInterrupted = false;
+      reviewNotice = null;
       restoreForOpen();
       if (progress.pending_result) {
         await this.continueFromMatch();
@@ -476,6 +674,13 @@ export async function createStoryClient({
     },
 
     async recover() {
+      if (review) {
+        const definition = review.definition;
+        review = createReview(definition);
+        writeReviewMarker(definition, 'SCENE');
+        await applyReviewIntent({ type: 'BEGIN' });
+        return;
+      }
       error = null;
       state = progress.checkpoint
         ? runtime.restoreStoryCheckpoint(progress.checkpoint, bundle)
@@ -485,11 +690,45 @@ export async function createStoryClient({
       else onChange();
     },
 
-    async replay() {
-      throw new Error('This campaign has no approved replay entry at the current boundary.');
+    async replay(matchRef) {
+      if (review) throw new Error('A Story review is already active.');
+      const definition = resolveStoryMatch(matchRegistry, matchRef);
+      review = createReview(definition);
+      reviewInterrupted = false;
+      reviewNotice = null;
+      try {
+        writeReviewMarker(definition, 'SCENE');
+        await applyReviewIntent({ type: 'BEGIN' });
+      } catch (reviewError) {
+        clearReviewMarker();
+        review = null;
+        throw reviewError;
+      }
+    },
+
+    completeReviewMatch(matchRef) {
+      if (review?.definition.match_ref !== matchRef) {
+        throw new Error('Story practice completion does not match the active review episode.');
+      }
+      const label = reviewLabel(review.definition);
+      clearReviewMarker();
+      review = null;
+      reviewNotice = `${label} practice finished. Canonical Story progress and Profile statistics are unchanged.`;
+      reviewInterrupted = false;
+      onChange();
+    },
+
+    cancelReview({ notify = true } = {}) {
+      if (!review && !reviewInterrupted) return;
+      clearReviewMarker();
+      review = null;
+      reviewInterrupted = false;
+      reviewNotice = 'Story practice ended. Canonical Story progress is unchanged.';
+      if (notify) onChange();
     },
 
     async reset() {
+      clearReviewMarker();
       const next = emptyRecord(bundle);
       persistProgress(next);
       progress = next;
@@ -498,6 +737,9 @@ export async function createStoryClient({
       auto = false;
       error = null;
       activeMatchContext = null;
+      review = null;
+      reviewNotice = null;
+      reviewInterrupted = false;
       onChange();
     },
 
@@ -547,16 +789,24 @@ export async function createStoryClient({
       display = null;
       error = null;
       activeMatchContext = null;
+      clearReviewMarker();
+      review = null;
+      reviewNotice = null;
+      reviewInterrupted = false;
       onChange();
     },
 
     reloadProgress({ notify = true } = {}) {
+      clearReviewMarker();
       progress = emptyRecord(bundle);
       state = null;
       display = null;
       auto = false;
       error = null;
       activeMatchContext = null;
+      review = null;
+      reviewNotice = null;
+      reviewInterrupted = false;
       readStored();
       if (notify) onChange();
     },

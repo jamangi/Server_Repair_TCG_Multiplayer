@@ -4,21 +4,24 @@ Tasks are implementation contracts. A builder must read `AGENTS.md` and then the
 
 Beginning with TASK-011, the displayed task ID includes the recommended reasoning-effort suffix used when starting that task. `HIGH` denotes substantial but bounded implementation/research; `XHIGH` denotes a cross-cutting semantic, architectural, or broad content migration. The stable task number and existing filename do not change, preserving links and history.
 
-Active task: **[`TASK-038-HIGH: Add completed Story chapter replay`](TASK-038-add-story-chapter-replay.md).**
+Active task: **[`TASK-039-HIGH: Audit campaign-one domain coverage`](TASK-039-audit-story-domain-coverage.md).**
 
 Planned Story replay, coverage, and expansion sequence:
 
-1. [`TASK-038-HIGH: Add completed Story chapter replay`](TASK-038-add-story-chapter-replay.md) — make Chapter history actionable as an approved non-canonical cutscene and practice-Match review session under `STORY-009 A`.
-2. [`TASK-039-HIGH: Audit campaign-one domain coverage`](TASK-039-audit-story-domain-coverage.md) — map all six Shifts to exact Ticket, Symptom, Fault, diagnostic, Repair, Verify, and supporting-domain roles with honest denominators.
-3. [`TASK-040-HIGH: Define the Story and domain expansion protocol`](TASK-040-define-story-expansion-protocol.md) — turn measured gaps into a gated, reusable research-to-release method and compute rather than guess Q.
-4. [`TASK-041-XHIGH: Research the expansion case set`](TASK-041-research-expansion-cases.md) — reuse the existing 72-case backlog, calculate Q, and collect only the additional qualifying cases needed for six distinct episodes.
-5. [`TASK-042-XHIGH: Integrate the approved expansion domain network`](TASK-042-integrate-expansion-domain-network.md) — add the smallest sourced object/relationship/Card/Ticket set and prove deck reachability and solvability.
-6. [`TASK-043-XHIGH: Blueprint the six-episode Story expansion`](TASK-043-blueprint-six-episode-story-expansion.md) — design six one-cutscene-plus-one-Match episodes with exact configurations, graph, checkpoints, and coverage goals.
-7. [`TASK-044-XHIGH: Author the six-episode expansion scripts`](TASK-044-author-story-expansion-scripts.md) — produce the context-complete, characterized, technically bounded candidate scripts and choreography.
-8. [`TASK-045-XHIGH: Create the Story expansion art`](TASK-045-create-story-expansion-art.md) — fill only proven art gaps with original, responsive, provenance-complete assets.
-9. [`TASK-046-XHIGH: Release the six-episode Story expansion`](TASK-046-release-six-episode-story-expansion.md) — integrate one versioned expansion, migrate progress safely, re-audit coverage, and verify the complete twelve-Match journey.
+1. [`TASK-039-HIGH: Audit campaign-one domain coverage`](TASK-039-audit-story-domain-coverage.md) — map all six Shifts to exact Ticket, Symptom, Fault, diagnostic, Repair, Verify, and supporting-domain roles with honest denominators.
+2. [`TASK-040-HIGH: Define the Story and domain expansion protocol`](TASK-040-define-story-expansion-protocol.md) — turn measured gaps into a gated, reusable research-to-release method and compute rather than guess Q.
+3. [`TASK-041-XHIGH: Research the expansion case set`](TASK-041-research-expansion-cases.md) — reuse the existing 72-case backlog, calculate Q, and collect only the additional qualifying cases needed for six distinct episodes.
+4. [`TASK-042-XHIGH: Integrate the approved expansion domain network`](TASK-042-integrate-expansion-domain-network.md) — add the smallest sourced object/relationship/Card/Ticket set and prove deck reachability and solvability.
+5. [`TASK-043-XHIGH: Blueprint the six-episode Story expansion`](TASK-043-blueprint-six-episode-story-expansion.md) — design six one-cutscene-plus-one-Match episodes with exact configurations, graph, checkpoints, and coverage goals.
+6. [`TASK-044-XHIGH: Author the six-episode expansion scripts`](TASK-044-author-story-expansion-scripts.md) — produce the context-complete, characterized, technically bounded candidate scripts and choreography.
+7. [`TASK-045-XHIGH: Create the Story expansion art`](TASK-045-create-story-expansion-art.md) — fill only proven art gaps with original, responsive, provenance-complete assets.
+8. [`TASK-046-XHIGH: Release the six-episode Story expansion`](TASK-046-release-six-episode-story-expansion.md) — integrate one versioned expansion, migrate progress safely, re-audit coverage, and verify the complete twelve-Match journey.
 
-Dependency note: `STORY-009 A` removed TASK-038's approval blocker, and completed TASK-037 satisfies its only prerequisite. TASK-039 through TASK-045 remain independent of replay implementation; TASK-046 depends on TASK-038 so all expanded episodes inherit the same non-canonical review contract.
+Dependency note: completed TASK-038 supplies the approved non-canonical review contract required by TASK-046. TASK-039 through TASK-045 remain independent of replay implementation.
+
+Completed Story replay:
+
+- [`TASK-038-HIGH: Add completed Story chapter replay`](TASK-038-add-story-chapter-replay.md) — completed 2026-08-28; made every durably completed Shift reviewable as an isolated cutscene and ordinary practice Match without canonical Story, reward, export, or Profile-statistic writes.
 
 Completed final-Story repair:
 
@@ -50,7 +53,7 @@ Approved but deferred V2 task:
 
 - [`TASK-017-XHIGH: Create the Server Repair V2 Migration Seed`](TASK-017-create-server-repair-v2-migration-seed.md) — approved Migration Seed direction but deferred until the V0 product is training-ready; when reactivated, it audits V0 in bounded checkpoints and establishes the public dependency-inference V2 foundation without modifying V0 behavior.
 
-TASK-011-HIGH through TASK-016-HIGH, TASK-018-HIGH through TASK-021-HIGH, and TASK-023-HIGH through TASK-037-HIGH are complete. `STORY-008 A` removed the per-character approval gate without relaxing canon or originality boundaries. PT-008 B is approved and the proposed TASK-022 was withdrawn without implementation. Return to TASK-017-XHIGH only when the project owner reactivates V2 migration.
+TASK-011-HIGH through TASK-016-HIGH, TASK-018-HIGH through TASK-021-HIGH, and TASK-023-HIGH through TASK-038-HIGH are complete. `STORY-008 A` removed the per-character approval gate without relaxing canon or originality boundaries. PT-008 B is approved and the proposed TASK-022 was withdrawn without implementation. Return to TASK-017-XHIGH only when the project owner reactivates V2 migration.
 
 Completed documentation and research tasks:
 

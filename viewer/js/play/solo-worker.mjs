@@ -40,6 +40,7 @@ let requestSequence = 0;
 let intentLookup = new Map();
 let matchMetadata = null;
 let storyContext = null;
+let storyReviewContext = null;
 
 const clone = (value) => structuredClone(value);
 
@@ -113,6 +114,16 @@ function assertStoryContext(candidate, definition) {
       || candidate.checkpoint_id !== definition.pre_match_checkpoint_id
       || candidate.return_label !== definition.return_label) {
     throw new Error('Story Match context is stale, mismatched, or malformed.');
+  }
+  return clone(candidate);
+}
+
+function assertStoryReviewContext(candidate, definition) {
+  if (!candidate || typeof candidate !== 'object' || Array.isArray(candidate)
+      || !exactKeys(candidate, ['schema_version', 'match_ref'])
+      || candidate.schema_version !== 'story-review-session-v1'
+      || candidate.match_ref !== definition.match_ref) {
+    throw new Error('Story practice context is mismatched or malformed.');
   }
   return clone(candidate);
 }
@@ -217,7 +228,7 @@ function tutorialBuilderConfiguration(definition, responseCardDefinitionIds, loa
 
 function assertStartPayload(payload) {
   if (!payload || typeof payload !== 'object' || Array.isArray(payload)) throw new Error('Start payload is invalid.');
-  const allowed = new Set(['match_id', 'seed', 'ticket_count', 'display_name', 'deck_id', 'card_definition_ids', 'tutorial_id', 'story_context']);
+  const allowed = new Set(['match_id', 'seed', 'ticket_count', 'display_name', 'deck_id', 'card_definition_ids', 'tutorial_id', 'story_context', 'story_review']);
   if (Object.keys(payload).some((key) => !allowed.has(key))) throw new Error('Start payload contains an unknown field.');
   if (typeof payload.match_id !== 'string' || payload.match_id.length > 120 || !SAFE_ID.test(payload.match_id)) throw new Error('Match ID is invalid.');
   if (typeof payload.seed !== 'string' || payload.seed.length < 1 || payload.seed.length > 160) throw new Error('Seed is invalid.');
@@ -231,8 +242,9 @@ function assertStartPayload(payload) {
   if (payload.tutorial_id !== undefined && (typeof payload.tutorial_id !== 'string' || !SAFE_ID.test(payload.tutorial_id))) {
     throw new Error('Tutorial ID is invalid.');
   }
-  if (payload.tutorial_id !== undefined && payload.story_context !== undefined) {
-    throw new Error('A Match cannot be both a Tutorial and a Story Match.');
+  if ([payload.tutorial_id, payload.story_context, payload.story_review]
+    .filter((value) => value !== undefined).length > 1) {
+    throw new Error('A Match cannot combine Tutorial, canonical Story, and Story practice contexts.');
   }
 }
 
@@ -513,6 +525,7 @@ async function startMatch(payload) {
   let tutorialDefinition = null;
   let storyDefinition = null;
   let nextStoryContext = null;
+  let nextStoryReviewContext = null;
   let loaded;
   let configuration;
   let builderResult;
@@ -538,6 +551,24 @@ async function startMatch(payload) {
     if (payload.seed !== storyDefinition.seed
         || payload.ticket_count !== storyDefinition.requested_ticket_count) {
       throw new Error('Story Match start pins do not match the reviewed registry.');
+    }
+    loaded = prepared.loadedCatalogs;
+    configuration = prepared.configuration;
+    builderResult = prepared.builderResult;
+  } else if (payload.story_review) {
+    const prepared = await prepareStoryMatch(
+      payload.story_review.match_ref,
+      payload.card_definition_ids,
+      { includeSnapshots: true },
+    );
+    if (!prepared.result.ok) {
+      throw new Error(`The active deck did not pass Story practice preflight (${prepared.result.code}).`);
+    }
+    storyDefinition = prepared.definition;
+    nextStoryReviewContext = assertStoryReviewContext(payload.story_review, storyDefinition);
+    if (payload.seed !== storyDefinition.seed
+        || payload.ticket_count !== storyDefinition.requested_ticket_count) {
+      throw new Error('Story practice start pins do not match the reviewed registry.');
     }
     loaded = prepared.loadedCatalogs;
     configuration = prepared.configuration;
@@ -610,10 +641,12 @@ async function startMatch(payload) {
   });
   state = nextState;
   storyContext = nextStoryContext;
+  storyReviewContext = nextStoryReviewContext;
   postMessage({
     type: 'MATCH_STARTED',
     projection: project(),
     story_context: storyContext ? clone(storyContext) : null,
+    story_review: storyReviewContext ? clone(storyReviewContext) : null,
   });
 }
 
@@ -654,6 +687,7 @@ function submitSelectedIntent(intentId) {
     projection,
     terminal_result: terminalResult,
     story_context: storyContext ? clone(storyContext) : null,
+    story_review: storyReviewContext ? clone(storyReviewContext) : null,
     story_match_result: terminalStoryResult(terminalResult),
   });
 }
@@ -665,6 +699,7 @@ function clearMatch() {
   intentLookup = new Map();
   matchMetadata = null;
   storyContext = null;
+  storyReviewContext = null;
 }
 
 self.addEventListener('message', async (event) => {

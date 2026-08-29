@@ -14,7 +14,7 @@ function deckMarkup(deck) {
 
 function historyMarkup(history) {
   if (!history.length) return '<p>No chapter history is available yet.</p>';
-  return `<ol class="story-history-list">${history.map((entry) => `<li><span>${escapeHtml(entry.label)}</span>${entry.replayable ? `<button type="button" class="play-button play-button--quiet" data-story-replay="${escapeHtml(entry.id)}">Replay</button>` : '<small>Recorded</small>'}</li>`).join('')}</ol>`;
+  return `<ol class="story-history-list">${history.map((entry) => `<li><span>${escapeHtml(entry.label)}</span>${entry.replayable ? `<button type="button" class="play-button play-button--quiet" data-story-replay="${escapeHtml(entry.id)}" aria-label="Review ${escapeHtml(entry.label)}">Review episode</button>` : '<small>Recorded</small>'}</li>`).join('')}</ol>`;
 }
 
 export function renderStoryHome(root, context) {
@@ -26,6 +26,7 @@ export function renderStoryHome(root, context) {
         <span class="story-home__status">${escapeHtml(model.status.replaceAll('_', ' ').toLowerCase())}</span>
       </header>
       ${model.error ? `<div class="play-global-notice" data-tone="error" role="alert">${escapeHtml(model.error)}</div>` : ''}
+      ${model.reviewNotice ? `<div class="play-global-notice" data-tone="${model.reviewInterrupted ? 'warning' : 'success'}" role="status">${escapeHtml(model.reviewNotice)}</div>` : ''}
       <div class="story-home-grid">
         <article class="story-home__continuity" data-route-reveal>
           <p class="play-eyebrow">${escapeHtml(model.chapter)}</p>
@@ -45,8 +46,8 @@ export function renderStoryHome(root, context) {
           ${historyMarkup(model.history)}
         </section>
         <aside class="story-home__controls" data-route-reveal aria-labelledby="story-controls-heading">
-          <p class="play-eyebrow">Story-only data</p><h2 id="story-controls-heading">Replay &amp; reset</h2>
-          <p>Replay and reset affect Story progress only. Decks, Profile statistics, Library data, and rules content remain unchanged.</p>
+          <p class="play-eyebrow">Review or erase</p><h2 id="story-controls-heading">Practice &amp; reset</h2>
+          <p>Episode review is isolated practice: its choices, Match result, rewards, and Profile statistics are not saved. Reset is separate and removes canonical Story progress.</p>
           <button type="button" class="play-button play-button--danger" data-story-reset>Reset Story progress</button>
         </aside>
       </div>
@@ -80,11 +81,10 @@ export function renderStoryHome(root, context) {
     }
     const replay = event.target.closest('[data-story-replay]');
     if (replay) {
-      if (!confirm('Replay this Story boundary? Current later Story progress will be replaced. Profile statistics and decks will not change.')) return;
       run(async () => {
         await context.story.replay(replay.dataset.storyReplay);
         context.navigate('#/play/story/scene');
-      });
+      }, 'story.home.primary');
       return;
     }
     if (event.target.closest('[data-story-reset]')) {

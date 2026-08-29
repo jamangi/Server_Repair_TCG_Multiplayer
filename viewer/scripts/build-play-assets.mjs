@@ -148,7 +148,7 @@ async function sourceEntries() {
   for (const relative of storyFiles) {
     const normalizedRelative = normalizePath(relative);
     const stageable = normalizedRelative.startsWith('fixtures/')
-      || /^campaigns\/[^/]+\/(?:manifest|registry|matches)\.json$/.test(normalizedRelative)
+      || /^campaigns\/[^/]+\/(?:manifest|registry|matches|review-episodes)\.json$/.test(normalizedRelative)
       || /^campaigns\/[^/]+\/(?:scripts|texts)\/[a-z0-9._/-]+\.json$/.test(normalizedRelative);
     if (!stageable) continue;
     entries.push({

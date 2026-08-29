@@ -78,6 +78,8 @@ function unavailableStory(error) {
     async openPrimary() { throw new Error(message); },
     async recover() { throw new Error(message); },
     async replay() { throw new Error(message); },
+    completeReviewMatch() { throw new Error(message); },
+    cancelReview() {},
     async reset() { throw new Error(message); },
     validateProgress(progress) {
       if (progress?.pack_id === null
@@ -176,7 +178,7 @@ function playNavigationMarkup() {
     ['profile', '#/play/profile', 'Profile'],
     ['story', '#/play/story', 'Story'],
   ];
-  return `<nav class="play-subnav" aria-label="Play navigation">${links.map(([name, hash, label]) => `<a href="${hash}"${route.name === name || (name === 'story' && route.name === 'story-scene') || (name === 'decks' && route.name === 'deck-edit') ? ' aria-current="page"' : ''}>${label}</a>`).join('')}<span class="play-subnav__mode">${game?.tutorial ? 'Guided tutorial' : game?.storyContext ? 'Story Match' : 'Local solo'}</span></nav>`;
+  return `<nav class="play-subnav" aria-label="Play navigation">${links.map(([name, hash, label]) => `<a href="${hash}"${route.name === name || (name === 'story' && route.name === 'story-scene') || (name === 'decks' && route.name === 'deck-edit') ? ' aria-current="page"' : ''}>${label}</a>`).join('')}<span class="play-subnav__mode">${game?.tutorial ? 'Guided tutorial' : game?.storyReview ? 'Story practice' : game?.storyContext ? 'Story Match' : 'Local solo'}</span></nav>`;
 }
 
 function renderShell() {
@@ -217,8 +219,10 @@ function renderCurrent({ focus = null } = {}) {
   else if (route.name === 'story-scene') pageCleanup = renderStoryScene(pageRoot, context);
   else if (route.name === 'game') {
     if (!game) {
-      const interruptedStory = story?.homeModel?.().status === 'INTERRUPTED_MATCH';
-      pageRoot.innerHTML = `<section class="play-route"><div class="game-loading"><p class="play-eyebrow">No active Match</p><h1>${interruptedStory ? 'Story Match was interrupted' : 'Start from Home'}</h1><p>Active Match state is intentionally not resumed after a reload or completed navigation away.${interruptedStory ? ' Restart from the durable pre-Match Story checkpoint.' : ''}</p><a class="play-button" href="${interruptedStory ? '#/play/story' : '#/play/home'}">${interruptedStory ? 'Restart from Story Home' : 'Return Home'}</a></div></section>`;
+      const storyHome = story?.homeModel?.() ?? {};
+      const interruptedStory = storyHome.status === 'INTERRUPTED_MATCH';
+      const interruptedReview = storyHome.reviewInterrupted === true;
+      pageRoot.innerHTML = `<section class="play-route"><div class="game-loading"><p class="play-eyebrow">No active Match</p><h1>${interruptedReview ? 'Story practice was interrupted' : interruptedStory ? 'Story Match was interrupted' : 'Start from Home'}</h1><p>Active Match state is intentionally not resumed after a reload or completed navigation away.${interruptedReview ? ' Canonical Story progress and Profile statistics are unchanged.' : interruptedStory ? ' Restart from the durable pre-Match Story checkpoint.' : ''}</p><a class="play-button" href="${interruptedReview || interruptedStory ? '#/play/story' : '#/play/home'}">${interruptedReview ? 'Return to Chapter history' : interruptedStory ? 'Restart from Story Home' : 'Return Home'}</a></div></section>`;
       pageCleanup = () => {};
     } else {
       pageCleanup = renderGame(pageRoot, context);
@@ -295,7 +299,7 @@ function beginMatch() {
   navigate('#/play/game');
 }
 
-async function beginStoryMatch({ context, definition }) {
+async function beginStoryMatch({ context, definition, review = null }) {
   const snapshot = freshSnapshot();
   if (snapshot.recovery_required) {
     openSettings();
@@ -303,7 +307,7 @@ async function beginStoryMatch({ context, definition }) {
   }
   const activeDeck = currentActiveDeck();
   if (!activeDeck) {
-    ui.storyPreflightNotice = 'Choose an active legal 30-card deck before restarting this Story Match.';
+    ui.storyPreflightNotice = `Choose an active legal 30-card deck before starting this ${review ? 'Story practice Match' : 'Story Match'}.`;
     navigate('#/play/decks');
     throw new Error(ui.storyPreflightNotice);
   }
@@ -312,13 +316,13 @@ async function beginStoryMatch({ context, definition }) {
     card_definition_ids: [...activeDeck.card_definition_ids],
   });
   if (!preflight.ok) {
-    ui.storyPreflightNotice = 'Story Match preflight could not prove the complete queue with this active deck. Select the reviewed campaign-ready deck, make it active, then restart from the pre-Match Story checkpoint.';
+    ui.storyPreflightNotice = `${review ? 'Story practice' : 'Story Match'} preflight could not prove the complete queue with this active deck. Select the reviewed campaign-ready deck, make it active, then return to Story.`;
     navigate('#/play/decks');
     throw new Error(ui.storyPreflightNotice);
   }
   ui.storyPreflightNotice = null;
   if (game?.hasActiveMatch()) game.endSession();
-  const matchId = createLocalId('local.story.match');
+  const matchId = createLocalId(review ? 'local.story.practice.match' : 'local.story.match');
   pendingStart = {
     match_id: matchId,
     seed: definition.seed,
@@ -326,18 +330,27 @@ async function beginStoryMatch({ context, definition }) {
     display_name: snapshot.state.records.profile.display_name,
     deck_id: activeDeck.deck_id,
     card_definition_ids: [...activeDeck.card_definition_ids],
-    story_context: structuredClone(context),
+    ...(context ? { story_context: structuredClone(context) } : {}),
+    ...(review ? { story_review: {
+      schema_version: review.schema_version,
+      match_ref: review.match_ref,
+    } } : {}),
   };
   gameStartInitiated = false;
   const session = new SoloGameSession({
     catalog,
     storyContext: context,
+    storyReview: review,
     onSfx: (interactionId) => { void sfx?.playInteraction(interactionId); },
     onChange: () => {
       if (route?.name === 'game') rerender();
     },
     onAnnounce: announce,
     onStarted: () => {
+      if (review) {
+        pendingStart = null;
+        return;
+      }
       try {
         storage.recordMatchStart(matchId);
       } catch (storageError) {
@@ -347,6 +360,22 @@ async function beginStoryMatch({ context, definition }) {
       pendingStart = null;
     },
     onCompleted: (summary, storyResult) => {
+      if (review) {
+        if (!session.storyReviewResultReady) {
+          session.resultApplied = null;
+          story.cancelReview({ notify: false });
+          return;
+        }
+        session.resultApplied = true;
+        try {
+          story.completeReviewMatch(review.match_ref);
+        } catch (reviewError) {
+          session.resultApplied = null;
+          session.storyReturnError = reviewError.message;
+          announce(`Story practice ended, but Chapter history could not be restored: ${reviewError.message}`);
+        }
+        return;
+      }
       try {
         const applied = storage.applyMatchResult(summary);
         session.resultApplied = applied.applied;
@@ -495,7 +524,7 @@ export async function mountPlay(nextRoot, options) {
 export async function confirmNavigation(nextRoute) {
   if (route?.name === 'story-scene'
       && nextRoute.name !== 'story-scene'
-      && !(nextRoute.name === 'game' && game?.storyContext)) {
+      && !(nextRoute.name === 'game' && (game?.storyContext || game?.storyReview))) {
     story?.reloadProgress?.({ notify: false });
   }
   if (route?.name === 'deck-edit' && nextRoute.hash !== route.hash && ui.editorDirty) {
@@ -510,8 +539,11 @@ export async function confirmNavigation(nextRoute) {
     ui.profileSavedId = null;
     ui.profileDirty = false;
   }
-  if (route?.name === 'game' && nextRoute.hash !== route.hash && game?.hasActiveMatch()) {
+  const activeOrStartingReview = Boolean(game?.storyReview && !game.terminalResult);
+  if (route?.name === 'game' && nextRoute.hash !== route.hash
+      && (game?.hasActiveMatch() || activeOrStartingReview)) {
     if (!confirm('Leave this active Match? Match state is not saved and cannot be resumed.')) return false;
+    if (game.storyReview) story?.cancelReview?.({ notify: false });
     game.endSession();
     game = null;
     pendingStart = null;
@@ -521,7 +553,8 @@ export async function confirmNavigation(nextRoute) {
 }
 
 export function hasUnsafeExit() {
-  return Boolean(ui.editorDirty || ui.profileDirty || game?.hasActiveMatch());
+  return Boolean(ui.editorDirty || ui.profileDirty || game?.hasActiveMatch()
+    || (game?.storyReview && !game.terminalResult));
 }
 
 export function openSettings() {
@@ -568,7 +601,10 @@ export function unmountPlay() {
   pageCleanup?.();
   pageCleanup = null;
   closeSettingsDialog({ restoreFocus: false, immediate: true });
-  if (game?.hasActiveMatch()) game.endSession();
+  if (game?.hasActiveMatch() || (game?.storyReview && !game.terminalResult)) {
+    if (game.storyReview) story?.cancelReview?.({ notify: false });
+    game.endSession();
+  }
   game = null;
   pendingStart = null;
   gameStartInitiated = false;

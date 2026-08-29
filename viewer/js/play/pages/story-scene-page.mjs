@@ -70,6 +70,7 @@ export function renderStoryScene(root, context) {
   root.innerHTML = `
     <section class="play-route story-scene-route" aria-labelledby="story-scene-heading" data-story-pending="${model.pending}">
       <h1 id="story-scene-heading" class="visually-hidden">${escapeHtml(model.location)} Story scene</h1>
+      ${model.review ? `<aside class="play-global-notice" data-tone="warning" role="status"><strong>Practice review · ${escapeHtml(model.review.label)}</strong><p>Choices and the upcoming Match are temporary. Canonical Story progress, rewards, and Profile statistics will not change.</p><a class="play-button play-button--quiet" href="#/play/story">Exit to Chapter history</a></aside>` : ''}
       <div class="story-stage" data-story-scene-id="${escapeHtml(model.sceneId)}">
         <div class="story-layer story-layer--background">${imageMarkup(model.background, 'story-background__image')}${model.backgroundAlternative ? `<p class="visually-hidden" data-story-art-alternative="background">${escapeHtml(model.backgroundAlternative)}</p>` : ''}</div>
         <div class="story-layer story-layer--characters">${model.characters.map(characterMarkup).join('')}</div>

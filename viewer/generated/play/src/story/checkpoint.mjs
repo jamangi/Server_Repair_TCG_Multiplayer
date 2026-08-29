@@ -203,3 +203,23 @@ export function restoreStoryCheckpoint(checkpoint, bundle) {
     ),
   };
 }
+
+export function createStoryReviewState(checkpoint, reviewCheckpointId, bundle) {
+  const canonical = restoreStoryCheckpoint(checkpoint, bundle);
+  const compiled = compileStoryPack(bundle);
+  const location = compiled.checkpoints.get(reviewCheckpointId);
+  if (!location) {
+    throw new StoryError('UNKNOWN_CHECKPOINT', `Unknown Story review checkpoint: ${reviewCheckpointId}.`);
+  }
+  return {
+    ...canonical,
+    status: 'READY',
+    location: { script_id: location.script_id, index: location.index },
+    call_stack: [],
+    pending_match: null,
+    returned_match: null,
+    display: createEmptyStoryDisplay(),
+    current_statement: null,
+    loop_visits: {},
+  };
+}

@@ -42,6 +42,7 @@ The public surface is exported by [`src/story/index.mjs`](../../src/story/index.
 - `reduceStory(state, intent, bundle)` returns `{ state, display, effects, digest }` without mutating its inputs.
 - `createDurableCheckpoint(state, checkpointId, bundle)` produces a versioned, digested safe-boundary record.
 - `restoreStoryCheckpoint(checkpoint, bundle)` validates and restarts the authored segment.
+- `createStoryReviewState(checkpoint, reviewCheckpointId, bundle)` validates canonical progress and creates an isolated runtime state at an authored episode-review boundary.
 - `normalizeStoryMatchResult(summary, { expectedMatchRef })` reduces a terminal Worker summary to the Story allowlist.
 - `acceptStoryMatchResult(state, result)` accepts one result for one pending Match exactly once.
 
@@ -74,6 +75,12 @@ Choice destinations, writes, future statements, unchosen prose, Match configurat
 On terminal settlement, the boundary normalizes the safe Worker summary. It records validity/completion, reason codes, Story-scoped Service Points, closed/given-up counts, verified/documented booleans, and five contribution counters. It does not copy a replay, private Ticket state, or profile statistics. The Story advances only after `ACCEPT_MATCH_RESULT`; acceptance emits the required post-Match checkpoint before later dialogue continues.
 
 Leaving or reloading during a Match restores `AWAITING_MATCH` from the pre-Match checkpoint and offers a fresh launch of the same registered configuration. It never claims that the prior local engine session resumed.
+
+## Completed-episode review
+
+Chapter history lists an episode only when its registered `match_ref` appears in accepted durable Match results. Its title, Shift identity, and configured Match come from reviewed Match metadata; a version-matched `review-episodes.json` supplies the `replay_entry_checkpoint_id`. Nothing is inferred from result-array position or script-file count.
+
+Review creates a detached runtime state from the validated canonical checkpoint. Its checkpoint effects, choices, and Story result are never persisted. The paired practice Match uses the same deck preflight, authored Builder configuration, Worker, and engine as canonical Story; the client omits canonical Story context and intentionally discards the terminal result outside the engine/statistics boundary. A versioned `sessionStorage` marker records only pack/content, `match_ref`, and `SCENE`/`MATCH` phase so scene reload can restart the review and Match reload can return to Chapter history. That marker is excluded from local backups and cleared by completion, Give Up, route leave, reset, or import.
 
 ## Durable progress and migration
 

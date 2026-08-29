@@ -808,6 +808,12 @@
       "sha256": "f1f8133984f47af23beef2e83dabd98393b473a9df910307507099643897be1f"
     },
     {
+      "path": "content/story-v1/campaigns/quiet-cascade-characterization-v2/review-episodes.json",
+      "source": "content/story-v1/campaigns/quiet-cascade-characterization-v2/review-episodes.json",
+      "bytes": 1022,
+      "sha256": "591245668effc99e109e3d395459c8fd59179eef5485a8ca53136c0857bf4264"
+    },
+    {
       "path": "content/story-v1/campaigns/quiet-cascade-characterization-v2/scripts/chapter-01.json",
       "source": "content/story-v1/campaigns/quiet-cascade-characterization-v2/scripts/chapter-01.json",
       "bytes": 18434,
@@ -996,8 +1002,8 @@
     {
       "path": "src/story/checkpoint.mjs",
       "source": "src/story/checkpoint.mjs",
-      "bytes": 10765,
-      "sha256": "1e55d62a1d25800e62e2650ee201e4216cd8a1ef953b4e0237f29dff8098550f"
+      "bytes": 11441,
+      "sha256": "48a3e7eab5d77f50b8e4ebdd72363f8ceefff1053a33603caeea901075e90043"
     },
     {
       "path": "src/story/conditions.mjs",
@@ -1014,8 +1020,8 @@
     {
       "path": "src/story/index.mjs",
       "source": "src/story/index.mjs",
-      "bytes": 446,
-      "sha256": "392e6980b59c607d314d38fcab9e8a8c62dfdae37edf52bc4a29b8bb0992b435"
+      "bytes": 472,
+      "sha256": "49a4501eba61830d1a642e0ee3e61edb213e2418503e3545ca165ba292b8866c"
     },
     {
       "path": "src/story/interpreter.mjs",

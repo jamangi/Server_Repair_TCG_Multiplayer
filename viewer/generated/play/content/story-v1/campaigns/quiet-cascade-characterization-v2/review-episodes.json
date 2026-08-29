@@ -1,0 +1,31 @@
+{
+  "schema_version": "story-review-episodes-v1",
+  "campaign_id": "story.campaign.quiet_cascade.v1",
+  "content_version": "quiet-cascade-characterization-v2",
+  "episodes": [
+    {
+      "match_ref": "story.match.qc01.shift01.wrong_device",
+      "replay_entry_checkpoint_id": "checkpoint.qc01.shift01.scene"
+    },
+    {
+      "match_ref": "story.match.qc01.shift02.power_lot",
+      "replay_entry_checkpoint_id": "checkpoint.qc01.shift02.scene"
+    },
+    {
+      "match_ref": "story.match.qc01.shift03.memory_compare",
+      "replay_entry_checkpoint_id": "checkpoint.qc01.shift03.scene"
+    },
+    {
+      "match_ref": "story.match.qc01.shift04.passes_cold",
+      "replay_entry_checkpoint_id": "checkpoint.qc01.shift04.scene"
+    },
+    {
+      "match_ref": "story.match.qc01.shift05.no_offer",
+      "replay_entry_checkpoint_id": "checkpoint.qc01.shift05.scene"
+    },
+    {
+      "match_ref": "story.match.qc01.shift06.quiet_cascade",
+      "replay_entry_checkpoint_id": "checkpoint.qc01.shift06.scene"
+    }
+  ]
+}
