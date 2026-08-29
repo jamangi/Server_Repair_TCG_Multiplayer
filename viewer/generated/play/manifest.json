@@ -996,8 +996,8 @@
     {
       "path": "src/story/checkpoint.mjs",
       "source": "src/story/checkpoint.mjs",
-      "bytes": 10657,
-      "sha256": "2985f233b90bad7c929b22454749fb911ebad06169a55615d979ec5aea522090"
+      "bytes": 10765,
+      "sha256": "1e55d62a1d25800e62e2650ee201e4216cd8a1ef953b4e0237f29dff8098550f"
     },
     {
       "path": "src/story/conditions.mjs",

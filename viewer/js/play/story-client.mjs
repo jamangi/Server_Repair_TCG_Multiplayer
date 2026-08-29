@@ -345,7 +345,7 @@ export async function createStoryClient({
         progress_summary: pendingResult
           ? 'An authoritative Story Match result is ready to cross the durable return boundary exactly once.'
           : progress.completed_ending_id
-            ? 'This Story route reached its authored ending.'
+            ? 'Campaign one is complete. More Story content is in development.'
             : undefined,
         interrupted_match: Boolean(pending && !pendingResult),
         can_open: !error && !progress.completed_ending_id,

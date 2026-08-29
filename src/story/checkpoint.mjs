@@ -197,6 +197,9 @@ export function restoreStoryCheckpoint(checkpoint, bundle) {
     display: createEmptyStoryDisplay(),
     current_statement: null,
     loop_visits: {},
-    transition_sequence: 0,
+    transition_sequence: checkpoint.branch_history.reduce(
+      (maximum, entry) => Math.max(maximum, entry.sequence),
+      0,
+    ),
   };
 }

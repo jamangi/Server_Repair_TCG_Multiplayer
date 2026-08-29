@@ -2,7 +2,7 @@
 
 ## Status
 
-**Active.** This is the next implementation task.
+**Completed 2026-08-28.** Restoring a durable checkpoint reset the runtime-only branch sequence to zero while retaining earlier branch-history entries. The next Chapter 4 choice therefore reused a lower sequence, and canonical local-data validation rejected the Shift 6 scene checkpoint. Restore now derives that counter from validated branch history, so direct, reloaded, migrated-v1, and export/import saves reach Shift 6; completed and abandoned results cross the return boundary exactly once; and Story Home identifies campaign one as complete with more content in development.
 
 ## Objective
 
