@@ -1,0 +1,334 @@
+{
+  "report_version": "story-expansion-release-audit-v1",
+  "pack_id": "story.campaign.quiet_cascade.v1",
+  "content_version": "quiet-cascade-expansion-v3",
+  "entry_label": "story.qc01.entry",
+  "generated_core_file_sha256": {
+    "authored-metadata.json": "d8b7d75528ff118e6117e140cff06bb261860a738866ad4e3a38037f9166b62e",
+    "graph.json": "890947315195e60633631039a5ce229505907c85419586e947d7c8bac051dcdd",
+    "manifest.json": "b30104fa8c8fc50338bab017be53cb0ee46c83abb7c17c449b4d92f95cb07132",
+    "matches.json": "9246aa9d1bd570639f334787108f14d5dc424e9fdcf040e32e5e674b81573f7c",
+    "registry.json": "825cfef1109dfa629d76294340fedd9c05736388069631042c705cf2a886f9d0",
+    "review-episodes.json": "37931a0cd78fa3dcb3199c05f588ec4142d3c400f26a7733a11ebeb3aeafabb7",
+    "scripts/chapter-01.json": "941c68f09578cb2e3753809ef9f1fb53fe6325b3a002c1179156915e3929e91d",
+    "scripts/chapter-02.json": "731397c3e827b0a4ecc941b4e1ec1496bf942d48a07740d84965f39201b249d9",
+    "scripts/chapter-03.json": "628a209c922c7751732e6020d304231b934d4283a94dc2f8001e4b94821bbb1d",
+    "scripts/chapter-04.json": "5d83ce18c9c0a07657ece4bebf63e87e6e4dfb79f0080b75fbac5f464f7ec6e3",
+    "scripts/shift-07.json": "7bbb6355a73d19225cda54d5774ce72cf7ec8700b25fc8f3c9815b9e5a975acf",
+    "scripts/shift-08.json": "a03abd61cdfb859a9f31691455d44429be0b313c6e1447f205254e143c3615cc",
+    "scripts/shift-09.json": "e16068ebe047f555fdb946acc09ff579c2df741a470f746e52480c0231a7a770",
+    "scripts/shift-10.json": "48b30304661b3a9182a576c96ebf8589d8b46307135e95dd6cee26fee858febf",
+    "scripts/shift-11.json": "5cce5a910c31dfeaf0a1d40018cb1f8fb9255fb639aac9d9e6d80759c97be4c9",
+    "scripts/shift-12.json": "8362c422e0e491f9de5f4157226c568087eac1c52703f24bd297c09cdc6d3bb9",
+    "texts/en.json": "3c2089eb25c2a3903576e3f9c2b306e24381f837832be4588aeefaff2c9f73c8"
+  },
+  "source_trees": {
+    "campaign_one": {
+      "content_version": "quiet-cascade-characterization-v2",
+      "file_count": 10,
+      "sha256": "da465da37ff2081111db7cf0fa1ce1e7b5cb2e69e8b80c077838640a308f929d"
+    },
+    "expansion_candidate": {
+      "content_version": "quiet-cascade-expansion-v3",
+      "file_count": 12,
+      "sha256": "a23cafc9a3ba1d0c5b20c40a9030d81cbc04fc8dad9fc1d49dc481bbe56be6a0"
+    }
+  },
+  "transition": {
+    "policy": "PRESERVE_ENDING_CHECKPOINT_ID_AND_RESUME_EXPANSION_WITHOUT_REPLAY_OR_RESULT_SYNTHESIS",
+    "expansion_entry_label": "story.qc02.entry",
+    "expansion_entry_checkpoint_id": "checkpoint.qc02.entry",
+    "former_campaign_one_endings": [
+      {
+        "ending_id": "ending.qc01.defensible_release",
+        "checkpoint_id": "checkpoint.qc01.ending.release.outcomes",
+        "replacement": {
+          "type": "checkpoint",
+          "checkpoint_id": "checkpoint.qc01.ending.release.outcomes",
+          "resume_label": "story.qc02.entry"
+        }
+      },
+      {
+        "ending_id": "ending.qc01.defensible_release",
+        "checkpoint_id": "checkpoint.qc01.ending.release.uncertainty",
+        "replacement": {
+          "type": "checkpoint",
+          "checkpoint_id": "checkpoint.qc01.ending.release.uncertainty",
+          "resume_label": "story.qc02.entry"
+        }
+      },
+      {
+        "ending_id": "ending.qc01.bounded_account",
+        "checkpoint_id": "checkpoint.qc01.ending.bounded.outcomes",
+        "replacement": {
+          "type": "checkpoint",
+          "checkpoint_id": "checkpoint.qc01.ending.bounded.outcomes",
+          "resume_label": "story.qc02.entry"
+        }
+      },
+      {
+        "ending_id": "ending.qc01.bounded_account",
+        "checkpoint_id": "checkpoint.qc01.ending.bounded.uncertainty",
+        "replacement": {
+          "type": "checkpoint",
+          "checkpoint_id": "checkpoint.qc01.ending.bounded.uncertainty",
+          "resume_label": "story.qc02.entry"
+        }
+      },
+      {
+        "ending_id": "ending.qc01.gate_hold",
+        "checkpoint_id": "checkpoint.qc01.ending.hold.outcomes",
+        "replacement": {
+          "type": "checkpoint",
+          "checkpoint_id": "checkpoint.qc01.ending.hold.outcomes",
+          "resume_label": "story.qc02.entry"
+        }
+      },
+      {
+        "ending_id": "ending.qc01.gate_hold",
+        "checkpoint_id": "checkpoint.qc01.ending.hold.uncertainty",
+        "replacement": {
+          "type": "checkpoint",
+          "checkpoint_id": "checkpoint.qc01.ending.hold.uncertainty",
+          "resume_label": "story.qc02.entry"
+        }
+      }
+    ],
+    "migration_assumption": {
+      "retain": [
+        "match_results",
+        "story_service_points",
+        "choices",
+        "branch_history"
+      ],
+      "add_variable_defaults": [
+        {
+          "variable_id": "story.qc02.initial_evidence_frame",
+          "default": "UNSET"
+        },
+        {
+          "variable_id": "story.qc02.change_evidence_frame",
+          "default": "UNSET"
+        }
+      ],
+      "clear_completed_ending_id": true,
+      "cleared_terminal_marker_derivation": {
+        "reason": "QC01_IS_NO_LONGER_TERMINAL",
+        "ending_band_from_preserved_story_service_points": {
+          "release_minimum": 20,
+          "bounded_minimum": 12,
+          "hold_maximum": 11
+        },
+        "exact_variant_from_preserved_checkpoint_id": true,
+        "lossless": true
+      },
+      "synthesize_match_results": false
+    }
+  },
+  "current_content_ending": {
+    "ending_id": "ending.qc02.current_content",
+    "checkpoint_id": "checkpoint.qc02.ending.current_content"
+  },
+  "counts": {
+    "campaign_one_matches": 6,
+    "expansion_matches": 6,
+    "total_matches": 12,
+    "campaign_one_requested_tickets": 12,
+    "expansion_requested_tickets": 6,
+    "total_requested_tickets": 18,
+    "campaign_one_scripts": 4,
+    "expansion_scripts": 6,
+    "total_scripts": 10,
+    "campaign_one_variables": 4,
+    "expansion_variables": 2,
+    "total_variables": 6,
+    "assets": 23,
+    "characters": 7,
+    "campaign_one_text_entries": 170,
+    "expansion_distinct_text_entries": 76,
+    "release_match_metadata_text_entries": 12,
+    "total_text_entries": 258,
+    "reviewed_replay_boundaries": 12
+  },
+  "review_episodes": [
+    {
+      "shift_number": 1,
+      "match_ref": "story.match.qc01.shift01.wrong_device",
+      "replay_entry_checkpoint_id": "checkpoint.qc01.shift01.scene"
+    },
+    {
+      "shift_number": 2,
+      "match_ref": "story.match.qc01.shift02.power_lot",
+      "replay_entry_checkpoint_id": "checkpoint.qc01.shift02.scene"
+    },
+    {
+      "shift_number": 3,
+      "match_ref": "story.match.qc01.shift03.memory_compare",
+      "replay_entry_checkpoint_id": "checkpoint.qc01.shift03.scene"
+    },
+    {
+      "shift_number": 4,
+      "match_ref": "story.match.qc01.shift04.passes_cold",
+      "replay_entry_checkpoint_id": "checkpoint.qc01.shift04.scene"
+    },
+    {
+      "shift_number": 5,
+      "match_ref": "story.match.qc01.shift05.no_offer",
+      "replay_entry_checkpoint_id": "checkpoint.qc01.shift05.scene"
+    },
+    {
+      "shift_number": 6,
+      "match_ref": "story.match.qc01.shift06.quiet_cascade",
+      "replay_entry_checkpoint_id": "checkpoint.qc01.shift06.scene"
+    },
+    {
+      "shift_number": 7,
+      "match_ref": "story.match.qc02.shift07.socket_contacts",
+      "replay_entry_checkpoint_id": "checkpoint.qc02.shift07.entry"
+    },
+    {
+      "shift_number": 8,
+      "match_ref": "story.match.qc02.shift08.power_distribution",
+      "replay_entry_checkpoint_id": "checkpoint.qc02.shift08.entry"
+    },
+    {
+      "shift_number": 9,
+      "match_ref": "story.match.qc02.shift09.predictive_drive",
+      "replay_entry_checkpoint_id": "checkpoint.qc02.shift09.entry"
+    },
+    {
+      "shift_number": 10,
+      "match_ref": "story.match.qc02.shift10.stale_alert",
+      "replay_entry_checkpoint_id": "checkpoint.qc02.shift10.entry"
+    },
+    {
+      "shift_number": 11,
+      "match_ref": "story.match.qc02.shift11.firmware_regression",
+      "replay_entry_checkpoint_id": "checkpoint.qc02.shift11.entry"
+    },
+    {
+      "shift_number": 12,
+      "match_ref": "story.match.qc02.shift12.bmc_recovery",
+      "replay_entry_checkpoint_id": "checkpoint.qc02.shift12.entry"
+    }
+  ],
+  "coverage": {
+    "interpretation_limit": "Counts are authored Match exposure only; they do not imply mastery, global catalog use, or minimal-route action use.",
+    "expansion_source_case_ids": [
+      "exp-001",
+      "exp-002",
+      "exp-003",
+      "exp-004",
+      "exp-005",
+      "exp-006"
+    ],
+    "expansion_fingerprint_ids": [
+      "fingerprint.compute.damaged_cpu_socket_contacts",
+      "fingerprint.power.failed_distribution_board",
+      "fingerprint.storage.predictive_drive_failure",
+      "fingerprint.management.stale_alert",
+      "fingerprint.firmware.incompatible_version_set",
+      "fingerprint.management.corrupt_bmc_firmware"
+    ],
+    "expansion_ticket_definition_ids": [
+      "ticket.generated.4f237a22c35d46166044b2c7",
+      "ticket.generated.3fd6eb04534f79b5b3f87f98",
+      "ticket.generated.36ba2ae8958431194a7e1fef",
+      "ticket.generated.b68505324c44f11977fcda07",
+      "ticket.generated.b34238282822e93980b5f1ad",
+      "ticket.generated.f32b85cbf2054fdf0114f42a"
+    ],
+    "expansion_learning_objectives": [
+      {
+        "shift_number": 7,
+        "title": "The Fourth Pair",
+        "match_ref": "story.match.qc02.shift07.socket_contacts",
+        "source_case_id": "exp-001",
+        "fingerprint_ids": [
+          "fingerprint.compute.damaged_cpu_socket_contacts"
+        ],
+        "ticket_definition_ids": [
+          "ticket.generated.4f237a22c35d46166044b2c7"
+        ],
+        "learning_objectives": [
+          "Identify a socket-location fault without condemning known-good processors or memory."
+        ]
+      },
+      {
+        "shift_number": 8,
+        "title": "Across Both Bays",
+        "match_ref": "story.match.qc02.shift08.power_distribution",
+        "source_case_id": "exp-002",
+        "fingerprint_ids": [
+          "fingerprint.power.failed_distribution_board"
+        ],
+        "ticket_definition_ids": [
+          "ticket.generated.3fd6eb04534f79b5b3f87f98"
+        ],
+        "learning_objectives": [
+          "Use cross-bay known-good comparisons to isolate a shared distribution fault."
+        ]
+      },
+      {
+        "shift_number": 9,
+        "title": "Before the Drop",
+        "match_ref": "story.match.qc02.shift09.predictive_drive",
+        "source_case_id": "exp-003",
+        "fingerprint_ids": [
+          "fingerprint.storage.predictive_drive_failure"
+        ],
+        "ticket_definition_ids": [
+          "ticket.generated.36ba2ae8958431194a7e1fef"
+        ],
+        "learning_objectives": [
+          "Treat predictive failure as actionable while protecting data and proving completed recovery."
+        ]
+      },
+      {
+        "shift_number": 10,
+        "title": "The Alert That Stayed",
+        "match_ref": "story.match.qc02.shift10.stale_alert",
+        "source_case_id": "exp-004",
+        "fingerprint_ids": [
+          "fingerprint.management.stale_alert"
+        ],
+        "ticket_definition_ids": [
+          "ticket.generated.b68505324c44f11977fcda07"
+        ],
+        "learning_objectives": [
+          "Separate read-only evidence preservation from the state-changing Repair that clears a stale alert."
+        ]
+      },
+      {
+        "shift_number": 11,
+        "title": "Version A, Version B",
+        "match_ref": "story.match.qc02.shift11.firmware_regression",
+        "source_case_id": "exp-005",
+        "fingerprint_ids": [
+          "fingerprint.firmware.incompatible_version_set"
+        ],
+        "ticket_definition_ids": [
+          "ticket.generated.b34238282822e93980b5f1ad"
+        ],
+        "learning_objectives": [
+          "Use repeated version A/B behavior and hardware elimination to diagnose a firmware regression."
+        ]
+      },
+      {
+        "shift_number": 12,
+        "title": "Recovery State",
+        "match_ref": "story.match.qc02.shift12.bmc_recovery",
+        "source_case_id": "exp-006",
+        "fingerprint_ids": [
+          "fingerprint.management.corrupt_bmc_firmware"
+        ],
+        "ticket_definition_ids": [
+          "ticket.generated.f32b85cbf2054fdf0114f42a"
+        ],
+        "learning_objectives": [
+          "Bound dangerous controller recovery to approved platform methods and verify recovery separately from the flash action."
+        ]
+      }
+    ]
+  }
+}

@@ -24,7 +24,10 @@ import {
   TASK_014_STARTER_DECK_ID,
   TASK_014_TICKET_CONTENT_VERSION,
   buildTicketsV3,
+  TASK_042_BUILDER_VERSION,
+  buildTicketsV4,
   createTask014Catalogs,
+  createTask042Catalogs,
 } from '../builder/task-014.mjs';
 import * as engine from '../engine/index.mjs';
 import {
@@ -378,6 +381,17 @@ export async function loadTask014Catalogs() {
   return createTask014Catalogs({ cards, decks, domain, parts, coverage });
 }
 
+export async function loadTask042Catalogs() {
+  const [cards, decks, domain, parts, coverage] = await Promise.all([
+    readJson('card-catalog-v4.json'),
+    readJson('decks-v4.json'),
+    readJson('domain-snapshot-v3.json'),
+    readJson('task-042-parts.json'),
+    readJson('playable-coverage-v4.json'),
+  ]);
+  return createTask042Catalogs({ cards, decks, domain, parts, coverage });
+}
+
 function fixedSnapshots(group, ticketContent) {
   const byId = new Map(ticketContent.templates.map((template) => [template.ticket.id, template.ticket]));
   return group.ticket_source.ticket_definition_ids.map((id) => {
@@ -390,8 +404,10 @@ function fixedSnapshots(group, ticketContent) {
 function generatedSnapshots(group, seed, catalogs) {
   const configuration = clone(group.ticket_source.builder_configuration);
   configuration.seed = normalizedSeed(seed);
-  const result = configuration.generator_version === TASK_014_BUILDER_VERSION
-    ? buildTicketsV3({ configuration, catalogs })
+  const result = configuration.generator_version === TASK_042_BUILDER_VERSION
+    ? buildTicketsV4({ configuration, catalogs })
+    : configuration.generator_version === TASK_014_BUILDER_VERSION
+      ? buildTicketsV3({ configuration, catalogs })
     : catalogs.rulesetVersion === DIAGNOSIS_V2_RULESET_VERSION
       ? buildTicketsV2({ configuration, catalogs })
     : buildTickets({

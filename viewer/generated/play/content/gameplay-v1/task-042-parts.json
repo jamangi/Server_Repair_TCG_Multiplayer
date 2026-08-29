@@ -1,0 +1,1994 @@
+{
+  "part_catalog_version": "ticket-parts-v2",
+  "ruleset_version": "first-version-v2",
+  "generator_version": "ticket-builder-v4",
+  "configuration_version": "ticket-builder-v4",
+  "ticket_content_version": "core-ticket-parts-v4",
+  "domain_content_version": "core-domain-snapshot-story-expansion-v4",
+  "card_catalog_version": "core-card-catalog-story-expansion-v5",
+  "deck_catalog_version": "core-response-decks-v5",
+  "outcome_family_version": "diagnostic-outcome-families-v1",
+  "command_action_costs": {
+    "command.ipmi.sel_elist": 1,
+    "command.linux.dhclient": 1,
+    "command.linux.dmesg": 1,
+    "command.linux.ethtool": 1,
+    "command.linux.free_h": 1,
+    "command.linux.ip_addr": 1,
+    "command.linux.ip_route": 1,
+    "command.linux.journalctl": 1,
+    "command.linux.lsblk": 1,
+    "command.linux.lspci": 1,
+    "command.linux.nvme_smart_log": 1,
+    "command.linux.smartctl": 1,
+    "command.network.ping": 1
+  },
+  "diagnostic_outcome_families": [
+    {
+      "part_id": "outcome_family.clean.v1",
+      "classification": "CLEAN",
+      "public_summary": "The diagnostic completed cleanly and produced no candidate-changing finding in this machine state."
+    },
+    {
+      "part_id": "outcome_family.unrelated.v1",
+      "classification": "IRRELEVANT",
+      "public_summary": "The diagnostic completed but produced no finding relevant to this Ticket."
+    },
+    {
+      "part_id": "outcome_family.inconclusive.v1",
+      "classification": "INCONCLUSIVE",
+      "public_summary": "The diagnostic completed, but the observation is inconclusive for the current candidates."
+    }
+  ],
+  "candidate_pool_parts": [
+    {
+      "part_id": "candidate_pool.public_relationships.v1",
+      "selection_rule": "PUBLIC_ASSOCIATED_FAULTS",
+      "minimum_candidates": 2,
+      "maximum_candidates": 5,
+      "distractor_order": "STABLE_ID"
+    }
+  ],
+  "closure_parts": [
+    {
+      "part_id": "closure.complete_path.v1",
+      "include_accepted_isolation": true,
+      "include_cited_decisive_evidence": true,
+      "include_every_repair_in_accepted_path": true,
+      "include_every_failed_verify_in_accepted_path": true,
+      "include_all_current_passing_verifies": true
+    }
+  ],
+  "teaching_parts": [
+    {
+      "part_id": "teaching.storage.v1",
+      "subsystem": "storage",
+      "difficulty": 2,
+      "objectives": [
+        "Separate storage path, media, and array-state evidence."
+      ]
+    },
+    {
+      "part_id": "teaching.memory.v1",
+      "subsystem": "memory",
+      "difficulty": 2,
+      "objectives": [
+        "Distinguish seating and population evidence from a failed DIMM."
+      ]
+    },
+    {
+      "part_id": "teaching.power.v1",
+      "subsystem": "power",
+      "difficulty": 2,
+      "objectives": [
+        "Distinguish a connection state from a failed supply."
+      ]
+    },
+    {
+      "part_id": "teaching.boot.v1",
+      "subsystem": "boot",
+      "difficulty": 2,
+      "objectives": [
+        "Separate boot selection from device detection and media state."
+      ]
+    },
+    {
+      "part_id": "teaching.thermal.v1",
+      "subsystem": "thermal",
+      "difficulty": 2,
+      "objectives": [
+        "Use telemetry and physical evidence to isolate the cooling path."
+      ]
+    },
+    {
+      "part_id": "teaching.network.v1",
+      "subsystem": "network",
+      "difficulty": 2,
+      "objectives": [
+        "Separate physical link evidence from address configuration."
+      ]
+    },
+    {
+      "part_id": "teaching.compute.socket_location.v1",
+      "subsystem": "compute",
+      "difficulty": 4,
+      "objectives": [
+        "Identify a socket-location fault without condemning known-good processors or memory."
+      ]
+    },
+    {
+      "part_id": "teaching.power.distribution_path.v1",
+      "subsystem": "power",
+      "difficulty": 4,
+      "objectives": [
+        "Use cross-bay known-good comparisons to isolate a shared distribution fault."
+      ]
+    },
+    {
+      "part_id": "teaching.storage.predictive_media.v1",
+      "subsystem": "storage",
+      "difficulty": 3,
+      "objectives": [
+        "Treat predictive failure as actionable while protecting data and proving completed recovery."
+      ]
+    },
+    {
+      "part_id": "teaching.management.stale_state.v1",
+      "subsystem": "management",
+      "difficulty": 3,
+      "objectives": [
+        "Separate read-only evidence preservation from the state-changing Repair that clears a stale alert."
+      ]
+    },
+    {
+      "part_id": "teaching.firmware.version_regression.v1",
+      "subsystem": "firmware",
+      "difficulty": 5,
+      "objectives": [
+        "Use repeated version A/B behavior and hardware elimination to diagnose a firmware regression."
+      ]
+    },
+    {
+      "part_id": "teaching.management.bmc_recovery.v1",
+      "subsystem": "management",
+      "difficulty": 6,
+      "objectives": [
+        "Bound dangerous controller recovery to approved platform methods and verify recovery separately from the flash action."
+      ]
+    }
+  ],
+  "fingerprint_roots": [
+    {
+      "fingerprint_id": "fingerprint.storage.loose_cable",
+      "subsystem": "storage",
+      "fault_blueprint_part_id": "truth.storage.loose_cable.v1",
+      "selection_weight": 1
+    },
+    {
+      "fingerprint_id": "fingerprint.storage.failed_sas_member",
+      "subsystem": "storage",
+      "fault_blueprint_part_id": "truth.storage.failed_sas_member.v1",
+      "selection_weight": 1
+    },
+    {
+      "fingerprint_id": "fingerprint.memory.unseated_dimm",
+      "subsystem": "memory",
+      "fault_blueprint_part_id": "truth.memory.unseated_dimm.v1",
+      "selection_weight": 1
+    },
+    {
+      "fingerprint_id": "fingerprint.memory.failed_dimm",
+      "subsystem": "memory",
+      "fault_blueprint_part_id": "truth.memory.failed_dimm.v1",
+      "selection_weight": 1
+    },
+    {
+      "fingerprint_id": "fingerprint.power.unseated_psu",
+      "subsystem": "power",
+      "fault_blueprint_part_id": "truth.power.unseated_psu.v1",
+      "selection_weight": 1
+    },
+    {
+      "fingerprint_id": "fingerprint.power.failed_psu",
+      "subsystem": "power",
+      "fault_blueprint_part_id": "truth.power.failed_psu.v1",
+      "selection_weight": 1
+    },
+    {
+      "fingerprint_id": "fingerprint.boot.incorrect_order",
+      "subsystem": "boot",
+      "fault_blueprint_part_id": "truth.boot.incorrect_order.v1",
+      "selection_weight": 1
+    },
+    {
+      "fingerprint_id": "fingerprint.boot.missing_nvme",
+      "subsystem": "boot",
+      "fault_blueprint_part_id": "truth.boot.missing_nvme.v1",
+      "selection_weight": 1
+    },
+    {
+      "fingerprint_id": "fingerprint.thermal.failed_fan",
+      "subsystem": "thermal",
+      "fault_blueprint_part_id": "truth.thermal.failed_fan.v1",
+      "selection_weight": 1
+    },
+    {
+      "fingerprint_id": "fingerprint.thermal.clogged_heatsink",
+      "subsystem": "thermal",
+      "fault_blueprint_part_id": "truth.thermal.clogged_heatsink.v1",
+      "selection_weight": 1
+    },
+    {
+      "fingerprint_id": "fingerprint.network.failed_cable",
+      "subsystem": "network",
+      "fault_blueprint_part_id": "truth.network.failed_cable.v1",
+      "selection_weight": 1
+    },
+    {
+      "fingerprint_id": "fingerprint.network.incorrect_static_ip",
+      "subsystem": "network",
+      "fault_blueprint_part_id": "truth.network.incorrect_static_ip.v1",
+      "selection_weight": 1
+    },
+    {
+      "fingerprint_id": "fingerprint.compute.damaged_cpu_socket_contacts",
+      "subsystem": "compute",
+      "fault_blueprint_part_id": "truth.compute.damaged_cpu_socket_contacts.v1",
+      "teaching_part_id": "teaching.compute.socket_location.v1",
+      "response_deck_id": "deck.story.expansion_response_v1",
+      "selection_weight": 1
+    },
+    {
+      "fingerprint_id": "fingerprint.power.failed_distribution_board",
+      "subsystem": "power",
+      "fault_blueprint_part_id": "truth.power.failed_distribution_board.v1",
+      "teaching_part_id": "teaching.power.distribution_path.v1",
+      "response_deck_id": "deck.story.expansion_response_v1",
+      "selection_weight": 1
+    },
+    {
+      "fingerprint_id": "fingerprint.storage.predictive_drive_failure",
+      "subsystem": "storage",
+      "fault_blueprint_part_id": "truth.storage.predictive_drive_failure.v1",
+      "teaching_part_id": "teaching.storage.predictive_media.v1",
+      "response_deck_id": "deck.story.expansion_response_v1",
+      "selection_weight": 1
+    },
+    {
+      "fingerprint_id": "fingerprint.management.stale_alert",
+      "subsystem": "management",
+      "fault_blueprint_part_id": "truth.management.stale_alert.v1",
+      "teaching_part_id": "teaching.management.stale_state.v1",
+      "response_deck_id": "deck.story.expansion_response_v1",
+      "selection_weight": 1
+    },
+    {
+      "fingerprint_id": "fingerprint.firmware.incompatible_version_set",
+      "subsystem": "firmware",
+      "fault_blueprint_part_id": "truth.firmware.incompatible_version_set.v1",
+      "teaching_part_id": "teaching.firmware.version_regression.v1",
+      "response_deck_id": "deck.story.expansion_response_v1",
+      "selection_weight": 1
+    },
+    {
+      "fingerprint_id": "fingerprint.management.corrupt_bmc_firmware",
+      "subsystem": "management",
+      "fault_blueprint_part_id": "truth.management.corrupt_bmc_firmware.v1",
+      "teaching_part_id": "teaching.management.bmc_recovery.v1",
+      "response_deck_id": "deck.story.expansion_response_v1",
+      "selection_weight": 1
+    }
+  ],
+  "public_context_parts": [
+    {
+      "part_id": "context.storage.io_errors.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.storage.loose_cable.v1"
+      ],
+      "symptom_ids": [
+        "symptom.storage.io_errors"
+      ],
+      "display_name": "Intermittent Storage Path",
+      "short_description": "Storage operations report errors while the path remains intermittently visible."
+    },
+    {
+      "part_id": "context.storage.raid_degraded.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.storage.failed_sas_member.v1"
+      ],
+      "symptom_ids": [
+        "symptom.storage.raid_degraded"
+      ],
+      "display_name": "One Member Down",
+      "short_description": "The array reports reduced redundancy and a member needs isolation."
+    },
+    {
+      "part_id": "context.memory.reduced_capacity.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.memory.unseated_dimm.v1"
+      ],
+      "symptom_ids": [
+        "symptom.boot.memory_warning"
+      ],
+      "display_name": "Memory Capacity Missing",
+      "short_description": "Firmware reports less memory than the installed configuration expects."
+    },
+    {
+      "part_id": "context.memory.intermittent_crash.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.memory.failed_dimm.v1"
+      ],
+      "symptom_ids": [
+        "symptom.system.intermittent_crash"
+      ],
+      "display_name": "Intermittent Memory Crash",
+      "short_description": "Workloads crash sporadically and memory remains a plausible cause."
+    },
+    {
+      "part_id": "context.power.redundancy_unseated.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.power.unseated_psu.v1"
+      ],
+      "symptom_ids": [
+        "symptom.power.redundancy_warning"
+      ],
+      "display_name": "Redundancy Path Unavailable",
+      "short_description": "One redundant power path is not available to the server."
+    },
+    {
+      "part_id": "context.power.redundancy_failed.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.power.failed_psu.v1"
+      ],
+      "symptom_ids": [
+        "symptom.power.redundancy_warning"
+      ],
+      "display_name": "Supply Redundancy Lost",
+      "short_description": "One redundant supply path reports an active fault."
+    },
+    {
+      "part_id": "context.boot.wrong_device.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.boot.incorrect_order.v1"
+      ],
+      "symptom_ids": [
+        "symptom.boot.wrong_device"
+      ],
+      "display_name": "Booting the Wrong Device",
+      "short_description": "The server selects an unintended boot source."
+    },
+    {
+      "part_id": "context.boot.no_device.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.boot.missing_nvme.v1"
+      ],
+      "symptom_ids": [
+        "symptom.boot.no_boot_device"
+      ],
+      "display_name": "Boot Device Missing",
+      "short_description": "POST completes, but the expected system device is not detected."
+    },
+    {
+      "part_id": "context.thermal.high_temp_fan.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.thermal.failed_fan.v1"
+      ],
+      "symptom_ids": [
+        "symptom.thermal.high_cpu_temp"
+      ],
+      "display_name": "Temperature Rising",
+      "short_description": "Processor temperature rises above the expected operating range."
+    },
+    {
+      "part_id": "context.thermal.high_temp_clog.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.thermal.clogged_heatsink.v1"
+      ],
+      "symptom_ids": [
+        "symptom.thermal.high_cpu_temp"
+      ],
+      "display_name": "Cooling Path Restricted",
+      "short_description": "Processor temperature remains high while the cooling path is investigated."
+    },
+    {
+      "part_id": "context.network.no_connectivity_cable.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.network.failed_cable.v1"
+      ],
+      "symptom_ids": [
+        "symptom.network.no_connectivity"
+      ],
+      "display_name": "Network Path Down",
+      "short_description": "The server cannot reach expected network destinations."
+    },
+    {
+      "part_id": "context.network.no_connectivity_static.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.network.incorrect_static_ip.v1"
+      ],
+      "symptom_ids": [
+        "symptom.network.no_connectivity"
+      ],
+      "display_name": "Addressed but Unreachable",
+      "short_description": "The interface is present, but expected network destinations are unreachable."
+    },
+    {
+      "part_id": "context.compute.damaged_cpu_socket_contacts.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.compute.damaged_cpu_socket_contacts.v1"
+      ],
+      "symptom_ids": [
+        "symptom.boot.no_post"
+      ],
+      "display_name": "Processor Population Will Not Complete Startup",
+      "short_description": "The server starts with a reduced processor population but does not complete startup with the expected processors installed."
+    },
+    {
+      "part_id": "context.power.failed_distribution_board.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.power.failed_distribution_board.v1"
+      ],
+      "symptom_ids": [
+        "symptom.power.voltage_out_of_range",
+        "symptom.power.no_power"
+      ],
+      "display_name": "Voltage Alert and Immediate Power Loss",
+      "short_description": "The server reports an out-of-range voltage and shuts down immediately despite supported supply substitutions."
+    },
+    {
+      "part_id": "context.storage.predictive_drive_failure.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.storage.predictive_drive_failure.v1"
+      ],
+      "symptom_ids": [
+        "symptom.storage.predictive_failure_warning",
+        "symptom.storage.drive_fault_led"
+      ],
+      "display_name": "Online Drive Predicts Failure",
+      "short_description": "An online array member reports predictive failure and an alternating drive-bay warning indication."
+    },
+    {
+      "part_id": "context.management.stale_alert.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.management.stale_alert.v1"
+      ],
+      "symptom_ids": [
+        "symptom.management.alert_persists"
+      ],
+      "display_name": "Healthy Hardware Retains a Degraded Alert",
+      "short_description": "Current drive and enclosure checks are healthy while management continues to display an earlier degraded-backplane alert."
+    },
+    {
+      "part_id": "context.firmware.incompatible_version_set.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.firmware.incompatible_version_set.v1"
+      ],
+      "symptom_ids": [
+        "symptom.network.link_flapping",
+        "symptom.network.no_link"
+      ],
+      "display_name": "Network Link Flaps After Firmware Change",
+      "short_description": "Management reports repeated link transitions after a firmware update even though substituted hardware and cabling remain stable."
+    },
+    {
+      "part_id": "context.management.corrupt_bmc_firmware.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.management.corrupt_bmc_firmware.v1"
+      ],
+      "symptom_ids": [
+        "symptom.management.bmc_not_responding",
+        "symptom.firmware.update_failed"
+      ],
+      "display_name": "Management Controller Fails After Interrupted Update",
+      "short_description": "The embedded management controller stops responding after an interrupted firmware update while the board still exposes an approved recovery state."
+    }
+  ],
+  "fault_blueprint_parts": [
+    {
+      "part_id": "truth.storage.loose_cable.v1",
+      "initial_machine_state_key": "machine.storage.loose_cable.active",
+      "fault_instances": [
+        {
+          "fault_instance_key": "fault_instance.storage.cable",
+          "fault_id": "fault.storage.cable.loose",
+          "role": "ACTIONABLE",
+          "actionable": true,
+          "deepest": true,
+          "required_to_repair": true
+        }
+      ],
+      "causal_edges": []
+    },
+    {
+      "part_id": "truth.storage.failed_sas_member.v1",
+      "initial_machine_state_key": "machine.storage.failed_sas_member.active",
+      "fault_instances": [
+        {
+          "fault_instance_key": "fault_instance.storage.sas",
+          "fault_id": "fault.storage.sas.drive_failed",
+          "role": "ACTIONABLE",
+          "actionable": true,
+          "deepest": true,
+          "required_to_repair": true
+        },
+        {
+          "fault_instance_key": "fault_instance.storage.array",
+          "fault_id": "fault.storage.raid.degraded",
+          "role": "TERMINAL",
+          "actionable": false,
+          "deepest": false,
+          "required_to_repair": false
+        }
+      ],
+      "causal_edges": [
+        {
+          "causal_edge_id": "edge.storage.sas_to_degraded",
+          "cause_fault_instance_key": "fault_instance.storage.sas",
+          "effect_fault_instance_key": "fault_instance.storage.array"
+        }
+      ]
+    },
+    {
+      "part_id": "truth.memory.unseated_dimm.v1",
+      "initial_machine_state_key": "machine.memory.unseated_dimm.active",
+      "fault_instances": [
+        {
+          "fault_instance_key": "fault_instance.memory.dimm",
+          "fault_id": "fault.memory.dimm.not_seated",
+          "role": "ACTIONABLE",
+          "actionable": true,
+          "deepest": true,
+          "required_to_repair": true
+        },
+        {
+          "fault_instance_key": "fault_instance.memory.channel",
+          "fault_id": "fault.memory.channel.unavailable",
+          "role": "TERMINAL",
+          "actionable": false,
+          "deepest": false,
+          "required_to_repair": false
+        }
+      ],
+      "causal_edges": [
+        {
+          "causal_edge_id": "edge.memory.dimm_to_channel",
+          "cause_fault_instance_key": "fault_instance.memory.dimm",
+          "effect_fault_instance_key": "fault_instance.memory.channel"
+        }
+      ]
+    },
+    {
+      "part_id": "truth.memory.failed_dimm.v1",
+      "initial_machine_state_key": "machine.memory.failed_dimm.active",
+      "fault_instances": [
+        {
+          "fault_instance_key": "fault_instance.memory.failed_dimm",
+          "fault_id": "fault.memory.dimm.failed",
+          "role": "ACTIONABLE",
+          "actionable": true,
+          "deepest": true,
+          "required_to_repair": true
+        },
+        {
+          "fault_instance_key": "fault_instance.memory.instability",
+          "fault_id": "fault.system.intermittent_memory_instability",
+          "role": "TERMINAL",
+          "actionable": false,
+          "deepest": false,
+          "required_to_repair": false
+        }
+      ],
+      "causal_edges": [
+        {
+          "causal_edge_id": "edge.memory.failed_to_instability",
+          "cause_fault_instance_key": "fault_instance.memory.failed_dimm",
+          "effect_fault_instance_key": "fault_instance.memory.instability"
+        }
+      ]
+    },
+    {
+      "part_id": "truth.power.unseated_psu.v1",
+      "initial_machine_state_key": "machine.power.unseated_psu.active",
+      "fault_instances": [
+        {
+          "fault_instance_key": "fault_instance.power.unseated_psu",
+          "fault_id": "fault.power.psu.not_seated",
+          "role": "ACTIONABLE",
+          "actionable": true,
+          "deepest": true,
+          "required_to_repair": true
+        }
+      ],
+      "causal_edges": []
+    },
+    {
+      "part_id": "truth.power.failed_psu.v1",
+      "initial_machine_state_key": "machine.power.failed_psu.active",
+      "fault_instances": [
+        {
+          "fault_instance_key": "fault_instance.power.failed_psu",
+          "fault_id": "fault.power.psu.failed",
+          "role": "ACTIONABLE",
+          "actionable": true,
+          "deepest": true,
+          "required_to_repair": true
+        }
+      ],
+      "causal_edges": []
+    },
+    {
+      "part_id": "truth.boot.incorrect_order.v1",
+      "initial_machine_state_key": "machine.boot.incorrect_order.active",
+      "fault_instances": [
+        {
+          "fault_instance_key": "fault_instance.boot.order",
+          "fault_id": "fault.boot.order.incorrect",
+          "role": "ACTIONABLE",
+          "actionable": true,
+          "deepest": true,
+          "required_to_repair": true
+        }
+      ],
+      "causal_edges": []
+    },
+    {
+      "part_id": "truth.boot.missing_nvme.v1",
+      "initial_machine_state_key": "machine.boot.missing_nvme.active",
+      "fault_instances": [
+        {
+          "fault_instance_key": "fault_instance.boot.nvme",
+          "fault_id": "fault.storage.nvme.device_failed",
+          "role": "ACTIONABLE",
+          "actionable": true,
+          "deepest": true,
+          "required_to_repair": true
+        },
+        {
+          "fault_instance_key": "fault_instance.boot.device",
+          "fault_id": "fault.boot.device.not_detected",
+          "role": "TERMINAL",
+          "actionable": false,
+          "deepest": false,
+          "required_to_repair": false
+        }
+      ],
+      "causal_edges": [
+        {
+          "causal_edge_id": "edge.storage.nvme_to_boot_missing",
+          "cause_fault_instance_key": "fault_instance.boot.nvme",
+          "effect_fault_instance_key": "fault_instance.boot.device"
+        }
+      ]
+    },
+    {
+      "part_id": "truth.thermal.failed_fan.v1",
+      "initial_machine_state_key": "machine.thermal.failed_fan.active",
+      "fault_instances": [
+        {
+          "fault_instance_key": "fault_instance.thermal.fan",
+          "fault_id": "fault.thermal.fan.failed",
+          "role": "ACTIONABLE",
+          "actionable": true,
+          "deepest": true,
+          "required_to_repair": true
+        },
+        {
+          "fault_instance_key": "fault_instance.thermal.overheating",
+          "fault_id": "fault.thermal.cpu.overheating",
+          "role": "TERMINAL",
+          "actionable": false,
+          "deepest": false,
+          "required_to_repair": false
+        }
+      ],
+      "causal_edges": [
+        {
+          "causal_edge_id": "edge.thermal.fan_to_overheat",
+          "cause_fault_instance_key": "fault_instance.thermal.fan",
+          "effect_fault_instance_key": "fault_instance.thermal.overheating"
+        }
+      ]
+    },
+    {
+      "part_id": "truth.thermal.clogged_heatsink.v1",
+      "initial_machine_state_key": "machine.thermal.clogged_heatsink.active",
+      "fault_instances": [
+        {
+          "fault_instance_key": "fault_instance.thermal.heatsink",
+          "fault_id": "fault.thermal.heatsink.clogged",
+          "role": "ACTIONABLE",
+          "actionable": true,
+          "deepest": true,
+          "required_to_repair": true
+        },
+        {
+          "fault_instance_key": "fault_instance.thermal.clog_overheating",
+          "fault_id": "fault.thermal.cpu.overheating",
+          "role": "TERMINAL",
+          "actionable": false,
+          "deepest": false,
+          "required_to_repair": false
+        }
+      ],
+      "causal_edges": [
+        {
+          "causal_edge_id": "edge.thermal.clog_to_overheat",
+          "cause_fault_instance_key": "fault_instance.thermal.heatsink",
+          "effect_fault_instance_key": "fault_instance.thermal.clog_overheating"
+        }
+      ]
+    },
+    {
+      "part_id": "truth.network.failed_cable.v1",
+      "initial_machine_state_key": "machine.network.failed_cable.active",
+      "fault_instances": [
+        {
+          "fault_instance_key": "fault_instance.network.cable",
+          "fault_id": "fault.network.cable.failed",
+          "role": "ACTIONABLE",
+          "actionable": true,
+          "deepest": true,
+          "required_to_repair": true
+        },
+        {
+          "fault_instance_key": "fault_instance.network.no_lease",
+          "fault_id": "fault.network.dhcp.no_lease",
+          "role": "TERMINAL",
+          "actionable": false,
+          "deepest": false,
+          "required_to_repair": false
+        }
+      ],
+      "causal_edges": [
+        {
+          "causal_edge_id": "edge.network.bad_cable_to_dhcp",
+          "cause_fault_instance_key": "fault_instance.network.cable",
+          "effect_fault_instance_key": "fault_instance.network.no_lease"
+        }
+      ]
+    },
+    {
+      "part_id": "truth.network.incorrect_static_ip.v1",
+      "initial_machine_state_key": "machine.network.incorrect_static_ip.active",
+      "fault_instances": [
+        {
+          "fault_instance_key": "fault_instance.network.static_ip",
+          "fault_id": "fault.network.ip.static_incorrect",
+          "role": "ACTIONABLE",
+          "actionable": true,
+          "deepest": true,
+          "required_to_repair": true
+        }
+      ],
+      "causal_edges": []
+    },
+    {
+      "part_id": "truth.compute.damaged_cpu_socket_contacts.v1",
+      "initial_machine_state_key": "machine.compute.damaged_socket_contacts.active",
+      "fault_instances": [
+        {
+          "fault_instance_key": "fault_instance.compute.damaged_cpu_socket_contacts.root",
+          "fault_id": "fault.compute.cpu_socket.contacts_damaged",
+          "role": "ACTIONABLE",
+          "actionable": true,
+          "deepest": true,
+          "required_to_repair": true
+        }
+      ],
+      "causal_edges": []
+    },
+    {
+      "part_id": "truth.power.failed_distribution_board.v1",
+      "initial_machine_state_key": "machine.power.failed_distribution_board.active",
+      "fault_instances": [
+        {
+          "fault_instance_key": "fault_instance.power.failed_distribution_board.root",
+          "fault_id": "fault.power.distribution_board.failed",
+          "role": "ACTIONABLE",
+          "actionable": true,
+          "deepest": true,
+          "required_to_repair": true
+        }
+      ],
+      "causal_edges": []
+    },
+    {
+      "part_id": "truth.storage.predictive_drive_failure.v1",
+      "initial_machine_state_key": "machine.storage.predictive_drive_failure.active",
+      "fault_instances": [
+        {
+          "fault_instance_key": "fault_instance.storage.predictive_drive_failure.root",
+          "fault_id": "fault.storage.drive.predictive_failure",
+          "role": "ACTIONABLE",
+          "actionable": true,
+          "deepest": true,
+          "required_to_repair": true
+        }
+      ],
+      "causal_edges": []
+    },
+    {
+      "part_id": "truth.management.stale_alert.v1",
+      "initial_machine_state_key": "machine.management.stale_alert.active",
+      "fault_instances": [
+        {
+          "fault_instance_key": "fault_instance.management.stale_alert.root",
+          "fault_id": "fault.management.alert.stale",
+          "role": "ACTIONABLE",
+          "actionable": true,
+          "deepest": true,
+          "required_to_repair": true
+        }
+      ],
+      "causal_edges": []
+    },
+    {
+      "part_id": "truth.firmware.incompatible_version_set.v1",
+      "initial_machine_state_key": "machine.firmware.incompatible_version_set.active",
+      "fault_instances": [
+        {
+          "fault_instance_key": "fault_instance.firmware.incompatible_version_set.root",
+          "fault_id": "fault.firmware.version_set.incompatible",
+          "role": "ACTIONABLE",
+          "actionable": true,
+          "deepest": true,
+          "required_to_repair": true
+        }
+      ],
+      "causal_edges": []
+    },
+    {
+      "part_id": "truth.management.corrupt_bmc_firmware.v1",
+      "initial_machine_state_key": "machine.management.corrupt_bmc_firmware.active",
+      "fault_instances": [
+        {
+          "fault_instance_key": "fault_instance.management.corrupt_bmc_firmware.root",
+          "fault_id": "fault.management.bmc_firmware.corrupt",
+          "role": "ACTIONABLE",
+          "actionable": true,
+          "deepest": true,
+          "required_to_repair": true
+        }
+      ],
+      "causal_edges": []
+    }
+  ],
+  "diagnostic_plan_parts": [
+    {
+      "part_id": "diagnostics.storage.loose_cable.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.storage.loose_cable.v1"
+      ],
+      "findings": [
+        {
+          "source_definition_id": "test.general.visual_inspection",
+          "candidate_fault_id": "fault.storage.cable.loose",
+          "disposition": "SUPPORT",
+          "public_summary": "The storage connector is visibly not fully latched."
+        },
+        {
+          "source_definition_id": "test.storage.device_inventory",
+          "candidate_fault_id": "fault.storage.cable.loose",
+          "disposition": "SUPPORT",
+          "public_summary": "The expected device disappears on the affected storage path."
+        }
+      ]
+    },
+    {
+      "part_id": "diagnostics.storage.failed_sas_member.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.storage.failed_sas_member.v1"
+      ],
+      "findings": [
+        {
+          "source_definition_id": "test.storage.drive_health",
+          "candidate_fault_id": "fault.storage.sas.drive_failed",
+          "disposition": "CONFIRM",
+          "public_summary": "Drive health data independently identifies the failed SAS member."
+        },
+        {
+          "source_definition_id": "test.storage.raid_status",
+          "candidate_fault_id": "fault.storage.sas.drive_failed",
+          "disposition": "SUPPORT",
+          "public_summary": "Array status identifies the affected member and degraded virtual disk."
+        },
+        {
+          "source_definition_id": "command.linux.smartctl",
+          "candidate_fault_id": "fault.storage.sas.drive_failed",
+          "disposition": "SUPPORT",
+          "public_summary": "smartctl corroborates the failed member health result."
+        }
+      ]
+    },
+    {
+      "part_id": "diagnostics.memory.unseated_dimm.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.memory.unseated_dimm.v1"
+      ],
+      "findings": [
+        {
+          "source_definition_id": "test.memory.single_dimm_isolation",
+          "candidate_fault_id": "fault.memory.dimm.not_seated",
+          "disposition": "CONFIRM",
+          "public_summary": "Single-DIMM isolation independently identifies the unseated module path."
+        },
+        {
+          "source_definition_id": "test.general.visual_inspection",
+          "candidate_fault_id": "fault.memory.dimm.not_seated",
+          "disposition": "SUPPORT",
+          "public_summary": "The DIMM seating geometry is visibly uneven."
+        }
+      ]
+    },
+    {
+      "part_id": "diagnostics.memory.failed_dimm.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.memory.failed_dimm.v1"
+      ],
+      "findings": [
+        {
+          "source_definition_id": "test.memory.diagnostic",
+          "candidate_fault_id": "fault.memory.dimm.failed",
+          "disposition": "CONFIRM",
+          "public_summary": "The memory diagnostic repeatedly identifies the same failed DIMM."
+        },
+        {
+          "source_definition_id": "test.memory.single_dimm_isolation",
+          "candidate_fault_id": "fault.memory.dimm.failed",
+          "disposition": "SUPPORT",
+          "public_summary": "The instability follows the isolated DIMM."
+        },
+        {
+          "source_definition_id": "test.system.bmc_logs",
+          "candidate_fault_id": "fault.memory.dimm.failed",
+          "disposition": "SUPPORT",
+          "public_summary": "Management events corroborate errors from the same DIMM."
+        }
+      ]
+    },
+    {
+      "part_id": "diagnostics.power.unseated_psu.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.power.unseated_psu.v1"
+      ],
+      "findings": [
+        {
+          "source_definition_id": "test.general.visual_inspection",
+          "candidate_fault_id": "fault.power.psu.not_seated",
+          "disposition": "SUPPORT",
+          "public_summary": "The PSU latch and chassis line do not show full seating."
+        },
+        {
+          "source_definition_id": "test.power.psu_status",
+          "candidate_fault_id": "fault.power.psu.not_seated",
+          "disposition": "SUPPORT",
+          "public_summary": "The supply reports intermittent presence without an internal failure code."
+        }
+      ]
+    },
+    {
+      "part_id": "diagnostics.power.failed_psu.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.power.failed_psu.v1"
+      ],
+      "findings": [
+        {
+          "source_definition_id": "test.power.known_good_psu",
+          "candidate_fault_id": "fault.power.psu.failed",
+          "disposition": "CONFIRM",
+          "public_summary": "A known-good supply restores the affected power path."
+        },
+        {
+          "source_definition_id": "test.power.psu_status",
+          "candidate_fault_id": "fault.power.psu.failed",
+          "disposition": "SUPPORT",
+          "public_summary": "Supply status reports an internal failure on the affected PSU."
+        },
+        {
+          "source_definition_id": "test.power.output_voltage_measurement",
+          "candidate_fault_id": "fault.power.psu.failed",
+          "disposition": "SUPPORT",
+          "public_summary": "The approved output measurement is outside the specified range."
+        }
+      ]
+    },
+    {
+      "part_id": "diagnostics.boot.incorrect_order.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.boot.incorrect_order.v1"
+      ],
+      "findings": [
+        {
+          "source_definition_id": "test.firmware.settings_review",
+          "candidate_fault_id": "fault.boot.order.incorrect",
+          "disposition": "SUPPORT",
+          "public_summary": "Firmware settings place an unintended device before the system volume."
+        },
+        {
+          "source_definition_id": "test.boot.device_inventory",
+          "candidate_fault_id": "fault.boot.order.incorrect",
+          "disposition": "SUPPORT",
+          "public_summary": "The expected system volume is detected but is not selected first."
+        }
+      ]
+    },
+    {
+      "part_id": "diagnostics.boot.missing_nvme.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.boot.missing_nvme.v1"
+      ],
+      "findings": [
+        {
+          "source_definition_id": "test.system.bmc_logs",
+          "candidate_fault_id": "fault.storage.nvme.device_failed",
+          "disposition": "CONFIRM",
+          "public_summary": "Management events independently identify the failed NVMe device."
+        },
+        {
+          "source_definition_id": "test.storage.device_inventory",
+          "candidate_fault_id": "fault.storage.nvme.device_failed",
+          "disposition": "SUPPORT",
+          "public_summary": "The expected NVMe device is absent from storage inventory."
+        },
+        {
+          "source_definition_id": "test.boot.device_inventory",
+          "candidate_fault_id": "fault.boot.device.not_detected",
+          "disposition": "SUPPORT",
+          "public_summary": "Firmware cannot enumerate the expected boot device."
+        }
+      ]
+    },
+    {
+      "part_id": "diagnostics.thermal.failed_fan.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.thermal.failed_fan.v1"
+      ],
+      "findings": [
+        {
+          "source_definition_id": "test.thermal.fan_telemetry",
+          "candidate_fault_id": "fault.thermal.fan.failed",
+          "disposition": "CONFIRM",
+          "public_summary": "Fan telemetry independently identifies the stalled fan."
+        },
+        {
+          "source_definition_id": "test.cooling.location_cross_substitution",
+          "candidate_fault_id": "fault.thermal.fan.failed",
+          "disposition": "CONFIRM",
+          "public_summary": "The fault follows the fan during controlled cross-substitution."
+        }
+      ]
+    },
+    {
+      "part_id": "diagnostics.thermal.clogged_heatsink.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.thermal.clogged_heatsink.v1"
+      ],
+      "findings": [
+        {
+          "source_definition_id": "test.thermal.temperature_monitoring",
+          "candidate_fault_id": "fault.thermal.heatsink.clogged",
+          "disposition": "CONFIRM",
+          "public_summary": "Temperature behavior independently identifies a restricted heatsink path."
+        },
+        {
+          "source_definition_id": "test.general.visual_inspection",
+          "candidate_fault_id": "fault.thermal.heatsink.clogged",
+          "disposition": "SUPPORT",
+          "public_summary": "Dust visibly obstructs the heatsink airflow path."
+        }
+      ]
+    },
+    {
+      "part_id": "diagnostics.network.failed_cable.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.network.failed_cable.v1"
+      ],
+      "findings": [
+        {
+          "source_definition_id": "test.network.cable_substitution",
+          "candidate_fault_id": "fault.network.cable.failed",
+          "disposition": "CONFIRM",
+          "public_summary": "Link returns with a known-good cable and fails again with the original cable."
+        },
+        {
+          "source_definition_id": "test.network.link",
+          "candidate_fault_id": "fault.network.cable.failed",
+          "disposition": "SUPPORT",
+          "public_summary": "The interface reports no carrier on the affected link."
+        }
+      ]
+    },
+    {
+      "part_id": "diagnostics.network.incorrect_static_ip.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.network.incorrect_static_ip.v1"
+      ],
+      "findings": [
+        {
+          "source_definition_id": "test.network.interface_config",
+          "candidate_fault_id": "fault.network.ip.static_incorrect",
+          "disposition": "CONFIRM",
+          "public_summary": "The configured address and prefix do not match the authored network."
+        },
+        {
+          "source_definition_id": "test.network.ping",
+          "candidate_fault_id": "fault.network.ip.static_incorrect",
+          "disposition": "SUPPORT",
+          "public_summary": "Reachability fails in the pattern expected from the incorrect static configuration."
+        }
+      ]
+    },
+    {
+      "part_id": "diagnostics.compute.damaged_cpu_socket_contacts.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.compute.damaged_cpu_socket_contacts.v1"
+      ],
+      "findings": [
+        {
+          "source_definition_id": "test.compute.socket_magnified_inspection",
+          "candidate_fault_id": "fault.compute.cpu_socket.contacts_damaged",
+          "disposition": "CONFIRM",
+          "public_summary": "Magnified inspection localizes visibly displaced contacts at the failing socket."
+        },
+        {
+          "source_definition_id": "test.general.minimum_configuration",
+          "candidate_fault_id": "fault.board.system.failed",
+          "disposition": "CONTRADICT",
+          "public_summary": "Known-good processor combinations boot away from the affected socket, contradicting a general board failure."
+        },
+        {
+          "source_definition_id": "test.general.minimum_configuration",
+          "candidate_fault_id": "fault.cpu.not_seated",
+          "disposition": "CONTRADICT",
+          "public_summary": "The processors operate in alternate supported combinations, contradicting a processor seating explanation."
+        },
+        {
+          "source_definition_id": "test.memory.single_dimm_isolation",
+          "candidate_fault_id": "fault.memory.dimm.failed",
+          "disposition": "CONTRADICT",
+          "public_summary": "The failure remains location-bound rather than following the reduced memory set."
+        },
+        {
+          "source_definition_id": "test.memory.single_dimm_isolation",
+          "candidate_fault_id": "fault.memory.dimm.not_seated",
+          "disposition": "CONTRADICT",
+          "public_summary": "The reduced memory comparison does not carry the startup failure away from the socket."
+        }
+      ]
+    },
+    {
+      "part_id": "diagnostics.power.failed_distribution_board.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.power.failed_distribution_board.v1"
+      ],
+      "findings": [
+        {
+          "source_definition_id": "test.power.distribution_path_isolation",
+          "candidate_fault_id": "fault.power.distribution_board.failed",
+          "disposition": "CONFIRM",
+          "public_summary": "Known-good supplies reproduce the same failure in every supported bay, confirming the shared distribution path."
+        },
+        {
+          "source_definition_id": "test.power.known_good_psu",
+          "candidate_fault_id": "fault.power.psu.failed",
+          "disposition": "RULE_OUT",
+          "public_summary": "Both known-good supplies behave identically across bays, ruling out an individual supply failure."
+        },
+        {
+          "source_definition_id": "test.general.visual_inspection",
+          "candidate_fault_id": "fault.power.input.cable_loose",
+          "disposition": "CONTRADICT",
+          "public_summary": "The documented input path remains correctly connected during the reduced-configuration comparison."
+        },
+        {
+          "source_definition_id": "test.general.visual_inspection",
+          "candidate_fault_id": "fault.power.psu.not_seated",
+          "disposition": "CONTRADICT",
+          "public_summary": "Supported supplies are fully seated in each tested bay."
+        }
+      ]
+    },
+    {
+      "part_id": "diagnostics.storage.predictive_drive_failure.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.storage.predictive_drive_failure.v1"
+      ],
+      "findings": [
+        {
+          "source_definition_id": "test.storage.predictive_health",
+          "candidate_fault_id": "fault.storage.drive.predictive_failure",
+          "disposition": "CONFIRM",
+          "public_summary": "Controller and device health evidence confirms a predictive threshold on the identified online member."
+        },
+        {
+          "source_definition_id": "test.storage.drive_health",
+          "candidate_fault_id": "fault.storage.sas.drive_failed",
+          "disposition": "CONTRADICT",
+          "public_summary": "The member remains online and responsive rather than presenting as a fully failed drive."
+        }
+      ]
+    },
+    {
+      "part_id": "diagnostics.management.stale_alert.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.management.stale_alert.v1"
+      ],
+      "findings": [
+        {
+          "source_definition_id": "test.management.event_log_freshness",
+          "candidate_fault_id": "fault.management.alert.stale",
+          "disposition": "CONFIRM",
+          "public_summary": "Preserved timestamps and healthy current telemetry show that the displayed alert describes historical state."
+        },
+        {
+          "source_definition_id": "test.storage.device_inventory",
+          "candidate_fault_id": "fault.storage.backplane.path_failed",
+          "disposition": "CONTRADICT",
+          "public_summary": "Fresh inventory shows the expected drives and bays healthy, contradicting a live backplane-path failure."
+        }
+      ]
+    },
+    {
+      "part_id": "diagnostics.firmware.incompatible_version_set.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.firmware.incompatible_version_set.v1"
+      ],
+      "findings": [
+        {
+          "source_definition_id": "test.firmware.version_compatibility",
+          "candidate_fault_id": "fault.firmware.version_set.incompatible",
+          "disposition": "SUPPORT",
+          "public_summary": "The failure begins with the new version set and an approved rollback removes it."
+        },
+        {
+          "source_definition_id": "test.network.link_counter_soak",
+          "candidate_fault_id": "fault.firmware.version_set.incompatible",
+          "disposition": "SUPPORT",
+          "public_summary": "A defined soak is clean after rollback and the later upgrade reproduces the link regression."
+        },
+        {
+          "source_definition_id": "test.general.visual_inspection",
+          "candidate_fault_id": "fault.network.cable.disconnected",
+          "disposition": "CONTRADICT",
+          "public_summary": "The link path remains connected throughout the controlled comparison."
+        },
+        {
+          "source_definition_id": "test.network.cable_substitution",
+          "candidate_fault_id": "fault.network.cable.failed",
+          "disposition": "RULE_OUT",
+          "public_summary": "Known-good cabling does not carry the failure away from the affected firmware state."
+        },
+        {
+          "source_definition_id": "test.network.cable_substitution",
+          "candidate_fault_id": "fault.network.nic.failed",
+          "disposition": "RULE_OUT",
+          "public_summary": "Hardware substitutions do not carry the failure, ruling out an individual interface fault."
+        }
+      ]
+    },
+    {
+      "part_id": "diagnostics.management.corrupt_bmc_firmware.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.management.corrupt_bmc_firmware.v1"
+      ],
+      "findings": [
+        {
+          "source_definition_id": "test.management.bmc_recovery_state",
+          "candidate_fault_id": "fault.management.bmc_firmware.corrupt",
+          "disposition": "CONFIRM",
+          "public_summary": "Approved recovery-state checks confirm controller firmware corruption without prescribing a board-specific raw procedure."
+        },
+        {
+          "source_definition_id": "test.firmware.version_compatibility",
+          "candidate_fault_id": "fault.firmware.version_set.incompatible",
+          "disposition": "RULE_OUT",
+          "public_summary": "Platform and image compatibility checks rule out an ordinary incompatible-version set."
+        }
+      ]
+    }
+  ],
+  "isolation_plan_parts": [
+    {
+      "part_id": "isolation.storage.loose_cable.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.storage.loose_cable.v1"
+      ],
+      "target_fault_id": "fault.storage.cable.loose",
+      "routes": [
+        {
+          "route_kind": "CORROBORATED_SUPPORT",
+          "source_definition_ids": [
+            "test.general.visual_inspection",
+            "test.storage.device_inventory"
+          ],
+          "minimum_distinct_outcomes": 2
+        }
+      ]
+    },
+    {
+      "part_id": "isolation.storage.failed_sas_member.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.storage.failed_sas_member.v1"
+      ],
+      "target_fault_id": "fault.storage.sas.drive_failed",
+      "routes": [
+        {
+          "route_kind": "DEFINITIVE_DIAGNOSTIC",
+          "source_definition_ids": [
+            "test.storage.drive_health"
+          ]
+        },
+        {
+          "route_kind": "CORROBORATED_SUPPORT",
+          "source_definition_ids": [
+            "test.storage.raid_status",
+            "command.linux.smartctl"
+          ],
+          "minimum_distinct_outcomes": 2
+        }
+      ]
+    },
+    {
+      "part_id": "isolation.memory.unseated_dimm.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.memory.unseated_dimm.v1"
+      ],
+      "target_fault_id": "fault.memory.dimm.not_seated",
+      "routes": [
+        {
+          "route_kind": "DEFINITIVE_DIAGNOSTIC",
+          "source_definition_ids": [
+            "test.memory.single_dimm_isolation"
+          ]
+        }
+      ]
+    },
+    {
+      "part_id": "isolation.memory.failed_dimm.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.memory.failed_dimm.v1"
+      ],
+      "target_fault_id": "fault.memory.dimm.failed",
+      "routes": [
+        {
+          "route_kind": "DEFINITIVE_DIAGNOSTIC",
+          "source_definition_ids": [
+            "test.memory.diagnostic"
+          ]
+        },
+        {
+          "route_kind": "CORROBORATED_SUPPORT",
+          "source_definition_ids": [
+            "test.memory.single_dimm_isolation",
+            "test.system.bmc_logs"
+          ],
+          "minimum_distinct_outcomes": 2
+        }
+      ]
+    },
+    {
+      "part_id": "isolation.power.unseated_psu.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.power.unseated_psu.v1"
+      ],
+      "target_fault_id": "fault.power.psu.not_seated",
+      "routes": [
+        {
+          "route_kind": "CORROBORATED_SUPPORT",
+          "source_definition_ids": [
+            "test.general.visual_inspection",
+            "test.power.psu_status"
+          ],
+          "minimum_distinct_outcomes": 2
+        }
+      ]
+    },
+    {
+      "part_id": "isolation.power.failed_psu.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.power.failed_psu.v1"
+      ],
+      "target_fault_id": "fault.power.psu.failed",
+      "routes": [
+        {
+          "route_kind": "DEFINITIVE_DIAGNOSTIC",
+          "source_definition_ids": [
+            "test.power.known_good_psu"
+          ]
+        },
+        {
+          "route_kind": "CORROBORATED_SUPPORT",
+          "source_definition_ids": [
+            "test.power.psu_status",
+            "test.power.output_voltage_measurement"
+          ],
+          "minimum_distinct_outcomes": 2
+        }
+      ]
+    },
+    {
+      "part_id": "isolation.boot.incorrect_order.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.boot.incorrect_order.v1"
+      ],
+      "target_fault_id": "fault.boot.order.incorrect",
+      "routes": [
+        {
+          "route_kind": "CORROBORATED_SUPPORT",
+          "source_definition_ids": [
+            "test.firmware.settings_review",
+            "test.boot.device_inventory"
+          ],
+          "minimum_distinct_outcomes": 2
+        }
+      ]
+    },
+    {
+      "part_id": "isolation.boot.missing_nvme.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.boot.missing_nvme.v1"
+      ],
+      "target_fault_id": "fault.storage.nvme.device_failed",
+      "routes": [
+        {
+          "route_kind": "DEFINITIVE_DIAGNOSTIC",
+          "source_definition_ids": [
+            "test.system.bmc_logs"
+          ]
+        }
+      ]
+    },
+    {
+      "part_id": "isolation.thermal.failed_fan.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.thermal.failed_fan.v1"
+      ],
+      "target_fault_id": "fault.thermal.fan.failed",
+      "routes": [
+        {
+          "route_kind": "DEFINITIVE_DIAGNOSTIC",
+          "source_definition_ids": [
+            "test.thermal.fan_telemetry"
+          ]
+        },
+        {
+          "route_kind": "DEFINITIVE_DIAGNOSTIC",
+          "source_definition_ids": [
+            "test.cooling.location_cross_substitution"
+          ]
+        }
+      ]
+    },
+    {
+      "part_id": "isolation.thermal.clogged_heatsink.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.thermal.clogged_heatsink.v1"
+      ],
+      "target_fault_id": "fault.thermal.heatsink.clogged",
+      "routes": [
+        {
+          "route_kind": "DEFINITIVE_DIAGNOSTIC",
+          "source_definition_ids": [
+            "test.thermal.temperature_monitoring"
+          ]
+        }
+      ]
+    },
+    {
+      "part_id": "isolation.network.failed_cable.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.network.failed_cable.v1"
+      ],
+      "target_fault_id": "fault.network.cable.failed",
+      "routes": [
+        {
+          "route_kind": "DEFINITIVE_DIAGNOSTIC",
+          "source_definition_ids": [
+            "test.network.cable_substitution"
+          ]
+        }
+      ]
+    },
+    {
+      "part_id": "isolation.network.incorrect_static_ip.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.network.incorrect_static_ip.v1"
+      ],
+      "target_fault_id": "fault.network.ip.static_incorrect",
+      "routes": [
+        {
+          "route_kind": "DEFINITIVE_DIAGNOSTIC",
+          "source_definition_ids": [
+            "test.network.interface_config"
+          ]
+        }
+      ]
+    },
+    {
+      "part_id": "isolation.compute.damaged_cpu_socket_contacts.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.compute.damaged_cpu_socket_contacts.v1"
+      ],
+      "target_fault_id": "fault.compute.cpu_socket.contacts_damaged",
+      "routes": [
+        {
+          "route_kind": "DEFINITIVE_DIAGNOSTIC",
+          "source_definition_ids": [
+            "test.compute.socket_magnified_inspection"
+          ]
+        }
+      ]
+    },
+    {
+      "part_id": "isolation.power.failed_distribution_board.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.power.failed_distribution_board.v1"
+      ],
+      "target_fault_id": "fault.power.distribution_board.failed",
+      "routes": [
+        {
+          "route_kind": "DEFINITIVE_DIAGNOSTIC",
+          "source_definition_ids": [
+            "test.power.distribution_path_isolation"
+          ]
+        }
+      ]
+    },
+    {
+      "part_id": "isolation.storage.predictive_drive_failure.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.storage.predictive_drive_failure.v1"
+      ],
+      "target_fault_id": "fault.storage.drive.predictive_failure",
+      "routes": [
+        {
+          "route_kind": "DEFINITIVE_DIAGNOSTIC",
+          "source_definition_ids": [
+            "test.storage.predictive_health"
+          ]
+        }
+      ]
+    },
+    {
+      "part_id": "isolation.management.stale_alert.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.management.stale_alert.v1"
+      ],
+      "target_fault_id": "fault.management.alert.stale",
+      "routes": [
+        {
+          "route_kind": "DEFINITIVE_DIAGNOSTIC",
+          "source_definition_ids": [
+            "test.management.event_log_freshness"
+          ]
+        }
+      ]
+    },
+    {
+      "part_id": "isolation.firmware.incompatible_version_set.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.firmware.incompatible_version_set.v1"
+      ],
+      "target_fault_id": "fault.firmware.version_set.incompatible",
+      "routes": [
+        {
+          "route_kind": "CORROBORATED_SUPPORT",
+          "source_definition_ids": [
+            "test.firmware.version_compatibility",
+            "test.network.link_counter_soak"
+          ],
+          "minimum_distinct_outcomes": 2
+        }
+      ]
+    },
+    {
+      "part_id": "isolation.management.corrupt_bmc_firmware.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.management.corrupt_bmc_firmware.v1"
+      ],
+      "target_fault_id": "fault.management.bmc_firmware.corrupt",
+      "routes": [
+        {
+          "route_kind": "DEFINITIVE_DIAGNOSTIC",
+          "source_definition_ids": [
+            "test.management.bmc_recovery_state"
+          ]
+        }
+      ]
+    }
+  ],
+  "repair_plan_parts": [
+    {
+      "part_id": "repair_plan.storage.loose_cable.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.storage.loose_cable.v1"
+      ],
+      "target_fault_id": "fault.storage.cable.loose",
+      "repair_procedure_id": "repair.storage.reseat_cable",
+      "public_summary": "The storage cable is fully reseated and latched."
+    },
+    {
+      "part_id": "repair_plan.storage.failed_sas_member.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.storage.failed_sas_member.v1"
+      ],
+      "target_fault_id": "fault.storage.sas.drive_failed",
+      "repair_procedure_id": "repair.storage.replace_raid_member",
+      "public_summary": "The failed SAS member is replaced and the array can recover."
+    },
+    {
+      "part_id": "repair_plan.memory.unseated_dimm.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.memory.unseated_dimm.v1"
+      ],
+      "target_fault_id": "fault.memory.dimm.not_seated",
+      "repair_procedure_id": "repair.memory.reseat_dimm",
+      "public_summary": "The DIMM is reseated according to the platform procedure."
+    },
+    {
+      "part_id": "repair_plan.memory.failed_dimm.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.memory.failed_dimm.v1"
+      ],
+      "target_fault_id": "fault.memory.dimm.failed",
+      "repair_procedure_id": "repair.memory.replace_dimm",
+      "public_summary": "The failed DIMM is replaced with a compatible module."
+    },
+    {
+      "part_id": "repair_plan.power.unseated_psu.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.power.unseated_psu.v1"
+      ],
+      "target_fault_id": "fault.power.psu.not_seated",
+      "repair_procedure_id": "repair.power.reseat_psu",
+      "public_summary": "The PSU is fully seated and latched."
+    },
+    {
+      "part_id": "repair_plan.power.failed_psu.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.power.failed_psu.v1"
+      ],
+      "target_fault_id": "fault.power.psu.failed",
+      "repair_procedure_id": "repair.power.replace_psu",
+      "public_summary": "The failed PSU is replaced with a compatible supply."
+    },
+    {
+      "part_id": "repair_plan.boot.incorrect_order.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.boot.incorrect_order.v1"
+      ],
+      "target_fault_id": "fault.boot.order.incorrect",
+      "repair_procedure_id": "repair.boot.correct_order",
+      "public_summary": "The intended system volume is restored to the first boot position."
+    },
+    {
+      "part_id": "repair_plan.boot.missing_nvme.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.boot.missing_nvme.v1"
+      ],
+      "target_fault_id": "fault.storage.nvme.device_failed",
+      "repair_procedure_id": "repair.storage.replace_nvme",
+      "public_summary": "The failed NVMe system device is replaced."
+    },
+    {
+      "part_id": "repair_plan.thermal.failed_fan.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.thermal.failed_fan.v1"
+      ],
+      "target_fault_id": "fault.thermal.fan.failed",
+      "repair_procedure_id": "repair.thermal.replace_fan",
+      "public_summary": "The failed fan is replaced with a compatible module."
+    },
+    {
+      "part_id": "repair_plan.thermal.clogged_heatsink.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.thermal.clogged_heatsink.v1"
+      ],
+      "target_fault_id": "fault.thermal.heatsink.clogged",
+      "repair_procedure_id": "repair.thermal.clean_cooling_path",
+      "public_summary": "The heatsink and airflow path are cleaned."
+    },
+    {
+      "part_id": "repair_plan.network.failed_cable.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.network.failed_cable.v1"
+      ],
+      "target_fault_id": "fault.network.cable.failed",
+      "repair_procedure_id": "repair.network.replace_cable",
+      "public_summary": "The failed Ethernet cable is replaced."
+    },
+    {
+      "part_id": "repair_plan.network.incorrect_static_ip.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.network.incorrect_static_ip.v1"
+      ],
+      "target_fault_id": "fault.network.ip.static_incorrect",
+      "repair_procedure_id": "repair.network.correct_static_ip",
+      "public_summary": "The static address, prefix, and gateway are corrected."
+    },
+    {
+      "part_id": "repair_plan.compute.damaged_cpu_socket_contacts.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.compute.damaged_cpu_socket_contacts.v1"
+      ],
+      "target_fault_id": "fault.compute.cpu_socket.contacts_damaged",
+      "repair_procedure_id": "repair.compute.restore_socket_contacts",
+      "public_summary": "The accepted Repair changes machine.compute.damaged_socket_contacts.active to its authored repaired state; it does not prove closure."
+    },
+    {
+      "part_id": "repair_plan.power.failed_distribution_board.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.power.failed_distribution_board.v1"
+      ],
+      "target_fault_id": "fault.power.distribution_board.failed",
+      "repair_procedure_id": "repair.power.replace_distribution_board",
+      "public_summary": "The accepted Repair changes machine.power.failed_distribution_board.active to its authored repaired state; it does not prove closure."
+    },
+    {
+      "part_id": "repair_plan.storage.predictive_drive_failure.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.storage.predictive_drive_failure.v1"
+      ],
+      "target_fault_id": "fault.storage.drive.predictive_failure",
+      "repair_procedure_id": "repair.storage.replace_predictive_drive",
+      "public_summary": "The accepted Repair changes machine.storage.predictive_drive_failure.active to its authored repaired state; it does not prove closure."
+    },
+    {
+      "part_id": "repair_plan.management.stale_alert.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.management.stale_alert.v1"
+      ],
+      "target_fault_id": "fault.management.alert.stale",
+      "repair_procedure_id": "repair.management.clear_stale_alert_state",
+      "public_summary": "The accepted Repair changes machine.management.stale_alert.active to its authored repaired state; it does not prove closure."
+    },
+    {
+      "part_id": "repair_plan.firmware.incompatible_version_set.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.firmware.incompatible_version_set.v1"
+      ],
+      "target_fault_id": "fault.firmware.version_set.incompatible",
+      "repair_procedure_id": "repair.firmware.restore_compatible_versions",
+      "public_summary": "The accepted Repair changes machine.firmware.incompatible_version_set.active to its authored repaired state; it does not prove closure."
+    },
+    {
+      "part_id": "repair_plan.management.corrupt_bmc_firmware.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.management.corrupt_bmc_firmware.v1"
+      ],
+      "target_fault_id": "fault.management.bmc_firmware.corrupt",
+      "repair_procedure_id": "repair.management.recover_bmc_firmware",
+      "public_summary": "The accepted Repair changes machine.management.corrupt_bmc_firmware.active to its authored repaired state; it does not prove closure."
+    }
+  ],
+  "verification_plan_parts": [
+    {
+      "part_id": "verify_plan.storage.detected.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.storage.loose_cable.v1"
+      ],
+      "requirements": [
+        {
+          "validation_procedure_id": "verify.storage.device_detected",
+          "success_condition": "The expected storage device is detected on the repaired path."
+        }
+      ]
+    },
+    {
+      "part_id": "verify_plan.storage.raid_healthy.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.storage.failed_sas_member.v1"
+      ],
+      "requirements": [
+        {
+          "validation_procedure_id": "verify.storage.raid_healthy",
+          "success_condition": "The array returns to a healthy redundant state."
+        }
+      ]
+    },
+    {
+      "part_id": "verify_plan.memory.inventory_and_test.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.memory.unseated_dimm.v1"
+      ],
+      "requirements": [
+        {
+          "validation_procedure_id": "verify.memory.inventory",
+          "success_condition": "Expected memory capacity and channel inventory are restored."
+        },
+        {
+          "validation_procedure_id": "verify.memory.full_test",
+          "success_condition": "A complete memory test passes after reseating."
+        }
+      ]
+    },
+    {
+      "part_id": "verify_plan.memory.full_test.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.memory.failed_dimm.v1"
+      ],
+      "requirements": [
+        {
+          "validation_procedure_id": "verify.memory.full_test",
+          "success_condition": "A complete memory test passes without the original errors."
+        }
+      ]
+    },
+    {
+      "part_id": "verify_plan.power.stable_unseated.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.power.unseated_psu.v1"
+      ],
+      "requirements": [
+        {
+          "validation_procedure_id": "verify.power.stable",
+          "success_condition": "The redundant power path remains stable after reseating."
+        }
+      ]
+    },
+    {
+      "part_id": "verify_plan.power.stable_failed.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.power.failed_psu.v1"
+      ],
+      "requirements": [
+        {
+          "validation_procedure_id": "verify.power.stable",
+          "success_condition": "The replacement supply remains stable under normal operation."
+        }
+      ]
+    },
+    {
+      "part_id": "verify_plan.boot.normal_order.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.boot.incorrect_order.v1"
+      ],
+      "requirements": [
+        {
+          "validation_procedure_id": "verify.boot.normal_boot",
+          "success_condition": "The server boots from the intended system volume."
+        }
+      ]
+    },
+    {
+      "part_id": "verify_plan.boot.nvme_detected.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.boot.missing_nvme.v1"
+      ],
+      "requirements": [
+        {
+          "validation_procedure_id": "verify.storage.device_detected",
+          "success_condition": "The replacement NVMe device is detected."
+        },
+        {
+          "validation_procedure_id": "verify.boot.normal_boot",
+          "success_condition": "The server completes a normal boot from the replacement device."
+        }
+      ]
+    },
+    {
+      "part_id": "verify_plan.thermal.fan_load.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.thermal.failed_fan.v1"
+      ],
+      "requirements": [
+        {
+          "validation_procedure_id": "verify.thermal.load_test",
+          "success_condition": "Fan telemetry and temperature remain normal under controlled load."
+        }
+      ]
+    },
+    {
+      "part_id": "verify_plan.thermal.clog_load.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.thermal.clogged_heatsink.v1"
+      ],
+      "requirements": [
+        {
+          "validation_procedure_id": "verify.thermal.load_test",
+          "success_condition": "Processor temperature remains within range under controlled load."
+        }
+      ]
+    },
+    {
+      "part_id": "verify_plan.network.link_connectivity.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.network.failed_cable.v1"
+      ],
+      "requirements": [
+        {
+          "validation_procedure_id": "verify.network.link",
+          "success_condition": "The repaired interface maintains physical carrier."
+        },
+        {
+          "validation_procedure_id": "verify.network.connectivity",
+          "success_condition": "Expected network destinations are reachable."
+        }
+      ]
+    },
+    {
+      "part_id": "verify_plan.network.connectivity.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.network.incorrect_static_ip.v1"
+      ],
+      "requirements": [
+        {
+          "validation_procedure_id": "verify.network.connectivity",
+          "success_condition": "The corrected interface reaches the expected destinations."
+        }
+      ]
+    },
+    {
+      "part_id": "verify_plan.compute.damaged_cpu_socket_contacts.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.compute.damaged_cpu_socket_contacts.v1"
+      ],
+      "requirements": [
+        {
+          "validation_procedure_id": "verify.compute.socket_path",
+          "success_condition": "Repeated cold starts complete with every expected processor and memory channel present and no new socket-path event."
+        }
+      ]
+    },
+    {
+      "part_id": "verify_plan.power.failed_distribution_board.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.power.failed_distribution_board.v1"
+      ],
+      "requirements": [
+        {
+          "validation_procedure_id": "verify.power.distribution_path",
+          "success_condition": "Cold starts, bay telemetry, and a safe redundancy transition complete without a new voltage or power-good event."
+        }
+      ]
+    },
+    {
+      "part_id": "verify_plan.storage.predictive_drive_failure.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.storage.predictive_drive_failure.v1"
+      ],
+      "requirements": [
+        {
+          "validation_procedure_id": "verify.storage.predictive_replacement",
+          "success_condition": "The documented replacement member is present, rebuild completes, the array is healthy, and no predictive warning returns."
+        }
+      ]
+    },
+    {
+      "part_id": "verify_plan.management.stale_alert.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.management.stale_alert.v1"
+      ],
+      "requirements": [
+        {
+          "validation_procedure_id": "verify.management.alert_does_not_recur",
+          "success_condition": "After evidence-preserving state refresh, current hardware stays healthy and the target alert does not recur during the defined window."
+        }
+      ]
+    },
+    {
+      "part_id": "verify_plan.firmware.incompatible_version_set.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.firmware.incompatible_version_set.v1"
+      ],
+      "requirements": [
+        {
+          "validation_procedure_id": "verify.firmware.compatible_persistent",
+          "success_condition": "The approved version set persists after restart and the defined link/counter soak completes without the regression."
+        }
+      ]
+    },
+    {
+      "part_id": "verify_plan.management.corrupt_bmc_firmware.v1",
+      "compatible_fault_blueprint_part_ids": [
+        "truth.management.corrupt_bmc_firmware.v1"
+      ],
+      "requirements": [
+        {
+          "validation_procedure_id": "verify.management.bmc_functional",
+          "success_condition": "The approved recovery completes and the controller reaches the reported reset and normal-start acceptance boundary."
+        }
+      ]
+    }
+  ]
+}

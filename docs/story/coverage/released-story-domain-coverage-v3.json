@@ -1,0 +1,4088 @@
+{
+  "authored_totals": {
+    "closure_publications": 18,
+    "explicit_document_live_requirements": 0,
+    "fingerprints": {
+      "ids": [
+        "fingerprint.boot.incorrect_order",
+        "fingerprint.boot.missing_nvme",
+        "fingerprint.compute.damaged_cpu_socket_contacts",
+        "fingerprint.firmware.incompatible_version_set",
+        "fingerprint.management.corrupt_bmc_firmware",
+        "fingerprint.management.stale_alert",
+        "fingerprint.memory.failed_dimm",
+        "fingerprint.memory.unseated_dimm",
+        "fingerprint.network.failed_cable",
+        "fingerprint.network.incorrect_static_ip",
+        "fingerprint.power.failed_distribution_board",
+        "fingerprint.power.failed_psu",
+        "fingerprint.power.unseated_psu",
+        "fingerprint.storage.failed_sas_member",
+        "fingerprint.storage.loose_cable",
+        "fingerprint.storage.predictive_drive_failure",
+        "fingerprint.thermal.clogged_heatsink",
+        "fingerprint.thermal.failed_fan"
+      ],
+      "repeated": [],
+      "ticket_role_occurrences": 18,
+      "unique_count": 18
+    },
+    "matches": 12,
+    "minimal_required_cards": {
+      "card_definition_ids": [
+        "card.bench.test.boot.device_inventory",
+        "card.bench.test.compute.socket_magnified_inspection",
+        "card.bench.test.firmware.settings_review",
+        "card.bench.test.firmware.version_compatibility",
+        "card.bench.test.general.visual_inspection",
+        "card.bench.test.management.bmc_recovery_state",
+        "card.bench.test.management.event_log_freshness",
+        "card.bench.test.memory.diagnostic",
+        "card.bench.test.memory.single_dimm_isolation",
+        "card.bench.test.network.cable_substitution",
+        "card.bench.test.network.interface_config",
+        "card.bench.test.network.link_counter_soak",
+        "card.bench.test.power.distribution_path_isolation",
+        "card.bench.test.power.known_good_psu",
+        "card.bench.test.power.psu_status",
+        "card.bench.test.storage.device_inventory",
+        "card.bench.test.storage.drive_health",
+        "card.bench.test.storage.predictive_health",
+        "card.bench.test.system.bmc_logs",
+        "card.bench.test.thermal.fan_telemetry",
+        "card.bench.test.thermal.temperature_monitoring",
+        "card.response.repair.boot.correct_order",
+        "card.response.repair.compute.restore_socket_contacts",
+        "card.response.repair.firmware.restore_compatible_versions",
+        "card.response.repair.management.clear_stale_alert_state",
+        "card.response.repair.management.recover_bmc_firmware",
+        "card.response.repair.memory.replace_dimm",
+        "card.response.repair.memory.reseat_dimm",
+        "card.response.repair.network.correct_static_ip",
+        "card.response.repair.network.replace_cable",
+        "card.response.repair.power.replace_distribution_board",
+        "card.response.repair.power.replace_psu",
+        "card.response.repair.power.reseat_psu",
+        "card.response.repair.storage.replace_nvme",
+        "card.response.repair.storage.replace_predictive_drive",
+        "card.response.repair.storage.replace_raid_member",
+        "card.response.repair.storage.reseat_cable",
+        "card.response.repair.thermal.clean_cooling_path",
+        "card.response.repair.thermal.replace_fan",
+        "card.response.verify.boot.normal_boot",
+        "card.response.verify.compute.socket_path",
+        "card.response.verify.firmware.compatible_persistent",
+        "card.response.verify.management.alert_does_not_recur",
+        "card.response.verify.management.bmc_functional",
+        "card.response.verify.memory.full_test",
+        "card.response.verify.memory.inventory",
+        "card.response.verify.network.connectivity",
+        "card.response.verify.network.link",
+        "card.response.verify.power.distribution_path",
+        "card.response.verify.power.stable",
+        "card.response.verify.storage.device_detected",
+        "card.response.verify.storage.predictive_replacement",
+        "card.response.verify.storage.raid_healthy",
+        "card.response.verify.thermal.load_test"
+      ],
+      "unique_count": 54
+    },
+    "minimal_witness_diagnostics": {
+      "ids": [
+        "test.boot.device_inventory",
+        "test.compute.socket_magnified_inspection",
+        "test.firmware.settings_review",
+        "test.firmware.version_compatibility",
+        "test.general.visual_inspection",
+        "test.management.bmc_recovery_state",
+        "test.management.event_log_freshness",
+        "test.memory.diagnostic",
+        "test.memory.single_dimm_isolation",
+        "test.network.cable_substitution",
+        "test.network.interface_config",
+        "test.network.link_counter_soak",
+        "test.power.distribution_path_isolation",
+        "test.power.known_good_psu",
+        "test.power.psu_status",
+        "test.storage.device_inventory",
+        "test.storage.drive_health",
+        "test.storage.predictive_health",
+        "test.system.bmc_logs",
+        "test.thermal.fan_telemetry",
+        "test.thermal.temperature_monitoring"
+      ],
+      "repeated": [
+        {
+          "count": 2,
+          "id": "test.general.visual_inspection"
+        }
+      ],
+      "ticket_role_occurrences": 22,
+      "unique_count": 21
+    },
+    "proven_candidate_changing_diagnostics": {
+      "ids": [
+        "command.linux.ip_addr",
+        "command.linux.ip_route",
+        "command.linux.lsblk",
+        "command.linux.lspci",
+        "command.linux.smartctl",
+        "command.network.ping",
+        "test.boot.device_inventory",
+        "test.compute.socket_magnified_inspection",
+        "test.cooling.location_cross_substitution",
+        "test.firmware.settings_review",
+        "test.firmware.version_compatibility",
+        "test.general.minimum_configuration",
+        "test.general.visual_inspection",
+        "test.management.bmc_recovery_state",
+        "test.management.event_log_freshness",
+        "test.memory.diagnostic",
+        "test.memory.single_dimm_isolation",
+        "test.network.cable_substitution",
+        "test.network.dhcp_pool_audit",
+        "test.network.interface_config",
+        "test.network.link",
+        "test.network.link_counter_soak",
+        "test.network.ping",
+        "test.pcie.inventory",
+        "test.power.distribution_path_isolation",
+        "test.power.known_good_psu",
+        "test.power.output_voltage_measurement",
+        "test.power.psu_status",
+        "test.power.residual_power_drain",
+        "test.storage.device_inventory",
+        "test.storage.drive_health",
+        "test.storage.predictive_health",
+        "test.storage.raid_status",
+        "test.system.bmc_logs",
+        "test.thermal.fan_telemetry",
+        "test.thermal.temperature_monitoring"
+      ],
+      "repeated": [
+        {
+          "count": 9,
+          "id": "test.general.visual_inspection"
+        },
+        {
+          "count": 4,
+          "id": "test.system.bmc_logs"
+        },
+        {
+          "count": 3,
+          "id": "command.linux.lsblk"
+        },
+        {
+          "count": 3,
+          "id": "command.linux.lspci"
+        },
+        {
+          "count": 3,
+          "id": "test.pcie.inventory"
+        },
+        {
+          "count": 3,
+          "id": "test.storage.device_inventory"
+        },
+        {
+          "count": 2,
+          "id": "command.linux.ip_addr"
+        },
+        {
+          "count": 2,
+          "id": "command.linux.ip_route"
+        },
+        {
+          "count": 2,
+          "id": "command.linux.smartctl"
+        },
+        {
+          "count": 2,
+          "id": "command.network.ping"
+        },
+        {
+          "count": 2,
+          "id": "test.boot.device_inventory"
+        },
+        {
+          "count": 2,
+          "id": "test.firmware.settings_review"
+        },
+        {
+          "count": 2,
+          "id": "test.memory.single_dimm_isolation"
+        },
+        {
+          "count": 2,
+          "id": "test.network.cable_substitution"
+        },
+        {
+          "count": 2,
+          "id": "test.network.interface_config"
+        },
+        {
+          "count": 2,
+          "id": "test.network.link"
+        },
+        {
+          "count": 2,
+          "id": "test.network.ping"
+        },
+        {
+          "count": 2,
+          "id": "test.power.distribution_path_isolation"
+        },
+        {
+          "count": 2,
+          "id": "test.power.known_good_psu"
+        },
+        {
+          "count": 2,
+          "id": "test.power.output_voltage_measurement"
+        },
+        {
+          "count": 2,
+          "id": "test.power.psu_status"
+        },
+        {
+          "count": 2,
+          "id": "test.storage.drive_health"
+        },
+        {
+          "count": 2,
+          "id": "test.storage.raid_status"
+        },
+        {
+          "count": 2,
+          "id": "test.thermal.fan_telemetry"
+        },
+        {
+          "count": 2,
+          "id": "test.thermal.temperature_monitoring"
+        }
+      ],
+      "ticket_role_occurrences": 74,
+      "unique_count": 36
+    },
+    "public_candidate_faults": {
+      "ids": [
+        "fault.board.system.failed",
+        "fault.boot.device.not_detected",
+        "fault.boot.order.incorrect",
+        "fault.compute.cpu_socket.contacts_damaged",
+        "fault.cpu.not_seated",
+        "fault.firmware.config.reset",
+        "fault.firmware.version_set.incompatible",
+        "fault.management.alert.stale",
+        "fault.management.bmc_firmware.corrupt",
+        "fault.memory.channel.unavailable",
+        "fault.memory.dimm.failed",
+        "fault.memory.dimm.not_seated",
+        "fault.memory.population.invalid",
+        "fault.network.cable.disconnected",
+        "fault.network.cable.failed",
+        "fault.network.dhcp.no_lease",
+        "fault.network.ip.static_incorrect",
+        "fault.network.nic.failed",
+        "fault.power.distribution_board.failed",
+        "fault.power.input.cable_loose",
+        "fault.power.psu.failed",
+        "fault.power.psu.not_seated",
+        "fault.storage.backplane.path_failed",
+        "fault.storage.cable.failed",
+        "fault.storage.cable.loose",
+        "fault.storage.drive.predictive_failure",
+        "fault.storage.nvme.device_failed",
+        "fault.storage.raid.controller_failed",
+        "fault.storage.raid.degraded",
+        "fault.storage.sas.drive_failed",
+        "fault.storage.sata.drive_failed",
+        "fault.system.intermittent_memory_instability",
+        "fault.thermal.cpu.overheating",
+        "fault.thermal.fan.failed",
+        "fault.thermal.heatsink.clogged",
+        "fault.thermal.heatsink.contact_poor"
+      ],
+      "repeated": [
+        {
+          "count": 3,
+          "id": "fault.network.cable.disconnected"
+        },
+        {
+          "count": 3,
+          "id": "fault.network.cable.failed"
+        },
+        {
+          "count": 3,
+          "id": "fault.network.nic.failed"
+        },
+        {
+          "count": 3,
+          "id": "fault.power.input.cable_loose"
+        },
+        {
+          "count": 3,
+          "id": "fault.power.psu.failed"
+        },
+        {
+          "count": 3,
+          "id": "fault.power.psu.not_seated"
+        },
+        {
+          "count": 3,
+          "id": "fault.storage.sas.drive_failed"
+        },
+        {
+          "count": 2,
+          "id": "fault.board.system.failed"
+        },
+        {
+          "count": 2,
+          "id": "fault.boot.order.incorrect"
+        },
+        {
+          "count": 2,
+          "id": "fault.firmware.version_set.incompatible"
+        },
+        {
+          "count": 2,
+          "id": "fault.memory.dimm.failed"
+        },
+        {
+          "count": 2,
+          "id": "fault.memory.dimm.not_seated"
+        },
+        {
+          "count": 2,
+          "id": "fault.network.dhcp.no_lease"
+        },
+        {
+          "count": 2,
+          "id": "fault.network.ip.static_incorrect"
+        },
+        {
+          "count": 2,
+          "id": "fault.storage.backplane.path_failed"
+        },
+        {
+          "count": 2,
+          "id": "fault.storage.cable.loose"
+        },
+        {
+          "count": 2,
+          "id": "fault.storage.nvme.device_failed"
+        },
+        {
+          "count": 2,
+          "id": "fault.thermal.cpu.overheating"
+        },
+        {
+          "count": 2,
+          "id": "fault.thermal.fan.failed"
+        },
+        {
+          "count": 2,
+          "id": "fault.thermal.heatsink.clogged"
+        },
+        {
+          "count": 2,
+          "id": "fault.thermal.heatsink.contact_poor"
+        }
+      ],
+      "ticket_role_occurrences": 64,
+      "unique_count": 36
+    },
+    "relevant_diagnostics": {
+      "ids": [
+        "command.linux.dhclient",
+        "command.linux.ip_addr",
+        "command.linux.ip_route",
+        "command.linux.lsblk",
+        "command.linux.lspci",
+        "command.linux.nvme_smart_log",
+        "command.linux.smartctl",
+        "command.network.ping",
+        "test.boot.device_inventory",
+        "test.boot.post_code_analysis",
+        "test.compute.socket_magnified_inspection",
+        "test.cooling.location_cross_substitution",
+        "test.firmware.settings_review",
+        "test.firmware.version_compatibility",
+        "test.general.minimum_configuration",
+        "test.general.visual_inspection",
+        "test.management.bmc_recovery_state",
+        "test.management.event_log_freshness",
+        "test.memory.diagnostic",
+        "test.memory.known_good_substitution",
+        "test.memory.single_dimm_isolation",
+        "test.network.cable_substitution",
+        "test.network.dhcp_pool_audit",
+        "test.network.dhcp_transaction_trace",
+        "test.network.interface_config",
+        "test.network.link",
+        "test.network.link_counter_soak",
+        "test.network.ping",
+        "test.pcie.inventory",
+        "test.power.distribution_path_isolation",
+        "test.power.known_good_psu",
+        "test.power.output_voltage_measurement",
+        "test.power.psu_status",
+        "test.power.residual_power_drain",
+        "test.storage.bay_path_isolation",
+        "test.storage.device_inventory",
+        "test.storage.drive_health",
+        "test.storage.predictive_health",
+        "test.storage.raid_status",
+        "test.system.bmc_logs",
+        "test.system.controlled_stress",
+        "test.thermal.fan_telemetry",
+        "test.thermal.temperature_monitoring"
+      ],
+      "repeated": [
+        {
+          "count": 15,
+          "id": "test.general.visual_inspection"
+        },
+        {
+          "count": 15,
+          "id": "test.system.bmc_logs"
+        },
+        {
+          "count": 14,
+          "id": "test.general.minimum_configuration"
+        },
+        {
+          "count": 13,
+          "id": "test.pcie.inventory"
+        },
+        {
+          "count": 13,
+          "id": "test.storage.device_inventory"
+        },
+        {
+          "count": 12,
+          "id": "test.memory.single_dimm_isolation"
+        },
+        {
+          "count": 12,
+          "id": "test.power.psu_status"
+        },
+        {
+          "count": 11,
+          "id": "test.storage.raid_status"
+        },
+        {
+          "count": 11,
+          "id": "test.thermal.fan_telemetry"
+        },
+        {
+          "count": 11,
+          "id": "test.thermal.temperature_monitoring"
+        },
+        {
+          "count": 10,
+          "id": "test.firmware.version_compatibility"
+        },
+        {
+          "count": 10,
+          "id": "test.memory.diagnostic"
+        },
+        {
+          "count": 10,
+          "id": "test.memory.known_good_substitution"
+        },
+        {
+          "count": 10,
+          "id": "test.network.link"
+        },
+        {
+          "count": 10,
+          "id": "test.power.distribution_path_isolation"
+        },
+        {
+          "count": 10,
+          "id": "test.power.known_good_psu"
+        },
+        {
+          "count": 10,
+          "id": "test.power.output_voltage_measurement"
+        },
+        {
+          "count": 10,
+          "id": "test.power.residual_power_drain"
+        },
+        {
+          "count": 10,
+          "id": "test.storage.bay_path_isolation"
+        },
+        {
+          "count": 10,
+          "id": "test.storage.drive_health"
+        },
+        {
+          "count": 9,
+          "id": "test.cooling.location_cross_substitution"
+        },
+        {
+          "count": 9,
+          "id": "test.system.controlled_stress"
+        },
+        {
+          "count": 6,
+          "id": "test.boot.post_code_analysis"
+        },
+        {
+          "count": 5,
+          "id": "test.network.link_counter_soak"
+        },
+        {
+          "count": 4,
+          "id": "command.linux.lsblk"
+        },
+        {
+          "count": 4,
+          "id": "command.linux.lspci"
+        },
+        {
+          "count": 4,
+          "id": "test.boot.device_inventory"
+        },
+        {
+          "count": 4,
+          "id": "test.management.bmc_recovery_state"
+        },
+        {
+          "count": 4,
+          "id": "test.network.cable_substitution"
+        },
+        {
+          "count": 4,
+          "id": "test.storage.predictive_health"
+        },
+        {
+          "count": 3,
+          "id": "command.linux.nvme_smart_log"
+        },
+        {
+          "count": 3,
+          "id": "command.linux.smartctl"
+        },
+        {
+          "count": 3,
+          "id": "test.compute.socket_magnified_inspection"
+        },
+        {
+          "count": 3,
+          "id": "test.firmware.settings_review"
+        },
+        {
+          "count": 2,
+          "id": "command.linux.dhclient"
+        },
+        {
+          "count": 2,
+          "id": "command.linux.ip_addr"
+        },
+        {
+          "count": 2,
+          "id": "command.linux.ip_route"
+        },
+        {
+          "count": 2,
+          "id": "command.network.ping"
+        },
+        {
+          "count": 2,
+          "id": "test.network.dhcp_pool_audit"
+        },
+        {
+          "count": 2,
+          "id": "test.network.dhcp_transaction_trace"
+        },
+        {
+          "count": 2,
+          "id": "test.network.interface_config"
+        },
+        {
+          "count": 2,
+          "id": "test.network.ping"
+        }
+      ],
+      "ticket_role_occurrences": 309,
+      "unique_count": 43
+    },
+    "repairs": {
+      "ids": [
+        "repair.boot.correct_order",
+        "repair.compute.restore_socket_contacts",
+        "repair.firmware.restore_compatible_versions",
+        "repair.management.clear_stale_alert_state",
+        "repair.management.recover_bmc_firmware",
+        "repair.memory.replace_dimm",
+        "repair.memory.reseat_dimm",
+        "repair.network.correct_static_ip",
+        "repair.network.replace_cable",
+        "repair.power.replace_distribution_board",
+        "repair.power.replace_psu",
+        "repair.power.reseat_psu",
+        "repair.storage.replace_nvme",
+        "repair.storage.replace_predictive_drive",
+        "repair.storage.replace_raid_member",
+        "repair.storage.reseat_cable",
+        "repair.thermal.clean_cooling_path",
+        "repair.thermal.replace_fan"
+      ],
+      "repeated": [],
+      "ticket_role_occurrences": 18,
+      "unique_count": 18
+    },
+    "symptoms": {
+      "ids": [
+        "symptom.boot.memory_warning",
+        "symptom.boot.no_boot_device",
+        "symptom.boot.no_post",
+        "symptom.boot.wrong_device",
+        "symptom.firmware.update_failed",
+        "symptom.management.alert_persists",
+        "symptom.management.bmc_not_responding",
+        "symptom.network.link_flapping",
+        "symptom.network.no_connectivity",
+        "symptom.network.no_link",
+        "symptom.power.no_power",
+        "symptom.power.redundancy_warning",
+        "symptom.power.voltage_out_of_range",
+        "symptom.storage.drive_fault_led",
+        "symptom.storage.io_errors",
+        "symptom.storage.predictive_failure_warning",
+        "symptom.storage.raid_degraded",
+        "symptom.system.intermittent_crash",
+        "symptom.thermal.high_cpu_temp"
+      ],
+      "repeated": [
+        {
+          "count": 2,
+          "id": "symptom.network.no_connectivity"
+        },
+        {
+          "count": 2,
+          "id": "symptom.power.redundancy_warning"
+        },
+        {
+          "count": 2,
+          "id": "symptom.thermal.high_cpu_temp"
+        }
+      ],
+      "ticket_role_occurrences": 22,
+      "unique_count": 19
+    },
+    "tickets": 18,
+    "truth_faults": {
+      "ids": [
+        "fault.boot.device.not_detected",
+        "fault.boot.order.incorrect",
+        "fault.compute.cpu_socket.contacts_damaged",
+        "fault.firmware.version_set.incompatible",
+        "fault.management.alert.stale",
+        "fault.management.bmc_firmware.corrupt",
+        "fault.memory.channel.unavailable",
+        "fault.memory.dimm.failed",
+        "fault.memory.dimm.not_seated",
+        "fault.network.cable.failed",
+        "fault.network.dhcp.no_lease",
+        "fault.network.ip.static_incorrect",
+        "fault.power.distribution_board.failed",
+        "fault.power.psu.failed",
+        "fault.power.psu.not_seated",
+        "fault.storage.cable.loose",
+        "fault.storage.drive.predictive_failure",
+        "fault.storage.nvme.device_failed",
+        "fault.storage.raid.degraded",
+        "fault.storage.sas.drive_failed",
+        "fault.system.intermittent_memory_instability",
+        "fault.thermal.cpu.overheating",
+        "fault.thermal.fan.failed",
+        "fault.thermal.heatsink.clogged"
+      ],
+      "repeated": [
+        {
+          "count": 2,
+          "id": "fault.thermal.cpu.overheating"
+        }
+      ],
+      "ticket_role_occurrences": 25,
+      "unique_count": 24
+    },
+    "verifications": {
+      "ids": [
+        "verify.boot.normal_boot",
+        "verify.compute.socket_path",
+        "verify.firmware.compatible_persistent",
+        "verify.management.alert_does_not_recur",
+        "verify.management.bmc_functional",
+        "verify.memory.full_test",
+        "verify.memory.inventory",
+        "verify.network.connectivity",
+        "verify.network.link",
+        "verify.power.distribution_path",
+        "verify.power.stable",
+        "verify.storage.device_detected",
+        "verify.storage.predictive_replacement",
+        "verify.storage.raid_healthy",
+        "verify.thermal.load_test"
+      ],
+      "repeated": [
+        {
+          "count": 2,
+          "id": "verify.boot.normal_boot"
+        },
+        {
+          "count": 2,
+          "id": "verify.memory.full_test"
+        },
+        {
+          "count": 2,
+          "id": "verify.network.connectivity"
+        },
+        {
+          "count": 2,
+          "id": "verify.power.stable"
+        },
+        {
+          "count": 2,
+          "id": "verify.storage.device_detected"
+        },
+        {
+          "count": 2,
+          "id": "verify.thermal.load_test"
+        }
+      ],
+      "ticket_role_occurrences": 21,
+      "unique_count": 15
+    }
+  },
+  "coverage_version": "released-story-domain-coverage-v1",
+  "denominators": {
+    "action_bearing_entities": 107,
+    "by_entity_type": {
+      "command": 13,
+      "component": 25,
+      "fault": 42,
+      "fault_causal_edge": 17,
+      "protocol": 20,
+      "repair_procedure": 35,
+      "symptom": 33,
+      "test": 37,
+      "tool": 13,
+      "validation_procedure": 22
+    },
+    "domain_entities": 257,
+    "faults": 42,
+    "global_bench_diagnostics": 50,
+    "playable_cards": 83,
+    "selected_repairs": 18,
+    "selected_validations": 15,
+    "supported_fingerprints": 18,
+    "symptoms": 33
+  },
+  "diagnostic_role_boundary": {
+    "commands": {
+      "authored_isolation_route_source_ids": [
+        "command.linux.smartctl"
+      ],
+      "expansion_required_isolation_ids": [],
+      "global_bench_count": 13,
+      "match_relevant_ids": [
+        "command.linux.dhclient",
+        "command.linux.ip_addr",
+        "command.linux.ip_route",
+        "command.linux.lsblk",
+        "command.linux.lspci",
+        "command.linux.nvme_smart_log",
+        "command.linux.smartctl",
+        "command.network.ping"
+      ],
+      "minimal_witness_count": 0
+    },
+    "definitions": {
+      "global_bench": "Visible in the shared catalog; not evidence of teaching or use.",
+      "match_relevant": "Public-graph relevant for campaign one or TASK-043 relevant for an expansion Ticket; not proof of execution.",
+      "minimal_witness": "Actually present in a deterministic complete solvability witness.",
+      "proven_candidate_changing": "Outcome-derived Candidate-changing in campaign one, plus only the expansion diagnostics required by the oracle witness. This intentionally underclaims optional expansion effects."
+    },
+    "global_bench_count": 50,
+    "global_bench_source_ids": [
+      "command.ipmi.sel_elist",
+      "command.linux.dhclient",
+      "command.linux.dmesg",
+      "command.linux.ethtool",
+      "command.linux.free_h",
+      "command.linux.ip_addr",
+      "command.linux.ip_route",
+      "command.linux.journalctl",
+      "command.linux.lsblk",
+      "command.linux.lspci",
+      "command.linux.nvme_smart_log",
+      "command.linux.smartctl",
+      "command.network.ping",
+      "test.boot.device_inventory",
+      "test.boot.post_code_analysis",
+      "test.boot.post_observation",
+      "test.compute.socket_magnified_inspection",
+      "test.cooling.location_cross_substitution",
+      "test.electrical.continuity",
+      "test.firmware.settings_review",
+      "test.firmware.version_compatibility",
+      "test.general.minimum_configuration",
+      "test.general.visual_inspection",
+      "test.management.bmc_recovery_state",
+      "test.management.event_log_freshness",
+      "test.memory.diagnostic",
+      "test.memory.known_good_substitution",
+      "test.memory.single_dimm_isolation",
+      "test.network.cable_substitution",
+      "test.network.dhcp_pool_audit",
+      "test.network.dhcp_transaction_trace",
+      "test.network.interface_config",
+      "test.network.link",
+      "test.network.link_counter_soak",
+      "test.network.ping",
+      "test.pcie.inventory",
+      "test.power.distribution_path_isolation",
+      "test.power.known_good_psu",
+      "test.power.output_voltage_measurement",
+      "test.power.psu_status",
+      "test.power.residual_power_drain",
+      "test.storage.bay_path_isolation",
+      "test.storage.device_inventory",
+      "test.storage.drive_health",
+      "test.storage.predictive_health",
+      "test.storage.raid_status",
+      "test.system.bmc_logs",
+      "test.system.controlled_stress",
+      "test.thermal.fan_telemetry",
+      "test.thermal.temperature_monitoring"
+    ],
+    "match_relevant_count": 43,
+    "match_relevant_source_ids": [
+      "command.linux.dhclient",
+      "command.linux.ip_addr",
+      "command.linux.ip_route",
+      "command.linux.lsblk",
+      "command.linux.lspci",
+      "command.linux.nvme_smart_log",
+      "command.linux.smartctl",
+      "command.network.ping",
+      "test.boot.device_inventory",
+      "test.boot.post_code_analysis",
+      "test.compute.socket_magnified_inspection",
+      "test.cooling.location_cross_substitution",
+      "test.firmware.settings_review",
+      "test.firmware.version_compatibility",
+      "test.general.minimum_configuration",
+      "test.general.visual_inspection",
+      "test.management.bmc_recovery_state",
+      "test.management.event_log_freshness",
+      "test.memory.diagnostic",
+      "test.memory.known_good_substitution",
+      "test.memory.single_dimm_isolation",
+      "test.network.cable_substitution",
+      "test.network.dhcp_pool_audit",
+      "test.network.dhcp_transaction_trace",
+      "test.network.interface_config",
+      "test.network.link",
+      "test.network.link_counter_soak",
+      "test.network.ping",
+      "test.pcie.inventory",
+      "test.power.distribution_path_isolation",
+      "test.power.known_good_psu",
+      "test.power.output_voltage_measurement",
+      "test.power.psu_status",
+      "test.power.residual_power_drain",
+      "test.storage.bay_path_isolation",
+      "test.storage.device_inventory",
+      "test.storage.drive_health",
+      "test.storage.predictive_health",
+      "test.storage.raid_status",
+      "test.system.bmc_logs",
+      "test.system.controlled_stress",
+      "test.thermal.fan_telemetry",
+      "test.thermal.temperature_monitoring"
+    ],
+    "minimal_witness_count": 21,
+    "minimal_witness_source_ids": [
+      "test.boot.device_inventory",
+      "test.compute.socket_magnified_inspection",
+      "test.firmware.settings_review",
+      "test.firmware.version_compatibility",
+      "test.general.visual_inspection",
+      "test.management.bmc_recovery_state",
+      "test.management.event_log_freshness",
+      "test.memory.diagnostic",
+      "test.memory.single_dimm_isolation",
+      "test.network.cable_substitution",
+      "test.network.interface_config",
+      "test.network.link_counter_soak",
+      "test.power.distribution_path_isolation",
+      "test.power.known_good_psu",
+      "test.power.psu_status",
+      "test.storage.device_inventory",
+      "test.storage.drive_health",
+      "test.storage.predictive_health",
+      "test.system.bmc_logs",
+      "test.thermal.fan_telemetry",
+      "test.thermal.temperature_monitoring"
+    ],
+    "proven_candidate_changing_count": 36,
+    "proven_candidate_changing_source_ids": [
+      "command.linux.ip_addr",
+      "command.linux.ip_route",
+      "command.linux.lsblk",
+      "command.linux.lspci",
+      "command.linux.smartctl",
+      "command.network.ping",
+      "test.boot.device_inventory",
+      "test.compute.socket_magnified_inspection",
+      "test.cooling.location_cross_substitution",
+      "test.firmware.settings_review",
+      "test.firmware.version_compatibility",
+      "test.general.minimum_configuration",
+      "test.general.visual_inspection",
+      "test.management.bmc_recovery_state",
+      "test.management.event_log_freshness",
+      "test.memory.diagnostic",
+      "test.memory.single_dimm_isolation",
+      "test.network.cable_substitution",
+      "test.network.dhcp_pool_audit",
+      "test.network.interface_config",
+      "test.network.link",
+      "test.network.link_counter_soak",
+      "test.network.ping",
+      "test.pcie.inventory",
+      "test.power.distribution_path_isolation",
+      "test.power.known_good_psu",
+      "test.power.output_voltage_measurement",
+      "test.power.psu_status",
+      "test.power.residual_power_drain",
+      "test.storage.device_inventory",
+      "test.storage.drive_health",
+      "test.storage.predictive_health",
+      "test.storage.raid_status",
+      "test.system.bmc_logs",
+      "test.thermal.fan_telemetry",
+      "test.thermal.temperature_monitoring"
+    ]
+  },
+  "interpretation_limits": [
+    "Global catalog presence, Match legality, public relevance, Candidate effects, Isolation routes, minimal-witness actions, response closure, and narrative mention are different roles.",
+    "Only minimal-witness diagnostics and required Repair/Verify response Cards are counted as actual required solution-path use.",
+    "The expansion engine proof policy may execute additional diagnostics; those execution counts demonstrate one proof policy, not a minimum teaching requirement.",
+    "A completed authored Match exposes a concept but does not prove learner mastery or later recall.",
+    "Document is represented by required closure publication; explicit Document Live remains optional in the current rules."
+  ],
+  "matches": [
+    {
+      "builder_contract": {
+        "card_catalog_version": "core-card-catalog-technical-copy-v4",
+        "configuration_version": "ticket-builder-v3",
+        "domain_content_version": "core-domain-snapshot-technical-copy-v3",
+        "kind": "LEGACY_TOP_LEVEL_PROFILE",
+        "ticket_content_version": "core-ticket-parts-v3"
+      },
+      "builder_proof": {
+        "exact_pin_match": true,
+        "source": "automated_games/task-036-quiet-cascade-characterization-v2/builder-proof.json",
+        "status": "SUCCESS"
+      },
+      "engine_proof": {
+        "classification": "SUCCEEDED",
+        "deterministic_rerun_identical": true,
+        "source": "automated_games/task-036-quiet-cascade-characterization-v2/summary.json",
+        "turns": 14
+      },
+      "match_ref": "story.match.qc01.shift01.wrong_device",
+      "seed": "story.quiet_cascade.s01.v1",
+      "segment": "CAMPAIGN_ONE",
+      "shift_number": 1,
+      "solvability_proof": {
+        "source": "docs/story/coverage/campaign-one-domain-coverage.json",
+        "ticket_witness_count": 1
+      },
+      "source_case_id": null,
+      "tickets": [
+        {
+          "diagnostics": {
+            "authored_isolation_routes": [
+              {
+                "eligible_outcome_ids": [
+                  "evidence.fingerprint.boot.incorrect.order.machine.boot.incorrect.order.active.test.firmware.settings.review",
+                  "evidence.fingerprint.boot.incorrect.order.machine.boot.incorrect.order.active.test.boot.device.inventory"
+                ],
+                "minimum_distinct_outcomes": 2,
+                "route_id": "route.fingerprint.boot.incorrect.order.01",
+                "route_kind": "CORROBORATED_SUPPORT",
+                "source_definition_ids": [
+                  "test.firmware.settings_review",
+                  "test.boot.device_inventory"
+                ]
+              }
+            ],
+            "minimal_witness_source_ids": [
+              "test.firmware.settings_review",
+              "test.boot.device_inventory"
+            ],
+            "optional_relevant_source_ids": [
+              "test.general.minimum_configuration",
+              "test.general.visual_inspection",
+              "test.pcie.inventory",
+              "test.storage.device_inventory",
+              "test.storage.raid_status",
+              "test.system.bmc_logs"
+            ],
+            "proven_candidate_changing_source_ids": [
+              "test.boot.device_inventory",
+              "test.firmware.settings_review"
+            ],
+            "relevant_source_ids": [
+              "test.boot.device_inventory",
+              "test.firmware.settings_review",
+              "test.general.minimum_configuration",
+              "test.general.visual_inspection",
+              "test.pcie.inventory",
+              "test.storage.device_inventory",
+              "test.storage.raid_status",
+              "test.system.bmc_logs"
+            ],
+            "target_legal_source_ids": [
+              "command.linux.dmesg",
+              "command.linux.ethtool",
+              "command.linux.free_h",
+              "command.linux.ip_addr",
+              "command.linux.ip_route",
+              "command.linux.journalctl",
+              "command.linux.lsblk",
+              "command.linux.lspci",
+              "command.linux.smartctl",
+              "command.network.ping",
+              "test.boot.device_inventory",
+              "test.boot.post_code_analysis",
+              "test.boot.post_observation",
+              "test.electrical.continuity",
+              "test.firmware.settings_review",
+              "test.general.minimum_configuration",
+              "test.general.visual_inspection",
+              "test.memory.diagnostic",
+              "test.memory.known_good_substitution",
+              "test.memory.single_dimm_isolation",
+              "test.network.cable_substitution",
+              "test.network.dhcp_pool_audit",
+              "test.network.interface_config",
+              "test.network.link",
+              "test.network.ping",
+              "test.pcie.inventory",
+              "test.power.known_good_psu",
+              "test.power.psu_status",
+              "test.storage.device_inventory",
+              "test.storage.drive_health",
+              "test.storage.raid_status",
+              "test.system.bmc_logs",
+              "test.system.controlled_stress",
+              "test.thermal.fan_telemetry",
+              "test.thermal.temperature_monitoring"
+            ]
+          },
+          "document_contract": {
+            "action": "PUBLISH_CLOSURE",
+            "closure_publication_required": true,
+            "explicit_document_live_required": false
+          },
+          "fingerprint_id": "fingerprint.boot.incorrect_order",
+          "hidden_true_fault_ids": [
+            "fault.boot.order.incorrect"
+          ],
+          "oracle_witness": [
+            {
+              "action": "RUN_DIAGNOSTIC",
+              "evidence_outcome_id": "evidence.fingerprint.boot.incorrect.order.machine.boot.incorrect.order.active.test.firmware.settings.review",
+              "source_definition_id": "test.firmware.settings_review"
+            },
+            {
+              "action": "RUN_DIAGNOSTIC",
+              "evidence_outcome_id": "evidence.fingerprint.boot.incorrect.order.machine.boot.incorrect.order.active.test.boot.device.inventory",
+              "source_definition_id": "test.boot.device_inventory"
+            },
+            {
+              "action": "COMMIT_ISOLATION",
+              "cited_outcome_ids": [
+                "evidence.fingerprint.boot.incorrect.order.machine.boot.incorrect.order.active.test.firmware.settings.review",
+                "evidence.fingerprint.boot.incorrect.order.machine.boot.incorrect.order.active.test.boot.device.inventory"
+              ],
+              "target_fault_instance_key": "fault_instance.boot.order"
+            },
+            {
+              "action": "PERFORM_REPAIR",
+              "repair_outcome_id": "repair_outcome.fingerprint.boot.incorrect.order",
+              "repair_procedure_id": "repair.boot.correct_order",
+              "target_fault_instance_key": "fault_instance.boot.order"
+            },
+            {
+              "action": "PERFORM_VERIFY",
+              "result": "PASS",
+              "validation_procedure_id": "verify.boot.normal_boot",
+              "verification_outcome_id": "verify_outcome.fingerprint.boot.incorrect.order.01.pass"
+            }
+          ],
+          "public_candidate_fault_ids": [
+            "fault.boot.order.incorrect",
+            "fault.firmware.config.reset"
+          ],
+          "public_symptom_ids": [
+            "symptom.boot.wrong_device"
+          ],
+          "repair_procedure_ids": [
+            "repair.boot.correct_order"
+          ],
+          "ticket_id": "ticket.generated.ef8a4924e707349bce5c2be7",
+          "ticket_snapshot_digest": "821769a6021482074d523c723dc08a6b9bd2885820eabe11a9011b199fc6dacb",
+          "validation_procedure_ids": [
+            "verify.boot.normal_boot"
+          ]
+        }
+      ]
+    },
+    {
+      "builder_contract": {
+        "card_catalog_version": "core-card-catalog-technical-copy-v4",
+        "configuration_version": "ticket-builder-v3",
+        "domain_content_version": "core-domain-snapshot-technical-copy-v3",
+        "kind": "LEGACY_TOP_LEVEL_PROFILE",
+        "ticket_content_version": "core-ticket-parts-v3"
+      },
+      "builder_proof": {
+        "exact_pin_match": true,
+        "source": "automated_games/task-036-quiet-cascade-characterization-v2/builder-proof.json",
+        "status": "SUCCESS"
+      },
+      "engine_proof": {
+        "classification": "SUCCEEDED",
+        "deterministic_rerun_identical": true,
+        "source": "automated_games/task-036-quiet-cascade-characterization-v2/summary.json",
+        "turns": 93
+      },
+      "match_ref": "story.match.qc01.shift02.power_lot",
+      "seed": "story.quiet_cascade.s02.v1",
+      "segment": "CAMPAIGN_ONE",
+      "shift_number": 2,
+      "solvability_proof": {
+        "source": "docs/story/coverage/campaign-one-domain-coverage.json",
+        "ticket_witness_count": 2
+      },
+      "source_case_id": null,
+      "tickets": [
+        {
+          "diagnostics": {
+            "authored_isolation_routes": [
+              {
+                "eligible_outcome_ids": [
+                  "evidence.fingerprint.power.unseated.psu.machine.power.unseated.psu.active.test.general.visual.inspection",
+                  "evidence.fingerprint.power.unseated.psu.machine.power.unseated.psu.active.test.power.psu.status"
+                ],
+                "minimum_distinct_outcomes": 2,
+                "route_id": "route.fingerprint.power.unseated.psu.01",
+                "route_kind": "CORROBORATED_SUPPORT",
+                "source_definition_ids": [
+                  "test.general.visual_inspection",
+                  "test.power.psu_status"
+                ]
+              }
+            ],
+            "minimal_witness_source_ids": [
+              "test.general.visual_inspection",
+              "test.power.psu_status"
+            ],
+            "optional_relevant_source_ids": [
+              "test.cooling.location_cross_substitution",
+              "test.firmware.version_compatibility",
+              "test.general.minimum_configuration",
+              "test.memory.diagnostic",
+              "test.memory.known_good_substitution",
+              "test.memory.single_dimm_isolation",
+              "test.network.link",
+              "test.pcie.inventory",
+              "test.power.distribution_path_isolation",
+              "test.power.known_good_psu",
+              "test.power.output_voltage_measurement",
+              "test.power.residual_power_drain",
+              "test.storage.bay_path_isolation",
+              "test.storage.device_inventory",
+              "test.storage.drive_health",
+              "test.storage.raid_status",
+              "test.system.bmc_logs",
+              "test.system.controlled_stress",
+              "test.thermal.fan_telemetry",
+              "test.thermal.temperature_monitoring"
+            ],
+            "proven_candidate_changing_source_ids": [
+              "test.general.visual_inspection",
+              "test.power.distribution_path_isolation",
+              "test.power.known_good_psu",
+              "test.power.output_voltage_measurement",
+              "test.power.psu_status",
+              "test.power.residual_power_drain",
+              "test.system.bmc_logs"
+            ],
+            "relevant_source_ids": [
+              "test.cooling.location_cross_substitution",
+              "test.firmware.version_compatibility",
+              "test.general.minimum_configuration",
+              "test.general.visual_inspection",
+              "test.memory.diagnostic",
+              "test.memory.known_good_substitution",
+              "test.memory.single_dimm_isolation",
+              "test.network.link",
+              "test.pcie.inventory",
+              "test.power.distribution_path_isolation",
+              "test.power.known_good_psu",
+              "test.power.output_voltage_measurement",
+              "test.power.psu_status",
+              "test.power.residual_power_drain",
+              "test.storage.bay_path_isolation",
+              "test.storage.device_inventory",
+              "test.storage.drive_health",
+              "test.storage.raid_status",
+              "test.system.bmc_logs",
+              "test.system.controlled_stress",
+              "test.thermal.fan_telemetry",
+              "test.thermal.temperature_monitoring"
+            ],
+            "target_legal_source_ids": [
+              "command.linux.dmesg",
+              "command.linux.ethtool",
+              "command.linux.free_h",
+              "command.linux.ip_addr",
+              "command.linux.ip_route",
+              "command.linux.journalctl",
+              "command.linux.lsblk",
+              "command.linux.lspci",
+              "command.linux.smartctl",
+              "command.network.ping",
+              "test.boot.device_inventory",
+              "test.boot.post_code_analysis",
+              "test.boot.post_observation",
+              "test.electrical.continuity",
+              "test.firmware.settings_review",
+              "test.general.minimum_configuration",
+              "test.general.visual_inspection",
+              "test.memory.diagnostic",
+              "test.memory.known_good_substitution",
+              "test.memory.single_dimm_isolation",
+              "test.network.cable_substitution",
+              "test.network.dhcp_pool_audit",
+              "test.network.interface_config",
+              "test.network.link",
+              "test.network.ping",
+              "test.pcie.inventory",
+              "test.power.distribution_path_isolation",
+              "test.power.known_good_psu",
+              "test.power.output_voltage_measurement",
+              "test.power.psu_status",
+              "test.power.residual_power_drain",
+              "test.storage.device_inventory",
+              "test.storage.drive_health",
+              "test.storage.raid_status",
+              "test.system.bmc_logs",
+              "test.system.controlled_stress",
+              "test.thermal.fan_telemetry",
+              "test.thermal.temperature_monitoring"
+            ]
+          },
+          "document_contract": {
+            "action": "PUBLISH_CLOSURE",
+            "closure_publication_required": true,
+            "explicit_document_live_required": false
+          },
+          "fingerprint_id": "fingerprint.power.unseated_psu",
+          "hidden_true_fault_ids": [
+            "fault.power.psu.not_seated"
+          ],
+          "oracle_witness": [
+            {
+              "action": "RUN_DIAGNOSTIC",
+              "evidence_outcome_id": "evidence.fingerprint.power.unseated.psu.machine.power.unseated.psu.active.test.general.visual.inspection",
+              "source_definition_id": "test.general.visual_inspection"
+            },
+            {
+              "action": "RUN_DIAGNOSTIC",
+              "evidence_outcome_id": "evidence.fingerprint.power.unseated.psu.machine.power.unseated.psu.active.test.power.psu.status",
+              "source_definition_id": "test.power.psu_status"
+            },
+            {
+              "action": "COMMIT_ISOLATION",
+              "cited_outcome_ids": [
+                "evidence.fingerprint.power.unseated.psu.machine.power.unseated.psu.active.test.general.visual.inspection",
+                "evidence.fingerprint.power.unseated.psu.machine.power.unseated.psu.active.test.power.psu.status"
+              ],
+              "target_fault_instance_key": "fault_instance.power.unseated_psu"
+            },
+            {
+              "action": "PERFORM_REPAIR",
+              "repair_outcome_id": "repair_outcome.fingerprint.power.unseated.psu",
+              "repair_procedure_id": "repair.power.reseat_psu",
+              "target_fault_instance_key": "fault_instance.power.unseated_psu"
+            },
+            {
+              "action": "PERFORM_VERIFY",
+              "result": "PASS",
+              "validation_procedure_id": "verify.power.stable",
+              "verification_outcome_id": "verify_outcome.fingerprint.power.unseated.psu.01.pass"
+            }
+          ],
+          "public_candidate_fault_ids": [
+            "fault.power.input.cable_loose",
+            "fault.power.psu.failed",
+            "fault.power.psu.not_seated"
+          ],
+          "public_symptom_ids": [
+            "symptom.power.redundancy_warning"
+          ],
+          "repair_procedure_ids": [
+            "repair.power.reseat_psu"
+          ],
+          "ticket_id": "ticket.generated.a10b8767580c9453c679a326",
+          "ticket_snapshot_digest": "c55b2fb6c7aee2644929ecdd803b3b3f5155b5ec4426b43e4953d0082391e0f7",
+          "validation_procedure_ids": [
+            "verify.power.stable"
+          ]
+        },
+        {
+          "diagnostics": {
+            "authored_isolation_routes": [
+              {
+                "eligible_outcome_ids": [
+                  "evidence.fingerprint.power.failed.psu.machine.power.failed.psu.active.test.power.known.good.psu"
+                ],
+                "minimum_distinct_outcomes": 1,
+                "route_id": "route.fingerprint.power.failed.psu.01",
+                "route_kind": "DEFINITIVE_DIAGNOSTIC",
+                "source_definition_ids": [
+                  "test.power.known_good_psu"
+                ]
+              },
+              {
+                "eligible_outcome_ids": [
+                  "evidence.fingerprint.power.failed.psu.machine.power.failed.psu.active.test.power.psu.status",
+                  "evidence.fingerprint.power.failed.psu.machine.power.failed.psu.active.test.power.output.voltage.measurement"
+                ],
+                "minimum_distinct_outcomes": 2,
+                "route_id": "route.fingerprint.power.failed.psu.02",
+                "route_kind": "CORROBORATED_SUPPORT",
+                "source_definition_ids": [
+                  "test.power.psu_status",
+                  "test.power.output_voltage_measurement"
+                ]
+              }
+            ],
+            "minimal_witness_source_ids": [
+              "test.power.known_good_psu"
+            ],
+            "optional_relevant_source_ids": [
+              "test.cooling.location_cross_substitution",
+              "test.firmware.version_compatibility",
+              "test.general.minimum_configuration",
+              "test.general.visual_inspection",
+              "test.memory.diagnostic",
+              "test.memory.known_good_substitution",
+              "test.memory.single_dimm_isolation",
+              "test.network.link",
+              "test.pcie.inventory",
+              "test.power.distribution_path_isolation",
+              "test.power.output_voltage_measurement",
+              "test.power.psu_status",
+              "test.power.residual_power_drain",
+              "test.storage.bay_path_isolation",
+              "test.storage.device_inventory",
+              "test.storage.drive_health",
+              "test.storage.raid_status",
+              "test.system.bmc_logs",
+              "test.system.controlled_stress",
+              "test.thermal.fan_telemetry",
+              "test.thermal.temperature_monitoring"
+            ],
+            "proven_candidate_changing_source_ids": [
+              "test.general.visual_inspection",
+              "test.power.known_good_psu",
+              "test.power.output_voltage_measurement",
+              "test.power.psu_status"
+            ],
+            "relevant_source_ids": [
+              "test.cooling.location_cross_substitution",
+              "test.firmware.version_compatibility",
+              "test.general.minimum_configuration",
+              "test.general.visual_inspection",
+              "test.memory.diagnostic",
+              "test.memory.known_good_substitution",
+              "test.memory.single_dimm_isolation",
+              "test.network.link",
+              "test.pcie.inventory",
+              "test.power.distribution_path_isolation",
+              "test.power.known_good_psu",
+              "test.power.output_voltage_measurement",
+              "test.power.psu_status",
+              "test.power.residual_power_drain",
+              "test.storage.bay_path_isolation",
+              "test.storage.device_inventory",
+              "test.storage.drive_health",
+              "test.storage.raid_status",
+              "test.system.bmc_logs",
+              "test.system.controlled_stress",
+              "test.thermal.fan_telemetry",
+              "test.thermal.temperature_monitoring"
+            ],
+            "target_legal_source_ids": [
+              "command.linux.dmesg",
+              "command.linux.ethtool",
+              "command.linux.free_h",
+              "command.linux.ip_addr",
+              "command.linux.ip_route",
+              "command.linux.journalctl",
+              "command.linux.lsblk",
+              "command.linux.lspci",
+              "command.linux.smartctl",
+              "command.network.ping",
+              "test.boot.device_inventory",
+              "test.boot.post_code_analysis",
+              "test.boot.post_observation",
+              "test.electrical.continuity",
+              "test.firmware.settings_review",
+              "test.general.minimum_configuration",
+              "test.general.visual_inspection",
+              "test.memory.diagnostic",
+              "test.memory.known_good_substitution",
+              "test.memory.single_dimm_isolation",
+              "test.network.cable_substitution",
+              "test.network.dhcp_pool_audit",
+              "test.network.interface_config",
+              "test.network.link",
+              "test.network.ping",
+              "test.pcie.inventory",
+              "test.power.distribution_path_isolation",
+              "test.power.known_good_psu",
+              "test.power.output_voltage_measurement",
+              "test.power.psu_status",
+              "test.power.residual_power_drain",
+              "test.storage.device_inventory",
+              "test.storage.drive_health",
+              "test.storage.raid_status",
+              "test.system.bmc_logs",
+              "test.system.controlled_stress",
+              "test.thermal.fan_telemetry",
+              "test.thermal.temperature_monitoring"
+            ]
+          },
+          "document_contract": {
+            "action": "PUBLISH_CLOSURE",
+            "closure_publication_required": true,
+            "explicit_document_live_required": false
+          },
+          "fingerprint_id": "fingerprint.power.failed_psu",
+          "hidden_true_fault_ids": [
+            "fault.power.psu.failed"
+          ],
+          "oracle_witness": [
+            {
+              "action": "RUN_DIAGNOSTIC",
+              "evidence_outcome_id": "evidence.fingerprint.power.failed.psu.machine.power.failed.psu.active.test.power.known.good.psu",
+              "source_definition_id": "test.power.known_good_psu"
+            },
+            {
+              "action": "COMMIT_ISOLATION",
+              "cited_outcome_ids": [
+                "evidence.fingerprint.power.failed.psu.machine.power.failed.psu.active.test.power.known.good.psu"
+              ],
+              "target_fault_instance_key": "fault_instance.power.failed_psu"
+            },
+            {
+              "action": "PERFORM_REPAIR",
+              "repair_outcome_id": "repair_outcome.fingerprint.power.failed.psu",
+              "repair_procedure_id": "repair.power.replace_psu",
+              "target_fault_instance_key": "fault_instance.power.failed_psu"
+            },
+            {
+              "action": "PERFORM_VERIFY",
+              "result": "PASS",
+              "validation_procedure_id": "verify.power.stable",
+              "verification_outcome_id": "verify_outcome.fingerprint.power.failed.psu.01.pass"
+            }
+          ],
+          "public_candidate_fault_ids": [
+            "fault.power.input.cable_loose",
+            "fault.power.psu.failed",
+            "fault.power.psu.not_seated"
+          ],
+          "public_symptom_ids": [
+            "symptom.power.redundancy_warning"
+          ],
+          "repair_procedure_ids": [
+            "repair.power.replace_psu"
+          ],
+          "ticket_id": "ticket.generated.8ee2c08bae1e3d005b35bff5",
+          "ticket_snapshot_digest": "8c7810616e535b8f62d3303e501bfcfdf8c9071df23903e2727b6fcb476e0d4b",
+          "validation_procedure_ids": [
+            "verify.power.stable"
+          ]
+        }
+      ]
+    },
+    {
+      "builder_contract": {
+        "card_catalog_version": "core-card-catalog-technical-copy-v4",
+        "configuration_version": "ticket-builder-v3",
+        "domain_content_version": "core-domain-snapshot-technical-copy-v3",
+        "kind": "LEGACY_TOP_LEVEL_PROFILE",
+        "ticket_content_version": "core-ticket-parts-v3"
+      },
+      "builder_proof": {
+        "exact_pin_match": true,
+        "source": "automated_games/task-036-quiet-cascade-characterization-v2/builder-proof.json",
+        "status": "SUCCESS"
+      },
+      "engine_proof": {
+        "classification": "SUCCEEDED",
+        "deterministic_rerun_identical": true,
+        "source": "automated_games/task-036-quiet-cascade-characterization-v2/summary.json",
+        "turns": 21
+      },
+      "match_ref": "story.match.qc01.shift03.memory_compare",
+      "seed": "story.quiet_cascade.s03.v1",
+      "segment": "CAMPAIGN_ONE",
+      "shift_number": 3,
+      "solvability_proof": {
+        "source": "docs/story/coverage/campaign-one-domain-coverage.json",
+        "ticket_witness_count": 2
+      },
+      "source_case_id": null,
+      "tickets": [
+        {
+          "diagnostics": {
+            "authored_isolation_routes": [
+              {
+                "eligible_outcome_ids": [
+                  "evidence.fingerprint.memory.failed.dimm.machine.memory.failed.dimm.active.test.memory.diagnostic"
+                ],
+                "minimum_distinct_outcomes": 1,
+                "route_id": "route.fingerprint.memory.failed.dimm.01",
+                "route_kind": "DEFINITIVE_DIAGNOSTIC",
+                "source_definition_ids": [
+                  "test.memory.diagnostic"
+                ]
+              },
+              {
+                "eligible_outcome_ids": [
+                  "evidence.fingerprint.memory.failed.dimm.machine.memory.failed.dimm.active.test.memory.single.dimm.isolation",
+                  "evidence.fingerprint.memory.failed.dimm.machine.memory.failed.dimm.active.test.system.bmc.logs"
+                ],
+                "minimum_distinct_outcomes": 2,
+                "route_id": "route.fingerprint.memory.failed.dimm.02",
+                "route_kind": "CORROBORATED_SUPPORT",
+                "source_definition_ids": [
+                  "test.memory.single_dimm_isolation",
+                  "test.system.bmc_logs"
+                ]
+              }
+            ],
+            "minimal_witness_source_ids": [
+              "test.memory.diagnostic"
+            ],
+            "optional_relevant_source_ids": [
+              "test.boot.post_code_analysis",
+              "test.compute.socket_magnified_inspection",
+              "test.general.minimum_configuration",
+              "test.general.visual_inspection",
+              "test.memory.known_good_substitution",
+              "test.memory.single_dimm_isolation",
+              "test.pcie.inventory",
+              "test.power.distribution_path_isolation",
+              "test.power.known_good_psu",
+              "test.power.output_voltage_measurement",
+              "test.power.psu_status",
+              "test.power.residual_power_drain",
+              "test.storage.bay_path_isolation",
+              "test.storage.device_inventory",
+              "test.storage.drive_health",
+              "test.storage.raid_status",
+              "test.system.bmc_logs",
+              "test.system.controlled_stress",
+              "test.thermal.fan_telemetry",
+              "test.thermal.temperature_monitoring"
+            ],
+            "proven_candidate_changing_source_ids": [
+              "test.memory.diagnostic",
+              "test.memory.single_dimm_isolation",
+              "test.system.bmc_logs"
+            ],
+            "relevant_source_ids": [
+              "test.boot.post_code_analysis",
+              "test.compute.socket_magnified_inspection",
+              "test.general.minimum_configuration",
+              "test.general.visual_inspection",
+              "test.memory.diagnostic",
+              "test.memory.known_good_substitution",
+              "test.memory.single_dimm_isolation",
+              "test.pcie.inventory",
+              "test.power.distribution_path_isolation",
+              "test.power.known_good_psu",
+              "test.power.output_voltage_measurement",
+              "test.power.psu_status",
+              "test.power.residual_power_drain",
+              "test.storage.bay_path_isolation",
+              "test.storage.device_inventory",
+              "test.storage.drive_health",
+              "test.storage.raid_status",
+              "test.system.bmc_logs",
+              "test.system.controlled_stress",
+              "test.thermal.fan_telemetry",
+              "test.thermal.temperature_monitoring"
+            ],
+            "target_legal_source_ids": [
+              "command.linux.dmesg",
+              "command.linux.ethtool",
+              "command.linux.free_h",
+              "command.linux.ip_addr",
+              "command.linux.ip_route",
+              "command.linux.journalctl",
+              "command.linux.lsblk",
+              "command.linux.lspci",
+              "command.linux.smartctl",
+              "command.network.ping",
+              "test.boot.device_inventory",
+              "test.boot.post_code_analysis",
+              "test.boot.post_observation",
+              "test.electrical.continuity",
+              "test.firmware.settings_review",
+              "test.general.minimum_configuration",
+              "test.general.visual_inspection",
+              "test.memory.diagnostic",
+              "test.memory.known_good_substitution",
+              "test.memory.single_dimm_isolation",
+              "test.network.cable_substitution",
+              "test.network.dhcp_pool_audit",
+              "test.network.interface_config",
+              "test.network.link",
+              "test.network.ping",
+              "test.pcie.inventory",
+              "test.power.known_good_psu",
+              "test.power.psu_status",
+              "test.storage.device_inventory",
+              "test.storage.drive_health",
+              "test.storage.raid_status",
+              "test.system.bmc_logs",
+              "test.system.controlled_stress",
+              "test.thermal.fan_telemetry",
+              "test.thermal.temperature_monitoring"
+            ]
+          },
+          "document_contract": {
+            "action": "PUBLISH_CLOSURE",
+            "closure_publication_required": true,
+            "explicit_document_live_required": false
+          },
+          "fingerprint_id": "fingerprint.memory.failed_dimm",
+          "hidden_true_fault_ids": [
+            "fault.memory.dimm.failed",
+            "fault.system.intermittent_memory_instability"
+          ],
+          "oracle_witness": [
+            {
+              "action": "RUN_DIAGNOSTIC",
+              "evidence_outcome_id": "evidence.fingerprint.memory.failed.dimm.machine.memory.failed.dimm.active.test.memory.diagnostic",
+              "source_definition_id": "test.memory.diagnostic"
+            },
+            {
+              "action": "COMMIT_ISOLATION",
+              "cited_outcome_ids": [
+                "evidence.fingerprint.memory.failed.dimm.machine.memory.failed.dimm.active.test.memory.diagnostic"
+              ],
+              "target_fault_instance_key": "fault_instance.memory.failed_dimm"
+            },
+            {
+              "action": "PERFORM_REPAIR",
+              "repair_outcome_id": "repair_outcome.fingerprint.memory.failed.dimm",
+              "repair_procedure_id": "repair.memory.replace_dimm",
+              "target_fault_instance_key": "fault_instance.memory.failed_dimm"
+            },
+            {
+              "action": "PERFORM_VERIFY",
+              "result": "PASS",
+              "validation_procedure_id": "verify.memory.full_test",
+              "verification_outcome_id": "verify_outcome.fingerprint.memory.failed.dimm.01.pass"
+            }
+          ],
+          "public_candidate_fault_ids": [
+            "fault.memory.dimm.failed",
+            "fault.system.intermittent_memory_instability"
+          ],
+          "public_symptom_ids": [
+            "symptom.system.intermittent_crash"
+          ],
+          "repair_procedure_ids": [
+            "repair.memory.replace_dimm"
+          ],
+          "ticket_id": "ticket.generated.75ea6ec9e60d64c7cac4caa5",
+          "ticket_snapshot_digest": "1bd3ccabc476313a0420cb9889ab5e7b84c60c250aa32f3d4f009f614f2c47e5",
+          "validation_procedure_ids": [
+            "verify.memory.full_test"
+          ]
+        },
+        {
+          "diagnostics": {
+            "authored_isolation_routes": [
+              {
+                "eligible_outcome_ids": [
+                  "evidence.fingerprint.memory.unseated.dimm.machine.memory.unseated.dimm.active.test.memory.single.dimm.isolation"
+                ],
+                "minimum_distinct_outcomes": 1,
+                "route_id": "route.fingerprint.memory.unseated.dimm.01",
+                "route_kind": "DEFINITIVE_DIAGNOSTIC",
+                "source_definition_ids": [
+                  "test.memory.single_dimm_isolation"
+                ]
+              }
+            ],
+            "minimal_witness_source_ids": [
+              "test.memory.single_dimm_isolation"
+            ],
+            "optional_relevant_source_ids": [
+              "test.boot.post_code_analysis",
+              "test.compute.socket_magnified_inspection",
+              "test.cooling.location_cross_substitution",
+              "test.firmware.version_compatibility",
+              "test.general.minimum_configuration",
+              "test.general.visual_inspection",
+              "test.management.bmc_recovery_state",
+              "test.memory.diagnostic",
+              "test.memory.known_good_substitution",
+              "test.network.link",
+              "test.network.link_counter_soak",
+              "test.pcie.inventory",
+              "test.power.distribution_path_isolation",
+              "test.power.known_good_psu",
+              "test.power.output_voltage_measurement",
+              "test.power.psu_status",
+              "test.power.residual_power_drain",
+              "test.storage.bay_path_isolation",
+              "test.storage.device_inventory",
+              "test.storage.drive_health",
+              "test.storage.raid_status",
+              "test.system.bmc_logs",
+              "test.system.controlled_stress",
+              "test.thermal.fan_telemetry",
+              "test.thermal.temperature_monitoring"
+            ],
+            "proven_candidate_changing_source_ids": [
+              "test.general.visual_inspection",
+              "test.memory.single_dimm_isolation"
+            ],
+            "relevant_source_ids": [
+              "test.boot.post_code_analysis",
+              "test.compute.socket_magnified_inspection",
+              "test.cooling.location_cross_substitution",
+              "test.firmware.version_compatibility",
+              "test.general.minimum_configuration",
+              "test.general.visual_inspection",
+              "test.management.bmc_recovery_state",
+              "test.memory.diagnostic",
+              "test.memory.known_good_substitution",
+              "test.memory.single_dimm_isolation",
+              "test.network.link",
+              "test.network.link_counter_soak",
+              "test.pcie.inventory",
+              "test.power.distribution_path_isolation",
+              "test.power.known_good_psu",
+              "test.power.output_voltage_measurement",
+              "test.power.psu_status",
+              "test.power.residual_power_drain",
+              "test.storage.bay_path_isolation",
+              "test.storage.device_inventory",
+              "test.storage.drive_health",
+              "test.storage.raid_status",
+              "test.system.bmc_logs",
+              "test.system.controlled_stress",
+              "test.thermal.fan_telemetry",
+              "test.thermal.temperature_monitoring"
+            ],
+            "target_legal_source_ids": [
+              "command.linux.dmesg",
+              "command.linux.ethtool",
+              "command.linux.free_h",
+              "command.linux.ip_addr",
+              "command.linux.ip_route",
+              "command.linux.journalctl",
+              "command.linux.lsblk",
+              "command.linux.lspci",
+              "command.linux.smartctl",
+              "command.network.ping",
+              "test.boot.device_inventory",
+              "test.boot.post_code_analysis",
+              "test.boot.post_observation",
+              "test.electrical.continuity",
+              "test.firmware.settings_review",
+              "test.firmware.version_compatibility",
+              "test.general.minimum_configuration",
+              "test.general.visual_inspection",
+              "test.memory.diagnostic",
+              "test.memory.known_good_substitution",
+              "test.memory.single_dimm_isolation",
+              "test.network.cable_substitution",
+              "test.network.dhcp_pool_audit",
+              "test.network.interface_config",
+              "test.network.link",
+              "test.network.ping",
+              "test.pcie.inventory",
+              "test.power.known_good_psu",
+              "test.power.psu_status",
+              "test.power.residual_power_drain",
+              "test.storage.device_inventory",
+              "test.storage.drive_health",
+              "test.storage.raid_status",
+              "test.system.bmc_logs",
+              "test.system.controlled_stress",
+              "test.thermal.fan_telemetry",
+              "test.thermal.temperature_monitoring"
+            ]
+          },
+          "document_contract": {
+            "action": "PUBLISH_CLOSURE",
+            "closure_publication_required": true,
+            "explicit_document_live_required": false
+          },
+          "fingerprint_id": "fingerprint.memory.unseated_dimm",
+          "hidden_true_fault_ids": [
+            "fault.memory.dimm.not_seated",
+            "fault.memory.channel.unavailable"
+          ],
+          "oracle_witness": [
+            {
+              "action": "RUN_DIAGNOSTIC",
+              "evidence_outcome_id": "evidence.fingerprint.memory.unseated.dimm.machine.memory.unseated.dimm.active.test.memory.single.dimm.isolation",
+              "source_definition_id": "test.memory.single_dimm_isolation"
+            },
+            {
+              "action": "COMMIT_ISOLATION",
+              "cited_outcome_ids": [
+                "evidence.fingerprint.memory.unseated.dimm.machine.memory.unseated.dimm.active.test.memory.single.dimm.isolation"
+              ],
+              "target_fault_instance_key": "fault_instance.memory.dimm"
+            },
+            {
+              "action": "PERFORM_REPAIR",
+              "repair_outcome_id": "repair_outcome.fingerprint.memory.unseated.dimm",
+              "repair_procedure_id": "repair.memory.reseat_dimm",
+              "target_fault_instance_key": "fault_instance.memory.dimm"
+            },
+            {
+              "action": "PERFORM_VERIFY",
+              "result": "PASS",
+              "validation_procedure_id": "verify.memory.inventory",
+              "verification_outcome_id": "verify_outcome.fingerprint.memory.unseated.dimm.01.pass"
+            },
+            {
+              "action": "PERFORM_VERIFY",
+              "result": "PASS",
+              "validation_procedure_id": "verify.memory.full_test",
+              "verification_outcome_id": "verify_outcome.fingerprint.memory.unseated.dimm.02.pass"
+            }
+          ],
+          "public_candidate_fault_ids": [
+            "fault.memory.channel.unavailable",
+            "fault.memory.dimm.not_seated",
+            "fault.memory.population.invalid"
+          ],
+          "public_symptom_ids": [
+            "symptom.boot.memory_warning"
+          ],
+          "repair_procedure_ids": [
+            "repair.memory.reseat_dimm"
+          ],
+          "ticket_id": "ticket.generated.424c8fab1db6aed25058ab78",
+          "ticket_snapshot_digest": "268c91a53ad795437e6690b2a5cc843071eea627671f2168b7a0dca00941a9c7",
+          "validation_procedure_ids": [
+            "verify.memory.full_test",
+            "verify.memory.inventory"
+          ]
+        }
+      ]
+    },
+    {
+      "builder_contract": {
+        "card_catalog_version": "core-card-catalog-technical-copy-v4",
+        "configuration_version": "ticket-builder-v3",
+        "domain_content_version": "core-domain-snapshot-technical-copy-v3",
+        "kind": "LEGACY_TOP_LEVEL_PROFILE",
+        "ticket_content_version": "core-ticket-parts-v3"
+      },
+      "builder_proof": {
+        "exact_pin_match": true,
+        "source": "automated_games/task-036-quiet-cascade-characterization-v2/builder-proof.json",
+        "status": "SUCCESS"
+      },
+      "engine_proof": {
+        "classification": "SUCCEEDED",
+        "deterministic_rerun_identical": true,
+        "source": "automated_games/task-036-quiet-cascade-characterization-v2/summary.json",
+        "turns": 29
+      },
+      "match_ref": "story.match.qc01.shift04.passes_cold",
+      "seed": "story.quiet_cascade.s04.v1",
+      "segment": "CAMPAIGN_ONE",
+      "shift_number": 4,
+      "solvability_proof": {
+        "source": "docs/story/coverage/campaign-one-domain-coverage.json",
+        "ticket_witness_count": 2
+      },
+      "source_case_id": null,
+      "tickets": [
+        {
+          "diagnostics": {
+            "authored_isolation_routes": [
+              {
+                "eligible_outcome_ids": [
+                  "evidence.fingerprint.thermal.clogged.heatsink.machine.thermal.clogged.heatsink.active.test.thermal.temperature.monitoring"
+                ],
+                "minimum_distinct_outcomes": 1,
+                "route_id": "route.fingerprint.thermal.clogged.heatsink.01",
+                "route_kind": "DEFINITIVE_DIAGNOSTIC",
+                "source_definition_ids": [
+                  "test.thermal.temperature_monitoring"
+                ]
+              }
+            ],
+            "minimal_witness_source_ids": [
+              "test.thermal.temperature_monitoring"
+            ],
+            "optional_relevant_source_ids": [
+              "test.boot.post_code_analysis",
+              "test.cooling.location_cross_substitution",
+              "test.general.minimum_configuration",
+              "test.general.visual_inspection",
+              "test.management.bmc_recovery_state",
+              "test.memory.diagnostic",
+              "test.memory.known_good_substitution",
+              "test.memory.single_dimm_isolation",
+              "test.network.link",
+              "test.pcie.inventory",
+              "test.power.distribution_path_isolation",
+              "test.power.known_good_psu",
+              "test.power.output_voltage_measurement",
+              "test.power.psu_status",
+              "test.power.residual_power_drain",
+              "test.storage.bay_path_isolation",
+              "test.storage.device_inventory",
+              "test.storage.drive_health",
+              "test.storage.raid_status",
+              "test.system.bmc_logs",
+              "test.system.controlled_stress",
+              "test.thermal.fan_telemetry"
+            ],
+            "proven_candidate_changing_source_ids": [
+              "test.general.visual_inspection",
+              "test.thermal.fan_telemetry",
+              "test.thermal.temperature_monitoring"
+            ],
+            "relevant_source_ids": [
+              "test.boot.post_code_analysis",
+              "test.cooling.location_cross_substitution",
+              "test.general.minimum_configuration",
+              "test.general.visual_inspection",
+              "test.management.bmc_recovery_state",
+              "test.memory.diagnostic",
+              "test.memory.known_good_substitution",
+              "test.memory.single_dimm_isolation",
+              "test.network.link",
+              "test.pcie.inventory",
+              "test.power.distribution_path_isolation",
+              "test.power.known_good_psu",
+              "test.power.output_voltage_measurement",
+              "test.power.psu_status",
+              "test.power.residual_power_drain",
+              "test.storage.bay_path_isolation",
+              "test.storage.device_inventory",
+              "test.storage.drive_health",
+              "test.storage.raid_status",
+              "test.system.bmc_logs",
+              "test.system.controlled_stress",
+              "test.thermal.fan_telemetry",
+              "test.thermal.temperature_monitoring"
+            ],
+            "target_legal_source_ids": [
+              "command.linux.dmesg",
+              "command.linux.ethtool",
+              "command.linux.free_h",
+              "command.linux.ip_addr",
+              "command.linux.ip_route",
+              "command.linux.journalctl",
+              "command.linux.lsblk",
+              "command.linux.lspci",
+              "command.linux.smartctl",
+              "command.network.ping",
+              "test.boot.device_inventory",
+              "test.boot.post_code_analysis",
+              "test.boot.post_observation",
+              "test.electrical.continuity",
+              "test.firmware.settings_review",
+              "test.general.minimum_configuration",
+              "test.general.visual_inspection",
+              "test.memory.diagnostic",
+              "test.memory.known_good_substitution",
+              "test.memory.single_dimm_isolation",
+              "test.network.cable_substitution",
+              "test.network.dhcp_pool_audit",
+              "test.network.interface_config",
+              "test.network.link",
+              "test.network.ping",
+              "test.pcie.inventory",
+              "test.power.known_good_psu",
+              "test.power.psu_status",
+              "test.storage.device_inventory",
+              "test.storage.drive_health",
+              "test.storage.raid_status",
+              "test.system.bmc_logs",
+              "test.system.controlled_stress",
+              "test.thermal.fan_telemetry",
+              "test.thermal.temperature_monitoring"
+            ]
+          },
+          "document_contract": {
+            "action": "PUBLISH_CLOSURE",
+            "closure_publication_required": true,
+            "explicit_document_live_required": false
+          },
+          "fingerprint_id": "fingerprint.thermal.clogged_heatsink",
+          "hidden_true_fault_ids": [
+            "fault.thermal.heatsink.clogged",
+            "fault.thermal.cpu.overheating"
+          ],
+          "oracle_witness": [
+            {
+              "action": "RUN_DIAGNOSTIC",
+              "evidence_outcome_id": "evidence.fingerprint.thermal.clogged.heatsink.machine.thermal.clogged.heatsink.active.test.thermal.temperature.monitoring",
+              "source_definition_id": "test.thermal.temperature_monitoring"
+            },
+            {
+              "action": "COMMIT_ISOLATION",
+              "cited_outcome_ids": [
+                "evidence.fingerprint.thermal.clogged.heatsink.machine.thermal.clogged.heatsink.active.test.thermal.temperature.monitoring"
+              ],
+              "target_fault_instance_key": "fault_instance.thermal.heatsink"
+            },
+            {
+              "action": "PERFORM_REPAIR",
+              "repair_outcome_id": "repair_outcome.fingerprint.thermal.clogged.heatsink",
+              "repair_procedure_id": "repair.thermal.clean_cooling_path",
+              "target_fault_instance_key": "fault_instance.thermal.heatsink"
+            },
+            {
+              "action": "PERFORM_VERIFY",
+              "result": "PASS",
+              "validation_procedure_id": "verify.thermal.load_test",
+              "verification_outcome_id": "verify_outcome.fingerprint.thermal.clogged.heatsink.01.pass"
+            }
+          ],
+          "public_candidate_fault_ids": [
+            "fault.thermal.cpu.overheating",
+            "fault.thermal.fan.failed",
+            "fault.thermal.heatsink.clogged",
+            "fault.thermal.heatsink.contact_poor"
+          ],
+          "public_symptom_ids": [
+            "symptom.thermal.high_cpu_temp"
+          ],
+          "repair_procedure_ids": [
+            "repair.thermal.clean_cooling_path"
+          ],
+          "ticket_id": "ticket.generated.6e55cf55154d356da2e91126",
+          "ticket_snapshot_digest": "ce86a008060199c2f5c5cb2ed763385e8766315e35a2ce1b9b3e19fa39627a95",
+          "validation_procedure_ids": [
+            "verify.thermal.load_test"
+          ]
+        },
+        {
+          "diagnostics": {
+            "authored_isolation_routes": [
+              {
+                "eligible_outcome_ids": [
+                  "evidence.fingerprint.thermal.failed.fan.machine.thermal.failed.fan.active.test.thermal.fan.telemetry"
+                ],
+                "minimum_distinct_outcomes": 1,
+                "route_id": "route.fingerprint.thermal.failed.fan.01",
+                "route_kind": "DEFINITIVE_DIAGNOSTIC",
+                "source_definition_ids": [
+                  "test.thermal.fan_telemetry"
+                ]
+              },
+              {
+                "eligible_outcome_ids": [
+                  "evidence.fingerprint.thermal.failed.fan.machine.thermal.failed.fan.active.test.cooling.location.cross.substitution"
+                ],
+                "minimum_distinct_outcomes": 1,
+                "route_id": "route.fingerprint.thermal.failed.fan.02",
+                "route_kind": "DEFINITIVE_DIAGNOSTIC",
+                "source_definition_ids": [
+                  "test.cooling.location_cross_substitution"
+                ]
+              }
+            ],
+            "minimal_witness_source_ids": [
+              "test.thermal.fan_telemetry"
+            ],
+            "optional_relevant_source_ids": [
+              "test.boot.post_code_analysis",
+              "test.cooling.location_cross_substitution",
+              "test.general.minimum_configuration",
+              "test.general.visual_inspection",
+              "test.management.bmc_recovery_state",
+              "test.memory.diagnostic",
+              "test.memory.known_good_substitution",
+              "test.memory.single_dimm_isolation",
+              "test.network.link",
+              "test.pcie.inventory",
+              "test.power.distribution_path_isolation",
+              "test.power.known_good_psu",
+              "test.power.output_voltage_measurement",
+              "test.power.psu_status",
+              "test.power.residual_power_drain",
+              "test.storage.bay_path_isolation",
+              "test.storage.device_inventory",
+              "test.storage.drive_health",
+              "test.storage.raid_status",
+              "test.system.bmc_logs",
+              "test.system.controlled_stress",
+              "test.thermal.temperature_monitoring"
+            ],
+            "proven_candidate_changing_source_ids": [
+              "test.cooling.location_cross_substitution",
+              "test.general.visual_inspection",
+              "test.thermal.fan_telemetry",
+              "test.thermal.temperature_monitoring"
+            ],
+            "relevant_source_ids": [
+              "test.boot.post_code_analysis",
+              "test.cooling.location_cross_substitution",
+              "test.general.minimum_configuration",
+              "test.general.visual_inspection",
+              "test.management.bmc_recovery_state",
+              "test.memory.diagnostic",
+              "test.memory.known_good_substitution",
+              "test.memory.single_dimm_isolation",
+              "test.network.link",
+              "test.pcie.inventory",
+              "test.power.distribution_path_isolation",
+              "test.power.known_good_psu",
+              "test.power.output_voltage_measurement",
+              "test.power.psu_status",
+              "test.power.residual_power_drain",
+              "test.storage.bay_path_isolation",
+              "test.storage.device_inventory",
+              "test.storage.drive_health",
+              "test.storage.raid_status",
+              "test.system.bmc_logs",
+              "test.system.controlled_stress",
+              "test.thermal.fan_telemetry",
+              "test.thermal.temperature_monitoring"
+            ],
+            "target_legal_source_ids": [
+              "command.linux.dmesg",
+              "command.linux.ethtool",
+              "command.linux.free_h",
+              "command.linux.ip_addr",
+              "command.linux.ip_route",
+              "command.linux.journalctl",
+              "command.linux.lsblk",
+              "command.linux.lspci",
+              "command.linux.smartctl",
+              "command.network.ping",
+              "test.boot.device_inventory",
+              "test.boot.post_code_analysis",
+              "test.boot.post_observation",
+              "test.cooling.location_cross_substitution",
+              "test.electrical.continuity",
+              "test.firmware.settings_review",
+              "test.general.minimum_configuration",
+              "test.general.visual_inspection",
+              "test.memory.diagnostic",
+              "test.memory.known_good_substitution",
+              "test.memory.single_dimm_isolation",
+              "test.network.cable_substitution",
+              "test.network.dhcp_pool_audit",
+              "test.network.interface_config",
+              "test.network.link",
+              "test.network.ping",
+              "test.pcie.inventory",
+              "test.power.known_good_psu",
+              "test.power.psu_status",
+              "test.storage.device_inventory",
+              "test.storage.drive_health",
+              "test.storage.raid_status",
+              "test.system.bmc_logs",
+              "test.system.controlled_stress",
+              "test.thermal.fan_telemetry",
+              "test.thermal.temperature_monitoring"
+            ]
+          },
+          "document_contract": {
+            "action": "PUBLISH_CLOSURE",
+            "closure_publication_required": true,
+            "explicit_document_live_required": false
+          },
+          "fingerprint_id": "fingerprint.thermal.failed_fan",
+          "hidden_true_fault_ids": [
+            "fault.thermal.fan.failed",
+            "fault.thermal.cpu.overheating"
+          ],
+          "oracle_witness": [
+            {
+              "action": "RUN_DIAGNOSTIC",
+              "evidence_outcome_id": "evidence.fingerprint.thermal.failed.fan.machine.thermal.failed.fan.active.test.thermal.fan.telemetry",
+              "source_definition_id": "test.thermal.fan_telemetry"
+            },
+            {
+              "action": "COMMIT_ISOLATION",
+              "cited_outcome_ids": [
+                "evidence.fingerprint.thermal.failed.fan.machine.thermal.failed.fan.active.test.thermal.fan.telemetry"
+              ],
+              "target_fault_instance_key": "fault_instance.thermal.fan"
+            },
+            {
+              "action": "PERFORM_REPAIR",
+              "repair_outcome_id": "repair_outcome.fingerprint.thermal.failed.fan",
+              "repair_procedure_id": "repair.thermal.replace_fan",
+              "target_fault_instance_key": "fault_instance.thermal.fan"
+            },
+            {
+              "action": "PERFORM_VERIFY",
+              "result": "PASS",
+              "validation_procedure_id": "verify.thermal.load_test",
+              "verification_outcome_id": "verify_outcome.fingerprint.thermal.failed.fan.01.pass"
+            }
+          ],
+          "public_candidate_fault_ids": [
+            "fault.thermal.cpu.overheating",
+            "fault.thermal.fan.failed",
+            "fault.thermal.heatsink.clogged",
+            "fault.thermal.heatsink.contact_poor"
+          ],
+          "public_symptom_ids": [
+            "symptom.thermal.high_cpu_temp"
+          ],
+          "repair_procedure_ids": [
+            "repair.thermal.replace_fan"
+          ],
+          "ticket_id": "ticket.generated.f60b9ce132c74c33f607df6d",
+          "ticket_snapshot_digest": "b8f877726a0d4356575d9efeb51c8226c674687ba0806ba067142ffc3f90c8cd",
+          "validation_procedure_ids": [
+            "verify.thermal.load_test"
+          ]
+        }
+      ]
+    },
+    {
+      "builder_contract": {
+        "card_catalog_version": "core-card-catalog-technical-copy-v4",
+        "configuration_version": "ticket-builder-v3",
+        "domain_content_version": "core-domain-snapshot-technical-copy-v3",
+        "kind": "LEGACY_TOP_LEVEL_PROFILE",
+        "ticket_content_version": "core-ticket-parts-v3"
+      },
+      "builder_proof": {
+        "exact_pin_match": true,
+        "source": "automated_games/task-036-quiet-cascade-characterization-v2/builder-proof.json",
+        "status": "SUCCESS"
+      },
+      "engine_proof": {
+        "classification": "SUCCEEDED",
+        "deterministic_rerun_identical": true,
+        "source": "automated_games/task-036-quiet-cascade-characterization-v2/summary.json",
+        "turns": 112
+      },
+      "match_ref": "story.match.qc01.shift05.no_offer",
+      "seed": "story.quiet_cascade.s05.v1",
+      "segment": "CAMPAIGN_ONE",
+      "shift_number": 5,
+      "solvability_proof": {
+        "source": "docs/story/coverage/campaign-one-domain-coverage.json",
+        "ticket_witness_count": 2
+      },
+      "source_case_id": null,
+      "tickets": [
+        {
+          "diagnostics": {
+            "authored_isolation_routes": [
+              {
+                "eligible_outcome_ids": [
+                  "evidence.fingerprint.network.incorrect.static.ip.machine.network.incorrect.static.ip.active.test.network.interface.config"
+                ],
+                "minimum_distinct_outcomes": 1,
+                "route_id": "route.fingerprint.network.incorrect.static.ip.01",
+                "route_kind": "DEFINITIVE_DIAGNOSTIC",
+                "source_definition_ids": [
+                  "test.network.interface_config"
+                ]
+              }
+            ],
+            "minimal_witness_source_ids": [
+              "test.network.interface_config"
+            ],
+            "optional_relevant_source_ids": [
+              "command.linux.dhclient",
+              "command.linux.ip_addr",
+              "command.linux.ip_route",
+              "command.linux.lspci",
+              "command.network.ping",
+              "test.cooling.location_cross_substitution",
+              "test.firmware.version_compatibility",
+              "test.general.minimum_configuration",
+              "test.general.visual_inspection",
+              "test.memory.single_dimm_isolation",
+              "test.network.cable_substitution",
+              "test.network.dhcp_pool_audit",
+              "test.network.dhcp_transaction_trace",
+              "test.network.link",
+              "test.network.link_counter_soak",
+              "test.network.ping",
+              "test.pcie.inventory",
+              "test.power.psu_status",
+              "test.storage.device_inventory",
+              "test.system.bmc_logs",
+              "test.thermal.fan_telemetry",
+              "test.thermal.temperature_monitoring"
+            ],
+            "proven_candidate_changing_source_ids": [
+              "command.linux.ip_addr",
+              "command.linux.ip_route",
+              "command.linux.lspci",
+              "command.network.ping",
+              "test.general.visual_inspection",
+              "test.network.cable_substitution",
+              "test.network.dhcp_pool_audit",
+              "test.network.interface_config",
+              "test.network.link",
+              "test.network.ping",
+              "test.pcie.inventory"
+            ],
+            "relevant_source_ids": [
+              "command.linux.dhclient",
+              "command.linux.ip_addr",
+              "command.linux.ip_route",
+              "command.linux.lspci",
+              "command.network.ping",
+              "test.cooling.location_cross_substitution",
+              "test.firmware.version_compatibility",
+              "test.general.minimum_configuration",
+              "test.general.visual_inspection",
+              "test.memory.single_dimm_isolation",
+              "test.network.cable_substitution",
+              "test.network.dhcp_pool_audit",
+              "test.network.dhcp_transaction_trace",
+              "test.network.interface_config",
+              "test.network.link",
+              "test.network.link_counter_soak",
+              "test.network.ping",
+              "test.pcie.inventory",
+              "test.power.psu_status",
+              "test.storage.device_inventory",
+              "test.system.bmc_logs",
+              "test.thermal.fan_telemetry",
+              "test.thermal.temperature_monitoring"
+            ],
+            "target_legal_source_ids": [
+              "command.linux.dmesg",
+              "command.linux.ethtool",
+              "command.linux.free_h",
+              "command.linux.ip_addr",
+              "command.linux.ip_route",
+              "command.linux.journalctl",
+              "command.linux.lsblk",
+              "command.linux.lspci",
+              "command.linux.smartctl",
+              "command.network.ping",
+              "test.boot.device_inventory",
+              "test.boot.post_code_analysis",
+              "test.boot.post_observation",
+              "test.electrical.continuity",
+              "test.firmware.settings_review",
+              "test.general.minimum_configuration",
+              "test.general.visual_inspection",
+              "test.memory.diagnostic",
+              "test.memory.known_good_substitution",
+              "test.memory.single_dimm_isolation",
+              "test.network.cable_substitution",
+              "test.network.dhcp_pool_audit",
+              "test.network.interface_config",
+              "test.network.link",
+              "test.network.ping",
+              "test.pcie.inventory",
+              "test.power.known_good_psu",
+              "test.power.psu_status",
+              "test.storage.device_inventory",
+              "test.storage.drive_health",
+              "test.storage.raid_status",
+              "test.system.bmc_logs",
+              "test.system.controlled_stress",
+              "test.thermal.fan_telemetry",
+              "test.thermal.temperature_monitoring"
+            ]
+          },
+          "document_contract": {
+            "action": "PUBLISH_CLOSURE",
+            "closure_publication_required": true,
+            "explicit_document_live_required": false
+          },
+          "fingerprint_id": "fingerprint.network.incorrect_static_ip",
+          "hidden_true_fault_ids": [
+            "fault.network.ip.static_incorrect"
+          ],
+          "oracle_witness": [
+            {
+              "action": "RUN_DIAGNOSTIC",
+              "evidence_outcome_id": "evidence.fingerprint.network.incorrect.static.ip.machine.network.incorrect.static.ip.active.test.network.interface.config",
+              "source_definition_id": "test.network.interface_config"
+            },
+            {
+              "action": "COMMIT_ISOLATION",
+              "cited_outcome_ids": [
+                "evidence.fingerprint.network.incorrect.static.ip.machine.network.incorrect.static.ip.active.test.network.interface.config"
+              ],
+              "target_fault_instance_key": "fault_instance.network.static_ip"
+            },
+            {
+              "action": "PERFORM_REPAIR",
+              "repair_outcome_id": "repair_outcome.fingerprint.network.incorrect.static.ip",
+              "repair_procedure_id": "repair.network.correct_static_ip",
+              "target_fault_instance_key": "fault_instance.network.static_ip"
+            },
+            {
+              "action": "PERFORM_VERIFY",
+              "result": "PASS",
+              "validation_procedure_id": "verify.network.connectivity",
+              "verification_outcome_id": "verify_outcome.fingerprint.network.incorrect.static.ip.01.pass"
+            }
+          ],
+          "public_candidate_fault_ids": [
+            "fault.network.cable.disconnected",
+            "fault.network.cable.failed",
+            "fault.network.dhcp.no_lease",
+            "fault.network.ip.static_incorrect",
+            "fault.network.nic.failed"
+          ],
+          "public_symptom_ids": [
+            "symptom.network.no_connectivity"
+          ],
+          "repair_procedure_ids": [
+            "repair.network.correct_static_ip"
+          ],
+          "ticket_id": "ticket.generated.759fd75d6ac043a57d6673d7",
+          "ticket_snapshot_digest": "45f7e05c9d9a57f0e324c34d21dd1420d7c0f76ec0c4753b1494414a292697bd",
+          "validation_procedure_ids": [
+            "verify.network.connectivity"
+          ]
+        },
+        {
+          "diagnostics": {
+            "authored_isolation_routes": [
+              {
+                "eligible_outcome_ids": [
+                  "evidence.fingerprint.network.failed.cable.machine.network.failed.cable.active.test.network.cable.substitution"
+                ],
+                "minimum_distinct_outcomes": 1,
+                "route_id": "route.fingerprint.network.failed.cable.01",
+                "route_kind": "DEFINITIVE_DIAGNOSTIC",
+                "source_definition_ids": [
+                  "test.network.cable_substitution"
+                ]
+              }
+            ],
+            "minimal_witness_source_ids": [
+              "test.network.cable_substitution"
+            ],
+            "optional_relevant_source_ids": [
+              "command.linux.dhclient",
+              "command.linux.ip_addr",
+              "command.linux.ip_route",
+              "command.linux.lspci",
+              "command.network.ping",
+              "test.cooling.location_cross_substitution",
+              "test.firmware.version_compatibility",
+              "test.general.minimum_configuration",
+              "test.general.visual_inspection",
+              "test.memory.single_dimm_isolation",
+              "test.network.dhcp_pool_audit",
+              "test.network.dhcp_transaction_trace",
+              "test.network.interface_config",
+              "test.network.link",
+              "test.network.link_counter_soak",
+              "test.network.ping",
+              "test.pcie.inventory",
+              "test.power.psu_status",
+              "test.storage.device_inventory",
+              "test.system.bmc_logs",
+              "test.thermal.fan_telemetry",
+              "test.thermal.temperature_monitoring"
+            ],
+            "proven_candidate_changing_source_ids": [
+              "command.linux.ip_addr",
+              "command.linux.ip_route",
+              "command.linux.lspci",
+              "command.network.ping",
+              "test.general.visual_inspection",
+              "test.network.cable_substitution",
+              "test.network.interface_config",
+              "test.network.link",
+              "test.network.ping",
+              "test.pcie.inventory"
+            ],
+            "relevant_source_ids": [
+              "command.linux.dhclient",
+              "command.linux.ip_addr",
+              "command.linux.ip_route",
+              "command.linux.lspci",
+              "command.network.ping",
+              "test.cooling.location_cross_substitution",
+              "test.firmware.version_compatibility",
+              "test.general.minimum_configuration",
+              "test.general.visual_inspection",
+              "test.memory.single_dimm_isolation",
+              "test.network.cable_substitution",
+              "test.network.dhcp_pool_audit",
+              "test.network.dhcp_transaction_trace",
+              "test.network.interface_config",
+              "test.network.link",
+              "test.network.link_counter_soak",
+              "test.network.ping",
+              "test.pcie.inventory",
+              "test.power.psu_status",
+              "test.storage.device_inventory",
+              "test.system.bmc_logs",
+              "test.thermal.fan_telemetry",
+              "test.thermal.temperature_monitoring"
+            ],
+            "target_legal_source_ids": [
+              "command.linux.dmesg",
+              "command.linux.ethtool",
+              "command.linux.free_h",
+              "command.linux.ip_addr",
+              "command.linux.ip_route",
+              "command.linux.journalctl",
+              "command.linux.lsblk",
+              "command.linux.lspci",
+              "command.linux.smartctl",
+              "command.network.ping",
+              "test.boot.device_inventory",
+              "test.boot.post_code_analysis",
+              "test.boot.post_observation",
+              "test.electrical.continuity",
+              "test.firmware.settings_review",
+              "test.general.minimum_configuration",
+              "test.general.visual_inspection",
+              "test.memory.diagnostic",
+              "test.memory.known_good_substitution",
+              "test.memory.single_dimm_isolation",
+              "test.network.cable_substitution",
+              "test.network.dhcp_pool_audit",
+              "test.network.interface_config",
+              "test.network.link",
+              "test.network.ping",
+              "test.pcie.inventory",
+              "test.power.known_good_psu",
+              "test.power.psu_status",
+              "test.storage.device_inventory",
+              "test.storage.drive_health",
+              "test.storage.raid_status",
+              "test.system.bmc_logs",
+              "test.system.controlled_stress",
+              "test.thermal.fan_telemetry",
+              "test.thermal.temperature_monitoring"
+            ]
+          },
+          "document_contract": {
+            "action": "PUBLISH_CLOSURE",
+            "closure_publication_required": true,
+            "explicit_document_live_required": false
+          },
+          "fingerprint_id": "fingerprint.network.failed_cable",
+          "hidden_true_fault_ids": [
+            "fault.network.cable.failed",
+            "fault.network.dhcp.no_lease"
+          ],
+          "oracle_witness": [
+            {
+              "action": "RUN_DIAGNOSTIC",
+              "evidence_outcome_id": "evidence.fingerprint.network.failed.cable.machine.network.failed.cable.active.test.network.cable.substitution",
+              "source_definition_id": "test.network.cable_substitution"
+            },
+            {
+              "action": "COMMIT_ISOLATION",
+              "cited_outcome_ids": [
+                "evidence.fingerprint.network.failed.cable.machine.network.failed.cable.active.test.network.cable.substitution"
+              ],
+              "target_fault_instance_key": "fault_instance.network.cable"
+            },
+            {
+              "action": "PERFORM_REPAIR",
+              "repair_outcome_id": "repair_outcome.fingerprint.network.failed.cable",
+              "repair_procedure_id": "repair.network.replace_cable",
+              "target_fault_instance_key": "fault_instance.network.cable"
+            },
+            {
+              "action": "PERFORM_VERIFY",
+              "result": "PASS",
+              "validation_procedure_id": "verify.network.link",
+              "verification_outcome_id": "verify_outcome.fingerprint.network.failed.cable.01.pass"
+            },
+            {
+              "action": "PERFORM_VERIFY",
+              "result": "PASS",
+              "validation_procedure_id": "verify.network.connectivity",
+              "verification_outcome_id": "verify_outcome.fingerprint.network.failed.cable.02.pass"
+            }
+          ],
+          "public_candidate_fault_ids": [
+            "fault.network.cable.disconnected",
+            "fault.network.cable.failed",
+            "fault.network.dhcp.no_lease",
+            "fault.network.ip.static_incorrect",
+            "fault.network.nic.failed"
+          ],
+          "public_symptom_ids": [
+            "symptom.network.no_connectivity"
+          ],
+          "repair_procedure_ids": [
+            "repair.network.replace_cable"
+          ],
+          "ticket_id": "ticket.generated.cbc8003979ffdaca83b41d7d",
+          "ticket_snapshot_digest": "4de1801512399068fea5881be79955af674ae35eff511d7a1d75101d6c0085d2",
+          "validation_procedure_ids": [
+            "verify.network.connectivity",
+            "verify.network.link"
+          ]
+        }
+      ]
+    },
+    {
+      "builder_contract": {
+        "card_catalog_version": "core-card-catalog-technical-copy-v4",
+        "configuration_version": "ticket-builder-v3",
+        "domain_content_version": "core-domain-snapshot-technical-copy-v3",
+        "kind": "LEGACY_TOP_LEVEL_PROFILE",
+        "ticket_content_version": "core-ticket-parts-v3"
+      },
+      "builder_proof": {
+        "exact_pin_match": true,
+        "source": "automated_games/task-036-quiet-cascade-characterization-v2/builder-proof.json",
+        "status": "SUCCESS"
+      },
+      "engine_proof": {
+        "classification": "SUCCEEDED",
+        "deterministic_rerun_identical": true,
+        "source": "automated_games/task-036-quiet-cascade-characterization-v2/summary.json",
+        "turns": 217
+      },
+      "match_ref": "story.match.qc01.shift06.quiet_cascade",
+      "seed": "story.quiet_cascade.s06.v1",
+      "segment": "CAMPAIGN_ONE",
+      "shift_number": 6,
+      "solvability_proof": {
+        "source": "docs/story/coverage/campaign-one-domain-coverage.json",
+        "ticket_witness_count": 3
+      },
+      "source_case_id": null,
+      "tickets": [
+        {
+          "diagnostics": {
+            "authored_isolation_routes": [
+              {
+                "eligible_outcome_ids": [
+                  "evidence.fingerprint.boot.missing.nvme.machine.boot.missing.nvme.active.test.system.bmc.logs"
+                ],
+                "minimum_distinct_outcomes": 1,
+                "route_id": "route.fingerprint.boot.missing.nvme.01",
+                "route_kind": "DEFINITIVE_DIAGNOSTIC",
+                "source_definition_ids": [
+                  "test.system.bmc_logs"
+                ]
+              }
+            ],
+            "minimal_witness_source_ids": [
+              "test.system.bmc_logs"
+            ],
+            "optional_relevant_source_ids": [
+              "command.linux.lsblk",
+              "command.linux.lspci",
+              "command.linux.nvme_smart_log",
+              "test.boot.device_inventory",
+              "test.boot.post_code_analysis",
+              "test.cooling.location_cross_substitution",
+              "test.firmware.settings_review",
+              "test.firmware.version_compatibility",
+              "test.general.minimum_configuration",
+              "test.general.visual_inspection",
+              "test.memory.diagnostic",
+              "test.memory.known_good_substitution",
+              "test.memory.single_dimm_isolation",
+              "test.network.cable_substitution",
+              "test.network.link",
+              "test.network.link_counter_soak",
+              "test.pcie.inventory",
+              "test.power.distribution_path_isolation",
+              "test.power.known_good_psu",
+              "test.power.output_voltage_measurement",
+              "test.power.psu_status",
+              "test.power.residual_power_drain",
+              "test.storage.bay_path_isolation",
+              "test.storage.device_inventory",
+              "test.storage.drive_health",
+              "test.storage.predictive_health",
+              "test.storage.raid_status",
+              "test.system.controlled_stress",
+              "test.thermal.fan_telemetry",
+              "test.thermal.temperature_monitoring"
+            ],
+            "proven_candidate_changing_source_ids": [
+              "command.linux.lsblk",
+              "command.linux.lspci",
+              "test.boot.device_inventory",
+              "test.firmware.settings_review",
+              "test.general.minimum_configuration",
+              "test.general.visual_inspection",
+              "test.pcie.inventory",
+              "test.storage.device_inventory",
+              "test.system.bmc_logs"
+            ],
+            "relevant_source_ids": [
+              "command.linux.lsblk",
+              "command.linux.lspci",
+              "command.linux.nvme_smart_log",
+              "test.boot.device_inventory",
+              "test.boot.post_code_analysis",
+              "test.cooling.location_cross_substitution",
+              "test.firmware.settings_review",
+              "test.firmware.version_compatibility",
+              "test.general.minimum_configuration",
+              "test.general.visual_inspection",
+              "test.memory.diagnostic",
+              "test.memory.known_good_substitution",
+              "test.memory.single_dimm_isolation",
+              "test.network.cable_substitution",
+              "test.network.link",
+              "test.network.link_counter_soak",
+              "test.pcie.inventory",
+              "test.power.distribution_path_isolation",
+              "test.power.known_good_psu",
+              "test.power.output_voltage_measurement",
+              "test.power.psu_status",
+              "test.power.residual_power_drain",
+              "test.storage.bay_path_isolation",
+              "test.storage.device_inventory",
+              "test.storage.drive_health",
+              "test.storage.predictive_health",
+              "test.storage.raid_status",
+              "test.system.bmc_logs",
+              "test.system.controlled_stress",
+              "test.thermal.fan_telemetry",
+              "test.thermal.temperature_monitoring"
+            ],
+            "target_legal_source_ids": [
+              "command.linux.dmesg",
+              "command.linux.ethtool",
+              "command.linux.free_h",
+              "command.linux.ip_addr",
+              "command.linux.ip_route",
+              "command.linux.journalctl",
+              "command.linux.lsblk",
+              "command.linux.lspci",
+              "command.linux.nvme_smart_log",
+              "command.linux.smartctl",
+              "command.network.ping",
+              "test.boot.device_inventory",
+              "test.boot.post_code_analysis",
+              "test.boot.post_observation",
+              "test.electrical.continuity",
+              "test.firmware.settings_review",
+              "test.general.minimum_configuration",
+              "test.general.visual_inspection",
+              "test.memory.diagnostic",
+              "test.memory.known_good_substitution",
+              "test.memory.single_dimm_isolation",
+              "test.network.cable_substitution",
+              "test.network.dhcp_pool_audit",
+              "test.network.interface_config",
+              "test.network.link",
+              "test.network.ping",
+              "test.pcie.inventory",
+              "test.power.known_good_psu",
+              "test.power.psu_status",
+              "test.storage.device_inventory",
+              "test.storage.drive_health",
+              "test.storage.predictive_health",
+              "test.storage.raid_status",
+              "test.system.bmc_logs",
+              "test.system.controlled_stress",
+              "test.thermal.fan_telemetry",
+              "test.thermal.temperature_monitoring"
+            ]
+          },
+          "document_contract": {
+            "action": "PUBLISH_CLOSURE",
+            "closure_publication_required": true,
+            "explicit_document_live_required": false
+          },
+          "fingerprint_id": "fingerprint.boot.missing_nvme",
+          "hidden_true_fault_ids": [
+            "fault.storage.nvme.device_failed",
+            "fault.boot.device.not_detected"
+          ],
+          "oracle_witness": [
+            {
+              "action": "RUN_DIAGNOSTIC",
+              "evidence_outcome_id": "evidence.fingerprint.boot.missing.nvme.machine.boot.missing.nvme.active.test.system.bmc.logs",
+              "source_definition_id": "test.system.bmc_logs"
+            },
+            {
+              "action": "COMMIT_ISOLATION",
+              "cited_outcome_ids": [
+                "evidence.fingerprint.boot.missing.nvme.machine.boot.missing.nvme.active.test.system.bmc.logs"
+              ],
+              "target_fault_instance_key": "fault_instance.boot.nvme"
+            },
+            {
+              "action": "PERFORM_REPAIR",
+              "repair_outcome_id": "repair_outcome.fingerprint.boot.missing.nvme",
+              "repair_procedure_id": "repair.storage.replace_nvme",
+              "target_fault_instance_key": "fault_instance.boot.nvme"
+            },
+            {
+              "action": "PERFORM_VERIFY",
+              "result": "PASS",
+              "validation_procedure_id": "verify.storage.device_detected",
+              "verification_outcome_id": "verify_outcome.fingerprint.boot.missing.nvme.01.pass"
+            },
+            {
+              "action": "PERFORM_VERIFY",
+              "result": "PASS",
+              "validation_procedure_id": "verify.boot.normal_boot",
+              "verification_outcome_id": "verify_outcome.fingerprint.boot.missing.nvme.02.pass"
+            }
+          ],
+          "public_candidate_fault_ids": [
+            "fault.boot.device.not_detected",
+            "fault.boot.order.incorrect",
+            "fault.storage.cable.loose",
+            "fault.storage.nvme.device_failed",
+            "fault.storage.raid.controller_failed"
+          ],
+          "public_symptom_ids": [
+            "symptom.boot.no_boot_device"
+          ],
+          "repair_procedure_ids": [
+            "repair.storage.replace_nvme"
+          ],
+          "ticket_id": "ticket.generated.3ec80b1b0e7221ac725aedf9",
+          "ticket_snapshot_digest": "1c74ad0725e500ac01d4c356f17551fee11678a88b35ca5b591ff056a2efdff2",
+          "validation_procedure_ids": [
+            "verify.boot.normal_boot",
+            "verify.storage.device_detected"
+          ]
+        },
+        {
+          "diagnostics": {
+            "authored_isolation_routes": [
+              {
+                "eligible_outcome_ids": [
+                  "evidence.fingerprint.storage.failed.sas.member.machine.storage.failed.sas.member.active.test.storage.drive.health"
+                ],
+                "minimum_distinct_outcomes": 1,
+                "route_id": "route.fingerprint.storage.failed.sas.member.01",
+                "route_kind": "DEFINITIVE_DIAGNOSTIC",
+                "source_definition_ids": [
+                  "test.storage.drive_health"
+                ]
+              },
+              {
+                "eligible_outcome_ids": [
+                  "evidence.fingerprint.storage.failed.sas.member.machine.storage.failed.sas.member.active.test.storage.raid.status",
+                  "evidence.fingerprint.storage.failed.sas.member.machine.storage.failed.sas.member.active.command.linux.smartctl"
+                ],
+                "minimum_distinct_outcomes": 2,
+                "route_id": "route.fingerprint.storage.failed.sas.member.02",
+                "route_kind": "CORROBORATED_SUPPORT",
+                "source_definition_ids": [
+                  "test.storage.raid_status",
+                  "command.linux.smartctl"
+                ]
+              }
+            ],
+            "minimal_witness_source_ids": [
+              "test.storage.drive_health"
+            ],
+            "optional_relevant_source_ids": [
+              "command.linux.lsblk",
+              "command.linux.nvme_smart_log",
+              "command.linux.smartctl",
+              "test.boot.device_inventory",
+              "test.firmware.version_compatibility",
+              "test.general.minimum_configuration",
+              "test.general.visual_inspection",
+              "test.memory.diagnostic",
+              "test.memory.known_good_substitution",
+              "test.memory.single_dimm_isolation",
+              "test.pcie.inventory",
+              "test.power.distribution_path_isolation",
+              "test.power.known_good_psu",
+              "test.power.output_voltage_measurement",
+              "test.power.psu_status",
+              "test.power.residual_power_drain",
+              "test.storage.bay_path_isolation",
+              "test.storage.device_inventory",
+              "test.storage.predictive_health",
+              "test.storage.raid_status",
+              "test.system.bmc_logs",
+              "test.system.controlled_stress",
+              "test.thermal.fan_telemetry",
+              "test.thermal.temperature_monitoring"
+            ],
+            "proven_candidate_changing_source_ids": [
+              "command.linux.lsblk",
+              "command.linux.smartctl",
+              "test.storage.device_inventory",
+              "test.storage.drive_health",
+              "test.storage.raid_status"
+            ],
+            "relevant_source_ids": [
+              "command.linux.lsblk",
+              "command.linux.nvme_smart_log",
+              "command.linux.smartctl",
+              "test.boot.device_inventory",
+              "test.firmware.version_compatibility",
+              "test.general.minimum_configuration",
+              "test.general.visual_inspection",
+              "test.memory.diagnostic",
+              "test.memory.known_good_substitution",
+              "test.memory.single_dimm_isolation",
+              "test.pcie.inventory",
+              "test.power.distribution_path_isolation",
+              "test.power.known_good_psu",
+              "test.power.output_voltage_measurement",
+              "test.power.psu_status",
+              "test.power.residual_power_drain",
+              "test.storage.bay_path_isolation",
+              "test.storage.device_inventory",
+              "test.storage.drive_health",
+              "test.storage.predictive_health",
+              "test.storage.raid_status",
+              "test.system.bmc_logs",
+              "test.system.controlled_stress",
+              "test.thermal.fan_telemetry",
+              "test.thermal.temperature_monitoring"
+            ],
+            "target_legal_source_ids": [
+              "command.linux.dmesg",
+              "command.linux.ethtool",
+              "command.linux.free_h",
+              "command.linux.ip_addr",
+              "command.linux.ip_route",
+              "command.linux.journalctl",
+              "command.linux.lsblk",
+              "command.linux.lspci",
+              "command.linux.nvme_smart_log",
+              "command.linux.smartctl",
+              "command.network.ping",
+              "test.boot.device_inventory",
+              "test.boot.post_code_analysis",
+              "test.boot.post_observation",
+              "test.electrical.continuity",
+              "test.firmware.settings_review",
+              "test.firmware.version_compatibility",
+              "test.general.minimum_configuration",
+              "test.general.visual_inspection",
+              "test.memory.diagnostic",
+              "test.memory.known_good_substitution",
+              "test.memory.single_dimm_isolation",
+              "test.network.cable_substitution",
+              "test.network.dhcp_pool_audit",
+              "test.network.interface_config",
+              "test.network.link",
+              "test.network.ping",
+              "test.pcie.inventory",
+              "test.power.known_good_psu",
+              "test.power.psu_status",
+              "test.storage.bay_path_isolation",
+              "test.storage.device_inventory",
+              "test.storage.drive_health",
+              "test.storage.predictive_health",
+              "test.storage.raid_status",
+              "test.system.bmc_logs",
+              "test.system.controlled_stress",
+              "test.thermal.fan_telemetry",
+              "test.thermal.temperature_monitoring"
+            ]
+          },
+          "document_contract": {
+            "action": "PUBLISH_CLOSURE",
+            "closure_publication_required": true,
+            "explicit_document_live_required": false
+          },
+          "fingerprint_id": "fingerprint.storage.failed_sas_member",
+          "hidden_true_fault_ids": [
+            "fault.storage.sas.drive_failed",
+            "fault.storage.raid.degraded"
+          ],
+          "oracle_witness": [
+            {
+              "action": "RUN_DIAGNOSTIC",
+              "evidence_outcome_id": "evidence.fingerprint.storage.failed.sas.member.machine.storage.failed.sas.member.active.test.storage.drive.health",
+              "source_definition_id": "test.storage.drive_health"
+            },
+            {
+              "action": "COMMIT_ISOLATION",
+              "cited_outcome_ids": [
+                "evidence.fingerprint.storage.failed.sas.member.machine.storage.failed.sas.member.active.test.storage.drive.health"
+              ],
+              "target_fault_instance_key": "fault_instance.storage.sas"
+            },
+            {
+              "action": "PERFORM_REPAIR",
+              "repair_outcome_id": "repair_outcome.fingerprint.storage.failed.sas.member",
+              "repair_procedure_id": "repair.storage.replace_raid_member",
+              "target_fault_instance_key": "fault_instance.storage.sas"
+            },
+            {
+              "action": "PERFORM_VERIFY",
+              "result": "PASS",
+              "validation_procedure_id": "verify.storage.raid_healthy",
+              "verification_outcome_id": "verify_outcome.fingerprint.storage.failed.sas.member.01.pass"
+            }
+          ],
+          "public_candidate_fault_ids": [
+            "fault.storage.raid.degraded",
+            "fault.storage.sas.drive_failed",
+            "fault.storage.sata.drive_failed"
+          ],
+          "public_symptom_ids": [
+            "symptom.storage.raid_degraded"
+          ],
+          "repair_procedure_ids": [
+            "repair.storage.replace_raid_member"
+          ],
+          "ticket_id": "ticket.generated.45a70010dd4752f864990575",
+          "ticket_snapshot_digest": "863ca5c0e0a72f9440e3352c80b070f4bde1ca166c801e79425821adfa7f4420",
+          "validation_procedure_ids": [
+            "verify.storage.raid_healthy"
+          ]
+        },
+        {
+          "diagnostics": {
+            "authored_isolation_routes": [
+              {
+                "eligible_outcome_ids": [
+                  "evidence.fingerprint.storage.loose.cable.machine.storage.loose.cable.active.test.general.visual.inspection",
+                  "evidence.fingerprint.storage.loose.cable.machine.storage.loose.cable.active.test.storage.device.inventory"
+                ],
+                "minimum_distinct_outcomes": 2,
+                "route_id": "route.fingerprint.storage.loose.cable.01",
+                "route_kind": "CORROBORATED_SUPPORT",
+                "source_definition_ids": [
+                  "test.general.visual_inspection",
+                  "test.storage.device_inventory"
+                ]
+              }
+            ],
+            "minimal_witness_source_ids": [
+              "test.general.visual_inspection",
+              "test.storage.device_inventory"
+            ],
+            "optional_relevant_source_ids": [
+              "command.linux.lsblk",
+              "command.linux.nvme_smart_log",
+              "command.linux.smartctl",
+              "test.boot.device_inventory",
+              "test.cooling.location_cross_substitution",
+              "test.firmware.settings_review",
+              "test.firmware.version_compatibility",
+              "test.general.minimum_configuration",
+              "test.memory.diagnostic",
+              "test.memory.known_good_substitution",
+              "test.memory.single_dimm_isolation",
+              "test.network.link",
+              "test.pcie.inventory",
+              "test.power.distribution_path_isolation",
+              "test.power.known_good_psu",
+              "test.power.output_voltage_measurement",
+              "test.power.psu_status",
+              "test.power.residual_power_drain",
+              "test.storage.bay_path_isolation",
+              "test.storage.drive_health",
+              "test.storage.predictive_health",
+              "test.storage.raid_status",
+              "test.system.bmc_logs",
+              "test.system.controlled_stress",
+              "test.thermal.fan_telemetry",
+              "test.thermal.temperature_monitoring"
+            ],
+            "proven_candidate_changing_source_ids": [
+              "command.linux.lsblk",
+              "command.linux.smartctl",
+              "test.general.visual_inspection",
+              "test.storage.device_inventory",
+              "test.storage.drive_health",
+              "test.storage.raid_status",
+              "test.system.bmc_logs"
+            ],
+            "relevant_source_ids": [
+              "command.linux.lsblk",
+              "command.linux.nvme_smart_log",
+              "command.linux.smartctl",
+              "test.boot.device_inventory",
+              "test.cooling.location_cross_substitution",
+              "test.firmware.settings_review",
+              "test.firmware.version_compatibility",
+              "test.general.minimum_configuration",
+              "test.general.visual_inspection",
+              "test.memory.diagnostic",
+              "test.memory.known_good_substitution",
+              "test.memory.single_dimm_isolation",
+              "test.network.link",
+              "test.pcie.inventory",
+              "test.power.distribution_path_isolation",
+              "test.power.known_good_psu",
+              "test.power.output_voltage_measurement",
+              "test.power.psu_status",
+              "test.power.residual_power_drain",
+              "test.storage.bay_path_isolation",
+              "test.storage.device_inventory",
+              "test.storage.drive_health",
+              "test.storage.predictive_health",
+              "test.storage.raid_status",
+              "test.system.bmc_logs",
+              "test.system.controlled_stress",
+              "test.thermal.fan_telemetry",
+              "test.thermal.temperature_monitoring"
+            ],
+            "target_legal_source_ids": [
+              "command.linux.dmesg",
+              "command.linux.ethtool",
+              "command.linux.free_h",
+              "command.linux.ip_addr",
+              "command.linux.ip_route",
+              "command.linux.journalctl",
+              "command.linux.lsblk",
+              "command.linux.lspci",
+              "command.linux.smartctl",
+              "command.network.ping",
+              "test.boot.device_inventory",
+              "test.boot.post_code_analysis",
+              "test.boot.post_observation",
+              "test.electrical.continuity",
+              "test.firmware.settings_review",
+              "test.general.minimum_configuration",
+              "test.general.visual_inspection",
+              "test.memory.diagnostic",
+              "test.memory.known_good_substitution",
+              "test.memory.single_dimm_isolation",
+              "test.network.cable_substitution",
+              "test.network.dhcp_pool_audit",
+              "test.network.interface_config",
+              "test.network.link",
+              "test.network.ping",
+              "test.pcie.inventory",
+              "test.power.known_good_psu",
+              "test.power.psu_status",
+              "test.storage.device_inventory",
+              "test.storage.drive_health",
+              "test.storage.raid_status",
+              "test.system.bmc_logs",
+              "test.system.controlled_stress",
+              "test.thermal.fan_telemetry",
+              "test.thermal.temperature_monitoring"
+            ]
+          },
+          "document_contract": {
+            "action": "PUBLISH_CLOSURE",
+            "closure_publication_required": true,
+            "explicit_document_live_required": false
+          },
+          "fingerprint_id": "fingerprint.storage.loose_cable",
+          "hidden_true_fault_ids": [
+            "fault.storage.cable.loose"
+          ],
+          "oracle_witness": [
+            {
+              "action": "RUN_DIAGNOSTIC",
+              "evidence_outcome_id": "evidence.fingerprint.storage.loose.cable.machine.storage.loose.cable.active.test.general.visual.inspection",
+              "source_definition_id": "test.general.visual_inspection"
+            },
+            {
+              "action": "RUN_DIAGNOSTIC",
+              "evidence_outcome_id": "evidence.fingerprint.storage.loose.cable.machine.storage.loose.cable.active.test.storage.device.inventory",
+              "source_definition_id": "test.storage.device_inventory"
+            },
+            {
+              "action": "COMMIT_ISOLATION",
+              "cited_outcome_ids": [
+                "evidence.fingerprint.storage.loose.cable.machine.storage.loose.cable.active.test.general.visual.inspection",
+                "evidence.fingerprint.storage.loose.cable.machine.storage.loose.cable.active.test.storage.device.inventory"
+              ],
+              "target_fault_instance_key": "fault_instance.storage.cable"
+            },
+            {
+              "action": "PERFORM_REPAIR",
+              "repair_outcome_id": "repair_outcome.fingerprint.storage.loose.cable",
+              "repair_procedure_id": "repair.storage.reseat_cable",
+              "target_fault_instance_key": "fault_instance.storage.cable"
+            },
+            {
+              "action": "PERFORM_VERIFY",
+              "result": "PASS",
+              "validation_procedure_id": "verify.storage.device_detected",
+              "verification_outcome_id": "verify_outcome.fingerprint.storage.loose.cable.01.pass"
+            }
+          ],
+          "public_candidate_fault_ids": [
+            "fault.storage.backplane.path_failed",
+            "fault.storage.cable.failed",
+            "fault.storage.cable.loose",
+            "fault.storage.nvme.device_failed",
+            "fault.storage.sas.drive_failed"
+          ],
+          "public_symptom_ids": [
+            "symptom.storage.io_errors"
+          ],
+          "repair_procedure_ids": [
+            "repair.storage.reseat_cable"
+          ],
+          "ticket_id": "ticket.generated.5352abd871c2e9076be92a0b",
+          "ticket_snapshot_digest": "b06dc5a7d12c29af78edd71f7a82a611d971844e6e71863e142bc293f4e6af27",
+          "validation_procedure_ids": [
+            "verify.storage.device_detected"
+          ]
+        }
+      ]
+    },
+    {
+      "builder_contract": {
+        "card_catalog_version": "core-card-catalog-story-expansion-v5",
+        "configuration_version": "ticket-builder-v4",
+        "domain_content_version": "core-domain-snapshot-story-expansion-v4",
+        "kind": "EMBEDDED_V4_CONFIGURATION",
+        "ticket_content_version": "core-ticket-parts-v4"
+      },
+      "builder_proof": {
+        "exact_pin_match": true,
+        "source": "automated_games/task-043-quiet-cascade-expansion-v3/builder-proof.json",
+        "status": "SUCCESS"
+      },
+      "engine_proof": {
+        "classification": "SUCCEEDED",
+        "deterministic_rerun_identical": true,
+        "source": "automated_games/task-043-quiet-cascade-expansion-v3/builder-proof.json",
+        "turns": 12
+      },
+      "match_ref": "story.match.qc02.shift07.socket_contacts",
+      "seed": "story.quiet_cascade.expansion.s07.v1",
+      "segment": "EXPANSION",
+      "shift_number": 7,
+      "solvability_proof": {
+        "source": "automated_games/task-043-quiet-cascade-expansion-v3/builder-proof.json",
+        "ticket_witness_count": 1
+      },
+      "source_case_id": "exp-001",
+      "tickets": [
+        {
+          "diagnostics": {
+            "authored_isolation_routes": [
+              {
+                "route_kind": "TASK_043_ORACLE_WITNESS",
+                "source_definition_ids": [
+                  "test.compute.socket_magnified_inspection"
+                ]
+              }
+            ],
+            "minimal_witness_source_ids": [
+              "test.compute.socket_magnified_inspection"
+            ],
+            "optional_relevant_source_ids": [
+              "test.boot.post_code_analysis",
+              "test.general.minimum_configuration",
+              "test.general.visual_inspection",
+              "test.memory.diagnostic",
+              "test.memory.known_good_substitution",
+              "test.memory.single_dimm_isolation",
+              "test.system.bmc_logs"
+            ],
+            "proven_candidate_changing_source_ids": [
+              "test.compute.socket_magnified_inspection"
+            ],
+            "relevant_source_ids": [
+              "test.boot.post_code_analysis",
+              "test.compute.socket_magnified_inspection",
+              "test.general.minimum_configuration",
+              "test.general.visual_inspection",
+              "test.memory.diagnostic",
+              "test.memory.known_good_substitution",
+              "test.memory.single_dimm_isolation",
+              "test.system.bmc_logs"
+            ],
+            "target_legal_source_ids": null
+          },
+          "document_contract": {
+            "action_type": "PUBLISH_CLOSURE",
+            "effect": "LOCK_WORKLOG_AND_ARCHIVE_TICKET",
+            "required_card_copies": 0
+          },
+          "fingerprint_id": "fingerprint.compute.damaged_cpu_socket_contacts",
+          "hidden_true_fault_ids": [
+            "fault.compute.cpu_socket.contacts_damaged"
+          ],
+          "oracle_witness": [
+            {
+              "action": "RUN_DIAGNOSTIC",
+              "evidence_outcome_id": "evidence.fingerprint.compute.damaged.cpu.socket.contacts.machine.compute.damaged.socket.contacts.active.test.compute.socket.magnified.inspection",
+              "source_definition_id": "test.compute.socket_magnified_inspection"
+            },
+            {
+              "action": "COMMIT_ISOLATION",
+              "cited_outcome_ids": [
+                "evidence.fingerprint.compute.damaged.cpu.socket.contacts.machine.compute.damaged.socket.contacts.active.test.compute.socket.magnified.inspection"
+              ],
+              "target_fault_instance_key": "fault_instance.compute.damaged_cpu_socket_contacts.root"
+            },
+            {
+              "action": "PERFORM_REPAIR",
+              "repair_outcome_id": "repair_outcome.fingerprint.compute.damaged.cpu.socket.contacts",
+              "target_fault_instance_key": "fault_instance.compute.damaged_cpu_socket_contacts.root"
+            },
+            {
+              "action": "PERFORM_VERIFY",
+              "result": "PASS",
+              "verification_outcome_id": "verify_outcome.fingerprint.compute.damaged.cpu.socket.contacts.01.pass"
+            }
+          ],
+          "public_candidate_fault_ids": [
+            "fault.board.system.failed",
+            "fault.compute.cpu_socket.contacts_damaged",
+            "fault.cpu.not_seated",
+            "fault.memory.dimm.failed",
+            "fault.memory.dimm.not_seated"
+          ],
+          "public_symptom_ids": [
+            "symptom.boot.no_post"
+          ],
+          "repair_procedure_ids": [
+            "repair.compute.restore_socket_contacts"
+          ],
+          "ticket_id": "ticket.generated.4f237a22c35d46166044b2c7",
+          "ticket_snapshot_digest": "dc4e0581e510fd94120fcca53ee8b25f5a8d3b456253627c7faf5603c5d8e481",
+          "validation_procedure_ids": [
+            "verify.compute.socket_path"
+          ]
+        }
+      ]
+    },
+    {
+      "builder_contract": {
+        "card_catalog_version": "core-card-catalog-story-expansion-v5",
+        "configuration_version": "ticket-builder-v4",
+        "domain_content_version": "core-domain-snapshot-story-expansion-v4",
+        "kind": "EMBEDDED_V4_CONFIGURATION",
+        "ticket_content_version": "core-ticket-parts-v4"
+      },
+      "builder_proof": {
+        "exact_pin_match": true,
+        "source": "automated_games/task-043-quiet-cascade-expansion-v3/builder-proof.json",
+        "status": "SUCCESS"
+      },
+      "engine_proof": {
+        "classification": "SUCCEEDED",
+        "deterministic_rerun_identical": true,
+        "source": "automated_games/task-043-quiet-cascade-expansion-v3/builder-proof.json",
+        "turns": 9
+      },
+      "match_ref": "story.match.qc02.shift08.power_distribution",
+      "seed": "story.quiet_cascade.expansion.s08.v1",
+      "segment": "EXPANSION",
+      "shift_number": 8,
+      "solvability_proof": {
+        "source": "automated_games/task-043-quiet-cascade-expansion-v3/builder-proof.json",
+        "ticket_witness_count": 1
+      },
+      "source_case_id": "exp-002",
+      "tickets": [
+        {
+          "diagnostics": {
+            "authored_isolation_routes": [
+              {
+                "route_kind": "TASK_043_ORACLE_WITNESS",
+                "source_definition_ids": [
+                  "test.power.distribution_path_isolation"
+                ]
+              }
+            ],
+            "minimal_witness_source_ids": [
+              "test.power.distribution_path_isolation"
+            ],
+            "optional_relevant_source_ids": [
+              "test.general.minimum_configuration",
+              "test.general.visual_inspection",
+              "test.power.known_good_psu",
+              "test.power.output_voltage_measurement",
+              "test.power.psu_status",
+              "test.power.residual_power_drain",
+              "test.system.bmc_logs"
+            ],
+            "proven_candidate_changing_source_ids": [
+              "test.power.distribution_path_isolation"
+            ],
+            "relevant_source_ids": [
+              "test.general.minimum_configuration",
+              "test.general.visual_inspection",
+              "test.power.distribution_path_isolation",
+              "test.power.known_good_psu",
+              "test.power.output_voltage_measurement",
+              "test.power.psu_status",
+              "test.power.residual_power_drain",
+              "test.system.bmc_logs"
+            ],
+            "target_legal_source_ids": null
+          },
+          "document_contract": {
+            "action_type": "PUBLISH_CLOSURE",
+            "effect": "LOCK_WORKLOG_AND_ARCHIVE_TICKET",
+            "required_card_copies": 0
+          },
+          "fingerprint_id": "fingerprint.power.failed_distribution_board",
+          "hidden_true_fault_ids": [
+            "fault.power.distribution_board.failed"
+          ],
+          "oracle_witness": [
+            {
+              "action": "RUN_DIAGNOSTIC",
+              "evidence_outcome_id": "evidence.fingerprint.power.failed.distribution.board.machine.power.failed.distribution.board.active.test.power.distribution.path.isolation",
+              "source_definition_id": "test.power.distribution_path_isolation"
+            },
+            {
+              "action": "COMMIT_ISOLATION",
+              "cited_outcome_ids": [
+                "evidence.fingerprint.power.failed.distribution.board.machine.power.failed.distribution.board.active.test.power.distribution.path.isolation"
+              ],
+              "target_fault_instance_key": "fault_instance.power.failed_distribution_board.root"
+            },
+            {
+              "action": "PERFORM_REPAIR",
+              "repair_outcome_id": "repair_outcome.fingerprint.power.failed.distribution.board",
+              "target_fault_instance_key": "fault_instance.power.failed_distribution_board.root"
+            },
+            {
+              "action": "PERFORM_VERIFY",
+              "result": "PASS",
+              "verification_outcome_id": "verify_outcome.fingerprint.power.failed.distribution.board.01.pass"
+            }
+          ],
+          "public_candidate_fault_ids": [
+            "fault.board.system.failed",
+            "fault.power.distribution_board.failed",
+            "fault.power.input.cable_loose",
+            "fault.power.psu.failed",
+            "fault.power.psu.not_seated"
+          ],
+          "public_symptom_ids": [
+            "symptom.power.voltage_out_of_range",
+            "symptom.power.no_power"
+          ],
+          "repair_procedure_ids": [
+            "repair.power.replace_distribution_board"
+          ],
+          "ticket_id": "ticket.generated.3fd6eb04534f79b5b3f87f98",
+          "ticket_snapshot_digest": "d34f08d79c2cc2d47d16d23ec753f1e78758d0b358664d4e592ea23f25b63d73",
+          "validation_procedure_ids": [
+            "verify.power.distribution_path"
+          ]
+        }
+      ]
+    },
+    {
+      "builder_contract": {
+        "card_catalog_version": "core-card-catalog-story-expansion-v5",
+        "configuration_version": "ticket-builder-v4",
+        "domain_content_version": "core-domain-snapshot-story-expansion-v4",
+        "kind": "EMBEDDED_V4_CONFIGURATION",
+        "ticket_content_version": "core-ticket-parts-v4"
+      },
+      "builder_proof": {
+        "exact_pin_match": true,
+        "source": "automated_games/task-043-quiet-cascade-expansion-v3/builder-proof.json",
+        "status": "SUCCESS"
+      },
+      "engine_proof": {
+        "classification": "SUCCEEDED",
+        "deterministic_rerun_identical": true,
+        "source": "automated_games/task-043-quiet-cascade-expansion-v3/builder-proof.json",
+        "turns": 12
+      },
+      "match_ref": "story.match.qc02.shift09.predictive_drive",
+      "seed": "story.quiet_cascade.expansion.s09.v1",
+      "segment": "EXPANSION",
+      "shift_number": 9,
+      "solvability_proof": {
+        "source": "automated_games/task-043-quiet-cascade-expansion-v3/builder-proof.json",
+        "ticket_witness_count": 1
+      },
+      "source_case_id": "exp-003",
+      "tickets": [
+        {
+          "diagnostics": {
+            "authored_isolation_routes": [
+              {
+                "route_kind": "TASK_043_ORACLE_WITNESS",
+                "source_definition_ids": [
+                  "test.storage.predictive_health"
+                ]
+              }
+            ],
+            "minimal_witness_source_ids": [
+              "test.storage.predictive_health"
+            ],
+            "optional_relevant_source_ids": [
+              "command.linux.smartctl",
+              "test.storage.bay_path_isolation",
+              "test.storage.drive_health",
+              "test.storage.raid_status",
+              "test.system.bmc_logs"
+            ],
+            "proven_candidate_changing_source_ids": [
+              "test.storage.predictive_health"
+            ],
+            "relevant_source_ids": [
+              "command.linux.smartctl",
+              "test.storage.bay_path_isolation",
+              "test.storage.drive_health",
+              "test.storage.predictive_health",
+              "test.storage.raid_status",
+              "test.system.bmc_logs"
+            ],
+            "target_legal_source_ids": null
+          },
+          "document_contract": {
+            "action_type": "PUBLISH_CLOSURE",
+            "effect": "LOCK_WORKLOG_AND_ARCHIVE_TICKET",
+            "required_card_copies": 0
+          },
+          "fingerprint_id": "fingerprint.storage.predictive_drive_failure",
+          "hidden_true_fault_ids": [
+            "fault.storage.drive.predictive_failure"
+          ],
+          "oracle_witness": [
+            {
+              "action": "RUN_DIAGNOSTIC",
+              "evidence_outcome_id": "evidence.fingerprint.storage.predictive.drive.failure.machine.storage.predictive.drive.failure.active.test.storage.predictive.health",
+              "source_definition_id": "test.storage.predictive_health"
+            },
+            {
+              "action": "COMMIT_ISOLATION",
+              "cited_outcome_ids": [
+                "evidence.fingerprint.storage.predictive.drive.failure.machine.storage.predictive.drive.failure.active.test.storage.predictive.health"
+              ],
+              "target_fault_instance_key": "fault_instance.storage.predictive_drive_failure.root"
+            },
+            {
+              "action": "PERFORM_REPAIR",
+              "repair_outcome_id": "repair_outcome.fingerprint.storage.predictive.drive.failure",
+              "target_fault_instance_key": "fault_instance.storage.predictive_drive_failure.root"
+            },
+            {
+              "action": "PERFORM_VERIFY",
+              "result": "PASS",
+              "verification_outcome_id": "verify_outcome.fingerprint.storage.predictive.drive.failure.01.pass"
+            }
+          ],
+          "public_candidate_fault_ids": [
+            "fault.storage.drive.predictive_failure",
+            "fault.storage.sas.drive_failed"
+          ],
+          "public_symptom_ids": [
+            "symptom.storage.predictive_failure_warning",
+            "symptom.storage.drive_fault_led"
+          ],
+          "repair_procedure_ids": [
+            "repair.storage.replace_predictive_drive"
+          ],
+          "ticket_id": "ticket.generated.36ba2ae8958431194a7e1fef",
+          "ticket_snapshot_digest": "c71d7e7f87b7e1177f7f8b79344293dee489778c9acfc9ba213d9cb7410aa671",
+          "validation_procedure_ids": [
+            "verify.storage.predictive_replacement"
+          ]
+        }
+      ]
+    },
+    {
+      "builder_contract": {
+        "card_catalog_version": "core-card-catalog-story-expansion-v5",
+        "configuration_version": "ticket-builder-v4",
+        "domain_content_version": "core-domain-snapshot-story-expansion-v4",
+        "kind": "EMBEDDED_V4_CONFIGURATION",
+        "ticket_content_version": "core-ticket-parts-v4"
+      },
+      "builder_proof": {
+        "exact_pin_match": true,
+        "source": "automated_games/task-043-quiet-cascade-expansion-v3/builder-proof.json",
+        "status": "SUCCESS"
+      },
+      "engine_proof": {
+        "classification": "SUCCEEDED",
+        "deterministic_rerun_identical": true,
+        "source": "automated_games/task-043-quiet-cascade-expansion-v3/builder-proof.json",
+        "turns": 9
+      },
+      "match_ref": "story.match.qc02.shift10.stale_alert",
+      "seed": "story.quiet_cascade.expansion.s10.v1",
+      "segment": "EXPANSION",
+      "shift_number": 10,
+      "solvability_proof": {
+        "source": "automated_games/task-043-quiet-cascade-expansion-v3/builder-proof.json",
+        "ticket_witness_count": 1
+      },
+      "source_case_id": "exp-004",
+      "tickets": [
+        {
+          "diagnostics": {
+            "authored_isolation_routes": [
+              {
+                "route_kind": "TASK_043_ORACLE_WITNESS",
+                "source_definition_ids": [
+                  "test.management.event_log_freshness"
+                ]
+              }
+            ],
+            "minimal_witness_source_ids": [
+              "test.management.event_log_freshness"
+            ],
+            "optional_relevant_source_ids": [
+              "command.linux.lsblk",
+              "test.storage.device_inventory"
+            ],
+            "proven_candidate_changing_source_ids": [
+              "test.management.event_log_freshness"
+            ],
+            "relevant_source_ids": [
+              "command.linux.lsblk",
+              "test.management.event_log_freshness",
+              "test.storage.device_inventory"
+            ],
+            "target_legal_source_ids": null
+          },
+          "document_contract": {
+            "action_type": "PUBLISH_CLOSURE",
+            "effect": "LOCK_WORKLOG_AND_ARCHIVE_TICKET",
+            "required_card_copies": 0
+          },
+          "fingerprint_id": "fingerprint.management.stale_alert",
+          "hidden_true_fault_ids": [
+            "fault.management.alert.stale"
+          ],
+          "oracle_witness": [
+            {
+              "action": "RUN_DIAGNOSTIC",
+              "evidence_outcome_id": "evidence.fingerprint.management.stale.alert.machine.management.stale.alert.active.test.management.event.log.freshness",
+              "source_definition_id": "test.management.event_log_freshness"
+            },
+            {
+              "action": "COMMIT_ISOLATION",
+              "cited_outcome_ids": [
+                "evidence.fingerprint.management.stale.alert.machine.management.stale.alert.active.test.management.event.log.freshness"
+              ],
+              "target_fault_instance_key": "fault_instance.management.stale_alert.root"
+            },
+            {
+              "action": "PERFORM_REPAIR",
+              "repair_outcome_id": "repair_outcome.fingerprint.management.stale.alert",
+              "target_fault_instance_key": "fault_instance.management.stale_alert.root"
+            },
+            {
+              "action": "PERFORM_VERIFY",
+              "result": "PASS",
+              "verification_outcome_id": "verify_outcome.fingerprint.management.stale.alert.01.pass"
+            }
+          ],
+          "public_candidate_fault_ids": [
+            "fault.management.alert.stale",
+            "fault.storage.backplane.path_failed"
+          ],
+          "public_symptom_ids": [
+            "symptom.management.alert_persists"
+          ],
+          "repair_procedure_ids": [
+            "repair.management.clear_stale_alert_state"
+          ],
+          "ticket_id": "ticket.generated.b68505324c44f11977fcda07",
+          "ticket_snapshot_digest": "c889bd1e907f1537e8080822e7d9ded3821e0507fe8bc20f49490ae81f01f0e8",
+          "validation_procedure_ids": [
+            "verify.management.alert_does_not_recur"
+          ]
+        }
+      ]
+    },
+    {
+      "builder_contract": {
+        "card_catalog_version": "core-card-catalog-story-expansion-v5",
+        "configuration_version": "ticket-builder-v4",
+        "domain_content_version": "core-domain-snapshot-story-expansion-v4",
+        "kind": "EMBEDDED_V4_CONFIGURATION",
+        "ticket_content_version": "core-ticket-parts-v4"
+      },
+      "builder_proof": {
+        "exact_pin_match": true,
+        "source": "automated_games/task-043-quiet-cascade-expansion-v3/builder-proof.json",
+        "status": "SUCCESS"
+      },
+      "engine_proof": {
+        "classification": "SUCCEEDED",
+        "deterministic_rerun_identical": true,
+        "source": "automated_games/task-043-quiet-cascade-expansion-v3/builder-proof.json",
+        "turns": 14
+      },
+      "match_ref": "story.match.qc02.shift11.firmware_regression",
+      "seed": "story.quiet_cascade.expansion.s11.v1",
+      "segment": "EXPANSION",
+      "shift_number": 11,
+      "solvability_proof": {
+        "source": "automated_games/task-043-quiet-cascade-expansion-v3/builder-proof.json",
+        "ticket_witness_count": 1
+      },
+      "source_case_id": "exp-005",
+      "tickets": [
+        {
+          "diagnostics": {
+            "authored_isolation_routes": [
+              {
+                "route_kind": "TASK_043_ORACLE_WITNESS",
+                "source_definition_ids": [
+                  "test.firmware.version_compatibility",
+                  "test.network.link_counter_soak"
+                ]
+              }
+            ],
+            "minimal_witness_source_ids": [
+              "test.firmware.version_compatibility",
+              "test.network.link_counter_soak"
+            ],
+            "optional_relevant_source_ids": [
+              "command.linux.lspci",
+              "test.general.visual_inspection",
+              "test.network.cable_substitution",
+              "test.network.link",
+              "test.pcie.inventory"
+            ],
+            "proven_candidate_changing_source_ids": [
+              "test.firmware.version_compatibility",
+              "test.network.link_counter_soak"
+            ],
+            "relevant_source_ids": [
+              "command.linux.lspci",
+              "test.firmware.version_compatibility",
+              "test.general.visual_inspection",
+              "test.network.cable_substitution",
+              "test.network.link",
+              "test.network.link_counter_soak",
+              "test.pcie.inventory"
+            ],
+            "target_legal_source_ids": null
+          },
+          "document_contract": {
+            "action_type": "PUBLISH_CLOSURE",
+            "effect": "LOCK_WORKLOG_AND_ARCHIVE_TICKET",
+            "required_card_copies": 0
+          },
+          "fingerprint_id": "fingerprint.firmware.incompatible_version_set",
+          "hidden_true_fault_ids": [
+            "fault.firmware.version_set.incompatible"
+          ],
+          "oracle_witness": [
+            {
+              "action": "RUN_DIAGNOSTIC",
+              "evidence_outcome_id": "evidence.fingerprint.firmware.incompatible.version.set.machine.firmware.incompatible.version.set.active.test.firmware.version.compatibility",
+              "source_definition_id": "test.firmware.version_compatibility"
+            },
+            {
+              "action": "RUN_DIAGNOSTIC",
+              "evidence_outcome_id": "evidence.fingerprint.firmware.incompatible.version.set.machine.firmware.incompatible.version.set.active.test.network.link.counter.soak",
+              "source_definition_id": "test.network.link_counter_soak"
+            },
+            {
+              "action": "COMMIT_ISOLATION",
+              "cited_outcome_ids": [
+                "evidence.fingerprint.firmware.incompatible.version.set.machine.firmware.incompatible.version.set.active.test.firmware.version.compatibility",
+                "evidence.fingerprint.firmware.incompatible.version.set.machine.firmware.incompatible.version.set.active.test.network.link.counter.soak"
+              ],
+              "target_fault_instance_key": "fault_instance.firmware.incompatible_version_set.root"
+            },
+            {
+              "action": "PERFORM_REPAIR",
+              "repair_outcome_id": "repair_outcome.fingerprint.firmware.incompatible.version.set",
+              "target_fault_instance_key": "fault_instance.firmware.incompatible_version_set.root"
+            },
+            {
+              "action": "PERFORM_VERIFY",
+              "result": "PASS",
+              "verification_outcome_id": "verify_outcome.fingerprint.firmware.incompatible.version.set.01.pass"
+            }
+          ],
+          "public_candidate_fault_ids": [
+            "fault.firmware.version_set.incompatible",
+            "fault.network.cable.disconnected",
+            "fault.network.cable.failed",
+            "fault.network.nic.failed"
+          ],
+          "public_symptom_ids": [
+            "symptom.network.link_flapping",
+            "symptom.network.no_link"
+          ],
+          "repair_procedure_ids": [
+            "repair.firmware.restore_compatible_versions"
+          ],
+          "ticket_id": "ticket.generated.b34238282822e93980b5f1ad",
+          "ticket_snapshot_digest": "face80b0d5c6f6c7f1ef3bb0495c0c6e4105360fa07887fb50cc2dea440cbc50",
+          "validation_procedure_ids": [
+            "verify.firmware.compatible_persistent"
+          ]
+        }
+      ]
+    },
+    {
+      "builder_contract": {
+        "card_catalog_version": "core-card-catalog-story-expansion-v5",
+        "configuration_version": "ticket-builder-v4",
+        "domain_content_version": "core-domain-snapshot-story-expansion-v4",
+        "kind": "EMBEDDED_V4_CONFIGURATION",
+        "ticket_content_version": "core-ticket-parts-v4"
+      },
+      "builder_proof": {
+        "exact_pin_match": true,
+        "source": "automated_games/task-043-quiet-cascade-expansion-v3/builder-proof.json",
+        "status": "SUCCESS"
+      },
+      "engine_proof": {
+        "classification": "SUCCEEDED",
+        "deterministic_rerun_identical": true,
+        "source": "automated_games/task-043-quiet-cascade-expansion-v3/builder-proof.json",
+        "turns": 6
+      },
+      "match_ref": "story.match.qc02.shift12.bmc_recovery",
+      "seed": "story.quiet_cascade.expansion.s12.v1",
+      "segment": "EXPANSION",
+      "shift_number": 12,
+      "solvability_proof": {
+        "source": "automated_games/task-043-quiet-cascade-expansion-v3/builder-proof.json",
+        "ticket_witness_count": 1
+      },
+      "source_case_id": "exp-006",
+      "tickets": [
+        {
+          "diagnostics": {
+            "authored_isolation_routes": [
+              {
+                "route_kind": "TASK_043_ORACLE_WITNESS",
+                "source_definition_ids": [
+                  "test.management.bmc_recovery_state"
+                ]
+              }
+            ],
+            "minimal_witness_source_ids": [
+              "test.management.bmc_recovery_state"
+            ],
+            "optional_relevant_source_ids": [
+              "test.firmware.version_compatibility"
+            ],
+            "proven_candidate_changing_source_ids": [
+              "test.management.bmc_recovery_state"
+            ],
+            "relevant_source_ids": [
+              "test.firmware.version_compatibility",
+              "test.management.bmc_recovery_state"
+            ],
+            "target_legal_source_ids": null
+          },
+          "document_contract": {
+            "action_type": "PUBLISH_CLOSURE",
+            "effect": "LOCK_WORKLOG_AND_ARCHIVE_TICKET",
+            "required_card_copies": 0
+          },
+          "fingerprint_id": "fingerprint.management.corrupt_bmc_firmware",
+          "hidden_true_fault_ids": [
+            "fault.management.bmc_firmware.corrupt"
+          ],
+          "oracle_witness": [
+            {
+              "action": "RUN_DIAGNOSTIC",
+              "evidence_outcome_id": "evidence.fingerprint.management.corrupt.bmc.firmware.machine.management.corrupt.bmc.firmware.active.test.management.bmc.recovery.state",
+              "source_definition_id": "test.management.bmc_recovery_state"
+            },
+            {
+              "action": "COMMIT_ISOLATION",
+              "cited_outcome_ids": [
+                "evidence.fingerprint.management.corrupt.bmc.firmware.machine.management.corrupt.bmc.firmware.active.test.management.bmc.recovery.state"
+              ],
+              "target_fault_instance_key": "fault_instance.management.corrupt_bmc_firmware.root"
+            },
+            {
+              "action": "PERFORM_REPAIR",
+              "repair_outcome_id": "repair_outcome.fingerprint.management.corrupt.bmc.firmware",
+              "target_fault_instance_key": "fault_instance.management.corrupt_bmc_firmware.root"
+            },
+            {
+              "action": "PERFORM_VERIFY",
+              "result": "PASS",
+              "verification_outcome_id": "verify_outcome.fingerprint.management.corrupt.bmc.firmware.01.pass"
+            }
+          ],
+          "public_candidate_fault_ids": [
+            "fault.firmware.version_set.incompatible",
+            "fault.management.bmc_firmware.corrupt"
+          ],
+          "public_symptom_ids": [
+            "symptom.management.bmc_not_responding",
+            "symptom.firmware.update_failed"
+          ],
+          "repair_procedure_ids": [
+            "repair.management.recover_bmc_firmware"
+          ],
+          "ticket_id": "ticket.generated.f32b85cbf2054fdf0114f42a",
+          "ticket_snapshot_digest": "761016e56ceb47a585727555f64bac47b103933cddbafc27a5c385f402851b01",
+          "validation_procedure_ids": [
+            "verify.management.bmc_functional"
+          ]
+        }
+      ]
+    }
+  ],
+  "pins": {
+    "campaign_one_proof_content_version": "quiet-cascade-characterization-v2",
+    "card_catalog_version": "core-card-catalog-story-expansion-v5",
+    "deck_catalog_version": "core-response-decks-v5",
+    "domain_content_version": "core-domain-snapshot-story-expansion-v4",
+    "expansion_proof_content_version": "quiet-cascade-expansion-v3",
+    "playable_coverage_version": "playable-coverage-v5",
+    "release_match_configuration_version": "story-match-configuration-v1",
+    "ruleset_version": "first-version-v2",
+    "story_content_version": "quiet-cascade-expansion-v3",
+    "story_pack_id": "story.campaign.quiet_cascade.v1",
+    "ticket_content_version": "core-ticket-parts-v4"
+  },
+  "proof_composition": {
+    "campaign_one": {
+      "builder": "automated_games/task-036-quiet-cascade-characterization-v2/builder-proof.json",
+      "engine": "automated_games/task-036-quiet-cascade-characterization-v2/summary.json",
+      "registry": "content/story-v1/campaigns/quiet-cascade-characterization-v2/matches.json",
+      "retained_legacy_builder_profile": true,
+      "solvability": "docs/story/coverage/campaign-one-domain-coverage.json"
+    },
+    "expansion": {
+      "builder_solvability_engine": "automated_games/task-043-quiet-cascade-expansion-v3/builder-proof.json",
+      "embedded_v4_builder_configuration": true,
+      "registry": "automated_games/task-043-quiet-cascade-expansion-v3/match-registry.json"
+    },
+    "limitation": "Campaign-one Ticket snapshots retain their reviewed v3 Builder provenance; this audit validates their entities and required Cards against the additive v4/v5 catalogs but does not relabel them as v4 builds.",
+    "method": "Compose the two existing real six-Match Builder/solvability/engine proof sets only after exact release-registry pin validation."
+  },
+  "proof_totals": {
+    "builder_constructed_at_exact_pins": 12,
+    "deterministic_engine_reruns": 12,
+    "engine_matches_succeeded": 12,
+    "exact_ticket_pins_matched": 18,
+    "registry_matches": 12,
+    "solvability_witnessed_tickets": 18
+  },
+  "uncovered": {
+    "diagnostic_ids_not_in_minimal_witness": [
+      "command.ipmi.sel_elist",
+      "command.linux.dhclient",
+      "command.linux.dmesg",
+      "command.linux.ethtool",
+      "command.linux.free_h",
+      "command.linux.ip_addr",
+      "command.linux.ip_route",
+      "command.linux.journalctl",
+      "command.linux.lsblk",
+      "command.linux.lspci",
+      "command.linux.nvme_smart_log",
+      "command.linux.smartctl",
+      "command.network.ping",
+      "test.boot.post_code_analysis",
+      "test.boot.post_observation",
+      "test.cooling.location_cross_substitution",
+      "test.electrical.continuity",
+      "test.general.minimum_configuration",
+      "test.memory.known_good_substitution",
+      "test.network.dhcp_pool_audit",
+      "test.network.dhcp_transaction_trace",
+      "test.network.link",
+      "test.network.ping",
+      "test.pcie.inventory",
+      "test.power.output_voltage_measurement",
+      "test.power.residual_power_drain",
+      "test.storage.bay_path_isolation",
+      "test.storage.raid_status",
+      "test.system.controlled_stress"
+    ],
+    "diagnostic_ids_not_match_relevant": [
+      "command.ipmi.sel_elist",
+      "command.linux.dmesg",
+      "command.linux.ethtool",
+      "command.linux.free_h",
+      "command.linux.journalctl",
+      "test.boot.post_observation",
+      "test.electrical.continuity"
+    ],
+    "public_candidate_fault_ids": [
+      "fault.board.rtc_battery.failed",
+      "fault.boot.bootloader.corrupt",
+      "fault.cooling.fan_sense_path.intermittent",
+      "fault.network.dhcp.pool_exhausted",
+      "fault.pcie.card.not_seated",
+      "fault.thermal.shutdown"
+    ],
+    "selected_repair_ids": [],
+    "selected_validation_ids": [],
+    "supported_fingerprint_ids": [],
+    "symptom_ids": [
+      "symptom.boot.bootloader_error",
+      "symptom.firmware.settings_reset",
+      "symptom.management.lifecycle_unavailable",
+      "symptom.memory.ecc_errors",
+      "symptom.memory.reduced_capacity",
+      "symptom.network.no_dhcp_lease",
+      "symptom.network.wrong_ip",
+      "symptom.pcie.device_missing",
+      "symptom.storage.drive_missing",
+      "symptom.system.device_errors",
+      "symptom.system.random_reboot",
+      "symptom.thermal.fan_warning",
+      "symptom.thermal.fans_loud",
+      "symptom.thermal.shutdown_under_load"
+    ],
+    "truth_fault_ids": [
+      "fault.board.rtc_battery.failed",
+      "fault.board.system.failed",
+      "fault.boot.bootloader.corrupt",
+      "fault.cooling.fan_sense_path.intermittent",
+      "fault.cpu.not_seated",
+      "fault.firmware.config.reset",
+      "fault.memory.population.invalid",
+      "fault.network.cable.disconnected",
+      "fault.network.dhcp.pool_exhausted",
+      "fault.network.nic.failed",
+      "fault.pcie.card.not_seated",
+      "fault.power.input.cable_loose",
+      "fault.storage.backplane.path_failed",
+      "fault.storage.cable.failed",
+      "fault.storage.raid.controller_failed",
+      "fault.storage.sata.drive_failed",
+      "fault.thermal.heatsink.contact_poor",
+      "fault.thermal.shutdown"
+    ]
+  }
+}

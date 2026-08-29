@@ -1,0 +1,2614 @@
+{
+  "authority_order": [
+    "Frozen gameplay/runtime authority",
+    "TASK-042 reviewed domain and executable Match proof",
+    "TASK-041 source fidelity and uncertainty bounds",
+    "TASK-043 Story topology and player-safe public setup",
+    "TASK-044 prose, which may describe but never authorize"
+  ],
+  "campaign_id": "story.campaign.quiet_cascade.v1",
+  "candidate_content_version": "quiet-cascade-expansion-v3",
+  "inputs_sha256": {
+    "blueprint": "1c2aa104d0c7fc579254d96f7134b9941d29a393ec4f77d40b8e996d0820ebc8",
+    "candidate_manifest": "b2a7a81f106d5c00510eb4ec4558d4264d5a6c0327fe2e5d50dae330ac40ade1",
+    "candidate_metadata": "25c56a70e451c3d26e13766689497e2a3f78a39a958a532b04fbced8299c4db5",
+    "candidate_registry": "bd1367b16f7a24edfbcbfb6187c5a169c752d7ebd512e282c15b7196b4619c8a",
+    "candidate_scripts": {
+      "content/story-v1/candidates/quiet-cascade-expansion-v3/scripts/shift-07.json": "7bbb6355a73d19225cda54d5774ce72cf7ec8700b25fc8f3c9815b9e5a975acf",
+      "content/story-v1/candidates/quiet-cascade-expansion-v3/scripts/shift-08.json": "a03abd61cdfb859a9f31691455d44429be0b313c6e1447f205254e143c3615cc",
+      "content/story-v1/candidates/quiet-cascade-expansion-v3/scripts/shift-09.json": "e16068ebe047f555fdb946acc09ff579c2df741a470f746e52480c0231a7a770",
+      "content/story-v1/candidates/quiet-cascade-expansion-v3/scripts/shift-10.json": "48b30304661b3a9182a576c96ebf8589d8b46307135e95dd6cee26fee858febf",
+      "content/story-v1/candidates/quiet-cascade-expansion-v3/scripts/shift-11.json": "5cce5a910c31dfeaf0a1d40018cb1f8fb9255fb639aac9d9e6d80759c97be4c9",
+      "content/story-v1/candidates/quiet-cascade-expansion-v3/scripts/shift-12.json": "8362c422e0e491f9de5f4157226c568087eac1c52703f24bd297c09cdc6d3bb9"
+    },
+    "candidate_texts": "55c17f06dd796b3bdb23cbd518c4612501ceb77c1400220123022627623dc37a",
+    "domain_proof": "a03c4012b0cf2333150cf7acc038d18207d139f319921019845fdb6dbfa30d7d",
+    "graph_report": "33921acf288e987491e6174965137c9c30758f78e823879e760f286fbe049c3d",
+    "research_registry": "cb89451ceff6af0d2da636e5ba34b714ebfcf3db2da3280d919900cf2bb32c75",
+    "source_case_reductions": {
+      "docs/case_studies/v0.2-story-expansion/cases/exp-001--damaged-cpu-socket-contacts.md": "aa02f6c3792275f7d34dc784a97d1b0dc33a8c8a568d80f3eab39685da3a04a1",
+      "docs/case_studies/v0.2-story-expansion/cases/exp-002--failed-power-distribution-board.md": "1a3c37c34e69abc25b6e503e7199e24c028c3b2d267225d3757c230d5a3bf2ac",
+      "docs/case_studies/v0.2-story-expansion/cases/exp-003--predictive-drive-failure.md": "f483e8c8e5d298f8c508f1ffb3c5b9ffae4c5a536ca278848e5057992ec2786d",
+      "docs/case_studies/v0.2-story-expansion/cases/exp-004--stale-management-alert.md": "9a2739e918cc5409e88ecd9bef4d810af0f74c20c5fe1d9528d306e3fc793240",
+      "docs/case_studies/v0.2-story-expansion/cases/exp-005--incompatible-firmware-versions.md": "526c07cd86927a9bc5e8b2150dd3a80acc6d9643cac753a366fdcf9bdf28f552",
+      "docs/case_studies/v0.2-story-expansion/cases/exp-006--corrupt-bmc-firmware.md": "de4175f828f703258a7bbba390ddbdd60c42cba88e15f8cb2597c2f2c37bcce6"
+    }
+  },
+  "schema_version": "quiet-cascade-expansion-source-to-line-trace-v1",
+  "status": "NON_LIVE_REVIEW_CANDIDATE",
+  "totals": {
+    "hidden_truth_disclosures": 0,
+    "source_events_cited": 66,
+    "sourced_cases": 6,
+    "traced_technical_lines": 30,
+    "unsupported_claims": 0,
+    "untraced_technical_lines": 0
+  },
+  "traces": [
+    {
+      "authority_bounds": [
+        "PUBLIC_CONTEXT_ONLY"
+      ],
+      "bounded_claim": "The environment exposes the reported full-population no-POST condition before anyone interprets it.",
+      "episode_id": "story.shift.qc02.07",
+      "forbidden_overreach": [
+        "Story prose is descriptive only and cannot manufacture Evidence, Isolation, Repair, Verify, Documentation, closure, or Service Points.",
+        "Before Match authorization, do not assert the hidden Fault, required diagnostic, correct Repair, or result.",
+        "Do not turn the reported contact manipulation into a transferable repair procedure.",
+        "Do not claim a preserved torque value, complete CPU/memory inventory, or post-repair stress interval.",
+        "Do not treat the displayed voltage/failsafe wording as proof of a regulator fault."
+      ],
+      "label_id": "story.qc02.shift07.entry",
+      "outcome_scope": "ALL",
+      "phase": "CONTEXT",
+      "player_facing_text": "Night shift leaves Trace quiet enough to hear the four-socket server restart, stop during its startup self-check, and return to silence.",
+      "research_source": {
+        "absent_lifecycle_categories": [
+          "Document"
+        ],
+        "accessed_on": "2026-08-28",
+        "case_id": "exp-001",
+        "lifecycle_score": 9,
+        "publisher": "Dell Community",
+        "source_events": [
+          {
+            "category": "Observe",
+            "event_number": 1,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Establishes the load/population-dependent no-POST condition.",
+            "locator": "Opening post",
+            "paraphrase": "The server booted with two processors but failed before BIOS with four installed and displayed processor-voltage/failsafe errors.",
+            "stable_object_cross_reference": "`symptom.boot.no_post`; `component.compute.cpu`"
+          }
+        ],
+        "title": "R910 will not power on with 4 processors",
+        "uncertainties": [
+          "The research reduction does not turn contact-restoration details into a player procedure; safety and board-rework authority remain downstream review matters."
+        ],
+        "url": "https://www.dell.com/community/en/conversations/rack-servers/r910-will-not-power-on-with-4-processors/647f7d25f4ccf8a8deb93b08"
+      },
+      "reviewed_domain_contract": {
+        "fingerprint_id": "fingerprint.compute.damaged_cpu_socket_contacts",
+        "public_candidate_fault_ids": [
+          "fault.board.system.failed",
+          "fault.compute.cpu_socket.contacts_damaged",
+          "fault.cpu.not_seated",
+          "fault.memory.dimm.failed",
+          "fault.memory.dimm.not_seated"
+        ],
+        "repair_procedure_ids": [
+          "repair.compute.restore_socket_contacts"
+        ],
+        "required_diagnostic_ids": [
+          "test.compute.socket_magnified_inspection"
+        ],
+        "symptom_ids": [
+          "symptom.boot.no_post"
+        ],
+        "validation_procedure_ids": [
+          "verify.compute.socket_path"
+        ]
+      },
+      "route_coverage": {
+        "first_route_id": "route.qc02.controlled_comparison_first.aaaaaa.change_history_first",
+        "last_route_id": "route.qc02.location_context_first.cccccc.current_state_first",
+        "route_count": 256,
+        "route_id_digest": "d38a7041dc51c3c4601d2ccd05b6fdff149fabd44a48ad489b20260b56b6ae3d"
+      },
+      "speaker_or_source": "NARRATION",
+      "statement_id": "story.qc02.s07.entry.01",
+      "technical_subject_episode_id": "story.shift.qc02.07",
+      "text_id": "text.qc02.s07.entry.01",
+      "trace_id": "trace.text.qc02.s07.entry.01"
+    },
+    {
+      "authority_bounds": [
+        "PUBLIC_CONTEXT_ONLY"
+      ],
+      "bounded_claim": "Define POST, ordinary startup behavior, and the limit of the population-dependent symptom.",
+      "episode_id": "story.shift.qc02.07",
+      "forbidden_overreach": [
+        "Story prose is descriptive only and cannot manufacture Evidence, Isolation, Repair, Verify, Documentation, closure, or Service Points.",
+        "Before Match authorization, do not assert the hidden Fault, required diagnostic, correct Repair, or result.",
+        "Do not turn the reported contact manipulation into a transferable repair procedure.",
+        "Do not claim a preserved torque value, complete CPU/memory inventory, or post-repair stress interval.",
+        "Do not treat the displayed voltage/failsafe wording as proof of a regulator fault."
+      ],
+      "label_id": "story.qc02.shift07.entry",
+      "outcome_scope": "ALL",
+      "phase": "CONTEXT",
+      "player_facing_text": "POST is the machine’s power-on self-test. This one completes it with two processors, but not with the full four. That difference opens a question; it does not condemn a processor.",
+      "research_source": {
+        "absent_lifecycle_categories": [
+          "Document"
+        ],
+        "accessed_on": "2026-08-28",
+        "case_id": "exp-001",
+        "lifecycle_score": 9,
+        "publisher": "Dell Community",
+        "source_events": [
+          {
+            "category": "Observe",
+            "event_number": 1,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Establishes the load/population-dependent no-POST condition.",
+            "locator": "Opening post",
+            "paraphrase": "The server booted with two processors but failed before BIOS with four installed and displayed processor-voltage/failsafe errors.",
+            "stable_object_cross_reference": "`symptom.boot.no_post`; `component.compute.cpu`"
+          },
+          {
+            "category": "Hypothesize",
+            "event_number": 2,
+            "fidelity": "inferred",
+            "lifecycle_contribution": "Preserves multiple candidates rather than treating the displayed voltage text as proof; the candidates are reconstructed from the author's reported choices.",
+            "locator": "Opening post",
+            "paraphrase": "The owner treated processors, power capacity or settings, firmware, memory population, and the board/socket path as plausible explanations.",
+            "stable_object_cross_reference": "`fault.cpu.not_seated`; `fault.board.system.failed`; `fault.memory.population.invalid`; `fault.compute.cpu_socket.contacts_damaged`"
+          }
+        ],
+        "title": "R910 will not power on with 4 processors",
+        "uncertainties": [
+          "The research reduction does not turn contact-restoration details into a player procedure; safety and board-rework authority remain downstream review matters."
+        ],
+        "url": "https://www.dell.com/community/en/conversations/rack-servers/r910-will-not-power-on-with-4-processors/647f7d25f4ccf8a8deb93b08"
+      },
+      "reviewed_domain_contract": {
+        "fingerprint_id": "fingerprint.compute.damaged_cpu_socket_contacts",
+        "public_candidate_fault_ids": [
+          "fault.board.system.failed",
+          "fault.compute.cpu_socket.contacts_damaged",
+          "fault.cpu.not_seated",
+          "fault.memory.dimm.failed",
+          "fault.memory.dimm.not_seated"
+        ],
+        "repair_procedure_ids": [
+          "repair.compute.restore_socket_contacts"
+        ],
+        "required_diagnostic_ids": [
+          "test.compute.socket_magnified_inspection"
+        ],
+        "symptom_ids": [
+          "symptom.boot.no_post"
+        ],
+        "validation_procedure_ids": [
+          "verify.compute.socket_path"
+        ]
+      },
+      "route_coverage": {
+        "first_route_id": "route.qc02.controlled_comparison_first.aaaaaa.change_history_first",
+        "last_route_id": "route.qc02.location_context_first.cccccc.current_state_first",
+        "route_count": 256,
+        "route_id_digest": "d38a7041dc51c3c4601d2ccd05b6fdff149fabd44a48ad489b20260b56b6ae3d"
+      },
+      "speaker_or_source": "story.character.sora_chen",
+      "statement_id": "story.qc02.s07.entry.02",
+      "technical_subject_episode_id": "story.shift.qc02.07",
+      "text_id": "text.qc02.s07.entry.02",
+      "trace_id": "trace.text.qc02.s07.entry.02"
+    },
+    {
+      "authority_bounds": [
+        "PUBLIC_CONTEXT_ONLY"
+      ],
+      "bounded_claim": "Explain component-versus-location comparison without supplying the required diagnostic.",
+      "episode_id": "story.shift.qc02.07",
+      "forbidden_overreach": [
+        "Story prose is descriptive only and cannot manufacture Evidence, Isolation, Repair, Verify, Documentation, closure, or Service Points.",
+        "Before Match authorization, do not assert the hidden Fault, required diagnostic, correct Repair, or result.",
+        "Do not turn the reported contact manipulation into a transferable repair procedure.",
+        "Do not claim a preserved torque value, complete CPU/memory inventory, or post-repair stress interval.",
+        "Do not treat the displayed voltage/failsafe wording as proof of a regulator fault."
+      ],
+      "label_id": "story.qc02.shift07.entry",
+      "outcome_scope": "ALL",
+      "phase": "CONTEXT",
+      "player_facing_text": "A processor can move. A socket cannot. The processors have worked in other supported pairings, so keep part identity separate from the fixed location and the board path around it.",
+      "research_source": {
+        "absent_lifecycle_categories": [
+          "Document"
+        ],
+        "accessed_on": "2026-08-28",
+        "case_id": "exp-001",
+        "lifecycle_score": 9,
+        "publisher": "Dell Community",
+        "source_events": [
+          {
+            "category": "Test",
+            "event_number": 3,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Contradicts a simple failed-processor explanation.",
+            "locator": "Opening post, processor-pair paragraph",
+            "paraphrase": "Both original processor pairs and mixed pairs booted in the supported two-processor arrangement.",
+            "stable_object_cross_reference": "Generic processor substitution; no exact current Test"
+          },
+          {
+            "category": "Test",
+            "event_number": 6,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Localizes the failure to the path introduced by socket 3 rather than to processor count alone.",
+            "locator": "Author update",
+            "paraphrase": "With processors in sockets 1, 2, and 4, the unsupported arrangement nevertheless reached BIOS.",
+            "stable_object_cross_reference": "Generic location isolation; related to `test.compute.socket_magnified_inspection` but not the same act"
+          }
+        ],
+        "title": "R910 will not power on with 4 processors",
+        "uncertainties": [
+          "The research reduction does not turn contact-restoration details into a player procedure; safety and board-rework authority remain downstream review matters."
+        ],
+        "url": "https://www.dell.com/community/en/conversations/rack-servers/r910-will-not-power-on-with-4-processors/647f7d25f4ccf8a8deb93b08"
+      },
+      "reviewed_domain_contract": {
+        "fingerprint_id": "fingerprint.compute.damaged_cpu_socket_contacts",
+        "public_candidate_fault_ids": [
+          "fault.board.system.failed",
+          "fault.compute.cpu_socket.contacts_damaged",
+          "fault.cpu.not_seated",
+          "fault.memory.dimm.failed",
+          "fault.memory.dimm.not_seated"
+        ],
+        "repair_procedure_ids": [
+          "repair.compute.restore_socket_contacts"
+        ],
+        "required_diagnostic_ids": [
+          "test.compute.socket_magnified_inspection"
+        ],
+        "symptom_ids": [
+          "symptom.boot.no_post"
+        ],
+        "validation_procedure_ids": [
+          "verify.compute.socket_path"
+        ]
+      },
+      "route_coverage": {
+        "first_route_id": "route.qc02.controlled_comparison_first.aaaaaa.change_history_first",
+        "last_route_id": "route.qc02.location_context_first.cccccc.current_state_first",
+        "route_count": 256,
+        "route_id_digest": "d38a7041dc51c3c4601d2ccd05b6fdff149fabd44a48ad489b20260b56b6ae3d"
+      },
+      "speaker_or_source": "story.character.malik_okoye",
+      "statement_id": "story.qc02.s07.entry.03",
+      "technical_subject_episode_id": "story.shift.qc02.07",
+      "text_id": "text.qc02.s07.entry.03",
+      "trace_id": "trace.text.qc02.s07.entry.03"
+    },
+    {
+      "authority_bounds": [
+        "PUBLIC_CONTEXT_ONLY"
+      ],
+      "bounded_claim": "Preserve the public Candidate set and the need for discriminating Evidence.",
+      "episode_id": "story.shift.qc02.07",
+      "forbidden_overreach": [
+        "Story prose is descriptive only and cannot manufacture Evidence, Isolation, Repair, Verify, Documentation, closure, or Service Points.",
+        "Before Match authorization, do not assert the hidden Fault, required diagnostic, correct Repair, or result.",
+        "Do not turn the reported contact manipulation into a transferable repair procedure.",
+        "Do not claim a preserved torque value, complete CPU/memory inventory, or post-repair stress interval.",
+        "Do not treat the displayed voltage/failsafe wording as proof of a regulator fault."
+      ],
+      "label_id": "story.qc02.shift07.entry",
+      "outcome_scope": "ALL",
+      "phase": "CONTEXT",
+      "player_facing_text": "The live Candidates still include processor seating, memory, the socket path, and the wider board. We need Evidence that makes one location behave differently under a controlled comparison.",
+      "research_source": {
+        "absent_lifecycle_categories": [
+          "Document"
+        ],
+        "accessed_on": "2026-08-28",
+        "case_id": "exp-001",
+        "lifecycle_score": 9,
+        "publisher": "Dell Community",
+        "source_events": [
+          {
+            "category": "Hypothesize",
+            "event_number": 2,
+            "fidelity": "inferred",
+            "lifecycle_contribution": "Preserves multiple candidates rather than treating the displayed voltage text as proof; the candidates are reconstructed from the author's reported choices.",
+            "locator": "Opening post",
+            "paraphrase": "The owner treated processors, power capacity or settings, firmware, memory population, and the board/socket path as plausible explanations.",
+            "stable_object_cross_reference": "`fault.cpu.not_seated`; `fault.board.system.failed`; `fault.memory.population.invalid`; `fault.compute.cpu_socket.contacts_damaged`"
+          },
+          {
+            "category": "Test",
+            "event_number": 3,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Contradicts a simple failed-processor explanation.",
+            "locator": "Opening post, processor-pair paragraph",
+            "paraphrase": "Both original processor pairs and mixed pairs booted in the supported two-processor arrangement.",
+            "stable_object_cross_reference": "Generic processor substitution; no exact current Test"
+          },
+          {
+            "category": "Test",
+            "event_number": 6,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Localizes the failure to the path introduced by socket 3 rather than to processor count alone.",
+            "locator": "Author update",
+            "paraphrase": "With processors in sockets 1, 2, and 4, the unsupported arrangement nevertheless reached BIOS.",
+            "stable_object_cross_reference": "Generic location isolation; related to `test.compute.socket_magnified_inspection` but not the same act"
+          }
+        ],
+        "title": "R910 will not power on with 4 processors",
+        "uncertainties": [
+          "The research reduction does not turn contact-restoration details into a player procedure; safety and board-rework authority remain downstream review matters."
+        ],
+        "url": "https://www.dell.com/community/en/conversations/rack-servers/r910-will-not-power-on-with-4-processors/647f7d25f4ccf8a8deb93b08"
+      },
+      "reviewed_domain_contract": {
+        "fingerprint_id": "fingerprint.compute.damaged_cpu_socket_contacts",
+        "public_candidate_fault_ids": [
+          "fault.board.system.failed",
+          "fault.compute.cpu_socket.contacts_damaged",
+          "fault.cpu.not_seated",
+          "fault.memory.dimm.failed",
+          "fault.memory.dimm.not_seated"
+        ],
+        "repair_procedure_ids": [
+          "repair.compute.restore_socket_contacts"
+        ],
+        "required_diagnostic_ids": [
+          "test.compute.socket_magnified_inspection"
+        ],
+        "symptom_ids": [
+          "symptom.boot.no_post"
+        ],
+        "validation_procedure_ids": [
+          "verify.compute.socket_path"
+        ]
+      },
+      "route_coverage": {
+        "first_route_id": "route.qc02.controlled_comparison_first.aaaaaa.change_history_first",
+        "last_route_id": "route.qc02.location_context_first.cccccc.current_state_first",
+        "route_count": 256,
+        "route_id_digest": "d38a7041dc51c3c4601d2ccd05b6fdff149fabd44a48ad489b20260b56b6ae3d"
+      },
+      "speaker_or_source": "story.character.sora_chen",
+      "statement_id": "story.qc02.s07.entry.04",
+      "technical_subject_episode_id": "story.shift.qc02.07",
+      "text_id": "text.qc02.s07.entry.04",
+      "trace_id": "trace.text.qc02.s07.entry.04"
+    },
+    {
+      "authority_bounds": [
+        "PUBLIC_CONTEXT_ONLY"
+      ],
+      "bounded_claim": "Carry component-versus-shared-path practice into Shift 8.",
+      "episode_id": "story.shift.qc02.07",
+      "forbidden_overreach": [
+        "Story prose is descriptive only and cannot manufacture Evidence, Isolation, Repair, Verify, Documentation, closure, or Service Points.",
+        "Before Match authorization, do not assert the hidden Fault, required diagnostic, correct Repair, or result.",
+        "Do not claim a decisive pre-repair PDB-only measurement; Isolation remains explicitly inferred.",
+        "Do not present a failed capacitor as an observed finding or generalize connector voltages/pinouts.",
+        "Do not turn the case reduction into authority for energized proprietary-connector probing."
+      ],
+      "label_id": "story.qc02.shift07.follow_on",
+      "outcome_scope": "ALL",
+      "phase": "FOLLOW_ON",
+      "player_facing_text": "The next unit also asks whether a replaceable part failed or whether the shared path around it did. This time the path carries redundant power.",
+      "research_source": {
+        "absent_lifecycle_categories": [
+          "Document"
+        ],
+        "accessed_on": "2026-08-28",
+        "case_id": "exp-002",
+        "lifecycle_score": 9,
+        "publisher": "Dell Community",
+        "source_events": [
+          {
+            "category": "Hypothesize",
+            "event_number": 2,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Creates a shared-path versus individual-component Diagnosis.",
+            "locator": "Opening post and first responses",
+            "paraphrase": "The owner considered the PDB and PSU backplane, while responders retained added components, connections, PSUs, and the system board as alternatives.",
+            "stable_object_cross_reference": "`fault.power.distribution_board.failed`; `fault.power.psu.failed`; `fault.board.system.failed`; `fault.power.input.cable_loose`"
+          },
+          {
+            "category": "Test",
+            "event_number": 4,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Contradicts one failed supply or one bay as a sufficient explanation and points toward a shared downstream path.",
+            "locator": "Opening post, PSU test list",
+            "paraphrase": "Each of the two PSUs was tried alone in each supported bay and every arrangement failed the same way while the supply indicators remained green.",
+            "stable_object_cross_reference": "`test.power.distribution_path_isolation`; `test.power.known_good_psu` as generic equivalents"
+          }
+        ],
+        "title": "T420 PowerEdge VLT0204 main board voltage outside of range",
+        "uncertainties": [
+          "Vendor voltage-event wording is preserved as source context and is not treated as a new Fault alias without curator review."
+        ],
+        "url": "https://www.dell.com/community/en/conversations/poweredge-hardware-general/t420-poweredge-vlt0204-main-board-voltage-outside-of-range/67fd91b469e6265ea77af6ab"
+      },
+      "reviewed_domain_contract": {
+        "fingerprint_id": "fingerprint.power.failed_distribution_board",
+        "public_candidate_fault_ids": [
+          "fault.board.system.failed",
+          "fault.power.distribution_board.failed",
+          "fault.power.input.cable_loose",
+          "fault.power.psu.failed",
+          "fault.power.psu.not_seated"
+        ],
+        "repair_procedure_ids": [
+          "repair.power.replace_distribution_board"
+        ],
+        "required_diagnostic_ids": [
+          "test.power.distribution_path_isolation"
+        ],
+        "symptom_ids": [
+          "symptom.power.voltage_out_of_range",
+          "symptom.power.no_power"
+        ],
+        "validation_procedure_ids": [
+          "verify.power.distribution_path"
+        ]
+      },
+      "route_coverage": {
+        "first_route_id": "route.qc02.controlled_comparison_first.aaaaaa.change_history_first",
+        "last_route_id": "route.qc02.location_context_first.cccccc.current_state_first",
+        "route_count": 256,
+        "route_id_digest": "d38a7041dc51c3c4601d2ccd05b6fdff149fabd44a48ad489b20260b56b6ae3d"
+      },
+      "speaker_or_source": "story.character.malik_okoye",
+      "statement_id": "story.qc02.s07.follow.01",
+      "technical_subject_episode_id": "story.shift.qc02.08",
+      "text_id": "text.qc02.s07.follow.01",
+      "trace_id": "trace.text.qc02.s07.follow.01"
+    },
+    {
+      "authority_bounds": [
+        "PUBLIC_CONTEXT_ONLY"
+      ],
+      "bounded_claim": "Establish the voltage-alert and immediate-shutdown symptom before interpretation.",
+      "episode_id": "story.shift.qc02.08",
+      "forbidden_overreach": [
+        "Story prose is descriptive only and cannot manufacture Evidence, Isolation, Repair, Verify, Documentation, closure, or Service Points.",
+        "Before Match authorization, do not assert the hidden Fault, required diagnostic, correct Repair, or result.",
+        "Do not claim a decisive pre-repair PDB-only measurement; Isolation remains explicitly inferred.",
+        "Do not present a failed capacitor as an observed finding or generalize connector voltages/pinouts.",
+        "Do not turn the case reduction into authority for energized proprietary-connector probing."
+      ],
+      "label_id": "story.qc02.shift08.entry",
+      "outcome_scope": "ALL",
+      "phase": "CONTEXT",
+      "player_facing_text": "A redundant-power server starts for a moment, reports voltage outside its allowed range, and shuts down before useful work can begin.",
+      "research_source": {
+        "absent_lifecycle_categories": [
+          "Document"
+        ],
+        "accessed_on": "2026-08-28",
+        "case_id": "exp-002",
+        "lifecycle_score": 9,
+        "publisher": "Dell Community",
+        "source_events": [
+          {
+            "category": "Observe",
+            "event_number": 1,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Establishes the no-power/immediate-shutdown and voltage evidence.",
+            "locator": "Opening post",
+            "paraphrase": "Pressing power produced a brief start, immediate shutdown, and a VLT0204 main-board voltage-range alert.",
+            "stable_object_cross_reference": "`symptom.power.no_power`; `symptom.power.voltage_out_of_range`"
+          }
+        ],
+        "title": "T420 PowerEdge VLT0204 main board voltage outside of range",
+        "uncertainties": [
+          "Vendor voltage-event wording is preserved as source context and is not treated as a new Fault alias without curator review."
+        ],
+        "url": "https://www.dell.com/community/en/conversations/poweredge-hardware-general/t420-poweredge-vlt0204-main-board-voltage-outside-of-range/67fd91b469e6265ea77af6ab"
+      },
+      "reviewed_domain_contract": {
+        "fingerprint_id": "fingerprint.power.failed_distribution_board",
+        "public_candidate_fault_ids": [
+          "fault.board.system.failed",
+          "fault.power.distribution_board.failed",
+          "fault.power.input.cable_loose",
+          "fault.power.psu.failed",
+          "fault.power.psu.not_seated"
+        ],
+        "repair_procedure_ids": [
+          "repair.power.replace_distribution_board"
+        ],
+        "required_diagnostic_ids": [
+          "test.power.distribution_path_isolation"
+        ],
+        "symptom_ids": [
+          "symptom.power.voltage_out_of_range",
+          "symptom.power.no_power"
+        ],
+        "validation_procedure_ids": [
+          "verify.power.distribution_path"
+        ]
+      },
+      "route_coverage": {
+        "first_route_id": "route.qc02.controlled_comparison_first.aaaaaa.change_history_first",
+        "last_route_id": "route.qc02.location_context_first.cccccc.current_state_first",
+        "route_count": 256,
+        "route_id_digest": "d38a7041dc51c3c4601d2ccd05b6fdff149fabd44a48ad489b20260b56b6ae3d"
+      },
+      "speaker_or_source": "NARRATION",
+      "statement_id": "story.qc02.s08.entry.01",
+      "technical_subject_episode_id": "story.shift.qc02.08",
+      "text_id": "text.qc02.s08.entry.01",
+      "trace_id": "trace.text.qc02.s08.entry.01"
+    },
+    {
+      "authority_bounds": [
+        "PUBLIC_CONTEXT_ONLY"
+      ],
+      "bounded_claim": "Explain ordinary redundant-power layout and the discrimination goal without prescribing the required diagnostic.",
+      "episode_id": "story.shift.qc02.08",
+      "forbidden_overreach": [
+        "Story prose is descriptive only and cannot manufacture Evidence, Isolation, Repair, Verify, Documentation, closure, or Service Points.",
+        "Before Match authorization, do not assert the hidden Fault, required diagnostic, correct Repair, or result.",
+        "Do not claim a decisive pre-repair PDB-only measurement; Isolation remains explicitly inferred.",
+        "Do not present a failed capacitor as an observed finding or generalize connector voltages/pinouts.",
+        "Do not turn the case reduction into authority for energized proprietary-connector probing."
+      ],
+      "label_id": "story.qc02.shift08.entry",
+      "outcome_scope": "ALL",
+      "phase": "CONTEXT",
+      "player_facing_text": "Two power supplies sit in separate bays, but their paths eventually meet inside the chassis. Useful Evidence must distinguish a removable part, one location, and something shared downstream without assuming which safe comparison will do it.",
+      "research_source": {
+        "absent_lifecycle_categories": [
+          "Document"
+        ],
+        "accessed_on": "2026-08-28",
+        "case_id": "exp-002",
+        "lifecycle_score": 9,
+        "publisher": "Dell Community",
+        "source_events": [
+          {
+            "category": "Test",
+            "event_number": 4,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Contradicts one failed supply or one bay as a sufficient explanation and points toward a shared downstream path.",
+            "locator": "Opening post, PSU test list",
+            "paraphrase": "Each of the two PSUs was tried alone in each supported bay and every arrangement failed the same way while the supply indicators remained green.",
+            "stable_object_cross_reference": "`test.power.distribution_path_isolation`; `test.power.known_good_psu` as generic equivalents"
+          }
+        ],
+        "title": "T420 PowerEdge VLT0204 main board voltage outside of range",
+        "uncertainties": [
+          "Vendor voltage-event wording is preserved as source context and is not treated as a new Fault alias without curator review."
+        ],
+        "url": "https://www.dell.com/community/en/conversations/poweredge-hardware-general/t420-poweredge-vlt0204-main-board-voltage-outside-of-range/67fd91b469e6265ea77af6ab"
+      },
+      "reviewed_domain_contract": {
+        "fingerprint_id": "fingerprint.power.failed_distribution_board",
+        "public_candidate_fault_ids": [
+          "fault.board.system.failed",
+          "fault.power.distribution_board.failed",
+          "fault.power.input.cable_loose",
+          "fault.power.psu.failed",
+          "fault.power.psu.not_seated"
+        ],
+        "repair_procedure_ids": [
+          "repair.power.replace_distribution_board"
+        ],
+        "required_diagnostic_ids": [
+          "test.power.distribution_path_isolation"
+        ],
+        "symptom_ids": [
+          "symptom.power.voltage_out_of_range",
+          "symptom.power.no_power"
+        ],
+        "validation_procedure_ids": [
+          "verify.power.distribution_path"
+        ]
+      },
+      "route_coverage": {
+        "first_route_id": "route.qc02.controlled_comparison_first.aaaaaa.change_history_first",
+        "last_route_id": "route.qc02.location_context_first.cccccc.current_state_first",
+        "route_count": 256,
+        "route_id_digest": "d38a7041dc51c3c4601d2ccd05b6fdff149fabd44a48ad489b20260b56b6ae3d"
+      },
+      "speaker_or_source": "story.character.malik_okoye",
+      "statement_id": "story.qc02.s08.entry.02",
+      "technical_subject_episode_id": "story.shift.qc02.08",
+      "text_id": "text.qc02.s08.entry.02",
+      "trace_id": "trace.text.qc02.s08.entry.02"
+    },
+    {
+      "authority_bounds": [
+        "PUBLIC_CONTEXT_ONLY"
+      ],
+      "bounded_claim": "Explain the pain caused by treating an alert label as causal proof.",
+      "episode_id": "story.shift.qc02.08",
+      "forbidden_overreach": [
+        "Story prose is descriptive only and cannot manufacture Evidence, Isolation, Repair, Verify, Documentation, closure, or Service Points.",
+        "Before Match authorization, do not assert the hidden Fault, required diagnostic, correct Repair, or result.",
+        "Do not claim a decisive pre-repair PDB-only measurement; Isolation remains explicitly inferred.",
+        "Do not present a failed capacitor as an observed finding or generalize connector voltages/pinouts.",
+        "Do not turn the case reduction into authority for energized proprietary-connector probing."
+      ],
+      "label_id": "story.qc02.shift08.entry",
+      "outcome_scope": "ALL",
+      "phase": "CONTEXT",
+      "player_facing_text": "The alert names a measured voltage condition. It does not name the failed part. If the record turns the alert label into a diagnosis, Gate cannot tell what was actually ruled out.",
+      "research_source": {
+        "absent_lifecycle_categories": [
+          "Document"
+        ],
+        "accessed_on": "2026-08-28",
+        "case_id": "exp-002",
+        "lifecycle_score": 9,
+        "publisher": "Dell Community",
+        "source_events": [
+          {
+            "category": "Observe",
+            "event_number": 1,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Establishes the no-power/immediate-shutdown and voltage evidence.",
+            "locator": "Opening post",
+            "paraphrase": "Pressing power produced a brief start, immediate shutdown, and a VLT0204 main-board voltage-range alert.",
+            "stable_object_cross_reference": "`symptom.power.no_power`; `symptom.power.voltage_out_of_range`"
+          },
+          {
+            "category": "Hypothesize",
+            "event_number": 2,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Creates a shared-path versus individual-component Diagnosis.",
+            "locator": "Opening post and first responses",
+            "paraphrase": "The owner considered the PDB and PSU backplane, while responders retained added components, connections, PSUs, and the system board as alternatives.",
+            "stable_object_cross_reference": "`fault.power.distribution_board.failed`; `fault.power.psu.failed`; `fault.board.system.failed`; `fault.power.input.cable_loose`"
+          }
+        ],
+        "title": "T420 PowerEdge VLT0204 main board voltage outside of range",
+        "uncertainties": [
+          "Vendor voltage-event wording is preserved as source context and is not treated as a new Fault alias without curator review."
+        ],
+        "url": "https://www.dell.com/community/en/conversations/poweredge-hardware-general/t420-poweredge-vlt0204-main-board-voltage-outside-of-range/67fd91b469e6265ea77af6ab"
+      },
+      "reviewed_domain_contract": {
+        "fingerprint_id": "fingerprint.power.failed_distribution_board",
+        "public_candidate_fault_ids": [
+          "fault.board.system.failed",
+          "fault.power.distribution_board.failed",
+          "fault.power.input.cable_loose",
+          "fault.power.psu.failed",
+          "fault.power.psu.not_seated"
+        ],
+        "repair_procedure_ids": [
+          "repair.power.replace_distribution_board"
+        ],
+        "required_diagnostic_ids": [
+          "test.power.distribution_path_isolation"
+        ],
+        "symptom_ids": [
+          "symptom.power.voltage_out_of_range",
+          "symptom.power.no_power"
+        ],
+        "validation_procedure_ids": [
+          "verify.power.distribution_path"
+        ]
+      },
+      "route_coverage": {
+        "first_route_id": "route.qc02.controlled_comparison_first.aaaaaa.change_history_first",
+        "last_route_id": "route.qc02.location_context_first.cccccc.current_state_first",
+        "route_count": 256,
+        "route_id_digest": "d38a7041dc51c3c4601d2ccd05b6fdff149fabd44a48ad489b20260b56b6ae3d"
+      },
+      "speaker_or_source": "story.character.hana_park",
+      "statement_id": "story.qc02.s08.entry.03",
+      "technical_subject_episode_id": "story.shift.qc02.08",
+      "text_id": "text.qc02.s08.entry.03",
+      "trace_id": "trace.text.qc02.s08.entry.03"
+    },
+    {
+      "authority_bounds": [
+        "PUBLIC_CONTEXT_ONLY"
+      ],
+      "bounded_claim": "Present source-supported public comparisons and remaining Candidates.",
+      "episode_id": "story.shift.qc02.08",
+      "forbidden_overreach": [
+        "Story prose is descriptive only and cannot manufacture Evidence, Isolation, Repair, Verify, Documentation, closure, or Service Points.",
+        "Before Match authorization, do not assert the hidden Fault, required diagnostic, correct Repair, or result.",
+        "Do not claim a decisive pre-repair PDB-only measurement; Isolation remains explicitly inferred.",
+        "Do not present a failed capacitor as an observed finding or generalize connector voltages/pinouts.",
+        "Do not turn the case reduction into authority for energized proprietary-connector probing."
+      ],
+      "label_id": "story.qc02.shift08.entry",
+      "outcome_scope": "ALL",
+      "phase": "CONTEXT",
+      "player_facing_text": "The minimum configuration still fails, and the live Candidates include supply, seating or input, distribution path, and system board. Preserve every arrangement and result.",
+      "research_source": {
+        "absent_lifecycle_categories": [
+          "Document"
+        ],
+        "accessed_on": "2026-08-28",
+        "case_id": "exp-002",
+        "lifecycle_score": 9,
+        "publisher": "Dell Community",
+        "source_events": [
+          {
+            "category": "Hypothesize",
+            "event_number": 2,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Creates a shared-path versus individual-component Diagnosis.",
+            "locator": "Opening post and first responses",
+            "paraphrase": "The owner considered the PDB and PSU backplane, while responders retained added components, connections, PSUs, and the system board as alternatives.",
+            "stable_object_cross_reference": "`fault.power.distribution_board.failed`; `fault.power.psu.failed`; `fault.board.system.failed`; `fault.power.input.cable_loose`"
+          },
+          {
+            "category": "Test",
+            "event_number": 3,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Contradicts the added memory, GPU, or second CPU as the sole trigger.",
+            "locator": "Opening post, chronological test list",
+            "paraphrase": "Memory was returned to the earlier configuration, then the GPU and second CPU were removed; the shutdown persisted.",
+            "stable_object_cross_reference": "Generic minimum-configuration testing"
+          },
+          {
+            "category": "Test",
+            "event_number": 4,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Contradicts one failed supply or one bay as a sufficient explanation and points toward a shared downstream path.",
+            "locator": "Opening post, PSU test list",
+            "paraphrase": "Each of the two PSUs was tried alone in each supported bay and every arrangement failed the same way while the supply indicators remained green.",
+            "stable_object_cross_reference": "`test.power.distribution_path_isolation`; `test.power.known_good_psu` as generic equivalents"
+          },
+          {
+            "category": "Test",
+            "event_number": 5,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Confirms that removable load reduction does not clear the fault.",
+            "locator": "Author follow-up dated 2025-04-16",
+            "paraphrase": "A later requested minimum state—one original CPU, one DIMM, no GPU, and one PSU—still produced the same error.",
+            "stable_object_cross_reference": "`test.general.minimum_configuration`"
+          }
+        ],
+        "title": "T420 PowerEdge VLT0204 main board voltage outside of range",
+        "uncertainties": [
+          "Vendor voltage-event wording is preserved as source context and is not treated as a new Fault alias without curator review."
+        ],
+        "url": "https://www.dell.com/community/en/conversations/poweredge-hardware-general/t420-poweredge-vlt0204-main-board-voltage-outside-of-range/67fd91b469e6265ea77af6ab"
+      },
+      "reviewed_domain_contract": {
+        "fingerprint_id": "fingerprint.power.failed_distribution_board",
+        "public_candidate_fault_ids": [
+          "fault.board.system.failed",
+          "fault.power.distribution_board.failed",
+          "fault.power.input.cable_loose",
+          "fault.power.psu.failed",
+          "fault.power.psu.not_seated"
+        ],
+        "repair_procedure_ids": [
+          "repair.power.replace_distribution_board"
+        ],
+        "required_diagnostic_ids": [
+          "test.power.distribution_path_isolation"
+        ],
+        "symptom_ids": [
+          "symptom.power.voltage_out_of_range",
+          "symptom.power.no_power"
+        ],
+        "validation_procedure_ids": [
+          "verify.power.distribution_path"
+        ]
+      },
+      "route_coverage": {
+        "first_route_id": "route.qc02.controlled_comparison_first.aaaaaa.change_history_first",
+        "last_route_id": "route.qc02.location_context_first.cccccc.current_state_first",
+        "route_count": 256,
+        "route_id_digest": "d38a7041dc51c3c4601d2ccd05b6fdff149fabd44a48ad489b20260b56b6ae3d"
+      },
+      "speaker_or_source": "story.character.malik_okoye",
+      "statement_id": "story.qc02.s08.entry.04",
+      "technical_subject_episode_id": "story.shift.qc02.08",
+      "text_id": "text.qc02.s08.entry.04",
+      "trace_id": "trace.text.qc02.s08.entry.04"
+    },
+    {
+      "authority_bounds": [
+        "PUBLIC_CONTEXT_ONLY"
+      ],
+      "bounded_claim": "Introduce predictive failure as actionable before outage.",
+      "episode_id": "story.shift.qc02.08",
+      "forbidden_overreach": [
+        "Story prose is descriptive only and cannot manufacture Evidence, Isolation, Repair, Verify, Documentation, closure, or Service Points.",
+        "Before Match authorization, do not assert the hidden Fault, required diagnostic, correct Repair, or result.",
+        "Do not invent SMART attributes, a controller-event export, or a long post-rebuild soak.",
+        "Do not imply that every advised backup, consistency, offlining, or compatibility step was reported as executed.",
+        "Do not claim the exact drive interface or that every array permits live replacement."
+      ],
+      "label_id": "story.qc02.shift08.follow_on",
+      "outcome_scope": "ALL",
+      "phase": "FOLLOW_ON",
+      "player_facing_text": "The next warning arrives before the service disappears. Acting early still requires an accountable fault, a protected repair, and proof that recovery finished.",
+      "research_source": {
+        "absent_lifecycle_categories": [
+          "Document"
+        ],
+        "accessed_on": "2026-08-28",
+        "case_id": "exp-003",
+        "lifecycle_score": 9,
+        "publisher": "Dell Community",
+        "source_events": [
+          {
+            "category": "Observe",
+            "event_number": 1,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Establishes a warning state before total media loss and identifies the physical bay.",
+            "locator": "Opening post",
+            "paraphrase": "Drive 0:1:0 alternated amber and green while the server and RAID-1 volume remained operational.",
+            "stable_object_cross_reference": "`symptom.storage.drive_fault_led`; `component.storage.sas_hdd` as a generic server-drive match"
+          },
+          {
+            "category": "Repair",
+            "event_number": 5,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Changes the isolated media state.",
+            "locator": "Final author update dated 2018-07-19",
+            "paraphrase": "The operator replaced the identified drive.",
+            "stable_object_cross_reference": "`repair.storage.replace_predictive_drive`"
+          },
+          {
+            "category": "Verify",
+            "event_number": 6,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Confirms that the new member was incorporated and the reported rebuild reached completion.",
+            "locator": "Final author update",
+            "paraphrase": "The replacement rebuild started and completed successfully.",
+            "stable_object_cross_reference": "`verify.storage.predictive_replacement`"
+          }
+        ],
+        "title": "PowerEdge R620 drive predicted failure",
+        "uncertainties": [
+          "The source's controller-management interface is not automatically classified as a current Command or new Tool."
+        ],
+        "url": "https://www.dell.com/community/en/conversations/poweredge-hardware-general/poweredge-r620-drive-predicted-failure/647f7b52f4ccf8a8de9878d4"
+      },
+      "reviewed_domain_contract": {
+        "fingerprint_id": "fingerprint.storage.predictive_drive_failure",
+        "public_candidate_fault_ids": [
+          "fault.storage.drive.predictive_failure",
+          "fault.storage.sas.drive_failed"
+        ],
+        "repair_procedure_ids": [
+          "repair.storage.replace_predictive_drive"
+        ],
+        "required_diagnostic_ids": [
+          "test.storage.predictive_health"
+        ],
+        "symptom_ids": [
+          "symptom.storage.predictive_failure_warning",
+          "symptom.storage.drive_fault_led"
+        ],
+        "validation_procedure_ids": [
+          "verify.storage.predictive_replacement"
+        ]
+      },
+      "route_coverage": {
+        "first_route_id": "route.qc02.controlled_comparison_first.aaaaaa.change_history_first",
+        "last_route_id": "route.qc02.location_context_first.cccccc.current_state_first",
+        "route_count": 256,
+        "route_id_digest": "d38a7041dc51c3c4601d2ccd05b6fdff149fabd44a48ad489b20260b56b6ae3d"
+      },
+      "speaker_or_source": "story.character.hana_park",
+      "statement_id": "story.qc02.s08.follow.01",
+      "technical_subject_episode_id": "story.shift.qc02.09",
+      "text_id": "text.qc02.s08.follow.01",
+      "trace_id": "trace.text.qc02.s08.follow.01"
+    },
+    {
+      "authority_bounds": [
+        "PUBLIC_CONTEXT_ONLY"
+      ],
+      "bounded_claim": "Establish the still-operating member and matching predictive warning.",
+      "episode_id": "story.shift.qc02.09",
+      "forbidden_overreach": [
+        "Story prose is descriptive only and cannot manufacture Evidence, Isolation, Repair, Verify, Documentation, closure, or Service Points.",
+        "Before Match authorization, do not assert the hidden Fault, required diagnostic, correct Repair, or result.",
+        "Do not invent SMART attributes, a controller-event export, or a long post-rebuild soak.",
+        "Do not imply that every advised backup, consistency, offlining, or compatibility step was reported as executed.",
+        "Do not claim the exact drive interface or that every array permits live replacement."
+      ],
+      "label_id": "story.qc02.shift09.entry",
+      "outcome_scope": "ALL",
+      "phase": "CONTEXT",
+      "player_facing_text": "One member of a mirrored storage array remains online while its bay alternates amber and green and management reports predictive failure.",
+      "research_source": {
+        "absent_lifecycle_categories": [
+          "Document"
+        ],
+        "accessed_on": "2026-08-28",
+        "case_id": "exp-003",
+        "lifecycle_score": 9,
+        "publisher": "Dell Community",
+        "source_events": [
+          {
+            "category": "Observe",
+            "event_number": 1,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Establishes a warning state before total media loss and identifies the physical bay.",
+            "locator": "Opening post",
+            "paraphrase": "Drive 0:1:0 alternated amber and green while the server and RAID-1 volume remained operational.",
+            "stable_object_cross_reference": "`symptom.storage.drive_fault_led`; `component.storage.sas_hdd` as a generic server-drive match"
+          },
+          {
+            "category": "Test",
+            "event_number": 3,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Correlates physical location with controller/management health evidence.",
+            "locator": "Opening post",
+            "paraphrase": "Management software reported “Failure Predicted” for the same member identified by the bay indicator.",
+            "stable_object_cross_reference": "`symptom.storage.predictive_failure_warning`; `test.storage.predictive_health` as the closest current Test"
+          }
+        ],
+        "title": "PowerEdge R620 drive predicted failure",
+        "uncertainties": [
+          "The source's controller-management interface is not automatically classified as a current Command or new Tool."
+        ],
+        "url": "https://www.dell.com/community/en/conversations/poweredge-hardware-general/poweredge-r620-drive-predicted-failure/647f7b52f4ccf8a8de9878d4"
+      },
+      "reviewed_domain_contract": {
+        "fingerprint_id": "fingerprint.storage.predictive_drive_failure",
+        "public_candidate_fault_ids": [
+          "fault.storage.drive.predictive_failure",
+          "fault.storage.sas.drive_failed"
+        ],
+        "repair_procedure_ids": [
+          "repair.storage.replace_predictive_drive"
+        ],
+        "required_diagnostic_ids": [
+          "test.storage.predictive_health"
+        ],
+        "symptom_ids": [
+          "symptom.storage.predictive_failure_warning",
+          "symptom.storage.drive_fault_led"
+        ],
+        "validation_procedure_ids": [
+          "verify.storage.predictive_replacement"
+        ]
+      },
+      "route_coverage": {
+        "first_route_id": "route.qc02.controlled_comparison_first.aaaaaa.change_history_first",
+        "last_route_id": "route.qc02.location_context_first.cccccc.current_state_first",
+        "route_count": 256,
+        "route_id_digest": "d38a7041dc51c3c4601d2ccd05b6fdff149fabd44a48ad489b20260b56b6ae3d"
+      },
+      "speaker_or_source": "NARRATION",
+      "statement_id": "story.qc02.s09.entry.01",
+      "technical_subject_episode_id": "story.shift.qc02.09",
+      "text_id": "text.qc02.s09.entry.01",
+      "trace_id": "trace.text.qc02.s09.entry.01"
+    },
+    {
+      "authority_bounds": [
+        "PUBLIC_CONTEXT_ONLY"
+      ],
+      "bounded_claim": "Define the storage environment and predictive state for a newcomer.",
+      "episode_id": "story.shift.qc02.09",
+      "forbidden_overreach": [
+        "Story prose is descriptive only and cannot manufacture Evidence, Isolation, Repair, Verify, Documentation, closure, or Service Points.",
+        "Before Match authorization, do not assert the hidden Fault, required diagnostic, correct Repair, or result.",
+        "Do not invent SMART attributes, a controller-event export, or a long post-rebuild soak.",
+        "Do not imply that every advised backup, consistency, offlining, or compatibility step was reported as executed.",
+        "Do not claim the exact drive interface or that every array permits live replacement."
+      ],
+      "label_id": "story.qc02.shift09.entry",
+      "outcome_scope": "ALL",
+      "phase": "CONTEXT",
+      "player_facing_text": "A mirrored array keeps equivalent data on more than one member so one path can fail without immediate service loss. Predictive means the controller sees risk before the member is fully offline; it is not a completed outage.",
+      "research_source": {
+        "absent_lifecycle_categories": [
+          "Document"
+        ],
+        "accessed_on": "2026-08-28",
+        "case_id": "exp-003",
+        "lifecycle_score": 9,
+        "publisher": "Dell Community",
+        "source_events": [
+          {
+            "category": "Observe",
+            "event_number": 1,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Establishes a warning state before total media loss and identifies the physical bay.",
+            "locator": "Opening post",
+            "paraphrase": "Drive 0:1:0 alternated amber and green while the server and RAID-1 volume remained operational.",
+            "stable_object_cross_reference": "`symptom.storage.drive_fault_led`; `component.storage.sas_hdd` as a generic server-drive match"
+          },
+          {
+            "category": "Test",
+            "event_number": 3,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Correlates physical location with controller/management health evidence.",
+            "locator": "Opening post",
+            "paraphrase": "Management software reported “Failure Predicted” for the same member identified by the bay indicator.",
+            "stable_object_cross_reference": "`symptom.storage.predictive_failure_warning`; `test.storage.predictive_health` as the closest current Test"
+          }
+        ],
+        "title": "PowerEdge R620 drive predicted failure",
+        "uncertainties": [
+          "The source's controller-management interface is not automatically classified as a current Command or new Tool."
+        ],
+        "url": "https://www.dell.com/community/en/conversations/poweredge-hardware-general/poweredge-r620-drive-predicted-failure/647f7b52f4ccf8a8de9878d4"
+      },
+      "reviewed_domain_contract": {
+        "fingerprint_id": "fingerprint.storage.predictive_drive_failure",
+        "public_candidate_fault_ids": [
+          "fault.storage.drive.predictive_failure",
+          "fault.storage.sas.drive_failed"
+        ],
+        "repair_procedure_ids": [
+          "repair.storage.replace_predictive_drive"
+        ],
+        "required_diagnostic_ids": [
+          "test.storage.predictive_health"
+        ],
+        "symptom_ids": [
+          "symptom.storage.predictive_failure_warning",
+          "symptom.storage.drive_fault_led"
+        ],
+        "validation_procedure_ids": [
+          "verify.storage.predictive_replacement"
+        ]
+      },
+      "route_coverage": {
+        "first_route_id": "route.qc02.controlled_comparison_first.aaaaaa.change_history_first",
+        "last_route_id": "route.qc02.location_context_first.cccccc.current_state_first",
+        "route_count": 256,
+        "route_id_digest": "d38a7041dc51c3c4601d2ccd05b6fdff149fabd44a48ad489b20260b56b6ae3d"
+      },
+      "speaker_or_source": "story.character.jonah_reed",
+      "statement_id": "story.qc02.s09.entry.02",
+      "technical_subject_episode_id": "story.shift.qc02.09",
+      "text_id": "text.qc02.s09.entry.02",
+      "trace_id": "trace.text.qc02.s09.entry.02"
+    },
+    {
+      "authority_bounds": [
+        "PUBLIC_CONTEXT_ONLY"
+      ],
+      "bounded_claim": "Explain the safe change and independent-acceptance boundary without prescribing the Repair or Verify.",
+      "episode_id": "story.shift.qc02.09",
+      "forbidden_overreach": [
+        "Story prose is descriptive only and cannot manufacture Evidence, Isolation, Repair, Verify, Documentation, closure, or Service Points.",
+        "Before Match authorization, do not assert the hidden Fault, required diagnostic, correct Repair, or result.",
+        "Do not invent SMART attributes, a controller-event export, or a long post-rebuild soak.",
+        "Do not imply that every advised backup, consistency, offlining, or compatibility step was reported as executed.",
+        "Do not claim the exact drive interface or that every array permits live replacement."
+      ],
+      "label_id": "story.qc02.shift09.entry",
+      "outcome_scope": "ALL",
+      "phase": "CONTEXT",
+      "player_facing_text": "Early action is responsible only if member identity, current data protection, change authorization, and an independently checked array state remain explicit. “Action taken” is not an acceptance test.",
+      "research_source": {
+        "absent_lifecycle_categories": [
+          "Document"
+        ],
+        "accessed_on": "2026-08-28",
+        "case_id": "exp-003",
+        "lifecycle_score": 9,
+        "publisher": "Dell Community",
+        "source_events": [
+          {
+            "category": "Isolate",
+            "event_number": 4,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Crosses from a generic array concern to one actionable member.",
+            "locator": "Opening post and responder interpretation",
+            "paraphrase": "The online member at 0:1:0 was selected as the predictively failing drive from the matching location and management evidence.",
+            "stable_object_cross_reference": "`fault.storage.drive.predictive_failure`"
+          },
+          {
+            "category": "Repair",
+            "event_number": 5,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Changes the isolated media state.",
+            "locator": "Final author update dated 2018-07-19",
+            "paraphrase": "The operator replaced the identified drive.",
+            "stable_object_cross_reference": "`repair.storage.replace_predictive_drive`"
+          },
+          {
+            "category": "Verify",
+            "event_number": 6,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Confirms that the new member was incorporated and the reported rebuild reached completion.",
+            "locator": "Final author update",
+            "paraphrase": "The replacement rebuild started and completed successfully.",
+            "stable_object_cross_reference": "`verify.storage.predictive_replacement`"
+          }
+        ],
+        "title": "PowerEdge R620 drive predicted failure",
+        "uncertainties": [
+          "The source's controller-management interface is not automatically classified as a current Command or new Tool."
+        ],
+        "url": "https://www.dell.com/community/en/conversations/poweredge-hardware-general/poweredge-r620-drive-predicted-failure/647f7b52f4ccf8a8de9878d4"
+      },
+      "reviewed_domain_contract": {
+        "fingerprint_id": "fingerprint.storage.predictive_drive_failure",
+        "public_candidate_fault_ids": [
+          "fault.storage.drive.predictive_failure",
+          "fault.storage.sas.drive_failed"
+        ],
+        "repair_procedure_ids": [
+          "repair.storage.replace_predictive_drive"
+        ],
+        "required_diagnostic_ids": [
+          "test.storage.predictive_health"
+        ],
+        "symptom_ids": [
+          "symptom.storage.predictive_failure_warning",
+          "symptom.storage.drive_fault_led"
+        ],
+        "validation_procedure_ids": [
+          "verify.storage.predictive_replacement"
+        ]
+      },
+      "route_coverage": {
+        "first_route_id": "route.qc02.controlled_comparison_first.aaaaaa.change_history_first",
+        "last_route_id": "route.qc02.location_context_first.cccccc.current_state_first",
+        "route_count": 256,
+        "route_id_digest": "d38a7041dc51c3c4601d2ccd05b6fdff149fabd44a48ad489b20260b56b6ae3d"
+      },
+      "speaker_or_source": "story.character.hana_park",
+      "statement_id": "story.qc02.s09.entry.03",
+      "technical_subject_episode_id": "story.shift.qc02.09",
+      "text_id": "text.qc02.s09.entry.03",
+      "trace_id": "trace.text.qc02.s09.entry.03"
+    },
+    {
+      "authority_bounds": [
+        "PUBLIC_CONTEXT_ONLY"
+      ],
+      "bounded_claim": "Present source-supported correlation while preserving the exact two public Candidates.",
+      "episode_id": "story.shift.qc02.09",
+      "forbidden_overreach": [
+        "Story prose is descriptive only and cannot manufacture Evidence, Isolation, Repair, Verify, Documentation, closure, or Service Points.",
+        "Before Match authorization, do not assert the hidden Fault, required diagnostic, correct Repair, or result.",
+        "Do not invent SMART attributes, a controller-event export, or a long post-rebuild soak.",
+        "Do not imply that every advised backup, consistency, offlining, or compatibility step was reported as executed.",
+        "Do not claim the exact drive interface or that every array permits live replacement."
+      ],
+      "label_id": "story.qc02.shift09.entry",
+      "outcome_scope": "ALL",
+      "phase": "CONTEXT",
+      "player_facing_text": "The warning, bay indicator, and controller member record point to the same location. The Match must still distinguish predictive media risk from a member that has already failed.",
+      "research_source": {
+        "absent_lifecycle_categories": [
+          "Document"
+        ],
+        "accessed_on": "2026-08-28",
+        "case_id": "exp-003",
+        "lifecycle_score": 9,
+        "publisher": "Dell Community",
+        "source_events": [
+          {
+            "category": "Observe",
+            "event_number": 1,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Establishes a warning state before total media loss and identifies the physical bay.",
+            "locator": "Opening post",
+            "paraphrase": "Drive 0:1:0 alternated amber and green while the server and RAID-1 volume remained operational.",
+            "stable_object_cross_reference": "`symptom.storage.drive_fault_led`; `component.storage.sas_hdd` as a generic server-drive match"
+          },
+          {
+            "category": "Hypothesize",
+            "event_number": 2,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Treats the warning as a degradation hypothesis to be confirmed, not yet a completed failure.",
+            "locator": "Opening post",
+            "paraphrase": "The operator proposed that the warned member needed replacement and asked whether the array would rebuild onto a compatible new drive.",
+            "stable_object_cross_reference": "`fault.storage.drive.predictive_failure`; `repair.storage.replace_predictive_drive` as a candidate mapping only"
+          },
+          {
+            "category": "Test",
+            "event_number": 3,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Correlates physical location with controller/management health evidence.",
+            "locator": "Opening post",
+            "paraphrase": "Management software reported “Failure Predicted” for the same member identified by the bay indicator.",
+            "stable_object_cross_reference": "`symptom.storage.predictive_failure_warning`; `test.storage.predictive_health` as the closest current Test"
+          }
+        ],
+        "title": "PowerEdge R620 drive predicted failure",
+        "uncertainties": [
+          "The source's controller-management interface is not automatically classified as a current Command or new Tool."
+        ],
+        "url": "https://www.dell.com/community/en/conversations/poweredge-hardware-general/poweredge-r620-drive-predicted-failure/647f7b52f4ccf8a8de9878d4"
+      },
+      "reviewed_domain_contract": {
+        "fingerprint_id": "fingerprint.storage.predictive_drive_failure",
+        "public_candidate_fault_ids": [
+          "fault.storage.drive.predictive_failure",
+          "fault.storage.sas.drive_failed"
+        ],
+        "repair_procedure_ids": [
+          "repair.storage.replace_predictive_drive"
+        ],
+        "required_diagnostic_ids": [
+          "test.storage.predictive_health"
+        ],
+        "symptom_ids": [
+          "symptom.storage.predictive_failure_warning",
+          "symptom.storage.drive_fault_led"
+        ],
+        "validation_procedure_ids": [
+          "verify.storage.predictive_replacement"
+        ]
+      },
+      "route_coverage": {
+        "first_route_id": "route.qc02.controlled_comparison_first.aaaaaa.change_history_first",
+        "last_route_id": "route.qc02.location_context_first.cccccc.current_state_first",
+        "route_count": 256,
+        "route_id_digest": "d38a7041dc51c3c4601d2ccd05b6fdff149fabd44a48ad489b20260b56b6ae3d"
+      },
+      "speaker_or_source": "story.character.jonah_reed",
+      "statement_id": "story.qc02.s09.entry.04",
+      "technical_subject_episode_id": "story.shift.qc02.09",
+      "text_id": "text.qc02.s09.entry.04",
+      "trace_id": "trace.text.qc02.s09.entry.04"
+    },
+    {
+      "authority_bounds": [
+        "PUBLIC_CONTEXT_ONLY"
+      ],
+      "bounded_claim": "Transition from predictive current evidence to a potentially historical alert.",
+      "episode_id": "story.shift.qc02.09",
+      "forbidden_overreach": [
+        "Story prose is descriptive only and cannot manufacture Evidence, Isolation, Repair, Verify, Documentation, closure, or Service Points.",
+        "Before Match authorization, do not assert the hidden Fault, required diagnostic, correct Repair, or result.",
+        "The source combines the fresh probe and state clear in one DSET event; do not claim it separately proved the candidate Test/Repair sequence.",
+        "Do not claim a prolonged nonrecurrence interval or that ordinary log clearing alone resolved the condition.",
+        "Preserve logs and current evidence before state-changing cleanup; alert clearance cannot prove a live FRU never existed."
+      ],
+      "label_id": "story.qc02.shift09.follow_on",
+      "outcome_scope": "ALL",
+      "phase": "FOLLOW_ON",
+      "player_facing_text": "Now we have the opposite problem: the hardware looks healthy while a management warning refuses to leave. Current state and recorded history have to be compared before either is trusted as the complete account.",
+      "research_source": {
+        "absent_lifecycle_categories": [
+          "Document"
+        ],
+        "accessed_on": "2026-08-28",
+        "case_id": "exp-004",
+        "lifecycle_score": 9,
+        "publisher": "Dell Community",
+        "source_events": [
+          {
+            "category": "Observe",
+            "event_number": 1,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Establishes a disagreement between the alert and current hardware evidence.",
+            "locator": "Opening post and 2012 follow-ups",
+            "paraphrase": "After drive replacement and successful rebuild or recognition, management still displayed a degraded backplane while drives, detailed parts, and physical indicators were healthy.",
+            "stable_object_cross_reference": "`symptom.management.alert_persists`; `component.chassis.diagnostics`; `component.storage.backplane`"
+          }
+        ],
+        "title": "PE2900 backplane degraded",
+        "uncertainties": [
+          "DSET remains a vendor diagnostic collector phrase; research does not promote it into a current Command or new stable Tool."
+        ],
+        "url": "https://www.dell.com/community/en/conversations/poweredge-hddscsiraid/pe2900-backplane-degraded/647e8b20f4ccf8a8dede59e9"
+      },
+      "reviewed_domain_contract": {
+        "fingerprint_id": "fingerprint.management.stale_alert",
+        "public_candidate_fault_ids": [
+          "fault.management.alert.stale",
+          "fault.storage.backplane.path_failed"
+        ],
+        "repair_procedure_ids": [
+          "repair.management.clear_stale_alert_state"
+        ],
+        "required_diagnostic_ids": [
+          "test.management.event_log_freshness"
+        ],
+        "symptom_ids": [
+          "symptom.management.alert_persists"
+        ],
+        "validation_procedure_ids": [
+          "verify.management.alert_does_not_recur"
+        ]
+      },
+      "route_coverage": {
+        "first_route_id": "route.qc02.controlled_comparison_first.aaaaaa.change_history_first",
+        "last_route_id": "route.qc02.location_context_first.cccccc.current_state_first",
+        "route_count": 256,
+        "route_id_digest": "d38a7041dc51c3c4601d2ccd05b6fdff149fabd44a48ad489b20260b56b6ae3d"
+      },
+      "speaker_or_source": "story.character.jonah_reed",
+      "statement_id": "story.qc02.s09.follow.01",
+      "technical_subject_episode_id": "story.shift.qc02.10",
+      "text_id": "text.qc02.s09.follow.01",
+      "trace_id": "trace.text.qc02.s09.follow.01"
+    },
+    {
+      "authority_bounds": [
+        "PUBLIC_CONTEXT_ONLY"
+      ],
+      "bounded_claim": "Establish the conflict between persistent alert and current hardware evidence.",
+      "episode_id": "story.shift.qc02.10",
+      "forbidden_overreach": [
+        "Story prose is descriptive only and cannot manufacture Evidence, Isolation, Repair, Verify, Documentation, closure, or Service Points.",
+        "Before Match authorization, do not assert the hidden Fault, required diagnostic, correct Repair, or result.",
+        "The source combines the fresh probe and state clear in one DSET event; do not claim it separately proved the candidate Test/Repair sequence.",
+        "Do not claim a prolonged nonrecurrence interval or that ordinary log clearing alone resolved the condition.",
+        "Preserve logs and current evidence before state-changing cleanup; alert clearance cannot prove a live FRU never existed."
+      ],
+      "label_id": "story.qc02.shift10.entry",
+      "outcome_scope": "ALL",
+      "phase": "CONTEXT",
+      "player_facing_text": "The management console still marks the storage backplane degraded. Current drive inventory and physical indicators show no matching present failure.",
+      "research_source": {
+        "absent_lifecycle_categories": [
+          "Document"
+        ],
+        "accessed_on": "2026-08-28",
+        "case_id": "exp-004",
+        "lifecycle_score": 9,
+        "publisher": "Dell Community",
+        "source_events": [
+          {
+            "category": "Observe",
+            "event_number": 1,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Establishes a disagreement between the alert and current hardware evidence.",
+            "locator": "Opening post and 2012 follow-ups",
+            "paraphrase": "After drive replacement and successful rebuild or recognition, management still displayed a degraded backplane while drives, detailed parts, and physical indicators were healthy.",
+            "stable_object_cross_reference": "`symptom.management.alert_persists`; `component.chassis.diagnostics`; `component.storage.backplane`"
+          }
+        ],
+        "title": "PE2900 backplane degraded",
+        "uncertainties": [
+          "DSET remains a vendor diagnostic collector phrase; research does not promote it into a current Command or new stable Tool."
+        ],
+        "url": "https://www.dell.com/community/en/conversations/poweredge-hddscsiraid/pe2900-backplane-degraded/647e8b20f4ccf8a8dede59e9"
+      },
+      "reviewed_domain_contract": {
+        "fingerprint_id": "fingerprint.management.stale_alert",
+        "public_candidate_fault_ids": [
+          "fault.management.alert.stale",
+          "fault.storage.backplane.path_failed"
+        ],
+        "repair_procedure_ids": [
+          "repair.management.clear_stale_alert_state"
+        ],
+        "required_diagnostic_ids": [
+          "test.management.event_log_freshness"
+        ],
+        "symptom_ids": [
+          "symptom.management.alert_persists"
+        ],
+        "validation_procedure_ids": [
+          "verify.management.alert_does_not_recur"
+        ]
+      },
+      "route_coverage": {
+        "first_route_id": "route.qc02.controlled_comparison_first.aaaaaa.change_history_first",
+        "last_route_id": "route.qc02.location_context_first.cccccc.current_state_first",
+        "route_count": 256,
+        "route_id_digest": "d38a7041dc51c3c4601d2ccd05b6fdff149fabd44a48ad489b20260b56b6ae3d"
+      },
+      "speaker_or_source": "NARRATION",
+      "statement_id": "story.qc02.s10.entry.01",
+      "technical_subject_episode_id": "story.shift.qc02.10",
+      "text_id": "text.qc02.s10.entry.01",
+      "trace_id": "trace.text.qc02.s10.entry.01"
+    },
+    {
+      "authority_bounds": [
+        "PUBLIC_CONTEXT_ONLY"
+      ],
+      "bounded_claim": "Explain the management surface and its possible temporal meanings.",
+      "episode_id": "story.shift.qc02.10",
+      "forbidden_overreach": [
+        "Story prose is descriptive only and cannot manufacture Evidence, Isolation, Repair, Verify, Documentation, closure, or Service Points.",
+        "Before Match authorization, do not assert the hidden Fault, required diagnostic, correct Repair, or result.",
+        "The source combines the fresh probe and state clear in one DSET event; do not claim it separately proved the candidate Test/Repair sequence.",
+        "Do not claim a prolonged nonrecurrence interval or that ordinary log clearing alone resolved the condition.",
+        "Preserve logs and current evidence before state-changing cleanup; alert clearance cannot prove a live FRU never existed."
+      ],
+      "label_id": "story.qc02.shift10.entry",
+      "outcome_scope": "ALL",
+      "phase": "CONTEXT",
+      "player_facing_text": "A management alert is a recorded state, not the hardware itself. It may describe a live condition, an earlier event, or state that was never refreshed after the machine changed.",
+      "research_source": {
+        "absent_lifecycle_categories": [
+          "Document"
+        ],
+        "accessed_on": "2026-08-28",
+        "case_id": "exp-004",
+        "lifecycle_score": 9,
+        "publisher": "Dell Community",
+        "source_events": [
+          {
+            "category": "Observe",
+            "event_number": 1,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Establishes a disagreement between the alert and current hardware evidence.",
+            "locator": "Opening post and 2012 follow-ups",
+            "paraphrase": "After drive replacement and successful rebuild or recognition, management still displayed a degraded backplane while drives, detailed parts, and physical indicators were healthy.",
+            "stable_object_cross_reference": "`symptom.management.alert_persists`; `component.chassis.diagnostics`; `component.storage.backplane`"
+          },
+          {
+            "category": "Hypothesize",
+            "event_number": 2,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Preserves a live-FRU alternative while introducing a stale-state explanation.",
+            "locator": "Replies dated 2007-12-28 and 2012-05-01",
+            "paraphrase": "Contributors considered an actual backplane/interposer condition, old management state, firmware/software state, and the prior drive event.",
+            "stable_object_cross_reference": "`fault.storage.backplane.path_failed`; `fault.management.alert.stale`"
+          }
+        ],
+        "title": "PE2900 backplane degraded",
+        "uncertainties": [
+          "DSET remains a vendor diagnostic collector phrase; research does not promote it into a current Command or new stable Tool."
+        ],
+        "url": "https://www.dell.com/community/en/conversations/poweredge-hddscsiraid/pe2900-backplane-degraded/647e8b20f4ccf8a8dede59e9"
+      },
+      "reviewed_domain_contract": {
+        "fingerprint_id": "fingerprint.management.stale_alert",
+        "public_candidate_fault_ids": [
+          "fault.management.alert.stale",
+          "fault.storage.backplane.path_failed"
+        ],
+        "repair_procedure_ids": [
+          "repair.management.clear_stale_alert_state"
+        ],
+        "required_diagnostic_ids": [
+          "test.management.event_log_freshness"
+        ],
+        "symptom_ids": [
+          "symptom.management.alert_persists"
+        ],
+        "validation_procedure_ids": [
+          "verify.management.alert_does_not_recur"
+        ]
+      },
+      "route_coverage": {
+        "first_route_id": "route.qc02.controlled_comparison_first.aaaaaa.change_history_first",
+        "last_route_id": "route.qc02.location_context_first.cccccc.current_state_first",
+        "route_count": 256,
+        "route_id_digest": "d38a7041dc51c3c4601d2ccd05b6fdff149fabd44a48ad489b20260b56b6ae3d"
+      },
+      "speaker_or_source": "story.character.jonah_reed",
+      "statement_id": "story.qc02.s10.entry.02",
+      "technical_subject_episode_id": "story.shift.qc02.10",
+      "text_id": "text.qc02.s10.entry.02",
+      "trace_id": "trace.text.qc02.s10.entry.02"
+    },
+    {
+      "authority_bounds": [
+        "PUBLIC_CONTEXT_ONLY"
+      ],
+      "bounded_claim": "Explain preserve-before-change and the Test-versus-Repair boundary.",
+      "episode_id": "story.shift.qc02.10",
+      "forbidden_overreach": [
+        "Story prose is descriptive only and cannot manufacture Evidence, Isolation, Repair, Verify, Documentation, closure, or Service Points.",
+        "Before Match authorization, do not assert the hidden Fault, required diagnostic, correct Repair, or result.",
+        "The source combines the fresh probe and state clear in one DSET event; do not claim it separately proved the candidate Test/Repair sequence.",
+        "Do not claim a prolonged nonrecurrence interval or that ordinary log clearing alone resolved the condition.",
+        "Preserve logs and current evidence before state-changing cleanup; alert clearance cannot prove a live FRU never existed."
+      ],
+      "label_id": "story.qc02.shift10.entry",
+      "outcome_scope": "ALL",
+      "phase": "CONTEXT",
+      "player_facing_text": "At the community orchestra, I reconcile the ledger after the event, not instead of it. Here, changing management state first would alter the record we need to judge. Preserve current chronology and device state before any action rewrites that surface.",
+      "research_source": {
+        "absent_lifecycle_categories": [
+          "Document"
+        ],
+        "accessed_on": "2026-08-28",
+        "case_id": "exp-004",
+        "lifecycle_score": 9,
+        "publisher": "Dell Community",
+        "source_events": [
+          {
+            "category": "Test",
+            "event_number": 3,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Contradicts a simple log-entry-only explanation while leaving broader cached/controller state plausible.",
+            "locator": "`ghri-bh` follow-up dated 2012-05-01",
+            "paraphrase": "A reporter cleared the ordinary management logs and the degraded indication persisted.",
+            "stable_object_cross_reference": "Generic management log clear; not an exact existing Command execution"
+          },
+          {
+            "category": "Test",
+            "event_number": 4,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Re-evaluates current hardware instead of relying only on the displayed historical state.",
+            "locator": "`ghri-bh` resolution posts",
+            "paraphrase": "DSET freshly probed the server hardware during the successful run.",
+            "stable_object_cross_reference": "`test.management.event_log_freshness` as the closest current Test; DSET itself has no stable object"
+          }
+        ],
+        "title": "PE2900 backplane degraded",
+        "uncertainties": [
+          "DSET remains a vendor diagnostic collector phrase; research does not promote it into a current Command or new stable Tool."
+        ],
+        "url": "https://www.dell.com/community/en/conversations/poweredge-hddscsiraid/pe2900-backplane-degraded/647e8b20f4ccf8a8dede59e9"
+      },
+      "reviewed_domain_contract": {
+        "fingerprint_id": "fingerprint.management.stale_alert",
+        "public_candidate_fault_ids": [
+          "fault.management.alert.stale",
+          "fault.storage.backplane.path_failed"
+        ],
+        "repair_procedure_ids": [
+          "repair.management.clear_stale_alert_state"
+        ],
+        "required_diagnostic_ids": [
+          "test.management.event_log_freshness"
+        ],
+        "symptom_ids": [
+          "symptom.management.alert_persists"
+        ],
+        "validation_procedure_ids": [
+          "verify.management.alert_does_not_recur"
+        ]
+      },
+      "route_coverage": {
+        "first_route_id": "route.qc02.controlled_comparison_first.aaaaaa.change_history_first",
+        "last_route_id": "route.qc02.location_context_first.cccccc.current_state_first",
+        "route_count": 256,
+        "route_id_digest": "d38a7041dc51c3c4601d2ccd05b6fdff149fabd44a48ad489b20260b56b6ae3d"
+      },
+      "speaker_or_source": "story.character.hana_park",
+      "statement_id": "story.qc02.s10.entry.03",
+      "technical_subject_episode_id": "story.shift.qc02.10",
+      "text_id": "text.qc02.s10.entry.03",
+      "trace_id": "trace.text.qc02.s10.entry.03"
+    },
+    {
+      "authority_bounds": [
+        "PUBLIC_CONTEXT_ONLY"
+      ],
+      "bounded_claim": "Preserve Candidate uncertainty and SIFT limits.",
+      "episode_id": "story.shift.qc02.10",
+      "forbidden_overreach": [
+        "Story prose is descriptive only and cannot manufacture Evidence, Isolation, Repair, Verify, Documentation, closure, or Service Points.",
+        "Before Match authorization, do not assert the hidden Fault, required diagnostic, correct Repair, or result.",
+        "The source combines the fresh probe and state clear in one DSET event; do not claim it separately proved the candidate Test/Repair sequence.",
+        "Do not claim a prolonged nonrecurrence interval or that ordinary log clearing alone resolved the condition.",
+        "Preserve logs and current evidence before state-changing cleanup; alert clearance cannot prove a live FRU never existed."
+      ],
+      "label_id": "story.qc02.shift10.entry",
+      "outcome_scope": "ALL",
+      "phase": "CONTEXT",
+      "player_facing_text": "The live Candidates are a current backplane-path problem and obsolete management state. Search can organize what exists; it cannot recover state we erase before comparison.",
+      "research_source": {
+        "absent_lifecycle_categories": [
+          "Document"
+        ],
+        "accessed_on": "2026-08-28",
+        "case_id": "exp-004",
+        "lifecycle_score": 9,
+        "publisher": "Dell Community",
+        "source_events": [
+          {
+            "category": "Hypothesize",
+            "event_number": 2,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Preserves a live-FRU alternative while introducing a stale-state explanation.",
+            "locator": "Replies dated 2007-12-28 and 2012-05-01",
+            "paraphrase": "Contributors considered an actual backplane/interposer condition, old management state, firmware/software state, and the prior drive event.",
+            "stable_object_cross_reference": "`fault.storage.backplane.path_failed`; `fault.management.alert.stale`"
+          },
+          {
+            "category": "Test",
+            "event_number": 3,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Contradicts a simple log-entry-only explanation while leaving broader cached/controller state plausible.",
+            "locator": "`ghri-bh` follow-up dated 2012-05-01",
+            "paraphrase": "A reporter cleared the ordinary management logs and the degraded indication persisted.",
+            "stable_object_cross_reference": "Generic management log clear; not an exact existing Command execution"
+          },
+          {
+            "category": "Test",
+            "event_number": 4,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Re-evaluates current hardware instead of relying only on the displayed historical state.",
+            "locator": "`ghri-bh` resolution posts",
+            "paraphrase": "DSET freshly probed the server hardware during the successful run.",
+            "stable_object_cross_reference": "`test.management.event_log_freshness` as the closest current Test; DSET itself has no stable object"
+          }
+        ],
+        "title": "PE2900 backplane degraded",
+        "uncertainties": [
+          "DSET remains a vendor diagnostic collector phrase; research does not promote it into a current Command or new stable Tool."
+        ],
+        "url": "https://www.dell.com/community/en/conversations/poweredge-hddscsiraid/pe2900-backplane-degraded/647e8b20f4ccf8a8dede59e9"
+      },
+      "reviewed_domain_contract": {
+        "fingerprint_id": "fingerprint.management.stale_alert",
+        "public_candidate_fault_ids": [
+          "fault.management.alert.stale",
+          "fault.storage.backplane.path_failed"
+        ],
+        "repair_procedure_ids": [
+          "repair.management.clear_stale_alert_state"
+        ],
+        "required_diagnostic_ids": [
+          "test.management.event_log_freshness"
+        ],
+        "symptom_ids": [
+          "symptom.management.alert_persists"
+        ],
+        "validation_procedure_ids": [
+          "verify.management.alert_does_not_recur"
+        ]
+      },
+      "route_coverage": {
+        "first_route_id": "route.qc02.controlled_comparison_first.aaaaaa.change_history_first",
+        "last_route_id": "route.qc02.location_context_first.cccccc.current_state_first",
+        "route_count": 256,
+        "route_id_digest": "d38a7041dc51c3c4601d2ccd05b6fdff149fabd44a48ad489b20260b56b6ae3d"
+      },
+      "speaker_or_source": "story.character.jonah_reed",
+      "statement_id": "story.qc02.s10.entry.04",
+      "technical_subject_episode_id": "story.shift.qc02.10",
+      "text_id": "text.qc02.s10.entry.04",
+      "trace_id": "trace.text.qc02.s10.entry.04"
+    },
+    {
+      "authority_bounds": [
+        "PUBLIC_CONTEXT_ONLY"
+      ],
+      "bounded_claim": "Introduce the version-change and link-flap setup without declaring cause.",
+      "episode_id": "story.shift.qc02.10",
+      "forbidden_overreach": [
+        "Story prose is descriptive only and cannot manufacture Evidence, Isolation, Repair, Verify, Documentation, closure, or Service Points.",
+        "Before Match authorization, do not assert the hidden Fault, required diagnostic, correct Repair, or result.",
+        "The preserved clean interval is forty-five minutes; do not inflate it into a production-length soak.",
+        "The case reports management-visible link transitions, not packet-loss and switch-counter proof on every system.",
+        "Do not generalize one known-good firmware version or rollback order to another platform."
+      ],
+      "label_id": "story.qc02.shift10.follow_on",
+      "outcome_scope": "ALL",
+      "phase": "FOLLOW_ON",
+      "player_facing_text": "The next record pairs a management-firmware change with a network link that repeatedly drops and returns. The chronology is suspicious; it still needs corroboration before it can support cause.",
+      "research_source": {
+        "absent_lifecycle_categories": [
+          "Document"
+        ],
+        "accessed_on": "2026-08-28",
+        "case_id": "exp-005",
+        "lifecycle_score": 9,
+        "publisher": "Dell Community",
+        "source_events": [
+          {
+            "category": "Observe",
+            "event_number": 1,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Establishes firmware-change timing, fleet scope, and the link-flapping complaint.",
+            "locator": "Opening post",
+            "paraphrase": "Repeated NIC down/up messages began on multiple systems after installation of iDRAC 5.00.00.00.",
+            "stable_object_cross_reference": "`symptom.network.link_flapping`; `component.management.bmc`; `component.network.nic`"
+          },
+          {
+            "category": "Hypothesize",
+            "event_number": 2,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Prevents management messages alone from proving either a physical link fault or firmware regression.",
+            "locator": "Opening post and first responses",
+            "paraphrase": "Participants considered switch port, cable, NIC hardware, adapter firmware, and the iDRAC version as competing explanations.",
+            "stable_object_cross_reference": "`fault.network.cable.failed`; `fault.network.nic.failed`; `fault.firmware.version_set.incompatible`"
+          },
+          {
+            "category": "Test",
+            "event_number": 3,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Contradicts a simple NIC or cable defect.",
+            "locator": "`J0sephus1` post dated 2021-08-23",
+            "paraphrase": "A second reporter swapped hardware and cabling and found them operating correctly while the complaint remained associated with the affected version context.",
+            "stable_object_cross_reference": "Generic component/cable substitution; no exact current combined Test"
+          }
+        ],
+        "title": "iDRAC keeps messaging the NIC in slot 4 port 1 network link is started",
+        "uncertainties": [
+          "The vendor-specific iDRAC release remains source provenance; it is not a new stable firmware object or rule change."
+        ],
+        "url": "https://www.dell.com/community/en/conversations/poweredge-hardware-general/idrac-keeps-messaging-the-nic-in-slot-4-port-1-network-link-is-started/647f94b2f4ccf8a8de70eaff"
+      },
+      "reviewed_domain_contract": {
+        "fingerprint_id": "fingerprint.firmware.incompatible_version_set",
+        "public_candidate_fault_ids": [
+          "fault.firmware.version_set.incompatible",
+          "fault.network.cable.disconnected",
+          "fault.network.cable.failed",
+          "fault.network.nic.failed"
+        ],
+        "repair_procedure_ids": [
+          "repair.firmware.restore_compatible_versions"
+        ],
+        "required_diagnostic_ids": [
+          "test.firmware.version_compatibility",
+          "test.network.link_counter_soak"
+        ],
+        "symptom_ids": [
+          "symptom.network.link_flapping",
+          "symptom.network.no_link"
+        ],
+        "validation_procedure_ids": [
+          "verify.firmware.compatible_persistent"
+        ]
+      },
+      "route_coverage": {
+        "first_route_id": "route.qc02.controlled_comparison_first.aaaaaa.change_history_first",
+        "last_route_id": "route.qc02.location_context_first.cccccc.current_state_first",
+        "route_count": 256,
+        "route_id_digest": "d38a7041dc51c3c4601d2ccd05b6fdff149fabd44a48ad489b20260b56b6ae3d"
+      },
+      "speaker_or_source": "story.character.jonah_reed",
+      "statement_id": "story.qc02.s10.follow.01",
+      "technical_subject_episode_id": "story.shift.qc02.11",
+      "text_id": "text.qc02.s10.follow.01",
+      "trace_id": "trace.text.qc02.s10.follow.01"
+    },
+    {
+      "authority_bounds": [
+        "PUBLIC_CONTEXT_ONLY"
+      ],
+      "bounded_claim": "Establish the repeated link-flap behavior and temporal firmware context.",
+      "episode_id": "story.shift.qc02.11",
+      "forbidden_overreach": [
+        "Story prose is descriptive only and cannot manufacture Evidence, Isolation, Repair, Verify, Documentation, closure, or Service Points.",
+        "Before Match authorization, do not assert the hidden Fault, required diagnostic, correct Repair, or result.",
+        "The preserved clean interval is forty-five minutes; do not inflate it into a production-length soak.",
+        "The case reports management-visible link transitions, not packet-loss and switch-counter proof on every system.",
+        "Do not generalize one known-good firmware version or rollback order to another platform."
+      ],
+      "label_id": "story.qc02.shift11.entry",
+      "outcome_scope": "ALL",
+      "phase": "CONTEXT",
+      "player_facing_text": "Across several systems, a network port begins reporting repeated link-down and link-up events after a management-firmware change.",
+      "research_source": {
+        "absent_lifecycle_categories": [
+          "Document"
+        ],
+        "accessed_on": "2026-08-28",
+        "case_id": "exp-005",
+        "lifecycle_score": 9,
+        "publisher": "Dell Community",
+        "source_events": [
+          {
+            "category": "Observe",
+            "event_number": 1,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Establishes firmware-change timing, fleet scope, and the link-flapping complaint.",
+            "locator": "Opening post",
+            "paraphrase": "Repeated NIC down/up messages began on multiple systems after installation of iDRAC 5.00.00.00.",
+            "stable_object_cross_reference": "`symptom.network.link_flapping`; `component.management.bmc`; `component.network.nic`"
+          }
+        ],
+        "title": "iDRAC keeps messaging the NIC in slot 4 port 1 network link is started",
+        "uncertainties": [
+          "The vendor-specific iDRAC release remains source provenance; it is not a new stable firmware object or rule change."
+        ],
+        "url": "https://www.dell.com/community/en/conversations/poweredge-hardware-general/idrac-keeps-messaging-the-nic-in-slot-4-port-1-network-link-is-started/647f94b2f4ccf8a8de70eaff"
+      },
+      "reviewed_domain_contract": {
+        "fingerprint_id": "fingerprint.firmware.incompatible_version_set",
+        "public_candidate_fault_ids": [
+          "fault.firmware.version_set.incompatible",
+          "fault.network.cable.disconnected",
+          "fault.network.cable.failed",
+          "fault.network.nic.failed"
+        ],
+        "repair_procedure_ids": [
+          "repair.firmware.restore_compatible_versions"
+        ],
+        "required_diagnostic_ids": [
+          "test.firmware.version_compatibility",
+          "test.network.link_counter_soak"
+        ],
+        "symptom_ids": [
+          "symptom.network.link_flapping",
+          "symptom.network.no_link"
+        ],
+        "validation_procedure_ids": [
+          "verify.firmware.compatible_persistent"
+        ]
+      },
+      "route_coverage": {
+        "first_route_id": "route.qc02.controlled_comparison_first.aaaaaa.change_history_first",
+        "last_route_id": "route.qc02.location_context_first.cccccc.current_state_first",
+        "route_count": 256,
+        "route_id_digest": "d38a7041dc51c3c4601d2ccd05b6fdff149fabd44a48ad489b20260b56b6ae3d"
+      },
+      "speaker_or_source": "NARRATION",
+      "statement_id": "story.qc02.s11.entry.01",
+      "technical_subject_episode_id": "story.shift.qc02.11",
+      "text_id": "text.qc02.s11.entry.01",
+      "trace_id": "trace.text.qc02.s11.entry.01"
+    },
+    {
+      "authority_bounds": [
+        "PUBLIC_CONTEXT_ONLY"
+      ],
+      "bounded_claim": "Define link flapping without claiming an unobserved service consequence.",
+      "episode_id": "story.shift.qc02.11",
+      "forbidden_overreach": [
+        "Story prose is descriptive only and cannot manufacture Evidence, Isolation, Repair, Verify, Documentation, closure, or Service Points.",
+        "Before Match authorization, do not assert the hidden Fault, required diagnostic, correct Repair, or result.",
+        "The preserved clean interval is forty-five minutes; do not inflate it into a production-length soak.",
+        "The case reports management-visible link transitions, not packet-loss and switch-counter proof on every system.",
+        "Do not generalize one known-good firmware version or rollback order to another platform."
+      ],
+      "label_id": "story.qc02.shift11.entry",
+      "outcome_scope": "ALL",
+      "phase": "CONTEXT",
+      "player_facing_text": "Link is the physical connection state between interfaces. Flapping means it repeatedly drops and returns; each return can look healthy while the repeated transitions remain the symptom.",
+      "research_source": {
+        "absent_lifecycle_categories": [
+          "Document"
+        ],
+        "accessed_on": "2026-08-28",
+        "case_id": "exp-005",
+        "lifecycle_score": 9,
+        "publisher": "Dell Community",
+        "source_events": [
+          {
+            "category": "Observe",
+            "event_number": 1,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Establishes firmware-change timing, fleet scope, and the link-flapping complaint.",
+            "locator": "Opening post",
+            "paraphrase": "Repeated NIC down/up messages began on multiple systems after installation of iDRAC 5.00.00.00.",
+            "stable_object_cross_reference": "`symptom.network.link_flapping`; `component.management.bmc`; `component.network.nic`"
+          }
+        ],
+        "title": "iDRAC keeps messaging the NIC in slot 4 port 1 network link is started",
+        "uncertainties": [
+          "The vendor-specific iDRAC release remains source provenance; it is not a new stable firmware object or rule change."
+        ],
+        "url": "https://www.dell.com/community/en/conversations/poweredge-hardware-general/idrac-keeps-messaging-the-nic-in-slot-4-port-1-network-link-is-started/647f94b2f4ccf8a8de70eaff"
+      },
+      "reviewed_domain_contract": {
+        "fingerprint_id": "fingerprint.firmware.incompatible_version_set",
+        "public_candidate_fault_ids": [
+          "fault.firmware.version_set.incompatible",
+          "fault.network.cable.disconnected",
+          "fault.network.cable.failed",
+          "fault.network.nic.failed"
+        ],
+        "repair_procedure_ids": [
+          "repair.firmware.restore_compatible_versions"
+        ],
+        "required_diagnostic_ids": [
+          "test.firmware.version_compatibility",
+          "test.network.link_counter_soak"
+        ],
+        "symptom_ids": [
+          "symptom.network.link_flapping",
+          "symptom.network.no_link"
+        ],
+        "validation_procedure_ids": [
+          "verify.firmware.compatible_persistent"
+        ]
+      },
+      "route_coverage": {
+        "first_route_id": "route.qc02.controlled_comparison_first.aaaaaa.change_history_first",
+        "last_route_id": "route.qc02.location_context_first.cccccc.current_state_first",
+        "route_count": 256,
+        "route_id_digest": "d38a7041dc51c3c4601d2ccd05b6fdff149fabd44a48ad489b20260b56b6ae3d"
+      },
+      "speaker_or_source": "story.character.malik_okoye",
+      "statement_id": "story.qc02.s11.entry.02",
+      "technical_subject_episode_id": "story.shift.qc02.11",
+      "text_id": "text.qc02.s11.entry.02",
+      "trace_id": "trace.text.qc02.s11.entry.02"
+    },
+    {
+      "authority_bounds": [
+        "PUBLIC_CONTEXT_ONLY"
+      ],
+      "bounded_claim": "Explain temporal correlation, hardware elimination, and need for corroboration.",
+      "episode_id": "story.shift.qc02.11",
+      "forbidden_overreach": [
+        "Story prose is descriptive only and cannot manufacture Evidence, Isolation, Repair, Verify, Documentation, closure, or Service Points.",
+        "Before Match authorization, do not assert the hidden Fault, required diagnostic, correct Repair, or result.",
+        "The preserved clean interval is forty-five minutes; do not inflate it into a production-length soak.",
+        "The case reports management-visible link transitions, not packet-loss and switch-counter proof on every system.",
+        "Do not generalize one known-good firmware version or rollback order to another platform."
+      ],
+      "label_id": "story.qc02.shift11.entry",
+      "outcome_scope": "ALL",
+      "phase": "CONTEXT",
+      "player_facing_text": "At the public observatory, a cloud arriving after a lens change earns another observation, not a verdict on the lens. Here, cabling and interface hardware have been exchanged without carrying the behavior away, but version compatibility remains only a Candidate.",
+      "research_source": {
+        "absent_lifecycle_categories": [
+          "Document"
+        ],
+        "accessed_on": "2026-08-28",
+        "case_id": "exp-005",
+        "lifecycle_score": 9,
+        "publisher": "Dell Community",
+        "source_events": [
+          {
+            "category": "Hypothesize",
+            "event_number": 2,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Prevents management messages alone from proving either a physical link fault or firmware regression.",
+            "locator": "Opening post and first responses",
+            "paraphrase": "Participants considered switch port, cable, NIC hardware, adapter firmware, and the iDRAC version as competing explanations.",
+            "stable_object_cross_reference": "`fault.network.cable.failed`; `fault.network.nic.failed`; `fault.firmware.version_set.incompatible`"
+          },
+          {
+            "category": "Test",
+            "event_number": 3,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Contradicts a simple NIC or cable defect.",
+            "locator": "`J0sephus1` post dated 2021-08-23",
+            "paraphrase": "A second reporter swapped hardware and cabling and found them operating correctly while the complaint remained associated with the affected version context.",
+            "stable_object_cross_reference": "Generic component/cable substitution; no exact current combined Test"
+          }
+        ],
+        "title": "iDRAC keeps messaging the NIC in slot 4 port 1 network link is started",
+        "uncertainties": [
+          "The vendor-specific iDRAC release remains source provenance; it is not a new stable firmware object or rule change."
+        ],
+        "url": "https://www.dell.com/community/en/conversations/poweredge-hardware-general/idrac-keeps-messaging-the-nic-in-slot-4-port-1-network-link-is-started/647f94b2f4ccf8a8de70eaff"
+      },
+      "reviewed_domain_contract": {
+        "fingerprint_id": "fingerprint.firmware.incompatible_version_set",
+        "public_candidate_fault_ids": [
+          "fault.firmware.version_set.incompatible",
+          "fault.network.cable.disconnected",
+          "fault.network.cable.failed",
+          "fault.network.nic.failed"
+        ],
+        "repair_procedure_ids": [
+          "repair.firmware.restore_compatible_versions"
+        ],
+        "required_diagnostic_ids": [
+          "test.firmware.version_compatibility",
+          "test.network.link_counter_soak"
+        ],
+        "symptom_ids": [
+          "symptom.network.link_flapping",
+          "symptom.network.no_link"
+        ],
+        "validation_procedure_ids": [
+          "verify.firmware.compatible_persistent"
+        ]
+      },
+      "route_coverage": {
+        "first_route_id": "route.qc02.controlled_comparison_first.aaaaaa.change_history_first",
+        "last_route_id": "route.qc02.location_context_first.cccccc.current_state_first",
+        "route_count": 256,
+        "route_id_digest": "d38a7041dc51c3c4601d2ccd05b6fdff149fabd44a48ad489b20260b56b6ae3d"
+      },
+      "speaker_or_source": "story.character.sora_chen",
+      "statement_id": "story.qc02.s11.entry.03",
+      "technical_subject_episode_id": "story.shift.qc02.11",
+      "text_id": "text.qc02.s11.entry.03",
+      "trace_id": "trace.text.qc02.s11.entry.03"
+    },
+    {
+      "authority_bounds": [
+        "PUBLIC_CONTEXT_ONLY"
+      ],
+      "bounded_claim": "Explain the corroboration goal without naming either required diagnostic.",
+      "episode_id": "story.shift.qc02.11",
+      "forbidden_overreach": [
+        "Story prose is descriptive only and cannot manufacture Evidence, Isolation, Repair, Verify, Documentation, closure, or Service Points.",
+        "Before Match authorization, do not assert the hidden Fault, required diagnostic, correct Repair, or result.",
+        "The preserved clean interval is forty-five minutes; do not inflate it into a production-length soak.",
+        "The case reports management-visible link transitions, not packet-loss and switch-counter proof on every system.",
+        "Do not generalize one known-good firmware version or rollback order to another platform."
+      ],
+      "label_id": "story.qc02.shift11.entry",
+      "outcome_scope": "ALL",
+      "phase": "CONTEXT",
+      "player_facing_text": "A clean comparison keeps configured state, physical path, observation window, and result named. Chronology alone is not enough; the Match must find safe Evidence that makes one Candidate differ.",
+      "research_source": {
+        "absent_lifecycle_categories": [
+          "Document"
+        ],
+        "accessed_on": "2026-08-28",
+        "case_id": "exp-005",
+        "lifecycle_score": 9,
+        "publisher": "Dell Community",
+        "source_events": [
+          {
+            "category": "Test",
+            "event_number": 3,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Contradicts a simple NIC or cable defect.",
+            "locator": "`J0sephus1` post dated 2021-08-23",
+            "paraphrase": "A second reporter swapped hardware and cabling and found them operating correctly while the complaint remained associated with the affected version context.",
+            "stable_object_cross_reference": "Generic component/cable substitution; no exact current combined Test"
+          }
+        ],
+        "title": "iDRAC keeps messaging the NIC in slot 4 port 1 network link is started",
+        "uncertainties": [
+          "The vendor-specific iDRAC release remains source provenance; it is not a new stable firmware object or rule change."
+        ],
+        "url": "https://www.dell.com/community/en/conversations/poweredge-hardware-general/idrac-keeps-messaging-the-nic-in-slot-4-port-1-network-link-is-started/647f94b2f4ccf8a8de70eaff"
+      },
+      "reviewed_domain_contract": {
+        "fingerprint_id": "fingerprint.firmware.incompatible_version_set",
+        "public_candidate_fault_ids": [
+          "fault.firmware.version_set.incompatible",
+          "fault.network.cable.disconnected",
+          "fault.network.cable.failed",
+          "fault.network.nic.failed"
+        ],
+        "repair_procedure_ids": [
+          "repair.firmware.restore_compatible_versions"
+        ],
+        "required_diagnostic_ids": [
+          "test.firmware.version_compatibility",
+          "test.network.link_counter_soak"
+        ],
+        "symptom_ids": [
+          "symptom.network.link_flapping",
+          "symptom.network.no_link"
+        ],
+        "validation_procedure_ids": [
+          "verify.firmware.compatible_persistent"
+        ]
+      },
+      "route_coverage": {
+        "first_route_id": "route.qc02.controlled_comparison_first.aaaaaa.change_history_first",
+        "last_route_id": "route.qc02.location_context_first.cccccc.current_state_first",
+        "route_count": 256,
+        "route_id_digest": "d38a7041dc51c3c4601d2ccd05b6fdff149fabd44a48ad489b20260b56b6ae3d"
+      },
+      "speaker_or_source": "story.character.malik_okoye",
+      "statement_id": "story.qc02.s11.entry.04",
+      "technical_subject_episode_id": "story.shift.qc02.11",
+      "text_id": "text.qc02.s11.entry.04",
+      "trace_id": "trace.text.qc02.s11.entry.04"
+    },
+    {
+      "authority_bounds": [
+        "PUBLIC_CONTEXT_ONLY"
+      ],
+      "bounded_claim": "Transition to BMC recovery while distinguishing read-only recovery evidence, volatile image transfer, and the state-changing firmware write.",
+      "episode_id": "story.shift.qc02.11",
+      "forbidden_overreach": [
+        "Story prose is descriptive only and cannot manufacture Evidence, Isolation, Repair, Verify, Documentation, closure, or Service Points.",
+        "Before Match authorization, do not assert the hidden Fault, required diagnostic, correct Repair, or result.",
+        "The source is community evidence for one board/controller generation, not service authority or a portable recovery guide.",
+        "Do not publish raw commands, addresses, pin mappings, electrical details, flash offsets, or a TFTP Diagnostic Command.",
+        "Do not claim an independently preserved post-reset login, inventory, sensor, or persistence test beyond the reported acceptance boundary."
+      ],
+      "label_id": "story.qc02.shift11.follow_on",
+      "outcome_scope": "ALL",
+      "phase": "FOLLOW_ON",
+      "player_facing_text": "The final case sharpens the boundary: a recovery-capable layer can yield read-only Evidence, and an image can reach volatile memory without writing flash. The approved transfer-and-write flow belongs to Repair authority; writing firmware is the machine-state change.",
+      "research_source": {
+        "absent_lifecycle_categories": [],
+        "accessed_on": "2026-08-28",
+        "case_id": "exp-006",
+        "lifecycle_score": 10,
+        "publisher": "ServerBuilds.net Forums",
+        "source_events": [
+          {
+            "category": "Test",
+            "event_number": 3,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Shows that a recovery-capable controller layer remains alive.",
+            "locator": "Recovery narrative before image transfer",
+            "paraphrase": "The board-specific serial connection reached the BMC bootloader and produced console output.",
+            "stable_object_cross_reference": "`test.management.bmc_recovery_state` as the closest current Test; UART has no current stable object"
+          },
+          {
+            "category": "Test",
+            "event_number": 4,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Shows that the bootloader and recovery network path can receive an image without yet writing flash.",
+            "locator": "Recovery narrative, transfer stage",
+            "paraphrase": "The matching firmware image transferred into volatile memory over the isolated recovery network.",
+            "stable_object_cross_reference": "Generic recovery-state evidence; TFTP has no current stable Command"
+          },
+          {
+            "category": "Test",
+            "event_number": 5,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Distinguishes a valid matching image from a corrupt transfer or wrong-platform image.",
+            "locator": "Recovery narrative, validation stage",
+            "paraphrase": "Image-header, platform-identity, kernel, filesystem, and bootloader integrity checks passed before writing.",
+            "stable_object_cross_reference": "`test.management.bmc_recovery_state`; no exact current checksum/platform-check action"
+          },
+          {
+            "category": "Repair",
+            "event_number": 7,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Changes the isolated firmware state.",
+            "locator": "Recovery narrative, flash stage",
+            "paraphrase": "The validated board-specific image was written through the recovery environment.",
+            "stable_object_cross_reference": "`repair.management.recover_bmc_firmware` as a generic equivalent only"
+          }
+        ],
+        "title": "GA-7PESH2 BMC recovery",
+        "uncertainties": [
+          "UART and TFTP are preserved as source-specific interfaces/transports. Their exact Tool, Test, Command, and Protocol treatment is missing-domain candidate work, not a research-stage decision."
+        ],
+        "url": "https://forums.serverbuilds.net/t/ga-7pesh2-bmc-recovery/882"
+      },
+      "reviewed_domain_contract": {
+        "fingerprint_id": "fingerprint.management.corrupt_bmc_firmware",
+        "public_candidate_fault_ids": [
+          "fault.firmware.version_set.incompatible",
+          "fault.management.bmc_firmware.corrupt"
+        ],
+        "repair_procedure_ids": [
+          "repair.management.recover_bmc_firmware"
+        ],
+        "required_diagnostic_ids": [
+          "test.management.bmc_recovery_state"
+        ],
+        "symptom_ids": [
+          "symptom.management.bmc_not_responding",
+          "symptom.firmware.update_failed"
+        ],
+        "validation_procedure_ids": [
+          "verify.management.bmc_functional"
+        ]
+      },
+      "route_coverage": {
+        "first_route_id": "route.qc02.controlled_comparison_first.aaaaaa.change_history_first",
+        "last_route_id": "route.qc02.location_context_first.cccccc.current_state_first",
+        "route_count": 256,
+        "route_id_digest": "d38a7041dc51c3c4601d2ccd05b6fdff149fabd44a48ad489b20260b56b6ae3d"
+      },
+      "speaker_or_source": "story.character.sora_chen",
+      "statement_id": "story.qc02.s11.follow.01",
+      "technical_subject_episode_id": "story.shift.qc02.12",
+      "text_id": "text.qc02.s11.follow.01",
+      "trace_id": "trace.text.qc02.s11.follow.01"
+    },
+    {
+      "authority_bounds": [
+        "PUBLIC_CONTEXT_ONLY"
+      ],
+      "bounded_claim": "Establish the interrupted-update and unavailable-controller state.",
+      "episode_id": "story.shift.qc02.12",
+      "forbidden_overreach": [
+        "Story prose is descriptive only and cannot manufacture Evidence, Isolation, Repair, Verify, Documentation, closure, or Service Points.",
+        "Before Match authorization, do not assert the hidden Fault, required diagnostic, correct Repair, or result.",
+        "The source is community evidence for one board/controller generation, not service authority or a portable recovery guide.",
+        "Do not publish raw commands, addresses, pin mappings, electrical details, flash offsets, or a TFTP Diagnostic Command.",
+        "Do not claim an independently preserved post-reset login, inventory, sensor, or persistence test beyond the reported acceptance boundary."
+      ],
+      "label_id": "story.qc02.shift12.entry",
+      "outcome_scope": "ALL",
+      "phase": "CONTEXT",
+      "player_facing_text": "A baseboard management controller stopped responding after power was lost during a firmware operation. The rest of the board now waits behind a management path that cannot start normally.",
+      "research_source": {
+        "absent_lifecycle_categories": [],
+        "accessed_on": "2026-08-28",
+        "case_id": "exp-006",
+        "lifecycle_score": 10,
+        "publisher": "ServerBuilds.net Forums",
+        "source_events": [
+          {
+            "category": "Observe",
+            "event_number": 1,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Establishes a firmware-interruption event and loss of management/board function.",
+            "locator": "Opening paragraphs",
+            "paraphrase": "Power was lost during a BMC update; afterward the board was otherwise unresponsive while the BMC indicator remained lit.",
+            "stable_object_cross_reference": "`symptom.firmware.update_failed`; `symptom.management.bmc_not_responding`; `component.management.bmc`"
+          }
+        ],
+        "title": "GA-7PESH2 BMC recovery",
+        "uncertainties": [
+          "UART and TFTP are preserved as source-specific interfaces/transports. Their exact Tool, Test, Command, and Protocol treatment is missing-domain candidate work, not a research-stage decision."
+        ],
+        "url": "https://forums.serverbuilds.net/t/ga-7pesh2-bmc-recovery/882"
+      },
+      "reviewed_domain_contract": {
+        "fingerprint_id": "fingerprint.management.corrupt_bmc_firmware",
+        "public_candidate_fault_ids": [
+          "fault.firmware.version_set.incompatible",
+          "fault.management.bmc_firmware.corrupt"
+        ],
+        "repair_procedure_ids": [
+          "repair.management.recover_bmc_firmware"
+        ],
+        "required_diagnostic_ids": [
+          "test.management.bmc_recovery_state"
+        ],
+        "symptom_ids": [
+          "symptom.management.bmc_not_responding",
+          "symptom.firmware.update_failed"
+        ],
+        "validation_procedure_ids": [
+          "verify.management.bmc_functional"
+        ]
+      },
+      "route_coverage": {
+        "first_route_id": "route.qc02.controlled_comparison_first.aaaaaa.change_history_first",
+        "last_route_id": "route.qc02.location_context_first.cccccc.current_state_first",
+        "route_count": 256,
+        "route_id_digest": "d38a7041dc51c3c4601d2ccd05b6fdff149fabd44a48ad489b20260b56b6ae3d"
+      },
+      "speaker_or_source": "NARRATION",
+      "statement_id": "story.qc02.s12.entry.01",
+      "technical_subject_episode_id": "story.shift.qc02.12",
+      "text_id": "text.qc02.s12.entry.01",
+      "trace_id": "trace.text.qc02.s12.entry.01"
+    },
+    {
+      "authority_bounds": [
+        "PUBLIC_CONTEXT_ONLY"
+      ],
+      "bounded_claim": "Define the BMC only to the bounded source record and state the unresolved recovery-layer uncertainty without drawing a conclusion.",
+      "episode_id": "story.shift.qc02.12",
+      "forbidden_overreach": [
+        "Story prose is descriptive only and cannot manufacture Evidence, Isolation, Repair, Verify, Documentation, closure, or Service Points.",
+        "Before Match authorization, do not assert the hidden Fault, required diagnostic, correct Repair, or result.",
+        "The source is community evidence for one board/controller generation, not service authority or a portable recovery guide.",
+        "Do not publish raw commands, addresses, pin mappings, electrical details, flash offsets, or a TFTP Diagnostic Command.",
+        "Do not claim an independently preserved post-reset login, inventory, sensor, or persistence test beyond the reported acceptance boundary."
+      ],
+      "label_id": "story.qc02.shift12.entry",
+      "outcome_scope": "ALL",
+      "phase": "CONTEXT",
+      "player_facing_text": "The BMC is a management controller on the board. Here its indicator remains lit while the board otherwise does not respond. The team does not yet know whether any controller layer remains reachable.",
+      "research_source": {
+        "absent_lifecycle_categories": [],
+        "accessed_on": "2026-08-28",
+        "case_id": "exp-006",
+        "lifecycle_score": 10,
+        "publisher": "ServerBuilds.net Forums",
+        "source_events": [
+          {
+            "category": "Observe",
+            "event_number": 1,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Establishes a firmware-interruption event and loss of management/board function.",
+            "locator": "Opening paragraphs",
+            "paraphrase": "Power was lost during a BMC update; afterward the board was otherwise unresponsive while the BMC indicator remained lit.",
+            "stable_object_cross_reference": "`symptom.firmware.update_failed`; `symptom.management.bmc_not_responding`; `component.management.bmc`"
+          },
+          {
+            "category": "Hypothesize",
+            "event_number": 2,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Distinguishes corrupt application firmware from a completely unreachable controller or an unrelated board fault.",
+            "locator": "Opening framing and recovery setup",
+            "paraphrase": "The author treated the failed update as a corrupt BMC firmware state that might still be recoverable through the controller bootloader.",
+            "stable_object_cross_reference": "`fault.management.bmc_firmware.corrupt`"
+          }
+        ],
+        "title": "GA-7PESH2 BMC recovery",
+        "uncertainties": [
+          "UART and TFTP are preserved as source-specific interfaces/transports. Their exact Tool, Test, Command, and Protocol treatment is missing-domain candidate work, not a research-stage decision."
+        ],
+        "url": "https://forums.serverbuilds.net/t/ga-7pesh2-bmc-recovery/882"
+      },
+      "reviewed_domain_contract": {
+        "fingerprint_id": "fingerprint.management.corrupt_bmc_firmware",
+        "public_candidate_fault_ids": [
+          "fault.firmware.version_set.incompatible",
+          "fault.management.bmc_firmware.corrupt"
+        ],
+        "repair_procedure_ids": [
+          "repair.management.recover_bmc_firmware"
+        ],
+        "required_diagnostic_ids": [
+          "test.management.bmc_recovery_state"
+        ],
+        "symptom_ids": [
+          "symptom.management.bmc_not_responding",
+          "symptom.firmware.update_failed"
+        ],
+        "validation_procedure_ids": [
+          "verify.management.bmc_functional"
+        ]
+      },
+      "route_coverage": {
+        "first_route_id": "route.qc02.controlled_comparison_first.aaaaaa.change_history_first",
+        "last_route_id": "route.qc02.location_context_first.cccccc.current_state_first",
+        "route_count": 256,
+        "route_id_digest": "d38a7041dc51c3c4601d2ccd05b6fdff149fabd44a48ad489b20260b56b6ae3d"
+      },
+      "speaker_or_source": "story.character.jonah_reed",
+      "statement_id": "story.qc02.s12.entry.02",
+      "technical_subject_episode_id": "story.shift.qc02.12",
+      "text_id": "text.qc02.s12.entry.02",
+      "trace_id": "trace.text.qc02.s12.entry.02"
+    },
+    {
+      "authority_bounds": [
+        "PUBLIC_CONTEXT_ONLY"
+      ],
+      "bounded_claim": "Distinguish read-only recovery evidence, volatile image receipt, and the state-changing firmware write without naming the sole required diagnostic.",
+      "episode_id": "story.shift.qc02.12",
+      "forbidden_overreach": [
+        "Story prose is descriptive only and cannot manufacture Evidence, Isolation, Repair, Verify, Documentation, closure, or Service Points.",
+        "Before Match authorization, do not assert the hidden Fault, required diagnostic, correct Repair, or result.",
+        "The source is community evidence for one board/controller generation, not service authority or a portable recovery guide.",
+        "Do not publish raw commands, addresses, pin mappings, electrical details, flash offsets, or a TFTP Diagnostic Command.",
+        "Do not claim an independently preserved post-reset login, inventory, sensor, or persistence test beyond the reported acceptance boundary."
+      ],
+      "label_id": "story.qc02.shift12.entry",
+      "outcome_scope": "ALL",
+      "phase": "CONTEXT",
+      "player_facing_text": "A recoverable firmware state and a broader version-set problem remain different Candidates. Read-only state can gather Evidence; receiving an image does not by itself prove either Candidate. The bounded recovery flow remains Repair authority, and writing firmware is the state change. The Match determines which authorized observation applies.",
+      "research_source": {
+        "absent_lifecycle_categories": [],
+        "accessed_on": "2026-08-28",
+        "case_id": "exp-006",
+        "lifecycle_score": 10,
+        "publisher": "ServerBuilds.net Forums",
+        "source_events": [
+          {
+            "category": "Hypothesize",
+            "event_number": 2,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Distinguishes corrupt application firmware from a completely unreachable controller or an unrelated board fault.",
+            "locator": "Opening framing and recovery setup",
+            "paraphrase": "The author treated the failed update as a corrupt BMC firmware state that might still be recoverable through the controller bootloader.",
+            "stable_object_cross_reference": "`fault.management.bmc_firmware.corrupt`"
+          },
+          {
+            "category": "Test",
+            "event_number": 3,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Shows that a recovery-capable controller layer remains alive.",
+            "locator": "Recovery narrative before image transfer",
+            "paraphrase": "The board-specific serial connection reached the BMC bootloader and produced console output.",
+            "stable_object_cross_reference": "`test.management.bmc_recovery_state` as the closest current Test; UART has no current stable object"
+          },
+          {
+            "category": "Test",
+            "event_number": 4,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Shows that the bootloader and recovery network path can receive an image without yet writing flash.",
+            "locator": "Recovery narrative, transfer stage",
+            "paraphrase": "The matching firmware image transferred into volatile memory over the isolated recovery network.",
+            "stable_object_cross_reference": "Generic recovery-state evidence; TFTP has no current stable Command"
+          },
+          {
+            "category": "Test",
+            "event_number": 5,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Distinguishes a valid matching image from a corrupt transfer or wrong-platform image.",
+            "locator": "Recovery narrative, validation stage",
+            "paraphrase": "Image-header, platform-identity, kernel, filesystem, and bootloader integrity checks passed before writing.",
+            "stable_object_cross_reference": "`test.management.bmc_recovery_state`; no exact current checksum/platform-check action"
+          },
+          {
+            "category": "Repair",
+            "event_number": 7,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Changes the isolated firmware state.",
+            "locator": "Recovery narrative, flash stage",
+            "paraphrase": "The validated board-specific image was written through the recovery environment.",
+            "stable_object_cross_reference": "`repair.management.recover_bmc_firmware` as a generic equivalent only"
+          }
+        ],
+        "title": "GA-7PESH2 BMC recovery",
+        "uncertainties": [
+          "UART and TFTP are preserved as source-specific interfaces/transports. Their exact Tool, Test, Command, and Protocol treatment is missing-domain candidate work, not a research-stage decision."
+        ],
+        "url": "https://forums.serverbuilds.net/t/ga-7pesh2-bmc-recovery/882"
+      },
+      "reviewed_domain_contract": {
+        "fingerprint_id": "fingerprint.management.corrupt_bmc_firmware",
+        "public_candidate_fault_ids": [
+          "fault.firmware.version_set.incompatible",
+          "fault.management.bmc_firmware.corrupt"
+        ],
+        "repair_procedure_ids": [
+          "repair.management.recover_bmc_firmware"
+        ],
+        "required_diagnostic_ids": [
+          "test.management.bmc_recovery_state"
+        ],
+        "symptom_ids": [
+          "symptom.management.bmc_not_responding",
+          "symptom.firmware.update_failed"
+        ],
+        "validation_procedure_ids": [
+          "verify.management.bmc_functional"
+        ]
+      },
+      "route_coverage": {
+        "first_route_id": "route.qc02.controlled_comparison_first.aaaaaa.change_history_first",
+        "last_route_id": "route.qc02.location_context_first.cccccc.current_state_first",
+        "route_count": 256,
+        "route_id_digest": "d38a7041dc51c3c4601d2ccd05b6fdff149fabd44a48ad489b20260b56b6ae3d"
+      },
+      "speaker_or_source": "story.character.sora_chen",
+      "statement_id": "story.qc02.s12.entry.03",
+      "technical_subject_episode_id": "story.shift.qc02.12",
+      "text_id": "text.qc02.s12.entry.03",
+      "trace_id": "trace.text.qc02.s12.entry.03"
+    },
+    {
+      "authority_bounds": [
+        "PUBLIC_CONTEXT_ONLY"
+      ],
+      "bounded_claim": "Bound transport tooling by distinguishing volatile transfer from the later state-changing flash write while preserving platform-specific authority.",
+      "episode_id": "story.shift.qc02.12",
+      "forbidden_overreach": [
+        "Story prose is descriptive only and cannot manufacture Evidence, Isolation, Repair, Verify, Documentation, closure, or Service Points.",
+        "Before Match authorization, do not assert the hidden Fault, required diagnostic, correct Repair, or result.",
+        "The source is community evidence for one board/controller generation, not service authority or a portable recovery guide.",
+        "Do not publish raw commands, addresses, pin mappings, electrical details, flash offsets, or a TFTP Diagnostic Command.",
+        "Do not claim an independently preserved post-reset login, inventory, sensor, or persistence test beyond the reported acceptance boundary."
+      ],
+      "label_id": "story.qc02.shift12.entry",
+      "outcome_scope": "ALL",
+      "phase": "CONTEXT",
+      "player_facing_text": "An image-transfer tool is not diagnostic Evidence merely because it is available. Moving an image into volatile memory does not write flash, but it remains inside the authorized recovery flow; no generic command authorizes board-specific firmware work.",
+      "research_source": {
+        "absent_lifecycle_categories": [],
+        "accessed_on": "2026-08-28",
+        "case_id": "exp-006",
+        "lifecycle_score": 10,
+        "publisher": "ServerBuilds.net Forums",
+        "source_events": [
+          {
+            "category": "Test",
+            "event_number": 4,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Shows that the bootloader and recovery network path can receive an image without yet writing flash.",
+            "locator": "Recovery narrative, transfer stage",
+            "paraphrase": "The matching firmware image transferred into volatile memory over the isolated recovery network.",
+            "stable_object_cross_reference": "Generic recovery-state evidence; TFTP has no current stable Command"
+          },
+          {
+            "category": "Test",
+            "event_number": 5,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Distinguishes a valid matching image from a corrupt transfer or wrong-platform image.",
+            "locator": "Recovery narrative, validation stage",
+            "paraphrase": "Image-header, platform-identity, kernel, filesystem, and bootloader integrity checks passed before writing.",
+            "stable_object_cross_reference": "`test.management.bmc_recovery_state`; no exact current checksum/platform-check action"
+          },
+          {
+            "category": "Repair",
+            "event_number": 7,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Changes the isolated firmware state.",
+            "locator": "Recovery narrative, flash stage",
+            "paraphrase": "The validated board-specific image was written through the recovery environment.",
+            "stable_object_cross_reference": "`repair.management.recover_bmc_firmware` as a generic equivalent only"
+          }
+        ],
+        "title": "GA-7PESH2 BMC recovery",
+        "uncertainties": [
+          "UART and TFTP are preserved as source-specific interfaces/transports. Their exact Tool, Test, Command, and Protocol treatment is missing-domain candidate work, not a research-stage decision."
+        ],
+        "url": "https://forums.serverbuilds.net/t/ga-7pesh2-bmc-recovery/882"
+      },
+      "reviewed_domain_contract": {
+        "fingerprint_id": "fingerprint.management.corrupt_bmc_firmware",
+        "public_candidate_fault_ids": [
+          "fault.firmware.version_set.incompatible",
+          "fault.management.bmc_firmware.corrupt"
+        ],
+        "repair_procedure_ids": [
+          "repair.management.recover_bmc_firmware"
+        ],
+        "required_diagnostic_ids": [
+          "test.management.bmc_recovery_state"
+        ],
+        "symptom_ids": [
+          "symptom.management.bmc_not_responding",
+          "symptom.firmware.update_failed"
+        ],
+        "validation_procedure_ids": [
+          "verify.management.bmc_functional"
+        ]
+      },
+      "route_coverage": {
+        "first_route_id": "route.qc02.controlled_comparison_first.aaaaaa.change_history_first",
+        "last_route_id": "route.qc02.location_context_first.cccccc.current_state_first",
+        "route_count": 256,
+        "route_id_digest": "d38a7041dc51c3c4601d2ccd05b6fdff149fabd44a48ad489b20260b56b6ae3d"
+      },
+      "speaker_or_source": "story.character.jonah_reed",
+      "statement_id": "story.qc02.s12.entry.04",
+      "technical_subject_episode_id": "story.shift.qc02.12",
+      "text_id": "text.qc02.s12.entry.04",
+      "trace_id": "trace.text.qc02.s12.entry.04"
+    },
+    {
+      "authority_bounds": [
+        "PUBLIC_CONTEXT_ONLY"
+      ],
+      "bounded_claim": "Explain general firmware safety and separate post-repair acceptance without claiming the source proved persistence.",
+      "episode_id": "story.shift.qc02.12",
+      "forbidden_overreach": [
+        "Story prose is descriptive only and cannot manufacture Evidence, Isolation, Repair, Verify, Documentation, closure, or Service Points.",
+        "Before Match authorization, do not assert the hidden Fault, required diagnostic, correct Repair, or result.",
+        "The source is community evidence for one board/controller generation, not service authority or a portable recovery guide.",
+        "Do not publish raw commands, addresses, pin mappings, electrical details, flash offsets, or a TFTP Diagnostic Command.",
+        "Do not claim an independently preserved post-reset login, inventory, sensor, or persistence test beyond the reported acceptance boundary."
+      ],
+      "label_id": "story.qc02.shift12.entry",
+      "outcome_scope": "ALL",
+      "phase": "CONTEXT",
+      "player_facing_text": "Before any state-changing procedure: confirm exact platform identity, an authorized and integrity-checked artifact, protected configuration, and a fallback boundary. After any Repair, use a separate Verify against the defined acceptance boundary.",
+      "research_source": {
+        "absent_lifecycle_categories": [],
+        "accessed_on": "2026-08-28",
+        "case_id": "exp-006",
+        "lifecycle_score": 10,
+        "publisher": "ServerBuilds.net Forums",
+        "source_events": [
+          {
+            "category": "Test",
+            "event_number": 3,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Shows that a recovery-capable controller layer remains alive.",
+            "locator": "Recovery narrative before image transfer",
+            "paraphrase": "The board-specific serial connection reached the BMC bootloader and produced console output.",
+            "stable_object_cross_reference": "`test.management.bmc_recovery_state` as the closest current Test; UART has no current stable object"
+          },
+          {
+            "category": "Test",
+            "event_number": 5,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Distinguishes a valid matching image from a corrupt transfer or wrong-platform image.",
+            "locator": "Recovery narrative, validation stage",
+            "paraphrase": "Image-header, platform-identity, kernel, filesystem, and bootloader integrity checks passed before writing.",
+            "stable_object_cross_reference": "`test.management.bmc_recovery_state`; no exact current checksum/platform-check action"
+          },
+          {
+            "category": "Verify",
+            "event_number": 8,
+            "fidelity": "explicit",
+            "lifecycle_contribution": "Supports functional recovery at the level reported, without claiming an independently documented login, inventory, sensor check, or persistence test.",
+            "locator": "Opening success statement and closing acceptance statement",
+            "paraphrase": "The author reports that the recovery method worked and gives reset followed by normal BMC/board startup as its acceptance boundary.",
+            "stable_object_cross_reference": "`verify.management.bmc_functional` as the closest current validation"
+          }
+        ],
+        "title": "GA-7PESH2 BMC recovery",
+        "uncertainties": [
+          "UART and TFTP are preserved as source-specific interfaces/transports. Their exact Tool, Test, Command, and Protocol treatment is missing-domain candidate work, not a research-stage decision."
+        ],
+        "url": "https://forums.serverbuilds.net/t/ga-7pesh2-bmc-recovery/882"
+      },
+      "reviewed_domain_contract": {
+        "fingerprint_id": "fingerprint.management.corrupt_bmc_firmware",
+        "public_candidate_fault_ids": [
+          "fault.firmware.version_set.incompatible",
+          "fault.management.bmc_firmware.corrupt"
+        ],
+        "repair_procedure_ids": [
+          "repair.management.recover_bmc_firmware"
+        ],
+        "required_diagnostic_ids": [
+          "test.management.bmc_recovery_state"
+        ],
+        "symptom_ids": [
+          "symptom.management.bmc_not_responding",
+          "symptom.firmware.update_failed"
+        ],
+        "validation_procedure_ids": [
+          "verify.management.bmc_functional"
+        ]
+      },
+      "route_coverage": {
+        "first_route_id": "route.qc02.controlled_comparison_first.aaaaaa.change_history_first",
+        "last_route_id": "route.qc02.location_context_first.cccccc.current_state_first",
+        "route_count": 256,
+        "route_id_digest": "d38a7041dc51c3c4601d2ccd05b6fdff149fabd44a48ad489b20260b56b6ae3d"
+      },
+      "speaker_or_source": "story.character.sora_chen",
+      "statement_id": "story.qc02.s12.entry.05",
+      "technical_subject_episode_id": "story.shift.qc02.12",
+      "text_id": "text.qc02.s12.entry.05",
+      "trace_id": "trace.text.qc02.s12.entry.05"
+    }
+  ]
+}

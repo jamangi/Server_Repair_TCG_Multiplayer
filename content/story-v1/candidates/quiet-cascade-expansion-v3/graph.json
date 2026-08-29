@@ -1,0 +1,520 @@
+{
+  "graph_version": "story-expansion-graph-v1",
+  "pack_id": "story.campaign.quiet_cascade.v1",
+  "content_version": "quiet-cascade-expansion-v3",
+  "entry_node_id": "story.node.qc02.entry",
+  "nodes": [
+    {
+      "node_id": "story.node.qc02.entry",
+      "kind": "ENTRY",
+      "entry_labels": [
+        "story.qc02.entry"
+      ]
+    },
+    {
+      "node_id": "story.node.qc02.shift07.entry",
+      "kind": "CHOICE_AND_SETUP",
+      "entry_labels": [
+        "story.qc02.shift07.entry",
+        "story.qc02.shift07.frame.location_context_first",
+        "story.qc02.shift07.frame.controlled_comparison_first"
+      ]
+    },
+    {
+      "node_id": "story.node.qc02.shift07.match",
+      "kind": "MATCH",
+      "entry_labels": [
+        "story.qc02.shift07.match"
+      ],
+      "match_ref": "story.match.qc02.shift07.socket_contacts",
+      "pre_match_checkpoint_id": "checkpoint.qc02.shift07.pre_match",
+      "post_match_checkpoint_id": "checkpoint.qc02.shift07.post_match"
+    },
+    {
+      "node_id": "story.node.qc02.shift07.return",
+      "kind": "MATCH_RETURN",
+      "entry_labels": [
+        "story.qc02.shift07.return",
+        "story.qc02.shift07.success",
+        "story.qc02.shift07.abandon"
+      ],
+      "match_ref": "story.match.qc02.shift07.socket_contacts"
+    },
+    {
+      "node_id": "story.node.qc02.shift07.follow_on",
+      "kind": "FOLLOW_ON",
+      "entry_labels": [
+        "story.qc02.shift07.follow_on"
+      ]
+    },
+    {
+      "node_id": "story.node.qc02.shift08.entry",
+      "kind": "SETUP",
+      "entry_labels": [
+        "story.qc02.shift08.entry"
+      ]
+    },
+    {
+      "node_id": "story.node.qc02.shift08.match",
+      "kind": "MATCH",
+      "entry_labels": [
+        "story.qc02.shift08.match"
+      ],
+      "match_ref": "story.match.qc02.shift08.power_distribution",
+      "pre_match_checkpoint_id": "checkpoint.qc02.shift08.pre_match",
+      "post_match_checkpoint_id": "checkpoint.qc02.shift08.post_match"
+    },
+    {
+      "node_id": "story.node.qc02.shift08.return",
+      "kind": "MATCH_RETURN",
+      "entry_labels": [
+        "story.qc02.shift08.return",
+        "story.qc02.shift08.success",
+        "story.qc02.shift08.abandon"
+      ],
+      "match_ref": "story.match.qc02.shift08.power_distribution"
+    },
+    {
+      "node_id": "story.node.qc02.shift08.follow_on",
+      "kind": "FOLLOW_ON",
+      "entry_labels": [
+        "story.qc02.shift08.follow_on",
+        "story.qc02.shift08.initial_frame_ack"
+      ]
+    },
+    {
+      "node_id": "story.node.qc02.shift09.entry",
+      "kind": "SETUP",
+      "entry_labels": [
+        "story.qc02.shift09.entry"
+      ]
+    },
+    {
+      "node_id": "story.node.qc02.shift09.match",
+      "kind": "MATCH",
+      "entry_labels": [
+        "story.qc02.shift09.match"
+      ],
+      "match_ref": "story.match.qc02.shift09.predictive_drive",
+      "pre_match_checkpoint_id": "checkpoint.qc02.shift09.pre_match",
+      "post_match_checkpoint_id": "checkpoint.qc02.shift09.post_match"
+    },
+    {
+      "node_id": "story.node.qc02.shift09.return",
+      "kind": "MATCH_RETURN",
+      "entry_labels": [
+        "story.qc02.shift09.return",
+        "story.qc02.shift09.success",
+        "story.qc02.shift09.abandon"
+      ],
+      "match_ref": "story.match.qc02.shift09.predictive_drive"
+    },
+    {
+      "node_id": "story.node.qc02.shift09.follow_on",
+      "kind": "FOLLOW_ON",
+      "entry_labels": [
+        "story.qc02.shift09.follow_on"
+      ]
+    },
+    {
+      "node_id": "story.node.qc02.shift10.entry",
+      "kind": "CHOICE_AND_SETUP",
+      "entry_labels": [
+        "story.qc02.shift10.entry",
+        "story.qc02.shift10.frame.current_state_first",
+        "story.qc02.shift10.frame.change_history_first"
+      ]
+    },
+    {
+      "node_id": "story.node.qc02.shift10.match",
+      "kind": "MATCH",
+      "entry_labels": [
+        "story.qc02.shift10.match"
+      ],
+      "match_ref": "story.match.qc02.shift10.stale_alert",
+      "pre_match_checkpoint_id": "checkpoint.qc02.shift10.pre_match",
+      "post_match_checkpoint_id": "checkpoint.qc02.shift10.post_match"
+    },
+    {
+      "node_id": "story.node.qc02.shift10.return",
+      "kind": "MATCH_RETURN",
+      "entry_labels": [
+        "story.qc02.shift10.return",
+        "story.qc02.shift10.success",
+        "story.qc02.shift10.abandon"
+      ],
+      "match_ref": "story.match.qc02.shift10.stale_alert"
+    },
+    {
+      "node_id": "story.node.qc02.shift10.follow_on",
+      "kind": "FOLLOW_ON",
+      "entry_labels": [
+        "story.qc02.shift10.follow_on"
+      ]
+    },
+    {
+      "node_id": "story.node.qc02.shift11.entry",
+      "kind": "SETUP",
+      "entry_labels": [
+        "story.qc02.shift11.entry"
+      ]
+    },
+    {
+      "node_id": "story.node.qc02.shift11.match",
+      "kind": "MATCH",
+      "entry_labels": [
+        "story.qc02.shift11.match"
+      ],
+      "match_ref": "story.match.qc02.shift11.firmware_regression",
+      "pre_match_checkpoint_id": "checkpoint.qc02.shift11.pre_match",
+      "post_match_checkpoint_id": "checkpoint.qc02.shift11.post_match"
+    },
+    {
+      "node_id": "story.node.qc02.shift11.return",
+      "kind": "MATCH_RETURN",
+      "entry_labels": [
+        "story.qc02.shift11.return",
+        "story.qc02.shift11.success",
+        "story.qc02.shift11.abandon"
+      ],
+      "match_ref": "story.match.qc02.shift11.firmware_regression"
+    },
+    {
+      "node_id": "story.node.qc02.shift11.follow_on",
+      "kind": "FOLLOW_ON",
+      "entry_labels": [
+        "story.qc02.shift11.follow_on",
+        "story.qc02.shift11.change_frame_ack"
+      ]
+    },
+    {
+      "node_id": "story.node.qc02.shift12.entry",
+      "kind": "SETUP",
+      "entry_labels": [
+        "story.qc02.shift12.entry"
+      ]
+    },
+    {
+      "node_id": "story.node.qc02.shift12.match",
+      "kind": "MATCH",
+      "entry_labels": [
+        "story.qc02.shift12.match"
+      ],
+      "match_ref": "story.match.qc02.shift12.bmc_recovery",
+      "pre_match_checkpoint_id": "checkpoint.qc02.shift12.pre_match",
+      "post_match_checkpoint_id": "checkpoint.qc02.shift12.post_match"
+    },
+    {
+      "node_id": "story.node.qc02.shift12.return",
+      "kind": "MATCH_RETURN",
+      "entry_labels": [
+        "story.qc02.shift12.return",
+        "story.qc02.shift12.success",
+        "story.qc02.shift12.abandon"
+      ],
+      "match_ref": "story.match.qc02.shift12.bmc_recovery"
+    },
+    {
+      "node_id": "story.node.qc02.shift12.follow_on",
+      "kind": "FOLLOW_ON",
+      "entry_labels": [
+        "story.qc02.shift12.follow_on"
+      ]
+    },
+    {
+      "node_id": "story.node.qc02.ending.current_content",
+      "kind": "ENDING",
+      "entry_labels": [
+        "story.qc02.ending.current_content"
+      ],
+      "ending_id": "ending.qc02.current_content"
+    }
+  ],
+  "edges": [
+    {
+      "from": "story.node.qc02.entry",
+      "to": "story.node.qc02.shift07.entry",
+      "condition": {
+        "kind": "UNCONDITIONAL"
+      }
+    },
+    {
+      "from": "story.node.qc02.shift07.entry",
+      "to": "story.node.qc02.shift07.match",
+      "condition": {
+        "kind": "CHOICE_IS",
+        "choice_id": "choice.qc02.initial_evidence_frame",
+        "option_id": "location_context_first",
+        "branch_label": "story.qc02.shift07.frame.location_context_first"
+      }
+    },
+    {
+      "from": "story.node.qc02.shift07.entry",
+      "to": "story.node.qc02.shift07.match",
+      "condition": {
+        "kind": "CHOICE_IS",
+        "choice_id": "choice.qc02.initial_evidence_frame",
+        "option_id": "controlled_comparison_first",
+        "branch_label": "story.qc02.shift07.frame.controlled_comparison_first"
+      }
+    },
+    {
+      "from": "story.node.qc02.shift07.match",
+      "to": "story.node.qc02.shift07.return",
+      "condition": {
+        "kind": "VALID_TERMINAL_MATCH_RESULT",
+        "match_ref": "story.match.qc02.shift07.socket_contacts"
+      }
+    },
+    {
+      "from": "story.node.qc02.shift07.return",
+      "to": "story.node.qc02.shift07.follow_on",
+      "condition": {
+        "kind": "MATCH_COMPLETION",
+        "match_ref": "story.match.qc02.shift07.socket_contacts",
+        "completion": "COMPLETED",
+        "branch_label": "story.qc02.shift07.success"
+      }
+    },
+    {
+      "from": "story.node.qc02.shift07.return",
+      "to": "story.node.qc02.shift07.follow_on",
+      "condition": {
+        "kind": "MATCH_COMPLETION",
+        "match_ref": "story.match.qc02.shift07.socket_contacts",
+        "completion": "ABANDONED",
+        "branch_label": "story.qc02.shift07.abandon"
+      }
+    },
+    {
+      "from": "story.node.qc02.shift07.follow_on",
+      "to": "story.node.qc02.shift08.entry",
+      "condition": {
+        "kind": "UNCONDITIONAL"
+      }
+    },
+    {
+      "from": "story.node.qc02.shift08.entry",
+      "to": "story.node.qc02.shift08.match",
+      "condition": {
+        "kind": "UNCONDITIONAL"
+      }
+    },
+    {
+      "from": "story.node.qc02.shift08.match",
+      "to": "story.node.qc02.shift08.return",
+      "condition": {
+        "kind": "VALID_TERMINAL_MATCH_RESULT",
+        "match_ref": "story.match.qc02.shift08.power_distribution"
+      }
+    },
+    {
+      "from": "story.node.qc02.shift08.return",
+      "to": "story.node.qc02.shift08.follow_on",
+      "condition": {
+        "kind": "MATCH_COMPLETION",
+        "match_ref": "story.match.qc02.shift08.power_distribution",
+        "completion": "COMPLETED",
+        "branch_label": "story.qc02.shift08.success"
+      }
+    },
+    {
+      "from": "story.node.qc02.shift08.return",
+      "to": "story.node.qc02.shift08.follow_on",
+      "condition": {
+        "kind": "MATCH_COMPLETION",
+        "match_ref": "story.match.qc02.shift08.power_distribution",
+        "completion": "ABANDONED",
+        "branch_label": "story.qc02.shift08.abandon"
+      }
+    },
+    {
+      "from": "story.node.qc02.shift08.follow_on",
+      "to": "story.node.qc02.shift09.entry",
+      "condition": {
+        "kind": "UNCONDITIONAL"
+      }
+    },
+    {
+      "from": "story.node.qc02.shift09.entry",
+      "to": "story.node.qc02.shift09.match",
+      "condition": {
+        "kind": "UNCONDITIONAL"
+      }
+    },
+    {
+      "from": "story.node.qc02.shift09.match",
+      "to": "story.node.qc02.shift09.return",
+      "condition": {
+        "kind": "VALID_TERMINAL_MATCH_RESULT",
+        "match_ref": "story.match.qc02.shift09.predictive_drive"
+      }
+    },
+    {
+      "from": "story.node.qc02.shift09.return",
+      "to": "story.node.qc02.shift09.follow_on",
+      "condition": {
+        "kind": "MATCH_COMPLETION",
+        "match_ref": "story.match.qc02.shift09.predictive_drive",
+        "completion": "COMPLETED",
+        "branch_label": "story.qc02.shift09.success"
+      }
+    },
+    {
+      "from": "story.node.qc02.shift09.return",
+      "to": "story.node.qc02.shift09.follow_on",
+      "condition": {
+        "kind": "MATCH_COMPLETION",
+        "match_ref": "story.match.qc02.shift09.predictive_drive",
+        "completion": "ABANDONED",
+        "branch_label": "story.qc02.shift09.abandon"
+      }
+    },
+    {
+      "from": "story.node.qc02.shift09.follow_on",
+      "to": "story.node.qc02.shift10.entry",
+      "condition": {
+        "kind": "UNCONDITIONAL"
+      }
+    },
+    {
+      "from": "story.node.qc02.shift10.entry",
+      "to": "story.node.qc02.shift10.match",
+      "condition": {
+        "kind": "CHOICE_IS",
+        "choice_id": "choice.qc02.change_evidence_frame",
+        "option_id": "current_state_first",
+        "branch_label": "story.qc02.shift10.frame.current_state_first"
+      }
+    },
+    {
+      "from": "story.node.qc02.shift10.entry",
+      "to": "story.node.qc02.shift10.match",
+      "condition": {
+        "kind": "CHOICE_IS",
+        "choice_id": "choice.qc02.change_evidence_frame",
+        "option_id": "change_history_first",
+        "branch_label": "story.qc02.shift10.frame.change_history_first"
+      }
+    },
+    {
+      "from": "story.node.qc02.shift10.match",
+      "to": "story.node.qc02.shift10.return",
+      "condition": {
+        "kind": "VALID_TERMINAL_MATCH_RESULT",
+        "match_ref": "story.match.qc02.shift10.stale_alert"
+      }
+    },
+    {
+      "from": "story.node.qc02.shift10.return",
+      "to": "story.node.qc02.shift10.follow_on",
+      "condition": {
+        "kind": "MATCH_COMPLETION",
+        "match_ref": "story.match.qc02.shift10.stale_alert",
+        "completion": "COMPLETED",
+        "branch_label": "story.qc02.shift10.success"
+      }
+    },
+    {
+      "from": "story.node.qc02.shift10.return",
+      "to": "story.node.qc02.shift10.follow_on",
+      "condition": {
+        "kind": "MATCH_COMPLETION",
+        "match_ref": "story.match.qc02.shift10.stale_alert",
+        "completion": "ABANDONED",
+        "branch_label": "story.qc02.shift10.abandon"
+      }
+    },
+    {
+      "from": "story.node.qc02.shift10.follow_on",
+      "to": "story.node.qc02.shift11.entry",
+      "condition": {
+        "kind": "UNCONDITIONAL"
+      }
+    },
+    {
+      "from": "story.node.qc02.shift11.entry",
+      "to": "story.node.qc02.shift11.match",
+      "condition": {
+        "kind": "UNCONDITIONAL"
+      }
+    },
+    {
+      "from": "story.node.qc02.shift11.match",
+      "to": "story.node.qc02.shift11.return",
+      "condition": {
+        "kind": "VALID_TERMINAL_MATCH_RESULT",
+        "match_ref": "story.match.qc02.shift11.firmware_regression"
+      }
+    },
+    {
+      "from": "story.node.qc02.shift11.return",
+      "to": "story.node.qc02.shift11.follow_on",
+      "condition": {
+        "kind": "MATCH_COMPLETION",
+        "match_ref": "story.match.qc02.shift11.firmware_regression",
+        "completion": "COMPLETED",
+        "branch_label": "story.qc02.shift11.success"
+      }
+    },
+    {
+      "from": "story.node.qc02.shift11.return",
+      "to": "story.node.qc02.shift11.follow_on",
+      "condition": {
+        "kind": "MATCH_COMPLETION",
+        "match_ref": "story.match.qc02.shift11.firmware_regression",
+        "completion": "ABANDONED",
+        "branch_label": "story.qc02.shift11.abandon"
+      }
+    },
+    {
+      "from": "story.node.qc02.shift11.follow_on",
+      "to": "story.node.qc02.shift12.entry",
+      "condition": {
+        "kind": "UNCONDITIONAL"
+      }
+    },
+    {
+      "from": "story.node.qc02.shift12.entry",
+      "to": "story.node.qc02.shift12.match",
+      "condition": {
+        "kind": "UNCONDITIONAL"
+      }
+    },
+    {
+      "from": "story.node.qc02.shift12.match",
+      "to": "story.node.qc02.shift12.return",
+      "condition": {
+        "kind": "VALID_TERMINAL_MATCH_RESULT",
+        "match_ref": "story.match.qc02.shift12.bmc_recovery"
+      }
+    },
+    {
+      "from": "story.node.qc02.shift12.return",
+      "to": "story.node.qc02.shift12.follow_on",
+      "condition": {
+        "kind": "MATCH_COMPLETION",
+        "match_ref": "story.match.qc02.shift12.bmc_recovery",
+        "completion": "COMPLETED",
+        "branch_label": "story.qc02.shift12.success"
+      }
+    },
+    {
+      "from": "story.node.qc02.shift12.return",
+      "to": "story.node.qc02.shift12.follow_on",
+      "condition": {
+        "kind": "MATCH_COMPLETION",
+        "match_ref": "story.match.qc02.shift12.bmc_recovery",
+        "completion": "ABANDONED",
+        "branch_label": "story.qc02.shift12.abandon"
+      }
+    },
+    {
+      "from": "story.node.qc02.shift12.follow_on",
+      "to": "story.node.qc02.ending.current_content",
+      "condition": {
+        "kind": "UNCONDITIONAL"
+      }
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # Quiet Cascade continuity ledger
 
-Status: **production ledger for `quiet-cascade-characterization-v2`; v1 retained for migration history**
+Status: **production continuity ledger for `quiet-cascade-expansion-v3`; v1 and characterization-v2 retained for migration history**
 
 This ledger separates facts that every route may rely on from facts that exist only after a remembered choice or normalized Match return. It is not an author-only solution ledger and intentionally contains no hidden Fault, Evidence-outcome, or required-action disclosure.
 
@@ -94,3 +94,11 @@ No additional character is introduced. The seven used characters are all establi
 `quiet-cascade-content-v1` is accepted only as the reviewed predecessor of `quiet-cascade-characterization-v2` for the same `story.campaign.quiet_cascade.v1` pack. Migration restores and verifies the v1 checkpoint and digest against a v1 manifest, preserves the checkpoint ID, variables, choices, points, branch history, Match results, pending Match/result, and ending marker, then changes the content version and computes a new digest. The runtime validates the result against the successor pack before persistence.
 
 This is an explicit restart at the same durable boundary, never a claim that an active Match or in-memory scene survived. Scene, pre-Match, pending-result, post-Match, ending, reload/route-leave, and import/export tests cover the path. A tampered digest, unknown predecessor, altered pack ID, or unstable authored ID requires recovery instead of best-effort conversion.
+
+## Expansion-v3 continuity
+
+`quiet-cascade-expansion-v3` is an additive successor under the same pack identity. The live pack retains every campaign-one script as JSON-equivalent content except the reviewed terminal transition: each of the six ending checkpoint variants keeps its stable checkpoint ID but now persists and resumes at `story.qc02.entry`. The old ending remains losslessly identifiable from the preserved Service Point band plus the exact outcomes-first or uncertainty-first checkpoint variant; its `completed_ending_id` is cleared only because campaign one is no longer terminal.
+
+Migration accepts either the complete v1→v2→v3 chain or the direct reviewed v2→v3 edge. Each predecessor checkpoint is restored against its own complete source bundle before re-digesting. The transition retains choices, values, points, branch history, six accepted Match results, pending boundary/result state, and replay eligibility; it adds only the two QC02 variable defaults and never invents a Match result or reward. Unknown versions, cross-pack records, altered digests, or unauthored checkpoint tuples fail closed.
+
+Shifts 7–12 add one real Match and one Ticket each. Their two remembered choices reconverge, their completed/abandoned returns remain separate, and their final state is the single honest `ending.qc02.current_content`. All twelve completed episodes expose reviewed isolated replay entries. Review, interruption, import/export, and reload preserve the same authority boundary: active engine state is never persisted, canonical results are accepted once, and practice results never write canonical Story or Profile state.

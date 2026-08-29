@@ -12,13 +12,13 @@ import {
   createDiagnosisV2Catalogs,
 } from '../viewer/generated/play/src/builder/diagnosis-v2.mjs';
 import {
-  TASK_014_BUILDER_VERSION,
-  TASK_014_CARD_CATALOG_VERSION,
-  TASK_014_CONFIGURATION_VERSION,
-  TASK_014_DOMAIN_CONTENT_VERSION,
-  TASK_014_TICKET_CONTENT_VERSION,
-  buildTicketsV3,
-  createTask014Catalogs,
+  TASK_042_BUILDER_VERSION,
+  TASK_042_CARD_CATALOG_VERSION,
+  TASK_042_CONFIGURATION_VERSION,
+  TASK_042_DOMAIN_CONTENT_VERSION,
+  TASK_042_TICKET_CONTENT_VERSION,
+  buildTicketsV4,
+  createTask042Catalogs,
 } from '../viewer/generated/play/src/builder/task-014.mjs';
 import {
   createClientDataContext,
@@ -474,7 +474,7 @@ test('Worker result summaries have the exact strict client contract and classify
   assert.equal(Object.hasOwn(summary, 'completed_at'), false);
 });
 
-test('the Worker-derived 1/10 Ticket configurations preserve exact resources and build unique-first batches', async () => {
+test('the Worker-derived TASK-042 1/10 Ticket configurations preserve exact resources and build unique-first batches', async () => {
   const worker = await readText(WORKER_PATH);
   const bounds = extractNamedFunction(worker, 'bounds');
   const compactCounts = extractNamedFunction(worker, 'compactCounts');
@@ -484,21 +484,21 @@ test('the Worker-derived 1/10 Ticket configurations preserve exact resources and
     'seed',
     'responseCardDefinitionIds',
     'loadedCatalogs',
-    'TASK_014_CONFIGURATION_VERSION',
-    'TASK_014_BUILDER_VERSION',
-    'TASK_014_TICKET_CONTENT_VERSION',
-    'TASK_014_DOMAIN_CONTENT_VERSION',
-    'TASK_014_CARD_CATALOG_VERSION',
+    'TASK_042_CONFIGURATION_VERSION',
+    'TASK_042_BUILDER_VERSION',
+    'TASK_042_TICKET_CONTENT_VERSION',
+    'TASK_042_DOMAIN_CONTENT_VERSION',
+    'TASK_042_CARD_CATALOG_VERSION',
     `'use strict'; ${bounds}; ${compactCounts}; ${builderConfiguration}; return builderConfiguration(ticketCount, seed, responseCardDefinitionIds, loadedCatalogs);`,
   );
   const [cardCatalog, deckCatalog, domainCatalog, parts, coverage] = await Promise.all([
-    readJson('content/gameplay-v1/card-catalog-v3.json'),
-    readJson('content/gameplay-v1/decks-v3.json'),
-    readJson('content/gameplay-v1/domain-snapshot-v2.json'),
-    readJson('content/gameplay-v1/task-014-parts.json'),
-    readJson('content/gameplay-v1/playable-coverage-v3.json'),
+    readJson('content/gameplay-v1/card-catalog-v4.json'),
+    readJson('content/gameplay-v1/decks-v4.json'),
+    readJson('content/gameplay-v1/domain-snapshot-v3.json'),
+    readJson('content/gameplay-v1/task-042-parts.json'),
+    readJson('content/gameplay-v1/playable-coverage-v4.json'),
   ]);
-  const expandedCatalogs = createTask014Catalogs({ cards: cardCatalog, decks: deckCatalog, domain: domainCatalog, parts, coverage });
+  const expandedCatalogs = createTask042Catalogs({ cards: cardCatalog, decks: deckCatalog, domain: domainCatalog, parts, coverage });
   const starterDeck = expandedCatalogs.decks.decks.find((deck) => deck.id === 'deck.core.multisystem_response_v3');
 
   for (const ticketCount of [1, 10]) {
@@ -507,20 +507,20 @@ test('the Worker-derived 1/10 Ticket configurations preserve exact resources and
       `task-010-worker-${ticketCount}`,
       starterDeck.card_definition_ids,
       expandedCatalogs,
-      TASK_014_CONFIGURATION_VERSION,
-      TASK_014_BUILDER_VERSION,
-      TASK_014_TICKET_CONTENT_VERSION,
-      TASK_014_DOMAIN_CONTENT_VERSION,
-      TASK_014_CARD_CATALOG_VERSION,
+      TASK_042_CONFIGURATION_VERSION,
+      TASK_042_BUILDER_VERSION,
+      TASK_042_TICKET_CONTENT_VERSION,
+      TASK_042_DOMAIN_CONTENT_VERSION,
+      TASK_042_CARD_CATALOG_VERSION,
     );
-    assert.equal(configuration.configuration_version, TASK_014_CONFIGURATION_VERSION);
+    assert.equal(configuration.configuration_version, TASK_042_CONFIGURATION_VERSION);
     assert.equal(configuration.scenario_or_mode_context, 'TRAINING');
     assert.equal(configuration.requested_ticket_count, ticketCount);
     assert.equal(configuration.allow_duplicate_causal_fingerprints, true);
     assert.equal(configuration.diagnostic_card_definition_ids.length, 50);
     assert.equal(Object.values(configuration.available_card_definition_counts).reduce((sum, count) => sum + count, 0), 30);
     assert.equal(configuration.progressive_difficulty_profile.bands[0].end_generated_index, ticketCount - 1);
-    const result = buildTicketsV3({ configuration, catalogs: expandedCatalogs });
+    const result = buildTicketsV4({ configuration, catalogs: expandedCatalogs });
     assert.equal(result.status, 'SUCCESS');
     const selected = result.attempts.find((attempt) => attempt.attempt_id === result.selected_attempt_id);
     assert.equal(selected.ticket_snapshots.length, ticketCount);
@@ -542,12 +542,18 @@ test('the generated Pages stage is a strict allowlist with no Node-only or serve
     'domain-snapshot.json',
     'ticket-templates.json',
     'task-014-parts.json',
+    'task-042-parts.json',
     'domain-snapshot-v2.json',
+    'domain-snapshot-v3.json',
     'card-catalog-v3.json',
+    'card-catalog-v4.json',
     'decks-v3.json',
+    'decks-v4.json',
     'playable-coverage-v3.json',
+    'playable-coverage-v4.json',
     'technical-action-glossary-v1.json',
     'technical-copy-review-v1.json',
+    'technical-copy-review-v2.json',
     'tutorials-v1.json',
   ]);
   const forbiddenSegments = new Set([

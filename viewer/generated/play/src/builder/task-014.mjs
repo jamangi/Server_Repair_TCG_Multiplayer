@@ -10,6 +10,14 @@ export const TASK_014_CARD_CATALOG_VERSION = 'core-card-catalog-technical-copy-v
 export const TASK_014_DECK_CATALOG_VERSION = 'core-response-decks-v4';
 export const TASK_014_PART_CATALOG_VERSION = 'ticket-parts-v1';
 export const TASK_014_STARTER_DECK_ID = 'deck.core.multisystem_response_v3';
+export const TASK_042_BUILDER_VERSION = 'ticket-builder-v4';
+export const TASK_042_CONFIGURATION_VERSION = 'ticket-builder-v4';
+export const TASK_042_TICKET_CONTENT_VERSION = 'core-ticket-parts-v4';
+export const TASK_042_DOMAIN_CONTENT_VERSION = 'core-domain-snapshot-story-expansion-v4';
+export const TASK_042_CARD_CATALOG_VERSION = 'core-card-catalog-story-expansion-v5';
+export const TASK_042_DECK_CATALOG_VERSION = 'core-response-decks-v5';
+export const TASK_042_PART_CATALOG_VERSION = 'ticket-parts-v2';
+export const TASK_042_RESPONSE_DECK_ID = 'deck.story.expansion_response_v1';
 
 const clone = (value) => structuredClone(value);
 const stableCompare = (left, right) => (left < right ? -1 : left > right ? 1 : 0);
@@ -224,7 +232,9 @@ function assembleTicket({ root, configuration, attemptId, ordinal, catalogs }) {
   const isolationPlan = choosePart(parts.isolation_plan_parts, blueprint.part_id, configuration.seed, `${namespace}.isolation`);
   const repairPlan = choosePart(parts.repair_plan_parts, blueprint.part_id, configuration.seed, `${namespace}.repair`);
   const verifyPlan = choosePart(parts.verification_plan_parts, blueprint.part_id, configuration.seed, `${namespace}.verify`);
-  const teaching = parts.teaching_parts.find((entry) => entry.subsystem === root.subsystem);
+  const teaching = root.teaching_part_id
+    ? parts.teaching_parts.find((entry) => entry.part_id === root.teaching_part_id)
+    : parts.teaching_parts.find((entry) => entry.subsystem === root.subsystem);
   const closure = parts.closure_parts[0];
   if (!candidatePart || !teaching || !closure) throw new Error(`${root.fingerprint_id} lacks a required shared authored part.`);
 
@@ -352,16 +362,18 @@ function assembleTicket({ root, configuration, attemptId, ordinal, catalogs }) {
       required_verification_requirement_ids: verificationRequirements.map((entry) => entry.requirement_id),
     },
     generation_provenance: {
-      generator_version: TASK_014_BUILDER_VERSION,
-      content_version: TASK_014_TICKET_CONTENT_VERSION,
-      domain_content_version: TASK_014_DOMAIN_CONTENT_VERSION,
-      card_catalog_version: TASK_014_CARD_CATALOG_VERSION,
-      configuration_version: TASK_014_CONFIGURATION_VERSION,
+      generator_version: parts.generator_version,
+      content_version: parts.ticket_content_version,
+      domain_content_version: parts.domain_content_version,
+      card_catalog_version: parts.card_catalog_version,
+      configuration_version: parts.configuration_version,
       configuration_id: configuration.id,
       attempt_id: attemptId,
       seed: configuration.seed,
       generation_index: configuration.generation_index_start + ordinal,
-      template_id: 'assembly.task_014.parts_v1',
+      template_id: parts.part_catalog_version === TASK_014_PART_CATALOG_VERSION
+        ? 'assembly.task_014.parts_v1'
+        : 'assembly.task_042.parts_v2',
       fallback_attempt_id: null,
       part_ids: partIds,
       fingerprint_id: root.fingerprint_id,
@@ -442,12 +454,13 @@ function scheduleRoots(eligible, requestedCount, available, seed, attemptId) {
 
 function validateConfiguration(configuration, catalogs) {
   const errors = [];
+  const { parts } = catalogs;
   const versions = [
-    ['configuration_version', TASK_014_CONFIGURATION_VERSION],
-    ['generator_version', TASK_014_BUILDER_VERSION],
-    ['content_version', TASK_014_TICKET_CONTENT_VERSION],
-    ['domain_content_version', TASK_014_DOMAIN_CONTENT_VERSION],
-    ['card_catalog_version', TASK_014_CARD_CATALOG_VERSION],
+    ['configuration_version', parts.configuration_version],
+    ['generator_version', parts.generator_version],
+    ['content_version', parts.ticket_content_version],
+    ['domain_content_version', parts.domain_content_version],
+    ['card_catalog_version', parts.card_catalog_version],
   ];
   for (const [field, expected] of versions) {
     if (configuration?.[field] !== expected) errors.push(diagnostic('VERSION_MISMATCH', 'VERSION', `${field} must equal ${expected}.`));
@@ -525,6 +538,39 @@ export function createTask014Catalogs({ cards, decks, domain, parts, coverage })
     parts: clone(parts),
     coverage: clone(coverage),
     ticketContent: { ticket_content_version: TASK_014_TICKET_CONTENT_VERSION, part_catalog_version: TASK_014_PART_CATALOG_VERSION },
+    engineCatalogs: { cards: clone(cards), decks: clone(decks), domain: clone(domain), content_version: domain.domain_content_version },
+    rulesetVersion: TASK_014_RULESET_VERSION,
+  };
+}
+
+export function createTask042Catalogs({ cards, decks, domain, parts, coverage }) {
+  if (cards.card_catalog_version !== TASK_042_CARD_CATALOG_VERSION
+      || decks.deck_catalog_version !== TASK_042_DECK_CATALOG_VERSION
+      || domain.domain_content_version !== TASK_042_DOMAIN_CONTENT_VERSION
+      || parts.part_catalog_version !== TASK_042_PART_CATALOG_VERSION
+      || coverage.coverage_version !== 'playable-coverage-v5') {
+    throw new Error('TASK-042 catalog versions are incompatible.');
+  }
+  const deckById = new Map(decks.decks.map((deck) => [deck.id, deck]));
+  const cardIds = new Set(cards.cards.map((card) => card.id));
+  for (const root of parts.fingerprint_roots) {
+    const deckId = root.response_deck_id ?? TASK_014_STARTER_DECK_ID;
+    const deck = deckById.get(deckId);
+    if (!deck) throw new Error(`${root.fingerprint_id} references missing response Deck ${deckId}.`);
+    if (deck.card_definition_ids.some((id) => !cardIds.has(id))) {
+      throw new Error(`${deckId} contains a missing Card definition.`);
+    }
+    if (root.teaching_part_id && !parts.teaching_parts.some((entry) => entry.part_id === root.teaching_part_id)) {
+      throw new Error(`${root.fingerprint_id} references missing Teaching part ${root.teaching_part_id}.`);
+    }
+  }
+  return {
+    cards: clone(cards),
+    decks: clone(decks),
+    domain: clone(domain),
+    parts: clone(parts),
+    coverage: clone(coverage),
+    ticketContent: { ticket_content_version: TASK_042_TICKET_CONTENT_VERSION, part_catalog_version: TASK_042_PART_CATALOG_VERSION },
     engineCatalogs: { cards: clone(cards), decks: clone(decks), domain: clone(domain), content_version: domain.domain_content_version },
     rulesetVersion: TASK_014_RULESET_VERSION,
   };
@@ -694,4 +740,8 @@ export function buildTicketsV3({ configuration, catalogs }) {
     selected_attempt_id: attemptId,
     attempts: [attempt],
   };
+}
+
+export function buildTicketsV4(input) {
+  return buildTicketsV3(input);
 }

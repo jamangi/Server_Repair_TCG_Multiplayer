@@ -2,7 +2,7 @@
 
 ## Status
 
-**Planned.** Depends on TASK-044.
+**Completed 2026-08-29.** The locked expansion inventory required no new pixels: all 70 reachable visual references resolve to 4 approved backgrounds and 8 approved character poses, with 36 responsive production derivatives and 6 same-layer fallback derivatives verified across desktop, mobile, reduced-data, zoom/reflow, and reduced-motion conditions. No production asset, manifest, Story topology, dialogue, domain content, or gameplay changed.
 
 ## Objective
 

@@ -1,12 +1,18 @@
-# The Quiet Cascade — campaign-one blueprint
+# The Quiet Cascade — campaign-one blueprint and expansion release
 
-Status: **versioned campaign content for Story pack `story.campaign.quiet_cascade.v1`**
+Status: **live `quiet-cascade-expansion-v3` content for Story pack `story.campaign.quiet_cascade.v1`; predecessor packs retained for migration history**
 
 ## Campaign brief
 
-*The Quiet Cascade* is a four-act, six-shift workplace mystery about what happens when ordinary technical faults pass through an organization that no longer carries enough context forward. The player begins the Continuity Rotation at Trinity Hub with an active legal response deck, no story-scoped Service Points, and no privileged knowledge of any machine. They finish by giving Civic Atlas and the floor a causal account that says exactly what the completed work established—and what it did not.
+Campaign one of *The Quiet Cascade* is a four-act, six-shift workplace mystery about what happens when ordinary technical faults pass through an organization that no longer carries enough context forward. The player begins the Continuity Rotation at Trinity Hub with an active legal response deck, no story-scoped Service Points, and no privileged knowledge of any machine. Its original outcome gives Civic Atlas and the floor a causal account that says exactly what the completed work established—and what it did not.
 
-The expected first playthrough is roughly three to four hours: six finite local Matches containing twelve Tickets, separated by short scenes and four bounded remembered choices. All twelve currently supported causal fingerprints appear exactly once. This breadth is intentional: the story-scale pattern is not a fabricated common hardware cause. It is the accumulated institutional effect of treating different, individually ordinary problems as if one short status or one green result explained them all.
+The campaign-one playthrough is roughly three to four hours: six finite local Matches containing twelve Tickets, separated by short scenes and four bounded remembered choices. Its twelve original causal fingerprints appear exactly once. This breadth is intentional: the story-scale pattern is not a fabricated common hardware cause. It is the accumulated institutional effect of treating different, individually ordinary problems as if one short status or one green result explained them all.
+
+## Current released boundary
+
+Production now loads `quiet-cascade-expansion-v3`, which appends six sourced one-Match episodes after every campaign-one outcome. New and reset profiles still begin at `story.qc01.entry`; eligible completed v1/v2 records retain all six accepted results and resume from their exact former ending checkpoint into `story.qc02.entry`. The combined release contains twelve episodes, twelve real Matches, 18 Tickets, 18 supported fingerprints, six remembered variables, and twelve isolated review boundaries. Only `ending.qc02.current_content` is terminal, and its copy claims completion of currently released content rather than all future Story work.
+
+Shifts 1–6 retain the reviewed legacy v3 Builder pins below. Shifts 7–12 use embedded v4 Builder configurations and the additive 83-Card catalog, with active response resources derived from the Player's real legal deck. The exact merge, migration assumptions, new Match metadata, and current teaching reach are recorded in the [release content report](../releases/quiet-cascade-expansion-v3/RELEASE_CONTENT_PACK.md) and [post-release coverage audit](../coverage/RELEASED_STORY_DOMAIN_COVERAGE_V3.md). The remainder of this document preserves the detailed campaign-one blueprint and its still-binding continuity constraints.
 
 ### Four acts
 
@@ -101,7 +107,7 @@ The script never reads hidden Faults, unchosen outcomes, replay internals, priva
 
 ## Content boundary
 
-The current expanded catalog proves no TASK-014 failed-Verify/recovery fingerprint. The separate recovery tutorial is pinned to its own older tutorial catalog and response deck. Campaign prose may respect the general rule that failed Verify reopens Diagnosis, but these six Story Matches do not fake such an event or silently import the tutorial scenario under the active-deck policy.
+Campaign one's TASK-014 catalog proved no failed-Verify/recovery fingerprint. The separate recovery tutorial remains pinned to its own older tutorial catalog and response deck. Campaign-one prose may respect the general rule that failed Verify reopens Diagnosis, but its six Matches do not fake such an event or silently import the tutorial scenario under the active-deck policy. The expansion's BMC recovery episode is separately sourced and pinned by its v4 Match configuration; it does not rewrite the earlier proof.
 
 No additional recurring character is required. The established ensemble covers Inflow, First Look, Rigline, Trace, Bench, Gate, Outflow, Client Programs, and Knowledge Systems. Background needs are registered in [`BACKGROUNDS.md`](../BACKGROUNDS.md).
 
@@ -111,6 +117,8 @@ The committed TASK-027 engine campaign completed all six configured queues with 
 
 The characterization-v2 graph report records 335 reachable statements, 66 labels, 24 scenes, four choices, six Match nodes, 29 checkpoint IDs, no unreachable label, and no cycle. The 48-route matrix covers both options of every remembered choice, completed and abandoned return handling for all six Matches, and each of the three ending bands. The original 324-statement v1 source remains unchanged for migration and before/after review.
 
+TASK-046 composes that immutable campaign-one proof with the reviewed expansion proof only after validating all twelve release registry entries. The released audit records 12/12 exact Builder configurations, 18/18 Ticket IDs and snapshot digests with complete solvability witnesses, 12/12 successful engine runs, and 12/12 identical reruns. These are constructibility and deterministic-integration claims, not learner-mastery claims.
+
 - Machine graph report: [`QUIET_CASCADE_GRAPH_REPORT.json`](../reports/QUIET_CASCADE_GRAPH_REPORT.json)
 - Human graph report: [`QUIET_CASCADE_GRAPH_REPORT.md`](../reports/QUIET_CASCADE_GRAPH_REPORT.md)
 - Ending-band editorial transcripts: [`QUIET_CASCADE_ROUTE_TRANSCRIPTS.md`](../reports/QUIET_CASCADE_ROUTE_TRANSCRIPTS.md)
@@ -118,5 +126,8 @@ The characterization-v2 graph report records 335 reachable statements, 66 labels
 - Preserved v1 engine/source history: `automated_games/task-027-quiet-cascade-v1/` and `content/story-v1/campaigns/quiet-cascade/`
 - Full original/context/final comparison: [`FINAL_DIALOGUE_COMPARISON.md`](../revisions/quiet-cascade-characterization-v2/FINAL_DIALOGUE_COMPARISON.md)
 - All 48 side-by-side route transcripts: [`FINAL_ROUTE_TRANSCRIPTS.md`](../revisions/quiet-cascade-characterization-v2/FINAL_ROUTE_TRANSCRIPTS.md)
+- Combined release content record: [`RELEASE_CONTENT_PACK.md`](../releases/quiet-cascade-expansion-v3/RELEASE_CONTENT_PACK.md)
+- Combined post-release coverage: [`RELEASED_STORY_DOMAIN_COVERAGE_V3.md`](../coverage/RELEASED_STORY_DOMAIN_COVERAGE_V3.md)
+- Release browser and accessibility QA: [`TASK-046-BROWSER-QA.md`](../TASK-046-BROWSER-QA.md)
 
 `node src/story/generate-quiet-cascade-reports.mjs` reruns the expensive engine proof twice per Match and regenerates every report. `node src/story/generate-quiet-cascade-reports.mjs --reports-only` preserves the committed engine runs while deterministically rebuilding Builder pins, graph analysis, route coverage, and transcripts after source-copy review.

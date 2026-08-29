@@ -2,7 +2,7 @@
 
 ## Status
 
-**Planned.** Depends on TASK-043.
+**Completed 2026-08-29.** Delivered the topology-locked non-live six-episode candidate pack, 256 canonical route transcripts, context and continuity ledgers, source-to-line provenance, choreography, exact reuse-only art briefs, and machine proofs with no unresolved or owner-approval items.
 
 ## Objective
 

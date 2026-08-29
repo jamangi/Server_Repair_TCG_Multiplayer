@@ -1,0 +1,335 @@
+{
+  "registry_version": "story-expansion-research-registry-v1",
+  "research_set_id": "case-study.story-expansion.v0.2",
+  "status": "RESEARCH_ONLY_NOT_DOMAIN_OR_GAMEPLAY_AUTHORITY",
+  "access_date": "2026-08-28",
+  "pins": {
+    "task_039_audit_version": "campaign-one-domain-coverage-v1",
+    "task_039_json_path": "docs/story/coverage/campaign-one-domain-coverage.json",
+    "task_039_json_sha256": "24bee750c6067c5241f49f5e30d47c33ec32ab03cece2e8a1f507e17878a5c3c",
+    "domain_content_version": "core-domain-snapshot-technical-copy-v3",
+    "playable_coverage_version": "playable-coverage-v4",
+    "ruleset_version": "first-version-v2",
+    "case_study_baseline_version": "0.1",
+    "case_study_baseline_commit": "7b8c88cd64930fc6d79e4b24307431a3759aadd9"
+  },
+  "q_calculation": {
+    "target_episode_slots": 6,
+    "validated_distinct_existing_complete_arc_count": 0,
+    "validated_existing_arc_ids": [],
+    "q0": 6,
+    "adjustments": [],
+    "final_q": 6,
+    "formula": "Q0 = max(0, target_episode_slots - validated_distinct_existing_complete_arc_count); final_q = Q0 + sum(adjustment.increment)",
+    "basis": "TASK-039 exposes diagnostic opportunities and present-but-incomplete domain paths, but zero uncovered already-playable complete fingerprints with a distinct required route, Repair, Verify, and closure witness.",
+    "no_adjustment_reason": "Six qualifying cases fill six distinct subsystem/objective slots; no selected case fails lifecycle qualification and no objective/subsystem diversity collision remains."
+  },
+  "command_audit": {
+    "catalog_exposure_ids": [
+      "command.ipmi.sel_elist",
+      "command.linux.dhclient",
+      "command.linux.dmesg",
+      "command.linux.ethtool",
+      "command.linux.free_h",
+      "command.linux.ip_addr",
+      "command.linux.ip_route",
+      "command.linux.journalctl",
+      "command.linux.lsblk",
+      "command.linux.lspci",
+      "command.linux.nvme_smart_log",
+      "command.linux.smartctl",
+      "command.network.ping"
+    ],
+    "catalog_exposure_count": 13,
+    "source_supported_useful_current_command_ids": [],
+    "required_isolation_current_command_ids": [],
+    "required_isolation_current_command_count": 0,
+    "semantics_note": "Catalog exposure, a useful evidence contribution, and a required Isolation action are separate claims. Research does not promote a source utility or transport into a Command and does not change current Command semantics."
+  },
+  "selected_cases": [
+    {
+      "case_id": "exp-001",
+      "slot_id": "expansion-slot-01",
+      "learning_objective_key": "objective.compute.socket_contact_isolation",
+      "fingerprint_candidate_key": "fingerprint-candidate.compute.bent_socket_contacts",
+      "subsystem": "compute",
+      "artifact_paths": { "found_cross_reference": "docs/case_studies/v0.2-story-expansion/database_cross_reference/found/exp-001--damaged-cpu-socket-contacts.md", "not_found_cross_reference": "docs/case_studies/v0.2-story-expansion/database_cross_reference/not_found/exp-001--damaged-cpu-socket-contacts.md" },
+      "source": {
+        "title": "R910 will not power on with 4 processors",
+        "publisher": "Dell Community",
+        "url": "https://www.dell.com/community/en/conversations/rack-servers/r910-will-not-power-on-with-4-processors/647f7d25f4ccf8a8deb93b08",
+        "source_type": "FIRSTHAND_FORUM_TROUBLESHOOTING_THREAD",
+        "publication_date": null,
+        "access_date": "2026-08-28",
+        "directly_opened": true,
+        "copyright_safe_paraphrase": "A PowerEdge R910 failed in the four-processor configuration. Comparative configuration checks and socket inspection narrowed the fault to bent socket contacts; correcting the contact condition restored the intended processor configuration.",
+        "source_locator_note": "Opening problem statement and accepted/resolution posts in the linked thread.",
+        "eligibility": {
+          "same_or_equivalent_initial_symptom": true,
+          "concrete_cause_established": true,
+          "actual_troubleshooting_sequence": true,
+          "stable_direct_url": true,
+          "explicit_vs_inferred_separable": true,
+          "repair_reported": true,
+          "post_repair_verification_reported": true
+        },
+        "selection_rubric": {
+          "observe": 1,
+          "hypothesis": 2,
+          "test": 2,
+          "isolate": 2,
+          "repair": 1,
+          "verify": 1,
+          "document": 0,
+          "total": 9
+        },
+        "rejected_alternatives": [],
+        "uncertainties": [
+          "The research reduction does not turn contact-restoration details into a player procedure; safety and board-rework authority remain downstream review matters."
+        ]
+      },
+      "lifecycle_steps": [
+        { "step_id": "exp-001.step.observe", "ordinal": 1, "category": "Observe", "fidelity": "explicit", "paraphrase": "The server would not power on in the full four-processor configuration.", "locator": "opening post: four-processor failure", "stable_refs": [{ "id": "symptom.boot.no_post", "entity_type": "symptom", "classification": "generic_semantic" }] },
+        { "step_id": "exp-001.step.hypothesize", "ordinal": 2, "category": "Hypothesize", "fidelity": "inferred", "paraphrase": "The configuration-dependent failure made the processor, socket, and board path competing explanations.", "locator": "configuration comparison context", "stable_refs": [{ "id": "component.compute.cpu_socket", "entity_type": "component", "classification": "generic_semantic" }] },
+        { "step_id": "exp-001.step.test", "ordinal": 3, "category": "Test", "fidelity": "explicit", "paraphrase": "The processor population was compared and the implicated socket was inspected for contact damage.", "locator": "troubleshooting and inspection posts", "stable_refs": [{ "id": "test.compute.socket_magnified_inspection", "entity_type": "test", "classification": "generic_semantic" }, { "id": "tool.inspection.magnifier", "entity_type": "tool", "classification": "generic_semantic" }] },
+        { "step_id": "exp-001.step.isolate", "ordinal": 4, "category": "Isolate", "fidelity": "inferred", "paraphrase": "Bent CPU-socket contacts were identified as the actionable fault.", "locator": "resolution: bent contacts", "stable_refs": [{ "id": "fault.compute.cpu_socket.contacts_damaged", "entity_type": "fault", "classification": "exact" }] },
+        { "step_id": "exp-001.step.repair", "ordinal": 5, "category": "Repair", "fidelity": "explicit", "paraphrase": "The damaged contact condition was corrected before the server was reassembled.", "locator": "resolution repair description", "stable_refs": [{ "id": "repair.compute.restore_socket_contacts", "entity_type": "repair_procedure", "classification": "generic_semantic" }, { "id": "protocol.service.cpu_socket_handling", "entity_type": "protocol", "classification": "generic_semantic" }] },
+        { "step_id": "exp-001.step.verify", "ordinal": 6, "category": "Verify", "fidelity": "explicit", "paraphrase": "The system then operated with the intended four-processor population.", "locator": "resolution follow-up", "stable_refs": [{ "id": "verify.compute.socket_path", "entity_type": "validation_procedure", "classification": "generic_semantic" }] }
+      ],
+      "absent_lifecycle_categories": ["Document"],
+      "stable_support": {
+        "symptom_ids": ["symptom.boot.no_post"],
+        "fault_ids": ["fault.compute.cpu_socket.contacts_damaged"],
+        "test_ids": ["test.compute.socket_magnified_inspection"],
+        "repair_ids": ["repair.compute.restore_socket_contacts"],
+        "validation_ids": ["verify.compute.socket_path"],
+        "component_ids": ["component.compute.cpu_socket"],
+        "tool_ids": ["tool.inspection.magnifier"],
+        "protocol_ids": ["protocol.service.cpu_socket_handling"]
+      },
+      "commands": { "catalog_exposure_ids_considered": ["command.linux.lspci"], "useful_evidence_current_ids": [], "required_isolation_current_ids": [], "encountered_source_interfaces": [] },
+      "candidate_dependencies": ["fingerprint-candidate.compute.bent_socket_contacts", "ticket-path-candidate.compute.socket_contact_isolation"]
+    },
+    {
+      "case_id": "exp-002",
+      "slot_id": "expansion-slot-02",
+      "learning_objective_key": "objective.power.distribution_board_vs_mainboard",
+      "fingerprint_candidate_key": "fingerprint-candidate.power.failed_distribution_board",
+      "subsystem": "power",
+      "artifact_paths": { "found_cross_reference": "docs/case_studies/v0.2-story-expansion/database_cross_reference/found/exp-002--failed-power-distribution-board.md", "not_found_cross_reference": "docs/case_studies/v0.2-story-expansion/database_cross_reference/not_found/exp-002--failed-power-distribution-board.md" },
+      "source": {
+        "title": "T420 PowerEdge VLT0204 main board voltage outside of range",
+        "publisher": "Dell Community",
+        "url": "https://www.dell.com/community/en/conversations/poweredge-hardware-general/t420-poweredge-vlt0204-main-board-voltage-outside-of-range/67fd91b469e6265ea77af6ab",
+        "source_type": "FIRSTHAND_FORUM_TROUBLESHOOTING_THREAD",
+        "publication_date": null,
+        "access_date": "2026-08-28",
+        "directly_opened": true,
+        "copyright_safe_paraphrase": "A PowerEdge T420 reported an out-of-range main-board voltage. Troubleshooting separated the supply/distribution path from a generic system-board conclusion and established a failed power-distribution board; replacing that board cleared the condition.",
+        "source_locator_note": "Opening voltage alert, diagnostic replies, and resolution posts in the linked thread.",
+        "eligibility": { "same_or_equivalent_initial_symptom": true, "concrete_cause_established": true, "actual_troubleshooting_sequence": true, "stable_direct_url": true, "explicit_vs_inferred_separable": true, "repair_reported": true, "post_repair_verification_reported": true },
+        "selection_rubric": { "observe": 1, "hypothesis": 2, "test": 2, "isolate": 2, "repair": 1, "verify": 1, "document": 0, "total": 9 },
+        "rejected_alternatives": [],
+        "uncertainties": ["Vendor voltage-event wording is preserved as source context and is not treated as a new Fault alias without curator review."],
+        "discussed_not_executed": [
+          { "phrase": "output-voltage measurement", "stable_ref": { "id": "test.power.output_voltage_measurement", "entity_type": "test", "classification": "generic_semantic" }, "reason": "Recommended in discussion but not part of the reported executed sequence." },
+          { "phrase": "multimeter", "stable_ref": { "id": "tool.electrical.multimeter", "entity_type": "tool", "classification": "generic_semantic" }, "reason": "Discussed instrumentation, not reported as used." }
+        ]
+      },
+      "lifecycle_steps": [
+        { "step_id": "exp-002.step.observe", "ordinal": 1, "category": "Observe", "fidelity": "explicit", "paraphrase": "The T420 reported a VLT0204 main-board voltage outside its allowed range.", "locator": "opening post: VLT0204 alert", "stable_refs": [{ "id": "symptom.power.voltage_out_of_range", "entity_type": "symptom", "classification": "exact" }] },
+        { "step_id": "exp-002.step.hypothesize", "ordinal": 2, "category": "Hypothesize", "fidelity": "explicit", "paraphrase": "The investigation considered the system board, supplies, and distribution path rather than accepting the alert label as the cause.", "locator": "diagnostic discussion", "stable_refs": [{ "id": "component.power.distribution_board", "entity_type": "component", "classification": "generic_semantic" }] },
+        { "step_id": "exp-002.step.test", "ordinal": 3, "category": "Test", "fidelity": "explicit", "paraphrase": "Both PSUs were tried in both bays and the machine was reduced to a minimum configuration, narrowing the abnormal-voltage path.", "locator": "reported PSU/bay swaps and minimum-configuration test", "stable_refs": [{ "id": "test.power.distribution_path_isolation", "entity_type": "test", "classification": "generic_semantic" }, { "id": "test.power.known_good_psu", "entity_type": "test", "classification": "generic_semantic" }, { "id": "test.general.minimum_configuration", "entity_type": "test", "classification": "generic_semantic" }] },
+        { "step_id": "exp-002.step.isolate", "ordinal": 4, "category": "Isolate", "fidelity": "inferred", "paraphrase": "The failed power-distribution board, not the alert's generic main-board wording, was identified as the actionable cause.", "locator": "resolution diagnosis", "stable_refs": [{ "id": "fault.power.distribution_board.failed", "entity_type": "fault", "classification": "exact" }] },
+        { "step_id": "exp-002.step.repair", "ordinal": 5, "category": "Repair", "fidelity": "explicit", "paraphrase": "The power-distribution board was replaced under a de-energized service boundary.", "locator": "resolution repair", "stable_refs": [{ "id": "repair.power.replace_distribution_board", "entity_type": "repair_procedure", "classification": "exact" }, { "id": "protocol.safety.deenergize_discharge", "entity_type": "protocol", "classification": "generic_semantic" }] },
+        { "step_id": "exp-002.step.verify", "ordinal": 6, "category": "Verify", "fidelity": "explicit", "paraphrase": "The server returned without the voltage fault after replacement.", "locator": "resolution follow-up", "stable_refs": [{ "id": "verify.power.distribution_path", "entity_type": "validation_procedure", "classification": "generic_semantic" }] }
+      ],
+      "absent_lifecycle_categories": ["Document"],
+      "stable_support": {
+        "symptom_ids": ["symptom.power.voltage_out_of_range"], "fault_ids": ["fault.power.distribution_board.failed"], "test_ids": ["test.general.minimum_configuration", "test.power.distribution_path_isolation", "test.power.known_good_psu"], "repair_ids": ["repair.power.replace_distribution_board"], "validation_ids": ["verify.power.distribution_path"], "component_ids": ["component.power.distribution_board"], "tool_ids": [], "protocol_ids": ["protocol.safety.deenergize_discharge"]
+      },
+      "commands": { "catalog_exposure_ids_considered": ["command.ipmi.sel_elist"], "useful_evidence_current_ids": [], "required_isolation_current_ids": [], "encountered_source_interfaces": [] },
+      "candidate_dependencies": ["fingerprint-candidate.power.failed_distribution_board", "ticket-path-candidate.power.distribution_board_vs_mainboard"]
+    },
+    {
+      "case_id": "exp-003",
+      "slot_id": "expansion-slot-03",
+      "learning_objective_key": "objective.storage.predictive_replacement_before_failure",
+      "fingerprint_candidate_key": "fingerprint-candidate.storage.predictive_drive_failure",
+      "subsystem": "storage",
+      "artifact_paths": { "found_cross_reference": "docs/case_studies/v0.2-story-expansion/database_cross_reference/found/exp-003--predictive-drive-failure.md", "not_found_cross_reference": "docs/case_studies/v0.2-story-expansion/database_cross_reference/not_found/exp-003--predictive-drive-failure.md" },
+      "source": {
+        "title": "PowerEdge R620 drive predicted failure",
+        "publisher": "Dell Community",
+        "url": "https://www.dell.com/community/en/conversations/poweredge-hardware-general/poweredge-r620-drive-predicted-failure/647f7b52f4ccf8a8de9878d4",
+        "source_type": "FIRSTHAND_FORUM_TROUBLESHOOTING_THREAD",
+        "publication_date": null,
+        "access_date": "2026-08-28",
+        "directly_opened": true,
+        "copyright_safe_paraphrase": "A PowerEdge R620 reported a predictive drive warning before total failure. The affected member was identified, replaced, and allowed to rebuild; the completed rebuild supplied the post-repair check.",
+        "source_locator_note": "Opening predictive-warning report, replacement guidance, and completion follow-up.",
+        "eligibility": { "same_or_equivalent_initial_symptom": true, "concrete_cause_established": true, "actual_troubleshooting_sequence": true, "stable_direct_url": true, "explicit_vs_inferred_separable": true, "repair_reported": true, "post_repair_verification_reported": true },
+        "selection_rubric": { "observe": 1, "hypothesis": 2, "test": 2, "isolate": 2, "repair": 1, "verify": 1, "document": 0, "total": 9 },
+        "rejected_alternatives": [],
+        "uncertainties": ["The source's controller-management interface is not automatically classified as a current Command or new Tool."]
+      },
+      "lifecycle_steps": [
+        { "step_id": "exp-003.step.observe", "ordinal": 1, "category": "Observe", "fidelity": "explicit", "paraphrase": "The R620 reported that a particular array drive was predicted to fail.", "locator": "opening post: predictive warning", "stable_refs": [{ "id": "symptom.storage.predictive_failure_warning", "entity_type": "symptom", "classification": "exact" }] },
+        { "step_id": "exp-003.step.hypothesize", "ordinal": 2, "category": "Hypothesize", "fidelity": "explicit", "paraphrase": "The warning was treated as a member-health problem to distinguish from an already failed array or a controller path fault.", "locator": "diagnostic and replacement discussion", "stable_refs": [{ "id": "component.storage.sas_hdd", "entity_type": "component", "classification": "generic_semantic" }] },
+        { "step_id": "exp-003.step.test", "ordinal": 3, "category": "Test", "fidelity": "explicit", "paraphrase": "The controller's predictive and member status identified which drive remained online but unhealthy.", "locator": "drive-status discussion", "stable_refs": [{ "id": "test.storage.predictive_health", "entity_type": "test", "classification": "generic_semantic" }, { "id": "tool.storage.raid_console", "entity_type": "tool", "classification": "generic_semantic" }] },
+        { "step_id": "exp-003.step.isolate", "ordinal": 4, "category": "Isolate", "fidelity": "explicit", "paraphrase": "The named physical drive was isolated as predictively failing before complete loss.", "locator": "selected member identification", "stable_refs": [{ "id": "fault.storage.drive.predictive_failure", "entity_type": "fault", "classification": "exact" }] },
+        { "step_id": "exp-003.step.repair", "ordinal": 5, "category": "Repair", "fidelity": "explicit", "paraphrase": "The predictively failing drive was replaced and the array rebuild was allowed to complete.", "locator": "replacement and rebuild follow-up", "stable_refs": [{ "id": "repair.storage.replace_predictive_drive", "entity_type": "repair_procedure", "classification": "exact" }, { "id": "protocol.service.storage_data_preservation", "entity_type": "protocol", "classification": "generic_semantic" }, { "id": "protocol.interface.sas", "entity_type": "protocol", "classification": "generic_semantic" }] },
+        { "step_id": "exp-003.step.verify", "ordinal": 6, "category": "Verify", "fidelity": "explicit", "paraphrase": "The completed rebuild and healthy member state verified the replacement.", "locator": "completion follow-up", "stable_refs": [{ "id": "verify.storage.predictive_replacement", "entity_type": "validation_procedure", "classification": "exact" }] }
+      ],
+      "absent_lifecycle_categories": ["Document"],
+      "stable_support": {
+        "symptom_ids": ["symptom.storage.predictive_failure_warning"], "fault_ids": ["fault.storage.drive.predictive_failure"], "test_ids": ["test.storage.predictive_health"], "repair_ids": ["repair.storage.replace_predictive_drive"], "validation_ids": ["verify.storage.predictive_replacement"], "component_ids": ["component.storage.sas_hdd"], "tool_ids": ["tool.storage.raid_console"], "protocol_ids": ["protocol.interface.sas", "protocol.service.storage_data_preservation"]
+      },
+      "commands": {
+        "catalog_exposure_ids_considered": ["command.linux.smartctl"],
+        "useful_evidence_current_ids": [],
+        "required_isolation_current_ids": [],
+        "encountered_source_interfaces": [{ "phrase": "controller drive-status interface", "classification": "VENDOR_INTERFACE_NOT_CURRENT_COMMAND", "diagnostic_contribution": "Reported predictive health and the affected member." }]
+      },
+      "candidate_dependencies": ["fingerprint-candidate.storage.predictive_drive_failure", "ticket-path-candidate.storage.predictive_replacement_before_failure"]
+    },
+    {
+      "case_id": "exp-004",
+      "slot_id": "expansion-slot-04",
+      "learning_objective_key": "objective.management.stale_alert_vs_live_backplane_fault",
+      "fingerprint_candidate_key": "fingerprint-candidate.management.stale_backplane_alert",
+      "subsystem": "management",
+      "artifact_paths": { "found_cross_reference": "docs/case_studies/v0.2-story-expansion/database_cross_reference/found/exp-004--stale-management-alert.md", "not_found_cross_reference": "docs/case_studies/v0.2-story-expansion/database_cross_reference/not_found/exp-004--stale-management-alert.md" },
+      "source": {
+        "title": "PE2900 backplane degraded",
+        "publisher": "Dell Community",
+        "url": "https://www.dell.com/community/en/conversations/poweredge-hddscsiraid/pe2900-backplane-degraded/647e8b20f4ccf8a8dede59e9",
+        "source_type": "FIRSTHAND_FORUM_TROUBLESHOOTING_THREAD",
+        "publication_date": null,
+        "access_date": "2026-08-28",
+        "directly_opened": true,
+        "copyright_safe_paraphrase": "A PowerEdge backplane-degraded alert persisted despite the current hardware state. Dell's DSET collection distinguished stale management state from a live backplane failure; clearing the stale condition and checking for recurrence closed the case.",
+        "source_locator_note": "Opening degraded-alert report, DSET diagnostic exchange, and resolution follow-up.",
+        "eligibility": { "same_or_equivalent_initial_symptom": true, "concrete_cause_established": true, "actual_troubleshooting_sequence": true, "stable_direct_url": true, "explicit_vs_inferred_separable": true, "repair_reported": true, "post_repair_verification_reported": true },
+        "selection_rubric": { "observe": 1, "hypothesis": 2, "test": 2, "isolate": 2, "repair": 1, "verify": 1, "document": 0, "total": 9 },
+        "rejected_alternatives": [],
+        "uncertainties": ["DSET remains a vendor diagnostic collector phrase; research does not promote it into a current Command or new stable Tool."]
+      },
+      "lifecycle_steps": [
+        { "step_id": "exp-004.step.observe", "ordinal": 1, "category": "Observe", "fidelity": "explicit", "paraphrase": "Management continued to report a degraded backplane condition.", "locator": "opening post: degraded alert", "stable_refs": [{ "id": "symptom.management.alert_persists", "entity_type": "symptom", "classification": "generic_semantic" }] },
+        { "step_id": "exp-004.step.hypothesize", "ordinal": 2, "category": "Hypothesize", "fidelity": "explicit", "paraphrase": "A live backplane problem and stale alert state were treated as competing explanations.", "locator": "diagnostic discussion", "stable_refs": [{ "id": "component.storage.backplane", "entity_type": "component", "classification": "generic_semantic" }, { "id": "component.management.bmc", "entity_type": "component", "classification": "generic_semantic" }] },
+        { "step_id": "exp-004.step.test", "ordinal": 3, "category": "Test", "fidelity": "explicit", "paraphrase": "A Dell DSET collection compared current hardware evidence with the persistent recorded alert.", "locator": "DSET diagnostic exchange", "stable_refs": [{ "id": "test.management.event_log_freshness", "entity_type": "test", "classification": "generic_semantic" }, { "id": "tool.management.bmc_console", "entity_type": "tool", "classification": "generic_semantic" }] },
+        { "step_id": "exp-004.step.isolate", "ordinal": 4, "category": "Isolate", "fidelity": "explicit", "paraphrase": "The remaining condition was isolated to stale alert state rather than a current backplane fault.", "locator": "resolution diagnosis", "stable_refs": [{ "id": "fault.management.alert.stale", "entity_type": "fault", "classification": "exact" }] },
+        { "step_id": "exp-004.step.repair", "ordinal": 5, "category": "Repair", "fidelity": "explicit", "paraphrase": "The stale management alert state was cleared.", "locator": "resolution action", "stable_refs": [{ "id": "repair.management.clear_stale_alert_state", "entity_type": "repair_procedure", "classification": "exact" }] },
+        { "step_id": "exp-004.step.verify", "ordinal": 6, "category": "Verify", "fidelity": "explicit", "paraphrase": "Follow-up state showed that the degraded alert did not recur as a current fault.", "locator": "resolution follow-up", "stable_refs": [{ "id": "verify.management.alert_does_not_recur", "entity_type": "validation_procedure", "classification": "exact" }] }
+      ],
+      "absent_lifecycle_categories": ["Document"],
+      "stable_support": {
+        "symptom_ids": ["symptom.management.alert_persists"], "fault_ids": ["fault.management.alert.stale"], "test_ids": ["test.management.event_log_freshness"], "repair_ids": ["repair.management.clear_stale_alert_state"], "validation_ids": ["verify.management.alert_does_not_recur"], "component_ids": ["component.management.bmc", "component.storage.backplane"], "tool_ids": ["tool.management.bmc_console"], "protocol_ids": []
+      },
+      "commands": {
+        "catalog_exposure_ids_considered": ["command.ipmi.sel_elist"],
+        "useful_evidence_current_ids": [],
+        "required_isolation_current_ids": [],
+        "encountered_source_interfaces": [{ "phrase": "Dell DSET", "classification": "DIAGNOSTIC_UTILITY_NOT_CURRENT_COMMAND", "diagnostic_contribution": "Collected current state that distinguished a stale alert from a live backplane fault." }]
+      },
+      "candidate_dependencies": ["fingerprint-candidate.management.stale_backplane_alert", "ticket-path-candidate.management.stale_alert_vs_live_backplane_fault"]
+    },
+    {
+      "case_id": "exp-005",
+      "slot_id": "expansion-slot-05",
+      "learning_objective_key": "objective.firmware.regression_vs_physical_link",
+      "fingerprint_candidate_key": "fingerprint-candidate.firmware.idrac_link_flap_regression",
+      "subsystem": "firmware-network",
+      "artifact_paths": { "found_cross_reference": "docs/case_studies/v0.2-story-expansion/database_cross_reference/found/exp-005--incompatible-firmware-nic-link-flaps.md", "not_found_cross_reference": "docs/case_studies/v0.2-story-expansion/database_cross_reference/not_found/exp-005--incompatible-firmware-nic-link-flaps.md" },
+      "source": {
+        "title": "iDRAC keeps messaging the NIC in slot 4 port 1 network link is started",
+        "publisher": "Dell Community",
+        "url": "https://www.dell.com/community/en/conversations/poweredge-hardware-general/idrac-keeps-messaging-the-nic-in-slot-4-port-1-network-link-is-started/647f94b2f4ccf8a8de70eaff",
+        "source_type": "FIRSTHAND_FORUM_TROUBLESHOOTING_THREAD",
+        "publication_date": null,
+        "access_date": "2026-08-28",
+        "directly_opened": true,
+        "copyright_safe_paraphrase": "Repeated iDRAC link-state messages resembled a physical NIC or cable fault but tracked a firmware change. Rolling back the implicated iDRAC firmware stopped the link flaps and established a version regression as the cause.",
+        "source_locator_note": "Opening repeated-link report, firmware correlation, rollback, and verification posts.",
+        "eligibility": { "same_or_equivalent_initial_symptom": true, "concrete_cause_established": true, "actual_troubleshooting_sequence": true, "stable_direct_url": true, "explicit_vs_inferred_separable": true, "repair_reported": true, "post_repair_verification_reported": true },
+        "selection_rubric": { "observe": 1, "hypothesis": 2, "test": 2, "isolate": 2, "repair": 1, "verify": 1, "document": 0, "total": 9 },
+        "rejected_alternatives": [],
+        "uncertainties": ["The vendor-specific iDRAC release remains source provenance; it is not a new stable firmware object or rule change."]
+      },
+      "lifecycle_steps": [
+        { "step_id": "exp-005.step.observe", "ordinal": 1, "category": "Observe", "fidelity": "explicit", "paraphrase": "iDRAC repeatedly logged that a NIC port link had started, exposing a link-flap pattern.", "locator": "opening post: recurring link messages", "stable_refs": [{ "id": "symptom.network.link_flapping", "entity_type": "symptom", "classification": "generic_semantic" }] },
+        { "step_id": "exp-005.step.hypothesize", "ordinal": 2, "category": "Hypothesize", "fidelity": "explicit", "paraphrase": "Physical link hardware and a recent management-firmware regression were compared as causes.", "locator": "diagnostic discussion", "stable_refs": [{ "id": "component.network.nic", "entity_type": "component", "classification": "generic_semantic" }, { "id": "component.management.bmc", "entity_type": "component", "classification": "generic_semantic" }] },
+        { "step_id": "exp-005.step.test", "ordinal": 3, "category": "Test", "fidelity": "explicit", "paraphrase": "Event timing and firmware-version comparison tied the repeated messages to the changed iDRAC version rather than the physical path.", "locator": "version correlation and rollback comparison", "stable_refs": [{ "id": "test.firmware.version_compatibility", "entity_type": "test", "classification": "generic_semantic" }, { "id": "test.network.link_counter_soak", "entity_type": "test", "classification": "generic_semantic" }, { "id": "tool.management.bmc_console", "entity_type": "tool", "classification": "generic_semantic" }] },
+        { "step_id": "exp-005.step.isolate", "ordinal": 4, "category": "Isolate", "fidelity": "inferred", "paraphrase": "The iDRAC firmware version set was isolated as incompatible with stable link reporting.", "locator": "rollback-supported diagnosis", "stable_refs": [{ "id": "fault.firmware.version_set.incompatible", "entity_type": "fault", "classification": "generic_semantic" }] },
+        { "step_id": "exp-005.step.repair", "ordinal": 5, "category": "Repair", "fidelity": "explicit", "paraphrase": "The affected iDRAC firmware was rolled back to the prior compatible version.", "locator": "rollback action", "stable_refs": [{ "id": "repair.firmware.restore_compatible_versions", "entity_type": "repair_procedure", "classification": "exact" }, { "id": "protocol.service.firmware_change_control", "entity_type": "protocol", "classification": "generic_semantic" }] },
+        { "step_id": "exp-005.step.verify", "ordinal": 6, "category": "Verify", "fidelity": "explicit", "paraphrase": "The link messages and flapping ceased after rollback and remained stable.", "locator": "post-rollback follow-up", "stable_refs": [{ "id": "verify.firmware.compatible_persistent", "entity_type": "validation_procedure", "classification": "generic_semantic" }] }
+      ],
+      "absent_lifecycle_categories": ["Document"],
+      "stable_support": {
+        "symptom_ids": ["symptom.network.link_flapping"], "fault_ids": ["fault.firmware.version_set.incompatible"], "test_ids": ["test.firmware.version_compatibility", "test.network.link_counter_soak"], "repair_ids": ["repair.firmware.restore_compatible_versions"], "validation_ids": ["verify.firmware.compatible_persistent"], "component_ids": ["component.management.bmc", "component.network.nic"], "tool_ids": ["tool.management.bmc_console"], "protocol_ids": ["protocol.service.firmware_change_control"]
+      },
+      "commands": {
+        "catalog_exposure_ids_considered": ["command.linux.ethtool"],
+        "useful_evidence_current_ids": [],
+        "required_isolation_current_ids": [],
+        "encountered_source_interfaces": [{ "phrase": "iDRAC firmware update/rollback interface", "classification": "REPAIR_INTERFACE_NOT_CURRENT_COMMAND", "diagnostic_contribution": "The before/after version comparison supplied evidence; the interface itself performed Repair." }]
+      },
+      "candidate_dependencies": ["fingerprint-candidate.firmware.idrac_link_flap_regression", "ticket-path-candidate.firmware.regression_vs_physical_link"]
+    },
+    {
+      "case_id": "exp-006",
+      "slot_id": "expansion-slot-06",
+      "learning_objective_key": "objective.management.bmc_recovery_state_before_board_replacement",
+      "fingerprint_candidate_key": "fingerprint-candidate.management.bmc_firmware_corruption",
+      "subsystem": "management-firmware",
+      "artifact_paths": { "found_cross_reference": "docs/case_studies/v0.2-story-expansion/database_cross_reference/found/exp-006--corrupt-bmc-firmware-recovery.md", "not_found_cross_reference": "docs/case_studies/v0.2-story-expansion/database_cross_reference/not_found/exp-006--corrupt-bmc-firmware-recovery.md" },
+      "source": {
+        "title": "GA-7PESH2 BMC recovery",
+        "publisher": "ServerBuilds.net Forums",
+        "url": "https://forums.serverbuilds.net/t/ga-7pesh2-bmc-recovery/882",
+        "source_type": "FIRSTHAND_COMMUNITY_RECOVERY_REPORT",
+        "publication_date": null,
+        "access_date": "2026-08-28",
+        "directly_opened": true,
+        "copyright_safe_paraphrase": "A GA-7PESH2 board's BMC stopped functioning after firmware corruption. UART output exposed a recoverable boot state, firmware was supplied through the documented TFTP recovery path, and restored BMC access verified recovery without replacing the board.",
+        "source_locator_note": "Opening failure report, UART/TFTP recovery procedure, and successful-access follow-up.",
+        "eligibility": { "same_or_equivalent_initial_symptom": true, "concrete_cause_established": true, "actual_troubleshooting_sequence": true, "stable_direct_url": true, "explicit_vs_inferred_separable": true, "repair_reported": true, "post_repair_verification_reported": true },
+        "selection_rubric": { "observe": 1, "hypothesis": 2, "test": 2, "isolate": 2, "repair": 1, "verify": 1, "document": 1, "total": 10 },
+        "rejected_alternatives": [],
+        "uncertainties": ["UART and TFTP are preserved as source-specific interfaces/transports. Their exact Tool, Test, Command, and Protocol treatment is missing-domain candidate work, not a research-stage decision."]
+      },
+      "lifecycle_steps": [
+        { "step_id": "exp-006.step.observe", "ordinal": 1, "category": "Observe", "fidelity": "explicit", "paraphrase": "The board-management controller was not responding after its firmware became unusable.", "locator": "opening failure report", "stable_refs": [{ "id": "symptom.management.bmc_not_responding", "entity_type": "symptom", "classification": "exact" }] },
+        { "step_id": "exp-006.step.hypothesize", "ordinal": 2, "category": "Hypothesize", "fidelity": "explicit", "paraphrase": "A recoverable firmware state was considered before concluding that the board hardware required replacement.", "locator": "recovery investigation", "stable_refs": [{ "id": "component.management.bmc", "entity_type": "component", "classification": "generic_semantic" }] },
+        { "step_id": "exp-006.step.test", "ordinal": 3, "category": "Test", "fidelity": "explicit", "paraphrase": "UART output exposed the BMC's recovery behavior and readiness to accept an image.", "locator": "UART recovery-state output", "stable_refs": [{ "id": "test.management.bmc_recovery_state", "entity_type": "test", "classification": "generic_semantic" }, { "id": "tool.management.bmc_console", "entity_type": "tool", "classification": "generic_semantic" }] },
+        { "step_id": "exp-006.step.isolate", "ordinal": 4, "category": "Isolate", "fidelity": "inferred", "paraphrase": "The recoverable BMC firmware image, rather than the whole system board, was isolated as the actionable fault.", "locator": "recovery-state interpretation", "stable_refs": [{ "id": "fault.management.bmc_firmware.corrupt", "entity_type": "fault", "classification": "exact" }] },
+        { "step_id": "exp-006.step.repair", "ordinal": 5, "category": "Repair", "fidelity": "explicit", "paraphrase": "A replacement BMC firmware image was transferred through the UART/TFTP recovery path and installed.", "locator": "UART/TFTP recovery procedure", "stable_refs": [{ "id": "repair.management.recover_bmc_firmware", "entity_type": "repair_procedure", "classification": "generic_semantic" }, { "id": "protocol.service.firmware_change_control", "entity_type": "protocol", "classification": "generic_semantic" }] },
+        { "step_id": "exp-006.step.verify", "ordinal": 6, "category": "Verify", "fidelity": "explicit", "paraphrase": "Normal BMC access and function returned after recovery.", "locator": "successful recovery follow-up", "stable_refs": [{ "id": "verify.management.bmc_functional", "entity_type": "validation_procedure", "classification": "exact" }] },
+        { "step_id": "exp-006.step.document", "ordinal": 7, "category": "Document", "fidelity": "explicit", "paraphrase": "The community recovery report preserved the failure state, recovery path, and successful result.", "locator": "procedure and successful follow-up posts", "stable_refs": [] }
+      ],
+      "absent_lifecycle_categories": [],
+      "stable_support": {
+        "symptom_ids": ["symptom.management.bmc_not_responding"], "fault_ids": ["fault.management.bmc_firmware.corrupt"], "test_ids": ["test.management.bmc_recovery_state"], "repair_ids": ["repair.management.recover_bmc_firmware"], "validation_ids": ["verify.management.bmc_functional"], "component_ids": ["component.management.bmc"], "tool_ids": ["tool.management.bmc_console"], "protocol_ids": ["protocol.service.firmware_change_control"]
+      },
+      "commands": {
+        "catalog_exposure_ids_considered": ["command.ipmi.sel_elist"],
+        "useful_evidence_current_ids": [],
+        "required_isolation_current_ids": [],
+        "encountered_source_interfaces": [
+          { "phrase": "UART console interaction", "classification": "SOURCE_INTERFACE_NOT_CURRENT_COMMAND", "diagnostic_contribution": "Exposed the recoverable BMC boot state during Test." },
+          { "phrase": "TFTP transfer invocation", "classification": "SOURCE_TRANSPORT_NOT_CURRENT_COMMAND", "diagnostic_contribution": "Delivered the replacement image during Repair; it was not diagnostic proof." }
+        ]
+      },
+      "candidate_dependencies": ["fingerprint-candidate.management.bmc_firmware_corruption", "ticket-path-candidate.management.bmc_recovery_state", "candidate-interface.uart_bmc_recovery", "candidate-protocol.tftp_bmc_recovery"]
+    }
+  ],
+  "evidence_slots": [
+    { "slot_id": "expansion-slot-01", "case_id": "exp-001", "learning_objective_key": "objective.compute.socket_contact_isolation", "fingerprint_candidate_key": "fingerprint-candidate.compute.bent_socket_contacts", "case_evidence": "QUALIFYING_COMPLETE_REDUCTION", "existing_complete_playable_arc": false, "current_support": "PRESENT_DOMAIN_OBJECTS_NOT_COMPLETE_PLAYABLE_PATH", "candidate_addition_keys": ["fingerprint-candidate.compute.bent_socket_contacts", "ticket-path-candidate.compute.socket_contact_isolation"], "required_current_command_ids": [] },
+    { "slot_id": "expansion-slot-02", "case_id": "exp-002", "learning_objective_key": "objective.power.distribution_board_vs_mainboard", "fingerprint_candidate_key": "fingerprint-candidate.power.failed_distribution_board", "case_evidence": "QUALIFYING_COMPLETE_REDUCTION", "existing_complete_playable_arc": false, "current_support": "PRESENT_DOMAIN_OBJECTS_NOT_COMPLETE_PLAYABLE_PATH", "candidate_addition_keys": ["fingerprint-candidate.power.failed_distribution_board", "ticket-path-candidate.power.distribution_board_vs_mainboard"], "required_current_command_ids": [] },
+    { "slot_id": "expansion-slot-03", "case_id": "exp-003", "learning_objective_key": "objective.storage.predictive_replacement_before_failure", "fingerprint_candidate_key": "fingerprint-candidate.storage.predictive_drive_failure", "case_evidence": "QUALIFYING_COMPLETE_REDUCTION", "existing_complete_playable_arc": false, "current_support": "PRESENT_DOMAIN_OBJECTS_NOT_COMPLETE_PLAYABLE_PATH", "candidate_addition_keys": ["fingerprint-candidate.storage.predictive_drive_failure", "ticket-path-candidate.storage.predictive_replacement_before_failure"], "required_current_command_ids": [] },
+    { "slot_id": "expansion-slot-04", "case_id": "exp-004", "learning_objective_key": "objective.management.stale_alert_vs_live_backplane_fault", "fingerprint_candidate_key": "fingerprint-candidate.management.stale_backplane_alert", "case_evidence": "QUALIFYING_COMPLETE_REDUCTION", "existing_complete_playable_arc": false, "current_support": "PRESENT_DOMAIN_OBJECTS_NOT_COMPLETE_PLAYABLE_PATH", "candidate_addition_keys": ["fingerprint-candidate.management.stale_backplane_alert", "ticket-path-candidate.management.stale_alert_vs_live_backplane_fault"], "required_current_command_ids": [] },
+    { "slot_id": "expansion-slot-05", "case_id": "exp-005", "learning_objective_key": "objective.firmware.regression_vs_physical_link", "fingerprint_candidate_key": "fingerprint-candidate.firmware.idrac_link_flap_regression", "case_evidence": "QUALIFYING_COMPLETE_REDUCTION", "existing_complete_playable_arc": false, "current_support": "PRESENT_DOMAIN_OBJECTS_NOT_COMPLETE_PLAYABLE_PATH", "candidate_addition_keys": ["fingerprint-candidate.firmware.idrac_link_flap_regression", "ticket-path-candidate.firmware.regression_vs_physical_link"], "required_current_command_ids": [] },
+    { "slot_id": "expansion-slot-06", "case_id": "exp-006", "learning_objective_key": "objective.management.bmc_recovery_state_before_board_replacement", "fingerprint_candidate_key": "fingerprint-candidate.management.bmc_firmware_corruption", "case_evidence": "QUALIFYING_COMPLETE_REDUCTION", "existing_complete_playable_arc": false, "current_support": "PRESENT_DOMAIN_OBJECTS_PLUS_UNRESOLVED_INTERFACE_GAPS", "candidate_addition_keys": ["fingerprint-candidate.management.bmc_firmware_corruption", "ticket-path-candidate.management.bmc_recovery_state", "candidate-interface.uart_bmc_recovery", "candidate-protocol.tftp_bmc_recovery"], "required_current_command_ids": [] }
+  ]
+}

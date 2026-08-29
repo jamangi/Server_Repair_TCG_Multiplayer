@@ -1,0 +1,521 @@
+{
+  "commands": {
+    "authored_isolation_route_source_ids": [],
+    "catalog_exposure_ids": [
+      "command.ipmi.sel_elist",
+      "command.linux.dhclient",
+      "command.linux.dmesg",
+      "command.linux.ethtool",
+      "command.linux.free_h",
+      "command.linux.ip_addr",
+      "command.linux.ip_route",
+      "command.linux.journalctl",
+      "command.linux.lsblk",
+      "command.linux.lspci",
+      "command.linux.nvme_smart_log",
+      "command.linux.smartctl",
+      "command.network.ping"
+    ],
+    "minimal_witness_required_ids": [],
+    "useful_candidate_changing_ids": [
+      "command.linux.lsblk",
+      "command.linux.lspci",
+      "command.linux.smartctl"
+    ]
+  },
+  "compatibility": {
+    "explicitly_migrated_prior_card_ids": [
+      "card.bench.test.management.event_log_freshness"
+    ],
+    "old_card_definitions_unchanged": 70,
+    "old_starter_deck_unchanged": true,
+    "stable_domain_ids_preserved": 257
+  },
+  "inventory": {
+    "action_bearing_records": 107,
+    "deferred_actions": 24,
+    "diagnostics": 50,
+    "expansion_deck_cards": 30,
+    "fingerprints": 18,
+    "knowledge_records": 257,
+    "new_response_cards": 12,
+    "playable_cards": 83,
+    "selected_repairs": 18,
+    "selected_validations": 15
+  },
+  "n4_test_repair_boundary": {
+    "diagnostic_changes_machine_state": false,
+    "migrated_card_id": "card.bench.test.management.event_log_freshness",
+    "repair_id": "repair.management.clear_stale_alert_state",
+    "test_id": "test.management.event_log_freshness"
+  },
+  "n6_test_repair_boundary": {
+    "repair_id": "repair.management.recover_bmc_firmware",
+    "test_id": "test.management.bmc_recovery_state",
+    "tftp_is_diagnostic_command": false
+  },
+  "pins": {
+    "builder": "ticket-builder-v4",
+    "cards": "core-card-catalog-story-expansion-v5",
+    "configuration": "ticket-builder-v4",
+    "coverage": "playable-coverage-v5",
+    "decks": "core-response-decks-v5",
+    "domain": "core-domain-snapshot-story-expansion-v4",
+    "old_artifact_sha256": {
+      "card-catalog-v3.json": "e2810a99ce02b1d57ef5613e3d9d09647f5fea8dd8b3b4074baacea09bc055ef",
+      "decks-v3.json": "8d9fc3ef8aa5d3932dd4fbb9349b915f4087b2c357caede6f559a2c2c24467f4",
+      "domain-snapshot-v2.json": "2e55fc92b725d869b67b3ea73c701c55db49f9b9a2f49bcff981cebaca687a2f",
+      "playable-coverage-v3.json": "87ed2e481221485aaef3221dcf2d0a1a4979971631db5284fa3e73745d20b065",
+      "task-014-parts.json": "06614e06602164e54dc36737aea89d573cd0d1b76ce863a0352a2f45e1be6c56"
+    },
+    "parts": "ticket-parts-v2",
+    "ruleset": "first-version-v2",
+    "task_041_registry_sha256": "cb89451ceff6af0d2da636e5ba34b714ebfcf3db2da3280d919900cf2bb32c75",
+    "task_042_source_pack_sha256": "0abc854f9a1b65deab7374190ada0aeba2011928e4a632d7ed3738ea225ffa09",
+    "tickets": "core-ticket-parts-v4"
+  },
+  "proof_version": "task-042-expansion-domain-proof-v1",
+  "quality": {
+    "complete_outcome_coverage_tickets": 6,
+    "hidden_truth_leaks": 0,
+    "new_response_cards_reusing_paired_test_art": 12,
+    "solvable_tickets": 6,
+    "technical_copy_review_records": 83
+  },
+  "teaching_objectives": [
+    "Bound dangerous controller recovery to approved platform methods and verify recovery separately from the flash action.",
+    "Identify a socket-location fault without condemning known-good processors or memory.",
+    "Separate read-only evidence preservation from the state-changing Repair that clears a stale alert.",
+    "Treat predictive failure as actionable while protecting data and proving completed recovery.",
+    "Use cross-bay known-good comparisons to isolate a shared distribution fault.",
+    "Use repeated version A/B behavior and hardware elimination to diagnose a firmware regression."
+  ],
+  "tickets": [
+    {
+      "accessed_on": "2026-08-28",
+      "authored_evidence_outcomes": 72,
+      "case_id": "exp-001",
+      "commands": {
+        "isolation_route_source_ids": [],
+        "minimal_witness_ids": [],
+        "useful_candidate_changing_ids": []
+      },
+      "fingerprint_candidate_key": "fingerprint-candidate.compute.bent_socket_contacts",
+      "fingerprint_id": "fingerprint.compute.damaged_cpu_socket_contacts",
+      "isolation_route_ids": [
+        "route.fingerprint.compute.damaged.cpu.socket.contacts.01"
+      ],
+      "learning_objective_key": "objective.compute.socket_contact_isolation",
+      "learning_objectives": [
+        "Identify a socket-location fault without condemning known-good processors or memory."
+      ],
+      "public_candidate_fault_ids": [
+        "fault.board.system.failed",
+        "fault.compute.cpu_socket.contacts_damaged",
+        "fault.cpu.not_seated",
+        "fault.memory.dimm.failed",
+        "fault.memory.dimm.not_seated"
+      ],
+      "public_projection_hidden_truth_leaks": 0,
+      "repair_procedure_ids": [
+        "repair.compute.restore_socket_contacts"
+      ],
+      "seed": "task-042-exp-001",
+      "slot_id": "expansion-slot-01",
+      "solvability_witness": [
+        {
+          "action": "RUN_DIAGNOSTIC",
+          "evidence_outcome_id": "evidence.fingerprint.compute.damaged.cpu.socket.contacts.machine.compute.damaged.socket.contacts.active.test.compute.socket.magnified.inspection",
+          "source_definition_id": "test.compute.socket_magnified_inspection"
+        },
+        {
+          "action": "COMMIT_ISOLATION",
+          "cited_outcome_ids": [
+            "evidence.fingerprint.compute.damaged.cpu.socket.contacts.machine.compute.damaged.socket.contacts.active.test.compute.socket.magnified.inspection"
+          ],
+          "target_fault_instance_key": "fault_instance.compute.damaged_cpu_socket_contacts.root"
+        },
+        {
+          "action": "PERFORM_REPAIR",
+          "repair_outcome_id": "repair_outcome.fingerprint.compute.damaged.cpu.socket.contacts",
+          "target_fault_instance_key": "fault_instance.compute.damaged_cpu_socket_contacts.root"
+        },
+        {
+          "action": "PERFORM_VERIFY",
+          "result": "PASS",
+          "verification_outcome_id": "verify_outcome.fingerprint.compute.damaged.cpu.socket.contacts.01.pass"
+        }
+      ],
+      "source_id": "source.case.exp-001",
+      "source_url": "https://www.dell.com/community/en/conversations/rack-servers/r910-will-not-power-on-with-4-processors/647f7d25f4ccf8a8deb93b08",
+      "symptom_ids": [
+        "symptom.boot.no_post"
+      ],
+      "target_legal_diagnostics_with_complete_outcomes": 36,
+      "ticket_id": "ticket.generated.827d9729d12225e209f47117",
+      "ticket_snapshot_digest": "450d9df67ef840c88f34fa73478d96c2b90db9eee68a4f983d95856ac6d4819d",
+      "true_fault_ids": [
+        "fault.compute.cpu_socket.contacts_damaged"
+      ],
+      "validation_procedure_ids": [
+        "verify.compute.socket_path"
+      ]
+    },
+    {
+      "accessed_on": "2026-08-28",
+      "authored_evidence_outcomes": 76,
+      "case_id": "exp-002",
+      "commands": {
+        "isolation_route_source_ids": [],
+        "minimal_witness_ids": [],
+        "useful_candidate_changing_ids": []
+      },
+      "fingerprint_candidate_key": "fingerprint-candidate.power.failed_distribution_board",
+      "fingerprint_id": "fingerprint.power.failed_distribution_board",
+      "isolation_route_ids": [
+        "route.fingerprint.power.failed.distribution.board.01"
+      ],
+      "learning_objective_key": "objective.power.distribution_board_vs_mainboard",
+      "learning_objectives": [
+        "Use cross-bay known-good comparisons to isolate a shared distribution fault."
+      ],
+      "public_candidate_fault_ids": [
+        "fault.board.system.failed",
+        "fault.power.distribution_board.failed",
+        "fault.power.input.cable_loose",
+        "fault.power.psu.failed",
+        "fault.power.psu.not_seated"
+      ],
+      "public_projection_hidden_truth_leaks": 0,
+      "repair_procedure_ids": [
+        "repair.power.replace_distribution_board"
+      ],
+      "seed": "task-042-exp-002",
+      "slot_id": "expansion-slot-02",
+      "solvability_witness": [
+        {
+          "action": "RUN_DIAGNOSTIC",
+          "evidence_outcome_id": "evidence.fingerprint.power.failed.distribution.board.machine.power.failed.distribution.board.active.test.power.distribution.path.isolation",
+          "source_definition_id": "test.power.distribution_path_isolation"
+        },
+        {
+          "action": "COMMIT_ISOLATION",
+          "cited_outcome_ids": [
+            "evidence.fingerprint.power.failed.distribution.board.machine.power.failed.distribution.board.active.test.power.distribution.path.isolation"
+          ],
+          "target_fault_instance_key": "fault_instance.power.failed_distribution_board.root"
+        },
+        {
+          "action": "PERFORM_REPAIR",
+          "repair_outcome_id": "repair_outcome.fingerprint.power.failed.distribution.board",
+          "target_fault_instance_key": "fault_instance.power.failed_distribution_board.root"
+        },
+        {
+          "action": "PERFORM_VERIFY",
+          "result": "PASS",
+          "verification_outcome_id": "verify_outcome.fingerprint.power.failed.distribution.board.01.pass"
+        }
+      ],
+      "source_id": "source.case.exp-002",
+      "source_url": "https://www.dell.com/community/en/conversations/poweredge-hardware-general/t420-poweredge-vlt0204-main-board-voltage-outside-of-range/67fd91b469e6265ea77af6ab",
+      "symptom_ids": [
+        "symptom.power.voltage_out_of_range",
+        "symptom.power.no_power"
+      ],
+      "target_legal_diagnostics_with_complete_outcomes": 38,
+      "ticket_id": "ticket.generated.80422a060f47ea4ce7871377",
+      "ticket_snapshot_digest": "0639e89199a6968f9316443c23e222ad4ba20f3114ce72d87694df6df532b86f",
+      "true_fault_ids": [
+        "fault.power.distribution_board.failed"
+      ],
+      "validation_procedure_ids": [
+        "verify.power.distribution_path"
+      ]
+    },
+    {
+      "accessed_on": "2026-08-28",
+      "authored_evidence_outcomes": 76,
+      "case_id": "exp-003",
+      "commands": {
+        "isolation_route_source_ids": [],
+        "minimal_witness_ids": [],
+        "useful_candidate_changing_ids": [
+          "command.linux.smartctl"
+        ]
+      },
+      "fingerprint_candidate_key": "fingerprint-candidate.storage.predictive_drive_failure",
+      "fingerprint_id": "fingerprint.storage.predictive_drive_failure",
+      "isolation_route_ids": [
+        "route.fingerprint.storage.predictive.drive.failure.01"
+      ],
+      "learning_objective_key": "objective.storage.predictive_replacement_before_failure",
+      "learning_objectives": [
+        "Treat predictive failure as actionable while protecting data and proving completed recovery."
+      ],
+      "public_candidate_fault_ids": [
+        "fault.storage.drive.predictive_failure",
+        "fault.storage.sas.drive_failed"
+      ],
+      "public_projection_hidden_truth_leaks": 0,
+      "repair_procedure_ids": [
+        "repair.storage.replace_predictive_drive"
+      ],
+      "seed": "task-042-exp-003",
+      "slot_id": "expansion-slot-03",
+      "solvability_witness": [
+        {
+          "action": "RUN_DIAGNOSTIC",
+          "evidence_outcome_id": "evidence.fingerprint.storage.predictive.drive.failure.machine.storage.predictive.drive.failure.active.test.storage.predictive.health",
+          "source_definition_id": "test.storage.predictive_health"
+        },
+        {
+          "action": "COMMIT_ISOLATION",
+          "cited_outcome_ids": [
+            "evidence.fingerprint.storage.predictive.drive.failure.machine.storage.predictive.drive.failure.active.test.storage.predictive.health"
+          ],
+          "target_fault_instance_key": "fault_instance.storage.predictive_drive_failure.root"
+        },
+        {
+          "action": "PERFORM_REPAIR",
+          "repair_outcome_id": "repair_outcome.fingerprint.storage.predictive.drive.failure",
+          "target_fault_instance_key": "fault_instance.storage.predictive_drive_failure.root"
+        },
+        {
+          "action": "PERFORM_VERIFY",
+          "result": "PASS",
+          "verification_outcome_id": "verify_outcome.fingerprint.storage.predictive.drive.failure.01.pass"
+        }
+      ],
+      "source_id": "source.case.exp-003",
+      "source_url": "https://www.dell.com/community/en/conversations/poweredge-hardware-general/poweredge-r620-drive-predicted-failure/647f7b52f4ccf8a8de9878d4",
+      "symptom_ids": [
+        "symptom.storage.predictive_failure_warning",
+        "symptom.storage.drive_fault_led"
+      ],
+      "target_legal_diagnostics_with_complete_outcomes": 38,
+      "ticket_id": "ticket.generated.46644a4accc96d5bd961b9fa",
+      "ticket_snapshot_digest": "f40eb2e706a86d54277265cd3d21b26753039ecb58287d677e51cf254a73059e",
+      "true_fault_ids": [
+        "fault.storage.drive.predictive_failure"
+      ],
+      "validation_procedure_ids": [
+        "verify.storage.predictive_replacement"
+      ]
+    },
+    {
+      "accessed_on": "2026-08-28",
+      "authored_evidence_outcomes": 78,
+      "case_id": "exp-004",
+      "commands": {
+        "isolation_route_source_ids": [],
+        "minimal_witness_ids": [],
+        "useful_candidate_changing_ids": [
+          "command.linux.lsblk"
+        ]
+      },
+      "fingerprint_candidate_key": "fingerprint-candidate.management.stale_backplane_alert",
+      "fingerprint_id": "fingerprint.management.stale_alert",
+      "isolation_route_ids": [
+        "route.fingerprint.management.stale.alert.01"
+      ],
+      "learning_objective_key": "objective.management.stale_alert_vs_live_backplane_fault",
+      "learning_objectives": [
+        "Separate read-only evidence preservation from the state-changing Repair that clears a stale alert."
+      ],
+      "public_candidate_fault_ids": [
+        "fault.management.alert.stale",
+        "fault.storage.backplane.path_failed"
+      ],
+      "public_projection_hidden_truth_leaks": 0,
+      "repair_procedure_ids": [
+        "repair.management.clear_stale_alert_state"
+      ],
+      "seed": "task-042-exp-004",
+      "slot_id": "expansion-slot-04",
+      "solvability_witness": [
+        {
+          "action": "RUN_DIAGNOSTIC",
+          "evidence_outcome_id": "evidence.fingerprint.management.stale.alert.machine.management.stale.alert.active.test.management.event.log.freshness",
+          "source_definition_id": "test.management.event_log_freshness"
+        },
+        {
+          "action": "COMMIT_ISOLATION",
+          "cited_outcome_ids": [
+            "evidence.fingerprint.management.stale.alert.machine.management.stale.alert.active.test.management.event.log.freshness"
+          ],
+          "target_fault_instance_key": "fault_instance.management.stale_alert.root"
+        },
+        {
+          "action": "PERFORM_REPAIR",
+          "repair_outcome_id": "repair_outcome.fingerprint.management.stale.alert",
+          "target_fault_instance_key": "fault_instance.management.stale_alert.root"
+        },
+        {
+          "action": "PERFORM_VERIFY",
+          "result": "PASS",
+          "verification_outcome_id": "verify_outcome.fingerprint.management.stale.alert.01.pass"
+        }
+      ],
+      "source_id": "source.case.exp-004",
+      "source_url": "https://www.dell.com/community/en/conversations/poweredge-hddscsiraid/pe2900-backplane-degraded/647e8b20f4ccf8a8dede59e9",
+      "symptom_ids": [
+        "symptom.management.alert_persists"
+      ],
+      "target_legal_diagnostics_with_complete_outcomes": 39,
+      "ticket_id": "ticket.generated.b8fa37ba78fc40c286f65d2a",
+      "ticket_snapshot_digest": "4f8f58bb0210c5ae7b2f11d2ea418c83d73552c8d940d88ddcd10b2a3d7632e2",
+      "true_fault_ids": [
+        "fault.management.alert.stale"
+      ],
+      "validation_procedure_ids": [
+        "verify.management.alert_does_not_recur"
+      ]
+    },
+    {
+      "accessed_on": "2026-08-28",
+      "authored_evidence_outcomes": 86,
+      "case_id": "exp-005",
+      "commands": {
+        "isolation_route_source_ids": [],
+        "minimal_witness_ids": [],
+        "useful_candidate_changing_ids": [
+          "command.linux.lspci"
+        ]
+      },
+      "fingerprint_candidate_key": "fingerprint-candidate.firmware.idrac_link_flap_regression",
+      "fingerprint_id": "fingerprint.firmware.incompatible_version_set",
+      "isolation_route_ids": [
+        "route.fingerprint.firmware.incompatible.version.set.01"
+      ],
+      "learning_objective_key": "objective.firmware.regression_vs_physical_link",
+      "learning_objectives": [
+        "Use repeated version A/B behavior and hardware elimination to diagnose a firmware regression."
+      ],
+      "public_candidate_fault_ids": [
+        "fault.firmware.version_set.incompatible",
+        "fault.network.cable.disconnected",
+        "fault.network.cable.failed",
+        "fault.network.nic.failed"
+      ],
+      "public_projection_hidden_truth_leaks": 0,
+      "repair_procedure_ids": [
+        "repair.firmware.restore_compatible_versions"
+      ],
+      "seed": "task-042-exp-005",
+      "slot_id": "expansion-slot-05",
+      "solvability_witness": [
+        {
+          "action": "RUN_DIAGNOSTIC",
+          "evidence_outcome_id": "evidence.fingerprint.firmware.incompatible.version.set.machine.firmware.incompatible.version.set.active.test.firmware.version.compatibility",
+          "source_definition_id": "test.firmware.version_compatibility"
+        },
+        {
+          "action": "RUN_DIAGNOSTIC",
+          "evidence_outcome_id": "evidence.fingerprint.firmware.incompatible.version.set.machine.firmware.incompatible.version.set.active.test.network.link.counter.soak",
+          "source_definition_id": "test.network.link_counter_soak"
+        },
+        {
+          "action": "COMMIT_ISOLATION",
+          "cited_outcome_ids": [
+            "evidence.fingerprint.firmware.incompatible.version.set.machine.firmware.incompatible.version.set.active.test.firmware.version.compatibility",
+            "evidence.fingerprint.firmware.incompatible.version.set.machine.firmware.incompatible.version.set.active.test.network.link.counter.soak"
+          ],
+          "target_fault_instance_key": "fault_instance.firmware.incompatible_version_set.root"
+        },
+        {
+          "action": "PERFORM_REPAIR",
+          "repair_outcome_id": "repair_outcome.fingerprint.firmware.incompatible.version.set",
+          "target_fault_instance_key": "fault_instance.firmware.incompatible_version_set.root"
+        },
+        {
+          "action": "PERFORM_VERIFY",
+          "result": "PASS",
+          "verification_outcome_id": "verify_outcome.fingerprint.firmware.incompatible.version.set.01.pass"
+        }
+      ],
+      "source_id": "source.case.exp-005",
+      "source_url": "https://www.dell.com/community/en/conversations/poweredge-hardware-general/idrac-keeps-messaging-the-nic-in-slot-4-port-1-network-link-is-started/647f94b2f4ccf8a8de70eaff",
+      "symptom_ids": [
+        "symptom.network.link_flapping",
+        "symptom.network.no_link"
+      ],
+      "target_legal_diagnostics_with_complete_outcomes": 43,
+      "ticket_id": "ticket.generated.b92a9e6c176464ba795f9dd5",
+      "ticket_snapshot_digest": "ecbb377dc65df8e4b96f90a35ff9541562b9a229b14e7ced92fae73994288637",
+      "true_fault_ids": [
+        "fault.firmware.version_set.incompatible"
+      ],
+      "validation_procedure_ids": [
+        "verify.firmware.compatible_persistent"
+      ]
+    },
+    {
+      "accessed_on": "2026-08-28",
+      "authored_evidence_outcomes": 80,
+      "case_id": "exp-006",
+      "commands": {
+        "isolation_route_source_ids": [],
+        "minimal_witness_ids": [],
+        "useful_candidate_changing_ids": []
+      },
+      "fingerprint_candidate_key": "fingerprint-candidate.management.bmc_firmware_corruption",
+      "fingerprint_id": "fingerprint.management.corrupt_bmc_firmware",
+      "isolation_route_ids": [
+        "route.fingerprint.management.corrupt.bmc.firmware.01"
+      ],
+      "learning_objective_key": "objective.management.bmc_recovery_state_before_board_replacement",
+      "learning_objectives": [
+        "Bound dangerous controller recovery to approved platform methods and verify recovery separately from the flash action."
+      ],
+      "public_candidate_fault_ids": [
+        "fault.firmware.version_set.incompatible",
+        "fault.management.bmc_firmware.corrupt"
+      ],
+      "public_projection_hidden_truth_leaks": 0,
+      "repair_procedure_ids": [
+        "repair.management.recover_bmc_firmware"
+      ],
+      "seed": "task-042-exp-006",
+      "slot_id": "expansion-slot-06",
+      "solvability_witness": [
+        {
+          "action": "RUN_DIAGNOSTIC",
+          "evidence_outcome_id": "evidence.fingerprint.management.corrupt.bmc.firmware.machine.management.corrupt.bmc.firmware.active.test.management.bmc.recovery.state",
+          "source_definition_id": "test.management.bmc_recovery_state"
+        },
+        {
+          "action": "COMMIT_ISOLATION",
+          "cited_outcome_ids": [
+            "evidence.fingerprint.management.corrupt.bmc.firmware.machine.management.corrupt.bmc.firmware.active.test.management.bmc.recovery.state"
+          ],
+          "target_fault_instance_key": "fault_instance.management.corrupt_bmc_firmware.root"
+        },
+        {
+          "action": "PERFORM_REPAIR",
+          "repair_outcome_id": "repair_outcome.fingerprint.management.corrupt.bmc.firmware",
+          "target_fault_instance_key": "fault_instance.management.corrupt_bmc_firmware.root"
+        },
+        {
+          "action": "PERFORM_VERIFY",
+          "result": "PASS",
+          "verification_outcome_id": "verify_outcome.fingerprint.management.corrupt.bmc.firmware.01.pass"
+        }
+      ],
+      "source_id": "source.case.exp-006",
+      "source_url": "https://forums.serverbuilds.net/t/ga-7pesh2-bmc-recovery/882",
+      "symptom_ids": [
+        "symptom.management.bmc_not_responding",
+        "symptom.firmware.update_failed"
+      ],
+      "target_legal_diagnostics_with_complete_outcomes": 40,
+      "ticket_id": "ticket.generated.6c878955ff0b3d7e5edbd5a0",
+      "ticket_snapshot_digest": "71fcf1cae907451f7b83ca12d7370e59d770174a72c61f5f934ba27851513ce4",
+      "true_fault_ids": [
+        "fault.management.bmc_firmware.corrupt"
+      ],
+      "validation_procedure_ids": [
+        "verify.management.bmc_functional"
+      ]
+    }
+  ]
+}

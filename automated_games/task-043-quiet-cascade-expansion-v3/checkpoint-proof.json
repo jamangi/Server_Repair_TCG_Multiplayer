@@ -1,0 +1,777 @@
+{
+  "campaign_id": "story.campaign.quiet_cascade.v1",
+  "content_version": "quiet-cascade-expansion-v3",
+  "matches": [
+    {
+      "abandoned_label": "story.qc02.shift07.abandon",
+      "active_match_resumption_supported": false,
+      "completed_label": "story.qc02.shift07.success",
+      "entry_label": "story.qc02.shift07.entry",
+      "interruption_behavior": "RESTORE_PRE_MATCH_CHECKPOINT_AND_RELAUNCH_FRESH_MATCH",
+      "isolated_schema_examples": {
+        "post_abandoned": {
+          "branch_history": [],
+          "checkpoint_id": "checkpoint.qc02.shift07.post_match",
+          "choices": {},
+          "content_version": "quiet-cascade-expansion-v3",
+          "digest": "575cbbee87a035f1515595cbdb9cdf896a3afb3b127f5d86d1c1e73da873db85",
+          "match_results": [
+            {
+              "completion": "ABANDONED",
+              "contributions": {
+                "documentation_actions": 0,
+                "isolations_accepted": 0,
+                "repairs_performed": 0,
+                "tests_run": 0,
+                "verify_passes": 0
+              },
+              "documented_outcome": false,
+              "match_id": "match.qc02.shift07.abandoned_proof",
+              "match_ref": "story.match.qc02.shift07.socket_contacts",
+              "reason_codes": [
+                "GIVE_UP"
+              ],
+              "result_id": "result.qc02.shift07.abandoned_proof",
+              "schema_version": "story-match-result-v1",
+              "story_service_points_gained": 0,
+              "tickets_closed": 0,
+              "tickets_given_up": 1,
+              "valid": true,
+              "verified_outcome": false
+            }
+          ],
+          "pack_id": "story.campaign.quiet_cascade.v1",
+          "pending_match": null,
+          "returned_match": {
+            "match_id": "match.qc02.shift07.abandoned_proof",
+            "match_ref": "story.match.qc02.shift07.socket_contacts",
+            "result_id": "result.qc02.shift07.abandoned_proof",
+            "schema_version": "story-match-context-v1"
+          },
+          "schema_version": "story-checkpoint-v1",
+          "story_service_points": 0,
+          "variables": {}
+        },
+        "post_completed": {
+          "branch_history": [],
+          "checkpoint_id": "checkpoint.qc02.shift07.post_match",
+          "choices": {},
+          "content_version": "quiet-cascade-expansion-v3",
+          "digest": "877eceee133f5b79f11416d1264b8ab5e70a90747d87310d8c0cc3d4ff2e0993",
+          "match_results": [
+            {
+              "completion": "COMPLETED",
+              "contributions": {
+                "documentation_actions": 1,
+                "isolations_accepted": 1,
+                "repairs_performed": 1,
+                "tests_run": 16,
+                "verify_passes": 1
+              },
+              "documented_outcome": true,
+              "match_id": "task-043-quiet-cascade-expansion-v3.story-qc02-shift-07.seed-story.quiet_cascade.expansion.s07.v1",
+              "match_ref": "story.match.qc02.shift07.socket_contacts",
+              "reason_codes": [
+                "QUEUE_EMPTY"
+              ],
+              "result_id": "result.qc02.shift07.engine_proof",
+              "schema_version": "story-match-result-v1",
+              "story_service_points_gained": 2,
+              "tickets_closed": 1,
+              "tickets_given_up": 0,
+              "valid": true,
+              "verified_outcome": true
+            }
+          ],
+          "pack_id": "story.campaign.quiet_cascade.v1",
+          "pending_match": null,
+          "returned_match": {
+            "match_id": "task-043-quiet-cascade-expansion-v3.story-qc02-shift-07.seed-story.quiet_cascade.expansion.s07.v1",
+            "match_ref": "story.match.qc02.shift07.socket_contacts",
+            "result_id": "result.qc02.shift07.engine_proof",
+            "schema_version": "story-match-context-v1"
+          },
+          "schema_version": "story-checkpoint-v1",
+          "story_service_points": 2,
+          "variables": {}
+        },
+        "pre_match": {
+          "branch_history": [],
+          "checkpoint_id": "checkpoint.qc02.shift07.pre_match",
+          "choices": {},
+          "content_version": "quiet-cascade-expansion-v3",
+          "digest": "2d97403177b9b636edc29658479daecadfd90b239612ecaa396240eef0a54e9e",
+          "match_results": [],
+          "pack_id": "story.campaign.quiet_cascade.v1",
+          "pending_match": {
+            "match_ref": "story.match.qc02.shift07.socket_contacts",
+            "post_match_checkpoint_id": "checkpoint.qc02.shift07.post_match",
+            "pre_match_checkpoint_id": "checkpoint.qc02.shift07.pre_match",
+            "return_label": "story.qc02.shift07.return",
+            "schema_version": "story-match-context-v1"
+          },
+          "returned_match": null,
+          "schema_version": "story-checkpoint-v1",
+          "story_service_points": 0,
+          "variables": {}
+        }
+      },
+      "launch_label": "story.qc02.shift07.match",
+      "match_ref": "story.match.qc02.shift07.socket_contacts",
+      "persistence_order": [
+        "CREATE_PRE_MATCH_CHECKPOINT",
+        "EMIT_START_MATCH",
+        "ACCEPT_MATCH_RESULT",
+        "CREATE_POST_MATCH_CHECKPOINT",
+        "CONTINUE_AT_RETURN_LABEL"
+      ],
+      "post_match_checkpoint_id": "checkpoint.qc02.shift07.post_match",
+      "pre_match_checkpoint_id": "checkpoint.qc02.shift07.pre_match",
+      "return_label": "story.qc02.shift07.return"
+    },
+    {
+      "abandoned_label": "story.qc02.shift08.abandon",
+      "active_match_resumption_supported": false,
+      "completed_label": "story.qc02.shift08.success",
+      "entry_label": "story.qc02.shift08.entry",
+      "interruption_behavior": "RESTORE_PRE_MATCH_CHECKPOINT_AND_RELAUNCH_FRESH_MATCH",
+      "isolated_schema_examples": {
+        "post_abandoned": {
+          "branch_history": [],
+          "checkpoint_id": "checkpoint.qc02.shift08.post_match",
+          "choices": {},
+          "content_version": "quiet-cascade-expansion-v3",
+          "digest": "ad2ccef34b16d2d14f1b36c2ac76b774db811102b9e9f6b1fb98ce5c856f700f",
+          "match_results": [
+            {
+              "completion": "ABANDONED",
+              "contributions": {
+                "documentation_actions": 0,
+                "isolations_accepted": 0,
+                "repairs_performed": 0,
+                "tests_run": 0,
+                "verify_passes": 0
+              },
+              "documented_outcome": false,
+              "match_id": "match.qc02.shift08.abandoned_proof",
+              "match_ref": "story.match.qc02.shift08.power_distribution",
+              "reason_codes": [
+                "GIVE_UP"
+              ],
+              "result_id": "result.qc02.shift08.abandoned_proof",
+              "schema_version": "story-match-result-v1",
+              "story_service_points_gained": 0,
+              "tickets_closed": 0,
+              "tickets_given_up": 1,
+              "valid": true,
+              "verified_outcome": false
+            }
+          ],
+          "pack_id": "story.campaign.quiet_cascade.v1",
+          "pending_match": null,
+          "returned_match": {
+            "match_id": "match.qc02.shift08.abandoned_proof",
+            "match_ref": "story.match.qc02.shift08.power_distribution",
+            "result_id": "result.qc02.shift08.abandoned_proof",
+            "schema_version": "story-match-context-v1"
+          },
+          "schema_version": "story-checkpoint-v1",
+          "story_service_points": 0,
+          "variables": {}
+        },
+        "post_completed": {
+          "branch_history": [],
+          "checkpoint_id": "checkpoint.qc02.shift08.post_match",
+          "choices": {},
+          "content_version": "quiet-cascade-expansion-v3",
+          "digest": "3aa5ec06419f7ffa1d53ed87c7fb8a2fcef54501addac186c45ac49b42f4adce",
+          "match_results": [
+            {
+              "completion": "COMPLETED",
+              "contributions": {
+                "documentation_actions": 1,
+                "isolations_accepted": 1,
+                "repairs_performed": 1,
+                "tests_run": 10,
+                "verify_passes": 1
+              },
+              "documented_outcome": true,
+              "match_id": "task-043-quiet-cascade-expansion-v3.story-qc02-shift-08.seed-story.quiet_cascade.expansion.s08.v1",
+              "match_ref": "story.match.qc02.shift08.power_distribution",
+              "reason_codes": [
+                "QUEUE_EMPTY"
+              ],
+              "result_id": "result.qc02.shift08.engine_proof",
+              "schema_version": "story-match-result-v1",
+              "story_service_points_gained": 2,
+              "tickets_closed": 1,
+              "tickets_given_up": 0,
+              "valid": true,
+              "verified_outcome": true
+            }
+          ],
+          "pack_id": "story.campaign.quiet_cascade.v1",
+          "pending_match": null,
+          "returned_match": {
+            "match_id": "task-043-quiet-cascade-expansion-v3.story-qc02-shift-08.seed-story.quiet_cascade.expansion.s08.v1",
+            "match_ref": "story.match.qc02.shift08.power_distribution",
+            "result_id": "result.qc02.shift08.engine_proof",
+            "schema_version": "story-match-context-v1"
+          },
+          "schema_version": "story-checkpoint-v1",
+          "story_service_points": 2,
+          "variables": {}
+        },
+        "pre_match": {
+          "branch_history": [],
+          "checkpoint_id": "checkpoint.qc02.shift08.pre_match",
+          "choices": {},
+          "content_version": "quiet-cascade-expansion-v3",
+          "digest": "6d915f13f9136f073aeb475b9559c24a5cd46be826f5dd73b3ffb5dab629fbe5",
+          "match_results": [],
+          "pack_id": "story.campaign.quiet_cascade.v1",
+          "pending_match": {
+            "match_ref": "story.match.qc02.shift08.power_distribution",
+            "post_match_checkpoint_id": "checkpoint.qc02.shift08.post_match",
+            "pre_match_checkpoint_id": "checkpoint.qc02.shift08.pre_match",
+            "return_label": "story.qc02.shift08.return",
+            "schema_version": "story-match-context-v1"
+          },
+          "returned_match": null,
+          "schema_version": "story-checkpoint-v1",
+          "story_service_points": 0,
+          "variables": {}
+        }
+      },
+      "launch_label": "story.qc02.shift08.match",
+      "match_ref": "story.match.qc02.shift08.power_distribution",
+      "persistence_order": [
+        "CREATE_PRE_MATCH_CHECKPOINT",
+        "EMIT_START_MATCH",
+        "ACCEPT_MATCH_RESULT",
+        "CREATE_POST_MATCH_CHECKPOINT",
+        "CONTINUE_AT_RETURN_LABEL"
+      ],
+      "post_match_checkpoint_id": "checkpoint.qc02.shift08.post_match",
+      "pre_match_checkpoint_id": "checkpoint.qc02.shift08.pre_match",
+      "return_label": "story.qc02.shift08.return"
+    },
+    {
+      "abandoned_label": "story.qc02.shift09.abandon",
+      "active_match_resumption_supported": false,
+      "completed_label": "story.qc02.shift09.success",
+      "entry_label": "story.qc02.shift09.entry",
+      "interruption_behavior": "RESTORE_PRE_MATCH_CHECKPOINT_AND_RELAUNCH_FRESH_MATCH",
+      "isolated_schema_examples": {
+        "post_abandoned": {
+          "branch_history": [],
+          "checkpoint_id": "checkpoint.qc02.shift09.post_match",
+          "choices": {},
+          "content_version": "quiet-cascade-expansion-v3",
+          "digest": "5e1900d014e05c09791a82ccc64393f80a4c93c51638883def8ba904cd5ddc3f",
+          "match_results": [
+            {
+              "completion": "ABANDONED",
+              "contributions": {
+                "documentation_actions": 0,
+                "isolations_accepted": 0,
+                "repairs_performed": 0,
+                "tests_run": 0,
+                "verify_passes": 0
+              },
+              "documented_outcome": false,
+              "match_id": "match.qc02.shift09.abandoned_proof",
+              "match_ref": "story.match.qc02.shift09.predictive_drive",
+              "reason_codes": [
+                "GIVE_UP"
+              ],
+              "result_id": "result.qc02.shift09.abandoned_proof",
+              "schema_version": "story-match-result-v1",
+              "story_service_points_gained": 0,
+              "tickets_closed": 0,
+              "tickets_given_up": 1,
+              "valid": true,
+              "verified_outcome": false
+            }
+          ],
+          "pack_id": "story.campaign.quiet_cascade.v1",
+          "pending_match": null,
+          "returned_match": {
+            "match_id": "match.qc02.shift09.abandoned_proof",
+            "match_ref": "story.match.qc02.shift09.predictive_drive",
+            "result_id": "result.qc02.shift09.abandoned_proof",
+            "schema_version": "story-match-context-v1"
+          },
+          "schema_version": "story-checkpoint-v1",
+          "story_service_points": 0,
+          "variables": {}
+        },
+        "post_completed": {
+          "branch_history": [],
+          "checkpoint_id": "checkpoint.qc02.shift09.post_match",
+          "choices": {},
+          "content_version": "quiet-cascade-expansion-v3",
+          "digest": "230b4c9c7fbf6c8549deaad689d5b381959efe10632194527f88baa13df85e71",
+          "match_results": [
+            {
+              "completion": "COMPLETED",
+              "contributions": {
+                "documentation_actions": 1,
+                "isolations_accepted": 1,
+                "repairs_performed": 1,
+                "tests_run": 15,
+                "verify_passes": 1
+              },
+              "documented_outcome": true,
+              "match_id": "task-043-quiet-cascade-expansion-v3.story-qc02-shift-09.seed-story.quiet_cascade.expansion.s09.v1",
+              "match_ref": "story.match.qc02.shift09.predictive_drive",
+              "reason_codes": [
+                "QUEUE_EMPTY"
+              ],
+              "result_id": "result.qc02.shift09.engine_proof",
+              "schema_version": "story-match-result-v1",
+              "story_service_points_gained": 2,
+              "tickets_closed": 1,
+              "tickets_given_up": 0,
+              "valid": true,
+              "verified_outcome": true
+            }
+          ],
+          "pack_id": "story.campaign.quiet_cascade.v1",
+          "pending_match": null,
+          "returned_match": {
+            "match_id": "task-043-quiet-cascade-expansion-v3.story-qc02-shift-09.seed-story.quiet_cascade.expansion.s09.v1",
+            "match_ref": "story.match.qc02.shift09.predictive_drive",
+            "result_id": "result.qc02.shift09.engine_proof",
+            "schema_version": "story-match-context-v1"
+          },
+          "schema_version": "story-checkpoint-v1",
+          "story_service_points": 2,
+          "variables": {}
+        },
+        "pre_match": {
+          "branch_history": [],
+          "checkpoint_id": "checkpoint.qc02.shift09.pre_match",
+          "choices": {},
+          "content_version": "quiet-cascade-expansion-v3",
+          "digest": "659cd83e9b48b46763b8242a2ceacdc9461471355bdab6c3560d919aa9e48847",
+          "match_results": [],
+          "pack_id": "story.campaign.quiet_cascade.v1",
+          "pending_match": {
+            "match_ref": "story.match.qc02.shift09.predictive_drive",
+            "post_match_checkpoint_id": "checkpoint.qc02.shift09.post_match",
+            "pre_match_checkpoint_id": "checkpoint.qc02.shift09.pre_match",
+            "return_label": "story.qc02.shift09.return",
+            "schema_version": "story-match-context-v1"
+          },
+          "returned_match": null,
+          "schema_version": "story-checkpoint-v1",
+          "story_service_points": 0,
+          "variables": {}
+        }
+      },
+      "launch_label": "story.qc02.shift09.match",
+      "match_ref": "story.match.qc02.shift09.predictive_drive",
+      "persistence_order": [
+        "CREATE_PRE_MATCH_CHECKPOINT",
+        "EMIT_START_MATCH",
+        "ACCEPT_MATCH_RESULT",
+        "CREATE_POST_MATCH_CHECKPOINT",
+        "CONTINUE_AT_RETURN_LABEL"
+      ],
+      "post_match_checkpoint_id": "checkpoint.qc02.shift09.post_match",
+      "pre_match_checkpoint_id": "checkpoint.qc02.shift09.pre_match",
+      "return_label": "story.qc02.shift09.return"
+    },
+    {
+      "abandoned_label": "story.qc02.shift10.abandon",
+      "active_match_resumption_supported": false,
+      "completed_label": "story.qc02.shift10.success",
+      "entry_label": "story.qc02.shift10.entry",
+      "interruption_behavior": "RESTORE_PRE_MATCH_CHECKPOINT_AND_RELAUNCH_FRESH_MATCH",
+      "isolated_schema_examples": {
+        "post_abandoned": {
+          "branch_history": [],
+          "checkpoint_id": "checkpoint.qc02.shift10.post_match",
+          "choices": {},
+          "content_version": "quiet-cascade-expansion-v3",
+          "digest": "c00459018f473b2c9a3263558223b144c148c0429c4da5c002ae76bdb17c29dd",
+          "match_results": [
+            {
+              "completion": "ABANDONED",
+              "contributions": {
+                "documentation_actions": 0,
+                "isolations_accepted": 0,
+                "repairs_performed": 0,
+                "tests_run": 0,
+                "verify_passes": 0
+              },
+              "documented_outcome": false,
+              "match_id": "match.qc02.shift10.abandoned_proof",
+              "match_ref": "story.match.qc02.shift10.stale_alert",
+              "reason_codes": [
+                "GIVE_UP"
+              ],
+              "result_id": "result.qc02.shift10.abandoned_proof",
+              "schema_version": "story-match-result-v1",
+              "story_service_points_gained": 0,
+              "tickets_closed": 0,
+              "tickets_given_up": 1,
+              "valid": true,
+              "verified_outcome": false
+            }
+          ],
+          "pack_id": "story.campaign.quiet_cascade.v1",
+          "pending_match": null,
+          "returned_match": {
+            "match_id": "match.qc02.shift10.abandoned_proof",
+            "match_ref": "story.match.qc02.shift10.stale_alert",
+            "result_id": "result.qc02.shift10.abandoned_proof",
+            "schema_version": "story-match-context-v1"
+          },
+          "schema_version": "story-checkpoint-v1",
+          "story_service_points": 0,
+          "variables": {}
+        },
+        "post_completed": {
+          "branch_history": [],
+          "checkpoint_id": "checkpoint.qc02.shift10.post_match",
+          "choices": {},
+          "content_version": "quiet-cascade-expansion-v3",
+          "digest": "abd7f6a5114970bd9465a4d941fbfa647ccc8b5c31f713d23b4028ca7bd0b036",
+          "match_results": [
+            {
+              "completion": "COMPLETED",
+              "contributions": {
+                "documentation_actions": 1,
+                "isolations_accepted": 1,
+                "repairs_performed": 1,
+                "tests_run": 14,
+                "verify_passes": 1
+              },
+              "documented_outcome": true,
+              "match_id": "task-043-quiet-cascade-expansion-v3.story-qc02-shift-10.seed-story.quiet_cascade.expansion.s10.v1",
+              "match_ref": "story.match.qc02.shift10.stale_alert",
+              "reason_codes": [
+                "QUEUE_EMPTY"
+              ],
+              "result_id": "result.qc02.shift10.engine_proof",
+              "schema_version": "story-match-result-v1",
+              "story_service_points_gained": 2,
+              "tickets_closed": 1,
+              "tickets_given_up": 0,
+              "valid": true,
+              "verified_outcome": true
+            }
+          ],
+          "pack_id": "story.campaign.quiet_cascade.v1",
+          "pending_match": null,
+          "returned_match": {
+            "match_id": "task-043-quiet-cascade-expansion-v3.story-qc02-shift-10.seed-story.quiet_cascade.expansion.s10.v1",
+            "match_ref": "story.match.qc02.shift10.stale_alert",
+            "result_id": "result.qc02.shift10.engine_proof",
+            "schema_version": "story-match-context-v1"
+          },
+          "schema_version": "story-checkpoint-v1",
+          "story_service_points": 2,
+          "variables": {}
+        },
+        "pre_match": {
+          "branch_history": [],
+          "checkpoint_id": "checkpoint.qc02.shift10.pre_match",
+          "choices": {},
+          "content_version": "quiet-cascade-expansion-v3",
+          "digest": "53842c3772b295274edf7f3739f55f8af837a5070503244999c9858e7a8c43ba",
+          "match_results": [],
+          "pack_id": "story.campaign.quiet_cascade.v1",
+          "pending_match": {
+            "match_ref": "story.match.qc02.shift10.stale_alert",
+            "post_match_checkpoint_id": "checkpoint.qc02.shift10.post_match",
+            "pre_match_checkpoint_id": "checkpoint.qc02.shift10.pre_match",
+            "return_label": "story.qc02.shift10.return",
+            "schema_version": "story-match-context-v1"
+          },
+          "returned_match": null,
+          "schema_version": "story-checkpoint-v1",
+          "story_service_points": 0,
+          "variables": {}
+        }
+      },
+      "launch_label": "story.qc02.shift10.match",
+      "match_ref": "story.match.qc02.shift10.stale_alert",
+      "persistence_order": [
+        "CREATE_PRE_MATCH_CHECKPOINT",
+        "EMIT_START_MATCH",
+        "ACCEPT_MATCH_RESULT",
+        "CREATE_POST_MATCH_CHECKPOINT",
+        "CONTINUE_AT_RETURN_LABEL"
+      ],
+      "post_match_checkpoint_id": "checkpoint.qc02.shift10.post_match",
+      "pre_match_checkpoint_id": "checkpoint.qc02.shift10.pre_match",
+      "return_label": "story.qc02.shift10.return"
+    },
+    {
+      "abandoned_label": "story.qc02.shift11.abandon",
+      "active_match_resumption_supported": false,
+      "completed_label": "story.qc02.shift11.success",
+      "entry_label": "story.qc02.shift11.entry",
+      "interruption_behavior": "RESTORE_PRE_MATCH_CHECKPOINT_AND_RELAUNCH_FRESH_MATCH",
+      "isolated_schema_examples": {
+        "post_abandoned": {
+          "branch_history": [],
+          "checkpoint_id": "checkpoint.qc02.shift11.post_match",
+          "choices": {},
+          "content_version": "quiet-cascade-expansion-v3",
+          "digest": "442ee687853daa3cc7227f1da3eb3e90b96e945fbf95fabd0375c724fc9a8239",
+          "match_results": [
+            {
+              "completion": "ABANDONED",
+              "contributions": {
+                "documentation_actions": 0,
+                "isolations_accepted": 0,
+                "repairs_performed": 0,
+                "tests_run": 0,
+                "verify_passes": 0
+              },
+              "documented_outcome": false,
+              "match_id": "match.qc02.shift11.abandoned_proof",
+              "match_ref": "story.match.qc02.shift11.firmware_regression",
+              "reason_codes": [
+                "GIVE_UP"
+              ],
+              "result_id": "result.qc02.shift11.abandoned_proof",
+              "schema_version": "story-match-result-v1",
+              "story_service_points_gained": 0,
+              "tickets_closed": 0,
+              "tickets_given_up": 1,
+              "valid": true,
+              "verified_outcome": false
+            }
+          ],
+          "pack_id": "story.campaign.quiet_cascade.v1",
+          "pending_match": null,
+          "returned_match": {
+            "match_id": "match.qc02.shift11.abandoned_proof",
+            "match_ref": "story.match.qc02.shift11.firmware_regression",
+            "result_id": "result.qc02.shift11.abandoned_proof",
+            "schema_version": "story-match-context-v1"
+          },
+          "schema_version": "story-checkpoint-v1",
+          "story_service_points": 0,
+          "variables": {}
+        },
+        "post_completed": {
+          "branch_history": [],
+          "checkpoint_id": "checkpoint.qc02.shift11.post_match",
+          "choices": {},
+          "content_version": "quiet-cascade-expansion-v3",
+          "digest": "b6e2312d736a27f9e14972f0f837770e6eb0c0880dd1f006cebafa3d4955816a",
+          "match_results": [
+            {
+              "completion": "COMPLETED",
+              "contributions": {
+                "documentation_actions": 1,
+                "isolations_accepted": 10,
+                "repairs_performed": 1,
+                "tests_run": 14,
+                "verify_passes": 1
+              },
+              "documented_outcome": true,
+              "match_id": "task-043-quiet-cascade-expansion-v3.story-qc02-shift-11.seed-story.quiet_cascade.expansion.s11.v1",
+              "match_ref": "story.match.qc02.shift11.firmware_regression",
+              "reason_codes": [
+                "QUEUE_EMPTY"
+              ],
+              "result_id": "result.qc02.shift11.engine_proof",
+              "schema_version": "story-match-result-v1",
+              "story_service_points_gained": 2,
+              "tickets_closed": 1,
+              "tickets_given_up": 0,
+              "valid": true,
+              "verified_outcome": true
+            }
+          ],
+          "pack_id": "story.campaign.quiet_cascade.v1",
+          "pending_match": null,
+          "returned_match": {
+            "match_id": "task-043-quiet-cascade-expansion-v3.story-qc02-shift-11.seed-story.quiet_cascade.expansion.s11.v1",
+            "match_ref": "story.match.qc02.shift11.firmware_regression",
+            "result_id": "result.qc02.shift11.engine_proof",
+            "schema_version": "story-match-context-v1"
+          },
+          "schema_version": "story-checkpoint-v1",
+          "story_service_points": 2,
+          "variables": {}
+        },
+        "pre_match": {
+          "branch_history": [],
+          "checkpoint_id": "checkpoint.qc02.shift11.pre_match",
+          "choices": {},
+          "content_version": "quiet-cascade-expansion-v3",
+          "digest": "9244274aa1ca560422d2c6993326a9b570f091060a723b7c3b58858be893593a",
+          "match_results": [],
+          "pack_id": "story.campaign.quiet_cascade.v1",
+          "pending_match": {
+            "match_ref": "story.match.qc02.shift11.firmware_regression",
+            "post_match_checkpoint_id": "checkpoint.qc02.shift11.post_match",
+            "pre_match_checkpoint_id": "checkpoint.qc02.shift11.pre_match",
+            "return_label": "story.qc02.shift11.return",
+            "schema_version": "story-match-context-v1"
+          },
+          "returned_match": null,
+          "schema_version": "story-checkpoint-v1",
+          "story_service_points": 0,
+          "variables": {}
+        }
+      },
+      "launch_label": "story.qc02.shift11.match",
+      "match_ref": "story.match.qc02.shift11.firmware_regression",
+      "persistence_order": [
+        "CREATE_PRE_MATCH_CHECKPOINT",
+        "EMIT_START_MATCH",
+        "ACCEPT_MATCH_RESULT",
+        "CREATE_POST_MATCH_CHECKPOINT",
+        "CONTINUE_AT_RETURN_LABEL"
+      ],
+      "post_match_checkpoint_id": "checkpoint.qc02.shift11.post_match",
+      "pre_match_checkpoint_id": "checkpoint.qc02.shift11.pre_match",
+      "return_label": "story.qc02.shift11.return"
+    },
+    {
+      "abandoned_label": "story.qc02.shift12.abandon",
+      "active_match_resumption_supported": false,
+      "completed_label": "story.qc02.shift12.success",
+      "entry_label": "story.qc02.shift12.entry",
+      "interruption_behavior": "RESTORE_PRE_MATCH_CHECKPOINT_AND_RELAUNCH_FRESH_MATCH",
+      "isolated_schema_examples": {
+        "post_abandoned": {
+          "branch_history": [],
+          "checkpoint_id": "checkpoint.qc02.shift12.post_match",
+          "choices": {},
+          "content_version": "quiet-cascade-expansion-v3",
+          "digest": "80b09a1f0c403bc9af747360b88276d7eed51bf32470649f34600f156a9a182f",
+          "match_results": [
+            {
+              "completion": "ABANDONED",
+              "contributions": {
+                "documentation_actions": 0,
+                "isolations_accepted": 0,
+                "repairs_performed": 0,
+                "tests_run": 0,
+                "verify_passes": 0
+              },
+              "documented_outcome": false,
+              "match_id": "match.qc02.shift12.abandoned_proof",
+              "match_ref": "story.match.qc02.shift12.bmc_recovery",
+              "reason_codes": [
+                "GIVE_UP"
+              ],
+              "result_id": "result.qc02.shift12.abandoned_proof",
+              "schema_version": "story-match-result-v1",
+              "story_service_points_gained": 0,
+              "tickets_closed": 0,
+              "tickets_given_up": 1,
+              "valid": true,
+              "verified_outcome": false
+            }
+          ],
+          "pack_id": "story.campaign.quiet_cascade.v1",
+          "pending_match": null,
+          "returned_match": {
+            "match_id": "match.qc02.shift12.abandoned_proof",
+            "match_ref": "story.match.qc02.shift12.bmc_recovery",
+            "result_id": "result.qc02.shift12.abandoned_proof",
+            "schema_version": "story-match-context-v1"
+          },
+          "schema_version": "story-checkpoint-v1",
+          "story_service_points": 0,
+          "variables": {}
+        },
+        "post_completed": {
+          "branch_history": [],
+          "checkpoint_id": "checkpoint.qc02.shift12.post_match",
+          "choices": {},
+          "content_version": "quiet-cascade-expansion-v3",
+          "digest": "42e1f572045f1fdc9eac93ac7848d864637bef5930dfb0af39cf2a4d2b5b5e80",
+          "match_results": [
+            {
+              "completion": "COMPLETED",
+              "contributions": {
+                "documentation_actions": 1,
+                "isolations_accepted": 1,
+                "repairs_performed": 1,
+                "tests_run": 6,
+                "verify_passes": 1
+              },
+              "documented_outcome": true,
+              "match_id": "task-043-quiet-cascade-expansion-v3.story-qc02-shift-12.seed-story.quiet_cascade.expansion.s12.v1",
+              "match_ref": "story.match.qc02.shift12.bmc_recovery",
+              "reason_codes": [
+                "QUEUE_EMPTY"
+              ],
+              "result_id": "result.qc02.shift12.engine_proof",
+              "schema_version": "story-match-result-v1",
+              "story_service_points_gained": 2,
+              "tickets_closed": 1,
+              "tickets_given_up": 0,
+              "valid": true,
+              "verified_outcome": true
+            }
+          ],
+          "pack_id": "story.campaign.quiet_cascade.v1",
+          "pending_match": null,
+          "returned_match": {
+            "match_id": "task-043-quiet-cascade-expansion-v3.story-qc02-shift-12.seed-story.quiet_cascade.expansion.s12.v1",
+            "match_ref": "story.match.qc02.shift12.bmc_recovery",
+            "result_id": "result.qc02.shift12.engine_proof",
+            "schema_version": "story-match-context-v1"
+          },
+          "schema_version": "story-checkpoint-v1",
+          "story_service_points": 2,
+          "variables": {}
+        },
+        "pre_match": {
+          "branch_history": [],
+          "checkpoint_id": "checkpoint.qc02.shift12.pre_match",
+          "choices": {},
+          "content_version": "quiet-cascade-expansion-v3",
+          "digest": "6ebed8e1d4cf87633da7bd975de8b4a261ec713cac0ae7fc1dfaff37ebdd9392",
+          "match_results": [],
+          "pack_id": "story.campaign.quiet_cascade.v1",
+          "pending_match": {
+            "match_ref": "story.match.qc02.shift12.bmc_recovery",
+            "post_match_checkpoint_id": "checkpoint.qc02.shift12.post_match",
+            "pre_match_checkpoint_id": "checkpoint.qc02.shift12.pre_match",
+            "return_label": "story.qc02.shift12.return",
+            "schema_version": "story-match-context-v1"
+          },
+          "returned_match": null,
+          "schema_version": "story-checkpoint-v1",
+          "story_service_points": 0,
+          "variables": {}
+        }
+      },
+      "launch_label": "story.qc02.shift12.match",
+      "match_ref": "story.match.qc02.shift12.bmc_recovery",
+      "persistence_order": [
+        "CREATE_PRE_MATCH_CHECKPOINT",
+        "EMIT_START_MATCH",
+        "ACCEPT_MATCH_RESULT",
+        "CREATE_POST_MATCH_CHECKPOINT",
+        "CONTINUE_AT_RETURN_LABEL"
+      ],
+      "post_match_checkpoint_id": "checkpoint.qc02.shift12.post_match",
+      "pre_match_checkpoint_id": "checkpoint.qc02.shift12.pre_match",
+      "return_label": "story.qc02.shift12.return"
+    }
+  ],
+  "proof_version": "task-043-checkpoint-boundary-proof-v1",
+  "runtime_contract": {
+    "active_match_resumption_supported": false,
+    "checkpoint_schema_version": "story-checkpoint-v1",
+    "match_context_schema_version": "story-match-context-v1",
+    "restart_source": "PRE_MATCH_CHECKPOINT",
+    "result_acceptance_precedes_post_match_checkpoint": true,
+    "return_label_runs_after_post_match_checkpoint": true
+  }
+}

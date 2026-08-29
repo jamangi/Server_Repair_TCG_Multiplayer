@@ -18,6 +18,7 @@ export const RULESET_VERSION = 'first-version-v2';
 export const CARD_CATALOG_VERSION = 'core-card-catalog-diagnosis-v2';
 export const PRIOR_EXPANDED_CARD_CATALOG_VERSION = 'core-card-catalog-coverage-v3';
 export const EXPANDED_CARD_CATALOG_VERSION = 'core-card-catalog-technical-copy-v4';
+export const STORY_EXPANSION_CARD_CATALOG_VERSION = 'core-card-catalog-story-expansion-v5';
 export const STORAGE_KEY = 'server-repair-tcg:solo-pages-v2:state';
 export const MAX_IMPORT_BYTES = 512 * 1024;
 export const PROFILE_NAME_MAX_LENGTH = 40;
@@ -246,7 +247,11 @@ export function createClientDataContext({ cardCatalog, deckCatalog }) {
   if (!isPlainObject(deckCatalog) || !Array.isArray(deckCatalog.decks)) {
     throw new ClientDataError('MISSING_CONTENT_CONTEXT', 'A loaded deck catalog is required.');
   }
-  const supportedCardCatalogVersions = new Set([CARD_CATALOG_VERSION, EXPANDED_CARD_CATALOG_VERSION]);
+  const supportedCardCatalogVersions = new Set([
+    CARD_CATALOG_VERSION,
+    EXPANDED_CARD_CATALOG_VERSION,
+    STORY_EXPANSION_CARD_CATALOG_VERSION,
+  ]);
   if (!supportedCardCatalogVersions.has(cardCatalog.card_catalog_version)
       || cardCatalog.ruleset_version !== RULESET_VERSION) {
     throw new ClientDataError('INCOMPATIBLE_CONTENT', 'The card catalog version is not compatible with solo-pages-v2.');
@@ -255,7 +260,10 @@ export function createClientDataContext({ cardCatalog, deckCatalog }) {
       || deckCatalog.ruleset_version !== RULESET_VERSION) {
     throw new ClientDataError('INCOMPATIBLE_CONTENT', 'The deck catalog version is not compatible with solo-pages-v2.');
   }
-  const starterSourceDeckId = cardCatalog.card_catalog_version === EXPANDED_CARD_CATALOG_VERSION
+  const starterSourceDeckId = [
+    EXPANDED_CARD_CATALOG_VERSION,
+    STORY_EXPANSION_CARD_CATALOG_VERSION,
+  ].includes(cardCatalog.card_catalog_version)
     ? EXPANDED_STARTER_SOURCE_DECK_ID : STARTER_SOURCE_DECK_ID;
   const starterDeck = deckCatalog.decks.find((deck) => deck.id === starterSourceDeckId);
   if (!starterDeck) {
@@ -874,6 +882,19 @@ export function migrateLocalState(candidate, context) {
     migrated.records.decks.card_catalog_version = EXPANDED_CARD_CATALOG_VERSION;
     return assertValidLocalState(migrated, normalized);
   }
+  if (normalized.cardCatalogVersion === STORY_EXPANSION_CARD_CATALOG_VERSION
+      && [CARD_CATALOG_VERSION, PRIOR_EXPANDED_CARD_CATALOG_VERSION]
+        .includes(working.records?.decks?.card_catalog_version)) {
+    const migrated = working;
+    migrated.records.decks = createDefaultState(normalized).records.decks;
+    return assertValidLocalState(migrated, normalized);
+  }
+  if (normalized.cardCatalogVersion === STORY_EXPANSION_CARD_CATALOG_VERSION
+      && working.records?.decks?.card_catalog_version === EXPANDED_CARD_CATALOG_VERSION) {
+    const migrated = working;
+    migrated.records.decks.card_catalog_version = STORY_EXPANSION_CARD_CATALOG_VERSION;
+    return assertValidLocalState(migrated, normalized);
+  }
   return assertValidLocalState(working, normalized);
 }
 
@@ -1137,23 +1158,33 @@ export function validateExportBundle(bundle, context) {
 }
 
 export function migrateExportBundle(candidate, context) {
-  normalizeContext(context);
+  const normalized = normalizeContext(context);
   if (!isPlainObject(candidate)) throw new ClientDataError('INVALID_IMPORT', 'Import bundle must be an object.');
   const unsafe = findForbiddenProperties(candidate);
   if (unsafe.length > 0) throw new ClientDataError('UNSAFE_IMPORT', 'Import contains unsafe object properties.', unsafe);
-  if (candidate.schema_version === EXPORT_VERSION) return cloneJson(candidate);
-  if (!SUPPORTED_PRIOR_EXPORT_VERSIONS.includes(candidate.schema_version)) {
+  if (candidate.schema_version !== EXPORT_VERSION
+      && !SUPPORTED_PRIOR_EXPORT_VERSIONS.includes(candidate.schema_version)) {
     throw new ClientDataError('UNSUPPORTED_VERSION', `Unsupported export version ${String(candidate.schema_version)}.`);
   }
   const migrated = cloneJson(candidate);
-  migrated.schema_version = EXPORT_VERSION;
-  if (isPlainObject(migrated.records) && !Object.hasOwn(migrated.records, 'story')) {
-    migrated.records.story = createEmptyStoryProgress();
+  if (candidate.schema_version !== EXPORT_VERSION) {
+    migrated.schema_version = EXPORT_VERSION;
+    if (isPlainObject(migrated.records) && !Object.hasOwn(migrated.records, 'story')) {
+      migrated.records.story = createEmptyStoryProgress();
+    }
+    if (isPlainObject(migrated.records?.settings)
+        && migrated.records.settings.schema_version === 'solo-settings-v2') {
+      migrated.records.settings.schema_version = SETTINGS_VERSION;
+      migrated.records.settings.sfx_volume_percent = 40;
+    }
   }
-  if (isPlainObject(migrated.records?.settings)
-      && migrated.records.settings.schema_version === 'solo-settings-v2') {
-    migrated.records.settings.schema_version = SETTINGS_VERSION;
-    migrated.records.settings.sfx_volume_percent = 40;
+  if (normalized.cardCatalogVersion === STORY_EXPANSION_CARD_CATALOG_VERSION
+      && [CARD_CATALOG_VERSION, PRIOR_EXPANDED_CARD_CATALOG_VERSION]
+        .includes(migrated.records?.decks?.card_catalog_version)) {
+    migrated.records.decks = createDefaultState(normalized).records.decks;
+  } else if (normalized.cardCatalogVersion === STORY_EXPANSION_CARD_CATALOG_VERSION
+      && migrated.records?.decks?.card_catalog_version === EXPANDED_CARD_CATALOG_VERSION) {
+    migrated.records.decks.card_catalog_version = STORY_EXPANSION_CARD_CATALOG_VERSION;
   }
   const errors = validateExportBundle(migrated, context);
   if (errors.length > 0) {

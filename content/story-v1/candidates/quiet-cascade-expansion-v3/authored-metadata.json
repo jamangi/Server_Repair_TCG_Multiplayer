@@ -1,0 +1,3238 @@
+{
+  "metadata_version": "story-authored-metadata-v1",
+  "pack_id": "story.campaign.quiet_cascade.v1",
+  "content_version": "quiet-cascade-expansion-v3",
+  "status": "CANDIDATE_NON_LIVE",
+  "route_model": "Selectors are declarative; TASK-044 validation executes all 256 routes.",
+  "authority_policy": "Dialogue supplies public context and normalized-result interpretation only; it never creates Match Evidence, Isolation, Repair, Verify, Documentation, or closure.",
+  "outcome_copy_policy": {
+    "allowed_normalized_result_fields": [
+      "completion"
+    ],
+    "minimal_result_contract": "Copy remains true when every normalized counter is zero and documented_outcome and verified_outcome are false.",
+    "private_match_detail_policy": "Outcome copy may state its selected completion and an allowlisted public process principle; it may not infer private Evidence, diagnosis, action sequence, or technical outcome.",
+    "public_process_principles": [
+      {
+        "principle_id": "S07_COMPLETED_SCOPE",
+        "allowed_copy": "This Match returned COMPLETED. That status belongs to this Ticket and does not decide why another machine behaves differently.",
+        "semantic_summary": "Confine completed status to this Ticket and reject applying it to another machine."
+      },
+      {
+        "principle_id": "S07_COMPLETED_FORWARD",
+        "allowed_copy": "For the next Ticket, record what moved, what stayed fixed, and which conditions surrounded each new comparison.",
+        "semantic_summary": "Teach controlled-comparison framing as a forward-looking public principle."
+      },
+      {
+        "principle_id": "S07_ABANDONED_SCOPE",
+        "allowed_copy": "This Match returned ABANDONED. This handoff adds no diagnosis, action, or closure beyond that bounded result.",
+        "semantic_summary": "State abandonment while adding no private diagnosis, action, or closure."
+      },
+      {
+        "principle_id": "S07_ABANDONED_FORWARD",
+        "allowed_copy": "For any fresh attempt, treat its observation window as new work and name what changed versus what stayed fixed.",
+        "semantic_summary": "Teach fresh-window comparison discipline without claiming prior Match work."
+      },
+      {
+        "principle_id": "S08_COMPLETED_SCOPE",
+        "allowed_copy": "This Match returned COMPLETED. Gate accepts that status for this Ticket without extending its explanation to another case.",
+        "semantic_summary": "Confine completed status to this Ticket."
+      },
+      {
+        "principle_id": "S08_COMPLETED_FORWARD",
+        "allowed_copy": "For the next Ticket, keep what was reported separate from the explanation being proposed, and require new Evidence before choosing between local and shared context.",
+        "semantic_summary": "Teach report-versus-explanation discipline prospectively."
+      },
+      {
+        "principle_id": "S08_ABANDONED_SCOPE",
+        "allowed_copy": "This Match returned ABANDONED. This handoff adds no tested configuration, isolated part, or closure beyond that bounded result.",
+        "semantic_summary": "State abandonment without inventing tests, Isolation, or closure."
+      },
+      {
+        "principle_id": "S08_ABANDONED_FORWARD",
+        "allowed_copy": "A fresh attempt must earn its own distinction between the report, its location, and any shared context.",
+        "semantic_summary": "Teach fresh report-location-context discrimination without claiming prior Match work."
+      },
+      {
+        "principle_id": "S09_COMPLETED_SCOPE",
+        "allowed_copy": "This Match returned COMPLETED. That status is scoped to this Ticket and does not dictate the same diagnosis or response for another one.",
+        "semantic_summary": "Confine completed status to this Ticket."
+      },
+      {
+        "principle_id": "S09_COMPLETED_FORWARD",
+        "allowed_copy": "I keep old transit maps because routes stay legible when their stops remain distinct. On the next warning, keep intervention and acceptance as separate stops.",
+        "semantic_summary": "Teach separate intervention and acceptance boundaries prospectively with restrained Jonah texture."
+      },
+      {
+        "principle_id": "S09_ABANDONED_SCOPE",
+        "allowed_copy": "This Match returned ABANDONED. This handoff adds no action, accepted state, or closure beyond that bounded result.",
+        "semantic_summary": "State abandonment without inventing action, acceptance, or closure details."
+      },
+      {
+        "principle_id": "S09_ABANDONED_FORWARD",
+        "allowed_copy": "On a fresh attempt, protect what the Ticket says is at risk and decide separately what would count as acceptance.",
+        "semantic_summary": "Teach prospective risk protection and independent acceptance."
+      },
+      {
+        "principle_id": "S10_COMPLETED_SCOPE",
+        "allowed_copy": "This Match returned COMPLETED. Gate accepts that status for this Ticket without turning it into a verdict for another case.",
+        "semantic_summary": "Confine completed status to this Ticket."
+      },
+      {
+        "principle_id": "S10_COMPLETED_FORWARD",
+        "allowed_copy": "For a later review, preserve the before-state and time before changing any record; a tidy after-state is not a substitute for provenance.",
+        "semantic_summary": "Teach preserve-before-change provenance prospectively."
+      },
+      {
+        "principle_id": "S10_ABANDONED_SCOPE",
+        "allowed_copy": "This Match returned ABANDONED. This scene adds no explanation, change, or closure beyond that bounded result.",
+        "semantic_summary": "State abandonment without inventing an explanation, change, or closure."
+      },
+      {
+        "principle_id": "S10_ABANDONED_FORWARD",
+        "allowed_copy": "A fresh review should preserve source, target, condition, output, and time before any state changes.",
+        "semantic_summary": "Teach prospective provenance capture without claiming prior observations."
+      },
+      {
+        "principle_id": "S11_COMPLETED_SCOPE",
+        "allowed_copy": "This Match returned COMPLETED. That status is scoped to this Ticket and does not make a sequence into a cause somewhere else.",
+        "semantic_summary": "Confine completed status and causal meaning to this Ticket."
+      },
+      {
+        "principle_id": "S11_COMPLETED_FORWARD",
+        "allowed_copy": "For a later correlation, keep prior state, intervening change, observation window, and result together; sequence may open a question, but it cannot settle one.",
+        "semantic_summary": "Teach prospective corroboration without claiming private observations."
+      },
+      {
+        "principle_id": "S11_ABANDONED_SCOPE",
+        "allowed_copy": "This Match returned ABANDONED. This scene adds no elimination, observation count, or causal claim beyond that result.",
+        "semantic_summary": "State abandonment without inventing eliminations, observations, or cause."
+      },
+      {
+        "principle_id": "S11_ABANDONED_FORWARD",
+        "allowed_copy": "A fresh attempt begins a new observation window; prior context may guide it, but cannot count as a test that survived interruption.",
+        "semantic_summary": "Teach fresh-window interruption discipline without claiming prior tests."
+      },
+      {
+        "principle_id": "S12_COMPLETED_SCOPE",
+        "allowed_copy": "This Match returned COMPLETED. Gate accepts that status for this Ticket without inventing which private steps produced it.",
+        "semantic_summary": "Confine completed status to this Ticket without inventing its sequence."
+      },
+      {
+        "principle_id": "S12_COMPLETED_FORWARD",
+        "allowed_copy": "For a later high-risk Ticket, keep observation, authorized action, and independent acceptance as separate entries; the explanation should survive transfer without becoming an instruction.",
+        "semantic_summary": "Teach prospective authority and acceptance separation without claiming private Match details."
+      },
+      {
+        "principle_id": "S12_ABANDONED_SCOPE",
+        "allowed_copy": "This Match returned ABANDONED. This scene adds no state finding, action, or successful acceptance beyond that bounded result.",
+        "semantic_summary": "State abandonment without inventing a finding, action, or acceptance."
+      },
+      {
+        "principle_id": "S12_ABANDONED_FORWARD",
+        "allowed_copy": "On a fresh attempt, record what is known, what authority is missing, and which acceptance boundary must be met before work can be called complete.",
+        "semantic_summary": "Teach prospective authority and acceptance bounds without claiming prior work."
+      }
+    ]
+  },
+  "public_candidate_copy_contracts": [
+    {
+      "episode_id": "story.shift.qc02.07",
+      "source_case_id": "exp-001",
+      "allowed_public_candidate_fault_ids": [
+        "fault.board.system.failed",
+        "fault.compute.cpu_socket.contacts_damaged",
+        "fault.cpu.not_seated",
+        "fault.memory.dimm.failed",
+        "fault.memory.dimm.not_seated"
+      ],
+      "copy_bound": "PRE_MATCH_COPY_MAY_NOT_ADD_OR_REMOVE_TICKET_CANDIDATES",
+      "pre_match_leakage_scope": [
+        "SOURCE_CASE_FOLLOW_ON",
+        "CONTEXT",
+        "CHOICE",
+        "CHOICE_BRANCH",
+        "MATCH_BRIDGE"
+      ],
+      "forbidden_pre_match_concepts": [
+        {
+          "concept_id": "REQUIRED_SOCKET_CONTACT_DIAGNOSTIC_OR_RESPONSE",
+          "forbidden_phrases": [
+            "magnified socket inspection",
+            "inspect the socket contacts",
+            "restore the socket contacts"
+          ]
+        }
+      ]
+    },
+    {
+      "episode_id": "story.shift.qc02.08",
+      "source_case_id": "exp-002",
+      "allowed_public_candidate_fault_ids": [
+        "fault.board.system.failed",
+        "fault.power.distribution_board.failed",
+        "fault.power.input.cable_loose",
+        "fault.power.psu.failed",
+        "fault.power.psu.not_seated"
+      ],
+      "copy_bound": "PRE_MATCH_COPY_MAY_NOT_ADD_OR_REMOVE_TICKET_CANDIDATES",
+      "pre_match_leakage_scope": [
+        "SOURCE_CASE_FOLLOW_ON",
+        "CONTEXT",
+        "CHOICE",
+        "CHOICE_BRANCH",
+        "MATCH_BRIDGE"
+      ],
+      "forbidden_pre_match_concepts": [
+        {
+          "concept_id": "REQUIRED_DISTRIBUTION_PATH_DIAGNOSTIC_OR_RESPONSE",
+          "forbidden_phrases": [
+            "distribution path isolation",
+            "each supply in each bay",
+            "replace the distribution board"
+          ]
+        }
+      ]
+    },
+    {
+      "episode_id": "story.shift.qc02.09",
+      "source_case_id": "exp-003",
+      "allowed_public_candidate_fault_ids": [
+        "fault.storage.drive.predictive_failure",
+        "fault.storage.sas.drive_failed"
+      ],
+      "copy_bound": "PRE_MATCH_COPY_MAY_NOT_ADD_OR_REMOVE_TICKET_CANDIDATES",
+      "pre_match_leakage_scope": [
+        "SOURCE_CASE_FOLLOW_ON",
+        "CONTEXT",
+        "CHOICE",
+        "CHOICE_BRANCH",
+        "MATCH_BRIDGE"
+      ],
+      "forbidden_pre_match_concepts": [
+        {
+          "concept_id": "REQUIRED_PREDICTIVE_HEALTH_DIAGNOSTIC_OR_RESPONSE",
+          "forbidden_phrases": [
+            "predictive health test",
+            "replace the predictive drive",
+            "replace the drive"
+          ]
+        }
+      ]
+    },
+    {
+      "episode_id": "story.shift.qc02.10",
+      "source_case_id": "exp-004",
+      "allowed_public_candidate_fault_ids": [
+        "fault.management.alert.stale",
+        "fault.storage.backplane.path_failed"
+      ],
+      "copy_bound": "PRE_MATCH_COPY_MAY_NOT_ADD_OR_REMOVE_TICKET_CANDIDATES",
+      "pre_match_leakage_scope": [
+        "SOURCE_CASE_FOLLOW_ON",
+        "CONTEXT",
+        "CHOICE",
+        "CHOICE_BRANCH",
+        "MATCH_BRIDGE"
+      ],
+      "forbidden_pre_match_concepts": [
+        {
+          "concept_id": "REQUIRED_EVENT_FRESHNESS_DIAGNOSTIC_OR_RESPONSE",
+          "forbidden_phrases": [
+            "event-log freshness",
+            "event log freshness",
+            "clear the stale alert"
+          ]
+        }
+      ]
+    },
+    {
+      "episode_id": "story.shift.qc02.11",
+      "source_case_id": "exp-005",
+      "allowed_public_candidate_fault_ids": [
+        "fault.firmware.version_set.incompatible",
+        "fault.network.cable.disconnected",
+        "fault.network.cable.failed",
+        "fault.network.nic.failed"
+      ],
+      "copy_bound": "PRE_MATCH_COPY_MAY_NOT_ADD_OR_REMOVE_TICKET_CANDIDATES",
+      "pre_match_leakage_scope": [
+        "SOURCE_CASE_FOLLOW_ON",
+        "CONTEXT",
+        "CHOICE",
+        "CHOICE_BRANCH",
+        "MATCH_BRIDGE"
+      ],
+      "forbidden_pre_match_concepts": [
+        {
+          "concept_id": "REQUIRED_VERSION_AND_LINK_DIAGNOSTIC_PAIR_OR_RESPONSE",
+          "forbidden_phrases": [
+            "version compatibility test",
+            "link-counter soak",
+            "link counter soak",
+            "two independent observations",
+            "restore compatible versions"
+          ]
+        }
+      ]
+    },
+    {
+      "episode_id": "story.shift.qc02.12",
+      "source_case_id": "exp-006",
+      "allowed_public_candidate_fault_ids": [
+        "fault.firmware.version_set.incompatible",
+        "fault.management.bmc_firmware.corrupt"
+      ],
+      "copy_bound": "PRE_MATCH_COPY_MAY_NOT_ADD_OR_REMOVE_TICKET_CANDIDATES",
+      "pre_match_leakage_scope": [
+        "SOURCE_CASE_FOLLOW_ON",
+        "CONTEXT",
+        "CHOICE",
+        "CHOICE_BRANCH",
+        "MATCH_BRIDGE"
+      ],
+      "forbidden_pre_match_concepts": [
+        {
+          "concept_id": "REQUIRED_RECOVERY_STATE_DIAGNOSTIC_OR_RESPONSE",
+          "forbidden_phrases": [
+            "bmc recovery-state test",
+            "bmc recovery state test",
+            "inspect the recovery interface",
+            "recover bmc firmware"
+          ]
+        }
+      ]
+    }
+  ],
+  "displays": [
+    {
+      "text_id": "text.qc02.s07.entry.01",
+      "statement_id": "story.qc02.s07.entry.01",
+      "display_kind": "NARRATE",
+      "episode_id": "story.shift.qc02.07",
+      "shift_number": 7,
+      "nearest_label": "story.qc02.shift07.entry",
+      "phase": "CONTEXT",
+      "speaker_key": null,
+      "technical_claim": true,
+      "source_case_id": "exp-001",
+      "source_event_numbers": [
+        1
+      ],
+      "semantic_key": "exp-001.entry.01",
+      "semantic_payload": "The environment exposes the reported full-population no-POST condition before anyone interprets it.",
+      "context_rungs": [
+        "ENVIRONMENT",
+        "PAIN_POINT"
+      ],
+      "authority_bound": "PUBLIC_CONTEXT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.board.system.failed",
+        "fault.compute.cpu_socket.contacts_damaged",
+        "fault.cpu.not_seated",
+        "fault.memory.dimm.failed",
+        "fault.memory.dimm.not_seated"
+      ],
+      "voice_fingerprint": null,
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s07.entry.02",
+      "statement_id": "story.qc02.s07.entry.02",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.07",
+      "shift_number": 7,
+      "nearest_label": "story.qc02.shift07.entry",
+      "phase": "CONTEXT",
+      "speaker_key": "story.character.sora_chen",
+      "technical_claim": true,
+      "source_case_id": "exp-001",
+      "source_event_numbers": [
+        1,
+        2
+      ],
+      "semantic_key": "exp-001.entry.02",
+      "semantic_payload": "Define POST, ordinary startup behavior, and the limit of the population-dependent symptom.",
+      "context_rungs": [
+        "NAME",
+        "NORMAL",
+        "FAILURE",
+        "INSIGHT"
+      ],
+      "authority_bound": "PUBLIC_CONTEXT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.board.system.failed",
+        "fault.compute.cpu_socket.contacts_damaged",
+        "fault.cpu.not_seated",
+        "fault.memory.dimm.failed",
+        "fault.memory.dimm.not_seated"
+      ],
+      "voice_fingerprint": "CONDITIONAL_COMPARISON",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s07.entry.03",
+      "statement_id": "story.qc02.s07.entry.03",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.07",
+      "shift_number": 7,
+      "nearest_label": "story.qc02.shift07.entry",
+      "phase": "CONTEXT",
+      "speaker_key": "story.character.malik_okoye",
+      "technical_claim": true,
+      "source_case_id": "exp-001",
+      "source_event_numbers": [
+        3,
+        6
+      ],
+      "semantic_key": "exp-001.entry.03",
+      "semantic_payload": "Explain component-versus-location comparison without supplying the required diagnostic.",
+      "context_rungs": [
+        "PROCEDURE",
+        "INSIGHT",
+        "ACTION"
+      ],
+      "authority_bound": "PUBLIC_CONTEXT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.board.system.failed",
+        "fault.compute.cpu_socket.contacts_damaged",
+        "fault.cpu.not_seated",
+        "fault.memory.dimm.failed",
+        "fault.memory.dimm.not_seated"
+      ],
+      "voice_fingerprint": "CONTROLLED_DEMONSTRATION",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s07.entry.04",
+      "statement_id": "story.qc02.s07.entry.04",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.07",
+      "shift_number": 7,
+      "nearest_label": "story.qc02.shift07.entry",
+      "phase": "CONTEXT",
+      "speaker_key": "story.character.sora_chen",
+      "technical_claim": true,
+      "source_case_id": "exp-001",
+      "source_event_numbers": [
+        2,
+        3,
+        6
+      ],
+      "semantic_key": "exp-001.entry.04",
+      "semantic_payload": "Preserve the public Candidate set and the need for discriminating Evidence.",
+      "context_rungs": [
+        "NAME",
+        "ACTION"
+      ],
+      "authority_bound": "PUBLIC_CONTEXT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.board.system.failed",
+        "fault.compute.cpu_socket.contacts_damaged",
+        "fault.cpu.not_seated",
+        "fault.memory.dimm.failed",
+        "fault.memory.dimm.not_seated"
+      ],
+      "voice_fingerprint": "CONDITIONAL_COMPARISON",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s07.choice.initial.prompt",
+      "statement_id": null,
+      "display_kind": "CHOICE_PROMPT",
+      "episode_id": "story.shift.qc02.07",
+      "shift_number": 7,
+      "nearest_label": "story.qc02.shift07.entry",
+      "phase": "CHOICE",
+      "speaker_key": null,
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-001.choice.initial.prompt",
+      "semantic_payload": "Ask which public evidence should lead the presentation without changing technical or gameplay authority.",
+      "context_rungs": [
+        "ACTION"
+      ],
+      "authority_bound": "PRESENTATION_ORDER_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.board.system.failed",
+        "fault.compute.cpu_socket.contacts_damaged",
+        "fault.cpu.not_seated",
+        "fault.memory.dimm.failed",
+        "fault.memory.dimm.not_seated"
+      ],
+      "voice_fingerprint": null,
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "choice_id": "choice.qc02.initial_evidence_frame",
+      "option_id": null,
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s07.choice.initial.location",
+      "statement_id": null,
+      "display_kind": "CHOICE_OPTION",
+      "episode_id": "story.shift.qc02.07",
+      "shift_number": 7,
+      "nearest_label": "story.qc02.shift07.entry",
+      "phase": "CHOICE",
+      "speaker_key": null,
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-001.choice.initial.location",
+      "semantic_payload": "Presentation-order option location_context_first; no gameplay, truth, reward, or Match effect.",
+      "context_rungs": [
+        "ACTION"
+      ],
+      "authority_bound": "PRESENTATION_ORDER_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.board.system.failed",
+        "fault.compute.cpu_socket.contacts_damaged",
+        "fault.cpu.not_seated",
+        "fault.memory.dimm.failed",
+        "fault.memory.dimm.not_seated"
+      ],
+      "voice_fingerprint": null,
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "choice_id": "choice.qc02.initial_evidence_frame",
+      "option_id": "location_context_first",
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s07.choice.initial.comparison",
+      "statement_id": null,
+      "display_kind": "CHOICE_OPTION",
+      "episode_id": "story.shift.qc02.07",
+      "shift_number": 7,
+      "nearest_label": "story.qc02.shift07.entry",
+      "phase": "CHOICE",
+      "speaker_key": null,
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-001.choice.initial.comparison",
+      "semantic_payload": "Presentation-order option controlled_comparison_first; no gameplay, truth, reward, or Match effect.",
+      "context_rungs": [
+        "ACTION"
+      ],
+      "authority_bound": "PRESENTATION_ORDER_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.board.system.failed",
+        "fault.compute.cpu_socket.contacts_damaged",
+        "fault.cpu.not_seated",
+        "fault.memory.dimm.failed",
+        "fault.memory.dimm.not_seated"
+      ],
+      "voice_fingerprint": null,
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "choice_id": "choice.qc02.initial_evidence_frame",
+      "option_id": "controlled_comparison_first",
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s07.frame.location.01",
+      "statement_id": "story.qc02.s07.frame.location.01",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.07",
+      "shift_number": 7,
+      "nearest_label": "story.qc02.shift07.frame.location_context_first",
+      "phase": "CHOICE_BRANCH",
+      "speaker_key": "story.character.sora_chen",
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-001.frame.location.01",
+      "semantic_payload": "The selected presentation order leads with location context while preserving comparisons.",
+      "context_rungs": [
+        "ACTION"
+      ],
+      "authority_bound": "PRESENTATION_ORDER_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.board.system.failed",
+        "fault.compute.cpu_socket.contacts_damaged",
+        "fault.cpu.not_seated",
+        "fault.memory.dimm.failed",
+        "fault.memory.dimm.not_seated"
+      ],
+      "voice_fingerprint": "CONDITIONAL_COMPARISON",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "CHOICE_IS",
+        "choice_id": "choice.qc02.initial_evidence_frame",
+        "option_id": "location_context_first"
+      }
+    },
+    {
+      "text_id": "text.qc02.s07.frame.comparison.01",
+      "statement_id": "story.qc02.s07.frame.comparison.01",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.07",
+      "shift_number": 7,
+      "nearest_label": "story.qc02.shift07.frame.controlled_comparison_first",
+      "phase": "CHOICE_BRANCH",
+      "speaker_key": "story.character.malik_okoye",
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-001.frame.comparison.01",
+      "semantic_payload": "The selected presentation order leads with comparisons while preserving location context.",
+      "context_rungs": [
+        "ACTION"
+      ],
+      "authority_bound": "PRESENTATION_ORDER_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.board.system.failed",
+        "fault.compute.cpu_socket.contacts_damaged",
+        "fault.cpu.not_seated",
+        "fault.memory.dimm.failed",
+        "fault.memory.dimm.not_seated"
+      ],
+      "voice_fingerprint": "CONTROLLED_DEMONSTRATION",
+      "personal_texture": true,
+      "texture_source": "malik_monthly_puzzle_night",
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "CHOICE_IS",
+        "choice_id": "choice.qc02.initial_evidence_frame",
+        "option_id": "controlled_comparison_first"
+      }
+    },
+    {
+      "text_id": "text.qc02.s07.match.01",
+      "statement_id": "story.qc02.s07.match.01",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.07",
+      "shift_number": 7,
+      "nearest_label": "story.qc02.shift07.match",
+      "phase": "MATCH_BRIDGE",
+      "speaker_key": "story.character.sora_chen",
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-001.match.01",
+      "semantic_payload": "Story yields all diagnostic and response authority to the Match.",
+      "context_rungs": [
+        "ACTION"
+      ],
+      "authority_bound": "NO_GAMEPLAY_AUTHORITY",
+      "public_candidate_fault_ids": [
+        "fault.board.system.failed",
+        "fault.compute.cpu_socket.contacts_damaged",
+        "fault.cpu.not_seated",
+        "fault.memory.dimm.failed",
+        "fault.memory.dimm.not_seated"
+      ],
+      "voice_fingerprint": "CONDITIONAL_COMPARISON",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s07.success.01",
+      "statement_id": "story.qc02.s07.success.01",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.07",
+      "shift_number": 7,
+      "nearest_label": "story.qc02.shift07.success",
+      "phase": "OUTCOME",
+      "speaker_key": "story.character.sora_chen",
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-001.success.01",
+      "semantic_payload": "Use normalized result field completion=COMPLETED only; Confine completed status to this Ticket and reject applying it to another machine. No private Match Evidence, diagnosis, action sequence, or technical outcome is asserted.",
+      "context_rungs": [
+        "CONSEQUENCE",
+        "INSIGHT"
+      ],
+      "authority_bound": "NORMALIZED_MATCH_RESULT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.board.system.failed",
+        "fault.compute.cpu_socket.contacts_damaged",
+        "fault.cpu.not_seated",
+        "fault.memory.dimm.failed",
+        "fault.memory.dimm.not_seated"
+      ],
+      "voice_fingerprint": "CONDITIONAL_COMPARISON",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [
+        "completion"
+      ],
+      "normalized_result_expectations": {
+        "completion": "COMPLETED"
+      },
+      "public_process_principle_id": "S07_COMPLETED_SCOPE",
+      "private_match_details_claimed": false,
+      "route_selector": {
+        "kind": "MATCH_COMPLETION",
+        "match_ref": "story.match.qc02.shift07.socket_contacts",
+        "completion": "COMPLETED"
+      }
+    },
+    {
+      "text_id": "text.qc02.s07.success.02",
+      "statement_id": "story.qc02.s07.success.02",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.07",
+      "shift_number": 7,
+      "nearest_label": "story.qc02.shift07.success",
+      "phase": "OUTCOME",
+      "speaker_key": "story.character.malik_okoye",
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-001.success.02",
+      "semantic_payload": "Use normalized result field completion=COMPLETED only; Teach controlled-comparison framing as a forward-looking public principle. No private Match Evidence, diagnosis, action sequence, or technical outcome is asserted.",
+      "context_rungs": [
+        "REINFORCEMENT"
+      ],
+      "authority_bound": "NORMALIZED_MATCH_RESULT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.board.system.failed",
+        "fault.compute.cpu_socket.contacts_damaged",
+        "fault.cpu.not_seated",
+        "fault.memory.dimm.failed",
+        "fault.memory.dimm.not_seated"
+      ],
+      "voice_fingerprint": "CONTROLLED_DEMONSTRATION",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [
+        "completion"
+      ],
+      "normalized_result_expectations": {
+        "completion": "COMPLETED"
+      },
+      "public_process_principle_id": "S07_COMPLETED_FORWARD",
+      "private_match_details_claimed": false,
+      "route_selector": {
+        "kind": "MATCH_COMPLETION",
+        "match_ref": "story.match.qc02.shift07.socket_contacts",
+        "completion": "COMPLETED"
+      }
+    },
+    {
+      "text_id": "text.qc02.s07.abandon.01",
+      "statement_id": "story.qc02.s07.abandon.01",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.07",
+      "shift_number": 7,
+      "nearest_label": "story.qc02.shift07.abandon",
+      "phase": "OUTCOME",
+      "speaker_key": "story.character.sora_chen",
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-001.abandon.01",
+      "semantic_payload": "Use normalized result field completion=ABANDONED only; State abandonment while adding no private diagnosis, action, or closure. No private Match Evidence, diagnosis, action sequence, or technical outcome is asserted.",
+      "context_rungs": [
+        "CONSEQUENCE",
+        "ACTION"
+      ],
+      "authority_bound": "NORMALIZED_MATCH_RESULT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.board.system.failed",
+        "fault.compute.cpu_socket.contacts_damaged",
+        "fault.cpu.not_seated",
+        "fault.memory.dimm.failed",
+        "fault.memory.dimm.not_seated"
+      ],
+      "voice_fingerprint": "CONDITIONAL_COMPARISON",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [
+        "completion"
+      ],
+      "normalized_result_expectations": {
+        "completion": "ABANDONED"
+      },
+      "public_process_principle_id": "S07_ABANDONED_SCOPE",
+      "private_match_details_claimed": false,
+      "route_selector": {
+        "kind": "MATCH_COMPLETION",
+        "match_ref": "story.match.qc02.shift07.socket_contacts",
+        "completion": "ABANDONED"
+      }
+    },
+    {
+      "text_id": "text.qc02.s07.abandon.02",
+      "statement_id": "story.qc02.s07.abandon.02",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.07",
+      "shift_number": 7,
+      "nearest_label": "story.qc02.shift07.abandon",
+      "phase": "OUTCOME",
+      "speaker_key": "story.character.malik_okoye",
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-001.abandon.02",
+      "semantic_payload": "Use normalized result field completion=ABANDONED only; Teach fresh-window comparison discipline without claiming prior Match work. No private Match Evidence, diagnosis, action sequence, or technical outcome is asserted.",
+      "context_rungs": [
+        "CONSEQUENCE"
+      ],
+      "authority_bound": "NORMALIZED_MATCH_RESULT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.board.system.failed",
+        "fault.compute.cpu_socket.contacts_damaged",
+        "fault.cpu.not_seated",
+        "fault.memory.dimm.failed",
+        "fault.memory.dimm.not_seated"
+      ],
+      "voice_fingerprint": "CONTROLLED_DEMONSTRATION",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [
+        "completion"
+      ],
+      "normalized_result_expectations": {
+        "completion": "ABANDONED"
+      },
+      "public_process_principle_id": "S07_ABANDONED_FORWARD",
+      "private_match_details_claimed": false,
+      "route_selector": {
+        "kind": "MATCH_COMPLETION",
+        "match_ref": "story.match.qc02.shift07.socket_contacts",
+        "completion": "ABANDONED"
+      }
+    },
+    {
+      "text_id": "text.qc02.s07.follow.01",
+      "statement_id": "story.qc02.s07.follow.01",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.07",
+      "shift_number": 7,
+      "nearest_label": "story.qc02.shift07.follow_on",
+      "phase": "FOLLOW_ON",
+      "speaker_key": "story.character.malik_okoye",
+      "technical_claim": true,
+      "source_case_id": "exp-002",
+      "source_event_numbers": [
+        2,
+        4
+      ],
+      "semantic_key": "exp-002.follow.01",
+      "semantic_payload": "Carry component-versus-shared-path practice into Shift 8.",
+      "context_rungs": [
+        "REINFORCEMENT"
+      ],
+      "authority_bound": "PUBLIC_CONTEXT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.board.system.failed",
+        "fault.power.distribution_board.failed",
+        "fault.power.input.cable_loose",
+        "fault.power.psu.failed",
+        "fault.power.psu.not_seated"
+      ],
+      "voice_fingerprint": "CONTROLLED_DEMONSTRATION",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s08.entry.01",
+      "statement_id": "story.qc02.s08.entry.01",
+      "display_kind": "NARRATE",
+      "episode_id": "story.shift.qc02.08",
+      "shift_number": 8,
+      "nearest_label": "story.qc02.shift08.entry",
+      "phase": "CONTEXT",
+      "speaker_key": null,
+      "technical_claim": true,
+      "source_case_id": "exp-002",
+      "source_event_numbers": [
+        1
+      ],
+      "semantic_key": "exp-002.entry.01",
+      "semantic_payload": "Establish the voltage-alert and immediate-shutdown symptom before interpretation.",
+      "context_rungs": [
+        "ENVIRONMENT",
+        "FAILURE",
+        "CONSEQUENCE"
+      ],
+      "authority_bound": "PUBLIC_CONTEXT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.board.system.failed",
+        "fault.power.distribution_board.failed",
+        "fault.power.input.cable_loose",
+        "fault.power.psu.failed",
+        "fault.power.psu.not_seated"
+      ],
+      "voice_fingerprint": null,
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s08.entry.02",
+      "statement_id": "story.qc02.s08.entry.02",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.08",
+      "shift_number": 8,
+      "nearest_label": "story.qc02.shift08.entry",
+      "phase": "CONTEXT",
+      "speaker_key": "story.character.malik_okoye",
+      "technical_claim": true,
+      "source_case_id": "exp-002",
+      "source_event_numbers": [
+        4
+      ],
+      "semantic_key": "exp-002.entry.02",
+      "semantic_payload": "Explain ordinary redundant-power layout and the discrimination goal without prescribing the required diagnostic.",
+      "context_rungs": [
+        "NORMAL",
+        "PROCEDURE",
+        "ACTION"
+      ],
+      "authority_bound": "PUBLIC_CONTEXT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.board.system.failed",
+        "fault.power.distribution_board.failed",
+        "fault.power.input.cable_loose",
+        "fault.power.psu.failed",
+        "fault.power.psu.not_seated"
+      ],
+      "voice_fingerprint": "CONTROLLED_DEMONSTRATION",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s08.entry.03",
+      "statement_id": "story.qc02.s08.entry.03",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.08",
+      "shift_number": 8,
+      "nearest_label": "story.qc02.shift08.entry",
+      "phase": "CONTEXT",
+      "speaker_key": "story.character.hana_park",
+      "technical_claim": true,
+      "source_case_id": "exp-002",
+      "source_event_numbers": [
+        1,
+        2
+      ],
+      "semantic_key": "exp-002.entry.03",
+      "semantic_payload": "Explain the pain caused by treating an alert label as causal proof.",
+      "context_rungs": [
+        "PAIN_POINT",
+        "CONSEQUENCE",
+        "INSIGHT"
+      ],
+      "authority_bound": "PUBLIC_CONTEXT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.board.system.failed",
+        "fault.power.distribution_board.failed",
+        "fault.power.input.cable_loose",
+        "fault.power.psu.failed",
+        "fault.power.psu.not_seated"
+      ],
+      "voice_fingerprint": "AUDITABLE_CRITERIA",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s08.entry.04",
+      "statement_id": "story.qc02.s08.entry.04",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.08",
+      "shift_number": 8,
+      "nearest_label": "story.qc02.shift08.entry",
+      "phase": "CONTEXT",
+      "speaker_key": "story.character.malik_okoye",
+      "technical_claim": true,
+      "source_case_id": "exp-002",
+      "source_event_numbers": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "semantic_key": "exp-002.entry.04",
+      "semantic_payload": "Present source-supported public comparisons and remaining Candidates.",
+      "context_rungs": [
+        "PROCEDURE",
+        "ACTION"
+      ],
+      "authority_bound": "PUBLIC_CONTEXT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.board.system.failed",
+        "fault.power.distribution_board.failed",
+        "fault.power.input.cable_loose",
+        "fault.power.psu.failed",
+        "fault.power.psu.not_seated"
+      ],
+      "voice_fingerprint": "CONTROLLED_DEMONSTRATION",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s08.match.01",
+      "statement_id": "story.qc02.s08.match.01",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.08",
+      "shift_number": 8,
+      "nearest_label": "story.qc02.shift08.match",
+      "phase": "MATCH_BRIDGE",
+      "speaker_key": "story.character.hana_park",
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-002.match.01",
+      "semantic_payload": "Yield diagnostic authority to the Match.",
+      "context_rungs": [
+        "ACTION"
+      ],
+      "authority_bound": "NO_GAMEPLAY_AUTHORITY",
+      "public_candidate_fault_ids": [
+        "fault.board.system.failed",
+        "fault.power.distribution_board.failed",
+        "fault.power.input.cable_loose",
+        "fault.power.psu.failed",
+        "fault.power.psu.not_seated"
+      ],
+      "voice_fingerprint": "AUDITABLE_CRITERIA",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s08.success.01",
+      "statement_id": "story.qc02.s08.success.01",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.08",
+      "shift_number": 8,
+      "nearest_label": "story.qc02.shift08.success",
+      "phase": "OUTCOME",
+      "speaker_key": "story.character.hana_park",
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-002.success.01",
+      "semantic_payload": "Use normalized result field completion=COMPLETED only; Confine completed status to this Ticket. No private Match Evidence, diagnosis, action sequence, or technical outcome is asserted.",
+      "context_rungs": [
+        "CONSEQUENCE",
+        "INSIGHT"
+      ],
+      "authority_bound": "NORMALIZED_MATCH_RESULT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.board.system.failed",
+        "fault.power.distribution_board.failed",
+        "fault.power.input.cable_loose",
+        "fault.power.psu.failed",
+        "fault.power.psu.not_seated"
+      ],
+      "voice_fingerprint": "AUDITABLE_CRITERIA",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [
+        "completion"
+      ],
+      "normalized_result_expectations": {
+        "completion": "COMPLETED"
+      },
+      "public_process_principle_id": "S08_COMPLETED_SCOPE",
+      "private_match_details_claimed": false,
+      "route_selector": {
+        "kind": "MATCH_COMPLETION",
+        "match_ref": "story.match.qc02.shift08.power_distribution",
+        "completion": "COMPLETED"
+      }
+    },
+    {
+      "text_id": "text.qc02.s08.success.02",
+      "statement_id": "story.qc02.s08.success.02",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.08",
+      "shift_number": 8,
+      "nearest_label": "story.qc02.shift08.success",
+      "phase": "OUTCOME",
+      "speaker_key": "story.character.malik_okoye",
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-002.success.02",
+      "semantic_payload": "Use normalized result field completion=COMPLETED only; Teach report-versus-explanation discipline prospectively. No private Match Evidence, diagnosis, action sequence, or technical outcome is asserted.",
+      "context_rungs": [
+        "REINFORCEMENT"
+      ],
+      "authority_bound": "NORMALIZED_MATCH_RESULT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.board.system.failed",
+        "fault.power.distribution_board.failed",
+        "fault.power.input.cable_loose",
+        "fault.power.psu.failed",
+        "fault.power.psu.not_seated"
+      ],
+      "voice_fingerprint": "CONTROLLED_DEMONSTRATION",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [
+        "completion"
+      ],
+      "normalized_result_expectations": {
+        "completion": "COMPLETED"
+      },
+      "public_process_principle_id": "S08_COMPLETED_FORWARD",
+      "private_match_details_claimed": false,
+      "route_selector": {
+        "kind": "MATCH_COMPLETION",
+        "match_ref": "story.match.qc02.shift08.power_distribution",
+        "completion": "COMPLETED"
+      }
+    },
+    {
+      "text_id": "text.qc02.s08.abandon.01",
+      "statement_id": "story.qc02.s08.abandon.01",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.08",
+      "shift_number": 8,
+      "nearest_label": "story.qc02.shift08.abandon",
+      "phase": "OUTCOME",
+      "speaker_key": "story.character.hana_park",
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-002.abandon.01",
+      "semantic_payload": "Use normalized result field completion=ABANDONED only; State abandonment without inventing tests, Isolation, or closure. No private Match Evidence, diagnosis, action sequence, or technical outcome is asserted.",
+      "context_rungs": [
+        "CONSEQUENCE",
+        "ACTION"
+      ],
+      "authority_bound": "NORMALIZED_MATCH_RESULT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.board.system.failed",
+        "fault.power.distribution_board.failed",
+        "fault.power.input.cable_loose",
+        "fault.power.psu.failed",
+        "fault.power.psu.not_seated"
+      ],
+      "voice_fingerprint": "AUDITABLE_CRITERIA",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [
+        "completion"
+      ],
+      "normalized_result_expectations": {
+        "completion": "ABANDONED"
+      },
+      "public_process_principle_id": "S08_ABANDONED_SCOPE",
+      "private_match_details_claimed": false,
+      "route_selector": {
+        "kind": "MATCH_COMPLETION",
+        "match_ref": "story.match.qc02.shift08.power_distribution",
+        "completion": "ABANDONED"
+      }
+    },
+    {
+      "text_id": "text.qc02.s08.abandon.02",
+      "statement_id": "story.qc02.s08.abandon.02",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.08",
+      "shift_number": 8,
+      "nearest_label": "story.qc02.shift08.abandon",
+      "phase": "OUTCOME",
+      "speaker_key": "story.character.malik_okoye",
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-002.abandon.02",
+      "semantic_payload": "Use normalized result field completion=ABANDONED only; Teach fresh report-location-context discrimination without claiming prior Match work. No private Match Evidence, diagnosis, action sequence, or technical outcome is asserted.",
+      "context_rungs": [
+        "REINFORCEMENT"
+      ],
+      "authority_bound": "NORMALIZED_MATCH_RESULT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.board.system.failed",
+        "fault.power.distribution_board.failed",
+        "fault.power.input.cable_loose",
+        "fault.power.psu.failed",
+        "fault.power.psu.not_seated"
+      ],
+      "voice_fingerprint": "CONTROLLED_DEMONSTRATION",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [
+        "completion"
+      ],
+      "normalized_result_expectations": {
+        "completion": "ABANDONED"
+      },
+      "public_process_principle_id": "S08_ABANDONED_FORWARD",
+      "private_match_details_claimed": false,
+      "route_selector": {
+        "kind": "MATCH_COMPLETION",
+        "match_ref": "story.match.qc02.shift08.power_distribution",
+        "completion": "ABANDONED"
+      }
+    },
+    {
+      "text_id": "text.qc02.s08.follow.01",
+      "statement_id": "story.qc02.s08.follow.01",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.08",
+      "shift_number": 8,
+      "nearest_label": "story.qc02.shift08.follow_on",
+      "phase": "FOLLOW_ON",
+      "speaker_key": "story.character.hana_park",
+      "technical_claim": true,
+      "source_case_id": "exp-003",
+      "source_event_numbers": [
+        1,
+        5,
+        6
+      ],
+      "semantic_key": "exp-003.follow.01",
+      "semantic_payload": "Introduce predictive failure as actionable before outage.",
+      "context_rungs": [
+        "FOLLOW_ON"
+      ],
+      "authority_bound": "PUBLIC_CONTEXT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.storage.drive.predictive_failure",
+        "fault.storage.sas.drive_failed"
+      ],
+      "voice_fingerprint": "AUDITABLE_CRITERIA",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s08.ack.initial.location.01",
+      "statement_id": "story.qc02.s08.ack.initial.location.01",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.08",
+      "shift_number": 8,
+      "nearest_label": "story.qc02.shift08.initial_frame_ack.location_context_first",
+      "phase": "DELAYED_CHOICE_ACK",
+      "speaker_key": "story.character.hana_park",
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-002.ack.initial.location.01",
+      "semantic_payload": "Acknowledge the remembered location-first framing and its presentation-only consequence.",
+      "context_rungs": [
+        "REINFORCEMENT"
+      ],
+      "authority_bound": "PRESENTATION_ORDER_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.board.system.failed",
+        "fault.power.distribution_board.failed",
+        "fault.power.input.cable_loose",
+        "fault.power.psu.failed",
+        "fault.power.psu.not_seated"
+      ],
+      "voice_fingerprint": "AUDITABLE_CRITERIA",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "VARIABLE_EQUALS",
+        "variable_id": "story.qc02.initial_evidence_frame",
+        "value": "LOCATION_CONTEXT_FIRST"
+      }
+    },
+    {
+      "text_id": "text.qc02.s08.ack.initial.comparison.01",
+      "statement_id": "story.qc02.s08.ack.initial.comparison.01",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.08",
+      "shift_number": 8,
+      "nearest_label": "story.qc02.shift08.initial_frame_ack.controlled_comparison_first",
+      "phase": "DELAYED_CHOICE_ACK",
+      "speaker_key": "story.character.hana_park",
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-002.ack.initial.comparison.01",
+      "semantic_payload": "Acknowledge the remembered comparison-first framing and its presentation-only consequence.",
+      "context_rungs": [
+        "REINFORCEMENT"
+      ],
+      "authority_bound": "PRESENTATION_ORDER_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.board.system.failed",
+        "fault.power.distribution_board.failed",
+        "fault.power.input.cable_loose",
+        "fault.power.psu.failed",
+        "fault.power.psu.not_seated"
+      ],
+      "voice_fingerprint": "AUDITABLE_CRITERIA",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "VARIABLE_EQUALS",
+        "variable_id": "story.qc02.initial_evidence_frame",
+        "value": "CONTROLLED_COMPARISON_FIRST"
+      }
+    },
+    {
+      "text_id": "text.qc02.s09.entry.01",
+      "statement_id": "story.qc02.s09.entry.01",
+      "display_kind": "NARRATE",
+      "episode_id": "story.shift.qc02.09",
+      "shift_number": 9,
+      "nearest_label": "story.qc02.shift09.entry",
+      "phase": "CONTEXT",
+      "speaker_key": null,
+      "technical_claim": true,
+      "source_case_id": "exp-003",
+      "source_event_numbers": [
+        1,
+        3
+      ],
+      "semantic_key": "exp-003.entry.01",
+      "semantic_payload": "Establish the still-operating member and matching predictive warning.",
+      "context_rungs": [
+        "ENVIRONMENT",
+        "FAILURE"
+      ],
+      "authority_bound": "PUBLIC_CONTEXT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.storage.drive.predictive_failure",
+        "fault.storage.sas.drive_failed"
+      ],
+      "voice_fingerprint": null,
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s09.entry.02",
+      "statement_id": "story.qc02.s09.entry.02",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.09",
+      "shift_number": 9,
+      "nearest_label": "story.qc02.shift09.entry",
+      "phase": "CONTEXT",
+      "speaker_key": "story.character.jonah_reed",
+      "technical_claim": true,
+      "source_case_id": "exp-003",
+      "source_event_numbers": [
+        1,
+        3
+      ],
+      "semantic_key": "exp-003.entry.02",
+      "semantic_payload": "Define the storage environment and predictive state for a newcomer.",
+      "context_rungs": [
+        "NAME",
+        "NORMAL",
+        "FAILURE"
+      ],
+      "authority_bound": "PUBLIC_CONTEXT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.storage.drive.predictive_failure",
+        "fault.storage.sas.drive_failed"
+      ],
+      "voice_fingerprint": "PROVENANCE_CHAIN",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s09.entry.03",
+      "statement_id": "story.qc02.s09.entry.03",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.09",
+      "shift_number": 9,
+      "nearest_label": "story.qc02.shift09.entry",
+      "phase": "CONTEXT",
+      "speaker_key": "story.character.hana_park",
+      "technical_claim": true,
+      "source_case_id": "exp-003",
+      "source_event_numbers": [
+        4,
+        5,
+        6
+      ],
+      "semantic_key": "exp-003.entry.03",
+      "semantic_payload": "Explain the safe change and independent-acceptance boundary without prescribing the Repair or Verify.",
+      "context_rungs": [
+        "PROCEDURE",
+        "PAIN_POINT",
+        "CONSEQUENCE"
+      ],
+      "authority_bound": "PUBLIC_CONTEXT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.storage.drive.predictive_failure",
+        "fault.storage.sas.drive_failed"
+      ],
+      "voice_fingerprint": "AUDITABLE_CRITERIA",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s09.entry.04",
+      "statement_id": "story.qc02.s09.entry.04",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.09",
+      "shift_number": 9,
+      "nearest_label": "story.qc02.shift09.entry",
+      "phase": "CONTEXT",
+      "speaker_key": "story.character.jonah_reed",
+      "technical_claim": true,
+      "source_case_id": "exp-003",
+      "source_event_numbers": [
+        1,
+        2,
+        3
+      ],
+      "semantic_key": "exp-003.entry.04",
+      "semantic_payload": "Present source-supported correlation while preserving the exact two public Candidates.",
+      "context_rungs": [
+        "INSIGHT",
+        "ACTION"
+      ],
+      "authority_bound": "PUBLIC_CONTEXT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.storage.drive.predictive_failure",
+        "fault.storage.sas.drive_failed"
+      ],
+      "voice_fingerprint": "PROVENANCE_CHAIN",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s09.match.01",
+      "statement_id": "story.qc02.s09.match.01",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.09",
+      "shift_number": 9,
+      "nearest_label": "story.qc02.shift09.match",
+      "phase": "MATCH_BRIDGE",
+      "speaker_key": "story.character.hana_park",
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-003.match.01",
+      "semantic_payload": "Yield action authority to the Match under a data-preservation boundary.",
+      "context_rungs": [
+        "ACTION"
+      ],
+      "authority_bound": "NO_GAMEPLAY_AUTHORITY",
+      "public_candidate_fault_ids": [
+        "fault.storage.drive.predictive_failure",
+        "fault.storage.sas.drive_failed"
+      ],
+      "voice_fingerprint": "AUDITABLE_CRITERIA",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s09.success.01",
+      "statement_id": "story.qc02.s09.success.01",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.09",
+      "shift_number": 9,
+      "nearest_label": "story.qc02.shift09.success",
+      "phase": "OUTCOME",
+      "speaker_key": "story.character.hana_park",
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-003.success.01",
+      "semantic_payload": "Use normalized result field completion=COMPLETED only; Confine completed status to this Ticket. No private Match Evidence, diagnosis, action sequence, or technical outcome is asserted.",
+      "context_rungs": [
+        "CONSEQUENCE",
+        "INSIGHT"
+      ],
+      "authority_bound": "NORMALIZED_MATCH_RESULT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.storage.drive.predictive_failure",
+        "fault.storage.sas.drive_failed"
+      ],
+      "voice_fingerprint": "AUDITABLE_CRITERIA",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [
+        "completion"
+      ],
+      "normalized_result_expectations": {
+        "completion": "COMPLETED"
+      },
+      "public_process_principle_id": "S09_COMPLETED_SCOPE",
+      "private_match_details_claimed": false,
+      "route_selector": {
+        "kind": "MATCH_COMPLETION",
+        "match_ref": "story.match.qc02.shift09.predictive_drive",
+        "completion": "COMPLETED"
+      }
+    },
+    {
+      "text_id": "text.qc02.s09.success.02",
+      "statement_id": "story.qc02.s09.success.02",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.09",
+      "shift_number": 9,
+      "nearest_label": "story.qc02.shift09.success",
+      "phase": "OUTCOME",
+      "speaker_key": "story.character.jonah_reed",
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-003.success.02",
+      "semantic_payload": "Use normalized result field completion=COMPLETED only; Teach separate intervention and acceptance boundaries prospectively with restrained Jonah texture. No private Match Evidence, diagnosis, action sequence, or technical outcome is asserted.",
+      "context_rungs": [
+        "REINFORCEMENT"
+      ],
+      "authority_bound": "NORMALIZED_MATCH_RESULT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.storage.drive.predictive_failure",
+        "fault.storage.sas.drive_failed"
+      ],
+      "voice_fingerprint": "PROVENANCE_CHAIN",
+      "personal_texture": true,
+      "texture_source": "jonah_transit_map_archive",
+      "normalized_result_fields": [
+        "completion"
+      ],
+      "normalized_result_expectations": {
+        "completion": "COMPLETED"
+      },
+      "public_process_principle_id": "S09_COMPLETED_FORWARD",
+      "private_match_details_claimed": false,
+      "route_selector": {
+        "kind": "MATCH_COMPLETION",
+        "match_ref": "story.match.qc02.shift09.predictive_drive",
+        "completion": "COMPLETED"
+      }
+    },
+    {
+      "text_id": "text.qc02.s09.abandon.01",
+      "statement_id": "story.qc02.s09.abandon.01",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.09",
+      "shift_number": 9,
+      "nearest_label": "story.qc02.shift09.abandon",
+      "phase": "OUTCOME",
+      "speaker_key": "story.character.hana_park",
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-003.abandon.01",
+      "semantic_payload": "Use normalized result field completion=ABANDONED only; State abandonment without inventing action, acceptance, or closure details. No private Match Evidence, diagnosis, action sequence, or technical outcome is asserted.",
+      "context_rungs": [
+        "CONSEQUENCE",
+        "ACTION"
+      ],
+      "authority_bound": "NORMALIZED_MATCH_RESULT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.storage.drive.predictive_failure",
+        "fault.storage.sas.drive_failed"
+      ],
+      "voice_fingerprint": "AUDITABLE_CRITERIA",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [
+        "completion"
+      ],
+      "normalized_result_expectations": {
+        "completion": "ABANDONED"
+      },
+      "public_process_principle_id": "S09_ABANDONED_SCOPE",
+      "private_match_details_claimed": false,
+      "route_selector": {
+        "kind": "MATCH_COMPLETION",
+        "match_ref": "story.match.qc02.shift09.predictive_drive",
+        "completion": "ABANDONED"
+      }
+    },
+    {
+      "text_id": "text.qc02.s09.abandon.02",
+      "statement_id": "story.qc02.s09.abandon.02",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.09",
+      "shift_number": 9,
+      "nearest_label": "story.qc02.shift09.abandon",
+      "phase": "OUTCOME",
+      "speaker_key": "story.character.jonah_reed",
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-003.abandon.02",
+      "semantic_payload": "Use normalized result field completion=ABANDONED only; Teach prospective risk protection and independent acceptance. No private Match Evidence, diagnosis, action sequence, or technical outcome is asserted.",
+      "context_rungs": [
+        "INSIGHT"
+      ],
+      "authority_bound": "NORMALIZED_MATCH_RESULT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.storage.drive.predictive_failure",
+        "fault.storage.sas.drive_failed"
+      ],
+      "voice_fingerprint": "PROVENANCE_CHAIN",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [
+        "completion"
+      ],
+      "normalized_result_expectations": {
+        "completion": "ABANDONED"
+      },
+      "public_process_principle_id": "S09_ABANDONED_FORWARD",
+      "private_match_details_claimed": false,
+      "route_selector": {
+        "kind": "MATCH_COMPLETION",
+        "match_ref": "story.match.qc02.shift09.predictive_drive",
+        "completion": "ABANDONED"
+      }
+    },
+    {
+      "text_id": "text.qc02.s09.follow.01",
+      "statement_id": "story.qc02.s09.follow.01",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.09",
+      "shift_number": 9,
+      "nearest_label": "story.qc02.shift09.follow_on",
+      "phase": "FOLLOW_ON",
+      "speaker_key": "story.character.jonah_reed",
+      "technical_claim": true,
+      "source_case_id": "exp-004",
+      "source_event_numbers": [
+        1
+      ],
+      "semantic_key": "exp-004.follow.01",
+      "semantic_payload": "Transition from predictive current evidence to a potentially historical alert.",
+      "context_rungs": [
+        "FOLLOW_ON"
+      ],
+      "authority_bound": "PUBLIC_CONTEXT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.management.alert.stale",
+        "fault.storage.backplane.path_failed"
+      ],
+      "voice_fingerprint": "PROVENANCE_CHAIN",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s10.entry.01",
+      "statement_id": "story.qc02.s10.entry.01",
+      "display_kind": "NARRATE",
+      "episode_id": "story.shift.qc02.10",
+      "shift_number": 10,
+      "nearest_label": "story.qc02.shift10.entry",
+      "phase": "CONTEXT",
+      "speaker_key": null,
+      "technical_claim": true,
+      "source_case_id": "exp-004",
+      "source_event_numbers": [
+        1
+      ],
+      "semantic_key": "exp-004.entry.01",
+      "semantic_payload": "Establish the conflict between persistent alert and current hardware evidence.",
+      "context_rungs": [
+        "ENVIRONMENT",
+        "FAILURE"
+      ],
+      "authority_bound": "PUBLIC_CONTEXT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.management.alert.stale",
+        "fault.storage.backplane.path_failed"
+      ],
+      "voice_fingerprint": null,
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s10.entry.02",
+      "statement_id": "story.qc02.s10.entry.02",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.10",
+      "shift_number": 10,
+      "nearest_label": "story.qc02.shift10.entry",
+      "phase": "CONTEXT",
+      "speaker_key": "story.character.jonah_reed",
+      "technical_claim": true,
+      "source_case_id": "exp-004",
+      "source_event_numbers": [
+        1,
+        2
+      ],
+      "semantic_key": "exp-004.entry.02",
+      "semantic_payload": "Explain the management surface and its possible temporal meanings.",
+      "context_rungs": [
+        "NAME",
+        "NORMAL",
+        "FAILURE"
+      ],
+      "authority_bound": "PUBLIC_CONTEXT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.management.alert.stale",
+        "fault.storage.backplane.path_failed"
+      ],
+      "voice_fingerprint": "PROVENANCE_CHAIN",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s10.entry.03",
+      "statement_id": "story.qc02.s10.entry.03",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.10",
+      "shift_number": 10,
+      "nearest_label": "story.qc02.shift10.entry",
+      "phase": "CONTEXT",
+      "speaker_key": "story.character.hana_park",
+      "technical_claim": true,
+      "source_case_id": "exp-004",
+      "source_event_numbers": [
+        3,
+        4
+      ],
+      "semantic_key": "exp-004.entry.03",
+      "semantic_payload": "Explain preserve-before-change and the Test-versus-Repair boundary.",
+      "context_rungs": [
+        "PROCEDURE",
+        "PAIN_POINT",
+        "ACTION"
+      ],
+      "authority_bound": "PUBLIC_CONTEXT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.management.alert.stale",
+        "fault.storage.backplane.path_failed"
+      ],
+      "voice_fingerprint": "AUDITABLE_CRITERIA",
+      "personal_texture": true,
+      "texture_source": "hana_community_orchestra_treasurer",
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s10.entry.04",
+      "statement_id": "story.qc02.s10.entry.04",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.10",
+      "shift_number": 10,
+      "nearest_label": "story.qc02.shift10.entry",
+      "phase": "CONTEXT",
+      "speaker_key": "story.character.jonah_reed",
+      "technical_claim": true,
+      "source_case_id": "exp-004",
+      "source_event_numbers": [
+        2,
+        3,
+        4
+      ],
+      "semantic_key": "exp-004.entry.04",
+      "semantic_payload": "Preserve Candidate uncertainty and SIFT limits.",
+      "context_rungs": [
+        "INSIGHT",
+        "CONSEQUENCE"
+      ],
+      "authority_bound": "PUBLIC_CONTEXT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.management.alert.stale",
+        "fault.storage.backplane.path_failed"
+      ],
+      "voice_fingerprint": "PROVENANCE_CHAIN",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s10.choice.change.prompt",
+      "statement_id": null,
+      "display_kind": "CHOICE_PROMPT",
+      "episode_id": "story.shift.qc02.10",
+      "shift_number": 10,
+      "nearest_label": "story.qc02.shift10.entry",
+      "phase": "CHOICE",
+      "speaker_key": null,
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-004.choice.change.prompt",
+      "semantic_payload": "Ask which public evidence should lead the presentation without changing technical or gameplay authority.",
+      "context_rungs": [
+        "ACTION"
+      ],
+      "authority_bound": "PRESENTATION_ORDER_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.management.alert.stale",
+        "fault.storage.backplane.path_failed"
+      ],
+      "voice_fingerprint": null,
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "choice_id": "choice.qc02.change_evidence_frame",
+      "option_id": null,
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s10.choice.change.current",
+      "statement_id": null,
+      "display_kind": "CHOICE_OPTION",
+      "episode_id": "story.shift.qc02.10",
+      "shift_number": 10,
+      "nearest_label": "story.qc02.shift10.entry",
+      "phase": "CHOICE",
+      "speaker_key": null,
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-004.choice.change.current",
+      "semantic_payload": "Presentation-order option current_state_first; no gameplay, truth, reward, or Match effect.",
+      "context_rungs": [
+        "ACTION"
+      ],
+      "authority_bound": "PRESENTATION_ORDER_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.management.alert.stale",
+        "fault.storage.backplane.path_failed"
+      ],
+      "voice_fingerprint": null,
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "choice_id": "choice.qc02.change_evidence_frame",
+      "option_id": "current_state_first",
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s10.choice.change.history",
+      "statement_id": null,
+      "display_kind": "CHOICE_OPTION",
+      "episode_id": "story.shift.qc02.10",
+      "shift_number": 10,
+      "nearest_label": "story.qc02.shift10.entry",
+      "phase": "CHOICE",
+      "speaker_key": null,
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-004.choice.change.history",
+      "semantic_payload": "Presentation-order option change_history_first; no gameplay, truth, reward, or Match effect.",
+      "context_rungs": [
+        "ACTION"
+      ],
+      "authority_bound": "PRESENTATION_ORDER_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.management.alert.stale",
+        "fault.storage.backplane.path_failed"
+      ],
+      "voice_fingerprint": null,
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "choice_id": "choice.qc02.change_evidence_frame",
+      "option_id": "change_history_first",
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s10.frame.current.01",
+      "statement_id": "story.qc02.s10.frame.current.01",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.10",
+      "shift_number": 10,
+      "nearest_label": "story.qc02.shift10.frame.current_state_first",
+      "phase": "CHOICE_BRANCH",
+      "speaker_key": "story.character.hana_park",
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-004.frame.current.01",
+      "semantic_payload": "The chosen presentation order leads with current state.",
+      "context_rungs": [
+        "ACTION"
+      ],
+      "authority_bound": "PRESENTATION_ORDER_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.management.alert.stale",
+        "fault.storage.backplane.path_failed"
+      ],
+      "voice_fingerprint": "AUDITABLE_CRITERIA",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "CHOICE_IS",
+        "choice_id": "choice.qc02.change_evidence_frame",
+        "option_id": "current_state_first"
+      }
+    },
+    {
+      "text_id": "text.qc02.s10.frame.history.01",
+      "statement_id": "story.qc02.s10.frame.history.01",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.10",
+      "shift_number": 10,
+      "nearest_label": "story.qc02.shift10.frame.change_history_first",
+      "phase": "CHOICE_BRANCH",
+      "speaker_key": "story.character.jonah_reed",
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-004.frame.history.01",
+      "semantic_payload": "The chosen presentation order leads with change history.",
+      "context_rungs": [
+        "ACTION"
+      ],
+      "authority_bound": "PRESENTATION_ORDER_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.management.alert.stale",
+        "fault.storage.backplane.path_failed"
+      ],
+      "voice_fingerprint": "PROVENANCE_CHAIN",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "CHOICE_IS",
+        "choice_id": "choice.qc02.change_evidence_frame",
+        "option_id": "change_history_first"
+      }
+    },
+    {
+      "text_id": "text.qc02.s10.match.01",
+      "statement_id": "story.qc02.s10.match.01",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.10",
+      "shift_number": 10,
+      "nearest_label": "story.qc02.shift10.match",
+      "phase": "MATCH_BRIDGE",
+      "speaker_key": "story.character.hana_park",
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-004.match.01",
+      "semantic_payload": "Yield all fault and repair authority to the Match.",
+      "context_rungs": [
+        "ACTION"
+      ],
+      "authority_bound": "NO_GAMEPLAY_AUTHORITY",
+      "public_candidate_fault_ids": [
+        "fault.management.alert.stale",
+        "fault.storage.backplane.path_failed"
+      ],
+      "voice_fingerprint": "AUDITABLE_CRITERIA",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s10.success.01",
+      "statement_id": "story.qc02.s10.success.01",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.10",
+      "shift_number": 10,
+      "nearest_label": "story.qc02.shift10.success",
+      "phase": "OUTCOME",
+      "speaker_key": "story.character.hana_park",
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-004.success.01",
+      "semantic_payload": "Use normalized result field completion=COMPLETED only; Confine completed status to this Ticket. No private Match Evidence, diagnosis, action sequence, or technical outcome is asserted.",
+      "context_rungs": [
+        "CONSEQUENCE",
+        "INSIGHT"
+      ],
+      "authority_bound": "NORMALIZED_MATCH_RESULT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.management.alert.stale",
+        "fault.storage.backplane.path_failed"
+      ],
+      "voice_fingerprint": "AUDITABLE_CRITERIA",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [
+        "completion"
+      ],
+      "normalized_result_expectations": {
+        "completion": "COMPLETED"
+      },
+      "public_process_principle_id": "S10_COMPLETED_SCOPE",
+      "private_match_details_claimed": false,
+      "route_selector": {
+        "kind": "MATCH_COMPLETION",
+        "match_ref": "story.match.qc02.shift10.stale_alert",
+        "completion": "COMPLETED"
+      }
+    },
+    {
+      "text_id": "text.qc02.s10.success.02",
+      "statement_id": "story.qc02.s10.success.02",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.10",
+      "shift_number": 10,
+      "nearest_label": "story.qc02.shift10.success",
+      "phase": "OUTCOME",
+      "speaker_key": "story.character.jonah_reed",
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-004.success.02",
+      "semantic_payload": "Use normalized result field completion=COMPLETED only; Teach preserve-before-change provenance prospectively. No private Match Evidence, diagnosis, action sequence, or technical outcome is asserted.",
+      "context_rungs": [
+        "REINFORCEMENT"
+      ],
+      "authority_bound": "NORMALIZED_MATCH_RESULT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.management.alert.stale",
+        "fault.storage.backplane.path_failed"
+      ],
+      "voice_fingerprint": "PROVENANCE_CHAIN",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [
+        "completion"
+      ],
+      "normalized_result_expectations": {
+        "completion": "COMPLETED"
+      },
+      "public_process_principle_id": "S10_COMPLETED_FORWARD",
+      "private_match_details_claimed": false,
+      "route_selector": {
+        "kind": "MATCH_COMPLETION",
+        "match_ref": "story.match.qc02.shift10.stale_alert",
+        "completion": "COMPLETED"
+      }
+    },
+    {
+      "text_id": "text.qc02.s10.abandon.01",
+      "statement_id": "story.qc02.s10.abandon.01",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.10",
+      "shift_number": 10,
+      "nearest_label": "story.qc02.shift10.abandon",
+      "phase": "OUTCOME",
+      "speaker_key": "story.character.hana_park",
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-004.abandon.01",
+      "semantic_payload": "Use normalized result field completion=ABANDONED only; State abandonment without inventing an explanation, change, or closure. No private Match Evidence, diagnosis, action sequence, or technical outcome is asserted.",
+      "context_rungs": [
+        "CONSEQUENCE",
+        "ACTION"
+      ],
+      "authority_bound": "NORMALIZED_MATCH_RESULT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.management.alert.stale",
+        "fault.storage.backplane.path_failed"
+      ],
+      "voice_fingerprint": "AUDITABLE_CRITERIA",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [
+        "completion"
+      ],
+      "normalized_result_expectations": {
+        "completion": "ABANDONED"
+      },
+      "public_process_principle_id": "S10_ABANDONED_SCOPE",
+      "private_match_details_claimed": false,
+      "route_selector": {
+        "kind": "MATCH_COMPLETION",
+        "match_ref": "story.match.qc02.shift10.stale_alert",
+        "completion": "ABANDONED"
+      }
+    },
+    {
+      "text_id": "text.qc02.s10.abandon.02",
+      "statement_id": "story.qc02.s10.abandon.02",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.10",
+      "shift_number": 10,
+      "nearest_label": "story.qc02.shift10.abandon",
+      "phase": "OUTCOME",
+      "speaker_key": "story.character.jonah_reed",
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-004.abandon.02",
+      "semantic_payload": "Use normalized result field completion=ABANDONED only; Teach prospective provenance capture without claiming prior observations. No private Match Evidence, diagnosis, action sequence, or technical outcome is asserted.",
+      "context_rungs": [
+        "REINFORCEMENT"
+      ],
+      "authority_bound": "NORMALIZED_MATCH_RESULT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.management.alert.stale",
+        "fault.storage.backplane.path_failed"
+      ],
+      "voice_fingerprint": "PROVENANCE_CHAIN",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [
+        "completion"
+      ],
+      "normalized_result_expectations": {
+        "completion": "ABANDONED"
+      },
+      "public_process_principle_id": "S10_ABANDONED_FORWARD",
+      "private_match_details_claimed": false,
+      "route_selector": {
+        "kind": "MATCH_COMPLETION",
+        "match_ref": "story.match.qc02.shift10.stale_alert",
+        "completion": "ABANDONED"
+      }
+    },
+    {
+      "text_id": "text.qc02.s10.follow.01",
+      "statement_id": "story.qc02.s10.follow.01",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.10",
+      "shift_number": 10,
+      "nearest_label": "story.qc02.shift10.follow_on",
+      "phase": "FOLLOW_ON",
+      "speaker_key": "story.character.jonah_reed",
+      "technical_claim": true,
+      "source_case_id": "exp-005",
+      "source_event_numbers": [
+        1,
+        2,
+        3
+      ],
+      "semantic_key": "exp-005.follow.01",
+      "semantic_payload": "Introduce the version-change and link-flap setup without declaring cause.",
+      "context_rungs": [
+        "FOLLOW_ON"
+      ],
+      "authority_bound": "PUBLIC_CONTEXT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.firmware.version_set.incompatible",
+        "fault.network.cable.disconnected",
+        "fault.network.cable.failed",
+        "fault.network.nic.failed"
+      ],
+      "voice_fingerprint": "PROVENANCE_CHAIN",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s11.entry.01",
+      "statement_id": "story.qc02.s11.entry.01",
+      "display_kind": "NARRATE",
+      "episode_id": "story.shift.qc02.11",
+      "shift_number": 11,
+      "nearest_label": "story.qc02.shift11.entry",
+      "phase": "CONTEXT",
+      "speaker_key": null,
+      "technical_claim": true,
+      "source_case_id": "exp-005",
+      "source_event_numbers": [
+        1
+      ],
+      "semantic_key": "exp-005.entry.01",
+      "semantic_payload": "Establish the repeated link-flap behavior and temporal firmware context.",
+      "context_rungs": [
+        "ENVIRONMENT",
+        "FAILURE"
+      ],
+      "authority_bound": "PUBLIC_CONTEXT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.firmware.version_set.incompatible",
+        "fault.network.cable.disconnected",
+        "fault.network.cable.failed",
+        "fault.network.nic.failed"
+      ],
+      "voice_fingerprint": null,
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s11.entry.02",
+      "statement_id": "story.qc02.s11.entry.02",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.11",
+      "shift_number": 11,
+      "nearest_label": "story.qc02.shift11.entry",
+      "phase": "CONTEXT",
+      "speaker_key": "story.character.malik_okoye",
+      "technical_claim": true,
+      "source_case_id": "exp-005",
+      "source_event_numbers": [
+        1
+      ],
+      "semantic_key": "exp-005.entry.02",
+      "semantic_payload": "Define link flapping without claiming an unobserved service consequence.",
+      "context_rungs": [
+        "NAME",
+        "NORMAL",
+        "FAILURE"
+      ],
+      "authority_bound": "PUBLIC_CONTEXT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.firmware.version_set.incompatible",
+        "fault.network.cable.disconnected",
+        "fault.network.cable.failed",
+        "fault.network.nic.failed"
+      ],
+      "voice_fingerprint": "CONTROLLED_DEMONSTRATION",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s11.entry.03",
+      "statement_id": "story.qc02.s11.entry.03",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.11",
+      "shift_number": 11,
+      "nearest_label": "story.qc02.shift11.entry",
+      "phase": "CONTEXT",
+      "speaker_key": "story.character.sora_chen",
+      "technical_claim": true,
+      "source_case_id": "exp-005",
+      "source_event_numbers": [
+        2,
+        3
+      ],
+      "semantic_key": "exp-005.entry.03",
+      "semantic_payload": "Explain temporal correlation, hardware elimination, and need for corroboration.",
+      "context_rungs": [
+        "PROCEDURE",
+        "INSIGHT",
+        "ACTION"
+      ],
+      "authority_bound": "PUBLIC_CONTEXT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.firmware.version_set.incompatible",
+        "fault.network.cable.disconnected",
+        "fault.network.cable.failed",
+        "fault.network.nic.failed"
+      ],
+      "voice_fingerprint": "CONDITIONAL_COMPARISON",
+      "personal_texture": true,
+      "texture_source": "sora_public_astronomy_night",
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s11.entry.04",
+      "statement_id": "story.qc02.s11.entry.04",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.11",
+      "shift_number": 11,
+      "nearest_label": "story.qc02.shift11.entry",
+      "phase": "CONTEXT",
+      "speaker_key": "story.character.malik_okoye",
+      "technical_claim": true,
+      "source_case_id": "exp-005",
+      "source_event_numbers": [
+        3
+      ],
+      "semantic_key": "exp-005.entry.04",
+      "semantic_payload": "Explain the corroboration goal without naming either required diagnostic.",
+      "context_rungs": [
+        "PROCEDURE",
+        "ACTION"
+      ],
+      "authority_bound": "PUBLIC_CONTEXT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.firmware.version_set.incompatible",
+        "fault.network.cable.disconnected",
+        "fault.network.cable.failed",
+        "fault.network.nic.failed"
+      ],
+      "voice_fingerprint": "CONTROLLED_DEMONSTRATION",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s11.match.01",
+      "statement_id": "story.qc02.s11.match.01",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.11",
+      "shift_number": 11,
+      "nearest_label": "story.qc02.shift11.match",
+      "phase": "MATCH_BRIDGE",
+      "speaker_key": "story.character.sora_chen",
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-005.match.01",
+      "semantic_payload": "Yield causal authority to the Match.",
+      "context_rungs": [
+        "ACTION"
+      ],
+      "authority_bound": "NO_GAMEPLAY_AUTHORITY",
+      "public_candidate_fault_ids": [
+        "fault.firmware.version_set.incompatible",
+        "fault.network.cable.disconnected",
+        "fault.network.cable.failed",
+        "fault.network.nic.failed"
+      ],
+      "voice_fingerprint": "CONDITIONAL_COMPARISON",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s11.success.01",
+      "statement_id": "story.qc02.s11.success.01",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.11",
+      "shift_number": 11,
+      "nearest_label": "story.qc02.shift11.success",
+      "phase": "OUTCOME",
+      "speaker_key": "story.character.sora_chen",
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-005.success.01",
+      "semantic_payload": "Use normalized result field completion=COMPLETED only; Confine completed status and causal meaning to this Ticket. No private Match Evidence, diagnosis, action sequence, or technical outcome is asserted.",
+      "context_rungs": [
+        "CONSEQUENCE",
+        "INSIGHT"
+      ],
+      "authority_bound": "NORMALIZED_MATCH_RESULT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.firmware.version_set.incompatible",
+        "fault.network.cable.disconnected",
+        "fault.network.cable.failed",
+        "fault.network.nic.failed"
+      ],
+      "voice_fingerprint": "CONDITIONAL_COMPARISON",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [
+        "completion"
+      ],
+      "normalized_result_expectations": {
+        "completion": "COMPLETED"
+      },
+      "public_process_principle_id": "S11_COMPLETED_SCOPE",
+      "private_match_details_claimed": false,
+      "route_selector": {
+        "kind": "MATCH_COMPLETION",
+        "match_ref": "story.match.qc02.shift11.firmware_regression",
+        "completion": "COMPLETED"
+      }
+    },
+    {
+      "text_id": "text.qc02.s11.success.02",
+      "statement_id": "story.qc02.s11.success.02",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.11",
+      "shift_number": 11,
+      "nearest_label": "story.qc02.shift11.success",
+      "phase": "OUTCOME",
+      "speaker_key": "story.character.malik_okoye",
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-005.success.02",
+      "semantic_payload": "Use normalized result field completion=COMPLETED only; Teach prospective corroboration without claiming private observations. No private Match Evidence, diagnosis, action sequence, or technical outcome is asserted.",
+      "context_rungs": [
+        "REINFORCEMENT"
+      ],
+      "authority_bound": "NORMALIZED_MATCH_RESULT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.firmware.version_set.incompatible",
+        "fault.network.cable.disconnected",
+        "fault.network.cable.failed",
+        "fault.network.nic.failed"
+      ],
+      "voice_fingerprint": "CONTROLLED_DEMONSTRATION",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [
+        "completion"
+      ],
+      "normalized_result_expectations": {
+        "completion": "COMPLETED"
+      },
+      "public_process_principle_id": "S11_COMPLETED_FORWARD",
+      "private_match_details_claimed": false,
+      "route_selector": {
+        "kind": "MATCH_COMPLETION",
+        "match_ref": "story.match.qc02.shift11.firmware_regression",
+        "completion": "COMPLETED"
+      }
+    },
+    {
+      "text_id": "text.qc02.s11.abandon.01",
+      "statement_id": "story.qc02.s11.abandon.01",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.11",
+      "shift_number": 11,
+      "nearest_label": "story.qc02.shift11.abandon",
+      "phase": "OUTCOME",
+      "speaker_key": "story.character.sora_chen",
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-005.abandon.01",
+      "semantic_payload": "Use normalized result field completion=ABANDONED only; State abandonment without inventing eliminations, observations, or cause. No private Match Evidence, diagnosis, action sequence, or technical outcome is asserted.",
+      "context_rungs": [
+        "CONSEQUENCE",
+        "ACTION"
+      ],
+      "authority_bound": "NORMALIZED_MATCH_RESULT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.firmware.version_set.incompatible",
+        "fault.network.cable.disconnected",
+        "fault.network.cable.failed",
+        "fault.network.nic.failed"
+      ],
+      "voice_fingerprint": "CONDITIONAL_COMPARISON",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [
+        "completion"
+      ],
+      "normalized_result_expectations": {
+        "completion": "ABANDONED"
+      },
+      "public_process_principle_id": "S11_ABANDONED_SCOPE",
+      "private_match_details_claimed": false,
+      "route_selector": {
+        "kind": "MATCH_COMPLETION",
+        "match_ref": "story.match.qc02.shift11.firmware_regression",
+        "completion": "ABANDONED"
+      }
+    },
+    {
+      "text_id": "text.qc02.s11.abandon.02",
+      "statement_id": "story.qc02.s11.abandon.02",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.11",
+      "shift_number": 11,
+      "nearest_label": "story.qc02.shift11.abandon",
+      "phase": "OUTCOME",
+      "speaker_key": "story.character.malik_okoye",
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-005.abandon.02",
+      "semantic_payload": "Use normalized result field completion=ABANDONED only; Teach fresh-window interruption discipline without claiming prior tests. No private Match Evidence, diagnosis, action sequence, or technical outcome is asserted.",
+      "context_rungs": [
+        "CONSEQUENCE"
+      ],
+      "authority_bound": "NORMALIZED_MATCH_RESULT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.firmware.version_set.incompatible",
+        "fault.network.cable.disconnected",
+        "fault.network.cable.failed",
+        "fault.network.nic.failed"
+      ],
+      "voice_fingerprint": "CONTROLLED_DEMONSTRATION",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [
+        "completion"
+      ],
+      "normalized_result_expectations": {
+        "completion": "ABANDONED"
+      },
+      "public_process_principle_id": "S11_ABANDONED_FORWARD",
+      "private_match_details_claimed": false,
+      "route_selector": {
+        "kind": "MATCH_COMPLETION",
+        "match_ref": "story.match.qc02.shift11.firmware_regression",
+        "completion": "ABANDONED"
+      }
+    },
+    {
+      "text_id": "text.qc02.s11.follow.01",
+      "statement_id": "story.qc02.s11.follow.01",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.11",
+      "shift_number": 11,
+      "nearest_label": "story.qc02.shift11.follow_on",
+      "phase": "FOLLOW_ON",
+      "speaker_key": "story.character.sora_chen",
+      "technical_claim": true,
+      "source_case_id": "exp-006",
+      "source_event_numbers": [
+        3,
+        4,
+        5,
+        7
+      ],
+      "semantic_key": "exp-006.follow.01",
+      "semantic_payload": "Transition to BMC recovery while distinguishing read-only recovery evidence, volatile image transfer, and the state-changing firmware write.",
+      "context_rungs": [
+        "FOLLOW_ON"
+      ],
+      "authority_bound": "PUBLIC_CONTEXT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.firmware.version_set.incompatible",
+        "fault.management.bmc_firmware.corrupt"
+      ],
+      "voice_fingerprint": "CONDITIONAL_COMPARISON",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s11.ack.change.current.01",
+      "statement_id": "story.qc02.s11.ack.change.current.01",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.11",
+      "shift_number": 11,
+      "nearest_label": "story.qc02.shift11.change_frame_ack.current_state_first",
+      "phase": "DELAYED_CHOICE_ACK",
+      "speaker_key": "story.character.sora_chen",
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-005.ack.change.current.01",
+      "semantic_payload": "Acknowledge the remembered current-state-first framing and its presentation-only consequence.",
+      "context_rungs": [
+        "REINFORCEMENT"
+      ],
+      "authority_bound": "PRESENTATION_ORDER_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.firmware.version_set.incompatible",
+        "fault.network.cable.disconnected",
+        "fault.network.cable.failed",
+        "fault.network.nic.failed"
+      ],
+      "voice_fingerprint": "CONDITIONAL_COMPARISON",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "VARIABLE_EQUALS",
+        "variable_id": "story.qc02.change_evidence_frame",
+        "value": "CURRENT_STATE_FIRST"
+      }
+    },
+    {
+      "text_id": "text.qc02.s11.ack.change.history.01",
+      "statement_id": "story.qc02.s11.ack.change.history.01",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.11",
+      "shift_number": 11,
+      "nearest_label": "story.qc02.shift11.change_frame_ack.change_history_first",
+      "phase": "DELAYED_CHOICE_ACK",
+      "speaker_key": "story.character.sora_chen",
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-005.ack.change.history.01",
+      "semantic_payload": "Acknowledge the remembered change-history-first framing and its presentation-only consequence.",
+      "context_rungs": [
+        "REINFORCEMENT"
+      ],
+      "authority_bound": "PRESENTATION_ORDER_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.firmware.version_set.incompatible",
+        "fault.network.cable.disconnected",
+        "fault.network.cable.failed",
+        "fault.network.nic.failed"
+      ],
+      "voice_fingerprint": "CONDITIONAL_COMPARISON",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "VARIABLE_EQUALS",
+        "variable_id": "story.qc02.change_evidence_frame",
+        "value": "CHANGE_HISTORY_FIRST"
+      }
+    },
+    {
+      "text_id": "text.qc02.s12.entry.01",
+      "statement_id": "story.qc02.s12.entry.01",
+      "display_kind": "NARRATE",
+      "episode_id": "story.shift.qc02.12",
+      "shift_number": 12,
+      "nearest_label": "story.qc02.shift12.entry",
+      "phase": "CONTEXT",
+      "speaker_key": null,
+      "technical_claim": true,
+      "source_case_id": "exp-006",
+      "source_event_numbers": [
+        1
+      ],
+      "semantic_key": "exp-006.entry.01",
+      "semantic_payload": "Establish the interrupted-update and unavailable-controller state.",
+      "context_rungs": [
+        "ENVIRONMENT",
+        "FAILURE",
+        "CONSEQUENCE"
+      ],
+      "authority_bound": "PUBLIC_CONTEXT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.firmware.version_set.incompatible",
+        "fault.management.bmc_firmware.corrupt"
+      ],
+      "voice_fingerprint": null,
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s12.entry.02",
+      "statement_id": "story.qc02.s12.entry.02",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.12",
+      "shift_number": 12,
+      "nearest_label": "story.qc02.shift12.entry",
+      "phase": "CONTEXT",
+      "speaker_key": "story.character.jonah_reed",
+      "technical_claim": true,
+      "source_case_id": "exp-006",
+      "source_event_numbers": [
+        1,
+        2
+      ],
+      "semantic_key": "exp-006.entry.02",
+      "semantic_payload": "Define the BMC only to the bounded source record and state the unresolved recovery-layer uncertainty without drawing a conclusion.",
+      "context_rungs": [
+        "NAME",
+        "FAILURE",
+        "PAIN_POINT"
+      ],
+      "authority_bound": "PUBLIC_CONTEXT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.firmware.version_set.incompatible",
+        "fault.management.bmc_firmware.corrupt"
+      ],
+      "voice_fingerprint": "PROVENANCE_CHAIN",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s12.entry.03",
+      "statement_id": "story.qc02.s12.entry.03",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.12",
+      "shift_number": 12,
+      "nearest_label": "story.qc02.shift12.entry",
+      "phase": "CONTEXT",
+      "speaker_key": "story.character.sora_chen",
+      "technical_claim": true,
+      "source_case_id": "exp-006",
+      "source_event_numbers": [
+        2,
+        3,
+        4,
+        5,
+        7
+      ],
+      "semantic_key": "exp-006.entry.03",
+      "semantic_payload": "Distinguish read-only recovery evidence, volatile image receipt, and the state-changing firmware write without naming the sole required diagnostic.",
+      "context_rungs": [
+        "PROCEDURE",
+        "INSIGHT",
+        "ACTION"
+      ],
+      "authority_bound": "PUBLIC_CONTEXT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.firmware.version_set.incompatible",
+        "fault.management.bmc_firmware.corrupt"
+      ],
+      "voice_fingerprint": "CONDITIONAL_COMPARISON",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s12.entry.04",
+      "statement_id": "story.qc02.s12.entry.04",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.12",
+      "shift_number": 12,
+      "nearest_label": "story.qc02.shift12.entry",
+      "phase": "CONTEXT",
+      "speaker_key": "story.character.jonah_reed",
+      "technical_claim": true,
+      "source_case_id": "exp-006",
+      "source_event_numbers": [
+        4,
+        5,
+        7
+      ],
+      "semantic_key": "exp-006.entry.04",
+      "semantic_payload": "Bound transport tooling by distinguishing volatile transfer from the later state-changing flash write while preserving platform-specific authority.",
+      "context_rungs": [
+        "PAIN_POINT",
+        "ACTION"
+      ],
+      "authority_bound": "PUBLIC_CONTEXT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.firmware.version_set.incompatible",
+        "fault.management.bmc_firmware.corrupt"
+      ],
+      "voice_fingerprint": "PROVENANCE_CHAIN",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s12.entry.05",
+      "statement_id": "story.qc02.s12.entry.05",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.12",
+      "shift_number": 12,
+      "nearest_label": "story.qc02.shift12.entry",
+      "phase": "CONTEXT",
+      "speaker_key": "story.character.sora_chen",
+      "technical_claim": true,
+      "source_case_id": "exp-006",
+      "source_event_numbers": [
+        3,
+        5,
+        8
+      ],
+      "semantic_key": "exp-006.entry.05",
+      "semantic_payload": "Explain general firmware safety and separate post-repair acceptance without claiming the source proved persistence.",
+      "context_rungs": [
+        "PROCEDURE",
+        "ACTION"
+      ],
+      "authority_bound": "PUBLIC_CONTEXT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.firmware.version_set.incompatible",
+        "fault.management.bmc_firmware.corrupt"
+      ],
+      "voice_fingerprint": "CONDITIONAL_COMPARISON",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s12.match.01",
+      "statement_id": "story.qc02.s12.match.01",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.12",
+      "shift_number": 12,
+      "nearest_label": "story.qc02.shift12.match",
+      "phase": "MATCH_BRIDGE",
+      "speaker_key": "story.character.sora_chen",
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-006.match.01",
+      "semantic_payload": "Yield recovery authority to the Match and restate lifecycle order.",
+      "context_rungs": [
+        "ACTION"
+      ],
+      "authority_bound": "NO_GAMEPLAY_AUTHORITY",
+      "public_candidate_fault_ids": [
+        "fault.firmware.version_set.incompatible",
+        "fault.management.bmc_firmware.corrupt"
+      ],
+      "voice_fingerprint": "CONDITIONAL_COMPARISON",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s12.success.01",
+      "statement_id": "story.qc02.s12.success.01",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.12",
+      "shift_number": 12,
+      "nearest_label": "story.qc02.shift12.success",
+      "phase": "OUTCOME",
+      "speaker_key": "story.character.hana_park",
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-006.success.01",
+      "semantic_payload": "Use normalized result field completion=COMPLETED only; Confine completed status to this Ticket without inventing its sequence. No private Match Evidence, diagnosis, action sequence, or technical outcome is asserted.",
+      "context_rungs": [
+        "CONSEQUENCE",
+        "INSIGHT"
+      ],
+      "authority_bound": "NORMALIZED_MATCH_RESULT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.firmware.version_set.incompatible",
+        "fault.management.bmc_firmware.corrupt"
+      ],
+      "voice_fingerprint": "AUDITABLE_CRITERIA",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [
+        "completion"
+      ],
+      "normalized_result_expectations": {
+        "completion": "COMPLETED"
+      },
+      "public_process_principle_id": "S12_COMPLETED_SCOPE",
+      "private_match_details_claimed": false,
+      "route_selector": {
+        "kind": "MATCH_COMPLETION",
+        "match_ref": "story.match.qc02.shift12.bmc_recovery",
+        "completion": "COMPLETED"
+      }
+    },
+    {
+      "text_id": "text.qc02.s12.success.02",
+      "statement_id": "story.qc02.s12.success.02",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.12",
+      "shift_number": 12,
+      "nearest_label": "story.qc02.shift12.success",
+      "phase": "OUTCOME",
+      "speaker_key": "story.character.jonah_reed",
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-006.success.02",
+      "semantic_payload": "Use normalized result field completion=COMPLETED only; Teach prospective authority and acceptance separation without claiming private Match details. No private Match Evidence, diagnosis, action sequence, or technical outcome is asserted.",
+      "context_rungs": [
+        "REINFORCEMENT"
+      ],
+      "authority_bound": "NORMALIZED_MATCH_RESULT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.firmware.version_set.incompatible",
+        "fault.management.bmc_firmware.corrupt"
+      ],
+      "voice_fingerprint": "PROVENANCE_CHAIN",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [
+        "completion"
+      ],
+      "normalized_result_expectations": {
+        "completion": "COMPLETED"
+      },
+      "public_process_principle_id": "S12_COMPLETED_FORWARD",
+      "private_match_details_claimed": false,
+      "route_selector": {
+        "kind": "MATCH_COMPLETION",
+        "match_ref": "story.match.qc02.shift12.bmc_recovery",
+        "completion": "COMPLETED"
+      }
+    },
+    {
+      "text_id": "text.qc02.s12.abandon.01",
+      "statement_id": "story.qc02.s12.abandon.01",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.12",
+      "shift_number": 12,
+      "nearest_label": "story.qc02.shift12.abandon",
+      "phase": "OUTCOME",
+      "speaker_key": "story.character.hana_park",
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-006.abandon.01",
+      "semantic_payload": "Use normalized result field completion=ABANDONED only; State abandonment without inventing a finding, action, or acceptance. No private Match Evidence, diagnosis, action sequence, or technical outcome is asserted.",
+      "context_rungs": [
+        "CONSEQUENCE",
+        "ACTION"
+      ],
+      "authority_bound": "NORMALIZED_MATCH_RESULT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.firmware.version_set.incompatible",
+        "fault.management.bmc_firmware.corrupt"
+      ],
+      "voice_fingerprint": "AUDITABLE_CRITERIA",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [
+        "completion"
+      ],
+      "normalized_result_expectations": {
+        "completion": "ABANDONED"
+      },
+      "public_process_principle_id": "S12_ABANDONED_SCOPE",
+      "private_match_details_claimed": false,
+      "route_selector": {
+        "kind": "MATCH_COMPLETION",
+        "match_ref": "story.match.qc02.shift12.bmc_recovery",
+        "completion": "ABANDONED"
+      }
+    },
+    {
+      "text_id": "text.qc02.s12.abandon.02",
+      "statement_id": "story.qc02.s12.abandon.02",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.12",
+      "shift_number": 12,
+      "nearest_label": "story.qc02.shift12.abandon",
+      "phase": "OUTCOME",
+      "speaker_key": "story.character.jonah_reed",
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-006.abandon.02",
+      "semantic_payload": "Use normalized result field completion=ABANDONED only; Teach prospective authority and acceptance bounds without claiming prior work. No private Match Evidence, diagnosis, action sequence, or technical outcome is asserted.",
+      "context_rungs": [
+        "CONSEQUENCE"
+      ],
+      "authority_bound": "NORMALIZED_MATCH_RESULT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.firmware.version_set.incompatible",
+        "fault.management.bmc_firmware.corrupt"
+      ],
+      "voice_fingerprint": "PROVENANCE_CHAIN",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [
+        "completion"
+      ],
+      "normalized_result_expectations": {
+        "completion": "ABANDONED"
+      },
+      "public_process_principle_id": "S12_ABANDONED_FORWARD",
+      "private_match_details_claimed": false,
+      "route_selector": {
+        "kind": "MATCH_COMPLETION",
+        "match_ref": "story.match.qc02.shift12.bmc_recovery",
+        "completion": "ABANDONED"
+      }
+    },
+    {
+      "text_id": "text.qc02.s12.follow.01",
+      "statement_id": "story.qc02.s12.follow.01",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.12",
+      "shift_number": 12,
+      "nearest_label": "story.qc02.shift12.follow_on",
+      "phase": "FOLLOW_ON",
+      "speaker_key": "story.character.hana_park",
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-006.follow.01",
+      "semantic_payload": "Summarize expansion completion without a cumulative gate.",
+      "context_rungs": [
+        "CONSEQUENCE"
+      ],
+      "authority_bound": "NORMALIZED_MATCH_HISTORY_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.firmware.version_set.incompatible",
+        "fault.management.bmc_firmware.corrupt"
+      ],
+      "voice_fingerprint": "AUDITABLE_CRITERIA",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    },
+    {
+      "text_id": "text.qc02.s12.follow.02",
+      "statement_id": "story.qc02.s12.follow.02",
+      "display_kind": "SAY",
+      "episode_id": "story.shift.qc02.12",
+      "shift_number": 12,
+      "nearest_label": "story.qc02.shift12.follow_on",
+      "phase": "FOLLOW_ON",
+      "speaker_key": "story.character.sora_chen",
+      "technical_claim": false,
+      "source_case_id": null,
+      "source_event_numbers": [],
+      "semantic_key": "exp-006.follow.02",
+      "semantic_payload": "Close on the institutional learning without inventing a common fault.",
+      "context_rungs": [
+        "INSIGHT"
+      ],
+      "authority_bound": "PUBLIC_STORY_CONTEXT_ONLY",
+      "public_candidate_fault_ids": [
+        "fault.firmware.version_set.incompatible",
+        "fault.management.bmc_firmware.corrupt"
+      ],
+      "voice_fingerprint": "CONDITIONAL_COMPARISON",
+      "personal_texture": false,
+      "texture_source": null,
+      "normalized_result_fields": [],
+      "normalized_result_expectations": null,
+      "public_process_principle_id": null,
+      "private_match_details_claimed": null,
+      "route_selector": {
+        "kind": "ALL_ROUTES"
+      }
+    }
+  ]
+}

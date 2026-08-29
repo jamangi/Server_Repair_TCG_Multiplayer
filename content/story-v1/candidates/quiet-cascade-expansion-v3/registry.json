@@ -1,0 +1,168 @@
+{
+  "registry_version": "story-registry-v1",
+  "variables": [
+    {
+      "variable_id": "story.qc02.initial_evidence_frame",
+      "value_type": "STRING",
+      "default": "UNSET"
+    },
+    {
+      "variable_id": "story.qc02.change_evidence_frame",
+      "value_type": "STRING",
+      "default": "UNSET"
+    }
+  ],
+  "assets": [
+    {
+      "asset_id": "story.bg.trinity.core_floor.night_storm",
+      "layer": "BACKGROUND",
+      "required": true,
+      "alt_text_id": "text.qc01.asset.bg.core_floor"
+    },
+    {
+      "asset_id": "story.bg.trinity.trace.night",
+      "layer": "BACKGROUND",
+      "required": true,
+      "alt_text_id": "text.qc01.asset.bg.trace"
+    },
+    {
+      "asset_id": "story.bg.trinity.validation_gate.predawn",
+      "layer": "BACKGROUND",
+      "required": true,
+      "alt_text_id": "text.qc01.asset.bg.gate"
+    },
+    {
+      "asset_id": "story.bg.trinity.knowledge_systems.night",
+      "layer": "BACKGROUND",
+      "required": true,
+      "alt_text_id": "text.qc01.asset.bg.knowledge"
+    },
+    {
+      "asset_id": "story.asset.character.malik_okoye.focused",
+      "layer": "CHARACTER",
+      "required": true,
+      "alt_text_id": "text.qc01.asset.character.malik.focused"
+    },
+    {
+      "asset_id": "story.asset.character.malik_okoye.defensive",
+      "layer": "CHARACTER",
+      "required": true,
+      "alt_text_id": "text.qc01.asset.character.malik.defensive"
+    },
+    {
+      "asset_id": "story.asset.character.sora_chen.focused",
+      "layer": "CHARACTER",
+      "required": true,
+      "alt_text_id": "text.qc01.asset.character.sora.focused"
+    },
+    {
+      "asset_id": "story.asset.character.sora_chen.approving",
+      "layer": "CHARACTER",
+      "required": true,
+      "alt_text_id": "text.qc01.asset.character.sora.approving"
+    },
+    {
+      "asset_id": "story.asset.character.hana_park.skeptical",
+      "layer": "CHARACTER",
+      "required": true,
+      "alt_text_id": "text.qc01.asset.character.hana.skeptical"
+    },
+    {
+      "asset_id": "story.asset.character.hana_park.relief",
+      "layer": "CHARACTER",
+      "required": true,
+      "alt_text_id": "text.qc01.asset.character.hana.relief"
+    },
+    {
+      "asset_id": "story.asset.character.jonah_reed.defensive",
+      "layer": "CHARACTER",
+      "required": true,
+      "alt_text_id": "text.qc01.asset.character.jonah.defensive"
+    },
+    {
+      "asset_id": "story.asset.character.jonah_reed.thoughtful",
+      "layer": "CHARACTER",
+      "required": true,
+      "alt_text_id": "text.qc01.asset.character.jonah.thoughtful"
+    }
+  ],
+  "characters": [
+    {
+      "character_id": "story.character.malik_okoye",
+      "name_text_id": "text.qc01.character.malik.name",
+      "poses": [
+        {
+          "pose_id": "focused",
+          "asset_id": "story.asset.character.malik_okoye.focused"
+        },
+        {
+          "pose_id": "defensive",
+          "asset_id": "story.asset.character.malik_okoye.defensive"
+        }
+      ]
+    },
+    {
+      "character_id": "story.character.sora_chen",
+      "name_text_id": "text.qc01.character.sora.name",
+      "poses": [
+        {
+          "pose_id": "focused",
+          "asset_id": "story.asset.character.sora_chen.focused"
+        },
+        {
+          "pose_id": "approving",
+          "asset_id": "story.asset.character.sora_chen.approving"
+        }
+      ]
+    },
+    {
+      "character_id": "story.character.hana_park",
+      "name_text_id": "text.qc01.character.hana.name",
+      "poses": [
+        {
+          "pose_id": "skeptical",
+          "asset_id": "story.asset.character.hana_park.skeptical"
+        },
+        {
+          "pose_id": "relief",
+          "asset_id": "story.asset.character.hana_park.relief"
+        }
+      ]
+    },
+    {
+      "character_id": "story.character.jonah_reed",
+      "name_text_id": "text.qc01.character.jonah.name",
+      "poses": [
+        {
+          "pose_id": "defensive",
+          "asset_id": "story.asset.character.jonah_reed.defensive"
+        },
+        {
+          "pose_id": "thoughtful",
+          "asset_id": "story.asset.character.jonah_reed.thoughtful"
+        }
+      ]
+    }
+  ],
+  "matches": [
+    {
+      "match_ref": "story.match.qc02.shift07.socket_contacts"
+    },
+    {
+      "match_ref": "story.match.qc02.shift08.power_distribution"
+    },
+    {
+      "match_ref": "story.match.qc02.shift09.predictive_drive"
+    },
+    {
+      "match_ref": "story.match.qc02.shift10.stale_alert"
+    },
+    {
+      "match_ref": "story.match.qc02.shift11.firmware_regression"
+    },
+    {
+      "match_ref": "story.match.qc02.shift12.bmc_recovery"
+    }
+  ],
+  "declared_loops": []
+}

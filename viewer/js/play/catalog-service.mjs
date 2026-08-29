@@ -1,5 +1,11 @@
 const CONTENT_ROOT = new URL('../../generated/play/content/gameplay-v1/', import.meta.url);
 
+const PLAY_RULESET_VERSION = 'first-version-v2';
+const PLAY_CARD_CATALOG_VERSION = 'core-card-catalog-story-expansion-v5';
+const PLAY_DECK_CATALOG_VERSION = 'core-response-decks-v5';
+const PLAY_DOMAIN_CONTENT_VERSION = 'core-domain-snapshot-story-expansion-v4';
+const PLAY_PART_CATALOG_VERSION = 'ticket-parts-v2';
+
 const TUTORIAL_RULESET_VERSION = 'first-version-v2';
 const TUTORIAL_CARD_CATALOG_VERSION = 'core-card-catalog-diagnosis-v2';
 const TUTORIAL_TICKET_CONTENT_VERSION = 'core-ticket-templates-diagnosis-v2';
@@ -85,18 +91,19 @@ export async function loadPlayCatalog({
   cache = true,
 } = {}) {
   const load = () => Promise.all([
-    fetchJson('card-catalog-v3.json', { fetchImpl, contentRoot }),
-    fetchJson('decks-v3.json', { fetchImpl, contentRoot }),
-    fetchJson('domain-snapshot-v2.json', { fetchImpl, contentRoot }),
-    fetchJson('task-014-parts.json', { fetchImpl, contentRoot }),
-    fetchJson('playable-coverage-v3.json', { fetchImpl, contentRoot }),
+    fetchJson('card-catalog-v4.json', { fetchImpl, contentRoot }),
+    fetchJson('decks-v4.json', { fetchImpl, contentRoot }),
+    fetchJson('domain-snapshot-v3.json', { fetchImpl, contentRoot }),
+    fetchJson('task-042-parts.json', { fetchImpl, contentRoot }),
+    fetchJson('playable-coverage-v4.json', { fetchImpl, contentRoot }),
   ]).then(([cards, decks, domain, parts, coverage]) => {
-    if (cards.ruleset_version !== 'first-version-v2'
-        || cards.card_catalog_version !== 'core-card-catalog-technical-copy-v4'
-        || decks.deck_catalog_version !== 'core-response-decks-v4'
-        || parts.part_catalog_version !== 'ticket-parts-v1'
-        || coverage.coverage_version !== 'playable-coverage-v4') {
-      throw new Error('TASK-014 playable content versions are incompatible.');
+    if (cards.ruleset_version !== PLAY_RULESET_VERSION
+        || cards.card_catalog_version !== PLAY_CARD_CATALOG_VERSION
+        || decks.deck_catalog_version !== PLAY_DECK_CATALOG_VERSION
+        || domain.domain_content_version !== PLAY_DOMAIN_CONTENT_VERSION
+        || parts.part_catalog_version !== PLAY_PART_CATALOG_VERSION
+        || coverage.coverage_version !== 'playable-coverage-v5') {
+      throw new Error('TASK-042 playable content versions are incompatible.');
     }
     return freezeCatalog({ cards, decks, domain, parts, coverage });
   });

@@ -1,0 +1,1208 @@
+{
+  "review_version": "technical-copy-review-v2",
+  "reviewed_on": "2026-08-28",
+  "review_scope": "83 published playable primary domain records, including twelve source-backed story-expansion response actions",
+  "sources": [
+    {
+      "id": "source.case.exp-001",
+      "title": "Dell PowerEdge R910 four-processor boot-failure case",
+      "url": "https://www.dell.com/community/en/conversations/rack-servers/r910-will-not-power-on-with-4-processors/647f7d25f4ccf8a8deb93b08",
+      "authority": "firsthand community troubleshooting report; gameplay interpretation reviewed separately"
+    },
+    {
+      "id": "source.case.exp-002",
+      "title": "Dell PowerEdge T420 voltage-error and PDB-replacement case",
+      "url": "https://www.dell.com/community/en/conversations/poweredge-hardware-general/t420-poweredge-vlt0204-main-board-voltage-outside-of-range/67fd91b469e6265ea77af6ab",
+      "authority": "firsthand community troubleshooting report; gameplay interpretation reviewed separately"
+    },
+    {
+      "id": "source.case.exp-003",
+      "title": "Dell PowerEdge R620 predictive-drive and completed-rebuild case",
+      "url": "https://www.dell.com/community/en/conversations/poweredge-hardware-general/poweredge-r620-drive-predicted-failure/647f7b52f4ccf8a8de9878d4",
+      "authority": "firsthand community troubleshooting report; gameplay interpretation reviewed separately"
+    },
+    {
+      "id": "source.case.exp-004",
+      "title": "Dell PowerEdge stale backplane-alert case",
+      "url": "https://www.dell.com/community/en/conversations/poweredge-hddscsiraid/pe2900-backplane-degraded/647e8b20f4ccf8a8dede59e9",
+      "authority": "firsthand community troubleshooting report; gameplay interpretation reviewed separately"
+    },
+    {
+      "id": "source.case.exp-005",
+      "title": "Dell PowerEdge firmware-correlated NIC-flap case",
+      "url": "https://www.dell.com/community/en/conversations/poweredge-hardware-general/idrac-keeps-messaging-the-nic-in-slot-4-port-1-network-link-is-started/647f94b2f4ccf8a8de70eaff",
+      "authority": "firsthand community troubleshooting report; gameplay interpretation reviewed separately"
+    },
+    {
+      "id": "source.case.exp-006",
+      "title": "GA-7PESH2 BMC recovery case",
+      "url": "https://forums.serverbuilds.net/t/ga-7pesh2-bmc-recovery/882",
+      "authority": "firsthand community troubleshooting report; gameplay interpretation reviewed separately"
+    },
+    {
+      "id": "source.dell.poweredge_service",
+      "title": "Dell PowerEdge Installation and Service Manual — installing and removing system components",
+      "url": "https://www.dell.com/support/manuals/en-us/poweredge-r6625/r6625_ism/installing-and-removing-system-components",
+      "authority": "platform vendor service manual"
+    },
+    {
+      "id": "source.dmtf.ipmi",
+      "title": "DMTF IPMI and Redfish event-log specifications",
+      "url": "https://www.dmtf.org/standards/ipmi",
+      "authority": "platform-management standard"
+    },
+    {
+      "id": "source.fluke.continuity",
+      "title": "Fluke continuity testing guidance",
+      "url": "https://www.fluke.com/en-us/learn/blog/digital-multimeters/how-to-test-for-continuity",
+      "authority": "measurement-tool vendor guidance"
+    },
+    {
+      "id": "source.freedesktop.journalctl",
+      "title": "systemd journalctl manual",
+      "url": "https://www.freedesktop.org/software/systemd/man/latest/journalctl.html",
+      "authority": "upstream command manual"
+    },
+    {
+      "id": "source.kernel.ipmi",
+      "title": "Linux kernel IPMI driver documentation",
+      "url": "https://docs.kernel.org/driver-api/ipmi.html",
+      "authority": "upstream platform documentation"
+    },
+    {
+      "id": "source.kernel.ras",
+      "title": "Linux kernel Reliability, Availability and Serviceability documentation",
+      "url": "https://docs.kernel.org/admin-guide/RAS/main.html",
+      "authority": "upstream platform documentation"
+    },
+    {
+      "id": "source.man.dmesg",
+      "title": "dmesg manual",
+      "url": "https://man7.org/linux/man-pages/man1/dmesg.1.html",
+      "authority": "upstream command manual"
+    },
+    {
+      "id": "source.man.ethtool",
+      "title": "ethtool manual",
+      "url": "https://man7.org/linux/man-pages/man8/ethtool.8.html",
+      "authority": "upstream command manual"
+    },
+    {
+      "id": "source.man.free",
+      "title": "free manual",
+      "url": "https://man7.org/linux/man-pages/man1/free.1.html",
+      "authority": "upstream command manual"
+    },
+    {
+      "id": "source.man.ip_address",
+      "title": "ip-address manual",
+      "url": "https://man7.org/linux/man-pages/man8/ip-address.8.html",
+      "authority": "upstream command manual"
+    },
+    {
+      "id": "source.man.ip_route",
+      "title": "ip-route manual",
+      "url": "https://man7.org/linux/man-pages/man8/ip-route.8.html",
+      "authority": "upstream command manual"
+    },
+    {
+      "id": "source.man.lsblk",
+      "title": "lsblk manual",
+      "url": "https://man7.org/linux/man-pages/man8/lsblk.8.html",
+      "authority": "upstream command manual"
+    },
+    {
+      "id": "source.man.lspci",
+      "title": "lspci manual",
+      "url": "https://man7.org/linux/man-pages/man8/lspci.8.html",
+      "authority": "upstream command manual"
+    },
+    {
+      "id": "source.man.ping",
+      "title": "ping manual",
+      "url": "https://man7.org/linux/man-pages/man8/ping.8.html",
+      "authority": "upstream command manual"
+    },
+    {
+      "id": "source.nvmexpress.specification",
+      "title": "NVM Express specifications",
+      "url": "https://nvmexpress.org/specifications/",
+      "authority": "storage protocol standard"
+    },
+    {
+      "id": "source.rfc2131.dhcp",
+      "title": "RFC 2131 — Dynamic Host Configuration Protocol",
+      "url": "https://www.rfc-editor.org/rfc/rfc2131.html",
+      "authority": "Internet standard"
+    },
+    {
+      "id": "source.smartmontools.smartctl",
+      "title": "smartmontools documentation",
+      "url": "https://www.smartmontools.org/wiki/TocDoc",
+      "authority": "upstream command documentation"
+    },
+    {
+      "id": "source.uefi.boot_manager",
+      "title": "UEFI Specification — Boot Manager",
+      "url": "https://uefi.org/specs/UEFI/2.11/03_Boot_Manager.html",
+      "authority": "firmware standard"
+    }
+  ],
+  "records": [
+    {
+      "domain_id": "command.ipmi.sel_elist",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.dmtf.ipmi",
+        "source.kernel.ipmi"
+      ],
+      "acronym_ids": [
+        "term.ipmi"
+      ],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "a0cd999842a3aaffcb661a8aefc9ddaeb3dc85e7518dedf98754886c2490ebfd"
+    },
+    {
+      "domain_id": "command.linux.dhclient",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.rfc2131.dhcp"
+      ],
+      "acronym_ids": [
+        "term.dhcp",
+        "term.ipv4"
+      ],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "824e969bb555ef38d642ca0be15bc84bd015ccfc5b5f013b58e14bd275d1c4f2"
+    },
+    {
+      "domain_id": "command.linux.dmesg",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.man.dmesg"
+      ],
+      "acronym_ids": [],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "b6007354b2c8ebfe5fa4d0a0356511f83c9c49a5bd48b778bb84efeeccd4e79f"
+    },
+    {
+      "domain_id": "command.linux.ethtool",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.man.ethtool"
+      ],
+      "acronym_ids": [],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "de3e5747354622a99a47e41490dc6a3ef14806660b17d13b324ccf2163b66611"
+    },
+    {
+      "domain_id": "command.linux.free_h",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.man.free"
+      ],
+      "acronym_ids": [],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "762f9a971796601e7d4ff0e00faaf1b98bd6e4be4bc8b3576d5a7a7f0b01ac2e"
+    },
+    {
+      "domain_id": "command.linux.ip_addr",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.man.ip_address"
+      ],
+      "acronym_ids": [
+        "term.ip"
+      ],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "4715ce4b35f0de53cd3e61802e3024698878697e600c26bd053eeedafb2a8c5e"
+    },
+    {
+      "domain_id": "command.linux.ip_route",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.man.ip_route"
+      ],
+      "acronym_ids": [],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "e4368345086e60d88447a9051225122f2738bd12d177b33bc55a4ebf231d7de4"
+    },
+    {
+      "domain_id": "command.linux.journalctl",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.freedesktop.journalctl"
+      ],
+      "acronym_ids": [],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "c6eaa20386f8bb6f1ca7d083807217e324ef86f1d40499e2f51fda8abc902482"
+    },
+    {
+      "domain_id": "command.linux.lsblk",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.man.lsblk"
+      ],
+      "acronym_ids": [],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "44ce7a03ff3126e0f28235e75a6b817c571599e3f2bc38d6b71f5239887667dc"
+    },
+    {
+      "domain_id": "command.linux.lspci",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.man.lspci"
+      ],
+      "acronym_ids": [
+        "term.pci",
+        "term.pcie"
+      ],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "0c2253bb96f0552d37d9971e2688b2e376264433ad477e244cc0feaf8eaba74e"
+    },
+    {
+      "domain_id": "command.linux.nvme_smart_log",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.nvmexpress.specification"
+      ],
+      "acronym_ids": [
+        "term.nvme",
+        "term.smart"
+      ],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "a8d0051bcfc94f180a30b3d3845b5943487d5aaab8996b271f796595f09c747d"
+    },
+    {
+      "domain_id": "command.linux.smartctl",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.smartmontools.smartctl"
+      ],
+      "acronym_ids": [
+        "term.smart"
+      ],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "bb4586f01a7abb406be2cc0a7a8d0b0288be2a0c4da2b6c7a51452aae6371e39"
+    },
+    {
+      "domain_id": "command.network.ping",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.man.ping"
+      ],
+      "acronym_ids": [
+        "term.icmp",
+        "term.ip"
+      ],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "d74e3dfb23bf185d0d9ee5ba2d8eddd148b7de5182a5f6cb855708d9d002c825"
+    },
+    {
+      "domain_id": "repair.boot.correct_order",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.dell.poweredge_service",
+        "source.uefi.boot_manager"
+      ],
+      "acronym_ids": [
+        "term.uefi"
+      ],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "5b11605bc5638c78843a745f50b52f550f6aced6ff2a1468d8902646aa117a4a"
+    },
+    {
+      "domain_id": "repair.compute.restore_socket_contacts",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.case.exp-001"
+      ],
+      "acronym_ids": [
+        "term.cpu"
+      ],
+      "scoped_uncertainty": "This game copy is bounded by exp-001; platform-specific service procedures and acceptance criteria remain authoritative.",
+      "technical_copy_sha256": "17fe3a46ad2c5f874477f0651ccfa77598e12828702deee9824fef6569e91093"
+    },
+    {
+      "domain_id": "repair.firmware.restore_compatible_versions",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.case.exp-005"
+      ],
+      "acronym_ids": [],
+      "scoped_uncertainty": "This game copy is bounded by exp-005; platform-specific service procedures and acceptance criteria remain authoritative.",
+      "technical_copy_sha256": "043bd0597f1e63a7df3d56b0bc276b76e21cd291efca93e38dd0abb53800b389"
+    },
+    {
+      "domain_id": "repair.management.clear_stale_alert_state",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.case.exp-004"
+      ],
+      "acronym_ids": [],
+      "scoped_uncertainty": "This game copy is bounded by exp-004; platform-specific service procedures and acceptance criteria remain authoritative.",
+      "technical_copy_sha256": "845a06e7d8f7fe6de630ac1d22206a684b47dcf0a2eff2d39cf15361ba432410"
+    },
+    {
+      "domain_id": "repair.management.recover_bmc_firmware",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.case.exp-006"
+      ],
+      "acronym_ids": [
+        "term.bmc"
+      ],
+      "scoped_uncertainty": "This game copy is bounded by exp-006; platform-specific service procedures and acceptance criteria remain authoritative.",
+      "technical_copy_sha256": "7f967b5c6b12fd017e70ad95a9e75f823deb6f50146cfa651e84acd98861c330"
+    },
+    {
+      "domain_id": "repair.memory.replace_dimm",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.dell.poweredge_service",
+        "source.kernel.ras"
+      ],
+      "acronym_ids": [
+        "term.dimm"
+      ],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "cb5f7610cf6ee98a6a735827ca1b0c769310077486022fdda2761509cfd29364"
+    },
+    {
+      "domain_id": "repair.memory.reseat_dimm",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.dell.poweredge_service",
+        "source.kernel.ras"
+      ],
+      "acronym_ids": [
+        "term.dimm"
+      ],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "7a7220663dd359fbff7b0e88e8df6d86e9109f8dd2fabcecf650a8831e6c60cf"
+    },
+    {
+      "domain_id": "repair.network.correct_static_ip",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.man.ethtool",
+        "source.man.ip_address",
+        "source.man.ip_route",
+        "source.man.ping",
+        "source.rfc2131.dhcp"
+      ],
+      "acronym_ids": [
+        "term.ip"
+      ],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "21f0c595b3b64f642df7e071534bce33cfb3f7b51b32248d0d7e70cb765da70f"
+    },
+    {
+      "domain_id": "repair.network.replace_cable",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.man.ethtool",
+        "source.man.ip_address",
+        "source.man.ip_route",
+        "source.man.ping",
+        "source.rfc2131.dhcp"
+      ],
+      "acronym_ids": [],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "b6abfad25bba531c4317fe1d075f4f75f8eef20b8d6446438628aaa08356136e"
+    },
+    {
+      "domain_id": "repair.power.replace_distribution_board",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.case.exp-002"
+      ],
+      "acronym_ids": [
+        "term.psu"
+      ],
+      "scoped_uncertainty": "This game copy is bounded by exp-002; platform-specific service procedures and acceptance criteria remain authoritative.",
+      "technical_copy_sha256": "7e5a5febbd9a354ca44bf6e18c44631176a921eff91d85ac83d60b051161eb66"
+    },
+    {
+      "domain_id": "repair.power.replace_psu",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.dell.poweredge_service",
+        "source.fluke.continuity"
+      ],
+      "acronym_ids": [
+        "term.psu"
+      ],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "042017effd5087d144b1f0d1a9fd80888383532676c3625de4a0579dc102b978"
+    },
+    {
+      "domain_id": "repair.power.reseat_psu",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.dell.poweredge_service",
+        "source.fluke.continuity"
+      ],
+      "acronym_ids": [
+        "term.psu"
+      ],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "5a090905339febbfd59133544d4adf69ccaab5632b300f928e69cce2f2e5a5f0"
+    },
+    {
+      "domain_id": "repair.storage.replace_nvme",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.dell.poweredge_service",
+        "source.man.lsblk",
+        "source.nvmexpress.specification",
+        "source.smartmontools.smartctl"
+      ],
+      "acronym_ids": [
+        "term.nvme"
+      ],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "f845ae6cc8c4c1d0c4d3936bcc2c84cbda6923776ef5c18806e4340997f55ad2"
+    },
+    {
+      "domain_id": "repair.storage.replace_predictive_drive",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.case.exp-003"
+      ],
+      "acronym_ids": [],
+      "scoped_uncertainty": "This game copy is bounded by exp-003; platform-specific service procedures and acceptance criteria remain authoritative.",
+      "technical_copy_sha256": "978bfd5f48a5d59431ac8799425134548f80aa50a7f8fbd5533d79584586ffd3"
+    },
+    {
+      "domain_id": "repair.storage.replace_raid_member",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.dell.poweredge_service",
+        "source.man.lsblk",
+        "source.nvmexpress.specification",
+        "source.smartmontools.smartctl"
+      ],
+      "acronym_ids": [
+        "term.raid"
+      ],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "39862b37748f088ed0bc5777a641513e592eaccb3eb87d48fb4160890d0e6b51"
+    },
+    {
+      "domain_id": "repair.storage.reseat_cable",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.dell.poweredge_service",
+        "source.man.lsblk",
+        "source.nvmexpress.specification",
+        "source.smartmontools.smartctl"
+      ],
+      "acronym_ids": [],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "34005e4612622cc3da26748ccdb4faa74627862f21a2fdb3958e287f0d2f5d14"
+    },
+    {
+      "domain_id": "repair.thermal.clean_cooling_path",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.dell.poweredge_service",
+        "source.kernel.ras"
+      ],
+      "acronym_ids": [],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "3641e44b29610b44e9d34f44b14a22e2e62493a09bbeb88dabf586dd86b636ab"
+    },
+    {
+      "domain_id": "repair.thermal.replace_fan",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.dell.poweredge_service",
+        "source.kernel.ras"
+      ],
+      "acronym_ids": [],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "17640080c918e946bc0e889afcfdf148ab4d00c3412256b3db1c30273a2967cf"
+    },
+    {
+      "domain_id": "test.boot.device_inventory",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.dell.poweredge_service",
+        "source.uefi.boot_manager"
+      ],
+      "acronym_ids": [],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "4583e2043544055862bacecf8e9b5dc646fedf9f41f77aea10d41700c9b5f087"
+    },
+    {
+      "domain_id": "test.boot.post_code_analysis",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.dell.poweredge_service",
+        "source.uefi.boot_manager"
+      ],
+      "acronym_ids": [
+        "term.post"
+      ],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "690ecf3cbc0b034d2905d8557f39d25a23f1ebe7f897bbf359d81bf01cfddfbf"
+    },
+    {
+      "domain_id": "test.boot.post_observation",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.dell.poweredge_service",
+        "source.uefi.boot_manager"
+      ],
+      "acronym_ids": [
+        "term.post"
+      ],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "76f24921c644804565d2ba4b0aac0b70de82f9a19fcddd0ea67afc9ad7afafe6"
+    },
+    {
+      "domain_id": "test.compute.socket_magnified_inspection",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.case.exp-001",
+        "source.dell.poweredge_service",
+        "source.kernel.ras"
+      ],
+      "acronym_ids": [
+        "term.cpu"
+      ],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "b8017eb3fdb2cdc7529f4ebf4d884b69fea26edbc7554acaa1cc8d28e428d1c0"
+    },
+    {
+      "domain_id": "test.cooling.location_cross_substitution",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.dell.poweredge_service",
+        "source.kernel.ras"
+      ],
+      "acronym_ids": [],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "d2b83a4420e55dc4d71aa65ae37015e3410b7e821cfedacc7142d37bca1d6521"
+    },
+    {
+      "domain_id": "test.electrical.continuity",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.dell.poweredge_service",
+        "source.fluke.continuity"
+      ],
+      "acronym_ids": [],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "d9e0180dfb59f6627910c411be05fdfc90517e9334d104b353564f203819a7db"
+    },
+    {
+      "domain_id": "test.firmware.settings_review",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.dell.poweredge_service",
+        "source.uefi.boot_manager"
+      ],
+      "acronym_ids": [],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "a7b95a9710b213fc85029197106ea6302699f6c32d71b7d5a6aa5e7a165729e3"
+    },
+    {
+      "domain_id": "test.firmware.version_compatibility",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.case.exp-005",
+        "source.case.exp-006",
+        "source.dell.poweredge_service",
+        "source.uefi.boot_manager"
+      ],
+      "acronym_ids": [
+        "term.bios",
+        "term.bmc"
+      ],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "e8382796ca7191bb72b30711dd9b8e07349c3c4ac28b86952ef1740255972dd2"
+    },
+    {
+      "domain_id": "test.general.minimum_configuration",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.case.exp-001",
+        "source.dell.poweredge_service"
+      ],
+      "acronym_ids": [],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "1fb1c9e8ad2ba5c191f962680533b04c654617ec296a5600b2b4b2d3cb7f92f6"
+    },
+    {
+      "domain_id": "test.general.visual_inspection",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.case.exp-002",
+        "source.case.exp-005",
+        "source.dell.poweredge_service"
+      ],
+      "acronym_ids": [],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "c2e05ec3782b1a71f0d29c4ecfeab89618c935f0193bcd4ca7d63b449755c399"
+    },
+    {
+      "domain_id": "test.management.bmc_recovery_state",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.case.exp-006",
+        "source.dell.poweredge_service",
+        "source.dmtf.ipmi",
+        "source.kernel.ipmi"
+      ],
+      "acronym_ids": [
+        "term.bmc"
+      ],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "d01498d0cc2726dce168a4e7798c53bd3e19b83e53ae76895c482187449fa6d8"
+    },
+    {
+      "domain_id": "test.management.event_log_freshness",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.case.exp-004",
+        "source.dell.poweredge_service",
+        "source.dmtf.ipmi",
+        "source.kernel.ipmi"
+      ],
+      "acronym_ids": [],
+      "scoped_uncertainty": "TASK-042 intentionally migrates this one playable Card from combined probe/clear wording to observation-only evidence preservation and current-state comparison; clearing or reset remains exclusively a Repair.",
+      "technical_copy_sha256": "c1a29898b8d92415704c446c6530f256d8de6c02a8e1db735466010fa7cbe1da"
+    },
+    {
+      "domain_id": "test.memory.diagnostic",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.dell.poweredge_service",
+        "source.kernel.ras"
+      ],
+      "acronym_ids": [
+        "term.ecc"
+      ],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "d5903fcda40d6801b474dcc71950d4c6ced73ea12638e2435f522c1157ac8a94"
+    },
+    {
+      "domain_id": "test.memory.known_good_substitution",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.dell.poweredge_service",
+        "source.kernel.ras"
+      ],
+      "acronym_ids": [
+        "term.dimm"
+      ],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "5c95bf398ac50b0ad5d3954c184e318dd5bd6f11c8649edacda9dd3f9f69b6bb"
+    },
+    {
+      "domain_id": "test.memory.single_dimm_isolation",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.case.exp-001",
+        "source.dell.poweredge_service",
+        "source.kernel.ras"
+      ],
+      "acronym_ids": [
+        "term.dimm"
+      ],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "45e4795c2b447ed66626947d3efdca3ee9527e360de9d36298dcce5bdb44efc7"
+    },
+    {
+      "domain_id": "test.network.cable_substitution",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.case.exp-005",
+        "source.man.ethtool",
+        "source.man.ip_address",
+        "source.man.ip_route",
+        "source.man.ping",
+        "source.rfc2131.dhcp"
+      ],
+      "acronym_ids": [],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "19e25a0c72f3adb1325725b7ebf905e185155d832971bf45875d9c9ad5220602"
+    },
+    {
+      "domain_id": "test.network.dhcp_pool_audit",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.man.ethtool",
+        "source.man.ip_address",
+        "source.man.ip_route",
+        "source.man.ping",
+        "source.rfc2131.dhcp"
+      ],
+      "acronym_ids": [
+        "term.dhcp"
+      ],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "931b1df1411775177d9dae5e32143f65543ab54722e576d73574f2465ab4d0ab"
+    },
+    {
+      "domain_id": "test.network.dhcp_transaction_trace",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.man.ethtool",
+        "source.man.ip_address",
+        "source.man.ip_route",
+        "source.man.ping",
+        "source.rfc2131.dhcp"
+      ],
+      "acronym_ids": [
+        "term.dhcp"
+      ],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "0c705d65c27d284dfa67db2beeee8584e9543fbe2873c03adde8a3bf45dde392"
+    },
+    {
+      "domain_id": "test.network.interface_config",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.man.ethtool",
+        "source.man.ip_address",
+        "source.man.ip_route",
+        "source.man.ping",
+        "source.rfc2131.dhcp"
+      ],
+      "acronym_ids": [
+        "term.ip"
+      ],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "33eba74d3b8b3d3ea44edb2f120aa586622f70969dbacf73e8bf0c67b88a213a"
+    },
+    {
+      "domain_id": "test.network.link",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.man.ethtool",
+        "source.man.ip_address",
+        "source.man.ip_route",
+        "source.man.ping",
+        "source.rfc2131.dhcp"
+      ],
+      "acronym_ids": [],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "2860a122621cb188db5b6d18646df84e4f1e92cf3ee663b7e6c7b181167be4b3"
+    },
+    {
+      "domain_id": "test.network.link_counter_soak",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.case.exp-005",
+        "source.man.ethtool",
+        "source.man.ip_address",
+        "source.man.ip_route",
+        "source.man.ping",
+        "source.rfc2131.dhcp"
+      ],
+      "acronym_ids": [],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "952792bf7564ded53949687dd08ae18d2bcaf1bcc66b8de0e2ee8ca7763ac7ce"
+    },
+    {
+      "domain_id": "test.network.ping",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.man.ethtool",
+        "source.man.ip_address",
+        "source.man.ip_route",
+        "source.man.ping",
+        "source.rfc2131.dhcp"
+      ],
+      "acronym_ids": [
+        "term.icmp"
+      ],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "d5fc7cadd23c62c5129d20ee3b1f792a0410daf6c9cd059d13a2407e930ac7cc"
+    },
+    {
+      "domain_id": "test.pcie.inventory",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.dell.poweredge_service",
+        "source.kernel.ras"
+      ],
+      "acronym_ids": [
+        "term.pcie"
+      ],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "fa548195a08c911a3ddb000eef64f6fa9bd442be5f49a6063c48b18cddccdf27"
+    },
+    {
+      "domain_id": "test.power.distribution_path_isolation",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.case.exp-002",
+        "source.dell.poweredge_service",
+        "source.fluke.continuity"
+      ],
+      "acronym_ids": [],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "07c8dafd086cafd892feb488feefff15493670a8566dc9f169ad67dbec07c24c"
+    },
+    {
+      "domain_id": "test.power.known_good_psu",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.case.exp-002",
+        "source.dell.poweredge_service",
+        "source.fluke.continuity"
+      ],
+      "acronym_ids": [
+        "term.psu"
+      ],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "db63e7866aa0e3eff3cfcfa33f01f3782b00b2ad34094637cbc39da380309c60"
+    },
+    {
+      "domain_id": "test.power.output_voltage_measurement",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.dell.poweredge_service",
+        "source.fluke.continuity"
+      ],
+      "acronym_ids": [
+        "term.atx"
+      ],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "f7e12aa41e7eee3ec3c4f78f90b1d24c58dac89d004e13439e34edad2defaca1"
+    },
+    {
+      "domain_id": "test.power.psu_status",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.dell.poweredge_service",
+        "source.fluke.continuity"
+      ],
+      "acronym_ids": [
+        "term.psu"
+      ],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "37eb48ad60be5fb403298f0da34b14be2cb23f8b62e271a5c4c6e9648b9a0835"
+    },
+    {
+      "domain_id": "test.power.residual_power_drain",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.dell.poweredge_service",
+        "source.fluke.continuity"
+      ],
+      "acronym_ids": [],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "9293060a860555cac5df2ef96edeba96348340da64d9f1637547110d6640d38f"
+    },
+    {
+      "domain_id": "test.storage.bay_path_isolation",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.dell.poweredge_service",
+        "source.man.lsblk",
+        "source.nvmexpress.specification",
+        "source.smartmontools.smartctl"
+      ],
+      "acronym_ids": [],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "157f58b719fdf3a1e1003bf2675c6f7f5d82d11d7b2abb850d91fee9cfe43f3f"
+    },
+    {
+      "domain_id": "test.storage.device_inventory",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.case.exp-004",
+        "source.dell.poweredge_service",
+        "source.man.lsblk",
+        "source.nvmexpress.specification",
+        "source.smartmontools.smartctl"
+      ],
+      "acronym_ids": [],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "b8c9f578655806c0b6f41323f145ca501ad3c0eb971230e46dbad317ba8f68a7"
+    },
+    {
+      "domain_id": "test.storage.drive_health",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.case.exp-003",
+        "source.dell.poweredge_service",
+        "source.man.lsblk",
+        "source.nvmexpress.specification",
+        "source.smartmontools.smartctl"
+      ],
+      "acronym_ids": [],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "3ce14983061acf8ed73fa7a46723804d0950b031761d3b9dba6881dbb3af2749"
+    },
+    {
+      "domain_id": "test.storage.predictive_health",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.case.exp-003",
+        "source.dell.poweredge_service",
+        "source.man.lsblk",
+        "source.nvmexpress.specification",
+        "source.smartmontools.smartctl"
+      ],
+      "acronym_ids": [
+        "term.smart"
+      ],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "b8ea86af5268ab3d90f8b55924808858834d7ee703d9cdf63e991aee3d4d7748"
+    },
+    {
+      "domain_id": "test.storage.raid_status",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.dell.poweredge_service",
+        "source.man.lsblk",
+        "source.nvmexpress.specification",
+        "source.smartmontools.smartctl"
+      ],
+      "acronym_ids": [
+        "term.raid"
+      ],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "837a33a2370f03bcf1f6cbaf584a5f310ae01a1143e3c024cd9046546b521b02"
+    },
+    {
+      "domain_id": "test.system.bmc_logs",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.dell.poweredge_service",
+        "source.dmtf.ipmi",
+        "source.kernel.ipmi"
+      ],
+      "acronym_ids": [
+        "term.bmc"
+      ],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "be54edd4d44aef1a1e3c43278735844f6d3c3849f4f44e69e526c0c872bf35e8"
+    },
+    {
+      "domain_id": "test.system.controlled_stress",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.dell.poweredge_service",
+        "source.kernel.ras"
+      ],
+      "acronym_ids": [],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "30d71cd1e0d0cc0eaefeb5da808f943fcd1db1ff25b13129db027b9df1385ba4"
+    },
+    {
+      "domain_id": "test.thermal.fan_telemetry",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.dell.poweredge_service",
+        "source.kernel.ras"
+      ],
+      "acronym_ids": [
+        "term.rpm"
+      ],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "aed600908f240a27d34f0881edf1c3d2dfe9f1e0b277474eea516da461acc9f9"
+    },
+    {
+      "domain_id": "test.thermal.temperature_monitoring",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.dell.poweredge_service",
+        "source.kernel.ras"
+      ],
+      "acronym_ids": [],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "0fbf49564d4ad4df2fe4a951fa7bedc80f22ab7d4487a47f3efe93f18f552564"
+    },
+    {
+      "domain_id": "verify.boot.normal_boot",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.dell.poweredge_service",
+        "source.uefi.boot_manager"
+      ],
+      "acronym_ids": [],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "a296758bf7722141c02788f10c6ffc7e03f91210f9bb22b55830b9d8db19948c"
+    },
+    {
+      "domain_id": "verify.compute.socket_path",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.case.exp-001"
+      ],
+      "acronym_ids": [
+        "term.cpu",
+        "term.post"
+      ],
+      "scoped_uncertainty": "This game copy is bounded by exp-001; platform-specific service procedures and acceptance criteria remain authoritative.",
+      "technical_copy_sha256": "30d6a07e2a86b4250f268f23802ba7aa81cf6ba953f418289c71841fd5ead260"
+    },
+    {
+      "domain_id": "verify.firmware.compatible_persistent",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.case.exp-005"
+      ],
+      "acronym_ids": [],
+      "scoped_uncertainty": "This game copy is bounded by exp-005; platform-specific service procedures and acceptance criteria remain authoritative.",
+      "technical_copy_sha256": "8d3359cd1ef8b9ddcca8f4051f911319914812c2478775916d8b24d50ea02f86"
+    },
+    {
+      "domain_id": "verify.management.alert_does_not_recur",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.case.exp-004"
+      ],
+      "acronym_ids": [],
+      "scoped_uncertainty": "This game copy is bounded by exp-004; platform-specific service procedures and acceptance criteria remain authoritative.",
+      "technical_copy_sha256": "54dd64089bfa9d9ed8978f0e68c9ff1fa8365b85b3d1ff0dcedaa1cfc07c3f71"
+    },
+    {
+      "domain_id": "verify.management.bmc_functional",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.case.exp-006"
+      ],
+      "acronym_ids": [
+        "term.bmc"
+      ],
+      "scoped_uncertainty": "This game copy is bounded by exp-006; platform-specific service procedures and acceptance criteria remain authoritative.",
+      "technical_copy_sha256": "9aab250f9d727bac570f05ab182b7bf21f048acbdf423bec1693f4c752cb050b"
+    },
+    {
+      "domain_id": "verify.memory.full_test",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.dell.poweredge_service",
+        "source.kernel.ras"
+      ],
+      "acronym_ids": [
+        "term.ecc"
+      ],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "b98b2e90f75d310c6742667bdb0b8144d95d489c8fb2729e7cabbf808a978339"
+    },
+    {
+      "domain_id": "verify.memory.inventory",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.dell.poweredge_service",
+        "source.kernel.ras"
+      ],
+      "acronym_ids": [
+        "term.dimm"
+      ],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "fcbe4927b9680dd48b80311719c86ea7dc45756efded747f6dfc44a1df266a94"
+    },
+    {
+      "domain_id": "verify.network.connectivity",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.man.ethtool",
+        "source.man.ip_address",
+        "source.man.ip_route",
+        "source.man.ping",
+        "source.rfc2131.dhcp"
+      ],
+      "acronym_ids": [
+        "term.icmp"
+      ],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "997e0f16df8393c5befd479a33eb2c27c398a928a3b091f4178c89057b7006d0"
+    },
+    {
+      "domain_id": "verify.network.link",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.man.ethtool",
+        "source.man.ip_address",
+        "source.man.ip_route",
+        "source.man.ping",
+        "source.rfc2131.dhcp"
+      ],
+      "acronym_ids": [],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "f20ada8c8bd7b3d7423139dcb9b7138c23d2cac3112f757ebb162f86f63d8b89"
+    },
+    {
+      "domain_id": "verify.power.distribution_path",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.case.exp-002"
+      ],
+      "acronym_ids": [
+        "term.psu"
+      ],
+      "scoped_uncertainty": "This game copy is bounded by exp-002; platform-specific service procedures and acceptance criteria remain authoritative.",
+      "technical_copy_sha256": "ad6176ba10c5d5c2a8106d709b50ba7045061bbeafc005a0b8d602db933ca310"
+    },
+    {
+      "domain_id": "verify.power.stable",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.dell.poweredge_service",
+        "source.fluke.continuity"
+      ],
+      "acronym_ids": [],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "e9e140c704d6f1332fe7ab4dfba6528ae7e109792b4d55972e3404af0cfae955"
+    },
+    {
+      "domain_id": "verify.storage.device_detected",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.dell.poweredge_service",
+        "source.man.lsblk",
+        "source.nvmexpress.specification",
+        "source.smartmontools.smartctl"
+      ],
+      "acronym_ids": [],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "04a9daf7f5d4b84592e8b4e81673c285b887194d44a4e84abefa11407dfaab96"
+    },
+    {
+      "domain_id": "verify.storage.predictive_replacement",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.case.exp-003"
+      ],
+      "acronym_ids": [],
+      "scoped_uncertainty": "This game copy is bounded by exp-003; platform-specific service procedures and acceptance criteria remain authoritative.",
+      "technical_copy_sha256": "f40c7549f0b41a4825649ad0a5b9077df252c7f830fbaf308e702a3c71aef7e2"
+    },
+    {
+      "domain_id": "verify.storage.raid_healthy",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.dell.poweredge_service",
+        "source.man.lsblk",
+        "source.nvmexpress.specification",
+        "source.smartmontools.smartctl"
+      ],
+      "acronym_ids": [
+        "term.raid"
+      ],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "58a0c15b552c55cb2c5b51379841aa5378326194320201053ac3dde984c4a26a"
+    },
+    {
+      "domain_id": "verify.thermal.load_test",
+      "review_status": "reviewed",
+      "source_ids": [
+        "source.dell.poweredge_service",
+        "source.kernel.ras"
+      ],
+      "acronym_ids": [],
+      "scoped_uncertainty": "Exact thresholds, indicators, slot maps, hot-swap conditions, and service steps remain controlled by approved platform documentation.",
+      "technical_copy_sha256": "11b5ac7e0059e2d61ee7af8cb569b8d5a258b2e96bedfc9cde6b6e982391fe20"
+    }
+  ]
+}

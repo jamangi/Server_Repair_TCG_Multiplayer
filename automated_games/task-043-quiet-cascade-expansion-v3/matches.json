@@ -1,0 +1,476 @@
+[
+  {
+    "builder_diagnostic_codes": [],
+    "classification": "SUCCEEDED",
+    "concessions": 0,
+    "contribution_counts": [
+      {
+        "assists": 0,
+        "closures": 1,
+        "documentation": 0,
+        "failed_verifies": 0,
+        "isolations": 1,
+        "player_id": "player_a",
+        "redundant_or_superseded_actions": 0,
+        "rejected_isolations": 0,
+        "repairs": 1,
+        "team_id": "team.cooperative",
+        "tests": 16,
+        "verifies": 1
+      }
+    ],
+    "determinism": {
+      "identical": true,
+      "mismatch_fields": []
+    },
+    "disconnects": 0,
+    "elapsed_virtual_time_seconds": 100,
+    "match_id": "task-043-quiet-cascade-expansion-v3.story-qc02-shift-07.seed-story.quiet_cascade.expansion.s07.v1",
+    "no_legal_progress_move": false,
+    "outcome": {
+      "match_status": "COMPLETED",
+      "reason_codes": [
+        "QUEUE_EMPTY"
+      ],
+      "valid": true,
+      "winner_player_ids": [],
+      "winning_team_ids": [
+        "team.cooperative"
+      ]
+    },
+    "player_service_points": [
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "starting": 0
+      }
+    ],
+    "rejected_intent_codes": [],
+    "rejected_intents": 0,
+    "replay_digest": "3c43b9e3f1d30938fddc8bb061f29a1e83c6e17e0dd516dd3dc827894498c3f4",
+    "rounds": 12,
+    "scores": {
+      "players": {
+        "player_a": 0
+      },
+      "teams": {
+        "team.cooperative": 2
+      }
+    },
+    "seed": "story.quiet_cascade.expansion.s07.v1",
+    "setting_group_id": "story-qc02-shift-07",
+    "stall_classification": "NONE",
+    "started": true,
+    "team_service_points": [
+      {
+        "final": 2,
+        "net": 2,
+        "starting": 0,
+        "team_id": "team.cooperative"
+      }
+    ],
+    "terminal_reason_codes": [
+      "QUEUE_EMPTY"
+    ],
+    "ticket_snapshot_digest": "318d8b918fca621e1bde691946335273c48270564efb4187d3cd80ed23469616",
+    "tickets_closed": 1,
+    "tickets_quarantined": 0,
+    "turns": 12
+  },
+  {
+    "builder_diagnostic_codes": [],
+    "classification": "SUCCEEDED",
+    "concessions": 0,
+    "contribution_counts": [
+      {
+        "assists": 0,
+        "closures": 1,
+        "documentation": 0,
+        "failed_verifies": 0,
+        "isolations": 1,
+        "player_id": "player_a",
+        "redundant_or_superseded_actions": 0,
+        "rejected_isolations": 0,
+        "repairs": 1,
+        "team_id": "team.cooperative",
+        "tests": 10,
+        "verifies": 1
+      }
+    ],
+    "determinism": {
+      "identical": true,
+      "mismatch_fields": []
+    },
+    "disconnects": 0,
+    "elapsed_virtual_time_seconds": 70,
+    "match_id": "task-043-quiet-cascade-expansion-v3.story-qc02-shift-08.seed-story.quiet_cascade.expansion.s08.v1",
+    "no_legal_progress_move": false,
+    "outcome": {
+      "match_status": "COMPLETED",
+      "reason_codes": [
+        "QUEUE_EMPTY"
+      ],
+      "valid": true,
+      "winner_player_ids": [],
+      "winning_team_ids": [
+        "team.cooperative"
+      ]
+    },
+    "player_service_points": [
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "starting": 0
+      }
+    ],
+    "rejected_intent_codes": [],
+    "rejected_intents": 0,
+    "replay_digest": "8d974838531b410e845702e24859d5205e2e1fc4a23bc90121016ec8f7b81409",
+    "rounds": 9,
+    "scores": {
+      "players": {
+        "player_a": 0
+      },
+      "teams": {
+        "team.cooperative": 2
+      }
+    },
+    "seed": "story.quiet_cascade.expansion.s08.v1",
+    "setting_group_id": "story-qc02-shift-08",
+    "stall_classification": "NONE",
+    "started": true,
+    "team_service_points": [
+      {
+        "final": 2,
+        "net": 2,
+        "starting": 0,
+        "team_id": "team.cooperative"
+      }
+    ],
+    "terminal_reason_codes": [
+      "QUEUE_EMPTY"
+    ],
+    "ticket_snapshot_digest": "2064d2625a7d59a12e04bbb554a633572bbbba779a4042819722c783a00fc68e",
+    "tickets_closed": 1,
+    "tickets_quarantined": 0,
+    "turns": 9
+  },
+  {
+    "builder_diagnostic_codes": [],
+    "classification": "SUCCEEDED",
+    "concessions": 0,
+    "contribution_counts": [
+      {
+        "assists": 0,
+        "closures": 1,
+        "documentation": 0,
+        "failed_verifies": 0,
+        "isolations": 1,
+        "player_id": "player_a",
+        "redundant_or_superseded_actions": 0,
+        "rejected_isolations": 0,
+        "repairs": 1,
+        "team_id": "team.cooperative",
+        "tests": 15,
+        "verifies": 1
+      }
+    ],
+    "determinism": {
+      "identical": true,
+      "mismatch_fields": []
+    },
+    "disconnects": 0,
+    "elapsed_virtual_time_seconds": 100,
+    "match_id": "task-043-quiet-cascade-expansion-v3.story-qc02-shift-09.seed-story.quiet_cascade.expansion.s09.v1",
+    "no_legal_progress_move": false,
+    "outcome": {
+      "match_status": "COMPLETED",
+      "reason_codes": [
+        "QUEUE_EMPTY"
+      ],
+      "valid": true,
+      "winner_player_ids": [],
+      "winning_team_ids": [
+        "team.cooperative"
+      ]
+    },
+    "player_service_points": [
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "starting": 0
+      }
+    ],
+    "rejected_intent_codes": [],
+    "rejected_intents": 0,
+    "replay_digest": "e172d5c8a3ec11e4f672a224b19bb37a13a71d0f1d1685c926118daa43f03eac",
+    "rounds": 12,
+    "scores": {
+      "players": {
+        "player_a": 0
+      },
+      "teams": {
+        "team.cooperative": 2
+      }
+    },
+    "seed": "story.quiet_cascade.expansion.s09.v1",
+    "setting_group_id": "story-qc02-shift-09",
+    "stall_classification": "NONE",
+    "started": true,
+    "team_service_points": [
+      {
+        "final": 2,
+        "net": 2,
+        "starting": 0,
+        "team_id": "team.cooperative"
+      }
+    ],
+    "terminal_reason_codes": [
+      "QUEUE_EMPTY"
+    ],
+    "ticket_snapshot_digest": "5e5641eb8a3707b63060ffbeeeb4570febb11b661be2bcb49c69b18588642b17",
+    "tickets_closed": 1,
+    "tickets_quarantined": 0,
+    "turns": 12
+  },
+  {
+    "builder_diagnostic_codes": [],
+    "classification": "SUCCEEDED",
+    "concessions": 0,
+    "contribution_counts": [
+      {
+        "assists": 0,
+        "closures": 1,
+        "documentation": 0,
+        "failed_verifies": 0,
+        "isolations": 1,
+        "player_id": "player_a",
+        "redundant_or_superseded_actions": 0,
+        "rejected_isolations": 0,
+        "repairs": 1,
+        "team_id": "team.cooperative",
+        "tests": 14,
+        "verifies": 1
+      }
+    ],
+    "determinism": {
+      "identical": true,
+      "mismatch_fields": []
+    },
+    "disconnects": 0,
+    "elapsed_virtual_time_seconds": 90,
+    "match_id": "task-043-quiet-cascade-expansion-v3.story-qc02-shift-10.seed-story.quiet_cascade.expansion.s10.v1",
+    "no_legal_progress_move": false,
+    "outcome": {
+      "match_status": "COMPLETED",
+      "reason_codes": [
+        "QUEUE_EMPTY"
+      ],
+      "valid": true,
+      "winner_player_ids": [],
+      "winning_team_ids": [
+        "team.cooperative"
+      ]
+    },
+    "player_service_points": [
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "starting": 0
+      }
+    ],
+    "rejected_intent_codes": [],
+    "rejected_intents": 0,
+    "replay_digest": "a47b413f992acef179a308fb611f3c90111cf45868aecb7bc41409001aaedfaa",
+    "rounds": 9,
+    "scores": {
+      "players": {
+        "player_a": 0
+      },
+      "teams": {
+        "team.cooperative": 2
+      }
+    },
+    "seed": "story.quiet_cascade.expansion.s10.v1",
+    "setting_group_id": "story-qc02-shift-10",
+    "stall_classification": "NONE",
+    "started": true,
+    "team_service_points": [
+      {
+        "final": 2,
+        "net": 2,
+        "starting": 0,
+        "team_id": "team.cooperative"
+      }
+    ],
+    "terminal_reason_codes": [
+      "QUEUE_EMPTY"
+    ],
+    "ticket_snapshot_digest": "2fdce3a4ceb65b2c3ec4cbc79e9ac83039d5ce2128188cd9746c7db796bad44d",
+    "tickets_closed": 1,
+    "tickets_quarantined": 0,
+    "turns": 9
+  },
+  {
+    "builder_diagnostic_codes": [],
+    "classification": "SUCCEEDED",
+    "concessions": 0,
+    "contribution_counts": [
+      {
+        "assists": 0,
+        "closures": 1,
+        "documentation": 0,
+        "failed_verifies": 0,
+        "isolations": 10,
+        "player_id": "player_a",
+        "redundant_or_superseded_actions": 0,
+        "rejected_isolations": 9,
+        "repairs": 1,
+        "team_id": "team.cooperative",
+        "tests": 14,
+        "verifies": 1
+      }
+    ],
+    "determinism": {
+      "identical": true,
+      "mismatch_fields": []
+    },
+    "disconnects": 0,
+    "elapsed_virtual_time_seconds": 145,
+    "match_id": "task-043-quiet-cascade-expansion-v3.story-qc02-shift-11.seed-story.quiet_cascade.expansion.s11.v1",
+    "no_legal_progress_move": false,
+    "outcome": {
+      "match_status": "COMPLETED",
+      "reason_codes": [
+        "QUEUE_EMPTY"
+      ],
+      "valid": true,
+      "winner_player_ids": [],
+      "winning_team_ids": [
+        "team.cooperative"
+      ]
+    },
+    "player_service_points": [
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "starting": 0
+      }
+    ],
+    "rejected_intent_codes": [],
+    "rejected_intents": 0,
+    "replay_digest": "70e2a092c2c80fad13b485f697c89a563e010adf4898745f34d1ca3eadd69213",
+    "rounds": 14,
+    "scores": {
+      "players": {
+        "player_a": 0
+      },
+      "teams": {
+        "team.cooperative": 2
+      }
+    },
+    "seed": "story.quiet_cascade.expansion.s11.v1",
+    "setting_group_id": "story-qc02-shift-11",
+    "stall_classification": "NONE",
+    "started": true,
+    "team_service_points": [
+      {
+        "final": 2,
+        "net": 2,
+        "starting": 0,
+        "team_id": "team.cooperative"
+      }
+    ],
+    "terminal_reason_codes": [
+      "QUEUE_EMPTY"
+    ],
+    "ticket_snapshot_digest": "349cbdc1cebb730ab622ad86b47f22794f1eb55433b1ace21b86dfef0838c84d",
+    "tickets_closed": 1,
+    "tickets_quarantined": 0,
+    "turns": 14
+  },
+  {
+    "builder_diagnostic_codes": [],
+    "classification": "SUCCEEDED",
+    "concessions": 0,
+    "contribution_counts": [
+      {
+        "assists": 0,
+        "closures": 1,
+        "documentation": 0,
+        "failed_verifies": 0,
+        "isolations": 1,
+        "player_id": "player_a",
+        "redundant_or_superseded_actions": 0,
+        "rejected_isolations": 0,
+        "repairs": 1,
+        "team_id": "team.cooperative",
+        "tests": 6,
+        "verifies": 1
+      }
+    ],
+    "determinism": {
+      "identical": true,
+      "mismatch_fields": []
+    },
+    "disconnects": 0,
+    "elapsed_virtual_time_seconds": 55,
+    "match_id": "task-043-quiet-cascade-expansion-v3.story-qc02-shift-12.seed-story.quiet_cascade.expansion.s12.v1",
+    "no_legal_progress_move": false,
+    "outcome": {
+      "match_status": "COMPLETED",
+      "reason_codes": [
+        "QUEUE_EMPTY"
+      ],
+      "valid": true,
+      "winner_player_ids": [],
+      "winning_team_ids": [
+        "team.cooperative"
+      ]
+    },
+    "player_service_points": [
+      {
+        "final": 0,
+        "net": 0,
+        "player_id": "player_a",
+        "starting": 0
+      }
+    ],
+    "rejected_intent_codes": [],
+    "rejected_intents": 0,
+    "replay_digest": "189e9b6916bb762ef43100de4c850c67e7b8232e135af5fa623d220ce3d1c295",
+    "rounds": 6,
+    "scores": {
+      "players": {
+        "player_a": 0
+      },
+      "teams": {
+        "team.cooperative": 2
+      }
+    },
+    "seed": "story.quiet_cascade.expansion.s12.v1",
+    "setting_group_id": "story-qc02-shift-12",
+    "stall_classification": "NONE",
+    "started": true,
+    "team_service_points": [
+      {
+        "final": 2,
+        "net": 2,
+        "starting": 0,
+        "team_id": "team.cooperative"
+      }
+    ],
+    "terminal_reason_codes": [
+      "QUEUE_EMPTY"
+    ],
+    "ticket_snapshot_digest": "a35675399815b7ffe71b23bddd2a5b40caa09fc7b0ce09098cfaeed7cf4465a9",
+    "tickets_closed": 1,
+    "tickets_quarantined": 0,
+    "turns": 6
+  }
+]

@@ -718,6 +718,12 @@
       "sha256": "e2810a99ce02b1d57ef5613e3d9d09647f5fea8dd8b3b4074baacea09bc055ef"
     },
     {
+      "path": "content/gameplay-v1/card-catalog-v4.json",
+      "source": "content/gameplay-v1/card-catalog-v4.json",
+      "bytes": 179749,
+      "sha256": "6cf15e17f492b675aeb8da02df3c2114f0f3ca1ad89613a9a3f33470a855a8fd"
+    },
+    {
       "path": "content/gameplay-v1/card-catalog.json",
       "source": "content/gameplay-v1/card-catalog.json",
       "bytes": 22309,
@@ -728,6 +734,12 @@
       "source": "content/gameplay-v1/decks-v3.json",
       "bytes": 3667,
       "sha256": "8d9fc3ef8aa5d3932dd4fbb9349b915f4087b2c357caede6f559a2c2c24467f4"
+    },
+    {
+      "path": "content/gameplay-v1/decks-v4.json",
+      "source": "content/gameplay-v1/decks-v4.json",
+      "bytes": 5744,
+      "sha256": "6eccefaf0ae1a4c8e7485ce27fcfc69f0990f5864188af31c06ab3b17269070c"
     },
     {
       "path": "content/gameplay-v1/decks.json",
@@ -748,6 +760,12 @@
       "sha256": "2e55fc92b725d869b67b3ea73c701c55db49f9b9a2f49bcff981cebaca687a2f"
     },
     {
+      "path": "content/gameplay-v1/domain-snapshot-v3.json",
+      "source": "content/gameplay-v1/domain-snapshot-v3.json",
+      "bytes": 468649,
+      "sha256": "d25f0e9f0371a0a45d106efcff19c80f5fb0ed175eabfeda7cac7c8106028fca"
+    },
+    {
       "path": "content/gameplay-v1/domain-snapshot.json",
       "source": "content/gameplay-v1/domain-snapshot.json",
       "bytes": 18181,
@@ -760,10 +778,22 @@
       "sha256": "87ed2e481221485aaef3221dcf2d0a1a4979971631db5284fa3e73745d20b065"
     },
     {
+      "path": "content/gameplay-v1/playable-coverage-v4.json",
+      "source": "content/gameplay-v1/playable-coverage-v4.json",
+      "bytes": 40404,
+      "sha256": "c1b907a6aea180bb5b618f4b95904bf4024eb3ba1e8413ebbab4963a029942dc"
+    },
+    {
       "path": "content/gameplay-v1/task-014-parts.json",
       "source": "content/gameplay-v1/task-014-parts.json",
       "bytes": 35838,
       "sha256": "06614e06602164e54dc36737aea89d573cd0d1b76ce863a0352a2f45e1be6c56"
+    },
+    {
+      "path": "content/gameplay-v1/task-042-parts.json",
+      "source": "content/gameplay-v1/task-042-parts.json",
+      "bytes": 70840,
+      "sha256": "b4d77345d6a0353e7aab6332d447ed8e1c419454a299e5c11c83a3bed66383bb"
     },
     {
       "path": "content/gameplay-v1/technical-action-glossary-v1.json",
@@ -776,6 +806,12 @@
       "source": "content/gameplay-v1/technical-copy-review-v1.json",
       "bytes": 41126,
       "sha256": "092837fac4eb36e75cfd245c8004cc5c7c906570431c9f6481dd9fd5e99b2f8c"
+    },
+    {
+      "path": "content/gameplay-v1/technical-copy-review-v2.json",
+      "source": "content/gameplay-v1/technical-copy-review-v2.json",
+      "bytes": 49480,
+      "sha256": "ce6cfefef09b50f20ab3c1ecb2389c6684c81c7de9fd768cd1ce1584d6103b97"
     },
     {
       "path": "content/gameplay-v1/ticket-templates.json",
@@ -842,6 +878,96 @@
       "source": "content/story-v1/campaigns/quiet-cascade-characterization-v2/texts/en.json",
       "bytes": 27075,
       "sha256": "53b34a7e3081772e974df5ca839d8f9af6d0282e6b3f3513fc872ccfbe66ed7f"
+    },
+    {
+      "path": "content/story-v1/campaigns/quiet-cascade-expansion-v3/manifest.json",
+      "source": "content/story-v1/campaigns/quiet-cascade-expansion-v3/manifest.json",
+      "bytes": 681,
+      "sha256": "b30104fa8c8fc50338bab017be53cb0ee46c83abb7c17c449b4d92f95cb07132"
+    },
+    {
+      "path": "content/story-v1/campaigns/quiet-cascade-expansion-v3/matches.json",
+      "source": "content/story-v1/campaigns/quiet-cascade-expansion-v3/matches.json",
+      "bytes": 83328,
+      "sha256": "9246aa9d1bd570639f334787108f14d5dc424e9fdcf040e32e5e674b81573f7c"
+    },
+    {
+      "path": "content/story-v1/campaigns/quiet-cascade-expansion-v3/registry.json",
+      "source": "content/story-v1/campaigns/quiet-cascade-expansion-v3/registry.json",
+      "bytes": 8704,
+      "sha256": "825cfef1109dfa629d76294340fedd9c05736388069631042c705cf2a886f9d0"
+    },
+    {
+      "path": "content/story-v1/campaigns/quiet-cascade-expansion-v3/review-episodes.json",
+      "source": "content/story-v1/campaigns/quiet-cascade-expansion-v3/review-episodes.json",
+      "bytes": 1880,
+      "sha256": "37931a0cd78fa3dcb3199c05f588ec4142d3c400f26a7733a11ebeb3aeafabb7"
+    },
+    {
+      "path": "content/story-v1/campaigns/quiet-cascade-expansion-v3/scripts/chapter-01.json",
+      "source": "content/story-v1/campaigns/quiet-cascade-expansion-v3/scripts/chapter-01.json",
+      "bytes": 18434,
+      "sha256": "941c68f09578cb2e3753809ef9f1fb53fe6325b3a002c1179156915e3929e91d"
+    },
+    {
+      "path": "content/story-v1/campaigns/quiet-cascade-expansion-v3/scripts/chapter-02.json",
+      "source": "content/story-v1/campaigns/quiet-cascade-expansion-v3/scripts/chapter-02.json",
+      "bytes": 16060,
+      "sha256": "731397c3e827b0a4ecc941b4e1ec1496bf942d48a07740d84965f39201b249d9"
+    },
+    {
+      "path": "content/story-v1/campaigns/quiet-cascade-expansion-v3/scripts/chapter-03.json",
+      "source": "content/story-v1/campaigns/quiet-cascade-expansion-v3/scripts/chapter-03.json",
+      "bytes": 12078,
+      "sha256": "628a209c922c7751732e6020d304231b934d4283a94dc2f8001e4b94821bbb1d"
+    },
+    {
+      "path": "content/story-v1/campaigns/quiet-cascade-expansion-v3/scripts/chapter-04.json",
+      "source": "content/story-v1/campaigns/quiet-cascade-expansion-v3/scripts/chapter-04.json",
+      "bytes": 18064,
+      "sha256": "5d83ce18c9c0a07657ece4bebf63e87e6e4dfb79f0080b75fbac5f464f7ec6e3"
+    },
+    {
+      "path": "content/story-v1/campaigns/quiet-cascade-expansion-v3/scripts/shift-07.json",
+      "source": "content/story-v1/campaigns/quiet-cascade-expansion-v3/scripts/shift-07.json",
+      "bytes": 10348,
+      "sha256": "7bbb6355a73d19225cda54d5774ce72cf7ec8700b25fc8f3c9815b9e5a975acf"
+    },
+    {
+      "path": "content/story-v1/campaigns/quiet-cascade-expansion-v3/scripts/shift-08.json",
+      "source": "content/story-v1/campaigns/quiet-cascade-expansion-v3/scripts/shift-08.json",
+      "bytes": 9620,
+      "sha256": "a03abd61cdfb859a9f31691455d44429be0b313c6e1447f205254e143c3615cc"
+    },
+    {
+      "path": "content/story-v1/campaigns/quiet-cascade-expansion-v3/scripts/shift-09.json",
+      "source": "content/story-v1/campaigns/quiet-cascade-expansion-v3/scripts/shift-09.json",
+      "bytes": 8513,
+      "sha256": "e16068ebe047f555fdb946acc09ff579c2df741a470f746e52480c0231a7a770"
+    },
+    {
+      "path": "content/story-v1/campaigns/quiet-cascade-expansion-v3/scripts/shift-10.json",
+      "source": "content/story-v1/campaigns/quiet-cascade-expansion-v3/scripts/shift-10.json",
+      "bytes": 10233,
+      "sha256": "48b30304661b3a9182a576c96ebf8589d8b46307135e95dd6cee26fee858febf"
+    },
+    {
+      "path": "content/story-v1/campaigns/quiet-cascade-expansion-v3/scripts/shift-11.json",
+      "source": "content/story-v1/campaigns/quiet-cascade-expansion-v3/scripts/shift-11.json",
+      "bytes": 9780,
+      "sha256": "5cce5a910c31dfeaf0a1d40018cb1f8fb9255fb639aac9d9e6d80759c97be4c9"
+    },
+    {
+      "path": "content/story-v1/campaigns/quiet-cascade-expansion-v3/scripts/shift-12.json",
+      "source": "content/story-v1/campaigns/quiet-cascade-expansion-v3/scripts/shift-12.json",
+      "bytes": 9117,
+      "sha256": "8362c422e0e491f9de5f4157226c568087eac1c52703f24bd297c09cdc6d3bb9"
+    },
+    {
+      "path": "content/story-v1/campaigns/quiet-cascade-expansion-v3/texts/en.json",
+      "source": "content/story-v1/campaigns/quiet-cascade-expansion-v3/texts/en.json",
+      "bytes": 42867,
+      "sha256": "3c2089eb25c2a3903576e3f9c2b306e24381f837832be4588aeefaff2c9f73c8"
     },
     {
       "path": "content/story-v1/campaigns/quiet-cascade/manifest.json",
@@ -936,8 +1062,8 @@
     {
       "path": "src/builder/task-014.mjs",
       "source": "src/builder/task-014.mjs",
-      "bytes": 35252,
-      "sha256": "484986b45b87ec709dc708a5f081d34e274a2b8f9fc3151216950c57c380ce71"
+      "bytes": 37881,
+      "sha256": "b3ed956702a32ba10f0fdf084a750beb11548e61cde6394033992afaa41c6f6e"
     },
     {
       "path": "src/builder/ticket-builder.mjs",

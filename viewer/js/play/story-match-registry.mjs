@@ -1,11 +1,16 @@
 export const STORY_MATCH_CONFIGURATION_VERSION = 'story-match-configuration-v1';
 export const STORY_MATCH_RESULT_VERSION = 'story-match-result-v1';
 export const DEFAULT_STORY_MATCH_REGISTRY_URL = new URL(
-  '../../generated/play/content/story-v1/campaigns/quiet-cascade-characterization-v2/matches.json',
+  '../../generated/play/content/story-v1/campaigns/quiet-cascade-expansion-v3/matches.json',
   import.meta.url,
 );
 
 const SAFE_ID = /^[a-z0-9]+(?:[._-][a-z0-9]+)*$/;
+const EMBEDDED_BUILDER_VERSION = 'ticket-builder-v4';
+const EMBEDDED_CONFIGURATION_VERSION = 'ticket-builder-v4';
+const EMBEDDED_TICKET_CONTENT_VERSION = 'core-ticket-parts-v4';
+const EMBEDDED_DOMAIN_CONTENT_VERSION = 'core-domain-snapshot-story-expansion-v4';
+const EMBEDDED_CARD_CATALOG_VERSION = 'core-card-catalog-story-expansion-v5';
 const clone = (value) => structuredClone(value);
 
 function record(value) {
@@ -22,6 +27,107 @@ function positiveInteger(value, label, maximum = 10) {
     throw new TypeError(`${label} must be an integer from 1 through ${maximum}.`);
   }
   return value;
+}
+
+function sameArray(left, right) {
+  return Array.isArray(left)
+    && Array.isArray(right)
+    && left.length === right.length
+    && left.every((value, index) => value === right[index]);
+}
+
+function stableIdArray(value, label, { minimum = 0 } = {}) {
+  if (!Array.isArray(value) || value.length < minimum || new Set(value).size !== value.length) {
+    throw new TypeError(`${label} must be a unique stable-ID array.`);
+  }
+  value.forEach((id) => stableId(id, label));
+  return value;
+}
+
+function cardCounts(cardDefinitionIds) {
+  const counts = {};
+  for (const id of cardDefinitionIds) counts[id] = (counts[id] ?? 0) + 1;
+  return counts;
+}
+
+function validateEmbeddedBuilderConfiguration(source) {
+  const configuration = source.builder_configuration;
+  if (!record(configuration)
+      || configuration.entity_type !== 'ticket_builder_configuration'
+      || configuration.configuration_version !== EMBEDDED_CONFIGURATION_VERSION
+      || configuration.generator_version !== EMBEDDED_BUILDER_VERSION
+      || configuration.content_version !== EMBEDDED_TICKET_CONTENT_VERSION
+      || configuration.domain_content_version !== EMBEDDED_DOMAIN_CONTENT_VERSION
+      || configuration.card_catalog_version !== EMBEDDED_CARD_CATALOG_VERSION
+      || configuration.scenario_or_mode_context !== 'CAMPAIGN') {
+    throw new TypeError(`${source.match_ref} embedded Builder configuration is malformed or not TASK-042 v4 content.`);
+  }
+  stableId(configuration.id, `${source.match_ref} Builder configuration ID`);
+  if (configuration.requested_ticket_count !== source.requested_ticket_count
+      || configuration.seed !== source.seed
+      || !sameArray(configuration.allowed_fingerprint_ids, source.allowed_fingerprint_ids)) {
+    throw new TypeError(`${source.match_ref} embedded Builder configuration does not preserve its reviewed Match pins.`);
+  }
+
+  const diagnosticIds = stableIdArray(
+    configuration.diagnostic_card_definition_ids,
+    `${source.match_ref} diagnostic Card IDs`,
+    { minimum: 1 },
+  );
+  const legalIds = stableIdArray(
+    configuration.legal_card_definition_ids,
+    `${source.match_ref} legal Card IDs`,
+    { minimum: diagnosticIds.length },
+  );
+  const legal = new Set(legalIds);
+  if (diagnosticIds.some((id) => !legal.has(id))) {
+    throw new TypeError(`${source.match_ref} embedded diagnostic Bench is not legal under its Builder configuration.`);
+  }
+  if (!record(configuration.available_card_definition_counts)
+      || Object.keys(configuration.available_card_definition_counts).length < 1) {
+    throw new TypeError(`${source.match_ref} embedded response-Card counts are missing.`);
+  }
+  let availableTotal = 0;
+  for (const [cardId, count] of Object.entries(configuration.available_card_definition_counts)) {
+    stableId(cardId, `${source.match_ref} available response Card`);
+    positiveInteger(count, `${source.match_ref} available response Card count`, 6);
+    if (!legal.has(cardId)) {
+      throw new TypeError(`${source.match_ref} available response Card is absent from the legal Card pool.`);
+    }
+    availableTotal += count;
+  }
+  const declaredLegal = new Set([
+    ...diagnosticIds,
+    ...Object.keys(configuration.available_card_definition_counts),
+  ]);
+  if (declaredLegal.size !== legal.size || [...declaredLegal].some((id) => !legal.has(id))) {
+    throw new TypeError(`${source.match_ref} embedded legal Card pool must exactly match its Bench and response deck.`);
+  }
+  for (const [cardId, requiredCount] of Object.entries(source.required_response_card_counts)) {
+    if ((configuration.available_card_definition_counts[cardId] ?? 0) < requiredCount) {
+      throw new TypeError(`${source.match_ref} embedded response deck cannot satisfy its reviewed requirement for ${cardId}.`);
+    }
+  }
+
+  if (!record(source.deck_pressure)
+      || source.deck_pressure.deck_size !== 30
+      || availableTotal !== source.deck_pressure.deck_size
+      || source.deck_pressure.feasible !== true
+      || source.deck_pressure.exact_response_requirement_count
+        !== Object.keys(source.required_response_card_counts).length) {
+    throw new TypeError(`${source.match_ref} embedded deck-pressure proof is malformed or inconsistent.`);
+  }
+  stableId(source.deck_pressure.deck_id, `${source.match_ref} proof Deck ID`);
+  for (const family of ['repair', 'verify']) {
+    const pressure = source.deck_pressure[family];
+    if (!record(pressure)) throw new TypeError(`${source.match_ref} ${family} deck-pressure proof is missing.`);
+    const cardId = stableId(pressure.card_definition_id, `${source.match_ref} ${family} Card`);
+    if (source.required_response_card_counts[cardId] !== pressure.required_copies
+        || configuration.available_card_definition_counts[cardId] !== pressure.available_copies
+        || pressure.headroom_copies !== pressure.available_copies - pressure.required_copies) {
+      throw new TypeError(`${source.match_ref} ${family} deck-pressure proof does not match its embedded configuration.`);
+    }
+  }
 }
 
 export function validateStoryMatchRegistry(candidate) {
@@ -42,6 +148,7 @@ export function validateStoryMatchRegistry(candidate) {
     throw new TypeError('Story Match result contract is unsupported.');
   }
   const matches = new Map();
+  let embeddedConfigurationCount = 0;
   for (const source of candidate.matches) {
     if (!record(source)) throw new TypeError('Story Match entry must be an object.');
     const matchRef = stableId(source.match_ref, 'Story Match reference');
@@ -75,7 +182,21 @@ export function validateStoryMatchRegistry(candidate) {
         || source.expected_ticket_snapshot_digests.some((digest) => !/^[a-f0-9]{64}$/.test(digest))) {
       throw new TypeError(`${matchRef} expected Builder output is invalid.`);
     }
+    source.expected_ticket_definition_ids.forEach((id) => stableId(id, `${matchRef} expected Ticket`));
+    if (source.builder_configuration !== undefined) {
+      validateEmbeddedBuilderConfiguration(source);
+      embeddedConfigurationCount += 1;
+    }
     matches.set(matchRef, Object.freeze(clone(source)));
+  }
+  if (embeddedConfigurationCount > 0) {
+    const contract = candidate.embedded_builder_configuration_contract;
+    if (!record(contract)
+        || contract.applies_when_present !== true
+        || contract.legacy_profile_applies_when_absent !== true
+        || contract.source_content_version !== 'quiet-cascade-expansion-v3') {
+      throw new TypeError('Story Match embedded Builder-configuration contract is malformed or unsupported.');
+    }
   }
   return Object.freeze({
     version: candidate.match_configuration_version,
@@ -136,11 +257,25 @@ export function createStoryBuilderConfiguration({
   definition,
   cardDefinitionIds,
   diagnosticCardIds,
-  configurationId = storyConfigurationId(definition),
+  configurationId,
 }) {
+  if (record(definition.builder_configuration)) {
+    const configuration = clone(definition.builder_configuration);
+    if (configurationId === undefined) return configuration;
+    if (!sameArray(diagnosticCardIds, configuration.diagnostic_card_definition_ids)) {
+      throw new TypeError('Current diagnostic Bench does not match the reviewed Story Builder configuration.');
+    }
+    return {
+      ...configuration,
+      id: configurationId,
+      legal_card_definition_ids: [...new Set([...diagnosticCardIds, ...cardDefinitionIds])].sort(),
+      diagnostic_card_definition_ids: [...diagnosticCardIds],
+      available_card_definition_counts: cardCounts(cardDefinitionIds),
+    };
+  }
   const profile = registry.builderProfile;
   return {
-    id: configurationId,
+    id: configurationId ?? storyConfigurationId(definition),
     entity_type: 'ticket_builder_configuration',
     configuration_version: profile.configuration_version,
     scenario_or_mode_context: profile.scenario_or_mode_context,

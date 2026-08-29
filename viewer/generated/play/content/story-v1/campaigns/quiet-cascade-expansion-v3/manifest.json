@@ -1,0 +1,26 @@
+{
+  "pack_version": "story-pack-v1",
+  "pack_id": "story.campaign.quiet_cascade.v1",
+  "content_version": "quiet-cascade-expansion-v3",
+  "default_locale": "en",
+  "entry_label": "story.qc01.entry",
+  "library_entry_labels": [],
+  "max_call_depth": 8,
+  "max_settle_steps": 1000,
+  "scripts": [
+    "scripts/chapter-01.json",
+    "scripts/chapter-02.json",
+    "scripts/chapter-03.json",
+    "scripts/chapter-04.json",
+    "scripts/shift-07.json",
+    "scripts/shift-08.json",
+    "scripts/shift-09.json",
+    "scripts/shift-10.json",
+    "scripts/shift-11.json",
+    "scripts/shift-12.json"
+  ],
+  "text_catalogs": {
+    "en": "texts/en.json"
+  },
+  "registry": "registry.json"
+}

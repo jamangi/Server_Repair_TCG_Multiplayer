@@ -1,0 +1,2676 @@
+{
+  "audit_version": "task-045-story-expansion-art-audit-v1",
+  "status": "VERIFIED_ZERO_GENERATION_COMPLETE_NON_LIVE",
+  "campaign_id": "story.campaign.quiet_cascade.v1",
+  "candidate_content_version": "quiet-cascade-expansion-v3",
+  "generated_from": [
+    {
+      "path": "art_sources/task-030/generation-log.json",
+      "bytes": 137976,
+      "sha256": "364740ac2ddf4f2aef7e8bbb9651f435d3f1bc9fe6916248d05a8376bfd0db87"
+    },
+    {
+      "path": "automated_games/task-043-quiet-cascade-expansion-v3/match-registry.json",
+      "bytes": 72243,
+      "sha256": "1080205aec2f0cf6beabcd0b25e62bd951eaa250701826d8fb7945a8d8952e85"
+    },
+    {
+      "path": "content/story-v1/candidates/quiet-cascade-expansion-v3/manifest.json",
+      "bytes": 557,
+      "sha256": "b2a7a81f106d5c00510eb4ec4558d4264d5a6c0327fe2e5d50dae330ac40ade1"
+    },
+    {
+      "path": "content/story-v1/candidates/quiet-cascade-expansion-v3/matches.json",
+      "bytes": 72243,
+      "sha256": "1080205aec2f0cf6beabcd0b25e62bd951eaa250701826d8fb7945a8d8952e85"
+    },
+    {
+      "path": "content/story-v1/candidates/quiet-cascade-expansion-v3/registry.json",
+      "bytes": 4624,
+      "sha256": "bd1367b16f7a24edfbcbfb6187c5a169c752d7ebd512e282c15b7196b4619c8a"
+    },
+    {
+      "path": "content/story-v1/candidates/quiet-cascade-expansion-v3/scripts/shift-07.json",
+      "bytes": 10348,
+      "sha256": "7bbb6355a73d19225cda54d5774ce72cf7ec8700b25fc8f3c9815b9e5a975acf"
+    },
+    {
+      "path": "content/story-v1/candidates/quiet-cascade-expansion-v3/scripts/shift-08.json",
+      "bytes": 9620,
+      "sha256": "a03abd61cdfb859a9f31691455d44429be0b313c6e1447f205254e143c3615cc"
+    },
+    {
+      "path": "content/story-v1/candidates/quiet-cascade-expansion-v3/scripts/shift-09.json",
+      "bytes": 8513,
+      "sha256": "e16068ebe047f555fdb946acc09ff579c2df741a470f746e52480c0231a7a770"
+    },
+    {
+      "path": "content/story-v1/candidates/quiet-cascade-expansion-v3/scripts/shift-10.json",
+      "bytes": 10233,
+      "sha256": "48b30304661b3a9182a576c96ebf8589d8b46307135e95dd6cee26fee858febf"
+    },
+    {
+      "path": "content/story-v1/candidates/quiet-cascade-expansion-v3/scripts/shift-11.json",
+      "bytes": 9780,
+      "sha256": "5cce5a910c31dfeaf0a1d40018cb1f8fb9255fb639aac9d9e6d80759c97be4c9"
+    },
+    {
+      "path": "content/story-v1/candidates/quiet-cascade-expansion-v3/scripts/shift-12.json",
+      "bytes": 9117,
+      "sha256": "8362c422e0e491f9de5f4157226c568087eac1c52703f24bd297c09cdc6d3bb9"
+    },
+    {
+      "path": "content/story-v1/candidates/quiet-cascade-expansion-v3/texts/en.json",
+      "bytes": 16735,
+      "sha256": "55c17f06dd796b3bdb23cbd518c4612501ceb77c1400220123022627623dc37a"
+    },
+    {
+      "path": "docs/art/task-030-story-art-inventory.json",
+      "bytes": 87300,
+      "sha256": "2355d1654d4ddf76befe93d6ffa6e3df77312b28b8aab0f02fd4523f86abb5b3"
+    },
+    {
+      "path": "docs/story/reports/story-expansion-planning-audit.json",
+      "bytes": 54288,
+      "sha256": "8bb21592c6ef5c8b899e1f773706f3c224a3d6f3cd3599e415f1ca164071f5a9"
+    },
+    {
+      "path": "docs/story/revisions/quiet-cascade-expansion-v3/ART_REQUESTS.json",
+      "bytes": 956217,
+      "sha256": "5552069749f38660f2be088d1715040602a53ac44a4f2f0d5038692a6ccb7721"
+    },
+    {
+      "path": "docs/story/revisions/quiet-cascade-expansion-v3/blueprint.json",
+      "bytes": 31676,
+      "sha256": "1c2aa104d0c7fc579254d96f7134b9941d29a393ec4f77d40b8e996d0820ebc8"
+    },
+    {
+      "path": "viewer/assets/story/manifest.json",
+      "bytes": 18451,
+      "sha256": "7a6cae7ed58f1a167e282bc9e91975f5978c1a59786426814fd28037bb186db0"
+    },
+    {
+      "path": "viewer/js/play/story-art-resolver.mjs",
+      "bytes": 7849,
+      "sha256": "f8a85d14d328ffa5c702efd6b89755d5c2d48ffd15e7e051e62021ce8639a1a8"
+    }
+  ],
+  "immutable_task_030_runtime_baseline": [
+    {
+      "path": "viewer/assets/story/manifest.json",
+      "sha256": "7a6cae7ed58f1a167e282bc9e91975f5978c1a59786426814fd28037bb186db0",
+      "unchanged": true
+    },
+    {
+      "path": "viewer/js/play/story-art-resolver.mjs",
+      "sha256": "f8a85d14d328ffa5c702efd6b89755d5c2d48ffd15e7e051e62021ce8639a1a8",
+      "unchanged": true
+    },
+    {
+      "path": "docs/art/task-030-story-art-inventory.json",
+      "sha256": "2355d1654d4ddf76befe93d6ffa6e3df77312b28b8aab0f02fd4523f86abb5b3",
+      "unchanged": true
+    },
+    {
+      "path": "art_sources/task-030/generation-log.json",
+      "sha256": "364740ac2ddf4f2aef7e8bbb9651f435d3f1bc9fe6916248d05a8376bfd0db87",
+      "unchanged": true
+    }
+  ],
+  "candidate_reference_join": {
+    "episode_count": 6,
+    "statement_reference_count": 70,
+    "scene_reference_count": 24,
+    "character_show_reference_count": 46,
+    "transient_show_reference_count": 0,
+    "every_reference_joined": true,
+    "episodes": [
+      {
+        "episode_id": "story.shift.qc02.07",
+        "script_id": "story.script.qc02.shift07",
+        "script_path": "content/story-v1/candidates/quiet-cascade-expansion-v3/scripts/shift-07.json",
+        "script_sha256": "7bbb6355a73d19225cda54d5774ce72cf7ec8700b25fc8f3c9815b9e5a975acf",
+        "match_ref": "story.match.qc02.shift07.socket_contacts",
+        "match_seed": "story.quiet_cascade.expansion.s07.v1",
+        "ticket_definition_id": "ticket.generated.4f237a22c35d46166044b2c7",
+        "ticket_snapshot_digest": "dc4e0581e510fd94120fcca53ee8b25f5a8d3b456253627c7faf5603c5d8e481",
+        "planning_source_ticket_definition_id": "ticket.generated.827d9729d12225e209f47117",
+        "planning_source_ticket_snapshot_digest": "450d9df67ef840c88f34fa73478d96c2b90db9eee68a4f983d95856ac6d4819d",
+        "source_case_id": "exp-001",
+        "pre_match_checkpoint_id": "checkpoint.qc02.shift07.pre_match",
+        "post_match_checkpoint_id": "checkpoint.qc02.shift07.post_match",
+        "backgrounds": [
+          "story.bg.trinity.core_floor.night_storm",
+          "story.bg.trinity.trace.night"
+        ],
+        "character_poses": [
+          "story.character.malik_okoye:focused",
+          "story.character.sora_chen:approving",
+          "story.character.sora_chen:focused"
+        ],
+        "transient_asset_ids": [],
+        "reference_counts": {
+          "scenes": 4,
+          "character_shows": 7,
+          "transient_shows": 0,
+          "total": 11
+        },
+        "references": [
+          {
+            "statement_index": 4,
+            "nearest_label": "story.qc02.shift07.entry",
+            "statement_type": "scene",
+            "layer": "BACKGROUND",
+            "asset_id": "story.bg.trinity.trace.night"
+          },
+          {
+            "statement_index": 9,
+            "nearest_label": "story.qc02.shift07.entry",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.sora_chen:focused",
+            "asset_id": "story.asset.character.sora_chen.focused"
+          },
+          {
+            "statement_index": 10,
+            "nearest_label": "story.qc02.shift07.entry",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.malik_okoye:focused",
+            "asset_id": "story.asset.character.malik_okoye.focused"
+          },
+          {
+            "statement_index": 28,
+            "nearest_label": "story.qc02.shift07.success",
+            "statement_type": "scene",
+            "layer": "BACKGROUND",
+            "asset_id": "story.bg.trinity.core_floor.night_storm"
+          },
+          {
+            "statement_index": 33,
+            "nearest_label": "story.qc02.shift07.success",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.sora_chen:approving",
+            "asset_id": "story.asset.character.sora_chen.approving"
+          },
+          {
+            "statement_index": 34,
+            "nearest_label": "story.qc02.shift07.success",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.malik_okoye:focused",
+            "asset_id": "story.asset.character.malik_okoye.focused"
+          },
+          {
+            "statement_index": 39,
+            "nearest_label": "story.qc02.shift07.abandon",
+            "statement_type": "scene",
+            "layer": "BACKGROUND",
+            "asset_id": "story.bg.trinity.core_floor.night_storm"
+          },
+          {
+            "statement_index": 44,
+            "nearest_label": "story.qc02.shift07.abandon",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.sora_chen:focused",
+            "asset_id": "story.asset.character.sora_chen.focused"
+          },
+          {
+            "statement_index": 45,
+            "nearest_label": "story.qc02.shift07.abandon",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.malik_okoye:focused",
+            "asset_id": "story.asset.character.malik_okoye.focused"
+          },
+          {
+            "statement_index": 50,
+            "nearest_label": "story.qc02.shift07.follow_on",
+            "statement_type": "scene",
+            "layer": "BACKGROUND",
+            "asset_id": "story.bg.trinity.core_floor.night_storm"
+          },
+          {
+            "statement_index": 55,
+            "nearest_label": "story.qc02.shift07.follow_on",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.malik_okoye:focused",
+            "asset_id": "story.asset.character.malik_okoye.focused"
+          }
+        ],
+        "exact_task_043_pin": true,
+        "exact_task_044_art_request": true
+      },
+      {
+        "episode_id": "story.shift.qc02.08",
+        "script_id": "story.script.qc02.shift08",
+        "script_path": "content/story-v1/candidates/quiet-cascade-expansion-v3/scripts/shift-08.json",
+        "script_sha256": "a03abd61cdfb859a9f31691455d44429be0b313c6e1447f205254e143c3615cc",
+        "match_ref": "story.match.qc02.shift08.power_distribution",
+        "match_seed": "story.quiet_cascade.expansion.s08.v1",
+        "ticket_definition_id": "ticket.generated.3fd6eb04534f79b5b3f87f98",
+        "ticket_snapshot_digest": "d34f08d79c2cc2d47d16d23ec753f1e78758d0b358664d4e592ea23f25b63d73",
+        "planning_source_ticket_definition_id": "ticket.generated.80422a060f47ea4ce7871377",
+        "planning_source_ticket_snapshot_digest": "0639e89199a6968f9316443c23e222ad4ba20f3114ce72d87694df6df532b86f",
+        "source_case_id": "exp-002",
+        "pre_match_checkpoint_id": "checkpoint.qc02.shift08.pre_match",
+        "post_match_checkpoint_id": "checkpoint.qc02.shift08.post_match",
+        "backgrounds": [
+          "story.bg.trinity.core_floor.night_storm",
+          "story.bg.trinity.validation_gate.predawn"
+        ],
+        "character_poses": [
+          "story.character.hana_park:relief",
+          "story.character.hana_park:skeptical",
+          "story.character.malik_okoye:defensive",
+          "story.character.malik_okoye:focused"
+        ],
+        "transient_asset_ids": [],
+        "reference_counts": {
+          "scenes": 4,
+          "character_shows": 7,
+          "transient_shows": 0,
+          "total": 11
+        },
+        "references": [
+          {
+            "statement_index": 1,
+            "nearest_label": "story.qc02.shift08.entry",
+            "statement_type": "scene",
+            "layer": "BACKGROUND",
+            "asset_id": "story.bg.trinity.core_floor.night_storm"
+          },
+          {
+            "statement_index": 6,
+            "nearest_label": "story.qc02.shift08.entry",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.malik_okoye:focused",
+            "asset_id": "story.asset.character.malik_okoye.focused"
+          },
+          {
+            "statement_index": 7,
+            "nearest_label": "story.qc02.shift08.entry",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.hana_park:skeptical",
+            "asset_id": "story.asset.character.hana_park.skeptical"
+          },
+          {
+            "statement_index": 18,
+            "nearest_label": "story.qc02.shift08.success",
+            "statement_type": "scene",
+            "layer": "BACKGROUND",
+            "asset_id": "story.bg.trinity.validation_gate.predawn"
+          },
+          {
+            "statement_index": 23,
+            "nearest_label": "story.qc02.shift08.success",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.malik_okoye:focused",
+            "asset_id": "story.asset.character.malik_okoye.focused"
+          },
+          {
+            "statement_index": 24,
+            "nearest_label": "story.qc02.shift08.success",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.hana_park:relief",
+            "asset_id": "story.asset.character.hana_park.relief"
+          },
+          {
+            "statement_index": 29,
+            "nearest_label": "story.qc02.shift08.abandon",
+            "statement_type": "scene",
+            "layer": "BACKGROUND",
+            "asset_id": "story.bg.trinity.validation_gate.predawn"
+          },
+          {
+            "statement_index": 34,
+            "nearest_label": "story.qc02.shift08.abandon",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.malik_okoye:defensive",
+            "asset_id": "story.asset.character.malik_okoye.defensive"
+          },
+          {
+            "statement_index": 35,
+            "nearest_label": "story.qc02.shift08.abandon",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.hana_park:skeptical",
+            "asset_id": "story.asset.character.hana_park.skeptical"
+          },
+          {
+            "statement_index": 40,
+            "nearest_label": "story.qc02.shift08.follow_on",
+            "statement_type": "scene",
+            "layer": "BACKGROUND",
+            "asset_id": "story.bg.trinity.validation_gate.predawn"
+          },
+          {
+            "statement_index": 45,
+            "nearest_label": "story.qc02.shift08.follow_on",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.hana_park:relief",
+            "asset_id": "story.asset.character.hana_park.relief"
+          }
+        ],
+        "exact_task_043_pin": true,
+        "exact_task_044_art_request": true
+      },
+      {
+        "episode_id": "story.shift.qc02.09",
+        "script_id": "story.script.qc02.shift09",
+        "script_path": "content/story-v1/candidates/quiet-cascade-expansion-v3/scripts/shift-09.json",
+        "script_sha256": "e16068ebe047f555fdb946acc09ff579c2df741a470f746e52480c0231a7a770",
+        "match_ref": "story.match.qc02.shift09.predictive_drive",
+        "match_seed": "story.quiet_cascade.expansion.s09.v1",
+        "ticket_definition_id": "ticket.generated.36ba2ae8958431194a7e1fef",
+        "ticket_snapshot_digest": "c71d7e7f87b7e1177f7f8b79344293dee489778c9acfc9ba213d9cb7410aa671",
+        "planning_source_ticket_definition_id": "ticket.generated.46644a4accc96d5bd961b9fa",
+        "planning_source_ticket_snapshot_digest": "f40eb2e706a86d54277265cd3d21b26753039ecb58287d677e51cf254a73059e",
+        "source_case_id": "exp-003",
+        "pre_match_checkpoint_id": "checkpoint.qc02.shift09.pre_match",
+        "post_match_checkpoint_id": "checkpoint.qc02.shift09.post_match",
+        "backgrounds": [
+          "story.bg.trinity.core_floor.night_storm",
+          "story.bg.trinity.knowledge_systems.night"
+        ],
+        "character_poses": [
+          "story.character.hana_park:relief",
+          "story.character.hana_park:skeptical",
+          "story.character.jonah_reed:thoughtful"
+        ],
+        "transient_asset_ids": [],
+        "reference_counts": {
+          "scenes": 4,
+          "character_shows": 8,
+          "transient_shows": 0,
+          "total": 12
+        },
+        "references": [
+          {
+            "statement_index": 1,
+            "nearest_label": "story.qc02.shift09.entry",
+            "statement_type": "scene",
+            "layer": "BACKGROUND",
+            "asset_id": "story.bg.trinity.core_floor.night_storm"
+          },
+          {
+            "statement_index": 6,
+            "nearest_label": "story.qc02.shift09.entry",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.jonah_reed:thoughtful",
+            "asset_id": "story.asset.character.jonah_reed.thoughtful"
+          },
+          {
+            "statement_index": 7,
+            "nearest_label": "story.qc02.shift09.entry",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.hana_park:skeptical",
+            "asset_id": "story.asset.character.hana_park.skeptical"
+          },
+          {
+            "statement_index": 18,
+            "nearest_label": "story.qc02.shift09.success",
+            "statement_type": "scene",
+            "layer": "BACKGROUND",
+            "asset_id": "story.bg.trinity.knowledge_systems.night"
+          },
+          {
+            "statement_index": 23,
+            "nearest_label": "story.qc02.shift09.success",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.jonah_reed:thoughtful",
+            "asset_id": "story.asset.character.jonah_reed.thoughtful"
+          },
+          {
+            "statement_index": 24,
+            "nearest_label": "story.qc02.shift09.success",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.hana_park:relief",
+            "asset_id": "story.asset.character.hana_park.relief"
+          },
+          {
+            "statement_index": 29,
+            "nearest_label": "story.qc02.shift09.abandon",
+            "statement_type": "scene",
+            "layer": "BACKGROUND",
+            "asset_id": "story.bg.trinity.knowledge_systems.night"
+          },
+          {
+            "statement_index": 34,
+            "nearest_label": "story.qc02.shift09.abandon",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.jonah_reed:thoughtful",
+            "asset_id": "story.asset.character.jonah_reed.thoughtful"
+          },
+          {
+            "statement_index": 35,
+            "nearest_label": "story.qc02.shift09.abandon",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.hana_park:skeptical",
+            "asset_id": "story.asset.character.hana_park.skeptical"
+          },
+          {
+            "statement_index": 40,
+            "nearest_label": "story.qc02.shift09.follow_on",
+            "statement_type": "scene",
+            "layer": "BACKGROUND",
+            "asset_id": "story.bg.trinity.knowledge_systems.night"
+          },
+          {
+            "statement_index": 45,
+            "nearest_label": "story.qc02.shift09.follow_on",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.jonah_reed:thoughtful",
+            "asset_id": "story.asset.character.jonah_reed.thoughtful"
+          },
+          {
+            "statement_index": 46,
+            "nearest_label": "story.qc02.shift09.follow_on",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.hana_park:skeptical",
+            "asset_id": "story.asset.character.hana_park.skeptical"
+          }
+        ],
+        "exact_task_043_pin": true,
+        "exact_task_044_art_request": true
+      },
+      {
+        "episode_id": "story.shift.qc02.10",
+        "script_id": "story.script.qc02.shift10",
+        "script_path": "content/story-v1/candidates/quiet-cascade-expansion-v3/scripts/shift-10.json",
+        "script_sha256": "48b30304661b3a9182a576c96ebf8589d8b46307135e95dd6cee26fee858febf",
+        "match_ref": "story.match.qc02.shift10.stale_alert",
+        "match_seed": "story.quiet_cascade.expansion.s10.v1",
+        "ticket_definition_id": "ticket.generated.b68505324c44f11977fcda07",
+        "ticket_snapshot_digest": "c889bd1e907f1537e8080822e7d9ded3821e0507fe8bc20f49490ae81f01f0e8",
+        "planning_source_ticket_definition_id": "ticket.generated.b8fa37ba78fc40c286f65d2a",
+        "planning_source_ticket_snapshot_digest": "4f8f58bb0210c5ae7b2f11d2ea418c83d73552c8d940d88ddcd10b2a3d7632e2",
+        "source_case_id": "exp-004",
+        "pre_match_checkpoint_id": "checkpoint.qc02.shift10.pre_match",
+        "post_match_checkpoint_id": "checkpoint.qc02.shift10.post_match",
+        "backgrounds": [
+          "story.bg.trinity.knowledge_systems.night"
+        ],
+        "character_poses": [
+          "story.character.hana_park:relief",
+          "story.character.hana_park:skeptical",
+          "story.character.jonah_reed:defensive",
+          "story.character.jonah_reed:thoughtful"
+        ],
+        "transient_asset_ids": [],
+        "reference_counts": {
+          "scenes": 4,
+          "character_shows": 8,
+          "transient_shows": 0,
+          "total": 12
+        },
+        "references": [
+          {
+            "statement_index": 1,
+            "nearest_label": "story.qc02.shift10.entry",
+            "statement_type": "scene",
+            "layer": "BACKGROUND",
+            "asset_id": "story.bg.trinity.knowledge_systems.night"
+          },
+          {
+            "statement_index": 6,
+            "nearest_label": "story.qc02.shift10.entry",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.jonah_reed:defensive",
+            "asset_id": "story.asset.character.jonah_reed.defensive"
+          },
+          {
+            "statement_index": 7,
+            "nearest_label": "story.qc02.shift10.entry",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.hana_park:skeptical",
+            "asset_id": "story.asset.character.hana_park.skeptical"
+          },
+          {
+            "statement_index": 25,
+            "nearest_label": "story.qc02.shift10.success",
+            "statement_type": "scene",
+            "layer": "BACKGROUND",
+            "asset_id": "story.bg.trinity.knowledge_systems.night"
+          },
+          {
+            "statement_index": 30,
+            "nearest_label": "story.qc02.shift10.success",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.jonah_reed:thoughtful",
+            "asset_id": "story.asset.character.jonah_reed.thoughtful"
+          },
+          {
+            "statement_index": 31,
+            "nearest_label": "story.qc02.shift10.success",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.hana_park:relief",
+            "asset_id": "story.asset.character.hana_park.relief"
+          },
+          {
+            "statement_index": 36,
+            "nearest_label": "story.qc02.shift10.abandon",
+            "statement_type": "scene",
+            "layer": "BACKGROUND",
+            "asset_id": "story.bg.trinity.knowledge_systems.night"
+          },
+          {
+            "statement_index": 41,
+            "nearest_label": "story.qc02.shift10.abandon",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.jonah_reed:thoughtful",
+            "asset_id": "story.asset.character.jonah_reed.thoughtful"
+          },
+          {
+            "statement_index": 42,
+            "nearest_label": "story.qc02.shift10.abandon",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.hana_park:skeptical",
+            "asset_id": "story.asset.character.hana_park.skeptical"
+          },
+          {
+            "statement_index": 47,
+            "nearest_label": "story.qc02.shift10.follow_on",
+            "statement_type": "scene",
+            "layer": "BACKGROUND",
+            "asset_id": "story.bg.trinity.knowledge_systems.night"
+          },
+          {
+            "statement_index": 52,
+            "nearest_label": "story.qc02.shift10.follow_on",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.jonah_reed:thoughtful",
+            "asset_id": "story.asset.character.jonah_reed.thoughtful"
+          },
+          {
+            "statement_index": 53,
+            "nearest_label": "story.qc02.shift10.follow_on",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.hana_park:relief",
+            "asset_id": "story.asset.character.hana_park.relief"
+          }
+        ],
+        "exact_task_043_pin": true,
+        "exact_task_044_art_request": true
+      },
+      {
+        "episode_id": "story.shift.qc02.11",
+        "script_id": "story.script.qc02.shift11",
+        "script_path": "content/story-v1/candidates/quiet-cascade-expansion-v3/scripts/shift-11.json",
+        "script_sha256": "5cce5a910c31dfeaf0a1d40018cb1f8fb9255fb639aac9d9e6d80759c97be4c9",
+        "match_ref": "story.match.qc02.shift11.firmware_regression",
+        "match_seed": "story.quiet_cascade.expansion.s11.v1",
+        "ticket_definition_id": "ticket.generated.b34238282822e93980b5f1ad",
+        "ticket_snapshot_digest": "face80b0d5c6f6c7f1ef3bb0495c0c6e4105360fa07887fb50cc2dea440cbc50",
+        "planning_source_ticket_definition_id": "ticket.generated.b92a9e6c176464ba795f9dd5",
+        "planning_source_ticket_snapshot_digest": "ecbb377dc65df8e4b96f90a35ff9541562b9a229b14e7ced92fae73994288637",
+        "source_case_id": "exp-005",
+        "pre_match_checkpoint_id": "checkpoint.qc02.shift11.pre_match",
+        "post_match_checkpoint_id": "checkpoint.qc02.shift11.post_match",
+        "backgrounds": [
+          "story.bg.trinity.core_floor.night_storm",
+          "story.bg.trinity.trace.night"
+        ],
+        "character_poses": [
+          "story.character.malik_okoye:defensive",
+          "story.character.malik_okoye:focused",
+          "story.character.sora_chen:approving",
+          "story.character.sora_chen:focused"
+        ],
+        "transient_asset_ids": [],
+        "reference_counts": {
+          "scenes": 4,
+          "character_shows": 8,
+          "transient_shows": 0,
+          "total": 12
+        },
+        "references": [
+          {
+            "statement_index": 1,
+            "nearest_label": "story.qc02.shift11.entry",
+            "statement_type": "scene",
+            "layer": "BACKGROUND",
+            "asset_id": "story.bg.trinity.core_floor.night_storm"
+          },
+          {
+            "statement_index": 6,
+            "nearest_label": "story.qc02.shift11.entry",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.malik_okoye:defensive",
+            "asset_id": "story.asset.character.malik_okoye.defensive"
+          },
+          {
+            "statement_index": 7,
+            "nearest_label": "story.qc02.shift11.entry",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.sora_chen:focused",
+            "asset_id": "story.asset.character.sora_chen.focused"
+          },
+          {
+            "statement_index": 18,
+            "nearest_label": "story.qc02.shift11.success",
+            "statement_type": "scene",
+            "layer": "BACKGROUND",
+            "asset_id": "story.bg.trinity.trace.night"
+          },
+          {
+            "statement_index": 23,
+            "nearest_label": "story.qc02.shift11.success",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.malik_okoye:focused",
+            "asset_id": "story.asset.character.malik_okoye.focused"
+          },
+          {
+            "statement_index": 24,
+            "nearest_label": "story.qc02.shift11.success",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.sora_chen:approving",
+            "asset_id": "story.asset.character.sora_chen.approving"
+          },
+          {
+            "statement_index": 29,
+            "nearest_label": "story.qc02.shift11.abandon",
+            "statement_type": "scene",
+            "layer": "BACKGROUND",
+            "asset_id": "story.bg.trinity.trace.night"
+          },
+          {
+            "statement_index": 34,
+            "nearest_label": "story.qc02.shift11.abandon",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.malik_okoye:focused",
+            "asset_id": "story.asset.character.malik_okoye.focused"
+          },
+          {
+            "statement_index": 35,
+            "nearest_label": "story.qc02.shift11.abandon",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.sora_chen:focused",
+            "asset_id": "story.asset.character.sora_chen.focused"
+          },
+          {
+            "statement_index": 40,
+            "nearest_label": "story.qc02.shift11.follow_on",
+            "statement_type": "scene",
+            "layer": "BACKGROUND",
+            "asset_id": "story.bg.trinity.trace.night"
+          },
+          {
+            "statement_index": 45,
+            "nearest_label": "story.qc02.shift11.follow_on",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.sora_chen:focused",
+            "asset_id": "story.asset.character.sora_chen.focused"
+          },
+          {
+            "statement_index": 46,
+            "nearest_label": "story.qc02.shift11.follow_on",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.malik_okoye:focused",
+            "asset_id": "story.asset.character.malik_okoye.focused"
+          }
+        ],
+        "exact_task_043_pin": true,
+        "exact_task_044_art_request": true
+      },
+      {
+        "episode_id": "story.shift.qc02.12",
+        "script_id": "story.script.qc02.shift12",
+        "script_path": "content/story-v1/candidates/quiet-cascade-expansion-v3/scripts/shift-12.json",
+        "script_sha256": "8362c422e0e491f9de5f4157226c568087eac1c52703f24bd297c09cdc6d3bb9",
+        "match_ref": "story.match.qc02.shift12.bmc_recovery",
+        "match_seed": "story.quiet_cascade.expansion.s12.v1",
+        "ticket_definition_id": "ticket.generated.f32b85cbf2054fdf0114f42a",
+        "ticket_snapshot_digest": "761016e56ceb47a585727555f64bac47b103933cddbafc27a5c385f402851b01",
+        "planning_source_ticket_definition_id": "ticket.generated.6c878955ff0b3d7e5edbd5a0",
+        "planning_source_ticket_snapshot_digest": "71fcf1cae907451f7b83ca12d7370e59d770174a72c61f5f934ba27851513ce4",
+        "source_case_id": "exp-006",
+        "pre_match_checkpoint_id": "checkpoint.qc02.shift12.pre_match",
+        "post_match_checkpoint_id": "checkpoint.qc02.shift12.post_match",
+        "backgrounds": [
+          "story.bg.trinity.trace.night",
+          "story.bg.trinity.validation_gate.predawn"
+        ],
+        "character_poses": [
+          "story.character.hana_park:relief",
+          "story.character.hana_park:skeptical",
+          "story.character.jonah_reed:thoughtful",
+          "story.character.sora_chen:approving",
+          "story.character.sora_chen:focused"
+        ],
+        "transient_asset_ids": [],
+        "reference_counts": {
+          "scenes": 4,
+          "character_shows": 8,
+          "transient_shows": 0,
+          "total": 12
+        },
+        "references": [
+          {
+            "statement_index": 1,
+            "nearest_label": "story.qc02.shift12.entry",
+            "statement_type": "scene",
+            "layer": "BACKGROUND",
+            "asset_id": "story.bg.trinity.trace.night"
+          },
+          {
+            "statement_index": 6,
+            "nearest_label": "story.qc02.shift12.entry",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.jonah_reed:thoughtful",
+            "asset_id": "story.asset.character.jonah_reed.thoughtful"
+          },
+          {
+            "statement_index": 7,
+            "nearest_label": "story.qc02.shift12.entry",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.sora_chen:focused",
+            "asset_id": "story.asset.character.sora_chen.focused"
+          },
+          {
+            "statement_index": 19,
+            "nearest_label": "story.qc02.shift12.success",
+            "statement_type": "scene",
+            "layer": "BACKGROUND",
+            "asset_id": "story.bg.trinity.validation_gate.predawn"
+          },
+          {
+            "statement_index": 24,
+            "nearest_label": "story.qc02.shift12.success",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.jonah_reed:thoughtful",
+            "asset_id": "story.asset.character.jonah_reed.thoughtful"
+          },
+          {
+            "statement_index": 25,
+            "nearest_label": "story.qc02.shift12.success",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.hana_park:relief",
+            "asset_id": "story.asset.character.hana_park.relief"
+          },
+          {
+            "statement_index": 30,
+            "nearest_label": "story.qc02.shift12.abandon",
+            "statement_type": "scene",
+            "layer": "BACKGROUND",
+            "asset_id": "story.bg.trinity.validation_gate.predawn"
+          },
+          {
+            "statement_index": 35,
+            "nearest_label": "story.qc02.shift12.abandon",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.jonah_reed:thoughtful",
+            "asset_id": "story.asset.character.jonah_reed.thoughtful"
+          },
+          {
+            "statement_index": 36,
+            "nearest_label": "story.qc02.shift12.abandon",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.hana_park:skeptical",
+            "asset_id": "story.asset.character.hana_park.skeptical"
+          },
+          {
+            "statement_index": 41,
+            "nearest_label": "story.qc02.shift12.follow_on",
+            "statement_type": "scene",
+            "layer": "BACKGROUND",
+            "asset_id": "story.bg.trinity.validation_gate.predawn"
+          },
+          {
+            "statement_index": 46,
+            "nearest_label": "story.qc02.shift12.follow_on",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.hana_park:relief",
+            "asset_id": "story.asset.character.hana_park.relief"
+          },
+          {
+            "statement_index": 47,
+            "nearest_label": "story.qc02.shift12.follow_on",
+            "statement_type": "show",
+            "layer": "CHARACTER",
+            "pose_id": "story.character.sora_chen:approving",
+            "asset_id": "story.asset.character.sora_chen.approving"
+          }
+        ],
+        "exact_task_043_pin": true,
+        "exact_task_044_art_request": true
+      }
+    ]
+  },
+  "asset_audit": {
+    "production_counts": {
+      "backgrounds": 4,
+      "characters": 8,
+      "transients": 0,
+      "total": 12
+    },
+    "production_asset_ids": [
+      "story.asset.character.hana_park.relief",
+      "story.asset.character.hana_park.skeptical",
+      "story.asset.character.jonah_reed.defensive",
+      "story.asset.character.jonah_reed.thoughtful",
+      "story.asset.character.malik_okoye.defensive",
+      "story.asset.character.malik_okoye.focused",
+      "story.asset.character.sora_chen.approving",
+      "story.asset.character.sora_chen.focused",
+      "story.bg.trinity.core_floor.night_storm",
+      "story.bg.trinity.knowledge_systems.night",
+      "story.bg.trinity.trace.night",
+      "story.bg.trinity.validation_gate.predawn"
+    ],
+    "assets": [
+      {
+        "asset_id": "story.asset.character.hana_park.relief",
+        "layer": "CHARACTER",
+        "reference_count": 7,
+        "referenced_by_episode_ids": [
+          "story.shift.qc02.08",
+          "story.shift.qc02.09",
+          "story.shift.qc02.10",
+          "story.shift.qc02.12"
+        ],
+        "registry_alt_text_id": "text.qc01.asset.character.hana.relief",
+        "alt_text": "Hana Park stands with the traveler tablet and a quietly relieved expression.",
+        "decorative": false,
+        "fallback_asset_id": "story.fallback.character",
+        "focal_point": {
+          "x": 0.5,
+          "y": 0.4
+        },
+        "protected_zones": [],
+        "master": {
+          "path": "art_sources/task-030/masters/characters/story-character-hana-park-relief.png",
+          "width": 1024,
+          "height": 1536,
+          "bytes": 1582247,
+          "sha256": "af98d7aca2b2925ee6a59cc177760324589d9c3bce19018998794950c29ba7ba",
+          "alpha_required": true
+        },
+        "derivatives": [
+          {
+            "profile": "desktop",
+            "path": "viewer/assets/story/characters/hana-park-relief-desktop.webp",
+            "width": 640,
+            "height": 960,
+            "bytes": 78594,
+            "byte_budget": 280000,
+            "quality": 86,
+            "sha256": "ac5bc6391e8fd5d096bda25bc5987f1b11e2515e8315b1c6050427b73c7a2cb4",
+            "visible_alpha_bounds": {
+              "x": 135,
+              "y": 10,
+              "width": 377,
+              "height": 950
+            },
+            "portrait_anchor_bounds": {
+              "x": 135,
+              "y": 10,
+              "width": 377,
+              "height": 503
+            },
+            "visible_alpha_pixels": 238310
+          },
+          {
+            "profile": "mobile",
+            "path": "viewer/assets/story/characters/hana-park-relief-mobile.webp",
+            "width": 426,
+            "height": 640,
+            "bytes": 44392,
+            "byte_budget": 180000,
+            "quality": 86,
+            "sha256": "97821df11060055eac8c45d839b3fea6be5275bd4ebb448703236896add52aae",
+            "visible_alpha_bounds": {
+              "x": 89,
+              "y": 6,
+              "width": 252,
+              "height": 634
+            },
+            "portrait_anchor_bounds": {
+              "x": 89,
+              "y": 6,
+              "width": 252,
+              "height": 336
+            },
+            "visible_alpha_pixels": 106232
+          },
+          {
+            "profile": "reduced_data",
+            "path": "viewer/assets/story/characters/hana-park-relief-reduced-data.webp",
+            "width": 320,
+            "height": 480,
+            "bytes": 29406,
+            "byte_budget": 120000,
+            "quality": 86,
+            "sha256": "901d7fa95435345046cb8daacb1f863c8f8b54fbf6754c058e1325c57c92d49f",
+            "visible_alpha_bounds": {
+              "x": 67,
+              "y": 5,
+              "width": 189,
+              "height": 475
+            },
+            "portrait_anchor_bounds": {
+              "x": 67,
+              "y": 5,
+              "width": 189,
+              "height": 252
+            },
+            "visible_alpha_pixels": 59938
+          }
+        ],
+        "provenance": {
+          "brief": "Identity-preserving Hana Park variant clipping a blank release record into place with quiet relief.",
+          "prompt_sha256": "f3a232d020e4c40289bea07b1eeca709ba3aedac0071b90273e1b7330fd0ce30",
+          "tool_or_artist": "OpenAI built-in image generation",
+          "date": "2026-08-27",
+          "generation_reference": "exec-bc4b2223-8d6d-4c1d-8fdc-65a8e5d17907",
+          "source_generation_references": [
+            "exec-749a3e23-6ae3-41b2-b5f9-633e98c8fa17"
+          ],
+          "source_inputs": [
+            "docs/ui-plan/ui-reference_images/story-mode-choice-dialogue-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-background-repair-floor-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-background-inflow-dock-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-character-ensemble-a-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-dialogue-inflow-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-character-ensemble-b-reference.png"
+          ],
+          "source_pixels_used": false,
+          "edit_history": [
+            "Generated from the approved Hana Park skeptical master using an identity-preserving expression and hand-action edit.",
+            "Removed only the unintended opaque backdrop in a transparent-alpha cleanup edit (exec-bc4b2223-8d6d-4c1d-8fdc-65a8e5d17907)."
+          ],
+          "review_state": "approved",
+          "review_notes": [
+            "Reviewed for identity continuity, text-free composition, technical safety, crop survival, overlay clearance, and absence of hidden gameplay answers.",
+            "Approved for canonical campaign-one integration under STORY-007 A on 2026-08-28."
+          ],
+          "approval": {
+            "status": "approved",
+            "scope": "TASK-030 production integration",
+            "date": "2026-08-27"
+          }
+        },
+        "content_safety_review": {
+          "no_named_artist_imitation": true,
+          "no_third_party_brand_or_logo": true,
+          "no_readable_or_pseudo_text": true,
+          "no_hidden_gameplay_answer": true,
+          "technical_safety_reviewed": true
+        },
+        "exact_existing_reuse": true
+      },
+      {
+        "asset_id": "story.asset.character.hana_park.skeptical",
+        "layer": "CHARACTER",
+        "reference_count": 8,
+        "referenced_by_episode_ids": [
+          "story.shift.qc02.08",
+          "story.shift.qc02.09",
+          "story.shift.qc02.10",
+          "story.shift.qc02.12"
+        ],
+        "registry_alt_text_id": "text.qc01.asset.character.hana.skeptical",
+        "alt_text": "Hana Park holds a traveler at the Validation Gate with a skeptical, exact expression.",
+        "decorative": false,
+        "fallback_asset_id": "story.fallback.character",
+        "focal_point": {
+          "x": 0.5,
+          "y": 0.4
+        },
+        "protected_zones": [],
+        "master": {
+          "path": "art_sources/task-030/masters/characters/story-character-hana-park-skeptical.png",
+          "width": 1024,
+          "height": 1536,
+          "bytes": 1996993,
+          "sha256": "6ebb158fb6b89d90d4b6f70396bd6fb0faecddcfffee0e5b7fd2687b42075b4b",
+          "alpha_required": true
+        },
+        "derivatives": [
+          {
+            "profile": "desktop",
+            "path": "viewer/assets/story/characters/hana-park-skeptical-desktop.webp",
+            "width": 640,
+            "height": 960,
+            "bytes": 95370,
+            "byte_budget": 280000,
+            "quality": 86,
+            "sha256": "cd08cb455c8b497b90d2425f1a00ef523b20e0e77f5e506a64bb3acf49e612ae",
+            "visible_alpha_bounds": {
+              "x": 102,
+              "y": 10,
+              "width": 439,
+              "height": 950
+            },
+            "portrait_anchor_bounds": {
+              "x": 135,
+              "y": 10,
+              "width": 377,
+              "height": 380
+            },
+            "visible_alpha_pixels": 285591
+          },
+          {
+            "profile": "mobile",
+            "path": "viewer/assets/story/characters/hana-park-skeptical-mobile.webp",
+            "width": 426,
+            "height": 640,
+            "bytes": 48928,
+            "byte_budget": 180000,
+            "quality": 86,
+            "sha256": "6b46138f95f86bc0f44ae5b44c311f6a741de370302205f607f62126598bc4d9",
+            "visible_alpha_bounds": {
+              "x": 68,
+              "y": 6,
+              "width": 293,
+              "height": 634
+            },
+            "portrait_anchor_bounds": {
+              "x": 90,
+              "y": 6,
+              "width": 251,
+              "height": 254
+            },
+            "visible_alpha_pixels": 127261
+          },
+          {
+            "profile": "reduced_data",
+            "path": "viewer/assets/story/characters/hana-park-skeptical-reduced-data.webp",
+            "width": 320,
+            "height": 480,
+            "bytes": 32356,
+            "byte_budget": 120000,
+            "quality": 86,
+            "sha256": "8d65698d667eb9a9cac49923b43b9e07f70a0ec7dc32e4d98f740840b716a80d",
+            "visible_alpha_bounds": {
+              "x": 51,
+              "y": 5,
+              "width": 220,
+              "height": 475
+            },
+            "portrait_anchor_bounds": {
+              "x": 67,
+              "y": 5,
+              "width": 189,
+              "height": 190
+            },
+            "visible_alpha_pixels": 71747
+          }
+        ],
+        "provenance": {
+          "brief": "Hana Park, exact Validation Gate reviewer, holding a blank traveler with a skeptical expression in light neutral quality workwear.",
+          "prompt_sha256": "7d7f6e02667cc74004d8bf3fdebddb1655aa5de2f31b1de0be7bf6c66205696d",
+          "tool_or_artist": "OpenAI built-in image generation",
+          "date": "2026-08-27",
+          "generation_reference": "exec-ac451eae-d397-445e-b40b-21220fc9ee47",
+          "source_generation_references": [],
+          "source_inputs": [
+            "docs/ui-plan/ui-reference_images/story-mode-choice-dialogue-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-background-repair-floor-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-background-inflow-dock-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-character-ensemble-a-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-dialogue-inflow-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-character-ensemble-b-reference.png"
+          ],
+          "source_pixels_used": false,
+          "edit_history": [
+            "Generated as an original master; no source pixels copied."
+          ],
+          "review_state": "approved",
+          "review_notes": [
+            "Reviewed for identity continuity, text-free composition, technical safety, crop survival, overlay clearance, and absence of hidden gameplay answers.",
+            "Approved for canonical campaign-one integration under STORY-007 A on 2026-08-28."
+          ],
+          "approval": {
+            "status": "approved",
+            "scope": "TASK-030 production integration",
+            "date": "2026-08-27"
+          }
+        },
+        "content_safety_review": {
+          "no_named_artist_imitation": true,
+          "no_third_party_brand_or_logo": true,
+          "no_readable_or_pseudo_text": true,
+          "no_hidden_gameplay_answer": true,
+          "technical_safety_reviewed": true
+        },
+        "exact_existing_reuse": true
+      },
+      {
+        "asset_id": "story.asset.character.jonah_reed.defensive",
+        "layer": "CHARACTER",
+        "reference_count": 1,
+        "referenced_by_episode_ids": [
+          "story.shift.qc02.10"
+        ],
+        "registry_alt_text_id": "text.qc01.asset.character.jonah.defensive",
+        "alt_text": "Jonah Reed holds the closed Worklog tablet in a guarded, attentive stance.",
+        "decorative": false,
+        "fallback_asset_id": "story.fallback.character",
+        "focal_point": {
+          "x": 0.5,
+          "y": 0.4
+        },
+        "protected_zones": [],
+        "master": {
+          "path": "art_sources/task-030/masters/characters/story-character-jonah-reed-defensive.png",
+          "width": 1024,
+          "height": 1536,
+          "bytes": 1669291,
+          "sha256": "6a7171c2ad77b23758448c09354c321e1ce23181f6705dd77bbb6cb3c028e9fa",
+          "alpha_required": true
+        },
+        "derivatives": [
+          {
+            "profile": "desktop",
+            "path": "viewer/assets/story/characters/jonah-reed-defensive-desktop.webp",
+            "width": 640,
+            "height": 960,
+            "bytes": 81514,
+            "byte_budget": 280000,
+            "quality": 86,
+            "sha256": "ebacbcbc92b255f0ae39559e834f6ea41c281c2d4ccfad8f09a52994f31e9707",
+            "visible_alpha_bounds": {
+              "x": 117,
+              "y": 9,
+              "width": 462,
+              "height": 951
+            },
+            "portrait_anchor_bounds": {
+              "x": 117,
+              "y": 9,
+              "width": 462,
+              "height": 522
+            },
+            "visible_alpha_pixels": 272137
+          },
+          {
+            "profile": "mobile",
+            "path": "viewer/assets/story/characters/jonah-reed-defensive-mobile.webp",
+            "width": 426,
+            "height": 640,
+            "bytes": 45086,
+            "byte_budget": 180000,
+            "quality": 86,
+            "sha256": "5026cb04410b5ee4659c9df70ed26b7e5f7c3bca1ebe2804e87fd70473a8f8e4",
+            "visible_alpha_bounds": {
+              "x": 78,
+              "y": 6,
+              "width": 308,
+              "height": 634
+            },
+            "portrait_anchor_bounds": {
+              "x": 78,
+              "y": 6,
+              "width": 308,
+              "height": 348
+            },
+            "visible_alpha_pixels": 121219
+          },
+          {
+            "profile": "reduced_data",
+            "path": "viewer/assets/story/characters/jonah-reed-defensive-reduced-data.webp",
+            "width": 320,
+            "height": 480,
+            "bytes": 29686,
+            "byte_budget": 120000,
+            "quality": 86,
+            "sha256": "25712d6b6755fd29aa02ba1a0d99225ade78db0a1e457441b3489cdb17e0aa87",
+            "visible_alpha_bounds": {
+              "x": 58,
+              "y": 4,
+              "width": 232,
+              "height": 476
+            },
+            "portrait_anchor_bounds": {
+              "x": 58,
+              "y": 4,
+              "width": 232,
+              "height": 262
+            },
+            "visible_alpha_pixels": 68324
+          }
+        ],
+        "provenance": {
+          "brief": "Identity-preserving Jonah Reed variant guarded but attentive beside the same source timeline board.",
+          "prompt_sha256": "1e17f88233ce6e4b556e9516268d250f06b3ea751ee4ec64b8d3b1676e426bf0",
+          "tool_or_artist": "OpenAI built-in image generation",
+          "date": "2026-08-27",
+          "generation_reference": "exec-603c8b34-ec5e-4215-9d49-b52c24e33e1d",
+          "source_generation_references": [
+            "exec-de8997bf-9900-4fa7-a719-f653b6105bac"
+          ],
+          "source_inputs": [
+            "docs/ui-plan/ui-reference_images/story-mode-choice-dialogue-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-background-repair-floor-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-background-inflow-dock-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-character-ensemble-a-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-dialogue-inflow-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-character-ensemble-b-reference.png"
+          ],
+          "source_pixels_used": false,
+          "edit_history": [
+            "Generated from the approved Jonah Reed thoughtful master using an identity-preserving expression and stance edit.",
+            "Removed only the unintended opaque backdrop in a transparent-alpha cleanup edit (exec-603c8b34-ec5e-4215-9d49-b52c24e33e1d)."
+          ],
+          "review_state": "approved",
+          "review_notes": [
+            "Reviewed for identity continuity, text-free composition, technical safety, crop survival, overlay clearance, and absence of hidden gameplay answers.",
+            "Approved for canonical campaign-one integration under STORY-007 A on 2026-08-28."
+          ],
+          "approval": {
+            "status": "approved",
+            "scope": "TASK-030 production integration",
+            "date": "2026-08-27"
+          }
+        },
+        "content_safety_review": {
+          "no_named_artist_imitation": true,
+          "no_third_party_brand_or_logo": true,
+          "no_readable_or_pseudo_text": true,
+          "no_hidden_gameplay_answer": true,
+          "technical_safety_reviewed": true
+        },
+        "exact_existing_reuse": true
+      },
+      {
+        "asset_id": "story.asset.character.jonah_reed.thoughtful",
+        "layer": "CHARACTER",
+        "reference_count": 10,
+        "referenced_by_episode_ids": [
+          "story.shift.qc02.09",
+          "story.shift.qc02.10",
+          "story.shift.qc02.12"
+        ],
+        "registry_alt_text_id": "text.qc01.asset.character.jonah.thoughtful",
+        "alt_text": "Jonah Reed pauses thoughtfully with a closed Worklog tablet.",
+        "decorative": false,
+        "fallback_asset_id": "story.fallback.character",
+        "focal_point": {
+          "x": 0.5,
+          "y": 0.4
+        },
+        "protected_zones": [],
+        "master": {
+          "path": "art_sources/task-030/masters/characters/story-character-jonah-reed-thoughtful.png",
+          "width": 1024,
+          "height": 1536,
+          "bytes": 2169450,
+          "sha256": "2b76276d5cbf9440f4f00cbf7de71c9b62df70fe029fe7e7042eca8bbad59695",
+          "alpha_required": true
+        },
+        "derivatives": [
+          {
+            "profile": "desktop",
+            "path": "viewer/assets/story/characters/jonah-reed-thoughtful-desktop.webp",
+            "width": 640,
+            "height": 960,
+            "bytes": 94606,
+            "byte_budget": 280000,
+            "quality": 86,
+            "sha256": "91c0b0e8c7f9bd079991c3aa5e34cec2afd60630aa77dc11db9d69528caf0bd2",
+            "visible_alpha_bounds": {
+              "x": 70,
+              "y": 8,
+              "width": 535,
+              "height": 952
+            },
+            "portrait_anchor_bounds": {
+              "x": 117,
+              "y": 8,
+              "width": 462,
+              "height": 382
+            },
+            "visible_alpha_pixels": 320521
+          },
+          {
+            "profile": "mobile",
+            "path": "viewer/assets/story/characters/jonah-reed-thoughtful-mobile.webp",
+            "width": 426,
+            "height": 640,
+            "bytes": 48052,
+            "byte_budget": 180000,
+            "quality": 86,
+            "sha256": "a15d103ad313e153829ebad3aa62f9cd8304083a0714d7acb0cbdc3896c2055a",
+            "visible_alpha_bounds": {
+              "x": 46,
+              "y": 6,
+              "width": 357,
+              "height": 634
+            },
+            "portrait_anchor_bounds": {
+              "x": 78,
+              "y": 6,
+              "width": 308,
+              "height": 254
+            },
+            "visible_alpha_pixels": 142787
+          },
+          {
+            "profile": "reduced_data",
+            "path": "viewer/assets/story/characters/jonah-reed-thoughtful-reduced-data.webp",
+            "width": 320,
+            "height": 480,
+            "bytes": 31548,
+            "byte_budget": 120000,
+            "quality": 86,
+            "sha256": "56d1fa71bb9d635e8a3aa9dccfaf1b453350e784e5a09eafb22b00f730a7e8b5",
+            "visible_alpha_bounds": {
+              "x": 35,
+              "y": 4,
+              "width": 268,
+              "height": 476
+            },
+            "portrait_anchor_bounds": {
+              "x": 58,
+              "y": 4,
+              "width": 232,
+              "height": 191
+            },
+            "visible_alpha_pixels": 80440
+          }
+        ],
+        "provenance": {
+          "brief": "Jonah Reed, Knowledge Systems steward, thoughtfully studying a small text-free source timeline board in brown and slate workwear.",
+          "prompt_sha256": "38576d186d27a47942e50d8163633bc42a1d6d9bbe306e8e9b13753d6855ac56",
+          "tool_or_artist": "OpenAI built-in image generation",
+          "date": "2026-08-27",
+          "generation_reference": "exec-0b767cf1-b2ff-4786-b512-2abc0d253b0b",
+          "source_generation_references": [],
+          "source_inputs": [
+            "docs/ui-plan/ui-reference_images/story-mode-choice-dialogue-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-background-repair-floor-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-background-inflow-dock-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-character-ensemble-a-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-dialogue-inflow-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-character-ensemble-b-reference.png"
+          ],
+          "source_pixels_used": false,
+          "edit_history": [
+            "Generated as an original master; no source pixels copied."
+          ],
+          "review_state": "approved",
+          "review_notes": [
+            "Reviewed for identity continuity, text-free composition, technical safety, crop survival, overlay clearance, and absence of hidden gameplay answers.",
+            "Approved for canonical campaign-one integration under STORY-007 A on 2026-08-28."
+          ],
+          "approval": {
+            "status": "approved",
+            "scope": "TASK-030 production integration",
+            "date": "2026-08-27"
+          }
+        },
+        "content_safety_review": {
+          "no_named_artist_imitation": true,
+          "no_third_party_brand_or_logo": true,
+          "no_readable_or_pseudo_text": true,
+          "no_hidden_gameplay_answer": true,
+          "technical_safety_reviewed": true
+        },
+        "exact_existing_reuse": true
+      },
+      {
+        "asset_id": "story.asset.character.malik_okoye.defensive",
+        "layer": "CHARACTER",
+        "reference_count": 2,
+        "referenced_by_episode_ids": [
+          "story.shift.qc02.08",
+          "story.shift.qc02.11"
+        ],
+        "registry_alt_text_id": "text.qc01.asset.character.malik.defensive",
+        "alt_text": "Malik Okoye holds the Rigline test cable in a guarded stance.",
+        "decorative": false,
+        "fallback_asset_id": "story.fallback.character",
+        "focal_point": {
+          "x": 0.5,
+          "y": 0.4
+        },
+        "protected_zones": [],
+        "master": {
+          "path": "art_sources/task-030/masters/characters/story-character-malik-okoye-defensive.png",
+          "width": 1024,
+          "height": 1536,
+          "bytes": 1769746,
+          "sha256": "f3d02f6ed7b2e2dc91074acc042ad770ab74f7c992e1125cbac9fe7409c472b4",
+          "alpha_required": true
+        },
+        "derivatives": [
+          {
+            "profile": "desktop",
+            "path": "viewer/assets/story/characters/malik-okoye-defensive-desktop.webp",
+            "width": 640,
+            "height": 960,
+            "bytes": 82366,
+            "byte_budget": 280000,
+            "quality": 86,
+            "sha256": "be9adb433562c370e000b6710ecc9bfd1fb3a37f83f3ba03fa07c9e87cb8115a",
+            "visible_alpha_bounds": {
+              "x": 90,
+              "y": 6,
+              "width": 443,
+              "height": 954
+            },
+            "portrait_anchor_bounds": {
+              "x": 90,
+              "y": 6,
+              "width": 443,
+              "height": 498
+            },
+            "visible_alpha_pixels": 255447
+          },
+          {
+            "profile": "mobile",
+            "path": "viewer/assets/story/characters/malik-okoye-defensive-mobile.webp",
+            "width": 426,
+            "height": 640,
+            "bytes": 44540,
+            "byte_budget": 180000,
+            "quality": 86,
+            "sha256": "e64204295fa4547ee156eff4cad0d816138e4e5f7bd0a3acb8501ddd6612848e",
+            "visible_alpha_bounds": {
+              "x": 59,
+              "y": 4,
+              "width": 296,
+              "height": 636
+            },
+            "portrait_anchor_bounds": {
+              "x": 59,
+              "y": 4,
+              "width": 296,
+              "height": 332
+            },
+            "visible_alpha_pixels": 113791
+          },
+          {
+            "profile": "reduced_data",
+            "path": "viewer/assets/story/characters/malik-okoye-defensive-reduced-data.webp",
+            "width": 320,
+            "height": 480,
+            "bytes": 28800,
+            "byte_budget": 120000,
+            "quality": 86,
+            "sha256": "a54feefb05a3a45005f4f45d51534f1acf7d0e931eeb670c2dae8058bd00f623",
+            "visible_alpha_bounds": {
+              "x": 45,
+              "y": 3,
+              "width": 222,
+              "height": 477
+            },
+            "portrait_anchor_bounds": {
+              "x": 45,
+              "y": 3,
+              "width": 222,
+              "height": 249
+            },
+            "visible_alpha_pixels": 64171
+          }
+        ],
+        "provenance": {
+          "brief": "Identity-preserving Malik Okoye variant with folded arms and a guarded stance, no equipment misuse.",
+          "prompt_sha256": "5190c926baa865675c366d8dd47b398071cafefa58c50cf306530a13a5ff1a87",
+          "tool_or_artist": "OpenAI built-in image generation",
+          "date": "2026-08-27",
+          "generation_reference": "exec-e1656734-2c8b-4458-a175-59b8ef2ff2b1",
+          "source_generation_references": [
+            "exec-4f448237-3bb6-43b7-8b8e-4a9cb40d6d43"
+          ],
+          "source_inputs": [
+            "docs/ui-plan/ui-reference_images/story-mode-choice-dialogue-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-background-repair-floor-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-background-inflow-dock-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-character-ensemble-a-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-dialogue-inflow-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-character-ensemble-b-reference.png"
+          ],
+          "source_pixels_used": false,
+          "edit_history": [
+            "Generated from the approved Malik Okoye focused master using an identity-preserving expression and stance edit.",
+            "Removed only the unintended opaque backdrop in a transparent-alpha cleanup edit (exec-e1656734-2c8b-4458-a175-59b8ef2ff2b1)."
+          ],
+          "review_state": "approved",
+          "review_notes": [
+            "Reviewed for identity continuity, text-free composition, technical safety, crop survival, overlay clearance, and absence of hidden gameplay answers.",
+            "Approved for canonical campaign-one integration under STORY-007 A on 2026-08-28."
+          ],
+          "approval": {
+            "status": "approved",
+            "scope": "TASK-030 production integration",
+            "date": "2026-08-27"
+          }
+        },
+        "content_safety_review": {
+          "no_named_artist_imitation": true,
+          "no_third_party_brand_or_logo": true,
+          "no_readable_or_pseudo_text": true,
+          "no_hidden_gameplay_answer": true,
+          "technical_safety_reviewed": true
+        },
+        "exact_existing_reuse": true
+      },
+      {
+        "asset_id": "story.asset.character.malik_okoye.focused",
+        "layer": "CHARACTER",
+        "reference_count": 9,
+        "referenced_by_episode_ids": [
+          "story.shift.qc02.07",
+          "story.shift.qc02.08",
+          "story.shift.qc02.11"
+        ],
+        "registry_alt_text_id": "text.qc01.asset.character.malik.focused",
+        "alt_text": "Malik Okoye holds a coiled Rigline test cable with focused attention.",
+        "decorative": false,
+        "fallback_asset_id": "story.fallback.character",
+        "focal_point": {
+          "x": 0.5,
+          "y": 0.4
+        },
+        "protected_zones": [],
+        "master": {
+          "path": "art_sources/task-030/masters/characters/story-character-malik-okoye-focused.png",
+          "width": 1024,
+          "height": 1536,
+          "bytes": 2189974,
+          "sha256": "57215c28e0d79da5e007e9ad2489b2f37f6ad254a850187132cc0fbfe7b3674c",
+          "alpha_required": true
+        },
+        "derivatives": [
+          {
+            "profile": "desktop",
+            "path": "viewer/assets/story/characters/malik-okoye-focused-desktop.webp",
+            "width": 640,
+            "height": 960,
+            "bytes": 91734,
+            "byte_budget": 280000,
+            "quality": 86,
+            "sha256": "ae06ae7f332a917861d826c7ef04c2969d9c3d29c39eed2375966d11b3797a98",
+            "visible_alpha_bounds": {
+              "x": 52,
+              "y": 6,
+              "width": 536,
+              "height": 954
+            },
+            "portrait_anchor_bounds": {
+              "x": 89,
+              "y": 6,
+              "width": 444,
+              "height": 382
+            },
+            "visible_alpha_pixels": 315432
+          },
+          {
+            "profile": "mobile",
+            "path": "viewer/assets/story/characters/malik-okoye-focused-mobile.webp",
+            "width": 426,
+            "height": 640,
+            "bytes": 45852,
+            "byte_budget": 180000,
+            "quality": 86,
+            "sha256": "0b82166078ddb93b4029603cc27241d10c3514db8604b8408d3a3cf0090f54a6",
+            "visible_alpha_bounds": {
+              "x": 34,
+              "y": 4,
+              "width": 358,
+              "height": 636
+            },
+            "portrait_anchor_bounds": {
+              "x": 59,
+              "y": 4,
+              "width": 296,
+              "height": 255
+            },
+            "visible_alpha_pixels": 140529
+          },
+          {
+            "profile": "reduced_data",
+            "path": "viewer/assets/story/characters/malik-okoye-focused-reduced-data.webp",
+            "width": 320,
+            "height": 480,
+            "bytes": 30804,
+            "byte_budget": 120000,
+            "quality": 86,
+            "sha256": "1dba8730946ab0a470a0e49d3a3b3024796f4a013783b737c823070c903a27b1",
+            "visible_alpha_bounds": {
+              "x": 26,
+              "y": 3,
+              "width": 268,
+              "height": 477
+            },
+            "portrait_anchor_bounds": {
+              "x": 45,
+              "y": 3,
+              "width": 222,
+              "height": 191
+            },
+            "visible_alpha_pixels": 79173
+          }
+        ],
+        "provenance": {
+          "brief": "Malik Okoye, Rigline specialist, focused beside a compact labeled-but-text-free test harness in indigo workwear.",
+          "prompt_sha256": "003d1ab2fcf404ddd68a2fbc25bcbd11d16a0b81b2f8b1798a3000f254a89248",
+          "tool_or_artist": "OpenAI built-in image generation",
+          "date": "2026-08-27",
+          "generation_reference": "exec-e2fe75b8-4ed6-432b-b337-6492979f885a",
+          "source_generation_references": [],
+          "source_inputs": [
+            "docs/ui-plan/ui-reference_images/story-mode-choice-dialogue-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-background-repair-floor-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-background-inflow-dock-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-character-ensemble-a-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-dialogue-inflow-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-character-ensemble-b-reference.png"
+          ],
+          "source_pixels_used": false,
+          "edit_history": [
+            "Generated as an original master; no source pixels copied."
+          ],
+          "review_state": "approved",
+          "review_notes": [
+            "Reviewed for identity continuity, text-free composition, technical safety, crop survival, overlay clearance, and absence of hidden gameplay answers.",
+            "Approved for canonical campaign-one integration under STORY-007 A on 2026-08-28."
+          ],
+          "approval": {
+            "status": "approved",
+            "scope": "TASK-030 production integration",
+            "date": "2026-08-27"
+          }
+        },
+        "content_safety_review": {
+          "no_named_artist_imitation": true,
+          "no_third_party_brand_or_logo": true,
+          "no_readable_or_pseudo_text": true,
+          "no_hidden_gameplay_answer": true,
+          "technical_safety_reviewed": true
+        },
+        "exact_existing_reuse": true
+      },
+      {
+        "asset_id": "story.asset.character.sora_chen.approving",
+        "layer": "CHARACTER",
+        "reference_count": 3,
+        "referenced_by_episode_ids": [
+          "story.shift.qc02.07",
+          "story.shift.qc02.11",
+          "story.shift.qc02.12"
+        ],
+        "registry_alt_text_id": "text.qc01.asset.character.sora.approving",
+        "alt_text": "Sora Chen offers restrained approval, one hand extended and a closed notebook at her side.",
+        "decorative": false,
+        "fallback_asset_id": "story.fallback.character",
+        "focal_point": {
+          "x": 0.5,
+          "y": 0.4
+        },
+        "protected_zones": [],
+        "master": {
+          "path": "art_sources/task-030/masters/characters/story-character-sora-chen-approving.png",
+          "width": 1024,
+          "height": 1536,
+          "bytes": 1726821,
+          "sha256": "6922836b2a37ec001604d7bacb802ff382610332fe60fc4f16d415685c306a89",
+          "alpha_required": true
+        },
+        "derivatives": [
+          {
+            "profile": "desktop",
+            "path": "viewer/assets/story/characters/sora-chen-approving-desktop.webp",
+            "width": 640,
+            "height": 960,
+            "bytes": 82132,
+            "byte_budget": 280000,
+            "quality": 86,
+            "sha256": "ed9c3fc46d2d3faa2f49bb1861a9b8bccc0b643b39abfc61907ef5b2c858a371",
+            "visible_alpha_bounds": {
+              "x": 84,
+              "y": 4,
+              "width": 414,
+              "height": 956
+            },
+            "portrait_anchor_bounds": {
+              "x": 89,
+              "y": 4,
+              "width": 380,
+              "height": 471
+            },
+            "visible_alpha_pixels": 237553
+          },
+          {
+            "profile": "mobile",
+            "path": "viewer/assets/story/characters/sora-chen-approving-mobile.webp",
+            "width": 426,
+            "height": 640,
+            "bytes": 45358,
+            "byte_budget": 180000,
+            "quality": 86,
+            "sha256": "3017cd55315029c1e95ccc7a42358dcd257f7da0b0903176ae0bae3312df49f7",
+            "visible_alpha_bounds": {
+              "x": 55,
+              "y": 3,
+              "width": 277,
+              "height": 637
+            },
+            "portrait_anchor_bounds": {
+              "x": 59,
+              "y": 3,
+              "width": 254,
+              "height": 314
+            },
+            "visible_alpha_pixels": 105879
+          },
+          {
+            "profile": "reduced_data",
+            "path": "viewer/assets/story/characters/sora-chen-approving-reduced-data.webp",
+            "width": 320,
+            "height": 480,
+            "bytes": 29962,
+            "byte_budget": 120000,
+            "quality": 86,
+            "sha256": "363b9cf132698be1eabc14093d6e377483e64877d8118e9035a5a8e13ac9c137",
+            "visible_alpha_bounds": {
+              "x": 42,
+              "y": 2,
+              "width": 207,
+              "height": 478
+            },
+            "portrait_anchor_bounds": {
+              "x": 44,
+              "y": 2,
+              "width": 191,
+              "height": 236
+            },
+            "visible_alpha_pixels": 59707
+          }
+        ],
+        "provenance": {
+          "brief": "Identity-preserving Sora Chen variant closing the notebook with restrained approval.",
+          "prompt_sha256": "26e7ecd131033414d024f2296e3e415935598e941a1d67a52085399862fde5b4",
+          "tool_or_artist": "OpenAI built-in image generation",
+          "date": "2026-08-27",
+          "generation_reference": "exec-208fe211-e0aa-4d5c-ab60-e22b6e2910f3",
+          "source_generation_references": [
+            "exec-94cfd104-3319-41cf-970c-a7ab9461a6dc"
+          ],
+          "source_inputs": [
+            "docs/ui-plan/ui-reference_images/story-mode-choice-dialogue-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-background-repair-floor-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-background-inflow-dock-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-character-ensemble-a-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-dialogue-inflow-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-character-ensemble-b-reference.png"
+          ],
+          "source_pixels_used": false,
+          "edit_history": [
+            "Generated from the approved Sora Chen focused master using an identity-preserving expression edit.",
+            "Removed only the unintended opaque backdrop in a transparent-alpha cleanup edit (exec-208fe211-e0aa-4d5c-ab60-e22b6e2910f3)."
+          ],
+          "review_state": "approved",
+          "review_notes": [
+            "Reviewed for identity continuity, text-free composition, technical safety, crop survival, overlay clearance, and absence of hidden gameplay answers.",
+            "Approved for canonical campaign-one integration under STORY-007 A on 2026-08-28."
+          ],
+          "approval": {
+            "status": "approved",
+            "scope": "TASK-030 production integration",
+            "date": "2026-08-27"
+          }
+        },
+        "content_safety_review": {
+          "no_named_artist_imitation": true,
+          "no_third_party_brand_or_logo": true,
+          "no_readable_or_pseudo_text": true,
+          "no_hidden_gameplay_answer": true,
+          "technical_safety_reviewed": true
+        },
+        "exact_existing_reuse": true
+      },
+      {
+        "asset_id": "story.asset.character.sora_chen.focused",
+        "layer": "CHARACTER",
+        "reference_count": 6,
+        "referenced_by_episode_ids": [
+          "story.shift.qc02.07",
+          "story.shift.qc02.11",
+          "story.shift.qc02.12"
+        ],
+        "registry_alt_text_id": "text.qc01.asset.character.sora.focused",
+        "alt_text": "Sora Chen stands ready to question an assumption, one hand raised and a closed notebook at her side.",
+        "decorative": false,
+        "fallback_asset_id": "story.fallback.character",
+        "focal_point": {
+          "x": 0.5,
+          "y": 0.4
+        },
+        "protected_zones": [],
+        "master": {
+          "path": "art_sources/task-030/masters/characters/story-character-sora-chen-focused.png",
+          "width": 1024,
+          "height": 1536,
+          "bytes": 2141967,
+          "sha256": "e495ad561454fc4ae64b54053018e58e700686805e64f5fa3418c9633e7cd58e",
+          "alpha_required": true
+        },
+        "derivatives": [
+          {
+            "profile": "desktop",
+            "path": "viewer/assets/story/characters/sora-chen-focused-desktop.webp",
+            "width": 640,
+            "height": 960,
+            "bytes": 98732,
+            "byte_budget": 280000,
+            "quality": 86,
+            "sha256": "5b98acf3a47af81d7727577f4fc39c1d8b7151856be1f7d35163aecf1dab6b13",
+            "visible_alpha_bounds": {
+              "x": 82,
+              "y": 5,
+              "width": 493,
+              "height": 955
+            },
+            "portrait_anchor_bounds": {
+              "x": 89,
+              "y": 5,
+              "width": 381,
+              "height": 382
+            },
+            "visible_alpha_pixels": 294926
+          },
+          {
+            "profile": "mobile",
+            "path": "viewer/assets/story/characters/sora-chen-focused-mobile.webp",
+            "width": 426,
+            "height": 640,
+            "bytes": 48950,
+            "byte_budget": 180000,
+            "quality": 86,
+            "sha256": "36ed91ebc79873bcb3f8a04e84db0a710257769fecf64453492bf5e176d6e51c",
+            "visible_alpha_bounds": {
+              "x": 54,
+              "y": 3,
+              "width": 329,
+              "height": 637
+            },
+            "portrait_anchor_bounds": {
+              "x": 59,
+              "y": 3,
+              "width": 254,
+              "height": 255
+            },
+            "visible_alpha_pixels": 131386
+          },
+          {
+            "profile": "reduced_data",
+            "path": "viewer/assets/story/characters/sora-chen-focused-reduced-data.webp",
+            "width": 320,
+            "height": 480,
+            "bytes": 32608,
+            "byte_budget": 120000,
+            "quality": 86,
+            "sha256": "d8c10baf1b3d6fd52878ed93738ad81e805c456d0201b012741713d8b1ba3e0e",
+            "visible_alpha_bounds": {
+              "x": 41,
+              "y": 2,
+              "width": 247,
+              "height": 478
+            },
+            "portrait_anchor_bounds": {
+              "x": 44,
+              "y": 2,
+              "width": 191,
+              "height": 192
+            },
+            "visible_alpha_pixels": 74028
+          }
+        ],
+        "provenance": {
+          "brief": "Sora Chen, Trace diagnostician, studying a small text-free fault tree notebook in olive and charcoal workwear.",
+          "prompt_sha256": "b5e84cf687e4df4a47dc47825c39e14b1e51d7d9408b82a5722a913d6dfcfdc3",
+          "tool_or_artist": "OpenAI built-in image generation",
+          "date": "2026-08-27",
+          "generation_reference": "exec-a5c00e4c-16b8-4de9-9bd9-0ed7f64a147c",
+          "source_generation_references": [],
+          "source_inputs": [
+            "docs/ui-plan/ui-reference_images/story-mode-choice-dialogue-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-background-repair-floor-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-background-inflow-dock-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-character-ensemble-a-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-dialogue-inflow-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-character-ensemble-b-reference.png"
+          ],
+          "source_pixels_used": false,
+          "edit_history": [
+            "Generated as an original master; no source pixels copied."
+          ],
+          "review_state": "approved",
+          "review_notes": [
+            "Reviewed for identity continuity, text-free composition, technical safety, crop survival, overlay clearance, and absence of hidden gameplay answers.",
+            "Approved for canonical campaign-one integration under STORY-007 A on 2026-08-28."
+          ],
+          "approval": {
+            "status": "approved",
+            "scope": "TASK-030 production integration",
+            "date": "2026-08-27"
+          }
+        },
+        "content_safety_review": {
+          "no_named_artist_imitation": true,
+          "no_third_party_brand_or_logo": true,
+          "no_readable_or_pseudo_text": true,
+          "no_hidden_gameplay_answer": true,
+          "technical_safety_reviewed": true
+        },
+        "exact_existing_reuse": true
+      },
+      {
+        "asset_id": "story.bg.trinity.core_floor.night_storm",
+        "layer": "BACKGROUND",
+        "reference_count": 6,
+        "referenced_by_episode_ids": [
+          "story.shift.qc02.07",
+          "story.shift.qc02.08",
+          "story.shift.qc02.09",
+          "story.shift.qc02.11"
+        ],
+        "registry_alt_text_id": "text.qc01.asset.bg.core_floor",
+        "alt_text": "The night-shift Core Floor, with an inspection bench, instrumented test racks, and a safely opened server chassis.",
+        "decorative": false,
+        "fallback_asset_id": "story.fallback.background",
+        "focal_point": {
+          "x": 0.53,
+          "y": 0.38
+        },
+        "protected_zones": [
+          {
+            "x": 0,
+            "y": 0.66,
+            "width": 1,
+            "height": 0.34
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "width": 0.3,
+            "height": 0.12
+          }
+        ],
+        "master": {
+          "path": "art_sources/task-030/masters/backgrounds/story-bg-trinity-bench-storm.png",
+          "width": 1672,
+          "height": 941,
+          "bytes": 1911571,
+          "sha256": "b1b36488f1fb21f860180c0af5085025500beecf1e7f04434adf325c87792ea0",
+          "alpha_required": false
+        },
+        "derivatives": [
+          {
+            "profile": "desktop",
+            "path": "viewer/assets/story/backgrounds/trinity-core-floor-night-storm-desktop.webp",
+            "width": 1600,
+            "height": 900,
+            "bytes": 116340,
+            "byte_budget": 460000,
+            "quality": 86,
+            "sha256": "0853da55c7e479d2da75eb5985620fe4d8664c3141638773b1a317b2a2b18e96"
+          },
+          {
+            "profile": "mobile",
+            "path": "viewer/assets/story/backgrounds/trinity-core-floor-night-storm-mobile.webp",
+            "width": 720,
+            "height": 960,
+            "bytes": 60224,
+            "byte_budget": 320000,
+            "quality": 86,
+            "sha256": "7634e06ea70015f5ca8da4d3f71491d86748879a5705bc17254610abac948166"
+          },
+          {
+            "profile": "reduced_data",
+            "path": "viewer/assets/story/backgrounds/trinity-core-floor-night-storm-reduced-data.webp",
+            "width": 960,
+            "height": 540,
+            "bytes": 50660,
+            "byte_budget": 210000,
+            "quality": 86,
+            "sha256": "2770e4ad155c5852864983913b35b6d75f2c3103b16b8652f2c63790a1f86523"
+          }
+        ],
+        "provenance": {
+          "brief": "A wide reconfigurable Core Floor at night spanning First Look, Rigline, and Bench: instrumented rack, safely opened chassis, antistatic work surface, and storm windows.",
+          "prompt_sha256": "58127a47970cced08732b140af82603763fe89d90c9e78e13a38ea946a8dfee6",
+          "tool_or_artist": "OpenAI built-in image generation",
+          "date": "2026-08-27",
+          "generation_reference": "exec-208ccb02-361b-43f5-9663-0d70b0ab3934",
+          "source_generation_references": [],
+          "source_inputs": [
+            "docs/ui-plan/ui-reference_images/story-mode-choice-dialogue-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-background-repair-floor-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-background-inflow-dock-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-character-ensemble-a-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-dialogue-inflow-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-character-ensemble-b-reference.png"
+          ],
+          "source_pixels_used": false,
+          "edit_history": [
+            "Generated as an original master; no source pixels copied."
+          ],
+          "review_state": "approved",
+          "review_notes": [
+            "Reviewed for identity continuity, text-free composition, technical safety, crop survival, overlay clearance, and absence of hidden gameplay answers.",
+            "Approved for canonical campaign-one integration under STORY-007 A on 2026-08-28."
+          ],
+          "approval": {
+            "status": "approved",
+            "scope": "TASK-030 production integration",
+            "date": "2026-08-27"
+          }
+        },
+        "content_safety_review": {
+          "no_named_artist_imitation": true,
+          "no_third_party_brand_or_logo": true,
+          "no_readable_or_pseudo_text": true,
+          "no_hidden_gameplay_answer": true,
+          "technical_safety_reviewed": true
+        },
+        "exact_existing_reuse": true
+      },
+      {
+        "asset_id": "story.bg.trinity.knowledge_systems.night",
+        "layer": "BACKGROUND",
+        "reference_count": 7,
+        "referenced_by_episode_ids": [
+          "story.shift.qc02.09",
+          "story.shift.qc02.10"
+        ],
+        "registry_alt_text_id": "text.qc01.asset.bg.knowledge",
+        "alt_text": "The Knowledge Systems desk, where attributable Worklog histories appear on a restrained timeline display.",
+        "decorative": false,
+        "fallback_asset_id": "story.fallback.background",
+        "focal_point": {
+          "x": 0.52,
+          "y": 0.36
+        },
+        "protected_zones": [
+          {
+            "x": 0,
+            "y": 0.66,
+            "width": 1,
+            "height": 0.34
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "width": 0.3,
+            "height": 0.12
+          }
+        ],
+        "master": {
+          "path": "art_sources/task-030/masters/backgrounds/story-bg-trinity-knowledge-systems-night.png",
+          "width": 1672,
+          "height": 941,
+          "bytes": 1449642,
+          "sha256": "82d770033a3b3627fe9d53cc9f239eb25b13c2fa516997b358cc34775f04e36b",
+          "alpha_required": false
+        },
+        "derivatives": [
+          {
+            "profile": "desktop",
+            "path": "viewer/assets/story/backgrounds/trinity-knowledge-systems-night-desktop.webp",
+            "width": 1600,
+            "height": 900,
+            "bytes": 67990,
+            "byte_budget": 460000,
+            "quality": 86,
+            "sha256": "83b9091796b92f6cd6eed9c3f093a8e22699bc002d25982724929feb1c4ba624"
+          },
+          {
+            "profile": "mobile",
+            "path": "viewer/assets/story/backgrounds/trinity-knowledge-systems-night-mobile.webp",
+            "width": 720,
+            "height": 960,
+            "bytes": 36054,
+            "byte_budget": 320000,
+            "quality": 86,
+            "sha256": "0fdae3cbda90f974bef87cd5fbc5a00c217fed8550e81b230124772793a28b58"
+          },
+          {
+            "profile": "reduced_data",
+            "path": "viewer/assets/story/backgrounds/trinity-knowledge-systems-night-reduced-data.webp",
+            "width": 960,
+            "height": 540,
+            "bytes": 32014,
+            "byte_budget": 210000,
+            "quality": 86,
+            "sha256": "2413343ed149bfbc68a0eeb8b739ff9de1bf627575eb6e2abfbd043dbcd48260"
+          }
+        ],
+        "provenance": {
+          "brief": "Knowledge Systems desk at night with an attributable source-history display made only from restrained blank timeline blocks.",
+          "prompt_sha256": "50b2021979426025ae1620a93b5c8768835163b2ad5a51360be116771255af17",
+          "tool_or_artist": "OpenAI built-in image generation",
+          "date": "2026-08-27",
+          "generation_reference": "exec-f3425f4a-78c0-41eb-b5b6-bfde352ad647",
+          "source_generation_references": [],
+          "source_inputs": [
+            "docs/ui-plan/ui-reference_images/story-mode-choice-dialogue-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-background-repair-floor-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-background-inflow-dock-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-character-ensemble-a-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-dialogue-inflow-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-character-ensemble-b-reference.png"
+          ],
+          "source_pixels_used": false,
+          "edit_history": [
+            "Generated as an original master.",
+            "Edited only the authored master to replace pseudo-writing with blank geometric source blocks."
+          ],
+          "review_state": "approved",
+          "review_notes": [
+            "Reviewed for identity continuity, text-free composition, technical safety, crop survival, overlay clearance, and absence of hidden gameplay answers.",
+            "Approved for canonical campaign-one integration under STORY-007 A on 2026-08-28."
+          ],
+          "approval": {
+            "status": "approved",
+            "scope": "TASK-030 production integration",
+            "date": "2026-08-27"
+          }
+        },
+        "content_safety_review": {
+          "no_named_artist_imitation": true,
+          "no_third_party_brand_or_logo": true,
+          "no_readable_or_pseudo_text": true,
+          "no_hidden_gameplay_answer": true,
+          "technical_safety_reviewed": true
+        },
+        "exact_existing_reuse": true
+      },
+      {
+        "asset_id": "story.bg.trinity.trace.night",
+        "layer": "BACKGROUND",
+        "reference_count": 5,
+        "referenced_by_episode_ids": [
+          "story.shift.qc02.07",
+          "story.shift.qc02.11",
+          "story.shift.qc02.12"
+        ],
+        "registry_alt_text_id": "text.qc01.asset.bg.trace",
+        "alt_text": "A Trace analysis bench lit by a task lamp, with instruments and a hand-drawn fault tree.",
+        "decorative": false,
+        "fallback_asset_id": "story.fallback.background",
+        "focal_point": {
+          "x": 0.5,
+          "y": 0.39
+        },
+        "protected_zones": [
+          {
+            "x": 0,
+            "y": 0.66,
+            "width": 1,
+            "height": 0.34
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "width": 0.3,
+            "height": 0.12
+          }
+        ],
+        "master": {
+          "path": "art_sources/task-030/masters/backgrounds/story-bg-trinity-trace-night.png",
+          "width": 1672,
+          "height": 941,
+          "bytes": 1793249,
+          "sha256": "ea9e6f21cd1d17448c53f19d0b815d3c36036f2138967f5fc2e4db087cbac67e",
+          "alpha_required": false
+        },
+        "derivatives": [
+          {
+            "profile": "desktop",
+            "path": "viewer/assets/story/backgrounds/trinity-trace-night-desktop.webp",
+            "width": 1600,
+            "height": 900,
+            "bytes": 111350,
+            "byte_budget": 460000,
+            "quality": 86,
+            "sha256": "ecf09b6dd5c020d8a968ce271143733941ff8e8c194758bd6d6ae872390cdc85"
+          },
+          {
+            "profile": "mobile",
+            "path": "viewer/assets/story/backgrounds/trinity-trace-night-mobile.webp",
+            "width": 720,
+            "height": 960,
+            "bytes": 60546,
+            "byte_budget": 320000,
+            "quality": 86,
+            "sha256": "f1fe2fc502c6cd3527d7f6b32e718b132adbd1b03852eeb2854162eb98f29e9e"
+          },
+          {
+            "profile": "reduced_data",
+            "path": "viewer/assets/story/backgrounds/trinity-trace-night-reduced-data.webp",
+            "width": 960,
+            "height": 540,
+            "bytes": 53162,
+            "byte_budget": 210000,
+            "quality": 86,
+            "sha256": "28981f151f490667d96884143fda319f87e0a648710dc05e66533e06ad73a9b8"
+          }
+        ],
+        "provenance": {
+          "brief": "Trace analysis bench at night with oscilloscope, small paper fault tree, safe handling, warm task lamp, and cool rack spill.",
+          "prompt_sha256": "7b4db3512e0072ad781027f8a8a462de4663e55be718a392ba8e032ff1b9e71f",
+          "tool_or_artist": "OpenAI built-in image generation",
+          "date": "2026-08-27",
+          "generation_reference": "exec-2431a0af-42ab-4793-b19e-858c44c50a4c",
+          "source_generation_references": [],
+          "source_inputs": [
+            "docs/ui-plan/ui-reference_images/story-mode-choice-dialogue-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-background-repair-floor-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-background-inflow-dock-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-character-ensemble-a-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-dialogue-inflow-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-character-ensemble-b-reference.png"
+          ],
+          "source_pixels_used": false,
+          "edit_history": [
+            "Generated as an original master.",
+            "Edited only the authored master to remove generator-made pseudo-writing from the paper while retaining blank analytical marks."
+          ],
+          "review_state": "approved",
+          "review_notes": [
+            "Reviewed for identity continuity, text-free composition, technical safety, crop survival, overlay clearance, and absence of hidden gameplay answers.",
+            "Approved for canonical campaign-one integration under STORY-007 A on 2026-08-28."
+          ],
+          "approval": {
+            "status": "approved",
+            "scope": "TASK-030 production integration",
+            "date": "2026-08-27"
+          }
+        },
+        "content_safety_review": {
+          "no_named_artist_imitation": true,
+          "no_third_party_brand_or_logo": true,
+          "no_readable_or_pseudo_text": true,
+          "no_hidden_gameplay_answer": true,
+          "technical_safety_reviewed": true
+        },
+        "exact_existing_reuse": true
+      },
+      {
+        "asset_id": "story.bg.trinity.validation_gate.predawn",
+        "layer": "BACKGROUND",
+        "reference_count": 6,
+        "referenced_by_episode_ids": [
+          "story.shift.qc02.08",
+          "story.shift.qc02.12"
+        ],
+        "registry_alt_text_id": "text.qc01.asset.bg.gate",
+        "alt_text": "The Validation Gate audit area, with a traveler station and distinct hold and release tags.",
+        "decorative": false,
+        "fallback_asset_id": "story.fallback.background",
+        "focal_point": {
+          "x": 0.52,
+          "y": 0.38
+        },
+        "protected_zones": [
+          {
+            "x": 0,
+            "y": 0.66,
+            "width": 1,
+            "height": 0.34
+          },
+          {
+            "x": 0,
+            "y": 0,
+            "width": 0.3,
+            "height": 0.12
+          }
+        ],
+        "master": {
+          "path": "art_sources/task-030/masters/backgrounds/story-bg-trinity-validation-gate-predawn.png",
+          "width": 1672,
+          "height": 941,
+          "bytes": 1607944,
+          "sha256": "ace97a32c8385ce2656aa6aba98a5dcf9dc71d57fc579d37d5ffebf2b8160829",
+          "alpha_required": false
+        },
+        "derivatives": [
+          {
+            "profile": "desktop",
+            "path": "viewer/assets/story/backgrounds/trinity-validation-gate-predawn-desktop.webp",
+            "width": 1600,
+            "height": 900,
+            "bytes": 86742,
+            "byte_budget": 460000,
+            "quality": 86,
+            "sha256": "b30e1a05e60d809bb564f59a2d97f601c940ff27ea5cb6b576e15bc4e6f012e6"
+          },
+          {
+            "profile": "mobile",
+            "path": "viewer/assets/story/backgrounds/trinity-validation-gate-predawn-mobile.webp",
+            "width": 720,
+            "height": 960,
+            "bytes": 40184,
+            "byte_budget": 320000,
+            "quality": 86,
+            "sha256": "e25ea8d3fb80475488ebe06aa7927fff5b70db0e8570db07dde449825a020a1a"
+          },
+          {
+            "profile": "reduced_data",
+            "path": "viewer/assets/story/backgrounds/trinity-validation-gate-predawn-reduced-data.webp",
+            "width": 960,
+            "height": 540,
+            "bytes": 40426,
+            "byte_budget": 210000,
+            "quality": 86,
+            "sha256": "f7978b60de8600f5d2c3925b3056f3a87d2bffb5cbb012ba74af789fe9b73ee3"
+          }
+        ],
+        "provenance": {
+          "brief": "Lived-in Validation Gate before dawn: unit identity station and visibly distinct but text-free hold and release materials.",
+          "prompt_sha256": "1ec0c032703978c121b109dcf8fc7d515943f1b710561da3701e057380406634",
+          "tool_or_artist": "OpenAI built-in image generation",
+          "date": "2026-08-27",
+          "generation_reference": "exec-8249529a-5d31-44ba-89f0-efdd4c5fd52f",
+          "source_generation_references": [],
+          "source_inputs": [
+            "docs/ui-plan/ui-reference_images/story-mode-choice-dialogue-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-background-repair-floor-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-background-inflow-dock-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-character-ensemble-a-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-dialogue-inflow-reference.png",
+            "docs/ui-plan/ui-reference_images/story-mode-character-ensemble-b-reference.png"
+          ],
+          "source_pixels_used": false,
+          "edit_history": [
+            "Generated as an original master; no source pixels copied."
+          ],
+          "review_state": "approved",
+          "review_notes": [
+            "Reviewed for identity continuity, text-free composition, technical safety, crop survival, overlay clearance, and absence of hidden gameplay answers.",
+            "Approved for canonical campaign-one integration under STORY-007 A on 2026-08-28."
+          ],
+          "approval": {
+            "status": "approved",
+            "scope": "TASK-030 production integration",
+            "date": "2026-08-27"
+          }
+        },
+        "content_safety_review": {
+          "no_named_artist_imitation": true,
+          "no_third_party_brand_or_logo": true,
+          "no_readable_or_pseudo_text": true,
+          "no_hidden_gameplay_answer": true,
+          "technical_safety_reviewed": true
+        },
+        "exact_existing_reuse": true
+      }
+    ],
+    "same_layer_fallback_count": 2,
+    "fallbacks": [
+      {
+        "asset_id": "story.fallback.background",
+        "layer": "BACKGROUND",
+        "decorative": true,
+        "alt_text": "",
+        "master": {
+          "path": "art_sources/task-030/masters/fallbacks/story-fallback-background.png",
+          "width": 1672,
+          "height": 941,
+          "bytes": 1788516,
+          "sha256": "1c347dd12e83d86686cbe2c4e8bbee406bc500eac256d9f5cf52faa9d45efba1",
+          "alpha_required": false
+        },
+        "derivatives": [
+          {
+            "profile": "desktop",
+            "path": "viewer/assets/story/fallbacks/fallback-background-desktop.webp",
+            "width": 1600,
+            "height": 900,
+            "bytes": 124802,
+            "byte_budget": 460000,
+            "quality": 86,
+            "sha256": "3d9dce3538d188b748bd5e3913a1928f3f8b8c4e0137a9f411688b891003b1db"
+          },
+          {
+            "profile": "mobile",
+            "path": "viewer/assets/story/fallbacks/fallback-background-mobile.webp",
+            "width": 720,
+            "height": 960,
+            "bytes": 57802,
+            "byte_budget": 320000,
+            "quality": 86,
+            "sha256": "3ea572475cee15971e6c3c1c9158507f04c14d2b0cb3461fce0cb4d32cbfde54"
+          },
+          {
+            "profile": "reduced_data",
+            "path": "viewer/assets/story/fallbacks/fallback-background-reduced-data.webp",
+            "width": 960,
+            "height": 540,
+            "bytes": 56698,
+            "byte_budget": 210000,
+            "quality": 86,
+            "sha256": "43ed273ba48a403f9e1bb6c7619705c7f93fc3bd0e658281af8308331307b887"
+          }
+        ],
+        "review_state": "approved",
+        "same_layer_only": true
+      },
+      {
+        "asset_id": "story.fallback.character",
+        "layer": "CHARACTER",
+        "decorative": true,
+        "alt_text": "",
+        "master": {
+          "path": "art_sources/task-030/masters/fallbacks/story-fallback-character.png",
+          "width": 1024,
+          "height": 1536,
+          "bytes": 1695528,
+          "sha256": "d4473f0310388ddf01c996192a3d9d4e37743980fa6c61d64d50882a52c6e795",
+          "alpha_required": true
+        },
+        "derivatives": [
+          {
+            "profile": "desktop",
+            "path": "viewer/assets/story/fallbacks/fallback-character-desktop.webp",
+            "width": 640,
+            "height": 960,
+            "bytes": 76194,
+            "byte_budget": 280000,
+            "quality": 86,
+            "sha256": "1ba3a6f08a59e7982dbab197f2999fc5ce933bcf7622bf8387bd1d36ceadfd3a"
+          },
+          {
+            "profile": "mobile",
+            "path": "viewer/assets/story/fallbacks/fallback-character-mobile.webp",
+            "width": 426,
+            "height": 640,
+            "bytes": 40662,
+            "byte_budget": 180000,
+            "quality": 86,
+            "sha256": "39b765809403132aa66d81fb17d4a972219d61d4753210a909bcf862618c0ec5"
+          },
+          {
+            "profile": "reduced_data",
+            "path": "viewer/assets/story/fallbacks/fallback-character-reduced-data.webp",
+            "width": 320,
+            "height": 480,
+            "bytes": 27098,
+            "byte_budget": 120000,
+            "quality": 86,
+            "sha256": "5c39a0f88f1c76a268ef6781b4f5af8ebcff70f6900dcec109114f5eaddf7b61"
+          }
+        ],
+        "review_state": "approved",
+        "same_layer_only": true
+      }
+    ],
+    "responsive_production_file_count": 36,
+    "responsive_fallback_file_count": 6,
+    "candidate_unused_registered_asset_ids": [],
+    "existing_campaign_one_assets_intentionally_not_selected": [
+      "story.asset.character.ev_shaw.concerned",
+      "story.asset.character.ev_shaw.focused",
+      "story.asset.character.inez_calder.amused",
+      "story.asset.character.inez_calder.focused",
+      "story.asset.character.priya_nayar.concerned",
+      "story.asset.character.priya_nayar.resolved",
+      "story.bg.trinity.client_review.dawn",
+      "story.bg.trinity.inflow.predawn_storm",
+      "story.insert.qc01.final_incident_queue",
+      "story.insert.qc01.repeat_serial_history",
+      "story.insert.qc01.sift_provenance_gap"
+    ],
+    "new_master_asset_ids": [],
+    "replaced_master_asset_ids": [],
+    "transient_asset_ids": [],
+    "gap_count": 0,
+    "generation_count": 0
+  },
+  "resolver_contract": {
+    "profiles_verified": [
+      "desktop",
+      "mobile",
+      "reduced_data"
+    ],
+    "production_resolutions_verified": 36,
+    "missing_id_same_layer_fallbacks_verified": 2,
+    "reduced_motion_contract": "Resolver selection and text/focus authority are independent of animation timing."
+  },
+  "provenance_and_license": {
+    "provenance_version": "task-030-story-art-provenance-v1",
+    "selected_asset_review_count": 12,
+    "all_selected_assets_approved": true,
+    "source_pixels_used_count": 0,
+    "license_audit": {
+      "result": "pass",
+      "source_ownership": "The six references are project-owned planning images; all masters are original TASK-030 generations.",
+      "third_party_brands_or_marks": false,
+      "named_artist_imitation": false,
+      "runtime_network_dependency": false,
+      "project_owned_reference_count": 6,
+      "references": [
+        {
+          "path": "docs/ui-plan/ui-reference_images/story-mode-choice-dialogue-reference.png",
+          "sha256": "d029365f0d2192a4d68f110757e3b2b541c185ce996045b4d64a35227122e1eb",
+          "usage": "Project-owned planning reference for composition, lighting, layer hierarchy, and cast cohesion only.",
+          "source_pixels_used": false
+        },
+        {
+          "path": "docs/ui-plan/ui-reference_images/story-mode-background-repair-floor-reference.png",
+          "sha256": "a951066b7cc4112bc057641e5c86dedf4d1c115560182199cd4b19e0f872badc",
+          "usage": "Project-owned planning reference for composition, lighting, layer hierarchy, and cast cohesion only.",
+          "source_pixels_used": false
+        },
+        {
+          "path": "docs/ui-plan/ui-reference_images/story-mode-background-inflow-dock-reference.png",
+          "sha256": "08a22a7d41cb900d4e1fb4cfa350507b5d2e3dff245b64f4de64929d10dd7f2e",
+          "usage": "Project-owned planning reference for composition, lighting, layer hierarchy, and cast cohesion only.",
+          "source_pixels_used": false
+        },
+        {
+          "path": "docs/ui-plan/ui-reference_images/story-mode-character-ensemble-a-reference.png",
+          "sha256": "42af06ac20ea3695e63c89c79e60fcd06a36c98fca6d7e2bfafd0073d021cc03",
+          "usage": "Project-owned planning reference for composition, lighting, layer hierarchy, and cast cohesion only.",
+          "source_pixels_used": false
+        },
+        {
+          "path": "docs/ui-plan/ui-reference_images/story-mode-dialogue-inflow-reference.png",
+          "sha256": "6b76ab8a20c0f58f78a4b4c724da00303636490278493e2a3fd7caf8ac704c95",
+          "usage": "Project-owned planning reference for composition, lighting, layer hierarchy, and cast cohesion only.",
+          "source_pixels_used": false
+        },
+        {
+          "path": "docs/ui-plan/ui-reference_images/story-mode-character-ensemble-b-reference.png",
+          "sha256": "bb327d6c6ce0fb6636e42fb5b4348a81b5e9e2023623f35694caf9e544c790bc",
+          "usage": "Project-owned planning reference for composition, lighting, layer hierarchy, and cast cohesion only.",
+          "source_pixels_used": false
+        }
+      ]
+    },
+    "review_findings": {
+      "no_hidden_solution": true,
+      "no_pseudo_text": true,
+      "no_third_party_brand_claim": true,
+      "no_named_artist_imitation": true,
+      "safe_technical_practice": true
+    }
+  },
+  "repository_budget": {
+    "selected_production_master_bytes": 22008895,
+    "selected_fallback_master_bytes": 3484044,
+    "selected_production_delivery_bytes": 2077068,
+    "selected_fallback_delivery_bytes": 383256,
+    "complete_task_030_delivery_bytes": 4811478,
+    "pages_budget_bytes": 15728640,
+    "remaining_pages_budget_bytes": 10917162,
+    "budget_percent_used": 30.59,
+    "result": "pass"
+  },
+  "task_030_baseline_verification": {
+    "errors": [],
+    "summary": {
+      "production": 23,
+      "fallback": 3,
+      "background": 6,
+      "character": 14,
+      "transient": 3,
+      "delivery_bytes": 4811478,
+      "pages_budget_bytes": 15728640,
+      "contact_sheets": 11,
+      "approved": 26
+    }
+  },
+  "release_boundary": {
+    "candidate_directory": "content/story-v1/candidates/quiet-cascade-expansion-v3",
+    "candidate_staging_entries": [],
+    "candidate_loader_references": [],
+    "task_043_live_loader_eligible": false,
+    "live_release_owner": "TASK-046",
+    "result": "CANDIDATE_REMAINS_OUTSIDE_LIVE_STORY_LOADERS"
+  },
+  "disposition": {
+    "mode": "VERIFICATION_ONLY",
+    "generate_or_edit_raster_art": false,
+    "update_manifest_or_resolver": false,
+    "update_story_topology_or_dialogue": false,
+    "update_domain_or_gameplay": false,
+    "stage_candidate_content": false,
+    "unresolved_items": [],
+    "owner_approval_required": false
+  }
+}

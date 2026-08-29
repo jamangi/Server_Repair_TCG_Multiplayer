@@ -32,7 +32,11 @@ Current research drafts:
 - [`SERVER-REPAIR-DOMAIN-EXPANSION-DRAFT-2026-08-23.txt`](research_drafts/SERVER-REPAIR-DOMAIN-EXPANSION-DRAFT-2026-08-23.txt) surveys post-market repair-bench cases and records the reconciliation behind the Core v0.1 expansion.
 - [`CASE-STUDY-CANDIDATE-DOMAIN-RECONCILIATION-2026-08-23.md`](research_drafts/CASE-STUDY-CANDIDATE-DOMAIN-RECONCILIATION-2026-08-23.md) compares the v0.1 case-study candidates and example card catalog with the live domain database, documenting the gaps promoted into Core v0.1.
 
-The planned Story expansion deliberately reuses this inventory. TASK-039 first measures what campaign one actually teaches; TASK-040 then defines how measured gaps determine Q; TASK-041 begins with the 72-entry v0.1 backlog and adds only the minimum qualifying cases needed to support six distinct Story+Match episodes. Research remains non-authoritative until TASK-042 performs schema, relationship, provenance, Card/Ticket, deck-reachability, and solvability review.
+The planned Story expansion deliberately reuses this inventory. TASK-039 measures what campaign one actually teaches, and TASK-040's [expansion protocol](../story/EXPANSION_PROTOCOL.md) defines how measured gaps determine Q. TASK-041 began with the 72-entry v0.1 backlog and added only the minimum qualifying cases needed to support six distinct Story+Match episodes. TASK-042 has now completed the required schema, relationship, provenance, Card/Ticket, deck-reachability, and solvability review; its generated [domain-network proof](../coverage/TASK-042-EXPANSION-DOMAIN-NETWORK.md) is the authoritative promotion record, while the original research reductions remain evidence-preserving inputs.
+
+## Story-expansion research v0.2
+
+TASK-041 completed the research gate in [`v0.2-story-expansion/`](v0.2-story-expansion/). The generated [`Q-CALCULATION.md`](v0.2-story-expansion/Q-CALCULATION.md) records `R = 0`, no adjustments, and `Q = 6`; the [`SIX-SLOT-EVIDENCE-MATRIX.md`](v0.2-story-expansion/SIX-SLOT-EVIDENCE-MATRIX.md) connects six directly opened qualifying sources to distinct objectives while keeping domain and gameplay additions candidate-only. The versioned [`registry.json`](v0.2-story-expansion/registry.json), [`source-ledger.md`](v0.2-story-expansion/source-ledger.md), lifecycle reductions, found/not-found cross-references, deduplicated candidate materials, and [`COMPLETION.md`](v0.2-story-expansion/COMPLETION.md) form the reproducible handoff to TASK-042 without rewriting v0.1 history.
 
 ## Method
 

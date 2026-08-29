@@ -2,7 +2,7 @@
 
 ## Status
 
-**Planned.** TASK-037 is a prerequisite; TASK-038 is not.
+**Completed 2026-08-28.** The deterministic audit reconstructs all six Matches and twelve pinned Tickets through the real Builder, validates their solvability witnesses, and publishes distinct catalog, relevance, Candidate-changing, Isolation-route, minimal-route, closure, dependency, and narrative roles. The generated report pins all denominators, exhaustively partitions the 50-card Diagnostic Bench, and inventories expansion opportunities without choosing Q.
 
 ## Objective
 

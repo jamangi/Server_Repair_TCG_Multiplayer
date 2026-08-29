@@ -2,7 +2,7 @@
 
 ## Status
 
-**Planned.** Depends on TASK-038 and TASK-043 through TASK-045 so expanded episodes inherit the approved replay contract.
+**Completed 2026-08-29.** Released `quiet-cascade-expansion-v3` as one additive twelve-episode Story pack: six campaign-one Matches retain their reviewed v3 Builder pins, six sourced expansion Matches use reviewed embedded v4 configurations, completed v1/v2 progress migrates without replay or fabricated results, and all current content ends deliberately at `ending.qc02.current_content`. The generated release and coverage reports prove 12/12 exact Match configurations, 18/18 solvability-witnessed Tickets, 12/12 reproducible engine successes, all twelve isolated replay boundaries, safe portability/interruption behavior, and responsive browser delivery with no new production art.
 
 ## Objective
 

@@ -1,0 +1,391 @@
+{
+  "script_version": "story-script-v1",
+  "script_id": "story.script.qc02.shift10",
+  "chapter_id": "story.shift.qc02.10",
+  "statements": [
+    {
+      "type": "label",
+      "label_id": "story.qc02.shift10.entry"
+    },
+    {
+      "type": "scene",
+      "scene_id": "story.scene.qc02.shift10.entry",
+      "background_asset_id": "story.bg.trinity.knowledge_systems.night",
+      "location_text_id": "text.qc01.location.knowledge",
+      "time_text_id": "text.qc01.time.late_shift",
+      "transition": "DISSOLVE",
+      "checkpoint_id": "checkpoint.qc02.shift10.entry"
+    },
+    {
+      "type": "hide",
+      "tag": "cast.sora",
+      "layer": "characters",
+      "transition": "CUT"
+    },
+    {
+      "type": "hide",
+      "tag": "cast.malik",
+      "layer": "characters",
+      "transition": "CUT"
+    },
+    {
+      "type": "hide",
+      "tag": "cast.hana",
+      "layer": "characters",
+      "transition": "CUT"
+    },
+    {
+      "type": "hide",
+      "tag": "cast.jonah",
+      "layer": "characters",
+      "transition": "CUT"
+    },
+    {
+      "type": "show",
+      "tag": "cast.jonah",
+      "layer": "characters",
+      "character_id": "story.character.jonah_reed",
+      "pose_id": "defensive",
+      "position": "LEFT",
+      "transition": "FADE"
+    },
+    {
+      "type": "show",
+      "tag": "cast.hana",
+      "layer": "characters",
+      "character_id": "story.character.hana_park",
+      "pose_id": "skeptical",
+      "position": "RIGHT",
+      "transition": "FADE"
+    },
+    {
+      "type": "narrate",
+      "statement_id": "story.qc02.s10.entry.01",
+      "text_id": "text.qc02.s10.entry.01",
+      "style_key": "NARRATION"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc02.s10.entry.02",
+      "speaker_key": "story.character.jonah_reed",
+      "text_id": "text.qc02.s10.entry.02",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc02.s10.entry.03",
+      "speaker_key": "story.character.hana_park",
+      "text_id": "text.qc02.s10.entry.03",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc02.s10.entry.04",
+      "speaker_key": "story.character.jonah_reed",
+      "text_id": "text.qc02.s10.entry.04",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "choice",
+      "choice_id": "choice.qc02.change_evidence_frame",
+      "prompt_text_id": "text.qc02.s10.choice.change.prompt",
+      "options": [
+        {
+          "option_id": "current_state_first",
+          "text_id": "text.qc02.s10.choice.change.current",
+          "jump_label": "story.qc02.shift10.frame.current_state_first",
+          "writes": [
+            {
+              "variable_id": "story.qc02.change_evidence_frame",
+              "value": "CURRENT_STATE_FIRST"
+            }
+          ]
+        },
+        {
+          "option_id": "change_history_first",
+          "text_id": "text.qc02.s10.choice.change.history",
+          "jump_label": "story.qc02.shift10.frame.change_history_first",
+          "writes": [
+            {
+              "variable_id": "story.qc02.change_evidence_frame",
+              "value": "CHANGE_HISTORY_FIRST"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "label",
+      "label_id": "story.qc02.shift10.frame.current_state_first"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc02.s10.frame.current.01",
+      "speaker_key": "story.character.hana_park",
+      "text_id": "text.qc02.s10.frame.current.01",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "jump",
+      "label_id": "story.qc02.shift10.match"
+    },
+    {
+      "type": "label",
+      "label_id": "story.qc02.shift10.frame.change_history_first"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc02.s10.frame.history.01",
+      "speaker_key": "story.character.jonah_reed",
+      "text_id": "text.qc02.s10.frame.history.01",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "jump",
+      "label_id": "story.qc02.shift10.match"
+    },
+    {
+      "type": "label",
+      "label_id": "story.qc02.shift10.match"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc02.s10.match.01",
+      "speaker_key": "story.character.hana_park",
+      "text_id": "text.qc02.s10.match.01",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "start_match",
+      "match_ref": "story.match.qc02.shift10.stale_alert",
+      "return_label": "story.qc02.shift10.return",
+      "pre_match_checkpoint_id": "checkpoint.qc02.shift10.pre_match",
+      "post_match_checkpoint_id": "checkpoint.qc02.shift10.post_match"
+    },
+    {
+      "type": "label",
+      "label_id": "story.qc02.shift10.return"
+    },
+    {
+      "type": "if",
+      "condition": {
+        "op": "MATCH_RESULT",
+        "match_ref": "story.match.qc02.shift10.stale_alert",
+        "field": "completion",
+        "comparator": "EQUALS",
+        "value": "COMPLETED"
+      },
+      "then_label": "story.qc02.shift10.success",
+      "else_label": "story.qc02.shift10.abandon"
+    },
+    {
+      "type": "label",
+      "label_id": "story.qc02.shift10.success"
+    },
+    {
+      "type": "scene",
+      "scene_id": "story.scene.qc02.shift10.success",
+      "background_asset_id": "story.bg.trinity.knowledge_systems.night",
+      "location_text_id": "text.qc01.location.knowledge",
+      "time_text_id": "text.qc01.time.late_shift",
+      "transition": "DISSOLVE"
+    },
+    {
+      "type": "hide",
+      "tag": "cast.sora",
+      "layer": "characters",
+      "transition": "CUT"
+    },
+    {
+      "type": "hide",
+      "tag": "cast.malik",
+      "layer": "characters",
+      "transition": "CUT"
+    },
+    {
+      "type": "hide",
+      "tag": "cast.hana",
+      "layer": "characters",
+      "transition": "CUT"
+    },
+    {
+      "type": "hide",
+      "tag": "cast.jonah",
+      "layer": "characters",
+      "transition": "CUT"
+    },
+    {
+      "type": "show",
+      "tag": "cast.jonah",
+      "layer": "characters",
+      "character_id": "story.character.jonah_reed",
+      "pose_id": "thoughtful",
+      "position": "LEFT",
+      "transition": "FADE"
+    },
+    {
+      "type": "show",
+      "tag": "cast.hana",
+      "layer": "characters",
+      "character_id": "story.character.hana_park",
+      "pose_id": "relief",
+      "position": "RIGHT",
+      "transition": "FADE"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc02.s10.success.01",
+      "speaker_key": "story.character.hana_park",
+      "text_id": "text.qc02.s10.success.01",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc02.s10.success.02",
+      "speaker_key": "story.character.jonah_reed",
+      "text_id": "text.qc02.s10.success.02",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "jump",
+      "label_id": "story.qc02.shift10.follow_on"
+    },
+    {
+      "type": "label",
+      "label_id": "story.qc02.shift10.abandon"
+    },
+    {
+      "type": "scene",
+      "scene_id": "story.scene.qc02.shift10.abandon",
+      "background_asset_id": "story.bg.trinity.knowledge_systems.night",
+      "location_text_id": "text.qc01.location.knowledge",
+      "time_text_id": "text.qc01.time.late_shift",
+      "transition": "DISSOLVE"
+    },
+    {
+      "type": "hide",
+      "tag": "cast.sora",
+      "layer": "characters",
+      "transition": "CUT"
+    },
+    {
+      "type": "hide",
+      "tag": "cast.malik",
+      "layer": "characters",
+      "transition": "CUT"
+    },
+    {
+      "type": "hide",
+      "tag": "cast.hana",
+      "layer": "characters",
+      "transition": "CUT"
+    },
+    {
+      "type": "hide",
+      "tag": "cast.jonah",
+      "layer": "characters",
+      "transition": "CUT"
+    },
+    {
+      "type": "show",
+      "tag": "cast.jonah",
+      "layer": "characters",
+      "character_id": "story.character.jonah_reed",
+      "pose_id": "thoughtful",
+      "position": "LEFT",
+      "transition": "FADE"
+    },
+    {
+      "type": "show",
+      "tag": "cast.hana",
+      "layer": "characters",
+      "character_id": "story.character.hana_park",
+      "pose_id": "skeptical",
+      "position": "RIGHT",
+      "transition": "FADE"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc02.s10.abandon.01",
+      "speaker_key": "story.character.hana_park",
+      "text_id": "text.qc02.s10.abandon.01",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc02.s10.abandon.02",
+      "speaker_key": "story.character.jonah_reed",
+      "text_id": "text.qc02.s10.abandon.02",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "jump",
+      "label_id": "story.qc02.shift10.follow_on"
+    },
+    {
+      "type": "label",
+      "label_id": "story.qc02.shift10.follow_on"
+    },
+    {
+      "type": "scene",
+      "scene_id": "story.scene.qc02.shift10.follow_on",
+      "background_asset_id": "story.bg.trinity.knowledge_systems.night",
+      "location_text_id": "text.qc01.location.knowledge",
+      "time_text_id": "text.qc01.time.late_shift",
+      "transition": "DISSOLVE"
+    },
+    {
+      "type": "hide",
+      "tag": "cast.sora",
+      "layer": "characters",
+      "transition": "CUT"
+    },
+    {
+      "type": "hide",
+      "tag": "cast.malik",
+      "layer": "characters",
+      "transition": "CUT"
+    },
+    {
+      "type": "hide",
+      "tag": "cast.hana",
+      "layer": "characters",
+      "transition": "CUT"
+    },
+    {
+      "type": "hide",
+      "tag": "cast.jonah",
+      "layer": "characters",
+      "transition": "CUT"
+    },
+    {
+      "type": "show",
+      "tag": "cast.jonah",
+      "layer": "characters",
+      "character_id": "story.character.jonah_reed",
+      "pose_id": "thoughtful",
+      "position": "LEFT",
+      "transition": "FADE"
+    },
+    {
+      "type": "show",
+      "tag": "cast.hana",
+      "layer": "characters",
+      "character_id": "story.character.hana_park",
+      "pose_id": "relief",
+      "position": "RIGHT",
+      "transition": "FADE"
+    },
+    {
+      "type": "say",
+      "statement_id": "story.qc02.s10.follow.01",
+      "speaker_key": "story.character.jonah_reed",
+      "text_id": "text.qc02.s10.follow.01",
+      "style_key": "DIALOGUE"
+    },
+    {
+      "type": "jump",
+      "label_id": "story.qc02.shift11.entry"
+    }
+  ]
+}

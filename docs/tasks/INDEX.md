@@ -4,20 +4,20 @@ Tasks are implementation contracts. A builder must read `AGENTS.md` and then the
 
 Beginning with TASK-011, the displayed task ID includes the recommended reasoning-effort suffix used when starting that task. `HIGH` denotes substantial but bounded implementation/research; `XHIGH` denotes a cross-cutting semantic, architectural, or broad content migration. The stable task number and existing filename do not change, preserving links and history.
 
-Active task: **[`TASK-039-HIGH: Audit campaign-one domain coverage`](TASK-039-audit-story-domain-coverage.md).**
+Active task: **None.** The TASK-039 through TASK-046 Story coverage and expansion sequence is complete; no successor task has been activated.
 
-Planned Story replay, coverage, and expansion sequence:
+Story coverage and expansion sequence: **complete.** Completed TASK-038 supplies the approved non-canonical review contract inherited by the released expansion.
 
-1. [`TASK-039-HIGH: Audit campaign-one domain coverage`](TASK-039-audit-story-domain-coverage.md) — map all six Shifts to exact Ticket, Symptom, Fault, diagnostic, Repair, Verify, and supporting-domain roles with honest denominators.
-2. [`TASK-040-HIGH: Define the Story and domain expansion protocol`](TASK-040-define-story-expansion-protocol.md) — turn measured gaps into a gated, reusable research-to-release method and compute rather than guess Q.
-3. [`TASK-041-XHIGH: Research the expansion case set`](TASK-041-research-expansion-cases.md) — reuse the existing 72-case backlog, calculate Q, and collect only the additional qualifying cases needed for six distinct episodes.
-4. [`TASK-042-XHIGH: Integrate the approved expansion domain network`](TASK-042-integrate-expansion-domain-network.md) — add the smallest sourced object/relationship/Card/Ticket set and prove deck reachability and solvability.
-5. [`TASK-043-XHIGH: Blueprint the six-episode Story expansion`](TASK-043-blueprint-six-episode-story-expansion.md) — design six one-cutscene-plus-one-Match episodes with exact configurations, graph, checkpoints, and coverage goals.
-6. [`TASK-044-XHIGH: Author the six-episode expansion scripts`](TASK-044-author-story-expansion-scripts.md) — produce the context-complete, characterized, technically bounded candidate scripts and choreography.
-7. [`TASK-045-XHIGH: Create the Story expansion art`](TASK-045-create-story-expansion-art.md) — fill only proven art gaps with original, responsive, provenance-complete assets.
-8. [`TASK-046-XHIGH: Release the six-episode Story expansion`](TASK-046-release-six-episode-story-expansion.md) — integrate one versioned expansion, migrate progress safely, re-audit coverage, and verify the complete twelve-Match journey.
+Completed Story coverage:
 
-Dependency note: completed TASK-038 supplies the approved non-canonical review contract required by TASK-046. TASK-039 through TASK-045 remain independent of replay implementation.
+- [`TASK-046-XHIGH: Release the six-episode Story expansion`](TASK-046-release-six-episode-story-expansion.md) — completed 2026-08-29; shipped one checkpoint-safe `quiet-cascade-expansion-v3` pack with twelve real Matches, preserved v1/v2 progress, twelve isolated replay boundaries, an honest current-content ending, v5 local catalog migration, 18/18 solvable Tickets, and 12/12 reproducible engine runs.
+- [`TASK-045-XHIGH: Create the Story expansion art`](TASK-045-create-story-expansion-art.md) — completed 2026-08-29; proved the six episodes need zero new art, joined all 70 reachable references to 4 approved backgrounds and 8 approved poses, verified responsive/fallback/provenance/accessibility behavior, and added a six-episode reuse contact sheet without changing production assets.
+- [`TASK-044-XHIGH: Author the six-episode expansion scripts`](TASK-044-author-story-expansion-scripts.md) — completed 2026-08-29; delivered six context-complete candidate scripts, exact delayed-choice acknowledgements, 256 canonical route transcripts, 30/30 sourced technical lines, completion-bounded outcome copy, and a zero-gap reuse-only art brief without staging live content.
+- [`TASK-043-XHIGH: Blueprint the six-episode Story expansion`](TASK-043-blueprint-six-episode-story-expansion.md) — completed 2026-08-28; locked six sourced QC02 episodes to six deterministic one-Ticket Matches, proved the expansion deck and engine runs, exhaustively covered 256 choice/result routes to one honest ending, and recorded a zero-new-art reuse plan.
+- [`TASK-042-XHIGH: Integrate the approved expansion domain network`](TASK-042-integrate-expansion-domain-network.md) — completed 2026-08-28; promoted six sourced fingerprints without adding domain IDs, published twelve response Cards and one 30-Card expansion deck, preserved immutable prior artifacts, and proved all six deterministic Ticket paths through the real Builder, solvability oracle, and safe engine projection.
+- [`TASK-041-XHIGH: Research the expansion case set`](TASK-041-research-expansion-cases.md) — completed 2026-08-28; calculated `Q = 6`, directly verified six qualifying firsthand sources, preserved six source-faithful lifecycle reductions, and published machine-checked evidence, cross-reference, and candidate ledgers.
+- [`TASK-040-HIGH: Define the Story and domain expansion protocol`](TASK-040-define-story-expansion-protocol.md) — completed 2026-08-28; established twelve evidence-to-release gates, reproducible Q selection, explicit authority/stop boundaries, and worked pilot/Shift controls.
+- [`TASK-039-HIGH: Audit campaign-one domain coverage`](TASK-039-audit-story-domain-coverage.md) — completed 2026-08-28; reconstructed all twelve pinned Tickets and their oracle-minimal routes, separated all coverage roles, and published a byte-stable six-Shift ledger plus dependency-ranked opportunity inventory.
 
 Completed Story replay:
 

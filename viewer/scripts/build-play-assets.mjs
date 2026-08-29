@@ -26,12 +26,18 @@ const GAMEPLAY_FILES = Object.freeze([
   'ticket-templates.json',
   'diagnosis-v2-migration.json',
   'task-014-parts.json',
+  'task-042-parts.json',
   'domain-snapshot-v2.json',
+  'domain-snapshot-v3.json',
   'card-catalog-v3.json',
+  'card-catalog-v4.json',
   'decks-v3.json',
+  'decks-v4.json',
   'playable-coverage-v3.json',
+  'playable-coverage-v4.json',
   'technical-action-glossary-v1.json',
   'technical-copy-review-v1.json',
+  'technical-copy-review-v2.json',
   'tutorials-v1.json',
 ]);
 

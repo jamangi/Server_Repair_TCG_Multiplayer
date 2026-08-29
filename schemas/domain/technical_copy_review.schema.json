@@ -34,7 +34,7 @@
     "records": {
       "type": "array",
       "minItems": 71,
-      "maxItems": 71,
+      "maxItems": 83,
       "items": {
         "type": "object",
         "additionalProperties": false,
@@ -50,5 +50,15 @@
       }
     }
   },
-  "required": ["review_version", "reviewed_on", "review_scope", "sources", "records"]
+  "required": ["review_version", "reviewed_on", "review_scope", "sources", "records"],
+  "allOf": [
+    {
+      "if": { "properties": { "review_version": { "const": "technical-copy-review-v1" } }, "required": ["review_version"] },
+      "then": { "properties": { "records": { "minItems": 71, "maxItems": 71 } } }
+    },
+    {
+      "if": { "properties": { "review_version": { "const": "technical-copy-review-v2" } }, "required": ["review_version"] },
+      "then": { "properties": { "records": { "minItems": 83, "maxItems": 83 } } }
+    }
+  ]
 }

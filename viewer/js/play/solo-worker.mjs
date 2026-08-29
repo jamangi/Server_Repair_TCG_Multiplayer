@@ -5,12 +5,14 @@ import {
 } from '../../generated/play/src/engine/index.mjs';
 import {
   buildTicketsV3,
+  buildTicketsV4,
   createTask014Catalogs,
-  TASK_014_BUILDER_VERSION,
-  TASK_014_CARD_CATALOG_VERSION,
-  TASK_014_CONFIGURATION_VERSION,
-  TASK_014_DOMAIN_CONTENT_VERSION,
-  TASK_014_TICKET_CONTENT_VERSION,
+  createTask042Catalogs,
+  TASK_042_BUILDER_VERSION,
+  TASK_042_CARD_CATALOG_VERSION,
+  TASK_042_CONFIGURATION_VERSION,
+  TASK_042_DOMAIN_CONTENT_VERSION,
+  TASK_042_TICKET_CONTENT_VERSION,
 } from '../../generated/play/src/builder/task-014.mjs';
 import {
   DIAGNOSIS_V2_BUILDER_VERSION,
@@ -34,6 +36,8 @@ const CONTENT_ROOT = new URL('../../generated/play/content/gameplay-v1/', import
 const SAFE_ID = /^[a-z0-9]+(?:[._-][a-z0-9]+)*$/;
 
 let catalogs = null;
+let task014Catalogs = null;
+let task042Catalogs = null;
 let state = null;
 let startedAtMilliseconds = null;
 let requestSequence = 0;
@@ -51,7 +55,20 @@ async function loadJson(name) {
 }
 
 async function loadCatalogs() {
-  if (catalogs) return catalogs;
+  if (task042Catalogs) return task042Catalogs;
+  const [cards, decks, domain, parts, coverage] = await Promise.all([
+    loadJson('card-catalog-v4.json'),
+    loadJson('decks-v4.json'),
+    loadJson('domain-snapshot-v3.json'),
+    loadJson('task-042-parts.json'),
+    loadJson('playable-coverage-v4.json'),
+  ]);
+  task042Catalogs = createTask042Catalogs({ cards, decks, domain, parts, coverage });
+  return task042Catalogs;
+}
+
+async function loadLegacyCatalogs() {
+  if (task014Catalogs) return task014Catalogs;
   const [cards, decks, domain, parts, coverage] = await Promise.all([
     loadJson('card-catalog-v3.json'),
     loadJson('decks-v3.json'),
@@ -59,8 +76,8 @@ async function loadCatalogs() {
     loadJson('task-014-parts.json'),
     loadJson('playable-coverage-v3.json'),
   ]);
-  catalogs = createTask014Catalogs({ cards, decks, domain, parts, coverage });
-  return catalogs;
+  task014Catalogs = createTask014Catalogs({ cards, decks, domain, parts, coverage });
+  return task014Catalogs;
 }
 
 async function loadTutorialCatalogs() {
@@ -149,14 +166,14 @@ function builderConfiguration(ticketCount, seed, responseCardDefinitionIds, load
   return {
     id: `builder_config.solo_pages.${ticketCount}`,
     entity_type: 'ticket_builder_configuration',
-    configuration_version: TASK_014_CONFIGURATION_VERSION,
+    configuration_version: TASK_042_CONFIGURATION_VERSION,
     scenario_or_mode_context: 'TRAINING',
     requested_ticket_count: ticketCount,
     seed,
-    generator_version: TASK_014_BUILDER_VERSION,
-    content_version: TASK_014_TICKET_CONTENT_VERSION,
-    domain_content_version: TASK_014_DOMAIN_CONTENT_VERSION,
-    card_catalog_version: TASK_014_CARD_CATALOG_VERSION,
+    generator_version: TASK_042_BUILDER_VERSION,
+    content_version: TASK_042_TICKET_CONTENT_VERSION,
+    domain_content_version: TASK_042_DOMAIN_CONTENT_VERSION,
+    card_catalog_version: TASK_042_CARD_CATALOG_VERSION,
     allowed_domain_ids: [],
     excluded_domain_ids: [],
     allowed_tags: [],
@@ -259,6 +276,24 @@ function diagnosticCardIds(loadedCatalogs) {
     .sort();
 }
 
+function currentResponseDeckIsLegal(cardDefinitionIds, loadedCatalogs) {
+  const cards = new Map(loadedCatalogs.cards.cards.map((card) => [card.id, card]));
+  const counts = compactCounts(cardDefinitionIds);
+  return cardDefinitionIds.length === 30
+    && Object.values(counts).every((count) => count >= 1 && count <= 6)
+    && cardDefinitionIds.every((id) => {
+      const card = cards.get(id);
+      return card && ['REPAIR', 'VERIFY'].includes(card.play_contract?.contract_type);
+    });
+}
+
+function exactCardCounts(cardDefinitionIds, expected) {
+  const actual = compactCounts(cardDefinitionIds);
+  const ids = Object.keys(expected);
+  return Object.keys(actual).length === ids.length
+    && ids.every((id) => actual[id] === expected[id]);
+}
+
 function storyBuild({ registry, definition, cardDefinitionIds, loadedCatalogs, configurationId }) {
   const configuration = createStoryBuilderConfiguration({
     registry,
@@ -267,7 +302,9 @@ function storyBuild({ registry, definition, cardDefinitionIds, loadedCatalogs, c
     diagnosticCardIds: diagnosticCardIds(loadedCatalogs),
     configurationId,
   });
-  const builderResult = buildTicketsV3({ configuration, catalogs: loadedCatalogs });
+  const builderResult = definition.builder_configuration
+    ? buildTicketsV4({ configuration, catalogs: loadedCatalogs })
+    : buildTicketsV3({ configuration, catalogs: loadedCatalogs });
   return { configuration, builderResult, attempt: selectedAttempt(builderResult) };
 }
 
@@ -284,8 +321,29 @@ function assertReviewedStoryBatch(definition, attempt, builderResult) {
 }
 
 async function prepareStoryMatch(matchRef, cardDefinitionIds, { includeSnapshots = false } = {}) {
-  const [registry, loadedCatalogs] = await Promise.all([loadStoryMatchRegistry(), loadCatalogs()]);
+  const registry = await loadStoryMatchRegistry();
   const definition = resolveStoryMatch(registry, matchRef);
+  const builderCatalogs = definition.builder_configuration
+    ? await loadCatalogs()
+    : await loadLegacyCatalogs();
+  // QC01's reviewed Ticket digests remain a v3 Builder contract. The Match
+  // itself runs against the additive v5 engine catalogs so a legal current
+  // deck may also carry new response Cards that cannot affect those old Tickets.
+  const loadedCatalogs = await loadCatalogs();
+  if (!currentResponseDeckIsLegal(cardDefinitionIds, loadedCatalogs)) {
+    return {
+      result: Object.freeze({
+        ok: false,
+        code: 'INVALID_DECK',
+        match_ref: definition.match_ref,
+        ticket_count: definition.requested_ticket_count,
+        missing: Object.freeze([]),
+      }),
+      registry,
+      definition,
+      loadedCatalogs,
+    };
+  }
   const requirementCheck = preflightStoryDeck(definition, cardDefinitionIds);
   if (!requirementCheck.ok) {
     return {
@@ -302,25 +360,36 @@ async function prepareStoryMatch(matchRef, cardDefinitionIds, { includeSnapshots
     };
   }
 
-  const canonicalDeck = loadedCatalogs.decks.decks.find(
-    (deck) => deck.id === registry.deckPolicy.canonical_proof_deck_id,
-  );
+  const canonicalDeckId = definition.deck_pressure?.deck_id
+    ?? registry.deckPolicy.canonical_proof_deck_id;
+  const canonicalDeck = builderCatalogs.decks.decks.find((deck) => deck.id === canonicalDeckId);
   if (!canonicalDeck) throw new Error('The Story canonical proof deck is missing from the pinned catalog.');
+  if (definition.builder_configuration
+      && !exactCardCounts(
+        canonicalDeck.card_definition_ids,
+        definition.builder_configuration.available_card_definition_counts,
+      )) {
+    throw new Error('The Story canonical proof deck does not match its embedded Builder resources.');
+  }
   const canonical = storyBuild({
     registry,
     definition,
     cardDefinitionIds: canonicalDeck.card_definition_ids,
-    loadedCatalogs,
+    loadedCatalogs: builderCatalogs,
   });
   assertReviewedStoryBatch(definition, canonical.attempt, canonical.builderResult);
 
-  const activeProof = storyBuild({
+  // QC01's exact aggregate response requirements are checked against the
+  // current deck above, while its immutable v3 Builder proof remains canonical.
+  // QC02 can additionally rebuild against the actual deck because every Card
+  // in that deck belongs to the same additive v4 Builder catalog.
+  const activeProof = definition.builder_configuration ? storyBuild({
     registry,
     definition,
     cardDefinitionIds,
-    loadedCatalogs,
+    loadedCatalogs: builderCatalogs,
     configurationId: `builder.story.preflight.${definition.shift_id.split('.').at(-1)}`,
-  });
+  }) : canonical;
   if (!activeProof.attempt || activeProof.builderResult.status !== 'SUCCESS'
       || activeProof.attempt.ticket_snapshots.length !== definition.requested_ticket_count) {
     const diagnostics = activeProof.builderResult.attempts
@@ -576,7 +645,7 @@ async function startMatch(payload) {
   } else {
     loaded = await loadCatalogs();
     configuration = builderConfiguration(payload.ticket_count, payload.seed, payload.card_definition_ids, loaded);
-    builderResult = buildTicketsV3({ configuration, catalogs: loaded });
+    builderResult = buildTicketsV4({ configuration, catalogs: loaded });
   }
   catalogs = loaded;
   const attempt = selectedAttempt(builderResult);
@@ -632,7 +701,7 @@ async function startMatch(payload) {
     now,
     ticketSource: {
       source_type: 'generated',
-      content_version: loaded.ticketContent.ticket_content_version,
+      content_version: configuration.content_version,
       generator_version: configuration.generator_version,
       configuration_id: configuration.id,
       seed: payload.seed,

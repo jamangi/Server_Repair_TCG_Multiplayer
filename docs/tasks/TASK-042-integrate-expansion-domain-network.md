@@ -2,7 +2,7 @@
 
 ## Status
 
-**Planned.** Depends on TASK-041 and any concrete rule/schema approvals it exposes.
+**Completed 2026-08-28.** Depends on completed TASK-041; no owner approval was required.
 
 ## Objective
 

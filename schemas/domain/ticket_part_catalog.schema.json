@@ -126,6 +126,8 @@
           "fingerprint_id": { "$ref": "#/$defs/stableId" },
           "subsystem": { "$ref": "#/$defs/stableId" },
           "fault_blueprint_part_id": { "$ref": "#/$defs/stableId" },
+          "teaching_part_id": { "$ref": "#/$defs/stableId" },
+          "response_deck_id": { "$ref": "#/$defs/stableId" },
           "selection_weight": { "type": "number", "exclusiveMinimum": 0 }
         },
         "required": ["fingerprint_id", "subsystem", "fault_blueprint_part_id", "selection_weight"]

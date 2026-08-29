@@ -1,5 +1,10 @@
 import { buildStoryHomeModel, buildStorySceneModel } from './story-ui-model.mjs';
-import { migrateStoryProgress } from './story-content-migration.mjs';
+import {
+  QUIET_CASCADE_CHARACTERIZATION_CONTENT_VERSION,
+  QUIET_CASCADE_EXPANSION_CONTENT_VERSION,
+  QUIET_CASCADE_V1_CONTENT_VERSION,
+  migrateStoryProgress,
+} from './story-content-migration.mjs';
 import { loadStoryMatchRegistry, resolveStoryMatch } from './story-match-registry.mjs';
 
 export const STORY_PROGRESS_RECORD_VERSION = 'story-progress-record-v1';
@@ -9,7 +14,7 @@ export const STORY_REVIEW_SESSION_VERSION = 'story-review-session-v1';
 export const STORY_REVIEW_SESSION_STORAGE_KEY = 'server-repair-tcg:story-review-v1';
 
 const DEFAULT_ROOT = new URL(
-  '../../generated/play/content/story-v1/campaigns/quiet-cascade-characterization-v2/',
+  '../../generated/play/content/story-v1/campaigns/quiet-cascade-expansion-v3/',
   import.meta.url,
 );
 const DEFAULT_RUNTIME_URL = new URL('../../generated/play/src/story/index.mjs', import.meta.url);
@@ -52,6 +57,29 @@ async function loadBundle({ rootUrl, fetchImpl }) {
     textPairsPromise,
   ]);
   return { manifest, registry, scripts, texts: Object.fromEntries(textPairs) };
+}
+
+async function loadPredecessorBundles({ bundle, rootUrl, fetchImpl }) {
+  if (bundle.manifest.content_version !== QUIET_CASCADE_EXPANSION_CONTENT_VERSION) return null;
+  const roots = new Map([
+    [
+      QUIET_CASCADE_V1_CONTENT_VERSION,
+      new URL('../quiet-cascade/', rootUrl),
+    ],
+    [
+      QUIET_CASCADE_CHARACTERIZATION_CONTENT_VERSION,
+      new URL('../quiet-cascade-characterization-v2/', rootUrl),
+    ],
+  ]);
+  const loaded = new Map(await Promise.all([...roots].map(async ([contentVersion, predecessorRoot]) => {
+    const predecessor = await loadBundle({ rootUrl: predecessorRoot, fetchImpl });
+    if (predecessor.manifest.pack_id !== bundle.manifest.pack_id
+        || predecessor.manifest.content_version !== contentVersion) {
+      throw new Error(`Story predecessor ${contentVersion} is malformed or belongs to another pack.`);
+    }
+    return [contentVersion, predecessor];
+  })));
+  return loaded;
 }
 
 async function loadReviewEpisodes({ rootUrl, fetchImpl }) {
@@ -133,8 +161,8 @@ function validateProgressRecord(candidate, { bundle, runtime }) {
   return { value: clone(candidate), restored };
 }
 
-function prepareProgressRecord(candidate, { bundle, runtime }) {
-  const migration = migrateStoryProgress(candidate, { bundle, runtime });
+function prepareProgressRecord(candidate, { bundle, runtime, predecessorBundles = null }) {
+  const migration = migrateStoryProgress(candidate, { bundle, runtime, predecessorBundles });
   const validated = validateProgressRecord(migration.value, { bundle, runtime });
   return { ...validated, migrated_from: migration.migrated_from };
 }
@@ -176,6 +204,7 @@ export async function createStoryClient({
     loadBundle({ rootUrl, fetchImpl }),
     loadStoryMatchRegistry({ url: new URL('matches.json', rootUrl), fetchImpl }),
   ]);
+  const predecessorBundles = await loadPredecessorBundles({ bundle, rootUrl, fetchImpl });
   const reviewRegistry = await loadReviewEpisodes({ rootUrl, fetchImpl });
   const issues = runtime.validateStoryPack(bundle);
   if (issues.length) {
@@ -192,7 +221,10 @@ export async function createStoryClient({
     throw new Error('Story review metadata belongs to a different campaign pack or content version.');
   }
   const reviewEntries = reviewRegistry?.episodes ?? new Map();
-  const reviewMetadataRequired = bundle.manifest.content_version === 'quiet-cascade-characterization-v2';
+  const reviewMetadataRequired = [
+    QUIET_CASCADE_CHARACTERIZATION_CONTENT_VERSION,
+    QUIET_CASCADE_EXPANSION_CONTENT_VERSION,
+  ].includes(bundle.manifest.content_version);
   if (reviewMetadataRequired && reviewEntries.size !== matchRegistry.matches.size) {
     throw new Error('Current Story content must declare one reviewed episode boundary per Match.');
   }
@@ -303,7 +335,7 @@ export async function createStoryClient({
     try {
       const candidate = storedProgress();
       if (!candidate || candidate.pack_id === null) return;
-      const validated = prepareProgressRecord(candidate, { bundle, runtime });
+      const validated = prepareProgressRecord(candidate, { bundle, runtime, predecessorBundles });
       if (validated.migrated_from !== null) persistProgress(validated.value);
       progress = validated.value;
       state = validated.restored;
@@ -493,7 +525,7 @@ export async function createStoryClient({
     get error() { return error; },
 
     validateProgress(candidate) {
-      return prepareProgressRecord(candidate, { bundle, runtime }).value;
+      return prepareProgressRecord(candidate, { bundle, runtime, predecessorBundles }).value;
     },
 
     homeModel() {
@@ -517,6 +549,9 @@ export async function createStoryClient({
             || entry.post_match_checkpoint_id === checkpointId) ?? null;
       const chapterId = definition?.chapter_id ?? chapterByCheckpoint.get(checkpointId) ?? null;
       const matchTitle = definition ? textCatalog[definition.title_text_id] : null;
+      const isExpansion = bundle.manifest.content_version === QUIET_CASCADE_EXPANSION_CONTENT_VERSION;
+      const completedMatchCount = progress.checkpoint?.match_results?.length ?? 0;
+      const campaignOneComplete = isExpansion && completedMatchCount >= 6;
       return buildStoryHomeModel({
         status: error ? 'RECOVERY_REQUIRED'
           : progress.completed_ending_id ? 'COMPLETE'
@@ -528,12 +563,17 @@ export async function createStoryClient({
         chapter_title: titleFromStableId(chapterId, 'Quiet Cascade'),
         shift_title: definition?.shift_id
           ? `Shift ${Number(definition.shift_id.split('.').at(-1))}${matchTitle ? ` · ${matchTitle}` : ''}`
-          : progress.completed_ending_id ? 'Campaign complete'
+          : progress.completed_ending_id ? (isExpansion ? 'Current content complete' : 'Campaign complete')
+            : campaignOneComplete ? 'Expansion available'
             : checkpointId ? 'Chapter handoff' : 'The first handoff',
         progress_summary: pendingResult
           ? 'An authoritative Story Match result is ready to cross the durable return boundary exactly once.'
           : progress.completed_ending_id
-            ? 'Campaign one is complete. More Story content is in development.'
+            ? isExpansion
+              ? 'All twelve currently released Story episodes are complete. Your record is preserved for future content.'
+              : 'Campaign one is complete. More Story content is in development.'
+            : campaignOneComplete
+              ? 'Campaign one is preserved. Continue into the six-episode expansion without replaying completed work.'
             : undefined,
         interrupted_match: Boolean(pending && !pendingResult),
         review_interrupted: reviewInterrupted,
@@ -762,7 +802,11 @@ export async function createStoryClient({
           || typeof candidate.exported_at !== 'string') {
         throw new Error('Story backup is malformed or unsupported.');
       }
-      const validated = prepareProgressRecord(candidate.progress, { bundle, runtime });
+      const validated = prepareProgressRecord(candidate.progress, {
+        bundle,
+        runtime,
+        predecessorBundles,
+      });
       return Object.freeze({
         value: validated.value,
         preview: Object.freeze({

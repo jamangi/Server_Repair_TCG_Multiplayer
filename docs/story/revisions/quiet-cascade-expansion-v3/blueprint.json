@@ -1,0 +1,467 @@
+{
+  "blueprint_version": "quiet-cascade-expansion-blueprint-v1",
+  "blueprint_id": "story.blueprint.quiet_cascade.expansion.v1",
+  "status": "NON_LIVE_CANDIDATE_NO_FINAL_DIALOGUE",
+  "campaign_id": "story.campaign.quiet_cascade.v1",
+  "namespace": "story.qc02",
+  "entry_label": "story.qc02.entry",
+  "ending": {
+    "ending_id": "ending.qc02.current_content",
+    "entry_label": "story.qc02.ending.current_content",
+    "checkpoint_id": "checkpoint.qc02.ending.current_content",
+    "meaning": "The six reviewed expansion episodes are complete or honestly bounded; this candidate defines no cumulative score gate and no later content promise."
+  },
+  "inputs": {
+    "base_story_graph": "content/story-v1/campaigns/quiet-cascade-characterization-v2/graph.json",
+    "base_story_registry": "content/story-v1/campaigns/quiet-cascade-characterization-v2/registry.json",
+    "case_registry": "docs/case_studies/v0.2-story-expansion/registry.json",
+    "domain_proof": "docs/coverage/task-042-expansion-domain-network-proof.json",
+    "match_registry": "automated_games/task-043-quiet-cascade-expansion-v3/match-registry.json",
+    "builder_proof": "automated_games/task-043-quiet-cascade-expansion-v3/builder-proof.json",
+    "planning_audit": "docs/story/reports/story-expansion-planning-audit.json"
+  },
+  "composition_policy": {
+    "candidate_entry_contract": "A future release may enter here only after TASK-046 maps an accepted campaign-one ending to this label.",
+    "campaign_one_service_points": "PRESERVE_EXACTLY",
+    "expansion_service_points": "ADD_ONLY_NORMALIZED_ACCEPTED_MATCH_GAIN",
+    "cumulative_score_gate": false,
+    "dialogue_can_grant_gameplay_authority": false,
+    "match_count": 6,
+    "tickets_per_match": 1,
+    "one_match_boundary_per_episode": true
+  },
+  "runtime_policy": {
+    "entry_checkpoint_id": "checkpoint.qc02.entry",
+    "canonical_match_outcomes": ["COMPLETED", "ABANDONED"],
+    "invalid_result_behavior": "DO_NOT_ADVANCE_RETAIN_PRE_MATCH_CHECKPOINT",
+    "interruption_behavior": "RESTORE_PRE_MATCH_CHECKPOINT_AND_OFFER_FRESH_LAUNCH",
+    "active_match_resume": false,
+    "post_match_acceptance": "ONLY_VALID_AUTHORITATIVE_TERMINAL_RESULT",
+    "completed_episode_replay": "STORY_009_A_ISOLATED_NON_CANONICAL_REVIEW",
+    "replay_mutates_canonical_checkpoint": false,
+    "replay_accepts_story_result": false,
+    "replay_mutates_profile_statistics": false
+  },
+  "remembered_choices": [
+    {
+      "choice_id": "choice.qc02.initial_evidence_frame",
+      "variable_id": "story.qc02.initial_evidence_frame",
+      "value_type": "STRING",
+      "default": "UNSET",
+      "episode_id": "story.shift.qc02.07",
+      "branch_kind": "RECONVERGENT_REMEMBERED",
+      "authority_effect": "PRESENTATION_ORDER_ONLY",
+      "options": [
+        {
+          "option_id": "location_context_first",
+          "value": "LOCATION_CONTEXT_FIRST",
+          "branch_label": "story.qc02.shift07.frame.location_context_first"
+        },
+        {
+          "option_id": "controlled_comparison_first",
+          "value": "CONTROLLED_COMPARISON_FIRST",
+          "branch_label": "story.qc02.shift07.frame.controlled_comparison_first"
+        }
+      ],
+      "reconverge_label": "story.qc02.shift07.match",
+      "delayed_ack_episode_id": "story.shift.qc02.08",
+      "delayed_ack_label": "story.qc02.shift08.initial_frame_ack"
+    },
+    {
+      "choice_id": "choice.qc02.change_evidence_frame",
+      "variable_id": "story.qc02.change_evidence_frame",
+      "value_type": "STRING",
+      "default": "UNSET",
+      "episode_id": "story.shift.qc02.10",
+      "branch_kind": "RECONVERGENT_REMEMBERED",
+      "authority_effect": "PRESENTATION_ORDER_ONLY",
+      "options": [
+        {
+          "option_id": "current_state_first",
+          "value": "CURRENT_STATE_FIRST",
+          "branch_label": "story.qc02.shift10.frame.current_state_first"
+        },
+        {
+          "option_id": "change_history_first",
+          "value": "CHANGE_HISTORY_FIRST",
+          "branch_label": "story.qc02.shift10.frame.change_history_first"
+        }
+      ],
+      "reconverge_label": "story.qc02.shift10.match",
+      "delayed_ack_episode_id": "story.shift.qc02.11",
+      "delayed_ack_label": "story.qc02.shift11.change_frame_ack"
+    }
+  ],
+  "episodes": [
+    {
+      "episode_id": "story.shift.qc02.07",
+      "shift_number": 7,
+      "title": "The Fourth Pair",
+      "case_id": "exp-001",
+      "source_url": "https://www.dell.com/community/en/conversations/rack-servers/r910-will-not-power-on-with-4-processors/647f7d25f4ccf8a8deb93b08",
+      "learning_objective_key": "objective.compute.socket_contact_isolation",
+      "learning_objective": "Identify a socket-location fault without condemning known-good processors or memory.",
+      "fingerprint_id": "fingerprint.compute.damaged_cpu_socket_contacts",
+      "match_ref": "story.match.qc02.shift07.socket_contacts",
+      "labels": {
+        "entry": "story.qc02.shift07.entry",
+        "match": "story.qc02.shift07.match",
+        "return": "story.qc02.shift07.return",
+        "success": "story.qc02.shift07.success",
+        "abandon": "story.qc02.shift07.abandon",
+        "follow_on": "story.qc02.shift07.follow_on"
+      },
+      "checkpoints": {
+        "entry": "checkpoint.qc02.shift07.entry",
+        "pre_match": "checkpoint.qc02.shift07.pre_match",
+        "post_match": "checkpoint.qc02.shift07.post_match"
+      },
+      "prerequisite_practice": [
+        "Campaign Shift 1: a public symptom starts a question but does not name the fault.",
+        "Campaign Shift 3: compare locations and keep otherwise known-good parts separate from the failing path."
+      ],
+      "public_setup": {
+        "summary": "A server reaches the floor after failing only when its full processor population is installed; the intake record does not establish whether a processor, memory path, socket location, or board path is responsible.",
+        "allowed_symptom_ids": ["symptom.boot.no_post"],
+        "forbidden_early_reveal_ids": [
+          "fault.compute.cpu_socket.contacts_damaged",
+          "test.compute.socket_magnified_inspection",
+          "repair.compute.restore_socket_contacts"
+        ]
+      },
+      "candidate_discrimination": "Use configuration comparison and location-specific physical evidence to separate the socket path from processor, memory, and whole-board Candidates.",
+      "story_service_points": {
+        "completed_valid_result": 2,
+        "abandoned_valid_result": 0,
+        "invalid_result": 0,
+        "preserve_inherited_total": true,
+        "gate_on_total": false
+      },
+      "art": {
+        "background_asset_ids": ["story.bg.trinity.trace.night", "story.bg.trinity.core_floor.night_storm"],
+        "character_pose_ids": ["story.character.sora_chen:focused", "story.character.sora_chen:approving", "story.character.malik_okoye:focused"],
+        "transient_asset_ids": []
+      },
+      "beats": [
+        { "beat_id": "story.beat.qc02.07.public_setup", "kind": "PUBLIC_SETUP", "summary": "Sora and Malik frame the population-dependent no-POST report as a location question, not a verdict on any part." },
+        { "beat_id": "story.beat.qc02.07.learning", "kind": "LEARNING", "summary": "The player must support a socket-location Isolation with discriminating Evidence." },
+        { "beat_id": "story.beat.qc02.07.practice", "kind": "REPEATED_PRACTICE", "summary": "Repeat campaign-one component-versus-location reasoning under a compute configuration change." },
+        { "beat_id": "story.beat.qc02.07.choice", "kind": "CUTSCENE_CHOICE", "summary": "Choose whether the brief leads with location context or controlled comparison; both orders reconverge before Match authority begins." },
+        { "beat_id": "story.beat.qc02.07.checkpoint", "kind": "CHECKPOINT", "summary": "Persist entry and pre-Match boundaries before the one-Ticket handoff." },
+        { "beat_id": "story.beat.qc02.07.match", "kind": "MATCH", "summary": "Launch the ordinary generated socket-contact Ticket without exposing its hidden truth." },
+        { "beat_id": "story.beat.qc02.07.branch", "kind": "OUTCOME_BRANCH", "summary": "Receive only valid COMPLETED or ABANDONED normalization, then reconverge without lending the result to another Ticket." },
+        { "beat_id": "story.beat.qc02.07.points", "kind": "SERVICE_POINT", "summary": "Add the authoritative Match gain—two for completed closure, zero for abandonment—without testing a cumulative gate." },
+        { "beat_id": "story.beat.qc02.07.interruption", "kind": "INTERRUPTION", "summary": "An interrupted active Match restarts from the pre-Match checkpoint as a fresh launch." },
+        { "beat_id": "story.beat.qc02.07.follow_on", "kind": "FOLLOW_ON", "summary": "Carry the distinction between a failed part and a failed shared path into power-distribution segmentation." }
+      ]
+    },
+    {
+      "episode_id": "story.shift.qc02.08",
+      "shift_number": 8,
+      "title": "Across Both Bays",
+      "case_id": "exp-002",
+      "source_url": "https://www.dell.com/community/en/conversations/poweredge-hardware-general/t420-poweredge-vlt0204-main-board-voltage-outside-of-range/67fd91b469e6265ea77af6ab",
+      "learning_objective_key": "objective.power.distribution_board_vs_mainboard",
+      "learning_objective": "Use cross-bay known-good comparisons to isolate a shared distribution fault.",
+      "fingerprint_id": "fingerprint.power.failed_distribution_board",
+      "match_ref": "story.match.qc02.shift08.power_distribution",
+      "labels": {
+        "entry": "story.qc02.shift08.entry",
+        "match": "story.qc02.shift08.match",
+        "return": "story.qc02.shift08.return",
+        "success": "story.qc02.shift08.success",
+        "abandon": "story.qc02.shift08.abandon",
+        "follow_on": "story.qc02.shift08.follow_on"
+      },
+      "checkpoints": {
+        "entry": "checkpoint.qc02.shift08.entry",
+        "pre_match": "checkpoint.qc02.shift08.pre_match",
+        "post_match": "checkpoint.qc02.shift08.post_match"
+      },
+      "prerequisite_practice": [
+        "Campaign Shift 2: the same redundancy warning may have different actionable causes.",
+        "Expansion Shift 7: separate the suspect part from the shared path and location around it."
+      ],
+      "public_setup": {
+        "summary": "A server reports an out-of-range voltage and can fail to power, while the alert wording alone cannot distinguish an individual supply, its seating/input, a shared distribution path, or the system board.",
+        "allowed_symptom_ids": ["symptom.power.voltage_out_of_range", "symptom.power.no_power"],
+        "forbidden_early_reveal_ids": [
+          "fault.power.distribution_board.failed",
+          "test.power.distribution_path_isolation",
+          "repair.power.replace_distribution_board"
+        ]
+      },
+      "candidate_discrimination": "Cross-bay known-good comparisons separate individual supply and bay explanations from a fault that remains on the shared distribution path.",
+      "story_service_points": {
+        "completed_valid_result": 2,
+        "abandoned_valid_result": 0,
+        "invalid_result": 0,
+        "preserve_inherited_total": true,
+        "gate_on_total": false
+      },
+      "art": {
+        "background_asset_ids": ["story.bg.trinity.core_floor.night_storm", "story.bg.trinity.validation_gate.predawn"],
+        "character_pose_ids": ["story.character.malik_okoye:focused", "story.character.malik_okoye:defensive", "story.character.hana_park:skeptical", "story.character.hana_park:relief"],
+        "transient_asset_ids": []
+      },
+      "beats": [
+        { "beat_id": "story.beat.qc02.08.public_setup", "kind": "PUBLIC_SETUP", "summary": "Malik presents the voltage alert and bay behavior without promoting the alert label into a diagnosis." },
+        { "beat_id": "story.beat.qc02.08.learning", "kind": "LEARNING", "summary": "The player must locate persistence across supplies and bays on the shared distribution path." },
+        { "beat_id": "story.beat.qc02.08.practice", "kind": "REPEATED_PRACTICE", "summary": "Repeat campaign-one power-warning discrimination with explicit path segmentation rather than icon matching." },
+        { "beat_id": "story.beat.qc02.08.checkpoint", "kind": "CHECKPOINT", "summary": "Persist entry and pre-Match boundaries before the one-Ticket handoff." },
+        { "beat_id": "story.beat.qc02.08.match", "kind": "MATCH", "summary": "Launch the ordinary generated power-distribution Ticket." },
+        { "beat_id": "story.beat.qc02.08.branch", "kind": "OUTCOME_BRANCH", "summary": "Hana receives closure or an honest bounded gap, then both routes reconverge." },
+        { "beat_id": "story.beat.qc02.08.points", "kind": "SERVICE_POINT", "summary": "Add only the normalized one-Ticket Match gain and preserve the campaign-one total." },
+        { "beat_id": "story.beat.qc02.08.interruption", "kind": "INTERRUPTION", "summary": "An interrupted active Match restarts from its durable pre-Match checkpoint." },
+        { "beat_id": "story.beat.qc02.08.ack", "kind": "DELAYED_CHOICE_ACK", "summary": "Acknowledge the Shift 7 evidence-framing choice as a durable briefing habit, never as gameplay authority." },
+        { "beat_id": "story.beat.qc02.08.follow_on", "kind": "FOLLOW_ON", "summary": "Move from fault location under failure to a warning that is actionable before outage." }
+      ]
+    },
+    {
+      "episode_id": "story.shift.qc02.09",
+      "shift_number": 9,
+      "title": "Before the Drop",
+      "case_id": "exp-003",
+      "source_url": "https://www.dell.com/community/en/conversations/poweredge-hardware-general/poweredge-r620-drive-predicted-failure/647f7b52f4ccf8a8de9878d4",
+      "learning_objective_key": "objective.storage.predictive_replacement_before_failure",
+      "learning_objective": "Treat predictive failure as actionable while protecting data and proving completed recovery.",
+      "fingerprint_id": "fingerprint.storage.predictive_drive_failure",
+      "match_ref": "story.match.qc02.shift09.predictive_drive",
+      "labels": {
+        "entry": "story.qc02.shift09.entry",
+        "match": "story.qc02.shift09.match",
+        "return": "story.qc02.shift09.return",
+        "success": "story.qc02.shift09.success",
+        "abandon": "story.qc02.shift09.abandon",
+        "follow_on": "story.qc02.shift09.follow_on"
+      },
+      "checkpoints": {
+        "entry": "checkpoint.qc02.shift09.entry",
+        "pre_match": "checkpoint.qc02.shift09.pre_match",
+        "post_match": "checkpoint.qc02.shift09.post_match"
+      },
+      "prerequisite_practice": [
+        "Campaign Shift 6: each storage Ticket needs its own Isolation, Repair, independent Verify, and documented limit.",
+        "Campaign-wide practice: warnings and public context are not themselves causal truth."
+      ],
+      "public_setup": {
+        "summary": "An array member remains online but carries a predictive warning; the work must distinguish early media risk from an already failed member while protecting the array.",
+        "allowed_symptom_ids": ["symptom.storage.predictive_failure_warning", "symptom.storage.drive_fault_led"],
+        "forbidden_early_reveal_ids": [
+          "fault.storage.drive.predictive_failure",
+          "test.storage.predictive_health",
+          "repair.storage.replace_predictive_drive"
+        ]
+      },
+      "candidate_discrimination": "Read current member health as evidence that can justify pre-failure action, while keeping predictive-risk and already-failed-member Candidates distinct.",
+      "story_service_points": {
+        "completed_valid_result": 2,
+        "abandoned_valid_result": 0,
+        "invalid_result": 0,
+        "preserve_inherited_total": true,
+        "gate_on_total": false
+      },
+      "art": {
+        "background_asset_ids": ["story.bg.trinity.core_floor.night_storm", "story.bg.trinity.knowledge_systems.night"],
+        "character_pose_ids": ["story.character.jonah_reed:thoughtful", "story.character.hana_park:skeptical", "story.character.hana_park:relief"],
+        "transient_asset_ids": []
+      },
+      "beats": [
+        { "beat_id": "story.beat.qc02.09.public_setup", "kind": "PUBLIC_SETUP", "summary": "Jonah frames a current predictive warning as a bounded risk record rather than a completed outage." },
+        { "beat_id": "story.beat.qc02.09.learning", "kind": "LEARNING", "summary": "The player must act before failure while retaining the data-preservation boundary and an independent completed-rebuild Verify." },
+        { "beat_id": "story.beat.qc02.09.practice", "kind": "REPEATED_PRACTICE", "summary": "Repeat campaign-one independent storage closure with a proactive rather than already-failed member." },
+        { "beat_id": "story.beat.qc02.09.checkpoint", "kind": "CHECKPOINT", "summary": "Persist entry and pre-Match boundaries before the one-Ticket handoff." },
+        { "beat_id": "story.beat.qc02.09.match", "kind": "MATCH", "summary": "Launch the ordinary generated predictive-drive Ticket." },
+        { "beat_id": "story.beat.qc02.09.branch", "kind": "OUTCOME_BRANCH", "summary": "Receive a verified rebuild closure or preserve unresolved risk; reconverge afterward." },
+        { "beat_id": "story.beat.qc02.09.points", "kind": "SERVICE_POINT", "summary": "Add only the normalized result gain, with no threshold that blocks the next lesson." },
+        { "beat_id": "story.beat.qc02.09.interruption", "kind": "INTERRUPTION", "summary": "An interrupted active Match is discarded and freshly launched from pre-Match." },
+        { "beat_id": "story.beat.qc02.09.follow_on", "kind": "FOLLOW_ON", "summary": "Turn from proactive warning evidence to the harder question of whether a persistent alert describes current state at all." }
+      ]
+    },
+    {
+      "episode_id": "story.shift.qc02.10",
+      "shift_number": 10,
+      "title": "The Alert That Stayed",
+      "case_id": "exp-004",
+      "source_url": "https://www.dell.com/community/en/conversations/poweredge-hddscsiraid/pe2900-backplane-degraded/647e8b20f4ccf8a8dede59e9",
+      "learning_objective_key": "objective.management.stale_alert_vs_live_backplane_fault",
+      "learning_objective": "Separate read-only evidence preservation from the state-changing Repair that clears a stale alert.",
+      "fingerprint_id": "fingerprint.management.stale_alert",
+      "match_ref": "story.match.qc02.shift10.stale_alert",
+      "labels": {
+        "entry": "story.qc02.shift10.entry",
+        "match": "story.qc02.shift10.match",
+        "return": "story.qc02.shift10.return",
+        "success": "story.qc02.shift10.success",
+        "abandon": "story.qc02.shift10.abandon",
+        "follow_on": "story.qc02.shift10.follow_on"
+      },
+      "checkpoints": {
+        "entry": "checkpoint.qc02.shift10.entry",
+        "pre_match": "checkpoint.qc02.shift10.pre_match",
+        "post_match": "checkpoint.qc02.shift10.post_match"
+      },
+      "prerequisite_practice": [
+        "Campaign Shift 5: preserve source, target, condition, output, and time with negative results.",
+        "Campaign Story: a historical record is context, not current machine truth."
+      ],
+      "public_setup": {
+        "summary": "A management alert persists even though the visible device inventory does not show a matching present failure; current state and alert chronology must remain separate until tested.",
+        "allowed_symptom_ids": ["symptom.management.alert_persists"],
+        "forbidden_early_reveal_ids": [
+          "fault.management.alert.stale",
+          "test.management.event_log_freshness",
+          "repair.management.clear_stale_alert_state"
+        ]
+      },
+      "candidate_discrimination": "Preserve and compare current event state against current device state before any action clears or rewrites the alert surface.",
+      "story_service_points": {
+        "completed_valid_result": 2,
+        "abandoned_valid_result": 0,
+        "invalid_result": 0,
+        "preserve_inherited_total": true,
+        "gate_on_total": false
+      },
+      "art": {
+        "background_asset_ids": ["story.bg.trinity.knowledge_systems.night"],
+        "character_pose_ids": ["story.character.hana_park:skeptical", "story.character.hana_park:relief", "story.character.jonah_reed:defensive", "story.character.jonah_reed:thoughtful"],
+        "transient_asset_ids": []
+      },
+      "beats": [
+        { "beat_id": "story.beat.qc02.10.public_setup", "kind": "PUBLIC_SETUP", "summary": "Hana and Jonah expose the mismatch between a persistent alert and current inventory without declaring either stale or live." },
+        { "beat_id": "story.beat.qc02.10.learning", "kind": "LEARNING", "summary": "The player must preserve and compare evidence before the state-changing clear operation." },
+        { "beat_id": "story.beat.qc02.10.practice", "kind": "REPEATED_PRACTICE", "summary": "Repeat campaign-one provenance discipline on a management surface where Test and Repair can look deceptively similar." },
+        { "beat_id": "story.beat.qc02.10.choice", "kind": "CUTSCENE_CHOICE", "summary": "Choose whether the brief leads with current state or change history; both orders reconverge before Match authority begins." },
+        { "beat_id": "story.beat.qc02.10.checkpoint", "kind": "CHECKPOINT", "summary": "Persist entry and pre-Match boundaries before the one-Ticket handoff." },
+        { "beat_id": "story.beat.qc02.10.match", "kind": "MATCH", "summary": "Launch the ordinary generated stale-alert Ticket with the read-only Test/state-changing Repair boundary intact." },
+        { "beat_id": "story.beat.qc02.10.branch", "kind": "OUTCOME_BRANCH", "summary": "Receive nonrecurrence closure or an unresolved alert record, then reconverge." },
+        { "beat_id": "story.beat.qc02.10.points", "kind": "SERVICE_POINT", "summary": "Add only authoritative one-Ticket Story points and do not infer quality from the inherited total." },
+        { "beat_id": "story.beat.qc02.10.interruption", "kind": "INTERRUPTION", "summary": "An interrupted active Match restarts from pre-Match and cannot imply that alert state was preserved or cleared." },
+        { "beat_id": "story.beat.qc02.10.follow_on", "kind": "FOLLOW_ON", "summary": "Carry current-versus-historical discipline into corroborating a firmware regression across version changes." }
+      ]
+    },
+    {
+      "episode_id": "story.shift.qc02.11",
+      "shift_number": 11,
+      "title": "Version A, Version B",
+      "case_id": "exp-005",
+      "source_url": "https://www.dell.com/community/en/conversations/poweredge-hardware-general/idrac-keeps-messaging-the-nic-in-slot-4-port-1-network-link-is-started/647f94b2f4ccf8a8de70eaff",
+      "learning_objective_key": "objective.firmware.regression_vs_physical_link",
+      "learning_objective": "Use repeated version A/B behavior and hardware elimination to diagnose a firmware regression.",
+      "fingerprint_id": "fingerprint.firmware.incompatible_version_set",
+      "match_ref": "story.match.qc02.shift11.firmware_regression",
+      "labels": {
+        "entry": "story.qc02.shift11.entry",
+        "match": "story.qc02.shift11.match",
+        "return": "story.qc02.shift11.return",
+        "success": "story.qc02.shift11.success",
+        "abandon": "story.qc02.shift11.abandon",
+        "follow_on": "story.qc02.shift11.follow_on"
+      },
+      "checkpoints": {
+        "entry": "checkpoint.qc02.shift11.entry",
+        "pre_match": "checkpoint.qc02.shift11.pre_match",
+        "post_match": "checkpoint.qc02.shift11.post_match"
+      },
+      "prerequisite_practice": [
+        "Campaign Shift 4: reproduction under named conditions does not by itself establish cause.",
+        "Campaign Shift 5: physical-link evidence and configured-state evidence remain distinct until Isolation."
+      ],
+      "public_setup": {
+        "summary": "A network port repeatedly changes link state after a management firmware change; physical media, interface hardware, and version compatibility remain public Candidates until corroborated.",
+        "allowed_symptom_ids": ["symptom.network.link_flapping", "symptom.network.no_link"],
+        "forbidden_early_reveal_ids": [
+          "fault.firmware.version_set.incompatible",
+          "test.firmware.version_compatibility",
+          "repair.firmware.restore_compatible_versions"
+        ]
+      },
+      "candidate_discrimination": "Combine version-compatibility evidence with sustained link-counter behavior; neither observation alone is sufficient for the selected corroborated route.",
+      "story_service_points": {
+        "completed_valid_result": 2,
+        "abandoned_valid_result": 0,
+        "invalid_result": 0,
+        "preserve_inherited_total": true,
+        "gate_on_total": false
+      },
+      "art": {
+        "background_asset_ids": ["story.bg.trinity.core_floor.night_storm", "story.bg.trinity.trace.night"],
+        "character_pose_ids": ["story.character.malik_okoye:focused", "story.character.malik_okoye:defensive", "story.character.sora_chen:focused", "story.character.sora_chen:approving"],
+        "transient_asset_ids": []
+      },
+      "beats": [
+        { "beat_id": "story.beat.qc02.11.public_setup", "kind": "PUBLIC_SETUP", "summary": "Malik and Sora frame repeatable link behavior across a version change without treating sequence as sufficient causation." },
+        { "beat_id": "story.beat.qc02.11.learning", "kind": "LEARNING", "summary": "The player must cite two corroborating observations before the firmware Isolation becomes actionable." },
+        { "beat_id": "story.beat.qc02.11.practice", "kind": "REPEATED_PRACTICE", "summary": "Repeat named-condition reproduction and physical-versus-configured discrimination in one corroborated route." },
+        { "beat_id": "story.beat.qc02.11.checkpoint", "kind": "CHECKPOINT", "summary": "Persist entry and pre-Match boundaries before the one-Ticket handoff." },
+        { "beat_id": "story.beat.qc02.11.match", "kind": "MATCH", "summary": "Launch the ordinary generated firmware-regression Ticket." },
+        { "beat_id": "story.beat.qc02.11.branch", "kind": "OUTCOME_BRANCH", "summary": "Receive sustained compatible behavior or preserve the unresolved version boundary, then reconverge." },
+        { "beat_id": "story.beat.qc02.11.points", "kind": "SERVICE_POINT", "summary": "Add only authoritative Match points; corroboration is required work, not a dialogue-awarded bonus." },
+        { "beat_id": "story.beat.qc02.11.interruption", "kind": "INTERRUPTION", "summary": "An interrupted active Match restarts from pre-Match with no claim that a prior soak continued." },
+        { "beat_id": "story.beat.qc02.11.ack", "kind": "DELAYED_CHOICE_ACK", "summary": "Acknowledge the Shift 10 current-state/change-history framing choice without changing evidence or outcome authority." },
+        { "beat_id": "story.beat.qc02.11.follow_on", "kind": "FOLLOW_ON", "summary": "Escalate from compatible version restoration to a bounded controller recovery where observing recovery state must remain separate from changing firmware." }
+      ]
+    },
+    {
+      "episode_id": "story.shift.qc02.12",
+      "shift_number": 12,
+      "title": "Recovery State",
+      "case_id": "exp-006",
+      "source_url": "https://forums.serverbuilds.net/t/ga-7pesh2-bmc-recovery/882",
+      "learning_objective_key": "objective.management.bmc_recovery_state_before_board_replacement",
+      "learning_objective": "Bound dangerous controller recovery to approved platform methods and verify recovery separately from the flash action.",
+      "fingerprint_id": "fingerprint.management.corrupt_bmc_firmware",
+      "match_ref": "story.match.qc02.shift12.bmc_recovery",
+      "labels": {
+        "entry": "story.qc02.shift12.entry",
+        "match": "story.qc02.shift12.match",
+        "return": "story.qc02.shift12.return",
+        "success": "story.qc02.shift12.success",
+        "abandon": "story.qc02.shift12.abandon",
+        "follow_on": "story.qc02.shift12.follow_on"
+      },
+      "checkpoints": {
+        "entry": "checkpoint.qc02.shift12.entry",
+        "pre_match": "checkpoint.qc02.shift12.pre_match",
+        "post_match": "checkpoint.qc02.shift12.post_match"
+      },
+      "prerequisite_practice": [
+        "Expansion Shift 10: read-only inspection must precede the state-changing Repair it may justify.",
+        "Campaign Shift 6: independent Verify and Documentation preserve a bounded handoff after risky work."
+      ],
+      "public_setup": {
+        "summary": "A management controller is nonresponsive after an interrupted firmware operation; a recoverable controller state and a version-set problem remain distinct public Candidates.",
+        "allowed_symptom_ids": ["symptom.management.bmc_not_responding", "symptom.firmware.update_failed"],
+        "forbidden_early_reveal_ids": [
+          "fault.management.bmc_firmware.corrupt",
+          "test.management.bmc_recovery_state",
+          "repair.management.recover_bmc_firmware"
+        ]
+      },
+      "candidate_discrimination": "Inspect recovery state as a Test; treat recovery transport and firmware write as the state-changing Repair; verify controller function independently afterward.",
+      "story_service_points": {
+        "completed_valid_result": 2,
+        "abandoned_valid_result": 0,
+        "invalid_result": 0,
+        "preserve_inherited_total": true,
+        "gate_on_total": false
+      },
+      "art": {
+        "background_asset_ids": ["story.bg.trinity.trace.night", "story.bg.trinity.validation_gate.predawn"],
+        "character_pose_ids": ["story.character.sora_chen:focused", "story.character.sora_chen:approving", "story.character.jonah_reed:thoughtful", "story.character.hana_park:skeptical", "story.character.hana_park:relief"],
+        "transient_asset_ids": []
+      },
+      "beats": [
+        { "beat_id": "story.beat.qc02.12.public_setup", "kind": "PUBLIC_SETUP", "summary": "Sora and Jonah frame a nonresponsive BMC after interrupted firmware work without declaring recovery state or selecting a procedure." },
+        { "beat_id": "story.beat.qc02.12.learning", "kind": "LEARNING", "summary": "The player must preserve the Test-versus-Repair boundary and independently verify the recovered management function." },
+        { "beat_id": "story.beat.qc02.12.practice", "kind": "REPEATED_PRACTICE", "summary": "Repeat preserve-before-change discipline, then carry the accepted result and its bounds into a documented Story handoff." },
+        { "beat_id": "story.beat.qc02.12.checkpoint", "kind": "CHECKPOINT", "summary": "Persist entry and pre-Match boundaries before the one-Ticket handoff." },
+        { "beat_id": "story.beat.qc02.12.match", "kind": "MATCH", "summary": "Launch the ordinary generated BMC-recovery Ticket; no transport utility is promoted into a diagnostic Command." },
+        { "beat_id": "story.beat.qc02.12.branch", "kind": "OUTCOME_BRANCH", "summary": "Hana receives an independently verified recovery or keeps the unsafe/unresolved state bounded; a following Story handoff may document only the accepted result and its limits." },
+        { "beat_id": "story.beat.qc02.12.points", "kind": "SERVICE_POINT", "summary": "Add the authoritative final one-Ticket gain without retroactively grading campaign-one totals." },
+        { "beat_id": "story.beat.qc02.12.interruption", "kind": "INTERRUPTION", "summary": "An interrupted active Match returns to pre-Match and cannot claim that a flash or recovery session resumed." },
+        { "beat_id": "story.beat.qc02.12.follow_on", "kind": "FOLLOW_ON", "summary": "End at a single current-content checkpoint with the six explanations preserved for later scripting, audit, and release work." }
+      ]
+    }
+  ]
+}
