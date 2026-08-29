@@ -4,6 +4,8 @@
 
 **Complete — 2026-08-26.** Two pinned, replayable, real-engine Tutorials now cover the fundamentals and failed-Verify recovery paths; local completion is cosmetic/exportable, player-safe Isolation guidance exposes no truth, and solo Give Up renders an authoritative post-transition solution sequence with preserved-history comparison.
 
+**Post-completion follow-up — 2026-08-29.** Project-owner play found two player-facing gaps now owned by TASK-047 and TASK-048: the recovery tutorial can require Document Live when its legal recovery is an unexplained Pass, and the fundamentals Isolation explanation does not plainly contrast a confirmed non-actionable array condition with the merely supported actionable drive Fault. TASK-015's authority and privacy contracts remain unchanged.
+
 ## Approved authority
 
 PT-007 A requires two engine-driven tutorials: a fundamentals path and a failed-Verify/recovery path. Both use pinned versions/seeds and real engine/Builder legal intents; pause at semantic checkpoints; highlight and announce exact controls; support replay, keyboard, touch, screen readers, and reduced motion; and never fabricate tutorial-only authority. PT-005 A supplies the solo one-Ticket Give Up/reveal behavior rendered by this task.

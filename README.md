@@ -86,7 +86,9 @@ The repository now contains the playable rules-engine foundation and a deliberat
 
 ## Completed release work and next boundary
 
-No successor task is active. TASK-039 through TASK-046 completed the measured Story expansion sequence; a later task should begin only from a new reviewed contract.
+TASK-047 is active to make every tutorial action checkpoint expose a visible legal route, beginning with the failed-Verify tutorial's empty-looking Document Live step. TASK-048 follows to clarify the fundamentals lesson's mixed Evidence state: RAID Array Degraded is confirmed but non-actionable, while Failed SAS Drive is actionable but only supported at that checkpoint. Both are tutorial-reliability repairs and must preserve engine authority, frozen Evidence rules, and hidden-truth boundaries. See the [task index](docs/tasks/INDEX.md).
+
+TASK-039 through TASK-046 completed the measured Story expansion sequence.
 
 TASK-037 repaired the original campaign-one Shift 6 handoff. TASK-046 now preserves that completed history while continuing eligible saves into the released expansion, so the former campaign-one terminal surface is no longer the live content boundary.
 

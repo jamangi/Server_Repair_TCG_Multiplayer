@@ -4,7 +4,11 @@ Tasks are implementation contracts. A builder must read `AGENTS.md` and then the
 
 Beginning with TASK-011, the displayed task ID includes the recommended reasoning-effort suffix used when starting that task. `HIGH` denotes substantial but bounded implementation/research; `XHIGH` denotes a cross-cutting semantic, architectural, or broad content migration. The stable task number and existing filename do not change, preserving links and history.
 
-Active task: **None.** The TASK-039 through TASK-046 Story coverage and expansion sequence is complete; no successor task has been activated.
+Active task: **[`TASK-047-HIGH: Make tutorial Documentation checkpoints self-recovering`](TASK-047-make-tutorial-documentation-checkpoints-self-recovering.md).** It is a focused tutorial-reliability repair: the failed-Verify tutorial can reach its required Document Live checkpoint with no visible Document Live choice while its test harness silently recovers by passing the turn. TASK-047 must make that legal recovery explicit and guard every semantic checkpoint without changing engine authority.
+
+Planned next:
+
+- [`TASK-048-HIGH: Clarify actionable Isolation evidence in tutorial guidance`](TASK-048-clarify-actionable-isolation-evidence-in-tutorial-guidance.md) — the RAID Status result correctly confirms a non-actionable degraded-array condition while only supporting the actionable failed-drive candidate; the task must make that candidate-role contrast unmistakable without changing data, repair gates, or hidden-truth boundaries.
 
 Story coverage and expansion sequence: **complete.** Completed TASK-038 supplies the approved non-canonical review contract inherited by the released expansion.
 
