@@ -1,0 +1,674 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Server Repair Test Cards — Print Planner</title>
+  <style id="page-style">
+    @page { size: 8.5in 11in; margin: 0; }
+  </style>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #111;
+      --muted: #555;
+      --line: #a6a6a6;
+      --soft-line: #d4d4d4;
+      --panel: #fff;
+      --workspace: #e9e9e9;
+      --control: #f7f7f7;
+      --paper-width: 8.5in;
+      --paper-height: 11in;
+      --page-margin: 0.35in;
+      --card-width: 2.5in;
+      --card-height: 2.2in;
+      --card-gap: 0.15in;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body { margin: 0; min-height: 100%; }
+
+    body {
+      background: var(--workspace);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    button, select, input { font: inherit; }
+
+    .app-header {
+      padding: 22px clamp(18px, 4vw, 48px) 18px;
+      border-bottom: 1px solid #ccc;
+      background: #fff;
+    }
+
+    .header-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      max-width: 1500px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      margin: 0 0 7px;
+      font-size: clamp(1.45rem, 2.4vw, 2.15rem);
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+    }
+
+    .subtitle {
+      max-width: 780px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+      line-height: 1.45;
+    }
+
+    .print-button {
+      flex: 0 0 auto;
+      min-height: 42px;
+      padding: 9px 18px;
+      border: 1.5px solid #111;
+      border-radius: 8px;
+      background: #111;
+      color: #fff;
+      cursor: pointer;
+      font-weight: 750;
+    }
+
+    .print-button:hover { background: #333; }
+    .print-button:focus-visible, select:focus-visible, input:focus-visible {
+      outline: 3px solid #777;
+      outline-offset: 2px;
+    }
+
+    .controls {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid #c6c6c6;
+      background: rgba(255, 255, 255, 0.97);
+      box-shadow: 0 5px 16px rgba(0, 0, 0, 0.06);
+    }
+
+    .controls-inner {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(110px, 1fr));
+      gap: 13px 16px;
+      max-width: 1500px;
+      margin: 0 auto;
+      padding: 15px clamp(18px, 4vw, 48px) 13px;
+      align-items: end;
+    }
+
+    .field {
+      display: grid;
+      gap: 5px;
+      min-width: 0;
+    }
+
+    .field label, .field-label {
+      color: #333;
+      font-size: 0.73rem;
+      font-weight: 800;
+      letter-spacing: 0.055em;
+      text-transform: uppercase;
+    }
+
+    .field select, .field input[type="number"] {
+      width: 100%;
+      min-height: 38px;
+      border: 1px solid #aaa;
+      border-radius: 6px;
+      background: var(--control);
+      color: #111;
+      padding: 7px 9px;
+    }
+
+    .number-with-unit {
+      display: grid;
+      grid-template-columns: minmax(55px, 1fr) auto;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .unit {
+      color: #555;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .check-field {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-height: 38px;
+      padding: 7px 2px;
+      font-size: 0.88rem;
+      font-weight: 650;
+    }
+
+    .check-field input { width: 18px; height: 18px; accent-color: #222; }
+
+    .status-row {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px 20px;
+      padding-top: 1px;
+      color: #444;
+      font-size: 0.83rem;
+    }
+
+    #layout-summary { font-weight: 750; color: #1e1e1e; }
+    #fit-summary[data-warning="true"] { color: #7a2d00; font-weight: 750; }
+
+    .preview-area {
+      min-height: 60vh;
+      overflow: hidden;
+      padding: 32px 18px 60px;
+    }
+
+    .pages {
+      display: grid;
+      justify-items: center;
+      gap: 26px;
+      width: 100%;
+    }
+
+    .paper-wrapper {
+      position: relative;
+      flex: none;
+    }
+
+    .sheet {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: grid;
+      align-content: start;
+      justify-content: start;
+      width: var(--paper-width);
+      height: var(--paper-height);
+      padding: var(--page-margin);
+      gap: var(--card-gap);
+      overflow: hidden;
+      transform-origin: top left;
+      background: #fff;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18), 0 0 0 1px #c9c9c9;
+    }
+
+    .test-card {
+      display: flex;
+      flex-direction: column;
+      width: var(--card-width);
+      height: var(--card-height);
+      min-width: 0;
+      min-height: 0;
+      overflow: hidden;
+      border: 1.2px solid var(--line);
+      border-radius: 0.10in;
+      background: #fff;
+      color: #111;
+      padding: 0.15in 0.16in 0.14in;
+      font-size: 11px;
+      line-height: 1.3;
+      break-inside: avoid;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: 0.045in;
+      margin-bottom: 0.085in;
+    }
+
+    .tag {
+      display: inline-flex;
+      max-width: 100%;
+      border: 0.8px solid #888;
+      border-radius: 999px;
+      padding: 0.022in 0.07in 0.018in;
+      color: #222;
+      font-size: 0.69em;
+      font-weight: 850;
+      line-height: 1.15;
+      letter-spacing: 0.035em;
+      overflow-wrap: anywhere;
+      text-transform: uppercase;
+    }
+
+    .card-title {
+      margin: 0 0 0.075in;
+      color: #050505;
+      font-size: 1.22em;
+      font-weight: 800;
+      line-height: 1.12;
+      letter-spacing: -0.018em;
+      overflow-wrap: anywhere;
+    }
+
+    .card-description {
+      margin: 0;
+      color: #292929;
+      font-size: 0.93em;
+      line-height: 1.34;
+      overflow-wrap: anywhere;
+    }
+
+    .test-card.is-overflowing {
+      border-style: dashed;
+      border-color: #7a2d00;
+    }
+
+    .empty-sheet-note {
+      color: #555;
+      font-size: 14px;
+    }
+
+    .print-help {
+      max-width: 900px;
+      margin: 0 auto 30px;
+      padding: 0 18px;
+      color: #555;
+      font-size: 0.83rem;
+      line-height: 1.45;
+      text-align: center;
+    }
+
+    @media (max-width: 1080px) {
+      .controls-inner { grid-template-columns: repeat(4, minmax(120px, 1fr)); }
+    }
+
+    @media (max-width: 680px) {
+      .header-row { display: grid; }
+      .print-button { width: 100%; }
+      .controls { position: static; }
+      .controls-inner { grid-template-columns: repeat(2, minmax(120px, 1fr)); }
+      .status-row { display: grid; }
+    }
+
+    @media print {
+      html, body {
+        width: var(--paper-width);
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #fff !important;
+      }
+
+      .app-header, .controls, .print-help { display: none !important; }
+
+      .preview-area {
+        width: var(--paper-width);
+        margin: 0;
+        padding: 0;
+        overflow: visible;
+        background: #fff;
+      }
+
+      .pages {
+        display: block;
+        width: var(--paper-width);
+      }
+
+      .paper-wrapper {
+        width: var(--paper-width) !important;
+        height: var(--paper-height) !important;
+        margin: 0 !important;
+        break-after: page;
+        page-break-after: always;
+      }
+
+      .paper-wrapper:last-child {
+        break-after: auto;
+        page-break-after: auto;
+      }
+
+      .sheet {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none !important;
+        box-shadow: none;
+      }
+
+      .test-card {
+        border-color: #888;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+
+      .test-card.is-overflowing { border-style: solid; border-color: #888; }
+    }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-row">
+      <div>
+        <h1>Server Repair Test Cards</h1>
+        <p class="subtitle">All 37 Test records from the Core v0.1 viewer, reformatted as low-ink notebook cards. Choose physical paper and card dimensions below; the page preview repaginates immediately.</p>
+      </div>
+      <button class="print-button" id="print-button" type="button">Print cards</button>
+    </div>
+  </header>
+
+  <section class="controls" aria-label="Print layout controls">
+    <div class="controls-inner">
+      <div class="field">
+        <label for="paper-size">Paper size</label>
+        <select id="paper-size">
+          <option value="letter" selected>US Letter — 8.5 × 11 in</option>
+          <option value="a4">A4 — 210 × 297 mm</option>
+          <option value="legal">US Legal — 8.5 × 14 in</option>
+          <option value="a5">A5 — 148 × 210 mm</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="orientation">Orientation</label>
+        <select id="orientation">
+          <option value="portrait" selected>Portrait</option>
+          <option value="landscape">Landscape</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="card-preset">Card size</label>
+        <select id="card-preset">
+          <option value="compact" selected>Compact notebook — 2.5 × 2.2 in</option>
+          <option value="standard">Roomy notebook — 3.25 × 2.5 in</option>
+          <option value="business">Wide small card — 3.5 × 2 in</option>
+          <option value="index">Index card — 3 × 5 in</option>
+          <option value="custom">Custom dimensions</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="card-width">Card width</label>
+        <div class="number-with-unit">
+          <input id="card-width" type="number" min="1.5" max="10" step="0.05" value="2.5">
+          <span class="unit">in</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="card-height">Card height</label>
+        <div class="number-with-unit">
+          <input id="card-height" type="number" min="1.2" max="13" step="0.05" value="2.2">
+          <span class="unit">in</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="page-margin">Page margin</label>
+        <select id="page-margin">
+          <option value="0.25">0.25 in</option>
+          <option value="0.35" selected>0.35 in</option>
+          <option value="0.5">0.5 in</option>
+          <option value="0.75">0.75 in</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="card-gap">Cutting gap</label>
+        <select id="card-gap">
+          <option value="0">None</option>
+          <option value="0.08">0.08 in</option>
+          <option value="0.15" selected>0.15 in</option>
+          <option value="0.25">0.25 in</option>
+        </select>
+      </div>
+
+      <label class="check-field">
+        <input id="auto-fit" type="checkbox" checked>
+        Auto-fit long text
+      </label>
+
+      <div class="status-row" aria-live="polite">
+        <span id="layout-summary"></span>
+        <span id="fit-summary"></span>
+        <span>Preview is scaled on screen; print dimensions remain physical.</span>
+      </div>
+    </div>
+  </section>
+
+  <main class="preview-area" id="preview-area">
+    <div class="pages" id="pages"></div>
+  </main>
+
+  <p class="print-help">For accurate dimensions, use 100% or “Actual size,” disable browser headers and footers, and choose no additional print-dialog margins. The document itself already includes the selected margin.</p>
+
+  <script>
+    "use strict";
+
+    const TESTS = [{"id":"test.management.bmc_recovery_state","title":"BMC Recovery-State Test","description":"Determines whether the baseboard management controller (BMC) is reachable, resettable, in recovery mode, or unrecoverable.","type":"firmware diagnostic"},{"id":"test.electrical.continuity","title":"Continuity Test","description":"Checks whether a documented, de-energized electrical path conducts between specified endpoints, revealing an open or unintended connection.","type":"electrical"},{"id":"test.system.controlled_stress","title":"Controlled Stress Test","description":"Applies an approved processor, memory, or combined workload while monitoring temperatures, hardware errors, and resets to reproduce intermittent memory or thermal behavior.","type":"stress"},{"id":"test.network.dhcp_pool_audit","title":"DHCP Address Pool Audit","description":"Inspects free-address capacity, active leases, exclusions, and stale reservations on the Dynamic Host Configuration Protocol (DHCP) service.","type":"server-side configuration and capacity audit"},{"id":"test.network.dhcp_transaction_trace","title":"DHCP Transaction Trace","description":"Interprets a Dynamic Host Configuration Protocol (DHCP) client exchange to distinguish an absent server offer from client-side address-configuration problems.","type":"protocol transaction analysis"},{"id":"test.storage.bay_path_isolation","title":"Drive Bay Path Isolation","description":"Uses protected inventory and compatible known-good media to learn whether a storage failure follows a drive or remains at one bay or backplane path.","type":"substitution"},{"id":"test.storage.drive_health","title":"Drive Health Test","description":"Reads supported drive-health status, media-error data, predictive warnings, and self-test history to identify a failed or degrading storage device.","type":"diagnostic"},{"id":"test.management.event_log_freshness","title":"Event Log Freshness Test","description":"Preserves current management logs, refreshes controller state, and checks whether the target alert returns under the complaint conditions.","type":"reproduction"},{"id":"test.thermal.fan_telemetry","title":"Fan Telemetry Inspection","description":"Compares commanded and reported fan speed in revolutions per minute (RPM), presence, sensor transitions, and physical rotation to separate a failed fan from its sense path.","type":"diagnostic"},{"id":"test.cooling.location_cross_substitution","title":"Fan-to-Location Cross-Substitution","description":"Temporarily swaps compatible fans between documented locations to learn whether a telemetry fault follows the fan or remains at its connector.","type":"substitution"},{"id":"test.boot.device_inventory","title":"Firmware Boot Device Inventory","description":"Compares firmware-detected boot devices and their order with the intended startup source, distinguishing a missing device from a misordered boot path.","type":"inspection"},{"id":"test.firmware.settings_review","title":"Firmware Settings Review","description":"Compares firmware boot, hardware, clock, and management settings with the approved baseline to identify reset or unintended configuration changes.","type":"inspection"},{"id":"test.firmware.version_compatibility","title":"Firmware Version Compatibility Review","description":"Compares basic input/output system (BIOS), baseboard management controller (BMC), storage, network, and device firmware with an approved compatible baseline.","type":"configuration review"},{"id":"test.network.interface_config","title":"Interface Configuration Inspection","description":"Reviews interface state, Internet Protocol (IP) addresses and prefixes, lease information, routes, and the default gateway to identify an incorrect or missing network configuration.","type":"network"},{"id":"test.memory.known_good_substitution","title":"Known-Good DIMM Substitution","description":"Temporarily substitutes a compatible known-good dual in-line memory module (DIMM) and compares startup, inventory, and errors to separate a module fault from a slot or channel fault.","type":"substitution"},{"id":"test.network.cable_substitution","title":"Known-Good Ethernet Cable Test","description":"Replaces the current Ethernet cable with a verified compatible cable and compares carrier, error counters, and reachability to isolate the cable from the adapter or switch port.","type":"substitution"},{"id":"test.power.known_good_psu","title":"Known-Good PSU Test","description":"Temporarily substitutes a compatible known-good power supply unit (PSU) and compares power, status, and bay behavior to separate a supply fault from a shared distribution fault.","type":"substitution"},{"id":"test.compute.socket_magnified_inspection","title":"Magnified CPU Socket Inspection","description":"Inspects central processing unit (CPU) socket contact alignment, contamination, damage, and mounting evidence under controlled magnification.","type":"inspection"},{"id":"test.system.bmc_logs","title":"Management Event Log Review","description":"Correlates timestamped baseboard management controller (BMC) event-log and sensor entries with the complaint to identify affected hardware and recurrence.","type":"diagnostic"},{"id":"test.memory.diagnostic","title":"Memory Diagnostic","description":"Exercises dual in-line memory modules (DIMMs) with memory patterns and sustained access while observing error-correcting code (ECC) reports, failures, and affected locations.","type":"diagnostic"},{"id":"test.general.minimum_configuration","title":"Minimum Configuration Test","description":"Reduces the server to its documented minimum boot configuration and observes power and startup behavior to separate core-platform faults from removable-device faults.","type":"isolation"},{"id":"test.network.link_counter_soak","title":"Network Link and Counter Soak","description":"Observes Ethernet link transitions and interface error counters over a defined interval after a firmware-related change.","type":"soak"},{"id":"test.network.link","title":"Network Link Test","description":"Observes Ethernet carrier, negotiated speed and duplex, indicators, and link errors to determine whether the physical link is present and stable.","type":"inspection"},{"id":"test.pcie.inventory","title":"PCIe Device Inventory","description":"Compares enumerated Peripheral Component Interconnect Express (PCIe) devices, identifiers, and link information with the expected hardware inventory to find a missing or unexpected adapter.","type":"inspection"},{"id":"test.network.ping","title":"Ping Connectivity Test","description":"Sends Internet Control Message Protocol (ICMP) Echo probes to selected local, gateway, and remote destinations to measure basic Internet Protocol reachability, loss, and timing.","type":"network"},{"id":"test.boot.post_code_analysis","title":"POST Code Analysis","description":"Records Power-On Self-Test (POST) codes and indicators, then maps them to the platform fault reference to identify the startup stage that did not complete.","type":"diagnostic"},{"id":"test.boot.post_observation","title":"POST Observation","description":"Observes Power-On Self-Test (POST) progress, console output, indicator codes, and audible signals to locate where startup stops or degrades.","type":"inspection"},{"id":"test.power.distribution_path_isolation","title":"Power Distribution Path Isolation","description":"Compares known-good power supply units (PSUs) across supported bays and minimum configuration to isolate a shared power-distribution fault.","type":"isolation"},{"id":"test.power.output_voltage_measurement","title":"Power Output Voltage Measurement","description":"Measures documented power rails and power-good signals with an appropriate meter and the platform connector pinout.","type":"electrical measurement"},{"id":"test.storage.predictive_health","title":"Predictive Drive Health Analysis","description":"Reviews Self-Monitoring, Analysis and Reporting Technology (SMART), controller, media-error, and endurance data before an online drive fails completely.","type":"health diagnostic"},{"id":"test.power.psu_status","title":"PSU Status Inspection","description":"Reviews power supply unit (PSU) presence, indicators, management sensors, input state, output state, and event codes to distinguish a failed or unseated supply from a shared power problem.","type":"inspection"},{"id":"test.storage.raid_status","title":"RAID Status Inspection","description":"Reads redundant array of independent disks (RAID) controller, array, member, redundancy, rebuild, and error state to distinguish a failed member, degraded array, or controller-visibility problem.","type":"diagnostic"},{"id":"test.power.residual_power_drain","title":"Residual-Power Drain Test","description":"Safely removes all external power, discharges residual state, and then compares symptoms after controlled re-energization.","type":"state reset and symptom comparison"},{"id":"test.memory.single_dimm_isolation","title":"Single-DIMM Isolation","description":"Tests one compatible dual in-line memory module (DIMM) at a time in approved slots, comparing startup, detected capacity, and errors to isolate a module, population, or channel problem.","type":"isolation"},{"id":"test.storage.device_inventory","title":"Storage Device Inventory","description":"Compares storage devices reported by firmware, controller, and operating-system layers, including model, serial, capacity, and path, to locate where an expected device disappears.","type":"inspection"},{"id":"test.thermal.temperature_monitoring","title":"Temperature Monitoring","description":"Observes processor and platform temperature sensors at idle and under a controlled load, revealing trends, limit crossings, and thermal-shutdown conditions.","type":"diagnostic"},{"id":"test.general.visual_inspection","title":"Visual Inspection","description":"Checks accessible hardware for loose seating, damaged connectors, blocked airflow, contamination, and other visible conditions that can explain the reported symptom.","type":"inspection"}];
+
+    const PAPER_SIZES = {
+      letter: { width: 8.5, height: 11, label: "US Letter" },
+      a4: { width: 8.2677, height: 11.6929, label: "A4" },
+      legal: { width: 8.5, height: 14, label: "US Legal" },
+      a5: { width: 5.8268, height: 8.2677, label: "A5" }
+    };
+
+    const CARD_PRESETS = {
+      compact: { width: 2.5, height: 2.2 },
+      standard: { width: 3.25, height: 2.5 },
+      business: { width: 3.5, height: 2 },
+      index: { width: 3, height: 5 }
+    };
+
+    const elements = {
+      paper: document.querySelector("#paper-size"),
+      orientation: document.querySelector("#orientation"),
+      preset: document.querySelector("#card-preset"),
+      cardWidth: document.querySelector("#card-width"),
+      cardHeight: document.querySelector("#card-height"),
+      margin: document.querySelector("#page-margin"),
+      gap: document.querySelector("#card-gap"),
+      autoFit: document.querySelector("#auto-fit"),
+      pages: document.querySelector("#pages"),
+      previewArea: document.querySelector("#preview-area"),
+      layoutSummary: document.querySelector("#layout-summary"),
+      fitSummary: document.querySelector("#fit-summary"),
+      pageStyle: document.querySelector("#page-style"),
+      printButton: document.querySelector("#print-button")
+    };
+
+    let latestLayout = null;
+    let renderFrame = 0;
+
+    function clampNumber(value, min, max, fallback) {
+      const number = Number(value);
+      return Number.isFinite(number) ? Math.min(max, Math.max(min, number)) : fallback;
+    }
+
+    function currentLayout() {
+      const paper = PAPER_SIZES[elements.paper.value];
+      const landscape = elements.orientation.value === "landscape";
+      const paperWidth = landscape ? paper.height : paper.width;
+      const paperHeight = landscape ? paper.width : paper.height;
+      const cardWidth = clampNumber(elements.cardWidth.value, 1.5, 10, 2.5);
+      const cardHeight = clampNumber(elements.cardHeight.value, 1.2, 13, 2.2);
+      const margin = clampNumber(elements.margin.value, 0, 1.5, 0.35);
+      const gap = clampNumber(elements.gap.value, 0, 0.5, 0.15);
+      const usableWidth = Math.max(0, paperWidth - margin * 2);
+      const usableHeight = Math.max(0, paperHeight - margin * 2);
+      const columns = Math.max(0, Math.floor((usableWidth + gap + 0.0001) / (cardWidth + gap)));
+      const rows = Math.max(0, Math.floor((usableHeight + gap + 0.0001) / (cardHeight + gap)));
+      const perPage = columns * rows;
+
+      return { paper, paperWidth, paperHeight, cardWidth, cardHeight, margin, gap, columns, rows, perPage };
+    }
+
+    function createCard(test, layout) {
+      const article = document.createElement("article");
+      article.className = "test-card";
+      article.dataset.id = test.id;
+      article.style.fontSize = `${baseFontPixels(layout)}px`;
+
+      const tags = document.createElement("div");
+      tags.className = "tags";
+      tags.append(createTag("Tests"), createTag(test.type));
+
+      const title = document.createElement("h2");
+      title.className = "card-title";
+      title.textContent = test.title;
+
+      const description = document.createElement("p");
+      description.className = "card-description";
+      description.textContent = test.description;
+
+      article.append(tags, title, description);
+      return article;
+    }
+
+    function createTag(text) {
+      const tag = document.createElement("span");
+      tag.className = "tag";
+      tag.textContent = text;
+      return tag;
+    }
+
+    function baseFontPixels(layout) {
+      const compactness = Math.min(layout.cardWidth / 2.5, layout.cardHeight / 2.2);
+      return Math.max(9.2, Math.min(14.2, 11.1 * Math.sqrt(compactness)));
+    }
+
+    function render() {
+      const layout = currentLayout();
+      latestLayout = layout;
+      const root = document.documentElement;
+      root.style.setProperty("--paper-width", `${layout.paperWidth}in`);
+      root.style.setProperty("--paper-height", `${layout.paperHeight}in`);
+      root.style.setProperty("--page-margin", `${layout.margin}in`);
+      root.style.setProperty("--card-width", `${layout.cardWidth}in`);
+      root.style.setProperty("--card-height", `${layout.cardHeight}in`);
+      root.style.setProperty("--card-gap", `${layout.gap}in`);
+      elements.pageStyle.textContent = `@page { size: ${layout.paperWidth}in ${layout.paperHeight}in; margin: 0; }`;
+
+      elements.pages.replaceChildren();
+
+      if (layout.perPage < 1) {
+        const note = document.createElement("p");
+        note.className = "empty-sheet-note";
+        note.textContent = "The selected card size does not fit inside this paper and margin combination.";
+        elements.pages.append(note);
+        elements.layoutSummary.textContent = "0 cards fit per page";
+        elements.fitSummary.textContent = "Reduce the card size or page margin.";
+        elements.fitSummary.dataset.warning = "true";
+        return;
+      }
+
+      const pageCount = Math.ceil(TESTS.length / layout.perPage);
+      for (let pageIndex = 0; pageIndex < pageCount; pageIndex += 1) {
+        const wrapper = document.createElement("div");
+        wrapper.className = "paper-wrapper";
+
+        const sheet = document.createElement("section");
+        sheet.className = "sheet";
+        sheet.setAttribute("aria-label", `Print page ${pageIndex + 1} of ${pageCount}`);
+        sheet.style.gridTemplateColumns = `repeat(${layout.columns}, ${layout.cardWidth}in)`;
+        sheet.style.gridTemplateRows = `repeat(${layout.rows}, ${layout.cardHeight}in)`;
+
+        const start = pageIndex * layout.perPage;
+        const pageTests = TESTS.slice(start, start + layout.perPage);
+        pageTests.forEach((test) => sheet.append(createCard(test, layout)));
+        wrapper.append(sheet);
+        elements.pages.append(wrapper);
+      }
+
+      elements.layoutSummary.textContent = `${layout.columns} columns × ${layout.rows} rows = ${layout.perPage} cards per page · ${pageCount} pages for ${TESTS.length} cards`;
+      scalePreview();
+      fitAllCards();
+    }
+
+    function scalePreview() {
+      if (!latestLayout || latestLayout.perPage < 1) return;
+      const paperPixelsWide = latestLayout.paperWidth * 96;
+      const paperPixelsHigh = latestLayout.paperHeight * 96;
+      const availableWidth = Math.max(240, elements.previewArea.clientWidth - 42);
+      const scale = Math.min(1, availableWidth / paperPixelsWide);
+
+      document.querySelectorAll(".paper-wrapper").forEach((wrapper) => {
+        wrapper.style.width = `${paperPixelsWide * scale}px`;
+        wrapper.style.height = `${paperPixelsHigh * scale}px`;
+        const sheet = wrapper.querySelector(".sheet");
+        sheet.style.transform = `scale(${scale})`;
+      });
+    }
+
+    function fitAllCards() {
+      cancelAnimationFrame(renderFrame);
+      renderFrame = requestAnimationFrame(() => {
+        const cards = [...document.querySelectorAll(".test-card")];
+        let adjusted = 0;
+        let overflow = 0;
+        const useAutoFit = elements.autoFit.checked;
+
+        cards.forEach((card) => {
+          const initial = baseFontPixels(latestLayout);
+          let size = initial;
+          card.style.fontSize = `${size}px`;
+          card.classList.remove("is-overflowing");
+
+          if (useAutoFit) {
+            while (card.scrollHeight > card.clientHeight + 1 && size > 7) {
+              size -= 0.25;
+              card.style.fontSize = `${size}px`;
+            }
+          }
+
+          if (size < initial - 0.1) adjusted += 1;
+          if (card.scrollHeight > card.clientHeight + 1) {
+            overflow += 1;
+            card.classList.add("is-overflowing");
+          }
+        });
+
+        if (overflow > 0) {
+          elements.fitSummary.textContent = `${overflow} card${overflow === 1 ? "" : "s"} still overflow; choose a larger size.`;
+          elements.fitSummary.dataset.warning = "true";
+        } else if (adjusted > 0) {
+          elements.fitSummary.textContent = `Auto-fit slightly reduced text on ${adjusted} card${adjusted === 1 ? "" : "s"}.`;
+          elements.fitSummary.dataset.warning = "false";
+        } else {
+          elements.fitSummary.textContent = "All card text fits at the standard size.";
+          elements.fitSummary.dataset.warning = "false";
+        }
+      });
+    }
+
+    function applyPreset() {
+      const preset = CARD_PRESETS[elements.preset.value];
+      if (!preset) return;
+      elements.cardWidth.value = preset.width;
+      elements.cardHeight.value = preset.height;
+      render();
+    }
+
+    elements.preset.addEventListener("change", applyPreset);
+    [elements.paper, elements.orientation, elements.margin, elements.gap].forEach((element) => {
+      element.addEventListener("change", render);
+    });
+    [elements.cardWidth, elements.cardHeight].forEach((element) => {
+      element.addEventListener("input", () => {
+        elements.preset.value = "custom";
+        render();
+      });
+    });
+    elements.autoFit.addEventListener("change", fitAllCards);
+    elements.printButton.addEventListener("click", () => window.print());
+    window.addEventListener("resize", scalePreview);
+    window.addEventListener("beforeprint", fitAllCards);
+
+    render();
+  </script>
+</body>
+</html>
