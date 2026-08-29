@@ -56,6 +56,7 @@
           ],
           "target": "BENCH",
           "action_type": "RUN_TEST",
+          "card_definition_id": "card.core.visual_inspection",
           "source_definition_id": "test.general.visual_inspection",
           "expected_event_types": ["EVIDENCE_CREATED"],
           "support_action_types": ["PASS_TURN"]
@@ -79,6 +80,7 @@
           ],
           "target": "BENCH",
           "action_type": "RUN_TEST",
+          "card_definition_id": "card.core.raid_status_inspection",
           "source_definition_id": "test.storage.raid_status",
           "expected_event_types": ["EVIDENCE_CREATED"],
           "support_action_types": ["PASS_TURN"]
@@ -102,6 +104,7 @@
           ],
           "target": "BENCH",
           "action_type": "RUN_TEST",
+          "card_definition_id": "card.core.drive_health_test",
           "source_definition_id": "test.storage.drive_health",
           "expected_event_types": ["EVIDENCE_CREATED"],
           "support_action_types": ["PASS_TURN"]
@@ -128,6 +131,7 @@
           ],
           "target": "HAND",
           "action_type": "PERFORM_REPAIR",
+          "card_definition_id": "card.core.replace_raid_member",
           "source_definition_id": "repair.storage.replace_raid_member",
           "expected_event_types": ["MACHINE_STATE_CHANGED"],
           "support_action_types": ["SEARCH", "REFRESH", "PASS_TURN"]
@@ -141,6 +145,7 @@
           ],
           "target": "HAND",
           "action_type": "PERFORM_VERIFY",
+          "card_definition_id": "card.core.raid_health_verification",
           "source_definition_id": "verify.storage.raid_healthy",
           "expected_event_types": ["VERIFY_RESOLVED"],
           "support_action_types": ["SEARCH", "REFRESH", "PASS_TURN"]
@@ -160,7 +165,7 @@
           "checkpoint_kind": "ACTION",
           "title": "Publish one live Worklog entry",
           "body": [
-            "Open the full Ticket and choose one Document Live control. The original accepted action remains unchanged; publication enriches its Worklog entry."
+            "Open the full Ticket and choose one Document Live control. Document Live costs 1 Action. The original accepted action remains unchanged; publication enriches its Worklog entry."
           ],
           "target": "DOCUMENTATION",
           "action_type": "DOCUMENT_LIVE",
@@ -205,6 +210,7 @@
           "body": ["Run RAID Status Inspection on the displayed Ticket to record supporting Evidence for the failed member."],
           "target": "BENCH",
           "action_type": "RUN_TEST",
+          "card_definition_id": "card.core.raid_status_inspection",
           "source_definition_id": "test.storage.raid_status",
           "expected_event_types": ["EVIDENCE_CREATED"],
           "support_action_types": ["PASS_TURN"]
@@ -216,6 +222,7 @@
           "body": ["Run Drive Health Test. Its public candidate-specific CONFIRM supplies the decisive first-stage Evidence."],
           "target": "BENCH",
           "action_type": "RUN_TEST",
+          "card_definition_id": "card.core.drive_health_test",
           "source_definition_id": "test.storage.drive_health",
           "expected_event_types": ["EVIDENCE_CREATED"],
           "support_action_types": ["PASS_TURN"]
@@ -238,6 +245,7 @@
           "body": ["Use Replace RAID Member. Search, Refresh, or Pass are available when needed; the Repair itself remains an ordinary legal engine intent."],
           "target": "HAND",
           "action_type": "PERFORM_REPAIR",
+          "card_definition_id": "card.core.replace_raid_member",
           "source_definition_id": "repair.storage.replace_raid_member",
           "expected_event_types": ["MACHINE_STATE_CHANGED"],
           "support_action_types": ["SEARCH", "REFRESH", "PASS_TURN"]
@@ -249,6 +257,7 @@
           "body": ["Use RAID Health Verification. The real authored result fails: the member is online, but the degraded array still needs a distinct Isolation and rebuild."],
           "target": "HAND",
           "action_type": "PERFORM_VERIFY",
+          "card_definition_id": "card.core.raid_health_verification",
           "source_definition_id": "verify.storage.raid_healthy",
           "expected_event_types": ["VERIFY_RESOLVED", "TICKET_RETURNED_TO_DIAGNOSIS"],
           "support_action_types": ["SEARCH", "REFRESH", "PASS_TURN"]
@@ -281,6 +290,7 @@
           "body": ["Use Rebuild RAID Array. This is a second machine-state change owned by the second accepted Isolation, not a retry of the first Repair."],
           "target": "HAND",
           "action_type": "PERFORM_REPAIR",
+          "card_definition_id": "card.core.rebuild_raid_array",
           "source_definition_id": "repair.storage.rebuild_array",
           "expected_event_types": ["MACHINE_STATE_CHANGED"],
           "support_action_types": ["SEARCH", "REFRESH", "PASS_TURN"]
@@ -292,6 +302,7 @@
           "body": ["Use RAID Health Verification again. This current pass satisfies the requirement after the latest Repair; the earlier failure remains preserved."],
           "target": "HAND",
           "action_type": "PERFORM_VERIFY",
+          "card_definition_id": "card.core.raid_health_verification",
           "source_definition_id": "verify.storage.raid_healthy",
           "expected_event_types": ["VERIFY_RESOLVED"],
           "support_action_types": ["SEARCH", "REFRESH", "PASS_TURN"]
@@ -307,7 +318,7 @@
           "id": "tutorial.verify_recovery.document_live",
           "checkpoint_kind": "ACTION",
           "title": "Publish one recovery entry",
-          "body": ["Open the full Ticket and publish one eligible accepted action with Document Live."],
+          "body": ["Open the full Ticket and publish one eligible accepted action with Document Live. It costs 1 Action; if none remain, the coach will identify and target Pass before returning here."],
           "target": "DOCUMENTATION",
           "action_type": "DOCUMENT_LIVE",
           "expected_event_types": ["WORKLOG_PUBLICATION"],

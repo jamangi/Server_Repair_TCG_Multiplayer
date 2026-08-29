@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 
 import { SoloGameSession } from '../viewer/js/play/game-session.mjs';
-import { paymentSummary } from '../viewer/js/play/pages/game-page.mjs';
+import { buildDocumentPreviewModels, paymentSummary } from '../viewer/js/play/pages/game-page.mjs';
 
 function projection({ selectedActions = 2 } = {}) {
   return {
@@ -149,4 +149,59 @@ test('Document Live settlement retains rejection context and routes accepted foc
   assert.equal(session.panelTab, 'worklog');
   assert.equal(session.lastAction.result_event_id, 'event.worklog.005');
   assert.equal(session.restoreDocumentedWorklogFocus, 'event.worklog.005');
+});
+
+test('pending documentable records remain present without an affordable Document Live intent', () => {
+  const ticketId = 'match.ticket.001';
+  const source = {
+    ticket_instance_id: ticketId,
+    source_action_event_id: 'event.worklog.005',
+    source_result_event_id: 'event.evidence.006',
+    worklog_placeholder_event_id: 'event.worklog.005',
+    source_card_instance_id: 'card.instance.001',
+    source_card_owner_player_id: 'player.solo',
+    recovery_available: false,
+  };
+  const projection = {
+    legal_intents: [],
+    view: {
+      documentable_actions: [source],
+      authorized_events: [{
+        event_id: source.source_result_event_id,
+        ticket_instance_id: ticketId,
+        visibility: 'PRIVATE_PLAYER',
+        payload: { public_summary: 'Exact authorized pending result.' },
+      }],
+      public_match: {
+        repair_queue: [{
+          ticket_instance_id: ticketId,
+          worklog: [{
+            placeholder_event_id: source.worklog_placeholder_event_id,
+            sequence: 5,
+            source_name: 'Drive Health Test',
+            actor_player_id: 'player.solo',
+            action_time: '2026-08-29T12:00:00.000Z',
+          }],
+        }],
+      },
+    },
+  };
+  const [pending] = buildDocumentPreviewModels(projection);
+  assert.equal(pending.document_live_legal, false);
+  assert.equal(pending.intent_id, null);
+  assert.equal(pending.source_name, 'Drive Health Test');
+  assert.equal(pending.public_summary, 'Exact authorized pending result.');
+
+  projection.legal_intents.push({
+    intent_id: 'intent.8.0001',
+    action_type: 'DOCUMENT_LIVE',
+    ticket_instance_id: ticketId,
+    source_action_event_id: source.source_action_event_id,
+  });
+  const [affordable] = buildDocumentPreviewModels(projection);
+  assert.equal(affordable.document_live_legal, true);
+  assert.equal(affordable.intent_id, 'intent.8.0001');
+
+  projection.view.documentable_actions = [];
+  assert.deepEqual(buildDocumentPreviewModels(projection), []);
 });

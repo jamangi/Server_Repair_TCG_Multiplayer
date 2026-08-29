@@ -19,6 +19,7 @@
         "body": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
         "target": { "enum": ["TICKET", "RESOURCES", "CANDIDATES", "BENCH", "EVIDENCE", "ISOLATION_GUIDANCE", "HAND", "DOCUMENTATION", "BASIC_ACTIONS", "RESULT"] },
         "action_type": { "$ref": "#/$defs/actionType" },
+        "card_definition_id": { "$ref": "#/$defs/stableId" },
         "source_definition_id": { "$ref": "#/$defs/stableId" },
         "candidate_source": { "const": "LATEST_CONFIRM" },
         "expected_event_types": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]+$" } },

@@ -2621,6 +2621,9 @@
 .play-app .documentation-workflow > p { margin: 0.25rem 0 0.55rem; color: #9db6be; font-size: 0.72rem; }
 .play-app .documentation-workflow .candidate-actions { justify-content: flex-start; }
 .play-app .documentation-workflow .basic-action--document { border-color: rgba(93, 216, 198, 0.58); color: #dbfff8; background: rgba(20, 86, 77, 0.52); }
+.play-app .documentation-workflow[data-documentable-state="pending-actions"] { border-style: dashed; }
+.play-app .documentation-workflow [data-document-pending] { text-decoration: none; opacity: 0.82; }
+.play-app .documentation-workflow__closure-note { padding-top: 0.45rem; border-top: 1px solid rgba(119, 196, 218, 0.24); }
 .play-app .full-ticket-dialog .documentation-workflow { border-color: var(--play-paper-candidate-border); color: var(--play-paper-candidate-fg); background: #e0e5dd; }
 .play-app .full-ticket-dialog .documentation-workflow > p { color: var(--play-paper-candidate-fg); }
 .play-app .full-ticket-dialog .documentation-workflow .basic-action--document { border-color: var(--play-paper-state-public); color: var(--play-paper-candidate-fg); background: #d4e5df; }

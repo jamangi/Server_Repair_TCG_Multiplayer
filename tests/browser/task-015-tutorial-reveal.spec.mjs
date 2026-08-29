@@ -125,13 +125,13 @@ async function submitProjectedIntent(page, intent, mode) {
 }
 
 function expectedProjectedIntent(projection, checkpoint) {
-  const cardId = cardIdBySource.get(checkpoint.source_definition_id);
+  const cardId = checkpoint.card_definition_id ?? cardIdBySource.get(checkpoint.source_definition_id);
   return projection.legal_intents.find((intent) => intent.action_type === checkpoint.action_type
     && (!cardId || intent.card_definition_id === cardId));
 }
 
 function helperProjectedIntent(projection, checkpoint) {
-  const cardId = cardIdBySource.get(checkpoint.source_definition_id);
+  const cardId = checkpoint.card_definition_id ?? cardIdBySource.get(checkpoint.source_definition_id);
   if (cardId && checkpoint.support_action_types.includes('SEARCH')) {
     const search = projection.legal_intents.find((intent) => intent.action_type === 'SEARCH'
       && intent.selected_card_definition_id === cardId);
@@ -148,7 +148,7 @@ function helperProjectedIntent(projection, checkpoint) {
 }
 
 async function enabledExpectedIntent(page, projection, checkpoint) {
-  const cardId = cardIdBySource.get(checkpoint.source_definition_id);
+  const cardId = checkpoint.card_definition_id ?? cardIdBySource.get(checkpoint.source_definition_id);
   const candidates = projection.legal_intents.filter((intent) => intent.action_type === checkpoint.action_type
     && (!cardId || intent.card_definition_id === cardId));
   for (const candidate of candidates) {
@@ -164,6 +164,8 @@ async function enabledExpectedIntent(page, projection, checkpoint) {
 
 async function completeTutorial(page, definition, mode, { captureRecovery = false } = {}) {
   const seenEvents = new Set();
+  let documentationRecoverySources = null;
+  let sawVisibleDocumentationRecovery = false;
   for (let guard = 0; guard < 100; guard += 1) {
     await expect(page.locator('.tutorial-coach, .result-panel')).toHaveCount(1);
     if (await page.locator('.result-panel').count()) break;
@@ -185,6 +187,43 @@ async function completeTutorial(page, definition, mode, { captureRecovery = fals
       ? page.locator(`[data-preview-document="${intent.intent_id}"]`).first()
       : page.locator(`[data-intent-id="${intent?.intent_id}"]`).first();
     if (!intent || (await projectedControl.count() && await projectedControl.isDisabled())) {
+      if (checkpoint.id === 'tutorial.verify_recovery.document_live') {
+        expect(latest.projection.view.public_match.turn.actions_remaining).toBe(0);
+        expect(latest.projection.view.documentable_actions.length).toBeGreaterThan(0);
+        expect(latest.projection.legal_intents.some((candidate) => candidate.action_type === 'DOCUMENT_LIVE')).toBe(false);
+        documentationRecoverySources = latest.projection.view.documentable_actions
+          .map((record) => record.source_action_event_id);
+        await expect(page.locator('.tutorial-coach')).toContainText('Document Live costs 1 Action');
+        await expect(page.locator('.tutorial-coach')).toContainText('Pass begins a fresh turn');
+        await expect(page.locator('#announcer')).toContainText('Pass begins a fresh turn');
+        await expect(page.locator('.basic-action--pass')).toBeEnabled();
+        await expect(page.locator('.basic-action--pass')).toHaveAttribute('data-tutorial-target', 'true');
+        await expect(page.locator('.basic-action--pass')).toBeFocused();
+        const documentationWorkflow = page.locator('.legal-action-panel .documentation-workflow');
+        await expect(documentationWorkflow).toContainText('eligible');
+        await expect(documentationWorkflow).toContainText('1 Action');
+        expect(await page.locator('[id]').evaluateAll((elements) =>
+          elements.length - new Set(elements.map((element) => element.id)).size)).toBe(0);
+        const disabledClose = documentationWorkflow.locator('.basic-action--close');
+        if (await disabledClose.count()) {
+          await expect(disabledClose).toBeDisabled();
+          await expect(disabledClose).not.toHaveAttribute('data-tutorial-target', 'true');
+        }
+        if (page.viewportSize()?.width >= 1500) {
+          await page.evaluate(() => {
+            document.documentElement.style.fontSize = '32px';
+            window.dispatchEvent(new Event('resize'));
+          });
+          await expect.poll(() => page.evaluate(() =>
+            document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBe(0);
+          await expect(page.locator('.basic-action--pass')).toBeVisible();
+          await page.evaluate(() => {
+            document.documentElement.style.removeProperty('font-size');
+            window.dispatchEvent(new Event('resize'));
+          });
+        }
+        sawVisibleDocumentationRecovery = true;
+      }
       intent = helperProjectedIntent(latest.projection, checkpoint);
     }
     expect(intent, `${checkpoint.id} did not expose an expected or recovery intent`).toBeTruthy();
@@ -193,6 +232,17 @@ async function completeTutorial(page, definition, mode, { captureRecovery = fals
     await expect.poll(() => page.evaluate(() => window.__task015WorkerMessages.length)).toBeGreaterThan(before);
     const resolved = await latestMessage(page);
     for (const event of resolved.events ?? []) seenEvents.add(event.event_type);
+
+    if (checkpoint.id === 'tutorial.verify_recovery.document_live'
+        && intent.action_type === 'DOCUMENT_LIVE') {
+      expect(sawVisibleDocumentationRecovery).toBe(true);
+      expect(resolved.events.some((event) => event.event_type === 'WORKLOG_PUBLICATION'
+        && event.payload.source_action_event_id === intent.source_action_event_id)).toBe(true);
+      const remaining = resolved.projection.view.documentable_actions
+        .map((record) => record.source_action_event_id);
+      expect(remaining).toEqual(documentationRecoverySources
+        .filter((sourceId) => sourceId !== intent.source_action_event_id));
+    }
 
     if (captureRecovery && checkpoint.id === 'tutorial.verify_recovery.failed_verify'
       && resolved.events.some((event) => event.event_type === 'TICKET_RETURNED_TO_DIAGNOSIS')) {
@@ -206,6 +256,7 @@ async function completeTutorial(page, definition, mode, { captureRecovery = fals
   }
   await expect(page.locator('.result-panel')).toBeVisible();
   await expect(page.locator('.authority-note')).toContainText('did not change Profile points or statistics');
+  if (definition.id === 'tutorial.verify_recovery') expect(sawVisibleDocumentationRecovery).toBe(true);
   return seenEvents;
 }
 
@@ -257,6 +308,21 @@ test('fundamentals completes by keyboard, touch, and reduced-motion paths withou
   }
   await completeTutorial(page, fundamentals, mode);
   await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBe(0);
+});
+
+test('failed-Verify Documentation recovery completes by keyboard, touch, and reduced motion without overflow', async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name === 'chromium-desktop', 'Desktop click, focus, live region, and 200% reflow are covered by the two-path test.');
+  const mode = interactionMode(testInfo.project.name);
+  await openHome(page);
+  const recovery = tutorialCatalog.tutorials.find((entry) => entry.id === 'tutorial.verify_recovery');
+  await startTutorial(page, recovery, mode);
+  if (testInfo.project.name === 'chromium-reduced-motion') {
+    const motion = await page.locator('.tutorial-coach').evaluate((node) => getComputedStyle(node).animationDuration);
+    expect(motion === '0s' || motion === '0ms').toBe(true);
+  }
+  await completeTutorial(page, recovery, mode);
+  await expect.poll(() => page.evaluate(() =>
+    document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBe(0);
 });
 
 test('tutorial restart, back/re-explain, confirmed exit, and reload are safe', async ({ page }, testInfo) => {

@@ -71,25 +71,26 @@ function visibilityLabel(visibility) {
 export function buildDocumentPreviewModels(projection) {
   const view = projection.view;
   const queue = view.public_match.repair_queue;
-  return projection.legal_intents
-    .filter((intent) => intent.action_type === 'DOCUMENT_LIVE')
-    .map((intent) => {
-      const source = view.documentable_actions.find((record) =>
-        record.ticket_instance_id === intent.ticket_instance_id
-          && record.source_action_event_id === intent.source_action_event_id);
-      const ticket = queue.find((record) => record.ticket_instance_id === intent.ticket_instance_id);
+  const intents = projection.legal_intents.filter((intent) => intent.action_type === 'DOCUMENT_LIVE');
+  return view.documentable_actions
+    .map((source) => {
+      const intent = intents.find((candidate) =>
+        candidate.ticket_instance_id === source.ticket_instance_id
+          && candidate.source_action_event_id === source.source_action_event_id);
+      const ticket = queue.find((record) => record.ticket_instance_id === source.ticket_instance_id);
       const worklog = ticket?.worklog.find((entry) =>
-        entry.placeholder_event_id === source?.worklog_placeholder_event_id);
+        entry.placeholder_event_id === source.worklog_placeholder_event_id);
       const result = view.authorized_events.find((event) =>
-        event.event_id === source?.source_result_event_id
-          && event.ticket_instance_id === intent.ticket_instance_id);
+        event.event_id === source.source_result_event_id
+          && event.ticket_instance_id === source.ticket_instance_id);
       const publicSummary = typeof result?.payload?.public_summary === 'string'
         && result.payload.public_summary.trim()
         ? result.payload.public_summary
         : null;
       if (!source || !ticket || !worklog || !result) return null;
       return {
-        intent_id: intent.intent_id,
+        intent_id: intent?.intent_id ?? null,
+        document_live_legal: Boolean(intent),
         ticket_instance_id: ticket.ticket_instance_id,
         source_action_event_id: source.source_action_event_id,
         source_result_event_id: source.source_result_event_id,
@@ -276,9 +277,26 @@ function candidateSummaryMarkup(ticket, session, context) {
   }).join('');
 }
 
-function ticketWorkflowMarkup(documentModels, closureIntent, session) {
-  if (!documentModels.length && !closureIntent) return '';
-  return `<section class="documentation-workflow" aria-labelledby="documentation-workflow-heading"><h3 id="documentation-workflow-heading">Documentation workflow</h3><p>Preview the exact authorized record before spending an Action.</p><div class="candidate-actions">${documentModels.map((model) => `<button type="button" class="basic-action basic-action--document" data-preview-document="${escapeHtml(model.intent_id)}" data-document-source="${escapeHtml(model.source_action_event_id)}"${session.resolving ? ' disabled' : ''}>Document ${escapeHtml(model.source_name)} · Worklog #${model.worklog_sequence}</button>`).join('')}${closureIntent ? `<button type="button" class="basic-action basic-action--close" data-intent-id="${closureIntent.intent_id}"${session.resolving ? ' disabled' : ''}>Document &amp; Close</button>` : ''}</div></section>`;
+function ticketWorkflowMarkup(documentModels, closureIntent, session, headingId) {
+  const selectedTicket = session.projection?.view?.public_match?.repair_queue?.find((ticket) =>
+    ticket.ticket_instance_id === session.selectedTicketId);
+  const hasResultHistory = selectedTicket?.worklog?.some((entry) => entry.source_result_event_id);
+  if (!documentModels.length && !closureIntent && !hasResultHistory) return '';
+  const actions = session.projection?.view?.public_match?.turn?.actions_remaining;
+  const legalCount = documentModels.filter((model) => model.document_live_legal).length;
+  const pendingCount = documentModels.length - legalCount;
+  const stateCopy = legalCount
+    ? 'Preview the exact authorized record before spending 1 Action.'
+    : pendingCount
+      ? `${pendingCount} eligible ${pendingCount === 1 ? 'record remains' : 'records remain'} for Document Live, which costs 1 Action. ${actions === 0 ? 'No Actions remain this turn.' : 'The authority does not currently expose a legal Document Live intent.'}`
+      : 'No documentable records remain for this Ticket. Passing does not create a record.';
+  const sourceControls = documentModels.map((model) => model.document_live_legal
+    ? `<button type="button" class="basic-action basic-action--document" data-preview-document="${escapeHtml(model.intent_id)}" data-document-source="${escapeHtml(model.source_action_event_id)}"${session.resolving ? ' disabled' : ''}>Document ${escapeHtml(model.source_name)} · Worklog #${model.worklog_sequence}</button>`
+    : `<button type="button" class="basic-action basic-action--document" data-document-pending="${escapeHtml(model.source_action_event_id)}" disabled>Document ${escapeHtml(model.source_name)} · Worklog #${model.worklog_sequence} · requires 1 Action</button>`).join('');
+  const closureCopy = closureIntent
+    ? '<p class="documentation-workflow__closure-note">Ready to close separately: Document &amp; Close costs 0 Actions and remains independently validated.</p>'
+    : '<p class="documentation-workflow__closure-note">Document &amp; Close becomes available only when the separate closure bundle is legal.</p>';
+  return `<section class="documentation-workflow" aria-labelledby="${escapeHtml(headingId)}" data-documentable-state="${legalCount ? 'legal' : pendingCount ? 'pending-actions' : 'none'}"><h3 id="${escapeHtml(headingId)}">Documentation workflow</h3><p role="status">${escapeHtml(stateCopy)}</p>${closureCopy}<div class="candidate-actions">${sourceControls}${closureIntent ? `<button type="button" class="basic-action basic-action--close" data-intent-id="${closureIntent.intent_id}"${session.resolving ? ' disabled' : ''}>Document &amp; Close · 0 Actions</button>` : ''}</div></section>`;
 }
 
 function isolationGuidanceMarkup(ticket, session, context) {
@@ -316,7 +334,7 @@ function fullTicketMarkup(ticket, presentation, session, context, documentModels
     <section class="candidate-tray"${ticket.status === 'RETURNED_TO_DIAGNOSIS' ? ' data-diagnosis-reopened="true"' : ''}><div class="section-heading"><div><p class="play-eyebrow">Hypothesize ↔ Test</p><h3>Candidate faults</h3></div><span>${ticket.public_candidate_fault_ids.length}</span></div><ul>${candidateMarkup(ticket, session, context)}</ul></section>
     <section class="accepted-isolation" data-isolation-state="${ticket.accepted_isolations.length ? 'accepted' : 'pending'}"><h3>Accepted Isolation</h3>${ticket.accepted_isolations.length ? ticket.accepted_isolations.map((record) => `<article><strong>${escapeHtml(domainName(context.catalog, record.candidate_fault_id))}</strong><span>${escapeHtml(record.classification.replaceAll('_', ' '))}</span><small>${record.cited_public_evidence_event_ids.length} public citation${record.cited_public_evidence_event_ids.length === 1 ? '' : 's'}</small></article>`).join('') : '<p>No actionable fault accepted yet. CONFIRM Evidence is decisive, but only an Accepted Isolation opens Repair.</p>'}</section>
     ${isolationGuidanceMarkup(ticket, session, context)}
-    ${ticketWorkflowMarkup(documentModels, closureIntent, session)}
+    ${ticketWorkflowMarkup(documentModels, closureIntent, session, 'full-ticket-documentation-heading')}
   </div>`;
 }
 
@@ -504,11 +522,11 @@ function solutionRevealMarkup(view, catalog, projection, expanded = false) {
 function tutorialCoachMarkup(session) {
   const tutorial = session.tutorial;
   if (!tutorial || tutorial.completed) return '';
-  const checkpoint = tutorial.displayed;
-  return `<aside class="tutorial-coach" aria-labelledby="tutorial-step-heading" data-tutorial-checkpoint="${escapeHtml(checkpoint.id)}">
+  const checkpoint = tutorial.presentation(session.projection);
+  return `<aside class="tutorial-coach" aria-labelledby="tutorial-step-heading" data-tutorial-checkpoint="${escapeHtml(checkpoint.id)}" data-tutorial-guidance="${escapeHtml(checkpoint.guidance_mode.toLowerCase())}">
     <header><p class="play-eyebrow">${tutorial.isReviewing ? 'Review · no state rewind' : `Guided step ${tutorial.index + 1} of ${tutorial.definition.checkpoints.length}`}</p><h2 id="tutorial-step-heading" tabindex="-1">${escapeHtml(checkpoint.title)}</h2></header>
     <div class="tutorial-coach__copy">${checkpoint.body.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join('')}</div>
-    <div class="tutorial-coach__controls">${checkpoint.checkpoint_kind === 'EXPLAIN' || tutorial.isReviewing ? `<button type="button" class="play-button play-button--primary" data-tutorial-continue>${tutorial.isReviewing ? 'Return to current step' : 'Continue'}</button>` : '<span class="tutorial-wait">Complete the highlighted real Match action to continue.</span>'}<button type="button" class="play-button" data-tutorial-back${tutorial.index < 1 ? ' disabled' : ''}>Back / re-explain</button><button type="button" class="play-button" data-tutorial-restart>Restart</button><button type="button" class="play-button play-button--danger" data-tutorial-exit>Exit tutorial</button></div>
+    <div class="tutorial-coach__controls">${checkpoint.checkpoint_kind === 'EXPLAIN' || tutorial.isReviewing ? `<button type="button" class="play-button play-button--primary" data-tutorial-continue>${tutorial.isReviewing ? 'Return to current step' : 'Continue'}</button>` : `<span class="tutorial-wait">${escapeHtml(checkpoint.wait_copy)}</span>`}<button type="button" class="play-button" data-tutorial-back${tutorial.index < 1 ? ' disabled' : ''}>Back / re-explain</button><button type="button" class="play-button" data-tutorial-restart>Restart</button><button type="button" class="play-button play-button--danger" data-tutorial-exit>Exit tutorial</button></div>
   </aside>`;
 }
 
@@ -730,7 +748,7 @@ export function renderGame(root, context) {
         </main>
         <aside class="investigation-rail">
           <section class="intelligence-panel" data-route-reveal><div class="intelligence-tabs" role="tablist" aria-label="Ticket intelligence"><button type="button" role="tab" data-continuity-key="game-panel-evidence" data-panel-tab="evidence" aria-selected="${session.panelTab === 'evidence'}">Evidence</button><button type="button" role="tab" data-continuity-key="game-panel-worklog" data-panel-tab="worklog" aria-selected="${session.panelTab === 'worklog'}">Worklog</button></div><section class="evidence-panel" data-continuity-scroll="game:ticket:${escapeHtml(selectedTicket?.ticket_instance_id || 'none')}:evidence" role="tabpanel" data-panel="evidence"${session.panelTab === 'evidence' ? '' : ' hidden'}><div class="section-heading"><div><p class="play-eyebrow">Knowledge state</p><h2>Evidence</h2></div><span>Team</span></div>${selectedTicket ? renderEvidence(view.authorized_events, selectedTicket.ticket_instance_id, context.catalog, session.lastEvents, session.lastAction?.result_event_id) : ''}</section><section class="worklog-panel" data-continuity-scroll="game:ticket:${escapeHtml(selectedTicket?.ticket_instance_id || 'none')}:worklog" role="tabpanel" data-panel="worklog"${session.panelTab === 'worklog' ? '' : ' hidden'}><div class="section-heading"><div><p class="play-eyebrow">Immutable sequence</p><h2>Worklog</h2></div><span>${selectedTicket?.worklog.length || 0}</span></div>${selectedTicket ? renderWorklog(selectedTicket, session.lastEvents, session.lastAction?.result_event_id, publicMatch) : ''}</section></section>
-          <section class="action-dock legal-action-panel" aria-labelledby="actions-heading" data-route-reveal><div class="section-heading"><div><p class="play-eyebrow">Engine-projected</p><h2 id="actions-heading">Legal Action</h2></div><span>${session.resolving ? 'Resolving' : 'Ready'}</span></div><div class="selected-card-actions">${selectedActionMarkup({ selectedCard, selectedCardDefinition, selectedCost, presentation: actionPresentation, selectedTicketId: session.selectedTicketId, projection, catalog: context.catalog, resolving: session.resolving })}</div>${ticketWorkflowMarkup(documentModels, closureIntent, session)}${actionResultMarkup(session, projection, context.catalog)}${session.resolving ? '<span class="intent-resolving" role="status">Resolving authoritative intent…</span>' : ''}</section>
+          <section class="action-dock legal-action-panel" aria-labelledby="actions-heading" data-route-reveal><div class="section-heading"><div><p class="play-eyebrow">Engine-projected</p><h2 id="actions-heading">Legal Action</h2></div><span>${session.resolving ? 'Resolving' : 'Ready'}</span></div><div class="selected-card-actions">${selectedActionMarkup({ selectedCard, selectedCardDefinition, selectedCost, presentation: actionPresentation, selectedTicketId: session.selectedTicketId, projection, catalog: context.catalog, resolving: session.resolving })}</div>${ticketWorkflowMarkup(documentModels, closureIntent, session, 'action-documentation-heading')}${actionResultMarkup(session, projection, context.catalog)}${session.resolving ? '<span class="intent-resolving" role="status">Resolving authoritative intent…</span>' : ''}</section>
           <section class="basic-actions-panel" aria-labelledby="basic-actions-heading"><div class="section-heading"><div><p class="play-eyebrow">Always available</p><h2 id="basic-actions-heading">Basic Actions</h2></div><span>${publicMatch.turn?.actions_remaining ?? 0} A</span></div><div class="basic-action-row"><label class="search-action">Search · ${view.utility_resources.search_tokens}<select id="search-intent"${searchIntents.length ? '' : ' disabled'}>${searchIntents.map((intent) => `<option value="${intent.intent_id}">${escapeHtml(cardName(context.catalog.cardById.get(intent.selected_card_definition_id)))}</option>`).join('') || '<option>Unavailable</option>'}</select><button type="button" class="basic-action" data-submit-search${!searchIntents.length || session.resolving ? ' disabled' : ''}>Search</button></label><button type="button" class="basic-action"${refreshIntent ? ` data-intent-id="${refreshIntent.intent_id}"` : ''}${!refreshIntent || session.resolving ? ' disabled' : ''}>Refresh · ${view.utility_resources.refresh_tokens}</button><button type="button" class="basic-action basic-action--give-up"${giveUpIntent ? ` data-give-up-intent="${giveUpIntent.intent_id}"` : ''}${!giveUpIntent || session.resolving ? ' disabled' : ''}>Give Up</button><button type="button" class="basic-action basic-action--pass"${passIntent ? ` data-intent-id="${passIntent.intent_id}"` : ''}${!passIntent || session.resolving ? ' disabled' : ''}>Pass</button></div></section>
         </aside>
       </div>
@@ -1024,7 +1042,7 @@ export function renderGame(root, context) {
   };
   const onClick = (event) => {
     if (event.target.closest('[data-tutorial-continue]')) {
-      if (session.tutorial?.continueExplanation()) context.rerender();
+      if (session.tutorial?.continueExplanation(session.projection)) context.rerender();
       return;
     }
     if (event.target.closest('[data-tutorial-back]')) {

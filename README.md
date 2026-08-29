@@ -86,7 +86,7 @@ The repository now contains the playable rules-engine foundation and a deliberat
 
 ## Completed release work and next boundary
 
-TASK-047 is active to make every tutorial action checkpoint expose a visible legal route, beginning with the failed-Verify tutorial's empty-looking Document Live step. TASK-048 follows to clarify the fundamentals lesson's mixed Evidence state: RAID Array Degraded is confirmed but non-actionable, while Failed SAS Drive is actionable but only supported at that checkpoint. Both are tutorial-reliability repairs and must preserve engine authority, frozen Evidence rules, and hidden-truth boundaries. See the [task index](docs/tasks/INDEX.md).
+TASK-047 is complete. Every tutorial action checkpoint now exposes its expected legal intent, a bounded and visibly targeted recovery, or an explicit safe stop. In the failed-Verify lesson's zero-Action Documentation state, the coach explains that Document Live costs one Action, targets Pass, returns to the same checkpoint with a fresh turn, and preserves exact projected record attribution. TASK-048 is active to clarify the fundamentals lesson's mixed Evidence state: RAID Array Degraded is confirmed but non-actionable, while Failed SAS Drive is actionable but only supported at that checkpoint. Both repairs preserve engine authority, frozen Evidence rules, and hidden-truth boundaries. See the [task index](docs/tasks/INDEX.md).
 
 TASK-039 through TASK-046 completed the measured Story expansion sequence.
 

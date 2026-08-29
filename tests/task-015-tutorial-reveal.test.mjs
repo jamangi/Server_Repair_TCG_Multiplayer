@@ -25,7 +25,11 @@ import {
   recordTutorialCompletion,
   validateTutorialProgress,
 } from '../viewer/js/play/data/client-data.mjs';
-import { TutorialController, validateTutorialReferences } from '../viewer/js/play/tutorial-controller.mjs';
+import {
+  TUTORIAL_RECOVERY_ATTEMPT_LIMIT,
+  TutorialController,
+  validateTutorialReferences,
+} from '../viewer/js/play/tutorial-controller.mjs';
 import { loadSchemaRegistry, validateJsonSchema } from './helpers/json-schema-validator.mjs';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
@@ -141,12 +145,33 @@ function latestConfirmedCandidate(state) {
   return null;
 }
 
-function sourceCardMatches(state, intent, sourceDefinitionId) {
+function sourceCardMatches(state, intent, sourceDefinitionId, cardDefinitionId = null) {
   const selected = intent.payload.selected_card_definition_id;
   const held = intent.payload.card_instance_id
     ? state.card_instances[intent.payload.card_instance_id]?.card_definition_id
     : null;
-  return (selected ?? held) === primaryCardId(sourceDefinitionId);
+  return (selected ?? held) === (cardDefinitionId ?? primaryCardId(sourceDefinitionId));
+}
+
+function clientProjection(state) {
+  const view = projectPrivatePlayer(state, PLAYER, catalogs.engineCatalogs);
+  const held = new Map([...view.hand, ...(view.diagnostic_bench ?? [])]
+    .map((card) => [card.card_instance_id, card.card_definition_id]));
+  const legalIntents = view.legal_intents.map((intent, index) => ({
+    intent_id: `intent.${view.revision}.${String(index + 1).padStart(4, '0')}`,
+    action_type: intent.action_type,
+    ticket_instance_id: intent.payload.ticket_instance_id ?? null,
+    card_instance_id: intent.payload.card_instance_id ?? null,
+    card_definition_id: held.get(intent.payload.card_instance_id)
+      ?? intent.payload.selected_card_definition_id ?? null,
+    candidate_fault_id: intent.payload.candidate_fault_id
+      ?? intent.payload.candidate_fault_ids?.[0] ?? null,
+    cited_evidence_event_ids: [...(intent.payload.cited_evidence_event_ids ?? [])],
+    source_action_event_id: intent.payload.source_action_event_id ?? null,
+    selected_card_definition_id: intent.payload.selected_card_definition_id ?? null,
+  }));
+  delete view.legal_intents;
+  return { view, legal_intents: legalIntents };
 }
 
 function intendedAction(state, checkpoint) {
@@ -156,7 +181,9 @@ function intendedAction(state, checkpoint) {
     if (checkpoint.source_definition_id && checkpoint.action_type === 'RUN_TEST') {
       return intent.payload.execution_definition_id === checkpoint.source_definition_id;
     }
-    if (checkpoint.source_definition_id && !sourceCardMatches(state, intent, checkpoint.source_definition_id)) return false;
+    if (checkpoint.source_definition_id && !sourceCardMatches(
+      state, intent, checkpoint.source_definition_id, checkpoint.card_definition_id,
+    )) return false;
     if (checkpoint.candidate_source === 'LATEST_CONFIRM') {
       return intent.payload.candidate_fault_id === latestConfirmedCandidate(state);
     }
@@ -166,7 +193,8 @@ function intendedAction(state, checkpoint) {
 
 function helperAction(state, checkpoint) {
   const intents = getLegalIntents({ state, playerId: PLAYER, catalogs: catalogs.engineCatalogs });
-  const cardId = checkpoint.source_definition_id ? primaryCardId(checkpoint.source_definition_id) : null;
+  const cardId = checkpoint.card_definition_id
+    ?? (checkpoint.source_definition_id ? primaryCardId(checkpoint.source_definition_id) : null);
   if (cardId && checkpoint.support_action_types.includes('SEARCH')) {
     const search = intents.find((intent) => intent.action_type === 'SEARCH'
       && intent.payload.selected_card_definition_id === cardId);
@@ -206,32 +234,88 @@ function replayTutorial(definition) {
   let state = createTutorialMatch(definition, ticket);
   let sequence = 0;
   const observed = new Set();
+  const trace = [];
+  const catalog = { ...catalogs, cardById: new Map(catalogs.cards.cards.map((card) => [card.id, card])) };
+  const controller = new TutorialController(definition, { catalog });
   for (const checkpoint of definition.checkpoints) {
+    assert.equal(controller.current.id, checkpoint.id);
+    if (checkpoint.checkpoint_kind === 'EXPLAIN') {
+      assert.equal(controller.continueExplanation(clientProjection(state)), true);
+      continue;
+    }
+    let recoveryCount = 0;
+    while (true) {
+      const projection = clientProjection(state);
+      const guide = controller.guidance(projection);
+      trace.push({
+        checkpoint_id: checkpoint.id,
+        guidance_mode: guide.mode,
+        actions_remaining: projection.view.public_match.turn?.actions_remaining ?? null,
+        documentable_action_count: projection.view.documentable_actions.length,
+        legal_document_live_count: projection.legal_intents
+          .filter((intent) => intent.action_type === 'DOCUMENT_LIVE').length,
+        legal_helper_action_type: guide.mode === 'RECOVERY' ? guide.intent.action_type : null,
+        ticket_status: projection.view.public_match.repair_queue[0]?.status ?? 'ARCHIVED',
+        closure_bundle_count: Object.keys(projection.view.closure_bundles).length,
+      });
+      assert.notEqual(guide.mode, 'BLOCKED', `${checkpoint.id} failed its pinned semantic reachability guard`);
+      const intent = guide.mode === 'EXPECTED'
+        ? intendedAction(state, checkpoint)
+        : helperAction(state, checkpoint);
+      assert.ok(intent, `${checkpoint.id} did not expose ${guide.mode.toLowerCase()} authority`);
+      assert.equal(intent.action_type, guide.intent.action_type);
+      assert.equal(controller.submit(guide.intent, projection), true);
+      sequence += 1;
+      const before = state.events.length;
+      const transition = submit(state, intent, sequence);
+      assert.equal(transition.result.accepted, true);
+      state = transition.state;
+      const events = state.events.slice(before);
+      controller.handleResolution(guide.intent, events, transition.result, clientProjection(state));
+      if (guide.mode === 'RECOVERY') {
+        recoveryCount += 1;
+        assert.ok(recoveryCount <= TUTORIAL_RECOVERY_ATTEMPT_LIMIT);
+        continue;
+      }
+      const eventTypes = new Set(events.map((event) => event.event_type));
+      checkpoint.expected_event_types.forEach((type) => {
+        assert.ok(eventTypes.has(type), `${checkpoint.id} did not produce ${type}`);
+        observed.add(type);
+      });
+      break;
+    }
+  }
+  assert.equal(state.status, 'COMPLETED');
+  assert.equal(controller.completed, true);
+  if (process.env.TASK_047_TRACE === '1') {
+    console.log(`TASK-047 trace ${definition.id}: ${JSON.stringify(trace)}`);
+  }
+  return { state, observed, trace };
+}
+
+function reachCheckpoint(definition, checkpointId) {
+  const { ticket } = builtTicket(definition);
+  let state = createTutorialMatch(definition, ticket);
+  let sequence = 0;
+  for (const checkpoint of definition.checkpoints) {
+    if (checkpoint.id === checkpointId) return { state, sequence, checkpoint };
     if (checkpoint.checkpoint_kind === 'EXPLAIN') continue;
     let intent = intendedAction(state, checkpoint);
-    for (let guard = 0; !intent && guard < 12; guard += 1) {
+    for (let guard = 0; !intent && guard < TUTORIAL_RECOVERY_ATTEMPT_LIMIT; guard += 1) {
       sequence += 1;
       const helper = helperAction(state, checkpoint);
-      assert.ok(helper, `${checkpoint.id} has no permitted helper intent at revision ${state.revision}`);
+      assert.ok(helper, `${checkpoint.id} has no legal recovery before ${checkpointId}`);
       const transition = submit(state, helper, sequence);
       assert.equal(transition.result.accepted, true);
       state = transition.state;
       intent = intendedAction(state, checkpoint);
     }
     sequence += 1;
-    const before = state.events.length;
-    assert.ok(intent, `${checkpoint.id} never exposed its expected legal intent`);
     const transition = submit(state, intent, sequence);
-    assert.equal(transition.result.accepted, true, `${checkpoint.id}: ${transition.result.error_code}`);
+    assert.equal(transition.result.accepted, true);
     state = transition.state;
-    const eventTypes = new Set(state.events.slice(before).map((event) => event.event_type));
-    checkpoint.expected_event_types.forEach((type) => {
-      assert.ok(eventTypes.has(type), `${checkpoint.id} did not produce ${type}`);
-      observed.add(type);
-    });
   }
-  assert.equal(state.status, 'COMPLETED');
-  return { state, observed };
+  assert.fail(`Checkpoint ${checkpointId} was not reached.`);
 }
 
 test('tutorial catalogs and local progress are versioned, schema-valid, and reference real content', () => {
@@ -292,6 +376,104 @@ test('tutorial overlay only constrains real legal intents and does not inspect h
   assert.equal(controller.isIntentAllowed({ action_type: hypothesis.action_type }, projection), true);
   assert.equal(controller.isIntentAllowed({ action_type: pass.action_type }, projection), false);
   assert.doesNotMatch(JSON.stringify(definition), /server_only_truth|actual_present|eligible_outcome_id/);
+});
+
+test('failed-Verify Documentation checkpoint exposes a visible bounded Pass recovery from the exact zero-Action projection', () => {
+  const definition = tutorials.tutorials.find((entry) => entry.id === 'tutorial.verify_recovery');
+  const checkpointId = 'tutorial.verify_recovery.document_live';
+  let { state, sequence, checkpoint } = reachCheckpoint(definition, checkpointId);
+  const catalog = { ...catalogs, cardById: new Map(catalogs.cards.cards.map((card) => [card.id, card])) };
+  const controller = new TutorialController(definition, { catalog });
+  controller.index = definition.checkpoints.findIndex((entry) => entry.id === checkpointId);
+
+  const before = clientProjection(state);
+  const ticketId = before.view.public_match.repair_queue[0].ticket_instance_id;
+  const sourceIdsBefore = before.view.documentable_actions
+    .filter((record) => record.ticket_instance_id === ticketId)
+    .map((record) => record.source_action_event_id);
+  assert.equal(before.view.public_match.turn.actions_remaining, 0);
+  assert.ok(sourceIdsBefore.length > 0);
+  assert.equal(before.legal_intents.some((intent) => intent.action_type === 'DOCUMENT_LIVE'), false);
+  assert.equal(before.legal_intents.some((intent) => intent.action_type === 'PUBLISH_CLOSURE'), true);
+  const recovery = controller.guidance(before);
+  assert.equal(recovery.mode, 'RECOVERY');
+  assert.equal(recovery.intent.action_type, 'PASS_TURN');
+  assert.match(recovery.explanation, /Document Live costs 1 Action/);
+  assert.match(recovery.explanation, /Pass begins a fresh turn with 2 Actions/);
+  assert.equal(controller.isIntentAllowed(recovery.intent, before), true);
+  assert.equal(controller.isIntentAllowed(
+    before.legal_intents.find((intent) => intent.action_type === 'PUBLISH_CLOSURE'),
+    before,
+  ), false);
+
+  const rawPass = getLegalIntents({ state, playerId: PLAYER, catalogs: catalogs.engineCatalogs })
+    .find((intent) => intent.action_type === 'PASS_TURN');
+  assert.equal(controller.submit(recovery.intent, before), true);
+  sequence += 1;
+  let transition = submit(state, rawPass, sequence);
+  assert.equal(transition.result.accepted, true);
+  state = transition.state;
+  let after = clientProjection(state);
+  controller.handleResolution(recovery.intent, transition.events, transition.result, after);
+  assert.equal(after.view.public_match.turn.actions_remaining, 2);
+  assert.deepEqual(after.view.documentable_actions
+    .filter((record) => record.ticket_instance_id === ticketId)
+    .map((record) => record.source_action_event_id), sourceIdsBefore);
+  assert.equal(controller.guidance(after).mode, 'EXPECTED');
+  const documentMetadata = controller.guidance(after).intent;
+  const rawDocument = getLegalIntents({ state, playerId: PLAYER, catalogs: catalogs.engineCatalogs })
+    .find((intent) => intent.action_type === 'DOCUMENT_LIVE'
+      && intent.payload.source_action_event_id === documentMetadata.source_action_event_id);
+  assert.ok(rawDocument);
+  assert.equal(controller.submit(documentMetadata, after), true);
+  sequence += 1;
+  transition = submit(state, rawDocument, sequence);
+  assert.equal(transition.result.accepted, true);
+  state = transition.state;
+  after = clientProjection(state);
+  controller.handleResolution(documentMetadata, transition.events, transition.result, after);
+  assert.equal(controller.current.id, 'tutorial.verify_recovery.close');
+  const sourceIdsAfter = after.view.documentable_actions
+    .filter((record) => record.ticket_instance_id === ticketId)
+    .map((record) => record.source_action_event_id);
+  assert.equal(sourceIdsAfter.includes(documentMetadata.source_action_event_id), false);
+  assert.deepEqual(sourceIdsAfter, sourceIdsBefore.filter((id) => id !== documentMetadata.source_action_event_id));
+  assert.equal(transition.events.some((event) => event.event_type === 'WORKLOG_PUBLICATION'
+    && event.payload.source_action_event_id === documentMetadata.source_action_event_id), true);
+});
+
+test('a Documentation checkpoint with no projected source fails safely, and repeated recovery state is cycle-bounded', () => {
+  const definition = tutorials.tutorials.find((entry) => entry.id === 'tutorial.verify_recovery');
+  const checkpointId = 'tutorial.verify_recovery.document_live';
+  const { state } = reachCheckpoint(definition, checkpointId);
+  const catalog = { ...catalogs, cardById: new Map(catalogs.cards.cards.map((card) => [card.id, card])) };
+  const controller = new TutorialController(definition, { catalog });
+  controller.index = definition.checkpoints.findIndex((entry) => entry.id === checkpointId);
+  const empty = clientProjection(state);
+  empty.view.documentable_actions = [];
+  empty.legal_intents = empty.legal_intents.filter((intent) => intent.action_type !== 'DOCUMENT_LIVE');
+  const blocked = controller.presentation(empty);
+  assert.equal(blocked.guidance_mode, 'BLOCKED');
+  assert.match(blocked.body.at(-1), /No eligible documentable source remains/);
+  assert.match(blocked.body.at(-1), /Passing cannot create a record/);
+  assert.match(blocked.body.at(-1), /Restart.*exit safely/i);
+  assert.equal(controller.isIntentAllowed(
+    empty.legal_intents.find((intent) => intent.action_type === 'PASS_TURN'), empty,
+  ), false);
+
+  const cyclicDefinition = structuredClone(definition);
+  const cyclicCheckpoint = cyclicDefinition.checkpoints.find((entry) => entry.id === checkpointId);
+  cyclicCheckpoint.action_type = 'PERFORM_REPAIR';
+  cyclicCheckpoint.source_definition_id = 'repair.storage.rebuild_array';
+  const cyclic = new TutorialController(cyclicDefinition, { catalog });
+  cyclic.index = cyclicDefinition.checkpoints.findIndex((entry) => entry.id === checkpointId);
+  const projection = clientProjection(state);
+  const pass = projection.legal_intents.find((intent) => intent.action_type === 'PASS_TURN');
+  assert.equal(cyclic.guidance(projection).mode, 'RECOVERY');
+  assert.equal(cyclic.submit(pass, projection), true);
+  cyclic.handleResolution(pass, [], { accepted: true }, projection);
+  assert.equal(cyclic.guidance(projection).mode, 'BLOCKED');
+  assert.match(cyclic.presentation(projection).body.at(-1), /repeated without exposing/);
 });
 
 test('Give Up keeps truth out of pre-reveal projections and reveals only after the authoritative transition', () => {

@@ -187,7 +187,7 @@ export class SoloGameSession {
       const startingActions = message.projection.view.public_match.turn?.actions_remaining;
       const matchMode = this.storyReview ? 'Story practice' : this.storyContext ? 'Story' : 'Solo';
       this.onAnnounce(`${matchMode} Match started. Opening hand drawn and first turn ready${Number.isSafeInteger(startingActions) ? ` with ${startingActions} Actions` : ''}.`);
-      this.tutorial?.announceCurrent();
+      this.tutorial?.announceCurrent(message.projection);
       this.resolveStart?.(message.projection);
       this.resolveStart = null;
       this.rejectStart = null;
@@ -259,7 +259,7 @@ export class SoloGameSession {
       if (submittedIntent && this.tutorial) {
         if (this.tutorial.completed) {
           this.tutorial.announce(`${this.tutorial.definition.title} complete. Tutorial progress was recorded locally without changing Match statistics.`);
-        } else this.tutorial.announceCurrent();
+        } else this.tutorial.announceCurrent(message.projection);
       }
       if (this.terminalResult) {
         this.active = false;

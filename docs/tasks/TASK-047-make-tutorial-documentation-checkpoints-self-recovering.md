@@ -2,7 +2,7 @@
 
 ## Status
 
-**Active.** This is the next implementation task. It precedes TASK-048 because the reported recovery tutorial can present an apparently blocked required action at its closing boundary.
+**Complete — 2026-08-29.** Every current tutorial action checkpoint now exposes its exact legal intent, a bounded player-visible recovery, or an explicit safe stop. The reported zero-Action Documentation boundary recovers through the ordinary projected Pass intent without changing engine authority.
 
 ## Objective
 
@@ -87,3 +87,62 @@ Do not change Ticket solutions, card/domain content, Action costs, closure autho
 ## Completion boundary
 
 Complete only when the captured recovery tutorial cannot strand a player at an empty Documentation step, every tutorial checkpoint has a tested visible legal route or explicit safe failure, ordinary Documentation semantics remain frozen, and the full pinned tutorials complete through real controls without silent harness-only recovery.
+
+## Completion record — 2026-08-29
+
+### Reproduction and root cause
+
+The pinned failed-Verify route reproduced the reported boundary exactly: after the second Repair and passing Verify, the active player had `0` Actions, six player-authorized `view.documentable_actions`, no legal `DOCUMENT_LIVE` intent, a legal `PASS_TURN` intent, Ticket status `READY_TO_CLOSE`, and one independently valid closure bundle. The ordinary engine was correct: `DOCUMENT_LIVE` costs one Action, `PUBLISH_CLOSURE` costs zero Actions, and Pass starts a new turn with two Actions. The defect was the tutorial/presentation join. The old harness silently selected Pass, while the controller continued to target Documentation and the UI derived Documentation choices only from presently legal intents, making the six pending records disappear.
+
+The repair uses only the player-safe projection. The controller selects one exact expected or recovery intent in definition order, explains its projected cost/state, targets and focuses its real control, returns to the unchanged checkpoint after recovery, and rejects unrelated helpers. Recovery is limited to six attempts and uses projected-state signatures to stop cycles. A missing documentable source or unrecoverable projection mismatch disables tutorial actions and presents explicit Restart/Exit guidance. Exact Card IDs now pin otherwise ambiguous source-bound tutorial actions.
+
+The ordinary Documentation presentation now joins projected documentable records to optional legal intents. Pending records remain named and attributed when Actions are exhausted, each published source disappears exactly once, an exhausted source set is described separately, and closure legality/cost remains a separate statement and control.
+
+### Deterministic checkpoint audit
+
+`Docs` is projected documentable records; `Live` is legal `DOCUMENT_LIVE` intents; `Closure` is the number of projected closure bundles. “Expected” means the exact ordinary control was rendered, targeted, and allowed while catalog coach copy remained visible. Recovery rows include the additional player-facing copy and retargeted control.
+
+| Tutorial checkpoint | Actions | Docs / Live | Ticket status | Closure | Visible route |
+| --- | ---: | ---: | --- | ---: | --- |
+| Fundamentals · hypothesis | 2 | 0 / 0 | `DIAGNOSIS` | 0 | Expected Set Hypothesis control |
+| Fundamentals · clean diagnostic | 2 | 0 / 0 | `DIAGNOSIS` | 0 | Expected Visual Inspection control |
+| Fundamentals · support | 2 | 1 / 1 | `DIAGNOSIS` | 0 | Expected RAID Status Inspection control |
+| Fundamentals · confirm | 2 | 2 / 2 | `DIAGNOSIS` | 0 | Expected Drive Health Test control |
+| Fundamentals · isolate | 1 | 3 / 3 | `DIAGNOSIS` | 0 | Expected Commit Isolation control |
+| Fundamentals · repair recovery | 2 | 3 / 3 | `REPAIR_READY` | 0 | Search targeted; coach explains the required Card is not in hand |
+| Fundamentals · repair | 1 | 3 / 3 | `REPAIR_READY` | 0 | Expected Replace RAID Member control |
+| Fundamentals · verify | 2 | 4 / 4 | `AWAITING_VERIFY` | 0 | Expected RAID Health Verification control |
+| Fundamentals · Document Live | 1 | 5 / 5 | `READY_TO_CLOSE` | 1 | Expected exact Document Live preview/submit control |
+| Fundamentals · close | 0 | 4 / 0 | `READY_TO_CLOSE` | 1 | Expected separate zero-Action Document & Close control |
+| Failed Verify · status | 2 | 0 / 0 | `DIAGNOSIS` | 0 | Expected RAID Status Inspection control |
+| Failed Verify · health | 2 | 1 / 1 | `DIAGNOSIS` | 0 | Expected Drive Health Test control |
+| Failed Verify · first Isolation | 1 | 2 / 2 | `DIAGNOSIS` | 0 | Expected Commit Isolation control |
+| Failed Verify · first Repair recovery | 2 | 2 / 2 | `REPAIR_READY` | 0 | Search targeted; coach explains the required Card is not in hand |
+| Failed Verify · first Repair | 1 | 2 / 2 | `REPAIR_READY` | 0 | Expected Replace RAID Member control |
+| Failed Verify · failed Verify | 2 | 3 / 3 | `AWAITING_VERIFY` | 0 | Expected RAID Health Verification control |
+| Failed Verify · second Isolation | 1 | 4 / 4 | `RETURNED_TO_DIAGNOSIS` | 0 | Expected Commit Isolation control |
+| Failed Verify · second Repair | 2 | 4 / 4 | `REPAIR_READY` | 0 | Expected Rebuild RAID Array control |
+| Failed Verify · passing Verify | 1 | 5 / 5 | `AWAITING_VERIFY` | 0 | Expected RAID Health Verification control |
+| Failed Verify · Document recovery | 0 | 6 / 0 | `READY_TO_CLOSE` | 1 | Pass targeted/focused; coach and live region say Document Live costs 1 Action and Pass starts a two-Action turn |
+| Failed Verify · Document Live | 2 | 6 / 6 | `READY_TO_CLOSE` | 1 | Returned to checkpoint; exact Document Live preview/submit control targeted |
+| Failed Verify · close | 1 | 5 / 5 | `READY_TO_CLOSE` | 1 | Expected separate zero-Action Document & Close control |
+
+The fundamentals route proves the expected affordable Documentation path. The failed-Verify route proves the legal zero-Action timing path. Pass preserved all six source IDs; one publication removed only its selected source and left the other five attributable and legal. Tutorial gating prevents an unrelated early publication from exhausting the pinned path. A projected no-source fixture stops explicitly and states that passing cannot create a record.
+
+### Verification
+
+All commands were run from the repository root.
+
+- Syntax checks for the tutorial controller, game session, game page, and focused test: exit `0`.
+- TASK-009/TASK-015 focused Node suites: exit `0`; `47` passed, `0` failed/skipped.
+- TASK-012/TASK-015 controller/presentation regression set: exit `0`; `22` passed, `0` failed/skipped.
+- Viewer baseline (`app.js`, `data-loader.js`, `entity-types.js`, and `viewer-baseline.test.mjs`): exit `0`; `3` passed, `0` failed/skipped.
+- `node viewer/scripts/build-play-assets.mjs`: exit `0`; `197` deterministic assets staged.
+- `node viewer/scripts/verify-play-assets.mjs`: exit `0`; `197` deterministic assets verified.
+- TASK-011/TASK-030 art verification: exit `0`; `104` canonical illustrations and `23` production Story assets plus fallbacks/contact sheets verified.
+- Complete Node suite (`node --test tests/*.mjs`): exit `0`; `360` passed, `0` failed/skipped.
+- TASK-015/TASK-025 browser matrix across desktop, tablet, mobile, and reduced motion: exit `0`; `11` passed, `13` intentionally skipped, `0` failed. This covers keyboard, touch, reduced motion, focus, live-region output, 200% text reflow, no horizontal overflow, exact preview/publication, archive review, restart, re-explain, exit, reload, and Give Up.
+- Complete browser sweep: exit `1`; `105` passed, `149` skipped, `6` failed. Two TASK-047 presentation findings from that sweep were corrected: inactive workflow height and duplicate compact/full-Ticket heading IDs. The affected fixed layout assertion then passed, and the full TASK-015/TASK-025 matrix passed again. Four failures, plus one later assertion in the shared TASK-016 accessibility test, remain from pre-existing TASK-046 catalog drift: stale `12 of 12` coverage copy, stale Ticket-name matching, and legacy deterministic helpers that cannot select the expanded response catalog. They do not exercise TASK-047 files or behavior and were not changed under this task's implementation-only boundary.
+- `git diff --check`: exit `0` after final edits.
+
+No gameplay authority, Action cost, closure rule, scoring rule, Story state, Ticket solution, or private-information boundary changed. The only unresolved items are the separately scoped legacy browser expectations named above.

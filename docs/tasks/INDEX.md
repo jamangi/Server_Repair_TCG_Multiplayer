@@ -4,11 +4,11 @@ Tasks are implementation contracts. A builder must read `AGENTS.md` and then the
 
 Beginning with TASK-011, the displayed task ID includes the recommended reasoning-effort suffix used when starting that task. `HIGH` denotes substantial but bounded implementation/research; `XHIGH` denotes a cross-cutting semantic, architectural, or broad content migration. The stable task number and existing filename do not change, preserving links and history.
 
-Active task: **[`TASK-047-HIGH: Make tutorial Documentation checkpoints self-recovering`](TASK-047-make-tutorial-documentation-checkpoints-self-recovering.md).** It is a focused tutorial-reliability repair: the failed-Verify tutorial can reach its required Document Live checkpoint with no visible Document Live choice while its test harness silently recovers by passing the turn. TASK-047 must make that legal recovery explicit and guard every semantic checkpoint without changing engine authority.
+Active task: **[`TASK-048-HIGH: Clarify actionable Isolation evidence in tutorial guidance`](TASK-048-clarify-actionable-isolation-evidence-in-tutorial-guidance.md).** The RAID Status result correctly confirms a non-actionable degraded-array condition while only supporting the actionable failed-drive candidate; the task must make that candidate-role contrast unmistakable without changing data, repair gates, or hidden-truth boundaries.
 
 Planned next:
 
-- [`TASK-048-HIGH: Clarify actionable Isolation evidence in tutorial guidance`](TASK-048-clarify-actionable-isolation-evidence-in-tutorial-guidance.md) — the RAID Status result correctly confirms a non-actionable degraded-array condition while only supporting the actionable failed-drive candidate; the task must make that candidate-role contrast unmistakable without changing data, repair gates, or hidden-truth boundaries.
+- No successor task is currently planned after TASK-048.
 
 Story coverage and expansion sequence: **complete.** Completed TASK-038 supplies the approved non-canonical review contract inherited by the released expansion.
 
@@ -61,6 +61,7 @@ TASK-011-HIGH through TASK-016-HIGH, TASK-018-HIGH through TASK-021-HIGH, and TA
 
 Completed documentation and research tasks:
 
+- [`TASK-047-HIGH: Make tutorial Documentation checkpoints self-recovering`](TASK-047-make-tutorial-documentation-checkpoints-self-recovering.md) — completed 2026-08-29; made every current tutorial action checkpoint expose an exact legal intent, bounded visible recovery, or explicit safe stop, including a projection-only Pass recovery for the failed-Verify lesson's zero-Action Document Live boundary without changing engine authority.
 - [`TASK-025-HIGH: Refine Documentation and archived Ticket review`](TASK-025-refine-documentation-and-archived-ticket-review.md) — completed 2026-08-27; added authenticated exact-result previews with mutation-free cancellation and single-submit protection, precise in-place Worklog publication attribution, and accessible projection-only archived Ticket records without changing frozen behavior.
 - [`TASK-011-HIGH: Create canonical Card and symptom Ticket illustrations`](TASK-011-create-canonical-card-and-symptom-illustrations.md) — completed 2026-08-26; delivered 71 domain-inherited playable-action illustrations and 33 public-Symptom Ticket panoramas, shared Library/Play resolution, deterministic provenance and asset validation, reviewed contact sheets, responsive crops, and safe placeholder fallback without gameplay changes.
 - [`TASK-015-HIGH: Add guided tutorials and the solo solution-reveal experience`](TASK-015-add-guided-tutorial-and-solution-reveal.md) — completed 2026-08-26; added two pinned real-engine tutorials, semantic checkpoints with accessible focus/highlights and replay controls, exportable cosmetic progress, projection-only Isolation guidance, and a rules-faithful post-Give-Up solution/history comparison.
