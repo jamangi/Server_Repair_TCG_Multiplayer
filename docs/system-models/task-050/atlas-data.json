@@ -1,0 +1,421 @@
+{
+  "atlas_version": "task-050-system-model-atlas-v1",
+  "contract_version": "system-model-planning-v0",
+  "release_coverage_path": "docs/story/coverage/released-story-domain-coverage-v3.json",
+  "selection_path": "docs/system-models/pilot-selection-v1.json",
+  "source_ledger_path": "docs/system-models/task-050/source-ledger.json",
+  "public_projection_rule": "A public artifact may read only profile public structure, the released public Symptoms and Candidates, and already public Ticket identity. It must not read hidden Faults, outcome IDs, route sufficiency, or oracle ordering.",
+  "profiles": [
+    {
+      "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+      "display_name": "14th-generation 2U hybrid-storage server profile",
+      "reference_identity": "Dell PowerEdge R740xd with documented 24-by-2.5-inch hybrid SAS/SATA/NVMe routing",
+      "generation_or_revision": "14th generation; online service-manual topics plus iDRAC9 3.31/3.36 and 6.x/7.x management guides",
+      "exactness": "Chassis family, hybrid backplane option, service boundaries, and cited management capabilities are exact. Diagram geometry, cable bundling, lifecycle prose, and UEFI handoff are generalized abstractions.",
+      "supported_option_constraints": [
+        "Use the documented 24-by-2.5-inch hybrid backplane family; this pilot fixes the public example to the supported 20 SAS/SATA plus 4 NVMe option.",
+        "The SAS branch reaches a documented PERC adapter path; the NVMe branch is kept as a PCIe/NVMe path because the cited cable labels do not prove one universal controller topology.",
+        "A network daughter card is present for the network pilot; optional add-in NICs and exact port counts remain outside scope.",
+        "Two supported power supplies are shown as one redundant pair without encoding wattage, mains phase, or exact power-distribution PCB layout."
+      ],
+      "claim_ids": [
+        "claim.r740xd.2u-dual-cpu-memory",
+        "claim.r740xd.dual-psu",
+        "claim.r740xd.hybrid-backplane",
+        "claim.r740xd.twenty-sas-four-nvme-option",
+        "claim.r740xd.sas-perc-path",
+        "claim.r740xd.pcie-nvme-path",
+        "claim.r740xd.network-daughter-card",
+        "claim.idrac9.out-of-band-management",
+        "claim.uefi.os-loader-handoff"
+      ],
+      "planes": [
+        { "plane": "power", "status": "PRESENT", "summary": "Two PSUs feed a deliberately abstracted board-power path." },
+        { "plane": "management", "status": "PRESENT", "summary": "The BMC/iDRAC role receives standby power and exposes inventory, log, and lifecycle surfaces distinct from the host." },
+        { "plane": "host_firmware_post", "status": "PRESENT", "summary": "System board, CPU/memory, UEFI settings, POST, and boot policy are bounded stages." },
+        { "plane": "memory", "status": "PRESENT", "summary": "DIMM population/training is grouped; individual slot topology is outside scope." },
+        { "plane": "storage", "status": "PRESENT", "summary": "A hybrid backplane has separate SAS/PERC and PCIe/NVMe path abstractions." },
+        { "plane": "network", "status": "PRESENT", "summary": "A host NIC, physical link, firmware/driver boundary, and OS interface are distinct." },
+        { "plane": "os_handoff", "status": "PRESENT", "summary": "UEFI boot selection hands off to a loader and bounded OS runtime." },
+        { "plane": "runtime_service", "status": "PRESENT", "summary": "Only storage I/O, network link behavior, management observation, and thermal load needed by the five-Ticket pilot are modeled." }
+      ],
+      "components": [
+        { "role_id": "role.psu_pair", "label": "Redundant PSU pair", "role": "Converts external input and supplies standby/switched power", "multiplicity": "2 supported supplies", "replaceability": "Hot-plug service unit subject to documented procedure", "optionality": "Required by this pilot profile", "domain_component_id": "component.power.hot_swap_psu", "gap_status": "existing_sufficient", "claim_ids": ["claim.r740xd.dual-psu"] },
+        { "role_id": "role.system_board", "label": "System board", "role": "Contains host sockets, chipset, firmware devices, and the BMC service boundary", "multiplicity": "1", "replaceability": "Board-level service unit", "optionality": "Required", "domain_component_id": "component.board.system", "gap_status": "existing_sufficient", "claim_ids": ["claim.r740xd.2u-dual-cpu-memory"] },
+        { "role_id": "role.bmc", "label": "BMC / iDRAC role", "role": "Out-of-band management, inventory, lifecycle logs, and host coordination", "multiplicity": "1 logical role", "replaceability": "Not a separate pilot FRU; serviced through the system board or documented recovery path", "optionality": "Required", "domain_component_id": "component.management.bmc", "gap_status": "existing_sufficient", "claim_ids": ["claim.idrac9.out-of-band-management", "claim.idrac9.hardware-inventory"] },
+        { "role_id": "role.cpu", "label": "Host processor sockets", "role": "Executes host firmware and OS workload", "multiplicity": "Up to 2; grouped in the atlas", "replaceability": "Socketed service role", "optionality": "At least 1", "domain_component_id": "component.compute.cpu", "gap_status": "existing_sufficient", "claim_ids": ["claim.r740xd.2u-dual-cpu-memory"] },
+        { "role_id": "role.memory", "label": "ECC DIMM population", "role": "Host working memory trained during preboot", "multiplicity": "Up to 24 slots; grouped", "replaceability": "Individual DIMM service units", "optionality": "Population varies", "domain_component_id": "component.memory.ecc_dimm", "gap_status": "existing_sufficient", "claim_ids": ["claim.r740xd.2u-dual-cpu-memory"] },
+        { "role_id": "role.fans", "label": "Cooling-fan row", "role": "Moves chassis airflow under management/host load", "multiplicity": "Grouped fan row; exact count outside scope", "replaceability": "Individual fan service units", "optionality": "Required", "domain_component_id": "component.cooling.fan", "gap_status": "existing_sufficient", "claim_ids": ["claim.r740xd.2u-dual-cpu-memory"] },
+        { "role_id": "role.hybrid_backplane", "label": "Hybrid drive backplane", "role": "Mounts front drives and connects power, signal, SAS, and PCIe/NVMe branches", "multiplicity": "1 documented 24-bay option", "replaceability": "Replaceable backplane service unit", "optionality": "Profile-defining option", "domain_component_id": "component.storage.backplane", "gap_status": "existing_sufficient", "claim_ids": ["claim.r740xd.hybrid-backplane", "claim.r740xd.backplane-serviceable"] },
+        { "role_id": "role.sas_cable", "label": "SAS data-cable branch", "role": "Carries the SAS/SATA branch between backplane and PERC path", "multiplicity": "Bundled abstraction; exact connector count omitted", "replaceability": "Cable/connector service path", "optionality": "Present in fixed hybrid option", "domain_component_id": "component.storage.data_cable", "gap_status": "existing_but_broad", "claim_ids": ["claim.r740xd.sas-perc-path"] },
+        { "role_id": "role.pcie_cable", "label": "PCIe/NVMe interconnect branch", "role": "Carries the direct NVMe branch from the hybrid backplane toward PCIe endpoints", "multiplicity": "Bundled abstraction", "replaceability": "Cable/connector service path", "optionality": "Present in fixed hybrid option", "domain_component_id": null, "gap_status": "missing_required", "gap_id": "gap.component.storage.pcie_nvme_interconnect", "claim_ids": ["claim.r740xd.pcie-nvme-path"] },
+        { "role_id": "role.perc", "label": "PERC adapter path", "role": "Controls the SAS/SATA storage branch", "multiplicity": "1 bounded adapter path", "replaceability": "Adapter service unit", "optionality": "Present in fixed hybrid option", "domain_component_id": "component.storage.raid_controller", "gap_status": "existing_sufficient", "claim_ids": ["claim.r740xd.sas-perc-path"] },
+        { "role_id": "role.nvme", "label": "NVMe drive group", "role": "Provides direct PCIe/NVMe storage and may contain boot media", "multiplicity": "4 bays in the fixed public option", "replaceability": "Individual drive service units", "optionality": "Profile-defining option", "domain_component_id": "component.storage.nvme_ssd", "gap_status": "existing_sufficient", "claim_ids": ["claim.r740xd.twenty-sas-four-nvme-option"] },
+        { "role_id": "role.sas_drives", "label": "SAS/SATA drive group", "role": "Provides controller-attached storage", "multiplicity": "20 bays in the fixed public option", "replaceability": "Individual drive service units", "optionality": "Profile-defining option", "domain_component_id": "component.storage.sas_hdd", "gap_status": "existing_but_broad", "claim_ids": ["claim.r740xd.twenty-sas-four-nvme-option"] },
+        { "role_id": "role.nic", "label": "Host network adapter", "role": "Provides the host data link across firmware, driver, port, and cable boundaries", "multiplicity": "1 grouped network daughter card", "replaceability": "Daughter-card service unit", "optionality": "Required by network pilot", "domain_component_id": "component.network.nic", "gap_status": "existing_sufficient", "claim_ids": ["claim.r740xd.network-daughter-card"] },
+        { "role_id": "role.network_cable", "label": "External network cable", "role": "Completes the physical host-network link", "multiplicity": "1 representative active link", "replaceability": "External replaceable cable", "optionality": "Required by network pilot", "domain_component_id": "component.network.ethernet_cable", "gap_status": "existing_sufficient", "claim_ids": ["claim.r740xd.network-daughter-card"] }
+      ],
+      "nodes": [
+        { "node_id": "ac", "label": "External power", "kind": "PUBLIC_ABSTRACTION", "plane": "power", "x": 25, "y": 38, "w": 120, "h": 56, "claim_ids": ["claim.r740xd.dual-psu"] },
+        { "node_id": "psu", "label": "PSU pair", "kind": "COMPONENT_INSTANCE", "plane": "power", "x": 185, "y": 38, "w": 120, "h": 56, "domain_component_id": "component.power.hot_swap_psu", "claim_ids": ["claim.r740xd.dual-psu"] },
+        { "node_id": "board", "label": "System board", "kind": "SERVICEABLE_UNIT", "plane": "host_firmware_post", "x": 350, "y": 160, "w": 150, "h": 78, "domain_component_id": "component.board.system", "claim_ids": ["claim.r740xd.2u-dual-cpu-memory"] },
+        { "node_id": "bmc", "label": "BMC + lifecycle", "kind": "CONTROL_SURFACE", "plane": "management", "x": 350, "y": 32, "w": 150, "h": 70, "domain_component_id": "component.management.bmc", "claim_ids": ["claim.idrac9.out-of-band-management", "claim.idrac9.pre-os-interface"] },
+        { "node_id": "cpu_memory", "label": "CPU + ECC memory", "kind": "COMPONENT_INSTANCE", "plane": "memory", "x": 545, "y": 160, "w": 145, "h": 78, "domain_component_id": "component.compute.cpu", "claim_ids": ["claim.r740xd.2u-dual-cpu-memory"] },
+        { "node_id": "uefi", "label": "UEFI / boot policy", "kind": "CONTROL_SURFACE", "plane": "host_firmware_post", "x": 545, "y": 32, "w": 145, "h": 70, "gap_id": "gap.component.firmware.system_bios", "claim_ids": ["claim.r740xd.uefi-boot-mode", "claim.r740xd.boot-order-configurable", "claim.uefi.boot-manager-policy"] },
+        { "node_id": "backplane", "label": "Hybrid backplane", "kind": "SERVICEABLE_UNIT", "plane": "storage", "x": 350, "y": 310, "w": 150, "h": 78, "domain_component_id": "component.storage.backplane", "claim_ids": ["claim.r740xd.hybrid-backplane", "claim.r740xd.backplane-serviceable"] },
+        { "node_id": "sas_path", "label": "SAS cable + PERC", "kind": "BUS_OR_LINK", "plane": "storage", "x": 545, "y": 275, "w": 145, "h": 66, "domain_component_id": "component.storage.data_cable", "claim_ids": ["claim.r740xd.sas-perc-path"] },
+        { "node_id": "nvme_path", "label": "PCIe / NVMe path", "kind": "BUS_OR_LINK", "plane": "storage", "x": 545, "y": 360, "w": 145, "h": 66, "gap_id": "gap.component.storage.pcie_nvme_interconnect", "claim_ids": ["claim.r740xd.pcie-nvme-path"] },
+        { "node_id": "drives", "label": "20 SAS/SATA + 4 NVMe", "kind": "COMPONENT_INSTANCE", "plane": "storage", "x": 735, "y": 310, "w": 170, "h": 78, "domain_component_id": "component.storage.nvme_ssd", "claim_ids": ["claim.r740xd.twenty-sas-four-nvme-option"] },
+        { "node_id": "nic", "label": "Host NIC", "kind": "COMPONENT_INSTANCE", "plane": "network", "x": 735, "y": 160, "w": 170, "h": 78, "domain_component_id": "component.network.nic", "claim_ids": ["claim.r740xd.network-daughter-card"] },
+        { "node_id": "link", "label": "Port + cable + peer", "kind": "PUBLIC_ABSTRACTION", "plane": "network", "x": 950, "y": 160, "w": 170, "h": 78, "domain_component_id": "component.network.ethernet_cable", "claim_ids": ["claim.r740xd.network-daughter-card"] },
+        { "node_id": "os", "label": "OS loader + runtime", "kind": "LOGICAL_GROUP", "plane": "os_handoff", "x": 735, "y": 32, "w": 170, "h": 70, "claim_ids": ["claim.uefi.os-loader-handoff"] },
+        { "node_id": "fans", "label": "Cooling + sensors", "kind": "OBSERVATION_POINT", "plane": "runtime_service", "x": 950, "y": 310, "w": 170, "h": 78, "domain_component_id": "component.cooling.fan", "claim_ids": ["claim.idrac9.hardware-inventory"] }
+      ],
+      "edges": [
+        { "edge_id": "e.ac-psu", "from": "ac", "to": "psu", "type": "POWER", "label": "input", "claim_ids": ["claim.r740xd.dual-psu"] },
+        { "edge_id": "e.psu-board", "from": "psu", "to": "board", "type": "POWER", "label": "standby + switched", "claim_ids": ["claim.r740xd.dual-psu"] },
+        { "edge_id": "e.board-bmc", "from": "board", "to": "bmc", "type": "CONTROL", "label": "host management", "claim_ids": ["claim.idrac9.uefi-cooperation"] },
+        { "edge_id": "e.board-uefi", "from": "board", "to": "uefi", "type": "CONTAINMENT", "label": "firmware surface", "claim_ids": ["claim.r740xd.uefi-boot-mode"] },
+        { "edge_id": "e.uefi-cpu", "from": "uefi", "to": "cpu_memory", "type": "LIFECYCLE", "label": "initialize / POST", "claim_ids": ["claim.uefi.boot-manager-policy"] },
+        { "edge_id": "e.uefi-os", "from": "uefi", "to": "os", "type": "LIFECYCLE", "label": "boot handoff", "claim_ids": ["claim.uefi.os-loader-handoff"] },
+        { "edge_id": "e.board-backplane", "from": "board", "to": "backplane", "type": "POWER", "label": "power + signal", "x_offset": 20, "claim_ids": ["claim.r740xd.backplane-power-signal"] },
+        { "edge_id": "e.board-sas", "from": "board", "to": "sas_path", "type": "DATA", "label": "host storage", "claim_ids": ["claim.r740xd.sas-perc-path"] },
+        { "edge_id": "e.sas-backplane", "from": "sas_path", "to": "backplane", "type": "DATA", "label": "SAS branch", "claim_ids": ["claim.r740xd.sas-perc-path"] },
+        { "edge_id": "e.board-nvme", "from": "board", "to": "nvme_path", "type": "DATA", "label": "PCIe branch", "claim_ids": ["claim.r740xd.pcie-nvme-path"] },
+        { "edge_id": "e.nvme-backplane", "from": "nvme_path", "to": "backplane", "type": "DATA", "label": "NVMe branch", "claim_ids": ["claim.r740xd.pcie-nvme-path"] },
+        { "edge_id": "e.backplane-drives", "from": "backplane", "to": "drives", "type": "CONTAINMENT", "label": "mounted bays", "claim_ids": ["claim.r740xd.twenty-sas-four-nvme-option"] },
+        { "edge_id": "e.board-nic", "from": "board", "to": "nic", "type": "DATA", "label": "PCIe / host", "claim_ids": ["claim.r740xd.network-daughter-card"] },
+        { "edge_id": "e.nic-link", "from": "nic", "to": "link", "type": "DATA", "label": "physical link", "claim_ids": ["claim.r740xd.network-daughter-card"] },
+        { "edge_id": "e.bmc-inventory", "from": "bmc", "to": "backplane", "type": "CONTROL", "label": "inventory / events", "x_offset": -20, "claim_ids": ["claim.idrac9.storage-observation"] },
+        { "edge_id": "e.bmc-fans", "from": "bmc", "to": "fans", "type": "CONTROL", "label": "telemetry", "claim_ids": ["claim.idrac9.hardware-inventory"] },
+        { "edge_id": "e.os-storage", "from": "os", "to": "drives", "type": "DATA", "label": "driver / I/O", "claim_ids": ["claim.uefi.os-loader-handoff", "claim.r740xd.hybrid-backplane"] },
+        { "edge_id": "e.os-network", "from": "os", "to": "nic", "type": "DATA", "label": "driver / counters", "claim_ids": ["claim.uefi.os-loader-handoff", "claim.r740xd.network-daughter-card"] },
+        { "edge_id": "e.fans-host", "from": "fans", "to": "cpu_memory", "type": "COOLING", "label": "airflow", "claim_ids": ["claim.r740xd.2u-dual-cpu-memory"] }
+      ],
+      "lifecycle": [
+        { "stage_id": "standby", "order": 10, "label": "Standby power reaches the management domain", "relation": "PRECEDES", "claim_ids": ["claim.idrac9.out-of-band-management"] },
+        { "stage_id": "management_init", "order": 20, "label": "BMC and lifecycle services initialize independently of the host OS", "relation": "PARALLEL_WITH_HOST_REQUEST", "claim_ids": ["claim.idrac9.pre-os-interface"] },
+        { "stage_id": "host_power", "order": 30, "label": "A host-power request enables the switched board path", "relation": "REQUIRES", "claim_ids": ["claim.idrac9.uefi-cooperation"] },
+        { "stage_id": "firmware_post", "order": 40, "label": "Host firmware initializes processor, memory, adapters, and device inventory", "relation": "PRECEDES", "claim_ids": ["claim.idrac9.hardware-inventory", "claim.r740xd.uefi-boot-mode"] },
+        { "stage_id": "boot_select", "order": 50, "label": "UEFI applies boot policy to an available boot option", "relation": "PRECEDES", "claim_ids": ["claim.uefi.boot-manager-policy", "claim.uefi.bootorder-nvram"] },
+        { "stage_id": "os_handoff", "order": 60, "label": "Firmware hands control to the selected OS loader", "relation": "HANDOFF_TO", "claim_ids": ["claim.uefi.os-loader-handoff"] },
+        { "stage_id": "bounded_runtime", "order": 70, "label": "The OS exercises storage and network paths while management continues telemetry and event collection", "relation": "PARALLEL_WITH", "claim_ids": ["claim.idrac9.lifecycle-log-categories", "claim.idrac9.storage-observation"] }
+      ],
+      "known_abstractions": [
+        "Diagram positions are explanatory and do not reproduce Dell physical layouts.",
+        "The power path between PSU pair and system board is intentionally opaque; no cited source proves a specific R740xd distribution-board FRU for this option.",
+        "The 20 SAS/SATA plus 4 NVMe option is fixed to prevent unsupported option mixing; exact bay numbering and connector counts are omitted.",
+        "CPU sockets, memory channels, fans, sensor buses, PCIe lanes, and network ports are grouped because the Tickets do not need per-instance wiring.",
+        "The BMC and UEFI control surfaces are logical roles; their drawing boundaries do not imply separate replaceable boards."
+      ],
+      "stop_conditions": [
+        "Stop if a Ticket requires an exact bay-to-slot, riser, expander, lane, or controller mapping not proved by the cited configuration.",
+        "Stop if a proposed public view would choose a different option or topology after reading hidden truth.",
+        "Stop if a repair needs a serviceable unit not established by a manufacturer procedure.",
+        "Stop before presenting management inventory or logs as proof of causation; they are observation paths only."
+      ]
+    },
+    {
+      "profile_id": "profile.dell.poweredge-r740xd2.power-interposer.v1",
+      "display_name": "14th-generation 2U shared power-interposer profile",
+      "reference_identity": "Dell PowerEdge R740xd2 with two supported PSUs and a replaceable Power Interposer Board",
+      "generation_or_revision": "14th generation; online service-manual topics and product technical guide",
+      "exactness": "PSU multiplicity, 1+1 redundancy, PIB service boundary, PSU-cage placement, and board-cable connection are exact. Internal rail topology and all non-power subsystem wiring are generalized.",
+      "supported_option_constraints": [
+        "This pilot fixes two supported supplies in a 1+1 redundant arrangement.",
+        "The exact Dell role is a Power Interposer Board (PIB); the existing game candidate says distribution board and is treated as a broader functional class, not a part-number synonym.",
+        "The model does not combine the R740xd2 PIB with the R740xd hybrid backplane profile; cross-family composition is unproved."
+      ],
+      "claim_ids": [
+        "claim.r740xd2.dual-psu",
+        "claim.r740xd2.one-plus-one-redundancy",
+        "claim.r740xd2.pib-service-unit",
+        "claim.r740xd2.pib-system-board-cables",
+        "claim.r740xd2.pib-deenergize"
+      ],
+      "planes": [
+        { "plane": "power", "status": "PRESENT", "summary": "Two PSU service units converge through the replaceable PIB before the system-board load." },
+        { "plane": "management", "status": "PRESENT", "summary": "A grouped management role can report PSU mismatch/status; internal sensor wiring is outside scope." },
+        { "plane": "host_firmware_post", "status": "PRESENT", "summary": "Host firmware/POST is a grouped load and observation boundary, not a detailed boot model in this profile." },
+        { "plane": "memory", "status": "OUT_OF_SCOPE_WITH_REASON", "summary": "Present as part of the host load but individual DIMMs are irrelevant to the power-path Ticket." },
+        { "plane": "storage", "status": "OUT_OF_SCOPE_WITH_REASON", "summary": "Present as a grouped downstream load; the Ticket does not require a storage option claim." },
+        { "plane": "network", "status": "OUT_OF_SCOPE_WITH_REASON", "summary": "Present as a grouped downstream load; exact adapter topology is not used." },
+        { "plane": "os_handoff", "status": "PRESENT", "summary": "Normal boot is bounded as one downstream state, without asserting an exact device path." },
+        { "plane": "runtime_service", "status": "PRESENT", "summary": "Power status, voltage checks, de-energized service, replacement, and post-repair path verification are modeled." }
+      ],
+      "components": [
+        { "role_id": "role.input", "label": "External input leads", "role": "Feed the two PSU modules", "multiplicity": "2 representative inputs", "replaceability": "External cable service unit", "optionality": "Required", "domain_component_id": "component.power.input_cable", "gap_status": "existing_sufficient", "claim_ids": ["claim.r740xd2.dual-psu"] },
+        { "role_id": "role.psu_pair", "label": "Redundant PSU pair", "role": "Converts input and supplies the shared path", "multiplicity": "2 in 1+1 configuration", "replaceability": "Individual PSU service units", "optionality": "Required by profile", "domain_component_id": "component.power.hot_swap_psu", "gap_status": "existing_sufficient", "claim_ids": ["claim.r740xd2.one-plus-one-redundancy"] },
+        { "role_id": "role.pib", "label": "Power Interposer Board", "role": "Shared serviceable distribution path from the PSU cage to system-board cables", "multiplicity": "1", "replaceability": "Replaceable only after required de-energization and PSU removal", "optionality": "Required by profile", "domain_component_id": "component.power.distribution_board", "gap_status": "existing_but_broad", "gap_id": "gap.component.power.interposer_board", "claim_ids": ["claim.r740xd2.pib-service-unit", "claim.r740xd2.pib-system-board-cables", "claim.r740xd2.pib-deenergize"] },
+        { "role_id": "role.system_board", "label": "System-board load", "role": "Receives distributed power and contains grouped host/management roles", "multiplicity": "1", "replaceability": "Board-level service unit", "optionality": "Required", "domain_component_id": "component.board.system", "gap_status": "existing_sufficient", "claim_ids": ["claim.r740xd2.pib-system-board-cables"] },
+        { "role_id": "role.bmc", "label": "Management status role", "role": "Reports supported PSU mismatch/status observations", "multiplicity": "1 grouped role", "replaceability": "Outside this Ticket's service scope", "optionality": "Required observation surface", "domain_component_id": "component.management.bmc", "gap_status": "existing_sufficient", "claim_ids": ["claim.r740xd2.psu-mismatch-reporting"] },
+        { "role_id": "role.host_loads", "label": "Host subsystem loads", "role": "Grouped CPU, memory, storage, network, cooling, firmware, and OS consumers", "multiplicity": "Grouped", "replaceability": "Outside this Ticket's scope", "optionality": "Required as a bounded load", "domain_component_id": null, "gap_status": "optional_outside_scope", "claim_ids": ["claim.r740xd2.pib-system-board-cables"] }
+      ],
+      "nodes": [
+        { "node_id": "ac", "label": "Input cables", "kind": "COMPONENT_INSTANCE", "plane": "power", "x": 30, "y": 175, "w": 135, "h": 70, "domain_component_id": "component.power.input_cable", "claim_ids": ["claim.r740xd2.dual-psu"] },
+        { "node_id": "psu", "label": "PSU A + PSU B", "kind": "COMPONENT_INSTANCE", "plane": "power", "x": 220, "y": 175, "w": 145, "h": 70, "domain_component_id": "component.power.hot_swap_psu", "claim_ids": ["claim.r740xd2.one-plus-one-redundancy"] },
+        { "node_id": "power_interposer", "label": "Power Interposer Board", "kind": "SERVICEABLE_UNIT", "plane": "power", "x": 430, "y": 175, "w": 180, "h": 70, "domain_component_id": "component.power.distribution_board", "gap_id": "gap.component.power.interposer_board", "claim_ids": ["claim.r740xd2.pib-service-unit", "claim.r740xd2.pib-system-board-cables"] },
+        { "node_id": "board", "label": "System-board load", "kind": "SERVICEABLE_UNIT", "plane": "host_firmware_post", "x": 680, "y": 175, "w": 170, "h": 70, "domain_component_id": "component.board.system", "claim_ids": ["claim.r740xd2.pib-system-board-cables"] },
+        { "node_id": "bmc", "label": "Management status", "kind": "OBSERVATION_POINT", "plane": "management", "x": 680, "y": 40, "w": 170, "h": 70, "domain_component_id": "component.management.bmc", "claim_ids": ["claim.r740xd2.psu-mismatch-reporting"] },
+        { "node_id": "host", "label": "Host + bounded runtime", "kind": "LOGICAL_GROUP", "plane": "runtime_service", "x": 920, "y": 175, "w": 175, "h": 70, "claim_ids": ["claim.r740xd2.pib-system-board-cables"] },
+        { "node_id": "service", "label": "De-energized service", "kind": "CONTROL_SURFACE", "plane": "runtime_service", "x": 430, "y": 325, "w": 180, "h": 70, "claim_ids": ["claim.r740xd2.pib-deenergize", "claim.r740xd2.pib-remove-psus"] }
+      ],
+      "edges": [
+        { "edge_id": "e.ac-psu", "from": "ac", "to": "psu", "type": "POWER", "label": "two inputs", "claim_ids": ["claim.r740xd2.dual-psu"] },
+        { "edge_id": "e.psu-pib", "from": "psu", "to": "power_interposer", "type": "POWER", "label": "1+1 feed", "claim_ids": ["claim.r740xd2.one-plus-one-redundancy", "claim.r740xd2.pib-psu-cage"] },
+        { "edge_id": "e.pib-board", "from": "power_interposer", "to": "board", "type": "POWER", "label": "board cables", "claim_ids": ["claim.r740xd2.pib-system-board-cables"] },
+        { "edge_id": "e.board-host", "from": "board", "to": "host", "type": "POWER", "label": "switched loads", "claim_ids": ["claim.r740xd2.pib-system-board-cables"] },
+        { "edge_id": "e.bmc-psu", "from": "bmc", "to": "psu", "type": "CONTROL", "label": "status / mismatch", "claim_ids": ["claim.r740xd2.psu-mismatch-reporting"] },
+        { "edge_id": "e.service-psu", "from": "service", "to": "psu", "type": "LIFECYCLE", "label": "remove first", "claim_ids": ["claim.r740xd2.pib-remove-psus"] },
+        { "edge_id": "e.service-pib", "from": "service", "to": "power_interposer", "type": "LIFECYCLE", "label": "disconnect / replace", "claim_ids": ["claim.r740xd2.pib-disconnect-cables", "claim.r740xd2.pib-deenergize"] }
+      ],
+      "lifecycle": [
+        { "stage_id": "input", "order": 10, "label": "Two external inputs feed the installed PSU pair", "relation": "PRECEDES", "claim_ids": ["claim.r740xd2.dual-psu"] },
+        { "stage_id": "standby", "order": 20, "label": "The shared PIB-to-board path can supply standby management loads", "relation": "PRECEDES", "claim_ids": ["claim.r740xd2.pib-system-board-cables"] },
+        { "stage_id": "status", "order": 30, "label": "Firmware or management can report supported PSU mismatch/status observations", "relation": "PARALLEL_WITH", "claim_ids": ["claim.r740xd2.psu-mismatch-reporting"] },
+        { "stage_id": "host_power", "order": 40, "label": "The distribution path supplies grouped host loads for POST and bounded boot", "relation": "ENABLES", "claim_ids": ["claim.r740xd2.pib-system-board-cables"] },
+        { "stage_id": "service", "order": 50, "label": "PIB replacement requires power-off, input disconnection, and PSU removal before board cables are disconnected", "relation": "REQUIRES_DEENERGIZATION_BEFORE", "claim_ids": ["claim.r740xd2.pib-deenergize", "claim.r740xd2.pib-remove-psus", "claim.r740xd2.pib-disconnect-cables"] },
+        { "stage_id": "verify", "order": 60, "label": "After reassembly, verification exercises the complete input-to-board distribution path", "relation": "OPTIONAL_AFTER_SERVICE", "claim_ids": ["claim.r740xd2.pib-system-board-cables"] }
+      ],
+      "known_abstractions": [
+        "The PIB is modeled as a shared serviceable path, not as a schematic of internal rails or protection circuitry.",
+        "Non-power subsystems are a grouped load because the exact Ticket needs only a bounded downstream consumer.",
+        "The management-status edge records a documented observation capability, not a causal diagnosis.",
+        "The public Candidate term distribution board is broader than Dell's exact Power Interposer Board role."
+      ],
+      "stop_conditions": [
+        "Stop if a proposed model equates every distribution-board Candidate with a PIB without product-specific documentation.",
+        "Stop if exact voltages, rail names, connector pins, or sensor topology are needed; the cited sources do not prove them.",
+        "Stop before combining this power bundle with the R740xd hybrid-storage profile; cross-family compatibility is not established.",
+        "Stop before treating a management status or measured voltage as automatic Isolation authority."
+      ]
+    }
+  ],
+  "dossiers": [
+    {
+      "dossier_id": "model.missing-nvme.v1",
+      "slug": "01-missing-nvme-boot-device",
+      "title": "Missing NVMe boot device",
+      "ticket_id": "ticket.generated.3ec80b1b0e7221ac725aedf9",
+      "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+      "focus": "NVMe discovery, management observation, boot policy, and OS handoff",
+      "public_focus_sentence": "The visible model shows both boot-policy and physical storage-path explanations for a missing boot device; it does not identify which explanation is true.",
+      "focus_node_ids": ["bmc", "uefi", "board", "backplane", "nvme_path", "sas_path", "drives", "os"],
+      "candidate_closure": [
+        { "candidate_id": "fault.boot.device.not_detected", "public_nodes": ["uefi", "nvme_path", "drives"], "reason": "Discovery spans the selected device, its PCIe/NVMe path, and firmware inventory." },
+        { "candidate_id": "fault.boot.order.incorrect", "public_nodes": ["uefi", "os"], "reason": "A configurable UEFI boot policy can select an available but unintended option." },
+        { "candidate_id": "fault.storage.cable.loose", "public_nodes": ["nvme_path", "backplane"], "reason": "The documented hybrid configuration contains serviceable interconnect and backplane connection boundaries." },
+        { "candidate_id": "fault.storage.nvme.device_failed", "public_nodes": ["drives"], "reason": "The fixed public option contains replaceable NVMe devices." },
+        { "candidate_id": "fault.storage.raid.controller_failed", "public_nodes": ["sas_path", "backplane"], "reason": "A documented controller-attached storage branch remains visible as a plausible storage-path abstraction without claiming it hosts the boot device." }
+      ],
+      "private_role_bindings": {
+        "fault.storage.nvme.device_failed": ["drives"],
+        "fault.boot.device.not_detected": ["uefi", "nvme_path", "drives"],
+        "test.system.bmc_logs": ["bmc", "backplane", "drives"],
+        "repair.storage.replace_nvme": ["drives"],
+        "verify.storage.device_detected": ["uefi", "nvme_path", "drives"],
+        "verify.boot.normal_boot": ["uefi", "os"]
+      },
+      "hidden_consistency_summary": "The private authoring view can realize an unavailable NVMe service unit, an indirect management event/inventory observation, replacement of that unit, renewed firmware/device discovery, and a later UEFI-to-OS handoff. Nothing in the public diagram marks the NVMe unit or path as failed.",
+      "differential_variants": [
+        "fault.boot.device.not_detected",
+        "fault.boot.order.incorrect",
+        "fault.storage.cable.loose",
+        "fault.storage.nvme.device_failed",
+        "fault.storage.raid.controller_failed"
+      ],
+      "known_abstractions": [
+        "The public device group does not reveal bay number, namespace, controller ownership, or boot-device membership.",
+        "BMC logs are represented as indirect observations; Ticket-authored Evidence, not this model, determines any diagnostic disposition.",
+        "The controller Candidate is kept plausible through a truthful controller-attached branch, not by pretending every NVMe bay is controlled by PERC."
+      ],
+      "stop_conditions": [
+        "Stop if the selected Ticket requires an exact NVMe bay/slot/controller path absent from the public snapshot.",
+        "Stop if a diagram annotation would say missing, failed, suspect, boot device, or correct order before authorized Evidence reveals it."
+      ]
+    },
+    {
+      "dossier_id": "model.loose-storage-cable.v1",
+      "slug": "02-loose-storage-cable",
+      "title": "Loose storage cable",
+      "ticket_id": "ticket.generated.5352abd871c2e9076be92a0b",
+      "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+      "focus": "Hybrid backplane, data-path service boundaries, device inventory, and post-reseat discovery",
+      "public_focus_sentence": "The visible model exposes devices, cable/path abstractions, backplane, and controller boundaries so every public storage Candidate remains physically possible.",
+      "focus_node_ids": ["bmc", "board", "backplane", "sas_path", "nvme_path", "drives", "os"],
+      "candidate_closure": [
+        { "candidate_id": "fault.storage.backplane.path_failed", "public_nodes": ["backplane"], "reason": "The documented replaceable hybrid backplane is a distinct service boundary." },
+        { "candidate_id": "fault.storage.cable.failed", "public_nodes": ["sas_path", "nvme_path"], "reason": "The configuration has separate documented SAS and PCIe/NVMe interconnect branches." },
+        { "candidate_id": "fault.storage.cable.loose", "public_nodes": ["sas_path", "nvme_path", "backplane"], "reason": "Manufacturer routing and service procedures establish reconnectable cable/connector boundaries." },
+        { "candidate_id": "fault.storage.nvme.device_failed", "public_nodes": ["drives", "nvme_path"], "reason": "Replaceable NVMe devices are present in the fixed hybrid option." },
+        { "candidate_id": "fault.storage.sas.drive_failed", "public_nodes": ["drives", "sas_path"], "reason": "SAS/SATA bays and a controller-attached SAS branch are present." }
+      ],
+      "private_role_bindings": {
+        "fault.storage.cable.loose": ["sas_path", "nvme_path", "backplane"],
+        "test.general.visual_inspection": ["sas_path", "nvme_path", "backplane"],
+        "test.storage.device_inventory": ["bmc", "os", "drives"],
+        "repair.storage.reseat_cable": ["sas_path", "nvme_path", "backplane"],
+        "verify.storage.device_detected": ["bmc", "os", "drives"]
+      },
+      "hidden_consistency_summary": "The private view can bind the authored loose-cable instance to one documented reconnectable branch, corroborate a physical observation with an inventory observation, reseat the connection under service procedure, and then verify device discovery. The public view deliberately shows both cable branches and does not disclose which connector the Ticket binds privately.",
+      "differential_variants": [
+        "fault.storage.backplane.path_failed",
+        "fault.storage.cable.failed",
+        "fault.storage.cable.loose",
+        "fault.storage.nvme.device_failed",
+        "fault.storage.sas.drive_failed"
+      ],
+      "known_abstractions": [
+        "The Ticket says storage cable while the profile has at least two cable technologies; private authoring may bind an exact branch, but public projection must preserve both until Evidence distinguishes them.",
+        "Visual inspection establishes access to a connection boundary, not an automatic outcome or permission to repair."
+      ],
+      "stop_conditions": [
+        "Stop if the authored outcome names a connector or bay that the cited configuration cannot support.",
+        "Stop if the public diagram highlights a loose connector or suppresses a competing device/backplane path."
+      ]
+    },
+    {
+      "dossier_id": "model.failed-power-distribution.v1",
+      "slug": "03-failed-power-distribution-board",
+      "title": "Failed power-distribution path",
+      "ticket_id": "ticket.generated.3fd6eb04534f79b5b3f87f98",
+      "profile_id": "profile.dell.poweredge-r740xd2.power-interposer.v1",
+      "focus": "Redundant input, PSU pair, shared Power Interposer Board service path, and downstream system-board load",
+      "public_focus_sentence": "The visible model separates two input/PSU branches from the shared interposer and downstream board so isolation can compare path segments without exposing the failing segment.",
+      "focus_node_ids": ["ac", "psu", "power_interposer", "board", "bmc", "host", "service"],
+      "candidate_closure": [
+        { "candidate_id": "fault.board.system.failed", "public_nodes": ["board", "host"], "reason": "The downstream system board is a distinct service/load boundary." },
+        { "candidate_id": "fault.power.distribution_board.failed", "public_nodes": ["power_interposer"], "reason": "The exact product has a replaceable PIB serving the broader distribution-board functional role." },
+        { "candidate_id": "fault.power.input.cable_loose", "public_nodes": ["ac", "psu"], "reason": "Two external input boundaries precede the PSU pair." },
+        { "candidate_id": "fault.power.psu.failed", "public_nodes": ["psu"], "reason": "Two individually serviceable supplies form the documented 1+1 pair." },
+        { "candidate_id": "fault.power.psu.not_seated", "public_nodes": ["psu", "power_interposer"], "reason": "The removable PSU-to-cage/interposer boundary is a truthful service interface." }
+      ],
+      "private_role_bindings": {
+        "fault.power.distribution_board.failed": ["power_interposer"],
+        "test.power.distribution_path_isolation": ["ac", "psu", "power_interposer", "board"],
+        "repair.power.replace_distribution_board": ["service", "power_interposer"],
+        "verify.power.distribution_path": ["ac", "psu", "power_interposer", "board", "host"]
+      },
+      "hidden_consistency_summary": "The private view can bind the broad game Fault to the documented PIB service role, compare upstream PSU and downstream board segments, perform the required de-energized replacement sequence, and exercise the rebuilt input-to-host path. Publicly, all five Candidates still map to distinct visible boundaries.",
+      "differential_variants": [
+        "fault.board.system.failed",
+        "fault.power.distribution_board.failed",
+        "fault.power.input.cable_loose",
+        "fault.power.psu.failed",
+        "fault.power.psu.not_seated"
+      ],
+      "known_abstractions": [
+        "The game's distribution-board term is functionally broader than Dell's Power Interposer Board; the mapping is a reviewed pilot gap, not a silent rename.",
+        "Voltage rails, pins, protection devices, and sensor circuits are outside the evidence available to this task."
+      ],
+      "stop_conditions": [
+        "Stop if future content requires electrical measurement points or voltage limits not defined by an approved domain contract and exact service source.",
+        "Stop if a generic distribution-board model is reused for a server without a documented equivalent service unit."
+      ]
+    },
+    {
+      "dossier_id": "model.incompatible-firmware-set.v1",
+      "slug": "04-incompatible-firmware-set-network",
+      "title": "Incompatible firmware set with network symptoms",
+      "ticket_id": "ticket.generated.b34238282822e93980b5f1ad",
+      "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+      "focus": "BMC firmware inventory/rollback, UEFI/adapter boundaries, host NIC, physical link, driver handoff, and runtime counters",
+      "public_focus_sentence": "The visible model keeps firmware, adapter, port, cable, peer, and runtime-counter boundaries separate, leaving both logical and physical network Candidates plausible.",
+      "focus_node_ids": ["bmc", "uefi", "board", "os", "nic", "link"],
+      "candidate_closure": [
+        { "candidate_id": "fault.firmware.version_set.incompatible", "public_nodes": ["bmc", "uefi", "nic", "os"], "reason": "The management inventory and documented rollback surface span BIOS, iDRAC, RAID, and NIC firmware while the host driver is a separate handoff boundary." },
+        { "candidate_id": "fault.network.cable.disconnected", "public_nodes": ["link"], "reason": "The external port/cable/peer path is visibly distinct." },
+        { "candidate_id": "fault.network.cable.failed", "public_nodes": ["link"], "reason": "The same physical path supports a failed-cable hypothesis without labeling link state." },
+        { "candidate_id": "fault.network.nic.failed", "public_nodes": ["nic"], "reason": "The host NIC is a documented serviceable adapter role." }
+      ],
+      "private_role_bindings": {
+        "fault.firmware.version_set.incompatible": ["bmc", "uefi", "nic"],
+        "test.firmware.version_compatibility": ["bmc", "uefi", "nic"],
+        "test.network.link_counter_soak": ["os", "nic", "link"],
+        "repair.firmware.restore_compatible_versions": ["bmc", "uefi", "nic"],
+        "verify.firmware.compatible_persistent": ["bmc", "uefi", "nic", "os", "link"]
+      },
+      "hidden_consistency_summary": "The private view can compare the documented management firmware inventory, correlate a bounded runtime link-counter observation, restore a source-supported prior compatible set, and then verify persistence across the firmware/driver/link boundary. The public view includes the same nodes for every Candidate and never labels a version compatible or incompatible.",
+      "differential_variants": [
+        "fault.firmware.version_set.incompatible",
+        "fault.network.cable.disconnected",
+        "fault.network.cable.failed",
+        "fault.network.nic.failed"
+      ],
+      "known_abstractions": [
+        "No specific compatible version tuple is invented; the manufacturer rollback source proves the surface and constraints, not the Ticket's authored compatibility matrix.",
+        "Link counter behavior and driver state are bounded OS-runtime observations; they do not make the diagram a network protocol model."
+      ],
+      "stop_conditions": [
+        "Stop if a Ticket needs a concrete version tuple without a product support matrix or authored source ledger entry.",
+        "Stop if rollback is represented as universally available; stored previous-version and component-support constraints must remain explicit.",
+        "Stop if the public view displays version mismatch, bad counters, or link failure before Evidence authorizes it."
+      ]
+    },
+    {
+      "dossier_id": "model.corrupt-bmc-firmware.v1",
+      "slug": "05-corrupt-bmc-firmware",
+      "title": "Corrupt BMC firmware recovery",
+      "ticket_id": "ticket.generated.f32b85cbf2054fdf0114f42a",
+      "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+      "focus": "Standby management initialization, BMC recovery state, external recovery image, bootloader reprogramming, and host-management reconnection",
+      "public_focus_sentence": "The visible model separates management recovery from ordinary version compatibility while retaining the host board, UEFI, and runtime interfaces that both public Candidates can affect.",
+      "focus_node_ids": ["psu", "board", "bmc", "uefi", "os"],
+      "candidate_closure": [
+        { "candidate_id": "fault.firmware.version_set.incompatible", "public_nodes": ["bmc", "uefi", "os"], "reason": "The documented firmware inventory/rollback surface crosses management, BIOS, and host-facing component versions." },
+        { "candidate_id": "fault.management.bmc_firmware.corrupt", "public_nodes": ["bmc", "board"], "reason": "The documented iDRAC9 recovery path establishes a recoverable management-firmware role on the board service boundary." }
+      ],
+      "private_role_bindings": {
+        "fault.management.bmc_firmware.corrupt": ["bmc", "board"],
+        "test.management.bmc_recovery_state": ["bmc", "board"],
+        "repair.management.recover_bmc_firmware": ["bmc", "board"],
+        "verify.management.bmc_functional": ["bmc", "board", "uefi", "os"]
+      },
+      "hidden_consistency_summary": "The private view can inspect the documented recovery-state boundary, supply an external recovery image through the vendor procedure, allow the bootloader to reprogram and reboot the management controller, and then verify both management responsiveness and bounded host coordination. The public projection does not show recovery mode, corruption, image presence, or result.",
+      "differential_variants": [
+        "fault.firmware.version_set.incompatible",
+        "fault.management.bmc_firmware.corrupt"
+      ],
+      "known_abstractions": [
+        "The recovery image and bootloader are logical nodes described in prose/text equivalent rather than extra diagram boxes; the cited procedure supplies their exact recovery roles.",
+        "The BMC is not labeled as a separate replaceable board; the pilot distinguishes firmware recovery from board replacement."
+      ],
+      "stop_conditions": [
+        "Stop if a proposed recovery step uses a filename, media format, or controller generation other than the applicable manufacturer procedure.",
+        "Stop if recovery success is inferred from image presence rather than the Ticket's authored Verification.",
+        "Stop if the public view reveals recovery state or distinguishes the two Candidates using private authoring data."
+      ]
+    }
+  ],
+  "action_mapping_rules": [
+    { "match": "command.linux.lsblk", "target_nodes": ["os", "drives"], "relation": "queries the OS block-device view across the storage path" },
+    { "match": "command.linux.lspci", "target_nodes": ["os", "board", "nic", "nvme_path"], "relation": "queries host-visible PCIe inventory without proving downstream health" },
+    { "match": "command.linux.nvme_smart_log", "target_nodes": ["os", "nvme_path", "drives"], "relation": "queries a reachable NVMe device telemetry surface" },
+    { "match": "command.linux.smartctl", "target_nodes": ["os", "sas_path", "drives"], "relation": "queries a reachable controller/device health surface" },
+    { "match_prefix": "test.boot.", "target_nodes": ["uefi", "board", "drives", "os"], "relation": "observes preboot discovery, POST, boot-policy, or handoff boundaries" },
+    { "match_prefix": "test.cooling.", "target_nodes": ["fans", "bmc"], "relation": "varies or observes the bounded cooling path under a controlled comparison" },
+    { "match": "test.firmware.settings_review", "target_nodes": ["uefi"], "relation": "queries the documented host-firmware settings surface" },
+    { "match": "test.firmware.version_compatibility", "target_nodes": ["bmc", "uefi", "nic"], "relation": "compares documented inventory across firmware-bearing roles; compatibility remains authored content" },
+    { "match": "test.general.minimum_configuration", "target_nodes": ["board", "cpu_memory", "drives", "nic"], "relation": "bounds host dependencies without asserting which removed option is causal" },
+    { "match": "test.general.visual_inspection", "target_nodes": ["board", "backplane", "sas_path", "nvme_path", "psu", "link"], "relation": "observes accessible service boundaries without turning proximity into diagnosis" },
+    { "match_prefix": "test.memory.", "target_nodes": ["cpu_memory", "board", "bmc"], "relation": "observes or varies the grouped memory-training and inventory path" },
+    { "match_prefix": "test.network.", "target_nodes": ["os", "nic", "link"], "relation": "observes or varies the adapter-to-physical-link path and bounded runtime counters" },
+    { "match": "test.pcie.inventory", "target_nodes": ["board", "nic", "nvme_path", "os"], "relation": "observes host-visible PCIe attachment boundaries" },
+    { "match_prefix": "test.power.", "target_nodes": ["ac", "psu", "power_interposer", "board", "bmc"], "relation": "observes or varies successive segments of the documented power path" },
+    { "match_prefix": "test.storage.", "target_nodes": ["bmc", "os", "backplane", "sas_path", "nvme_path", "drives"], "relation": "observes or varies device, path, backplane, and controller boundaries" },
+    { "match": "test.system.bmc_logs", "target_nodes": ["bmc", "board", "backplane", "drives"], "relation": "queries indirect lifecycle/inventory events; the Ticket authors their Evidence meaning" },
+    { "match": "test.system.controlled_stress", "target_nodes": ["os", "cpu_memory", "fans", "drives", "nic"], "relation": "exercises bounded runtime loads while telemetry remains observable" },
+    { "match_prefix": "test.thermal.", "target_nodes": ["fans", "bmc", "cpu_memory"], "relation": "observes cooling telemetry and the bounded host-load path" },
+    { "match": "test.management.bmc_recovery_state", "target_nodes": ["bmc", "board"], "relation": "queries the documented management recovery boundary" },
+    { "match": "repair.storage.replace_nvme", "target_nodes": ["drives", "backplane"], "relation": "intervenes on a replaceable NVMe service unit and its bay boundary" },
+    { "match": "repair.storage.reseat_cable", "target_nodes": ["sas_path", "nvme_path", "backplane"], "relation": "intervenes on a documented reconnectable storage interconnect boundary" },
+    { "match": "repair.power.replace_distribution_board", "target_nodes": ["service", "power_interposer"], "relation": "de-energizes and replaces the exact PIB service role used for the broader game Candidate" },
+    { "match": "repair.firmware.restore_compatible_versions", "target_nodes": ["bmc", "uefi", "nic"], "relation": "changes firmware-bearing roles through a documented rollback/update surface" },
+    { "match": "repair.management.recover_bmc_firmware", "target_nodes": ["bmc", "board"], "relation": "applies the documented external-image recovery path to the management firmware role" },
+    { "match": "verify.storage.device_detected", "target_nodes": ["bmc", "os", "backplane", "sas_path", "nvme_path", "drives"], "relation": "checks renewed device visibility through the applicable storage path" },
+    { "match": "verify.boot.normal_boot", "target_nodes": ["uefi", "drives", "os"], "relation": "checks successful boot selection and OS handoff after storage discovery" },
+    { "match": "verify.power.distribution_path", "target_nodes": ["ac", "psu", "power_interposer", "board", "host"], "relation": "checks the rebuilt input-to-board path under a downstream load" },
+    { "match": "verify.firmware.compatible_persistent", "target_nodes": ["bmc", "uefi", "nic", "os", "link"], "relation": "checks inventory persistence and bounded runtime link behavior after firmware intervention" },
+    { "match": "verify.management.bmc_functional", "target_nodes": ["bmc", "board", "uefi", "os"], "relation": "checks management responsiveness and bounded host coordination after recovery" }
+  ]
+}

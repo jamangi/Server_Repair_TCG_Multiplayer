@@ -1,0 +1,285 @@
+{
+  "ledger_version": "task-050-source-ledger-v1",
+  "access_date": "2026-08-30",
+  "archive_policy": {
+    "local_copies_retained": false,
+    "reason": "The manufacturer and standards material is copyrighted. This repository records canonical URLs, document versions where exposed, scoped claims, and access status without redistributing source diagrams or manuals.",
+    "mutable_web_warning": "Dell online-manual topics can redirect by locale or product alias. A URL remaining reachable does not prove its content is unchanged; revalidation must compare the scoped claim and product context."
+  },
+  "sources": [
+    {
+      "source_id": "src.dell.r740xd.system-overview",
+      "kind": "manufacturer_service_manual",
+      "title": "PowerEdge R740xd system overview",
+      "publisher": "Dell Technologies",
+      "product_scope": "PowerEdge R740xd, 14th-generation platform",
+      "revision": "Online service-manual topic; topic revision not exposed",
+      "url": "https://www.dell.com/support/manuals/en-us/poweredge-r740xd/per740xd_ism_pub/poweredge-r740xd-system-overview?guid=guid-db2e151c-0b4d-4f95-8c09-d0d81a59807d&lang=en-us",
+      "access_status": "accessible",
+      "claim_ids": [
+        "claim.r740xd.2u-dual-cpu-memory",
+        "claim.r740xd.dual-psu",
+        "claim.r740xd.nvme-capability"
+      ],
+      "claim_scope": "Exact family-level chassis, processor/memory, redundant-power, and NVMe capability facts; not proof of every option combination."
+    },
+    {
+      "source_id": "src.dell.r740xd.backplane-details",
+      "kind": "manufacturer_service_manual",
+      "title": "PowerEdge R740xd backplane details",
+      "publisher": "Dell Technologies",
+      "product_scope": "PowerEdge R740xd backplane options",
+      "revision": "Online service-manual topic; topic revision not exposed",
+      "url": "https://www.dell.com/support/manuals/en-us/poweredge-r740xd/per740xd_ism_pub/backplane-details?guid=guid-5d119b25-5363-4be0-b451-e30ae7ca3f5b&lang=en-us",
+      "access_status": "accessible",
+      "claim_ids": [
+        "claim.r740xd.hybrid-backplane",
+        "claim.r740xd.twenty-sas-four-nvme-option"
+      ],
+      "claim_scope": "Exact supported 24-by-2.5-inch hybrid backplane family and a documented 20 SAS/SATA plus 4 NVMe option."
+    },
+    {
+      "source_id": "src.dell.r740xd.cable-routing",
+      "kind": "manufacturer_service_manual",
+      "title": "PowerEdge R740xd cable routing",
+      "publisher": "Dell Technologies",
+      "product_scope": "PowerEdge R740xd 24-by-2.5-inch NVMe/hybrid routing",
+      "revision": "Online service-manual topic; Figure 16; topic revision not exposed",
+      "url": "https://www.dell.com/support/manuals/en-us/poweredge-r740xd/per740xd_ism_pub/cable-routing?guid=guid-06637506-d7db-43e6-9c15-be4a832d4fbe",
+      "access_status": "accessible",
+      "claim_ids": [
+        "claim.r740xd.backplane-power-signal",
+        "claim.r740xd.sas-perc-path",
+        "claim.r740xd.pcie-nvme-path",
+        "claim.r740xd.hybrid-routing-option"
+      ],
+      "claim_scope": "Exact family cable-routing relationships. The atlas generalizes connector positions and calls the PCIe-side target a PCIe/NVMe path because the online labels do not justify a more specific controller identity.",
+      "conflict_or_exception": "The topic labels the SAS adapter as PERC while some PCIe cable endpoints are visually grouped near controller/card labels. The atlas does not infer a universal tri-mode controller."
+    },
+    {
+      "source_id": "src.dell.r740xd.backplane-install",
+      "kind": "manufacturer_service_manual",
+      "title": "Installing the backplane",
+      "publisher": "Dell Technologies",
+      "product_scope": "PowerEdge R740xd service procedure",
+      "revision": "Online service-manual topic; topic revision not exposed",
+      "url": "https://www.dell.com/support/manuals/en-us/poweredge-r740xd/per740xd_ism_pub/installing-the-backplane?guid=guid-8dd331b7-13d7-4719-8082-53a8c956cf27&lang=en-us",
+      "access_status": "accessible",
+      "claim_ids": [
+        "claim.r740xd.backplane-serviceable",
+        "claim.r740xd.backplane-cables-reconnected"
+      ],
+      "claim_scope": "Exact service boundary: the backplane is removable and its documented cables must be reconnected."
+    },
+    {
+      "source_id": "src.dell.r740xd.bios-settings",
+      "kind": "manufacturer_firmware_manual",
+      "title": "System BIOS Settings details",
+      "publisher": "Dell Technologies",
+      "product_scope": "PowerEdge R740xd BIOS",
+      "revision": "Online BIOS reference; topic revision not exposed",
+      "url": "https://www.dell.com/support/manuals/en-us/poweredge-r740xd/r740xd_bios_ism_pub/system-bios-settings-details?guid=guid-62c95e9f-dca7-4314-967f-8c31b3e9edb1&lang=en-us",
+      "access_status": "accessible",
+      "claim_ids": [
+        "claim.r740xd.uefi-boot-mode",
+        "claim.r740xd.nvme-settings"
+      ],
+      "claim_scope": "Exact R740xd firmware settings relevant to boot mode and NVMe configuration; no claim that changing a setting is authorized gameplay."
+    },
+    {
+      "source_id": "src.dell.r740xd.boot-order",
+      "kind": "manufacturer_firmware_manual",
+      "title": "Changing boot order",
+      "publisher": "Dell Technologies",
+      "product_scope": "PowerEdge R740xd BIOS",
+      "revision": "Online BIOS reference; topic revision not exposed",
+      "url": "https://www.dell.com/support/manuals/en-us/poweredge-r740xd/r740xd_bios_ism_pub/changing-boot-order?guid=guid-07c7df74-38ab-4c4d-9aa8-d93624c5158e&lang=en-us",
+      "access_status": "accessible",
+      "claim_ids": ["claim.r740xd.boot-order-configurable"],
+      "claim_scope": "Exact existence of a configurable boot-order surface."
+    },
+    {
+      "source_id": "src.dell.r740xd.nic-ports",
+      "kind": "manufacturer_technical_specification",
+      "title": "NIC ports",
+      "publisher": "Dell Technologies",
+      "product_scope": "PowerEdge R740xd",
+      "revision": "Online technical-specification topic; topic revision not exposed",
+      "url": "https://www.dell.com/support/manuals/en-us/poweredge-r740xd/per740xd_techspecs_pub/nic-ports?guid=guid-8ba21af1-af17-4133-85d8-442d2c1fe4f9&lang=en-us",
+      "access_status": "accessible",
+      "claim_ids": [
+        "claim.r740xd.network-daughter-card",
+        "claim.r740xd.add-in-nic-option"
+      ],
+      "claim_scope": "Exact family support for a network daughter card and optional add-in network adapters; port counts are not encoded in the public pilot diagram."
+    },
+    {
+      "source_id": "src.dell.idrac9.lifecycle-introduction",
+      "kind": "manufacturer_management_manual",
+      "title": "Lifecycle Controller introduction",
+      "publisher": "Dell Technologies",
+      "product_scope": "iDRAC9 with Lifecycle Controller, including PowerEdge R740xd",
+      "revision": "iDRAC9 6.xx Lifecycle Controller User's Guide",
+      "url": "https://www.dell.com/support/manuals/en-us/poweredge-r740xd/idrac9_6.xx_lc_ug/introduction",
+      "access_status": "accessible",
+      "claim_ids": [
+        "claim.idrac9.out-of-band-management",
+        "claim.idrac9.uefi-cooperation",
+        "claim.idrac9.pre-os-interface"
+      ],
+      "claim_scope": "Exact product-family support for iDRAC9/Lifecycle Controller; management behavior is shared across the documented iDRAC9 generation."
+    },
+    {
+      "source_id": "src.dell.idrac9.firmware-rollback",
+      "kind": "manufacturer_management_manual",
+      "title": "Firmware rollback",
+      "publisher": "Dell Technologies",
+      "product_scope": "iDRAC9 with Lifecycle Controller supported platforms",
+      "revision": "3.36.36.36",
+      "url": "https://www.dell.com/support/manuals/en-us/idrac9-lifecycle-controller-v3.3-series/idrac9_3.36.36.36_lc_ug/firmware-rollback?guid=guid-d4c864dc-1503-4910-b865-6ab4b55f0c99&lang=en-us",
+      "access_status": "accessible",
+      "claim_ids": [
+        "claim.idrac9.rollback-bios-idrac-raid-nic",
+        "claim.idrac9.rollback-stored-version-constraints"
+      ],
+      "claim_scope": "Generation-level documented rollback coverage and constraints; not proof that every arbitrary firmware combination is compatible."
+    },
+    {
+      "source_id": "src.dell.idrac9.recovery",
+      "kind": "manufacturer_support_procedure",
+      "title": "PowerEdge: iDRAC recovery procedure with firmimg image",
+      "publisher": "Dell Technologies",
+      "product_scope": "iDRAC7/8/9 recovery; iDRAC9 on 14th-generation systems",
+      "revision": "Article version 10; modified 2025-07-22",
+      "url": "https://www.dell.com/support/kbdoc/en-uk/000120131/poweredge-idrac-recovery-procedure-with-firmimg-d7",
+      "access_status": "accessible",
+      "claim_ids": [
+        "claim.idrac9.dual-boot-images",
+        "claim.idrac9.sd-recovery-image",
+        "claim.idrac9.bootloader-reprograms-reboots"
+      ],
+      "claim_scope": "Generation-level recovery procedure. The atlas uses only the existence and direction of the recovery path, not vendor filename or branded UI in the illustration."
+    },
+    {
+      "source_id": "src.dell.idrac9.inventory",
+      "kind": "manufacturer_management_manual",
+      "title": "Viewing system inventory",
+      "publisher": "Dell Technologies",
+      "product_scope": "iDRAC9 on 14th-generation PowerEdge systems",
+      "revision": "3.31.31.31",
+      "url": "https://www.dell.com/support/manuals/en-us/poweredge-r740/idrac_3.31.31.31_ug/viewing-system-inventory?guid=guid-cff6b735-2153-49a5-b1d2-34ffa1b8ab17&lang=en-us",
+      "access_status": "accessible",
+      "claim_ids": [
+        "claim.idrac9.hardware-inventory",
+        "claim.idrac9.firmware-inventory",
+        "claim.idrac9.csior"
+      ],
+      "claim_scope": "Generalized iDRAC9-generation inventory behavior, combined with the exact R740xd iDRAC9 support source; the URL product alias is R740 rather than R740xd and is not treated as chassis-option proof."
+    },
+    {
+      "source_id": "src.dell.idrac9.lifecycle-log",
+      "kind": "manufacturer_management_manual",
+      "title": "Viewing Lifecycle Log history",
+      "publisher": "Dell Technologies",
+      "product_scope": "iDRAC9 with Lifecycle Controller",
+      "revision": "iDRAC9 6.xx Lifecycle Controller User's Guide",
+      "url": "https://www.dell.com/support/manuals/en-us/oth-r740/idrac9_6.xx_lc_ug/viewing-lifecycle-log-history?guid=guid-482a7006-b457-4781-af06-589e0cdd2530&lang=en-us",
+      "access_status": "accessible",
+      "claim_ids": [
+        "claim.idrac9.lifecycle-log-categories",
+        "claim.idrac9.lifecycle-log-timestamps"
+      ],
+      "claim_scope": "Generalized iDRAC9-generation log behavior; no claim that a log uniquely diagnoses a Ticket Candidate."
+    },
+    {
+      "source_id": "src.dell.idrac9.storage-monitoring",
+      "kind": "manufacturer_management_manual",
+      "title": "Monitoring storage devices using web interface",
+      "publisher": "Dell Technologies",
+      "product_scope": "iDRAC9 on 14th-generation PowerEdge systems",
+      "revision": "iDRAC9 7.xx User's Guide",
+      "url": "https://www.dell.com/support/manuals/en-us/poweredge-r740/idrac9_7.xx_ug_14g/monitoring-storage-devices-using-web-interface?guid=guid-f4650417-3e7e-456c-91bd-91f4a32b61f4&lang=en-us",
+      "access_status": "accessible",
+      "claim_ids": [
+        "claim.idrac9.storage-observation",
+        "claim.idrac9.nvme-observation-limit"
+      ],
+      "claim_scope": "Generalized management observation of controllers, disks, enclosures, and NVMe limitations; not proof of fault causation."
+    },
+    {
+      "source_id": "src.dell.r740xd2.psu-specifications",
+      "kind": "manufacturer_technical_specification",
+      "title": "PowerEdge R740xd2 PSU specifications",
+      "publisher": "Dell Technologies",
+      "product_scope": "PowerEdge R740xd2",
+      "revision": "Online technical-specification topic; topic revision not exposed",
+      "url": "https://www.dell.com/support/manuals/en-us/poweredge-r740xd2/per740xd2_ts_pub/psu-specifications?guid=guid-e1ac1620-e3a7-4d56-9b02-bd5de9e95dad",
+      "access_status": "accessible",
+      "claim_ids": ["claim.r740xd2.dual-psu"],
+      "claim_scope": "Exact family PSU support."
+    },
+    {
+      "source_id": "src.dell.r740xd2.technical-guide",
+      "kind": "manufacturer_technical_guide",
+      "title": "PowerEdge R740xd2 Technical Guide",
+      "publisher": "Dell Technologies",
+      "product_scope": "PowerEdge R740xd2",
+      "revision": "Published PDF; document revision not exposed in filename",
+      "url": "https://i.dell.com/sites/csdocuments/Product_Docs/en/poweredge-r740xd2-technical-guide.pdf",
+      "access_status": "accessible",
+      "claim_ids": [
+        "claim.r740xd2.one-plus-one-redundancy",
+        "claim.r740xd2.psu-mismatch-reporting"
+      ],
+      "claim_scope": "Exact family 1+1 PSU redundancy and management/firmware reporting behavior."
+    },
+    {
+      "source_id": "src.dell.r740xd2.pib-install",
+      "kind": "manufacturer_service_manual",
+      "title": "Installing power interposer board",
+      "publisher": "Dell Technologies",
+      "product_scope": "PowerEdge R740xd2",
+      "revision": "Online service-manual topic; topic revision not exposed",
+      "url": "https://www.dell.com/support/manuals/en-us/oth-r740xd2/per740xd2_ism_pub/installing-power-interposer-board?guid=guid-04f497da-2ae1-4593-85d2-64ef3a6b92a4&lang=en-us",
+      "access_status": "accessible",
+      "claim_ids": [
+        "claim.r740xd2.pib-service-unit",
+        "claim.r740xd2.pib-psu-cage",
+        "claim.r740xd2.pib-system-board-cables",
+        "claim.r740xd2.pib-deenergize"
+      ],
+      "claim_scope": "Exact R740xd2 service boundary and connections for the power interposer board (PIB)."
+    },
+    {
+      "source_id": "src.dell.r740xd2.pib-remove",
+      "kind": "manufacturer_service_manual",
+      "title": "Removing the power interposer board",
+      "publisher": "Dell Technologies",
+      "product_scope": "PowerEdge R740xd2",
+      "revision": "Online service-manual topic; topic revision not exposed",
+      "url": "https://www.dell.com/support/manuals/en-us/poweredge-r740xd2/per740xd2_ism_pub/pib?guid=guid-4dd5d0c7-e3fe-408b-bca9-dfc8061c63ff&lang=en-us",
+      "access_status": "accessible",
+      "claim_ids": [
+        "claim.r740xd2.pib-disconnect-cables",
+        "claim.r740xd2.pib-remove-psus"
+      ],
+      "claim_scope": "Exact removal constraints supporting the replaceable shared-distribution-path model."
+    },
+    {
+      "source_id": "src.uefi.2_10.boot-manager",
+      "kind": "primary_standard",
+      "title": "UEFI Specification 2.10 — Boot Manager",
+      "publisher": "UEFI Forum",
+      "product_scope": "Standards-defined UEFI boot-manager behavior",
+      "revision": "2.10",
+      "url": "https://uefi.org/specs/UEFI/2.10/03_Boot_Manager.html",
+      "access_status": "accessible",
+      "claim_ids": [
+        "claim.uefi.boot-manager-policy",
+        "claim.uefi.bootorder-nvram",
+        "claim.uefi.os-loader-handoff"
+      ],
+      "claim_scope": "Generalized standards behavior, used only where the manufacturer documentation identifies UEFI mode; not an R740xd implementation-detail claim."
+    }
+  ]
+}

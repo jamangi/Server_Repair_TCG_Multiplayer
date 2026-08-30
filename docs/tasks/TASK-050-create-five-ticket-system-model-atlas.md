@@ -2,7 +2,7 @@
 
 ## Status
 
-**Planned after TASK-049.** This is the manual illustration-of-concept phase. It must complete before production schemas, domain integration, or runtime selection begin.
+**Completed 2026-08-30.** The manual illustration-of-concept package is in [`../system-models/task-050/`](../system-models/task-050/). `SYSTEM-001` is pending project-owner approval, so production schemas, domain integration, runtime selection, and TASK-051 remain blocked.
 
 ## Objective
 

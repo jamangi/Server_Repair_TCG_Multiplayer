@@ -1,0 +1,113 @@
+{
+  "evaluation_version": "task-050-system-architecture-evaluation-v1",
+  "pilot_denominator": {
+    "tickets": 5,
+    "public_equivalence_classes": 5,
+    "source_backed_profiles": 2,
+    "profile_ticket_bindings": 5,
+    "primary_source_entries": 18,
+    "component_gap_roles": 2,
+    "broad_or_ambiguous_component_roles": 3,
+    "relationship_findings": 16,
+    "fixed_option_constraints": 7
+  },
+  "profile_reuse": [
+    { "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1", "ticket_count": 4 },
+    { "profile_id": "profile.dell.poweredge-r740xd2.power-interposer.v1", "ticket_count": 1 }
+  ],
+  "strategies": [
+    {
+      "option": "A",
+      "name": "Curated Finder plus deterministic projection builder",
+      "recommendation": "recommended",
+      "profiles_or_full_models_authored": 2,
+      "ticket_bindings_authored": 5,
+      "reused_bindings": 3,
+      "unique_option_constraints": 7,
+      "manual_authoring_burden": "Two source-backed profile packages plus five small Ticket compatibility/closure bindings; common lifecycle, topology, descriptions, and action rationale mappings are rendered once per profile.",
+      "source_burden": "18 primary-source ledger entries support two fixed configurations; Ticket bindings reuse claim IDs without duplicating source interpretation.",
+      "deterministic_selection": "Yes. The complete private Ticket may validate compatibility, then a stable profile ID is selected; public projection receives only that public profile and public Ticket fields.",
+      "component_gap_count": 2,
+      "relationship_gap_count": 16,
+      "combinations_cannot_be_proved_real": 0,
+      "consequences": [
+        "Production work must curate versioned fixed profiles and deterministic compatibility predicates before a Ticket can resolve.",
+        "A private validator may reject an incompatible profile but may not alter the public projection using hidden truth.",
+        "Descriptions, diagrams, text equivalents, and rationale views must be projections of typed profile/binding data rather than independent copy.",
+        "Unsupported systems fail closed to an honest no-model fallback; the Finder never improvises a component combination.",
+        "TASK-051 may implement the approved typed contract and the five pilot profiles only; it may not infer Evidence or change gameplay authority."
+      ]
+    },
+    {
+      "option": "B",
+      "name": "Authored profile per Ticket or Ticket family",
+      "recommendation": "viable_but_not_preferred",
+      "profiles_or_full_models_authored": 5,
+      "ticket_bindings_authored": 0,
+      "reused_bindings": 0,
+      "unique_option_constraints": 7,
+      "manual_authoring_burden": "Five complete models. Four would duplicate the same R740xd structure, lifecycle, citations, accessibility semantics, and most action mappings, creating three avoidable full-profile copies in this pilot.",
+      "source_burden": "The same 18 sources still suffice, but their claim interpretations must be synchronized across four duplicated R740xd records.",
+      "deterministic_selection": "Yes, by direct Ticket-to-model assignment; no general Finder logic is needed.",
+      "component_gap_count": 2,
+      "relationship_gap_count": 16,
+      "combinations_cannot_be_proved_real": 0,
+      "consequences": [
+        "Reality proof is simple because every Ticket points to one manually reviewed model.",
+        "Public non-leak remains straightforward, but each copied model needs independent deterministic and accessibility checks.",
+        "Corrections to a shared real platform, source revision, or diagram grammar must be applied consistently to every duplicate.",
+        "This option trades selection complexity for measurable duplication and drift risk; the pilot already demonstrates 4-to-1 reuse that it would discard."
+      ]
+    },
+    {
+      "option": "C",
+      "name": "Constrained composition Builder",
+      "recommendation": "not_proved_by_pilot",
+      "profiles_or_full_models_authored": 2,
+      "ticket_bindings_authored": 5,
+      "reused_bindings": 3,
+      "unique_option_constraints": 7,
+      "manual_authoring_burden": "At minimum the same two base profiles and five bindings, plus compatibility rules and rule-level sources for every swappable storage, power, management, firmware, and network bundle.",
+      "source_burden": "18 sources prove only the two original family/configuration pairings. No source in the pilot proves cross-family bundle exchange or a closed compatibility matrix.",
+      "deterministic_selection": "Possible only after canonical rule ordering and closed constraints exist; the pilot does not provide those rules.",
+      "component_gap_count": 2,
+      "relationship_gap_count": 16,
+      "combinations_cannot_be_proved_real": 2,
+      "unproved_combination_measure": "Treating the two profile bases and their two distinct power/storage bundles as independently swappable yields four pairings. Only the two original manufacturer-family pairings are proved; the two cross-pairings are unproved and must be rejected.",
+      "consequences": [
+        "Approval would authorize only a closed compatibility rule set with independent primary-source proof for each allowed combination.",
+        "The current pilot is insufficient to implement the Builder because it found no lawful evidence for two obvious cross-combinations and no complete option matrix.",
+        "Every generated combination would need stable canonical serialization, provenance, public non-leak proof, and a reject-by-default rule.",
+        "Composition must never use plausibility, visual similarity, a reseller list, or hidden Ticket truth as compatibility evidence."
+      ]
+    },
+    {
+      "option": "D",
+      "name": "Stop or defer",
+      "recommendation": "available_gate_option",
+      "profiles_or_full_models_authored": 0,
+      "ticket_bindings_authored": 0,
+      "reused_bindings": 0,
+      "unique_option_constraints": 0,
+      "manual_authoring_burden": "No production implementation; retain the atlas as research evidence.",
+      "source_burden": "No additional source work until the owner reopens the sequence.",
+      "deterministic_selection": "Not applicable.",
+      "component_gap_count": 0,
+      "relationship_gap_count": 0,
+      "combinations_cannot_be_proved_real": 0,
+      "consequences": [
+        "TASK-051 and every later System Model production/UI task remain blocked.",
+        "Current gameplay, domain content, Viewer behavior, and public Tickets remain unchanged.",
+        "The research package can be resumed later without treating any unapproved architecture as authoritative."
+      ]
+    }
+  ],
+  "recommended_option": "A",
+  "recommendation_reason": "The pilot realizes five Tickets with two fixed source-backed profiles, reusing one profile four times while preserving five distinct public equivalence classes. It avoids three duplicated full models relative to B and rejects two unproved cross-combinations exposed by C. No pilot evidence disproves the Finder-first contract.",
+  "approval_gate": {
+    "decision_id": "SYSTEM-001",
+    "status": "pending_owner_approval",
+    "reply_format": "SYSTEM-001 A, B, C, or D",
+    "blocked_task": "TASK-051"
+  }
+}

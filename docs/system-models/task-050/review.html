@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TASK-050 System Model atlas review</title>
+  <style>
+    * { box-sizing: border-box; }
+    :root { color-scheme: dark; font: 100%/1.55 system-ui, sans-serif; background: #030a0f; color: #eef8fb; }
+    body { margin: 0; }
+    main { width: min(100%, 92rem); margin-inline: auto; padding: clamp(.75rem, 2vw, 2rem); }
+    header, article { border: 1px solid #6a98aa; border-radius: .75rem; background: #081822; }
+    header { padding: 1rem; margin-block-end: 1rem; }
+    article { padding: clamp(.75rem, 2vw, 1.5rem); margin-block: 1rem; overflow: hidden; }
+    h1, h2 { line-height: 1.2; overflow-wrap: anywhere; }
+    figure { margin: 0; }
+    svg { display: block; width: 100%; height: auto; border: 1px solid #7faabd; border-radius: .5rem; }
+    figcaption { max-width: 90ch; padding-block: .75rem; overflow-wrap: anywhere; }
+    code { overflow-wrap: anywhere; }
+    summary { min-height: 2.75rem; padding-block: .6rem; cursor: pointer; }
+    @media (max-width: 34rem) { main { padding: .5rem; } article { padding: .55rem; } }
+    @media (forced-colors: active) { header, article, svg { border-color: CanvasText; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header><h1>Five-Ticket System Model atlas review</h1><p>Research-only responsive review surface. Each illustration is public-safe; each written caption is its ordered text equivalent.</p></header>
+    <article data-ticket-id="ticket.generated.3ec80b1b0e7221ac725aedf9">
+      <h2>Missing NVMe boot device</h2>
+      <p class="public-boundary"><strong>Public projection:</strong> The visible model shows both boot-policy and physical storage-path explanations for a missing boot device; it does not identify which explanation is true.</p>
+      <figure><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 470" role="img" aria-labelledby="title desc" data-ticket-id="ticket.generated.3ec80b1b0e7221ac725aedf9">
+  <title id="title">Public-safe system context for ticket.generated.3ec80b1b0e7221ac725aedf9</title>
+  <desc id="desc">Ticket ticket.generated.3ec80b1b0e7221ac725aedf9 has public Symptoms symptom.boot.no_boot_device. Its public Candidates are fault.boot.device.not_detected, fault.boot.order.incorrect, fault.storage.cable.loose, fault.storage.nvme.device_failed, fault.storage.raid.controller_failed. The schematic focus contains System board (host firmware post); BMC + lifecycle (management); UEFI / boot policy (host firmware post); Hybrid backplane (storage); SAS cable + PERC (storage); PCIe / NVMe path (storage); 20 SAS/SATA + 4 NVMe (storage); OS loader + runtime (os handoff). Connections, in reading order: control relation from System board to BMC + lifecycle: host management; containment relation from System board to UEFI / boot policy: firmware surface; lifecycle relation from UEFI / boot policy to OS loader + runtime: boot handoff; power relation from System board to Hybrid backplane: power + signal; data relation from System board to SAS cable + PERC: host storage; data relation from SAS cable + PERC to Hybrid backplane: SAS branch; data relation from System board to PCIe / NVMe path: PCIe branch; data relation from PCIe / NVMe path to Hybrid backplane: NVMe branch; containment relation from Hybrid backplane to 20 SAS/SATA + 4 NVMe: mounted bays; control relation from BMC + lifecycle to Hybrid backplane: inventory / events; data relation from OS loader + runtime to 20 SAS/SATA + 4 NVMe: driver / I/O. Line labels and dash patterns distinguish relation types; no node or edge states which Candidate is true.</desc>
+  <defs>
+    <marker id="triangle" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke" stroke="context-stroke" /></marker>
+    <marker id="diamond" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 6 L 6 0 L 12 6 L 6 12 z" fill="context-stroke" stroke="context-stroke" /></marker>
+    <marker id="square" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 1 1 H 9 V 9 H 1 z" fill="context-stroke" stroke="context-stroke" /></marker>
+    <style>
+      :root { color-scheme: dark; }
+      svg { background: #07131b; font-family: ui-sans-serif, system-ui, sans-serif; }
+      .node rect { fill: #102b39; stroke: #cfeaf2; stroke-width: 2; }
+      .node:focus rect { stroke: #ffd166; stroke-width: 5; }
+      .node-label { fill: #f7fbfc; font-size: 15px; font-weight: 700; text-anchor: middle; }
+      .node-kind { fill: #b8dce8; font-size: 11px; text-anchor: middle; }
+      .edge line { fill: none; stroke-width: 3; }
+      .edge text { fill: #f7fbfc; font-size: 11px; font-weight: 700; text-anchor: middle; paint-order: stroke; stroke: #07131b; stroke-width: 5; stroke-linejoin: round; }
+      .power line { stroke: #ffcf5c; } .data line { stroke: #5ee6ff; }
+      .control line { stroke: #f58cff; } .lifecycle line { stroke: #9ce47a; }
+      .containment line { stroke: #f2a366; } .cooling line { stroke: #b6adff; }
+      @media (forced-colors: active) {
+        svg { background: Canvas; }
+        .node rect { fill: Canvas; stroke: CanvasText; }
+        .node-label, .node-kind, .edge text { fill: CanvasText; stroke: Canvas; }
+        .edge line { stroke: CanvasText; }
+        marker path { fill: CanvasText !important; }
+        .node:focus rect { stroke: Highlight; }
+      }
+    </style>
+  </defs>
+  <g aria-hidden="true"><g class="edge control" aria-label="CONTROL: System board to BMC + lifecycle, host management">
+      <line x1="425" y1="155" x2="425" y2="107" stroke-dasharray="3 5" marker-end="url(#diamond)" />
+      <text x="425" y="124">CONTROL</text>
+    </g>
+    <g class="edge containment" aria-label="CONTAINMENT: System board to UEFI / boot policy, firmware surface">
+      <line x1="489.16666666666663" y1="155" x2="559.1666666666666" y2="107" stroke-dasharray="12 4 2 4" marker-end="url(#square)" />
+      <text x="524.1666666666666" y="124">CONTAINMENT</text>
+    </g>
+    <g class="edge lifecycle" aria-label="LIFECYCLE: UEFI / boot policy to OS loader + runtime, boot handoff">
+      <line x1="695" y1="67" x2="730" y2="67" stroke-dasharray="2 5" marker-end="url(#triangle)" />
+      <text x="712.5" y="60">LIFECYCLE</text>
+    </g>
+    <g class="edge power" aria-label="POWER: System board to Hybrid backplane, power + signal">
+      <line x1="445" y1="243" x2="445" y2="305" marker-end="url(#triangle)" />
+      <text x="445" y="267">POWER</text>
+    </g>
+    <g class="edge data" aria-label="DATA: System board to SAS cable + PERC, host storage">
+      <line x1="502.70642201834863" y1="243" x2="550.3899082568807" y2="270" stroke-dasharray="10 4" marker-end="url(#triangle)" />
+      <text x="526.5481651376147" y="249.5">DATA</text>
+    </g>
+    <g class="edge data" aria-label="DATA: SAS cable + PERC to Hybrid backplane, SAS branch">
+      <line x1="540" y1="324.5064935064935" x2="505" y2="331.961038961039" stroke-dasharray="10 4" marker-end="url(#triangle)" />
+      <text x="522.5" y="321.23376623376623">DATA</text>
+    </g>
+    <g class="edge data" aria-label="DATA: System board to PCIe / NVMe path, PCIe branch">
+      <line x1="468.659793814433" y1="243" x2="579.7938144329897" y2="355" stroke-dasharray="10 4" marker-end="url(#triangle)" />
+      <text x="524.2268041237114" y="292">DATA</text>
+    </g>
+    <g class="edge data" aria-label="DATA: PCIe / NVMe path to Hybrid backplane, NVMe branch">
+      <line x1="540" y1="375.2857142857143" x2="505" y2="367.2857142857143" stroke-dasharray="10 4" marker-end="url(#triangle)" />
+      <text x="522.5" y="364.2857142857143">DATA</text>
+    </g>
+    <g class="edge containment" aria-label="CONTAINMENT: Hybrid backplane to 20 SAS/SATA + 4 NVMe, mounted bays">
+      <line x1="505" y1="349" x2="730" y2="349" stroke-dasharray="12 4 2 4" marker-end="url(#square)" />
+      <text x="617.5" y="342">CONTAINMENT</text>
+    </g>
+    <g class="edge control" aria-label="CONTROL: BMC + lifecycle to Hybrid backplane, inventory / events">
+      <line x1="405" y1="107" x2="405" y2="305" stroke-dasharray="3 5" marker-end="url(#diamond)" />
+      <text x="405" y="199">CONTROL</text>
+    </g>
+    <g class="edge data" aria-label="DATA: OS loader + runtime to 20 SAS/SATA + 4 NVMe, driver / I/O">
+      <line x1="820" y1="107" x2="820" y2="305" stroke-dasharray="10 4" marker-end="url(#triangle)" />
+      <text x="820" y="199">DATA</text>
+    </g></g>
+  <g aria-label="System components in text-equivalent reading order"><g class="node plane-host_firmware_post" tabindex="0" role="group" aria-label="System board; SERVICEABLE_UNIT; host firmware post plane" data-reading-order="1">
+      <rect x="350" y="160" width="150" height="78" rx="10" />
+      <text x="425" y="195" class="node-label">System board</text>
+      <text x="425" y="216" class="node-kind">host firmware post</text>
+    </g>
+    <g class="node plane-management" tabindex="0" role="group" aria-label="BMC + lifecycle; CONTROL_SURFACE; management plane" data-reading-order="2">
+      <rect x="350" y="32" width="150" height="70" rx="10" />
+      <text x="425" y="63" class="node-label">BMC + lifecycle</text>
+      <text x="425" y="84" class="node-kind">management</text>
+    </g>
+    <g class="node plane-host_firmware_post" tabindex="0" role="group" aria-label="UEFI / boot policy; CONTROL_SURFACE; host firmware post plane" data-reading-order="3">
+      <rect x="545" y="32" width="145" height="70" rx="10" />
+      <text x="617.5" y="63" class="node-label">UEFI / boot policy</text>
+      <text x="617.5" y="84" class="node-kind">host firmware post</text>
+    </g>
+    <g class="node plane-storage" tabindex="0" role="group" aria-label="Hybrid backplane; SERVICEABLE_UNIT; storage plane" data-reading-order="4">
+      <rect x="350" y="310" width="150" height="78" rx="10" />
+      <text x="425" y="345" class="node-label">Hybrid backplane</text>
+      <text x="425" y="366" class="node-kind">storage</text>
+    </g>
+    <g class="node plane-storage" tabindex="0" role="group" aria-label="SAS cable + PERC; BUS_OR_LINK; storage plane" data-reading-order="5">
+      <rect x="545" y="275" width="145" height="66" rx="10" />
+      <text x="617.5" y="304" class="node-label">SAS cable + PERC</text>
+      <text x="617.5" y="325" class="node-kind">storage</text>
+    </g>
+    <g class="node plane-storage" tabindex="0" role="group" aria-label="PCIe / NVMe path; BUS_OR_LINK; storage plane" data-reading-order="6">
+      <rect x="545" y="360" width="145" height="66" rx="10" />
+      <text x="617.5" y="389" class="node-label">PCIe / NVMe path</text>
+      <text x="617.5" y="410" class="node-kind">storage</text>
+    </g>
+    <g class="node plane-storage" tabindex="0" role="group" aria-label="20 SAS/SATA + 4 NVMe; COMPONENT_INSTANCE; storage plane" data-reading-order="7">
+      <rect x="735" y="310" width="170" height="78" rx="10" />
+      <text x="820" y="345" class="node-label">20 SAS/SATA + 4 NVMe</text>
+      <text x="820" y="366" class="node-kind">storage</text>
+    </g>
+    <g class="node plane-os_handoff" tabindex="0" role="group" aria-label="OS loader + runtime; LOGICAL_GROUP; os handoff plane" data-reading-order="8">
+      <rect x="735" y="32" width="170" height="70" rx="10" />
+      <text x="820" y="63" class="node-label">OS loader + runtime</text>
+      <text x="820" y="84" class="node-kind">os handoff</text>
+    </g></g>
+</svg>
+<figcaption>Ticket ticket.generated.3ec80b1b0e7221ac725aedf9 has public Symptoms symptom.boot.no_boot_device. Its public Candidates are fault.boot.device.not_detected, fault.boot.order.incorrect, fault.storage.cable.loose, fault.storage.nvme.device_failed, fault.storage.raid.controller_failed. The schematic focus contains System board (host firmware post); BMC + lifecycle (management); UEFI / boot policy (host firmware post); Hybrid backplane (storage); SAS cable + PERC (storage); PCIe / NVMe path (storage); 20 SAS/SATA + 4 NVMe (storage); OS loader + runtime (os handoff). Connections, in reading order: control relation from System board to BMC + lifecycle: host management; containment relation from System board to UEFI / boot policy: firmware surface; lifecycle relation from UEFI / boot policy to OS loader + runtime: boot handoff; power relation from System board to Hybrid backplane: power + signal; data relation from System board to SAS cable + PERC: host storage; data relation from SAS cable + PERC to Hybrid backplane: SAS branch; data relation from System board to PCIe / NVMe path: PCIe branch; data relation from PCIe / NVMe path to Hybrid backplane: NVMe branch; containment relation from Hybrid backplane to 20 SAS/SATA + 4 NVMe: mounted bays; control relation from BMC + lifecycle to Hybrid backplane: inventory / events; data relation from OS loader + runtime to 20 SAS/SATA + 4 NVMe: driver / I/O. Line labels and dash patterns distinguish relation types; no node or edge states which Candidate is true.</figcaption></figure>
+      <details><summary>Public Candidates</summary><ul><li><code>fault.boot.device.not_detected</code></li><li><code>fault.boot.order.incorrect</code></li><li><code>fault.storage.cable.loose</code></li><li><code>fault.storage.nvme.device_failed</code></li><li><code>fault.storage.raid.controller_failed</code></li></ul></details>
+    </article>
+<article data-ticket-id="ticket.generated.5352abd871c2e9076be92a0b">
+      <h2>Loose storage cable</h2>
+      <p class="public-boundary"><strong>Public projection:</strong> The visible model exposes devices, cable/path abstractions, backplane, and controller boundaries so every public storage Candidate remains physically possible.</p>
+      <figure><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 470" role="img" aria-labelledby="title desc" data-ticket-id="ticket.generated.5352abd871c2e9076be92a0b">
+  <title id="title">Public-safe system context for ticket.generated.5352abd871c2e9076be92a0b</title>
+  <desc id="desc">Ticket ticket.generated.5352abd871c2e9076be92a0b has public Symptoms symptom.storage.io_errors. Its public Candidates are fault.storage.backplane.path_failed, fault.storage.cable.failed, fault.storage.cable.loose, fault.storage.nvme.device_failed, fault.storage.sas.drive_failed. The schematic focus contains System board (host firmware post); BMC + lifecycle (management); Hybrid backplane (storage); SAS cable + PERC (storage); PCIe / NVMe path (storage); 20 SAS/SATA + 4 NVMe (storage); OS loader + runtime (os handoff). Connections, in reading order: control relation from System board to BMC + lifecycle: host management; power relation from System board to Hybrid backplane: power + signal; data relation from System board to SAS cable + PERC: host storage; data relation from SAS cable + PERC to Hybrid backplane: SAS branch; data relation from System board to PCIe / NVMe path: PCIe branch; data relation from PCIe / NVMe path to Hybrid backplane: NVMe branch; containment relation from Hybrid backplane to 20 SAS/SATA + 4 NVMe: mounted bays; control relation from BMC + lifecycle to Hybrid backplane: inventory / events; data relation from OS loader + runtime to 20 SAS/SATA + 4 NVMe: driver / I/O. Line labels and dash patterns distinguish relation types; no node or edge states which Candidate is true.</desc>
+  <defs>
+    <marker id="triangle" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke" stroke="context-stroke" /></marker>
+    <marker id="diamond" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 6 L 6 0 L 12 6 L 6 12 z" fill="context-stroke" stroke="context-stroke" /></marker>
+    <marker id="square" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 1 1 H 9 V 9 H 1 z" fill="context-stroke" stroke="context-stroke" /></marker>
+    <style>
+      :root { color-scheme: dark; }
+      svg { background: #07131b; font-family: ui-sans-serif, system-ui, sans-serif; }
+      .node rect { fill: #102b39; stroke: #cfeaf2; stroke-width: 2; }
+      .node:focus rect { stroke: #ffd166; stroke-width: 5; }
+      .node-label { fill: #f7fbfc; font-size: 15px; font-weight: 700; text-anchor: middle; }
+      .node-kind { fill: #b8dce8; font-size: 11px; text-anchor: middle; }
+      .edge line { fill: none; stroke-width: 3; }
+      .edge text { fill: #f7fbfc; font-size: 11px; font-weight: 700; text-anchor: middle; paint-order: stroke; stroke: #07131b; stroke-width: 5; stroke-linejoin: round; }
+      .power line { stroke: #ffcf5c; } .data line { stroke: #5ee6ff; }
+      .control line { stroke: #f58cff; } .lifecycle line { stroke: #9ce47a; }
+      .containment line { stroke: #f2a366; } .cooling line { stroke: #b6adff; }
+      @media (forced-colors: active) {
+        svg { background: Canvas; }
+        .node rect { fill: Canvas; stroke: CanvasText; }
+        .node-label, .node-kind, .edge text { fill: CanvasText; stroke: Canvas; }
+        .edge line { stroke: CanvasText; }
+        marker path { fill: CanvasText !important; }
+        .node:focus rect { stroke: Highlight; }
+      }
+    </style>
+  </defs>
+  <g aria-hidden="true"><g class="edge control" aria-label="CONTROL: System board to BMC + lifecycle, host management">
+      <line x1="425" y1="155" x2="425" y2="107" stroke-dasharray="3 5" marker-end="url(#diamond)" />
+      <text x="425" y="124">CONTROL</text>
+    </g>
+    <g class="edge power" aria-label="POWER: System board to Hybrid backplane, power + signal">
+      <line x1="445" y1="243" x2="445" y2="305" marker-end="url(#triangle)" />
+      <text x="445" y="267">POWER</text>
+    </g>
+    <g class="edge data" aria-label="DATA: System board to SAS cable + PERC, host storage">
+      <line x1="502.70642201834863" y1="243" x2="550.3899082568807" y2="270" stroke-dasharray="10 4" marker-end="url(#triangle)" />
+      <text x="526.5481651376147" y="249.5">DATA</text>
+    </g>
+    <g class="edge data" aria-label="DATA: SAS cable + PERC to Hybrid backplane, SAS branch">
+      <line x1="540" y1="324.5064935064935" x2="505" y2="331.961038961039" stroke-dasharray="10 4" marker-end="url(#triangle)" />
+      <text x="522.5" y="321.23376623376623">DATA</text>
+    </g>
+    <g class="edge data" aria-label="DATA: System board to PCIe / NVMe path, PCIe branch">
+      <line x1="468.659793814433" y1="243" x2="579.7938144329897" y2="355" stroke-dasharray="10 4" marker-end="url(#triangle)" />
+      <text x="524.2268041237114" y="292">DATA</text>
+    </g>
+    <g class="edge data" aria-label="DATA: PCIe / NVMe path to Hybrid backplane, NVMe branch">
+      <line x1="540" y1="375.2857142857143" x2="505" y2="367.2857142857143" stroke-dasharray="10 4" marker-end="url(#triangle)" />
+      <text x="522.5" y="364.2857142857143">DATA</text>
+    </g>
+    <g class="edge containment" aria-label="CONTAINMENT: Hybrid backplane to 20 SAS/SATA + 4 NVMe, mounted bays">
+      <line x1="505" y1="349" x2="730" y2="349" stroke-dasharray="12 4 2 4" marker-end="url(#square)" />
+      <text x="617.5" y="342">CONTAINMENT</text>
+    </g>
+    <g class="edge control" aria-label="CONTROL: BMC + lifecycle to Hybrid backplane, inventory / events">
+      <line x1="405" y1="107" x2="405" y2="305" stroke-dasharray="3 5" marker-end="url(#diamond)" />
+      <text x="405" y="199">CONTROL</text>
+    </g>
+    <g class="edge data" aria-label="DATA: OS loader + runtime to 20 SAS/SATA + 4 NVMe, driver / I/O">
+      <line x1="820" y1="107" x2="820" y2="305" stroke-dasharray="10 4" marker-end="url(#triangle)" />
+      <text x="820" y="199">DATA</text>
+    </g></g>
+  <g aria-label="System components in text-equivalent reading order"><g class="node plane-host_firmware_post" tabindex="0" role="group" aria-label="System board; SERVICEABLE_UNIT; host firmware post plane" data-reading-order="1">
+      <rect x="350" y="160" width="150" height="78" rx="10" />
+      <text x="425" y="195" class="node-label">System board</text>
+      <text x="425" y="216" class="node-kind">host firmware post</text>
+    </g>
+    <g class="node plane-management" tabindex="0" role="group" aria-label="BMC + lifecycle; CONTROL_SURFACE; management plane" data-reading-order="2">
+      <rect x="350" y="32" width="150" height="70" rx="10" />
+      <text x="425" y="63" class="node-label">BMC + lifecycle</text>
+      <text x="425" y="84" class="node-kind">management</text>
+    </g>
+    <g class="node plane-storage" tabindex="0" role="group" aria-label="Hybrid backplane; SERVICEABLE_UNIT; storage plane" data-reading-order="3">
+      <rect x="350" y="310" width="150" height="78" rx="10" />
+      <text x="425" y="345" class="node-label">Hybrid backplane</text>
+      <text x="425" y="366" class="node-kind">storage</text>
+    </g>
+    <g class="node plane-storage" tabindex="0" role="group" aria-label="SAS cable + PERC; BUS_OR_LINK; storage plane" data-reading-order="4">
+      <rect x="545" y="275" width="145" height="66" rx="10" />
+      <text x="617.5" y="304" class="node-label">SAS cable + PERC</text>
+      <text x="617.5" y="325" class="node-kind">storage</text>
+    </g>
+    <g class="node plane-storage" tabindex="0" role="group" aria-label="PCIe / NVMe path; BUS_OR_LINK; storage plane" data-reading-order="5">
+      <rect x="545" y="360" width="145" height="66" rx="10" />
+      <text x="617.5" y="389" class="node-label">PCIe / NVMe path</text>
+      <text x="617.5" y="410" class="node-kind">storage</text>
+    </g>
+    <g class="node plane-storage" tabindex="0" role="group" aria-label="20 SAS/SATA + 4 NVMe; COMPONENT_INSTANCE; storage plane" data-reading-order="6">
+      <rect x="735" y="310" width="170" height="78" rx="10" />
+      <text x="820" y="345" class="node-label">20 SAS/SATA + 4 NVMe</text>
+      <text x="820" y="366" class="node-kind">storage</text>
+    </g>
+    <g class="node plane-os_handoff" tabindex="0" role="group" aria-label="OS loader + runtime; LOGICAL_GROUP; os handoff plane" data-reading-order="7">
+      <rect x="735" y="32" width="170" height="70" rx="10" />
+      <text x="820" y="63" class="node-label">OS loader + runtime</text>
+      <text x="820" y="84" class="node-kind">os handoff</text>
+    </g></g>
+</svg>
+<figcaption>Ticket ticket.generated.5352abd871c2e9076be92a0b has public Symptoms symptom.storage.io_errors. Its public Candidates are fault.storage.backplane.path_failed, fault.storage.cable.failed, fault.storage.cable.loose, fault.storage.nvme.device_failed, fault.storage.sas.drive_failed. The schematic focus contains System board (host firmware post); BMC + lifecycle (management); Hybrid backplane (storage); SAS cable + PERC (storage); PCIe / NVMe path (storage); 20 SAS/SATA + 4 NVMe (storage); OS loader + runtime (os handoff). Connections, in reading order: control relation from System board to BMC + lifecycle: host management; power relation from System board to Hybrid backplane: power + signal; data relation from System board to SAS cable + PERC: host storage; data relation from SAS cable + PERC to Hybrid backplane: SAS branch; data relation from System board to PCIe / NVMe path: PCIe branch; data relation from PCIe / NVMe path to Hybrid backplane: NVMe branch; containment relation from Hybrid backplane to 20 SAS/SATA + 4 NVMe: mounted bays; control relation from BMC + lifecycle to Hybrid backplane: inventory / events; data relation from OS loader + runtime to 20 SAS/SATA + 4 NVMe: driver / I/O. Line labels and dash patterns distinguish relation types; no node or edge states which Candidate is true.</figcaption></figure>
+      <details><summary>Public Candidates</summary><ul><li><code>fault.storage.backplane.path_failed</code></li><li><code>fault.storage.cable.failed</code></li><li><code>fault.storage.cable.loose</code></li><li><code>fault.storage.nvme.device_failed</code></li><li><code>fault.storage.sas.drive_failed</code></li></ul></details>
+    </article>
+<article data-ticket-id="ticket.generated.3fd6eb04534f79b5b3f87f98">
+      <h2>Failed power-distribution path</h2>
+      <p class="public-boundary"><strong>Public projection:</strong> The visible model separates two input/PSU branches from the shared interposer and downstream board so isolation can compare path segments without exposing the failing segment.</p>
+      <figure><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 470" role="img" aria-labelledby="title desc" data-ticket-id="ticket.generated.3fd6eb04534f79b5b3f87f98">
+  <title id="title">Public-safe system context for ticket.generated.3fd6eb04534f79b5b3f87f98</title>
+  <desc id="desc">Ticket ticket.generated.3fd6eb04534f79b5b3f87f98 has public Symptoms symptom.power.voltage_out_of_range, symptom.power.no_power. Its public Candidates are fault.board.system.failed, fault.power.distribution_board.failed, fault.power.input.cable_loose, fault.power.psu.failed, fault.power.psu.not_seated. The schematic focus contains Input cables (power); PSU A + PSU B (power); Power Interposer Board (power); System-board load (host firmware post); Management status (management); Host + bounded runtime (runtime service); De-energized service (runtime service). Connections, in reading order: power relation from Input cables to PSU A + PSU B: two inputs; power relation from PSU A + PSU B to Power Interposer Board: 1+1 feed; power relation from Power Interposer Board to System-board load: board cables; power relation from System-board load to Host + bounded runtime: switched loads; control relation from Management status to PSU A + PSU B: status / mismatch; lifecycle relation from De-energized service to PSU A + PSU B: remove first; lifecycle relation from De-energized service to Power Interposer Board: disconnect / replace. Line labels and dash patterns distinguish relation types; no node or edge states which Candidate is true.</desc>
+  <defs>
+    <marker id="triangle" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke" stroke="context-stroke" /></marker>
+    <marker id="diamond" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 6 L 6 0 L 12 6 L 6 12 z" fill="context-stroke" stroke="context-stroke" /></marker>
+    <marker id="square" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 1 1 H 9 V 9 H 1 z" fill="context-stroke" stroke="context-stroke" /></marker>
+    <style>
+      :root { color-scheme: dark; }
+      svg { background: #07131b; font-family: ui-sans-serif, system-ui, sans-serif; }
+      .node rect { fill: #102b39; stroke: #cfeaf2; stroke-width: 2; }
+      .node:focus rect { stroke: #ffd166; stroke-width: 5; }
+      .node-label { fill: #f7fbfc; font-size: 15px; font-weight: 700; text-anchor: middle; }
+      .node-kind { fill: #b8dce8; font-size: 11px; text-anchor: middle; }
+      .edge line { fill: none; stroke-width: 3; }
+      .edge text { fill: #f7fbfc; font-size: 11px; font-weight: 700; text-anchor: middle; paint-order: stroke; stroke: #07131b; stroke-width: 5; stroke-linejoin: round; }
+      .power line { stroke: #ffcf5c; } .data line { stroke: #5ee6ff; }
+      .control line { stroke: #f58cff; } .lifecycle line { stroke: #9ce47a; }
+      .containment line { stroke: #f2a366; } .cooling line { stroke: #b6adff; }
+      @media (forced-colors: active) {
+        svg { background: Canvas; }
+        .node rect { fill: Canvas; stroke: CanvasText; }
+        .node-label, .node-kind, .edge text { fill: CanvasText; stroke: Canvas; }
+        .edge line { stroke: CanvasText; }
+        marker path { fill: CanvasText !important; }
+        .node:focus rect { stroke: Highlight; }
+      }
+    </style>
+  </defs>
+  <g aria-hidden="true"><g class="edge power" aria-label="POWER: Input cables to PSU A + PSU B, two inputs">
+      <line x1="170" y1="210" x2="215" y2="210" marker-end="url(#triangle)" />
+      <text x="192.5" y="203">POWER</text>
+    </g>
+    <g class="edge power" aria-label="POWER: PSU A + PSU B to Power Interposer Board, 1+1 feed">
+      <line x1="370" y1="210" x2="425" y2="210" marker-end="url(#triangle)" />
+      <text x="397.5" y="203">POWER</text>
+    </g>
+    <g class="edge power" aria-label="POWER: Power Interposer Board to System-board load, board cables">
+      <line x1="615" y1="210" x2="675" y2="210" marker-end="url(#triangle)" />
+      <text x="645" y="203">POWER</text>
+    </g>
+    <g class="edge power" aria-label="POWER: System-board load to Host + bounded runtime, switched loads">
+      <line x1="855" y1="210" x2="915" y2="210" marker-end="url(#triangle)" />
+      <text x="885" y="203">POWER</text>
+    </g>
+    <g class="edge control" aria-label="CONTROL: Management status to PSU A + PSU B, status / mismatch">
+      <line x1="675" y1="100.71428571428571" x2="370" y2="187.85714285714286" stroke-dasharray="3 5" marker-end="url(#diamond)" />
+      <text x="522.5" y="137.28571428571428">CONTROL</text>
+    </g>
+    <g class="edge lifecycle" aria-label="LIFECYCLE: De-energized service to PSU A + PSU B, remove first">
+      <line x1="459.3333333333333" y1="320" x2="353.1666666666667" y2="250" stroke-dasharray="2 5" marker-end="url(#triangle)" />
+      <text x="406.25" y="278">LIFECYCLE</text>
+    </g>
+    <g class="edge lifecycle" aria-label="LIFECYCLE: De-energized service to Power Interposer Board, disconnect / replace">
+      <line x1="520" y1="320" x2="520" y2="250" stroke-dasharray="2 5" marker-end="url(#triangle)" />
+      <text x="520" y="278">LIFECYCLE</text>
+    </g></g>
+  <g aria-label="System components in text-equivalent reading order"><g class="node plane-power" tabindex="0" role="group" aria-label="Input cables; COMPONENT_INSTANCE; power plane" data-reading-order="1">
+      <rect x="30" y="175" width="135" height="70" rx="10" />
+      <text x="97.5" y="206" class="node-label">Input cables</text>
+      <text x="97.5" y="227" class="node-kind">power</text>
+    </g>
+    <g class="node plane-power" tabindex="0" role="group" aria-label="PSU A + PSU B; COMPONENT_INSTANCE; power plane" data-reading-order="2">
+      <rect x="220" y="175" width="145" height="70" rx="10" />
+      <text x="292.5" y="206" class="node-label">PSU A + PSU B</text>
+      <text x="292.5" y="227" class="node-kind">power</text>
+    </g>
+    <g class="node plane-power" tabindex="0" role="group" aria-label="Power Interposer Board; SERVICEABLE_UNIT; power plane" data-reading-order="3">
+      <rect x="430" y="175" width="180" height="70" rx="10" />
+      <text x="520" y="206" class="node-label">Power Interposer Board</text>
+      <text x="520" y="227" class="node-kind">power</text>
+    </g>
+    <g class="node plane-host_firmware_post" tabindex="0" role="group" aria-label="System-board load; SERVICEABLE_UNIT; host firmware post plane" data-reading-order="4">
+      <rect x="680" y="175" width="170" height="70" rx="10" />
+      <text x="765" y="206" class="node-label">System-board load</text>
+      <text x="765" y="227" class="node-kind">host firmware post</text>
+    </g>
+    <g class="node plane-management" tabindex="0" role="group" aria-label="Management status; OBSERVATION_POINT; management plane" data-reading-order="5">
+      <rect x="680" y="40" width="170" height="70" rx="10" />
+      <text x="765" y="71" class="node-label">Management status</text>
+      <text x="765" y="92" class="node-kind">management</text>
+    </g>
+    <g class="node plane-runtime_service" tabindex="0" role="group" aria-label="Host + bounded runtime; LOGICAL_GROUP; runtime service plane" data-reading-order="6">
+      <rect x="920" y="175" width="175" height="70" rx="10" />
+      <text x="1007.5" y="206" class="node-label">Host + bounded runtime</text>
+      <text x="1007.5" y="227" class="node-kind">runtime service</text>
+    </g>
+    <g class="node plane-runtime_service" tabindex="0" role="group" aria-label="De-energized service; CONTROL_SURFACE; runtime service plane" data-reading-order="7">
+      <rect x="430" y="325" width="180" height="70" rx="10" />
+      <text x="520" y="356" class="node-label">De-energized service</text>
+      <text x="520" y="377" class="node-kind">runtime service</text>
+    </g></g>
+</svg>
+<figcaption>Ticket ticket.generated.3fd6eb04534f79b5b3f87f98 has public Symptoms symptom.power.voltage_out_of_range, symptom.power.no_power. Its public Candidates are fault.board.system.failed, fault.power.distribution_board.failed, fault.power.input.cable_loose, fault.power.psu.failed, fault.power.psu.not_seated. The schematic focus contains Input cables (power); PSU A + PSU B (power); Power Interposer Board (power); System-board load (host firmware post); Management status (management); Host + bounded runtime (runtime service); De-energized service (runtime service). Connections, in reading order: power relation from Input cables to PSU A + PSU B: two inputs; power relation from PSU A + PSU B to Power Interposer Board: 1+1 feed; power relation from Power Interposer Board to System-board load: board cables; power relation from System-board load to Host + bounded runtime: switched loads; control relation from Management status to PSU A + PSU B: status / mismatch; lifecycle relation from De-energized service to PSU A + PSU B: remove first; lifecycle relation from De-energized service to Power Interposer Board: disconnect / replace. Line labels and dash patterns distinguish relation types; no node or edge states which Candidate is true.</figcaption></figure>
+      <details><summary>Public Candidates</summary><ul><li><code>fault.board.system.failed</code></li><li><code>fault.power.distribution_board.failed</code></li><li><code>fault.power.input.cable_loose</code></li><li><code>fault.power.psu.failed</code></li><li><code>fault.power.psu.not_seated</code></li></ul></details>
+    </article>
+<article data-ticket-id="ticket.generated.b34238282822e93980b5f1ad">
+      <h2>Incompatible firmware set with network symptoms</h2>
+      <p class="public-boundary"><strong>Public projection:</strong> The visible model keeps firmware, adapter, port, cable, peer, and runtime-counter boundaries separate, leaving both logical and physical network Candidates plausible.</p>
+      <figure><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 470" role="img" aria-labelledby="title desc" data-ticket-id="ticket.generated.b34238282822e93980b5f1ad">
+  <title id="title">Public-safe system context for ticket.generated.b34238282822e93980b5f1ad</title>
+  <desc id="desc">Ticket ticket.generated.b34238282822e93980b5f1ad has public Symptoms symptom.network.link_flapping, symptom.network.no_link. Its public Candidates are fault.firmware.version_set.incompatible, fault.network.cable.disconnected, fault.network.cable.failed, fault.network.nic.failed. The schematic focus contains System board (host firmware post); BMC + lifecycle (management); UEFI / boot policy (host firmware post); Host NIC (network); Port + cable + peer (network); OS loader + runtime (os handoff). Connections, in reading order: control relation from System board to BMC + lifecycle: host management; containment relation from System board to UEFI / boot policy: firmware surface; lifecycle relation from UEFI / boot policy to OS loader + runtime: boot handoff; data relation from System board to Host NIC: PCIe / host; data relation from Host NIC to Port + cable + peer: physical link; data relation from OS loader + runtime to Host NIC: driver / counters. Line labels and dash patterns distinguish relation types; no node or edge states which Candidate is true.</desc>
+  <defs>
+    <marker id="triangle" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke" stroke="context-stroke" /></marker>
+    <marker id="diamond" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 6 L 6 0 L 12 6 L 6 12 z" fill="context-stroke" stroke="context-stroke" /></marker>
+    <marker id="square" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 1 1 H 9 V 9 H 1 z" fill="context-stroke" stroke="context-stroke" /></marker>
+    <style>
+      :root { color-scheme: dark; }
+      svg { background: #07131b; font-family: ui-sans-serif, system-ui, sans-serif; }
+      .node rect { fill: #102b39; stroke: #cfeaf2; stroke-width: 2; }
+      .node:focus rect { stroke: #ffd166; stroke-width: 5; }
+      .node-label { fill: #f7fbfc; font-size: 15px; font-weight: 700; text-anchor: middle; }
+      .node-kind { fill: #b8dce8; font-size: 11px; text-anchor: middle; }
+      .edge line { fill: none; stroke-width: 3; }
+      .edge text { fill: #f7fbfc; font-size: 11px; font-weight: 700; text-anchor: middle; paint-order: stroke; stroke: #07131b; stroke-width: 5; stroke-linejoin: round; }
+      .power line { stroke: #ffcf5c; } .data line { stroke: #5ee6ff; }
+      .control line { stroke: #f58cff; } .lifecycle line { stroke: #9ce47a; }
+      .containment line { stroke: #f2a366; } .cooling line { stroke: #b6adff; }
+      @media (forced-colors: active) {
+        svg { background: Canvas; }
+        .node rect { fill: Canvas; stroke: CanvasText; }
+        .node-label, .node-kind, .edge text { fill: CanvasText; stroke: Canvas; }
+        .edge line { stroke: CanvasText; }
+        marker path { fill: CanvasText !important; }
+        .node:focus rect { stroke: Highlight; }
+      }
+    </style>
+  </defs>
+  <g aria-hidden="true"><g class="edge control" aria-label="CONTROL: System board to BMC + lifecycle, host management">
+      <line x1="425" y1="155" x2="425" y2="107" stroke-dasharray="3 5" marker-end="url(#diamond)" />
+      <text x="425" y="124">CONTROL</text>
+    </g>
+    <g class="edge containment" aria-label="CONTAINMENT: System board to UEFI / boot policy, firmware surface">
+      <line x1="489.16666666666663" y1="155" x2="559.1666666666666" y2="107" stroke-dasharray="12 4 2 4" marker-end="url(#square)" />
+      <text x="524.1666666666666" y="124">CONTAINMENT</text>
+    </g>
+    <g class="edge lifecycle" aria-label="LIFECYCLE: UEFI / boot policy to OS loader + runtime, boot handoff">
+      <line x1="695" y1="67" x2="730" y2="67" stroke-dasharray="2 5" marker-end="url(#triangle)" />
+      <text x="712.5" y="60">LIFECYCLE</text>
+    </g>
+    <g class="edge data" aria-label="DATA: System board to Host NIC, PCIe / host">
+      <line x1="505" y1="199" x2="730" y2="199" stroke-dasharray="10 4" marker-end="url(#triangle)" />
+      <text x="617.5" y="192">DATA</text>
+    </g>
+    <g class="edge data" aria-label="DATA: Host NIC to Port + cable + peer, physical link">
+      <line x1="910" y1="199" x2="945" y2="199" stroke-dasharray="10 4" marker-end="url(#triangle)" />
+      <text x="927.5" y="192">DATA</text>
+    </g>
+    <g class="edge data" aria-label="DATA: OS loader + runtime to Host NIC, driver / counters">
+      <line x1="820" y1="107" x2="820" y2="155" stroke-dasharray="10 4" marker-end="url(#triangle)" />
+      <text x="820" y="124">DATA</text>
+    </g></g>
+  <g aria-label="System components in text-equivalent reading order"><g class="node plane-host_firmware_post" tabindex="0" role="group" aria-label="System board; SERVICEABLE_UNIT; host firmware post plane" data-reading-order="1">
+      <rect x="350" y="160" width="150" height="78" rx="10" />
+      <text x="425" y="195" class="node-label">System board</text>
+      <text x="425" y="216" class="node-kind">host firmware post</text>
+    </g>
+    <g class="node plane-management" tabindex="0" role="group" aria-label="BMC + lifecycle; CONTROL_SURFACE; management plane" data-reading-order="2">
+      <rect x="350" y="32" width="150" height="70" rx="10" />
+      <text x="425" y="63" class="node-label">BMC + lifecycle</text>
+      <text x="425" y="84" class="node-kind">management</text>
+    </g>
+    <g class="node plane-host_firmware_post" tabindex="0" role="group" aria-label="UEFI / boot policy; CONTROL_SURFACE; host firmware post plane" data-reading-order="3">
+      <rect x="545" y="32" width="145" height="70" rx="10" />
+      <text x="617.5" y="63" class="node-label">UEFI / boot policy</text>
+      <text x="617.5" y="84" class="node-kind">host firmware post</text>
+    </g>
+    <g class="node plane-network" tabindex="0" role="group" aria-label="Host NIC; COMPONENT_INSTANCE; network plane" data-reading-order="4">
+      <rect x="735" y="160" width="170" height="78" rx="10" />
+      <text x="820" y="195" class="node-label">Host NIC</text>
+      <text x="820" y="216" class="node-kind">network</text>
+    </g>
+    <g class="node plane-network" tabindex="0" role="group" aria-label="Port + cable + peer; PUBLIC_ABSTRACTION; network plane" data-reading-order="5">
+      <rect x="950" y="160" width="170" height="78" rx="10" />
+      <text x="1035" y="195" class="node-label">Port + cable + peer</text>
+      <text x="1035" y="216" class="node-kind">network</text>
+    </g>
+    <g class="node plane-os_handoff" tabindex="0" role="group" aria-label="OS loader + runtime; LOGICAL_GROUP; os handoff plane" data-reading-order="6">
+      <rect x="735" y="32" width="170" height="70" rx="10" />
+      <text x="820" y="63" class="node-label">OS loader + runtime</text>
+      <text x="820" y="84" class="node-kind">os handoff</text>
+    </g></g>
+</svg>
+<figcaption>Ticket ticket.generated.b34238282822e93980b5f1ad has public Symptoms symptom.network.link_flapping, symptom.network.no_link. Its public Candidates are fault.firmware.version_set.incompatible, fault.network.cable.disconnected, fault.network.cable.failed, fault.network.nic.failed. The schematic focus contains System board (host firmware post); BMC + lifecycle (management); UEFI / boot policy (host firmware post); Host NIC (network); Port + cable + peer (network); OS loader + runtime (os handoff). Connections, in reading order: control relation from System board to BMC + lifecycle: host management; containment relation from System board to UEFI / boot policy: firmware surface; lifecycle relation from UEFI / boot policy to OS loader + runtime: boot handoff; data relation from System board to Host NIC: PCIe / host; data relation from Host NIC to Port + cable + peer: physical link; data relation from OS loader + runtime to Host NIC: driver / counters. Line labels and dash patterns distinguish relation types; no node or edge states which Candidate is true.</figcaption></figure>
+      <details><summary>Public Candidates</summary><ul><li><code>fault.firmware.version_set.incompatible</code></li><li><code>fault.network.cable.disconnected</code></li><li><code>fault.network.cable.failed</code></li><li><code>fault.network.nic.failed</code></li></ul></details>
+    </article>
+<article data-ticket-id="ticket.generated.f32b85cbf2054fdf0114f42a">
+      <h2>Corrupt BMC firmware recovery</h2>
+      <p class="public-boundary"><strong>Public projection:</strong> The visible model separates management recovery from ordinary version compatibility while retaining the host board, UEFI, and runtime interfaces that both public Candidates can affect.</p>
+      <figure><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 470" role="img" aria-labelledby="title desc" data-ticket-id="ticket.generated.f32b85cbf2054fdf0114f42a">
+  <title id="title">Public-safe system context for ticket.generated.f32b85cbf2054fdf0114f42a</title>
+  <desc id="desc">Ticket ticket.generated.f32b85cbf2054fdf0114f42a has public Symptoms symptom.management.bmc_not_responding, symptom.firmware.update_failed. Its public Candidates are fault.firmware.version_set.incompatible, fault.management.bmc_firmware.corrupt. The schematic focus contains PSU pair (power); System board (host firmware post); BMC + lifecycle (management); UEFI / boot policy (host firmware post); OS loader + runtime (os handoff). Connections, in reading order: power relation from PSU pair to System board: standby + switched; control relation from System board to BMC + lifecycle: host management; containment relation from System board to UEFI / boot policy: firmware surface; lifecycle relation from UEFI / boot policy to OS loader + runtime: boot handoff. Line labels and dash patterns distinguish relation types; no node or edge states which Candidate is true.</desc>
+  <defs>
+    <marker id="triangle" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke" stroke="context-stroke" /></marker>
+    <marker id="diamond" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 6 L 6 0 L 12 6 L 6 12 z" fill="context-stroke" stroke="context-stroke" /></marker>
+    <marker id="square" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 1 1 H 9 V 9 H 1 z" fill="context-stroke" stroke="context-stroke" /></marker>
+    <style>
+      :root { color-scheme: dark; }
+      svg { background: #07131b; font-family: ui-sans-serif, system-ui, sans-serif; }
+      .node rect { fill: #102b39; stroke: #cfeaf2; stroke-width: 2; }
+      .node:focus rect { stroke: #ffd166; stroke-width: 5; }
+      .node-label { fill: #f7fbfc; font-size: 15px; font-weight: 700; text-anchor: middle; }
+      .node-kind { fill: #b8dce8; font-size: 11px; text-anchor: middle; }
+      .edge line { fill: none; stroke-width: 3; }
+      .edge text { fill: #f7fbfc; font-size: 11px; font-weight: 700; text-anchor: middle; paint-order: stroke; stroke: #07131b; stroke-width: 5; stroke-linejoin: round; }
+      .power line { stroke: #ffcf5c; } .data line { stroke: #5ee6ff; }
+      .control line { stroke: #f58cff; } .lifecycle line { stroke: #9ce47a; }
+      .containment line { stroke: #f2a366; } .cooling line { stroke: #b6adff; }
+      @media (forced-colors: active) {
+        svg { background: Canvas; }
+        .node rect { fill: Canvas; stroke: CanvasText; }
+        .node-label, .node-kind, .edge text { fill: CanvasText; stroke: Canvas; }
+        .edge line { stroke: CanvasText; }
+        marker path { fill: CanvasText !important; }
+        .node:focus rect { stroke: Highlight; }
+      }
+    </style>
+  </defs>
+  <g aria-hidden="true"><g class="edge power" aria-label="POWER: PSU pair to System board, standby + switched">
+      <line x1="289.6616541353383" y1="99" x2="365.4511278195489" y2="155" marker-end="url(#triangle)" />
+      <text x="327.5563909774436" y="120">POWER</text>
+    </g>
+    <g class="edge control" aria-label="CONTROL: System board to BMC + lifecycle, host management">
+      <line x1="425" y1="155" x2="425" y2="107" stroke-dasharray="3 5" marker-end="url(#diamond)" />
+      <text x="425" y="124">CONTROL</text>
+    </g>
+    <g class="edge containment" aria-label="CONTAINMENT: System board to UEFI / boot policy, firmware surface">
+      <line x1="489.16666666666663" y1="155" x2="559.1666666666666" y2="107" stroke-dasharray="12 4 2 4" marker-end="url(#square)" />
+      <text x="524.1666666666666" y="124">CONTAINMENT</text>
+    </g>
+    <g class="edge lifecycle" aria-label="LIFECYCLE: UEFI / boot policy to OS loader + runtime, boot handoff">
+      <line x1="695" y1="67" x2="730" y2="67" stroke-dasharray="2 5" marker-end="url(#triangle)" />
+      <text x="712.5" y="60">LIFECYCLE</text>
+    </g></g>
+  <g aria-label="System components in text-equivalent reading order"><g class="node plane-power" tabindex="0" role="group" aria-label="PSU pair; COMPONENT_INSTANCE; power plane" data-reading-order="1">
+      <rect x="185" y="38" width="120" height="56" rx="10" />
+      <text x="245" y="62" class="node-label">PSU pair</text>
+      <text x="245" y="83" class="node-kind">power</text>
+    </g>
+    <g class="node plane-host_firmware_post" tabindex="0" role="group" aria-label="System board; SERVICEABLE_UNIT; host firmware post plane" data-reading-order="2">
+      <rect x="350" y="160" width="150" height="78" rx="10" />
+      <text x="425" y="195" class="node-label">System board</text>
+      <text x="425" y="216" class="node-kind">host firmware post</text>
+    </g>
+    <g class="node plane-management" tabindex="0" role="group" aria-label="BMC + lifecycle; CONTROL_SURFACE; management plane" data-reading-order="3">
+      <rect x="350" y="32" width="150" height="70" rx="10" />
+      <text x="425" y="63" class="node-label">BMC + lifecycle</text>
+      <text x="425" y="84" class="node-kind">management</text>
+    </g>
+    <g class="node plane-host_firmware_post" tabindex="0" role="group" aria-label="UEFI / boot policy; CONTROL_SURFACE; host firmware post plane" data-reading-order="4">
+      <rect x="545" y="32" width="145" height="70" rx="10" />
+      <text x="617.5" y="63" class="node-label">UEFI / boot policy</text>
+      <text x="617.5" y="84" class="node-kind">host firmware post</text>
+    </g>
+    <g class="node plane-os_handoff" tabindex="0" role="group" aria-label="OS loader + runtime; LOGICAL_GROUP; os handoff plane" data-reading-order="5">
+      <rect x="735" y="32" width="170" height="70" rx="10" />
+      <text x="820" y="63" class="node-label">OS loader + runtime</text>
+      <text x="820" y="84" class="node-kind">os handoff</text>
+    </g></g>
+</svg>
+<figcaption>Ticket ticket.generated.f32b85cbf2054fdf0114f42a has public Symptoms symptom.management.bmc_not_responding, symptom.firmware.update_failed. Its public Candidates are fault.firmware.version_set.incompatible, fault.management.bmc_firmware.corrupt. The schematic focus contains PSU pair (power); System board (host firmware post); BMC + lifecycle (management); UEFI / boot policy (host firmware post); OS loader + runtime (os handoff). Connections, in reading order: power relation from PSU pair to System board: standby + switched; control relation from System board to BMC + lifecycle: host management; containment relation from System board to UEFI / boot policy: firmware surface; lifecycle relation from UEFI / boot policy to OS loader + runtime: boot handoff. Line labels and dash patterns distinguish relation types; no node or edge states which Candidate is true.</figcaption></figure>
+      <details><summary>Public Candidates</summary><ul><li><code>fault.firmware.version_set.incompatible</code></li><li><code>fault.management.bmc_firmware.corrupt</code></li></ul></details>
+    </article>
+  </main>
+</body>
+</html>

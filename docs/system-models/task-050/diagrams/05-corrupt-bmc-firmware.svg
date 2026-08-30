@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 470" role="img" aria-labelledby="title desc" data-ticket-id="ticket.generated.f32b85cbf2054fdf0114f42a">
+  <title id="title">Public-safe system context for ticket.generated.f32b85cbf2054fdf0114f42a</title>
+  <desc id="desc">Ticket ticket.generated.f32b85cbf2054fdf0114f42a has public Symptoms symptom.management.bmc_not_responding, symptom.firmware.update_failed. Its public Candidates are fault.firmware.version_set.incompatible, fault.management.bmc_firmware.corrupt. The schematic focus contains PSU pair (power); System board (host firmware post); BMC + lifecycle (management); UEFI / boot policy (host firmware post); OS loader + runtime (os handoff). Connections, in reading order: power relation from PSU pair to System board: standby + switched; control relation from System board to BMC + lifecycle: host management; containment relation from System board to UEFI / boot policy: firmware surface; lifecycle relation from UEFI / boot policy to OS loader + runtime: boot handoff. Line labels and dash patterns distinguish relation types; no node or edge states which Candidate is true.</desc>
+  <defs>
+    <marker id="triangle" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke" stroke="context-stroke" /></marker>
+    <marker id="diamond" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 6 L 6 0 L 12 6 L 6 12 z" fill="context-stroke" stroke="context-stroke" /></marker>
+    <marker id="square" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 1 1 H 9 V 9 H 1 z" fill="context-stroke" stroke="context-stroke" /></marker>
+    <style>
+      :root { color-scheme: dark; }
+      svg { background: #07131b; font-family: ui-sans-serif, system-ui, sans-serif; }
+      .node rect { fill: #102b39; stroke: #cfeaf2; stroke-width: 2; }
+      .node:focus rect { stroke: #ffd166; stroke-width: 5; }
+      .node-label { fill: #f7fbfc; font-size: 15px; font-weight: 700; text-anchor: middle; }
+      .node-kind { fill: #b8dce8; font-size: 11px; text-anchor: middle; }
+      .edge line { fill: none; stroke-width: 3; }
+      .edge text { fill: #f7fbfc; font-size: 11px; font-weight: 700; text-anchor: middle; paint-order: stroke; stroke: #07131b; stroke-width: 5; stroke-linejoin: round; }
+      .power line { stroke: #ffcf5c; } .data line { stroke: #5ee6ff; }
+      .control line { stroke: #f58cff; } .lifecycle line { stroke: #9ce47a; }
+      .containment line { stroke: #f2a366; } .cooling line { stroke: #b6adff; }
+      @media (forced-colors: active) {
+        svg { background: Canvas; }
+        .node rect { fill: Canvas; stroke: CanvasText; }
+        .node-label, .node-kind, .edge text { fill: CanvasText; stroke: Canvas; }
+        .edge line { stroke: CanvasText; }
+        marker path { fill: CanvasText !important; }
+        .node:focus rect { stroke: Highlight; }
+      }
+    </style>
+  </defs>
+  <g aria-hidden="true"><g class="edge power" aria-label="POWER: PSU pair to System board, standby + switched">
+      <line x1="289.6616541353383" y1="99" x2="365.4511278195489" y2="155" marker-end="url(#triangle)" />
+      <text x="327.5563909774436" y="120">POWER</text>
+    </g>
+    <g class="edge control" aria-label="CONTROL: System board to BMC + lifecycle, host management">
+      <line x1="425" y1="155" x2="425" y2="107" stroke-dasharray="3 5" marker-end="url(#diamond)" />
+      <text x="425" y="124">CONTROL</text>
+    </g>
+    <g class="edge containment" aria-label="CONTAINMENT: System board to UEFI / boot policy, firmware surface">
+      <line x1="489.16666666666663" y1="155" x2="559.1666666666666" y2="107" stroke-dasharray="12 4 2 4" marker-end="url(#square)" />
+      <text x="524.1666666666666" y="124">CONTAINMENT</text>
+    </g>
+    <g class="edge lifecycle" aria-label="LIFECYCLE: UEFI / boot policy to OS loader + runtime, boot handoff">
+      <line x1="695" y1="67" x2="730" y2="67" stroke-dasharray="2 5" marker-end="url(#triangle)" />
+      <text x="712.5" y="60">LIFECYCLE</text>
+    </g></g>
+  <g aria-label="System components in text-equivalent reading order"><g class="node plane-power" tabindex="0" role="group" aria-label="PSU pair; COMPONENT_INSTANCE; power plane" data-reading-order="1">
+      <rect x="185" y="38" width="120" height="56" rx="10" />
+      <text x="245" y="62" class="node-label">PSU pair</text>
+      <text x="245" y="83" class="node-kind">power</text>
+    </g>
+    <g class="node plane-host_firmware_post" tabindex="0" role="group" aria-label="System board; SERVICEABLE_UNIT; host firmware post plane" data-reading-order="2">
+      <rect x="350" y="160" width="150" height="78" rx="10" />
+      <text x="425" y="195" class="node-label">System board</text>
+      <text x="425" y="216" class="node-kind">host firmware post</text>
+    </g>
+    <g class="node plane-management" tabindex="0" role="group" aria-label="BMC + lifecycle; CONTROL_SURFACE; management plane" data-reading-order="3">
+      <rect x="350" y="32" width="150" height="70" rx="10" />
+      <text x="425" y="63" class="node-label">BMC + lifecycle</text>
+      <text x="425" y="84" class="node-kind">management</text>
+    </g>
+    <g class="node plane-host_firmware_post" tabindex="0" role="group" aria-label="UEFI / boot policy; CONTROL_SURFACE; host firmware post plane" data-reading-order="4">
+      <rect x="545" y="32" width="145" height="70" rx="10" />
+      <text x="617.5" y="63" class="node-label">UEFI / boot policy</text>
+      <text x="617.5" y="84" class="node-kind">host firmware post</text>
+    </g>
+    <g class="node plane-os_handoff" tabindex="0" role="group" aria-label="OS loader + runtime; LOGICAL_GROUP; os handoff plane" data-reading-order="5">
+      <rect x="735" y="32" width="170" height="70" rx="10" />
+      <text x="820" y="63" class="node-label">OS loader + runtime</text>
+      <text x="820" y="84" class="node-kind">os handoff</text>
+    </g></g>
+</svg>

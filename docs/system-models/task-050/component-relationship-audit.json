@@ -1,0 +1,400 @@
+{
+  "audit_version": "task-050-component-relationship-audit-v1",
+  "scope": "Five TASK-050 research dossiers only; no production domain mutation is authorized.",
+  "status_definitions": {
+    "existing_sufficient": "An existing stable Component ID is precise enough for the modeled teaching role.",
+    "existing_but_broad": "An existing Component is directionally relevant but collapses a source-significant role or technology distinction.",
+    "missing_required": "The pilot cannot express a source-backed component or firmware-bearing role precisely with the current Component catalog.",
+    "optional_outside_scope": "The role is real but per-instance detail is intentionally unnecessary for these Tickets.",
+    "rejected_unjustified": "A nearby or plausible part was considered but neither source nor Ticket requires it."
+  },
+  "component_roles": [
+    {
+      "role": "External power input cable",
+      "profile_role_ids": ["role.input"],
+      "domain_component_id": "component.power.input_cable",
+      "classification": "existing_sufficient",
+      "concrete_ticket_need": ["fault.power.input.cable_loose"],
+      "object_audit": {
+        "faults_symptoms": "Fault-to-component relation exists for the input-cable Candidate; Symptoms should remain subsystem observations.",
+        "tests_commands": "Visual inspection and distribution isolation need a Ticket/profile-scoped observed path, not a global physical-nearness list.",
+        "repairs_verifications": "No selected Repair targets this cable; verification includes the complete path, so absence from a direct repair target is intentional."
+      }
+    },
+    {
+      "role": "Hot-swap PSU",
+      "profile_role_ids": ["role.psu_pair"],
+      "domain_component_id": "component.power.hot_swap_psu",
+      "classification": "existing_sufficient",
+      "concrete_ticket_need": ["fault.power.psu.failed", "fault.power.psu.not_seated", "test.power.distribution_path_isolation", "verify.power.distribution_path"],
+      "object_audit": {
+        "faults_symptoms": "Selected PSU Faults already bind the component; no new Symptom relation is justified.",
+        "tests_commands": "Power-path tests already name the PSU where direct targeting is meaningful.",
+        "repairs_verifications": "The selected PDB Repair does not target the PSU; the distribution-path Verification already includes it."
+      }
+    },
+    {
+      "role": "System board",
+      "profile_role_ids": ["role.system_board"],
+      "domain_component_id": "component.board.system",
+      "classification": "existing_sufficient",
+      "concrete_ticket_need": ["fault.board.system.failed", "test.firmware.version_compatibility", "verify.firmware.compatible_persistent"],
+      "object_audit": {
+        "faults_symptoms": "Board Fault relation is present. Boot and firmware Faults need path/control-surface semantics rather than being indiscriminately assigned to the whole board.",
+        "tests_commands": "Firmware compatibility already targets the board but lacks the queried firmware inventory/control-surface relation.",
+        "repairs_verifications": "Firmware verification already names the board; BMC recovery may escalate to the board FRU but must preserve the logical BMC target."
+      }
+    },
+    {
+      "role": "BMC / iDRAC management controller",
+      "profile_role_ids": ["role.bmc"],
+      "domain_component_id": "component.management.bmc",
+      "classification": "existing_sufficient",
+      "concrete_ticket_need": ["fault.management.bmc_firmware.corrupt", "test.system.bmc_logs", "test.management.bmc_recovery_state", "repair.management.recover_bmc_firmware", "verify.management.bmc_functional"],
+      "object_audit": {
+        "faults_symptoms": "The corrupt-firmware Fault resolves to BMC; responsiveness and update Symptoms should remain observations, not affected-component assertions.",
+        "tests_commands": "Recovery test has a BMC target; log review lacks its queried BMC control surface and observed subjects.",
+        "repairs_verifications": "Recovery and functional verification already target BMC. A recovery-image/control-surface relation remains missing."
+      }
+    },
+    {
+      "role": "Host processor",
+      "profile_role_ids": ["role.cpu"],
+      "domain_component_id": "component.compute.cpu",
+      "classification": "existing_sufficient",
+      "concrete_ticket_need": ["test.general.minimum_configuration", "test.system.controlled_stress"],
+      "object_audit": {
+        "faults_symptoms": "No selected hidden Fault targets the CPU; adding one would invent a Candidate.",
+        "tests_commands": "Minimum-configuration and stress relevance is profile-level dependency/load context, not a missing global target instance.",
+        "repairs_verifications": "No selected Repair or Verification directly targets CPU; relation intentionally absent."
+      }
+    },
+    {
+      "role": "ECC DIMM population",
+      "profile_role_ids": ["role.memory"],
+      "domain_component_id": "component.memory.ecc_dimm",
+      "classification": "existing_sufficient",
+      "concrete_ticket_need": ["test.memory.diagnostic", "test.memory.known_good_substitution", "test.memory.single_dimm_isolation"],
+      "object_audit": {
+        "faults_symptoms": "No selected hidden Fault is a DIMM Fault; public model inclusion supports alternative diagnostic relevance only.",
+        "tests_commands": "Existing memory tests have component semantics sufficient for this profile-level rationale.",
+        "repairs_verifications": "No selected memory Repair or Verification exists; relation intentionally absent."
+      }
+    },
+    {
+      "role": "Cooling fan row",
+      "profile_role_ids": ["role.fans"],
+      "domain_component_id": "component.cooling.fan",
+      "classification": "existing_sufficient",
+      "concrete_ticket_need": ["test.cooling.location_cross_substitution", "test.thermal.fan_telemetry", "test.thermal.temperature_monitoring", "test.system.controlled_stress"],
+      "object_audit": {
+        "faults_symptoms": "No selected hidden cooling Fault exists; no new Fault relation is justified.",
+        "tests_commands": "Cooling and thermal relevance is a documented bounded runtime path; exact fan-to-sensor instances remain profile data.",
+        "repairs_verifications": "No selected cooling intervention; relation intentionally absent."
+      }
+    },
+    {
+      "role": "Hybrid drive backplane",
+      "profile_role_ids": ["role.hybrid_backplane"],
+      "domain_component_id": "component.storage.backplane",
+      "classification": "existing_sufficient",
+      "concrete_ticket_need": ["fault.storage.backplane.path_failed", "test.storage.device_inventory", "repair.storage.reseat_cable", "verify.storage.device_detected"],
+      "object_audit": {
+        "faults_symptoms": "Backplane path Fault resolves to this role; missing-device/I/O Symptoms remain path observations.",
+        "tests_commands": "Inventory needs observed-path semantics across firmware/controller/OS rather than one direct component target.",
+        "repairs_verifications": "Cable reseat and storage verification need explicit endpoint/path relations; the backplane need not be the repair target itself."
+      }
+    },
+    {
+      "role": "SAS/SATA storage data cable",
+      "profile_role_ids": ["role.sas_cable"],
+      "domain_component_id": "component.storage.data_cable",
+      "classification": "existing_but_broad",
+      "concrete_ticket_need": ["fault.storage.cable.failed", "fault.storage.cable.loose", "repair.storage.reseat_cable"],
+      "object_audit": {
+        "faults_symptoms": "Generic cable Faults can affect this role, but the current catalog does not encode protocol/endpoints.",
+        "tests_commands": "Visual and inventory observations need the exact dossier path instance.",
+        "repairs_verifications": "Reseat and device-detected actions lack a typed repair-target/verified-path instance."
+      }
+    },
+    {
+      "role": "PCIe/NVMe interconnect cable or connector branch",
+      "profile_role_ids": ["role.pcie_cable"],
+      "domain_component_id": null,
+      "proposed_component_id": "component.storage.pcie_nvme_interconnect",
+      "classification": "missing_required",
+      "concrete_ticket_need": ["fault.storage.cable.failed", "fault.storage.cable.loose", "fault.storage.nvme.device_failed", "repair.storage.reseat_cable"],
+      "object_audit": {
+        "faults_symptoms": "A source-backed NVMe interconnect branch is required to keep cable and NVMe-device Candidates simultaneously plausible without misusing the SAS/SATA-only cable definition.",
+        "tests_commands": "Inventory, PCIe inventory, visual inspection, and NVMe commands observe different portions of this path.",
+        "repairs_verifications": "Reseat and detection need exact branch/endpoints; adding the Component alone is insufficient without typed relations."
+      }
+    },
+    {
+      "role": "PERC / RAID controller adapter",
+      "profile_role_ids": ["role.perc"],
+      "domain_component_id": "component.storage.raid_controller",
+      "classification": "existing_sufficient",
+      "concrete_ticket_need": ["fault.storage.raid.controller_failed", "test.storage.raid_status", "test.firmware.version_compatibility"],
+      "object_audit": {
+        "faults_symptoms": "Controller Fault is already component-bound; the atlas limits it to the documented SAS branch.",
+        "tests_commands": "RAID status and firmware compatibility have suitable component relevance, though compatibility still needs a queried-inventory surface.",
+        "repairs_verifications": "No selected controller Repair; absence is intentional."
+      }
+    },
+    {
+      "role": "NVMe SSD",
+      "profile_role_ids": ["role.nvme"],
+      "domain_component_id": "component.storage.nvme_ssd",
+      "classification": "existing_sufficient",
+      "concrete_ticket_need": ["fault.storage.nvme.device_failed", "repair.storage.replace_nvme", "verify.storage.device_detected"],
+      "object_audit": {
+        "faults_symptoms": "NVMe device Fault relation is present; boot-device-not-detected still needs affected-path semantics.",
+        "tests_commands": "NVMe telemetry and inventories are relevant when reachable; no diagnostic result is inferred from presence.",
+        "repairs_verifications": "Replace NVMe and storage detection currently omit target Component/path instances and need enrichment."
+      }
+    },
+    {
+      "role": "SAS/SATA drive group",
+      "profile_role_ids": ["role.sas_drives"],
+      "domain_component_id": "component.storage.sas_hdd",
+      "classification": "existing_but_broad",
+      "concrete_ticket_need": ["fault.storage.sas.drive_failed", "test.storage.drive_health", "test.storage.predictive_health"],
+      "object_audit": {
+        "faults_symptoms": "The fixed profile includes both SAS and SATA-capable bays; using only the SAS Component is an admitted pilot shorthand rather than a complete option inventory.",
+        "tests_commands": "Health actions need a selected device/path instance, not every installed drive.",
+        "repairs_verifications": "No selected SAS-drive Repair; relation intentionally absent."
+      }
+    },
+    {
+      "role": "Host network adapter",
+      "profile_role_ids": ["role.nic"],
+      "domain_component_id": "component.network.nic",
+      "classification": "existing_sufficient",
+      "concrete_ticket_need": ["fault.network.nic.failed", "test.network.link_counter_soak", "test.firmware.version_compatibility", "verify.firmware.compatible_persistent"],
+      "object_audit": {
+        "faults_symptoms": "NIC Fault already binds the adapter; link Symptoms remain runtime observations.",
+        "tests_commands": "Network tests and firmware compatibility name the NIC where appropriate; counter observation additionally needs a runtime path.",
+        "repairs_verifications": "Firmware repair lacks explicit firmware-bearing targets; persistence verification already names the NIC but needs verified-state/path semantics."
+      }
+    },
+    {
+      "role": "External network cable",
+      "profile_role_ids": ["role.network_cable"],
+      "domain_component_id": "component.network.ethernet_cable",
+      "classification": "existing_sufficient",
+      "concrete_ticket_need": ["fault.network.cable.disconnected", "fault.network.cable.failed", "test.network.cable_substitution", "test.network.link_counter_soak"],
+      "object_audit": {
+        "faults_symptoms": "Both cable Candidates bind the role; no hidden state is carried by the profile.",
+        "tests_commands": "Substitution and soak require an observed host-NIC-to-peer path relation.",
+        "repairs_verifications": "No selected cable Repair; firmware verification includes link behavior but should verify the path rather than target the cable as changed."
+      }
+    },
+    {
+      "role": "Power Interposer Board",
+      "profile_role_ids": ["role.pib"],
+      "domain_component_id": "component.power.distribution_board",
+      "proposed_component_id": "component.power.interposer_board",
+      "classification": "existing_but_broad",
+      "concrete_ticket_need": ["fault.power.distribution_board.failed", "test.power.distribution_path_isolation", "repair.power.replace_distribution_board", "verify.power.distribution_path"],
+      "object_audit": {
+        "faults_symptoms": "The broad game Fault can be privately bound to the exact PIB role for this profile, but a production profile needs an exact Component or typed realizes-role relation.",
+        "tests_commands": "Power isolation already targets the broad Component and PSU; profile path instances are still required.",
+        "repairs_verifications": "Repair and Verification relationships are present for the broad Component, but exact PIB service identity and containment/de-energization are not expressible."
+      }
+    },
+    {
+      "role": "System BIOS / UEFI firmware role",
+      "profile_role_ids": [],
+      "domain_component_id": null,
+      "proposed_component_id": "component.firmware.system_bios",
+      "classification": "missing_required",
+      "concrete_ticket_need": ["fault.boot.order.incorrect", "fault.firmware.version_set.incompatible", "test.firmware.settings_review", "repair.firmware.restore_compatible_versions", "verify.firmware.compatible_persistent"],
+      "object_audit": {
+        "faults_symptoms": "Boot-order and version-set Faults currently cannot name a firmware-bearing role or boot-policy control surface.",
+        "tests_commands": "Settings and compatibility reviews need a queried firmware/control-surface relationship.",
+        "repairs_verifications": "Restore-compatible-versions has no required Components; persistence verification names the board/BMC/NIC but cannot express the BIOS role itself."
+      }
+    },
+    {
+      "role": "Grouped host loads, per-slot wiring, sensor buses, expanders, and exact connector pins",
+      "profile_role_ids": ["role.host_loads"],
+      "domain_component_id": null,
+      "classification": "optional_outside_scope",
+      "concrete_ticket_need": [],
+      "object_audit": {
+        "faults_symptoms": "No selected Candidate needs this detail.",
+        "tests_commands": "A grouped load/path is enough for the pilot's explanation.",
+        "repairs_verifications": "Creating IDs would add unsupported precision and no concrete action relationship."
+      }
+    },
+    {
+      "role": "Universal tri-mode controller and exact R740xd power-distribution PCB",
+      "profile_role_ids": [],
+      "domain_component_id": null,
+      "classification": "rejected_unjustified",
+      "concrete_ticket_need": [],
+      "object_audit": {
+        "faults_symptoms": "Plausibility or visual proximity is not a Candidate/component proof.",
+        "tests_commands": "No exact pilot observation requires these inferred parts.",
+        "repairs_verifications": "No source-backed service target exists in the selected configuration; do not create an ID."
+      }
+    }
+  ],
+  "relationship_findings": [
+    {
+      "finding_id": "gap.relation.repair.replace_nvme.target",
+      "domain_object_ids": ["repair.storage.replace_nvme", "component.storage.nvme_ssd"],
+      "dossier_ids": ["model.missing-nvme.v1"],
+      "needed_relation": "repair_target",
+      "classification": "missing_relation_instance",
+      "need": "The procedure's required_component_ids is empty even though the service action replaces the isolated NVMe unit.",
+      "gameplay_authority": "Domain enrichment only; does not authorize Repair or choose the target instance."
+    },
+    {
+      "finding_id": "gap.relation.repair.reseat_storage_cable.target",
+      "domain_object_ids": ["repair.storage.reseat_cable", "component.storage.data_cable", "component.storage.pcie_nvme_interconnect"],
+      "dossier_ids": ["model.loose-storage-cable.v1"],
+      "needed_relation": "repair_target",
+      "classification": "missing_relationship_field_schema_capability",
+      "need": "One generic required-component list cannot identify the source-backed branch and its two endpoints without collapsing SAS and PCIe/NVMe paths.",
+      "gameplay_authority": "Profile-scoped enrichment; Ticket Isolation still selects the legal instance."
+    },
+    {
+      "finding_id": "gap.relation.verify.storage_detected.path",
+      "domain_object_ids": ["verify.storage.device_detected", "component.storage.backplane", "component.storage.nvme_ssd", "component.storage.data_cable"],
+      "dossier_ids": ["model.missing-nvme.v1", "model.loose-storage-cable.v1"],
+      "needed_relation": "verified_state",
+      "classification": "missing_relationship_field_schema_capability",
+      "need": "The Verification describes firmware/controller/OS inventory and stable path identity but target_component_ids is empty and cannot express a layered verified path.",
+      "gameplay_authority": "Explanatory/validation enrichment; PASS remains authored."
+    },
+    {
+      "finding_id": "gap.relation.verify.normal_boot.handoff",
+      "domain_object_ids": ["verify.boot.normal_boot", "component.firmware.system_bios"],
+      "dossier_ids": ["model.missing-nvme.v1"],
+      "needed_relation": "verified_state",
+      "classification": "missing_domain_object",
+      "need": "The Verification checks persistent boot policy and UEFI-to-loader handoff, but no BIOS/UEFI Component or boot-path relation exists.",
+      "gameplay_authority": "Domain enrichment only; success conditions and authored result remain authoritative."
+    },
+    {
+      "finding_id": "gap.relation.test.bmc_logs.surface_subject",
+      "domain_object_ids": ["test.system.bmc_logs", "component.management.bmc"],
+      "dossier_ids": ["model.missing-nvme.v1", "model.loose-storage-cable.v1", "model.failed-power-distribution.v1"],
+      "needed_relation": "queried_control_surface_and_observed_path",
+      "classification": "missing_relationship_field_schema_capability",
+      "need": "The Test requires a BMC console but target_component_ids is empty; a queried control surface and Ticket/profile-scoped observed subject are distinct relations.",
+      "gameplay_authority": "Does not imply a log outcome or decisive Evidence."
+    },
+    {
+      "finding_id": "gap.relation.test.storage_inventory.layers",
+      "domain_object_ids": ["test.storage.device_inventory", "component.storage.backplane", "component.storage.nvme_ssd", "component.storage.raid_controller"],
+      "dossier_ids": ["model.missing-nvme.v1", "model.loose-storage-cable.v1"],
+      "needed_relation": "observed_component_path",
+      "classification": "missing_relationship_field_schema_capability",
+      "need": "The Test compares firmware, controller, and OS layers while target_component_ids is empty; one flat component list cannot preserve layer/path semantics.",
+      "gameplay_authority": "Observation scope only; Evidence rules remain authored."
+    },
+    {
+      "finding_id": "gap.relation.test.visual_inspection.binding",
+      "domain_object_ids": ["test.general.visual_inspection"],
+      "dossier_ids": ["model.loose-storage-cable.v1", "model.failed-power-distribution.v1", "model.incompatible-firmware-set.v1"],
+      "needed_relation": "observed_component_path",
+      "classification": "relation_intentionally_absent_from_global_object",
+      "need": "A global target list would incorrectly include every inspectable component; the concrete target belongs to the selected profile and Ticket action target.",
+      "gameplay_authority": "Requires profile/runtime target binding, not a broad domain edit."
+    },
+    {
+      "finding_id": "gap.relation.fault.boot_device_not_detected.path",
+      "domain_object_ids": ["fault.boot.device.not_detected", "component.storage.nvme_ssd", "component.storage.pcie_nvme_interconnect", "component.firmware.system_bios"],
+      "dossier_ids": ["model.missing-nvme.v1"],
+      "needed_relation": "affected_component_path",
+      "classification": "missing_relationship_field_schema_capability",
+      "need": "affected_component_ids is empty because the condition spans device, discovery path, and firmware inventory rather than one universally affected Component.",
+      "gameplay_authority": "Must not select which path is faulty or create a hidden root cause."
+    },
+    {
+      "finding_id": "gap.relation.fault.boot_order.control_surface",
+      "domain_object_ids": ["fault.boot.order.incorrect", "component.firmware.system_bios"],
+      "dossier_ids": ["model.missing-nvme.v1"],
+      "needed_relation": "affected_control_surface",
+      "classification": "missing_domain_object",
+      "need": "affected_component_ids is empty and the incorrect state belongs to persistent UEFI boot policy, not a generic physical board failure.",
+      "gameplay_authority": "Domain enrichment only; Candidate truth remains Ticket-authored."
+    },
+    {
+      "finding_id": "gap.relation.test.firmware_compatibility.surface",
+      "domain_object_ids": ["test.firmware.version_compatibility", "component.board.system", "component.management.bmc", "component.network.nic", "component.storage.raid_controller", "component.firmware.system_bios"],
+      "dossier_ids": ["model.incompatible-firmware-set.v1", "model.corrupt-bmc-firmware.v1"],
+      "needed_relation": "queried_control_surface",
+      "classification": "relation_present_but_too_coarse",
+      "need": "Four target Components are present, but the Test actually queries version inventory across firmware-bearing roles and an approved baseline; physical target proximity alone is insufficient.",
+      "gameplay_authority": "Must not define compatibility tuples from topology."
+    },
+    {
+      "finding_id": "gap.relation.repair.restore_firmware.targets",
+      "domain_object_ids": ["repair.firmware.restore_compatible_versions", "component.board.system", "component.management.bmc", "component.network.nic", "component.firmware.system_bios"],
+      "dossier_ids": ["model.incompatible-firmware-set.v1"],
+      "needed_relation": "repair_target",
+      "classification": "missing_relationship_field_schema_capability",
+      "need": "required_component_ids is empty; repair targets are a compatible set of firmware-bearing roles in an ordered change plan, not one undifferentiated component.",
+      "gameplay_authority": "The authored Repair remains the only change authority and compatibility source."
+    },
+    {
+      "finding_id": "gap.relation.verify.firmware_persistence.path",
+      "domain_object_ids": ["verify.firmware.compatible_persistent", "component.board.system", "component.management.bmc", "component.network.nic"],
+      "dossier_ids": ["model.incompatible-firmware-set.v1"],
+      "needed_relation": "verified_state_and_dependency",
+      "classification": "relation_present_but_too_coarse",
+      "need": "Target Components exist, but the success conditions additionally require version persistence, completed jobs, driver initialization, and link/counter soak across lifecycle stages.",
+      "gameplay_authority": "Derived rationale cannot decide PASS."
+    },
+    {
+      "finding_id": "gap.relation.test.bmc_recovery.surface",
+      "domain_object_ids": ["test.management.bmc_recovery_state", "component.management.bmc"],
+      "dossier_ids": ["model.corrupt-bmc-firmware.v1"],
+      "needed_relation": "queried_control_surface",
+      "classification": "relation_present_but_too_coarse",
+      "need": "The BMC target is present, but reachability, reset, recovery-mode, external-media, and unrecoverable states are distinct observation/control paths.",
+      "gameplay_authority": "Recovery-state Evidence remains authored."
+    },
+    {
+      "finding_id": "gap.relation.repair.bmc_recovery.surface",
+      "domain_object_ids": ["repair.management.recover_bmc_firmware", "component.management.bmc", "component.board.system"],
+      "dossier_ids": ["model.corrupt-bmc-firmware.v1"],
+      "needed_relation": "repair_target_and_dependency",
+      "classification": "relation_present_but_too_coarse",
+      "need": "The BMC requirement exists, but the recovery-image/bootloader path and conditional board-FRU escalation cannot be represented as typed dependencies.",
+      "gameplay_authority": "Must not turn board replacement into an automatically legal fallback."
+    },
+    {
+      "finding_id": "gap.relation.power_path.structure",
+      "domain_object_ids": ["component.power.input_cable", "component.power.hot_swap_psu", "component.power.distribution_board", "component.board.system"],
+      "dossier_ids": ["model.failed-power-distribution.v1"],
+      "needed_relation": "dependency_containment_connection",
+      "classification": "missing_relationship_field_schema_capability",
+      "need": "Action target lists are present for the key Test/Repair/Verification, but the domain cannot state input-to-PSU-to-PIB-to-board path order, redundancy peer relation, service containment, or de-energization dependency.",
+      "gameplay_authority": "Topology is explanatory and must not infer fault location or isolation acceptance."
+    },
+    {
+      "finding_id": "gap.relation.symptom.component",
+      "domain_object_ids": ["symptom.boot.no_boot_device", "symptom.storage.io_errors", "symptom.power.voltage_out_of_range", "symptom.power.no_power", "symptom.network.link_flapping", "symptom.network.no_link", "symptom.management.bmc_not_responding", "symptom.firmware.update_failed"],
+      "dossier_ids": ["model.missing-nvme.v1", "model.loose-storage-cable.v1", "model.failed-power-distribution.v1", "model.incompatible-firmware-set.v1", "model.corrupt-bmc-firmware.v1"],
+      "needed_relation": "none",
+      "classification": "relation_intentionally_absent",
+      "need": "Public Symptoms can arise from multiple Candidate-compatible paths; assigning a Component would narrow or leak the diagnosis.",
+      "gameplay_authority": "Preserve subsystem/public observation semantics."
+    }
+  ],
+  "summary": {
+    "modeled_role_rows": 19,
+    "existing_sufficient": 12,
+    "existing_but_broad": 3,
+    "missing_required": 2,
+    "optional_outside_scope": 1,
+    "rejected_unjustified": 1,
+    "relationship_findings": 16,
+    "production_edits_made": 0
+  }
+}

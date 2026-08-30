@@ -1,0 +1,77 @@
+{
+  "manifest_version": "task-050-generated-manifest-v1",
+  "generator": "docs/system-models/task-050/generate-atlas.mjs",
+  "atlas_version": "task-050-system-model-atlas-v1",
+  "files": [
+    {
+      "file": "ATLAS.md",
+      "sha256": "a9240026b3ecd4928c85524cc5450b6837103df493dc4fbdcdb7e5eaacea63b0",
+      "bytes": 2355
+    },
+    {
+      "file": "COMPONENT_RELATIONSHIP_AUDIT.md",
+      "sha256": "d4f85cd50654b0ca0466109cf0b2270e89e47e96f51fede3f33805855aaee5d6",
+      "bytes": 19205
+    },
+    {
+      "file": "ARCHITECTURE_EVALUATION.md",
+      "sha256": "a15ef2771f6a64de75925c47e68cb65c3b8886238a1e1ba5aa6b1d88541c126a",
+      "bytes": 6399
+    },
+    {
+      "file": "dossiers/01-missing-nvme-boot-device.md",
+      "sha256": "7dd55e275120fb2f21c92b98360bfd0c955c7c33e40f5fb4c0f148f7f36b8916",
+      "bytes": 30401
+    },
+    {
+      "file": "diagrams/01-missing-nvme-boot-device.svg",
+      "sha256": "2428f2685d41100e88d09efa7889eea4d66287f00dd547e6ce49239e5b41a206",
+      "bytes": 9703
+    },
+    {
+      "file": "dossiers/02-loose-storage-cable.md",
+      "sha256": "8f9d6d548adfcb2479a64119fe5ed287864cbf15af54652dce50e1b33b7d0d9e",
+      "bytes": 29199
+    },
+    {
+      "file": "diagrams/02-loose-storage-cable.svg",
+      "sha256": "b993858c9440ca93017e72d87f0ad124821829b58edb5ae70a37af0f9557289c",
+      "bytes": 8528
+    },
+    {
+      "file": "dossiers/03-failed-power-distribution-board.md",
+      "sha256": "5f23403de058226f0d74811613a82b1e8f2519198c8d100be87c8b311b7fcd5a",
+      "bytes": 18744
+    },
+    {
+      "file": "diagrams/03-failed-power-distribution-board.svg",
+      "sha256": "38ef87b83e45af25aa786053bf20e2289f3cc4b4583f6f2bf4c3ce2407f6ebec",
+      "bytes": 7888
+    },
+    {
+      "file": "dossiers/04-incompatible-firmware-set-network.md",
+      "sha256": "7fc896caf1475bff91daa0bd64156405268b19f3d1ba13f471d551af9fc4c0a5",
+      "bytes": 24963
+    },
+    {
+      "file": "diagrams/04-incompatible-firmware-set-network.svg",
+      "sha256": "5f05ead4a328b3178b056d44e1ed8b168bd065a9dd170d645cb93b8fdf2707b5",
+      "bytes": 7096
+    },
+    {
+      "file": "dossiers/05-corrupt-bmc-firmware.md",
+      "sha256": "4a2371056643b0c81782577358e4305cede3261611a45c2903211e1c86953cbb",
+      "bytes": 22833
+    },
+    {
+      "file": "diagrams/05-corrupt-bmc-firmware.svg",
+      "sha256": "dfd5816d9a538ea4b8e47724f2d83a9e9c6b067358f6b06de7d351c6956f784a",
+      "bytes": 6060
+    },
+    {
+      "file": "review.html",
+      "sha256": "e6b96b1a31da5b931b1c0dc2c6c85163d93be2fe321fb435be8c3d962e7b9a6f",
+      "bytes": 50364
+    }
+  ]
+}

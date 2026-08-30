@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 470" role="img" aria-labelledby="title desc" data-ticket-id="ticket.generated.3fd6eb04534f79b5b3f87f98">
+  <title id="title">Public-safe system context for ticket.generated.3fd6eb04534f79b5b3f87f98</title>
+  <desc id="desc">Ticket ticket.generated.3fd6eb04534f79b5b3f87f98 has public Symptoms symptom.power.voltage_out_of_range, symptom.power.no_power. Its public Candidates are fault.board.system.failed, fault.power.distribution_board.failed, fault.power.input.cable_loose, fault.power.psu.failed, fault.power.psu.not_seated. The schematic focus contains Input cables (power); PSU A + PSU B (power); Power Interposer Board (power); System-board load (host firmware post); Management status (management); Host + bounded runtime (runtime service); De-energized service (runtime service). Connections, in reading order: power relation from Input cables to PSU A + PSU B: two inputs; power relation from PSU A + PSU B to Power Interposer Board: 1+1 feed; power relation from Power Interposer Board to System-board load: board cables; power relation from System-board load to Host + bounded runtime: switched loads; control relation from Management status to PSU A + PSU B: status / mismatch; lifecycle relation from De-energized service to PSU A + PSU B: remove first; lifecycle relation from De-energized service to Power Interposer Board: disconnect / replace. Line labels and dash patterns distinguish relation types; no node or edge states which Candidate is true.</desc>
+  <defs>
+    <marker id="triangle" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke" stroke="context-stroke" /></marker>
+    <marker id="diamond" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 6 L 6 0 L 12 6 L 6 12 z" fill="context-stroke" stroke="context-stroke" /></marker>
+    <marker id="square" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 1 1 H 9 V 9 H 1 z" fill="context-stroke" stroke="context-stroke" /></marker>
+    <style>
+      :root { color-scheme: dark; }
+      svg { background: #07131b; font-family: ui-sans-serif, system-ui, sans-serif; }
+      .node rect { fill: #102b39; stroke: #cfeaf2; stroke-width: 2; }
+      .node:focus rect { stroke: #ffd166; stroke-width: 5; }
+      .node-label { fill: #f7fbfc; font-size: 15px; font-weight: 700; text-anchor: middle; }
+      .node-kind { fill: #b8dce8; font-size: 11px; text-anchor: middle; }
+      .edge line { fill: none; stroke-width: 3; }
+      .edge text { fill: #f7fbfc; font-size: 11px; font-weight: 700; text-anchor: middle; paint-order: stroke; stroke: #07131b; stroke-width: 5; stroke-linejoin: round; }
+      .power line { stroke: #ffcf5c; } .data line { stroke: #5ee6ff; }
+      .control line { stroke: #f58cff; } .lifecycle line { stroke: #9ce47a; }
+      .containment line { stroke: #f2a366; } .cooling line { stroke: #b6adff; }
+      @media (forced-colors: active) {
+        svg { background: Canvas; }
+        .node rect { fill: Canvas; stroke: CanvasText; }
+        .node-label, .node-kind, .edge text { fill: CanvasText; stroke: Canvas; }
+        .edge line { stroke: CanvasText; }
+        marker path { fill: CanvasText !important; }
+        .node:focus rect { stroke: Highlight; }
+      }
+    </style>
+  </defs>
+  <g aria-hidden="true"><g class="edge power" aria-label="POWER: Input cables to PSU A + PSU B, two inputs">
+      <line x1="170" y1="210" x2="215" y2="210" marker-end="url(#triangle)" />
+      <text x="192.5" y="203">POWER</text>
+    </g>
+    <g class="edge power" aria-label="POWER: PSU A + PSU B to Power Interposer Board, 1+1 feed">
+      <line x1="370" y1="210" x2="425" y2="210" marker-end="url(#triangle)" />
+      <text x="397.5" y="203">POWER</text>
+    </g>
+    <g class="edge power" aria-label="POWER: Power Interposer Board to System-board load, board cables">
+      <line x1="615" y1="210" x2="675" y2="210" marker-end="url(#triangle)" />
+      <text x="645" y="203">POWER</text>
+    </g>
+    <g class="edge power" aria-label="POWER: System-board load to Host + bounded runtime, switched loads">
+      <line x1="855" y1="210" x2="915" y2="210" marker-end="url(#triangle)" />
+      <text x="885" y="203">POWER</text>
+    </g>
+    <g class="edge control" aria-label="CONTROL: Management status to PSU A + PSU B, status / mismatch">
+      <line x1="675" y1="100.71428571428571" x2="370" y2="187.85714285714286" stroke-dasharray="3 5" marker-end="url(#diamond)" />
+      <text x="522.5" y="137.28571428571428">CONTROL</text>
+    </g>
+    <g class="edge lifecycle" aria-label="LIFECYCLE: De-energized service to PSU A + PSU B, remove first">
+      <line x1="459.3333333333333" y1="320" x2="353.1666666666667" y2="250" stroke-dasharray="2 5" marker-end="url(#triangle)" />
+      <text x="406.25" y="278">LIFECYCLE</text>
+    </g>
+    <g class="edge lifecycle" aria-label="LIFECYCLE: De-energized service to Power Interposer Board, disconnect / replace">
+      <line x1="520" y1="320" x2="520" y2="250" stroke-dasharray="2 5" marker-end="url(#triangle)" />
+      <text x="520" y="278">LIFECYCLE</text>
+    </g></g>
+  <g aria-label="System components in text-equivalent reading order"><g class="node plane-power" tabindex="0" role="group" aria-label="Input cables; COMPONENT_INSTANCE; power plane" data-reading-order="1">
+      <rect x="30" y="175" width="135" height="70" rx="10" />
+      <text x="97.5" y="206" class="node-label">Input cables</text>
+      <text x="97.5" y="227" class="node-kind">power</text>
+    </g>
+    <g class="node plane-power" tabindex="0" role="group" aria-label="PSU A + PSU B; COMPONENT_INSTANCE; power plane" data-reading-order="2">
+      <rect x="220" y="175" width="145" height="70" rx="10" />
+      <text x="292.5" y="206" class="node-label">PSU A + PSU B</text>
+      <text x="292.5" y="227" class="node-kind">power</text>
+    </g>
+    <g class="node plane-power" tabindex="0" role="group" aria-label="Power Interposer Board; SERVICEABLE_UNIT; power plane" data-reading-order="3">
+      <rect x="430" y="175" width="180" height="70" rx="10" />
+      <text x="520" y="206" class="node-label">Power Interposer Board</text>
+      <text x="520" y="227" class="node-kind">power</text>
+    </g>
+    <g class="node plane-host_firmware_post" tabindex="0" role="group" aria-label="System-board load; SERVICEABLE_UNIT; host firmware post plane" data-reading-order="4">
+      <rect x="680" y="175" width="170" height="70" rx="10" />
+      <text x="765" y="206" class="node-label">System-board load</text>
+      <text x="765" y="227" class="node-kind">host firmware post</text>
+    </g>
+    <g class="node plane-management" tabindex="0" role="group" aria-label="Management status; OBSERVATION_POINT; management plane" data-reading-order="5">
+      <rect x="680" y="40" width="170" height="70" rx="10" />
+      <text x="765" y="71" class="node-label">Management status</text>
+      <text x="765" y="92" class="node-kind">management</text>
+    </g>
+    <g class="node plane-runtime_service" tabindex="0" role="group" aria-label="Host + bounded runtime; LOGICAL_GROUP; runtime service plane" data-reading-order="6">
+      <rect x="920" y="175" width="175" height="70" rx="10" />
+      <text x="1007.5" y="206" class="node-label">Host + bounded runtime</text>
+      <text x="1007.5" y="227" class="node-kind">runtime service</text>
+    </g>
+    <g class="node plane-runtime_service" tabindex="0" role="group" aria-label="De-energized service; CONTROL_SURFACE; runtime service plane" data-reading-order="7">
+      <rect x="430" y="325" width="180" height="70" rx="10" />
+      <text x="520" y="356" class="node-label">De-energized service</text>
+      <text x="520" y="377" class="node-kind">runtime service</text>
+    </g></g>
+</svg>

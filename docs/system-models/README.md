@@ -2,7 +2,7 @@
 
 ## Status
 
-This directory is the planning entry point for the proposed System Model / System Finder capability. TASK-049's implementation-neutral contract is complete, but the architecture remains unapproved until TASK-050 produces the manual atlas and the `SYSTEM-001` owner gate is resolved. Existing V0 Ticket outcomes, Evidence dispositions, legal intents, Diagnostic Bench relevance, and hidden-truth boundaries remain authoritative.
+This directory is the planning entry point for the proposed System Model / System Finder capability. TASK-049's implementation-neutral contract and TASK-050's manual five-Ticket atlas are complete. The production architecture remains unapproved until the project owner resolves `SYSTEM-001`; TASK-051 is blocked. Existing V0 Ticket outcomes, Evidence dispositions, legal intents, Diagnostic Bench relevance, and hidden-truth boundaries remain authoritative.
 
 The TASK-049 package is:
 
@@ -11,6 +11,14 @@ The TASK-049 package is:
 - [`PILOT_SELECTION.md`](PILOT_SELECTION.md) and [`pilot-selection-v1.json`](pilot-selection-v1.json) — the reproducible five-Ticket pilot and its committed classification ledger;
 - [`WORKED_EXAMPLES.md`](WORKED_EXAMPLES.md) — storage and non-storage contract walks plus reality and non-leak counterexamples; and
 - [`verify-task-049.mjs`](verify-task-049.mjs) — denominator, selection, field-ownership, acceptance, and repository-relative Markdown-link checks.
+
+The TASK-050 package is:
+
+- [`task-050/ATLAS.md`](task-050/ATLAS.md) — five complete Ticket dossiers generated from two fixed source-backed profiles;
+- [`task-050/review.html`](task-050/review.html) — responsive review of five original public-safe SVG schematics and exact text equivalents;
+- [`task-050/COMPONENT_RELATIONSHIP_AUDIT.md`](task-050/COMPONENT_RELATIONSHIP_AUDIT.md) — every modeled role plus sixteen concrete, authority-bounded relationship findings;
+- [`task-050/ARCHITECTURE_EVALUATION.md`](task-050/ARCHITECTURE_EVALUATION.md) — measured A/B/C/D comparison and Finder-first recommendation; and
+- [`task-050/source-ledger.json`](task-050/source-ledger.json) — eighteen primary-source entries with revisions, claim scope, access status, exact/generalized boundaries, and exceptions.
 
 The project-owner-supplied concept image is preserved at [`system-model-host-bmc-concept.png`](../ui-plan/ui-reference_images/system-model-host-bmc-concept.png). It demonstrates the useful idea of showing the host and management subsystems as distinct but connected regions; it is not a complete topology, a real product specification, or a production layout.
 
