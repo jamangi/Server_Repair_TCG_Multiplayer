@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/system_model_private_validation_catalog.schema.json",
+  "title": "System Model Private Validation Catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "stableId": { "$ref": "system_model_catalog.schema.json#/$defs/stableId" },
+    "digest": { "$ref": "system_model_catalog.schema.json#/$defs/digest" },
+    "claimArray": { "$ref": "system_model_catalog.schema.json#/$defs/claimArray" },
+    "idArray": { "$ref": "system_model_catalog.schema.json#/$defs/idArray" },
+    "faultBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "fault_id": { "type": "string", "pattern": "^fault\\." },
+        "target_role_ids": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/stableId" }, "uniqueItems": true },
+        "target_node_ids": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/stableId" }, "uniqueItems": true },
+        "binding_basis": { "type": "string", "minLength": 1 },
+        "source_claim_ids": { "$ref": "#/$defs/claimArray" }
+      },
+      "required": ["fault_id", "target_role_ids", "target_node_ids", "binding_basis", "source_claim_ids"]
+    },
+    "actionRequirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "requirement_id": { "$ref": "#/$defs/stableId" },
+        "action_type": { "enum": ["RUN_DIAGNOSTIC", "PERFORM_REPAIR", "PERFORM_VERIFY"] },
+        "action_definition_id": { "$ref": "#/$defs/stableId" },
+        "attachment_id": { "$ref": "#/$defs/stableId" },
+        "authored_result_reference": { "$ref": "#/$defs/stableId" }
+      },
+      "required": ["requirement_id", "action_type", "action_definition_id", "attachment_id", "authored_result_reference"]
+    },
+    "variant": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "variant_id": { "$ref": "#/$defs/stableId" },
+        "synthetic_hidden_fault_ids": { "type": "array", "minItems": 1, "items": { "type": "string", "pattern": "^fault\\." }, "uniqueItems": true },
+        "expected_public_binding_digest": { "$ref": "#/$defs/digest" }
+      },
+      "required": ["variant_id", "synthetic_hidden_fault_ids", "expected_public_binding_digest"]
+    },
+    "proof": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "compatibility_id": { "$ref": "#/$defs/stableId" },
+        "binding_id": { "$ref": "#/$defs/stableId" },
+        "ticket_id": { "type": "string", "pattern": "^ticket\\." },
+        "ticket_snapshot_digest": { "$ref": "#/$defs/digest" },
+        "profile_ref": { "$ref": "ticket_system_binding_catalog.schema.json#/$defs/profileRef" },
+        "required_capability_ids": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/stableId" }, "uniqueItems": true },
+        "hidden_fault_bindings": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/faultBinding" } },
+        "authored_action_requirements": { "type": "array", "minItems": 3, "items": { "$ref": "#/$defs/actionRequirement" } },
+        "differential_variants": { "type": "array", "minItems": 2, "maxItems": 5, "items": { "$ref": "#/$defs/variant" } },
+        "validation_result": { "const": "PASS" },
+        "authority_boundary": { "const": "BUILD_TIME_REJECTION_ONLY" },
+        "serialization": { "$ref": "system_model_catalog.schema.json#/$defs/serialization" }
+      },
+      "required": ["compatibility_id", "binding_id", "ticket_id", "ticket_snapshot_digest", "profile_ref", "required_capability_ids", "hidden_fault_bindings", "authored_action_requirements", "differential_variants", "validation_result", "authority_boundary", "serialization"]
+    }
+  },
+  "properties": {
+    "schema_version": { "const": "system-model-private-validation-catalog-v1" },
+    "release_id": { "const": "system-model-pilot-v1" },
+    "contract_version": { "const": "system-model-contract-v1" },
+    "canonicalization_version": { "const": "canonical-json-v1" },
+    "storage_boundary": { "const": "SERVER_OR_BUILD_ONLY" },
+    "compatibility_proofs": { "type": "array", "minItems": 5, "maxItems": 5, "items": { "$ref": "#/$defs/proof" } },
+    "serialization": { "$ref": "system_model_catalog.schema.json#/$defs/serialization" }
+  },
+  "required": ["schema_version", "release_id", "contract_version", "canonicalization_version", "storage_boundary", "compatibility_proofs", "serialization"]
+}

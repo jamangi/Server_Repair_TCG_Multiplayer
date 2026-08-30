@@ -1,0 +1,395 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/system_model_catalog.schema.json",
+  "title": "System Model Catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "stableId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+    },
+    "digest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "idArray": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/stableId" },
+      "uniqueItems": true
+    },
+    "claimArray": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/stableId" },
+      "uniqueItems": true
+    },
+    "serialization": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "canonicalization_version": { "const": "canonical-json-v1" },
+        "digest_algorithm": { "const": "sha256" },
+        "content_digest": { "$ref": "#/$defs/digest" }
+      },
+      "required": ["canonicalization_version", "digest_algorithm", "content_digest"]
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "manufacturer": { "type": "string", "minLength": 1 },
+        "family": { "type": "string", "minLength": 1 },
+        "model_scope": { "type": "string", "minLength": 1 },
+        "generation_or_era": { "type": "string", "minLength": 1 },
+        "exactness_class": { "enum": ["EXACT", "GENERALIZED", "MIXED"] },
+        "exact_details": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+        "generalized_details": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true }
+      },
+      "required": ["manufacturer", "family", "model_scope", "generation_or_era", "exactness_class", "exact_details", "generalized_details"]
+    },
+    "optionConstraint": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "constraint_id": { "$ref": "#/$defs/stableId" },
+        "statement": { "type": "string", "minLength": 1 },
+        "enforcement": { "const": "REQUIRED_FOR_PROFILE" },
+        "source_claim_ids": { "$ref": "#/$defs/claimArray" }
+      },
+      "required": ["constraint_id", "statement", "enforcement", "source_claim_ids"]
+    },
+    "plane": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "plane": { "enum": ["power", "management", "host_firmware_post", "memory", "storage", "network", "os_handoff", "runtime_service"] },
+        "status": { "enum": ["PRESENT", "NOT_APPLICABLE", "OUT_OF_SCOPE_WITH_REASON"] },
+        "summary": { "type": "string", "minLength": 1 },
+        "source_claim_ids": { "$ref": "#/$defs/claimArray" }
+      },
+      "required": ["plane", "status", "summary", "source_claim_ids"]
+    },
+    "multiplicity": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "minimum": { "type": "integer", "minimum": 0 },
+        "maximum": { "type": ["integer", "null"], "minimum": 0 },
+        "unit": { "type": "string", "minLength": 1 }
+      },
+      "required": ["minimum", "maximum", "unit"]
+    },
+    "role": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "role_id": { "$ref": "#/$defs/stableId" },
+        "label": { "type": "string", "minLength": 1 },
+        "role_kind": { "enum": ["PHYSICAL_COMPONENT", "INTERCONNECT_ROLE", "LOGICAL_ROLE", "PUBLIC_ABSTRACTION"] },
+        "purpose": { "type": "string", "minLength": 1 },
+        "component_definition_id": { "type": ["string", "null"], "pattern": "^component\\.[a-z0-9._-]+$" },
+        "multiplicity": { "$ref": "#/$defs/multiplicity" },
+        "optionality": { "enum": ["REQUIRED", "OPTIONAL", "PROFILE_CONSTRAINED", "OUT_OF_SCOPE_ABSTRACTION"] },
+        "replaceability": { "enum": ["HOT_SWAP_SERVICE_UNIT", "BOARD_SERVICE_UNIT", "NOT_SEPARATE_SERVICE_UNIT", "SOCKETED_SERVICE_UNIT", "INDIVIDUAL_SERVICE_UNIT", "REPLACEABLE_SERVICE_UNIT", "CABLE_SERVICE_PATH", "ADAPTER_SERVICE_UNIT", "EXTERNAL_REPLACEABLE_UNIT", "DEENERGIZED_SERVICE_UNIT", "OUTSIDE_SCOPE"] },
+        "serviceability_note": { "type": "string", "minLength": 1 },
+        "lifecycle_stage_ids": { "$ref": "#/$defs/idArray" },
+        "public_visibility": { "const": "PUBLIC" },
+        "synchronization_status": { "enum": ["EXISTING_COMPONENT", "RESOLVED_TASK_051", "OUT_OF_SCOPE_ABSTRACTION"] },
+        "source_claim_ids": { "$ref": "#/$defs/claimArray" }
+      },
+      "required": ["role_id", "label", "role_kind", "purpose", "component_definition_id", "multiplicity", "optionality", "replaceability", "serviceability_note", "lifecycle_stage_ids", "public_visibility", "synchronization_status", "source_claim_ids"]
+    },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "node_id": { "$ref": "#/$defs/stableId" },
+        "label": { "type": "string", "minLength": 1 },
+        "node_kind": { "enum": ["COMPONENT_INSTANCE", "SERVICEABLE_UNIT", "CONTROL_SURFACE", "OBSERVATION_POINT", "LOGICAL_GROUP", "BUS_OR_LINK", "PUBLIC_ABSTRACTION"] },
+        "plane": { "enum": ["power", "management", "host_firmware_post", "memory", "storage", "network", "os_handoff", "runtime_service"] },
+        "role_ids": { "$ref": "#/$defs/idArray" },
+        "public_visibility": { "const": "PUBLIC" },
+        "source_claim_ids": { "$ref": "#/$defs/claimArray" }
+      },
+      "required": ["node_id", "label", "node_kind", "plane", "role_ids", "public_visibility", "source_claim_ids"]
+    },
+    "edge": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "edge_id": { "$ref": "#/$defs/stableId" },
+        "from_node_id": { "$ref": "#/$defs/stableId" },
+        "to_node_id": { "$ref": "#/$defs/stableId" },
+        "relation_type": { "enum": ["CONTAINS", "MOUNTS", "REALIZES_ROLE", "SERVICE_UNIT_FOR", "OPTION_MEMBER_OF", "DELIVERS_STANDBY_POWER_TO", "DELIVERS_SWITCHED_POWER_TO", "RETURNS_POWER_GOOD_TO", "COOLS", "EXHAUSTS_THROUGH", "DATA_LINK_TO", "CONTROL_LINK_TO", "MANAGES", "BOOT_SOURCE_FOR", "HANDOFF_TO", "ENABLES", "OBSERVES", "REPORTS_INVENTORY_FOR", "EMITS_STATUS_AT", "MEASURES_PATH", "MEMBER_OF", "REDUNDANCY_PEER_OF", "BACKED_BY", "EXPOSES_AS", "ACCESSED_THROUGH", "REQUIRES_DEENERGIZATION_BEFORE", "REQUIRES_PROTOCOL"] },
+        "direction": { "enum": ["DIRECTED", "UNDIRECTED"] },
+        "cardinality": { "enum": ["ONE_TO_ONE", "ONE_TO_MANY", "MANY_TO_ONE", "MANY_TO_MANY"] },
+        "label": { "type": "string", "minLength": 1 },
+        "lifecycle_stage_ids": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/stableId" }, "uniqueItems": true },
+        "public_visibility": { "const": "PUBLIC" },
+        "source_claim_ids": { "$ref": "#/$defs/claimArray" }
+      },
+      "required": ["edge_id", "from_node_id", "to_node_id", "relation_type", "direction", "cardinality", "label", "lifecycle_stage_ids", "public_visibility", "source_claim_ids"]
+    },
+    "path": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path_id": { "$ref": "#/$defs/stableId" },
+        "flow_kind": { "enum": ["POWER", "DATA", "CONTROL", "OBSERVATION", "LIFECYCLE", "COOLING"] },
+        "node_ids": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/stableId" }, "uniqueItems": true },
+        "edge_ids": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/stableId" }, "uniqueItems": true },
+        "start_node_id": { "$ref": "#/$defs/stableId" },
+        "end_node_id": { "$ref": "#/$defs/stableId" },
+        "lifecycle_stage_ids": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/stableId" }, "uniqueItems": true },
+        "public_visibility": { "const": "PUBLIC" },
+        "source_claim_ids": { "$ref": "#/$defs/claimArray" }
+      },
+      "required": ["path_id", "flow_kind", "node_ids", "edge_ids", "start_node_id", "end_node_id", "lifecycle_stage_ids", "public_visibility", "source_claim_ids"]
+    },
+    "stage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "stage_id": { "$ref": "#/$defs/stableId" },
+        "order_key": { "type": "integer", "minimum": 0 },
+        "label": { "type": "string", "minLength": 1 },
+        "stage_mode": { "enum": ["REQUIRED", "PARALLEL", "CONDITIONAL", "SERVICE_CONDITIONAL"] },
+        "condition": { "type": ["string", "null"] },
+        "source_claim_ids": { "$ref": "#/$defs/claimArray" }
+      },
+      "required": ["stage_id", "order_key", "label", "stage_mode", "condition", "source_claim_ids"]
+    },
+    "lifecycleRelation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "relation_id": { "$ref": "#/$defs/stableId" },
+        "from_stage_id": { "$ref": "#/$defs/stableId" },
+        "to_stage_id": { "$ref": "#/$defs/stableId" },
+        "relation_type": { "enum": ["PRECEDES", "REQUIRES", "ENABLES", "PARALLEL_WITH", "OPTIONAL_AFTER", "HANDOFF_TO"] },
+        "source_claim_ids": { "$ref": "#/$defs/claimArray" }
+      },
+      "required": ["relation_id", "from_stage_id", "to_stage_id", "relation_type", "source_claim_ids"]
+    },
+    "surface": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "surface_id": { "$ref": "#/$defs/stableId" },
+        "node_ids": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/stableId" }, "uniqueItems": true },
+        "access_domain": { "enum": ["MANAGEMENT", "HOST_FIRMWARE", "OS", "PHYSICAL_SERVICE", "EXTERNAL_TOOL"] },
+        "capability": { "enum": ["QUERY", "CHANGE", "BOTH"] },
+        "lifecycle_stage_ids": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/stableId" }, "uniqueItems": true },
+        "public_visibility": { "const": "PUBLIC" },
+        "source_claim_ids": { "$ref": "#/$defs/claimArray" }
+      },
+      "required": ["surface_id", "node_ids", "access_domain", "capability", "lifecycle_stage_ids", "public_visibility", "source_claim_ids"]
+    },
+    "observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "observation_id": { "$ref": "#/$defs/stableId" },
+        "observation_kind": { "enum": ["DIRECT", "PATH_BASED", "INDIRECT"] },
+        "observer_node_ids": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/stableId" }, "uniqueItems": true },
+        "subject_node_ids": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/stableId" }, "uniqueItems": true },
+        "transport": { "type": "string", "minLength": 1 },
+        "lifecycle_stage_ids": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/stableId" }, "uniqueItems": true },
+        "limits": { "type": "string", "minLength": 1 },
+        "public_visibility": { "const": "PUBLIC" },
+        "source_claim_ids": { "$ref": "#/$defs/claimArray" }
+      },
+      "required": ["observation_id", "observation_kind", "observer_node_ids", "subject_node_ids", "transport", "lifecycle_stage_ids", "limits", "public_visibility", "source_claim_ids"]
+    },
+    "capability": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "capability_id": { "$ref": "#/$defs/stableId" },
+        "label": { "type": "string", "minLength": 1 },
+        "node_ids": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/stableId" }, "uniqueItems": true },
+        "public_visibility": { "const": "PUBLIC" },
+        "source_claim_ids": { "$ref": "#/$defs/claimArray" }
+      },
+      "required": ["capability_id", "label", "node_ids", "public_visibility", "source_claim_ids"]
+    },
+    "token": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "token": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]*$" },
+        "value": { "type": "string", "minLength": 1 }
+      },
+      "required": ["token", "value"]
+    },
+    "attachment": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "attachment_id": { "$ref": "#/$defs/stableId" },
+        "action_definition_id": { "$ref": "#/$defs/stableId" },
+        "action_kind": { "enum": ["TEST", "COMMAND", "REPAIR", "VERIFICATION"] },
+        "attachment_kind": { "enum": ["OBSERVES_COMPONENT_PATH", "QUERIES_CONTROL_SURFACE", "INTERVENES_ON_SERVICE_UNIT", "VERIFIES_STATE"] },
+        "target_node_ids": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/stableId" }, "uniqueItems": true },
+        "target_path_ids": { "$ref": "#/$defs/idArray" },
+        "control_surface_ids": { "$ref": "#/$defs/idArray" },
+        "observation_point_ids": { "$ref": "#/$defs/idArray" },
+        "relevant_stage_ids": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/stableId" }, "uniqueItems": true },
+        "rationale_template_id": { "$ref": "#/$defs/stableId" },
+        "rationale_tokens": { "type": "array", "minItems": 3, "items": { "$ref": "#/$defs/token" } },
+        "source_claim_ids": { "$ref": "#/$defs/claimArray" },
+        "public_visibility": { "const": "PUBLIC" },
+        "authority_boundary": { "const": "SYSTEM_RELEVANCE_ONLY" }
+      },
+      "required": ["attachment_id", "action_definition_id", "action_kind", "attachment_kind", "target_node_ids", "target_path_ids", "control_surface_ids", "observation_point_ids", "relevant_stage_ids", "rationale_template_id", "rationale_tokens", "source_claim_ids", "public_visibility", "authority_boundary"]
+    },
+    "clause": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "clause_id": { "$ref": "#/$defs/stableId" },
+        "clause_kind": { "enum": ["ALWAYS", "WHEN_OPTION", "UNLESS_OPTION", "PARALLEL", "NOT_APPLICABLE"] },
+        "stage_id": { "$ref": "#/$defs/stableId" },
+        "template_id": { "$ref": "#/$defs/stableId" },
+        "tokens": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/token" } },
+        "source_claim_ids": { "$ref": "#/$defs/claimArray" }
+      },
+      "required": ["clause_id", "clause_kind", "stage_id", "template_id", "tokens", "source_claim_ids"]
+    },
+    "descriptionProgram": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "template_catalog_version": { "const": "system-model-template-catalog-v1" },
+        "sections": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "section_id": { "$ref": "#/$defs/stableId" },
+              "heading": { "type": "string", "minLength": 1 },
+              "clauses": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/clause" } }
+            },
+            "required": ["section_id", "heading", "clauses"]
+          }
+        }
+      },
+      "required": ["template_catalog_version", "sections"]
+    },
+    "abstraction": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "abstraction_id": { "$ref": "#/$defs/stableId" },
+        "label": { "type": "string", "minLength": 1 },
+        "represented_node_ids": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/stableId" }, "uniqueItems": true },
+        "source_claim_ids": { "$ref": "#/$defs/claimArray" }
+      },
+      "required": ["abstraction_id", "label", "represented_node_ids", "source_claim_ids"]
+    },
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile_id": { "$ref": "#/$defs/stableId" },
+        "profile_revision": { "type": "integer", "minimum": 1 },
+        "lifecycle_status": { "enum": ["DRAFT", "PUBLISHED", "DEPRECATED"] },
+        "identity": { "$ref": "#/$defs/identity" },
+        "option_constraints": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/optionConstraint" } },
+        "plane_declarations": { "type": "array", "minItems": 8, "maxItems": 8, "items": { "$ref": "#/$defs/plane" } },
+        "role_instances": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/role" } },
+        "topology_nodes": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/node" } },
+        "topology_edges": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/edge" } },
+        "paths": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/path" } },
+        "lifecycle_stages": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/stage" } },
+        "lifecycle_relations": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/lifecycleRelation" } },
+        "control_surfaces": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/surface" } },
+        "observation_points": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/observation" } },
+        "finder_capabilities": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/capability" } },
+        "action_attachments": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/attachment" } },
+        "description_program": { "$ref": "#/$defs/descriptionProgram" },
+        "public_abstractions": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/abstraction" } },
+        "provenance": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "claim_ledger_id": { "$ref": "#/$defs/stableId" },
+            "source_manifest_version": { "$ref": "#/$defs/stableId" },
+            "source_claim_ids": { "$ref": "#/$defs/claimArray" },
+            "exactness_statement": { "type": "string", "minLength": 1 }
+          },
+          "required": ["claim_ledger_id", "source_manifest_version", "source_claim_ids", "exactness_statement"]
+        },
+        "synchronization": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "component_catalog_version": { "$ref": "#/$defs/stableId" },
+            "referenced_component_ids": { "$ref": "#/$defs/idArray" },
+            "resolved_gap_ids": { "$ref": "#/$defs/idArray" }
+          },
+          "required": ["component_catalog_version", "referenced_component_ids", "resolved_gap_ids"]
+        },
+        "serialization": { "$ref": "#/$defs/serialization" }
+      },
+      "required": ["profile_id", "profile_revision", "lifecycle_status", "identity", "option_constraints", "plane_declarations", "role_instances", "topology_nodes", "topology_edges", "paths", "lifecycle_stages", "lifecycle_relations", "control_surfaces", "observation_points", "finder_capabilities", "action_attachments", "description_program", "public_abstractions", "provenance", "synchronization", "serialization"]
+    },
+    "template": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "template_id": { "$ref": "#/$defs/stableId" },
+        "purpose": { "enum": ["LIFECYCLE_CLAUSE", "ACTION_RATIONALE"] },
+        "token_names": { "type": "array", "minItems": 1, "items": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]*$" }, "uniqueItems": true },
+        "template": { "type": "string", "minLength": 1 }
+      },
+      "required": ["template_id", "purpose", "token_names", "template"]
+    }
+  },
+  "properties": {
+    "schema_version": { "const": "system-model-catalog-v1" },
+    "release_id": { "const": "system-model-pilot-v1" },
+    "contract_version": { "const": "system-model-contract-v1" },
+    "canonicalization_version": { "const": "canonical-json-v1" },
+    "source_manifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "source_ledger_id": { "$ref": "#/$defs/stableId" },
+        "source_ledger_path": { "type": "string", "minLength": 1 },
+        "source_ledger_sha256": { "$ref": "#/$defs/digest" },
+        "source_count": { "type": "integer", "minimum": 1 },
+        "claim_count": { "type": "integer", "minimum": 1 }
+      },
+      "required": ["source_ledger_id", "source_ledger_path", "source_ledger_sha256", "source_count", "claim_count"]
+    },
+    "component_catalog": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "catalog_version": { "$ref": "#/$defs/stableId" },
+        "base_policy": { "const": "PRESERVE_EXISTING_IDS" },
+        "successor_pack_path": { "type": "string", "minLength": 1 },
+        "added_component_ids": { "type": "array", "minItems": 2, "maxItems": 2, "items": { "type": "string", "pattern": "^component\\." }, "uniqueItems": true }
+      },
+      "required": ["catalog_version", "base_policy", "successor_pack_path", "added_component_ids"]
+    },
+    "templates": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/template" } },
+    "fallback": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "fallback_id": { "$ref": "#/$defs/stableId" },
+        "public_message": { "type": "string", "minLength": 1 },
+        "prohibited_detail": { "type": "string", "minLength": 1 }
+      },
+      "required": ["fallback_id", "public_message", "prohibited_detail"]
+    },
+    "profiles": { "type": "array", "minItems": 2, "maxItems": 2, "items": { "$ref": "#/$defs/profile" } },
+    "serialization": { "$ref": "#/$defs/serialization" }
+  },
+  "required": ["schema_version", "release_id", "contract_version", "canonicalization_version", "source_manifest", "component_catalog", "templates", "fallback", "profiles", "serialization"]
+}

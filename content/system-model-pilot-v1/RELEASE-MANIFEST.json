@@ -1,0 +1,120 @@
+{
+  "contract_version": "system-model-contract-v1",
+  "generated_files": [
+    {
+      "bytes": 21887,
+      "path": "content/system-model-pilot-v1/domain-relationship-overlay-v1.json",
+      "sha256": "0f468018fe585f9deb774905a7cfc57ea559ec29ace8bc69e9335daea8c59cd8"
+    },
+    {
+      "bytes": 6729,
+      "path": "content/system-model-pilot-v1/migration-v1.json",
+      "sha256": "484638ba492bca68fb996af681e6824309734bfb3f4009f389123bffa3910dca"
+    },
+    {
+      "bytes": 24988,
+      "path": "content/system-model-pilot-v1/private-compatibility-v1.json",
+      "sha256": "75f1f8b36ee0ecd9721e4823cd79614ca64c660efc139add3cf87782bc8db1a3"
+    },
+    {
+      "bytes": 196068,
+      "path": "content/system-model-pilot-v1/system-model-catalog-v1.json",
+      "sha256": "5bfc68136e3e00e6028262806324d759fc6510fa72d7ddeed71a8b4f4b04d8f0"
+    },
+    {
+      "bytes": 17473,
+      "path": "content/system-model-pilot-v1/ticket-system-bindings-v1.json",
+      "sha256": "b219dad410ff1ffce72449ff3cead7aff8402b7063e7115cd755d76026543c85"
+    },
+    {
+      "bytes": 2204,
+      "path": "viewer/content/system-model-pilot-v1-components.json",
+      "sha256": "c418e712a5706f81beea3209b2a0c86f89a77ca07535f7e0ec8174c05485e94c"
+    }
+  ],
+  "generator": {
+    "path": "content/system-model-pilot-v1/build-release.mjs",
+    "sha256": "64b6b19a7266eb9cae3425814aa6fa1d9e8d1abe8a46506dca190f32c7ec52fc"
+  },
+  "immutable_inputs": [
+    {
+      "path": "docs/system-models/task-050/atlas-data.json",
+      "sha256": "32dd04e2d8fd23e7a6bf35b2fe5a63decd6fbeb6fa29c1c98f7f817af946add8"
+    },
+    {
+      "path": "docs/system-models/task-050/source-ledger.json",
+      "sha256": "d4bda20ff9970fa6eb03c810b453cf789df23dc42000b4b9ddb575c75cc33da2"
+    },
+    {
+      "path": "docs/system-models/task-050/component-relationship-audit.json",
+      "sha256": "2871f6c4a6431d8407580db370011c8b027b6a3d307c3109370a6fde604a3fd8"
+    },
+    {
+      "path": "docs/story/coverage/released-story-domain-coverage-v3.json",
+      "sha256": "cd66630f1db0362d24e3e9bb9c222fc60bfe7ec8b3facd9149bb07e43ef98013"
+    },
+    {
+      "path": "content/gameplay-v1/domain-snapshot-v3.json",
+      "sha256": "d25f0e9f0371a0a45d106efcff19c80f5fb0ed175eabfeda7cac7c8106028fca"
+    },
+    {
+      "path": "content/gameplay-v1/card-catalog-v4.json",
+      "sha256": "6cf15e17f492b675aeb8da02df3c2114f0f3ca1ad89613a9a3f33470a855a8fd"
+    },
+    {
+      "path": "content/gameplay-v1/decks-v4.json",
+      "sha256": "6eccefaf0ae1a4c8e7485ce27fcfc69f0990f5864188af31c06ab3b17269070c"
+    },
+    {
+      "path": "content/gameplay-v1/playable-coverage-v4.json",
+      "sha256": "c1b907a6aea180bb5b618f4b95904bf4024eb3ba1e8413ebbab4963a029942dc"
+    },
+    {
+      "path": "content/story-v1/campaigns/quiet-cascade/manifest.json",
+      "sha256": "bc1b810d40e20f062444446d69c4ee180f07eefe61ff38667678f9f92dd95d02"
+    },
+    {
+      "path": "content/story-v1/campaigns/quiet-cascade-characterization-v2/manifest.json",
+      "sha256": "c90325f9cc3a93dddc335a4dedf61df91b7e4e9627ded660810ce2f67bf5a924"
+    },
+    {
+      "path": "content/story-v1/campaigns/quiet-cascade-expansion-v3/manifest.json",
+      "sha256": "b30104fa8c8fc50338bab017be53cb0ee46c83abb7c17c449b4d92f95cb07132"
+    }
+  ],
+  "release_id": "system-model-pilot-v1",
+  "schema_files": [
+    {
+      "path": "schemas/domain/system_model_catalog.schema.json",
+      "sha256": "675ebe9a1395175551307ee5a1df60aa88de462fc562112218b2bf79c658e496"
+    },
+    {
+      "path": "schemas/domain/ticket_system_binding_catalog.schema.json",
+      "sha256": "6f182765be49016ac8e90c94fcd01434c6ad7eae18fad1b447546f6221a3eb79"
+    },
+    {
+      "path": "schemas/domain/system_model_private_validation_catalog.schema.json",
+      "sha256": "5351a8f957773f65e14840d8a814709a822ca08d83f05ee684c02258fed1ebd5"
+    },
+    {
+      "path": "schemas/domain/system_model_relationship_overlay.schema.json",
+      "sha256": "5e25e74370065fde40d79b7bec7df6ff702a108dcfb47d6875bb9b786cc9383c"
+    },
+    {
+      "path": "schemas/domain/system_model_migration.schema.json",
+      "sha256": "600b4302eac420649f1bc5e506f6935fa61811724c8e53dada902b9ad72b5971"
+    },
+    {
+      "path": "schemas/domain/system_model_release_manifest.schema.json",
+      "sha256": "e73232bb76cf16ddc1ce873512591c3468ba16890eb286bb2a8f6acaa464d418"
+    }
+  ],
+  "schema_version": "system-model-release-manifest-v1",
+  "totals": {
+    "added_components": 2,
+    "private_compatibility_proofs": 5,
+    "profiles": 2,
+    "relationship_findings": 16,
+    "ticket_bindings": 5
+  }
+}

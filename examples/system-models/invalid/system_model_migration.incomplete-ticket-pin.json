@@ -1,0 +1,150 @@
+{
+  "added_component_ids": [
+    "component.firmware.system_bios",
+    "component.storage.pcie_nvme_interconnect"
+  ],
+  "compatibility": {
+    "active_deck_and_bench": "UNCHANGED",
+    "evidence_and_isolation_authority": "UNCHANGED",
+    "story_checkpoint_and_replay_identity": "UNCHANGED",
+    "ticket_engine_behavior": "UNCHANGED",
+    "unsupported_ticket_behavior": "NO_SYSTEM_BINDING"
+  },
+  "from_release": "released-story-domain-coverage-v3",
+  "immutable_inputs": [
+    {
+      "mutation_policy": "MUST_REMAIN_BYTE_IDENTICAL",
+      "path": "docs/system-models/task-050/atlas-data.json",
+      "purpose": "TASK-050 research atlas",
+      "sha256": "32dd04e2d8fd23e7a6bf35b2fe5a63decd6fbeb6fa29c1c98f7f817af946add8"
+    },
+    {
+      "mutation_policy": "MUST_REMAIN_BYTE_IDENTICAL",
+      "path": "docs/system-models/task-050/source-ledger.json",
+      "purpose": "TASK-050 claim ledger",
+      "sha256": "d4bda20ff9970fa6eb03c810b453cf789df23dc42000b4b9ddb575c75cc33da2"
+    },
+    {
+      "mutation_policy": "MUST_REMAIN_BYTE_IDENTICAL",
+      "path": "docs/system-models/task-050/component-relationship-audit.json",
+      "purpose": "TASK-050 gap audit",
+      "sha256": "2871f6c4a6431d8407580db370011c8b027b6a3d307c3109370a6fde604a3fd8"
+    },
+    {
+      "mutation_policy": "MUST_REMAIN_BYTE_IDENTICAL",
+      "path": "docs/story/coverage/released-story-domain-coverage-v3.json",
+      "purpose": "released Ticket coverage",
+      "sha256": "cd66630f1db0362d24e3e9bb9c222fc60bfe7ec8b3facd9149bb07e43ef98013"
+    },
+    {
+      "mutation_policy": "MUST_REMAIN_BYTE_IDENTICAL",
+      "path": "content/gameplay-v1/domain-snapshot-v3.json",
+      "purpose": "immutable gameplay domain snapshot",
+      "sha256": "d25f0e9f0371a0a45d106efcff19c80f5fb0ed175eabfeda7cac7c8106028fca"
+    },
+    {
+      "mutation_policy": "MUST_REMAIN_BYTE_IDENTICAL",
+      "path": "content/gameplay-v1/card-catalog-v4.json",
+      "purpose": "immutable gameplay Card catalog",
+      "sha256": "6cf15e17f492b675aeb8da02df3c2114f0f3ca1ad89613a9a3f33470a855a8fd"
+    },
+    {
+      "mutation_policy": "MUST_REMAIN_BYTE_IDENTICAL",
+      "path": "content/gameplay-v1/decks-v4.json",
+      "purpose": "immutable gameplay decks",
+      "sha256": "6eccefaf0ae1a4c8e7485ce27fcfc69f0990f5864188af31c06ab3b17269070c"
+    },
+    {
+      "mutation_policy": "MUST_REMAIN_BYTE_IDENTICAL",
+      "path": "content/gameplay-v1/playable-coverage-v4.json",
+      "purpose": "immutable playable coverage",
+      "sha256": "c1b907a6aea180bb5b618f4b95904bf4024eb3ba1e8413ebbab4963a029942dc"
+    },
+    {
+      "mutation_policy": "MUST_REMAIN_BYTE_IDENTICAL",
+      "path": "content/story-v1/campaigns/quiet-cascade/manifest.json",
+      "purpose": "campaign-one release",
+      "sha256": "bc1b810d40e20f062444446d69c4ee180f07eefe61ff38667678f9f92dd95d02"
+    },
+    {
+      "mutation_policy": "MUST_REMAIN_BYTE_IDENTICAL",
+      "path": "content/story-v1/campaigns/quiet-cascade-characterization-v2/manifest.json",
+      "purpose": "characterization release",
+      "sha256": "c90325f9cc3a93dddc335a4dedf61df91b7e4e9627ded660810ce2f67bf5a924"
+    },
+    {
+      "mutation_policy": "MUST_REMAIN_BYTE_IDENTICAL",
+      "path": "content/story-v1/campaigns/quiet-cascade-expansion-v3/manifest.json",
+      "purpose": "current Story release",
+      "sha256": "b30104fa8c8fc50338bab017be53cb0ee46c83abb7c17c449b4d92f95cb07132"
+    }
+  ],
+  "migration_id": "migration.system-model-pilot-v1",
+  "migration_strategy": "VERSIONED_SUCCESSOR_OVERLAY",
+  "preserved_component_ids": [
+    "component.power.distribution_board"
+  ],
+  "schema_version": "system-model-migration-v1",
+  "serialization": {
+    "canonicalization_version": "canonical-json-v1",
+    "content_digest": "00d1e540f370f9edc9a887baff3a5d301725ea8f2d6158a65cc75259805b7ffb",
+    "digest_algorithm": "sha256"
+  },
+  "ticket_bindings": [
+    {
+      "binding_id": "binding.fingerprint.boot.missing_nvme.system-model.v1",
+      "migration_action": "ADD_EXTERNAL_VERSIONED_BINDING",
+      "profile_ref": {
+        "profile_content_digest": "23d8cd238aaaa986c8082b1686d05a35a637c461a2b142caa78d3c8eb879f3b0",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+        "profile_revision": 1
+      },
+      "ticket_id": "ticket.generated.3ec80b1b0e7221ac725aedf9"
+    },
+    {
+      "binding_id": "binding.fingerprint.storage.loose_cable.system-model.v1",
+      "migration_action": "ADD_EXTERNAL_VERSIONED_BINDING",
+      "prior_ticket_snapshot_digest": "b06dc5a7d12c29af78edd71f7a82a611d971844e6e71863e142bc293f4e6af27",
+      "profile_ref": {
+        "profile_content_digest": "23d8cd238aaaa986c8082b1686d05a35a637c461a2b142caa78d3c8eb879f3b0",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+        "profile_revision": 1
+      },
+      "ticket_id": "ticket.generated.5352abd871c2e9076be92a0b"
+    },
+    {
+      "binding_id": "binding.fingerprint.power.failed_distribution_board.system-model.v1",
+      "migration_action": "ADD_EXTERNAL_VERSIONED_BINDING",
+      "prior_ticket_snapshot_digest": "d34f08d79c2cc2d47d16d23ec753f1e78758d0b358664d4e592ea23f25b63d73",
+      "profile_ref": {
+        "profile_content_digest": "83e72e6f1996f670b786c640a5ff14db929da43fdc09cffad9adac8150369ae9",
+        "profile_id": "profile.dell.poweredge-r740xd2.power-interposer.v1",
+        "profile_revision": 1
+      },
+      "ticket_id": "ticket.generated.3fd6eb04534f79b5b3f87f98"
+    },
+    {
+      "binding_id": "binding.fingerprint.firmware.incompatible_version_set.system-model.v1",
+      "migration_action": "ADD_EXTERNAL_VERSIONED_BINDING",
+      "prior_ticket_snapshot_digest": "face80b0d5c6f6c7f1ef3bb0495c0c6e4105360fa07887fb50cc2dea440cbc50",
+      "profile_ref": {
+        "profile_content_digest": "23d8cd238aaaa986c8082b1686d05a35a637c461a2b142caa78d3c8eb879f3b0",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+        "profile_revision": 1
+      },
+      "ticket_id": "ticket.generated.b34238282822e93980b5f1ad"
+    },
+    {
+      "binding_id": "binding.fingerprint.management.corrupt_bmc_firmware.system-model.v1",
+      "migration_action": "ADD_EXTERNAL_VERSIONED_BINDING",
+      "prior_ticket_snapshot_digest": "761016e56ceb47a585727555f64bac47b103933cddbafc27a5c385f402851b01",
+      "profile_ref": {
+        "profile_content_digest": "23d8cd238aaaa986c8082b1686d05a35a637c461a2b142caa78d3c8eb879f3b0",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+        "profile_revision": 1
+      },
+      "ticket_id": "ticket.generated.f32b85cbf2054fdf0114f42a"
+    }
+  ],
+  "to_release": "system-model-pilot-v1"
+}

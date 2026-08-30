@@ -12,6 +12,12 @@ The domain package describes reusable authored technical knowledge and authored 
 - Technical Tools remain a domain category. They are unrelated to the removed account/loadout Equipment mechanic.
 - Qualifications have no domain or runtime gameplay contract because they are recognition-only account badges.
 
+## System Model pilot boundary
+
+Approved `SYSTEM-001 A` adds a separate `system-model-contract-v1` domain overlay. Two curated profiles reference stable Component definitions and expose public structure, lifecycle, capabilities, and explanation-only action attachments. Five external public bindings pin the released Ticket/profile identities and prove Candidate closure. A separate build/server-only catalog proves hidden Fault/action compatibility; it can reject content but cannot select or alter a public profile.
+
+The overlay does not modify `repair-ticket-v2`, gameplay snapshots, or runtime schemas. Its relationship taxonomy cannot derive Evidence, legal actions, Candidate rank, Isolation, Repair, or Verify results. See the [TASK-051 production record](../system-models/task-051/README.md) and [migration](../system-models/task-051/MIGRATION.md).
+
 ## Authored Repair Ticket contract
 
 [`repair_ticket.schema.json`](../../schemas/domain/repair_ticket.schema.json) separates content that different audiences may eventually see:
@@ -46,6 +52,12 @@ This is the authored output contract shared by fixed fixtures and deterministic 
 - `card.schema.json`
 - `technical_action_glossary.schema.json`
 - `technical_copy_review.schema.json`
+- `system_model_catalog.schema.json`
+- `ticket_system_binding_catalog.schema.json`
+- `system_model_private_validation_catalog.schema.json`
+- `system_model_relationship_overlay.schema.json`
+- `system_model_migration.schema.json`
+- `system_model_release_manifest.schema.json`
 
 ## Validation beyond JSON Schema
 

@@ -358,18 +358,18 @@ STORY-009 A
 
 ## System Model architecture approval
 
-### SYSTEM-001 — System Model production architecture — **pending**
+### SYSTEM-001 — System Model production architecture — **A approved 2026-08-30**
 
 TASK-050's [five-Ticket atlas](../../system-models/task-050/ATLAS.md) realizes five released Tickets with two fixed source-backed profiles: the hybrid-storage R740xd profile is reused four times and the exact R740xd2 power-interposer profile once. Five distinct public Ticket surfaces remain five public equivalence classes. The audit found two missing required pilot roles, three broad/ambiguous roles, and sixteen concrete relationship needs without editing production domain data. The [measured evaluation](../../system-models/task-050/ARCHITECTURE_EVALUATION.md) is the complete evidence packet.
 
-- **A — Curated Finder plus deterministic projection builder (recommended).** Curate versioned source-backed fixed profiles; deterministically select a compatible profile; then render prose, diagrams, text equivalents, and action-rationale views from typed profile/binding data. The pilot needs two profiles plus five bindings and avoids three duplicated full models. Private compatibility validation may reject a profile but may not change the public projection using hidden truth. Unsupported systems fail closed rather than being improvised. Approval authorizes TASK-051 to implement only the approved typed pilot contract and five synchronized bindings; it does not authorize Evidence inference, gameplay changes, mass production, or the Viewer experience.
+- **A — Curated Finder plus deterministic projection builder (approved).** Curate versioned source-backed fixed profiles; deterministically select a compatible profile; then render prose, diagrams, text equivalents, and action-rationale views from typed profile/binding data. The pilot needs two profiles plus five bindings and avoids three duplicated full models. Private compatibility validation may reject a profile but may not change the public projection using hidden truth. Unsupported systems fail closed rather than being improvised. Approval authorizes TASK-051 to implement only the approved typed pilot contract and five synchronized bindings; it does not authorize Evidence inference, gameplay changes, mass production, or the Viewer experience.
 - **B — Authored profile per Ticket or Ticket family.** Assign one complete manually reviewed model directly to each Ticket/family and avoid general Finder selection logic. In this pilot that means five full models, including four copies of the same R740xd structure, lifecycle, source interpretation, accessibility grammar, and most action mappings. Reality and selection proof are simple, but every shared source correction and renderer rule must remain synchronized across duplicates. Approval accepts that measured authoring/drift cost in exchange for simpler assignment.
 - **C — Constrained composition Builder.** Generate systems only from a closed compatibility rule set with primary-source proof for every allowed combination, canonical serialization, reject-by-default behavior, and independent public non-leak validation. The pilot does **not** yet prove this option: treating its two bases and two distinct bundles as swappable exposes four pairings, while sources prove only the two original manufacturer-family pairings; both cross-pairings are unproved and must be rejected. Approval would require TASK-051 to stop until the missing closed compatibility matrix and rule-level sources are supplied; plausibility, visual resemblance, reseller data, and hidden Ticket truth are never compatibility evidence.
 - **D — Stop or defer.** Keep TASK-049 and TASK-050 as non-production research evidence. Do not implement schemas, resolver selection, Component synchronization, mass production, or “Show system.” TASK-051 and the remaining System Model sequence stay blocked until the owner deliberately reopens the gate.
 
-Until the project owner approves one option, none is authoritative and TASK-051 must not begin.
+Option A is the production architecture authority for the five-Ticket pilot. TASK-051 implements only its typed data, bindings, private validation boundary, and domain synchronization; resolver/view generation remains TASK-052 scope.
 
-Pending reply format:
+Approved reply record:
 
 ```text
 SYSTEM-001 A

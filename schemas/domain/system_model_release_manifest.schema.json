@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/system_model_release_manifest.schema.json",
+  "title": "System Model Release Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "digest": { "$ref": "system_model_catalog.schema.json#/$defs/digest" },
+    "file": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "sha256": { "$ref": "#/$defs/digest" }
+      },
+      "required": ["path", "sha256"]
+    }
+  },
+  "properties": {
+    "schema_version": { "const": "system-model-release-manifest-v1" },
+    "release_id": { "const": "system-model-pilot-v1" },
+    "contract_version": { "const": "system-model-contract-v1" },
+    "generator": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "sha256": { "$ref": "#/$defs/digest" }
+      },
+      "required": ["path", "sha256"]
+    },
+    "schema_files": { "type": "array", "minItems": 6, "maxItems": 6, "items": { "$ref": "#/$defs/file" } },
+    "generated_files": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "path": { "type": "string", "minLength": 1 },
+          "sha256": { "$ref": "#/$defs/digest" },
+          "bytes": { "type": "integer", "minimum": 1 }
+        },
+        "required": ["path", "sha256", "bytes"]
+      }
+    },
+    "immutable_inputs": { "type": "array", "minItems": 11, "items": { "$ref": "#/$defs/file" } },
+    "totals": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profiles": { "const": 2 },
+        "ticket_bindings": { "const": 5 },
+        "private_compatibility_proofs": { "const": 5 },
+        "relationship_findings": { "const": 16 },
+        "added_components": { "const": 2 }
+      },
+      "required": ["profiles", "ticket_bindings", "private_compatibility_proofs", "relationship_findings", "added_components"]
+    }
+  },
+  "required": ["schema_version", "release_id", "contract_version", "generator", "schema_files", "generated_files", "immutable_inputs", "totals"]
+}

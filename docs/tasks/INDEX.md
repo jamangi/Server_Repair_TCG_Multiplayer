@@ -4,22 +4,22 @@ Tasks are implementation contracts. A builder must read `AGENTS.md` and then the
 
 Beginning with TASK-011, the displayed task ID includes the recommended reasoning-effort suffix used when starting that task. `HIGH` denotes substantial but bounded implementation/research; `XHIGH` denotes a cross-cutting semantic, architectural, or broad content migration. The stable task number and existing filename do not change, preserving links and history.
 
-Next boundary: **Gate `SYSTEM-001` is pending project-owner approval.** Review the completed [five-Ticket atlas](../system-models/task-050/ATLAS.md) and [architecture evaluation](../system-models/task-050/ARCHITECTURE_EVALUATION.md), then select A, B, C, or D in [`APPROVALS.md`](../design/decisions/APPROVALS.md#system-001--system-model-production-architecture--pending). TASK-051 is blocked until that choice is approved.
+Next boundary: **TASK-052 — prove the five-Ticket System Resolver.** `SYSTEM-001 A` was approved on 2026-08-30 and TASK-051 released the strict two-profile/five-binding production contract. TASK-052 may now implement and prove deterministic pilot resolution and derived views; mass rollout remains blocked until its later `SYSTEM-002` gate.
 
 Prerequisite completed: **[`TASK-049-XHIGH: Define the System Model and research protocol`](TASK-049-define-system-model-and-research-protocol.md).** The complete model/research/non-leak contract, deterministic five-Ticket pilot, worked examples, architecture evidence requirements, and source/stop rules are now committed without changing production data.
 
 Planned System Model sequence after completed TASK-049:
 
 - [`TASK-050-XHIGH: Create the five-Ticket System Model atlas`](TASK-050-create-five-ticket-system-model-atlas.md) — completed 2026-08-30; delivered five source-backed dossiers and deterministic accessible schematics from two fixed profiles, a zero-production-mutation Component/relationship audit, and measured `SYSTEM-001` evidence.
-- **Gate `SYSTEM-001`** — owner selects a curated Finder plus projection builder, authored Ticket-specific profiles, a proved constrained composition Builder, or deferral before production schema work.
-- [`TASK-051-XHIGH: Integrate the approved pilot System Model contract`](TASK-051-integrate-approved-pilot-system-model-contract.md) — implement the approved typed contract and synchronize the five pilot profiles/components/relationships while preserving immutable content and V0 authority.
+- **Gate `SYSTEM-001 A`** — approved 2026-08-30; use a curated Finder plus deterministic projection builder with build/server-only compatibility rejection and public-input-only resolution.
+- [`TASK-051-XHIGH: Integrate the approved pilot System Model contract`](TASK-051-integrate-approved-pilot-system-model-contract.md) — completed 2026-08-30; released two strict source-backed profiles, five public Ticket bindings, separate private compatibility proofs, two justified Components, sixteen relationship dispositions, canonical migration/manifest records, and complete-or-none validation while preserving immutable content and V0 authority.
 - [`TASK-052-XHIGH: Prove the five-Ticket System Resolver`](TASK-052-prove-five-ticket-system-resolver.md) — deterministically resolve and derive descriptions, accessible diagrams, and action-rationale graphs for the pilot, then author the `SYSTEM-002` scale-readiness packet.
 - **Gate `SYSTEM-002`** — owner approves mass production, requests a bounded pilot correction, reopens architecture, or defers the player-facing capability.
 - [`TASK-053-XHIGH: Synchronize the released Story System Model domain`](TASK-053-synchronize-released-story-system-domain.md) — extend source-backed profiles, Components, and justified relationships across the exact released Story Ticket denominator.
 - [`TASK-054-XHIGH: Productionize the Story System Resolver`](TASK-054-productionize-story-system-resolver.md) — make resolution and all public-safe derived views deterministic, build-validated, staged, and stable across Story migration/replay.
 - [`TASK-055-HIGH: Add the “Show system” Ticket experience`](TASK-055-add-show-system-ticket-experience.md) — add the accessible public topology/lifecycle/action-rationale view without making it Evidence or leaking hidden truth.
 
-The sequence's completed V0 planning contract, atlas, and Finder-first recommendation are in [`docs/system-models/README.md`](../system-models/README.md). TASK-050 is complete; later System Model tasks remain planned until `SYSTEM-001` and their other prerequisites are satisfied.
+The sequence's completed V0 planning contract, atlas, approved Finder architecture, and TASK-051 production package are in [`docs/system-models/README.md`](../system-models/README.md). TASK-052 is next; later tasks remain planned behind their stated prerequisites and `SYSTEM-002` scale gate.
 
 Story coverage and expansion sequence: **complete.** Completed TASK-038 supplies the approved non-canonical review contract inherited by the released expansion.
 

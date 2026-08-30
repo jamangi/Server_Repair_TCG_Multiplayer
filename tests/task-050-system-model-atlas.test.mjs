@@ -213,7 +213,7 @@ test('SVGs expose accessible semantics and redundant non-color relation cues', (
   }
 });
 
-test('SYSTEM-001 comparison uses measured pilot evidence and leaves TASK-051 blocked', () => {
+test('SYSTEM-001 comparison preserves the original measured recommendation and approval gate', () => {
   assert.equal(architecture.pilot_denominator.tickets, 5);
   assert.equal(architecture.pilot_denominator.source_backed_profiles, 2);
   assert.equal(architecture.pilot_denominator.public_equivalence_classes, 5);

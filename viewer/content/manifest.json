@@ -1,6 +1,6 @@
 {
   "format_version": 1,
-  "generated_at": "2026-08-28T02:52:14.584Z",
+  "generated_at": "2026-08-30T23:20:41.553Z",
   "files": [
     "./core-v0.1-case-study-gaps.json",
     "./core-v0.1-components.json",
@@ -10,6 +10,7 @@
     "./core-v0.1-post-market-bench.json",
     "./core-v0.1-protocols.json",
     "./core-v0.1-repairs-validations.json",
-    "./core-v0.1-symptoms.json"
+    "./core-v0.1-symptoms.json",
+    "./system-model-pilot-v1-components.json"
   ]
 }

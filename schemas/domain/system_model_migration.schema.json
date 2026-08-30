@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/system_model_migration.schema.json",
+  "title": "System Model Migration",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "stableId": { "$ref": "system_model_catalog.schema.json#/$defs/stableId" },
+    "digest": { "$ref": "system_model_catalog.schema.json#/$defs/digest" },
+    "immutableInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "sha256": { "$ref": "#/$defs/digest" },
+        "purpose": { "type": "string", "minLength": 1 },
+        "mutation_policy": { "const": "MUST_REMAIN_BYTE_IDENTICAL" }
+      },
+      "required": ["path", "sha256", "purpose", "mutation_policy"]
+    },
+    "ticketBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ticket_id": { "type": "string", "pattern": "^ticket\\." },
+        "prior_ticket_snapshot_digest": { "$ref": "#/$defs/digest" },
+        "binding_id": { "$ref": "#/$defs/stableId" },
+        "profile_ref": { "$ref": "ticket_system_binding_catalog.schema.json#/$defs/profileRef" },
+        "migration_action": { "const": "ADD_EXTERNAL_VERSIONED_BINDING" }
+      },
+      "required": ["ticket_id", "prior_ticket_snapshot_digest", "binding_id", "profile_ref", "migration_action"]
+    }
+  },
+  "properties": {
+    "schema_version": { "const": "system-model-migration-v1" },
+    "migration_id": { "$ref": "#/$defs/stableId" },
+    "migration_strategy": { "const": "VERSIONED_SUCCESSOR_OVERLAY" },
+    "from_release": { "$ref": "#/$defs/stableId" },
+    "to_release": { "const": "system-model-pilot-v1" },
+    "immutable_inputs": { "type": "array", "minItems": 11, "items": { "$ref": "#/$defs/immutableInput" } },
+    "ticket_bindings": { "type": "array", "minItems": 5, "maxItems": 5, "items": { "$ref": "#/$defs/ticketBinding" } },
+    "added_component_ids": { "type": "array", "minItems": 2, "maxItems": 2, "items": { "type": "string", "pattern": "^component\\." }, "uniqueItems": true },
+    "preserved_component_ids": { "type": "array", "minItems": 1, "items": { "type": "string", "pattern": "^component\\." }, "uniqueItems": true },
+    "compatibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ticket_engine_behavior": { "const": "UNCHANGED" },
+        "active_deck_and_bench": { "const": "UNCHANGED" },
+        "evidence_and_isolation_authority": { "const": "UNCHANGED" },
+        "story_checkpoint_and_replay_identity": { "const": "UNCHANGED" },
+        "unsupported_ticket_behavior": { "const": "NO_SYSTEM_BINDING" }
+      },
+      "required": ["ticket_engine_behavior", "active_deck_and_bench", "evidence_and_isolation_authority", "story_checkpoint_and_replay_identity", "unsupported_ticket_behavior"]
+    },
+    "serialization": { "$ref": "system_model_catalog.schema.json#/$defs/serialization" }
+  },
+  "required": ["schema_version", "migration_id", "migration_strategy", "from_release", "to_release", "immutable_inputs", "ticket_bindings", "added_component_ids", "preserved_component_ids", "compatibility", "serialization"]
+}

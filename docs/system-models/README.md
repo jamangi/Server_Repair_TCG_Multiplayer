@@ -2,7 +2,7 @@
 
 ## Status
 
-This directory is the planning entry point for the proposed System Model / System Finder capability. TASK-049's implementation-neutral contract and TASK-050's manual five-Ticket atlas are complete. The production architecture remains unapproved until the project owner resolves `SYSTEM-001`; TASK-051 is blocked. Existing V0 Ticket outcomes, Evidence dispositions, legal intents, Diagnostic Bench relevance, and hidden-truth boundaries remain authoritative.
+This directory is the entry point for the System Model / System Finder capability. TASK-049's implementation-neutral contract and TASK-050's manual five-Ticket atlas are complete. The project owner approved the recommended curated Finder architecture as `SYSTEM-001 A` on 2026-08-30, and TASK-051 released the strict two-profile/five-binding pilot contract. Existing V0 Ticket outcomes, Evidence dispositions, legal intents, Diagnostic Bench relevance, and hidden-truth boundaries remain authoritative.
 
 The TASK-049 package is:
 
@@ -19,6 +19,13 @@ The TASK-050 package is:
 - [`task-050/COMPONENT_RELATIONSHIP_AUDIT.md`](task-050/COMPONENT_RELATIONSHIP_AUDIT.md) — every modeled role plus sixteen concrete, authority-bounded relationship findings;
 - [`task-050/ARCHITECTURE_EVALUATION.md`](task-050/ARCHITECTURE_EVALUATION.md) — measured A/B/C/D comparison and Finder-first recommendation; and
 - [`task-050/source-ledger.json`](task-050/source-ledger.json) — eighteen primary-source entries with revisions, claim scope, access status, exact/generalized boundaries, and exceptions.
+
+The TASK-051 production package is:
+
+- [`task-051/README.md`](task-051/README.md) — architecture, artifact inventory, source/abstraction exceptions, and remaining boundary;
+- [`task-051/MIGRATION.md`](task-051/MIGRATION.md) — immutable successor-overlay and public/private compatibility contract;
+- [`../../content/system-model-pilot-v1/`](../../content/system-model-pilot-v1/) — two canonical profiles, five public bindings, five build/server-only compatibility proofs, sixteen relationship dispositions, deterministic migration/manifest data, and executable build/validation; and
+- [`../../viewer/content/system-model-pilot-v1-components.json`](../../viewer/content/system-model-pilot-v1-components.json) — the two justified pilot Component definitions.
 
 The project-owner-supplied concept image is preserved at [`system-model-host-bmc-concept.png`](../ui-plan/ui-reference_images/system-model-host-bmc-concept.png). It demonstrates the useful idea of showing the host and management subsystems as distinct but connected regions; it is not a complete topology, a real product specification, or a production layout.
 
@@ -81,8 +88,8 @@ The model is explanatory in V0. It must not derive Evidence dispositions, decide
 
 1. **TASK-049** defines the evidence protocol, model contract, public/private boundary, five-Ticket selection, and evaluation method.
 2. **TASK-050** manually creates the five-Ticket illustrated atlas and component/relationship gap audit, then authors the `SYSTEM-001` architecture approval packet.
-3. **Gate SYSTEM-001** selects Finder-first hybrid, ticket-specific authored models, or a constrained composition Builder. TASK-051 cannot start without it.
-4. **TASK-051** implements the approved typed contract and synchronizes the five pilot models/components/relationships.
+3. **Gate SYSTEM-001 A** approved the Finder-first hybrid on 2026-08-30.
+4. **TASK-051** completed the strict typed pilot contract, five bindings, private validation boundary, Component/relationship synchronization, and immutable migration.
 5. **TASK-052** proves deterministic resolution, validation, descriptions, diagrams, and relevance graphs for the pilot, then authors the `SYSTEM-002` scale-readiness packet.
 6. **Gate SYSTEM-002** approves mass production or sends the pilot back for a bounded correction.
 7. **TASK-053** audits and synchronizes the complete released Story Ticket set.

@@ -2,7 +2,7 @@
 
 ## Status
 
-**Completed 2026-08-30.** The manual illustration-of-concept package is in [`../system-models/task-050/`](../system-models/task-050/). `SYSTEM-001` is pending project-owner approval, so production schemas, domain integration, runtime selection, and TASK-051 remain blocked.
+**Completed 2026-08-30.** The manual illustration-of-concept package is in [`../system-models/task-050/`](../system-models/task-050/). The project owner subsequently approved `SYSTEM-001 A` on 2026-08-30; TASK-051 records the production successor without changing this research package.
 
 ## Objective
 

@@ -1,0 +1,645 @@
+{
+  "canonicalization_version": "canonical-json-v1",
+  "component_ontology_policy": "USES_EXISTING_COMPONENT_IDS_AND_TWO_JUSTIFIED_SUCCESSOR_DEFINITIONS",
+  "contract_version": "system-model-contract-v1",
+  "relationships": [
+    {
+      "authority_boundary": "Domain enrichment only; does not authorize Repair or choose the target instance.",
+      "dossier_ids": [
+        "model.missing-nvme.v1"
+      ],
+      "implementation_status": "APPLIED_PROFILE_OVERLAY",
+      "justification": "The procedure's required_component_ids is empty even though the service action replaces the isolated NVMe unit.",
+      "relation_type": "REPAIR_TARGETS_ROLE_PATH",
+      "relationship_id": "gap.relation.repair.replace_nvme.target",
+      "source_claim_ids": [
+        "claim.r740xd.backplane-serviceable",
+        "claim.r740xd.twenty-sas-four-nvme-option"
+      ],
+      "source_object_ids": [
+        "repair.storage.replace_nvme",
+        "component.storage.nvme_ssd"
+      ],
+      "targets": [
+        {
+          "node_ids": [
+            "drives"
+          ],
+          "path_ids": [
+            "path.r740xd.nvme-storage"
+          ],
+          "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+          "role_ids": [
+            "role.nvme"
+          ]
+        }
+      ]
+    },
+    {
+      "authority_boundary": "Profile-scoped enrichment; Ticket Isolation still selects the legal instance.",
+      "dossier_ids": [
+        "model.loose-storage-cable.v1"
+      ],
+      "implementation_status": "APPLIED_PROFILE_OVERLAY",
+      "justification": "One generic required-component list cannot identify the source-backed branch and its two endpoints without collapsing SAS and PCIe/NVMe paths.",
+      "relation_type": "REPAIR_TARGETS_ROLE_PATH",
+      "relationship_id": "gap.relation.repair.reseat_storage_cable.target",
+      "source_claim_ids": [
+        "claim.r740xd.sas-perc-path",
+        "claim.r740xd.pcie-nvme-path",
+        "claim.r740xd.backplane-serviceable"
+      ],
+      "source_object_ids": [
+        "repair.storage.reseat_cable",
+        "component.storage.data_cable",
+        "component.storage.pcie_nvme_interconnect"
+      ],
+      "targets": [
+        {
+          "node_ids": [
+            "sas_path",
+            "nvme_path",
+            "backplane"
+          ],
+          "path_ids": [
+            "path.r740xd.sas-storage",
+            "path.r740xd.nvme-storage"
+          ],
+          "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+          "role_ids": [
+            "role.sas_cable",
+            "role.pcie_cable"
+          ]
+        }
+      ]
+    },
+    {
+      "authority_boundary": "Explanatory/validation enrichment; PASS remains authored.",
+      "dossier_ids": [
+        "model.missing-nvme.v1",
+        "model.loose-storage-cable.v1"
+      ],
+      "implementation_status": "APPLIED_PROFILE_OVERLAY",
+      "justification": "The Verification describes firmware/controller/OS inventory and stable path identity but target_component_ids is empty and cannot express a layered verified path.",
+      "relation_type": "VERIFIES_PATH_STATE",
+      "relationship_id": "gap.relation.verify.storage_detected.path",
+      "source_claim_ids": [
+        "claim.idrac9.storage-observation",
+        "claim.uefi.os-loader-handoff"
+      ],
+      "source_object_ids": [
+        "verify.storage.device_detected",
+        "component.storage.backplane",
+        "component.storage.nvme_ssd",
+        "component.storage.data_cable"
+      ],
+      "targets": [
+        {
+          "node_ids": [
+            "bmc",
+            "os",
+            "backplane",
+            "sas_path",
+            "nvme_path",
+            "drives"
+          ],
+          "path_ids": [
+            "path.r740xd.sas-storage",
+            "path.r740xd.nvme-storage"
+          ],
+          "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+          "role_ids": [
+            "role.hybrid_backplane",
+            "role.nvme",
+            "role.sas_drives"
+          ]
+        }
+      ]
+    },
+    {
+      "authority_boundary": "Domain enrichment only; success conditions and authored result remain authoritative.",
+      "dossier_ids": [
+        "model.missing-nvme.v1"
+      ],
+      "implementation_status": "APPLIED_PROFILE_OVERLAY",
+      "justification": "The Verification checks persistent boot policy and UEFI-to-loader handoff, but no BIOS/UEFI Component or boot-path relation exists.",
+      "relation_type": "VERIFIES_PATH_STATE",
+      "relationship_id": "gap.relation.verify.normal_boot.handoff",
+      "source_claim_ids": [
+        "claim.uefi.os-loader-handoff",
+        "claim.r740xd.boot-order-configurable"
+      ],
+      "source_object_ids": [
+        "verify.boot.normal_boot",
+        "component.firmware.system_bios"
+      ],
+      "targets": [
+        {
+          "node_ids": [
+            "uefi",
+            "os"
+          ],
+          "path_ids": [
+            "path.r740xd.boot-handoff"
+          ],
+          "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+          "role_ids": [
+            "role.system_bios"
+          ]
+        }
+      ]
+    },
+    {
+      "authority_boundary": "Does not imply a log outcome or decisive Evidence.",
+      "dossier_ids": [
+        "model.missing-nvme.v1",
+        "model.loose-storage-cable.v1",
+        "model.failed-power-distribution.v1"
+      ],
+      "implementation_status": "APPLIED_PROFILE_OVERLAY",
+      "justification": "The Test requires a BMC console but target_component_ids is empty; a queried control surface and Ticket/profile-scoped observed subject are distinct relations.",
+      "relation_type": "QUERIES_CONTROL_SURFACE",
+      "relationship_id": "gap.relation.test.bmc_logs.surface_subject",
+      "source_claim_ids": [
+        "claim.idrac9.lifecycle-log-categories",
+        "claim.idrac9.storage-observation",
+        "claim.r740xd2.psu-mismatch-reporting"
+      ],
+      "source_object_ids": [
+        "test.system.bmc_logs",
+        "component.management.bmc"
+      ],
+      "targets": [
+        {
+          "node_ids": [
+            "bmc",
+            "backplane",
+            "drives"
+          ],
+          "path_ids": [
+            "path.r740xd.management-storage"
+          ],
+          "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+          "role_ids": [
+            "role.bmc"
+          ]
+        },
+        {
+          "node_ids": [
+            "bmc",
+            "board"
+          ],
+          "path_ids": [
+            "path.r740xd2.power-status"
+          ],
+          "profile_id": "profile.dell.poweredge-r740xd2.power-interposer.v1",
+          "role_ids": [
+            "role.bmc"
+          ]
+        }
+      ]
+    },
+    {
+      "authority_boundary": "Observation scope only; Evidence rules remain authored.",
+      "dossier_ids": [
+        "model.missing-nvme.v1",
+        "model.loose-storage-cable.v1"
+      ],
+      "implementation_status": "APPLIED_PROFILE_OVERLAY",
+      "justification": "The Test compares firmware, controller, and OS layers while target_component_ids is empty; one flat component list cannot preserve layer/path semantics.",
+      "relation_type": "OBSERVES_COMPONENT_PATH",
+      "relationship_id": "gap.relation.test.storage_inventory.layers",
+      "source_claim_ids": [
+        "claim.idrac9.hardware-inventory",
+        "claim.idrac9.storage-observation"
+      ],
+      "source_object_ids": [
+        "test.storage.device_inventory",
+        "component.storage.backplane",
+        "component.storage.nvme_ssd",
+        "component.storage.raid_controller"
+      ],
+      "targets": [
+        {
+          "node_ids": [
+            "bmc",
+            "os",
+            "backplane",
+            "sas_path",
+            "nvme_path",
+            "drives"
+          ],
+          "path_ids": [
+            "path.r740xd.management-storage",
+            "path.r740xd.sas-storage",
+            "path.r740xd.nvme-storage"
+          ],
+          "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+          "role_ids": [
+            "role.bmc",
+            "role.hybrid_backplane",
+            "role.nvme",
+            "role.perc"
+          ]
+        }
+      ]
+    },
+    {
+      "authority_boundary": "Requires profile/runtime target binding, not a broad domain edit.",
+      "dossier_ids": [
+        "model.loose-storage-cable.v1",
+        "model.failed-power-distribution.v1",
+        "model.incompatible-firmware-set.v1"
+      ],
+      "implementation_status": "APPLIED_PROFILE_OVERLAY",
+      "justification": "A global target list would incorrectly include every inspectable component; the concrete target belongs to the selected profile and Ticket action target.",
+      "relation_type": "OBSERVES_COMPONENT_PATH",
+      "relationship_id": "gap.relation.test.visual_inspection.binding",
+      "source_claim_ids": [
+        "claim.r740xd.backplane-serviceable",
+        "claim.r740xd2.pib-service-unit"
+      ],
+      "source_object_ids": [
+        "test.general.visual_inspection"
+      ],
+      "targets": [
+        {
+          "node_ids": [
+            "board",
+            "backplane",
+            "sas_path",
+            "nvme_path"
+          ],
+          "path_ids": [
+            "path.r740xd.sas-storage",
+            "path.r740xd.nvme-storage"
+          ],
+          "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+          "role_ids": [
+            "role.system_board",
+            "role.hybrid_backplane",
+            "role.sas_cable",
+            "role.pcie_cable"
+          ]
+        },
+        {
+          "node_ids": [
+            "psu",
+            "power_interposer",
+            "board"
+          ],
+          "path_ids": [
+            "path.r740xd2.power-distribution"
+          ],
+          "profile_id": "profile.dell.poweredge-r740xd2.power-interposer.v1",
+          "role_ids": [
+            "role.psu_pair",
+            "role.pib",
+            "role.system_board"
+          ]
+        }
+      ]
+    },
+    {
+      "authority_boundary": "Must not select which path is faulty or create a hidden root cause.",
+      "dossier_ids": [
+        "model.missing-nvme.v1"
+      ],
+      "implementation_status": "APPLIED_PROFILE_OVERLAY",
+      "justification": "affected_component_ids is empty because the condition spans device, discovery path, and firmware inventory rather than one universally affected Component.",
+      "relation_type": "AFFECTS_PATH_WITHOUT_CAUSAL_INFERENCE",
+      "relationship_id": "gap.relation.fault.boot_device_not_detected.path",
+      "source_claim_ids": [
+        "claim.r740xd.uefi-boot-mode",
+        "claim.r740xd.pcie-nvme-path"
+      ],
+      "source_object_ids": [
+        "fault.boot.device.not_detected",
+        "component.storage.nvme_ssd",
+        "component.storage.pcie_nvme_interconnect",
+        "component.firmware.system_bios"
+      ],
+      "targets": [
+        {
+          "node_ids": [
+            "uefi",
+            "nvme_path",
+            "drives"
+          ],
+          "path_ids": [
+            "path.r740xd.nvme-storage",
+            "path.r740xd.boot-handoff"
+          ],
+          "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+          "role_ids": [
+            "role.system_bios",
+            "role.nvme",
+            "role.pcie_cable"
+          ]
+        }
+      ]
+    },
+    {
+      "authority_boundary": "Domain enrichment only; Candidate truth remains Ticket-authored.",
+      "dossier_ids": [
+        "model.missing-nvme.v1"
+      ],
+      "implementation_status": "APPLIED_PROFILE_OVERLAY",
+      "justification": "affected_component_ids is empty and the incorrect state belongs to persistent UEFI boot policy, not a generic physical board failure.",
+      "relation_type": "AFFECTS_CONTROL_SURFACE_WITHOUT_CAUSAL_INFERENCE",
+      "relationship_id": "gap.relation.fault.boot_order.control_surface",
+      "source_claim_ids": [
+        "claim.r740xd.boot-order-configurable",
+        "claim.uefi.bootorder-nvram"
+      ],
+      "source_object_ids": [
+        "fault.boot.order.incorrect",
+        "component.firmware.system_bios"
+      ],
+      "targets": [
+        {
+          "node_ids": [
+            "uefi"
+          ],
+          "path_ids": [
+            "path.r740xd.boot-handoff"
+          ],
+          "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+          "role_ids": [
+            "role.system_bios"
+          ]
+        }
+      ]
+    },
+    {
+      "authority_boundary": "Must not define compatibility tuples from topology.",
+      "dossier_ids": [
+        "model.incompatible-firmware-set.v1",
+        "model.corrupt-bmc-firmware.v1"
+      ],
+      "implementation_status": "APPLIED_PROFILE_OVERLAY",
+      "justification": "Four target Components are present, but the Test actually queries version inventory across firmware-bearing roles and an approved baseline; physical target proximity alone is insufficient.",
+      "relation_type": "QUERIES_CONTROL_SURFACE",
+      "relationship_id": "gap.relation.test.firmware_compatibility.surface",
+      "source_claim_ids": [
+        "claim.idrac9.hardware-inventory",
+        "claim.r740xd.uefi-boot-mode",
+        "claim.r740xd.network-daughter-card"
+      ],
+      "source_object_ids": [
+        "test.firmware.version_compatibility",
+        "component.board.system",
+        "component.management.bmc",
+        "component.network.nic",
+        "component.storage.raid_controller",
+        "component.firmware.system_bios"
+      ],
+      "targets": [
+        {
+          "node_ids": [
+            "bmc",
+            "uefi",
+            "nic"
+          ],
+          "path_ids": [
+            "path.r740xd.network-runtime",
+            "path.r740xd.boot-handoff"
+          ],
+          "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+          "role_ids": [
+            "role.bmc",
+            "role.system_bios",
+            "role.nic"
+          ]
+        }
+      ]
+    },
+    {
+      "authority_boundary": "The authored Repair remains the only change authority and compatibility source.",
+      "dossier_ids": [
+        "model.incompatible-firmware-set.v1"
+      ],
+      "implementation_status": "APPLIED_PROFILE_OVERLAY",
+      "justification": "required_component_ids is empty; repair targets are a compatible set of firmware-bearing roles in an ordered change plan, not one undifferentiated component.",
+      "relation_type": "REPAIR_TARGETS_ROLE_PATH",
+      "relationship_id": "gap.relation.repair.restore_firmware.targets",
+      "source_claim_ids": [
+        "claim.idrac9.hardware-inventory",
+        "claim.r740xd.uefi-boot-mode"
+      ],
+      "source_object_ids": [
+        "repair.firmware.restore_compatible_versions",
+        "component.board.system",
+        "component.management.bmc",
+        "component.network.nic",
+        "component.firmware.system_bios"
+      ],
+      "targets": [
+        {
+          "node_ids": [
+            "bmc",
+            "uefi",
+            "nic"
+          ],
+          "path_ids": [
+            "path.r740xd.network-runtime",
+            "path.r740xd.boot-handoff"
+          ],
+          "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+          "role_ids": [
+            "role.bmc",
+            "role.system_bios",
+            "role.nic"
+          ]
+        }
+      ]
+    },
+    {
+      "authority_boundary": "Derived rationale cannot decide PASS.",
+      "dossier_ids": [
+        "model.incompatible-firmware-set.v1"
+      ],
+      "implementation_status": "APPLIED_PROFILE_OVERLAY",
+      "justification": "Target Components exist, but the success conditions additionally require version persistence, completed jobs, driver initialization, and link/counter soak across lifecycle stages.",
+      "relation_type": "VERIFIES_DEPENDENCY_STATE",
+      "relationship_id": "gap.relation.verify.firmware_persistence.path",
+      "source_claim_ids": [
+        "claim.idrac9.hardware-inventory",
+        "claim.uefi.os-loader-handoff",
+        "claim.r740xd.network-daughter-card"
+      ],
+      "source_object_ids": [
+        "verify.firmware.compatible_persistent",
+        "component.board.system",
+        "component.management.bmc",
+        "component.network.nic"
+      ],
+      "targets": [
+        {
+          "node_ids": [
+            "bmc",
+            "uefi",
+            "nic",
+            "os",
+            "link"
+          ],
+          "path_ids": [
+            "path.r740xd.network-runtime",
+            "path.r740xd.boot-handoff"
+          ],
+          "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+          "role_ids": [
+            "role.bmc",
+            "role.system_bios",
+            "role.nic"
+          ]
+        }
+      ]
+    },
+    {
+      "authority_boundary": "Recovery-state Evidence remains authored.",
+      "dossier_ids": [
+        "model.corrupt-bmc-firmware.v1"
+      ],
+      "implementation_status": "APPLIED_PROFILE_OVERLAY",
+      "justification": "The BMC target is present, but reachability, reset, recovery-mode, external-media, and unrecoverable states are distinct observation/control paths.",
+      "relation_type": "QUERIES_CONTROL_SURFACE",
+      "relationship_id": "gap.relation.test.bmc_recovery.surface",
+      "source_claim_ids": [
+        "claim.idrac9.pre-os-interface",
+        "claim.idrac9.out-of-band-management"
+      ],
+      "source_object_ids": [
+        "test.management.bmc_recovery_state",
+        "component.management.bmc"
+      ],
+      "targets": [
+        {
+          "node_ids": [
+            "bmc",
+            "board"
+          ],
+          "path_ids": [
+            "path.r740xd.management-storage"
+          ],
+          "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+          "role_ids": [
+            "role.bmc",
+            "role.system_board"
+          ]
+        }
+      ]
+    },
+    {
+      "authority_boundary": "Must not turn board replacement into an automatically legal fallback.",
+      "dossier_ids": [
+        "model.corrupt-bmc-firmware.v1"
+      ],
+      "implementation_status": "APPLIED_PROFILE_OVERLAY",
+      "justification": "The BMC requirement exists, but the recovery-image/bootloader path and conditional board-FRU escalation cannot be represented as typed dependencies.",
+      "relation_type": "REPAIR_TARGETS_WITH_DEPENDENCY",
+      "relationship_id": "gap.relation.repair.bmc_recovery.surface",
+      "source_claim_ids": [
+        "claim.idrac9.pre-os-interface",
+        "claim.idrac9.uefi-cooperation"
+      ],
+      "source_object_ids": [
+        "repair.management.recover_bmc_firmware",
+        "component.management.bmc",
+        "component.board.system"
+      ],
+      "targets": [
+        {
+          "node_ids": [
+            "bmc",
+            "board"
+          ],
+          "path_ids": [
+            "path.r740xd.management-storage"
+          ],
+          "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+          "role_ids": [
+            "role.bmc",
+            "role.system_board"
+          ]
+        }
+      ]
+    },
+    {
+      "authority_boundary": "Topology is explanatory and must not infer fault location or isolation acceptance.",
+      "dossier_ids": [
+        "model.failed-power-distribution.v1"
+      ],
+      "implementation_status": "APPLIED_PROFILE_OVERLAY",
+      "justification": "Action target lists are present for the key Test/Repair/Verification, but the domain cannot state input-to-PSU-to-PIB-to-board path order, redundancy peer relation, service containment, or de-energization dependency.",
+      "relation_type": "SYSTEM_DEPENDENCY_PATH",
+      "relationship_id": "gap.relation.power_path.structure",
+      "source_claim_ids": [
+        "claim.r740xd2.one-plus-one-redundancy",
+        "claim.r740xd2.pib-system-board-cables",
+        "claim.r740xd2.pib-deenergize"
+      ],
+      "source_object_ids": [
+        "component.power.input_cable",
+        "component.power.hot_swap_psu",
+        "component.power.distribution_board",
+        "component.board.system"
+      ],
+      "targets": [
+        {
+          "node_ids": [
+            "ac",
+            "psu",
+            "power_interposer",
+            "board",
+            "host"
+          ],
+          "path_ids": [
+            "path.r740xd2.power-distribution",
+            "path.r740xd2.pib-service"
+          ],
+          "profile_id": "profile.dell.poweredge-r740xd2.power-interposer.v1",
+          "role_ids": [
+            "role.input",
+            "role.psu_pair",
+            "role.pib",
+            "role.system_board"
+          ]
+        }
+      ]
+    },
+    {
+      "authority_boundary": "Preserve subsystem/public observation semantics.",
+      "dossier_ids": [
+        "model.missing-nvme.v1",
+        "model.loose-storage-cable.v1",
+        "model.failed-power-distribution.v1",
+        "model.incompatible-firmware-set.v1",
+        "model.corrupt-bmc-firmware.v1"
+      ],
+      "implementation_status": "PRESERVED_INTENTIONALLY_UNBOUND",
+      "justification": "Public Symptoms can arise from multiple Candidate-compatible paths; assigning a Component would narrow or leak the diagnosis.",
+      "relation_type": "INTENTIONALLY_UNBOUND_PUBLIC_SYMPTOM",
+      "relationship_id": "gap.relation.symptom.component",
+      "source_claim_ids": [],
+      "source_object_ids": [
+        "symptom.boot.no_boot_device",
+        "symptom.storage.io_errors",
+        "symptom.power.voltage_out_of_range",
+        "symptom.power.no_power",
+        "symptom.network.link_flapping",
+        "symptom.network.no_link",
+        "symptom.management.bmc_not_responding",
+        "symptom.firmware.update_failed"
+      ],
+      "targets": []
+    }
+  ],
+  "release_id": "system-model-pilot-v1",
+  "schema_version": "system-model-relationship-overlay-v1",
+  "serialization": {
+    "canonicalization_version": "canonical-json-v1",
+    "content_digest": "c68fe88bc2c8bd6196a9a94279c724d0ae340017f00a6e2525b06cb43d83bb09",
+    "digest_algorithm": "sha256"
+  }
+}

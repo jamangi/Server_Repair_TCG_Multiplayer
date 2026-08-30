@@ -1,0 +1,66 @@
+{
+  "entities": [
+    {
+      "compatibility_tags": [
+        "firmware-bearing-role"
+      ],
+      "component_type": "firmware_role",
+      "education_text": "This is a logical firmware-bearing role on the system-board service boundary, not a claim that BIOS is a separately replaceable board.",
+      "entity_type": "component",
+      "hot_swappable": false,
+      "id": "component.firmware.system_bios",
+      "inspectable": true,
+      "interfaces": [],
+      "presentation": {
+        "display_name": "System BIOS / UEFI Firmware",
+        "short_description": "The host-firmware role that initializes platform hardware, exposes setup policy, and hands control to a selected boot path."
+      },
+      "replaceable": false,
+      "source": {
+        "expansion_id": "expansion.system_model_pilot_v1",
+        "search_tags": [
+          "bios",
+          "firmware",
+          "uefi",
+          "boot policy"
+        ],
+        "status": "published",
+        "version": "1.0.0"
+      },
+      "subsystem": "firmware"
+    },
+    {
+      "compatibility_tags": [
+        "pcie-nvme-path"
+      ],
+      "component_type": "data_interconnect",
+      "education_text": "The definition stays at a bundled service-path level because the approved sources do not prove one universal lane, riser, controller, or connector layout.",
+      "entity_type": "component",
+      "hot_swappable": false,
+      "id": "component.storage.pcie_nvme_interconnect",
+      "inspectable": true,
+      "interfaces": [],
+      "presentation": {
+        "display_name": "PCIe / NVMe Interconnect",
+        "short_description": "A documented cable-and-connector service path carrying the direct NVMe branch between a hybrid backplane and PCIe endpoints."
+      },
+      "replaceable": true,
+      "source": {
+        "expansion_id": "expansion.system_model_pilot_v1",
+        "search_tags": [
+          "cable",
+          "interconnect",
+          "nvme",
+          "pcie",
+          "storage"
+        ],
+        "status": "published",
+        "version": "1.0.0"
+      },
+      "subsystem": "storage"
+    }
+  ],
+  "name": "System Model Pilot V1 Components",
+  "pack_id": "system_model_pilot_v1_components",
+  "version": "1.0.0"
+}

@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/system_model_relationship_overlay.schema.json",
+  "title": "System Model Relationship Overlay",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "stableId": { "$ref": "system_model_catalog.schema.json#/$defs/stableId" },
+    "idArray": { "$ref": "system_model_catalog.schema.json#/$defs/idArray" },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile_id": { "$ref": "#/$defs/stableId" },
+        "role_ids": { "$ref": "#/$defs/idArray" },
+        "node_ids": { "$ref": "#/$defs/idArray" },
+        "path_ids": { "$ref": "#/$defs/idArray" }
+      },
+      "required": ["profile_id", "role_ids", "node_ids", "path_ids"]
+    },
+    "relationship": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "relationship_id": { "$ref": "#/$defs/stableId" },
+        "source_object_ids": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/stableId" }, "uniqueItems": true },
+        "relation_type": { "enum": ["REPAIR_TARGETS_ROLE_PATH", "VERIFIES_PATH_STATE", "QUERIES_CONTROL_SURFACE", "OBSERVES_COMPONENT_PATH", "AFFECTS_PATH_WITHOUT_CAUSAL_INFERENCE", "AFFECTS_CONTROL_SURFACE_WITHOUT_CAUSAL_INFERENCE", "VERIFIES_DEPENDENCY_STATE", "REPAIR_TARGETS_WITH_DEPENDENCY", "SYSTEM_DEPENDENCY_PATH", "INTENTIONALLY_UNBOUND_PUBLIC_SYMPTOM"] },
+        "implementation_status": { "enum": ["APPLIED_PROFILE_OVERLAY", "PRESERVED_INTENTIONALLY_UNBOUND"] },
+        "targets": { "type": "array", "items": { "$ref": "#/$defs/target" } },
+        "dossier_ids": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/stableId" }, "uniqueItems": true },
+        "source_claim_ids": { "$ref": "#/$defs/idArray" },
+        "justification": { "type": "string", "minLength": 1 },
+        "authority_boundary": { "type": "string", "minLength": 1 }
+      },
+      "required": ["relationship_id", "source_object_ids", "relation_type", "implementation_status", "targets", "dossier_ids", "source_claim_ids", "justification", "authority_boundary"]
+    }
+  },
+  "properties": {
+    "schema_version": { "const": "system-model-relationship-overlay-v1" },
+    "release_id": { "const": "system-model-pilot-v1" },
+    "contract_version": { "const": "system-model-contract-v1" },
+    "canonicalization_version": { "const": "canonical-json-v1" },
+    "component_ontology_policy": { "const": "USES_EXISTING_COMPONENT_IDS_AND_TWO_JUSTIFIED_SUCCESSOR_DEFINITIONS" },
+    "relationships": { "type": "array", "minItems": 16, "maxItems": 16, "items": { "$ref": "#/$defs/relationship" } },
+    "serialization": { "$ref": "system_model_catalog.schema.json#/$defs/serialization" }
+  },
+  "required": ["schema_version", "release_id", "contract_version", "canonicalization_version", "component_ontology_policy", "relationships", "serialization"]
+}

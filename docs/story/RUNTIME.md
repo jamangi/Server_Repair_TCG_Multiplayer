@@ -107,6 +107,8 @@ The current Story content version is `quiet-cascade-expansion-v3` under the unch
 
 Ordinary Play now uses the additive v5 Card/deck catalog while the local/export schema remains v4. Valid custom decks from the technical-copy v4 catalog are preserved exactly and receive only the v5 catalog-version pin; older incompatible deck snapshots reset to the reviewed current default. Import performs the same content migration before strict validation and still commits atomically. Campaign-one Story Matches retain their exact v3 Builder reconstruction while running through the additive current engine catalog; expansion Matches use reviewed embedded v4 Builder configurations whose active response counts are derived from the Player's actual legal 30-Card deck.
 
+TASK-051 adds external System Model bindings for five released Ticket snapshots without editing any Story pack, Match registry, checkpoint, result, or replay. The bindings are explanatory domain metadata outside durable Story progress. Their private compatibility proofs remain build/server-only and cannot affect Story branches, Match launch, profile statistics, or checkpoint migration.
+
 ## Static Viewer staging
 
 The canonical Play asset script stages `src/story/**/*.mjs` and `content/story-v1/**/*.json` under `viewer/generated/play/`, records bytes and SHA-256 hashes in the generated manifest, and rejects symlinks or unsupported extensions. Story art remains a separate reviewed source under `viewer/assets/story/`; it is deliberately not copied into generated Play assets.
