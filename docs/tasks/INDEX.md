@@ -8,7 +8,20 @@ Active task: **[`TASK-048-HIGH: Clarify actionable Isolation evidence in tutoria
 
 Planned next:
 
-- No successor task is currently planned after TASK-048.
+- [`TASK-049-XHIGH: Define the System Model and research protocol`](TASK-049-define-system-model-and-research-protocol.md) — define the complete model/research/non-leak contract and reproducibly select five released Story Tickets without changing production data.
+
+Planned System Model sequence after TASK-049:
+
+- [`TASK-050-XHIGH: Create the five-Ticket System Model atlas`](TASK-050-create-five-ticket-system-model-atlas.md) — manually research and illustrate five source-backed systems, audit Component/relationship gaps, compare architectures, and author the `SYSTEM-001` approval packet.
+- **Gate `SYSTEM-001`** — owner selects a curated Finder plus projection builder, authored Ticket-specific profiles, a proved constrained composition Builder, or deferral before production schema work.
+- [`TASK-051-XHIGH: Integrate the approved pilot System Model contract`](TASK-051-integrate-approved-pilot-system-model-contract.md) — implement the approved typed contract and synchronize the five pilot profiles/components/relationships while preserving immutable content and V0 authority.
+- [`TASK-052-XHIGH: Prove the five-Ticket System Resolver`](TASK-052-prove-five-ticket-system-resolver.md) — deterministically resolve and derive descriptions, accessible diagrams, and action-rationale graphs for the pilot, then author the `SYSTEM-002` scale-readiness packet.
+- **Gate `SYSTEM-002`** — owner approves mass production, requests a bounded pilot correction, reopens architecture, or defers the player-facing capability.
+- [`TASK-053-XHIGH: Synchronize the released Story System Model domain`](TASK-053-synchronize-released-story-system-domain.md) — extend source-backed profiles, Components, and justified relationships across the exact released Story Ticket denominator.
+- [`TASK-054-XHIGH: Productionize the Story System Resolver`](TASK-054-productionize-story-system-resolver.md) — make resolution and all public-safe derived views deterministic, build-validated, staged, and stable across Story migration/replay.
+- [`TASK-055-HIGH: Add the “Show system” Ticket experience`](TASK-055-add-show-system-ticket-experience.md) — add the accessible public topology/lifecycle/action-rationale view without making it Evidence or leaking hidden truth.
+
+The sequence's working definition and finder-first recommendation are in [`docs/system-models/README.md`](../system-models/README.md). Only TASK-048 is active; all System Model tasks remain planned until their prerequisites and gates are satisfied.
 
 Story coverage and expansion sequence: **complete.** Completed TASK-038 supplies the approved non-canonical review contract inherited by the released expansion.
 

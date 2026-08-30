@@ -88,6 +88,8 @@ The repository now contains the playable rules-engine foundation and a deliberat
 
 TASK-047 is complete. Every tutorial action checkpoint now exposes its expected legal intent, a bounded and visibly targeted recovery, or an explicit safe stop. In the failed-Verify lesson's zero-Action Documentation state, the coach explains that Document Live costs one Action, targets Pass, returns to the same checkpoint with a fresh turn, and preserves exact projected record attribution. TASK-048 is active to clarify the fundamentals lesson's mixed Evidence state: RAID Array Degraded is confirmed but non-actionable, while Failed SAS Drive is actionable but only supported at that checkpoint. Both repairs preserve engine authority, frozen Evidence rules, and hidden-truth boundaries. See the [task index](docs/tasks/INDEX.md).
 
+TASK-049 through TASK-055 are now planned as a gated System Model sequence after TASK-048. The sequence researches five Story Tickets before schema work, recommends a curated source-backed Finder plus deterministic description/diagram builder, synchronizes Components only through justified typed relationships, proves public non-leakage, scales to the released Story corpus, and only then adds a “Show system” Ticket experience. Two owner gates prevent speculative architecture and mass production from proceeding without pilot evidence. See the [System Model roadmap](docs/system-models/README.md).
+
 TASK-039 through TASK-046 completed the measured Story expansion sequence.
 
 TASK-037 repaired the original campaign-one Shift 6 handoff. TASK-046 now preserves that completed history while continuing eligible saves into the released expansion, so the former campaign-one terminal surface is no longer the live content boundary.
@@ -125,6 +127,7 @@ If implementation exposes a new rule question or pressure against frozen behavio
 - [`docs/candidate_flows/`](docs/candidate_flows/) — deliberately non-authoritative example rules, board/card fixtures, audited game replays, focused application flows, and full campaign/multiplayer walkthroughs. Begin with its [`README`](docs/candidate_flows/README.md); use the package to critique structure, not as promoted rules or implementation contracts.
 - [`docs/case_studies/`](docs/case_studies/) — versioned research that converts real troubleshooting accounts into lifecycle reductions, domain cross-references, candidate materials, and decision observations. Begin with its [`README`](docs/case_studies/README.md).
 - [`docs/story/`](docs/story/) — the working fictional setting, company, campaign frame, characters, voice, real-world inspiration boundary, and story-derived candidate mechanics. Begin with its [`README`](docs/story/README.md).
+- [`docs/system-models/`](docs/system-models/) — the proposed source-backed System Model / Finder architecture, lifecycle/topology scope, public/private safety boundary, and phased delivery roadmap.
 - [`docs/audio/`](docs/audio/) — procedural synthesis review, the completed human- and machine-readable interaction and recipe catalogues, and the shared SFX runtime guide.
 - [`docs/tasks/`](docs/tasks/) — scoped implementation and research contracts, with [`INDEX.md`](docs/tasks/INDEX.md) identifying the current task state.
 - [`docs/ui-plan/`](docs/ui-plan/) — provisional application structure and original visual wireframes.
