@@ -3303,9 +3303,19 @@ dialog.settings-dialog #settings-sfx-volume {
 .play-app .isolation-guidance { padding: 0.75rem; border: 2px dashed var(--play-paper-hypothesis-border); border-radius: 0.75rem; color: var(--play-paper-candidate-fg); background: #edf0e8; }
 .play-app .isolation-guidance > summary { min-height: 44px; color: var(--play-paper-hypothesis-fg); font-weight: 900; cursor: pointer; }
 .play-app .isolation-guidance p { margin: 0.55rem 0; }
-.play-app .isolation-guidance li { margin-block: 0.35rem; }
+.play-app .isolation-candidate-guide h3 { margin-block: 1rem 0.5rem; color: var(--play-ink-900); }
+.play-app .isolation-candidate-guide > ul { display: grid; margin: 0; padding: 0; gap: 0.65rem; list-style: none; }
+.play-app .isolation-candidate-guide__item { padding: 0.7rem; border: 2px solid var(--play-paper-candidate-border); border-radius: 0.55rem; background: var(--play-paper-candidate-bg); }
+.play-app .isolation-candidate-guide__item > header { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.35rem 0.75rem; }
+.play-app .isolation-candidate-guide__item code { overflow-wrap: anywhere; }
+.play-app .isolation-candidate-guide__item dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0.65rem 0; gap: 0.4rem; }
+.play-app .isolation-candidate-guide__item dl > div { min-width: 0; padding: 0.45rem; border: 1px solid var(--play-paper-candidate-border); border-radius: 0.35rem; }
+.play-app .isolation-candidate-guide__item dt { color: var(--play-ink-700); font-size: 0.67rem; font-weight: 900; letter-spacing: 0.04em; text-transform: uppercase; }
+.play-app .isolation-candidate-guide__item dd { margin: 0.15rem 0 0; font-weight: 800; overflow-wrap: anywhere; }
+.play-app .isolation-candidate-guide__item > p { padding-inline-start: 0.65rem; border-inline-start: 4px solid var(--play-paper-hypothesis-border); }
 
 @media (max-width: 900px) {
+  .play-app .isolation-candidate-guide__item dl { grid-template-columns: 1fr; }
   .play-app .document-preview__facts,
   .play-app .archive-review__summary dl { grid-template-columns: 1fr; }
   .play-app .document-preview__actions { display: grid; grid-template-columns: 1fr 1fr; }

@@ -26,6 +26,10 @@ import {
   validateTutorialProgress,
 } from '../viewer/js/play/data/client-data.mjs';
 import {
+  buildIsolationGuidanceModel,
+  renderIsolationGuidance,
+} from '../viewer/js/play/pages/game-page.mjs';
+import {
   TUTORIAL_RECOVERY_ATTEMPT_LIMIT,
   TutorialController,
   validateTutorialReferences,
@@ -360,6 +364,58 @@ test('each pinned tutorial Builder output is independently solvable and replays 
         ?? state.archived_tickets[state.archived_ticket_ids[0]].verification_history.some((entry) => entry.result === 'FAIL'), true);
     }
   }
+});
+
+test('post-RAID-Status guidance explains the exact mixed Evidence state without forecasting Drive Health', () => {
+  const definition = tutorials.tutorials.find((entry) => entry.id === 'tutorial.fundamentals');
+  const checkpointId = 'tutorial.fundamentals.isolation_help';
+  const { state, checkpoint } = reachCheckpoint(definition, checkpointId);
+  const projection = clientProjection(state);
+  const ticket = projection.view.public_match.repair_queue[0];
+  const catalog = {
+    ...catalogs,
+    domainById: new Map(catalogs.domain.entities.map((record) => [record.id, record])),
+  };
+  const model = buildIsolationGuidanceModel(ticket, projection, catalog, {
+    candidateRoleHints: definition.candidate_role_hints,
+  });
+  const rendered = `${checkpoint.body.join(' ')} ${renderIsolationGuidance(model)}`;
+  const array = model.candidates.find((candidate) => candidate.candidate_id === 'fault.storage.raid.degraded');
+  const drive = model.candidates.find((candidate) => candidate.candidate_id === 'fault.storage.sas.drive_failed');
+
+  assert.equal(ticket.accepted_isolations.length, 0);
+  assert.equal(model.accepted_isolation_count, 0);
+  assert.equal(model.legal_commit_route_count, 2);
+  assert.equal(projection.legal_intents.filter((intent) => intent.action_type === 'COMMIT_ISOLATION').length, 2);
+  assert.deepEqual(
+    projection.view.authorized_events.flatMap((event) => event.payload?.candidate_effects ?? [])
+      .filter((effect) => [array.candidate_id, drive.candidate_id].includes(effect.candidate_fault_id))
+      .map((effect) => [effect.candidate_fault_id, effect.disposition]),
+    [
+      ['fault.storage.sas.drive_failed', 'SUPPORT'],
+      ['fault.storage.raid.degraded', 'CONFIRM'],
+    ],
+  );
+  assert.equal(array.role, 'NON_ACTIONABLE');
+  assert.equal(array.strongest_disposition, 'CONFIRM');
+  assert.equal(array.legal_commit_route, true);
+  assert.equal(drive.role, 'ACTIONABLE');
+  assert.equal(drive.strongest_disposition, 'SUPPORT');
+  assert.equal(drive.legal_commit_route, true);
+  assert.match(rendered, /RAID Array Degraded/);
+  assert.match(rendered, /confirmed/i);
+  assert.match(rendered, /non-actionable condition/i);
+  assert.match(rendered, /Failed SAS Drive/);
+  assert.match(rendered, /actionable fault/i);
+  assert.match(rendered, /supported, not confirmed/i);
+  assert.match(rendered, /drive, cable or backplane path, power, controller, or configuration/i);
+  assert.match(rendered, /No accepted repair-opening Isolation exists yet/i);
+  assert.match(rendered, /only its returned authorized Evidence can close or redirect that gap/i);
+  assert.doesNotMatch(rendered, /decisive failed-drive Evidence|will confirm|eligible outcome/i);
+  assert.doesNotMatch(JSON.stringify(projection), /server_only_truth|actual_present|eligible_outcome_id|evidence\.raid\.single_member_health/);
+  assert.equal(projection.legal_intents.some((intent) =>
+    intent.action_type === 'RUN_TEST'
+      && intent.card_definition_id === 'card.core.drive_health_test'), true);
 });
 
 test('tutorial overlay only constrains real legal intents and does not inspect hidden truth', () => {

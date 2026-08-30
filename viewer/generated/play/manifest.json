@@ -822,8 +822,8 @@
     {
       "path": "content/gameplay-v1/tutorials-v1.json",
       "source": "content/gameplay-v1/tutorials-v1.json",
-      "bytes": 18255,
-      "sha256": "af886f82777e522fe581704c54e671857bf522ec4805d633ab82f4efeb5156a8"
+      "bytes": 18862,
+      "sha256": "4e3e8a7b09325d40644d30b379d1acbb53707f00048f2930135412eeb7cd272f"
     },
     {
       "path": "content/story-v1/campaigns/quiet-cascade-characterization-v2/manifest.json",

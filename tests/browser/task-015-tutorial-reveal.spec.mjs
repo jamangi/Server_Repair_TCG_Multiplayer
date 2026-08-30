@@ -177,6 +177,70 @@ async function completeTutorial(page, definition, mode, { captureRecovery = fals
     await expect(page.locator('#announcer')).toContainText(checkpoint.title);
 
     if (checkpoint.checkpoint_kind === 'EXPLAIN') {
+      if (checkpoint.id === 'tutorial.fundamentals.isolation_help') {
+        const latest = await latestMessage(page);
+        const ticket = latest.projection.view.public_match.repair_queue[0];
+        const effects = latest.projection.view.authorized_events
+          .flatMap((event) => event.payload?.candidate_effects ?? [])
+          .filter((effect) => [
+            'fault.storage.raid.degraded',
+            'fault.storage.sas.drive_failed',
+          ].includes(effect.candidate_fault_id))
+          .map((effect) => [effect.candidate_fault_id, effect.disposition]);
+        expect(effects).toEqual([
+          ['fault.storage.sas.drive_failed', 'SUPPORT'],
+          ['fault.storage.raid.degraded', 'CONFIRM'],
+        ]);
+        expect(ticket.accepted_isolations).toEqual([]);
+        expect(latest.projection.legal_intents.filter((intent) => intent.action_type === 'COMMIT_ISOLATION')).toHaveLength(2);
+        expect(latest.projection.legal_intents.some((intent) => intent.action_type === 'PERFORM_REPAIR')).toBe(false);
+        expect(JSON.stringify(latest.projection)).not.toMatch(/server_only_truth|actual_present|eligible_outcome_id|evidence\.raid\.single_member_health/);
+
+        const coach = page.locator('.tutorial-coach');
+        await expect(coach).toContainText('RAID Status confirmed RAID Array Degraded');
+        await expect(coach).toContainText('non-actionable condition');
+        await expect(coach).toContainText('Failed SAS Drive is an actionable fault');
+        await expect(coach).toContainText('supported, not confirmed');
+        await expect(coach).toContainText('drive, cable or backplane path, power, controller, or configuration');
+        await expect(coach).toContainText('No accepted repair-opening Isolation exists yet');
+        await expect(coach).toContainText('only its returned authorized Evidence');
+        await expect(coach).not.toContainText('decisive failed-drive Evidence');
+
+        await activate(page, page.locator('[data-view-full-ticket]'), mode);
+        const dialog = page.locator('#full-ticket-dialog');
+        await expect(dialog).toBeVisible();
+        const guidance = dialog.locator('.isolation-guidance');
+        await activate(page, guidance.locator('summary'), mode);
+        await expect(guidance).toContainText('Accepted repair-opening Isolation: None yet');
+        await expect(guidance).toContainText('Projected legal commit routes: 2 available');
+        const array = guidance.locator('[data-candidate-id="fault.storage.raid.degraded"]');
+        const drive = guidance.locator('[data-candidate-id="fault.storage.sas.drive_failed"]');
+        await expect(array).toHaveAttribute('data-candidate-role', 'non_actionable');
+        await expect(array).toHaveAttribute('data-commit-route', 'true');
+        await expect(array).toContainText('Non-actionable condition');
+        await expect(array).toContainText('CONFIRM');
+        await expect(array).toContainText('not a repairable cause');
+        await expect(drive).toHaveAttribute('data-candidate-role', 'actionable');
+        await expect(drive).toHaveAttribute('data-commit-route', 'true');
+        await expect(drive).toContainText('Actionable fault');
+        await expect(drive).toContainText('SUPPORT');
+        await expect(drive).toContainText('corroborated route');
+        await expect(dialog).not.toContainText(/server_only_truth|actual_present|eligible_outcome|single_member_health/i);
+        if (page.viewportSize()?.width >= 1500) {
+          await page.evaluate(() => {
+            document.documentElement.style.fontSize = '32px';
+          });
+          await expect.poll(() => page.evaluate(() =>
+            document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBe(0);
+          await expect(array).toBeVisible();
+          await expect(drive).toBeVisible();
+          await page.evaluate(() => {
+            document.documentElement.style.removeProperty('font-size');
+          });
+        }
+        await activate(page, dialog.getByRole('button', { name: 'Close full Ticket' }), mode);
+        await expect(dialog).not.toBeVisible();
+      }
       await activate(page, page.locator('[data-tutorial-continue]'), mode);
       continue;
     }

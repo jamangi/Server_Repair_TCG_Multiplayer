@@ -412,6 +412,19 @@ export function validateTutorialReferences(tutorialCatalog, catalog) {
     if (ids.has(tutorial.id)) errors.push(`Duplicate tutorial ID ${tutorial.id}.`);
     ids.add(tutorial.id);
     if (!ticketIds.has(tutorial.expected_ticket_definition_id)) errors.push(`${tutorial.id} references an unknown Ticket.`);
+    const tutorialTicket = catalog.ticketContent.templates.find((entry) =>
+      entry.ticket.id === tutorial.expected_ticket_definition_id)?.ticket;
+    const publicCandidates = new Set(tutorialTicket?.public_candidate_fault_ids ?? []);
+    const hintedCandidates = new Set();
+    for (const hint of tutorial.candidate_role_hints ?? []) {
+      if (hintedCandidates.has(hint.candidate_fault_id)) {
+        errors.push(`${tutorial.id} repeats Candidate role hint ${hint.candidate_fault_id}.`);
+      }
+      hintedCandidates.add(hint.candidate_fault_id);
+      if (!publicCandidates.has(hint.candidate_fault_id)) {
+        errors.push(`${tutorial.id} role hint ${hint.candidate_fault_id} is not a public Candidate on its pinned Ticket.`);
+      }
+    }
     const checkpointIds = new Set();
     for (const checkpoint of tutorial.checkpoints ?? []) {
       if (checkpointIds.has(checkpoint.id)) errors.push(`${tutorial.id} has duplicate checkpoint ${checkpoint.id}.`);

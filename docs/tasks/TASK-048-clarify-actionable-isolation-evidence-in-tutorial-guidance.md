@@ -2,7 +2,7 @@
 
 ## Status
 
-**Planned after TASK-047.** The report is supported as an instructional-clarity defect, not as evidence that the authoritative disposition data is contradictory.
+**Complete — 2026-08-30.** The fundamentals tutorial now explains the mixed RAID Status result candidate by candidate, and reusable projection-safe guidance distinguishes a legal commit attempt from an accepted repair-opening Isolation without changing engine authority, hidden outcomes, or gameplay data.
 
 ## Objective
 
@@ -84,3 +84,53 @@ Do not change candidate IDs, actionability, authored outcomes, Ticket solutions,
 ## Completion boundary
 
 Complete only when a new player can accurately explain that the array condition is confirmed but non-actionable, the failed drive is actionable but not yet decisively established, the next test addresses that exact gap, and every statement is derived from player-safe projection rather than hidden truth.
+
+## Completion record — 2026-08-30
+
+### Reproduction and authority finding
+
+The exact real-engine fundamentals path was replayed through RAID Status Inspection and `tutorial.fundamentals.isolation_help`. The pinned `ticket.storage.single_sas_member` Ticket publicly exposes Failed SAS Drive, RAID Array Degraded, and RAID Controller Failure. Its single authorized current-revision Evidence event applies `SUPPORT` to Failed SAS Drive and `CONFIRM` to RAID Array Degraded. No Isolation is accepted and no Repair intent is projected.
+
+The engine does project two legal `COMMIT_ISOLATION` attempts because the player has authorized Evidence to cite for both affected candidates. That is not an accepted route: the degraded-array attempt remains non-actionable and cannot open Repair, while the supported failed-drive attempt can still be rejected for insufficient corroboration. The next pinned action is Drive Health Test. Neither hidden `server_only_truth`, authored presence/outcome fields, nor its future Evidence result appears in the public projection. Reproduction therefore found no authority defect and required no engine or domain-data change.
+
+### Implementation
+
+- Added public tutorial candidate-role hints for the two relevant candidates, with strict schema and controller validation against the pinned Ticket's public candidate pool.
+- Rewrote the RAID Status checkpoint to name the confirmed degraded-array condition, explain its non-actionable system-state role and real-world component uncertainty, distinguish the actionable but merely supported failed drive, state that no accepted repair-opening Isolation exists, and connect Drive Health Test to the remaining Evidence gap without forecasting its result.
+- Replaced the generic Isolation summary with candidate-by-candidate, projection-safe guidance showing role, strongest authorized disposition, citation count, notebook state, legal commit-attempt availability, and accepted repair-opening state in visible text.
+- Preserved the unsupported-attempt privacy guarantee and made legal-attempt versus accepted-Isolation wording explicit across actionable confirm, non-actionable confirm, support, contradiction, rule-out, inconclusive, and no-Evidence states.
+- Added responsive candidate cards plus real-engine Node and browser coverage for the mixed state, full-Ticket interaction, keyboard/touch access, 200% reflow, hidden-truth absence, and complete tutorial closure.
+
+### Verification
+
+- `node viewer/scripts/build-play-assets.mjs` — exit 0; staged 197 files.
+- `node viewer/scripts/verify-play-assets.mjs` — exit 0; verified 197 files.
+- `node --check viewer/js/play/pages/game-page.mjs` and `node --check viewer/js/play/tutorial-controller.mjs` — exit 0 for both.
+- `node --test tests/task-048-isolation-guidance.test.mjs tests/task-015-tutorial-reveal.test.mjs` — exit 0; 10 passed, 0 failed, 0 skipped after the final catalog placement.
+- `node --test tests/task-013-diagnosis-v2.test.mjs tests/task-013-automated-campaign.test.mjs tests/task-015-tutorial-reveal.test.mjs tests/task-023-ticket-semantic-contrast.test.mjs tests/task-048-isolation-guidance.test.mjs` — exit 0; 20 passed, 0 failed, 0 skipped.
+- Viewer baseline commands from `AGENTS.md` — all exit 0; three baseline tests passed, with all three JavaScript syntax checks clean.
+- `node --test tests/*.test.mjs` — exit 0; 361 passed, 0 failed, 0 skipped.
+- TASK-013/TASK-023 browser accessibility and contrast matrix — exit 0; 8 passed, 0 failed, 8 intentionally skipped.
+- TASK-015 browser matrix — initial run: 9 passed, 10 intentionally skipped, and 1 Windows process-cleanup `EPERM`; the exact affected mobile case reran with exit 0 and 1 pass.
+- Final real-tutorial browser smoke checks — exit 0; both desktop tutorials completed through closure (1 pass), and the fundamentals mobile/keyboard route completed through closure (1 pass).
+- Complete Playwright suite — 104 passed, 149 skipped, 7 failed in the parallel run. The two transient TASK-032/TASK-038 failures reran together with exit 0 and 2 passes. The five remaining failures are the pre-existing TASK-046 catalog/legacy-expectation drift recorded below; no TASK-048 or TASK-015 acceptance test failed.
+- `git diff --check` — exit 0.
+
+### Changed files
+
+- `content/gameplay-v1/tutorials-v1.json`
+- `schemas/client/tutorial_catalog.schema.json`
+- `viewer/js/play/tutorial-controller.mjs`
+- `viewer/js/play/pages/game-page.mjs`
+- `viewer/css/play.css`
+- `viewer/generated/play/content/gameplay-v1/tutorials-v1.json`
+- `viewer/generated/play/manifest.json`
+- `tests/task-015-tutorial-reveal.test.mjs`
+- `tests/task-048-isolation-guidance.test.mjs`
+- `tests/browser/task-015-tutorial-reveal.spec.mjs`
+- `docs/tasks/TASK-048-clarify-actionable-isolation-evidence-in-tutorial-guidance.md`
+- `docs/tasks/INDEX.md`
+
+### Unresolved items
+
+The complete browser sweep retains five failures already documented at the TASK-047 boundary: the TASK-010 keyboard fixture expects a diagnosis helper absent from its legacy bench entry; TASK-012 continuity exhausts its held-response search within 30 intents; two TASK-014 assertions still expect `12 of 12` instead of the released `12 of 18`; and TASK-016's dialog-name regular expression excludes the current expanded Ticket title. These are outside TASK-048's allowed behavioral scope. No TASK-048 requirement remains unresolved.

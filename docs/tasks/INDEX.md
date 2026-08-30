@@ -4,11 +4,9 @@ Tasks are implementation contracts. A builder must read `AGENTS.md` and then the
 
 Beginning with TASK-011, the displayed task ID includes the recommended reasoning-effort suffix used when starting that task. `HIGH` denotes substantial but bounded implementation/research; `XHIGH` denotes a cross-cutting semantic, architectural, or broad content migration. The stable task number and existing filename do not change, preserving links and history.
 
-Active task: **[`TASK-048-HIGH: Clarify actionable Isolation evidence in tutorial guidance`](TASK-048-clarify-actionable-isolation-evidence-in-tutorial-guidance.md).** The RAID Status result correctly confirms a non-actionable degraded-array condition while only supporting the actionable failed-drive candidate; the task must make that candidate-role contrast unmistakable without changing data, repair gates, or hidden-truth boundaries.
+Active task: **[`TASK-049-XHIGH: Define the System Model and research protocol`](TASK-049-define-system-model-and-research-protocol.md).** Define the complete model/research/non-leak contract and reproducibly select five released Story Tickets without changing production data.
 
-Planned next:
-
-- [`TASK-049-XHIGH: Define the System Model and research protocol`](TASK-049-define-system-model-and-research-protocol.md) — define the complete model/research/non-leak contract and reproducibly select five released Story Tickets without changing production data.
+Prerequisite completed: **[`TASK-048-HIGH: Clarify actionable Isolation evidence in tutorial guidance`](TASK-048-clarify-actionable-isolation-evidence-in-tutorial-guidance.md).** The fundamentals tutorial now makes the confirmed non-actionable array condition, supported actionable drive candidate, real-world uncertainty, and still-locked Repair route explicit without changing authority or hidden truth.
 
 Planned System Model sequence after TASK-049:
 
@@ -21,7 +19,7 @@ Planned System Model sequence after TASK-049:
 - [`TASK-054-XHIGH: Productionize the Story System Resolver`](TASK-054-productionize-story-system-resolver.md) — make resolution and all public-safe derived views deterministic, build-validated, staged, and stable across Story migration/replay.
 - [`TASK-055-HIGH: Add the “Show system” Ticket experience`](TASK-055-add-show-system-ticket-experience.md) — add the accessible public topology/lifecycle/action-rationale view without making it Evidence or leaking hidden truth.
 
-The sequence's working definition and finder-first recommendation are in [`docs/system-models/README.md`](../system-models/README.md). Only TASK-048 is active; all System Model tasks remain planned until their prerequisites and gates are satisfied.
+The sequence's working definition and finder-first recommendation are in [`docs/system-models/README.md`](../system-models/README.md). Only TASK-049 is active; later System Model tasks remain planned until their prerequisites and gates are satisfied.
 
 Story coverage and expansion sequence: **complete.** Completed TASK-038 supplies the approved non-canonical review contract inherited by the released expansion.
 
@@ -74,6 +72,7 @@ TASK-011-HIGH through TASK-016-HIGH, TASK-018-HIGH through TASK-021-HIGH, and TA
 
 Completed documentation and research tasks:
 
+- [`TASK-048-HIGH: Clarify actionable Isolation evidence in tutorial guidance`](TASK-048-clarify-actionable-isolation-evidence-in-tutorial-guidance.md) — completed 2026-08-30; distinguished confirmed non-actionable conditions from supported actionable Faults in candidate-by-candidate projection-safe guidance, connected the exact fundamentals Evidence gap to Drive Health Test, and preserved authority, repair gating, and hidden truth.
 - [`TASK-047-HIGH: Make tutorial Documentation checkpoints self-recovering`](TASK-047-make-tutorial-documentation-checkpoints-self-recovering.md) — completed 2026-08-29; made every current tutorial action checkpoint expose an exact legal intent, bounded visible recovery, or explicit safe stop, including a projection-only Pass recovery for the failed-Verify lesson's zero-Action Document Live boundary without changing engine authority.
 - [`TASK-025-HIGH: Refine Documentation and archived Ticket review`](TASK-025-refine-documentation-and-archived-ticket-review.md) — completed 2026-08-27; added authenticated exact-result previews with mutation-free cancellation and single-submit protection, precise in-place Worklog publication attribution, and accessible projection-only archived Ticket records without changing frozen behavior.
 - [`TASK-011-HIGH: Create canonical Card and symptom Ticket illustrations`](TASK-011-create-canonical-card-and-symptom-illustrations.md) — completed 2026-08-26; delivered 71 domain-inherited playable-action illustrations and 33 public-Symptom Ticket panoramas, shared Library/Play resolution, deterministic provenance and asset validation, reviewed contact sheets, responsive crops, and safe placeholder fallback without gameplay changes.

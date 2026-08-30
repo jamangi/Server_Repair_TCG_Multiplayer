@@ -14,6 +14,16 @@
       "seed": "tutorial-fundamentals-v1",
       "required_teaching_beat": "repair_then_verify",
       "expected_ticket_definition_id": "ticket.storage.single_sas_member",
+      "candidate_role_hints": [
+        {
+          "candidate_fault_id": "fault.storage.sas.drive_failed",
+          "role": "ACTIONABLE"
+        },
+        {
+          "candidate_fault_id": "fault.storage.raid.degraded",
+          "role": "NON_ACTIONABLE"
+        }
+      ],
       "checkpoints": [
         {
           "id": "tutorial.fundamentals.observe",
@@ -76,7 +86,7 @@
           "checkpoint_kind": "ACTION",
           "title": "Collect supporting context",
           "body": [
-            "Run RAID Status Inspection on the displayed Ticket. Its result supports the failed member and can also confirm the non-actionable degraded-array condition; Repair remains locked until an actionable Fault has an accepted Isolation."
+            "Run RAID Status Inspection on the displayed Ticket to inspect the array and member report. Read the authorized result before deciding what it established; the tutorial does not assume an outcome in advance."
           ],
           "target": "BENCH",
           "action_type": "RUN_TEST",
@@ -88,19 +98,20 @@
         {
           "id": "tutorial.fundamentals.isolation_help",
           "checkpoint_kind": "EXPLAIN",
-          "title": "Ask why Isolation is unavailable",
+          "title": "Separate the confirmed condition from the repairable cause",
           "body": [
-            "Open the full Ticket and expand “Why can’t I isolate?”. The guidance uses only your authorized projection: phase, public dispositions, projected citations, eliminations, and generic next steps.",
-            "Direct observation, definitive diagnostic, corroborated support, evidence-backed elimination, and recovery-derived routes are distinct authored routes. An unsupported attempt stays generic so it cannot distinguish a wrong Candidate from insufficient Evidence."
+            "RAID Status confirmed RAID Array Degraded. That is a non-actionable condition: it says the array has lost redundancy, but it does not identify a repairable cause.",
+            "Failed SAS Drive is an actionable fault, but this Evidence only SUPPORTs it; it is supported, not confirmed. In real server work, a degraded array can still leave the drive, cable or backplane path, power, controller, or configuration unresolved.",
+            "No accepted repair-opening Isolation exists yet, so Repair remains unavailable. Open the full Ticket and expand “Why can’t I isolate?” for the candidate-by-candidate state. Then run Drive Health Test to examine the member itself; only its returned authorized Evidence can close or redirect that gap."
           ],
           "target": "ISOLATION_GUIDANCE"
         },
         {
           "id": "tutorial.fundamentals.confirm",
           "checkpoint_kind": "ACTION",
-          "title": "Collect decisive actionable Evidence",
+          "title": "Test the unresolved member",
           "body": [
-            "Run Drive Health Test. Its candidate-specific CONFIRM is decisive for the actionable failed member. The result remains attached to this Ticket and current diagnosis revision."
+            "Run Drive Health Test to examine whether the named member itself is failing. Follow the returned authorized Evidence rather than assuming its result; the guidance will show whether it creates a legal Isolation route for this diagnosis stage."
           ],
           "target": "BENCH",
           "action_type": "RUN_TEST",

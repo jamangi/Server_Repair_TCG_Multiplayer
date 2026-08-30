@@ -299,29 +299,147 @@ function ticketWorkflowMarkup(documentModels, closureIntent, session, headingId)
   return `<section class="documentation-workflow" aria-labelledby="${escapeHtml(headingId)}" data-documentable-state="${legalCount ? 'legal' : pendingCount ? 'pending-actions' : 'none'}"><h3 id="${escapeHtml(headingId)}">Documentation workflow</h3><p role="status">${escapeHtml(stateCopy)}</p>${closureCopy}<div class="candidate-actions">${sourceControls}${closureIntent ? `<button type="button" class="basic-action basic-action--close" data-intent-id="${closureIntent.intent_id}"${session.resolving ? ' disabled' : ''}>Document &amp; Close · 0 Actions</button>` : ''}</div></section>`;
 }
 
-function isolationGuidanceMarkup(ticket, session, context) {
-  const projection = session.projection;
-  const evidence = projection.view.authorized_events.filter((event) =>
-    event.ticket_instance_id === ticket.ticket_instance_id
-      && ['EVIDENCE_CREATED', 'VERIFY_EVIDENCE_CREATED'].includes(event.event_type));
+const DISPOSITION_STRENGTH = Object.freeze({
+  CONFIRM: 5,
+  RULE_OUT: 4,
+  SUPPORT: 3,
+  CONTRADICT: 2,
+  INCONCLUSIVE: 1,
+});
+
+function currentDiagnosisEvidence(ticket, projection) {
+  return projection.view.authorized_events.filter((event) => {
+    if (event.ticket_instance_id !== ticket.ticket_instance_id
+        || !['EVIDENCE_CREATED', 'VERIFY_EVIDENCE_CREATED'].includes(event.event_type)) return false;
+    const { machine_revision: machineRevision, diagnosis_revision: diagnosisRevision } = event.payload ?? {};
+    return (!Number.isSafeInteger(machineRevision) || machineRevision === ticket.machine_revision)
+      && (!Number.isSafeInteger(diagnosisRevision) || diagnosisRevision === ticket.diagnosis_revision);
+  });
+}
+
+function isolationRouteExplanation({
+  phaseAccepts,
+  eliminated,
+  role,
+  strongestDisposition,
+  evidenceCount,
+  legalIntent,
+  routeCitationCount,
+}) {
+  if (!phaseAccepts) return 'The current Ticket phase does not accept a new Isolation.';
+  if (eliminated) return 'The current notebook state rules this Candidate out for this diagnosis stage.';
+  if (role === 'NON_ACTIONABLE') {
+    return `${legalIntent ? 'A cited commit attempt is legal, but ' : ''}this confirmed condition describes system state, not a repairable cause, so it cannot open Repair.`;
+  }
+  if (!evidenceCount) return 'No authorized Evidence currently changes this Candidate.';
+  if (strongestDisposition === 'SUPPORT') {
+    return `SUPPORT raises this Candidate but does not confirm it.${legalIntent ? ` A cited attempt is legal with ${routeCitationCount} projected citation${routeCitationCount === 1 ? '' : 's'}, but SUPPORT alone does not establish an accepted repair-opening Isolation unless an authored corroborated route is satisfied.` : ' No authored corroborated route is currently projected.'}`;
+  }
+  if (strongestDisposition === 'CONTRADICT') {
+    return 'CONTRADICT weighs against this Candidate but does not rule it out or create a commit route.';
+  }
+  if (strongestDisposition === 'RULE_OUT') {
+    return 'RULE_OUT supports a cited notebook elimination, not an Isolation commit.';
+  }
+  if (strongestDisposition === 'INCONCLUSIVE') {
+    return 'The authorized result did not decide this Candidate.';
+  }
+  if (legalIntent) {
+    return `A cited commit attempt is legal with ${routeCitationCount} projected citation${routeCitationCount === 1 ? '' : 's'}; only the authoritative result can accept it and open Repair.`;
+  }
+  return 'No legal commit route is projected from the current public Ticket state and authorized Evidence.';
+}
+
+export function buildIsolationGuidanceModel(ticket, projection, catalog, { candidateRoleHints = [] } = {}) {
+  const evidence = currentDiagnosisEvidence(ticket, projection);
   const isolationIntents = projection.legal_intents.filter((intent) =>
     intent.action_type === 'COMMIT_ISOLATION' && intent.ticket_instance_id === ticket.ticket_instance_id);
-  const cited = new Set(isolationIntents.flatMap((intent) => intent.cited_evidence_event_ids ?? []));
-  const dispositions = evidence.flatMap((event) => (event.payload?.candidate_effects ?? []).map((effect) => ({
-    sequence: event.sequence,
-    disposition: effect.disposition,
-    candidate: domainName(context.catalog, effect.candidate_fault_id),
-    cited: cited.has(event.event_id),
-  })));
   const phaseAccepts = ['DIAGNOSIS', 'RETURNED_TO_DIAGNOSIS'].includes(ticket.status);
+  const roleByCandidate = new Map(candidateRoleHints.map((hint) => [hint.candidate_fault_id, hint.role]));
+  const hypotheses = new Set(projection.view.hypotheses[ticket.ticket_instance_id] ?? []);
+  const candidates = ticket.public_candidate_fault_ids.map((candidateId) => {
+    const effects = evidence.flatMap((event) => (event.payload?.candidate_effects ?? [])
+      .filter((effect) => effect.candidate_fault_id === candidateId)
+      .map((effect) => ({
+        event_id: event.event_id,
+        sequence: event.sequence,
+        disposition: effect.disposition,
+      })));
+    const strongest = [...effects].sort((left, right) =>
+      (DISPOSITION_STRENGTH[right.disposition] ?? 0) - (DISPOSITION_STRENGTH[left.disposition] ?? 0)
+        || right.sequence - left.sequence)[0] ?? null;
+    const legalIntent = isolationIntents.find((intent) => intent.candidate_fault_id === candidateId) ?? null;
+    const elimination = [...projection.view.eliminations].reverse().find((record) =>
+      record.ticket_instance_id === ticket.ticket_instance_id
+        && record.candidate_fault_id === candidateId
+        && record.diagnosis_revision === ticket.diagnosis_revision);
+    const accepted = ticket.accepted_isolations.some((record) => record.candidate_fault_id === candidateId);
+    const eliminated = elimination?.eliminated === true;
+    const hintedRole = roleByCandidate.get(candidateId);
+    const role = hintedRole ?? (accepted ? 'ACTIONABLE' : 'UNRESOLVED');
+    const roleLabel = role === 'ACTIONABLE'
+      ? 'Actionable fault'
+      : role === 'NON_ACTIONABLE'
+        ? 'Non-actionable condition'
+        : 'Role unresolved by current projection';
+    const notebookState = eliminated ? 'Ruled out' : hypotheses.has(candidateId) ? 'Current hypothesis' : 'Candidate';
+    const routeCitationIds = [...new Set(legalIntent?.cited_evidence_event_ids ?? [])];
+    return {
+      candidate_id: candidateId,
+      display_name: domainName(catalog, candidateId),
+      role,
+      role_label: roleLabel,
+      strongest_disposition: strongest?.disposition ?? 'NO_EVIDENCE',
+      evidence_count: new Set(effects.map((effect) => effect.event_id)).size,
+      evidence_sequences: [...new Set(effects.map((effect) => effect.sequence))].sort((left, right) => left - right),
+      notebook_state: notebookState,
+      legal_commit_route: Boolean(legalIntent),
+      route_citation_count: routeCitationIds.length,
+      route_citation_event_ids: routeCitationIds,
+      availability_explanation: isolationRouteExplanation({
+        phaseAccepts,
+        eliminated,
+        role,
+        strongestDisposition: strongest?.disposition ?? 'NO_EVIDENCE',
+        evidenceCount: effects.length,
+        legalIntent: Boolean(legalIntent),
+        routeCitationCount: routeCitationIds.length,
+      }),
+    };
+  });
+  return {
+    phase_accepts_isolation: phaseAccepts,
+    accepted_isolation_count: ticket.accepted_isolations.length,
+    legal_commit_route_count: isolationIntents.length,
+    candidates,
+  };
+}
+
+export function renderIsolationGuidance(model) {
+  const candidates = model.candidates.map((candidate) => {
+    const evidenceLabel = candidate.evidence_count
+      ? `${candidate.evidence_count} authorized Evidence record${candidate.evidence_count === 1 ? '' : 's'}${candidate.evidence_sequences.length ? ` (#${candidate.evidence_sequences.join(', #')})` : ''}`
+      : '0 authorized Candidate-changing Evidence records';
+    return `<li class="isolation-candidate-guide__item" data-candidate-id="${escapeHtml(candidate.candidate_id)}" data-candidate-role="${escapeHtml(candidate.role.toLowerCase())}" data-commit-route="${candidate.legal_commit_route}"><header><strong>${escapeHtml(candidate.display_name)}</strong><code>${escapeHtml(candidate.candidate_id)}</code></header><dl><div><dt>Public role</dt><dd>${escapeHtml(candidate.role_label)}</dd></div><div><dt>Strongest disposition</dt><dd>${escapeHtml(candidate.strongest_disposition.replaceAll('_', ' '))}</dd></div><div><dt>Authorized Evidence</dt><dd>${escapeHtml(evidenceLabel)}</dd></div><div><dt>Notebook</dt><dd>${escapeHtml(candidate.notebook_state)}</dd></div><div><dt>Commit attempt</dt><dd>${candidate.legal_commit_route ? `Legal · ${candidate.route_citation_count} projected citation${candidate.route_citation_count === 1 ? '' : 's'}` : 'Unavailable'}</dd></div></dl><p><strong>${candidate.legal_commit_route ? 'What the legal attempt means:' : 'Why it is unavailable:'}</strong> ${escapeHtml(candidate.availability_explanation)}</p></li>`;
+  }).join('');
   return `<details class="isolation-guidance"><summary>Why can’t I isolate?</summary><div>
-    <p><strong>Current phase:</strong> ${phaseAccepts ? 'Diagnosis accepts Isolation attempts.' : `${escapeHtml(STATUS_LABELS[ticket.status] || ticket.status)} does not accept a new Isolation.`}</p>
-    <p><strong>Projected route:</strong> ${isolationIntents.length ? `${isolationIntents.length} candidate route${isolationIntents.length === 1 ? ' is' : 's are'} supported by currently authorized information.` : 'No candidate route is currently supported by the authorized Evidence, valid current-stage eliminations, and public prerequisites.'}</p>
-    <p><strong>Projected citations:</strong> ${cited.size ? [...cited].map((id) => evidence.find((event) => event.event_id === id)?.sequence).filter(Number.isFinite).map((sequence) => `Evidence #${sequence}`).join(', ') : 'None selected by a projected legal Isolation.'}</p>
-    ${dispositions.length ? `<ul>${dispositions.map((item) => `<li><strong>${escapeHtml(item.disposition)}</strong> · ${escapeHtml(item.candidate)} · Evidence #${item.sequence}${item.cited ? ' · selected citation' : ''}</li>`).join('')}</ul>` : '<p>No candidate-changing disposition has been recorded yet. Clean, unrelated, and inconclusive findings still remain Evidence.</p>'}
-    <p>CONFIRM is decisive only for its named Candidate; SUPPORT may need corroboration; CONTRADICT and RULE_OUT weigh against a Candidate; INCONCLUSIVE does not decide it. A confirmed non-actionable condition does not open Repair.</p>
-    <p>An unsupported attempt deliberately does not say whether the Candidate was wrong or the Evidence was insufficient. Inspect Evidence, run another relevant diagnostic, update a cited notebook elimination, or use Give Up if you want to abandon this Ticket and authorize its private solution reveal.</p>
+    <p><strong>Current phase:</strong> ${model.phase_accepts_isolation ? 'Diagnosis accepts Isolation attempts.' : 'The current Ticket phase does not accept a new Isolation.'}</p>
+    <p><strong>Accepted repair-opening Isolation:</strong> ${model.accepted_isolation_count ? `${model.accepted_isolation_count} accepted.` : 'None yet; Repair remains unavailable.'}</p>
+    <p><strong>Projected legal commit routes:</strong> ${model.legal_commit_route_count ? `${model.legal_commit_route_count} available.` : 'None from the current authorized state.'}</p>
+    <section class="isolation-candidate-guide" aria-labelledby="isolation-candidate-guide-heading"><h3 id="isolation-candidate-guide-heading">Candidate-by-candidate state</h3><ul>${candidates}</ul></section>
+    <p>A condition may be confirmed without becoming repairable. An actionable fault may still need decisive Evidence or an authored corroborated route. CONFIRM applies only to its named Candidate; SUPPORT raises a Candidate; CONTRADICT weighs against it; RULE_OUT supports elimination; INCONCLUSIVE does not decide it.</p>
+    <p>An unsupported attempt deliberately does not say whether the Candidate was wrong or the Evidence was insufficient. Inspect authorized Evidence, run another relevant diagnostic, update a cited notebook elimination, or use Give Up if you want to abandon this Ticket and authorize its private solution reveal.</p>
   </div></details>`;
+}
+
+function isolationGuidanceMarkup(ticket, session, context) {
+  const candidateRoleHints = session.tutorial?.definition?.candidate_role_hints ?? [];
+  return renderIsolationGuidance(buildIsolationGuidanceModel(
+    ticket,
+    session.projection,
+    context.catalog,
+    { candidateRoleHints },
+  ));
 }
 
 function fullTicketMarkup(ticket, presentation, session, context, documentModels, closureIntent) {
