@@ -1,0 +1,164 @@
+{
+  "selection_version": "system-model-pilot-selection-v1",
+  "source": {
+    "path": "docs/story/coverage/released-story-domain-coverage-v3.json",
+    "sha256": "cd66630f1db0362d24e3e9bb9c222fc60bfe7ec8b3facd9149bb07e43ef98013",
+    "expected_ticket_count": 18
+  },
+  "selection_size": 5,
+  "pressure_order": [
+    "management_host_control",
+    "preboot_firmware_post_memory_boot_policy",
+    "storage_path",
+    "power_thermal_load",
+    "network_post_os_runtime",
+    "physical_repair",
+    "logical_repair",
+    "direct_observation",
+    "path_based_observation",
+    "indirect_observation",
+    "ambiguous_public_candidates"
+  ],
+  "tickets": [
+    {
+      "ticket_id": "ticket.generated.ef8a4924e707349bce5c2be7",
+      "shift": 1,
+      "fingerprint_id": "fingerprint.boot.incorrect_order",
+      "pressure_tags": ["preboot_firmware_post_memory_boot_policy", "logical_repair", "direct_observation", "path_based_observation", "ambiguous_public_candidates"],
+      "basis_ids": ["symptom.boot.wrong_device", "fault.boot.order.incorrect", "fault.firmware.config.reset", "test.firmware.settings_review", "test.boot.device_inventory", "repair.boot.correct_order"]
+    },
+    {
+      "ticket_id": "ticket.generated.a10b8767580c9453c679a326",
+      "shift": 2,
+      "fingerprint_id": "fingerprint.power.unseated_psu",
+      "pressure_tags": ["power_thermal_load", "physical_repair", "direct_observation", "indirect_observation", "ambiguous_public_candidates"],
+      "basis_ids": ["symptom.power.redundancy_warning", "fault.power.psu.not_seated", "test.general.visual_inspection", "test.power.psu_status", "repair.power.reseat_psu"]
+    },
+    {
+      "ticket_id": "ticket.generated.8ee2c08bae1e3d005b35bff5",
+      "shift": 2,
+      "fingerprint_id": "fingerprint.power.failed_psu",
+      "pressure_tags": ["power_thermal_load", "physical_repair", "path_based_observation", "ambiguous_public_candidates"],
+      "basis_ids": ["symptom.power.redundancy_warning", "fault.power.psu.failed", "test.power.known_good_psu", "repair.power.replace_psu"]
+    },
+    {
+      "ticket_id": "ticket.generated.75ea6ec9e60d64c7cac4caa5",
+      "shift": 3,
+      "fingerprint_id": "fingerprint.memory.failed_dimm",
+      "pressure_tags": ["preboot_firmware_post_memory_boot_policy", "physical_repair", "indirect_observation", "ambiguous_public_candidates"],
+      "basis_ids": ["symptom.system.intermittent_crash", "fault.memory.dimm.failed", "fault.system.intermittent_memory_instability", "test.memory.diagnostic", "repair.memory.replace_dimm"]
+    },
+    {
+      "ticket_id": "ticket.generated.424c8fab1db6aed25058ab78",
+      "shift": 3,
+      "fingerprint_id": "fingerprint.memory.unseated_dimm",
+      "pressure_tags": ["preboot_firmware_post_memory_boot_policy", "physical_repair", "path_based_observation", "ambiguous_public_candidates"],
+      "basis_ids": ["symptom.boot.memory_warning", "fault.memory.channel.unavailable", "fault.memory.dimm.not_seated", "fault.memory.population.invalid", "test.memory.single_dimm_isolation", "repair.memory.reseat_dimm"]
+    },
+    {
+      "ticket_id": "ticket.generated.6e55cf55154d356da2e91126",
+      "shift": 4,
+      "fingerprint_id": "fingerprint.thermal.clogged_heatsink",
+      "pressure_tags": ["power_thermal_load", "physical_repair", "indirect_observation", "ambiguous_public_candidates"],
+      "basis_ids": ["symptom.thermal.high_cpu_temp", "fault.thermal.cpu.overheating", "fault.thermal.heatsink.clogged", "test.thermal.temperature_monitoring", "repair.thermal.clean_cooling_path"]
+    },
+    {
+      "ticket_id": "ticket.generated.f60b9ce132c74c33f607df6d",
+      "shift": 4,
+      "fingerprint_id": "fingerprint.thermal.failed_fan",
+      "pressure_tags": ["power_thermal_load", "physical_repair", "indirect_observation", "ambiguous_public_candidates"],
+      "basis_ids": ["symptom.thermal.high_cpu_temp", "fault.thermal.fan.failed", "test.thermal.fan_telemetry", "repair.thermal.replace_fan"]
+    },
+    {
+      "ticket_id": "ticket.generated.759fd75d6ac043a57d6673d7",
+      "shift": 5,
+      "fingerprint_id": "fingerprint.network.incorrect_static_ip",
+      "pressure_tags": ["network_post_os_runtime", "logical_repair", "direct_observation", "ambiguous_public_candidates"],
+      "basis_ids": ["symptom.network.no_connectivity", "fault.network.ip.static_incorrect", "test.network.interface_config", "repair.network.correct_static_ip"]
+    },
+    {
+      "ticket_id": "ticket.generated.cbc8003979ffdaca83b41d7d",
+      "shift": 5,
+      "fingerprint_id": "fingerprint.network.failed_cable",
+      "pressure_tags": ["network_post_os_runtime", "physical_repair", "path_based_observation", "ambiguous_public_candidates"],
+      "basis_ids": ["symptom.network.no_connectivity", "fault.network.cable.failed", "fault.network.dhcp.no_lease", "test.network.cable_substitution", "repair.network.replace_cable"]
+    },
+    {
+      "ticket_id": "ticket.generated.3ec80b1b0e7221ac725aedf9",
+      "shift": 6,
+      "fingerprint_id": "fingerprint.boot.missing_nvme",
+      "pressure_tags": ["management_host_control", "preboot_firmware_post_memory_boot_policy", "storage_path", "physical_repair", "indirect_observation", "ambiguous_public_candidates"],
+      "basis_ids": ["symptom.boot.no_boot_device", "fault.boot.device.not_detected", "fault.boot.order.incorrect", "fault.storage.cable.loose", "fault.storage.nvme.device_failed", "fault.storage.raid.controller_failed", "test.system.bmc_logs", "repair.storage.replace_nvme"]
+    },
+    {
+      "ticket_id": "ticket.generated.45a70010dd4752f864990575",
+      "shift": 6,
+      "fingerprint_id": "fingerprint.storage.failed_sas_member",
+      "pressure_tags": ["storage_path", "physical_repair", "indirect_observation", "ambiguous_public_candidates"],
+      "basis_ids": ["symptom.storage.raid_degraded", "fault.storage.raid.degraded", "fault.storage.sas.drive_failed", "fault.storage.sata.drive_failed", "test.storage.drive_health", "repair.storage.replace_raid_member"]
+    },
+    {
+      "ticket_id": "ticket.generated.5352abd871c2e9076be92a0b",
+      "shift": 6,
+      "fingerprint_id": "fingerprint.storage.loose_cable",
+      "pressure_tags": ["storage_path", "physical_repair", "direct_observation", "path_based_observation", "ambiguous_public_candidates"],
+      "basis_ids": ["symptom.storage.io_errors", "fault.storage.backplane.path_failed", "fault.storage.cable.failed", "fault.storage.cable.loose", "fault.storage.nvme.device_failed", "fault.storage.sas.drive_failed", "test.general.visual_inspection", "test.storage.device_inventory", "repair.storage.reseat_cable"]
+    },
+    {
+      "ticket_id": "ticket.generated.4f237a22c35d46166044b2c7",
+      "shift": 7,
+      "fingerprint_id": "fingerprint.compute.damaged_cpu_socket_contacts",
+      "pressure_tags": ["preboot_firmware_post_memory_boot_policy", "physical_repair", "direct_observation", "ambiguous_public_candidates"],
+      "basis_ids": ["symptom.boot.no_post", "fault.board.system.failed", "fault.compute.cpu_socket.contacts_damaged", "fault.cpu.not_seated", "fault.memory.dimm.failed", "fault.memory.dimm.not_seated", "test.compute.socket_magnified_inspection", "repair.compute.restore_socket_contacts"]
+    },
+    {
+      "ticket_id": "ticket.generated.3fd6eb04534f79b5b3f87f98",
+      "shift": 8,
+      "fingerprint_id": "fingerprint.power.failed_distribution_board",
+      "pressure_tags": ["power_thermal_load", "physical_repair", "path_based_observation", "ambiguous_public_candidates"],
+      "basis_ids": ["symptom.power.voltage_out_of_range", "symptom.power.no_power", "fault.board.system.failed", "fault.power.distribution_board.failed", "fault.power.psu.failed", "test.power.distribution_path_isolation", "repair.power.replace_distribution_board"]
+    },
+    {
+      "ticket_id": "ticket.generated.36ba2ae8958431194a7e1fef",
+      "shift": 9,
+      "fingerprint_id": "fingerprint.storage.predictive_drive_failure",
+      "pressure_tags": ["storage_path", "physical_repair", "indirect_observation", "ambiguous_public_candidates"],
+      "basis_ids": ["symptom.storage.predictive_failure_warning", "symptom.storage.drive_fault_led", "fault.storage.drive.predictive_failure", "fault.storage.sas.drive_failed", "test.storage.predictive_health", "repair.storage.replace_predictive_drive"]
+    },
+    {
+      "ticket_id": "ticket.generated.b68505324c44f11977fcda07",
+      "shift": 10,
+      "fingerprint_id": "fingerprint.management.stale_alert",
+      "pressure_tags": ["management_host_control", "storage_path", "logical_repair", "indirect_observation", "ambiguous_public_candidates"],
+      "basis_ids": ["symptom.management.alert_persists", "fault.management.alert.stale", "fault.storage.backplane.path_failed", "test.management.event_log_freshness", "repair.management.clear_stale_alert_state"]
+    },
+    {
+      "ticket_id": "ticket.generated.b34238282822e93980b5f1ad",
+      "shift": 11,
+      "fingerprint_id": "fingerprint.firmware.incompatible_version_set",
+      "pressure_tags": ["management_host_control", "network_post_os_runtime", "logical_repair", "direct_observation", "indirect_observation", "ambiguous_public_candidates"],
+      "basis_ids": ["symptom.network.link_flapping", "symptom.network.no_link", "fault.firmware.version_set.incompatible", "fault.network.cable.disconnected", "fault.network.cable.failed", "fault.network.nic.failed", "test.firmware.version_compatibility", "test.network.link_counter_soak", "repair.firmware.restore_compatible_versions"]
+    },
+    {
+      "ticket_id": "ticket.generated.f32b85cbf2054fdf0114f42a",
+      "shift": 12,
+      "fingerprint_id": "fingerprint.management.corrupt_bmc_firmware",
+      "pressure_tags": ["management_host_control", "preboot_firmware_post_memory_boot_policy", "logical_repair", "direct_observation", "indirect_observation", "ambiguous_public_candidates"],
+      "basis_ids": ["symptom.management.bmc_not_responding", "symptom.firmware.update_failed", "fault.firmware.version_set.incompatible", "fault.management.bmc_firmware.corrupt", "test.management.bmc_recovery_state", "repair.management.recover_bmc_firmware"]
+    }
+  ],
+  "score_order": [
+    "covered_pressure_count_desc",
+    "balanced_depth_sum_desc",
+    "pressure_occurrence_count_desc",
+    "distinct_shift_count_desc",
+    "sorted_ticket_id_signature_asc"
+  ],
+  "expected_selection": [
+    "ticket.generated.3ec80b1b0e7221ac725aedf9",
+    "ticket.generated.3fd6eb04534f79b5b3f87f98",
+    "ticket.generated.5352abd871c2e9076be92a0b",
+    "ticket.generated.b34238282822e93980b5f1ad",
+    "ticket.generated.f32b85cbf2054fdf0114f42a"
+  ]
+}

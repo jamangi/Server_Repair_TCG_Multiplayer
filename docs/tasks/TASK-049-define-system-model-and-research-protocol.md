@@ -2,7 +2,7 @@
 
 ## Status
 
-**Planned after TASK-048.** TASK-048 remains the only active task. This task begins the proposed System Model sequence only after the tutorial repair is complete.
+**Complete.** The implementation-neutral contract, claim-level research protocol, deterministic five-Ticket selection, worked consistency/non-leak examples, field-ownership proof, and repository-relative verifier are committed under [`docs/system-models/`](../system-models/README.md). No production schema, content, runtime, Viewer, or gameplay authority changed. TASK-050 may now create the manual atlas and `SYSTEM-001` approval packet.
 
 ## Objective
 
@@ -90,3 +90,35 @@ Do not edit schemas, domain/gameplay/Story content, generated manifests, Viewer/
 ## Completion boundary
 
 Stop when a future builder can select and research five Story Tickets, model the necessary lifecycle/topology, distinguish every consistency contract, generate comparable manual outputs, and recognize authority/leakage failures without guessing what “system,” “relevant,” “real,” or “synchronized” means.
+
+## Completion record
+
+- Contract: [`SYSTEM_MODEL_CONTRACT.md`](../system-models/SYSTEM_MODEL_CONTRACT.md)
+- Research/architecture protocol: [`RESEARCH_PROTOCOL.md`](../system-models/RESEARCH_PROTOCOL.md)
+- Selection report and machine ledger: [`PILOT_SELECTION.md`](../system-models/PILOT_SELECTION.md), [`pilot-selection-v1.json`](../system-models/pilot-selection-v1.json)
+- Storage/non-storage walks and counterexamples: [`WORKED_EXAMPLES.md`](../system-models/WORKED_EXAMPLES.md)
+- Reproducer/link validator: [`verify-task-049.mjs`](../system-models/verify-task-049.mjs)
+
+Selected stable released Ticket IDs:
+
+- `ticket.generated.3ec80b1b0e7221ac725aedf9`
+- `ticket.generated.3fd6eb04534f79b5b3f87f98`
+- `ticket.generated.5352abd871c2e9076be92a0b`
+- `ticket.generated.b34238282822e93980b5f1ad`
+- `ticket.generated.f32b85cbf2054fdf0114f42a`
+
+The deterministic calculation covers all 11 declared pressure flags, scores 20/22 balanced depth and 27 pressure occurrences across four Shifts, and evaluates all 8,568 five-Ticket combinations. There is no uncovered requested top-level category. The selected five do not contain a memory-primary or thermal-primary Ticket; those are explicit pilot-depth limits rather than invented coverage gaps.
+
+`SYSTEM-001` remains intentionally unresolved until TASK-050 compares the three architectures with sourced manual atlas evidence. No immediate owner decision was exposed by TASK-049.
+
+Verification from the repository root:
+
+- `node --check docs/system-models/verify-task-049.mjs` — exit `0`.
+- `node docs/system-models/verify-task-049.mjs` — exit `0`; 22 passed, 0 failed; 18 released Tickets and all 8,568 five-Ticket combinations checked; repository-relative links in the task package/index/root resolve.
+- `node src/story/generate-released-story-domain-coverage.mjs --check` — exit `0`; 12 Matches, 18 Tickets, 12 engine successes, and 21 minimal diagnostics; both released coverage artifacts byte-stable.
+- `node --test tests/task-046-released-story-domain-coverage.test.mjs` — exit `0`; 6 passed, 0 failed, 0 skipped/cancelled/todo.
+- `git diff --check` — exit `0`.
+
+Changed files are the four navigation/status documents (`README.md`, this task, `docs/tasks/INDEX.md`, and `docs/system-models/README.md`) plus the six TASK-049 package files listed above. Viewer baseline checks are not applicable because no Viewer file changed.
+
+Unresolved work is deliberately assigned to TASK-050: source-backed real profile selection, exact product/option research, manual illustrations, Component/relationship gap discovery, measured architecture comparison, and the `SYSTEM-001` owner decision. The mandatory stop conditions for contradictory sources, ambiguous options, insufficient Component granularity, schema pressure, gameplay-authority pressure, Candidate-closure/non-leak failures, unreviewable provenance, and projection drift are recorded in the research protocol.

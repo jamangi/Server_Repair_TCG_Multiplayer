@@ -4,11 +4,11 @@ Tasks are implementation contracts. A builder must read `AGENTS.md` and then the
 
 Beginning with TASK-011, the displayed task ID includes the recommended reasoning-effort suffix used when starting that task. `HIGH` denotes substantial but bounded implementation/research; `XHIGH` denotes a cross-cutting semantic, architectural, or broad content migration. The stable task number and existing filename do not change, preserving links and history.
 
-Active task: **[`TASK-049-XHIGH: Define the System Model and research protocol`](TASK-049-define-system-model-and-research-protocol.md).** Define the complete model/research/non-leak contract and reproducibly select five released Story Tickets without changing production data.
+Next task: **[`TASK-050-XHIGH: Create the five-Ticket System Model atlas`](TASK-050-create-five-ticket-system-model-atlas.md).** Research and manually illustrate the five deterministically selected released Story Tickets, audit Component/relationship gaps, compare the three candidate architectures, and author the `SYSTEM-001` approval packet without changing production schemas or gameplay authority.
 
-Prerequisite completed: **[`TASK-048-HIGH: Clarify actionable Isolation evidence in tutorial guidance`](TASK-048-clarify-actionable-isolation-evidence-in-tutorial-guidance.md).** The fundamentals tutorial now makes the confirmed non-actionable array condition, supported actionable drive candidate, real-world uncertainty, and still-locked Repair route explicit without changing authority or hidden truth.
+Prerequisite completed: **[`TASK-049-XHIGH: Define the System Model and research protocol`](TASK-049-define-system-model-and-research-protocol.md).** The complete model/research/non-leak contract, deterministic five-Ticket pilot, worked examples, architecture evidence requirements, and source/stop rules are now committed without changing production data.
 
-Planned System Model sequence after TASK-049:
+Planned System Model sequence after completed TASK-049:
 
 - [`TASK-050-XHIGH: Create the five-Ticket System Model atlas`](TASK-050-create-five-ticket-system-model-atlas.md) — manually research and illustrate five source-backed systems, audit Component/relationship gaps, compare architectures, and author the `SYSTEM-001` approval packet.
 - **Gate `SYSTEM-001`** — owner selects a curated Finder plus projection builder, authored Ticket-specific profiles, a proved constrained composition Builder, or deferral before production schema work.
@@ -19,7 +19,7 @@ Planned System Model sequence after TASK-049:
 - [`TASK-054-XHIGH: Productionize the Story System Resolver`](TASK-054-productionize-story-system-resolver.md) — make resolution and all public-safe derived views deterministic, build-validated, staged, and stable across Story migration/replay.
 - [`TASK-055-HIGH: Add the “Show system” Ticket experience`](TASK-055-add-show-system-ticket-experience.md) — add the accessible public topology/lifecycle/action-rationale view without making it Evidence or leaking hidden truth.
 
-The sequence's working definition and finder-first recommendation are in [`docs/system-models/README.md`](../system-models/README.md). Only TASK-049 is active; later System Model tasks remain planned until their prerequisites and gates are satisfied.
+The sequence's completed V0 planning contract and finder-first recommendation under test are in [`docs/system-models/README.md`](../system-models/README.md). TASK-050 is the next task; later System Model tasks remain planned until their prerequisites and gates are satisfied.
 
 Story coverage and expansion sequence: **complete.** Completed TASK-038 supplies the approved non-canonical review contract inherited by the released expansion.
 

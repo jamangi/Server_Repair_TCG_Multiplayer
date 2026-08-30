@@ -2,7 +2,15 @@
 
 ## Status
 
-This directory is the planning entry point for the proposed System Model / System Finder capability. It is non-authoritative until the ordered task sequence and its approval gates are completed. Existing V0 Ticket outcomes, Evidence dispositions, legal intents, Diagnostic Bench relevance, and hidden-truth boundaries remain authoritative.
+This directory is the planning entry point for the proposed System Model / System Finder capability. TASK-049's implementation-neutral contract is complete, but the architecture remains unapproved until TASK-050 produces the manual atlas and the `SYSTEM-001` owner gate is resolved. Existing V0 Ticket outcomes, Evidence dispositions, legal intents, Diagnostic Bench relevance, and hidden-truth boundaries remain authoritative.
+
+The TASK-049 package is:
+
+- [`SYSTEM_MODEL_CONTRACT.md`](SYSTEM_MODEL_CONTRACT.md) — vocabulary, planes, candidate typed model, projections, authority boundaries, consistency definitions, versioning, fallback, and field ownership;
+- [`RESEARCH_PROTOCOL.md`](RESEARCH_PROTOCOL.md) — claim-level sourcing, architecture-comparison evidence, stop rules, and TASK-050 handoff;
+- [`PILOT_SELECTION.md`](PILOT_SELECTION.md) and [`pilot-selection-v1.json`](pilot-selection-v1.json) — the reproducible five-Ticket pilot and its committed classification ledger;
+- [`WORKED_EXAMPLES.md`](WORKED_EXAMPLES.md) — storage and non-storage contract walks plus reality and non-leak counterexamples; and
+- [`verify-task-049.mjs`](verify-task-049.mjs) — denominator, selection, field-ownership, acceptance, and repository-relative Markdown-link checks.
 
 The project-owner-supplied concept image is preserved at [`system-model-host-bmc-concept.png`](../ui-plan/ui-reference_images/system-model-host-bmc-concept.png). It demonstrates the useful idea of showing the host and management subsystems as distinct but connected regions; it is not a complete topology, a real product specification, or a production layout.
 
