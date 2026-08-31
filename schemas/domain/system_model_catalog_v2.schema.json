@@ -1,0 +1,1297 @@
+{
+  "$defs": {
+    "abstraction": {
+      "additionalProperties": false,
+      "properties": {
+        "abstraction_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "label": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "represented_node_ids": {
+          "items": {
+            "$ref": "#/$defs/stableId"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "source_claim_ids": {
+          "$ref": "#/$defs/claimArray"
+        }
+      },
+      "required": [
+        "abstraction_id",
+        "label",
+        "represented_node_ids",
+        "source_claim_ids"
+      ],
+      "type": "object"
+    },
+    "attachment": {
+      "additionalProperties": false,
+      "properties": {
+        "action_definition_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "action_kind": {
+          "enum": [
+            "TEST",
+            "COMMAND",
+            "REPAIR",
+            "VERIFICATION"
+          ]
+        },
+        "attachment_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "attachment_kind": {
+          "enum": [
+            "OBSERVES_COMPONENT_PATH",
+            "QUERIES_CONTROL_SURFACE",
+            "INTERVENES_ON_SERVICE_UNIT",
+            "VERIFIES_STATE"
+          ]
+        },
+        "authority_boundary": {
+          "const": "SYSTEM_RELEVANCE_ONLY"
+        },
+        "control_surface_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "observation_point_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "public_visibility": {
+          "const": "PUBLIC"
+        },
+        "rationale_template_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "rationale_tokens": {
+          "items": {
+            "$ref": "#/$defs/token"
+          },
+          "minItems": 3,
+          "type": "array"
+        },
+        "relevant_stage_ids": {
+          "items": {
+            "$ref": "#/$defs/stableId"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "source_claim_ids": {
+          "$ref": "#/$defs/claimArray"
+        },
+        "target_node_ids": {
+          "items": {
+            "$ref": "#/$defs/stableId"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "target_path_ids": {
+          "$ref": "#/$defs/idArray"
+        }
+      },
+      "required": [
+        "attachment_id",
+        "action_definition_id",
+        "action_kind",
+        "attachment_kind",
+        "target_node_ids",
+        "target_path_ids",
+        "control_surface_ids",
+        "observation_point_ids",
+        "relevant_stage_ids",
+        "rationale_template_id",
+        "rationale_tokens",
+        "source_claim_ids",
+        "public_visibility",
+        "authority_boundary"
+      ],
+      "type": "object"
+    },
+    "capability": {
+      "additionalProperties": false,
+      "properties": {
+        "capability_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "label": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "node_ids": {
+          "items": {
+            "$ref": "#/$defs/stableId"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "public_visibility": {
+          "const": "PUBLIC"
+        },
+        "source_claim_ids": {
+          "$ref": "#/$defs/claimArray"
+        }
+      },
+      "required": [
+        "capability_id",
+        "label",
+        "node_ids",
+        "public_visibility",
+        "source_claim_ids"
+      ],
+      "type": "object"
+    },
+    "claimArray": {
+      "items": {
+        "$ref": "#/$defs/stableId"
+      },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "clause": {
+      "additionalProperties": false,
+      "properties": {
+        "clause_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "clause_kind": {
+          "enum": [
+            "ALWAYS",
+            "WHEN_OPTION",
+            "UNLESS_OPTION",
+            "PARALLEL",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "source_claim_ids": {
+          "$ref": "#/$defs/claimArray"
+        },
+        "stage_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "template_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "tokens": {
+          "items": {
+            "$ref": "#/$defs/token"
+          },
+          "minItems": 1,
+          "type": "array"
+        }
+      },
+      "required": [
+        "clause_id",
+        "clause_kind",
+        "stage_id",
+        "template_id",
+        "tokens",
+        "source_claim_ids"
+      ],
+      "type": "object"
+    },
+    "descriptionProgram": {
+      "additionalProperties": false,
+      "properties": {
+        "sections": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "clauses": {
+                "items": {
+                  "$ref": "#/$defs/clause"
+                },
+                "minItems": 1,
+                "type": "array"
+              },
+              "heading": {
+                "minLength": 1,
+                "type": "string"
+              },
+              "section_id": {
+                "$ref": "#/$defs/stableId"
+              }
+            },
+            "required": [
+              "section_id",
+              "heading",
+              "clauses"
+            ],
+            "type": "object"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "template_catalog_version": {
+          "const": "system-model-template-catalog-v1"
+        }
+      },
+      "required": [
+        "template_catalog_version",
+        "sections"
+      ],
+      "type": "object"
+    },
+    "digest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "edge": {
+      "additionalProperties": false,
+      "properties": {
+        "cardinality": {
+          "enum": [
+            "ONE_TO_ONE",
+            "ONE_TO_MANY",
+            "MANY_TO_ONE",
+            "MANY_TO_MANY"
+          ]
+        },
+        "direction": {
+          "enum": [
+            "DIRECTED",
+            "UNDIRECTED"
+          ]
+        },
+        "edge_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "from_node_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "label": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "lifecycle_stage_ids": {
+          "items": {
+            "$ref": "#/$defs/stableId"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "public_visibility": {
+          "const": "PUBLIC"
+        },
+        "relation_type": {
+          "enum": [
+            "CONTAINS",
+            "MOUNTS",
+            "REALIZES_ROLE",
+            "SERVICE_UNIT_FOR",
+            "OPTION_MEMBER_OF",
+            "DELIVERS_STANDBY_POWER_TO",
+            "DELIVERS_SWITCHED_POWER_TO",
+            "RETURNS_POWER_GOOD_TO",
+            "COOLS",
+            "EXHAUSTS_THROUGH",
+            "DATA_LINK_TO",
+            "CONTROL_LINK_TO",
+            "MANAGES",
+            "BOOT_SOURCE_FOR",
+            "HANDOFF_TO",
+            "ENABLES",
+            "OBSERVES",
+            "REPORTS_INVENTORY_FOR",
+            "EMITS_STATUS_AT",
+            "MEASURES_PATH",
+            "MEMBER_OF",
+            "REDUNDANCY_PEER_OF",
+            "BACKED_BY",
+            "EXPOSES_AS",
+            "ACCESSED_THROUGH",
+            "REQUIRES_DEENERGIZATION_BEFORE",
+            "REQUIRES_PROTOCOL"
+          ]
+        },
+        "source_claim_ids": {
+          "$ref": "#/$defs/claimArray"
+        },
+        "to_node_id": {
+          "$ref": "#/$defs/stableId"
+        }
+      },
+      "required": [
+        "edge_id",
+        "from_node_id",
+        "to_node_id",
+        "relation_type",
+        "direction",
+        "cardinality",
+        "label",
+        "lifecycle_stage_ids",
+        "public_visibility",
+        "source_claim_ids"
+      ],
+      "type": "object"
+    },
+    "idArray": {
+      "items": {
+        "$ref": "#/$defs/stableId"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "identity": {
+      "additionalProperties": false,
+      "properties": {
+        "exact_details": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "exactness_class": {
+          "enum": [
+            "EXACT",
+            "GENERALIZED",
+            "MIXED"
+          ]
+        },
+        "family": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "generalized_details": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "generation_or_era": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "manufacturer": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "model_scope": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "manufacturer",
+        "family",
+        "model_scope",
+        "generation_or_era",
+        "exactness_class",
+        "exact_details",
+        "generalized_details"
+      ],
+      "type": "object"
+    },
+    "lifecycleRelation": {
+      "additionalProperties": false,
+      "properties": {
+        "from_stage_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "relation_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "relation_type": {
+          "enum": [
+            "PRECEDES",
+            "REQUIRES",
+            "ENABLES",
+            "PARALLEL_WITH",
+            "OPTIONAL_AFTER",
+            "HANDOFF_TO"
+          ]
+        },
+        "source_claim_ids": {
+          "$ref": "#/$defs/claimArray"
+        },
+        "to_stage_id": {
+          "$ref": "#/$defs/stableId"
+        }
+      },
+      "required": [
+        "relation_id",
+        "from_stage_id",
+        "to_stage_id",
+        "relation_type",
+        "source_claim_ids"
+      ],
+      "type": "object"
+    },
+    "multiplicity": {
+      "additionalProperties": false,
+      "properties": {
+        "maximum": {
+          "minimum": 0,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "minimum": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "unit": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "minimum",
+        "maximum",
+        "unit"
+      ],
+      "type": "object"
+    },
+    "node": {
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "node_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "node_kind": {
+          "enum": [
+            "COMPONENT_INSTANCE",
+            "SERVICEABLE_UNIT",
+            "CONTROL_SURFACE",
+            "OBSERVATION_POINT",
+            "LOGICAL_GROUP",
+            "BUS_OR_LINK",
+            "PUBLIC_ABSTRACTION"
+          ]
+        },
+        "plane": {
+          "enum": [
+            "power",
+            "management",
+            "host_firmware_post",
+            "memory",
+            "storage",
+            "network",
+            "os_handoff",
+            "runtime_service"
+          ]
+        },
+        "public_visibility": {
+          "const": "PUBLIC"
+        },
+        "role_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "source_claim_ids": {
+          "$ref": "#/$defs/claimArray"
+        }
+      },
+      "required": [
+        "node_id",
+        "label",
+        "node_kind",
+        "plane",
+        "role_ids",
+        "public_visibility",
+        "source_claim_ids"
+      ],
+      "type": "object"
+    },
+    "observation": {
+      "additionalProperties": false,
+      "properties": {
+        "lifecycle_stage_ids": {
+          "items": {
+            "$ref": "#/$defs/stableId"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "limits": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "observation_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "observation_kind": {
+          "enum": [
+            "DIRECT",
+            "PATH_BASED",
+            "INDIRECT"
+          ]
+        },
+        "observer_node_ids": {
+          "items": {
+            "$ref": "#/$defs/stableId"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "public_visibility": {
+          "const": "PUBLIC"
+        },
+        "source_claim_ids": {
+          "$ref": "#/$defs/claimArray"
+        },
+        "subject_node_ids": {
+          "items": {
+            "$ref": "#/$defs/stableId"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "transport": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "observation_id",
+        "observation_kind",
+        "observer_node_ids",
+        "subject_node_ids",
+        "transport",
+        "lifecycle_stage_ids",
+        "limits",
+        "public_visibility",
+        "source_claim_ids"
+      ],
+      "type": "object"
+    },
+    "optionConstraint": {
+      "additionalProperties": false,
+      "properties": {
+        "constraint_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "enforcement": {
+          "const": "REQUIRED_FOR_PROFILE"
+        },
+        "source_claim_ids": {
+          "$ref": "#/$defs/claimArray"
+        },
+        "statement": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "constraint_id",
+        "statement",
+        "enforcement",
+        "source_claim_ids"
+      ],
+      "type": "object"
+    },
+    "path": {
+      "additionalProperties": false,
+      "properties": {
+        "edge_ids": {
+          "items": {
+            "$ref": "#/$defs/stableId"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "end_node_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "flow_kind": {
+          "enum": [
+            "POWER",
+            "DATA",
+            "CONTROL",
+            "OBSERVATION",
+            "LIFECYCLE",
+            "COOLING"
+          ]
+        },
+        "lifecycle_stage_ids": {
+          "items": {
+            "$ref": "#/$defs/stableId"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "node_ids": {
+          "items": {
+            "$ref": "#/$defs/stableId"
+          },
+          "minItems": 2,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "path_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "public_visibility": {
+          "const": "PUBLIC"
+        },
+        "source_claim_ids": {
+          "$ref": "#/$defs/claimArray"
+        },
+        "start_node_id": {
+          "$ref": "#/$defs/stableId"
+        }
+      },
+      "required": [
+        "path_id",
+        "flow_kind",
+        "node_ids",
+        "edge_ids",
+        "start_node_id",
+        "end_node_id",
+        "lifecycle_stage_ids",
+        "public_visibility",
+        "source_claim_ids"
+      ],
+      "type": "object"
+    },
+    "plane": {
+      "additionalProperties": false,
+      "properties": {
+        "plane": {
+          "enum": [
+            "power",
+            "management",
+            "host_firmware_post",
+            "memory",
+            "storage",
+            "network",
+            "os_handoff",
+            "runtime_service"
+          ]
+        },
+        "source_claim_ids": {
+          "$ref": "#/$defs/claimArray"
+        },
+        "status": {
+          "enum": [
+            "PRESENT",
+            "NOT_APPLICABLE",
+            "OUT_OF_SCOPE_WITH_REASON"
+          ]
+        },
+        "summary": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "plane",
+        "status",
+        "summary",
+        "source_claim_ids"
+      ],
+      "type": "object"
+    },
+    "profile": {
+      "additionalProperties": false,
+      "properties": {
+        "action_attachments": {
+          "items": {
+            "$ref": "#/$defs/attachment"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "control_surfaces": {
+          "items": {
+            "$ref": "#/$defs/surface"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "description_program": {
+          "$ref": "#/$defs/descriptionProgram"
+        },
+        "finder_capabilities": {
+          "items": {
+            "$ref": "#/$defs/capability"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "identity": {
+          "$ref": "#/$defs/identity"
+        },
+        "lifecycle_relations": {
+          "items": {
+            "$ref": "#/$defs/lifecycleRelation"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "lifecycle_stages": {
+          "items": {
+            "$ref": "#/$defs/stage"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "lifecycle_status": {
+          "enum": [
+            "DRAFT",
+            "PUBLISHED",
+            "DEPRECATED"
+          ]
+        },
+        "observation_points": {
+          "items": {
+            "$ref": "#/$defs/observation"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "option_constraints": {
+          "items": {
+            "$ref": "#/$defs/optionConstraint"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "paths": {
+          "items": {
+            "$ref": "#/$defs/path"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "plane_declarations": {
+          "items": {
+            "$ref": "#/$defs/plane"
+          },
+          "maxItems": 8,
+          "minItems": 8,
+          "type": "array"
+        },
+        "profile_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "profile_revision": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "provenance": {
+          "additionalProperties": false,
+          "properties": {
+            "claim_ledger_id": {
+              "$ref": "#/$defs/stableId"
+            },
+            "exactness_statement": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "source_claim_ids": {
+              "$ref": "#/$defs/claimArray"
+            },
+            "source_manifest_version": {
+              "$ref": "#/$defs/stableId"
+            }
+          },
+          "required": [
+            "claim_ledger_id",
+            "source_manifest_version",
+            "source_claim_ids",
+            "exactness_statement"
+          ],
+          "type": "object"
+        },
+        "public_abstractions": {
+          "items": {
+            "$ref": "#/$defs/abstraction"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "role_instances": {
+          "items": {
+            "$ref": "#/$defs/role"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "serialization": {
+          "$ref": "#/$defs/serialization"
+        },
+        "synchronization": {
+          "additionalProperties": false,
+          "properties": {
+            "component_catalog_version": {
+              "$ref": "#/$defs/stableId"
+            },
+            "referenced_component_ids": {
+              "$ref": "#/$defs/idArray"
+            },
+            "resolved_gap_ids": {
+              "$ref": "#/$defs/idArray"
+            }
+          },
+          "required": [
+            "component_catalog_version",
+            "referenced_component_ids",
+            "resolved_gap_ids"
+          ],
+          "type": "object"
+        },
+        "topology_edges": {
+          "items": {
+            "$ref": "#/$defs/edge"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "topology_nodes": {
+          "items": {
+            "$ref": "#/$defs/node"
+          },
+          "minItems": 1,
+          "type": "array"
+        }
+      },
+      "required": [
+        "profile_id",
+        "profile_revision",
+        "lifecycle_status",
+        "identity",
+        "option_constraints",
+        "plane_declarations",
+        "role_instances",
+        "topology_nodes",
+        "topology_edges",
+        "paths",
+        "lifecycle_stages",
+        "lifecycle_relations",
+        "control_surfaces",
+        "observation_points",
+        "finder_capabilities",
+        "action_attachments",
+        "description_program",
+        "public_abstractions",
+        "provenance",
+        "synchronization",
+        "serialization"
+      ],
+      "type": "object"
+    },
+    "role": {
+      "additionalProperties": false,
+      "properties": {
+        "component_definition_id": {
+          "pattern": "^component\\.[a-z0-9._-]+$",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "label": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "lifecycle_stage_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "multiplicity": {
+          "$ref": "#/$defs/multiplicity"
+        },
+        "optionality": {
+          "enum": [
+            "REQUIRED",
+            "OPTIONAL",
+            "PROFILE_CONSTRAINED",
+            "OUT_OF_SCOPE_ABSTRACTION"
+          ]
+        },
+        "public_visibility": {
+          "const": "PUBLIC"
+        },
+        "purpose": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "replaceability": {
+          "enum": [
+            "HOT_SWAP_SERVICE_UNIT",
+            "BOARD_SERVICE_UNIT",
+            "NOT_SEPARATE_SERVICE_UNIT",
+            "SOCKETED_SERVICE_UNIT",
+            "INDIVIDUAL_SERVICE_UNIT",
+            "REPLACEABLE_SERVICE_UNIT",
+            "CABLE_SERVICE_PATH",
+            "ADAPTER_SERVICE_UNIT",
+            "EXTERNAL_REPLACEABLE_UNIT",
+            "DEENERGIZED_SERVICE_UNIT",
+            "OUTSIDE_SCOPE"
+          ]
+        },
+        "role_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "role_kind": {
+          "enum": [
+            "PHYSICAL_COMPONENT",
+            "INTERCONNECT_ROLE",
+            "LOGICAL_ROLE",
+            "PUBLIC_ABSTRACTION"
+          ]
+        },
+        "serviceability_note": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "source_claim_ids": {
+          "$ref": "#/$defs/claimArray"
+        },
+        "synchronization_status": {
+          "enum": [
+            "EXISTING_COMPONENT",
+            "RESOLVED_TASK_051",
+            "OUT_OF_SCOPE_ABSTRACTION"
+          ]
+        }
+      },
+      "required": [
+        "role_id",
+        "label",
+        "role_kind",
+        "purpose",
+        "component_definition_id",
+        "multiplicity",
+        "optionality",
+        "replaceability",
+        "serviceability_note",
+        "lifecycle_stage_ids",
+        "public_visibility",
+        "synchronization_status",
+        "source_claim_ids"
+      ],
+      "type": "object"
+    },
+    "serialization": {
+      "additionalProperties": false,
+      "properties": {
+        "canonicalization_version": {
+          "const": "canonical-json-v1"
+        },
+        "content_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "digest_algorithm": {
+          "const": "sha256"
+        }
+      },
+      "required": [
+        "canonicalization_version",
+        "digest_algorithm",
+        "content_digest"
+      ],
+      "type": "object"
+    },
+    "stableId": {
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$",
+      "type": "string"
+    },
+    "stage": {
+      "additionalProperties": false,
+      "properties": {
+        "condition": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "label": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "order_key": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "source_claim_ids": {
+          "$ref": "#/$defs/claimArray"
+        },
+        "stage_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "stage_mode": {
+          "enum": [
+            "REQUIRED",
+            "PARALLEL",
+            "CONDITIONAL",
+            "SERVICE_CONDITIONAL"
+          ]
+        }
+      },
+      "required": [
+        "stage_id",
+        "order_key",
+        "label",
+        "stage_mode",
+        "condition",
+        "source_claim_ids"
+      ],
+      "type": "object"
+    },
+    "surface": {
+      "additionalProperties": false,
+      "properties": {
+        "access_domain": {
+          "enum": [
+            "MANAGEMENT",
+            "HOST_FIRMWARE",
+            "OS",
+            "PHYSICAL_SERVICE",
+            "EXTERNAL_TOOL"
+          ]
+        },
+        "capability": {
+          "enum": [
+            "QUERY",
+            "CHANGE",
+            "BOTH"
+          ]
+        },
+        "lifecycle_stage_ids": {
+          "items": {
+            "$ref": "#/$defs/stableId"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "node_ids": {
+          "items": {
+            "$ref": "#/$defs/stableId"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "public_visibility": {
+          "const": "PUBLIC"
+        },
+        "source_claim_ids": {
+          "$ref": "#/$defs/claimArray"
+        },
+        "surface_id": {
+          "$ref": "#/$defs/stableId"
+        }
+      },
+      "required": [
+        "surface_id",
+        "node_ids",
+        "access_domain",
+        "capability",
+        "lifecycle_stage_ids",
+        "public_visibility",
+        "source_claim_ids"
+      ],
+      "type": "object"
+    },
+    "template": {
+      "additionalProperties": false,
+      "properties": {
+        "purpose": {
+          "enum": [
+            "LIFECYCLE_CLAUSE",
+            "ACTION_RATIONALE"
+          ]
+        },
+        "template": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "template_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "token_names": {
+          "items": {
+            "pattern": "^[A-Z][A-Z0-9_]*$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "template_id",
+        "purpose",
+        "token_names",
+        "template"
+      ],
+      "type": "object"
+    },
+    "token": {
+      "additionalProperties": false,
+      "properties": {
+        "token": {
+          "pattern": "^[A-Z][A-Z0-9_]*$",
+          "type": "string"
+        },
+        "value": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "token",
+        "value"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "https://example.local/schemas/system_model_catalog_v2.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "canonicalization_version": {
+      "const": "canonical-json-v1"
+    },
+    "component_catalog": {
+      "additionalProperties": false,
+      "properties": {
+        "added_component_ids": {
+          "maxItems": 0,
+          "type": "array"
+        },
+        "base_policy": {
+          "const": "PRESERVE_EXISTING_IDS"
+        },
+        "catalog_version": {
+          "$ref": "#/$defs/stableId"
+        },
+        "successor_pack_path": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "catalog_version",
+        "base_policy",
+        "successor_pack_path",
+        "added_component_ids"
+      ],
+      "type": "object"
+    },
+    "contract_version": {
+      "const": "system-model-contract-v1"
+    },
+    "fallback": {
+      "additionalProperties": false,
+      "properties": {
+        "fallback_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "prohibited_detail": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "public_message": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "fallback_id",
+        "public_message",
+        "prohibited_detail"
+      ],
+      "type": "object"
+    },
+    "profiles": {
+      "items": {
+        "$ref": "#/$defs/profile"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "type": "array"
+    },
+    "release_id": {
+      "const": "system-model-story-v1"
+    },
+    "schema_version": {
+      "const": "system-model-catalog-v2"
+    },
+    "serialization": {
+      "$ref": "#/$defs/serialization"
+    },
+    "source_manifest": {
+      "additionalProperties": false,
+      "properties": {
+        "claim_count": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "source_count": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "source_ledger_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "source_ledger_path": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "source_ledger_sha256": {
+          "$ref": "#/$defs/digest"
+        }
+      },
+      "required": [
+        "source_ledger_id",
+        "source_ledger_path",
+        "source_ledger_sha256",
+        "source_count",
+        "claim_count"
+      ],
+      "type": "object"
+    },
+    "templates": {
+      "items": {
+        "$ref": "#/$defs/template"
+      },
+      "minItems": 2,
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "release_id",
+    "contract_version",
+    "canonicalization_version",
+    "source_manifest",
+    "component_catalog",
+    "templates",
+    "fallback",
+    "profiles",
+    "serialization"
+  ],
+  "title": "Released Story System Model Catalog",
+  "type": "object"
+}

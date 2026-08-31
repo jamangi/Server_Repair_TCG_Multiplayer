@@ -2,7 +2,7 @@
 
 ## Status
 
-This directory is the entry point for the System Model / System Finder capability. TASK-049's implementation-neutral contract, TASK-050's manual five-Ticket atlas, TASK-051's strict two-profile/five-binding contract, and TASK-052's deterministic resolver/projection proof are complete. The project owner approved the curated Finder architecture as `SYSTEM-001 A` on 2026-08-30 and approved its bounded released-Story scale path as `SYSTEM-002 A` on 2026-08-31. TASK-053 is the next authorized boundary. Existing V0 Ticket outcomes, Evidence dispositions, legal intents, Diagnostic Bench relevance, and hidden-truth boundaries remain authoritative.
+This directory is the entry point for the System Model / System Finder capability. TASK-049 through TASK-055 are complete. The project owner approved the curated Finder architecture as `SYSTEM-001 A` on 2026-08-30 and its bounded released-Story scale path as `SYSTEM-002 A` on 2026-08-31. The resulting release covers all 18 immutable Tickets in the twelve-Match Story campaign, productionizes their public-safe projections, and exposes them through the accessible zero-Action **Show system** Ticket experience. Existing V0 Ticket outcomes, Evidence dispositions, legal intents, Diagnostic Bench relevance, and hidden-truth boundaries remain authoritative; no successor System Model task is currently authorized.
 
 The TASK-049 package is:
 
@@ -34,6 +34,24 @@ The TASK-052 proof package is:
 - [`task-052/review.html`](task-052/review.html) and [`task-052/BROWSER_QA.md`](task-052/BROWSER_QA.md) — proof-only accessible review surface and browser matrix;
 - [`task-052/resolver-proof-v1.json`](task-052/resolver-proof-v1.json) and [`task-052/public-projections/`](task-052/public-projections/) — strict aggregate and per-Ticket public proof artifacts; and
 - [`../../src/system-models/`](../../src/system-models/) — the public-input-only deterministic resolver and one-source projection builder.
+
+The TASK-053 released-Story domain package is:
+
+- [`task-053/README.md`](task-053/README.md) and [`task-053/RELEASED_STORY_SYSTEM_COVERAGE.md`](task-053/RELEASED_STORY_SYSTEM_COVERAGE.md) — exact 12-Match / 18-Ticket denominator, profile reuse, source exceptions, public Candidate closure, and zero-gap completion record;
+- [`task-053/source-ledger-v2.json`](task-053/source-ledger-v2.json) — 25 bounded primary-source records and 50 claim-level mappings; and
+- [`../../content/system-model-story-v1/`](../../content/system-model-story-v1/) — three source-backed profiles, 18 exact public bindings, 18 build-only compatibility proofs, 125 typed relationships, immutable migration/manifest data, deterministic generation, and strict validation.
+
+The TASK-054 production package is:
+
+- [`task-054/README.md`](task-054/README.md), [`task-054/production-build-report-v1.json`](task-054/production-build-report-v1.json), and [`task-054/benchmark-production.mjs`](task-054/benchmark-production.mjs) — production boundary, measured coverage, public/private audit, size, caching, fallback, and benchmark evidence;
+- [`../../content/system-model-story-v1/public-system-projections-v1.json`](../../content/system-model-story-v1/public-system-projections-v1.json) — the canonical deduplicated public catalog containing three shared profile cores and eighteen opaque Ticket contexts; and
+- [`../../viewer/js/play/system-model-service.mjs`](../../viewer/js/play/system-model-service.mjs) — the same-origin, version-cached, strictly validated browser consumer with one generic unavailable result.
+
+The TASK-055 player package is:
+
+- [`task-055/README.md`](task-055/README.md) — information hierarchy, authority boundary, dialog lifecycle, and interaction contract;
+- [`task-055/BROWSER_QA.md`](task-055/BROWSER_QA.md) — desktop, tablet, phone, zoom, reduced-motion, forced-color, keyboard, touch, replay, failure, and human visual evidence; and
+- [`../../viewer/js/play/system-model-view.mjs`](../../viewer/js/play/system-model-view.mjs) — the semantic lifecycle, topology plus complete text equivalent, component, rationale, legality, and learning-source presentation.
 
 The project-owner-supplied concept image is preserved at [`system-model-host-bmc-concept.png`](../ui-plan/ui-reference_images/system-model-host-bmc-concept.png). It demonstrates the useful idea of showing the host and management subsystems as distinct but connected regions; it is not a complete topology, a real product specification, or a production layout.
 
@@ -99,10 +117,10 @@ The model is explanatory in V0. It must not derive Evidence dispositions, decide
 3. **Gate SYSTEM-001 A** approved the Finder-first hybrid on 2026-08-30.
 4. **TASK-051** completed the strict typed pilot contract, five bindings, private validation boundary, Component/relationship synchronization, and immutable migration.
 5. **TASK-052** completed deterministic resolution, validation, descriptions, diagrams, and relevance graphs for the pilot and authored the `SYSTEM-002` scale-readiness packet.
-6. **Gate SYSTEM-002 A** approved bounded mass production with the proved resolver on 2026-08-31; the production resolver and player experience remain reserved to their later tasks.
-7. **TASK-053** audits and synchronizes the complete released Story Ticket set.
-8. **TASK-054** productionizes System resolution and derived views across that set.
-9. **TASK-055** adds the public-safe “Show system” experience to the Ticket UI.
+6. **Gate SYSTEM-002 A** approved bounded mass production with the proved resolver on 2026-08-31.
+7. **TASK-053** completed the exact released-Story audit and synchronized all eighteen Ticket instances with three sourced profiles and no new Component IDs.
+8. **TASK-054** completed deterministic production resolution, deduplicated public projection, static staging, strict validation, and honest fallback across that set.
+9. **TASK-055** completed the public-safe **Show system** Ticket experience and its responsive, accessible, non-leak verification matrix.
 
 This order keeps inexpensive research and manual counterexamples ahead of schema migration, domain expansion, runtime work, mass production, and UI polish.
 

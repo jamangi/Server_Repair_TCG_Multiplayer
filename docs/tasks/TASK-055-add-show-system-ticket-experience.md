@@ -2,7 +2,7 @@
 
 ## Status
 
-**Planned after TASK-054.** This is the player-facing integration phase.
+**Complete.** The player-facing integration consumes only TASK-054 public projections and is verified across every released Story Ticket.
 
 ## Objective
 
@@ -77,3 +77,9 @@ Do not change System/domain truth, Ticket solutions, Candidate lists, Evidence, 
 ## Completion boundary
 
 Complete only when every covered Story Ticket offers a polished, comprehensible, responsive System view that deepens mental modeling without acting as Evidence, leaking the answer, changing gameplay, or fabricating unsupported hardware.
+
+## Completion record
+
+Completed on 2026-08-31. The full Ticket now offers a subordinate, zero-Action **Show system** experience for every valid released-Story projection, with an honest loading/unavailable path that never blocks ordinary Play. The separate System modal preserves two-level focus, semantic topology plus complete text equivalence, relevance-versus-legality authority, responsive/orientation behavior, reduced motion, forced colors, 44 × 44 targets, central SFX reuse, and zero gameplay authority.
+
+Coverage and exact command totals are recorded in [`docs/system-models/task-055/BROWSER_QA.md`](../system-models/task-055/BROWSER_QA.md). Focused Node coverage proves all 12 episodes / 18 Tickets / three profiles and zero causal fingerprint tokens in canonical, staged, and rendered public content.

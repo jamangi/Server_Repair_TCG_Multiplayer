@@ -1048,6 +1048,12 @@
       "sha256": "2d7872fc9706bd268d0d69a44ede6b25dc977aaf82a1884063ac910d408b6831"
     },
     {
+      "path": "content/system-model-story-v1/public-system-projections-v1.json",
+      "source": "content/system-model-story-v1/public-system-projections-v1.json",
+      "bytes": 1010455,
+      "sha256": "5b2a7d5aaf15122b20e4347369217a8698b83bc10cbedee90f0119a3be75d567"
+    },
+    {
       "path": "src/builder/canonical.mjs",
       "source": "src/builder/canonical.mjs",
       "bytes": 1837,

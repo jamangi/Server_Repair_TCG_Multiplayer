@@ -1,0 +1,211 @@
+{
+  "$defs": {
+    "binding": {
+      "additionalProperties": false,
+      "properties": {
+        "authority_boundary": {
+          "const": "EXPLANATORY_ONLY"
+        },
+        "binding_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "candidate_closure": {
+          "items": {
+            "$ref": "#/$defs/candidateClosure"
+          },
+          "maxItems": 5,
+          "minItems": 2,
+          "type": "array"
+        },
+        "fallback_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "fingerprint_id": {
+          "pattern": "^fingerprint\\.",
+          "type": "string"
+        },
+        "profile_ref": {
+          "$ref": "#/$defs/profileRef"
+        },
+        "public_requirement_capability_ids": {
+          "items": {
+            "$ref": "#/$defs/stableId"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "public_resolver_key": {
+          "$ref": "#/$defs/stableId"
+        },
+        "public_surface": {
+          "additionalProperties": false,
+          "properties": {
+            "public_candidate_fault_ids": {
+              "items": {
+                "pattern": "^fault\\.",
+                "type": "string"
+              },
+              "maxItems": 5,
+              "minItems": 2,
+              "type": "array",
+              "uniqueItems": true
+            },
+            "public_surface_digest": {
+              "$ref": "#/$defs/digest"
+            },
+            "public_symptom_ids": {
+              "items": {
+                "pattern": "^symptom\\.",
+                "type": "string"
+              },
+              "minItems": 1,
+              "type": "array",
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "public_symptom_ids",
+            "public_candidate_fault_ids",
+            "public_surface_digest"
+          ],
+          "type": "object"
+        },
+        "serialization": {
+          "$ref": "system_model_catalog_v2.schema.json#/$defs/serialization"
+        },
+        "ticket_focus_statement": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "ticket_id": {
+          "pattern": "^ticket\\.",
+          "type": "string"
+        },
+        "ticket_snapshot_digest": {
+          "$ref": "#/$defs/digest"
+        }
+      },
+      "required": [
+        "binding_id",
+        "public_resolver_key",
+        "ticket_id",
+        "fingerprint_id",
+        "ticket_snapshot_digest",
+        "public_surface",
+        "profile_ref",
+        "public_requirement_capability_ids",
+        "candidate_closure",
+        "ticket_focus_statement",
+        "fallback_id",
+        "authority_boundary",
+        "serialization"
+      ],
+      "type": "object"
+    },
+    "candidateClosure": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_fault_id": {
+          "pattern": "^fault\\.",
+          "type": "string"
+        },
+        "explanation": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "public_node_ids": {
+          "items": {
+            "$ref": "#/$defs/stableId"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "public_path_ids": {
+          "items": {
+            "$ref": "#/$defs/stableId"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "candidate_fault_id",
+        "public_node_ids",
+        "public_path_ids",
+        "explanation"
+      ],
+      "type": "object"
+    },
+    "digest": {
+      "$ref": "system_model_catalog_v2.schema.json#/$defs/digest"
+    },
+    "idArray": {
+      "$ref": "system_model_catalog_v2.schema.json#/$defs/idArray"
+    },
+    "profileRef": {
+      "additionalProperties": false,
+      "properties": {
+        "profile_content_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "profile_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "profile_revision": {
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "profile_id",
+        "profile_revision",
+        "profile_content_digest"
+      ],
+      "type": "object"
+    },
+    "stableId": {
+      "$ref": "system_model_catalog_v2.schema.json#/$defs/stableId"
+    }
+  },
+  "$id": "https://example.local/schemas/ticket_system_binding_catalog_v2.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "bindings": {
+      "items": {
+        "$ref": "#/$defs/binding"
+      },
+      "maxItems": 18,
+      "minItems": 18,
+      "type": "array"
+    },
+    "canonicalization_version": {
+      "const": "canonical-json-v1"
+    },
+    "contract_version": {
+      "const": "system-model-contract-v1"
+    },
+    "release_id": {
+      "const": "system-model-story-v1"
+    },
+    "schema_version": {
+      "const": "ticket-system-binding-catalog-v2"
+    },
+    "serialization": {
+      "$ref": "system_model_catalog_v2.schema.json#/$defs/serialization"
+    }
+  },
+  "required": [
+    "schema_version",
+    "release_id",
+    "contract_version",
+    "canonicalization_version",
+    "bindings",
+    "serialization"
+  ],
+  "title": "Released Story Ticket System Binding Catalog",
+  "type": "object"
+}

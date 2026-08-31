@@ -13,6 +13,7 @@ import { closeSettingsDialog, openSettingsDialog } from './settings-dialog.mjs';
 import { createStorageService } from './storage-service.mjs';
 import { createStoryArtResolver, loadStoryArtManifest } from './story-art-resolver.mjs';
 import { createStoryClient } from './story-client.mjs';
+import { loadSystemModelProjectionCatalog } from './system-model-service.mjs';
 import { createUiContinuity } from './ui-continuity.mjs';
 import { TutorialController } from './tutorial-controller.mjs';
 
@@ -25,6 +26,10 @@ let tutorialCatalog = null;
 let artResolver = null;
 let storage = null;
 let story = null;
+let systemModelProjectionCatalog = null;
+let systemModelProjectionStatus = 'IDLE';
+let systemModelProjectionLoadPromise = null;
+let systemModelRefreshTimer = null;
 let sfx = null;
 let initializePromise = null;
 let navigate = (hash) => { location.hash = hash; };
@@ -134,6 +139,42 @@ async function initialize() {
   return initializePromise;
 }
 
+function loadOptionalSystemModelCatalog() {
+  if (systemModelProjectionLoadPromise) return;
+  systemModelProjectionStatus = 'LOADING';
+  if (root) root.dataset.systemModelStatus = 'loading';
+  systemModelProjectionLoadPromise = loadSystemModelProjectionCatalog()
+    .then((loadedCatalog) => {
+      systemModelProjectionCatalog = loadedCatalog;
+      systemModelProjectionStatus = 'AVAILABLE';
+      if (root) root.dataset.systemModelStatus = 'available';
+    })
+    .catch(() => {
+      systemModelProjectionCatalog = null;
+      systemModelProjectionStatus = 'UNAVAILABLE';
+      if (root) root.dataset.systemModelStatus = 'unavailable';
+    })
+    .finally(() => {
+      rerenderWhenPlayDialogsSettle();
+    });
+}
+
+function rerenderWhenPlayDialogsSettle() {
+  if (!root || !route) return;
+  const expectedRoot = root;
+  const expectedRouteHash = route.hash;
+  const refreshWhenClear = () => {
+    systemModelRefreshTimer = null;
+    if (root !== expectedRoot || route?.hash !== expectedRouteHash) return;
+    if (root.querySelector('dialog[open]')) {
+      systemModelRefreshTimer = setTimeout(refreshWhenClear, 100);
+      return;
+    }
+    rerender();
+  };
+  refreshWhenClear();
+}
+
 function freshSnapshot() {
   return storage.load();
 }
@@ -148,6 +189,8 @@ function contextForRender() {
     artResolver,
     storage,
     story,
+    systemModelProjectionCatalog,
+    systemModelProjectionStatus,
     ui,
     game,
     navigate,
@@ -515,10 +558,12 @@ export async function mountPlay(nextRoot, options) {
   navigate = options.navigate;
   announce = options.announce;
   root.classList.add('play-app');
+  root.dataset.systemModelStatus = systemModelProjectionStatus.toLowerCase();
   root.innerHTML = '<section class="route-loading" aria-busy="true"><p>Loading Solo Play…</p></section>';
   await initialize();
   applyMotionPreference(freshSnapshot().state.records.settings.motion_preference);
   renderCurrent();
+  loadOptionalSystemModelCatalog();
 }
 
 export async function confirmNavigation(nextRoute) {
@@ -597,6 +642,8 @@ export async function connectSfxService(service) {
 }
 
 export function unmountPlay() {
+  if (systemModelRefreshTimer) clearTimeout(systemModelRefreshTimer);
+  systemModelRefreshTimer = null;
   teardownPlayDialogs(root);
   pageCleanup?.();
   pageCleanup = null;
@@ -610,6 +657,7 @@ export function unmountPlay() {
   gameStartInitiated = false;
   root?.classList.remove('play-app');
   root?.removeAttribute('data-motion');
+  root?.removeAttribute('data-system-model-status');
   document.body.classList.remove('active-match-layout');
   root = null;
   route = null;

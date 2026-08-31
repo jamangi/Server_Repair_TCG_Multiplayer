@@ -46,6 +46,8 @@ The audit covers the outer shell, Library, Settings, Play Home, Deck gallery/edi
 | Match result | `game.result.controls` plus the shared archive/popup/rejection families |
 | Remaining Play controls | `play.route.fallback` at priority 20, below every specialized mapping |
 
+TASK-055 keeps the read-only **Show system** route inside the existing `game.popup.open` / `game.popup.close` semantics. Opening and closing the public System Model therefore receives one catalogued overlay cue through the central service; topology focus, scrolling, rationale disclosures, and passive projection rendering add no new sound meaning.
+
 ## Source-audit conclusions
 
 - A semantic cue belongs to an accepted user operation, not to rerendering, route restoration, focus placement, Worker results, motion, evidence reveal, or Story timers.

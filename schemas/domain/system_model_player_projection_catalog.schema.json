@@ -1,0 +1,278 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/system_model_player_projection_catalog.schema.json",
+  "title": "Released Story System Model player projection catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "stableId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+    },
+    "digest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "serialization": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "canonicalization_version": { "const": "canonical-json-v1" },
+        "digest_algorithm": { "const": "sha256" },
+        "content_digest": { "$ref": "#/$defs/digest" }
+      },
+      "required": ["canonicalization_version", "digest_algorithm", "content_digest"]
+    },
+    "descriptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "concise": { "type": "string", "minLength": 1 },
+        "extended": { "type": "string", "minLength": 1 }
+      },
+      "required": ["concise", "extended"]
+    },
+    "profileIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile_id": { "$ref": "#/$defs/stableId" },
+        "profile_revision": { "type": "integer", "minimum": 1 },
+        "profile_content_digest": { "$ref": "#/$defs/digest" },
+        "display_name": { "type": "string", "minLength": 1 },
+        "model_scope": { "type": "string", "minLength": 1 },
+        "generation_or_era": { "type": "string", "minLength": 1 },
+        "exactness_class": { "enum": ["EXACT", "GENERALIZED", "MIXED"] },
+        "option_statements": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "system_model_public_projection.schema.json#/$defs/tokenStatement" }
+        },
+        "plane_statements": {
+          "type": "array",
+          "minItems": 8,
+          "maxItems": 8,
+          "items": { "$ref": "system_model_public_projection.schema.json#/$defs/planeStatement" }
+        },
+        "abstraction_statements": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "system_model_public_projection.schema.json#/$defs/abstraction" }
+        }
+      },
+      "required": [
+        "profile_id",
+        "profile_revision",
+        "profile_content_digest",
+        "display_name",
+        "model_scope",
+        "generation_or_era",
+        "exactness_class",
+        "option_statements",
+        "plane_statements",
+        "abstraction_statements"
+      ]
+    },
+    "learningReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "source_id": { "$ref": "#/$defs/stableId" },
+        "title": { "type": "string", "minLength": 1 },
+        "publisher": { "type": "string", "minLength": 1 },
+        "product_scope": { "type": "string", "minLength": 1 },
+        "revision": { "type": "string", "minLength": 1 },
+        "url": { "type": "string", "pattern": "^https://" },
+        "claim_scope": { "type": "string", "minLength": 1 },
+        "relevant_claim_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/stableId" }
+        }
+      },
+      "required": [
+        "source_id",
+        "title",
+        "publisher",
+        "product_scope",
+        "revision",
+        "url",
+        "claim_scope",
+        "relevant_claim_ids"
+      ]
+    },
+    "rationaleGroups": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "TEST": {
+          "type": "array",
+          "items": { "$ref": "system_model_public_projection.schema.json#/$defs/rationaleGraph" }
+        },
+        "COMMAND": {
+          "type": "array",
+          "items": { "$ref": "system_model_public_projection.schema.json#/$defs/rationaleGraph" }
+        },
+        "REPAIR": {
+          "type": "array",
+          "items": { "$ref": "system_model_public_projection.schema.json#/$defs/rationaleGraph" }
+        },
+        "VERIFICATION": {
+          "type": "array",
+          "items": { "$ref": "system_model_public_projection.schema.json#/$defs/rationaleGraph" }
+        }
+      },
+      "required": ["TEST", "COMMAND", "REPAIR", "VERIFICATION"]
+    },
+    "profileProjection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": { "const": "system-model-profile-projection-v1" },
+        "projection_version": { "const": "system-model-player-projection-v1" },
+        "profile": { "$ref": "#/$defs/profileIdentity" },
+        "intro": { "type": "string", "minLength": 1 },
+        "descriptions": { "$ref": "#/$defs/descriptions" },
+        "lifecycle": { "$ref": "system_model_public_projection.schema.json#/properties/lifecycle" },
+        "topology": { "$ref": "system_model_public_projection.schema.json#/properties/diagram" },
+        "components": { "$ref": "system_model_public_projection.schema.json#/properties/component_inventory" },
+        "rationales": { "$ref": "#/$defs/rationaleGroups" },
+        "learning_references": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/learningReference" }
+        },
+        "authority_boundary": { "$ref": "system_model_public_projection.schema.json#/properties/authority_boundary" },
+        "cache_key": { "$ref": "#/$defs/stableId" },
+        "serialization": { "$ref": "#/$defs/serialization" }
+      },
+      "required": [
+        "schema_version",
+        "projection_version",
+        "profile",
+        "intro",
+        "descriptions",
+        "lifecycle",
+        "topology",
+        "components",
+        "rationales",
+        "learning_references",
+        "authority_boundary",
+        "cache_key",
+        "serialization"
+      ]
+    },
+    "ticketBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ticket_id": { "$ref": "#/$defs/stableId" },
+        "ticket_snapshot_digest": { "$ref": "#/$defs/digest" },
+        "profile_id": { "$ref": "#/$defs/stableId" },
+        "profile_revision": { "type": "integer", "minimum": 1 },
+        "profile_cache_key": { "$ref": "#/$defs/stableId" },
+        "projection_cache_key": { "$ref": "#/$defs/stableId" },
+        "projection_digest": { "$ref": "#/$defs/digest" }
+      },
+      "required": [
+        "ticket_id",
+        "ticket_snapshot_digest",
+        "profile_id",
+        "profile_revision",
+        "profile_cache_key",
+        "projection_cache_key",
+        "projection_digest"
+      ]
+    },
+    "playerProjection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": { "const": "system-model-player-projection-v1" },
+        "projection_version": { "const": "system-model-player-projection-v1" },
+        "content_version": { "const": "released-story-system-projections-v1" },
+        "cache_key": { "$ref": "#/$defs/stableId" },
+        "projection_digest": { "$ref": "#/$defs/digest" },
+        "ticket_ref": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "ticket_id": { "$ref": "#/$defs/stableId" },
+            "ticket_snapshot_digest": { "$ref": "#/$defs/digest" }
+          },
+          "required": ["ticket_id", "ticket_snapshot_digest"]
+        },
+        "profile": { "$ref": "#/$defs/profileIdentity" },
+        "intro": { "type": "string", "minLength": 1 },
+        "descriptions": { "$ref": "#/$defs/descriptions" },
+        "lifecycle": { "$ref": "system_model_public_projection.schema.json#/properties/lifecycle" },
+        "topology": { "$ref": "system_model_public_projection.schema.json#/properties/diagram" },
+        "components": { "$ref": "system_model_public_projection.schema.json#/properties/component_inventory" },
+        "rationales": { "$ref": "#/$defs/rationaleGroups" },
+        "learning_references": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/learningReference" }
+        },
+        "authority_boundary": { "$ref": "system_model_public_projection.schema.json#/properties/authority_boundary" }
+      },
+      "required": [
+        "schema_version",
+        "projection_version",
+        "content_version",
+        "cache_key",
+        "projection_digest",
+        "ticket_ref",
+        "profile",
+        "intro",
+        "descriptions",
+        "lifecycle",
+        "topology",
+        "components",
+        "rationales",
+        "learning_references",
+        "authority_boundary"
+      ]
+    }
+  },
+  "properties": {
+    "schema_version": { "const": "system-model-public-projection-catalog-v1" },
+    "content_version": { "const": "released-story-system-projections-v1" },
+    "projection_version": { "const": "system-model-player-projection-v1" },
+    "source_release_id": { "const": "system-model-story-v1" },
+    "source_catalog_digest": { "$ref": "#/$defs/digest" },
+    "source_binding_catalog_digest": { "$ref": "#/$defs/digest" },
+    "fallback": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "public_message": { "const": "A detailed system model is not available for this Ticket. Ordinary troubleshooting remains unchanged." }
+      },
+      "required": ["public_message"]
+    },
+    "profile_projections": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/profileProjection" }
+    },
+    "ticket_bindings": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/ticketBinding" }
+    },
+    "serialization": { "$ref": "#/$defs/serialization" }
+  },
+  "required": [
+    "schema_version",
+    "content_version",
+    "projection_version",
+    "source_release_id",
+    "source_catalog_digest",
+    "source_binding_catalog_digest",
+    "fallback",
+    "profile_projections",
+    "ticket_bindings",
+    "serialization"
+  ]
+}

@@ -1161,7 +1161,7 @@ export const SFX_INTERACTIONS = Object.freeze([
     "dedupe_group": "popup",
     "overlap_policy": "interrupt",
     "event_type": "click",
-    "selector": "[data-view-full-ticket], [data-inspect-selected], [data-inspect-diagnostic], [data-inspect-hand], [data-preview-document], [data-archive-ticket-id], [data-view-solution-ticket]",
+    "selector": "[data-view-full-ticket], [data-view-system], [data-inspect-selected], [data-inspect-diagnostic], [data-inspect-hand], [data-preview-document], [data-archive-ticket-id], [data-view-solution-ticket]",
     "recipe_id": "sfx.popup.open"
   },
   {
@@ -1193,7 +1193,7 @@ export const SFX_INTERACTIONS = Object.freeze([
     "dedupe_group": "popup",
     "overlap_policy": "interrupt",
     "event_type": "click",
-    "selector": "[data-close-dialog='full-ticket'], [data-close-dialog='card'], [data-close-dialog='archive-review']",
+    "selector": "[data-close-dialog='full-ticket'], [data-close-dialog='system'], [data-close-dialog='card'], [data-close-dialog='archive-review']",
     "recipe_id": "sfx.popup.close"
   },
   {

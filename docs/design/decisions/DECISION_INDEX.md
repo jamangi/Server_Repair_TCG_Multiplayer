@@ -52,7 +52,7 @@ Rejected, derivative, or superseded ideas need not remain in the active foundati
 
 ## Foundation status
 
-The V0 training-ready and released Story sequences through TASK-048 are complete under the recorded PT, UI, and Story approvals. TASK-049 through TASK-052 completed the System Model contract, research atlas, typed production pilot, and five-Ticket resolver/projection proof without changing V0 authority. The project owner approved `SYSTEM-001 A` on 2026-08-30 and `SYSTEM-002 A` on 2026-08-31. TASK-053 is therefore the next authorized System Model boundary; TASK-054 and TASK-055 remain ordered behind their stated task prerequisites. The V2 Migration Seed direction remains approved except that MS-006 A's prior parking sequence is superseded; TASK-017 is deferred until the project owner returns to it.
+The V0 training-ready and released Story sequences through TASK-048 are complete under the recorded PT, UI, and Story approvals. TASK-049 through TASK-055 completed the System Model contract, research atlas, typed pilot, released-Story synchronization, production projection, and public-safe **Show system** experience without changing V0 authority. The project owner approved `SYSTEM-001 A` on 2026-08-30 and `SYSTEM-002 A` on 2026-08-31; both gates were satisfied without a new approval choice. No successor System Model task is currently authorized. The V2 Migration Seed direction remains approved except that MS-006 A's prior parking sequence is superseded; TASK-017 is deferred until the project owner returns to it.
 
 ## Maintenance rules
 

@@ -1,0 +1,1070 @@
+{
+  "schema_version": "system-model-production-build-report-v1",
+  "source_release_id": "system-model-story-v1",
+  "public_content_version": "released-story-system-projections-v1",
+  "projection_version": "system-model-player-projection-v1",
+  "totals": {
+    "tickets_resolved": 18,
+    "profile_cores": 3,
+    "compatibility_proofs_passed": 18,
+    "deterministic_builds_compared": 2,
+    "fallback_cases_checked": 2
+  },
+  "measurements": {
+    "ticket_count": 18,
+    "profile_count": 3,
+    "raw_bytes": 1010455,
+    "gzip_bytes": 59221,
+    "naive_repeated_bytes": 6323679,
+    "deduplicated_bytes_saved": 5313224
+  },
+  "ticket_results": [
+    {
+      "ticket_id": "ticket.generated.36ba2ae8958431194a7e1fef",
+      "ticket_snapshot_digest": "c71d7e7f87b7e1177f7f8b79344293dee489778c9acfc9ba213d9cb7410aa671",
+      "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+      "profile_revision": 1,
+      "projection_digest": "6dbd1fb656a9bbe1c527209f9d5cb93e626f555d1177a56221d4b887d078cbce",
+      "resolution": {
+        "status": "RESOLVED",
+        "reason_code": "RESOLVED",
+        "steps": [
+          {
+            "step": "request",
+            "code": "PUBLIC_INPUTS_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "binding_lookup",
+            "code": "EXACTLY_ONE_BINDING",
+            "status": "PASS"
+          },
+          {
+            "step": "public_surface",
+            "code": "PUBLIC_SURFACE_AND_ACTIVE_CANDIDATES_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "profile_pin",
+            "code": "PROFILE_ID_REVISION_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "profile_consistency",
+            "code": "PUBLIC_CAPABILITY_TOPOLOGY_AND_CLOSURE_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "serialization",
+            "code": "PROFILE_DIGEST_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "public_projection",
+            "code": "ONE_SOURCE_PROJECTION_ACCEPTED",
+            "status": "PASS"
+          }
+        ]
+      },
+      "authoring_compatibility": {
+        "status": "PASS",
+        "reason_code": "AUTHORING_COMPATIBILITY_CONFIRMED",
+        "coverage": {
+          "authored_role_checks": 1,
+          "authored_action_checks": 3,
+          "differential_cases": 2
+        }
+      }
+    },
+    {
+      "ticket_id": "ticket.generated.3ec80b1b0e7221ac725aedf9",
+      "ticket_snapshot_digest": "1c74ad0725e500ac01d4c356f17551fee11678a88b35ca5b591ff056a2efdff2",
+      "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+      "profile_revision": 1,
+      "projection_digest": "38371a0acf73a4f48563105a5230db8dad3da4c2f1574cd12a25c4fa09cd1969",
+      "resolution": {
+        "status": "RESOLVED",
+        "reason_code": "RESOLVED",
+        "steps": [
+          {
+            "step": "request",
+            "code": "PUBLIC_INPUTS_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "binding_lookup",
+            "code": "EXACTLY_ONE_BINDING",
+            "status": "PASS"
+          },
+          {
+            "step": "public_surface",
+            "code": "PUBLIC_SURFACE_AND_ACTIVE_CANDIDATES_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "profile_pin",
+            "code": "PROFILE_ID_REVISION_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "profile_consistency",
+            "code": "PUBLIC_CAPABILITY_TOPOLOGY_AND_CLOSURE_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "serialization",
+            "code": "PROFILE_DIGEST_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "public_projection",
+            "code": "ONE_SOURCE_PROJECTION_ACCEPTED",
+            "status": "PASS"
+          }
+        ]
+      },
+      "authoring_compatibility": {
+        "status": "PASS",
+        "reason_code": "AUTHORING_COMPATIBILITY_CONFIRMED",
+        "coverage": {
+          "authored_role_checks": 2,
+          "authored_action_checks": 4,
+          "differential_cases": 5
+        }
+      }
+    },
+    {
+      "ticket_id": "ticket.generated.3fd6eb04534f79b5b3f87f98",
+      "ticket_snapshot_digest": "d34f08d79c2cc2d47d16d23ec753f1e78758d0b358664d4e592ea23f25b63d73",
+      "profile_id": "profile.dell.poweredge-r740xd2.power-interposer.v1",
+      "profile_revision": 1,
+      "projection_digest": "cc77e2de41c3c2ef463485a8e88e8a8a41eeb578fc14fbdc39b657351603607c",
+      "resolution": {
+        "status": "RESOLVED",
+        "reason_code": "RESOLVED",
+        "steps": [
+          {
+            "step": "request",
+            "code": "PUBLIC_INPUTS_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "binding_lookup",
+            "code": "EXACTLY_ONE_BINDING",
+            "status": "PASS"
+          },
+          {
+            "step": "public_surface",
+            "code": "PUBLIC_SURFACE_AND_ACTIVE_CANDIDATES_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "profile_pin",
+            "code": "PROFILE_ID_REVISION_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "profile_consistency",
+            "code": "PUBLIC_CAPABILITY_TOPOLOGY_AND_CLOSURE_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "serialization",
+            "code": "PROFILE_DIGEST_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "public_projection",
+            "code": "ONE_SOURCE_PROJECTION_ACCEPTED",
+            "status": "PASS"
+          }
+        ]
+      },
+      "authoring_compatibility": {
+        "status": "PASS",
+        "reason_code": "AUTHORING_COMPATIBILITY_CONFIRMED",
+        "coverage": {
+          "authored_role_checks": 1,
+          "authored_action_checks": 3,
+          "differential_cases": 5
+        }
+      }
+    },
+    {
+      "ticket_id": "ticket.generated.424c8fab1db6aed25058ab78",
+      "ticket_snapshot_digest": "268c91a53ad795437e6690b2a5cc843071eea627671f2168b7a0dca00941a9c7",
+      "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+      "profile_revision": 1,
+      "projection_digest": "6ddba8cfee6d8bcef5cea14e8218915a17f70a5bac4161147726d30c1f0c5c10",
+      "resolution": {
+        "status": "RESOLVED",
+        "reason_code": "RESOLVED",
+        "steps": [
+          {
+            "step": "request",
+            "code": "PUBLIC_INPUTS_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "binding_lookup",
+            "code": "EXACTLY_ONE_BINDING",
+            "status": "PASS"
+          },
+          {
+            "step": "public_surface",
+            "code": "PUBLIC_SURFACE_AND_ACTIVE_CANDIDATES_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "profile_pin",
+            "code": "PROFILE_ID_REVISION_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "profile_consistency",
+            "code": "PUBLIC_CAPABILITY_TOPOLOGY_AND_CLOSURE_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "serialization",
+            "code": "PROFILE_DIGEST_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "public_projection",
+            "code": "ONE_SOURCE_PROJECTION_ACCEPTED",
+            "status": "PASS"
+          }
+        ]
+      },
+      "authoring_compatibility": {
+        "status": "PASS",
+        "reason_code": "AUTHORING_COMPATIBILITY_CONFIRMED",
+        "coverage": {
+          "authored_role_checks": 2,
+          "authored_action_checks": 4,
+          "differential_cases": 3
+        }
+      }
+    },
+    {
+      "ticket_id": "ticket.generated.45a70010dd4752f864990575",
+      "ticket_snapshot_digest": "863ca5c0e0a72f9440e3352c80b070f4bde1ca166c801e79425821adfa7f4420",
+      "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+      "profile_revision": 1,
+      "projection_digest": "b01c0c1b76183afd0e035762fdd8746e25ab8eb70bc2ae0ec3baa08972f2cc0d",
+      "resolution": {
+        "status": "RESOLVED",
+        "reason_code": "RESOLVED",
+        "steps": [
+          {
+            "step": "request",
+            "code": "PUBLIC_INPUTS_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "binding_lookup",
+            "code": "EXACTLY_ONE_BINDING",
+            "status": "PASS"
+          },
+          {
+            "step": "public_surface",
+            "code": "PUBLIC_SURFACE_AND_ACTIVE_CANDIDATES_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "profile_pin",
+            "code": "PROFILE_ID_REVISION_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "profile_consistency",
+            "code": "PUBLIC_CAPABILITY_TOPOLOGY_AND_CLOSURE_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "serialization",
+            "code": "PROFILE_DIGEST_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "public_projection",
+            "code": "ONE_SOURCE_PROJECTION_ACCEPTED",
+            "status": "PASS"
+          }
+        ]
+      },
+      "authoring_compatibility": {
+        "status": "PASS",
+        "reason_code": "AUTHORING_COMPATIBILITY_CONFIRMED",
+        "coverage": {
+          "authored_role_checks": 2,
+          "authored_action_checks": 3,
+          "differential_cases": 3
+        }
+      }
+    },
+    {
+      "ticket_id": "ticket.generated.4f237a22c35d46166044b2c7",
+      "ticket_snapshot_digest": "dc4e0581e510fd94120fcca53ee8b25f5a8d3b456253627c7faf5603c5d8e481",
+      "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+      "profile_revision": 1,
+      "projection_digest": "f8c067a824e3431daa2ccf86e73a21418486ad8f2df57f3b3a8cf8fe1b135c4f",
+      "resolution": {
+        "status": "RESOLVED",
+        "reason_code": "RESOLVED",
+        "steps": [
+          {
+            "step": "request",
+            "code": "PUBLIC_INPUTS_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "binding_lookup",
+            "code": "EXACTLY_ONE_BINDING",
+            "status": "PASS"
+          },
+          {
+            "step": "public_surface",
+            "code": "PUBLIC_SURFACE_AND_ACTIVE_CANDIDATES_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "profile_pin",
+            "code": "PROFILE_ID_REVISION_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "profile_consistency",
+            "code": "PUBLIC_CAPABILITY_TOPOLOGY_AND_CLOSURE_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "serialization",
+            "code": "PROFILE_DIGEST_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "public_projection",
+            "code": "ONE_SOURCE_PROJECTION_ACCEPTED",
+            "status": "PASS"
+          }
+        ]
+      },
+      "authoring_compatibility": {
+        "status": "PASS",
+        "reason_code": "AUTHORING_COMPATIBILITY_CONFIRMED",
+        "coverage": {
+          "authored_role_checks": 1,
+          "authored_action_checks": 3,
+          "differential_cases": 5
+        }
+      }
+    },
+    {
+      "ticket_id": "ticket.generated.5352abd871c2e9076be92a0b",
+      "ticket_snapshot_digest": "b06dc5a7d12c29af78edd71f7a82a611d971844e6e71863e142bc293f4e6af27",
+      "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+      "profile_revision": 1,
+      "projection_digest": "3bfeaa534f2b2d475d7755686ca8da3ca344f4c7ea1f8e121b925fd9e73af7b8",
+      "resolution": {
+        "status": "RESOLVED",
+        "reason_code": "RESOLVED",
+        "steps": [
+          {
+            "step": "request",
+            "code": "PUBLIC_INPUTS_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "binding_lookup",
+            "code": "EXACTLY_ONE_BINDING",
+            "status": "PASS"
+          },
+          {
+            "step": "public_surface",
+            "code": "PUBLIC_SURFACE_AND_ACTIVE_CANDIDATES_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "profile_pin",
+            "code": "PROFILE_ID_REVISION_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "profile_consistency",
+            "code": "PUBLIC_CAPABILITY_TOPOLOGY_AND_CLOSURE_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "serialization",
+            "code": "PROFILE_DIGEST_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "public_projection",
+            "code": "ONE_SOURCE_PROJECTION_ACCEPTED",
+            "status": "PASS"
+          }
+        ]
+      },
+      "authoring_compatibility": {
+        "status": "PASS",
+        "reason_code": "AUTHORING_COMPATIBILITY_CONFIRMED",
+        "coverage": {
+          "authored_role_checks": 1,
+          "authored_action_checks": 4,
+          "differential_cases": 5
+        }
+      }
+    },
+    {
+      "ticket_id": "ticket.generated.6e55cf55154d356da2e91126",
+      "ticket_snapshot_digest": "ce86a008060199c2f5c5cb2ed763385e8766315e35a2ce1b9b3e19fa39627a95",
+      "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+      "profile_revision": 1,
+      "projection_digest": "51441d2791874d44511b77967f52c7fa8c20436c955e06677032ef564d223d5b",
+      "resolution": {
+        "status": "RESOLVED",
+        "reason_code": "RESOLVED",
+        "steps": [
+          {
+            "step": "request",
+            "code": "PUBLIC_INPUTS_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "binding_lookup",
+            "code": "EXACTLY_ONE_BINDING",
+            "status": "PASS"
+          },
+          {
+            "step": "public_surface",
+            "code": "PUBLIC_SURFACE_AND_ACTIVE_CANDIDATES_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "profile_pin",
+            "code": "PROFILE_ID_REVISION_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "profile_consistency",
+            "code": "PUBLIC_CAPABILITY_TOPOLOGY_AND_CLOSURE_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "serialization",
+            "code": "PROFILE_DIGEST_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "public_projection",
+            "code": "ONE_SOURCE_PROJECTION_ACCEPTED",
+            "status": "PASS"
+          }
+        ]
+      },
+      "authoring_compatibility": {
+        "status": "PASS",
+        "reason_code": "AUTHORING_COMPATIBILITY_CONFIRMED",
+        "coverage": {
+          "authored_role_checks": 2,
+          "authored_action_checks": 3,
+          "differential_cases": 4
+        }
+      }
+    },
+    {
+      "ticket_id": "ticket.generated.759fd75d6ac043a57d6673d7",
+      "ticket_snapshot_digest": "45f7e05c9d9a57f0e324c34d21dd1420d7c0f76ec0c4753b1494414a292697bd",
+      "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+      "profile_revision": 1,
+      "projection_digest": "c3a46043583c4bc39f62bd6c738101f56a6a9b3530e977f001a0781c2bf9c0a9",
+      "resolution": {
+        "status": "RESOLVED",
+        "reason_code": "RESOLVED",
+        "steps": [
+          {
+            "step": "request",
+            "code": "PUBLIC_INPUTS_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "binding_lookup",
+            "code": "EXACTLY_ONE_BINDING",
+            "status": "PASS"
+          },
+          {
+            "step": "public_surface",
+            "code": "PUBLIC_SURFACE_AND_ACTIVE_CANDIDATES_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "profile_pin",
+            "code": "PROFILE_ID_REVISION_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "profile_consistency",
+            "code": "PUBLIC_CAPABILITY_TOPOLOGY_AND_CLOSURE_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "serialization",
+            "code": "PROFILE_DIGEST_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "public_projection",
+            "code": "ONE_SOURCE_PROJECTION_ACCEPTED",
+            "status": "PASS"
+          }
+        ]
+      },
+      "authoring_compatibility": {
+        "status": "PASS",
+        "reason_code": "AUTHORING_COMPATIBILITY_CONFIRMED",
+        "coverage": {
+          "authored_role_checks": 1,
+          "authored_action_checks": 3,
+          "differential_cases": 5
+        }
+      }
+    },
+    {
+      "ticket_id": "ticket.generated.75ea6ec9e60d64c7cac4caa5",
+      "ticket_snapshot_digest": "1bd3ccabc476313a0420cb9889ab5e7b84c60c250aa32f3d4f009f614f2c47e5",
+      "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+      "profile_revision": 1,
+      "projection_digest": "a45bbe0543dd141e5eb9a861f225e7190ed3d532ad31f149c59108dff11d833b",
+      "resolution": {
+        "status": "RESOLVED",
+        "reason_code": "RESOLVED",
+        "steps": [
+          {
+            "step": "request",
+            "code": "PUBLIC_INPUTS_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "binding_lookup",
+            "code": "EXACTLY_ONE_BINDING",
+            "status": "PASS"
+          },
+          {
+            "step": "public_surface",
+            "code": "PUBLIC_SURFACE_AND_ACTIVE_CANDIDATES_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "profile_pin",
+            "code": "PROFILE_ID_REVISION_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "profile_consistency",
+            "code": "PUBLIC_CAPABILITY_TOPOLOGY_AND_CLOSURE_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "serialization",
+            "code": "PROFILE_DIGEST_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "public_projection",
+            "code": "ONE_SOURCE_PROJECTION_ACCEPTED",
+            "status": "PASS"
+          }
+        ]
+      },
+      "authoring_compatibility": {
+        "status": "PASS",
+        "reason_code": "AUTHORING_COMPATIBILITY_CONFIRMED",
+        "coverage": {
+          "authored_role_checks": 2,
+          "authored_action_checks": 3,
+          "differential_cases": 2
+        }
+      }
+    },
+    {
+      "ticket_id": "ticket.generated.8ee2c08bae1e3d005b35bff5",
+      "ticket_snapshot_digest": "8c7810616e535b8f62d3303e501bfcfdf8c9071df23903e2727b6fcb476e0d4b",
+      "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+      "profile_revision": 1,
+      "projection_digest": "3bfa434a45515515dd0bb2407d82240e7248945dc3b0a2d84810f07832fca44f",
+      "resolution": {
+        "status": "RESOLVED",
+        "reason_code": "RESOLVED",
+        "steps": [
+          {
+            "step": "request",
+            "code": "PUBLIC_INPUTS_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "binding_lookup",
+            "code": "EXACTLY_ONE_BINDING",
+            "status": "PASS"
+          },
+          {
+            "step": "public_surface",
+            "code": "PUBLIC_SURFACE_AND_ACTIVE_CANDIDATES_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "profile_pin",
+            "code": "PROFILE_ID_REVISION_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "profile_consistency",
+            "code": "PUBLIC_CAPABILITY_TOPOLOGY_AND_CLOSURE_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "serialization",
+            "code": "PROFILE_DIGEST_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "public_projection",
+            "code": "ONE_SOURCE_PROJECTION_ACCEPTED",
+            "status": "PASS"
+          }
+        ]
+      },
+      "authoring_compatibility": {
+        "status": "PASS",
+        "reason_code": "AUTHORING_COMPATIBILITY_CONFIRMED",
+        "coverage": {
+          "authored_role_checks": 1,
+          "authored_action_checks": 3,
+          "differential_cases": 3
+        }
+      }
+    },
+    {
+      "ticket_id": "ticket.generated.a10b8767580c9453c679a326",
+      "ticket_snapshot_digest": "c55b2fb6c7aee2644929ecdd803b3b3f5155b5ec4426b43e4953d0082391e0f7",
+      "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+      "profile_revision": 1,
+      "projection_digest": "40841df624c2d45cd9a7951b3ad0937930b27a71e19a7c9f30fce7e1c895c2ea",
+      "resolution": {
+        "status": "RESOLVED",
+        "reason_code": "RESOLVED",
+        "steps": [
+          {
+            "step": "request",
+            "code": "PUBLIC_INPUTS_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "binding_lookup",
+            "code": "EXACTLY_ONE_BINDING",
+            "status": "PASS"
+          },
+          {
+            "step": "public_surface",
+            "code": "PUBLIC_SURFACE_AND_ACTIVE_CANDIDATES_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "profile_pin",
+            "code": "PROFILE_ID_REVISION_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "profile_consistency",
+            "code": "PUBLIC_CAPABILITY_TOPOLOGY_AND_CLOSURE_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "serialization",
+            "code": "PROFILE_DIGEST_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "public_projection",
+            "code": "ONE_SOURCE_PROJECTION_ACCEPTED",
+            "status": "PASS"
+          }
+        ]
+      },
+      "authoring_compatibility": {
+        "status": "PASS",
+        "reason_code": "AUTHORING_COMPATIBILITY_CONFIRMED",
+        "coverage": {
+          "authored_role_checks": 1,
+          "authored_action_checks": 4,
+          "differential_cases": 3
+        }
+      }
+    },
+    {
+      "ticket_id": "ticket.generated.b34238282822e93980b5f1ad",
+      "ticket_snapshot_digest": "face80b0d5c6f6c7f1ef3bb0495c0c6e4105360fa07887fb50cc2dea440cbc50",
+      "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+      "profile_revision": 1,
+      "projection_digest": "9d9fc394ba4c41654e51ea04a670902df6a9a67d0525ed8bd8f19a1433d198c4",
+      "resolution": {
+        "status": "RESOLVED",
+        "reason_code": "RESOLVED",
+        "steps": [
+          {
+            "step": "request",
+            "code": "PUBLIC_INPUTS_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "binding_lookup",
+            "code": "EXACTLY_ONE_BINDING",
+            "status": "PASS"
+          },
+          {
+            "step": "public_surface",
+            "code": "PUBLIC_SURFACE_AND_ACTIVE_CANDIDATES_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "profile_pin",
+            "code": "PROFILE_ID_REVISION_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "profile_consistency",
+            "code": "PUBLIC_CAPABILITY_TOPOLOGY_AND_CLOSURE_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "serialization",
+            "code": "PROFILE_DIGEST_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "public_projection",
+            "code": "ONE_SOURCE_PROJECTION_ACCEPTED",
+            "status": "PASS"
+          }
+        ]
+      },
+      "authoring_compatibility": {
+        "status": "PASS",
+        "reason_code": "AUTHORING_COMPATIBILITY_CONFIRMED",
+        "coverage": {
+          "authored_role_checks": 1,
+          "authored_action_checks": 4,
+          "differential_cases": 4
+        }
+      }
+    },
+    {
+      "ticket_id": "ticket.generated.b68505324c44f11977fcda07",
+      "ticket_snapshot_digest": "c889bd1e907f1537e8080822e7d9ded3821e0507fe8bc20f49490ae81f01f0e8",
+      "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+      "profile_revision": 1,
+      "projection_digest": "65fe6fafc40f2a415c45bee60b335414127e487a134adbd8414a496e971dddee",
+      "resolution": {
+        "status": "RESOLVED",
+        "reason_code": "RESOLVED",
+        "steps": [
+          {
+            "step": "request",
+            "code": "PUBLIC_INPUTS_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "binding_lookup",
+            "code": "EXACTLY_ONE_BINDING",
+            "status": "PASS"
+          },
+          {
+            "step": "public_surface",
+            "code": "PUBLIC_SURFACE_AND_ACTIVE_CANDIDATES_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "profile_pin",
+            "code": "PROFILE_ID_REVISION_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "profile_consistency",
+            "code": "PUBLIC_CAPABILITY_TOPOLOGY_AND_CLOSURE_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "serialization",
+            "code": "PROFILE_DIGEST_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "public_projection",
+            "code": "ONE_SOURCE_PROJECTION_ACCEPTED",
+            "status": "PASS"
+          }
+        ]
+      },
+      "authoring_compatibility": {
+        "status": "PASS",
+        "reason_code": "AUTHORING_COMPATIBILITY_CONFIRMED",
+        "coverage": {
+          "authored_role_checks": 1,
+          "authored_action_checks": 3,
+          "differential_cases": 2
+        }
+      }
+    },
+    {
+      "ticket_id": "ticket.generated.cbc8003979ffdaca83b41d7d",
+      "ticket_snapshot_digest": "4de1801512399068fea5881be79955af674ae35eff511d7a1d75101d6c0085d2",
+      "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+      "profile_revision": 1,
+      "projection_digest": "4967d9e6693f26fd107a594f69bea91a8a1aa3179bf1c969ef7383034a4def9c",
+      "resolution": {
+        "status": "RESOLVED",
+        "reason_code": "RESOLVED",
+        "steps": [
+          {
+            "step": "request",
+            "code": "PUBLIC_INPUTS_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "binding_lookup",
+            "code": "EXACTLY_ONE_BINDING",
+            "status": "PASS"
+          },
+          {
+            "step": "public_surface",
+            "code": "PUBLIC_SURFACE_AND_ACTIVE_CANDIDATES_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "profile_pin",
+            "code": "PROFILE_ID_REVISION_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "profile_consistency",
+            "code": "PUBLIC_CAPABILITY_TOPOLOGY_AND_CLOSURE_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "serialization",
+            "code": "PROFILE_DIGEST_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "public_projection",
+            "code": "ONE_SOURCE_PROJECTION_ACCEPTED",
+            "status": "PASS"
+          }
+        ]
+      },
+      "authoring_compatibility": {
+        "status": "PASS",
+        "reason_code": "AUTHORING_COMPATIBILITY_CONFIRMED",
+        "coverage": {
+          "authored_role_checks": 2,
+          "authored_action_checks": 4,
+          "differential_cases": 5
+        }
+      }
+    },
+    {
+      "ticket_id": "ticket.generated.ef8a4924e707349bce5c2be7",
+      "ticket_snapshot_digest": "821769a6021482074d523c723dc08a6b9bd2885820eabe11a9011b199fc6dacb",
+      "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+      "profile_revision": 1,
+      "projection_digest": "3778082f955ceee424763cfb8c9c874e7db5aac2d97026b9798e878cd9282b0b",
+      "resolution": {
+        "status": "RESOLVED",
+        "reason_code": "RESOLVED",
+        "steps": [
+          {
+            "step": "request",
+            "code": "PUBLIC_INPUTS_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "binding_lookup",
+            "code": "EXACTLY_ONE_BINDING",
+            "status": "PASS"
+          },
+          {
+            "step": "public_surface",
+            "code": "PUBLIC_SURFACE_AND_ACTIVE_CANDIDATES_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "profile_pin",
+            "code": "PROFILE_ID_REVISION_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "profile_consistency",
+            "code": "PUBLIC_CAPABILITY_TOPOLOGY_AND_CLOSURE_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "serialization",
+            "code": "PROFILE_DIGEST_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "public_projection",
+            "code": "ONE_SOURCE_PROJECTION_ACCEPTED",
+            "status": "PASS"
+          }
+        ]
+      },
+      "authoring_compatibility": {
+        "status": "PASS",
+        "reason_code": "AUTHORING_COMPATIBILITY_CONFIRMED",
+        "coverage": {
+          "authored_role_checks": 1,
+          "authored_action_checks": 4,
+          "differential_cases": 2
+        }
+      }
+    },
+    {
+      "ticket_id": "ticket.generated.f32b85cbf2054fdf0114f42a",
+      "ticket_snapshot_digest": "761016e56ceb47a585727555f64bac47b103933cddbafc27a5c385f402851b01",
+      "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+      "profile_revision": 1,
+      "projection_digest": "81a21fa136894c31a0b040059d006e7e51d74f1568df64dbeb7eba62e233d1d5",
+      "resolution": {
+        "status": "RESOLVED",
+        "reason_code": "RESOLVED",
+        "steps": [
+          {
+            "step": "request",
+            "code": "PUBLIC_INPUTS_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "binding_lookup",
+            "code": "EXACTLY_ONE_BINDING",
+            "status": "PASS"
+          },
+          {
+            "step": "public_surface",
+            "code": "PUBLIC_SURFACE_AND_ACTIVE_CANDIDATES_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "profile_pin",
+            "code": "PROFILE_ID_REVISION_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "profile_consistency",
+            "code": "PUBLIC_CAPABILITY_TOPOLOGY_AND_CLOSURE_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "serialization",
+            "code": "PROFILE_DIGEST_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "public_projection",
+            "code": "ONE_SOURCE_PROJECTION_ACCEPTED",
+            "status": "PASS"
+          }
+        ]
+      },
+      "authoring_compatibility": {
+        "status": "PASS",
+        "reason_code": "AUTHORING_COMPATIBILITY_CONFIRMED",
+        "coverage": {
+          "authored_role_checks": 1,
+          "authored_action_checks": 3,
+          "differential_cases": 2
+        }
+      }
+    },
+    {
+      "ticket_id": "ticket.generated.f60b9ce132c74c33f607df6d",
+      "ticket_snapshot_digest": "b8f877726a0d4356575d9efeb51c8226c674687ba0806ba067142ffc3f90c8cd",
+      "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+      "profile_revision": 1,
+      "projection_digest": "ffaad7da8ff40bb1ec289d197b455b6de2ef853d9953f2026fcdf07cdb5d910d",
+      "resolution": {
+        "status": "RESOLVED",
+        "reason_code": "RESOLVED",
+        "steps": [
+          {
+            "step": "request",
+            "code": "PUBLIC_INPUTS_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "binding_lookup",
+            "code": "EXACTLY_ONE_BINDING",
+            "status": "PASS"
+          },
+          {
+            "step": "public_surface",
+            "code": "PUBLIC_SURFACE_AND_ACTIVE_CANDIDATES_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "profile_pin",
+            "code": "PROFILE_ID_REVISION_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "profile_consistency",
+            "code": "PUBLIC_CAPABILITY_TOPOLOGY_AND_CLOSURE_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "serialization",
+            "code": "PROFILE_DIGEST_ACCEPTED",
+            "status": "PASS"
+          },
+          {
+            "step": "public_projection",
+            "code": "ONE_SOURCE_PROJECTION_ACCEPTED",
+            "status": "PASS"
+          }
+        ]
+      },
+      "authoring_compatibility": {
+        "status": "PASS",
+        "reason_code": "AUTHORING_COMPATIBILITY_CONFIRMED",
+        "coverage": {
+          "authored_role_checks": 2,
+          "authored_action_checks": 3,
+          "differential_cases": 4
+        }
+      }
+    }
+  ],
+  "fallback_results": [
+    {
+      "status": "UNAVAILABLE",
+      "reason_code": "NO_PUBLIC_BINDING",
+      "public_message": "A detailed system model is not available for this Ticket. Ordinary troubleshooting remains unchanged.",
+      "fabricated_projection": false,
+      "gameplay_effect": "NONE"
+    },
+    {
+      "status": "UNAVAILABLE",
+      "reason_code": "PROFILE_NOT_FOUND",
+      "public_message": "A detailed system model is not available for this Ticket. Ordinary troubleshooting remains unchanged.",
+      "fabricated_projection": false,
+      "gameplay_effect": "NONE"
+    }
+  ],
+  "serialization": {
+    "canonicalization_version": "canonical-json-v1",
+    "digest_algorithm": "sha256",
+    "content_digest": "431947860ac7282f34688c5b5a1b559d040888a702d19de42c3a8d292b04899c"
+  }
+}

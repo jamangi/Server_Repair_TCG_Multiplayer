@@ -1,0 +1,168 @@
+{
+  "$defs": {
+    "digest": {
+      "$ref": "system_model_catalog_v2.schema.json#/$defs/digest"
+    },
+    "immutableInput": {
+      "additionalProperties": false,
+      "properties": {
+        "mutation_policy": {
+          "const": "MUST_REMAIN_BYTE_IDENTICAL"
+        },
+        "path": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "purpose": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "sha256": {
+          "$ref": "#/$defs/digest"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "purpose",
+        "mutation_policy"
+      ],
+      "type": "object"
+    },
+    "stableId": {
+      "$ref": "system_model_catalog_v2.schema.json#/$defs/stableId"
+    },
+    "ticketBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "binding_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "migration_action": {
+          "enum": [
+            "PRESERVE_EXISTING_BINDING",
+            "ADD_EXTERNAL_VERSIONED_BINDING"
+          ]
+        },
+        "prior_ticket_snapshot_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "profile_ref": {
+          "$ref": "ticket_system_binding_catalog_v2.schema.json#/$defs/profileRef"
+        },
+        "ticket_id": {
+          "pattern": "^ticket\\.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "ticket_id",
+        "prior_ticket_snapshot_digest",
+        "binding_id",
+        "profile_ref",
+        "migration_action"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "https://example.local/schemas/system_model_migration_v2.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "added_component_ids": {
+      "items": {
+        "pattern": "^component\\.",
+        "type": "string"
+      },
+      "maxItems": 0,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "compatibility": {
+      "additionalProperties": false,
+      "properties": {
+        "active_deck_and_bench": {
+          "const": "UNCHANGED"
+        },
+        "evidence_and_isolation_authority": {
+          "const": "UNCHANGED"
+        },
+        "story_checkpoint_and_replay_identity": {
+          "const": "UNCHANGED"
+        },
+        "ticket_engine_behavior": {
+          "const": "UNCHANGED"
+        },
+        "unsupported_ticket_behavior": {
+          "const": "NO_SYSTEM_BINDING_OUTSIDE_RELEASED_STORY"
+        }
+      },
+      "required": [
+        "ticket_engine_behavior",
+        "active_deck_and_bench",
+        "evidence_and_isolation_authority",
+        "story_checkpoint_and_replay_identity",
+        "unsupported_ticket_behavior"
+      ],
+      "type": "object"
+    },
+    "from_release": {
+      "const": "system-model-pilot-v1"
+    },
+    "immutable_inputs": {
+      "items": {
+        "$ref": "#/$defs/immutableInput"
+      },
+      "minItems": 11,
+      "type": "array"
+    },
+    "migration_id": {
+      "$ref": "#/$defs/stableId"
+    },
+    "migration_strategy": {
+      "const": "VERSIONED_SUCCESSOR_OVERLAY"
+    },
+    "preserved_component_ids": {
+      "items": {
+        "pattern": "^component\\.",
+        "type": "string"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "schema_version": {
+      "const": "system-model-migration-v2"
+    },
+    "serialization": {
+      "$ref": "system_model_catalog_v2.schema.json#/$defs/serialization"
+    },
+    "ticket_bindings": {
+      "items": {
+        "$ref": "#/$defs/ticketBinding"
+      },
+      "maxItems": 18,
+      "minItems": 18,
+      "type": "array"
+    },
+    "to_release": {
+      "const": "system-model-story-v1"
+    }
+  },
+  "required": [
+    "schema_version",
+    "migration_id",
+    "migration_strategy",
+    "from_release",
+    "to_release",
+    "immutable_inputs",
+    "ticket_bindings",
+    "added_component_ids",
+    "preserved_component_ids",
+    "compatibility",
+    "serialization"
+  ],
+  "title": "Released Story System Model Migration",
+  "type": "object"
+}

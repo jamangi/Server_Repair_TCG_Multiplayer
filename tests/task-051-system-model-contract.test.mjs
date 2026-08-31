@@ -278,5 +278,5 @@ test('TASK-051 release documentation has no missing repository-relative links', 
       );
     }
   }
-  assert.equal(checked, 34);
+  assert.equal(checked, 46);
 });

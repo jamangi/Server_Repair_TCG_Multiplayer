@@ -1,0 +1,443 @@
+{
+  "$defs": {
+    "builderContract": {
+      "additionalProperties": false,
+      "properties": {
+        "card_catalog_version": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "configuration_version": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "domain_content_version": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "LEGACY_TOP_LEVEL_PROFILE",
+            "EMBEDDED_V4_CONFIGURATION"
+          ]
+        },
+        "ticket_content_version": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "configuration_version",
+        "domain_content_version",
+        "ticket_content_version",
+        "card_catalog_version"
+      ],
+      "type": "object"
+    },
+    "coverageMeasure": {
+      "additionalProperties": false,
+      "properties": {
+        "covered": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "percent": {
+          "const": 100
+        },
+        "total": {
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "covered",
+        "total",
+        "percent"
+      ],
+      "type": "object"
+    },
+    "stringIdArray": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ticket": {
+      "additionalProperties": false,
+      "properties": {
+        "binding_id": {
+          "pattern": "^binding\\.",
+          "type": "string"
+        },
+        "builder_contract": {
+          "$ref": "#/$defs/builderContract"
+        },
+        "builder_proof_status": {
+          "const": "SUCCESS"
+        },
+        "deterministic_engine_rerun_identical": {
+          "const": true
+        },
+        "exact_pin_match": {
+          "const": true
+        },
+        "fingerprint_id": {
+          "pattern": "^fingerprint\\.",
+          "type": "string"
+        },
+        "hidden_path_validation": {
+          "const": "PASS"
+        },
+        "match_ref": {
+          "pattern": "^story\\.match\\.",
+          "type": "string"
+        },
+        "profile_ref": {
+          "$ref": "ticket_system_binding_catalog_v2.schema.json#/$defs/profileRef"
+        },
+        "public_candidate_closure": {
+          "const": "PASS"
+        },
+        "seed": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "segment": {
+          "enum": [
+            "CAMPAIGN_ONE",
+            "EXPANSION"
+          ]
+        },
+        "shift_number": {
+          "maximum": 12,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "ticket_id": {
+          "pattern": "^ticket\\.",
+          "type": "string"
+        },
+        "ticket_snapshot_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "segment",
+        "shift_number",
+        "match_ref",
+        "seed",
+        "ticket_id",
+        "ticket_snapshot_digest",
+        "fingerprint_id",
+        "binding_id",
+        "profile_ref",
+        "builder_contract",
+        "builder_proof_status",
+        "exact_pin_match",
+        "deterministic_engine_rerun_identical",
+        "public_candidate_closure",
+        "hidden_path_validation"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "https://example.local/schemas/released_story_system_coverage.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "blocking_gaps": {
+      "maxItems": 0,
+      "type": "array"
+    },
+    "component_roles": {
+      "additionalProperties": false,
+      "properties": {
+        "component_definition_backed": {
+          "const": 20
+        },
+        "explicit_public_abstractions": {
+          "const": 3
+        },
+        "mapped": {
+          "const": 23
+        },
+        "role_ids": {
+          "items": {
+            "pattern": "^role\\.",
+            "type": "string"
+          },
+          "maxItems": 23,
+          "minItems": 23,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "total": {
+          "const": 23
+        }
+      },
+      "required": [
+        "total",
+        "mapped",
+        "component_definition_backed",
+        "explicit_public_abstractions",
+        "role_ids"
+      ],
+      "type": "object"
+    },
+    "coverage": {
+      "additionalProperties": false,
+      "properties": {
+        "actions_with_justified_paths": {
+          "$ref": "#/$defs/coverageMeasure"
+        },
+        "hidden_authored_paths": {
+          "$ref": "#/$defs/coverageMeasure"
+        },
+        "public_candidate_sets": {
+          "$ref": "#/$defs/coverageMeasure"
+        },
+        "system_relevant_domain_objects": {
+          "$ref": "#/$defs/coverageMeasure"
+        },
+        "ticket_instances": {
+          "$ref": "#/$defs/coverageMeasure"
+        },
+        "unique_fingerprints": {
+          "$ref": "#/$defs/coverageMeasure"
+        }
+      },
+      "required": [
+        "ticket_instances",
+        "unique_fingerprints",
+        "hidden_authored_paths",
+        "public_candidate_sets",
+        "system_relevant_domain_objects",
+        "actions_with_justified_paths"
+      ],
+      "type": "object"
+    },
+    "coverage_version": {
+      "const": "released-story-system-model-coverage-v1"
+    },
+    "declared_denominator": {
+      "additionalProperties": false,
+      "properties": {
+        "action_ticket_occurrences": {
+          "const": 348
+        },
+        "hidden_authored_paths": {
+          "const": 18
+        },
+        "public_candidate_occurrences": {
+          "const": 64
+        },
+        "story_matches": {
+          "const": 12
+        },
+        "ticket_instances": {
+          "const": 18
+        },
+        "unique_fingerprints": {
+          "const": 18
+        },
+        "unique_public_candidate_faults": {
+          "const": 36
+        },
+        "unique_relevant_actions": {
+          "const": 76
+        }
+      },
+      "required": [
+        "story_matches",
+        "ticket_instances",
+        "unique_fingerprints",
+        "public_candidate_occurrences",
+        "unique_public_candidate_faults",
+        "hidden_authored_paths",
+        "unique_relevant_actions",
+        "action_ticket_occurrences"
+      ],
+      "type": "object"
+    },
+    "domain_matrix": {
+      "additionalProperties": false,
+      "properties": {
+        "intentionally_unbound_public_symptom_ids": {
+          "items": {
+            "pattern": "^symptom\\.",
+            "type": "string"
+          },
+          "maxItems": 19,
+          "minItems": 19,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "public_candidate_fault_ids": {
+          "items": {
+            "pattern": "^fault\\.",
+            "type": "string"
+          },
+          "maxItems": 36,
+          "minItems": 36,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "relevant_diagnostic_ids": {
+          "items": {
+            "pattern": "^(?:test|command)\\.",
+            "type": "string"
+          },
+          "maxItems": 43,
+          "minItems": 43,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "repair_ids": {
+          "items": {
+            "pattern": "^repair\\.",
+            "type": "string"
+          },
+          "maxItems": 18,
+          "minItems": 18,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "verification_ids": {
+          "items": {
+            "pattern": "^verify\\.",
+            "type": "string"
+          },
+          "maxItems": 15,
+          "minItems": 15,
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "public_candidate_fault_ids",
+        "intentionally_unbound_public_symptom_ids",
+        "relevant_diagnostic_ids",
+        "repair_ids",
+        "verification_ids"
+      ],
+      "type": "object"
+    },
+    "intentional_exclusions": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "count": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "exclusion_id": {
+            "pattern": "^exclusion\\.",
+            "type": "string"
+          },
+          "reason": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "exclusion_id",
+          "count",
+          "reason"
+        ],
+        "type": "object"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "type": "array"
+    },
+    "profiles": {
+      "additionalProperties": false,
+      "properties": {
+        "bindings_by_profile": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "profile_id": {
+                "pattern": "^profile\\.",
+                "type": "string"
+              },
+              "ticket_bindings": {
+                "maximum": 18,
+                "minimum": 1,
+                "type": "integer"
+              }
+            },
+            "required": [
+              "profile_id",
+              "ticket_bindings"
+            ],
+            "type": "object"
+          },
+          "maxItems": 3,
+          "minItems": 3,
+          "type": "array"
+        },
+        "new_sourced_variants": {
+          "const": 1
+        },
+        "reused_from_pilot": {
+          "const": 2
+        },
+        "total": {
+          "const": 3
+        }
+      },
+      "required": [
+        "total",
+        "reused_from_pilot",
+        "new_sourced_variants",
+        "bindings_by_profile"
+      ],
+      "type": "object"
+    },
+    "release_id": {
+      "const": "system-model-story-v1"
+    },
+    "serialization": {
+      "$ref": "system_model_catalog_v2.schema.json#/$defs/serialization"
+    },
+    "source_exceptions": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "type": "array"
+    },
+    "ticket_instances": {
+      "items": {
+        "$ref": "#/$defs/ticket"
+      },
+      "maxItems": 18,
+      "minItems": 18,
+      "type": "array"
+    }
+  },
+  "required": [
+    "coverage_version",
+    "release_id",
+    "declared_denominator",
+    "coverage",
+    "profiles",
+    "component_roles",
+    "domain_matrix",
+    "ticket_instances",
+    "intentional_exclusions",
+    "source_exceptions",
+    "blocking_gaps",
+    "serialization"
+  ],
+  "title": "Released Story System Model Coverage Ledger",
+  "type": "object"
+}

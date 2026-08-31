@@ -1,0 +1,153 @@
+{
+  "$defs": {
+    "digest": {
+      "$ref": "system_model_catalog_v2.schema.json#/$defs/digest"
+    },
+    "file": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "sha256": {
+          "$ref": "#/$defs/digest"
+        }
+      },
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "https://example.local/schemas/system_model_release_manifest_v2.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "contract_version": {
+      "const": "system-model-contract-v1"
+    },
+    "generated_files": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "bytes": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "path": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "sha256": {
+            "$ref": "#/$defs/digest"
+          }
+        },
+        "required": [
+          "path",
+          "sha256",
+          "bytes"
+        ],
+        "type": "object"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "type": "array"
+    },
+    "generator": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "sha256": {
+          "$ref": "#/$defs/digest"
+        }
+      },
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "type": "object"
+    },
+    "immutable_inputs": {
+      "items": {
+        "$ref": "#/$defs/file"
+      },
+      "minItems": 11,
+      "type": "array"
+    },
+    "release_id": {
+      "const": "system-model-story-v1"
+    },
+    "schema_files": {
+      "items": {
+        "$ref": "#/$defs/file"
+      },
+      "maxItems": 7,
+      "minItems": 7,
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "system-model-release-manifest-v2"
+    },
+    "totals": {
+      "additionalProperties": false,
+      "properties": {
+        "added_components": {
+          "const": 0
+        },
+        "new_profile_variants": {
+          "const": 1
+        },
+        "private_compatibility_proofs": {
+          "const": 18
+        },
+        "profiles": {
+          "const": 3
+        },
+        "relationship_findings": {
+          "const": 125
+        },
+        "reused_profiles": {
+          "const": 2
+        },
+        "ticket_bindings": {
+          "const": 18
+        },
+        "ticket_instances": {
+          "const": 18
+        },
+        "unique_fingerprints": {
+          "const": 18
+        }
+      },
+      "required": [
+        "profiles",
+        "reused_profiles",
+        "new_profile_variants",
+        "ticket_bindings",
+        "private_compatibility_proofs",
+        "relationship_findings",
+        "added_components",
+        "ticket_instances",
+        "unique_fingerprints"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "release_id",
+    "contract_version",
+    "generator",
+    "schema_files",
+    "generated_files",
+    "immutable_inputs",
+    "totals"
+  ],
+  "title": "Released Story System Model Release Manifest",
+  "type": "object"
+}

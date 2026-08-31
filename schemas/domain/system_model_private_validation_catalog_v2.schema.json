@@ -1,0 +1,231 @@
+{
+  "$defs": {
+    "actionRequirement": {
+      "additionalProperties": false,
+      "properties": {
+        "action_definition_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "action_type": {
+          "enum": [
+            "RUN_DIAGNOSTIC",
+            "PERFORM_REPAIR",
+            "PERFORM_VERIFY"
+          ]
+        },
+        "attachment_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "authored_result_reference": {
+          "$ref": "#/$defs/stableId"
+        },
+        "requirement_id": {
+          "$ref": "#/$defs/stableId"
+        }
+      },
+      "required": [
+        "requirement_id",
+        "action_type",
+        "action_definition_id",
+        "attachment_id",
+        "authored_result_reference"
+      ],
+      "type": "object"
+    },
+    "claimArray": {
+      "$ref": "system_model_catalog_v2.schema.json#/$defs/claimArray"
+    },
+    "digest": {
+      "$ref": "system_model_catalog_v2.schema.json#/$defs/digest"
+    },
+    "faultBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "binding_basis": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "fault_id": {
+          "pattern": "^fault\\.",
+          "type": "string"
+        },
+        "source_claim_ids": {
+          "$ref": "#/$defs/claimArray"
+        },
+        "target_node_ids": {
+          "items": {
+            "$ref": "#/$defs/stableId"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "target_role_ids": {
+          "items": {
+            "$ref": "#/$defs/stableId"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "fault_id",
+        "target_role_ids",
+        "target_node_ids",
+        "binding_basis",
+        "source_claim_ids"
+      ],
+      "type": "object"
+    },
+    "idArray": {
+      "$ref": "system_model_catalog_v2.schema.json#/$defs/idArray"
+    },
+    "proof": {
+      "additionalProperties": false,
+      "properties": {
+        "authored_action_requirements": {
+          "items": {
+            "$ref": "#/$defs/actionRequirement"
+          },
+          "minItems": 3,
+          "type": "array"
+        },
+        "authority_boundary": {
+          "const": "BUILD_TIME_REJECTION_ONLY"
+        },
+        "binding_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "compatibility_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "differential_variants": {
+          "items": {
+            "$ref": "#/$defs/variant"
+          },
+          "maxItems": 5,
+          "minItems": 2,
+          "type": "array"
+        },
+        "hidden_fault_bindings": {
+          "items": {
+            "$ref": "#/$defs/faultBinding"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "profile_ref": {
+          "$ref": "ticket_system_binding_catalog_v2.schema.json#/$defs/profileRef"
+        },
+        "required_capability_ids": {
+          "items": {
+            "$ref": "#/$defs/stableId"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "serialization": {
+          "$ref": "system_model_catalog_v2.schema.json#/$defs/serialization"
+        },
+        "ticket_id": {
+          "pattern": "^ticket\\.",
+          "type": "string"
+        },
+        "ticket_snapshot_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "validation_result": {
+          "const": "PASS"
+        }
+      },
+      "required": [
+        "compatibility_id",
+        "binding_id",
+        "ticket_id",
+        "ticket_snapshot_digest",
+        "profile_ref",
+        "required_capability_ids",
+        "hidden_fault_bindings",
+        "authored_action_requirements",
+        "differential_variants",
+        "validation_result",
+        "authority_boundary",
+        "serialization"
+      ],
+      "type": "object"
+    },
+    "stableId": {
+      "$ref": "system_model_catalog_v2.schema.json#/$defs/stableId"
+    },
+    "variant": {
+      "additionalProperties": false,
+      "properties": {
+        "expected_public_binding_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "synthetic_hidden_fault_ids": {
+          "items": {
+            "pattern": "^fault\\.",
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "variant_id": {
+          "$ref": "#/$defs/stableId"
+        }
+      },
+      "required": [
+        "variant_id",
+        "synthetic_hidden_fault_ids",
+        "expected_public_binding_digest"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "https://example.local/schemas/system_model_private_validation_catalog_v2.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "canonicalization_version": {
+      "const": "canonical-json-v1"
+    },
+    "compatibility_proofs": {
+      "items": {
+        "$ref": "#/$defs/proof"
+      },
+      "maxItems": 18,
+      "minItems": 18,
+      "type": "array"
+    },
+    "contract_version": {
+      "const": "system-model-contract-v1"
+    },
+    "release_id": {
+      "const": "system-model-story-v1"
+    },
+    "schema_version": {
+      "const": "system-model-private-validation-catalog-v2"
+    },
+    "serialization": {
+      "$ref": "system_model_catalog_v2.schema.json#/$defs/serialization"
+    },
+    "storage_boundary": {
+      "const": "SERVER_OR_BUILD_ONLY"
+    }
+  },
+  "required": [
+    "schema_version",
+    "release_id",
+    "contract_version",
+    "canonicalization_version",
+    "storage_boundary",
+    "compatibility_proofs",
+    "serialization"
+  ],
+  "title": "Released Story System Model Private Validation Catalog",
+  "type": "object"
+}

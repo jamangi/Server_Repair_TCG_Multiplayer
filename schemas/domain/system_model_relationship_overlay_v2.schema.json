@@ -1,0 +1,149 @@
+{
+  "$defs": {
+    "idArray": {
+      "$ref": "system_model_catalog_v2.schema.json#/$defs/idArray"
+    },
+    "relationship": {
+      "additionalProperties": false,
+      "properties": {
+        "authority_boundary": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "dossier_ids": {
+          "items": {
+            "$ref": "#/$defs/stableId"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "implementation_status": {
+          "enum": [
+            "APPLIED_PROFILE_OVERLAY",
+            "PRESERVED_INTENTIONALLY_UNBOUND"
+          ]
+        },
+        "justification": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "relation_type": {
+          "enum": [
+            "REPAIR_TARGETS_ROLE_PATH",
+            "VERIFIES_PATH_STATE",
+            "QUERIES_CONTROL_SURFACE",
+            "OBSERVES_COMPONENT_PATH",
+            "AFFECTS_PATH_WITHOUT_CAUSAL_INFERENCE",
+            "AFFECTS_CONTROL_SURFACE_WITHOUT_CAUSAL_INFERENCE",
+            "VERIFIES_DEPENDENCY_STATE",
+            "REPAIR_TARGETS_WITH_DEPENDENCY",
+            "SYSTEM_DEPENDENCY_PATH",
+            "INTENTIONALLY_UNBOUND_PUBLIC_SYMPTOM"
+          ]
+        },
+        "relationship_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "source_claim_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "source_object_ids": {
+          "items": {
+            "$ref": "#/$defs/stableId"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "targets": {
+          "items": {
+            "$ref": "#/$defs/target"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "relationship_id",
+        "source_object_ids",
+        "relation_type",
+        "implementation_status",
+        "targets",
+        "dossier_ids",
+        "source_claim_ids",
+        "justification",
+        "authority_boundary"
+      ],
+      "type": "object"
+    },
+    "stableId": {
+      "$ref": "system_model_catalog_v2.schema.json#/$defs/stableId"
+    },
+    "target": {
+      "additionalProperties": false,
+      "properties": {
+        "node_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "path_ids": {
+          "$ref": "#/$defs/idArray"
+        },
+        "profile_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "role_ids": {
+          "$ref": "#/$defs/idArray"
+        }
+      },
+      "required": [
+        "profile_id",
+        "role_ids",
+        "node_ids",
+        "path_ids"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "https://example.local/schemas/system_model_relationship_overlay_v2.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "canonicalization_version": {
+      "const": "canonical-json-v1"
+    },
+    "component_ontology_policy": {
+      "const": "USES_EXISTING_COMPONENT_IDS_AND_PRESERVES_TASK_051_SUCCESSOR_DEFINITIONS"
+    },
+    "contract_version": {
+      "const": "system-model-contract-v1"
+    },
+    "relationships": {
+      "items": {
+        "$ref": "#/$defs/relationship"
+      },
+      "maxItems": 125,
+      "minItems": 125,
+      "type": "array"
+    },
+    "release_id": {
+      "const": "system-model-story-v1"
+    },
+    "schema_version": {
+      "const": "system-model-relationship-overlay-v2"
+    },
+    "serialization": {
+      "$ref": "system_model_catalog_v2.schema.json#/$defs/serialization"
+    }
+  },
+  "required": [
+    "schema_version",
+    "release_id",
+    "contract_version",
+    "canonicalization_version",
+    "component_ontology_policy",
+    "relationships",
+    "serialization"
+  ],
+  "title": "Released Story System Model Relationship Overlay",
+  "type": "object"
+}

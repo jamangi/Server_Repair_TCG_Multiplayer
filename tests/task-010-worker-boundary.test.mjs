@@ -585,6 +585,7 @@ test('the generated Pages stage is a strict allowlist with no Node-only or serve
           || entry.source.endsWith('/diagnosis-v2-migration.json')))
       || entry.source.startsWith('assets/')
       || entry.source.startsWith('content/story-v1/')
+      || entry.source === 'content/system-model-story-v1/public-system-projections-v1.json'
       || entry.source.startsWith('viewer/assets/play/')
       || entry.source.startsWith('viewer/vendor/');
     assert.equal(allowed, true, `unexpected staged source ${entry.source}`);

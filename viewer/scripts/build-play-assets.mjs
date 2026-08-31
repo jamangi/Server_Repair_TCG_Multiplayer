@@ -41,6 +41,10 @@ const GAMEPLAY_FILES = Object.freeze([
   'tutorials-v1.json',
 ]);
 
+const SYSTEM_MODEL_PUBLIC_FILES = Object.freeze([
+  'public-system-projections-v1.json',
+]);
+
 const STORY_RUNTIME_FILES = Object.freeze([
   'checkpoint.mjs',
   'conditions.mjs',
@@ -144,6 +148,13 @@ async function sourceEntries() {
     entries.push({
       source: `content/gameplay-v1/${filename}`,
       output: `content/gameplay-v1/${filename}`,
+    });
+  }
+
+  for (const filename of SYSTEM_MODEL_PUBLIC_FILES) {
+    entries.push({
+      source: `content/system-model-story-v1/${filename}`,
+      output: `content/system-model-story-v1/${filename}`,
     });
   }
 

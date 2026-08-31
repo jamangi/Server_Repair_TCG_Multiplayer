@@ -1,0 +1,756 @@
+{
+  "blocking_gaps": [],
+  "component_roles": {
+    "component_definition_backed": 20,
+    "explicit_public_abstractions": 3,
+    "mapped": 23,
+    "role_ids": [
+      "role.bmc",
+      "role.cpu",
+      "role.cpu_heatsink",
+      "role.cpu_socket",
+      "role.fans",
+      "role.host_loads",
+      "role.hybrid_backplane",
+      "role.input",
+      "role.memory",
+      "role.memory_channel",
+      "role.network_cable",
+      "role.network_service",
+      "role.nic",
+      "role.nvme",
+      "role.os_network_config",
+      "role.pcie_cable",
+      "role.perc",
+      "role.pib",
+      "role.psu_pair",
+      "role.sas_cable",
+      "role.sas_drives",
+      "role.system_bios",
+      "role.system_board"
+    ],
+    "total": 23
+  },
+  "coverage": {
+    "actions_with_justified_paths": {
+      "covered": 76,
+      "percent": 100,
+      "total": 76
+    },
+    "hidden_authored_paths": {
+      "covered": 18,
+      "percent": 100,
+      "total": 18
+    },
+    "public_candidate_sets": {
+      "covered": 18,
+      "percent": 100,
+      "total": 18
+    },
+    "system_relevant_domain_objects": {
+      "covered": 131,
+      "percent": 100,
+      "total": 131
+    },
+    "ticket_instances": {
+      "covered": 18,
+      "percent": 100,
+      "total": 18
+    },
+    "unique_fingerprints": {
+      "covered": 18,
+      "percent": 100,
+      "total": 18
+    }
+  },
+  "coverage_version": "released-story-system-model-coverage-v1",
+  "declared_denominator": {
+    "action_ticket_occurrences": 348,
+    "hidden_authored_paths": 18,
+    "public_candidate_occurrences": 64,
+    "story_matches": 12,
+    "ticket_instances": 18,
+    "unique_fingerprints": 18,
+    "unique_public_candidate_faults": 36,
+    "unique_relevant_actions": 76
+  },
+  "domain_matrix": {
+    "intentionally_unbound_public_symptom_ids": [
+      "symptom.boot.memory_warning",
+      "symptom.boot.no_boot_device",
+      "symptom.boot.no_post",
+      "symptom.boot.wrong_device",
+      "symptom.firmware.update_failed",
+      "symptom.management.alert_persists",
+      "symptom.management.bmc_not_responding",
+      "symptom.network.link_flapping",
+      "symptom.network.no_connectivity",
+      "symptom.network.no_link",
+      "symptom.power.no_power",
+      "symptom.power.redundancy_warning",
+      "symptom.power.voltage_out_of_range",
+      "symptom.storage.drive_fault_led",
+      "symptom.storage.io_errors",
+      "symptom.storage.predictive_failure_warning",
+      "symptom.storage.raid_degraded",
+      "symptom.system.intermittent_crash",
+      "symptom.thermal.high_cpu_temp"
+    ],
+    "public_candidate_fault_ids": [
+      "fault.board.system.failed",
+      "fault.boot.device.not_detected",
+      "fault.boot.order.incorrect",
+      "fault.compute.cpu_socket.contacts_damaged",
+      "fault.cpu.not_seated",
+      "fault.firmware.config.reset",
+      "fault.firmware.version_set.incompatible",
+      "fault.management.alert.stale",
+      "fault.management.bmc_firmware.corrupt",
+      "fault.memory.channel.unavailable",
+      "fault.memory.dimm.failed",
+      "fault.memory.dimm.not_seated",
+      "fault.memory.population.invalid",
+      "fault.network.cable.disconnected",
+      "fault.network.cable.failed",
+      "fault.network.dhcp.no_lease",
+      "fault.network.ip.static_incorrect",
+      "fault.network.nic.failed",
+      "fault.power.distribution_board.failed",
+      "fault.power.input.cable_loose",
+      "fault.power.psu.failed",
+      "fault.power.psu.not_seated",
+      "fault.storage.backplane.path_failed",
+      "fault.storage.cable.failed",
+      "fault.storage.cable.loose",
+      "fault.storage.drive.predictive_failure",
+      "fault.storage.nvme.device_failed",
+      "fault.storage.raid.controller_failed",
+      "fault.storage.raid.degraded",
+      "fault.storage.sas.drive_failed",
+      "fault.storage.sata.drive_failed",
+      "fault.system.intermittent_memory_instability",
+      "fault.thermal.cpu.overheating",
+      "fault.thermal.fan.failed",
+      "fault.thermal.heatsink.clogged",
+      "fault.thermal.heatsink.contact_poor"
+    ],
+    "relevant_diagnostic_ids": [
+      "command.linux.dhclient",
+      "command.linux.ip_addr",
+      "command.linux.ip_route",
+      "command.linux.lsblk",
+      "command.linux.lspci",
+      "command.linux.nvme_smart_log",
+      "command.linux.smartctl",
+      "command.network.ping",
+      "test.boot.device_inventory",
+      "test.boot.post_code_analysis",
+      "test.compute.socket_magnified_inspection",
+      "test.cooling.location_cross_substitution",
+      "test.firmware.settings_review",
+      "test.firmware.version_compatibility",
+      "test.general.minimum_configuration",
+      "test.general.visual_inspection",
+      "test.management.bmc_recovery_state",
+      "test.management.event_log_freshness",
+      "test.memory.diagnostic",
+      "test.memory.known_good_substitution",
+      "test.memory.single_dimm_isolation",
+      "test.network.cable_substitution",
+      "test.network.dhcp_pool_audit",
+      "test.network.dhcp_transaction_trace",
+      "test.network.interface_config",
+      "test.network.link",
+      "test.network.link_counter_soak",
+      "test.network.ping",
+      "test.pcie.inventory",
+      "test.power.distribution_path_isolation",
+      "test.power.known_good_psu",
+      "test.power.output_voltage_measurement",
+      "test.power.psu_status",
+      "test.power.residual_power_drain",
+      "test.storage.bay_path_isolation",
+      "test.storage.device_inventory",
+      "test.storage.drive_health",
+      "test.storage.predictive_health",
+      "test.storage.raid_status",
+      "test.system.bmc_logs",
+      "test.system.controlled_stress",
+      "test.thermal.fan_telemetry",
+      "test.thermal.temperature_monitoring"
+    ],
+    "repair_ids": [
+      "repair.boot.correct_order",
+      "repair.compute.restore_socket_contacts",
+      "repair.firmware.restore_compatible_versions",
+      "repair.management.clear_stale_alert_state",
+      "repair.management.recover_bmc_firmware",
+      "repair.memory.replace_dimm",
+      "repair.memory.reseat_dimm",
+      "repair.network.correct_static_ip",
+      "repair.network.replace_cable",
+      "repair.power.replace_distribution_board",
+      "repair.power.replace_psu",
+      "repair.power.reseat_psu",
+      "repair.storage.replace_nvme",
+      "repair.storage.replace_predictive_drive",
+      "repair.storage.replace_raid_member",
+      "repair.storage.reseat_cable",
+      "repair.thermal.clean_cooling_path",
+      "repair.thermal.replace_fan"
+    ],
+    "verification_ids": [
+      "verify.boot.normal_boot",
+      "verify.compute.socket_path",
+      "verify.firmware.compatible_persistent",
+      "verify.management.alert_does_not_recur",
+      "verify.management.bmc_functional",
+      "verify.memory.full_test",
+      "verify.memory.inventory",
+      "verify.network.connectivity",
+      "verify.network.link",
+      "verify.power.distribution_path",
+      "verify.power.stable",
+      "verify.storage.device_detected",
+      "verify.storage.predictive_replacement",
+      "verify.storage.raid_healthy",
+      "verify.thermal.load_test"
+    ]
+  },
+  "intentional_exclusions": [
+    {
+      "count": 19,
+      "exclusion_id": "exclusion.story.public-symptom-component-bindings",
+      "reason": "Public Symptoms remain observations spanning multiple Candidate-compatible roles; the overlay records explicit non-relations."
+    },
+    {
+      "count": 1,
+      "exclusion_id": "exclusion.story.per-pin-slot-sensor-wiring",
+      "reason": "Pin, slot, sensor-bus, lane, peer-infrastructure, and unsupported-option detail is outside the sourced teaching boundary."
+    },
+    {
+      "count": 1,
+      "exclusion_id": "exclusion.story.gameplay-inference",
+      "reason": "Topology never derives Bench relevance, legal intents, Evidence, Isolation, Repair, or Verify authority."
+    }
+  ],
+  "profiles": {
+    "bindings_by_profile": [
+      {
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+        "ticket_bindings": 13
+      },
+      {
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+        "ticket_bindings": 4
+      },
+      {
+        "profile_id": "profile.dell.poweredge-r740xd2.power-interposer.v1",
+        "ticket_bindings": 1
+      }
+    ],
+    "new_sourced_variants": 1,
+    "reused_from_pilot": 2,
+    "total": 3
+  },
+  "release_id": "system-model-story-v1",
+  "serialization": {
+    "canonicalization_version": "canonical-json-v1",
+    "content_digest": "3e10527cac9899bcf3456e845d3779a6c146a7eb36dda7f5de39071dcd4a601a",
+    "digest_algorithm": "sha256"
+  },
+  "source_exceptions": [
+    "Mutable Dell HTML topics expose no stable topic revision; product scope, exact URL, access date, and claim boundary are pinned.",
+    "The R740xd power-distribution path remains an honest board-power abstraction; only the R740xd2 profile names an exact Power Interposer Board service unit.",
+    "OS network configuration and bounded peer services are generalized public roles backed only to the host handoff and NDC boundary; no external-infrastructure health is asserted.",
+    "The established SAS/SATA drive-group role remains broader than one exact drive technology; the fixed option and per-Ticket path constrain its use."
+  ],
+  "ticket_instances": [
+    {
+      "binding_id": "binding.fingerprint.boot.incorrect_order.system-model.story-v1",
+      "builder_contract": {
+        "card_catalog_version": "core-card-catalog-technical-copy-v4",
+        "configuration_version": "ticket-builder-v3",
+        "domain_content_version": "core-domain-snapshot-technical-copy-v3",
+        "kind": "LEGACY_TOP_LEVEL_PROFILE",
+        "ticket_content_version": "core-ticket-parts-v3"
+      },
+      "builder_proof_status": "SUCCESS",
+      "deterministic_engine_rerun_identical": true,
+      "exact_pin_match": true,
+      "fingerprint_id": "fingerprint.boot.incorrect_order",
+      "hidden_path_validation": "PASS",
+      "match_ref": "story.match.qc01.shift01.wrong_device",
+      "profile_ref": {
+        "profile_content_digest": "521d8b531b2d2307982bc200155f1f98eae1029834655cd9d0cd779740303204",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+        "profile_revision": 1
+      },
+      "public_candidate_closure": "PASS",
+      "seed": "story.quiet_cascade.s01.v1",
+      "segment": "CAMPAIGN_ONE",
+      "shift_number": 1,
+      "ticket_id": "ticket.generated.ef8a4924e707349bce5c2be7",
+      "ticket_snapshot_digest": "821769a6021482074d523c723dc08a6b9bd2885820eabe11a9011b199fc6dacb"
+    },
+    {
+      "binding_id": "binding.fingerprint.power.unseated_psu.system-model.story-v1",
+      "builder_contract": {
+        "card_catalog_version": "core-card-catalog-technical-copy-v4",
+        "configuration_version": "ticket-builder-v3",
+        "domain_content_version": "core-domain-snapshot-technical-copy-v3",
+        "kind": "LEGACY_TOP_LEVEL_PROFILE",
+        "ticket_content_version": "core-ticket-parts-v3"
+      },
+      "builder_proof_status": "SUCCESS",
+      "deterministic_engine_rerun_identical": true,
+      "exact_pin_match": true,
+      "fingerprint_id": "fingerprint.power.unseated_psu",
+      "hidden_path_validation": "PASS",
+      "match_ref": "story.match.qc01.shift02.power_lot",
+      "profile_ref": {
+        "profile_content_digest": "521d8b531b2d2307982bc200155f1f98eae1029834655cd9d0cd779740303204",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+        "profile_revision": 1
+      },
+      "public_candidate_closure": "PASS",
+      "seed": "story.quiet_cascade.s02.v1",
+      "segment": "CAMPAIGN_ONE",
+      "shift_number": 2,
+      "ticket_id": "ticket.generated.a10b8767580c9453c679a326",
+      "ticket_snapshot_digest": "c55b2fb6c7aee2644929ecdd803b3b3f5155b5ec4426b43e4953d0082391e0f7"
+    },
+    {
+      "binding_id": "binding.fingerprint.power.failed_psu.system-model.story-v1",
+      "builder_contract": {
+        "card_catalog_version": "core-card-catalog-technical-copy-v4",
+        "configuration_version": "ticket-builder-v3",
+        "domain_content_version": "core-domain-snapshot-technical-copy-v3",
+        "kind": "LEGACY_TOP_LEVEL_PROFILE",
+        "ticket_content_version": "core-ticket-parts-v3"
+      },
+      "builder_proof_status": "SUCCESS",
+      "deterministic_engine_rerun_identical": true,
+      "exact_pin_match": true,
+      "fingerprint_id": "fingerprint.power.failed_psu",
+      "hidden_path_validation": "PASS",
+      "match_ref": "story.match.qc01.shift02.power_lot",
+      "profile_ref": {
+        "profile_content_digest": "521d8b531b2d2307982bc200155f1f98eae1029834655cd9d0cd779740303204",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+        "profile_revision": 1
+      },
+      "public_candidate_closure": "PASS",
+      "seed": "story.quiet_cascade.s02.v1",
+      "segment": "CAMPAIGN_ONE",
+      "shift_number": 2,
+      "ticket_id": "ticket.generated.8ee2c08bae1e3d005b35bff5",
+      "ticket_snapshot_digest": "8c7810616e535b8f62d3303e501bfcfdf8c9071df23903e2727b6fcb476e0d4b"
+    },
+    {
+      "binding_id": "binding.fingerprint.memory.failed_dimm.system-model.story-v1",
+      "builder_contract": {
+        "card_catalog_version": "core-card-catalog-technical-copy-v4",
+        "configuration_version": "ticket-builder-v3",
+        "domain_content_version": "core-domain-snapshot-technical-copy-v3",
+        "kind": "LEGACY_TOP_LEVEL_PROFILE",
+        "ticket_content_version": "core-ticket-parts-v3"
+      },
+      "builder_proof_status": "SUCCESS",
+      "deterministic_engine_rerun_identical": true,
+      "exact_pin_match": true,
+      "fingerprint_id": "fingerprint.memory.failed_dimm",
+      "hidden_path_validation": "PASS",
+      "match_ref": "story.match.qc01.shift03.memory_compare",
+      "profile_ref": {
+        "profile_content_digest": "521d8b531b2d2307982bc200155f1f98eae1029834655cd9d0cd779740303204",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+        "profile_revision": 1
+      },
+      "public_candidate_closure": "PASS",
+      "seed": "story.quiet_cascade.s03.v1",
+      "segment": "CAMPAIGN_ONE",
+      "shift_number": 3,
+      "ticket_id": "ticket.generated.75ea6ec9e60d64c7cac4caa5",
+      "ticket_snapshot_digest": "1bd3ccabc476313a0420cb9889ab5e7b84c60c250aa32f3d4f009f614f2c47e5"
+    },
+    {
+      "binding_id": "binding.fingerprint.memory.unseated_dimm.system-model.story-v1",
+      "builder_contract": {
+        "card_catalog_version": "core-card-catalog-technical-copy-v4",
+        "configuration_version": "ticket-builder-v3",
+        "domain_content_version": "core-domain-snapshot-technical-copy-v3",
+        "kind": "LEGACY_TOP_LEVEL_PROFILE",
+        "ticket_content_version": "core-ticket-parts-v3"
+      },
+      "builder_proof_status": "SUCCESS",
+      "deterministic_engine_rerun_identical": true,
+      "exact_pin_match": true,
+      "fingerprint_id": "fingerprint.memory.unseated_dimm",
+      "hidden_path_validation": "PASS",
+      "match_ref": "story.match.qc01.shift03.memory_compare",
+      "profile_ref": {
+        "profile_content_digest": "521d8b531b2d2307982bc200155f1f98eae1029834655cd9d0cd779740303204",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+        "profile_revision": 1
+      },
+      "public_candidate_closure": "PASS",
+      "seed": "story.quiet_cascade.s03.v1",
+      "segment": "CAMPAIGN_ONE",
+      "shift_number": 3,
+      "ticket_id": "ticket.generated.424c8fab1db6aed25058ab78",
+      "ticket_snapshot_digest": "268c91a53ad795437e6690b2a5cc843071eea627671f2168b7a0dca00941a9c7"
+    },
+    {
+      "binding_id": "binding.fingerprint.thermal.clogged_heatsink.system-model.story-v1",
+      "builder_contract": {
+        "card_catalog_version": "core-card-catalog-technical-copy-v4",
+        "configuration_version": "ticket-builder-v3",
+        "domain_content_version": "core-domain-snapshot-technical-copy-v3",
+        "kind": "LEGACY_TOP_LEVEL_PROFILE",
+        "ticket_content_version": "core-ticket-parts-v3"
+      },
+      "builder_proof_status": "SUCCESS",
+      "deterministic_engine_rerun_identical": true,
+      "exact_pin_match": true,
+      "fingerprint_id": "fingerprint.thermal.clogged_heatsink",
+      "hidden_path_validation": "PASS",
+      "match_ref": "story.match.qc01.shift04.passes_cold",
+      "profile_ref": {
+        "profile_content_digest": "521d8b531b2d2307982bc200155f1f98eae1029834655cd9d0cd779740303204",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+        "profile_revision": 1
+      },
+      "public_candidate_closure": "PASS",
+      "seed": "story.quiet_cascade.s04.v1",
+      "segment": "CAMPAIGN_ONE",
+      "shift_number": 4,
+      "ticket_id": "ticket.generated.6e55cf55154d356da2e91126",
+      "ticket_snapshot_digest": "ce86a008060199c2f5c5cb2ed763385e8766315e35a2ce1b9b3e19fa39627a95"
+    },
+    {
+      "binding_id": "binding.fingerprint.thermal.failed_fan.system-model.story-v1",
+      "builder_contract": {
+        "card_catalog_version": "core-card-catalog-technical-copy-v4",
+        "configuration_version": "ticket-builder-v3",
+        "domain_content_version": "core-domain-snapshot-technical-copy-v3",
+        "kind": "LEGACY_TOP_LEVEL_PROFILE",
+        "ticket_content_version": "core-ticket-parts-v3"
+      },
+      "builder_proof_status": "SUCCESS",
+      "deterministic_engine_rerun_identical": true,
+      "exact_pin_match": true,
+      "fingerprint_id": "fingerprint.thermal.failed_fan",
+      "hidden_path_validation": "PASS",
+      "match_ref": "story.match.qc01.shift04.passes_cold",
+      "profile_ref": {
+        "profile_content_digest": "521d8b531b2d2307982bc200155f1f98eae1029834655cd9d0cd779740303204",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+        "profile_revision": 1
+      },
+      "public_candidate_closure": "PASS",
+      "seed": "story.quiet_cascade.s04.v1",
+      "segment": "CAMPAIGN_ONE",
+      "shift_number": 4,
+      "ticket_id": "ticket.generated.f60b9ce132c74c33f607df6d",
+      "ticket_snapshot_digest": "b8f877726a0d4356575d9efeb51c8226c674687ba0806ba067142ffc3f90c8cd"
+    },
+    {
+      "binding_id": "binding.fingerprint.network.incorrect_static_ip.system-model.story-v1",
+      "builder_contract": {
+        "card_catalog_version": "core-card-catalog-technical-copy-v4",
+        "configuration_version": "ticket-builder-v3",
+        "domain_content_version": "core-domain-snapshot-technical-copy-v3",
+        "kind": "LEGACY_TOP_LEVEL_PROFILE",
+        "ticket_content_version": "core-ticket-parts-v3"
+      },
+      "builder_proof_status": "SUCCESS",
+      "deterministic_engine_rerun_identical": true,
+      "exact_pin_match": true,
+      "fingerprint_id": "fingerprint.network.incorrect_static_ip",
+      "hidden_path_validation": "PASS",
+      "match_ref": "story.match.qc01.shift05.no_offer",
+      "profile_ref": {
+        "profile_content_digest": "521d8b531b2d2307982bc200155f1f98eae1029834655cd9d0cd779740303204",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+        "profile_revision": 1
+      },
+      "public_candidate_closure": "PASS",
+      "seed": "story.quiet_cascade.s05.v1",
+      "segment": "CAMPAIGN_ONE",
+      "shift_number": 5,
+      "ticket_id": "ticket.generated.759fd75d6ac043a57d6673d7",
+      "ticket_snapshot_digest": "45f7e05c9d9a57f0e324c34d21dd1420d7c0f76ec0c4753b1494414a292697bd"
+    },
+    {
+      "binding_id": "binding.fingerprint.network.failed_cable.system-model.story-v1",
+      "builder_contract": {
+        "card_catalog_version": "core-card-catalog-technical-copy-v4",
+        "configuration_version": "ticket-builder-v3",
+        "domain_content_version": "core-domain-snapshot-technical-copy-v3",
+        "kind": "LEGACY_TOP_LEVEL_PROFILE",
+        "ticket_content_version": "core-ticket-parts-v3"
+      },
+      "builder_proof_status": "SUCCESS",
+      "deterministic_engine_rerun_identical": true,
+      "exact_pin_match": true,
+      "fingerprint_id": "fingerprint.network.failed_cable",
+      "hidden_path_validation": "PASS",
+      "match_ref": "story.match.qc01.shift05.no_offer",
+      "profile_ref": {
+        "profile_content_digest": "521d8b531b2d2307982bc200155f1f98eae1029834655cd9d0cd779740303204",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+        "profile_revision": 1
+      },
+      "public_candidate_closure": "PASS",
+      "seed": "story.quiet_cascade.s05.v1",
+      "segment": "CAMPAIGN_ONE",
+      "shift_number": 5,
+      "ticket_id": "ticket.generated.cbc8003979ffdaca83b41d7d",
+      "ticket_snapshot_digest": "4de1801512399068fea5881be79955af674ae35eff511d7a1d75101d6c0085d2"
+    },
+    {
+      "binding_id": "binding.fingerprint.boot.missing_nvme.system-model.v1",
+      "builder_contract": {
+        "card_catalog_version": "core-card-catalog-technical-copy-v4",
+        "configuration_version": "ticket-builder-v3",
+        "domain_content_version": "core-domain-snapshot-technical-copy-v3",
+        "kind": "LEGACY_TOP_LEVEL_PROFILE",
+        "ticket_content_version": "core-ticket-parts-v3"
+      },
+      "builder_proof_status": "SUCCESS",
+      "deterministic_engine_rerun_identical": true,
+      "exact_pin_match": true,
+      "fingerprint_id": "fingerprint.boot.missing_nvme",
+      "hidden_path_validation": "PASS",
+      "match_ref": "story.match.qc01.shift06.quiet_cascade",
+      "profile_ref": {
+        "profile_content_digest": "23d8cd238aaaa986c8082b1686d05a35a637c461a2b142caa78d3c8eb879f3b0",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+        "profile_revision": 1
+      },
+      "public_candidate_closure": "PASS",
+      "seed": "story.quiet_cascade.s06.v1",
+      "segment": "CAMPAIGN_ONE",
+      "shift_number": 6,
+      "ticket_id": "ticket.generated.3ec80b1b0e7221ac725aedf9",
+      "ticket_snapshot_digest": "1c74ad0725e500ac01d4c356f17551fee11678a88b35ca5b591ff056a2efdff2"
+    },
+    {
+      "binding_id": "binding.fingerprint.storage.failed_sas_member.system-model.story-v1",
+      "builder_contract": {
+        "card_catalog_version": "core-card-catalog-technical-copy-v4",
+        "configuration_version": "ticket-builder-v3",
+        "domain_content_version": "core-domain-snapshot-technical-copy-v3",
+        "kind": "LEGACY_TOP_LEVEL_PROFILE",
+        "ticket_content_version": "core-ticket-parts-v3"
+      },
+      "builder_proof_status": "SUCCESS",
+      "deterministic_engine_rerun_identical": true,
+      "exact_pin_match": true,
+      "fingerprint_id": "fingerprint.storage.failed_sas_member",
+      "hidden_path_validation": "PASS",
+      "match_ref": "story.match.qc01.shift06.quiet_cascade",
+      "profile_ref": {
+        "profile_content_digest": "521d8b531b2d2307982bc200155f1f98eae1029834655cd9d0cd779740303204",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+        "profile_revision": 1
+      },
+      "public_candidate_closure": "PASS",
+      "seed": "story.quiet_cascade.s06.v1",
+      "segment": "CAMPAIGN_ONE",
+      "shift_number": 6,
+      "ticket_id": "ticket.generated.45a70010dd4752f864990575",
+      "ticket_snapshot_digest": "863ca5c0e0a72f9440e3352c80b070f4bde1ca166c801e79425821adfa7f4420"
+    },
+    {
+      "binding_id": "binding.fingerprint.storage.loose_cable.system-model.v1",
+      "builder_contract": {
+        "card_catalog_version": "core-card-catalog-technical-copy-v4",
+        "configuration_version": "ticket-builder-v3",
+        "domain_content_version": "core-domain-snapshot-technical-copy-v3",
+        "kind": "LEGACY_TOP_LEVEL_PROFILE",
+        "ticket_content_version": "core-ticket-parts-v3"
+      },
+      "builder_proof_status": "SUCCESS",
+      "deterministic_engine_rerun_identical": true,
+      "exact_pin_match": true,
+      "fingerprint_id": "fingerprint.storage.loose_cable",
+      "hidden_path_validation": "PASS",
+      "match_ref": "story.match.qc01.shift06.quiet_cascade",
+      "profile_ref": {
+        "profile_content_digest": "23d8cd238aaaa986c8082b1686d05a35a637c461a2b142caa78d3c8eb879f3b0",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+        "profile_revision": 1
+      },
+      "public_candidate_closure": "PASS",
+      "seed": "story.quiet_cascade.s06.v1",
+      "segment": "CAMPAIGN_ONE",
+      "shift_number": 6,
+      "ticket_id": "ticket.generated.5352abd871c2e9076be92a0b",
+      "ticket_snapshot_digest": "b06dc5a7d12c29af78edd71f7a82a611d971844e6e71863e142bc293f4e6af27"
+    },
+    {
+      "binding_id": "binding.fingerprint.compute.damaged_cpu_socket_contacts.system-model.story-v1",
+      "builder_contract": {
+        "card_catalog_version": "core-card-catalog-story-expansion-v5",
+        "configuration_version": "ticket-builder-v4",
+        "domain_content_version": "core-domain-snapshot-story-expansion-v4",
+        "kind": "EMBEDDED_V4_CONFIGURATION",
+        "ticket_content_version": "core-ticket-parts-v4"
+      },
+      "builder_proof_status": "SUCCESS",
+      "deterministic_engine_rerun_identical": true,
+      "exact_pin_match": true,
+      "fingerprint_id": "fingerprint.compute.damaged_cpu_socket_contacts",
+      "hidden_path_validation": "PASS",
+      "match_ref": "story.match.qc02.shift07.socket_contacts",
+      "profile_ref": {
+        "profile_content_digest": "521d8b531b2d2307982bc200155f1f98eae1029834655cd9d0cd779740303204",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+        "profile_revision": 1
+      },
+      "public_candidate_closure": "PASS",
+      "seed": "story.quiet_cascade.expansion.s07.v1",
+      "segment": "EXPANSION",
+      "shift_number": 7,
+      "ticket_id": "ticket.generated.4f237a22c35d46166044b2c7",
+      "ticket_snapshot_digest": "dc4e0581e510fd94120fcca53ee8b25f5a8d3b456253627c7faf5603c5d8e481"
+    },
+    {
+      "binding_id": "binding.fingerprint.power.failed_distribution_board.system-model.v1",
+      "builder_contract": {
+        "card_catalog_version": "core-card-catalog-story-expansion-v5",
+        "configuration_version": "ticket-builder-v4",
+        "domain_content_version": "core-domain-snapshot-story-expansion-v4",
+        "kind": "EMBEDDED_V4_CONFIGURATION",
+        "ticket_content_version": "core-ticket-parts-v4"
+      },
+      "builder_proof_status": "SUCCESS",
+      "deterministic_engine_rerun_identical": true,
+      "exact_pin_match": true,
+      "fingerprint_id": "fingerprint.power.failed_distribution_board",
+      "hidden_path_validation": "PASS",
+      "match_ref": "story.match.qc02.shift08.power_distribution",
+      "profile_ref": {
+        "profile_content_digest": "83e72e6f1996f670b786c640a5ff14db929da43fdc09cffad9adac8150369ae9",
+        "profile_id": "profile.dell.poweredge-r740xd2.power-interposer.v1",
+        "profile_revision": 1
+      },
+      "public_candidate_closure": "PASS",
+      "seed": "story.quiet_cascade.expansion.s08.v1",
+      "segment": "EXPANSION",
+      "shift_number": 8,
+      "ticket_id": "ticket.generated.3fd6eb04534f79b5b3f87f98",
+      "ticket_snapshot_digest": "d34f08d79c2cc2d47d16d23ec753f1e78758d0b358664d4e592ea23f25b63d73"
+    },
+    {
+      "binding_id": "binding.fingerprint.storage.predictive_drive_failure.system-model.story-v1",
+      "builder_contract": {
+        "card_catalog_version": "core-card-catalog-story-expansion-v5",
+        "configuration_version": "ticket-builder-v4",
+        "domain_content_version": "core-domain-snapshot-story-expansion-v4",
+        "kind": "EMBEDDED_V4_CONFIGURATION",
+        "ticket_content_version": "core-ticket-parts-v4"
+      },
+      "builder_proof_status": "SUCCESS",
+      "deterministic_engine_rerun_identical": true,
+      "exact_pin_match": true,
+      "fingerprint_id": "fingerprint.storage.predictive_drive_failure",
+      "hidden_path_validation": "PASS",
+      "match_ref": "story.match.qc02.shift09.predictive_drive",
+      "profile_ref": {
+        "profile_content_digest": "521d8b531b2d2307982bc200155f1f98eae1029834655cd9d0cd779740303204",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+        "profile_revision": 1
+      },
+      "public_candidate_closure": "PASS",
+      "seed": "story.quiet_cascade.expansion.s09.v1",
+      "segment": "EXPANSION",
+      "shift_number": 9,
+      "ticket_id": "ticket.generated.36ba2ae8958431194a7e1fef",
+      "ticket_snapshot_digest": "c71d7e7f87b7e1177f7f8b79344293dee489778c9acfc9ba213d9cb7410aa671"
+    },
+    {
+      "binding_id": "binding.fingerprint.management.stale_alert.system-model.story-v1",
+      "builder_contract": {
+        "card_catalog_version": "core-card-catalog-story-expansion-v5",
+        "configuration_version": "ticket-builder-v4",
+        "domain_content_version": "core-domain-snapshot-story-expansion-v4",
+        "kind": "EMBEDDED_V4_CONFIGURATION",
+        "ticket_content_version": "core-ticket-parts-v4"
+      },
+      "builder_proof_status": "SUCCESS",
+      "deterministic_engine_rerun_identical": true,
+      "exact_pin_match": true,
+      "fingerprint_id": "fingerprint.management.stale_alert",
+      "hidden_path_validation": "PASS",
+      "match_ref": "story.match.qc02.shift10.stale_alert",
+      "profile_ref": {
+        "profile_content_digest": "521d8b531b2d2307982bc200155f1f98eae1029834655cd9d0cd779740303204",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+        "profile_revision": 1
+      },
+      "public_candidate_closure": "PASS",
+      "seed": "story.quiet_cascade.expansion.s10.v1",
+      "segment": "EXPANSION",
+      "shift_number": 10,
+      "ticket_id": "ticket.generated.b68505324c44f11977fcda07",
+      "ticket_snapshot_digest": "c889bd1e907f1537e8080822e7d9ded3821e0507fe8bc20f49490ae81f01f0e8"
+    },
+    {
+      "binding_id": "binding.fingerprint.firmware.incompatible_version_set.system-model.v1",
+      "builder_contract": {
+        "card_catalog_version": "core-card-catalog-story-expansion-v5",
+        "configuration_version": "ticket-builder-v4",
+        "domain_content_version": "core-domain-snapshot-story-expansion-v4",
+        "kind": "EMBEDDED_V4_CONFIGURATION",
+        "ticket_content_version": "core-ticket-parts-v4"
+      },
+      "builder_proof_status": "SUCCESS",
+      "deterministic_engine_rerun_identical": true,
+      "exact_pin_match": true,
+      "fingerprint_id": "fingerprint.firmware.incompatible_version_set",
+      "hidden_path_validation": "PASS",
+      "match_ref": "story.match.qc02.shift11.firmware_regression",
+      "profile_ref": {
+        "profile_content_digest": "23d8cd238aaaa986c8082b1686d05a35a637c461a2b142caa78d3c8eb879f3b0",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+        "profile_revision": 1
+      },
+      "public_candidate_closure": "PASS",
+      "seed": "story.quiet_cascade.expansion.s11.v1",
+      "segment": "EXPANSION",
+      "shift_number": 11,
+      "ticket_id": "ticket.generated.b34238282822e93980b5f1ad",
+      "ticket_snapshot_digest": "face80b0d5c6f6c7f1ef3bb0495c0c6e4105360fa07887fb50cc2dea440cbc50"
+    },
+    {
+      "binding_id": "binding.fingerprint.management.corrupt_bmc_firmware.system-model.v1",
+      "builder_contract": {
+        "card_catalog_version": "core-card-catalog-story-expansion-v5",
+        "configuration_version": "ticket-builder-v4",
+        "domain_content_version": "core-domain-snapshot-story-expansion-v4",
+        "kind": "EMBEDDED_V4_CONFIGURATION",
+        "ticket_content_version": "core-ticket-parts-v4"
+      },
+      "builder_proof_status": "SUCCESS",
+      "deterministic_engine_rerun_identical": true,
+      "exact_pin_match": true,
+      "fingerprint_id": "fingerprint.management.corrupt_bmc_firmware",
+      "hidden_path_validation": "PASS",
+      "match_ref": "story.match.qc02.shift12.bmc_recovery",
+      "profile_ref": {
+        "profile_content_digest": "23d8cd238aaaa986c8082b1686d05a35a637c461a2b142caa78d3c8eb879f3b0",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+        "profile_revision": 1
+      },
+      "public_candidate_closure": "PASS",
+      "seed": "story.quiet_cascade.expansion.s12.v1",
+      "segment": "EXPANSION",
+      "shift_number": 12,
+      "ticket_id": "ticket.generated.f32b85cbf2054fdf0114f42a",
+      "ticket_snapshot_digest": "761016e56ceb47a585727555f64bac47b103933cddbafc27a5c385f402851b01"
+    }
+  ]
+}

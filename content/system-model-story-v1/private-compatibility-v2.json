@@ -1,0 +1,1872 @@
+{
+  "canonicalization_version": "canonical-json-v1",
+  "compatibility_proofs": [
+    {
+      "authored_action_requirements": [
+        {
+          "action_definition_id": "test.storage.predictive_health",
+          "action_type": "RUN_DIAGNOSTIC",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.test.storage.predictive_health",
+          "authored_result_reference": "evidence.fingerprint.storage.predictive.drive.failure.machine.storage.predictive.drive.failure.active.test.storage.predictive.health",
+          "requirement_id": "requirement.binding.fingerprint.storage.predictive_drive_failure.system-model.story-v1.01"
+        },
+        {
+          "action_definition_id": "repair.storage.replace_predictive_drive",
+          "action_type": "PERFORM_REPAIR",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.repair.storage.replace_predictive_drive",
+          "authored_result_reference": "repair_outcome.fingerprint.storage.predictive.drive.failure",
+          "requirement_id": "requirement.binding.fingerprint.storage.predictive_drive_failure.system-model.story-v1.02"
+        },
+        {
+          "action_definition_id": "verify.storage.predictive_replacement",
+          "action_type": "PERFORM_VERIFY",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.verify.storage.predictive_replacement",
+          "authored_result_reference": "verify_outcome.fingerprint.storage.predictive.drive.failure.01.pass",
+          "requirement_id": "requirement.binding.fingerprint.storage.predictive_drive_failure.system-model.story-v1.03"
+        }
+      ],
+      "authority_boundary": "BUILD_TIME_REJECTION_ONLY",
+      "binding_id": "binding.fingerprint.storage.predictive_drive_failure.system-model.story-v1",
+      "compatibility_id": "compatibility.fingerprint.storage.predictive_drive_failure.story-v1",
+      "differential_variants": [
+        {
+          "expected_public_binding_digest": "0cb5500782488f1e88ddbe685f0dd4db701423863bf8f53233d4f35f319ea82c",
+          "synthetic_hidden_fault_ids": [
+            "fault.storage.drive.predictive_failure"
+          ],
+          "variant_id": "variant.fingerprint.storage.predictive_drive_failure.01"
+        },
+        {
+          "expected_public_binding_digest": "0cb5500782488f1e88ddbe685f0dd4db701423863bf8f53233d4f35f319ea82c",
+          "synthetic_hidden_fault_ids": [
+            "fault.storage.sas.drive_failed"
+          ],
+          "variant_id": "variant.fingerprint.storage.predictive_drive_failure.02"
+        }
+      ],
+      "hidden_fault_bindings": [
+        {
+          "binding_basis": "Build-time compatibility only: fault.storage.drive.predictive_failure has a source-backed role and path in the fixed profile. This record cannot choose a public profile or derive Evidence.",
+          "fault_id": "fault.storage.drive.predictive_failure",
+          "source_claim_ids": [
+            "claim.r740xd.twenty-sas-four-nvme-option",
+            "claim.r740xd.sas-perc-path",
+            "claim.r740xd.pcie-nvme-path"
+          ],
+          "target_node_ids": [
+            "bmc",
+            "uefi",
+            "backplane",
+            "sas_path",
+            "nvme_path",
+            "drives"
+          ],
+          "target_role_ids": [
+            "role.hybrid_backplane",
+            "role.sas_cable",
+            "role.pcie_cable",
+            "role.perc",
+            "role.nvme",
+            "role.sas_drives"
+          ]
+        }
+      ],
+      "profile_ref": {
+        "profile_content_digest": "521d8b531b2d2307982bc200155f1f98eae1029834655cd9d0cd779740303204",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+        "profile_revision": 1
+      },
+      "required_capability_ids": [
+        "capability.r740xd.story.storage-array-service",
+        "capability.r740xd.hybrid-storage"
+      ],
+      "serialization": {
+        "canonicalization_version": "canonical-json-v1",
+        "content_digest": "f12aa55f957981deb3981aa767074f9d08cc2658cc45433054e1251d15f0777f",
+        "digest_algorithm": "sha256"
+      },
+      "ticket_id": "ticket.generated.36ba2ae8958431194a7e1fef",
+      "ticket_snapshot_digest": "c71d7e7f87b7e1177f7f8b79344293dee489778c9acfc9ba213d9cb7410aa671",
+      "validation_result": "PASS"
+    },
+    {
+      "authored_action_requirements": [
+        {
+          "action_definition_id": "test.system.bmc_logs",
+          "action_type": "RUN_DIAGNOSTIC",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.v1.test.system.bmc_logs",
+          "authored_result_reference": "evidence.fingerprint.boot.missing.nvme.machine.boot.missing.nvme.active.test.system.bmc.logs",
+          "requirement_id": "private-requirement.fingerprint.boot.missing_nvme.01"
+        },
+        {
+          "action_definition_id": "repair.storage.replace_nvme",
+          "action_type": "PERFORM_REPAIR",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.v1.repair.storage.replace_nvme",
+          "authored_result_reference": "repair_outcome.fingerprint.boot.missing.nvme",
+          "requirement_id": "private-requirement.fingerprint.boot.missing_nvme.02"
+        },
+        {
+          "action_definition_id": "verify.storage.device_detected",
+          "action_type": "PERFORM_VERIFY",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.v1.verify.storage.device_detected",
+          "authored_result_reference": "verify_outcome.fingerprint.boot.missing.nvme.01.pass",
+          "requirement_id": "private-requirement.fingerprint.boot.missing_nvme.03"
+        },
+        {
+          "action_definition_id": "verify.boot.normal_boot",
+          "action_type": "PERFORM_VERIFY",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.v1.verify.boot.normal_boot",
+          "authored_result_reference": "verify_outcome.fingerprint.boot.missing.nvme.02.pass",
+          "requirement_id": "private-requirement.fingerprint.boot.missing_nvme.04"
+        }
+      ],
+      "authority_boundary": "BUILD_TIME_REJECTION_ONLY",
+      "binding_id": "binding.fingerprint.boot.missing_nvme.system-model.v1",
+      "compatibility_id": "compatibility.fingerprint.boot.missing_nvme.v1",
+      "differential_variants": [
+        {
+          "expected_public_binding_digest": "9b21ae0bd6d0991b04aedd0d1bcd764205e84f1f7812b10e0a47658920690b90",
+          "synthetic_hidden_fault_ids": [
+            "fault.boot.device.not_detected"
+          ],
+          "variant_id": "nonleak.fingerprint.boot.missing_nvme.01"
+        },
+        {
+          "expected_public_binding_digest": "9b21ae0bd6d0991b04aedd0d1bcd764205e84f1f7812b10e0a47658920690b90",
+          "synthetic_hidden_fault_ids": [
+            "fault.boot.order.incorrect"
+          ],
+          "variant_id": "nonleak.fingerprint.boot.missing_nvme.02"
+        },
+        {
+          "expected_public_binding_digest": "9b21ae0bd6d0991b04aedd0d1bcd764205e84f1f7812b10e0a47658920690b90",
+          "synthetic_hidden_fault_ids": [
+            "fault.storage.cable.loose"
+          ],
+          "variant_id": "nonleak.fingerprint.boot.missing_nvme.03"
+        },
+        {
+          "expected_public_binding_digest": "9b21ae0bd6d0991b04aedd0d1bcd764205e84f1f7812b10e0a47658920690b90",
+          "synthetic_hidden_fault_ids": [
+            "fault.storage.nvme.device_failed"
+          ],
+          "variant_id": "nonleak.fingerprint.boot.missing_nvme.04"
+        },
+        {
+          "expected_public_binding_digest": "9b21ae0bd6d0991b04aedd0d1bcd764205e84f1f7812b10e0a47658920690b90",
+          "synthetic_hidden_fault_ids": [
+            "fault.storage.raid.controller_failed"
+          ],
+          "variant_id": "nonleak.fingerprint.boot.missing_nvme.05"
+        }
+      ],
+      "hidden_fault_bindings": [
+        {
+          "binding_basis": "Compatibility proof only; the authored Ticket remains the source of truth.",
+          "fault_id": "fault.storage.nvme.device_failed",
+          "source_claim_ids": [
+            "claim.r740xd.twenty-sas-four-nvme-option",
+            "claim.r740xd.pcie-nvme-path"
+          ],
+          "target_node_ids": [
+            "drives",
+            "nvme_path"
+          ],
+          "target_role_ids": [
+            "role.nvme"
+          ]
+        },
+        {
+          "binding_basis": "Compatibility proof only; the authored Ticket remains the source of truth.",
+          "fault_id": "fault.boot.device.not_detected",
+          "source_claim_ids": [
+            "claim.r740xd.uefi-boot-mode",
+            "claim.r740xd.boot-order-configurable",
+            "claim.uefi.boot-manager-policy",
+            "claim.r740xd.pcie-nvme-path",
+            "claim.r740xd.twenty-sas-four-nvme-option"
+          ],
+          "target_node_ids": [
+            "uefi",
+            "nvme_path",
+            "drives"
+          ],
+          "target_role_ids": [
+            "role.system_bios",
+            "role.nvme"
+          ]
+        }
+      ],
+      "profile_ref": {
+        "profile_content_digest": "23d8cd238aaaa986c8082b1686d05a35a637c461a2b142caa78d3c8eb879f3b0",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+        "profile_revision": 1
+      },
+      "required_capability_ids": [
+        "capability.r740xd.hybrid-storage",
+        "capability.r740xd.management-inventory",
+        "capability.r740xd.firmware-policy",
+        "capability.r740xd.documented-service"
+      ],
+      "serialization": {
+        "canonicalization_version": "canonical-json-v1",
+        "content_digest": "6c0441b5d6a119578d67b100c704a4233cc08ff0398c9efd431f2499cf49bac7",
+        "digest_algorithm": "sha256"
+      },
+      "ticket_id": "ticket.generated.3ec80b1b0e7221ac725aedf9",
+      "ticket_snapshot_digest": "1c74ad0725e500ac01d4c356f17551fee11678a88b35ca5b591ff056a2efdff2",
+      "validation_result": "PASS"
+    },
+    {
+      "authored_action_requirements": [
+        {
+          "action_definition_id": "test.power.distribution_path_isolation",
+          "action_type": "RUN_DIAGNOSTIC",
+          "attachment_id": "attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.distribution_path_isolation",
+          "authored_result_reference": "evidence.fingerprint.power.failed.distribution.board.machine.power.failed.distribution.board.active.test.power.distribution.path.isolation",
+          "requirement_id": "private-requirement.fingerprint.power.failed_distribution_board.01"
+        },
+        {
+          "action_definition_id": "repair.power.replace_distribution_board",
+          "action_type": "PERFORM_REPAIR",
+          "attachment_id": "attachment.dell.poweredge-r740xd2.power-interposer.v1.repair.power.replace_distribution_board",
+          "authored_result_reference": "repair_outcome.fingerprint.power.failed.distribution.board",
+          "requirement_id": "private-requirement.fingerprint.power.failed_distribution_board.02"
+        },
+        {
+          "action_definition_id": "verify.power.distribution_path",
+          "action_type": "PERFORM_VERIFY",
+          "attachment_id": "attachment.dell.poweredge-r740xd2.power-interposer.v1.verify.power.distribution_path",
+          "authored_result_reference": "verify_outcome.fingerprint.power.failed.distribution.board.01.pass",
+          "requirement_id": "private-requirement.fingerprint.power.failed_distribution_board.03"
+        }
+      ],
+      "authority_boundary": "BUILD_TIME_REJECTION_ONLY",
+      "binding_id": "binding.fingerprint.power.failed_distribution_board.system-model.v1",
+      "compatibility_id": "compatibility.fingerprint.power.failed_distribution_board.v1",
+      "differential_variants": [
+        {
+          "expected_public_binding_digest": "86fb8afbacfddba851fbf1319ffb65d3939e3375385ff555f6e48c1e80d1c763",
+          "synthetic_hidden_fault_ids": [
+            "fault.board.system.failed"
+          ],
+          "variant_id": "nonleak.fingerprint.power.failed_distribution_board.01"
+        },
+        {
+          "expected_public_binding_digest": "86fb8afbacfddba851fbf1319ffb65d3939e3375385ff555f6e48c1e80d1c763",
+          "synthetic_hidden_fault_ids": [
+            "fault.power.distribution_board.failed"
+          ],
+          "variant_id": "nonleak.fingerprint.power.failed_distribution_board.02"
+        },
+        {
+          "expected_public_binding_digest": "86fb8afbacfddba851fbf1319ffb65d3939e3375385ff555f6e48c1e80d1c763",
+          "synthetic_hidden_fault_ids": [
+            "fault.power.input.cable_loose"
+          ],
+          "variant_id": "nonleak.fingerprint.power.failed_distribution_board.03"
+        },
+        {
+          "expected_public_binding_digest": "86fb8afbacfddba851fbf1319ffb65d3939e3375385ff555f6e48c1e80d1c763",
+          "synthetic_hidden_fault_ids": [
+            "fault.power.psu.failed"
+          ],
+          "variant_id": "nonleak.fingerprint.power.failed_distribution_board.04"
+        },
+        {
+          "expected_public_binding_digest": "86fb8afbacfddba851fbf1319ffb65d3939e3375385ff555f6e48c1e80d1c763",
+          "synthetic_hidden_fault_ids": [
+            "fault.power.psu.not_seated"
+          ],
+          "variant_id": "nonleak.fingerprint.power.failed_distribution_board.05"
+        }
+      ],
+      "hidden_fault_bindings": [
+        {
+          "binding_basis": "Compatibility proof only; the authored Ticket remains the source of truth.",
+          "fault_id": "fault.power.distribution_board.failed",
+          "source_claim_ids": [
+            "claim.r740xd2.pib-service-unit",
+            "claim.r740xd2.pib-system-board-cables"
+          ],
+          "target_node_ids": [
+            "power_interposer"
+          ],
+          "target_role_ids": [
+            "role.pib"
+          ]
+        }
+      ],
+      "profile_ref": {
+        "profile_content_digest": "83e72e6f1996f670b786c640a5ff14db929da43fdc09cffad9adac8150369ae9",
+        "profile_id": "profile.dell.poweredge-r740xd2.power-interposer.v1",
+        "profile_revision": 1
+      },
+      "required_capability_ids": [
+        "capability.r740xd2.redundant-power",
+        "capability.r740xd2.pib-service",
+        "capability.r740xd2.power-path-observation"
+      ],
+      "serialization": {
+        "canonicalization_version": "canonical-json-v1",
+        "content_digest": "b9e652c419ba518b1656526e533415cf14c4909472cb358403eaced6e9d6a4a2",
+        "digest_algorithm": "sha256"
+      },
+      "ticket_id": "ticket.generated.3fd6eb04534f79b5b3f87f98",
+      "ticket_snapshot_digest": "d34f08d79c2cc2d47d16d23ec753f1e78758d0b358664d4e592ea23f25b63d73",
+      "validation_result": "PASS"
+    },
+    {
+      "authored_action_requirements": [
+        {
+          "action_definition_id": "test.memory.single_dimm_isolation",
+          "action_type": "RUN_DIAGNOSTIC",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.test.memory.single_dimm_isolation",
+          "authored_result_reference": "evidence.fingerprint.memory.unseated.dimm.machine.memory.unseated.dimm.active.test.memory.single.dimm.isolation",
+          "requirement_id": "requirement.binding.fingerprint.memory.unseated_dimm.system-model.story-v1.01"
+        },
+        {
+          "action_definition_id": "repair.memory.reseat_dimm",
+          "action_type": "PERFORM_REPAIR",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.repair.memory.reseat_dimm",
+          "authored_result_reference": "repair_outcome.fingerprint.memory.unseated.dimm",
+          "requirement_id": "requirement.binding.fingerprint.memory.unseated_dimm.system-model.story-v1.02"
+        },
+        {
+          "action_definition_id": "verify.memory.inventory",
+          "action_type": "PERFORM_VERIFY",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.verify.memory.inventory",
+          "authored_result_reference": "verify_outcome.fingerprint.memory.unseated.dimm.01.pass",
+          "requirement_id": "requirement.binding.fingerprint.memory.unseated_dimm.system-model.story-v1.03"
+        },
+        {
+          "action_definition_id": "verify.memory.full_test",
+          "action_type": "PERFORM_VERIFY",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.verify.memory.full_test",
+          "authored_result_reference": "verify_outcome.fingerprint.memory.unseated.dimm.02.pass",
+          "requirement_id": "requirement.binding.fingerprint.memory.unseated_dimm.system-model.story-v1.04"
+        }
+      ],
+      "authority_boundary": "BUILD_TIME_REJECTION_ONLY",
+      "binding_id": "binding.fingerprint.memory.unseated_dimm.system-model.story-v1",
+      "compatibility_id": "compatibility.fingerprint.memory.unseated_dimm.story-v1",
+      "differential_variants": [
+        {
+          "expected_public_binding_digest": "e6ac97f9d456bef06d78448e3c0219ccd3dfd9c1af262149ce19a8b72cd39d89",
+          "synthetic_hidden_fault_ids": [
+            "fault.memory.channel.unavailable"
+          ],
+          "variant_id": "variant.fingerprint.memory.unseated_dimm.01"
+        },
+        {
+          "expected_public_binding_digest": "e6ac97f9d456bef06d78448e3c0219ccd3dfd9c1af262149ce19a8b72cd39d89",
+          "synthetic_hidden_fault_ids": [
+            "fault.memory.dimm.not_seated"
+          ],
+          "variant_id": "variant.fingerprint.memory.unseated_dimm.02"
+        },
+        {
+          "expected_public_binding_digest": "e6ac97f9d456bef06d78448e3c0219ccd3dfd9c1af262149ce19a8b72cd39d89",
+          "synthetic_hidden_fault_ids": [
+            "fault.memory.population.invalid"
+          ],
+          "variant_id": "variant.fingerprint.memory.unseated_dimm.03"
+        }
+      ],
+      "hidden_fault_bindings": [
+        {
+          "binding_basis": "Build-time compatibility only: fault.memory.dimm.not_seated has a source-backed role and path in the fixed profile. This record cannot choose a public profile or derive Evidence.",
+          "fault_id": "fault.memory.dimm.not_seated",
+          "source_claim_ids": [
+            "claim.r740xd.memory-install-verify",
+            "claim.r740xd.memory-population-channels"
+          ],
+          "target_node_ids": [
+            "board",
+            "memory_channel",
+            "cpu_memory"
+          ],
+          "target_role_ids": [
+            "role.memory_channel",
+            "role.memory"
+          ]
+        },
+        {
+          "binding_basis": "Build-time compatibility only: fault.memory.channel.unavailable has a source-backed role and path in the fixed profile. This record cannot choose a public profile or derive Evidence.",
+          "fault_id": "fault.memory.channel.unavailable",
+          "source_claim_ids": [
+            "claim.r740xd.memory-install-verify",
+            "claim.r740xd.memory-population-channels"
+          ],
+          "target_node_ids": [
+            "board",
+            "memory_channel",
+            "cpu_memory"
+          ],
+          "target_role_ids": [
+            "role.memory_channel",
+            "role.memory"
+          ]
+        }
+      ],
+      "profile_ref": {
+        "profile_content_digest": "521d8b531b2d2307982bc200155f1f98eae1029834655cd9d0cd779740303204",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+        "profile_revision": 1
+      },
+      "required_capability_ids": [
+        "capability.r740xd.story.memory-service"
+      ],
+      "serialization": {
+        "canonicalization_version": "canonical-json-v1",
+        "content_digest": "94bcb666e040c431de99c9aba2e149854cbdb921ac89d1e01ceadcef01fdd31d",
+        "digest_algorithm": "sha256"
+      },
+      "ticket_id": "ticket.generated.424c8fab1db6aed25058ab78",
+      "ticket_snapshot_digest": "268c91a53ad795437e6690b2a5cc843071eea627671f2168b7a0dca00941a9c7",
+      "validation_result": "PASS"
+    },
+    {
+      "authored_action_requirements": [
+        {
+          "action_definition_id": "test.storage.drive_health",
+          "action_type": "RUN_DIAGNOSTIC",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.test.storage.drive_health",
+          "authored_result_reference": "evidence.fingerprint.storage.failed.sas.member.machine.storage.failed.sas.member.active.test.storage.drive.health",
+          "requirement_id": "requirement.binding.fingerprint.storage.failed_sas_member.system-model.story-v1.01"
+        },
+        {
+          "action_definition_id": "repair.storage.replace_raid_member",
+          "action_type": "PERFORM_REPAIR",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.repair.storage.replace_raid_member",
+          "authored_result_reference": "repair_outcome.fingerprint.storage.failed.sas.member",
+          "requirement_id": "requirement.binding.fingerprint.storage.failed_sas_member.system-model.story-v1.02"
+        },
+        {
+          "action_definition_id": "verify.storage.raid_healthy",
+          "action_type": "PERFORM_VERIFY",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.verify.storage.raid_healthy",
+          "authored_result_reference": "verify_outcome.fingerprint.storage.failed.sas.member.01.pass",
+          "requirement_id": "requirement.binding.fingerprint.storage.failed_sas_member.system-model.story-v1.03"
+        }
+      ],
+      "authority_boundary": "BUILD_TIME_REJECTION_ONLY",
+      "binding_id": "binding.fingerprint.storage.failed_sas_member.system-model.story-v1",
+      "compatibility_id": "compatibility.fingerprint.storage.failed_sas_member.story-v1",
+      "differential_variants": [
+        {
+          "expected_public_binding_digest": "49e4bbd38a39bb0021b73fed40d2d407d303fc983b173096794d830f2bd5c1d6",
+          "synthetic_hidden_fault_ids": [
+            "fault.storage.raid.degraded"
+          ],
+          "variant_id": "variant.fingerprint.storage.failed_sas_member.01"
+        },
+        {
+          "expected_public_binding_digest": "49e4bbd38a39bb0021b73fed40d2d407d303fc983b173096794d830f2bd5c1d6",
+          "synthetic_hidden_fault_ids": [
+            "fault.storage.sas.drive_failed"
+          ],
+          "variant_id": "variant.fingerprint.storage.failed_sas_member.02"
+        },
+        {
+          "expected_public_binding_digest": "49e4bbd38a39bb0021b73fed40d2d407d303fc983b173096794d830f2bd5c1d6",
+          "synthetic_hidden_fault_ids": [
+            "fault.storage.sata.drive_failed"
+          ],
+          "variant_id": "variant.fingerprint.storage.failed_sas_member.03"
+        }
+      ],
+      "hidden_fault_bindings": [
+        {
+          "binding_basis": "Build-time compatibility only: fault.storage.sas.drive_failed has a source-backed role and path in the fixed profile. This record cannot choose a public profile or derive Evidence.",
+          "fault_id": "fault.storage.sas.drive_failed",
+          "source_claim_ids": [
+            "claim.r740xd.twenty-sas-four-nvme-option",
+            "claim.r740xd.sas-perc-path",
+            "claim.r740xd.pcie-nvme-path"
+          ],
+          "target_node_ids": [
+            "bmc",
+            "uefi",
+            "backplane",
+            "sas_path",
+            "nvme_path",
+            "drives"
+          ],
+          "target_role_ids": [
+            "role.hybrid_backplane",
+            "role.sas_cable",
+            "role.pcie_cable",
+            "role.perc",
+            "role.nvme",
+            "role.sas_drives"
+          ]
+        },
+        {
+          "binding_basis": "Build-time compatibility only: fault.storage.raid.degraded has a source-backed role and path in the fixed profile. This record cannot choose a public profile or derive Evidence.",
+          "fault_id": "fault.storage.raid.degraded",
+          "source_claim_ids": [
+            "claim.r740xd.twenty-sas-four-nvme-option",
+            "claim.r740xd.sas-perc-path",
+            "claim.r740xd.pcie-nvme-path"
+          ],
+          "target_node_ids": [
+            "bmc",
+            "uefi",
+            "backplane",
+            "sas_path",
+            "nvme_path",
+            "drives"
+          ],
+          "target_role_ids": [
+            "role.hybrid_backplane",
+            "role.sas_cable",
+            "role.pcie_cable",
+            "role.perc",
+            "role.nvme",
+            "role.sas_drives"
+          ]
+        }
+      ],
+      "profile_ref": {
+        "profile_content_digest": "521d8b531b2d2307982bc200155f1f98eae1029834655cd9d0cd779740303204",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+        "profile_revision": 1
+      },
+      "required_capability_ids": [
+        "capability.r740xd.story.storage-array-service",
+        "capability.r740xd.hybrid-storage"
+      ],
+      "serialization": {
+        "canonicalization_version": "canonical-json-v1",
+        "content_digest": "ea15518ffa8546c84dab68abcdfb909f89fb02b2165464682b91e1041e4c99d6",
+        "digest_algorithm": "sha256"
+      },
+      "ticket_id": "ticket.generated.45a70010dd4752f864990575",
+      "ticket_snapshot_digest": "863ca5c0e0a72f9440e3352c80b070f4bde1ca166c801e79425821adfa7f4420",
+      "validation_result": "PASS"
+    },
+    {
+      "authored_action_requirements": [
+        {
+          "action_definition_id": "test.compute.socket_magnified_inspection",
+          "action_type": "RUN_DIAGNOSTIC",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.test.compute.socket_magnified_inspection",
+          "authored_result_reference": "evidence.fingerprint.compute.damaged.cpu.socket.contacts.machine.compute.damaged.socket.contacts.active.test.compute.socket.magnified.inspection",
+          "requirement_id": "requirement.binding.fingerprint.compute.damaged_cpu_socket_contacts.system-model.story-v1.01"
+        },
+        {
+          "action_definition_id": "repair.compute.restore_socket_contacts",
+          "action_type": "PERFORM_REPAIR",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.repair.compute.restore_socket_contacts",
+          "authored_result_reference": "repair_outcome.fingerprint.compute.damaged.cpu.socket.contacts",
+          "requirement_id": "requirement.binding.fingerprint.compute.damaged_cpu_socket_contacts.system-model.story-v1.02"
+        },
+        {
+          "action_definition_id": "verify.compute.socket_path",
+          "action_type": "PERFORM_VERIFY",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.verify.compute.socket_path",
+          "authored_result_reference": "verify_outcome.fingerprint.compute.damaged.cpu.socket.contacts.01.pass",
+          "requirement_id": "requirement.binding.fingerprint.compute.damaged_cpu_socket_contacts.system-model.story-v1.03"
+        }
+      ],
+      "authority_boundary": "BUILD_TIME_REJECTION_ONLY",
+      "binding_id": "binding.fingerprint.compute.damaged_cpu_socket_contacts.system-model.story-v1",
+      "compatibility_id": "compatibility.fingerprint.compute.damaged_cpu_socket_contacts.story-v1",
+      "differential_variants": [
+        {
+          "expected_public_binding_digest": "9fa7eec70364504dc6fc91cd665ae28071c97c0f721c3c65469f874aa6fe29e9",
+          "synthetic_hidden_fault_ids": [
+            "fault.board.system.failed"
+          ],
+          "variant_id": "variant.fingerprint.compute.damaged_cpu_socket_contacts.01"
+        },
+        {
+          "expected_public_binding_digest": "9fa7eec70364504dc6fc91cd665ae28071c97c0f721c3c65469f874aa6fe29e9",
+          "synthetic_hidden_fault_ids": [
+            "fault.compute.cpu_socket.contacts_damaged"
+          ],
+          "variant_id": "variant.fingerprint.compute.damaged_cpu_socket_contacts.02"
+        },
+        {
+          "expected_public_binding_digest": "9fa7eec70364504dc6fc91cd665ae28071c97c0f721c3c65469f874aa6fe29e9",
+          "synthetic_hidden_fault_ids": [
+            "fault.cpu.not_seated"
+          ],
+          "variant_id": "variant.fingerprint.compute.damaged_cpu_socket_contacts.03"
+        },
+        {
+          "expected_public_binding_digest": "9fa7eec70364504dc6fc91cd665ae28071c97c0f721c3c65469f874aa6fe29e9",
+          "synthetic_hidden_fault_ids": [
+            "fault.memory.dimm.failed"
+          ],
+          "variant_id": "variant.fingerprint.compute.damaged_cpu_socket_contacts.04"
+        },
+        {
+          "expected_public_binding_digest": "9fa7eec70364504dc6fc91cd665ae28071c97c0f721c3c65469f874aa6fe29e9",
+          "synthetic_hidden_fault_ids": [
+            "fault.memory.dimm.not_seated"
+          ],
+          "variant_id": "variant.fingerprint.compute.damaged_cpu_socket_contacts.05"
+        }
+      ],
+      "hidden_fault_bindings": [
+        {
+          "binding_basis": "Build-time compatibility only: fault.compute.cpu_socket.contacts_damaged has a source-backed role and path in the fixed profile. This record cannot choose a public profile or derive Evidence.",
+          "fault_id": "fault.compute.cpu_socket.contacts_damaged",
+          "source_claim_ids": [
+            "claim.r740xd.cpu-socket-phm-service",
+            "claim.r740xd.2u-dual-cpu-memory"
+          ],
+          "target_node_ids": [
+            "board",
+            "cpu_socket",
+            "cpu_memory"
+          ],
+          "target_role_ids": [
+            "role.system_board",
+            "role.cpu_socket",
+            "role.cpu"
+          ]
+        }
+      ],
+      "profile_ref": {
+        "profile_content_digest": "521d8b531b2d2307982bc200155f1f98eae1029834655cd9d0cd779740303204",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+        "profile_revision": 1
+      },
+      "required_capability_ids": [
+        "capability.r740xd.story.compute-socket-service"
+      ],
+      "serialization": {
+        "canonicalization_version": "canonical-json-v1",
+        "content_digest": "97a6be659063ae99832f6342813524c94e68fb2da269eeb5efdaee0b98a1d8b7",
+        "digest_algorithm": "sha256"
+      },
+      "ticket_id": "ticket.generated.4f237a22c35d46166044b2c7",
+      "ticket_snapshot_digest": "dc4e0581e510fd94120fcca53ee8b25f5a8d3b456253627c7faf5603c5d8e481",
+      "validation_result": "PASS"
+    },
+    {
+      "authored_action_requirements": [
+        {
+          "action_definition_id": "test.general.visual_inspection",
+          "action_type": "RUN_DIAGNOSTIC",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.v1.test.general.visual_inspection",
+          "authored_result_reference": "evidence.fingerprint.storage.loose.cable.machine.storage.loose.cable.active.test.general.visual.inspection",
+          "requirement_id": "private-requirement.fingerprint.storage.loose_cable.01"
+        },
+        {
+          "action_definition_id": "test.storage.device_inventory",
+          "action_type": "RUN_DIAGNOSTIC",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.v1.test.storage.device_inventory",
+          "authored_result_reference": "evidence.fingerprint.storage.loose.cable.machine.storage.loose.cable.active.test.storage.device.inventory",
+          "requirement_id": "private-requirement.fingerprint.storage.loose_cable.02"
+        },
+        {
+          "action_definition_id": "repair.storage.reseat_cable",
+          "action_type": "PERFORM_REPAIR",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.v1.repair.storage.reseat_cable",
+          "authored_result_reference": "repair_outcome.fingerprint.storage.loose.cable",
+          "requirement_id": "private-requirement.fingerprint.storage.loose_cable.03"
+        },
+        {
+          "action_definition_id": "verify.storage.device_detected",
+          "action_type": "PERFORM_VERIFY",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.v1.verify.storage.device_detected",
+          "authored_result_reference": "verify_outcome.fingerprint.storage.loose.cable.01.pass",
+          "requirement_id": "private-requirement.fingerprint.storage.loose_cable.04"
+        }
+      ],
+      "authority_boundary": "BUILD_TIME_REJECTION_ONLY",
+      "binding_id": "binding.fingerprint.storage.loose_cable.system-model.v1",
+      "compatibility_id": "compatibility.fingerprint.storage.loose_cable.v1",
+      "differential_variants": [
+        {
+          "expected_public_binding_digest": "ee27ee51993610d14899616bbc09113eb56e7f41be6d54de4e204ff0c8e97e2a",
+          "synthetic_hidden_fault_ids": [
+            "fault.storage.backplane.path_failed"
+          ],
+          "variant_id": "nonleak.fingerprint.storage.loose_cable.01"
+        },
+        {
+          "expected_public_binding_digest": "ee27ee51993610d14899616bbc09113eb56e7f41be6d54de4e204ff0c8e97e2a",
+          "synthetic_hidden_fault_ids": [
+            "fault.storage.cable.failed"
+          ],
+          "variant_id": "nonleak.fingerprint.storage.loose_cable.02"
+        },
+        {
+          "expected_public_binding_digest": "ee27ee51993610d14899616bbc09113eb56e7f41be6d54de4e204ff0c8e97e2a",
+          "synthetic_hidden_fault_ids": [
+            "fault.storage.cable.loose"
+          ],
+          "variant_id": "nonleak.fingerprint.storage.loose_cable.03"
+        },
+        {
+          "expected_public_binding_digest": "ee27ee51993610d14899616bbc09113eb56e7f41be6d54de4e204ff0c8e97e2a",
+          "synthetic_hidden_fault_ids": [
+            "fault.storage.nvme.device_failed"
+          ],
+          "variant_id": "nonleak.fingerprint.storage.loose_cable.04"
+        },
+        {
+          "expected_public_binding_digest": "ee27ee51993610d14899616bbc09113eb56e7f41be6d54de4e204ff0c8e97e2a",
+          "synthetic_hidden_fault_ids": [
+            "fault.storage.sas.drive_failed"
+          ],
+          "variant_id": "nonleak.fingerprint.storage.loose_cable.05"
+        }
+      ],
+      "hidden_fault_bindings": [
+        {
+          "binding_basis": "Compatibility proof only; the authored Ticket remains the source of truth.",
+          "fault_id": "fault.storage.cable.loose",
+          "source_claim_ids": [
+            "claim.r740xd.sas-perc-path",
+            "claim.r740xd.pcie-nvme-path",
+            "claim.r740xd.hybrid-backplane",
+            "claim.r740xd.backplane-serviceable"
+          ],
+          "target_node_ids": [
+            "sas_path",
+            "nvme_path",
+            "backplane"
+          ],
+          "target_role_ids": [
+            "role.sas_cable",
+            "role.pcie_cable"
+          ]
+        }
+      ],
+      "profile_ref": {
+        "profile_content_digest": "23d8cd238aaaa986c8082b1686d05a35a637c461a2b142caa78d3c8eb879f3b0",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+        "profile_revision": 1
+      },
+      "required_capability_ids": [
+        "capability.r740xd.hybrid-storage",
+        "capability.r740xd.management-inventory",
+        "capability.r740xd.documented-service"
+      ],
+      "serialization": {
+        "canonicalization_version": "canonical-json-v1",
+        "content_digest": "f06aebed2638a3a6c0d9bc3f5cd9b1023108f758251291449b673ffe81c938d7",
+        "digest_algorithm": "sha256"
+      },
+      "ticket_id": "ticket.generated.5352abd871c2e9076be92a0b",
+      "ticket_snapshot_digest": "b06dc5a7d12c29af78edd71f7a82a611d971844e6e71863e142bc293f4e6af27",
+      "validation_result": "PASS"
+    },
+    {
+      "authored_action_requirements": [
+        {
+          "action_definition_id": "test.thermal.temperature_monitoring",
+          "action_type": "RUN_DIAGNOSTIC",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.test.thermal.temperature_monitoring",
+          "authored_result_reference": "evidence.fingerprint.thermal.clogged.heatsink.machine.thermal.clogged.heatsink.active.test.thermal.temperature.monitoring",
+          "requirement_id": "requirement.binding.fingerprint.thermal.clogged_heatsink.system-model.story-v1.01"
+        },
+        {
+          "action_definition_id": "repair.thermal.clean_cooling_path",
+          "action_type": "PERFORM_REPAIR",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.repair.thermal.clean_cooling_path",
+          "authored_result_reference": "repair_outcome.fingerprint.thermal.clogged.heatsink",
+          "requirement_id": "requirement.binding.fingerprint.thermal.clogged_heatsink.system-model.story-v1.02"
+        },
+        {
+          "action_definition_id": "verify.thermal.load_test",
+          "action_type": "PERFORM_VERIFY",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.verify.thermal.load_test",
+          "authored_result_reference": "verify_outcome.fingerprint.thermal.clogged.heatsink.01.pass",
+          "requirement_id": "requirement.binding.fingerprint.thermal.clogged_heatsink.system-model.story-v1.03"
+        }
+      ],
+      "authority_boundary": "BUILD_TIME_REJECTION_ONLY",
+      "binding_id": "binding.fingerprint.thermal.clogged_heatsink.system-model.story-v1",
+      "compatibility_id": "compatibility.fingerprint.thermal.clogged_heatsink.story-v1",
+      "differential_variants": [
+        {
+          "expected_public_binding_digest": "a79cf6142f500300aedb3371efbf5495d4bc72a558582e94a51ecca7e0f140f9",
+          "synthetic_hidden_fault_ids": [
+            "fault.thermal.cpu.overheating"
+          ],
+          "variant_id": "variant.fingerprint.thermal.clogged_heatsink.01"
+        },
+        {
+          "expected_public_binding_digest": "a79cf6142f500300aedb3371efbf5495d4bc72a558582e94a51ecca7e0f140f9",
+          "synthetic_hidden_fault_ids": [
+            "fault.thermal.fan.failed"
+          ],
+          "variant_id": "variant.fingerprint.thermal.clogged_heatsink.02"
+        },
+        {
+          "expected_public_binding_digest": "a79cf6142f500300aedb3371efbf5495d4bc72a558582e94a51ecca7e0f140f9",
+          "synthetic_hidden_fault_ids": [
+            "fault.thermal.heatsink.clogged"
+          ],
+          "variant_id": "variant.fingerprint.thermal.clogged_heatsink.03"
+        },
+        {
+          "expected_public_binding_digest": "a79cf6142f500300aedb3371efbf5495d4bc72a558582e94a51ecca7e0f140f9",
+          "synthetic_hidden_fault_ids": [
+            "fault.thermal.heatsink.contact_poor"
+          ],
+          "variant_id": "variant.fingerprint.thermal.clogged_heatsink.04"
+        }
+      ],
+      "hidden_fault_bindings": [
+        {
+          "binding_basis": "Build-time compatibility only: fault.thermal.heatsink.clogged has a source-backed role and path in the fixed profile. This record cannot choose a public profile or derive Evidence.",
+          "fault_id": "fault.thermal.heatsink.clogged",
+          "source_claim_ids": [
+            "claim.r740xd.cooling-fan-hot-swap",
+            "claim.r740xd.thermal-control"
+          ],
+          "target_node_ids": [
+            "bmc",
+            "fans",
+            "heatsink",
+            "cpu_memory"
+          ],
+          "target_role_ids": [
+            "role.fans",
+            "role.cpu_heatsink",
+            "role.cpu"
+          ]
+        },
+        {
+          "binding_basis": "Build-time compatibility only: fault.thermal.cpu.overheating has a source-backed role and path in the fixed profile. This record cannot choose a public profile or derive Evidence.",
+          "fault_id": "fault.thermal.cpu.overheating",
+          "source_claim_ids": [
+            "claim.r740xd.cooling-fan-hot-swap",
+            "claim.r740xd.thermal-control"
+          ],
+          "target_node_ids": [
+            "bmc",
+            "fans",
+            "heatsink",
+            "cpu_memory"
+          ],
+          "target_role_ids": [
+            "role.fans",
+            "role.cpu_heatsink",
+            "role.cpu"
+          ]
+        }
+      ],
+      "profile_ref": {
+        "profile_content_digest": "521d8b531b2d2307982bc200155f1f98eae1029834655cd9d0cd779740303204",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+        "profile_revision": 1
+      },
+      "required_capability_ids": [
+        "capability.r740xd.story.thermal-service"
+      ],
+      "serialization": {
+        "canonicalization_version": "canonical-json-v1",
+        "content_digest": "331ade17145625a0f320fbdb94c0ee3c3582e91c20e2a2ec4ea3d58eb8ea841d",
+        "digest_algorithm": "sha256"
+      },
+      "ticket_id": "ticket.generated.6e55cf55154d356da2e91126",
+      "ticket_snapshot_digest": "ce86a008060199c2f5c5cb2ed763385e8766315e35a2ce1b9b3e19fa39627a95",
+      "validation_result": "PASS"
+    },
+    {
+      "authored_action_requirements": [
+        {
+          "action_definition_id": "test.network.interface_config",
+          "action_type": "RUN_DIAGNOSTIC",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.test.network.interface_config",
+          "authored_result_reference": "evidence.fingerprint.network.incorrect.static.ip.machine.network.incorrect.static.ip.active.test.network.interface.config",
+          "requirement_id": "requirement.binding.fingerprint.network.incorrect_static_ip.system-model.story-v1.01"
+        },
+        {
+          "action_definition_id": "repair.network.correct_static_ip",
+          "action_type": "PERFORM_REPAIR",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.repair.network.correct_static_ip",
+          "authored_result_reference": "repair_outcome.fingerprint.network.incorrect.static.ip",
+          "requirement_id": "requirement.binding.fingerprint.network.incorrect_static_ip.system-model.story-v1.02"
+        },
+        {
+          "action_definition_id": "verify.network.connectivity",
+          "action_type": "PERFORM_VERIFY",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.verify.network.connectivity",
+          "authored_result_reference": "verify_outcome.fingerprint.network.incorrect.static.ip.01.pass",
+          "requirement_id": "requirement.binding.fingerprint.network.incorrect_static_ip.system-model.story-v1.03"
+        }
+      ],
+      "authority_boundary": "BUILD_TIME_REJECTION_ONLY",
+      "binding_id": "binding.fingerprint.network.incorrect_static_ip.system-model.story-v1",
+      "compatibility_id": "compatibility.fingerprint.network.incorrect_static_ip.story-v1",
+      "differential_variants": [
+        {
+          "expected_public_binding_digest": "5d3effd99fc5ad2d43dd344cb393888e061a2d51f923976f24cad040b8ee6762",
+          "synthetic_hidden_fault_ids": [
+            "fault.network.cable.disconnected"
+          ],
+          "variant_id": "variant.fingerprint.network.incorrect_static_ip.01"
+        },
+        {
+          "expected_public_binding_digest": "5d3effd99fc5ad2d43dd344cb393888e061a2d51f923976f24cad040b8ee6762",
+          "synthetic_hidden_fault_ids": [
+            "fault.network.cable.failed"
+          ],
+          "variant_id": "variant.fingerprint.network.incorrect_static_ip.02"
+        },
+        {
+          "expected_public_binding_digest": "5d3effd99fc5ad2d43dd344cb393888e061a2d51f923976f24cad040b8ee6762",
+          "synthetic_hidden_fault_ids": [
+            "fault.network.dhcp.no_lease"
+          ],
+          "variant_id": "variant.fingerprint.network.incorrect_static_ip.03"
+        },
+        {
+          "expected_public_binding_digest": "5d3effd99fc5ad2d43dd344cb393888e061a2d51f923976f24cad040b8ee6762",
+          "synthetic_hidden_fault_ids": [
+            "fault.network.ip.static_incorrect"
+          ],
+          "variant_id": "variant.fingerprint.network.incorrect_static_ip.04"
+        },
+        {
+          "expected_public_binding_digest": "5d3effd99fc5ad2d43dd344cb393888e061a2d51f923976f24cad040b8ee6762",
+          "synthetic_hidden_fault_ids": [
+            "fault.network.nic.failed"
+          ],
+          "variant_id": "variant.fingerprint.network.incorrect_static_ip.05"
+        }
+      ],
+      "hidden_fault_bindings": [
+        {
+          "binding_basis": "Build-time compatibility only: fault.network.ip.static_incorrect has a source-backed role and path in the fixed profile. This record cannot choose a public profile or derive Evidence.",
+          "fault_id": "fault.network.ip.static_incorrect",
+          "source_claim_ids": [
+            "claim.r740xd.network-daughter-card",
+            "claim.r740xd.network-daughter-card-service",
+            "claim.uefi.os-loader-handoff"
+          ],
+          "target_node_ids": [
+            "os",
+            "network_config",
+            "network_service",
+            "nic",
+            "link"
+          ],
+          "target_role_ids": [
+            "role.os_network_config",
+            "role.network_service",
+            "role.nic",
+            "role.network_cable"
+          ]
+        }
+      ],
+      "profile_ref": {
+        "profile_content_digest": "521d8b531b2d2307982bc200155f1f98eae1029834655cd9d0cd779740303204",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+        "profile_revision": 1
+      },
+      "required_capability_ids": [
+        "capability.r740xd.story.network-runtime-config",
+        "capability.r740xd.host-network"
+      ],
+      "serialization": {
+        "canonicalization_version": "canonical-json-v1",
+        "content_digest": "3d0faee7a0c134ceb1e9b9894a4502a52699fcbe2960410f0f525ecd1517289d",
+        "digest_algorithm": "sha256"
+      },
+      "ticket_id": "ticket.generated.759fd75d6ac043a57d6673d7",
+      "ticket_snapshot_digest": "45f7e05c9d9a57f0e324c34d21dd1420d7c0f76ec0c4753b1494414a292697bd",
+      "validation_result": "PASS"
+    },
+    {
+      "authored_action_requirements": [
+        {
+          "action_definition_id": "test.memory.diagnostic",
+          "action_type": "RUN_DIAGNOSTIC",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.test.memory.diagnostic",
+          "authored_result_reference": "evidence.fingerprint.memory.failed.dimm.machine.memory.failed.dimm.active.test.memory.diagnostic",
+          "requirement_id": "requirement.binding.fingerprint.memory.failed_dimm.system-model.story-v1.01"
+        },
+        {
+          "action_definition_id": "repair.memory.replace_dimm",
+          "action_type": "PERFORM_REPAIR",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.repair.memory.replace_dimm",
+          "authored_result_reference": "repair_outcome.fingerprint.memory.failed.dimm",
+          "requirement_id": "requirement.binding.fingerprint.memory.failed_dimm.system-model.story-v1.02"
+        },
+        {
+          "action_definition_id": "verify.memory.full_test",
+          "action_type": "PERFORM_VERIFY",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.verify.memory.full_test",
+          "authored_result_reference": "verify_outcome.fingerprint.memory.failed.dimm.01.pass",
+          "requirement_id": "requirement.binding.fingerprint.memory.failed_dimm.system-model.story-v1.03"
+        }
+      ],
+      "authority_boundary": "BUILD_TIME_REJECTION_ONLY",
+      "binding_id": "binding.fingerprint.memory.failed_dimm.system-model.story-v1",
+      "compatibility_id": "compatibility.fingerprint.memory.failed_dimm.story-v1",
+      "differential_variants": [
+        {
+          "expected_public_binding_digest": "62fc4db6236bd1a98943eae377301bffe7f983bc525366051c1367aa42569b70",
+          "synthetic_hidden_fault_ids": [
+            "fault.memory.dimm.failed"
+          ],
+          "variant_id": "variant.fingerprint.memory.failed_dimm.01"
+        },
+        {
+          "expected_public_binding_digest": "62fc4db6236bd1a98943eae377301bffe7f983bc525366051c1367aa42569b70",
+          "synthetic_hidden_fault_ids": [
+            "fault.system.intermittent_memory_instability"
+          ],
+          "variant_id": "variant.fingerprint.memory.failed_dimm.02"
+        }
+      ],
+      "hidden_fault_bindings": [
+        {
+          "binding_basis": "Build-time compatibility only: fault.memory.dimm.failed has a source-backed role and path in the fixed profile. This record cannot choose a public profile or derive Evidence.",
+          "fault_id": "fault.memory.dimm.failed",
+          "source_claim_ids": [
+            "claim.r740xd.memory-install-verify",
+            "claim.r740xd.memory-population-channels"
+          ],
+          "target_node_ids": [
+            "board",
+            "memory_channel",
+            "cpu_memory"
+          ],
+          "target_role_ids": [
+            "role.memory_channel",
+            "role.memory"
+          ]
+        },
+        {
+          "binding_basis": "Build-time compatibility only: fault.system.intermittent_memory_instability has a source-backed role and path in the fixed profile. This record cannot choose a public profile or derive Evidence.",
+          "fault_id": "fault.system.intermittent_memory_instability",
+          "source_claim_ids": [
+            "claim.r740xd.memory-install-verify",
+            "claim.r740xd.memory-population-channels"
+          ],
+          "target_node_ids": [
+            "board",
+            "memory_channel",
+            "cpu_memory"
+          ],
+          "target_role_ids": [
+            "role.memory_channel",
+            "role.memory"
+          ]
+        }
+      ],
+      "profile_ref": {
+        "profile_content_digest": "521d8b531b2d2307982bc200155f1f98eae1029834655cd9d0cd779740303204",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+        "profile_revision": 1
+      },
+      "required_capability_ids": [
+        "capability.r740xd.story.memory-service"
+      ],
+      "serialization": {
+        "canonicalization_version": "canonical-json-v1",
+        "content_digest": "24122e6b0c7a5ed5670af7e4b2d723c9795fec74448d7643919e7ce00072d3e2",
+        "digest_algorithm": "sha256"
+      },
+      "ticket_id": "ticket.generated.75ea6ec9e60d64c7cac4caa5",
+      "ticket_snapshot_digest": "1bd3ccabc476313a0420cb9889ab5e7b84c60c250aa32f3d4f009f614f2c47e5",
+      "validation_result": "PASS"
+    },
+    {
+      "authored_action_requirements": [
+        {
+          "action_definition_id": "test.power.known_good_psu",
+          "action_type": "RUN_DIAGNOSTIC",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.test.power.known_good_psu",
+          "authored_result_reference": "evidence.fingerprint.power.failed.psu.machine.power.failed.psu.active.test.power.known.good.psu",
+          "requirement_id": "requirement.binding.fingerprint.power.failed_psu.system-model.story-v1.01"
+        },
+        {
+          "action_definition_id": "repair.power.replace_psu",
+          "action_type": "PERFORM_REPAIR",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.repair.power.replace_psu",
+          "authored_result_reference": "repair_outcome.fingerprint.power.failed.psu",
+          "requirement_id": "requirement.binding.fingerprint.power.failed_psu.system-model.story-v1.02"
+        },
+        {
+          "action_definition_id": "verify.power.stable",
+          "action_type": "PERFORM_VERIFY",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.verify.power.stable",
+          "authored_result_reference": "verify_outcome.fingerprint.power.failed.psu.01.pass",
+          "requirement_id": "requirement.binding.fingerprint.power.failed_psu.system-model.story-v1.03"
+        }
+      ],
+      "authority_boundary": "BUILD_TIME_REJECTION_ONLY",
+      "binding_id": "binding.fingerprint.power.failed_psu.system-model.story-v1",
+      "compatibility_id": "compatibility.fingerprint.power.failed_psu.story-v1",
+      "differential_variants": [
+        {
+          "expected_public_binding_digest": "0d8fc7a1f972491d8f72f400ee4e12e734ffab2c9582e6a921d822f94f6da0c2",
+          "synthetic_hidden_fault_ids": [
+            "fault.power.input.cable_loose"
+          ],
+          "variant_id": "variant.fingerprint.power.failed_psu.01"
+        },
+        {
+          "expected_public_binding_digest": "0d8fc7a1f972491d8f72f400ee4e12e734ffab2c9582e6a921d822f94f6da0c2",
+          "synthetic_hidden_fault_ids": [
+            "fault.power.psu.failed"
+          ],
+          "variant_id": "variant.fingerprint.power.failed_psu.02"
+        },
+        {
+          "expected_public_binding_digest": "0d8fc7a1f972491d8f72f400ee4e12e734ffab2c9582e6a921d822f94f6da0c2",
+          "synthetic_hidden_fault_ids": [
+            "fault.power.psu.not_seated"
+          ],
+          "variant_id": "variant.fingerprint.power.failed_psu.03"
+        }
+      ],
+      "hidden_fault_bindings": [
+        {
+          "binding_basis": "Build-time compatibility only: fault.power.psu.failed has a source-backed role and path in the fixed profile. This record cannot choose a public profile or derive Evidence.",
+          "fault_id": "fault.power.psu.failed",
+          "source_claim_ids": [
+            "claim.r740xd.dual-psu",
+            "claim.r740xd.psu-service"
+          ],
+          "target_node_ids": [
+            "ac",
+            "psu",
+            "board"
+          ],
+          "target_role_ids": [
+            "role.psu_pair",
+            "role.system_board"
+          ]
+        }
+      ],
+      "profile_ref": {
+        "profile_content_digest": "521d8b531b2d2307982bc200155f1f98eae1029834655cd9d0cd779740303204",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+        "profile_revision": 1
+      },
+      "required_capability_ids": [
+        "capability.r740xd.story.redundant-psu-service"
+      ],
+      "serialization": {
+        "canonicalization_version": "canonical-json-v1",
+        "content_digest": "0f95e3fd084dea5fb4c7ddd2379238f33118187409f5b9c0f707da8bc489d9bf",
+        "digest_algorithm": "sha256"
+      },
+      "ticket_id": "ticket.generated.8ee2c08bae1e3d005b35bff5",
+      "ticket_snapshot_digest": "8c7810616e535b8f62d3303e501bfcfdf8c9071df23903e2727b6fcb476e0d4b",
+      "validation_result": "PASS"
+    },
+    {
+      "authored_action_requirements": [
+        {
+          "action_definition_id": "test.general.visual_inspection",
+          "action_type": "RUN_DIAGNOSTIC",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.test.general.visual_inspection",
+          "authored_result_reference": "evidence.fingerprint.power.unseated.psu.machine.power.unseated.psu.active.test.general.visual.inspection",
+          "requirement_id": "requirement.binding.fingerprint.power.unseated_psu.system-model.story-v1.01"
+        },
+        {
+          "action_definition_id": "test.power.psu_status",
+          "action_type": "RUN_DIAGNOSTIC",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.test.power.psu_status",
+          "authored_result_reference": "evidence.fingerprint.power.unseated.psu.machine.power.unseated.psu.active.test.power.psu.status",
+          "requirement_id": "requirement.binding.fingerprint.power.unseated_psu.system-model.story-v1.02"
+        },
+        {
+          "action_definition_id": "repair.power.reseat_psu",
+          "action_type": "PERFORM_REPAIR",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.repair.power.reseat_psu",
+          "authored_result_reference": "repair_outcome.fingerprint.power.unseated.psu",
+          "requirement_id": "requirement.binding.fingerprint.power.unseated_psu.system-model.story-v1.03"
+        },
+        {
+          "action_definition_id": "verify.power.stable",
+          "action_type": "PERFORM_VERIFY",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.verify.power.stable",
+          "authored_result_reference": "verify_outcome.fingerprint.power.unseated.psu.01.pass",
+          "requirement_id": "requirement.binding.fingerprint.power.unseated_psu.system-model.story-v1.04"
+        }
+      ],
+      "authority_boundary": "BUILD_TIME_REJECTION_ONLY",
+      "binding_id": "binding.fingerprint.power.unseated_psu.system-model.story-v1",
+      "compatibility_id": "compatibility.fingerprint.power.unseated_psu.story-v1",
+      "differential_variants": [
+        {
+          "expected_public_binding_digest": "8dd3ff3b2b6052df5cb95317389d1d9a00ff545397e00992daad0b1689e2c40f",
+          "synthetic_hidden_fault_ids": [
+            "fault.power.input.cable_loose"
+          ],
+          "variant_id": "variant.fingerprint.power.unseated_psu.01"
+        },
+        {
+          "expected_public_binding_digest": "8dd3ff3b2b6052df5cb95317389d1d9a00ff545397e00992daad0b1689e2c40f",
+          "synthetic_hidden_fault_ids": [
+            "fault.power.psu.failed"
+          ],
+          "variant_id": "variant.fingerprint.power.unseated_psu.02"
+        },
+        {
+          "expected_public_binding_digest": "8dd3ff3b2b6052df5cb95317389d1d9a00ff545397e00992daad0b1689e2c40f",
+          "synthetic_hidden_fault_ids": [
+            "fault.power.psu.not_seated"
+          ],
+          "variant_id": "variant.fingerprint.power.unseated_psu.03"
+        }
+      ],
+      "hidden_fault_bindings": [
+        {
+          "binding_basis": "Build-time compatibility only: fault.power.psu.not_seated has a source-backed role and path in the fixed profile. This record cannot choose a public profile or derive Evidence.",
+          "fault_id": "fault.power.psu.not_seated",
+          "source_claim_ids": [
+            "claim.r740xd.dual-psu",
+            "claim.r740xd.psu-service"
+          ],
+          "target_node_ids": [
+            "ac",
+            "psu",
+            "board"
+          ],
+          "target_role_ids": [
+            "role.psu_pair",
+            "role.system_board"
+          ]
+        }
+      ],
+      "profile_ref": {
+        "profile_content_digest": "521d8b531b2d2307982bc200155f1f98eae1029834655cd9d0cd779740303204",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+        "profile_revision": 1
+      },
+      "required_capability_ids": [
+        "capability.r740xd.story.redundant-psu-service"
+      ],
+      "serialization": {
+        "canonicalization_version": "canonical-json-v1",
+        "content_digest": "5c875a5a211d44f13655ffeb8e2a700794ed997dd8131a4ed91d52f8c8f934c8",
+        "digest_algorithm": "sha256"
+      },
+      "ticket_id": "ticket.generated.a10b8767580c9453c679a326",
+      "ticket_snapshot_digest": "c55b2fb6c7aee2644929ecdd803b3b3f5155b5ec4426b43e4953d0082391e0f7",
+      "validation_result": "PASS"
+    },
+    {
+      "authored_action_requirements": [
+        {
+          "action_definition_id": "test.firmware.version_compatibility",
+          "action_type": "RUN_DIAGNOSTIC",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.v1.test.firmware.version_compatibility",
+          "authored_result_reference": "evidence.fingerprint.firmware.incompatible.version.set.machine.firmware.incompatible.version.set.active.test.firmware.version.compatibility",
+          "requirement_id": "private-requirement.fingerprint.firmware.incompatible_version_set.01"
+        },
+        {
+          "action_definition_id": "test.network.link_counter_soak",
+          "action_type": "RUN_DIAGNOSTIC",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.v1.test.network.link_counter_soak",
+          "authored_result_reference": "evidence.fingerprint.firmware.incompatible.version.set.machine.firmware.incompatible.version.set.active.test.network.link.counter.soak",
+          "requirement_id": "private-requirement.fingerprint.firmware.incompatible_version_set.02"
+        },
+        {
+          "action_definition_id": "repair.firmware.restore_compatible_versions",
+          "action_type": "PERFORM_REPAIR",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.v1.repair.firmware.restore_compatible_versions",
+          "authored_result_reference": "repair_outcome.fingerprint.firmware.incompatible.version.set",
+          "requirement_id": "private-requirement.fingerprint.firmware.incompatible_version_set.03"
+        },
+        {
+          "action_definition_id": "verify.firmware.compatible_persistent",
+          "action_type": "PERFORM_VERIFY",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.v1.verify.firmware.compatible_persistent",
+          "authored_result_reference": "verify_outcome.fingerprint.firmware.incompatible.version.set.01.pass",
+          "requirement_id": "private-requirement.fingerprint.firmware.incompatible_version_set.04"
+        }
+      ],
+      "authority_boundary": "BUILD_TIME_REJECTION_ONLY",
+      "binding_id": "binding.fingerprint.firmware.incompatible_version_set.system-model.v1",
+      "compatibility_id": "compatibility.fingerprint.firmware.incompatible_version_set.v1",
+      "differential_variants": [
+        {
+          "expected_public_binding_digest": "2da82eb285955e54b862dee5e822302cf394b8d2552f3716d06af49360dbf97b",
+          "synthetic_hidden_fault_ids": [
+            "fault.firmware.version_set.incompatible"
+          ],
+          "variant_id": "nonleak.fingerprint.firmware.incompatible_version_set.01"
+        },
+        {
+          "expected_public_binding_digest": "2da82eb285955e54b862dee5e822302cf394b8d2552f3716d06af49360dbf97b",
+          "synthetic_hidden_fault_ids": [
+            "fault.network.cable.disconnected"
+          ],
+          "variant_id": "nonleak.fingerprint.firmware.incompatible_version_set.02"
+        },
+        {
+          "expected_public_binding_digest": "2da82eb285955e54b862dee5e822302cf394b8d2552f3716d06af49360dbf97b",
+          "synthetic_hidden_fault_ids": [
+            "fault.network.cable.failed"
+          ],
+          "variant_id": "nonleak.fingerprint.firmware.incompatible_version_set.03"
+        },
+        {
+          "expected_public_binding_digest": "2da82eb285955e54b862dee5e822302cf394b8d2552f3716d06af49360dbf97b",
+          "synthetic_hidden_fault_ids": [
+            "fault.network.nic.failed"
+          ],
+          "variant_id": "nonleak.fingerprint.firmware.incompatible_version_set.04"
+        }
+      ],
+      "hidden_fault_bindings": [
+        {
+          "binding_basis": "Compatibility proof only; the authored Ticket remains the source of truth.",
+          "fault_id": "fault.firmware.version_set.incompatible",
+          "source_claim_ids": [
+            "claim.idrac9.out-of-band-management",
+            "claim.idrac9.pre-os-interface",
+            "claim.r740xd.uefi-boot-mode",
+            "claim.r740xd.boot-order-configurable",
+            "claim.uefi.boot-manager-policy",
+            "claim.r740xd.network-daughter-card",
+            "claim.uefi.os-loader-handoff"
+          ],
+          "target_node_ids": [
+            "bmc",
+            "uefi",
+            "nic",
+            "os"
+          ],
+          "target_role_ids": [
+            "role.bmc",
+            "role.system_bios",
+            "role.nic"
+          ]
+        }
+      ],
+      "profile_ref": {
+        "profile_content_digest": "23d8cd238aaaa986c8082b1686d05a35a637c461a2b142caa78d3c8eb879f3b0",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+        "profile_revision": 1
+      },
+      "required_capability_ids": [
+        "capability.r740xd.management-inventory",
+        "capability.r740xd.firmware-policy",
+        "capability.r740xd.host-network"
+      ],
+      "serialization": {
+        "canonicalization_version": "canonical-json-v1",
+        "content_digest": "54581f74fa13ef35e32d07be03fa2ac755ff687854aa8ad2aa8b5d83182594cd",
+        "digest_algorithm": "sha256"
+      },
+      "ticket_id": "ticket.generated.b34238282822e93980b5f1ad",
+      "ticket_snapshot_digest": "face80b0d5c6f6c7f1ef3bb0495c0c6e4105360fa07887fb50cc2dea440cbc50",
+      "validation_result": "PASS"
+    },
+    {
+      "authored_action_requirements": [
+        {
+          "action_definition_id": "test.management.event_log_freshness",
+          "action_type": "RUN_DIAGNOSTIC",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.test.management.event_log_freshness",
+          "authored_result_reference": "evidence.fingerprint.management.stale.alert.machine.management.stale.alert.active.test.management.event.log.freshness",
+          "requirement_id": "requirement.binding.fingerprint.management.stale_alert.system-model.story-v1.01"
+        },
+        {
+          "action_definition_id": "repair.management.clear_stale_alert_state",
+          "action_type": "PERFORM_REPAIR",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.repair.management.clear_stale_alert_state",
+          "authored_result_reference": "repair_outcome.fingerprint.management.stale.alert",
+          "requirement_id": "requirement.binding.fingerprint.management.stale_alert.system-model.story-v1.02"
+        },
+        {
+          "action_definition_id": "verify.management.alert_does_not_recur",
+          "action_type": "PERFORM_VERIFY",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.verify.management.alert_does_not_recur",
+          "authored_result_reference": "verify_outcome.fingerprint.management.stale.alert.01.pass",
+          "requirement_id": "requirement.binding.fingerprint.management.stale_alert.system-model.story-v1.03"
+        }
+      ],
+      "authority_boundary": "BUILD_TIME_REJECTION_ONLY",
+      "binding_id": "binding.fingerprint.management.stale_alert.system-model.story-v1",
+      "compatibility_id": "compatibility.fingerprint.management.stale_alert.story-v1",
+      "differential_variants": [
+        {
+          "expected_public_binding_digest": "dd2d72077e2d56a83e800c51b6b7e102fd7050a956f12a51309737b1c9e1249e",
+          "synthetic_hidden_fault_ids": [
+            "fault.management.alert.stale"
+          ],
+          "variant_id": "variant.fingerprint.management.stale_alert.01"
+        },
+        {
+          "expected_public_binding_digest": "dd2d72077e2d56a83e800c51b6b7e102fd7050a956f12a51309737b1c9e1249e",
+          "synthetic_hidden_fault_ids": [
+            "fault.storage.backplane.path_failed"
+          ],
+          "variant_id": "variant.fingerprint.management.stale_alert.02"
+        }
+      ],
+      "hidden_fault_bindings": [
+        {
+          "binding_basis": "Build-time compatibility only: fault.management.alert.stale has a source-backed role and path in the fixed profile. This record cannot choose a public profile or derive Evidence.",
+          "fault_id": "fault.management.alert.stale",
+          "source_claim_ids": [
+            "claim.idrac9.hardware-inventory",
+            "claim.idrac9.lifecycle-log-categories",
+            "claim.idrac9.lifecycle-log-timestamps"
+          ],
+          "target_node_ids": [
+            "bmc",
+            "backplane",
+            "board"
+          ],
+          "target_role_ids": [
+            "role.bmc",
+            "role.hybrid_backplane"
+          ]
+        }
+      ],
+      "profile_ref": {
+        "profile_content_digest": "521d8b531b2d2307982bc200155f1f98eae1029834655cd9d0cd779740303204",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+        "profile_revision": 1
+      },
+      "required_capability_ids": [
+        "capability.r740xd.story.management-event-freshness",
+        "capability.r740xd.management-inventory"
+      ],
+      "serialization": {
+        "canonicalization_version": "canonical-json-v1",
+        "content_digest": "d8b884daaf2332d5c6709a259d1fde2524dac6e5f79540741bee6de993a29ec7",
+        "digest_algorithm": "sha256"
+      },
+      "ticket_id": "ticket.generated.b68505324c44f11977fcda07",
+      "ticket_snapshot_digest": "c889bd1e907f1537e8080822e7d9ded3821e0507fe8bc20f49490ae81f01f0e8",
+      "validation_result": "PASS"
+    },
+    {
+      "authored_action_requirements": [
+        {
+          "action_definition_id": "test.network.cable_substitution",
+          "action_type": "RUN_DIAGNOSTIC",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.test.network.cable_substitution",
+          "authored_result_reference": "evidence.fingerprint.network.failed.cable.machine.network.failed.cable.active.test.network.cable.substitution",
+          "requirement_id": "requirement.binding.fingerprint.network.failed_cable.system-model.story-v1.01"
+        },
+        {
+          "action_definition_id": "repair.network.replace_cable",
+          "action_type": "PERFORM_REPAIR",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.repair.network.replace_cable",
+          "authored_result_reference": "repair_outcome.fingerprint.network.failed.cable",
+          "requirement_id": "requirement.binding.fingerprint.network.failed_cable.system-model.story-v1.02"
+        },
+        {
+          "action_definition_id": "verify.network.link",
+          "action_type": "PERFORM_VERIFY",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.verify.network.link",
+          "authored_result_reference": "verify_outcome.fingerprint.network.failed.cable.01.pass",
+          "requirement_id": "requirement.binding.fingerprint.network.failed_cable.system-model.story-v1.03"
+        },
+        {
+          "action_definition_id": "verify.network.connectivity",
+          "action_type": "PERFORM_VERIFY",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.verify.network.connectivity",
+          "authored_result_reference": "verify_outcome.fingerprint.network.failed.cable.02.pass",
+          "requirement_id": "requirement.binding.fingerprint.network.failed_cable.system-model.story-v1.04"
+        }
+      ],
+      "authority_boundary": "BUILD_TIME_REJECTION_ONLY",
+      "binding_id": "binding.fingerprint.network.failed_cable.system-model.story-v1",
+      "compatibility_id": "compatibility.fingerprint.network.failed_cable.story-v1",
+      "differential_variants": [
+        {
+          "expected_public_binding_digest": "23c400d108a5d8a2a5d1c4466b3ede6624a8ba339dba1c6ee1e57ed88cef5cb4",
+          "synthetic_hidden_fault_ids": [
+            "fault.network.cable.disconnected"
+          ],
+          "variant_id": "variant.fingerprint.network.failed_cable.01"
+        },
+        {
+          "expected_public_binding_digest": "23c400d108a5d8a2a5d1c4466b3ede6624a8ba339dba1c6ee1e57ed88cef5cb4",
+          "synthetic_hidden_fault_ids": [
+            "fault.network.cable.failed"
+          ],
+          "variant_id": "variant.fingerprint.network.failed_cable.02"
+        },
+        {
+          "expected_public_binding_digest": "23c400d108a5d8a2a5d1c4466b3ede6624a8ba339dba1c6ee1e57ed88cef5cb4",
+          "synthetic_hidden_fault_ids": [
+            "fault.network.dhcp.no_lease"
+          ],
+          "variant_id": "variant.fingerprint.network.failed_cable.03"
+        },
+        {
+          "expected_public_binding_digest": "23c400d108a5d8a2a5d1c4466b3ede6624a8ba339dba1c6ee1e57ed88cef5cb4",
+          "synthetic_hidden_fault_ids": [
+            "fault.network.ip.static_incorrect"
+          ],
+          "variant_id": "variant.fingerprint.network.failed_cable.04"
+        },
+        {
+          "expected_public_binding_digest": "23c400d108a5d8a2a5d1c4466b3ede6624a8ba339dba1c6ee1e57ed88cef5cb4",
+          "synthetic_hidden_fault_ids": [
+            "fault.network.nic.failed"
+          ],
+          "variant_id": "variant.fingerprint.network.failed_cable.05"
+        }
+      ],
+      "hidden_fault_bindings": [
+        {
+          "binding_basis": "Build-time compatibility only: fault.network.cable.failed has a source-backed role and path in the fixed profile. This record cannot choose a public profile or derive Evidence.",
+          "fault_id": "fault.network.cable.failed",
+          "source_claim_ids": [
+            "claim.r740xd.network-daughter-card",
+            "claim.r740xd.network-daughter-card-service",
+            "claim.uefi.os-loader-handoff"
+          ],
+          "target_node_ids": [
+            "os",
+            "network_config",
+            "network_service",
+            "nic",
+            "link"
+          ],
+          "target_role_ids": [
+            "role.os_network_config",
+            "role.network_service",
+            "role.nic",
+            "role.network_cable"
+          ]
+        },
+        {
+          "binding_basis": "Build-time compatibility only: fault.network.dhcp.no_lease has a source-backed role and path in the fixed profile. This record cannot choose a public profile or derive Evidence.",
+          "fault_id": "fault.network.dhcp.no_lease",
+          "source_claim_ids": [
+            "claim.r740xd.network-daughter-card",
+            "claim.r740xd.network-daughter-card-service",
+            "claim.uefi.os-loader-handoff"
+          ],
+          "target_node_ids": [
+            "os",
+            "network_config",
+            "network_service",
+            "nic",
+            "link"
+          ],
+          "target_role_ids": [
+            "role.os_network_config",
+            "role.network_service",
+            "role.nic",
+            "role.network_cable"
+          ]
+        }
+      ],
+      "profile_ref": {
+        "profile_content_digest": "521d8b531b2d2307982bc200155f1f98eae1029834655cd9d0cd779740303204",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+        "profile_revision": 1
+      },
+      "required_capability_ids": [
+        "capability.r740xd.story.network-runtime-config",
+        "capability.r740xd.host-network"
+      ],
+      "serialization": {
+        "canonicalization_version": "canonical-json-v1",
+        "content_digest": "8d921f5fbe952d1edb9e10dc80d3839caa0c9ef7376327930d29dc9560c1bf87",
+        "digest_algorithm": "sha256"
+      },
+      "ticket_id": "ticket.generated.cbc8003979ffdaca83b41d7d",
+      "ticket_snapshot_digest": "4de1801512399068fea5881be79955af674ae35eff511d7a1d75101d6c0085d2",
+      "validation_result": "PASS"
+    },
+    {
+      "authored_action_requirements": [
+        {
+          "action_definition_id": "test.firmware.settings_review",
+          "action_type": "RUN_DIAGNOSTIC",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.test.firmware.settings_review",
+          "authored_result_reference": "evidence.fingerprint.boot.incorrect.order.machine.boot.incorrect.order.active.test.firmware.settings.review",
+          "requirement_id": "requirement.binding.fingerprint.boot.incorrect_order.system-model.story-v1.01"
+        },
+        {
+          "action_definition_id": "test.boot.device_inventory",
+          "action_type": "RUN_DIAGNOSTIC",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.test.boot.device_inventory",
+          "authored_result_reference": "evidence.fingerprint.boot.incorrect.order.machine.boot.incorrect.order.active.test.boot.device.inventory",
+          "requirement_id": "requirement.binding.fingerprint.boot.incorrect_order.system-model.story-v1.02"
+        },
+        {
+          "action_definition_id": "repair.boot.correct_order",
+          "action_type": "PERFORM_REPAIR",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.repair.boot.correct_order",
+          "authored_result_reference": "repair_outcome.fingerprint.boot.incorrect.order",
+          "requirement_id": "requirement.binding.fingerprint.boot.incorrect_order.system-model.story-v1.03"
+        },
+        {
+          "action_definition_id": "verify.boot.normal_boot",
+          "action_type": "PERFORM_VERIFY",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.verify.boot.normal_boot",
+          "authored_result_reference": "verify_outcome.fingerprint.boot.incorrect.order.01.pass",
+          "requirement_id": "requirement.binding.fingerprint.boot.incorrect_order.system-model.story-v1.04"
+        }
+      ],
+      "authority_boundary": "BUILD_TIME_REJECTION_ONLY",
+      "binding_id": "binding.fingerprint.boot.incorrect_order.system-model.story-v1",
+      "compatibility_id": "compatibility.fingerprint.boot.incorrect_order.story-v1",
+      "differential_variants": [
+        {
+          "expected_public_binding_digest": "710920f86f102f4953753fc9517ae047e792038416d29a621c165427a74ffc16",
+          "synthetic_hidden_fault_ids": [
+            "fault.boot.order.incorrect"
+          ],
+          "variant_id": "variant.fingerprint.boot.incorrect_order.01"
+        },
+        {
+          "expected_public_binding_digest": "710920f86f102f4953753fc9517ae047e792038416d29a621c165427a74ffc16",
+          "synthetic_hidden_fault_ids": [
+            "fault.firmware.config.reset"
+          ],
+          "variant_id": "variant.fingerprint.boot.incorrect_order.02"
+        }
+      ],
+      "hidden_fault_bindings": [
+        {
+          "binding_basis": "Build-time compatibility only: fault.boot.order.incorrect has a source-backed role and path in the fixed profile. This record cannot choose a public profile or derive Evidence.",
+          "fault_id": "fault.boot.order.incorrect",
+          "source_claim_ids": [
+            "claim.r740xd.boot-order-configurable",
+            "claim.uefi.os-loader-handoff"
+          ],
+          "target_node_ids": [
+            "uefi",
+            "os",
+            "drives"
+          ],
+          "target_role_ids": [
+            "role.system_bios",
+            "role.nvme"
+          ]
+        }
+      ],
+      "profile_ref": {
+        "profile_content_digest": "521d8b531b2d2307982bc200155f1f98eae1029834655cd9d0cd779740303204",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+        "profile_revision": 1
+      },
+      "required_capability_ids": [
+        "capability.r740xd.firmware-policy",
+        "capability.r740xd.hybrid-storage"
+      ],
+      "serialization": {
+        "canonicalization_version": "canonical-json-v1",
+        "content_digest": "d94315146b3f2411227ebb70bb63b0871040d23fad42c783cadeae7e8c53c428",
+        "digest_algorithm": "sha256"
+      },
+      "ticket_id": "ticket.generated.ef8a4924e707349bce5c2be7",
+      "ticket_snapshot_digest": "821769a6021482074d523c723dc08a6b9bd2885820eabe11a9011b199fc6dacb",
+      "validation_result": "PASS"
+    },
+    {
+      "authored_action_requirements": [
+        {
+          "action_definition_id": "test.management.bmc_recovery_state",
+          "action_type": "RUN_DIAGNOSTIC",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.v1.test.management.bmc_recovery_state",
+          "authored_result_reference": "evidence.fingerprint.management.corrupt.bmc.firmware.machine.management.corrupt.bmc.firmware.active.test.management.bmc.recovery.state",
+          "requirement_id": "private-requirement.fingerprint.management.corrupt_bmc_firmware.01"
+        },
+        {
+          "action_definition_id": "repair.management.recover_bmc_firmware",
+          "action_type": "PERFORM_REPAIR",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.v1.repair.management.recover_bmc_firmware",
+          "authored_result_reference": "repair_outcome.fingerprint.management.corrupt.bmc.firmware",
+          "requirement_id": "private-requirement.fingerprint.management.corrupt_bmc_firmware.02"
+        },
+        {
+          "action_definition_id": "verify.management.bmc_functional",
+          "action_type": "PERFORM_VERIFY",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.v1.verify.management.bmc_functional",
+          "authored_result_reference": "verify_outcome.fingerprint.management.corrupt.bmc.firmware.01.pass",
+          "requirement_id": "private-requirement.fingerprint.management.corrupt_bmc_firmware.03"
+        }
+      ],
+      "authority_boundary": "BUILD_TIME_REJECTION_ONLY",
+      "binding_id": "binding.fingerprint.management.corrupt_bmc_firmware.system-model.v1",
+      "compatibility_id": "compatibility.fingerprint.management.corrupt_bmc_firmware.v1",
+      "differential_variants": [
+        {
+          "expected_public_binding_digest": "4270444a9443581d88b3cdf7496e001b395d7055b99400b751baa480db41b1c5",
+          "synthetic_hidden_fault_ids": [
+            "fault.firmware.version_set.incompatible"
+          ],
+          "variant_id": "nonleak.fingerprint.management.corrupt_bmc_firmware.01"
+        },
+        {
+          "expected_public_binding_digest": "4270444a9443581d88b3cdf7496e001b395d7055b99400b751baa480db41b1c5",
+          "synthetic_hidden_fault_ids": [
+            "fault.management.bmc_firmware.corrupt"
+          ],
+          "variant_id": "nonleak.fingerprint.management.corrupt_bmc_firmware.02"
+        }
+      ],
+      "hidden_fault_bindings": [
+        {
+          "binding_basis": "Compatibility proof only; the authored Ticket remains the source of truth.",
+          "fault_id": "fault.management.bmc_firmware.corrupt",
+          "source_claim_ids": [
+            "claim.idrac9.out-of-band-management",
+            "claim.idrac9.pre-os-interface",
+            "claim.r740xd.2u-dual-cpu-memory"
+          ],
+          "target_node_ids": [
+            "bmc",
+            "board"
+          ],
+          "target_role_ids": [
+            "role.bmc",
+            "role.system_board"
+          ]
+        }
+      ],
+      "profile_ref": {
+        "profile_content_digest": "23d8cd238aaaa986c8082b1686d05a35a637c461a2b142caa78d3c8eb879f3b0",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+        "profile_revision": 1
+      },
+      "required_capability_ids": [
+        "capability.r740xd.management-inventory",
+        "capability.r740xd.firmware-policy"
+      ],
+      "serialization": {
+        "canonicalization_version": "canonical-json-v1",
+        "content_digest": "653f52e479d9d7ef691b2c976307073c9437fcfbc5f370a46f029fd28c070822",
+        "digest_algorithm": "sha256"
+      },
+      "ticket_id": "ticket.generated.f32b85cbf2054fdf0114f42a",
+      "ticket_snapshot_digest": "761016e56ceb47a585727555f64bac47b103933cddbafc27a5c385f402851b01",
+      "validation_result": "PASS"
+    },
+    {
+      "authored_action_requirements": [
+        {
+          "action_definition_id": "test.thermal.fan_telemetry",
+          "action_type": "RUN_DIAGNOSTIC",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.test.thermal.fan_telemetry",
+          "authored_result_reference": "evidence.fingerprint.thermal.failed.fan.machine.thermal.failed.fan.active.test.thermal.fan.telemetry",
+          "requirement_id": "requirement.binding.fingerprint.thermal.failed_fan.system-model.story-v1.01"
+        },
+        {
+          "action_definition_id": "repair.thermal.replace_fan",
+          "action_type": "PERFORM_REPAIR",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.repair.thermal.replace_fan",
+          "authored_result_reference": "repair_outcome.fingerprint.thermal.failed.fan",
+          "requirement_id": "requirement.binding.fingerprint.thermal.failed_fan.system-model.story-v1.02"
+        },
+        {
+          "action_definition_id": "verify.thermal.load_test",
+          "action_type": "PERFORM_VERIFY",
+          "attachment_id": "attachment.dell.poweredge-r740xd.hybrid-24x2_5.story-v1.verify.thermal.load_test",
+          "authored_result_reference": "verify_outcome.fingerprint.thermal.failed.fan.01.pass",
+          "requirement_id": "requirement.binding.fingerprint.thermal.failed_fan.system-model.story-v1.03"
+        }
+      ],
+      "authority_boundary": "BUILD_TIME_REJECTION_ONLY",
+      "binding_id": "binding.fingerprint.thermal.failed_fan.system-model.story-v1",
+      "compatibility_id": "compatibility.fingerprint.thermal.failed_fan.story-v1",
+      "differential_variants": [
+        {
+          "expected_public_binding_digest": "70d4ea2dd372fe6c3baa491a07002fba032dc73a3328ae55dca1ccf69a0e3f96",
+          "synthetic_hidden_fault_ids": [
+            "fault.thermal.cpu.overheating"
+          ],
+          "variant_id": "variant.fingerprint.thermal.failed_fan.01"
+        },
+        {
+          "expected_public_binding_digest": "70d4ea2dd372fe6c3baa491a07002fba032dc73a3328ae55dca1ccf69a0e3f96",
+          "synthetic_hidden_fault_ids": [
+            "fault.thermal.fan.failed"
+          ],
+          "variant_id": "variant.fingerprint.thermal.failed_fan.02"
+        },
+        {
+          "expected_public_binding_digest": "70d4ea2dd372fe6c3baa491a07002fba032dc73a3328ae55dca1ccf69a0e3f96",
+          "synthetic_hidden_fault_ids": [
+            "fault.thermal.heatsink.clogged"
+          ],
+          "variant_id": "variant.fingerprint.thermal.failed_fan.03"
+        },
+        {
+          "expected_public_binding_digest": "70d4ea2dd372fe6c3baa491a07002fba032dc73a3328ae55dca1ccf69a0e3f96",
+          "synthetic_hidden_fault_ids": [
+            "fault.thermal.heatsink.contact_poor"
+          ],
+          "variant_id": "variant.fingerprint.thermal.failed_fan.04"
+        }
+      ],
+      "hidden_fault_bindings": [
+        {
+          "binding_basis": "Build-time compatibility only: fault.thermal.fan.failed has a source-backed role and path in the fixed profile. This record cannot choose a public profile or derive Evidence.",
+          "fault_id": "fault.thermal.fan.failed",
+          "source_claim_ids": [
+            "claim.r740xd.cooling-fan-hot-swap",
+            "claim.r740xd.thermal-control"
+          ],
+          "target_node_ids": [
+            "bmc",
+            "fans",
+            "heatsink",
+            "cpu_memory"
+          ],
+          "target_role_ids": [
+            "role.fans",
+            "role.cpu_heatsink",
+            "role.cpu"
+          ]
+        },
+        {
+          "binding_basis": "Build-time compatibility only: fault.thermal.cpu.overheating has a source-backed role and path in the fixed profile. This record cannot choose a public profile or derive Evidence.",
+          "fault_id": "fault.thermal.cpu.overheating",
+          "source_claim_ids": [
+            "claim.r740xd.cooling-fan-hot-swap",
+            "claim.r740xd.thermal-control"
+          ],
+          "target_node_ids": [
+            "bmc",
+            "fans",
+            "heatsink",
+            "cpu_memory"
+          ],
+          "target_role_ids": [
+            "role.fans",
+            "role.cpu_heatsink",
+            "role.cpu"
+          ]
+        }
+      ],
+      "profile_ref": {
+        "profile_content_digest": "521d8b531b2d2307982bc200155f1f98eae1029834655cd9d0cd779740303204",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+        "profile_revision": 1
+      },
+      "required_capability_ids": [
+        "capability.r740xd.story.thermal-service"
+      ],
+      "serialization": {
+        "canonicalization_version": "canonical-json-v1",
+        "content_digest": "23c8f95a6f6282dbc294cf4f544ac61b6bf992cc95c7256a55dce5b16cbf057b",
+        "digest_algorithm": "sha256"
+      },
+      "ticket_id": "ticket.generated.f60b9ce132c74c33f607df6d",
+      "ticket_snapshot_digest": "b8f877726a0d4356575d9efeb51c8226c674687ba0806ba067142ffc3f90c8cd",
+      "validation_result": "PASS"
+    }
+  ],
+  "contract_version": "system-model-contract-v1",
+  "release_id": "system-model-story-v1",
+  "schema_version": "system-model-private-validation-catalog-v2",
+  "serialization": {
+    "canonicalization_version": "canonical-json-v1",
+    "content_digest": "f3e22b2bf09969e568c0307dc7418732defab462f14f519b2185413fe463e3ae",
+    "digest_algorithm": "sha256"
+  },
+  "storage_boundary": "SERVER_OR_BUILD_ONLY"
+}

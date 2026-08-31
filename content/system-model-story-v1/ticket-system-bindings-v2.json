@@ -1,0 +1,1503 @@
+{
+  "bindings": [
+    {
+      "authority_boundary": "EXPLANATORY_ONLY",
+      "binding_id": "binding.fingerprint.storage.predictive_drive_failure.system-model.story-v1",
+      "candidate_closure": [
+        {
+          "candidate_fault_id": "fault.storage.drive.predictive_failure",
+          "explanation": "fault.storage.drive.predictive_failure remains possible within the displayed hybrid backplane, controller branches, and drive service units; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "bmc",
+            "uefi",
+            "backplane",
+            "sas_path",
+            "nvme_path",
+            "drives"
+          ],
+          "public_path_ids": [
+            "path.r740xd.sas-storage",
+            "path.r740xd.nvme-storage"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.storage.sas.drive_failed",
+          "explanation": "fault.storage.sas.drive_failed remains possible within the displayed hybrid backplane, controller branches, and drive service units; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "bmc",
+            "uefi",
+            "backplane",
+            "sas_path",
+            "nvme_path",
+            "drives"
+          ],
+          "public_path_ids": [
+            "path.r740xd.sas-storage",
+            "path.r740xd.nvme-storage"
+          ]
+        }
+      ],
+      "fallback_id": "fallback.system-model.text-only.v1",
+      "fingerprint_id": "fingerprint.storage.predictive_drive_failure",
+      "profile_ref": {
+        "profile_content_digest": "521d8b531b2d2307982bc200155f1f98eae1029834655cd9d0cd779740303204",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+        "profile_revision": 1
+      },
+      "public_requirement_capability_ids": [
+        "capability.r740xd.story.storage-array-service",
+        "capability.r740xd.hybrid-storage"
+      ],
+      "public_resolver_key": "resolver.fingerprint.storage.predictive_drive_failure.story-v1",
+      "public_surface": {
+        "public_candidate_fault_ids": [
+          "fault.storage.drive.predictive_failure",
+          "fault.storage.sas.drive_failed"
+        ],
+        "public_surface_digest": "c1775c8950f6a7e2550a30234b78fee3d92f90a1fc44854511a573850c863664",
+        "public_symptom_ids": [
+          "symptom.storage.predictive_failure_warning",
+          "symptom.storage.drive_fault_led"
+        ]
+      },
+      "serialization": {
+        "canonicalization_version": "canonical-json-v1",
+        "content_digest": "0cb5500782488f1e88ddbe685f0dd4db701423863bf8f53233d4f35f319ea82c",
+        "digest_algorithm": "sha256"
+      },
+      "ticket_focus_statement": "This public system view preserves all 2 authored Candidates for fingerprint.storage.predictive_drive_failure while separating component, control, observation, and service boundaries. It does not identify the hidden solution.",
+      "ticket_id": "ticket.generated.36ba2ae8958431194a7e1fef",
+      "ticket_snapshot_digest": "c71d7e7f87b7e1177f7f8b79344293dee489778c9acfc9ba213d9cb7410aa671"
+    },
+    {
+      "authority_boundary": "EXPLANATORY_ONLY",
+      "binding_id": "binding.fingerprint.boot.missing_nvme.system-model.v1",
+      "candidate_closure": [
+        {
+          "candidate_fault_id": "fault.boot.device.not_detected",
+          "explanation": "Discovery spans firmware inventory, the NVMe path, and installed devices.",
+          "public_node_ids": [
+            "uefi",
+            "drives"
+          ],
+          "public_path_ids": [
+            "path.r740xd.nvme-storage"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.boot.order.incorrect",
+          "explanation": "A configurable boot-policy surface precedes the loader handoff.",
+          "public_node_ids": [
+            "uefi",
+            "os"
+          ],
+          "public_path_ids": [
+            "path.r740xd.boot-handoff"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.storage.cable.loose",
+          "explanation": "The hybrid option contains a reconnectable interconnect and backplane boundary.",
+          "public_node_ids": [
+            "nvme_path",
+            "backplane"
+          ],
+          "public_path_ids": [
+            "path.r740xd.nvme-storage"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.storage.nvme.device_failed",
+          "explanation": "The fixed option contains replaceable NVMe service units.",
+          "public_node_ids": [
+            "drives"
+          ],
+          "public_path_ids": [
+            "path.r740xd.nvme-storage"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.storage.raid.controller_failed",
+          "explanation": "A separate controller-attached SAS branch remains visibly possible.",
+          "public_node_ids": [
+            "sas_path",
+            "backplane"
+          ],
+          "public_path_ids": [
+            "path.r740xd.sas-storage"
+          ]
+        }
+      ],
+      "fallback_id": "fallback.system-model.text-only.v1",
+      "fingerprint_id": "fingerprint.boot.missing_nvme",
+      "profile_ref": {
+        "profile_content_digest": "23d8cd238aaaa986c8082b1686d05a35a637c461a2b142caa78d3c8eb879f3b0",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+        "profile_revision": 1
+      },
+      "public_requirement_capability_ids": [
+        "capability.r740xd.hybrid-storage",
+        "capability.r740xd.management-inventory",
+        "capability.r740xd.firmware-policy",
+        "capability.r740xd.documented-service"
+      ],
+      "public_resolver_key": "resolver.fingerprint.boot.missing_nvme.v1",
+      "public_surface": {
+        "public_candidate_fault_ids": [
+          "fault.boot.device.not_detected",
+          "fault.boot.order.incorrect",
+          "fault.storage.cable.loose",
+          "fault.storage.nvme.device_failed",
+          "fault.storage.raid.controller_failed"
+        ],
+        "public_surface_digest": "fc720995cf7cb5d87fc6796232f1a4e30d1daa2b61930092350444a07741805f",
+        "public_symptom_ids": [
+          "symptom.boot.no_boot_device"
+        ]
+      },
+      "serialization": {
+        "canonicalization_version": "canonical-json-v1",
+        "content_digest": "9b21ae0bd6d0991b04aedd0d1bcd764205e84f1f7812b10e0a47658920690b90",
+        "digest_algorithm": "sha256"
+      },
+      "ticket_focus_statement": "The visible model shows both boot-policy and physical storage-path explanations for a missing boot device; it does not identify which explanation is true.",
+      "ticket_id": "ticket.generated.3ec80b1b0e7221ac725aedf9",
+      "ticket_snapshot_digest": "1c74ad0725e500ac01d4c356f17551fee11678a88b35ca5b591ff056a2efdff2"
+    },
+    {
+      "authority_boundary": "EXPLANATORY_ONLY",
+      "binding_id": "binding.fingerprint.power.failed_distribution_board.system-model.v1",
+      "candidate_closure": [
+        {
+          "candidate_fault_id": "fault.board.system.failed",
+          "explanation": "The downstream board and host load are distinct visible boundaries.",
+          "public_node_ids": [
+            "board",
+            "host"
+          ],
+          "public_path_ids": [
+            "path.r740xd2.power-distribution"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.power.distribution_board.failed",
+          "explanation": "The documented Power Interposer Board realizes the broader distribution-board role.",
+          "public_node_ids": [
+            "power_interposer"
+          ],
+          "public_path_ids": [
+            "path.r740xd2.power-distribution"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.power.input.cable_loose",
+          "explanation": "Two external input boundaries precede the PSU pair.",
+          "public_node_ids": [
+            "ac",
+            "psu"
+          ],
+          "public_path_ids": [
+            "path.r740xd2.power-distribution"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.power.psu.failed",
+          "explanation": "Two serviceable supplies remain visible as a redundant pair.",
+          "public_node_ids": [
+            "psu"
+          ],
+          "public_path_ids": [
+            "path.r740xd2.power-distribution"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.power.psu.not_seated",
+          "explanation": "The removable PSU-to-cage/interposer service boundary remains visible.",
+          "public_node_ids": [
+            "psu",
+            "power_interposer"
+          ],
+          "public_path_ids": [
+            "path.r740xd2.power-distribution"
+          ]
+        }
+      ],
+      "fallback_id": "fallback.system-model.text-only.v1",
+      "fingerprint_id": "fingerprint.power.failed_distribution_board",
+      "profile_ref": {
+        "profile_content_digest": "83e72e6f1996f670b786c640a5ff14db929da43fdc09cffad9adac8150369ae9",
+        "profile_id": "profile.dell.poweredge-r740xd2.power-interposer.v1",
+        "profile_revision": 1
+      },
+      "public_requirement_capability_ids": [
+        "capability.r740xd2.redundant-power",
+        "capability.r740xd2.pib-service",
+        "capability.r740xd2.power-path-observation"
+      ],
+      "public_resolver_key": "resolver.fingerprint.power.failed_distribution_board.v1",
+      "public_surface": {
+        "public_candidate_fault_ids": [
+          "fault.board.system.failed",
+          "fault.power.distribution_board.failed",
+          "fault.power.input.cable_loose",
+          "fault.power.psu.failed",
+          "fault.power.psu.not_seated"
+        ],
+        "public_surface_digest": "25091b6efe8c529a61e50e0cc043d7d451a8de4e709d40468fc52291e50effd1",
+        "public_symptom_ids": [
+          "symptom.power.voltage_out_of_range",
+          "symptom.power.no_power"
+        ]
+      },
+      "serialization": {
+        "canonicalization_version": "canonical-json-v1",
+        "content_digest": "86fb8afbacfddba851fbf1319ffb65d3939e3375385ff555f6e48c1e80d1c763",
+        "digest_algorithm": "sha256"
+      },
+      "ticket_focus_statement": "The visible model separates two input/PSU branches from the shared interposer and downstream board so isolation can compare path segments without exposing the failing segment.",
+      "ticket_id": "ticket.generated.3fd6eb04534f79b5b3f87f98",
+      "ticket_snapshot_digest": "d34f08d79c2cc2d47d16d23ec753f1e78758d0b358664d4e592ea23f25b63d73"
+    },
+    {
+      "authority_boundary": "EXPLANATORY_ONLY",
+      "binding_id": "binding.fingerprint.memory.unseated_dimm.system-model.story-v1",
+      "candidate_closure": [
+        {
+          "candidate_fault_id": "fault.memory.channel.unavailable",
+          "explanation": "fault.memory.channel.unavailable remains possible within the displayed memory channels, DIMM population, and firmware inventory; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "board",
+            "memory_channel",
+            "cpu_memory"
+          ],
+          "public_path_ids": [
+            "path.r740xd.memory-channel"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.memory.dimm.not_seated",
+          "explanation": "fault.memory.dimm.not_seated remains possible within the displayed memory channels, DIMM population, and firmware inventory; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "board",
+            "memory_channel",
+            "cpu_memory"
+          ],
+          "public_path_ids": [
+            "path.r740xd.memory-channel"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.memory.population.invalid",
+          "explanation": "fault.memory.population.invalid remains possible within the displayed memory channels, DIMM population, and firmware inventory; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "board",
+            "memory_channel",
+            "cpu_memory"
+          ],
+          "public_path_ids": [
+            "path.r740xd.memory-channel"
+          ]
+        }
+      ],
+      "fallback_id": "fallback.system-model.text-only.v1",
+      "fingerprint_id": "fingerprint.memory.unseated_dimm",
+      "profile_ref": {
+        "profile_content_digest": "521d8b531b2d2307982bc200155f1f98eae1029834655cd9d0cd779740303204",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+        "profile_revision": 1
+      },
+      "public_requirement_capability_ids": [
+        "capability.r740xd.story.memory-service"
+      ],
+      "public_resolver_key": "resolver.fingerprint.memory.unseated_dimm.story-v1",
+      "public_surface": {
+        "public_candidate_fault_ids": [
+          "fault.memory.channel.unavailable",
+          "fault.memory.dimm.not_seated",
+          "fault.memory.population.invalid"
+        ],
+        "public_surface_digest": "5ba548102476b0b238a5d0d42a4acbf89e63731cc144acb90e9cda8ffab8b28b",
+        "public_symptom_ids": [
+          "symptom.boot.memory_warning"
+        ]
+      },
+      "serialization": {
+        "canonicalization_version": "canonical-json-v1",
+        "content_digest": "e6ac97f9d456bef06d78448e3c0219ccd3dfd9c1af262149ce19a8b72cd39d89",
+        "digest_algorithm": "sha256"
+      },
+      "ticket_focus_statement": "This public system view preserves all 3 authored Candidates for fingerprint.memory.unseated_dimm while separating component, control, observation, and service boundaries. It does not identify the hidden solution.",
+      "ticket_id": "ticket.generated.424c8fab1db6aed25058ab78",
+      "ticket_snapshot_digest": "268c91a53ad795437e6690b2a5cc843071eea627671f2168b7a0dca00941a9c7"
+    },
+    {
+      "authority_boundary": "EXPLANATORY_ONLY",
+      "binding_id": "binding.fingerprint.storage.failed_sas_member.system-model.story-v1",
+      "candidate_closure": [
+        {
+          "candidate_fault_id": "fault.storage.raid.degraded",
+          "explanation": "fault.storage.raid.degraded remains possible within the displayed hybrid backplane, controller branches, and drive service units; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "bmc",
+            "uefi",
+            "backplane",
+            "sas_path",
+            "nvme_path",
+            "drives"
+          ],
+          "public_path_ids": [
+            "path.r740xd.sas-storage",
+            "path.r740xd.nvme-storage"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.storage.sas.drive_failed",
+          "explanation": "fault.storage.sas.drive_failed remains possible within the displayed hybrid backplane, controller branches, and drive service units; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "bmc",
+            "uefi",
+            "backplane",
+            "sas_path",
+            "nvme_path",
+            "drives"
+          ],
+          "public_path_ids": [
+            "path.r740xd.sas-storage",
+            "path.r740xd.nvme-storage"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.storage.sata.drive_failed",
+          "explanation": "fault.storage.sata.drive_failed remains possible within the displayed hybrid backplane, controller branches, and drive service units; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "bmc",
+            "uefi",
+            "backplane",
+            "sas_path",
+            "nvme_path",
+            "drives"
+          ],
+          "public_path_ids": [
+            "path.r740xd.sas-storage",
+            "path.r740xd.nvme-storage"
+          ]
+        }
+      ],
+      "fallback_id": "fallback.system-model.text-only.v1",
+      "fingerprint_id": "fingerprint.storage.failed_sas_member",
+      "profile_ref": {
+        "profile_content_digest": "521d8b531b2d2307982bc200155f1f98eae1029834655cd9d0cd779740303204",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+        "profile_revision": 1
+      },
+      "public_requirement_capability_ids": [
+        "capability.r740xd.story.storage-array-service",
+        "capability.r740xd.hybrid-storage"
+      ],
+      "public_resolver_key": "resolver.fingerprint.storage.failed_sas_member.story-v1",
+      "public_surface": {
+        "public_candidate_fault_ids": [
+          "fault.storage.raid.degraded",
+          "fault.storage.sas.drive_failed",
+          "fault.storage.sata.drive_failed"
+        ],
+        "public_surface_digest": "b745c2be0272e52eabd92ae5b79a1e679099979a0e6bdc6444d430f2c7c4afb2",
+        "public_symptom_ids": [
+          "symptom.storage.raid_degraded"
+        ]
+      },
+      "serialization": {
+        "canonicalization_version": "canonical-json-v1",
+        "content_digest": "49e4bbd38a39bb0021b73fed40d2d407d303fc983b173096794d830f2bd5c1d6",
+        "digest_algorithm": "sha256"
+      },
+      "ticket_focus_statement": "This public system view preserves all 3 authored Candidates for fingerprint.storage.failed_sas_member while separating component, control, observation, and service boundaries. It does not identify the hidden solution.",
+      "ticket_id": "ticket.generated.45a70010dd4752f864990575",
+      "ticket_snapshot_digest": "863ca5c0e0a72f9440e3352c80b070f4bde1ca166c801e79425821adfa7f4420"
+    },
+    {
+      "authority_boundary": "EXPLANATORY_ONLY",
+      "binding_id": "binding.fingerprint.compute.damaged_cpu_socket_contacts.system-model.story-v1",
+      "candidate_closure": [
+        {
+          "candidate_fault_id": "fault.board.system.failed",
+          "explanation": "fault.board.system.failed remains possible within the displayed system board, processor socket, and processor module; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "board",
+            "cpu_socket",
+            "cpu_memory"
+          ],
+          "public_path_ids": [
+            "path.r740xd.compute-socket"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.compute.cpu_socket.contacts_damaged",
+          "explanation": "fault.compute.cpu_socket.contacts_damaged remains possible within the displayed system board, processor socket, and processor module; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "board",
+            "cpu_socket",
+            "cpu_memory"
+          ],
+          "public_path_ids": [
+            "path.r740xd.compute-socket"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.cpu.not_seated",
+          "explanation": "fault.cpu.not_seated remains possible within the displayed system board, processor socket, and processor module; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "board",
+            "cpu_socket",
+            "cpu_memory"
+          ],
+          "public_path_ids": [
+            "path.r740xd.compute-socket"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.memory.dimm.failed",
+          "explanation": "fault.memory.dimm.failed remains possible within the displayed memory channels, DIMM population, and firmware inventory; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "board",
+            "memory_channel",
+            "cpu_memory"
+          ],
+          "public_path_ids": [
+            "path.r740xd.memory-channel"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.memory.dimm.not_seated",
+          "explanation": "fault.memory.dimm.not_seated remains possible within the displayed memory channels, DIMM population, and firmware inventory; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "board",
+            "memory_channel",
+            "cpu_memory"
+          ],
+          "public_path_ids": [
+            "path.r740xd.memory-channel"
+          ]
+        }
+      ],
+      "fallback_id": "fallback.system-model.text-only.v1",
+      "fingerprint_id": "fingerprint.compute.damaged_cpu_socket_contacts",
+      "profile_ref": {
+        "profile_content_digest": "521d8b531b2d2307982bc200155f1f98eae1029834655cd9d0cd779740303204",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+        "profile_revision": 1
+      },
+      "public_requirement_capability_ids": [
+        "capability.r740xd.story.compute-socket-service"
+      ],
+      "public_resolver_key": "resolver.fingerprint.compute.damaged_cpu_socket_contacts.story-v1",
+      "public_surface": {
+        "public_candidate_fault_ids": [
+          "fault.board.system.failed",
+          "fault.compute.cpu_socket.contacts_damaged",
+          "fault.cpu.not_seated",
+          "fault.memory.dimm.failed",
+          "fault.memory.dimm.not_seated"
+        ],
+        "public_surface_digest": "c2a2ef8d22cd8e468f62f7345cc4af45af51ea38baffc64c80911d3e407b102a",
+        "public_symptom_ids": [
+          "symptom.boot.no_post"
+        ]
+      },
+      "serialization": {
+        "canonicalization_version": "canonical-json-v1",
+        "content_digest": "9fa7eec70364504dc6fc91cd665ae28071c97c0f721c3c65469f874aa6fe29e9",
+        "digest_algorithm": "sha256"
+      },
+      "ticket_focus_statement": "This public system view preserves all 5 authored Candidates for fingerprint.compute.damaged_cpu_socket_contacts while separating component, control, observation, and service boundaries. It does not identify the hidden solution.",
+      "ticket_id": "ticket.generated.4f237a22c35d46166044b2c7",
+      "ticket_snapshot_digest": "dc4e0581e510fd94120fcca53ee8b25f5a8d3b456253627c7faf5603c5d8e481"
+    },
+    {
+      "authority_boundary": "EXPLANATORY_ONLY",
+      "binding_id": "binding.fingerprint.storage.loose_cable.system-model.v1",
+      "candidate_closure": [
+        {
+          "candidate_fault_id": "fault.storage.backplane.path_failed",
+          "explanation": "The replaceable hybrid backplane is a distinct service boundary.",
+          "public_node_ids": [
+            "backplane"
+          ],
+          "public_path_ids": [
+            "path.r740xd.sas-storage",
+            "path.r740xd.nvme-storage"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.storage.cable.failed",
+          "explanation": "Separate documented SAS and PCIe/NVMe interconnect branches remain visible.",
+          "public_node_ids": [
+            "sas_path",
+            "nvme_path"
+          ],
+          "public_path_ids": [
+            "path.r740xd.sas-storage",
+            "path.r740xd.nvme-storage"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.storage.cable.loose",
+          "explanation": "Both reconnectable branch boundaries remain possible until authorized Evidence narrows them.",
+          "public_node_ids": [
+            "sas_path",
+            "nvme_path",
+            "backplane"
+          ],
+          "public_path_ids": [
+            "path.r740xd.sas-storage",
+            "path.r740xd.nvme-storage"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.storage.nvme.device_failed",
+          "explanation": "Replaceable NVMe devices remain present.",
+          "public_node_ids": [
+            "drives",
+            "nvme_path"
+          ],
+          "public_path_ids": [
+            "path.r740xd.nvme-storage"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.storage.sas.drive_failed",
+          "explanation": "Controller-attached SAS/SATA bays remain present.",
+          "public_node_ids": [
+            "drives",
+            "sas_path"
+          ],
+          "public_path_ids": [
+            "path.r740xd.sas-storage"
+          ]
+        }
+      ],
+      "fallback_id": "fallback.system-model.text-only.v1",
+      "fingerprint_id": "fingerprint.storage.loose_cable",
+      "profile_ref": {
+        "profile_content_digest": "23d8cd238aaaa986c8082b1686d05a35a637c461a2b142caa78d3c8eb879f3b0",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+        "profile_revision": 1
+      },
+      "public_requirement_capability_ids": [
+        "capability.r740xd.hybrid-storage",
+        "capability.r740xd.management-inventory",
+        "capability.r740xd.documented-service"
+      ],
+      "public_resolver_key": "resolver.fingerprint.storage.loose_cable.v1",
+      "public_surface": {
+        "public_candidate_fault_ids": [
+          "fault.storage.backplane.path_failed",
+          "fault.storage.cable.failed",
+          "fault.storage.cable.loose",
+          "fault.storage.nvme.device_failed",
+          "fault.storage.sas.drive_failed"
+        ],
+        "public_surface_digest": "81789ab1bcc01a12951fabecbea5aea9f5c03322442b033fdf59a7fe7c52c9a3",
+        "public_symptom_ids": [
+          "symptom.storage.io_errors"
+        ]
+      },
+      "serialization": {
+        "canonicalization_version": "canonical-json-v1",
+        "content_digest": "ee27ee51993610d14899616bbc09113eb56e7f41be6d54de4e204ff0c8e97e2a",
+        "digest_algorithm": "sha256"
+      },
+      "ticket_focus_statement": "The visible model exposes devices, cable/path abstractions, backplane, and controller boundaries so every public storage Candidate remains physically possible.",
+      "ticket_id": "ticket.generated.5352abd871c2e9076be92a0b",
+      "ticket_snapshot_digest": "b06dc5a7d12c29af78edd71f7a82a611d971844e6e71863e142bc293f4e6af27"
+    },
+    {
+      "authority_boundary": "EXPLANATORY_ONLY",
+      "binding_id": "binding.fingerprint.thermal.clogged_heatsink.system-model.story-v1",
+      "candidate_closure": [
+        {
+          "candidate_fault_id": "fault.thermal.cpu.overheating",
+          "explanation": "fault.thermal.cpu.overheating remains possible within the displayed management telemetry, fan row, heatsink, and processor load; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "bmc",
+            "fans",
+            "heatsink",
+            "cpu_memory"
+          ],
+          "public_path_ids": [
+            "path.r740xd.thermal-service"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.thermal.fan.failed",
+          "explanation": "fault.thermal.fan.failed remains possible within the displayed management telemetry, fan row, heatsink, and processor load; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "bmc",
+            "fans",
+            "heatsink",
+            "cpu_memory"
+          ],
+          "public_path_ids": [
+            "path.r740xd.thermal-service"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.thermal.heatsink.clogged",
+          "explanation": "fault.thermal.heatsink.clogged remains possible within the displayed management telemetry, fan row, heatsink, and processor load; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "bmc",
+            "fans",
+            "heatsink",
+            "cpu_memory"
+          ],
+          "public_path_ids": [
+            "path.r740xd.thermal-service"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.thermal.heatsink.contact_poor",
+          "explanation": "fault.thermal.heatsink.contact_poor remains possible within the displayed management telemetry, fan row, heatsink, and processor load; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "bmc",
+            "fans",
+            "heatsink",
+            "cpu_memory"
+          ],
+          "public_path_ids": [
+            "path.r740xd.thermal-service"
+          ]
+        }
+      ],
+      "fallback_id": "fallback.system-model.text-only.v1",
+      "fingerprint_id": "fingerprint.thermal.clogged_heatsink",
+      "profile_ref": {
+        "profile_content_digest": "521d8b531b2d2307982bc200155f1f98eae1029834655cd9d0cd779740303204",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+        "profile_revision": 1
+      },
+      "public_requirement_capability_ids": [
+        "capability.r740xd.story.thermal-service"
+      ],
+      "public_resolver_key": "resolver.fingerprint.thermal.clogged_heatsink.story-v1",
+      "public_surface": {
+        "public_candidate_fault_ids": [
+          "fault.thermal.cpu.overheating",
+          "fault.thermal.fan.failed",
+          "fault.thermal.heatsink.clogged",
+          "fault.thermal.heatsink.contact_poor"
+        ],
+        "public_surface_digest": "589a8377f14e2397ff27b56dae10142b442be82274ba6aed64d9d520b0e79a1f",
+        "public_symptom_ids": [
+          "symptom.thermal.high_cpu_temp"
+        ]
+      },
+      "serialization": {
+        "canonicalization_version": "canonical-json-v1",
+        "content_digest": "a79cf6142f500300aedb3371efbf5495d4bc72a558582e94a51ecca7e0f140f9",
+        "digest_algorithm": "sha256"
+      },
+      "ticket_focus_statement": "This public system view preserves all 4 authored Candidates for fingerprint.thermal.clogged_heatsink while separating component, control, observation, and service boundaries. It does not identify the hidden solution.",
+      "ticket_id": "ticket.generated.6e55cf55154d356da2e91126",
+      "ticket_snapshot_digest": "ce86a008060199c2f5c5cb2ed763385e8766315e35a2ce1b9b3e19fa39627a95"
+    },
+    {
+      "authority_boundary": "EXPLANATORY_ONLY",
+      "binding_id": "binding.fingerprint.network.incorrect_static_ip.system-model.story-v1",
+      "candidate_closure": [
+        {
+          "candidate_fault_id": "fault.network.cable.disconnected",
+          "explanation": "fault.network.cable.disconnected remains possible within the displayed OS configuration, network adapter, cable, and bounded peer path; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "os",
+            "network_config",
+            "network_service",
+            "nic",
+            "link"
+          ],
+          "public_path_ids": [
+            "path.r740xd.network-config",
+            "path.r740xd.network-runtime"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.network.cable.failed",
+          "explanation": "fault.network.cable.failed remains possible within the displayed OS configuration, network adapter, cable, and bounded peer path; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "os",
+            "network_config",
+            "network_service",
+            "nic",
+            "link"
+          ],
+          "public_path_ids": [
+            "path.r740xd.network-config",
+            "path.r740xd.network-runtime"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.network.dhcp.no_lease",
+          "explanation": "fault.network.dhcp.no_lease remains possible within the displayed OS configuration, network adapter, cable, and bounded peer path; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "os",
+            "network_config",
+            "network_service",
+            "nic",
+            "link"
+          ],
+          "public_path_ids": [
+            "path.r740xd.network-config",
+            "path.r740xd.network-runtime"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.network.ip.static_incorrect",
+          "explanation": "fault.network.ip.static_incorrect remains possible within the displayed OS configuration, network adapter, cable, and bounded peer path; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "os",
+            "network_config",
+            "network_service",
+            "nic",
+            "link"
+          ],
+          "public_path_ids": [
+            "path.r740xd.network-config",
+            "path.r740xd.network-runtime"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.network.nic.failed",
+          "explanation": "fault.network.nic.failed remains possible within the displayed OS configuration, network adapter, cable, and bounded peer path; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "os",
+            "network_config",
+            "network_service",
+            "nic",
+            "link"
+          ],
+          "public_path_ids": [
+            "path.r740xd.network-config",
+            "path.r740xd.network-runtime"
+          ]
+        }
+      ],
+      "fallback_id": "fallback.system-model.text-only.v1",
+      "fingerprint_id": "fingerprint.network.incorrect_static_ip",
+      "profile_ref": {
+        "profile_content_digest": "521d8b531b2d2307982bc200155f1f98eae1029834655cd9d0cd779740303204",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+        "profile_revision": 1
+      },
+      "public_requirement_capability_ids": [
+        "capability.r740xd.story.network-runtime-config",
+        "capability.r740xd.host-network"
+      ],
+      "public_resolver_key": "resolver.fingerprint.network.incorrect_static_ip.story-v1",
+      "public_surface": {
+        "public_candidate_fault_ids": [
+          "fault.network.cable.disconnected",
+          "fault.network.cable.failed",
+          "fault.network.dhcp.no_lease",
+          "fault.network.ip.static_incorrect",
+          "fault.network.nic.failed"
+        ],
+        "public_surface_digest": "26a37b6301675754018eb20b07dad05df0b8b26530db92a36e47e073c166fc66",
+        "public_symptom_ids": [
+          "symptom.network.no_connectivity"
+        ]
+      },
+      "serialization": {
+        "canonicalization_version": "canonical-json-v1",
+        "content_digest": "5d3effd99fc5ad2d43dd344cb393888e061a2d51f923976f24cad040b8ee6762",
+        "digest_algorithm": "sha256"
+      },
+      "ticket_focus_statement": "This public system view preserves all 5 authored Candidates for fingerprint.network.incorrect_static_ip while separating component, control, observation, and service boundaries. It does not identify the hidden solution.",
+      "ticket_id": "ticket.generated.759fd75d6ac043a57d6673d7",
+      "ticket_snapshot_digest": "45f7e05c9d9a57f0e324c34d21dd1420d7c0f76ec0c4753b1494414a292697bd"
+    },
+    {
+      "authority_boundary": "EXPLANATORY_ONLY",
+      "binding_id": "binding.fingerprint.memory.failed_dimm.system-model.story-v1",
+      "candidate_closure": [
+        {
+          "candidate_fault_id": "fault.memory.dimm.failed",
+          "explanation": "fault.memory.dimm.failed remains possible within the displayed memory channels, DIMM population, and firmware inventory; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "board",
+            "memory_channel",
+            "cpu_memory"
+          ],
+          "public_path_ids": [
+            "path.r740xd.memory-channel"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.system.intermittent_memory_instability",
+          "explanation": "fault.system.intermittent_memory_instability remains possible within the displayed memory channels, DIMM population, and firmware inventory; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "board",
+            "memory_channel",
+            "cpu_memory"
+          ],
+          "public_path_ids": [
+            "path.r740xd.memory-channel"
+          ]
+        }
+      ],
+      "fallback_id": "fallback.system-model.text-only.v1",
+      "fingerprint_id": "fingerprint.memory.failed_dimm",
+      "profile_ref": {
+        "profile_content_digest": "521d8b531b2d2307982bc200155f1f98eae1029834655cd9d0cd779740303204",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+        "profile_revision": 1
+      },
+      "public_requirement_capability_ids": [
+        "capability.r740xd.story.memory-service"
+      ],
+      "public_resolver_key": "resolver.fingerprint.memory.failed_dimm.story-v1",
+      "public_surface": {
+        "public_candidate_fault_ids": [
+          "fault.memory.dimm.failed",
+          "fault.system.intermittent_memory_instability"
+        ],
+        "public_surface_digest": "abb597f6eccfb509b3bf86562348717593d18c1e0075cac0d6205f5617380fd5",
+        "public_symptom_ids": [
+          "symptom.system.intermittent_crash"
+        ]
+      },
+      "serialization": {
+        "canonicalization_version": "canonical-json-v1",
+        "content_digest": "62fc4db6236bd1a98943eae377301bffe7f983bc525366051c1367aa42569b70",
+        "digest_algorithm": "sha256"
+      },
+      "ticket_focus_statement": "This public system view preserves all 2 authored Candidates for fingerprint.memory.failed_dimm while separating component, control, observation, and service boundaries. It does not identify the hidden solution.",
+      "ticket_id": "ticket.generated.75ea6ec9e60d64c7cac4caa5",
+      "ticket_snapshot_digest": "1bd3ccabc476313a0420cb9889ab5e7b84c60c250aa32f3d4f009f614f2c47e5"
+    },
+    {
+      "authority_boundary": "EXPLANATORY_ONLY",
+      "binding_id": "binding.fingerprint.power.failed_psu.system-model.story-v1",
+      "candidate_closure": [
+        {
+          "candidate_fault_id": "fault.power.input.cable_loose",
+          "explanation": "fault.power.input.cable_loose remains possible within the displayed external input, redundant PSU pair, and board-power path; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "ac",
+            "psu",
+            "board"
+          ],
+          "public_path_ids": [
+            "path.r740xd.power"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.power.psu.failed",
+          "explanation": "fault.power.psu.failed remains possible within the displayed external input, redundant PSU pair, and board-power path; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "ac",
+            "psu",
+            "board"
+          ],
+          "public_path_ids": [
+            "path.r740xd.power"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.power.psu.not_seated",
+          "explanation": "fault.power.psu.not_seated remains possible within the displayed external input, redundant PSU pair, and board-power path; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "ac",
+            "psu",
+            "board"
+          ],
+          "public_path_ids": [
+            "path.r740xd.power"
+          ]
+        }
+      ],
+      "fallback_id": "fallback.system-model.text-only.v1",
+      "fingerprint_id": "fingerprint.power.failed_psu",
+      "profile_ref": {
+        "profile_content_digest": "521d8b531b2d2307982bc200155f1f98eae1029834655cd9d0cd779740303204",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+        "profile_revision": 1
+      },
+      "public_requirement_capability_ids": [
+        "capability.r740xd.story.redundant-psu-service"
+      ],
+      "public_resolver_key": "resolver.fingerprint.power.failed_psu.story-v1",
+      "public_surface": {
+        "public_candidate_fault_ids": [
+          "fault.power.input.cable_loose",
+          "fault.power.psu.failed",
+          "fault.power.psu.not_seated"
+        ],
+        "public_surface_digest": "9a9afb8da40ba47289c47565dedf19b222f9d05bb08c4e455239894fde9e0340",
+        "public_symptom_ids": [
+          "symptom.power.redundancy_warning"
+        ]
+      },
+      "serialization": {
+        "canonicalization_version": "canonical-json-v1",
+        "content_digest": "0d8fc7a1f972491d8f72f400ee4e12e734ffab2c9582e6a921d822f94f6da0c2",
+        "digest_algorithm": "sha256"
+      },
+      "ticket_focus_statement": "This public system view preserves all 3 authored Candidates for fingerprint.power.failed_psu while separating component, control, observation, and service boundaries. It does not identify the hidden solution.",
+      "ticket_id": "ticket.generated.8ee2c08bae1e3d005b35bff5",
+      "ticket_snapshot_digest": "8c7810616e535b8f62d3303e501bfcfdf8c9071df23903e2727b6fcb476e0d4b"
+    },
+    {
+      "authority_boundary": "EXPLANATORY_ONLY",
+      "binding_id": "binding.fingerprint.power.unseated_psu.system-model.story-v1",
+      "candidate_closure": [
+        {
+          "candidate_fault_id": "fault.power.input.cable_loose",
+          "explanation": "fault.power.input.cable_loose remains possible within the displayed external input, redundant PSU pair, and board-power path; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "ac",
+            "psu",
+            "board"
+          ],
+          "public_path_ids": [
+            "path.r740xd.power"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.power.psu.failed",
+          "explanation": "fault.power.psu.failed remains possible within the displayed external input, redundant PSU pair, and board-power path; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "ac",
+            "psu",
+            "board"
+          ],
+          "public_path_ids": [
+            "path.r740xd.power"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.power.psu.not_seated",
+          "explanation": "fault.power.psu.not_seated remains possible within the displayed external input, redundant PSU pair, and board-power path; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "ac",
+            "psu",
+            "board"
+          ],
+          "public_path_ids": [
+            "path.r740xd.power"
+          ]
+        }
+      ],
+      "fallback_id": "fallback.system-model.text-only.v1",
+      "fingerprint_id": "fingerprint.power.unseated_psu",
+      "profile_ref": {
+        "profile_content_digest": "521d8b531b2d2307982bc200155f1f98eae1029834655cd9d0cd779740303204",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+        "profile_revision": 1
+      },
+      "public_requirement_capability_ids": [
+        "capability.r740xd.story.redundant-psu-service"
+      ],
+      "public_resolver_key": "resolver.fingerprint.power.unseated_psu.story-v1",
+      "public_surface": {
+        "public_candidate_fault_ids": [
+          "fault.power.input.cable_loose",
+          "fault.power.psu.failed",
+          "fault.power.psu.not_seated"
+        ],
+        "public_surface_digest": "9a9afb8da40ba47289c47565dedf19b222f9d05bb08c4e455239894fde9e0340",
+        "public_symptom_ids": [
+          "symptom.power.redundancy_warning"
+        ]
+      },
+      "serialization": {
+        "canonicalization_version": "canonical-json-v1",
+        "content_digest": "8dd3ff3b2b6052df5cb95317389d1d9a00ff545397e00992daad0b1689e2c40f",
+        "digest_algorithm": "sha256"
+      },
+      "ticket_focus_statement": "This public system view preserves all 3 authored Candidates for fingerprint.power.unseated_psu while separating component, control, observation, and service boundaries. It does not identify the hidden solution.",
+      "ticket_id": "ticket.generated.a10b8767580c9453c679a326",
+      "ticket_snapshot_digest": "c55b2fb6c7aee2644929ecdd803b3b3f5155b5ec4426b43e4953d0082391e0f7"
+    },
+    {
+      "authority_boundary": "EXPLANATORY_ONLY",
+      "binding_id": "binding.fingerprint.firmware.incompatible_version_set.system-model.v1",
+      "candidate_closure": [
+        {
+          "candidate_fault_id": "fault.firmware.version_set.incompatible",
+          "explanation": "Management inventory, firmware policy, host adapter, and runtime boundaries are all present.",
+          "public_node_ids": [
+            "bmc",
+            "uefi",
+            "nic",
+            "os"
+          ],
+          "public_path_ids": [
+            "path.r740xd.boot-handoff",
+            "path.r740xd.network-runtime"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.network.cable.disconnected",
+          "explanation": "The external port, cable, and peer boundary remains distinct.",
+          "public_node_ids": [
+            "link"
+          ],
+          "public_path_ids": [
+            "path.r740xd.network-runtime"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.network.cable.failed",
+          "explanation": "The physical-link boundary supports a failed-cable possibility without displaying link state.",
+          "public_node_ids": [
+            "link"
+          ],
+          "public_path_ids": [
+            "path.r740xd.network-runtime"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.network.nic.failed",
+          "explanation": "The host network adapter remains a distinct service role.",
+          "public_node_ids": [
+            "nic"
+          ],
+          "public_path_ids": [
+            "path.r740xd.network-runtime"
+          ]
+        }
+      ],
+      "fallback_id": "fallback.system-model.text-only.v1",
+      "fingerprint_id": "fingerprint.firmware.incompatible_version_set",
+      "profile_ref": {
+        "profile_content_digest": "23d8cd238aaaa986c8082b1686d05a35a637c461a2b142caa78d3c8eb879f3b0",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+        "profile_revision": 1
+      },
+      "public_requirement_capability_ids": [
+        "capability.r740xd.management-inventory",
+        "capability.r740xd.firmware-policy",
+        "capability.r740xd.host-network"
+      ],
+      "public_resolver_key": "resolver.fingerprint.firmware.incompatible_version_set.v1",
+      "public_surface": {
+        "public_candidate_fault_ids": [
+          "fault.firmware.version_set.incompatible",
+          "fault.network.cable.disconnected",
+          "fault.network.cable.failed",
+          "fault.network.nic.failed"
+        ],
+        "public_surface_digest": "7c733e717a0bde53bee00b68bd742af5813c566cab9c5661d490a9794acd2d8f",
+        "public_symptom_ids": [
+          "symptom.network.link_flapping",
+          "symptom.network.no_link"
+        ]
+      },
+      "serialization": {
+        "canonicalization_version": "canonical-json-v1",
+        "content_digest": "2da82eb285955e54b862dee5e822302cf394b8d2552f3716d06af49360dbf97b",
+        "digest_algorithm": "sha256"
+      },
+      "ticket_focus_statement": "The visible model keeps firmware, adapter, port, cable, peer, and runtime-counter boundaries separate, leaving both logical and physical network Candidates plausible.",
+      "ticket_id": "ticket.generated.b34238282822e93980b5f1ad",
+      "ticket_snapshot_digest": "face80b0d5c6f6c7f1ef3bb0495c0c6e4105360fa07887fb50cc2dea440cbc50"
+    },
+    {
+      "authority_boundary": "EXPLANATORY_ONLY",
+      "binding_id": "binding.fingerprint.management.stale_alert.system-model.story-v1",
+      "candidate_closure": [
+        {
+          "candidate_fault_id": "fault.management.alert.stale",
+          "explanation": "fault.management.alert.stale remains possible within the displayed BMC inventory, lifecycle events, and observed component subjects; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "bmc",
+            "backplane",
+            "board"
+          ],
+          "public_path_ids": [
+            "path.r740xd.management-storage"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.storage.backplane.path_failed",
+          "explanation": "fault.storage.backplane.path_failed remains possible within the displayed hybrid backplane, controller branches, and drive service units; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "bmc",
+            "uefi",
+            "backplane",
+            "sas_path",
+            "nvme_path",
+            "drives"
+          ],
+          "public_path_ids": [
+            "path.r740xd.sas-storage",
+            "path.r740xd.nvme-storage"
+          ]
+        }
+      ],
+      "fallback_id": "fallback.system-model.text-only.v1",
+      "fingerprint_id": "fingerprint.management.stale_alert",
+      "profile_ref": {
+        "profile_content_digest": "521d8b531b2d2307982bc200155f1f98eae1029834655cd9d0cd779740303204",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+        "profile_revision": 1
+      },
+      "public_requirement_capability_ids": [
+        "capability.r740xd.story.management-event-freshness",
+        "capability.r740xd.management-inventory"
+      ],
+      "public_resolver_key": "resolver.fingerprint.management.stale_alert.story-v1",
+      "public_surface": {
+        "public_candidate_fault_ids": [
+          "fault.management.alert.stale",
+          "fault.storage.backplane.path_failed"
+        ],
+        "public_surface_digest": "6cf421e253872bbddc815f8614f729ffd32349382beee736ce1026b34f12193f",
+        "public_symptom_ids": [
+          "symptom.management.alert_persists"
+        ]
+      },
+      "serialization": {
+        "canonicalization_version": "canonical-json-v1",
+        "content_digest": "dd2d72077e2d56a83e800c51b6b7e102fd7050a956f12a51309737b1c9e1249e",
+        "digest_algorithm": "sha256"
+      },
+      "ticket_focus_statement": "This public system view preserves all 2 authored Candidates for fingerprint.management.stale_alert while separating component, control, observation, and service boundaries. It does not identify the hidden solution.",
+      "ticket_id": "ticket.generated.b68505324c44f11977fcda07",
+      "ticket_snapshot_digest": "c889bd1e907f1537e8080822e7d9ded3821e0507fe8bc20f49490ae81f01f0e8"
+    },
+    {
+      "authority_boundary": "EXPLANATORY_ONLY",
+      "binding_id": "binding.fingerprint.network.failed_cable.system-model.story-v1",
+      "candidate_closure": [
+        {
+          "candidate_fault_id": "fault.network.cable.disconnected",
+          "explanation": "fault.network.cable.disconnected remains possible within the displayed OS configuration, network adapter, cable, and bounded peer path; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "os",
+            "network_config",
+            "network_service",
+            "nic",
+            "link"
+          ],
+          "public_path_ids": [
+            "path.r740xd.network-config",
+            "path.r740xd.network-runtime"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.network.cable.failed",
+          "explanation": "fault.network.cable.failed remains possible within the displayed OS configuration, network adapter, cable, and bounded peer path; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "os",
+            "network_config",
+            "network_service",
+            "nic",
+            "link"
+          ],
+          "public_path_ids": [
+            "path.r740xd.network-config",
+            "path.r740xd.network-runtime"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.network.dhcp.no_lease",
+          "explanation": "fault.network.dhcp.no_lease remains possible within the displayed OS configuration, network adapter, cable, and bounded peer path; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "os",
+            "network_config",
+            "network_service",
+            "nic",
+            "link"
+          ],
+          "public_path_ids": [
+            "path.r740xd.network-config",
+            "path.r740xd.network-runtime"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.network.ip.static_incorrect",
+          "explanation": "fault.network.ip.static_incorrect remains possible within the displayed OS configuration, network adapter, cable, and bounded peer path; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "os",
+            "network_config",
+            "network_service",
+            "nic",
+            "link"
+          ],
+          "public_path_ids": [
+            "path.r740xd.network-config",
+            "path.r740xd.network-runtime"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.network.nic.failed",
+          "explanation": "fault.network.nic.failed remains possible within the displayed OS configuration, network adapter, cable, and bounded peer path; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "os",
+            "network_config",
+            "network_service",
+            "nic",
+            "link"
+          ],
+          "public_path_ids": [
+            "path.r740xd.network-config",
+            "path.r740xd.network-runtime"
+          ]
+        }
+      ],
+      "fallback_id": "fallback.system-model.text-only.v1",
+      "fingerprint_id": "fingerprint.network.failed_cable",
+      "profile_ref": {
+        "profile_content_digest": "521d8b531b2d2307982bc200155f1f98eae1029834655cd9d0cd779740303204",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+        "profile_revision": 1
+      },
+      "public_requirement_capability_ids": [
+        "capability.r740xd.story.network-runtime-config",
+        "capability.r740xd.host-network"
+      ],
+      "public_resolver_key": "resolver.fingerprint.network.failed_cable.story-v1",
+      "public_surface": {
+        "public_candidate_fault_ids": [
+          "fault.network.cable.disconnected",
+          "fault.network.cable.failed",
+          "fault.network.dhcp.no_lease",
+          "fault.network.ip.static_incorrect",
+          "fault.network.nic.failed"
+        ],
+        "public_surface_digest": "26a37b6301675754018eb20b07dad05df0b8b26530db92a36e47e073c166fc66",
+        "public_symptom_ids": [
+          "symptom.network.no_connectivity"
+        ]
+      },
+      "serialization": {
+        "canonicalization_version": "canonical-json-v1",
+        "content_digest": "23c400d108a5d8a2a5d1c4466b3ede6624a8ba339dba1c6ee1e57ed88cef5cb4",
+        "digest_algorithm": "sha256"
+      },
+      "ticket_focus_statement": "This public system view preserves all 5 authored Candidates for fingerprint.network.failed_cable while separating component, control, observation, and service boundaries. It does not identify the hidden solution.",
+      "ticket_id": "ticket.generated.cbc8003979ffdaca83b41d7d",
+      "ticket_snapshot_digest": "4de1801512399068fea5881be79955af674ae35eff511d7a1d75101d6c0085d2"
+    },
+    {
+      "authority_boundary": "EXPLANATORY_ONLY",
+      "binding_id": "binding.fingerprint.boot.incorrect_order.system-model.story-v1",
+      "candidate_closure": [
+        {
+          "candidate_fault_id": "fault.boot.order.incorrect",
+          "explanation": "fault.boot.order.incorrect remains possible within the displayed UEFI policy, boot media, and OS handoff; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "uefi",
+            "os",
+            "drives"
+          ],
+          "public_path_ids": [
+            "path.r740xd.boot-handoff"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.firmware.config.reset",
+          "explanation": "fault.firmware.config.reset remains possible within the displayed BMC, BIOS/UEFI, adapter firmware, and runtime handoff; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "bmc",
+            "board",
+            "uefi",
+            "nic"
+          ],
+          "public_path_ids": [
+            "path.r740xd.boot-handoff",
+            "path.r740xd.network-runtime"
+          ]
+        }
+      ],
+      "fallback_id": "fallback.system-model.text-only.v1",
+      "fingerprint_id": "fingerprint.boot.incorrect_order",
+      "profile_ref": {
+        "profile_content_digest": "521d8b531b2d2307982bc200155f1f98eae1029834655cd9d0cd779740303204",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+        "profile_revision": 1
+      },
+      "public_requirement_capability_ids": [
+        "capability.r740xd.firmware-policy",
+        "capability.r740xd.hybrid-storage"
+      ],
+      "public_resolver_key": "resolver.fingerprint.boot.incorrect_order.story-v1",
+      "public_surface": {
+        "public_candidate_fault_ids": [
+          "fault.boot.order.incorrect",
+          "fault.firmware.config.reset"
+        ],
+        "public_surface_digest": "1863041d18c0df31d37241ca2421be145c5a836a86a77e2ac7b185d7dceb5233",
+        "public_symptom_ids": [
+          "symptom.boot.wrong_device"
+        ]
+      },
+      "serialization": {
+        "canonicalization_version": "canonical-json-v1",
+        "content_digest": "710920f86f102f4953753fc9517ae047e792038416d29a621c165427a74ffc16",
+        "digest_algorithm": "sha256"
+      },
+      "ticket_focus_statement": "This public system view preserves all 2 authored Candidates for fingerprint.boot.incorrect_order while separating component, control, observation, and service boundaries. It does not identify the hidden solution.",
+      "ticket_id": "ticket.generated.ef8a4924e707349bce5c2be7",
+      "ticket_snapshot_digest": "821769a6021482074d523c723dc08a6b9bd2885820eabe11a9011b199fc6dacb"
+    },
+    {
+      "authority_boundary": "EXPLANATORY_ONLY",
+      "binding_id": "binding.fingerprint.management.corrupt_bmc_firmware.system-model.v1",
+      "candidate_closure": [
+        {
+          "candidate_fault_id": "fault.firmware.version_set.incompatible",
+          "explanation": "Management inventory, host firmware, and runtime handoff boundaries remain present.",
+          "public_node_ids": [
+            "bmc",
+            "uefi",
+            "os"
+          ],
+          "public_path_ids": [
+            "path.r740xd.boot-handoff"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.management.bmc_firmware.corrupt",
+          "explanation": "The recoverable management-firmware role remains distinct from the board service boundary.",
+          "public_node_ids": [
+            "bmc",
+            "board"
+          ],
+          "public_path_ids": [
+            "path.r740xd.management-storage"
+          ]
+        }
+      ],
+      "fallback_id": "fallback.system-model.text-only.v1",
+      "fingerprint_id": "fingerprint.management.corrupt_bmc_firmware",
+      "profile_ref": {
+        "profile_content_digest": "23d8cd238aaaa986c8082b1686d05a35a637c461a2b142caa78d3c8eb879f3b0",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+        "profile_revision": 1
+      },
+      "public_requirement_capability_ids": [
+        "capability.r740xd.management-inventory",
+        "capability.r740xd.firmware-policy"
+      ],
+      "public_resolver_key": "resolver.fingerprint.management.corrupt_bmc_firmware.v1",
+      "public_surface": {
+        "public_candidate_fault_ids": [
+          "fault.firmware.version_set.incompatible",
+          "fault.management.bmc_firmware.corrupt"
+        ],
+        "public_surface_digest": "5e435b2cea05c8f5c743bb5629434fcaab0fe675241f3df15bbdc1ee10719ba0",
+        "public_symptom_ids": [
+          "symptom.management.bmc_not_responding",
+          "symptom.firmware.update_failed"
+        ]
+      },
+      "serialization": {
+        "canonicalization_version": "canonical-json-v1",
+        "content_digest": "4270444a9443581d88b3cdf7496e001b395d7055b99400b751baa480db41b1c5",
+        "digest_algorithm": "sha256"
+      },
+      "ticket_focus_statement": "The visible model separates management recovery from ordinary version compatibility while retaining the host board, UEFI, and runtime interfaces that both public Candidates can affect.",
+      "ticket_id": "ticket.generated.f32b85cbf2054fdf0114f42a",
+      "ticket_snapshot_digest": "761016e56ceb47a585727555f64bac47b103933cddbafc27a5c385f402851b01"
+    },
+    {
+      "authority_boundary": "EXPLANATORY_ONLY",
+      "binding_id": "binding.fingerprint.thermal.failed_fan.system-model.story-v1",
+      "candidate_closure": [
+        {
+          "candidate_fault_id": "fault.thermal.cpu.overheating",
+          "explanation": "fault.thermal.cpu.overheating remains possible within the displayed management telemetry, fan row, heatsink, and processor load; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "bmc",
+            "fans",
+            "heatsink",
+            "cpu_memory"
+          ],
+          "public_path_ids": [
+            "path.r740xd.thermal-service"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.thermal.fan.failed",
+          "explanation": "fault.thermal.fan.failed remains possible within the displayed management telemetry, fan row, heatsink, and processor load; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "bmc",
+            "fans",
+            "heatsink",
+            "cpu_memory"
+          ],
+          "public_path_ids": [
+            "path.r740xd.thermal-service"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.thermal.heatsink.clogged",
+          "explanation": "fault.thermal.heatsink.clogged remains possible within the displayed management telemetry, fan row, heatsink, and processor load; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "bmc",
+            "fans",
+            "heatsink",
+            "cpu_memory"
+          ],
+          "public_path_ids": [
+            "path.r740xd.thermal-service"
+          ]
+        },
+        {
+          "candidate_fault_id": "fault.thermal.heatsink.contact_poor",
+          "explanation": "fault.thermal.heatsink.contact_poor remains possible within the displayed management telemetry, fan row, heatsink, and processor load; the model does not rank it or assert current health.",
+          "public_node_ids": [
+            "bmc",
+            "fans",
+            "heatsink",
+            "cpu_memory"
+          ],
+          "public_path_ids": [
+            "path.r740xd.thermal-service"
+          ]
+        }
+      ],
+      "fallback_id": "fallback.system-model.text-only.v1",
+      "fingerprint_id": "fingerprint.thermal.failed_fan",
+      "profile_ref": {
+        "profile_content_digest": "521d8b531b2d2307982bc200155f1f98eae1029834655cd9d0cd779740303204",
+        "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.story-v1",
+        "profile_revision": 1
+      },
+      "public_requirement_capability_ids": [
+        "capability.r740xd.story.thermal-service"
+      ],
+      "public_resolver_key": "resolver.fingerprint.thermal.failed_fan.story-v1",
+      "public_surface": {
+        "public_candidate_fault_ids": [
+          "fault.thermal.cpu.overheating",
+          "fault.thermal.fan.failed",
+          "fault.thermal.heatsink.clogged",
+          "fault.thermal.heatsink.contact_poor"
+        ],
+        "public_surface_digest": "589a8377f14e2397ff27b56dae10142b442be82274ba6aed64d9d520b0e79a1f",
+        "public_symptom_ids": [
+          "symptom.thermal.high_cpu_temp"
+        ]
+      },
+      "serialization": {
+        "canonicalization_version": "canonical-json-v1",
+        "content_digest": "70d4ea2dd372fe6c3baa491a07002fba032dc73a3328ae55dca1ccf69a0e3f96",
+        "digest_algorithm": "sha256"
+      },
+      "ticket_focus_statement": "This public system view preserves all 4 authored Candidates for fingerprint.thermal.failed_fan while separating component, control, observation, and service boundaries. It does not identify the hidden solution.",
+      "ticket_id": "ticket.generated.f60b9ce132c74c33f607df6d",
+      "ticket_snapshot_digest": "b8f877726a0d4356575d9efeb51c8226c674687ba0806ba067142ffc3f90c8cd"
+    }
+  ],
+  "canonicalization_version": "canonical-json-v1",
+  "contract_version": "system-model-contract-v1",
+  "release_id": "system-model-story-v1",
+  "schema_version": "ticket-system-binding-catalog-v2",
+  "serialization": {
+    "canonicalization_version": "canonical-json-v1",
+    "content_digest": "b2ef6a2bb81ef203958c43f466d2de52b7811c52451af1680e6bdd0df08b070c",
+    "digest_algorithm": "sha256"
+  }
+}
