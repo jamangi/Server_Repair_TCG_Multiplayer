@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/system_model_resolver_fixture_catalog.schema.json",
+  "title": "System Model Resolver Invalid Fixture Catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "stableId": { "type": "string", "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$" }
+  },
+  "properties": {
+    "schema_version": { "const": "system-model-resolver-fixture-catalog-v1" },
+    "fixture_catalog_id": { "$ref": "#/$defs/stableId" },
+    "fixtures": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "fixture_id": { "$ref": "#/$defs/stableId" },
+          "title": { "type": "string", "minLength": 1 },
+          "base_binding_id": { "$ref": "#/$defs/stableId" },
+          "base_profile_id": { "$ref": "#/$defs/stableId" },
+          "mutation": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "operation": { "enum": ["REMOVE_NODE", "REVERSE_EDGE", "REMOVE_CANDIDATE_CLOSURE", "ADD_UNSUPPORTED_OPTION_CLAIM", "CLEAR_NODE_ROLE_REFS"] },
+              "target_id": { "$ref": "#/$defs/stableId" }
+            },
+            "required": ["operation", "target_id"]
+          },
+          "expected_reason_code": { "enum": ["MISSING_REQUIRED_DEVICE", "INCOMPATIBLE_CONTROLLER_PATH", "PUBLIC_CANDIDATE_CLOSURE_FAILED", "UNSUPPORTED_VENDOR_OPTION", "INCOMPLETE_DOMAIN_RELATIONSHIPS"] },
+          "expectation": { "type": "string", "minLength": 1 }
+        },
+        "required": ["fixture_id", "title", "base_binding_id", "base_profile_id", "mutation", "expected_reason_code", "expectation"]
+      }
+    }
+  },
+  "required": ["schema_version", "fixture_catalog_id", "fixtures"]
+}

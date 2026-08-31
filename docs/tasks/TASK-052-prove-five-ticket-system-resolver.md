@@ -2,7 +2,7 @@
 
 ## Status
 
-**Planned after TASK-051.** Uses the approved `SYSTEM-001` architecture and the integrated five-model contract.
+**Completed 2026-08-30.** Uses approved `SYSTEM-001 A`, proves exactly the five integrated pilot bindings, and leaves `SYSTEM-002` pending before any scale work.
 
 ## Objective
 
@@ -88,3 +88,54 @@ Do not scale beyond five Tickets, add production Ticket controls, alter gameplay
 ## Completion boundary
 
 Stop when all five pilots resolve and render from one typed source, invalid systems are rejected, public output is demonstrably non-leaking, measured scale evidence is published, and `SYSTEM-002` is ready for owner choice.
+
+## Completion record
+
+### Resolver and one-source projection
+
+- `src/system-models/resolver.mjs` accepts explicit public Ticket/profile/version inputs, selects exactly one pinned public binding, validates the public profile, and returns a bounded trace plus either a strict projection or one generic honest fallback.
+- `src/system-models/projections.mjs` derives lifecycle prose, accessible topology geometry/text, component inventory, public-Candidate closure, and Test/Command/Repair/Verification rationale graphs from the same canonical public profile.
+- Authoring-only compatibility is a separate reject-only call. It reports status and aggregate check counts but cannot select a profile, vary public bytes, reveal private identifiers, or change failure text.
+- Resolver/projection code has no engine, Builder, Story, Evidence, legal-action, scoring, or network dependency. Every failure reports `gameplay_effect: NONE`; existing Tickets remain playable.
+
+### Measured proof
+
+- 5/5 immutable pilot Tickets resolve deterministically to exactly one of two curated profiles, and all traces end in `ONE_SOURCE_PROJECTION_ACCEPTED`.
+- 5/5 deliberate incompatible profiles reject with the stable codes `MISSING_REQUIRED_DEVICE`, `INCOMPATIBLE_CONTROLLER_PATH`, `PUBLIC_CANDIDATE_CLOSURE_FAILED`, `UNSUPPORTED_VENDOR_OPTION`, and `INCOMPLETE_DOMAIN_RELATIONSHIPS`.
+- 21 authoring variants preserve byte-identical public projections within their public equivalence classes.
+- 111 non-empty authorized public-Candidate combinations preserve the canonical lifecycle/topology/inventory/rationale semantic digest while changing only public Candidate context.
+- 51 unique sourced public attachments produce 174 per-Ticket rationale graphs. Every graph and generated representation resolves to canonical nodes, edges, paths, roles, and source claims.
+- A 250-resolution benchmark completed in 2,167.74 ms (8.671 ms per resolution), with zero network requests and zero random choices.
+- The focused four-project browser matrix passed 20/20 checks, and a hands-on desktop/mobile review found no overflow, console, interaction, or accessibility blocker.
+
+### Files
+
+- Resolver and projection source: `src/system-models/resolver.mjs`, `src/system-models/projections.mjs`.
+- Strict schemas: `schemas/domain/system_model_public_projection.schema.json`, `system_model_resolver_result.schema.json`, `system_model_resolver_fixture_catalog.schema.json`, and `system_model_resolver_proof.schema.json`.
+- Proof source and outputs: `docs/system-models/task-052/**`, including the generator, benchmark, invalid fixtures, aggregate proof, five public projections, report, accessible review surface, release README, and browser QA.
+- Regressions: `tests/task-052-system-model-resolver.test.mjs` and `tests/browser/task-052-system-resolver-proof.spec.mjs`, plus the synchronized schema-count assertion.
+- Synchronized task, decision, schema, System Model, package-script, and root documentation. No production Viewer, Ticket, gameplay, Builder, engine, or Story artifact changed.
+
+### Scale gate and unresolved item
+
+`SYSTEM-002` now records A/B/C/D with the measured pilot results. Option A is recommended because every bounded proof gate passed, but no option is authoritative until the project owner replies. This is the only unresolved TASK-052 handoff; TASK-053 through TASK-055 remain blocked.
+
+### Verification
+
+Final verification commands completed with exit code 0:
+
+- `node --check src/system-models/projections.mjs`, `node --check src/system-models/resolver.mjs`, `node --check docs/system-models/task-052/generate-proof.mjs`, and `node --check docs/system-models/task-052/benchmark-resolver.mjs` — syntax clean.
+- `node content/system-model-pilot-v1/build-release.mjs --check` — all 19 deterministic TASK-051 inputs matched; `node content/system-model-pilot-v1/validate-release.mjs` — accepted 2 profiles, 5 bindings, 5 private proofs, 16 relationship findings, and 2 added Components.
+- `node docs/system-models/task-052/generate-proof.mjs --check` — 5/5 Tickets, 5/5 invalid profiles, 21 private variants, and 111 public-Candidate combinations matched committed bytes.
+- `node --test tests/task-052-system-model-resolver.test.mjs` — 12 passed, 0 failed, including strict schemas, canonical references, public non-leak scans, immutable-input hashes, and repository-relative Markdown links.
+- `node --check viewer/js/app.js`, `node --check viewer/js/data-loader.js`, and `node --check viewer/js/entity-types.js` — syntax clean; `node --test tests/viewer-baseline.test.mjs` — 3 passed, 0 failed.
+- `node --test tests/task-007-schema-contracts.test.mjs tests/viewer-content-schema.test.mjs tests/task-050-system-model-atlas.test.mjs tests/task-051-system-model-contract.test.mjs tests/task-052-system-model-resolver.test.mjs` — 58 passed, 0 failed.
+- `node --test --test-reporter=tap tests/*.test.mjs` — 395 passed, 0 failed.
+- `node viewer/scripts/build-play-assets.mjs` and `node viewer/scripts/verify-play-assets.mjs` — 197 deterministic staged Play assets built and verified without a tracked diff.
+- `node tools/run-automated-games.mjs --verify-report automated_games/task-009-foundation-v1` — 22 rows verified (12 successful, 10 retained exceptions), 0 deterministic mismatches.
+- `node tools/run-task-014-campaign.mjs --verify-report automated_games/task-014-playable-coverage-v3` — 13 rows verified, 0 deterministic mismatches.
+- `node docs/system-models/task-052/benchmark-resolver.mjs` — 250 resolutions in 2,167.74 ms (8.671 ms each), 0 network requests, 0 random choices.
+- `playwright test tests/browser/task-052-system-resolver-proof.spec.mjs` through the bundled Playwright 1.62.1 runtime — 20 passed, 0 failed across desktop, tablet touch, mobile touch, and reduced-motion mobile.
+- `git diff --check` — clean.
+
+Hands-on review additionally exercised the local static page at 1440×900 and 390×844, opened a native disclosure, inspected the accessibility tree, and found no horizontal overflow or console errors. The local `npx` launcher was missing its npm module (exit 1), so the identical committed Playwright specification was run through the bundled 1.62.1 CLI. An initial browser assertion treated a multi-element locator as singular (16 passed, 4 failed); the assertion was corrected and the final run passed 20/20. An initial focused integration run exposed the reserved Qualification-name collision and a stale documentation-link count (56 passed, 2 failed); both were synchronized before the final 58/58 and 395/395 runs.

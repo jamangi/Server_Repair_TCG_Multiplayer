@@ -18,6 +18,8 @@ Approved `SYSTEM-001 A` adds a separate `system-model-contract-v1` domain overla
 
 The overlay does not modify `repair-ticket-v2`, gameplay snapshots, or runtime schemas. Its relationship taxonomy cannot derive Evidence, legal actions, Candidate rank, Isolation, Repair, or Verify results. See the [TASK-051 production record](../system-models/task-051/README.md) and [migration](../system-models/task-051/MIGRATION.md).
 
+TASK-052 adds a deterministic resolver/projection proof over that unchanged overlay. `system_model_public_projection.schema.json` admits only public Ticket/profile inputs and one-source derived views; `system_model_resolver_result.schema.json` discriminates a selected public projection from the bounded honest fallback; `system_model_resolver_proof.schema.json` records aggregate pass/reject evidence without private identifiers; and `system_model_resolver_fixture_catalog.schema.json` constrains the five deliberate invalid mutations and stable public reason codes. These are build/review contracts, not Match authority or production Ticket UI. See the [TASK-052 proof record](../system-models/task-052/README.md).
+
 ## Authored Repair Ticket contract
 
 [`repair_ticket.schema.json`](../../schemas/domain/repair_ticket.schema.json) separates content that different audiences may eventually see:
@@ -58,6 +60,10 @@ This is the authored output contract shared by fixed fixtures and deterministic 
 - `system_model_relationship_overlay.schema.json`
 - `system_model_migration.schema.json`
 - `system_model_release_manifest.schema.json`
+- `system_model_public_projection.schema.json`
+- `system_model_resolver_fixture_catalog.schema.json`
+- `system_model_resolver_proof.schema.json`
+- `system_model_resolver_result.schema.json`
 
 ## Validation beyond JSON Schema
 

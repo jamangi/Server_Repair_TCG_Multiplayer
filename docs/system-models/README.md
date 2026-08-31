@@ -2,7 +2,7 @@
 
 ## Status
 
-This directory is the entry point for the System Model / System Finder capability. TASK-049's implementation-neutral contract and TASK-050's manual five-Ticket atlas are complete. The project owner approved the recommended curated Finder architecture as `SYSTEM-001 A` on 2026-08-30, and TASK-051 released the strict two-profile/five-binding pilot contract. Existing V0 Ticket outcomes, Evidence dispositions, legal intents, Diagnostic Bench relevance, and hidden-truth boundaries remain authoritative.
+This directory is the entry point for the System Model / System Finder capability. TASK-049's implementation-neutral contract, TASK-050's manual five-Ticket atlas, TASK-051's strict two-profile/five-binding contract, and TASK-052's deterministic resolver/projection proof are complete. The project owner approved the curated Finder architecture as `SYSTEM-001 A` on 2026-08-30; `SYSTEM-002` is now pending before scale. Existing V0 Ticket outcomes, Evidence dispositions, legal intents, Diagnostic Bench relevance, and hidden-truth boundaries remain authoritative.
 
 The TASK-049 package is:
 
@@ -26,6 +26,14 @@ The TASK-051 production package is:
 - [`task-051/MIGRATION.md`](task-051/MIGRATION.md) — immutable successor-overlay and public/private compatibility contract;
 - [`../../content/system-model-pilot-v1/`](../../content/system-model-pilot-v1/) — two canonical profiles, five public bindings, five build/server-only compatibility proofs, sixteen relationship dispositions, deterministic migration/manifest data, and executable build/validation; and
 - [`../../viewer/content/system-model-pilot-v1-components.json`](../../viewer/content/system-model-pilot-v1-components.json) — the two justified pilot Component definitions.
+
+The TASK-052 proof package is:
+
+- [`task-052/README.md`](task-052/README.md) — resolver/projection boundary, measured results, artifact inventory, and exclusions;
+- [`task-052/REPORT.md`](task-052/REPORT.md) — generated 5/5 resolution, invalid-fixture, differential, and one-source measurements;
+- [`task-052/review.html`](task-052/review.html) and [`task-052/BROWSER_QA.md`](task-052/BROWSER_QA.md) — proof-only accessible review surface and browser matrix;
+- [`task-052/resolver-proof-v1.json`](task-052/resolver-proof-v1.json) and [`task-052/public-projections/`](task-052/public-projections/) — strict aggregate and per-Ticket public proof artifacts; and
+- [`../../src/system-models/`](../../src/system-models/) — the public-input-only deterministic resolver and one-source projection builder.
 
 The project-owner-supplied concept image is preserved at [`system-model-host-bmc-concept.png`](../ui-plan/ui-reference_images/system-model-host-bmc-concept.png). It demonstrates the useful idea of showing the host and management subsystems as distinct but connected regions; it is not a complete topology, a real product specification, or a production layout.
 
@@ -90,8 +98,8 @@ The model is explanatory in V0. It must not derive Evidence dispositions, decide
 2. **TASK-050** manually creates the five-Ticket illustrated atlas and component/relationship gap audit, then authors the `SYSTEM-001` architecture approval packet.
 3. **Gate SYSTEM-001 A** approved the Finder-first hybrid on 2026-08-30.
 4. **TASK-051** completed the strict typed pilot contract, five bindings, private validation boundary, Component/relationship synchronization, and immutable migration.
-5. **TASK-052** proves deterministic resolution, validation, descriptions, diagrams, and relevance graphs for the pilot, then authors the `SYSTEM-002` scale-readiness packet.
-6. **Gate SYSTEM-002** approves mass production or sends the pilot back for a bounded correction.
+5. **TASK-052** completed deterministic resolution, validation, descriptions, diagrams, and relevance graphs for the pilot and authored the `SYSTEM-002` scale-readiness packet.
+6. **Gate SYSTEM-002** is pending; it approves mass production, sends the pilot back for a bounded correction, reopens architecture, or defers the capability.
 7. **TASK-053** audits and synchronizes the complete released Story Ticket set.
 8. **TASK-054** productionizes System resolution and derived views across that set.
 9. **TASK-055** adds the public-safe “Show system” experience to the Ticket UI.

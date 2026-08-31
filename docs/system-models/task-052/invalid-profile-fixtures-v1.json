@@ -1,0 +1,66 @@
+{
+  "schema_version": "system-model-resolver-fixture-catalog-v1",
+  "fixture_catalog_id": "system-model-resolver-invalid-profiles-v1",
+  "fixtures": [
+    {
+      "fixture_id": "fixture.system-model.missing-device.v1",
+      "title": "Required storage device is absent",
+      "base_binding_id": "binding.fingerprint.boot.missing_nvme.system-model.v1",
+      "base_profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+      "mutation": {
+        "operation": "REMOVE_NODE",
+        "target_id": "drives"
+      },
+      "expected_reason_code": "MISSING_REQUIRED_DEVICE",
+      "expectation": "Reject the candidate profile and keep ordinary Ticket play available through the generic fallback."
+    },
+    {
+      "fixture_id": "fixture.system-model.incompatible-controller-path.v1",
+      "title": "Controller path direction contradicts its ordered path",
+      "base_binding_id": "binding.fingerprint.storage.loose_cable.system-model.v1",
+      "base_profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+      "mutation": {
+        "operation": "REVERSE_EDGE",
+        "target_id": "e.sas-backplane"
+      },
+      "expected_reason_code": "INCOMPATIBLE_CONTROLLER_PATH",
+      "expectation": "Reject the directionally impossible controller/backplane path without choosing a plausible substitute."
+    },
+    {
+      "fixture_id": "fixture.system-model.candidate-elimination.v1",
+      "title": "One still-public Candidate loses visible closure",
+      "base_binding_id": "binding.fingerprint.power.failed_distribution_board.system-model.v1",
+      "base_profile_id": "profile.dell.poweredge-r740xd2.power-interposer.v1",
+      "mutation": {
+        "operation": "REMOVE_CANDIDATE_CLOSURE",
+        "target_id": "fault.power.psu.not_seated"
+      },
+      "expected_reason_code": "PUBLIC_CANDIDATE_CLOSURE_FAILED",
+      "expectation": "Reject the binding instead of publishing a topology that rules out a public possibility."
+    },
+    {
+      "fixture_id": "fixture.system-model.unsupported-vendor-option.v1",
+      "title": "Vendor option claim has no released source basis",
+      "base_binding_id": "binding.fingerprint.firmware.incompatible_version_set.system-model.v1",
+      "base_profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+      "mutation": {
+        "operation": "ADD_UNSUPPORTED_OPTION_CLAIM",
+        "target_id": "constraint.dell.poweredge-r740xd.hybrid-24x2_5.v1.01"
+      },
+      "expected_reason_code": "UNSUPPORTED_VENDOR_OPTION",
+      "expectation": "Reject the unproved option combination; no live lookup or close-enough profile is permitted."
+    },
+    {
+      "fixture_id": "fixture.system-model.incomplete-domain-relationships.v1",
+      "title": "Serviceable backplane loses its Component-role mapping",
+      "base_binding_id": "binding.fingerprint.storage.loose_cable.system-model.v1",
+      "base_profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+      "mutation": {
+        "operation": "CLEAR_NODE_ROLE_REFS",
+        "target_id": "backplane"
+      },
+      "expected_reason_code": "INCOMPLETE_DOMAIN_RELATIONSHIPS",
+      "expectation": "Reject the incomplete semantic graph rather than render an orphan service unit."
+    }
+  ]
+}

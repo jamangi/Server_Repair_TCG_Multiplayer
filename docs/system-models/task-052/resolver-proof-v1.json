@@ -1,0 +1,998 @@
+{
+  "architecture_decision": "SYSTEM-001-A",
+  "cases": [
+    {
+      "authoring_validation_summary": {
+        "coverage": {
+          "authored_action_checks": 4,
+          "authored_role_checks": 2,
+          "differential_cases": 5
+        },
+        "gameplay_effect": "NONE",
+        "public_projection_digest": "7fbc19692070ba03af59baad0a1e576ee9dcc9bfc0b41cacd708b89b59a908ba",
+        "reason_code": "AUTHORING_COMPATIBILITY_CONFIRMED",
+        "status": "PASS",
+        "validation_trace": [
+          {
+            "code": "SELECTED_PROFILE_MATCHES",
+            "status": "PASS",
+            "step": "profile_match"
+          },
+          {
+            "code": "AUTHORING_REQUIREMENTS_ACCEPTED",
+            "status": "PASS",
+            "step": "compatibility"
+          }
+        ]
+      },
+      "binding_id": "binding.fingerprint.boot.missing_nvme.system-model.v1",
+      "case_id": "proof.case.binding.fingerprint.boot.missing_nvme.system-model.v1",
+      "differential_cases": 5,
+      "fingerprint_id": "fingerprint.boot.missing_nvme",
+      "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+      "profile_revision": 1,
+      "public_candidate_combinations": 31,
+      "public_candidate_count": 5,
+      "public_projection_digest": "7fbc19692070ba03af59baad0a1e576ee9dcc9bfc0b41cacd708b89b59a908ba",
+      "public_projection_path": "docs/system-models/task-052/public-projections/binding-fingerprint-boot-missing_nvme-system-model-v1.json",
+      "rationale_graph_count": 41,
+      "resolver_key": "resolver.fingerprint.boot.missing_nvme.v1",
+      "semantic_model_digest": "91565211561d2fea86679310b96825854b87eb1ac45e0ff47e45a6f935a39b01",
+      "source_review": [
+        {
+          "access_status": "accessible",
+          "product_scope": "iDRAC9 with Lifecycle Controller, including PowerEdge R740xd",
+          "publisher": "Dell Technologies",
+          "revision": "iDRAC9 6.xx Lifecycle Controller User's Guide",
+          "source_id": "src.dell.idrac9.lifecycle-introduction",
+          "title": "Lifecycle Controller introduction",
+          "url": "https://www.dell.com/support/manuals/en-us/poweredge-r740xd/idrac9_6.xx_lc_ug/introduction",
+          "used_claim_ids": [
+            "claim.idrac9.out-of-band-management"
+          ]
+        },
+        {
+          "access_status": "accessible",
+          "product_scope": "PowerEdge R740xd backplane options",
+          "publisher": "Dell Technologies",
+          "revision": "Online service-manual topic; topic revision not exposed",
+          "source_id": "src.dell.r740xd.backplane-details",
+          "title": "PowerEdge R740xd backplane details",
+          "url": "https://www.dell.com/support/manuals/en-us/poweredge-r740xd/per740xd_ism_pub/backplane-details?guid=guid-5d119b25-5363-4be0-b451-e30ae7ca3f5b&lang=en-us",
+          "used_claim_ids": [
+            "claim.r740xd.hybrid-backplane",
+            "claim.r740xd.twenty-sas-four-nvme-option"
+          ]
+        },
+        {
+          "access_status": "accessible",
+          "product_scope": "PowerEdge R740xd 24-by-2.5-inch NVMe/hybrid routing",
+          "publisher": "Dell Technologies",
+          "revision": "Online service-manual topic; Figure 16; topic revision not exposed",
+          "source_id": "src.dell.r740xd.cable-routing",
+          "title": "PowerEdge R740xd cable routing",
+          "url": "https://www.dell.com/support/manuals/en-us/poweredge-r740xd/per740xd_ism_pub/cable-routing?guid=guid-06637506-d7db-43e6-9c15-be4a832d4fbe",
+          "used_claim_ids": [
+            "claim.r740xd.sas-perc-path",
+            "claim.r740xd.pcie-nvme-path"
+          ]
+        },
+        {
+          "access_status": "accessible",
+          "product_scope": "PowerEdge R740xd",
+          "publisher": "Dell Technologies",
+          "revision": "Online technical-specification topic; topic revision not exposed",
+          "source_id": "src.dell.r740xd.nic-ports",
+          "title": "NIC ports",
+          "url": "https://www.dell.com/support/manuals/en-us/poweredge-r740xd/per740xd_techspecs_pub/nic-ports?guid=guid-8ba21af1-af17-4133-85d8-442d2c1fe4f9&lang=en-us",
+          "used_claim_ids": [
+            "claim.r740xd.network-daughter-card"
+          ]
+        },
+        {
+          "access_status": "accessible",
+          "product_scope": "PowerEdge R740xd, 14th-generation platform",
+          "publisher": "Dell Technologies",
+          "revision": "Online service-manual topic; topic revision not exposed",
+          "source_id": "src.dell.r740xd.system-overview",
+          "title": "PowerEdge R740xd system overview",
+          "url": "https://www.dell.com/support/manuals/en-us/poweredge-r740xd/per740xd_ism_pub/poweredge-r740xd-system-overview?guid=guid-db2e151c-0b4d-4f95-8c09-d0d81a59807d&lang=en-us",
+          "used_claim_ids": [
+            "claim.r740xd.2u-dual-cpu-memory",
+            "claim.r740xd.dual-psu"
+          ]
+        },
+        {
+          "access_status": "accessible",
+          "product_scope": "Standards-defined UEFI boot-manager behavior",
+          "publisher": "UEFI Forum",
+          "revision": "2.10",
+          "source_id": "src.uefi.2_10.boot-manager",
+          "title": "UEFI Specification 2.10 — Boot Manager",
+          "url": "https://uefi.org/specs/UEFI/2.10/03_Boot_Manager.html",
+          "used_claim_ids": [
+            "claim.uefi.os-loader-handoff"
+          ]
+        }
+      ],
+      "ticket_id": "ticket.generated.3ec80b1b0e7221ac725aedf9",
+      "ticket_snapshot_digest": "1c74ad0725e500ac01d4c356f17551fee11678a88b35ca5b591ff056a2efdff2",
+      "validation_trace": [
+        {
+          "code": "PUBLIC_INPUTS_ACCEPTED",
+          "status": "PASS",
+          "step": "request"
+        },
+        {
+          "code": "EXACTLY_ONE_BINDING",
+          "status": "PASS",
+          "step": "binding_lookup"
+        },
+        {
+          "code": "PUBLIC_SURFACE_AND_ACTIVE_CANDIDATES_ACCEPTED",
+          "status": "PASS",
+          "step": "public_surface"
+        },
+        {
+          "code": "PROFILE_ID_REVISION_ACCEPTED",
+          "status": "PASS",
+          "step": "profile_pin"
+        },
+        {
+          "code": "PUBLIC_CAPABILITY_TOPOLOGY_AND_CLOSURE_ACCEPTED",
+          "status": "PASS",
+          "step": "profile_consistency"
+        },
+        {
+          "code": "PROFILE_DIGEST_ACCEPTED",
+          "status": "PASS",
+          "step": "serialization"
+        },
+        {
+          "code": "ONE_SOURCE_PROJECTION_ACCEPTED",
+          "status": "PASS",
+          "step": "public_projection"
+        }
+      ]
+    },
+    {
+      "authoring_validation_summary": {
+        "coverage": {
+          "authored_action_checks": 4,
+          "authored_role_checks": 1,
+          "differential_cases": 4
+        },
+        "gameplay_effect": "NONE",
+        "public_projection_digest": "b92fef39ea570af34c979acfc383ef8c1961e51a9069eacb3faf0ba08172bc65",
+        "reason_code": "AUTHORING_COMPATIBILITY_CONFIRMED",
+        "status": "PASS",
+        "validation_trace": [
+          {
+            "code": "SELECTED_PROFILE_MATCHES",
+            "status": "PASS",
+            "step": "profile_match"
+          },
+          {
+            "code": "AUTHORING_REQUIREMENTS_ACCEPTED",
+            "status": "PASS",
+            "step": "compatibility"
+          }
+        ]
+      },
+      "binding_id": "binding.fingerprint.firmware.incompatible_version_set.system-model.v1",
+      "case_id": "proof.case.binding.fingerprint.firmware.incompatible_version_set.system-model.v1",
+      "differential_cases": 4,
+      "fingerprint_id": "fingerprint.firmware.incompatible_version_set",
+      "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+      "profile_revision": 1,
+      "public_candidate_combinations": 15,
+      "public_candidate_count": 4,
+      "public_projection_digest": "b92fef39ea570af34c979acfc383ef8c1961e51a9069eacb3faf0ba08172bc65",
+      "public_projection_path": "docs/system-models/task-052/public-projections/binding-fingerprint-firmware-incompatible_version_set-system-model-v1.json",
+      "rationale_graph_count": 41,
+      "resolver_key": "resolver.fingerprint.firmware.incompatible_version_set.v1",
+      "semantic_model_digest": "fdf7087d0896ab2dc7023f022d5273e2061e157ffe4d09d3ab64ea3a1a740f7b",
+      "source_review": [
+        {
+          "access_status": "accessible",
+          "product_scope": "iDRAC9 with Lifecycle Controller, including PowerEdge R740xd",
+          "publisher": "Dell Technologies",
+          "revision": "iDRAC9 6.xx Lifecycle Controller User's Guide",
+          "source_id": "src.dell.idrac9.lifecycle-introduction",
+          "title": "Lifecycle Controller introduction",
+          "url": "https://www.dell.com/support/manuals/en-us/poweredge-r740xd/idrac9_6.xx_lc_ug/introduction",
+          "used_claim_ids": [
+            "claim.idrac9.out-of-band-management"
+          ]
+        },
+        {
+          "access_status": "accessible",
+          "product_scope": "PowerEdge R740xd backplane options",
+          "publisher": "Dell Technologies",
+          "revision": "Online service-manual topic; topic revision not exposed",
+          "source_id": "src.dell.r740xd.backplane-details",
+          "title": "PowerEdge R740xd backplane details",
+          "url": "https://www.dell.com/support/manuals/en-us/poweredge-r740xd/per740xd_ism_pub/backplane-details?guid=guid-5d119b25-5363-4be0-b451-e30ae7ca3f5b&lang=en-us",
+          "used_claim_ids": [
+            "claim.r740xd.hybrid-backplane",
+            "claim.r740xd.twenty-sas-four-nvme-option"
+          ]
+        },
+        {
+          "access_status": "accessible",
+          "product_scope": "PowerEdge R740xd 24-by-2.5-inch NVMe/hybrid routing",
+          "publisher": "Dell Technologies",
+          "revision": "Online service-manual topic; Figure 16; topic revision not exposed",
+          "source_id": "src.dell.r740xd.cable-routing",
+          "title": "PowerEdge R740xd cable routing",
+          "url": "https://www.dell.com/support/manuals/en-us/poweredge-r740xd/per740xd_ism_pub/cable-routing?guid=guid-06637506-d7db-43e6-9c15-be4a832d4fbe",
+          "used_claim_ids": [
+            "claim.r740xd.sas-perc-path",
+            "claim.r740xd.pcie-nvme-path"
+          ]
+        },
+        {
+          "access_status": "accessible",
+          "product_scope": "PowerEdge R740xd",
+          "publisher": "Dell Technologies",
+          "revision": "Online technical-specification topic; topic revision not exposed",
+          "source_id": "src.dell.r740xd.nic-ports",
+          "title": "NIC ports",
+          "url": "https://www.dell.com/support/manuals/en-us/poweredge-r740xd/per740xd_techspecs_pub/nic-ports?guid=guid-8ba21af1-af17-4133-85d8-442d2c1fe4f9&lang=en-us",
+          "used_claim_ids": [
+            "claim.r740xd.network-daughter-card"
+          ]
+        },
+        {
+          "access_status": "accessible",
+          "product_scope": "PowerEdge R740xd, 14th-generation platform",
+          "publisher": "Dell Technologies",
+          "revision": "Online service-manual topic; topic revision not exposed",
+          "source_id": "src.dell.r740xd.system-overview",
+          "title": "PowerEdge R740xd system overview",
+          "url": "https://www.dell.com/support/manuals/en-us/poweredge-r740xd/per740xd_ism_pub/poweredge-r740xd-system-overview?guid=guid-db2e151c-0b4d-4f95-8c09-d0d81a59807d&lang=en-us",
+          "used_claim_ids": [
+            "claim.r740xd.2u-dual-cpu-memory",
+            "claim.r740xd.dual-psu"
+          ]
+        },
+        {
+          "access_status": "accessible",
+          "product_scope": "Standards-defined UEFI boot-manager behavior",
+          "publisher": "UEFI Forum",
+          "revision": "2.10",
+          "source_id": "src.uefi.2_10.boot-manager",
+          "title": "UEFI Specification 2.10 — Boot Manager",
+          "url": "https://uefi.org/specs/UEFI/2.10/03_Boot_Manager.html",
+          "used_claim_ids": [
+            "claim.uefi.os-loader-handoff"
+          ]
+        }
+      ],
+      "ticket_id": "ticket.generated.b34238282822e93980b5f1ad",
+      "ticket_snapshot_digest": "face80b0d5c6f6c7f1ef3bb0495c0c6e4105360fa07887fb50cc2dea440cbc50",
+      "validation_trace": [
+        {
+          "code": "PUBLIC_INPUTS_ACCEPTED",
+          "status": "PASS",
+          "step": "request"
+        },
+        {
+          "code": "EXACTLY_ONE_BINDING",
+          "status": "PASS",
+          "step": "binding_lookup"
+        },
+        {
+          "code": "PUBLIC_SURFACE_AND_ACTIVE_CANDIDATES_ACCEPTED",
+          "status": "PASS",
+          "step": "public_surface"
+        },
+        {
+          "code": "PROFILE_ID_REVISION_ACCEPTED",
+          "status": "PASS",
+          "step": "profile_pin"
+        },
+        {
+          "code": "PUBLIC_CAPABILITY_TOPOLOGY_AND_CLOSURE_ACCEPTED",
+          "status": "PASS",
+          "step": "profile_consistency"
+        },
+        {
+          "code": "PROFILE_DIGEST_ACCEPTED",
+          "status": "PASS",
+          "step": "serialization"
+        },
+        {
+          "code": "ONE_SOURCE_PROJECTION_ACCEPTED",
+          "status": "PASS",
+          "step": "public_projection"
+        }
+      ]
+    },
+    {
+      "authoring_validation_summary": {
+        "coverage": {
+          "authored_action_checks": 3,
+          "authored_role_checks": 1,
+          "differential_cases": 2
+        },
+        "gameplay_effect": "NONE",
+        "public_projection_digest": "830e8528f905ce6bb19398f5aa285b2e82b6720230ad3c6389e7d4a5a3addc0c",
+        "reason_code": "AUTHORING_COMPATIBILITY_CONFIRMED",
+        "status": "PASS",
+        "validation_trace": [
+          {
+            "code": "SELECTED_PROFILE_MATCHES",
+            "status": "PASS",
+            "step": "profile_match"
+          },
+          {
+            "code": "AUTHORING_REQUIREMENTS_ACCEPTED",
+            "status": "PASS",
+            "step": "compatibility"
+          }
+        ]
+      },
+      "binding_id": "binding.fingerprint.management.corrupt_bmc_firmware.system-model.v1",
+      "case_id": "proof.case.binding.fingerprint.management.corrupt_bmc_firmware.system-model.v1",
+      "differential_cases": 2,
+      "fingerprint_id": "fingerprint.management.corrupt_bmc_firmware",
+      "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+      "profile_revision": 1,
+      "public_candidate_combinations": 3,
+      "public_candidate_count": 2,
+      "public_projection_digest": "830e8528f905ce6bb19398f5aa285b2e82b6720230ad3c6389e7d4a5a3addc0c",
+      "public_projection_path": "docs/system-models/task-052/public-projections/binding-fingerprint-management-corrupt_bmc_firmware-system-model-v1.json",
+      "rationale_graph_count": 41,
+      "resolver_key": "resolver.fingerprint.management.corrupt_bmc_firmware.v1",
+      "semantic_model_digest": "7bd4ce5ee386b9a5bf9f19898147c5dc88a52b8baac463d3d23d6ffbabd6d1be",
+      "source_review": [
+        {
+          "access_status": "accessible",
+          "product_scope": "iDRAC9 with Lifecycle Controller, including PowerEdge R740xd",
+          "publisher": "Dell Technologies",
+          "revision": "iDRAC9 6.xx Lifecycle Controller User's Guide",
+          "source_id": "src.dell.idrac9.lifecycle-introduction",
+          "title": "Lifecycle Controller introduction",
+          "url": "https://www.dell.com/support/manuals/en-us/poweredge-r740xd/idrac9_6.xx_lc_ug/introduction",
+          "used_claim_ids": [
+            "claim.idrac9.out-of-band-management"
+          ]
+        },
+        {
+          "access_status": "accessible",
+          "product_scope": "PowerEdge R740xd backplane options",
+          "publisher": "Dell Technologies",
+          "revision": "Online service-manual topic; topic revision not exposed",
+          "source_id": "src.dell.r740xd.backplane-details",
+          "title": "PowerEdge R740xd backplane details",
+          "url": "https://www.dell.com/support/manuals/en-us/poweredge-r740xd/per740xd_ism_pub/backplane-details?guid=guid-5d119b25-5363-4be0-b451-e30ae7ca3f5b&lang=en-us",
+          "used_claim_ids": [
+            "claim.r740xd.hybrid-backplane",
+            "claim.r740xd.twenty-sas-four-nvme-option"
+          ]
+        },
+        {
+          "access_status": "accessible",
+          "product_scope": "PowerEdge R740xd 24-by-2.5-inch NVMe/hybrid routing",
+          "publisher": "Dell Technologies",
+          "revision": "Online service-manual topic; Figure 16; topic revision not exposed",
+          "source_id": "src.dell.r740xd.cable-routing",
+          "title": "PowerEdge R740xd cable routing",
+          "url": "https://www.dell.com/support/manuals/en-us/poweredge-r740xd/per740xd_ism_pub/cable-routing?guid=guid-06637506-d7db-43e6-9c15-be4a832d4fbe",
+          "used_claim_ids": [
+            "claim.r740xd.sas-perc-path",
+            "claim.r740xd.pcie-nvme-path"
+          ]
+        },
+        {
+          "access_status": "accessible",
+          "product_scope": "PowerEdge R740xd",
+          "publisher": "Dell Technologies",
+          "revision": "Online technical-specification topic; topic revision not exposed",
+          "source_id": "src.dell.r740xd.nic-ports",
+          "title": "NIC ports",
+          "url": "https://www.dell.com/support/manuals/en-us/poweredge-r740xd/per740xd_techspecs_pub/nic-ports?guid=guid-8ba21af1-af17-4133-85d8-442d2c1fe4f9&lang=en-us",
+          "used_claim_ids": [
+            "claim.r740xd.network-daughter-card"
+          ]
+        },
+        {
+          "access_status": "accessible",
+          "product_scope": "PowerEdge R740xd, 14th-generation platform",
+          "publisher": "Dell Technologies",
+          "revision": "Online service-manual topic; topic revision not exposed",
+          "source_id": "src.dell.r740xd.system-overview",
+          "title": "PowerEdge R740xd system overview",
+          "url": "https://www.dell.com/support/manuals/en-us/poweredge-r740xd/per740xd_ism_pub/poweredge-r740xd-system-overview?guid=guid-db2e151c-0b4d-4f95-8c09-d0d81a59807d&lang=en-us",
+          "used_claim_ids": [
+            "claim.r740xd.2u-dual-cpu-memory",
+            "claim.r740xd.dual-psu"
+          ]
+        },
+        {
+          "access_status": "accessible",
+          "product_scope": "Standards-defined UEFI boot-manager behavior",
+          "publisher": "UEFI Forum",
+          "revision": "2.10",
+          "source_id": "src.uefi.2_10.boot-manager",
+          "title": "UEFI Specification 2.10 — Boot Manager",
+          "url": "https://uefi.org/specs/UEFI/2.10/03_Boot_Manager.html",
+          "used_claim_ids": [
+            "claim.uefi.os-loader-handoff"
+          ]
+        }
+      ],
+      "ticket_id": "ticket.generated.f32b85cbf2054fdf0114f42a",
+      "ticket_snapshot_digest": "761016e56ceb47a585727555f64bac47b103933cddbafc27a5c385f402851b01",
+      "validation_trace": [
+        {
+          "code": "PUBLIC_INPUTS_ACCEPTED",
+          "status": "PASS",
+          "step": "request"
+        },
+        {
+          "code": "EXACTLY_ONE_BINDING",
+          "status": "PASS",
+          "step": "binding_lookup"
+        },
+        {
+          "code": "PUBLIC_SURFACE_AND_ACTIVE_CANDIDATES_ACCEPTED",
+          "status": "PASS",
+          "step": "public_surface"
+        },
+        {
+          "code": "PROFILE_ID_REVISION_ACCEPTED",
+          "status": "PASS",
+          "step": "profile_pin"
+        },
+        {
+          "code": "PUBLIC_CAPABILITY_TOPOLOGY_AND_CLOSURE_ACCEPTED",
+          "status": "PASS",
+          "step": "profile_consistency"
+        },
+        {
+          "code": "PROFILE_DIGEST_ACCEPTED",
+          "status": "PASS",
+          "step": "serialization"
+        },
+        {
+          "code": "ONE_SOURCE_PROJECTION_ACCEPTED",
+          "status": "PASS",
+          "step": "public_projection"
+        }
+      ]
+    },
+    {
+      "authoring_validation_summary": {
+        "coverage": {
+          "authored_action_checks": 3,
+          "authored_role_checks": 1,
+          "differential_cases": 5
+        },
+        "gameplay_effect": "NONE",
+        "public_projection_digest": "1bc2bc8c8576f547455049c7de5f9f67b96b7b134235a3f6f0efd25f7e92db2c",
+        "reason_code": "AUTHORING_COMPATIBILITY_CONFIRMED",
+        "status": "PASS",
+        "validation_trace": [
+          {
+            "code": "SELECTED_PROFILE_MATCHES",
+            "status": "PASS",
+            "step": "profile_match"
+          },
+          {
+            "code": "AUTHORING_REQUIREMENTS_ACCEPTED",
+            "status": "PASS",
+            "step": "compatibility"
+          }
+        ]
+      },
+      "binding_id": "binding.fingerprint.power.failed_distribution_board.system-model.v1",
+      "case_id": "proof.case.binding.fingerprint.power.failed_distribution_board.system-model.v1",
+      "differential_cases": 5,
+      "fingerprint_id": "fingerprint.power.failed_distribution_board",
+      "profile_id": "profile.dell.poweredge-r740xd2.power-interposer.v1",
+      "profile_revision": 1,
+      "public_candidate_combinations": 31,
+      "public_candidate_count": 5,
+      "public_projection_digest": "1bc2bc8c8576f547455049c7de5f9f67b96b7b134235a3f6f0efd25f7e92db2c",
+      "public_projection_path": "docs/system-models/task-052/public-projections/binding-fingerprint-power-failed_distribution_board-system-model-v1.json",
+      "rationale_graph_count": 10,
+      "resolver_key": "resolver.fingerprint.power.failed_distribution_board.v1",
+      "semantic_model_digest": "bfc858f775e32d5521f26ff862a0dacacd63e4aed8981b95cc93c149867f2fb8",
+      "source_review": [
+        {
+          "access_status": "accessible",
+          "product_scope": "PowerEdge R740xd2",
+          "publisher": "Dell Technologies",
+          "revision": "Online service-manual topic; topic revision not exposed",
+          "source_id": "src.dell.r740xd2.pib-install",
+          "title": "Installing power interposer board",
+          "url": "https://www.dell.com/support/manuals/en-us/oth-r740xd2/per740xd2_ism_pub/installing-power-interposer-board?guid=guid-04f497da-2ae1-4593-85d2-64ef3a6b92a4&lang=en-us",
+          "used_claim_ids": [
+            "claim.r740xd2.pib-service-unit",
+            "claim.r740xd2.pib-system-board-cables",
+            "claim.r740xd2.pib-deenergize"
+          ]
+        },
+        {
+          "access_status": "accessible",
+          "product_scope": "PowerEdge R740xd2",
+          "publisher": "Dell Technologies",
+          "revision": "Online technical-specification topic; topic revision not exposed",
+          "source_id": "src.dell.r740xd2.psu-specifications",
+          "title": "PowerEdge R740xd2 PSU specifications",
+          "url": "https://www.dell.com/support/manuals/en-us/poweredge-r740xd2/per740xd2_ts_pub/psu-specifications?guid=guid-e1ac1620-e3a7-4d56-9b02-bd5de9e95dad",
+          "used_claim_ids": [
+            "claim.r740xd2.dual-psu"
+          ]
+        },
+        {
+          "access_status": "accessible",
+          "product_scope": "PowerEdge R740xd2",
+          "publisher": "Dell Technologies",
+          "revision": "Published PDF; document revision not exposed in filename",
+          "source_id": "src.dell.r740xd2.technical-guide",
+          "title": "PowerEdge R740xd2 Technical Guide",
+          "url": "https://i.dell.com/sites/csdocuments/Product_Docs/en/poweredge-r740xd2-technical-guide.pdf",
+          "used_claim_ids": [
+            "claim.r740xd2.one-plus-one-redundancy"
+          ]
+        }
+      ],
+      "ticket_id": "ticket.generated.3fd6eb04534f79b5b3f87f98",
+      "ticket_snapshot_digest": "d34f08d79c2cc2d47d16d23ec753f1e78758d0b358664d4e592ea23f25b63d73",
+      "validation_trace": [
+        {
+          "code": "PUBLIC_INPUTS_ACCEPTED",
+          "status": "PASS",
+          "step": "request"
+        },
+        {
+          "code": "EXACTLY_ONE_BINDING",
+          "status": "PASS",
+          "step": "binding_lookup"
+        },
+        {
+          "code": "PUBLIC_SURFACE_AND_ACTIVE_CANDIDATES_ACCEPTED",
+          "status": "PASS",
+          "step": "public_surface"
+        },
+        {
+          "code": "PROFILE_ID_REVISION_ACCEPTED",
+          "status": "PASS",
+          "step": "profile_pin"
+        },
+        {
+          "code": "PUBLIC_CAPABILITY_TOPOLOGY_AND_CLOSURE_ACCEPTED",
+          "status": "PASS",
+          "step": "profile_consistency"
+        },
+        {
+          "code": "PROFILE_DIGEST_ACCEPTED",
+          "status": "PASS",
+          "step": "serialization"
+        },
+        {
+          "code": "ONE_SOURCE_PROJECTION_ACCEPTED",
+          "status": "PASS",
+          "step": "public_projection"
+        }
+      ]
+    },
+    {
+      "authoring_validation_summary": {
+        "coverage": {
+          "authored_action_checks": 4,
+          "authored_role_checks": 1,
+          "differential_cases": 5
+        },
+        "gameplay_effect": "NONE",
+        "public_projection_digest": "9a925f7d430b848230d26eeff75fe5755e6d015e4db4cc3a09c553e61d4fc6a1",
+        "reason_code": "AUTHORING_COMPATIBILITY_CONFIRMED",
+        "status": "PASS",
+        "validation_trace": [
+          {
+            "code": "SELECTED_PROFILE_MATCHES",
+            "status": "PASS",
+            "step": "profile_match"
+          },
+          {
+            "code": "AUTHORING_REQUIREMENTS_ACCEPTED",
+            "status": "PASS",
+            "step": "compatibility"
+          }
+        ]
+      },
+      "binding_id": "binding.fingerprint.storage.loose_cable.system-model.v1",
+      "case_id": "proof.case.binding.fingerprint.storage.loose_cable.system-model.v1",
+      "differential_cases": 5,
+      "fingerprint_id": "fingerprint.storage.loose_cable",
+      "profile_id": "profile.dell.poweredge-r740xd.hybrid-24x2_5.v1",
+      "profile_revision": 1,
+      "public_candidate_combinations": 31,
+      "public_candidate_count": 5,
+      "public_projection_digest": "9a925f7d430b848230d26eeff75fe5755e6d015e4db4cc3a09c553e61d4fc6a1",
+      "public_projection_path": "docs/system-models/task-052/public-projections/binding-fingerprint-storage-loose_cable-system-model-v1.json",
+      "rationale_graph_count": 41,
+      "resolver_key": "resolver.fingerprint.storage.loose_cable.v1",
+      "semantic_model_digest": "517cf6aa4a562f93d23cdebb63252d7df8ce03a57e1ec91110e6b712830f2765",
+      "source_review": [
+        {
+          "access_status": "accessible",
+          "product_scope": "iDRAC9 with Lifecycle Controller, including PowerEdge R740xd",
+          "publisher": "Dell Technologies",
+          "revision": "iDRAC9 6.xx Lifecycle Controller User's Guide",
+          "source_id": "src.dell.idrac9.lifecycle-introduction",
+          "title": "Lifecycle Controller introduction",
+          "url": "https://www.dell.com/support/manuals/en-us/poweredge-r740xd/idrac9_6.xx_lc_ug/introduction",
+          "used_claim_ids": [
+            "claim.idrac9.out-of-band-management"
+          ]
+        },
+        {
+          "access_status": "accessible",
+          "product_scope": "PowerEdge R740xd backplane options",
+          "publisher": "Dell Technologies",
+          "revision": "Online service-manual topic; topic revision not exposed",
+          "source_id": "src.dell.r740xd.backplane-details",
+          "title": "PowerEdge R740xd backplane details",
+          "url": "https://www.dell.com/support/manuals/en-us/poweredge-r740xd/per740xd_ism_pub/backplane-details?guid=guid-5d119b25-5363-4be0-b451-e30ae7ca3f5b&lang=en-us",
+          "used_claim_ids": [
+            "claim.r740xd.hybrid-backplane",
+            "claim.r740xd.twenty-sas-four-nvme-option"
+          ]
+        },
+        {
+          "access_status": "accessible",
+          "product_scope": "PowerEdge R740xd 24-by-2.5-inch NVMe/hybrid routing",
+          "publisher": "Dell Technologies",
+          "revision": "Online service-manual topic; Figure 16; topic revision not exposed",
+          "source_id": "src.dell.r740xd.cable-routing",
+          "title": "PowerEdge R740xd cable routing",
+          "url": "https://www.dell.com/support/manuals/en-us/poweredge-r740xd/per740xd_ism_pub/cable-routing?guid=guid-06637506-d7db-43e6-9c15-be4a832d4fbe",
+          "used_claim_ids": [
+            "claim.r740xd.sas-perc-path",
+            "claim.r740xd.pcie-nvme-path"
+          ]
+        },
+        {
+          "access_status": "accessible",
+          "product_scope": "PowerEdge R740xd",
+          "publisher": "Dell Technologies",
+          "revision": "Online technical-specification topic; topic revision not exposed",
+          "source_id": "src.dell.r740xd.nic-ports",
+          "title": "NIC ports",
+          "url": "https://www.dell.com/support/manuals/en-us/poweredge-r740xd/per740xd_techspecs_pub/nic-ports?guid=guid-8ba21af1-af17-4133-85d8-442d2c1fe4f9&lang=en-us",
+          "used_claim_ids": [
+            "claim.r740xd.network-daughter-card"
+          ]
+        },
+        {
+          "access_status": "accessible",
+          "product_scope": "PowerEdge R740xd, 14th-generation platform",
+          "publisher": "Dell Technologies",
+          "revision": "Online service-manual topic; topic revision not exposed",
+          "source_id": "src.dell.r740xd.system-overview",
+          "title": "PowerEdge R740xd system overview",
+          "url": "https://www.dell.com/support/manuals/en-us/poweredge-r740xd/per740xd_ism_pub/poweredge-r740xd-system-overview?guid=guid-db2e151c-0b4d-4f95-8c09-d0d81a59807d&lang=en-us",
+          "used_claim_ids": [
+            "claim.r740xd.2u-dual-cpu-memory",
+            "claim.r740xd.dual-psu"
+          ]
+        },
+        {
+          "access_status": "accessible",
+          "product_scope": "Standards-defined UEFI boot-manager behavior",
+          "publisher": "UEFI Forum",
+          "revision": "2.10",
+          "source_id": "src.uefi.2_10.boot-manager",
+          "title": "UEFI Specification 2.10 — Boot Manager",
+          "url": "https://uefi.org/specs/UEFI/2.10/03_Boot_Manager.html",
+          "used_claim_ids": [
+            "claim.uefi.os-loader-handoff"
+          ]
+        }
+      ],
+      "ticket_id": "ticket.generated.5352abd871c2e9076be92a0b",
+      "ticket_snapshot_digest": "b06dc5a7d12c29af78edd71f7a82a611d971844e6e71863e142bc293f4e6af27",
+      "validation_trace": [
+        {
+          "code": "PUBLIC_INPUTS_ACCEPTED",
+          "status": "PASS",
+          "step": "request"
+        },
+        {
+          "code": "EXACTLY_ONE_BINDING",
+          "status": "PASS",
+          "step": "binding_lookup"
+        },
+        {
+          "code": "PUBLIC_SURFACE_AND_ACTIVE_CANDIDATES_ACCEPTED",
+          "status": "PASS",
+          "step": "public_surface"
+        },
+        {
+          "code": "PROFILE_ID_REVISION_ACCEPTED",
+          "status": "PASS",
+          "step": "profile_pin"
+        },
+        {
+          "code": "PUBLIC_CAPABILITY_TOPOLOGY_AND_CLOSURE_ACCEPTED",
+          "status": "PASS",
+          "step": "profile_consistency"
+        },
+        {
+          "code": "PROFILE_DIGEST_ACCEPTED",
+          "status": "PASS",
+          "step": "serialization"
+        },
+        {
+          "code": "ONE_SOURCE_PROJECTION_ACCEPTED",
+          "status": "PASS",
+          "step": "public_projection"
+        }
+      ]
+    }
+  ],
+  "deterministic_performance_budget": {
+    "fallback_profile_choices": 0,
+    "maximum_bindings_scanned_per_resolution": 5,
+    "maximum_profiles_scanned_per_resolution": 2,
+    "network_requests_per_resolution": 0,
+    "random_choices_per_resolution": 0
+  },
+  "generator_version": "task-052-proof-generator-v1",
+  "input_digests": [
+    {
+      "input_id": "catalog",
+      "path": "content/system-model-pilot-v1/system-model-catalog-v1.json",
+      "sha256": "5bfc68136e3e00e6028262806324d759fc6510fa72d7ddeed71a8b4f4b04d8f0"
+    },
+    {
+      "input_id": "bindings",
+      "path": "content/system-model-pilot-v1/ticket-system-bindings-v1.json",
+      "sha256": "b219dad410ff1ffce72449ff3cead7aff8402b7063e7115cd755d76026543c85"
+    },
+    {
+      "input_id": "privateValidation",
+      "path": "content/system-model-pilot-v1/private-compatibility-v1.json",
+      "sha256": "75f1f8b36ee0ecd9721e4823cd79614ca64c660efc139add3cf87782bc8db1a3"
+    },
+    {
+      "input_id": "relationshipOverlay",
+      "path": "content/system-model-pilot-v1/domain-relationship-overlay-v1.json",
+      "sha256": "0f468018fe585f9deb774905a7cfc57ea559ec29ace8bc69e9335daea8c59cd8"
+    },
+    {
+      "input_id": "releaseManifest",
+      "path": "content/system-model-pilot-v1/RELEASE-MANIFEST.json",
+      "sha256": "8a8cbd0d23b491fec1108903e0e55d8148de596af3605c03b32279c78b19646e"
+    },
+    {
+      "input_id": "sourceLedger",
+      "path": "docs/system-models/task-050/source-ledger.json",
+      "sha256": "d4bda20ff9970fa6eb03c810b453cf789df23dc42000b4b9ddb575c75cc33da2"
+    },
+    {
+      "input_id": "fixtures",
+      "path": "docs/system-models/task-052/invalid-profile-fixtures-v1.json",
+      "sha256": "95ed6e667f0c2901f08b9b95b3c9059cad8773e6216994e43e651ebdd45c4bfa"
+    }
+  ],
+  "invalid_profile_results": [
+    {
+      "expected_reason_code": "MISSING_REQUIRED_DEVICE",
+      "fallback_id": "fallback.system-model.text-only.v1",
+      "fixture_id": "fixture.system-model.missing-device.v1",
+      "gameplay_effect": "NONE",
+      "materialized_profile_digest": "b468484f3f835c2c869852ad5b6a7efcc7e5a2f5e5005b650a4fc8125508f230",
+      "public_message": "A detailed system model is not available for this Ticket. Ordinary troubleshooting remains unchanged.",
+      "reason_code": "MISSING_REQUIRED_DEVICE",
+      "title": "Required storage device is absent",
+      "validation_trace": [
+        {
+          "code": "PUBLIC_INPUTS_ACCEPTED",
+          "status": "PASS",
+          "step": "request"
+        },
+        {
+          "code": "EXACTLY_ONE_BINDING",
+          "status": "PASS",
+          "step": "binding_lookup"
+        },
+        {
+          "code": "PUBLIC_SURFACE_AND_ACTIVE_CANDIDATES_ACCEPTED",
+          "status": "PASS",
+          "step": "public_surface"
+        },
+        {
+          "code": "PROFILE_ID_REVISION_ACCEPTED",
+          "status": "PASS",
+          "step": "profile_pin"
+        },
+        {
+          "code": "MISSING_REQUIRED_DEVICE",
+          "status": "FAIL",
+          "step": "resolution"
+        }
+      ]
+    },
+    {
+      "expected_reason_code": "INCOMPATIBLE_CONTROLLER_PATH",
+      "fallback_id": "fallback.system-model.text-only.v1",
+      "fixture_id": "fixture.system-model.incompatible-controller-path.v1",
+      "gameplay_effect": "NONE",
+      "materialized_profile_digest": "f5e2383547aada7fab2acb780899913ae27b0e2ae53389e2f6c48132a9f4c99d",
+      "public_message": "A detailed system model is not available for this Ticket. Ordinary troubleshooting remains unchanged.",
+      "reason_code": "INCOMPATIBLE_CONTROLLER_PATH",
+      "title": "Controller path direction contradicts its ordered path",
+      "validation_trace": [
+        {
+          "code": "PUBLIC_INPUTS_ACCEPTED",
+          "status": "PASS",
+          "step": "request"
+        },
+        {
+          "code": "EXACTLY_ONE_BINDING",
+          "status": "PASS",
+          "step": "binding_lookup"
+        },
+        {
+          "code": "PUBLIC_SURFACE_AND_ACTIVE_CANDIDATES_ACCEPTED",
+          "status": "PASS",
+          "step": "public_surface"
+        },
+        {
+          "code": "PROFILE_ID_REVISION_ACCEPTED",
+          "status": "PASS",
+          "step": "profile_pin"
+        },
+        {
+          "code": "INCOMPATIBLE_CONTROLLER_PATH",
+          "status": "FAIL",
+          "step": "resolution"
+        }
+      ]
+    },
+    {
+      "expected_reason_code": "PUBLIC_CANDIDATE_CLOSURE_FAILED",
+      "fallback_id": "fallback.system-model.text-only.v1",
+      "fixture_id": "fixture.system-model.candidate-elimination.v1",
+      "gameplay_effect": "NONE",
+      "materialized_profile_digest": "c1f66c3bc9a25208ebacce5d346b61d8a35b500bb0aff7370692dc883b9ab69e",
+      "public_message": "A detailed system model is not available for this Ticket. Ordinary troubleshooting remains unchanged.",
+      "reason_code": "PUBLIC_CANDIDATE_CLOSURE_FAILED",
+      "title": "One still-public Candidate loses visible closure",
+      "validation_trace": [
+        {
+          "code": "PUBLIC_INPUTS_ACCEPTED",
+          "status": "PASS",
+          "step": "request"
+        },
+        {
+          "code": "EXACTLY_ONE_BINDING",
+          "status": "PASS",
+          "step": "binding_lookup"
+        },
+        {
+          "code": "PUBLIC_SURFACE_AND_ACTIVE_CANDIDATES_ACCEPTED",
+          "status": "PASS",
+          "step": "public_surface"
+        },
+        {
+          "code": "PROFILE_ID_REVISION_ACCEPTED",
+          "status": "PASS",
+          "step": "profile_pin"
+        },
+        {
+          "code": "PUBLIC_CANDIDATE_CLOSURE_FAILED",
+          "status": "FAIL",
+          "step": "resolution"
+        }
+      ]
+    },
+    {
+      "expected_reason_code": "UNSUPPORTED_VENDOR_OPTION",
+      "fallback_id": "fallback.system-model.text-only.v1",
+      "fixture_id": "fixture.system-model.unsupported-vendor-option.v1",
+      "gameplay_effect": "NONE",
+      "materialized_profile_digest": "62378d8c9f0e58318cce47cca9f90df2b6a4c496e9b144d81642bf838217286f",
+      "public_message": "A detailed system model is not available for this Ticket. Ordinary troubleshooting remains unchanged.",
+      "reason_code": "UNSUPPORTED_VENDOR_OPTION",
+      "title": "Vendor option claim has no released source basis",
+      "validation_trace": [
+        {
+          "code": "PUBLIC_INPUTS_ACCEPTED",
+          "status": "PASS",
+          "step": "request"
+        },
+        {
+          "code": "EXACTLY_ONE_BINDING",
+          "status": "PASS",
+          "step": "binding_lookup"
+        },
+        {
+          "code": "PUBLIC_SURFACE_AND_ACTIVE_CANDIDATES_ACCEPTED",
+          "status": "PASS",
+          "step": "public_surface"
+        },
+        {
+          "code": "PROFILE_ID_REVISION_ACCEPTED",
+          "status": "PASS",
+          "step": "profile_pin"
+        },
+        {
+          "code": "UNSUPPORTED_VENDOR_OPTION",
+          "status": "FAIL",
+          "step": "resolution"
+        }
+      ]
+    },
+    {
+      "expected_reason_code": "INCOMPLETE_DOMAIN_RELATIONSHIPS",
+      "fallback_id": "fallback.system-model.text-only.v1",
+      "fixture_id": "fixture.system-model.incomplete-domain-relationships.v1",
+      "gameplay_effect": "NONE",
+      "materialized_profile_digest": "006318bc894cb9ac9773a8bdfb6387c1ab2f744f11a2e91c4cb6cb72ddf41675",
+      "public_message": "A detailed system model is not available for this Ticket. Ordinary troubleshooting remains unchanged.",
+      "reason_code": "INCOMPLETE_DOMAIN_RELATIONSHIPS",
+      "title": "Serviceable backplane loses its Component-role mapping",
+      "validation_trace": [
+        {
+          "code": "PUBLIC_INPUTS_ACCEPTED",
+          "status": "PASS",
+          "step": "request"
+        },
+        {
+          "code": "EXACTLY_ONE_BINDING",
+          "status": "PASS",
+          "step": "binding_lookup"
+        },
+        {
+          "code": "PUBLIC_SURFACE_AND_ACTIVE_CANDIDATES_ACCEPTED",
+          "status": "PASS",
+          "step": "public_surface"
+        },
+        {
+          "code": "PROFILE_ID_REVISION_ACCEPTED",
+          "status": "PASS",
+          "step": "profile_pin"
+        },
+        {
+          "code": "INCOMPLETE_DOMAIN_RELATIONSHIPS",
+          "status": "FAIL",
+          "step": "resolution"
+        }
+      ]
+    }
+  ],
+  "invariants": [
+    "PUBLIC_INPUT_ONLY_RESOLUTION",
+    "AUTHORING_VALIDATION_REJECT_ONLY",
+    "PUBLIC_CANDIDATE_CLOSURE",
+    "BYTE_STABLE_PRIVATE_DIFFERENTIAL",
+    "ONE_SOURCE_ALL_REPRESENTATIONS",
+    "SYSTEM_RELEVANCE_NOT_MATCH_LEGALITY",
+    "PLAYABLE_TEXT_FALLBACK",
+    "NO_GAMEPLAY_EFFECT"
+  ],
+  "proof_id": "system-model-five-ticket-resolver-proof-v1",
+  "release_id": "system-model-pilot-v1",
+  "schema_version": "system-model-resolver-proof-v1",
+  "serialization": {
+    "canonicalization_version": "canonical-json-v1",
+    "content_digest": "297fb5f7991738ed38e101b6503fc701483622af33f1bc85641a81ed90fc0f23",
+    "digest_algorithm": "sha256"
+  },
+  "totals": {
+    "differential_cases": 21,
+    "invalid_profiles_rejected": 5,
+    "public_candidate_combinations": 111,
+    "public_projections": 5,
+    "rendered_rationale_graphs": 174,
+    "resolved_tickets": 5,
+    "unique_profiles": 2,
+    "unique_rationale_attachments": 51
+  }
+}

@@ -6,7 +6,7 @@ This directory is the authoritative entry point for Server Repair TCG rule decis
 
 - [`FROZEN_RULES.md`](FROZEN_RULES.md) is the normative source implementations and tests may rely on.
 - [`UNFROZEN_RULES.md`](UNFROZEN_RULES.md) is the canonical open inventory and now contains only deferred `PRESSURE-009`; TASK-013 synchronized the four V0 diagnosis pressures into a successor rules version.
-- [`APPROVALS.md`](APPROVALS.md) records approved PT-001 through PT-008 choices, STORY-001 A through STORY-009 A, approved System Model gate `SYSTEM-001 A`, the still-approved-but-deferred Migration Seed direction, and rejected alternatives as decision provenance. No unselected option is authoritative merely because it appears there.
+- [`APPROVALS.md`](APPROVALS.md) records approved PT-001 through PT-008 choices, STORY-001 A through STORY-009 A, approved System Model gate `SYSTEM-001 A`, pending scale gate `SYSTEM-002`, the still-approved-but-deferred Migration Seed direction, and rejected alternatives as decision provenance. No unselected option is authoritative merely because it appears there.
 - The former candidate ledger was fully resolved on 2026-08-22. The former synchronization ledger was fully resolved by [`TASK-007`](../../tasks/TASK-007-synchronize-approved-gameplay-rules.md) on 2026-08-23. Both retired ledgers remain available in Git history.
 - `SCORE-001`, `GEN-001`, terminal policy, departure cleanup, Room lifecycle, and the four previously pressured frozen rules are approved. [`TASK-008`](../../tasks/TASK-008-freeze-first-version-foundation.md) records their synchronization.
 - The repository has a frozen `first-version-v1` foundation and an explicit `first-version-v2` diagnosis successor. TASK-009 replays and `solo-pages-v1` remain pinned to v1; current Solo play uses the synchronized v2 Bench, candidates, routes, Repair gate, and Give Up behavior.
@@ -52,7 +52,7 @@ Rejected, derivative, or superseded ideas need not remain in the active foundati
 
 ## Foundation status
 
-The V0 training-ready and released Story sequences through TASK-048 are complete under the recorded PT, UI, and Story approvals. TASK-049 and TASK-050 completed the System Model contract and five-Ticket research atlas without production changes. The project owner approved `SYSTEM-001 A` on 2026-08-30, and TASK-051 released the two-profile/five-binding pilot contract with separate private validation and unchanged V0 authority. TASK-052 is the next System Model boundary; no `SYSTEM-002` scale approval exists yet. The V2 Migration Seed direction remains approved except that MS-006 A's prior parking sequence is superseded; TASK-017 is deferred until the project owner returns to it.
+The V0 training-ready and released Story sequences through TASK-048 are complete under the recorded PT, UI, and Story approvals. TASK-049 through TASK-052 completed the System Model contract, research atlas, typed production pilot, and five-Ticket resolver/projection proof without changing V0 authority. The project owner approved `SYSTEM-001 A` on 2026-08-30; `SYSTEM-002` is now the pending scale choice, so TASK-053 through TASK-055 remain blocked. The V2 Migration Seed direction remains approved except that MS-006 A's prior parking sequence is superseded; TASK-017 is deferred until the project owner returns to it.
 
 ## Maintenance rules
 

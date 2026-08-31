@@ -10,10 +10,12 @@
     "build:play-assets": "node viewer/scripts/build-play-assets.mjs",
     "build:sfx-assets": "node viewer/scripts/build-sfx-assets.mjs",
     "build:system-models": "node content/system-model-pilot-v1/build-release.mjs",
+    "build:system-resolver": "node docs/system-models/task-052/generate-proof.mjs",
     "verify:task-011-art": "node viewer/scripts/verify-task-011-art.mjs",
     "verify:play-assets": "node viewer/scripts/verify-play-assets.mjs",
     "verify:sfx-assets": "node viewer/scripts/verify-sfx-assets.mjs",
     "verify:system-models": "node content/system-model-pilot-v1/build-release.mjs --check && node content/system-model-pilot-v1/validate-release.mjs",
+    "verify:system-resolver": "node docs/system-models/task-052/generate-proof.mjs --check && node --test tests/task-052-system-model-resolver.test.mjs",
     "test:node": "node --test tests/*.test.mjs",
     "test:browser": "playwright test"
   },

@@ -1,0 +1,2133 @@
+{
+  "authority_boundary": {
+    "gameplay_effect": "NONE",
+    "legal_now": "Only the authoritative Match engine decides whether an action is legal now.",
+    "system_relevance": "The rationale explains why an action can matter for this system profile."
+  },
+  "candidate_closure": [
+    {
+      "candidate_fault_id": "fault.board.system.failed",
+      "explanation": "The downstream board and host load are distinct visible boundaries.",
+      "public_node_ids": [
+        "board",
+        "host"
+      ],
+      "public_path_ids": [
+        "path.r740xd2.power-distribution"
+      ]
+    },
+    {
+      "candidate_fault_id": "fault.power.distribution_board.failed",
+      "explanation": "The documented Power Interposer Board realizes the broader distribution-board role.",
+      "public_node_ids": [
+        "power_interposer"
+      ],
+      "public_path_ids": [
+        "path.r740xd2.power-distribution"
+      ]
+    },
+    {
+      "candidate_fault_id": "fault.power.input.cable_loose",
+      "explanation": "Two external input boundaries precede the PSU pair.",
+      "public_node_ids": [
+        "ac",
+        "psu"
+      ],
+      "public_path_ids": [
+        "path.r740xd2.power-distribution"
+      ]
+    },
+    {
+      "candidate_fault_id": "fault.power.psu.failed",
+      "explanation": "Two serviceable supplies remain visible as a redundant pair.",
+      "public_node_ids": [
+        "psu"
+      ],
+      "public_path_ids": [
+        "path.r740xd2.power-distribution"
+      ]
+    },
+    {
+      "candidate_fault_id": "fault.power.psu.not_seated",
+      "explanation": "The removable PSU-to-cage/interposer service boundary remains visible.",
+      "public_node_ids": [
+        "psu",
+        "power_interposer"
+      ],
+      "public_path_ids": [
+        "path.r740xd2.power-distribution"
+      ]
+    }
+  ],
+  "component_inventory": [
+    {
+      "component_definition_id": "component.power.input_cable",
+      "label": "External input leads",
+      "multiplicity": "2–2 input leads",
+      "optionality": "REQUIRED",
+      "planes": [
+        "power"
+      ],
+      "purpose": "Feed the two PSU modules",
+      "replaceability": "EXTERNAL_REPLACEABLE_UNIT",
+      "role_id": "role.input",
+      "serviceability_note": "External cable service unit",
+      "source_claim_ids": [
+        "claim.r740xd2.dual-psu"
+      ]
+    },
+    {
+      "component_definition_id": "component.power.hot_swap_psu",
+      "label": "Redundant PSU pair",
+      "multiplicity": "2–2 service units",
+      "optionality": "REQUIRED",
+      "planes": [
+        "power"
+      ],
+      "purpose": "Converts input and supplies the shared path",
+      "replaceability": "HOT_SWAP_SERVICE_UNIT",
+      "role_id": "role.psu_pair",
+      "serviceability_note": "Individual PSU service units",
+      "source_claim_ids": [
+        "claim.r740xd2.one-plus-one-redundancy"
+      ]
+    },
+    {
+      "component_definition_id": "component.power.distribution_board",
+      "label": "Power Interposer Board",
+      "multiplicity": "1–1 service unit",
+      "optionality": "REQUIRED",
+      "planes": [
+        "power"
+      ],
+      "purpose": "Shared serviceable distribution path from the PSU cage to system-board cables",
+      "replaceability": "DEENERGIZED_SERVICE_UNIT",
+      "role_id": "role.pib",
+      "serviceability_note": "Replaceable only after required de-energization and PSU removal",
+      "source_claim_ids": [
+        "claim.r740xd2.pib-service-unit",
+        "claim.r740xd2.pib-system-board-cables",
+        "claim.r740xd2.pib-deenergize"
+      ]
+    },
+    {
+      "component_definition_id": "component.board.system",
+      "label": "System-board load",
+      "multiplicity": "1–1 service unit",
+      "optionality": "REQUIRED",
+      "planes": [
+        "host_firmware_post"
+      ],
+      "purpose": "Receives distributed power and contains grouped host/management roles",
+      "replaceability": "BOARD_SERVICE_UNIT",
+      "role_id": "role.system_board",
+      "serviceability_note": "Board-level service unit",
+      "source_claim_ids": [
+        "claim.r740xd2.pib-system-board-cables"
+      ]
+    },
+    {
+      "component_definition_id": "component.management.bmc",
+      "label": "Management status role",
+      "multiplicity": "1–1 logical role",
+      "optionality": "REQUIRED",
+      "planes": [
+        "management"
+      ],
+      "purpose": "Reports supported PSU mismatch/status observations",
+      "replaceability": "NOT_SEPARATE_SERVICE_UNIT",
+      "role_id": "role.bmc",
+      "serviceability_note": "Outside this Ticket's service scope",
+      "source_claim_ids": [
+        "claim.r740xd2.psu-mismatch-reporting"
+      ]
+    },
+    {
+      "component_definition_id": null,
+      "label": "Host subsystem loads",
+      "multiplicity": "1–1 grouped load",
+      "optionality": "OUT_OF_SCOPE_ABSTRACTION",
+      "planes": [
+        "runtime_service"
+      ],
+      "purpose": "Grouped CPU, memory, storage, network, cooling, firmware, and OS consumers",
+      "replaceability": "OUTSIDE_SCOPE",
+      "role_id": "role.host_loads",
+      "serviceability_note": "Outside this Ticket's scope",
+      "source_claim_ids": [
+        "claim.r740xd2.pib-system-board-cables"
+      ]
+    }
+  ],
+  "diagram": {
+    "canvas": {
+      "height": 412,
+      "plane_order": [
+        "power",
+        "management",
+        "host_firmware_post",
+        "memory",
+        "storage",
+        "network",
+        "os_handoff",
+        "runtime_service"
+      ],
+      "width": 1562
+    },
+    "edges": [
+      {
+        "cardinality": "ONE_TO_MANY",
+        "direction": "DIRECTED",
+        "edge_id": "e.ac-psu",
+        "from_node_id": "ac",
+        "label": "two inputs",
+        "lifecycle_stage_ids": [
+          "standby",
+          "host_power",
+          "input"
+        ],
+        "line_pattern": "DOUBLE",
+        "public_visibility": "PUBLIC",
+        "relation_family": "POWER",
+        "relation_type": "DELIVERS_STANDBY_POWER_TO",
+        "source_claim_ids": [
+          "claim.r740xd2.dual-psu"
+        ],
+        "to_node_id": "psu"
+      },
+      {
+        "cardinality": "ONE_TO_ONE",
+        "direction": "DIRECTED",
+        "edge_id": "e.psu-pib",
+        "from_node_id": "psu",
+        "label": "1+1 feed",
+        "lifecycle_stage_ids": [
+          "standby",
+          "host_power",
+          "verify"
+        ],
+        "line_pattern": "DOUBLE",
+        "public_visibility": "PUBLIC",
+        "relation_family": "POWER",
+        "relation_type": "DELIVERS_STANDBY_POWER_TO",
+        "source_claim_ids": [
+          "claim.r740xd2.one-plus-one-redundancy",
+          "claim.r740xd2.pib-psu-cage"
+        ],
+        "to_node_id": "power_interposer"
+      },
+      {
+        "cardinality": "ONE_TO_ONE",
+        "direction": "DIRECTED",
+        "edge_id": "e.pib-board",
+        "from_node_id": "power_interposer",
+        "label": "board cables",
+        "lifecycle_stage_ids": [
+          "standby",
+          "host_power",
+          "verify"
+        ],
+        "line_pattern": "DOUBLE",
+        "public_visibility": "PUBLIC",
+        "relation_family": "POWER",
+        "relation_type": "DELIVERS_SWITCHED_POWER_TO",
+        "source_claim_ids": [
+          "claim.r740xd2.pib-system-board-cables"
+        ],
+        "to_node_id": "board"
+      },
+      {
+        "cardinality": "ONE_TO_ONE",
+        "direction": "DIRECTED",
+        "edge_id": "e.board-host",
+        "from_node_id": "board",
+        "label": "switched loads",
+        "lifecycle_stage_ids": [
+          "host_power",
+          "verify"
+        ],
+        "line_pattern": "DOUBLE",
+        "public_visibility": "PUBLIC",
+        "relation_family": "POWER",
+        "relation_type": "DELIVERS_SWITCHED_POWER_TO",
+        "source_claim_ids": [
+          "claim.r740xd2.pib-system-board-cables"
+        ],
+        "to_node_id": "host"
+      },
+      {
+        "cardinality": "ONE_TO_ONE",
+        "direction": "DIRECTED",
+        "edge_id": "e.bmc-psu",
+        "from_node_id": "bmc",
+        "label": "status / mismatch",
+        "lifecycle_stage_ids": [
+          "status",
+          "host_power",
+          "verify"
+        ],
+        "line_pattern": "DOTTED",
+        "public_visibility": "PUBLIC",
+        "relation_family": "OBSERVATION",
+        "relation_type": "OBSERVES",
+        "source_claim_ids": [
+          "claim.r740xd2.psu-mismatch-reporting"
+        ],
+        "to_node_id": "psu"
+      },
+      {
+        "cardinality": "ONE_TO_ONE",
+        "direction": "DIRECTED",
+        "edge_id": "e.service-psu",
+        "from_node_id": "service",
+        "label": "remove first",
+        "lifecycle_stage_ids": [
+          "service"
+        ],
+        "line_pattern": "DOUBLE_DASH",
+        "public_visibility": "PUBLIC",
+        "relation_family": "SERVICE",
+        "relation_type": "REQUIRES_DEENERGIZATION_BEFORE",
+        "source_claim_ids": [
+          "claim.r740xd2.pib-remove-psus"
+        ],
+        "to_node_id": "psu"
+      },
+      {
+        "cardinality": "ONE_TO_ONE",
+        "direction": "DIRECTED",
+        "edge_id": "e.service-pib",
+        "from_node_id": "service",
+        "label": "disconnect / replace",
+        "lifecycle_stage_ids": [
+          "service"
+        ],
+        "line_pattern": "DOUBLE_DASH",
+        "public_visibility": "PUBLIC",
+        "relation_family": "SERVICE",
+        "relation_type": "REQUIRES_DEENERGIZATION_BEFORE",
+        "source_claim_ids": [
+          "claim.r740xd2.pib-disconnect-cables",
+          "claim.r740xd2.pib-deenergize"
+        ],
+        "to_node_id": "power_interposer"
+      }
+    ],
+    "legend": [
+      {
+        "line_pattern": "SOLID",
+        "relation_family": "STRUCTURE"
+      },
+      {
+        "line_pattern": "DOUBLE",
+        "relation_family": "POWER"
+      },
+      {
+        "line_pattern": "DOTTED",
+        "relation_family": "COOLING"
+      },
+      {
+        "line_pattern": "DASHED",
+        "relation_family": "DATA"
+      },
+      {
+        "line_pattern": "DASH_DOT",
+        "relation_family": "CONTROL"
+      },
+      {
+        "line_pattern": "LONG_DASH",
+        "relation_family": "LIFECYCLE"
+      },
+      {
+        "line_pattern": "DOTTED",
+        "relation_family": "OBSERVATION"
+      },
+      {
+        "line_pattern": "SHORT_DASH",
+        "relation_family": "LOGICAL"
+      },
+      {
+        "line_pattern": "DOUBLE_DASH",
+        "relation_family": "SERVICE"
+      }
+    ],
+    "nodes": [
+      {
+        "label": "Input cables",
+        "layout": {
+          "height": 66,
+          "reading_order": 1,
+          "width": 152,
+          "x": 42,
+          "y": 52
+        },
+        "node_id": "ac",
+        "node_kind": "COMPONENT_INSTANCE",
+        "plane": "power",
+        "public_visibility": "PUBLIC",
+        "role_ids": [
+          "role.input"
+        ],
+        "source_claim_ids": [
+          "claim.r740xd2.dual-psu"
+        ]
+      },
+      {
+        "label": "PSU A + PSU B",
+        "layout": {
+          "height": 66,
+          "reading_order": 2,
+          "width": 152,
+          "x": 42,
+          "y": 156
+        },
+        "node_id": "psu",
+        "node_kind": "COMPONENT_INSTANCE",
+        "plane": "power",
+        "public_visibility": "PUBLIC",
+        "role_ids": [
+          "role.psu_pair"
+        ],
+        "source_claim_ids": [
+          "claim.r740xd2.one-plus-one-redundancy"
+        ]
+      },
+      {
+        "label": "Power Interposer Board",
+        "layout": {
+          "height": 66,
+          "reading_order": 3,
+          "width": 152,
+          "x": 42,
+          "y": 260
+        },
+        "node_id": "power_interposer",
+        "node_kind": "SERVICEABLE_UNIT",
+        "plane": "power",
+        "public_visibility": "PUBLIC",
+        "role_ids": [
+          "role.pib"
+        ],
+        "source_claim_ids": [
+          "claim.r740xd2.pib-service-unit",
+          "claim.r740xd2.pib-system-board-cables"
+        ]
+      },
+      {
+        "label": "System-board load",
+        "layout": {
+          "height": 66,
+          "reading_order": 4,
+          "width": 152,
+          "x": 422,
+          "y": 52
+        },
+        "node_id": "board",
+        "node_kind": "SERVICEABLE_UNIT",
+        "plane": "host_firmware_post",
+        "public_visibility": "PUBLIC",
+        "role_ids": [
+          "role.system_board"
+        ],
+        "source_claim_ids": [
+          "claim.r740xd2.pib-system-board-cables"
+        ]
+      },
+      {
+        "label": "Management status",
+        "layout": {
+          "height": 66,
+          "reading_order": 5,
+          "width": 152,
+          "x": 232,
+          "y": 52
+        },
+        "node_id": "bmc",
+        "node_kind": "OBSERVATION_POINT",
+        "plane": "management",
+        "public_visibility": "PUBLIC",
+        "role_ids": [
+          "role.bmc"
+        ],
+        "source_claim_ids": [
+          "claim.r740xd2.psu-mismatch-reporting"
+        ]
+      },
+      {
+        "label": "Host + bounded runtime",
+        "layout": {
+          "height": 66,
+          "reading_order": 6,
+          "width": 152,
+          "x": 1372,
+          "y": 52
+        },
+        "node_id": "host",
+        "node_kind": "LOGICAL_GROUP",
+        "plane": "runtime_service",
+        "public_visibility": "PUBLIC",
+        "role_ids": [
+          "role.host_loads"
+        ],
+        "source_claim_ids": [
+          "claim.r740xd2.pib-system-board-cables"
+        ]
+      },
+      {
+        "label": "De-energized service",
+        "layout": {
+          "height": 66,
+          "reading_order": 7,
+          "width": 152,
+          "x": 1372,
+          "y": 156
+        },
+        "node_id": "service",
+        "node_kind": "CONTROL_SURFACE",
+        "plane": "runtime_service",
+        "public_visibility": "PUBLIC",
+        "role_ids": [],
+        "source_claim_ids": [
+          "claim.r740xd2.pib-deenergize",
+          "claim.r740xd2.pib-remove-psus"
+        ]
+      }
+    ],
+    "paths": [
+      {
+        "edge_ids": [
+          "e.ac-psu",
+          "e.psu-pib",
+          "e.pib-board",
+          "e.board-host"
+        ],
+        "end_node_id": "host",
+        "flow_kind": "POWER",
+        "lifecycle_stage_ids": [
+          "standby",
+          "host_power",
+          "input",
+          "verify"
+        ],
+        "node_ids": [
+          "ac",
+          "psu",
+          "power_interposer",
+          "board",
+          "host"
+        ],
+        "ordered_labels": [
+          "Input cables",
+          "PSU A + PSU B",
+          "Power Interposer Board",
+          "System-board load",
+          "Host + bounded runtime"
+        ],
+        "path_id": "path.r740xd2.power-distribution",
+        "public_visibility": "PUBLIC",
+        "source_claim_ids": [
+          "claim.r740xd2.dual-psu",
+          "claim.r740xd2.one-plus-one-redundancy",
+          "claim.r740xd2.pib-psu-cage",
+          "claim.r740xd2.pib-system-board-cables"
+        ],
+        "start_node_id": "ac"
+      },
+      {
+        "edge_ids": [
+          "e.bmc-psu"
+        ],
+        "end_node_id": "psu",
+        "flow_kind": "OBSERVATION",
+        "lifecycle_stage_ids": [
+          "status",
+          "host_power",
+          "verify"
+        ],
+        "node_ids": [
+          "bmc",
+          "psu"
+        ],
+        "ordered_labels": [
+          "Management status",
+          "PSU A + PSU B"
+        ],
+        "path_id": "path.r740xd2.power-status",
+        "public_visibility": "PUBLIC",
+        "source_claim_ids": [
+          "claim.r740xd2.psu-mismatch-reporting"
+        ],
+        "start_node_id": "bmc"
+      },
+      {
+        "edge_ids": [
+          "e.service-psu"
+        ],
+        "end_node_id": "psu",
+        "flow_kind": "LIFECYCLE",
+        "lifecycle_stage_ids": [
+          "service"
+        ],
+        "node_ids": [
+          "service",
+          "psu"
+        ],
+        "ordered_labels": [
+          "De-energized service",
+          "PSU A + PSU B"
+        ],
+        "path_id": "path.r740xd2.psu-service",
+        "public_visibility": "PUBLIC",
+        "source_claim_ids": [
+          "claim.r740xd2.pib-remove-psus"
+        ],
+        "start_node_id": "service"
+      },
+      {
+        "edge_ids": [
+          "e.service-pib"
+        ],
+        "end_node_id": "power_interposer",
+        "flow_kind": "LIFECYCLE",
+        "lifecycle_stage_ids": [
+          "service"
+        ],
+        "node_ids": [
+          "service",
+          "power_interposer"
+        ],
+        "ordered_labels": [
+          "De-energized service",
+          "Power Interposer Board"
+        ],
+        "path_id": "path.r740xd2.pib-service",
+        "public_visibility": "PUBLIC",
+        "source_claim_ids": [
+          "claim.r740xd2.pib-disconnect-cables",
+          "claim.r740xd2.pib-deenergize"
+        ],
+        "start_node_id": "service"
+      }
+    ],
+    "scope_statement": "Dell Technologies PowerEdge R740xd2; dual-PSU Power Interposer Board service path. Geometry is explanatory, and no current health or cause is shown.",
+    "text_equivalent": {
+      "abstraction_sentences": [
+        "The PIB is modeled as a shared serviceable path, not as a schematic of internal rails or protection circuitry.",
+        "Non-power subsystems are a grouped load because the exact Ticket needs only a bounded downstream consumer.",
+        "The management-status edge records a documented observation capability, not a causal diagnosis.",
+        "The public Candidate term distribution board is broader than Dell's exact Power Interposer Board role."
+      ],
+      "full_text": "Dell Technologies PowerEdge R740xd2; dual-PSU Power Interposer Board service path. Geometry is explanatory, and no current health or cause is shown. 1. Input cables is a component instance in the power plane. 2. PSU A + PSU B is a component instance in the power plane. 3. Power Interposer Board is a serviceable unit in the power plane. 4. System-board load is a serviceable unit in the host firmware post plane. 5. Management status is a observation point in the management plane. 6. Host + bounded runtime is a logical group in the runtime service plane. 7. De-energized service is a control surface in the runtime service plane. Input cables two inputs (delivers standby power to) PSU A + PSU B. PSU A + PSU B 1+1 feed (delivers standby power to) Power Interposer Board. Power Interposer Board board cables (delivers switched power to) System-board load. System-board load switched loads (delivers switched power to) Host + bounded runtime. Management status status / mismatch (observes) PSU A + PSU B. De-energized service remove first (requires deenergization before) PSU A + PSU B. De-energized service disconnect / replace (requires deenergization before) Power Interposer Board. power path path.r740xd2.power-distribution: Input cables → PSU A + PSU B → Power Interposer Board → System-board load → Host + bounded runtime. observation path path.r740xd2.power-status: Management status → PSU A + PSU B. lifecycle path path.r740xd2.psu-service: De-energized service → PSU A + PSU B. lifecycle path path.r740xd2.pib-service: De-energized service → Power Interposer Board. The PIB is modeled as a shared serviceable path, not as a schematic of internal rails or protection circuitry. Non-power subsystems are a grouped load because the exact Ticket needs only a bounded downstream consumer. The management-status edge records a documented observation capability, not a causal diagnosis. The public Candidate term distribution board is broader than Dell's exact Power Interposer Board role.",
+      "ordered_edge_sentences": [
+        "Input cables two inputs (delivers standby power to) PSU A + PSU B.",
+        "PSU A + PSU B 1+1 feed (delivers standby power to) Power Interposer Board.",
+        "Power Interposer Board board cables (delivers switched power to) System-board load.",
+        "System-board load switched loads (delivers switched power to) Host + bounded runtime.",
+        "Management status status / mismatch (observes) PSU A + PSU B.",
+        "De-energized service remove first (requires deenergization before) PSU A + PSU B.",
+        "De-energized service disconnect / replace (requires deenergization before) Power Interposer Board."
+      ],
+      "ordered_node_sentences": [
+        "1. Input cables is a component instance in the power plane.",
+        "2. PSU A + PSU B is a component instance in the power plane.",
+        "3. Power Interposer Board is a serviceable unit in the power plane.",
+        "4. System-board load is a serviceable unit in the host firmware post plane.",
+        "5. Management status is a observation point in the management plane.",
+        "6. Host + bounded runtime is a logical group in the runtime service plane.",
+        "7. De-energized service is a control surface in the runtime service plane."
+      ],
+      "ordered_path_sentences": [
+        "power path path.r740xd2.power-distribution: Input cables → PSU A + PSU B → Power Interposer Board → System-board load → Host + bounded runtime.",
+        "observation path path.r740xd2.power-status: Management status → PSU A + PSU B.",
+        "lifecycle path path.r740xd2.psu-service: De-energized service → PSU A + PSU B.",
+        "lifecycle path path.r740xd2.pib-service: De-energized service → Power Interposer Board."
+      ]
+    },
+    "title": "Public-safe system context for The visible model separates two input/PSU branches from the shared interposer and downstream board so isolation can compare path segments without exposing the failing segment."
+  },
+  "lifecycle": {
+    "applicability_summary": {
+      "conditional": 1,
+      "not_applicable": 0,
+      "optional": 0,
+      "optional_conditional": 1,
+      "parallel": 1,
+      "required": 3
+    },
+    "entries": [
+      {
+        "applicability": "REQUIRED",
+        "clause_id": "clause.dell.poweredge-r740xd2.power-interposer.v1.input",
+        "condition": null,
+        "order_key": 10,
+        "section_heading": "How this system starts and runs",
+        "section_id": "description.dell.poweredge-r740xd2.power-interposer.v1.lifecycle",
+        "source_claim_ids": [
+          "claim.r740xd2.dual-psu"
+        ],
+        "stage_id": "input",
+        "text": "Required: Two external inputs feed the installed PSU pair."
+      },
+      {
+        "applicability": "REQUIRED",
+        "clause_id": "clause.dell.poweredge-r740xd2.power-interposer.v1.standby",
+        "condition": null,
+        "order_key": 20,
+        "section_heading": "How this system starts and runs",
+        "section_id": "description.dell.poweredge-r740xd2.power-interposer.v1.lifecycle",
+        "source_claim_ids": [
+          "claim.r740xd2.pib-system-board-cables"
+        ],
+        "stage_id": "standby",
+        "text": "Required: The shared PIB-to-board path can supply standby management loads."
+      },
+      {
+        "applicability": "PARALLEL",
+        "clause_id": "clause.dell.poweredge-r740xd2.power-interposer.v1.status",
+        "condition": null,
+        "order_key": 30,
+        "section_heading": "How this system starts and runs",
+        "section_id": "description.dell.poweredge-r740xd2.power-interposer.v1.lifecycle",
+        "source_claim_ids": [
+          "claim.r740xd2.psu-mismatch-reporting"
+        ],
+        "stage_id": "status",
+        "text": "In parallel: Firmware or management can report supported PSU mismatch/status observations."
+      },
+      {
+        "applicability": "REQUIRED",
+        "clause_id": "clause.dell.poweredge-r740xd2.power-interposer.v1.host_power",
+        "condition": null,
+        "order_key": 40,
+        "section_heading": "How this system starts and runs",
+        "section_id": "description.dell.poweredge-r740xd2.power-interposer.v1.lifecycle",
+        "source_claim_ids": [
+          "claim.r740xd2.pib-system-board-cables"
+        ],
+        "stage_id": "host_power",
+        "text": "Required: The distribution path supplies grouped host loads for POST and bounded boot."
+      },
+      {
+        "applicability": "OPTIONAL_CONDITIONAL",
+        "clause_id": "clause.dell.poweredge-r740xd2.power-interposer.v1.service",
+        "condition": "Only during an authorized service path.",
+        "order_key": 50,
+        "section_heading": "How this system starts and runs",
+        "section_id": "description.dell.poweredge-r740xd2.power-interposer.v1.lifecycle",
+        "source_claim_ids": [
+          "claim.r740xd2.pib-deenergize",
+          "claim.r740xd2.pib-remove-psus",
+          "claim.r740xd2.pib-disconnect-cables"
+        ],
+        "stage_id": "service",
+        "text": "Optional when applicable (Only during an authorized service path.): PIB replacement requires power-off, input disconnection, and PSU removal before board cables are disconnected."
+      },
+      {
+        "applicability": "CONDITIONAL",
+        "clause_id": "clause.dell.poweredge-r740xd2.power-interposer.v1.verify",
+        "condition": "Only during an authorized service path.",
+        "order_key": 60,
+        "section_heading": "How this system starts and runs",
+        "section_id": "description.dell.poweredge-r740xd2.power-interposer.v1.lifecycle",
+        "source_claim_ids": [
+          "claim.r740xd2.pib-system-board-cables"
+        ],
+        "stage_id": "verify",
+        "text": "When applicable (Only during an authorized service path.): After reassembly, verification exercises the complete input-to-board distribution path."
+      }
+    ],
+    "heading": "How this system starts and runs",
+    "not_applicable_note": "No lifecycle stage is declared not applicable for this profile.",
+    "relations": [
+      {
+        "from_stage_id": "input",
+        "relation_id": "lifecycle.r740xd2.01",
+        "relation_type": "PRECEDES",
+        "source_claim_ids": [
+          "claim.r740xd2.dual-psu",
+          "claim.r740xd2.pib-system-board-cables"
+        ],
+        "to_stage_id": "standby"
+      },
+      {
+        "from_stage_id": "standby",
+        "relation_id": "lifecycle.r740xd2.02",
+        "relation_type": "ENABLES",
+        "source_claim_ids": [
+          "claim.r740xd2.pib-system-board-cables"
+        ],
+        "to_stage_id": "host_power"
+      },
+      {
+        "from_stage_id": "status",
+        "relation_id": "lifecycle.r740xd2.03",
+        "relation_type": "PARALLEL_WITH",
+        "source_claim_ids": [
+          "claim.r740xd2.psu-mismatch-reporting",
+          "claim.r740xd2.pib-system-board-cables"
+        ],
+        "to_stage_id": "host_power"
+      },
+      {
+        "from_stage_id": "host_power",
+        "relation_id": "lifecycle.r740xd2.04",
+        "relation_type": "OPTIONAL_AFTER",
+        "source_claim_ids": [
+          "claim.r740xd2.pib-system-board-cables",
+          "claim.r740xd2.pib-deenergize",
+          "claim.r740xd2.pib-remove-psus",
+          "claim.r740xd2.pib-disconnect-cables"
+        ],
+        "to_stage_id": "service"
+      },
+      {
+        "from_stage_id": "service",
+        "relation_id": "lifecycle.r740xd2.05",
+        "relation_type": "HANDOFF_TO",
+        "source_claim_ids": [
+          "claim.r740xd2.pib-deenergize",
+          "claim.r740xd2.pib-remove-psus",
+          "claim.r740xd2.pib-disconnect-cables",
+          "claim.r740xd2.pib-system-board-cables"
+        ],
+        "to_stage_id": "verify"
+      }
+    ]
+  },
+  "model_ref": {
+    "profile_content_digest": "83e72e6f1996f670b786c640a5ff14db929da43fdc09cffad9adac8150369ae9",
+    "profile_id": "profile.dell.poweredge-r740xd2.power-interposer.v1",
+    "profile_revision": 1
+  },
+  "projection_id": "projection.binding.fingerprint.power.failed_distribution_board.system-model.v1.v1",
+  "rationale_graphs": [
+    {
+      "action_definition_id": "repair.power.replace_distribution_board",
+      "action_kind": "REPAIR",
+      "attachment_id": "attachment.dell.poweredge-r740xd2.power-interposer.v1.repair.power.replace_distribution_board",
+      "graph_edges": [
+        {
+          "from_graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.repair.power.replace_distribution_board",
+          "relation": "intervenes on",
+          "to_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.repair.power.replace_distribution_board.service"
+        },
+        {
+          "from_graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.repair.power.replace_distribution_board",
+          "relation": "intervenes on",
+          "to_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.repair.power.replace_distribution_board.power_interposer"
+        },
+        {
+          "from_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.repair.power.replace_distribution_board.service",
+          "relation": "participates in",
+          "to_graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.repair.power.replace_distribution_board.path.r740xd2.pib-service"
+        },
+        {
+          "from_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.repair.power.replace_distribution_board.power_interposer",
+          "relation": "participates in",
+          "to_graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.repair.power.replace_distribution_board.path.r740xd2.pib-service"
+        }
+      ],
+      "graph_nodes": [
+        {
+          "graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.repair.power.replace_distribution_board",
+          "kind": "ACTION",
+          "label": "Replace Power Distribution Board",
+          "semantic_ref": "repair.power.replace_distribution_board"
+        },
+        {
+          "graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.repair.power.replace_distribution_board.service",
+          "kind": "TOPOLOGY_NODE",
+          "label": "De-energized service",
+          "semantic_ref": "service"
+        },
+        {
+          "graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.repair.power.replace_distribution_board.power_interposer",
+          "kind": "TOPOLOGY_NODE",
+          "label": "Power Interposer Board",
+          "semantic_ref": "power_interposer"
+        },
+        {
+          "graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.repair.power.replace_distribution_board.path.r740xd2.pib-service",
+          "kind": "PATH",
+          "label": "path.r740xd2.pib-service",
+          "semantic_ref": "path.r740xd2.pib-service"
+        }
+      ],
+      "legality_label": "Legal now is evaluated separately by the authoritative Match engine.",
+      "relevance_label": "Relevant to this system profile",
+      "relevant_stage_ids": [
+        "standby",
+        "host_power",
+        "service",
+        "verify"
+      ],
+      "sentence": "Replace Power Distribution Board de-energizes and replaces the exact PIB service role used for the broader game Candidate on De-energized service -> Power Interposer Board.",
+      "source_claim_ids": [
+        "claim.r740xd2.pib-deenergize",
+        "claim.r740xd2.pib-remove-psus",
+        "claim.r740xd2.pib-service-unit",
+        "claim.r740xd2.pib-system-board-cables"
+      ],
+      "target_node_ids": [
+        "service",
+        "power_interposer"
+      ],
+      "target_path_ids": [
+        "path.r740xd2.pib-service"
+      ]
+    },
+    {
+      "action_definition_id": "test.general.minimum_configuration",
+      "action_kind": "TEST",
+      "attachment_id": "attachment.dell.poweredge-r740xd2.power-interposer.v1.test.general.minimum_configuration",
+      "graph_edges": [
+        {
+          "from_graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.general.minimum_configuration",
+          "relation": "observes",
+          "to_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.general.minimum_configuration.board"
+        }
+      ],
+      "graph_nodes": [
+        {
+          "graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.general.minimum_configuration",
+          "kind": "ACTION",
+          "label": "Minimum Configuration Test",
+          "semantic_ref": "test.general.minimum_configuration"
+        },
+        {
+          "graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.general.minimum_configuration.board",
+          "kind": "TOPOLOGY_NODE",
+          "label": "System-board load",
+          "semantic_ref": "board"
+        }
+      ],
+      "legality_label": "Legal now is evaluated separately by the authoritative Match engine.",
+      "relevance_label": "Relevant to this system profile",
+      "relevant_stage_ids": [
+        "standby",
+        "host_power",
+        "verify"
+      ],
+      "sentence": "Minimum Configuration Test bounds host dependencies without asserting which removed option is causal on System-board load.",
+      "source_claim_ids": [
+        "claim.r740xd2.pib-system-board-cables"
+      ],
+      "target_node_ids": [
+        "board"
+      ],
+      "target_path_ids": []
+    },
+    {
+      "action_definition_id": "test.general.visual_inspection",
+      "action_kind": "TEST",
+      "attachment_id": "attachment.dell.poweredge-r740xd2.power-interposer.v1.test.general.visual_inspection",
+      "graph_edges": [
+        {
+          "from_graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.general.visual_inspection",
+          "relation": "observes",
+          "to_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.general.visual_inspection.board"
+        },
+        {
+          "from_graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.general.visual_inspection",
+          "relation": "observes",
+          "to_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.general.visual_inspection.psu"
+        },
+        {
+          "from_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.general.visual_inspection.board",
+          "relation": "participates in",
+          "to_graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.general.visual_inspection.path.r740xd2.power-distribution"
+        },
+        {
+          "from_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.general.visual_inspection.psu",
+          "relation": "participates in",
+          "to_graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.general.visual_inspection.path.r740xd2.power-distribution"
+        }
+      ],
+      "graph_nodes": [
+        {
+          "graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.general.visual_inspection",
+          "kind": "ACTION",
+          "label": "Visual Inspection",
+          "semantic_ref": "test.general.visual_inspection"
+        },
+        {
+          "graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.general.visual_inspection.board",
+          "kind": "TOPOLOGY_NODE",
+          "label": "System-board load",
+          "semantic_ref": "board"
+        },
+        {
+          "graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.general.visual_inspection.psu",
+          "kind": "TOPOLOGY_NODE",
+          "label": "PSU A + PSU B",
+          "semantic_ref": "psu"
+        },
+        {
+          "graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.general.visual_inspection.path.r740xd2.power-distribution",
+          "kind": "PATH",
+          "label": "path.r740xd2.power-distribution",
+          "semantic_ref": "path.r740xd2.power-distribution"
+        }
+      ],
+      "legality_label": "Legal now is evaluated separately by the authoritative Match engine.",
+      "relevance_label": "Relevant to this system profile",
+      "relevant_stage_ids": [
+        "standby",
+        "host_power",
+        "verify",
+        "input",
+        "status",
+        "service"
+      ],
+      "sentence": "Visual Inspection observes accessible service boundaries without turning proximity into diagnosis on System-board load -> PSU A + PSU B.",
+      "source_claim_ids": [
+        "claim.r740xd2.pib-system-board-cables",
+        "claim.r740xd2.one-plus-one-redundancy"
+      ],
+      "target_node_ids": [
+        "board",
+        "psu"
+      ],
+      "target_path_ids": [
+        "path.r740xd2.power-distribution"
+      ]
+    },
+    {
+      "action_definition_id": "test.power.distribution_path_isolation",
+      "action_kind": "TEST",
+      "attachment_id": "attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.distribution_path_isolation",
+      "graph_edges": [
+        {
+          "from_graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.distribution_path_isolation",
+          "relation": "observes",
+          "to_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.distribution_path_isolation.ac"
+        },
+        {
+          "from_graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.distribution_path_isolation",
+          "relation": "observes",
+          "to_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.distribution_path_isolation.psu"
+        },
+        {
+          "from_graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.distribution_path_isolation",
+          "relation": "observes",
+          "to_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.distribution_path_isolation.power_interposer"
+        },
+        {
+          "from_graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.distribution_path_isolation",
+          "relation": "observes",
+          "to_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.distribution_path_isolation.board"
+        },
+        {
+          "from_graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.distribution_path_isolation",
+          "relation": "observes",
+          "to_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.distribution_path_isolation.bmc"
+        },
+        {
+          "from_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.distribution_path_isolation.ac",
+          "relation": "participates in",
+          "to_graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.distribution_path_isolation.path.r740xd2.power-distribution"
+        },
+        {
+          "from_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.distribution_path_isolation.psu",
+          "relation": "participates in",
+          "to_graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.distribution_path_isolation.path.r740xd2.power-distribution"
+        },
+        {
+          "from_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.distribution_path_isolation.power_interposer",
+          "relation": "participates in",
+          "to_graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.distribution_path_isolation.path.r740xd2.power-distribution"
+        },
+        {
+          "from_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.distribution_path_isolation.board",
+          "relation": "participates in",
+          "to_graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.distribution_path_isolation.path.r740xd2.power-distribution"
+        },
+        {
+          "from_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.distribution_path_isolation.psu",
+          "relation": "participates in",
+          "to_graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.distribution_path_isolation.path.r740xd2.power-status"
+        },
+        {
+          "from_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.distribution_path_isolation.bmc",
+          "relation": "participates in",
+          "to_graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.distribution_path_isolation.path.r740xd2.power-status"
+        }
+      ],
+      "graph_nodes": [
+        {
+          "graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.distribution_path_isolation",
+          "kind": "ACTION",
+          "label": "Power Distribution Path Isolation",
+          "semantic_ref": "test.power.distribution_path_isolation"
+        },
+        {
+          "graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.distribution_path_isolation.ac",
+          "kind": "TOPOLOGY_NODE",
+          "label": "Input cables",
+          "semantic_ref": "ac"
+        },
+        {
+          "graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.distribution_path_isolation.psu",
+          "kind": "TOPOLOGY_NODE",
+          "label": "PSU A + PSU B",
+          "semantic_ref": "psu"
+        },
+        {
+          "graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.distribution_path_isolation.power_interposer",
+          "kind": "TOPOLOGY_NODE",
+          "label": "Power Interposer Board",
+          "semantic_ref": "power_interposer"
+        },
+        {
+          "graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.distribution_path_isolation.board",
+          "kind": "TOPOLOGY_NODE",
+          "label": "System-board load",
+          "semantic_ref": "board"
+        },
+        {
+          "graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.distribution_path_isolation.bmc",
+          "kind": "TOPOLOGY_NODE",
+          "label": "Management status",
+          "semantic_ref": "bmc"
+        },
+        {
+          "graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.distribution_path_isolation.path.r740xd2.power-distribution",
+          "kind": "PATH",
+          "label": "path.r740xd2.power-distribution",
+          "semantic_ref": "path.r740xd2.power-distribution"
+        },
+        {
+          "graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.distribution_path_isolation.path.r740xd2.power-status",
+          "kind": "PATH",
+          "label": "path.r740xd2.power-status",
+          "semantic_ref": "path.r740xd2.power-status"
+        }
+      ],
+      "legality_label": "Legal now is evaluated separately by the authoritative Match engine.",
+      "relevance_label": "Relevant to this system profile",
+      "relevant_stage_ids": [
+        "input",
+        "service",
+        "verify",
+        "standby",
+        "status",
+        "host_power"
+      ],
+      "sentence": "Power Distribution Path Isolation observes or varies successive segments of the documented power path on Input cables -> PSU A + PSU B -> Power Interposer Board -> System-board load -> Management status.",
+      "source_claim_ids": [
+        "claim.r740xd2.dual-psu",
+        "claim.r740xd2.one-plus-one-redundancy",
+        "claim.r740xd2.pib-service-unit",
+        "claim.r740xd2.pib-system-board-cables",
+        "claim.r740xd2.psu-mismatch-reporting"
+      ],
+      "target_node_ids": [
+        "ac",
+        "psu",
+        "power_interposer",
+        "board",
+        "bmc"
+      ],
+      "target_path_ids": [
+        "path.r740xd2.power-distribution",
+        "path.r740xd2.power-status"
+      ]
+    },
+    {
+      "action_definition_id": "test.power.known_good_psu",
+      "action_kind": "TEST",
+      "attachment_id": "attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.known_good_psu",
+      "graph_edges": [
+        {
+          "from_graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.known_good_psu",
+          "relation": "observes",
+          "to_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.known_good_psu.ac"
+        },
+        {
+          "from_graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.known_good_psu",
+          "relation": "observes",
+          "to_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.known_good_psu.psu"
+        },
+        {
+          "from_graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.known_good_psu",
+          "relation": "observes",
+          "to_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.known_good_psu.power_interposer"
+        },
+        {
+          "from_graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.known_good_psu",
+          "relation": "observes",
+          "to_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.known_good_psu.board"
+        },
+        {
+          "from_graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.known_good_psu",
+          "relation": "observes",
+          "to_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.known_good_psu.bmc"
+        },
+        {
+          "from_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.known_good_psu.ac",
+          "relation": "participates in",
+          "to_graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.known_good_psu.path.r740xd2.power-distribution"
+        },
+        {
+          "from_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.known_good_psu.psu",
+          "relation": "participates in",
+          "to_graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.known_good_psu.path.r740xd2.power-distribution"
+        },
+        {
+          "from_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.known_good_psu.power_interposer",
+          "relation": "participates in",
+          "to_graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.known_good_psu.path.r740xd2.power-distribution"
+        },
+        {
+          "from_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.known_good_psu.board",
+          "relation": "participates in",
+          "to_graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.known_good_psu.path.r740xd2.power-distribution"
+        },
+        {
+          "from_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.known_good_psu.psu",
+          "relation": "participates in",
+          "to_graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.known_good_psu.path.r740xd2.power-status"
+        },
+        {
+          "from_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.known_good_psu.bmc",
+          "relation": "participates in",
+          "to_graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.known_good_psu.path.r740xd2.power-status"
+        }
+      ],
+      "graph_nodes": [
+        {
+          "graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.known_good_psu",
+          "kind": "ACTION",
+          "label": "Known-Good PSU Test",
+          "semantic_ref": "test.power.known_good_psu"
+        },
+        {
+          "graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.known_good_psu.ac",
+          "kind": "TOPOLOGY_NODE",
+          "label": "Input cables",
+          "semantic_ref": "ac"
+        },
+        {
+          "graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.known_good_psu.psu",
+          "kind": "TOPOLOGY_NODE",
+          "label": "PSU A + PSU B",
+          "semantic_ref": "psu"
+        },
+        {
+          "graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.known_good_psu.power_interposer",
+          "kind": "TOPOLOGY_NODE",
+          "label": "Power Interposer Board",
+          "semantic_ref": "power_interposer"
+        },
+        {
+          "graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.known_good_psu.board",
+          "kind": "TOPOLOGY_NODE",
+          "label": "System-board load",
+          "semantic_ref": "board"
+        },
+        {
+          "graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.known_good_psu.bmc",
+          "kind": "TOPOLOGY_NODE",
+          "label": "Management status",
+          "semantic_ref": "bmc"
+        },
+        {
+          "graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.known_good_psu.path.r740xd2.power-distribution",
+          "kind": "PATH",
+          "label": "path.r740xd2.power-distribution",
+          "semantic_ref": "path.r740xd2.power-distribution"
+        },
+        {
+          "graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.known_good_psu.path.r740xd2.power-status",
+          "kind": "PATH",
+          "label": "path.r740xd2.power-status",
+          "semantic_ref": "path.r740xd2.power-status"
+        }
+      ],
+      "legality_label": "Legal now is evaluated separately by the authoritative Match engine.",
+      "relevance_label": "Relevant to this system profile",
+      "relevant_stage_ids": [
+        "input",
+        "service",
+        "verify",
+        "standby",
+        "status",
+        "host_power"
+      ],
+      "sentence": "Known-Good PSU Test observes or varies successive segments of the documented power path on Input cables -> PSU A + PSU B -> Power Interposer Board -> System-board load -> Management status.",
+      "source_claim_ids": [
+        "claim.r740xd2.dual-psu",
+        "claim.r740xd2.one-plus-one-redundancy",
+        "claim.r740xd2.pib-service-unit",
+        "claim.r740xd2.pib-system-board-cables",
+        "claim.r740xd2.psu-mismatch-reporting"
+      ],
+      "target_node_ids": [
+        "ac",
+        "psu",
+        "power_interposer",
+        "board",
+        "bmc"
+      ],
+      "target_path_ids": [
+        "path.r740xd2.power-distribution",
+        "path.r740xd2.power-status"
+      ]
+    },
+    {
+      "action_definition_id": "test.power.output_voltage_measurement",
+      "action_kind": "TEST",
+      "attachment_id": "attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.output_voltage_measurement",
+      "graph_edges": [
+        {
+          "from_graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.output_voltage_measurement",
+          "relation": "observes",
+          "to_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.output_voltage_measurement.ac"
+        },
+        {
+          "from_graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.output_voltage_measurement",
+          "relation": "observes",
+          "to_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.output_voltage_measurement.psu"
+        },
+        {
+          "from_graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.output_voltage_measurement",
+          "relation": "observes",
+          "to_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.output_voltage_measurement.power_interposer"
+        },
+        {
+          "from_graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.output_voltage_measurement",
+          "relation": "observes",
+          "to_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.output_voltage_measurement.board"
+        },
+        {
+          "from_graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.output_voltage_measurement",
+          "relation": "observes",
+          "to_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.output_voltage_measurement.bmc"
+        },
+        {
+          "from_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.output_voltage_measurement.ac",
+          "relation": "participates in",
+          "to_graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.output_voltage_measurement.path.r740xd2.power-distribution"
+        },
+        {
+          "from_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.output_voltage_measurement.psu",
+          "relation": "participates in",
+          "to_graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.output_voltage_measurement.path.r740xd2.power-distribution"
+        },
+        {
+          "from_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.output_voltage_measurement.power_interposer",
+          "relation": "participates in",
+          "to_graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.output_voltage_measurement.path.r740xd2.power-distribution"
+        },
+        {
+          "from_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.output_voltage_measurement.board",
+          "relation": "participates in",
+          "to_graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.output_voltage_measurement.path.r740xd2.power-distribution"
+        },
+        {
+          "from_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.output_voltage_measurement.psu",
+          "relation": "participates in",
+          "to_graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.output_voltage_measurement.path.r740xd2.power-status"
+        },
+        {
+          "from_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.output_voltage_measurement.bmc",
+          "relation": "participates in",
+          "to_graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.output_voltage_measurement.path.r740xd2.power-status"
+        }
+      ],
+      "graph_nodes": [
+        {
+          "graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.output_voltage_measurement",
+          "kind": "ACTION",
+          "label": "Power Output Voltage Measurement",
+          "semantic_ref": "test.power.output_voltage_measurement"
+        },
+        {
+          "graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.output_voltage_measurement.ac",
+          "kind": "TOPOLOGY_NODE",
+          "label": "Input cables",
+          "semantic_ref": "ac"
+        },
+        {
+          "graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.output_voltage_measurement.psu",
+          "kind": "TOPOLOGY_NODE",
+          "label": "PSU A + PSU B",
+          "semantic_ref": "psu"
+        },
+        {
+          "graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.output_voltage_measurement.power_interposer",
+          "kind": "TOPOLOGY_NODE",
+          "label": "Power Interposer Board",
+          "semantic_ref": "power_interposer"
+        },
+        {
+          "graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.output_voltage_measurement.board",
+          "kind": "TOPOLOGY_NODE",
+          "label": "System-board load",
+          "semantic_ref": "board"
+        },
+        {
+          "graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.output_voltage_measurement.bmc",
+          "kind": "TOPOLOGY_NODE",
+          "label": "Management status",
+          "semantic_ref": "bmc"
+        },
+        {
+          "graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.output_voltage_measurement.path.r740xd2.power-distribution",
+          "kind": "PATH",
+          "label": "path.r740xd2.power-distribution",
+          "semantic_ref": "path.r740xd2.power-distribution"
+        },
+        {
+          "graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.output_voltage_measurement.path.r740xd2.power-status",
+          "kind": "PATH",
+          "label": "path.r740xd2.power-status",
+          "semantic_ref": "path.r740xd2.power-status"
+        }
+      ],
+      "legality_label": "Legal now is evaluated separately by the authoritative Match engine.",
+      "relevance_label": "Relevant to this system profile",
+      "relevant_stage_ids": [
+        "input",
+        "service",
+        "verify",
+        "standby",
+        "status",
+        "host_power"
+      ],
+      "sentence": "Power Output Voltage Measurement observes or varies successive segments of the documented power path on Input cables -> PSU A + PSU B -> Power Interposer Board -> System-board load -> Management status.",
+      "source_claim_ids": [
+        "claim.r740xd2.dual-psu",
+        "claim.r740xd2.one-plus-one-redundancy",
+        "claim.r740xd2.pib-service-unit",
+        "claim.r740xd2.pib-system-board-cables",
+        "claim.r740xd2.psu-mismatch-reporting"
+      ],
+      "target_node_ids": [
+        "ac",
+        "psu",
+        "power_interposer",
+        "board",
+        "bmc"
+      ],
+      "target_path_ids": [
+        "path.r740xd2.power-distribution",
+        "path.r740xd2.power-status"
+      ]
+    },
+    {
+      "action_definition_id": "test.power.psu_status",
+      "action_kind": "TEST",
+      "attachment_id": "attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.psu_status",
+      "graph_edges": [
+        {
+          "from_graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.psu_status",
+          "relation": "observes",
+          "to_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.psu_status.ac"
+        },
+        {
+          "from_graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.psu_status",
+          "relation": "observes",
+          "to_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.psu_status.psu"
+        },
+        {
+          "from_graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.psu_status",
+          "relation": "observes",
+          "to_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.psu_status.power_interposer"
+        },
+        {
+          "from_graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.psu_status",
+          "relation": "observes",
+          "to_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.psu_status.board"
+        },
+        {
+          "from_graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.psu_status",
+          "relation": "observes",
+          "to_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.psu_status.bmc"
+        },
+        {
+          "from_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.psu_status.ac",
+          "relation": "participates in",
+          "to_graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.psu_status.path.r740xd2.power-distribution"
+        },
+        {
+          "from_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.psu_status.psu",
+          "relation": "participates in",
+          "to_graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.psu_status.path.r740xd2.power-distribution"
+        },
+        {
+          "from_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.psu_status.power_interposer",
+          "relation": "participates in",
+          "to_graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.psu_status.path.r740xd2.power-distribution"
+        },
+        {
+          "from_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.psu_status.board",
+          "relation": "participates in",
+          "to_graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.psu_status.path.r740xd2.power-distribution"
+        },
+        {
+          "from_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.psu_status.psu",
+          "relation": "participates in",
+          "to_graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.psu_status.path.r740xd2.power-status"
+        },
+        {
+          "from_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.psu_status.bmc",
+          "relation": "participates in",
+          "to_graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.psu_status.path.r740xd2.power-status"
+        }
+      ],
+      "graph_nodes": [
+        {
+          "graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.psu_status",
+          "kind": "ACTION",
+          "label": "PSU Status Inspection",
+          "semantic_ref": "test.power.psu_status"
+        },
+        {
+          "graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.psu_status.ac",
+          "kind": "TOPOLOGY_NODE",
+          "label": "Input cables",
+          "semantic_ref": "ac"
+        },
+        {
+          "graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.psu_status.psu",
+          "kind": "TOPOLOGY_NODE",
+          "label": "PSU A + PSU B",
+          "semantic_ref": "psu"
+        },
+        {
+          "graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.psu_status.power_interposer",
+          "kind": "TOPOLOGY_NODE",
+          "label": "Power Interposer Board",
+          "semantic_ref": "power_interposer"
+        },
+        {
+          "graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.psu_status.board",
+          "kind": "TOPOLOGY_NODE",
+          "label": "System-board load",
+          "semantic_ref": "board"
+        },
+        {
+          "graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.psu_status.bmc",
+          "kind": "TOPOLOGY_NODE",
+          "label": "Management status",
+          "semantic_ref": "bmc"
+        },
+        {
+          "graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.psu_status.path.r740xd2.power-distribution",
+          "kind": "PATH",
+          "label": "path.r740xd2.power-distribution",
+          "semantic_ref": "path.r740xd2.power-distribution"
+        },
+        {
+          "graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.psu_status.path.r740xd2.power-status",
+          "kind": "PATH",
+          "label": "path.r740xd2.power-status",
+          "semantic_ref": "path.r740xd2.power-status"
+        }
+      ],
+      "legality_label": "Legal now is evaluated separately by the authoritative Match engine.",
+      "relevance_label": "Relevant to this system profile",
+      "relevant_stage_ids": [
+        "input",
+        "service",
+        "verify",
+        "standby",
+        "status",
+        "host_power"
+      ],
+      "sentence": "PSU Status Inspection observes or varies successive segments of the documented power path on Input cables -> PSU A + PSU B -> Power Interposer Board -> System-board load -> Management status.",
+      "source_claim_ids": [
+        "claim.r740xd2.dual-psu",
+        "claim.r740xd2.one-plus-one-redundancy",
+        "claim.r740xd2.pib-service-unit",
+        "claim.r740xd2.pib-system-board-cables",
+        "claim.r740xd2.psu-mismatch-reporting"
+      ],
+      "target_node_ids": [
+        "ac",
+        "psu",
+        "power_interposer",
+        "board",
+        "bmc"
+      ],
+      "target_path_ids": [
+        "path.r740xd2.power-distribution",
+        "path.r740xd2.power-status"
+      ]
+    },
+    {
+      "action_definition_id": "test.power.residual_power_drain",
+      "action_kind": "TEST",
+      "attachment_id": "attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.residual_power_drain",
+      "graph_edges": [
+        {
+          "from_graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.residual_power_drain",
+          "relation": "observes",
+          "to_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.residual_power_drain.ac"
+        },
+        {
+          "from_graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.residual_power_drain",
+          "relation": "observes",
+          "to_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.residual_power_drain.psu"
+        },
+        {
+          "from_graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.residual_power_drain",
+          "relation": "observes",
+          "to_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.residual_power_drain.power_interposer"
+        },
+        {
+          "from_graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.residual_power_drain",
+          "relation": "observes",
+          "to_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.residual_power_drain.board"
+        },
+        {
+          "from_graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.residual_power_drain",
+          "relation": "observes",
+          "to_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.residual_power_drain.bmc"
+        },
+        {
+          "from_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.residual_power_drain.ac",
+          "relation": "participates in",
+          "to_graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.residual_power_drain.path.r740xd2.power-distribution"
+        },
+        {
+          "from_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.residual_power_drain.psu",
+          "relation": "participates in",
+          "to_graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.residual_power_drain.path.r740xd2.power-distribution"
+        },
+        {
+          "from_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.residual_power_drain.power_interposer",
+          "relation": "participates in",
+          "to_graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.residual_power_drain.path.r740xd2.power-distribution"
+        },
+        {
+          "from_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.residual_power_drain.board",
+          "relation": "participates in",
+          "to_graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.residual_power_drain.path.r740xd2.power-distribution"
+        },
+        {
+          "from_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.residual_power_drain.psu",
+          "relation": "participates in",
+          "to_graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.residual_power_drain.path.r740xd2.power-status"
+        },
+        {
+          "from_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.residual_power_drain.bmc",
+          "relation": "participates in",
+          "to_graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.residual_power_drain.path.r740xd2.power-status"
+        }
+      ],
+      "graph_nodes": [
+        {
+          "graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.residual_power_drain",
+          "kind": "ACTION",
+          "label": "Residual-Power Drain Test",
+          "semantic_ref": "test.power.residual_power_drain"
+        },
+        {
+          "graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.residual_power_drain.ac",
+          "kind": "TOPOLOGY_NODE",
+          "label": "Input cables",
+          "semantic_ref": "ac"
+        },
+        {
+          "graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.residual_power_drain.psu",
+          "kind": "TOPOLOGY_NODE",
+          "label": "PSU A + PSU B",
+          "semantic_ref": "psu"
+        },
+        {
+          "graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.residual_power_drain.power_interposer",
+          "kind": "TOPOLOGY_NODE",
+          "label": "Power Interposer Board",
+          "semantic_ref": "power_interposer"
+        },
+        {
+          "graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.residual_power_drain.board",
+          "kind": "TOPOLOGY_NODE",
+          "label": "System-board load",
+          "semantic_ref": "board"
+        },
+        {
+          "graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.residual_power_drain.bmc",
+          "kind": "TOPOLOGY_NODE",
+          "label": "Management status",
+          "semantic_ref": "bmc"
+        },
+        {
+          "graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.residual_power_drain.path.r740xd2.power-distribution",
+          "kind": "PATH",
+          "label": "path.r740xd2.power-distribution",
+          "semantic_ref": "path.r740xd2.power-distribution"
+        },
+        {
+          "graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.residual_power_drain.path.r740xd2.power-status",
+          "kind": "PATH",
+          "label": "path.r740xd2.power-status",
+          "semantic_ref": "path.r740xd2.power-status"
+        }
+      ],
+      "legality_label": "Legal now is evaluated separately by the authoritative Match engine.",
+      "relevance_label": "Relevant to this system profile",
+      "relevant_stage_ids": [
+        "input",
+        "service",
+        "verify",
+        "standby",
+        "status",
+        "host_power"
+      ],
+      "sentence": "Residual-Power Drain Test observes or varies successive segments of the documented power path on Input cables -> PSU A + PSU B -> Power Interposer Board -> System-board load -> Management status.",
+      "source_claim_ids": [
+        "claim.r740xd2.dual-psu",
+        "claim.r740xd2.one-plus-one-redundancy",
+        "claim.r740xd2.pib-service-unit",
+        "claim.r740xd2.pib-system-board-cables",
+        "claim.r740xd2.psu-mismatch-reporting"
+      ],
+      "target_node_ids": [
+        "ac",
+        "psu",
+        "power_interposer",
+        "board",
+        "bmc"
+      ],
+      "target_path_ids": [
+        "path.r740xd2.power-distribution",
+        "path.r740xd2.power-status"
+      ]
+    },
+    {
+      "action_definition_id": "test.system.bmc_logs",
+      "action_kind": "TEST",
+      "attachment_id": "attachment.dell.poweredge-r740xd2.power-interposer.v1.test.system.bmc_logs",
+      "graph_edges": [
+        {
+          "from_graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.system.bmc_logs",
+          "relation": "observes",
+          "to_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.system.bmc_logs.bmc"
+        },
+        {
+          "from_graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.system.bmc_logs",
+          "relation": "observes",
+          "to_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.system.bmc_logs.board"
+        }
+      ],
+      "graph_nodes": [
+        {
+          "graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.system.bmc_logs",
+          "kind": "ACTION",
+          "label": "Management Event Log Review",
+          "semantic_ref": "test.system.bmc_logs"
+        },
+        {
+          "graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.system.bmc_logs.bmc",
+          "kind": "TOPOLOGY_NODE",
+          "label": "Management status",
+          "semantic_ref": "bmc"
+        },
+        {
+          "graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.test.system.bmc_logs.board",
+          "kind": "TOPOLOGY_NODE",
+          "label": "System-board load",
+          "semantic_ref": "board"
+        }
+      ],
+      "legality_label": "Legal now is evaluated separately by the authoritative Match engine.",
+      "relevance_label": "Relevant to this system profile",
+      "relevant_stage_ids": [
+        "standby",
+        "status",
+        "host_power",
+        "verify"
+      ],
+      "sentence": "Management Event Log Review queries indirect lifecycle/inventory events; the Ticket authors their Evidence meaning on Management status -> System-board load.",
+      "source_claim_ids": [
+        "claim.r740xd2.psu-mismatch-reporting",
+        "claim.r740xd2.pib-system-board-cables"
+      ],
+      "target_node_ids": [
+        "bmc",
+        "board"
+      ],
+      "target_path_ids": []
+    },
+    {
+      "action_definition_id": "verify.power.distribution_path",
+      "action_kind": "VERIFICATION",
+      "attachment_id": "attachment.dell.poweredge-r740xd2.power-interposer.v1.verify.power.distribution_path",
+      "graph_edges": [
+        {
+          "from_graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.verify.power.distribution_path",
+          "relation": "checks",
+          "to_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.verify.power.distribution_path.ac"
+        },
+        {
+          "from_graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.verify.power.distribution_path",
+          "relation": "checks",
+          "to_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.verify.power.distribution_path.psu"
+        },
+        {
+          "from_graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.verify.power.distribution_path",
+          "relation": "checks",
+          "to_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.verify.power.distribution_path.power_interposer"
+        },
+        {
+          "from_graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.verify.power.distribution_path",
+          "relation": "checks",
+          "to_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.verify.power.distribution_path.board"
+        },
+        {
+          "from_graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.verify.power.distribution_path",
+          "relation": "checks",
+          "to_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.verify.power.distribution_path.host"
+        },
+        {
+          "from_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.verify.power.distribution_path.ac",
+          "relation": "participates in",
+          "to_graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.verify.power.distribution_path.path.r740xd2.power-distribution"
+        },
+        {
+          "from_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.verify.power.distribution_path.psu",
+          "relation": "participates in",
+          "to_graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.verify.power.distribution_path.path.r740xd2.power-distribution"
+        },
+        {
+          "from_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.verify.power.distribution_path.power_interposer",
+          "relation": "participates in",
+          "to_graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.verify.power.distribution_path.path.r740xd2.power-distribution"
+        },
+        {
+          "from_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.verify.power.distribution_path.board",
+          "relation": "participates in",
+          "to_graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.verify.power.distribution_path.path.r740xd2.power-distribution"
+        },
+        {
+          "from_graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.verify.power.distribution_path.host",
+          "relation": "participates in",
+          "to_graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.verify.power.distribution_path.path.r740xd2.power-distribution"
+        }
+      ],
+      "graph_nodes": [
+        {
+          "graph_node_id": "graph.action.attachment.dell.poweredge-r740xd2.power-interposer.v1.verify.power.distribution_path",
+          "kind": "ACTION",
+          "label": "Power Distribution Path Verification",
+          "semantic_ref": "verify.power.distribution_path"
+        },
+        {
+          "graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.verify.power.distribution_path.ac",
+          "kind": "TOPOLOGY_NODE",
+          "label": "Input cables",
+          "semantic_ref": "ac"
+        },
+        {
+          "graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.verify.power.distribution_path.psu",
+          "kind": "TOPOLOGY_NODE",
+          "label": "PSU A + PSU B",
+          "semantic_ref": "psu"
+        },
+        {
+          "graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.verify.power.distribution_path.power_interposer",
+          "kind": "TOPOLOGY_NODE",
+          "label": "Power Interposer Board",
+          "semantic_ref": "power_interposer"
+        },
+        {
+          "graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.verify.power.distribution_path.board",
+          "kind": "TOPOLOGY_NODE",
+          "label": "System-board load",
+          "semantic_ref": "board"
+        },
+        {
+          "graph_node_id": "graph.target.attachment.dell.poweredge-r740xd2.power-interposer.v1.verify.power.distribution_path.host",
+          "kind": "TOPOLOGY_NODE",
+          "label": "Host + bounded runtime",
+          "semantic_ref": "host"
+        },
+        {
+          "graph_node_id": "graph.path.attachment.dell.poweredge-r740xd2.power-interposer.v1.verify.power.distribution_path.path.r740xd2.power-distribution",
+          "kind": "PATH",
+          "label": "path.r740xd2.power-distribution",
+          "semantic_ref": "path.r740xd2.power-distribution"
+        }
+      ],
+      "legality_label": "Legal now is evaluated separately by the authoritative Match engine.",
+      "relevance_label": "Relevant to this system profile",
+      "relevant_stage_ids": [
+        "input",
+        "service",
+        "verify",
+        "standby",
+        "status",
+        "host_power"
+      ],
+      "sentence": "Power Distribution Path Verification checks the rebuilt input-to-board path under a downstream load on Input cables -> PSU A + PSU B -> Power Interposer Board -> System-board load -> Host + bounded runtime.",
+      "source_claim_ids": [
+        "claim.r740xd2.dual-psu",
+        "claim.r740xd2.one-plus-one-redundancy",
+        "claim.r740xd2.pib-service-unit",
+        "claim.r740xd2.pib-system-board-cables"
+      ],
+      "target_node_ids": [
+        "ac",
+        "psu",
+        "power_interposer",
+        "board",
+        "host"
+      ],
+      "target_path_ids": [
+        "path.r740xd2.power-distribution"
+      ]
+    }
+  ],
+  "schema_version": "system-model-public-projection-v1",
+  "scope": {
+    "abstraction_statements": [
+      {
+        "abstraction_id": "abstraction.dell.poweredge-r740xd2.power-interposer.v1.01",
+        "label": "The PIB is modeled as a shared serviceable path, not as a schematic of internal rails or protection circuitry.",
+        "represented_node_ids": [
+          "ac",
+          "psu",
+          "power_interposer",
+          "board",
+          "bmc",
+          "host",
+          "service"
+        ],
+        "source_claim_ids": [
+          "claim.r740xd2.dual-psu"
+        ]
+      },
+      {
+        "abstraction_id": "abstraction.dell.poweredge-r740xd2.power-interposer.v1.02",
+        "label": "Non-power subsystems are a grouped load because the exact Ticket needs only a bounded downstream consumer.",
+        "represented_node_ids": [
+          "psu",
+          "power_interposer",
+          "board"
+        ],
+        "source_claim_ids": [
+          "claim.r740xd2.one-plus-one-redundancy"
+        ]
+      },
+      {
+        "abstraction_id": "abstraction.dell.poweredge-r740xd2.power-interposer.v1.03",
+        "label": "The management-status edge records a documented observation capability, not a causal diagnosis.",
+        "represented_node_ids": [
+          "power_interposer",
+          "board",
+          "bmc"
+        ],
+        "source_claim_ids": [
+          "claim.r740xd2.pib-service-unit"
+        ]
+      },
+      {
+        "abstraction_id": "abstraction.dell.poweredge-r740xd2.power-interposer.v1.04",
+        "label": "The public Candidate term distribution board is broader than Dell's exact Power Interposer Board role.",
+        "represented_node_ids": [
+          "board",
+          "bmc",
+          "host"
+        ],
+        "source_claim_ids": [
+          "claim.r740xd2.pib-system-board-cables"
+        ]
+      }
+    ],
+    "display_name": "Dell Technologies PowerEdge R740xd2",
+    "exactness_class": "MIXED",
+    "generation_or_era": "14th generation",
+    "model_scope": "dual-PSU Power Interposer Board service path",
+    "option_statements": [
+      {
+        "constraint_id": "constraint.dell.poweredge-r740xd2.power-interposer.v1.01",
+        "source_claim_ids": [
+          "claim.r740xd2.dual-psu",
+          "claim.r740xd2.one-plus-one-redundancy"
+        ],
+        "statement": "This pilot fixes two supported supplies in a 1+1 redundant arrangement."
+      },
+      {
+        "constraint_id": "constraint.dell.poweredge-r740xd2.power-interposer.v1.02",
+        "source_claim_ids": [
+          "claim.r740xd2.pib-service-unit"
+        ],
+        "statement": "The exact Dell role is a Power Interposer Board (PIB); the existing game candidate says distribution board and is treated as a broader functional class, not a part-number synonym."
+      },
+      {
+        "constraint_id": "constraint.dell.poweredge-r740xd2.power-interposer.v1.03",
+        "source_claim_ids": [
+          "claim.r740xd2.pib-service-unit",
+          "claim.r740xd.hybrid-backplane"
+        ],
+        "statement": "The model does not combine the R740xd2 PIB with the R740xd hybrid backplane profile; cross-family composition is unproved."
+      }
+    ],
+    "plane_statements": [
+      {
+        "plane": "power",
+        "source_claim_ids": [
+          "claim.r740xd2.dual-psu"
+        ],
+        "status": "PRESENT",
+        "summary": "Two PSU service units converge through the replaceable PIB before the system-board load."
+      },
+      {
+        "plane": "management",
+        "source_claim_ids": [
+          "claim.r740xd2.dual-psu"
+        ],
+        "status": "PRESENT",
+        "summary": "A grouped management role can report PSU mismatch/status; internal sensor wiring is outside scope."
+      },
+      {
+        "plane": "host_firmware_post",
+        "source_claim_ids": [
+          "claim.r740xd2.dual-psu"
+        ],
+        "status": "PRESENT",
+        "summary": "Host firmware/POST is a grouped load and observation boundary, not a detailed boot model in this profile."
+      },
+      {
+        "plane": "memory",
+        "source_claim_ids": [
+          "claim.r740xd2.dual-psu"
+        ],
+        "status": "OUT_OF_SCOPE_WITH_REASON",
+        "summary": "Present as part of the host load but individual DIMMs are irrelevant to the power-path Ticket."
+      },
+      {
+        "plane": "storage",
+        "source_claim_ids": [
+          "claim.r740xd2.dual-psu"
+        ],
+        "status": "OUT_OF_SCOPE_WITH_REASON",
+        "summary": "Present as a grouped downstream load; the Ticket does not require a storage option claim."
+      },
+      {
+        "plane": "network",
+        "source_claim_ids": [
+          "claim.r740xd2.dual-psu"
+        ],
+        "status": "OUT_OF_SCOPE_WITH_REASON",
+        "summary": "Present as a grouped downstream load; exact adapter topology is not used."
+      },
+      {
+        "plane": "os_handoff",
+        "source_claim_ids": [
+          "claim.r740xd2.dual-psu"
+        ],
+        "status": "PRESENT",
+        "summary": "Normal boot is bounded as one downstream state, without asserting an exact device path."
+      },
+      {
+        "plane": "runtime_service",
+        "source_claim_ids": [
+          "claim.r740xd2.dual-psu"
+        ],
+        "status": "PRESENT",
+        "summary": "Power status, voltage checks, de-energized service, replacement, and post-repair path verification are modeled."
+      }
+    ]
+  },
+  "semantic_index": {
+    "attachment_ids": [
+      "attachment.dell.poweredge-r740xd2.power-interposer.v1.repair.power.replace_distribution_board",
+      "attachment.dell.poweredge-r740xd2.power-interposer.v1.test.general.minimum_configuration",
+      "attachment.dell.poweredge-r740xd2.power-interposer.v1.test.general.visual_inspection",
+      "attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.distribution_path_isolation",
+      "attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.known_good_psu",
+      "attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.output_voltage_measurement",
+      "attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.psu_status",
+      "attachment.dell.poweredge-r740xd2.power-interposer.v1.test.power.residual_power_drain",
+      "attachment.dell.poweredge-r740xd2.power-interposer.v1.test.system.bmc_logs",
+      "attachment.dell.poweredge-r740xd2.power-interposer.v1.verify.power.distribution_path"
+    ],
+    "capability_ids": [
+      "capability.r740xd2.redundant-power",
+      "capability.r740xd2.pib-service",
+      "capability.r740xd2.power-path-observation"
+    ],
+    "edge_ids": [
+      "e.ac-psu",
+      "e.psu-pib",
+      "e.pib-board",
+      "e.board-host",
+      "e.bmc-psu",
+      "e.service-psu",
+      "e.service-pib"
+    ],
+    "node_ids": [
+      "ac",
+      "psu",
+      "power_interposer",
+      "board",
+      "bmc",
+      "host",
+      "service"
+    ],
+    "path_ids": [
+      "path.r740xd2.power-distribution",
+      "path.r740xd2.power-status",
+      "path.r740xd2.psu-service",
+      "path.r740xd2.pib-service"
+    ],
+    "role_ids": [
+      "role.input",
+      "role.psu_pair",
+      "role.pib",
+      "role.system_board",
+      "role.bmc",
+      "role.host_loads"
+    ],
+    "stage_ids": [
+      "input",
+      "standby",
+      "status",
+      "host_power",
+      "service",
+      "verify"
+    ]
+  },
+  "semantic_model_digest": "bfc858f775e32d5521f26ff862a0dacacd63e4aed8981b95cc93c149867f2fb8",
+  "serialization": {
+    "canonicalization_version": "canonical-json-v1",
+    "content_digest": "1bc2bc8c8576f547455049c7de5f9f67b96b7b134235a3f6f0efd25f7e92db2c",
+    "digest_algorithm": "sha256"
+  },
+  "source_claim_ids": [
+    "claim.r740xd2.dual-psu",
+    "claim.r740xd2.one-plus-one-redundancy",
+    "claim.r740xd2.pib-service-unit",
+    "claim.r740xd2.pib-system-board-cables",
+    "claim.r740xd2.pib-deenergize"
+  ],
+  "ticket_context": {
+    "active_candidate_fault_ids": [
+      "fault.board.system.failed",
+      "fault.power.distribution_board.failed",
+      "fault.power.input.cable_loose",
+      "fault.power.psu.failed",
+      "fault.power.psu.not_seated"
+    ],
+    "binding_id": "binding.fingerprint.power.failed_distribution_board.system-model.v1",
+    "fingerprint_id": "fingerprint.power.failed_distribution_board",
+    "initial_candidate_fault_ids": [
+      "fault.board.system.failed",
+      "fault.power.distribution_board.failed",
+      "fault.power.input.cable_loose",
+      "fault.power.psu.failed",
+      "fault.power.psu.not_seated"
+    ],
+    "public_symptom_ids": [
+      "symptom.power.voltage_out_of_range",
+      "symptom.power.no_power"
+    ],
+    "resolver_key": "resolver.fingerprint.power.failed_distribution_board.v1",
+    "ticket_id": "ticket.generated.3fd6eb04534f79b5b3f87f98",
+    "ticket_snapshot_digest": "d34f08d79c2cc2d47d16d23ec753f1e78758d0b358664d4e592ea23f25b63d73"
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/system_model_resolver_result.schema.json",
+  "title": "System Model Resolver Result",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "stableId": { "type": "string", "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$" },
+    "digest": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "trace": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "step": { "type": "string", "minLength": 1 },
+          "code": { "type": "string", "pattern": "^[A-Z0-9_]+$" },
+          "status": { "enum": ["PASS", "FAIL"] }
+        },
+        "required": ["step", "code", "status"]
+      }
+    },
+    "serialization": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "canonicalization_version": { "const": "canonical-json-v1" },
+        "digest_algorithm": { "const": "sha256" },
+        "content_digest": { "$ref": "#/$defs/digest" }
+      },
+      "required": ["canonicalization_version", "digest_algorithm", "content_digest"]
+    }
+  },
+  "properties": {
+    "result_version": { "const": "system-model-resolver-result-v1" },
+    "status": { "enum": ["RESOLVED", "UNAVAILABLE"] },
+    "reason_code": { "type": "string", "pattern": "^[A-Z0-9_]+$" },
+    "ticket_id": { "type": ["string", "null"] },
+    "selected_profile_id": { "type": ["string", "null"] },
+    "selected_profile_revision": { "type": "integer", "minimum": 1 },
+    "binding_id": { "$ref": "#/$defs/stableId" },
+    "public_binding_digest": { "$ref": "#/$defs/digest" },
+    "validation_trace": { "$ref": "#/$defs/trace" },
+    "public_projection": {
+      "oneOf": [
+        { "$ref": "system_model_public_projection.schema.json" },
+        { "type": "null" }
+      ]
+    },
+    "fallback": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "fallback_id": { "$ref": "#/$defs/stableId" },
+            "public_message": { "type": "string", "minLength": 1 }
+          },
+          "required": ["fallback_id", "public_message"]
+        },
+        { "type": "null" }
+      ]
+    },
+    "gameplay_effect": { "const": "NONE" },
+    "serialization": { "$ref": "#/$defs/serialization" }
+  },
+  "required": ["result_version", "status", "reason_code", "ticket_id", "selected_profile_id", "validation_trace", "public_projection", "fallback", "gameplay_effect", "serialization"],
+  "allOf": [
+    {
+      "if": { "properties": { "status": { "const": "RESOLVED" } }, "required": ["status"] },
+      "then": {
+        "properties": {
+          "reason_code": { "const": "RESOLVED" },
+          "ticket_id": { "$ref": "#/$defs/stableId" },
+          "selected_profile_id": { "$ref": "#/$defs/stableId" },
+          "public_projection": { "$ref": "system_model_public_projection.schema.json" },
+          "fallback": { "type": "null" }
+        },
+        "required": ["selected_profile_revision", "binding_id", "public_binding_digest"]
+      },
+      "else": {
+        "properties": {
+          "selected_profile_id": { "type": "null" },
+          "public_projection": { "type": "null" },
+          "fallback": { "type": "object" }
+        },
+        "not": {
+          "anyOf": [
+            { "required": ["selected_profile_revision"] },
+            { "required": ["binding_id"] },
+            { "required": ["public_binding_digest"] }
+          ]
+        }
+      }
+    }
+  ]
+}

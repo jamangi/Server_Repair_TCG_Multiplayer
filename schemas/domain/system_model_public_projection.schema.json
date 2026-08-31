@@ -1,0 +1,368 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/schemas/system_model_public_projection.schema.json",
+  "title": "System Model Public Projection",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "stableId": { "type": "string", "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$" },
+    "digest": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "stringArray": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+    "idArray": { "type": "array", "items": { "$ref": "#/$defs/stableId" }, "uniqueItems": true },
+    "serialization": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "canonicalization_version": { "const": "canonical-json-v1" },
+        "digest_algorithm": { "const": "sha256" },
+        "content_digest": { "$ref": "#/$defs/digest" }
+      },
+      "required": ["canonicalization_version", "digest_algorithm", "content_digest"]
+    },
+    "claimArray": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/stableId" },
+      "uniqueItems": true
+    },
+    "tokenStatement": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "constraint_id": { "$ref": "#/$defs/stableId" },
+        "statement": { "type": "string", "minLength": 1 },
+        "source_claim_ids": { "$ref": "#/$defs/claimArray" }
+      },
+      "required": ["constraint_id", "statement", "source_claim_ids"]
+    },
+    "planeStatement": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "plane": { "enum": ["power", "management", "host_firmware_post", "memory", "storage", "network", "os_handoff", "runtime_service"] },
+        "status": { "enum": ["PRESENT", "NOT_APPLICABLE", "OUT_OF_SCOPE_WITH_REASON"] },
+        "summary": { "type": "string", "minLength": 1 },
+        "source_claim_ids": { "$ref": "#/$defs/claimArray" }
+      },
+      "required": ["plane", "status", "summary", "source_claim_ids"]
+    },
+    "abstraction": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "abstraction_id": { "$ref": "#/$defs/stableId" },
+        "label": { "type": "string", "minLength": 1 },
+        "represented_node_ids": { "$ref": "#/$defs/idArray" },
+        "source_claim_ids": { "$ref": "#/$defs/claimArray" }
+      },
+      "required": ["abstraction_id", "label", "represented_node_ids", "source_claim_ids"]
+    },
+    "lifecycleEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "clause_id": { "$ref": "#/$defs/stableId" },
+        "section_id": { "$ref": "#/$defs/stableId" },
+        "section_heading": { "type": "string", "minLength": 1 },
+        "stage_id": { "$ref": "#/$defs/stableId" },
+        "order_key": { "type": "integer", "minimum": 0 },
+        "applicability": { "enum": ["REQUIRED", "OPTIONAL", "CONDITIONAL", "OPTIONAL_CONDITIONAL", "PARALLEL", "NOT_APPLICABLE"] },
+        "condition": { "type": ["string", "null"] },
+        "text": { "type": "string", "minLength": 1 },
+        "source_claim_ids": { "$ref": "#/$defs/claimArray" }
+      },
+      "required": ["clause_id", "section_id", "section_heading", "stage_id", "order_key", "applicability", "condition", "text", "source_claim_ids"]
+    },
+    "lifecycleRelation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "relation_id": { "$ref": "#/$defs/stableId" },
+        "from_stage_id": { "$ref": "#/$defs/stableId" },
+        "to_stage_id": { "$ref": "#/$defs/stableId" },
+        "relation_type": { "enum": ["PRECEDES", "REQUIRES", "ENABLES", "PARALLEL_WITH", "OPTIONAL_AFTER", "HANDOFF_TO"] },
+        "source_claim_ids": { "$ref": "#/$defs/claimArray" }
+      },
+      "required": ["relation_id", "from_stage_id", "to_stage_id", "relation_type", "source_claim_ids"]
+    },
+    "layout": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "x": { "type": "number", "minimum": 0 },
+        "y": { "type": "number", "minimum": 0 },
+        "width": { "type": "number", "exclusiveMinimum": 0 },
+        "height": { "type": "number", "exclusiveMinimum": 0 },
+        "reading_order": { "type": "integer", "minimum": 1 }
+      },
+      "required": ["x", "y", "width", "height", "reading_order"]
+    },
+    "diagramNode": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "node_id": { "$ref": "#/$defs/stableId" },
+        "label": { "type": "string", "minLength": 1 },
+        "node_kind": { "enum": ["COMPONENT_INSTANCE", "SERVICEABLE_UNIT", "CONTROL_SURFACE", "OBSERVATION_POINT", "LOGICAL_GROUP", "BUS_OR_LINK", "PUBLIC_ABSTRACTION"] },
+        "plane": { "type": "string", "minLength": 1 },
+        "role_ids": { "$ref": "#/$defs/idArray" },
+        "public_visibility": { "const": "PUBLIC" },
+        "source_claim_ids": { "$ref": "#/$defs/claimArray" },
+        "layout": { "$ref": "#/$defs/layout" }
+      },
+      "required": ["node_id", "label", "node_kind", "plane", "role_ids", "public_visibility", "source_claim_ids", "layout"]
+    },
+    "diagramEdge": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "edge_id": { "$ref": "#/$defs/stableId" },
+        "from_node_id": { "$ref": "#/$defs/stableId" },
+        "to_node_id": { "$ref": "#/$defs/stableId" },
+        "relation_type": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]+$" },
+        "direction": { "enum": ["DIRECTED", "UNDIRECTED"] },
+        "cardinality": { "enum": ["ONE_TO_ONE", "ONE_TO_MANY", "MANY_TO_ONE", "MANY_TO_MANY"] },
+        "label": { "type": "string", "minLength": 1 },
+        "lifecycle_stage_ids": { "$ref": "#/$defs/idArray" },
+        "public_visibility": { "const": "PUBLIC" },
+        "source_claim_ids": { "$ref": "#/$defs/claimArray" },
+        "relation_family": { "enum": ["STRUCTURE", "POWER", "COOLING", "DATA", "CONTROL", "LIFECYCLE", "OBSERVATION", "LOGICAL", "SERVICE"] },
+        "line_pattern": { "enum": ["SOLID", "DOUBLE", "DOTTED", "DASHED", "DASH_DOT", "LONG_DASH", "SHORT_DASH", "DOUBLE_DASH"] }
+      },
+      "required": ["edge_id", "from_node_id", "to_node_id", "relation_type", "direction", "cardinality", "label", "lifecycle_stage_ids", "public_visibility", "source_claim_ids", "relation_family", "line_pattern"]
+    },
+    "diagramPath": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path_id": { "$ref": "#/$defs/stableId" },
+        "flow_kind": { "enum": ["POWER", "DATA", "CONTROL", "OBSERVATION", "LIFECYCLE", "COOLING"] },
+        "node_ids": { "$ref": "#/$defs/idArray" },
+        "edge_ids": { "$ref": "#/$defs/idArray" },
+        "start_node_id": { "$ref": "#/$defs/stableId" },
+        "end_node_id": { "$ref": "#/$defs/stableId" },
+        "lifecycle_stage_ids": { "$ref": "#/$defs/idArray" },
+        "public_visibility": { "const": "PUBLIC" },
+        "source_claim_ids": { "$ref": "#/$defs/claimArray" },
+        "ordered_labels": { "$ref": "#/$defs/stringArray" }
+      },
+      "required": ["path_id", "flow_kind", "node_ids", "edge_ids", "start_node_id", "end_node_id", "lifecycle_stage_ids", "public_visibility", "source_claim_ids", "ordered_labels"]
+    },
+    "inventoryItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "role_id": { "$ref": "#/$defs/stableId" },
+        "label": { "type": "string", "minLength": 1 },
+        "purpose": { "type": "string", "minLength": 1 },
+        "component_definition_id": { "type": ["string", "null"] },
+        "multiplicity": { "type": "string", "minLength": 1 },
+        "optionality": { "type": "string", "minLength": 1 },
+        "replaceability": { "type": "string", "minLength": 1 },
+        "serviceability_note": { "type": "string", "minLength": 1 },
+        "planes": { "$ref": "#/$defs/stringArray" },
+        "source_claim_ids": { "$ref": "#/$defs/claimArray" }
+      },
+      "required": ["role_id", "label", "purpose", "component_definition_id", "multiplicity", "optionality", "replaceability", "serviceability_note", "planes", "source_claim_ids"]
+    },
+    "graphNode": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "graph_node_id": { "$ref": "#/$defs/stableId" },
+        "kind": { "enum": ["ACTION", "TOPOLOGY_NODE", "PATH"] },
+        "label": { "type": "string", "minLength": 1 },
+        "semantic_ref": { "$ref": "#/$defs/stableId" }
+      },
+      "required": ["graph_node_id", "kind", "label", "semantic_ref"]
+    },
+    "graphEdge": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "from_graph_node_id": { "$ref": "#/$defs/stableId" },
+        "to_graph_node_id": { "$ref": "#/$defs/stableId" },
+        "relation": { "type": "string", "minLength": 1 }
+      },
+      "required": ["from_graph_node_id", "to_graph_node_id", "relation"]
+    },
+    "rationaleGraph": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "attachment_id": { "$ref": "#/$defs/stableId" },
+        "action_definition_id": { "$ref": "#/$defs/stableId" },
+        "action_kind": { "enum": ["TEST", "COMMAND", "REPAIR", "VERIFICATION"] },
+        "relevance_label": { "const": "Relevant to this system profile" },
+        "legality_label": { "const": "Legal now is evaluated separately by the authoritative Match engine." },
+        "sentence": { "type": "string", "minLength": 1 },
+        "graph_nodes": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/graphNode" } },
+        "graph_edges": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/graphEdge" } },
+        "target_node_ids": { "$ref": "#/$defs/idArray" },
+        "target_path_ids": { "$ref": "#/$defs/idArray" },
+        "relevant_stage_ids": { "$ref": "#/$defs/idArray" },
+        "source_claim_ids": { "$ref": "#/$defs/claimArray" }
+      },
+      "required": ["attachment_id", "action_definition_id", "action_kind", "relevance_label", "legality_label", "sentence", "graph_nodes", "graph_edges", "target_node_ids", "target_path_ids", "relevant_stage_ids", "source_claim_ids"]
+    }
+  },
+  "properties": {
+    "schema_version": { "const": "system-model-public-projection-v1" },
+    "projection_id": { "$ref": "#/$defs/stableId" },
+    "ticket_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ticket_id": { "$ref": "#/$defs/stableId" },
+        "ticket_snapshot_digest": { "$ref": "#/$defs/digest" },
+        "fingerprint_id": { "$ref": "#/$defs/stableId" },
+        "binding_id": { "$ref": "#/$defs/stableId" },
+        "resolver_key": { "$ref": "#/$defs/stableId" },
+        "public_symptom_ids": { "$ref": "#/$defs/idArray" },
+        "initial_candidate_fault_ids": { "$ref": "#/$defs/idArray" },
+        "active_candidate_fault_ids": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/stableId" }, "uniqueItems": true }
+      },
+      "required": ["ticket_id", "ticket_snapshot_digest", "fingerprint_id", "binding_id", "resolver_key", "public_symptom_ids", "initial_candidate_fault_ids", "active_candidate_fault_ids"]
+    },
+    "model_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "profile_id": { "$ref": "#/$defs/stableId" },
+        "profile_revision": { "type": "integer", "minimum": 1 },
+        "profile_content_digest": { "$ref": "#/$defs/digest" }
+      },
+      "required": ["profile_id", "profile_revision", "profile_content_digest"]
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "display_name": { "type": "string", "minLength": 1 },
+        "model_scope": { "type": "string", "minLength": 1 },
+        "generation_or_era": { "type": "string", "minLength": 1 },
+        "exactness_class": { "enum": ["EXACT", "GENERALIZED", "MIXED"] },
+        "option_statements": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/tokenStatement" } },
+        "plane_statements": { "type": "array", "minItems": 8, "maxItems": 8, "items": { "$ref": "#/$defs/planeStatement" } },
+        "abstraction_statements": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/abstraction" } }
+      },
+      "required": ["display_name", "model_scope", "generation_or_era", "exactness_class", "option_statements", "plane_statements", "abstraction_statements"]
+    },
+    "lifecycle": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "heading": { "type": "string", "minLength": 1 },
+        "entries": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/lifecycleEntry" } },
+        "relations": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/lifecycleRelation" } },
+        "applicability_summary": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "required": { "type": "integer", "minimum": 0 },
+            "optional": { "type": "integer", "minimum": 0 },
+            "conditional": { "type": "integer", "minimum": 0 },
+            "optional_conditional": { "type": "integer", "minimum": 0 },
+            "parallel": { "type": "integer", "minimum": 0 },
+            "not_applicable": { "type": "integer", "minimum": 0 }
+          },
+          "required": ["required", "optional", "conditional", "optional_conditional", "parallel", "not_applicable"]
+        },
+        "not_applicable_note": { "type": "string", "minLength": 1 }
+      },
+      "required": ["heading", "entries", "relations", "applicability_summary", "not_applicable_note"]
+    },
+    "diagram": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": { "type": "string", "minLength": 1 },
+        "scope_statement": { "type": "string", "minLength": 1 },
+        "canvas": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "width": { "type": "number", "exclusiveMinimum": 0 },
+            "height": { "type": "number", "exclusiveMinimum": 0 },
+            "plane_order": { "type": "array", "minItems": 8, "maxItems": 8, "items": { "type": "string" }, "uniqueItems": true }
+          },
+          "required": ["width", "height", "plane_order"]
+        },
+        "legend": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "relation_family": { "type": "string", "minLength": 1 },
+              "line_pattern": { "type": "string", "minLength": 1 }
+            },
+            "required": ["relation_family", "line_pattern"]
+          }
+        },
+        "nodes": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/diagramNode" } },
+        "edges": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/diagramEdge" } },
+        "paths": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/diagramPath" } },
+        "text_equivalent": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "full_text": { "type": "string", "minLength": 1 },
+            "ordered_node_sentences": { "$ref": "#/$defs/stringArray" },
+            "ordered_edge_sentences": { "$ref": "#/$defs/stringArray" },
+            "ordered_path_sentences": { "$ref": "#/$defs/stringArray" },
+            "abstraction_sentences": { "$ref": "#/$defs/stringArray" }
+          },
+          "required": ["full_text", "ordered_node_sentences", "ordered_edge_sentences", "ordered_path_sentences", "abstraction_sentences"]
+        }
+      },
+      "required": ["title", "scope_statement", "canvas", "legend", "nodes", "edges", "paths", "text_equivalent"]
+    },
+    "component_inventory": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/inventoryItem" } },
+    "rationale_graphs": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/rationaleGraph" } },
+    "candidate_closure": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "candidate_fault_id": { "$ref": "#/$defs/stableId" },
+          "explanation": { "type": "string", "minLength": 1 },
+          "public_node_ids": { "$ref": "#/$defs/idArray" },
+          "public_path_ids": { "$ref": "#/$defs/idArray" }
+        },
+        "required": ["candidate_fault_id", "explanation", "public_node_ids", "public_path_ids"]
+      }
+    },
+    "source_claim_ids": { "$ref": "#/$defs/claimArray" },
+    "semantic_index": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "role_ids": { "$ref": "#/$defs/idArray" },
+        "node_ids": { "$ref": "#/$defs/idArray" },
+        "edge_ids": { "$ref": "#/$defs/idArray" },
+        "path_ids": { "$ref": "#/$defs/idArray" },
+        "stage_ids": { "$ref": "#/$defs/idArray" },
+        "capability_ids": { "$ref": "#/$defs/idArray" },
+        "attachment_ids": { "$ref": "#/$defs/idArray" }
+      },
+      "required": ["role_ids", "node_ids", "edge_ids", "path_ids", "stage_ids", "capability_ids", "attachment_ids"]
+    },
+    "semantic_model_digest": { "$ref": "#/$defs/digest" },
+    "authority_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "system_relevance": { "type": "string", "minLength": 1 },
+        "legal_now": { "type": "string", "minLength": 1 },
+        "gameplay_effect": { "const": "NONE" }
+      },
+      "required": ["system_relevance", "legal_now", "gameplay_effect"]
+    },
+    "serialization": { "$ref": "#/$defs/serialization" }
+  },
+  "required": ["schema_version", "projection_id", "ticket_context", "model_ref", "scope", "lifecycle", "diagram", "component_inventory", "rationale_graphs", "candidate_closure", "source_claim_ids", "semantic_index", "semantic_model_digest", "authority_boundary", "serialization"]
+}
