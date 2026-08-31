@@ -61,3 +61,7 @@ The additional complete `playwright test --reporter=dot --trace=off` audit execu
 - TASK-016's fixed dialog-name regular expression does not include the existing **Supply Redundancy Lost** Ticket title.
 
 The TASK-010 and TASK-012 cases reproduced with the new staged System projection temporarily absent, proving that optional catalog loading and System rendering are not their cause. This sprint does not change those legacy tests, their engine/Builder inputs, or gameplay authority; they remain repository baseline test debt outside TASK-053 through TASK-055 rather than accepted exceptions in the new experience.
+
+## Successor ownership
+
+The project owner authorized [`TASK-056-HIGH`](../../tasks/TASK-056-restore-browser-baseline-and-investigate-focus-flake.md) on 2026-08-31 to restore the five legacy cases and investigate the concurrency-only TASK-015 focus result. This pointer assigns follow-up ownership without changing the historical TASK-055 totals or reclassifying any result as an accepted product exception.
