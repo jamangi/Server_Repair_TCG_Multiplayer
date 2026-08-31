@@ -2,7 +2,7 @@
 
 ## Status
 
-**Completed 2026-08-30.** Uses approved `SYSTEM-001 A`, proves exactly the five integrated pilot bindings, and leaves `SYSTEM-002` pending before any scale work.
+**Completed 2026-08-30.** Uses approved `SYSTEM-001 A` and proves exactly the five integrated pilot bindings. The project owner subsequently approved `SYSTEM-002 A` on 2026-08-31, authorizing TASK-053 without changing this proof's five-Ticket boundary.
 
 ## Objective
 
@@ -116,9 +116,9 @@ Stop when all five pilots resolve and render from one typed source, invalid syst
 - Regressions: `tests/task-052-system-model-resolver.test.mjs` and `tests/browser/task-052-system-resolver-proof.spec.mjs`, plus the synchronized schema-count assertion.
 - Synchronized task, decision, schema, System Model, package-script, and root documentation. No production Viewer, Ticket, gameplay, Builder, engine, or Story artifact changed.
 
-### Scale gate and unresolved item
+### Scale gate and handoff
 
-`SYSTEM-002` now records A/B/C/D with the measured pilot results. Option A is recommended because every bounded proof gate passed, but no option is authoritative until the project owner replies. This is the only unresolved TASK-052 handoff; TASK-053 through TASK-055 remain blocked.
+`SYSTEM-002` records A/B/C/D with the measured pilot results. The project owner approved Option A on 2026-08-31, making the proved resolver architecture authoritative for TASK-053's bounded released-Story domain audit and synchronization. TASK-054 and TASK-055 retain their stated prerequisites; the approval does not expand TASK-052 or implement later production/UI work. No unresolved TASK-052 item remains.
 
 ### Verification
 

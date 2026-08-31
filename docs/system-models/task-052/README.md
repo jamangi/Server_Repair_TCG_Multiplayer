@@ -1,6 +1,6 @@
 # TASK-052 five-Ticket System Resolver
 
-Status: **proof complete; `SYSTEM-002` owner choice pending**
+Status: **proof complete; `SYSTEM-002 A` approved 2026-08-31; TASK-053 authorized**
 
 TASK-052 proves the approved `SYSTEM-001 A` Finder architecture on exactly the five immutable pilot Tickets. Resolution and all derived views are deterministic, public-input-only build artifacts. Authoring-only compatibility remains a separate reject-only gate and can never select or vary a player-visible projection.
 
@@ -40,4 +40,4 @@ Absence, ambiguity, bad keys, version drift, missing required devices, incompati
 
 ## Deliberate exclusions
 
-This release does not scale beyond the five pilots, modify any Ticket or gameplay snapshot, add a production Ticket control, infer Evidence, rank Candidates, expose failure highlighting, or authorize Story-wide production. TASK-053 remains blocked until the project owner answers `SYSTEM-002`.
+This release does not itself scale beyond the five pilots, modify any Ticket or gameplay snapshot, add a production Ticket control, infer Evidence, rank Candidates, expose failure highlighting, or implement Story-wide production. The project owner's `SYSTEM-002 A` approval authorizes TASK-053 to perform the separate bounded released-Story domain audit and synchronization; TASK-054 and TASK-055 retain their prerequisites.

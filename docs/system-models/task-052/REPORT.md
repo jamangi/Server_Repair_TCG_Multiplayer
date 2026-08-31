@@ -36,10 +36,10 @@ Every rejection returns the same generic text-only fallback; it never names the 
 - Every representation pins canonical JSON V1 and SHA-256; regeneration is byte-stable.
 - System relevance is labeled separately from current Match legality, and the resolver reports `gameplay_effect: NONE`.
 
+## Scale decision
+
+The five-pilot architecture passes its bounded gates. The project owner approved `SYSTEM-002 A` on 2026-08-31, authorizing TASK-053's bounded released-Story domain audit and synchronization. TASK-054 productionization and TASK-055 player-interface work retain their stated prerequisites.
+
 ## Safety boundary
 
 No authoring result identifier, diagnostic outcome identifier, solution pointer, or authoring-only reason is present in the public model data, generated prose, diagram data, rationale graphs, public traces, failure messages, or generated filenames. The authoring summary exposes only pass/reject status and aggregate check counts.
-
-## Remaining gate
-
-The five-pilot architecture passes its bounded gates. `SYSTEM-002` asks the owner whether to approve mass production, expand/correct the curated library, reopen the architecture, or defer the player-facing capability. TASK-053 remains blocked until that choice is recorded.

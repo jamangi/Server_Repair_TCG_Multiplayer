@@ -375,16 +375,18 @@ Approved reply record:
 SYSTEM-001 A
 ```
 
-### SYSTEM-002 — System Model scale path — **pending owner choice**
+### SYSTEM-002 — System Model scale path — **A approved 2026-08-31**
 
 TASK-052's [five-Ticket resolver proof](../../system-models/task-052/REPORT.md) resolves 5/5 immutable pilots, rejects 5/5 deliberate incompatible profiles with stable public-safe reason codes, preserves byte-identical public output across 21 hidden authoring variants, and preserves its canonical semantic model across 111 authorized public-Candidate combinations. Two curated profiles serve five bindings; 51 unique public action attachments produce 174 per-Ticket rationale graphs. A 250-resolution local benchmark completed in 2,167.74 ms (8.671 ms per resolution), with no network requests or random choices. The strict proof and browser matrix pass without changing Ticket, Builder, engine, Evidence, legal-action, scoring, Story, or production Viewer authority.
 
-- **A — Approve mass production with the proved resolver (recommended).** Use the curated, source-backed Finder, exactly-one deterministic public binding policy, reject-only private compatibility gate, one-source public projection builder, and honest fail-closed fallback as the architecture for the released Story denominator. Approval authorizes TASK-053's bounded Story-domain audit and synchronization sequence; it does not authorize the production resolver rollout, Ticket UI, hidden inference, arbitrary system composition, or unsupported profiles. The measured advantage is reuse without copied model drift: two profiles serve five pilot Tickets while every Ticket still carries its own public binding and projection digest. The ongoing cost is deliberate source review, profile/version maintenance, Candidate-closure proof, and browser/accessibility review for each new supported profile or binding.
+- **A — Approve mass production with the proved resolver (approved).** Use the curated, source-backed Finder, exactly-one deterministic public binding policy, reject-only private compatibility gate, one-source public projection builder, and honest fail-closed fallback as the architecture for the released Story denominator. Approval authorizes TASK-053's bounded Story-domain audit and synchronization sequence; it does not authorize the production resolver rollout, Ticket UI, hidden inference, arbitrary system composition, or unsupported profiles. The measured advantage is reuse without copied model drift: two profiles serve five pilot Tickets while every Ticket still carries its own public binding and projection digest. The ongoing cost is deliberate source review, profile/version maintenance, Candidate-closure proof, and browser/accessibility review for each new supported profile or binding.
 - **B — Expand or correct the curated library, then repeat the five-Ticket pilot.** Keep `SYSTEM-001 A` as the architecture but withhold scaling. Supply a named profile, Component, source, projection, performance, or review deficiency; make only that bounded correction and rerun the same 5/5, differential, invalid-fixture, determinism, gameplay-isolation, and browser gates before returning to this decision. TASK-053 remains blocked.
 - **C — Reopen the architecture choice.** Treat the pilot as evidence that the curated Finder does not scale or preserve the intended safety boundary, and return to the `SYSTEM-001` alternatives with a concrete failed requirement. No mass production, general composition Builder, production resolver, or Ticket UI proceeds until a replacement architecture and migration boundary are explicitly approved.
 - **D — Defer player-facing System Models.** Retain TASK-049 through TASK-052 as versioned research, production-contract, and proof evidence, but do not expand profiles or ship resolver-derived views. Existing gameplay and Story remain unchanged, and TASK-053 through TASK-055 stay blocked until the owner reopens the sequence.
 
-Pending reply format:
+The owner selected Option A on 2026-08-31. TASK-053 may now perform the bounded released-Story domain audit and synchronization. TASK-054 and TASK-055 retain their stated task prerequisites; this approval does not implement or independently authorize their production resolver and player-interface changes.
+
+Approved reply record:
 
 ```text
 SYSTEM-002 A

@@ -31,4 +31,4 @@ System relevance remains explanatory. An action attachment can say which role, p
 - Grouped R740xd2 host loads remain an explicit `OUT_OF_SCOPE_ABSTRACTION` with no invented Component definition.
 - Manufacturer pages remain mutable external sources. The release pins the reviewed TASK-050 ledger metadata and hash; it stores no copied manufacturer diagram or service-manual text.
 
-There are no unresolved pilot consistency blockers. Scaling, deterministic public view generation, and resolver behavior remain TASK-052 scope; `SYSTEM-002`, Story-wide rollout, and the Ticket UI remain later gates/tasks.
+There are no unresolved pilot consistency blockers. TASK-052 subsequently proved deterministic resolution and public view generation, and the owner approved `SYSTEM-002 A` on 2026-08-31. Story-wide domain synchronization, production rollout, and the Ticket UI remain isolated to TASK-053 through TASK-055.

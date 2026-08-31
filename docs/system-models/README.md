@@ -2,7 +2,7 @@
 
 ## Status
 
-This directory is the entry point for the System Model / System Finder capability. TASK-049's implementation-neutral contract, TASK-050's manual five-Ticket atlas, TASK-051's strict two-profile/five-binding contract, and TASK-052's deterministic resolver/projection proof are complete. The project owner approved the curated Finder architecture as `SYSTEM-001 A` on 2026-08-30; `SYSTEM-002` is now pending before scale. Existing V0 Ticket outcomes, Evidence dispositions, legal intents, Diagnostic Bench relevance, and hidden-truth boundaries remain authoritative.
+This directory is the entry point for the System Model / System Finder capability. TASK-049's implementation-neutral contract, TASK-050's manual five-Ticket atlas, TASK-051's strict two-profile/five-binding contract, and TASK-052's deterministic resolver/projection proof are complete. The project owner approved the curated Finder architecture as `SYSTEM-001 A` on 2026-08-30 and approved its bounded released-Story scale path as `SYSTEM-002 A` on 2026-08-31. TASK-053 is the next authorized boundary. Existing V0 Ticket outcomes, Evidence dispositions, legal intents, Diagnostic Bench relevance, and hidden-truth boundaries remain authoritative.
 
 The TASK-049 package is:
 
@@ -99,7 +99,7 @@ The model is explanatory in V0. It must not derive Evidence dispositions, decide
 3. **Gate SYSTEM-001 A** approved the Finder-first hybrid on 2026-08-30.
 4. **TASK-051** completed the strict typed pilot contract, five bindings, private validation boundary, Component/relationship synchronization, and immutable migration.
 5. **TASK-052** completed deterministic resolution, validation, descriptions, diagrams, and relevance graphs for the pilot and authored the `SYSTEM-002` scale-readiness packet.
-6. **Gate SYSTEM-002** is pending; it approves mass production, sends the pilot back for a bounded correction, reopens architecture, or defers the capability.
+6. **Gate SYSTEM-002 A** approved bounded mass production with the proved resolver on 2026-08-31; the production resolver and player experience remain reserved to their later tasks.
 7. **TASK-053** audits and synchronizes the complete released Story Ticket set.
 8. **TASK-054** productionizes System resolution and derived views across that set.
 9. **TASK-055** adds the public-safe “Show system” experience to the Ticket UI.
